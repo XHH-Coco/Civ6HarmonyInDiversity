@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mod id="a6238f40-6a67-448f-ae7e-5485577be02e" version="4">
+  <Properties>
+    <Name>简体中文汉化修正GS版(Better Chinese for GS)</Name>
+    <Description>对官方简中忍无可忍了吗？此MOD旨在修正官方简中翻译的错误/歧义/表述不清的地方。[NEWLINE]此MOD持续更新中，如果你发现了其它语病/表达不通顺的地方或是此MOD也有翻译BUG，欢迎私信B站：流浪de蒲公英。</Description>
+    <CustomProperties xmlns="http://schemas.microsoft.com/developer/msbuild/2003"></CustomProperties>
+    <Created>1619219211</Created>
+    <Teaser>汉化修正 MADE BY B站：流浪de蒲公英</Teaser>
+    <Authors>流浪de蒲公英(WDandelion)</Authors>
+    <SpecialThanks>流氓星及其粉丝群群友[NEWLINE]当初和我热烈探讨但已经退坑了的小雨[NEWLINE]送了我GS还耐心帮我排查modinfo问题的瓜瓜瓜[NEWLINE]耐心帮我排查modinfo问题兵最后帮我解决了问题的vvv[NEWLINE]其它天文台或者说养老院陪我一起钻研了大半年的核心玩家[NEWLINE]在我之前入群的时候耐心回答我问题的SA[NEWLINE]最近帮我提供了不少存档也帮了不少忙的宣友BOT[NEWLINE]不断容忍我咕咕咕并帮我反馈BUG的粉丝[NEWLINE]以及订阅我MOD的你</SpecialThanks>
+    <Homepage>http://space.bilibili.com/9027022</Homepage>
+    <AffectsSavedGames>0</AffectsSavedGames>
+    <CompatibleVersions>2.0</CompatibleVersions>
+  </Properties>
+  <Dependencies>
+    <Mod id="4873eb62-8ccc-4574-b784-dda455e74e68" title="Expansion: Gathering Storm" />
+  </Dependencies>
+  <References>
+    <Mod id="02A8BDDE-67EA-4D38-9540-26E685E3156E" title="DLC: Aztec Civilization Pack" />
+    <Mod id="3809975F-263F-40A2-A747-8BFB171D821A" title="DLC: Poland Civilization Pack" />
+    <Mod id="2F6E858A-28EF-46B3-BEAC-B985E52E9BC1" title="DLC: Vikings Content" />
+    <Mod id="E3F53C61-371C-440B-96CE-077D318B36C0" title="DLC: Australia Civilization Pack" />
+    <Mod id="3809975F-263F-40A2-A747-8BFB171D821A" title="DLC: Poland Civilization Pack" />
+    <Mod id="643EA320-8E1A-4CF1-A01C-00D88DDD131A" title="DLC: Nubia Civilization Pack" />
+    <Mod id="1F367231-A040-4793-BDBB-088816853683" title="DLC: Khmer and Indonesia Civilization Pack" />
+    <Mod id="1B28771A-C749-434B-9053-D1380C553DE9" title="Expansion: Rise and Fall" />
+    <Mod id="4873eb62-8ccc-4574-b784-dda455e74e68" title="Expansion: Gathering Storm" />
+    <Mod id="9DE86512-DE1A-400D-8C0A-AB46EBBF76B9" title="DLC: Maya &amp; Grand Colombia Pack" />
+  </References>
+  <FrontEndActions>
+    <UpdateText id="Better_Chinese">
+      <File priority="1">Text/Expansion2_Translations_ConfigText.xml</File>
+      <File>Text/Expansion2_Translations_Text.xml</File>
+      <File priority="2">Text/Expansion1_Translations_ConfigText.xml</File>
+      <File priority="2">Text/Expansion1_Translations_Text.xml</File>
+      <File priority="2">Text/Expansion1_Translations_Major_Text.xml</File>
+      <File priority="3">Text/Vanilla_zh_Hans_CN.xml</File>
+      <File priority="3">Text/Poland_Translations_ConfigText.xml</File>
+      <File priority="3">Text/VikingsLandmarks_Translations_Text.xml</File>
+      <File priority="3">Text/Australia_Translations_ConfigText.xml</File>
+      <File priority="3">Text/Macedonia_Persia_Translations_ConfigText.xml</File>
+      <File priority="3">Text/Nubia_Amanitore_Translations_ConfigText.xml</File>
+      <File priority="3">Text/Indonesia_Khmer_Translations_ConfigText.xml</File>
+      <File>Text/GranColombia_Maya_Translations_Text.xml</File>
+      <File>Text/GranColombia_Maya_Translations_ConfigText.xml</File>
+      <File>Text/TeddyRoosevelt_Translations_ConfigText.xml</File>
+      <File>Text/Ethiopia_Translations_ConfigText.xml</File>
+      <File>Text/Byzantium_Gaul_Translations_ConfigText.xml</File>
+    </UpdateText>
+  </FrontEndActions>
+  <InGameActions>
+    <UpdateText id="Better_Chinese">
+      <File priority="1">Text/Expansion2_Translations_ConfigText.xml</File>
+      <File priority="1">Text/Expansion2_Translations_Text.xml</File>
+      <File priority="2">Text/Expansion1_Translations_ConfigText.xml</File>
+      <File priority="2">Text/Expansion1_Translations_Text.xml</File>
+      <File priority="2">Text/Expansion1_Translations_Major_Text.xml</File>
+      <File priority="3">Text/Vanilla_zh_Hans_CN.xml</File>
+      <File priority="3">Text/Poland_Translations_ConfigText.xml</File>
+      <File priority="3">Text/VikingsLandmarks_Translations_Text.xml</File>
+      <File priority="3">Text/Australia_Translations_ConfigText.xml</File>
+      <File priority="3">Text/Macedonia_Persia_Translations_ConfigText.xml</File>
+      <File priority="3">Text/Macedonia_Persia_Translations_ConfigText.xml</File>
+      <File priority="3">Text/Indonesia_Khmer_Translations_ConfigText.xml</File>
+      <File>Text/GranColombia_Maya_Translations_ConfigText.xml</File>
+      <File>Text/GranColombia_Maya_Translations_Text.xml</File>
+      <File>Text/TeddyRoosevelt_Translations_ConfigText.xml</File>
+      <File>Text/Byzantium_Gaul_Translations_ConfigText.xml</File>
+      <File>Text/Ethiopia_Translations_ConfigText.xml</File>
+    </UpdateText>
+  </InGameActions>
+  <Files>
+    <File>Text/Australia_Translations_ConfigText.xml</File>
+    <File>Text/Byzantium_Gaul_Translations_ConfigText.xml</File>
+    <File>Text/Ethiopia_Translations_ConfigText.xml</File>
+    <File>Text/Expansion1_Translations_ConfigText.xml</File>
+    <File>Text/Expansion1_Translations_Major_Text.xml</File>
+    <File>Text/Expansion1_Translations_Text.xml</File>
+    <File>Text/Expansion2_Translations_ConfigText.xml</File>
+    <File>Text/Expansion2_Translations_Text.xml</File>
+    <File>Text/GranColombia_Maya_Translations_ConfigText.xml</File>
+    <File>Text/GranColombia_Maya_Translations_Text.xml</File>
+    <File>Text/Indonesia_Khmer_Translations_ConfigText.xml</File>
+    <File>Text/Macedonia_Persia_Translations_ConfigText.xml</File>
+    <File>Text/Nubia_Amanitore_Translations_ConfigText.xml</File>
+    <File>Text/Poland_Translations_ConfigText.xml</File>
+    <File>Text/TeddyRoosevelt_Translations_ConfigText.xml</File>
+    <File>Text/Vanilla_zh_Hans_CN.xml</File>
+    <File>Text/VikingsLandmarks_Translations_Text.xml</File>
+  </Files>
+</Mod>

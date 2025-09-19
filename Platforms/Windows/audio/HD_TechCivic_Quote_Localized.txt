@@ -1,0 +1,58 @@
+Event	ID	Name			Wwise Object Path	Notes
+	35734509	Play_HistoricalPhilosophyHD_Quote_2			\Default Work Unit\Play_HistoricalPhilosophyHD_Quote_2	
+	35734510	Play_HistoricalPhilosophyHD_Quote_1			\Default Work Unit\Play_HistoricalPhilosophyHD_Quote_1	
+	48370444	Play_LiteraryTraditionHD_Quote_2			\Default Work Unit\Play_LiteraryTraditionHD_Quote_2	
+	48370447	Play_LiteraryTraditionHD_Quote_1			\Default Work Unit\Play_LiteraryTraditionHD_Quote_1	
+	714688580	Play_EthicsHD_Quote_2			\Default Work Unit\Play_EthicsHD_Quote_2	
+	714688583	Play_EthicsHD_Quote_1			\Default Work Unit\Play_EthicsHD_Quote_1	
+	776153597	Play_BiologyHD_Quote_2			\Default Work Unit\Play_BiologyHD_Quote_2	
+	776153598	Play_BiologyHD_Quote_1			\Default Work Unit\Play_BiologyHD_Quote_1	
+	1119323693	Play_ImperialExaminationSystemHD_Quote_2			\Default Work Unit\Play_ImperialExaminationSystemHD_Quote_2	
+	1119323694	Play_ImperialExaminationSystemHD_Quote_1			\Default Work Unit\Play_ImperialExaminationSystemHD_Quote_1	
+	2753569953	Play_PaperMakingHD_Quote_2			\Default Work Unit\Play_PaperMakingHD_Quote_2	
+	2753569954	Play_PaperMakingHD_Quote_1			\Default Work Unit\Play_PaperMakingHD_Quote_1	
+	2962325585	Play_SocialScienceHD_Quote_2			\Default Work Unit\Play_SocialScienceHD_Quote_2	
+	2962325586	Play_SocialScienceHD_Quote_1			\Default Work Unit\Play_SocialScienceHD_Quote_1	
+	2967524324	Play_CompassHD_Quote_2			\Default Work Unit\Play_CompassHD_Quote_2	
+	2967524327	Play_CompassHD_Quote_1			\Default Work Unit\Play_CompassHD_Quote_1	
+	3100817797	Play_ArchaeologyHD_Quote_1			\Default Work Unit\Play_ArchaeologyHD_Quote_1	
+	3100817798	Play_ArchaeologyHD_Quote_2			\Default Work Unit\Play_ArchaeologyHD_Quote_2	
+	3426462580	Stop_Speech_CivicsHD			\Default Work Unit\Stop_Speech_CivicsHD	
+	3614429708	Stop_Speech_TechsHD			\Default Work Unit\Stop_Speech_TechsHD	
+	3733953404	Play_PhysicsHD_Quote_1			\Default Work Unit\Play_PhysicsHD_Quote_1	
+	3733953407	Play_PhysicsHD_Quote_2			\Default Work Unit\Play_PhysicsHD_Quote_2	
+	3759297221	Play_CalendarHD_Quote_1			\Default Work Unit\Play_CalendarHD_Quote_1	
+	3759297222	Play_CalendarHD_Quote_2			\Default Work Unit\Play_CalendarHD_Quote_2	
+	3866050840	Play_EvolutionTheoryHD_Quote_2			\Default Work Unit\Play_EvolutionTheoryHD_Quote_2	
+	3866050843	Play_EvolutionTheoryHD_Quote_1			\Default Work Unit\Play_EvolutionTheoryHD_Quote_1	
+	3888695129	Play_SupplyHD_Quote_2			\Default Work Unit\Play_SupplyHD_Quote_2	
+	3888695130	Play_SupplyHD_Quote_1			\Default Work Unit\Play_SupplyHD_Quote_1	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	31038191	Civic_Supply2_Chinese	D:\projects\civ6\Civ6\Wwise\Civ6 Project\.cache\Windows\SFX\Civic_Supply2_Chinese_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\Civic_Supply2_Chinese		1493096
+	33121809	Tech_Physics1_Chinese	D:\projects\civ6\Civ6\Wwise\Civ6 Project\.cache\Windows\SFX\Tech_Physics1_Chinese_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\Tech_Physics1_Chinese		1047672
+	75089739	Civic_EvolutionTheory1_Chinese	D:\projects\civ6\Civ6\Wwise\Civ6 Project\.cache\Windows\SFX\Civic_EvolutionTheory1_Chinese_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\Civic_EvolutionTheory1_Chinese		2188680
+	77179291	Tech_Biology1_Chinese	D:\projects\civ6\Civ6\Wwise\Civ6 Project\.cache\Windows\SFX\Tech_Biology1_Chinese_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\Tech_Biology1_Chinese		567012
+	140672782	Tech_Compass2_Chinese	D:\projects\civ6\Civ6\Wwise\Civ6 Project\.cache\Windows\SFX\Tech_Compass2_Chinese_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\Tech_Compass2_Chinese		984432
+	144018363	Tech_PaperMaking1_Chinese	D:\projects\civ6\Civ6\Wwise\Civ6 Project\.cache\Windows\SFX\Tech_PaperMaking1_Chinese_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\Tech_PaperMaking1_Chinese		1325308
+	154063041	Civic_Ethics2_Chinese	D:\projects\civ6\Civ6\Wwise\Civ6 Project\.cache\Windows\SFX\Civic_Ethics2_Chinese_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\Civic_Ethics2_Chinese		1814188
+	253566927	Civic_LiteraryTradition1_Chinese	D:\projects\civ6\Civ6\Wwise\Civ6 Project\.cache\Windows\SFX\Civic_LiteraryTradition1_Chinese_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\Civic_LiteraryTradition1_Chinese		876840
+	306111608	Civic_HistoricalPhilosophy2_Chinese	D:\projects\civ6\Civ6\Wwise\Civ6 Project\.cache\Windows\SFX\Civic_HistoricalPhilosophy2_Chinese_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\Civic_HistoricalPhilosophy2_Chinese		1300516
+	315269171	Tech_Calendar1_Chinese	D:\projects\civ6\Civ6\Wwise\Civ6 Project\.cache\Windows\SFX\Tech_Calendar1_Chinese_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\Tech_Calendar1_Chinese		2782960
+	329083830	Tech_PaperMaking2_Chinese	D:\projects\civ6\Civ6\Wwise\Civ6 Project\.cache\Windows\SFX\Tech_PaperMaking2_Chinese_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\Tech_PaperMaking2_Chinese		2003524
+	410979778	Civic_LiteraryTradition2_Chinese	D:\projects\civ6\Civ6\Wwise\Civ6 Project\.cache\Windows\SFX\Civic_LiteraryTradition2_Chinese_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\Civic_LiteraryTradition2_Chinese		1689664
+	588775871	Civic_ImperialExaminationSystem2_Chinese	D:\projects\civ6\Civ6\Wwise\Civ6 Project\.cache\Windows\SFX\Civic_ImperialExaminationSystem2_Chinese_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\Civic_ImperialExaminationSystem2_Chinese		1726352
+	605013785	Civic_HistoricalPhilosophy1_Chinese	D:\projects\civ6\Civ6\Wwise\Civ6 Project\.cache\Windows\SFX\Civic_HistoricalPhilosophy1_Chinese_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\Civic_HistoricalPhilosophy1_Chinese		2024820
+	606498038	Tech_Calendar2_Chinese	D:\projects\civ6\Civ6\Wwise\Civ6 Project\.cache\Windows\SFX\Tech_Calendar2_Chinese_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\Tech_Calendar2_Chinese		1790792
+	696574508	Civic_Archaeology1_Chinese	D:\projects\civ6\Civ6\Wwise\Civ6 Project\.cache\Windows\SFX\Civic_Archaeology1_Chinese_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\Civic_Archaeology1_Chinese		3105692
+	725188898	Civic_SocialScience1_Chinese	D:\projects\civ6\Civ6\Wwise\Civ6 Project\.cache\Windows\SFX\Civic_SocialScience1_Chinese_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\Civic_SocialScience1_Chinese		1407788
+	754257254	Tech_Compass1_Chinese	D:\projects\civ6\Civ6\Wwise\Civ6 Project\.cache\Windows\SFX\Tech_Compass1_Chinese_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\Tech_Compass1_Chinese		1538636
+	767187335	Tech_Physics2_Chinese	D:\projects\civ6\Civ6\Wwise\Civ6 Project\.cache\Windows\SFX\Tech_Physics2_Chinese_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\Tech_Physics2_Chinese		930136
+	775310908	Civic_EvolutionTheory2_Chinese	D:\projects\civ6\Civ6\Wwise\Civ6 Project\.cache\Windows\SFX\Civic_EvolutionTheory2_Chinese_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\Civic_EvolutionTheory2_Chinese		904976
+	802163391	Civic_SocialScience2_Chinese	D:\projects\civ6\Civ6\Wwise\Civ6 Project\.cache\Windows\SFX\Civic_SocialScience2_Chinese_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\Civic_SocialScience2_Chinese		1575928
+	803692144	Civic_Supply1_Chinese	D:\projects\civ6\Civ6\Wwise\Civ6 Project\.cache\Windows\SFX\Civic_Supply1_Chinese_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\Civic_Supply1_Chinese		982044
+	868672280	Civic_ImperialExaminationSystem1_Chinese	D:\projects\civ6\Civ6\Wwise\Civ6 Project\.cache\Windows\SFX\Civic_ImperialExaminationSystem1_Chinese_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\Civic_ImperialExaminationSystem1_Chinese		1169792
+	989872496	Civic_Ethics1_Chinese	D:\projects\civ6\Civ6\Wwise\Civ6 Project\.cache\Windows\SFX\Civic_Ethics1_Chinese_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\Civic_Ethics1_Chinese		710220
+	1032632575	Tech_Biology2_Chinese	D:\projects\civ6\Civ6\Wwise\Civ6 Project\.cache\Windows\SFX\Tech_Biology2_Chinese_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\Tech_Biology2_Chinese		591536
+	1053078861	Civic_Archaeology2_Chinese	D:\projects\civ6\Civ6\Wwise\Civ6 Project\.cache\Windows\SFX\Civic_Archaeology2_Chinese_9E69E797.wem		\Actor-Mixer Hierarchy\Default Work Unit\Civic_Archaeology2_Chinese		2885480
+

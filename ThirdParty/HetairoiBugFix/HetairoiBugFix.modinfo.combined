@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mod id="9b2971d1-5cb5-4bda-9acf-cde684bd9d1a" version="1">
+  <Properties>
+    <Name>Hetairoi's general bug fix mod</Name>
+    <Description>Fixed a bug in which Hetairoi's General Adjacent Bonus did not work.</Description>
+    <CustomProperties></CustomProperties>
+    <Created>1596216497</Created>
+    <Teaser>Fixed a bug in which Hetairoi's General Adjacent Bonus did not work.</Teaser>
+    <Authors>Amazer</Authors>
+    <CompatibleVersions>1.2,2.0</CompatibleVersions>
+  </Properties>
+  <Dependencies>
+    <Mod id="E2749E9A-8056-45CD-901B-C368C8E83DEB" title="DLC: Persia and Macedon Civilization Pack" />
+  </Dependencies>
+  <InGameActions>
+    <UpdateDatabase id="HetairoiFix">
+      <File priority="4">HetairoiBugFix.xml</File>
+      <File priority="3">HetairoiBugCodeDelete.sql</File>
+    </UpdateDatabase>
+  </InGameActions>
+  <Files>
+    <File>HetairoiBugCodeDelete.sql</File>
+    <File>HetairoiBugFix.xml</File>
+  </Files>
+</Mod>

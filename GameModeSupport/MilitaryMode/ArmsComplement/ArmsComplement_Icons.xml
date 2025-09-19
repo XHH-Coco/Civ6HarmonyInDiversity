@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameData>
+  <IconTextureAtlases>
+    <Row Name="ATLAS_ARMOR_CAVALRY" IconSize="22" Filename="ARMOR_CAVALRY_22.dds"/>
+    <Row Name="ATLAS_ARMOR_CAVALRY" IconSize="32" Filename="ARMOR_CAVALRY_32.dds"/>
+    <Row Name="ATLAS_ARMOR_CAVALRY" IconSize="38" Filename="ARMOR_CAVALRY_38.dds"/>
+    <Row Name="ATLAS_ARMOR_CAVALRY" IconSize="50" Filename="ARMOR_CAVALRY_50.dds"/>
+    <Row Name="ATLAS_ARMOR_CAVALRY" IconSize="80" Filename="ARMOR_CAVALRY_80.dds"/>
+    <Row Name="ATLAS_ARMOR_CAVALRY" IconSize="256" Filename="ARMOR_CAVALRY_256.dds"/>
+    <Row Name="ATLAS_CANNON" IconSize="22" Filename="CANNON_22.dds"/>
+    <Row Name="ATLAS_CANNON" IconSize="32" Filename="CANNON_32.dds"/>
+    <Row Name="ATLAS_CANNON" IconSize="38" Filename="CANNON_38.dds"/>
+    <Row Name="ATLAS_CANNON" IconSize="50" Filename="CANNON_50.dds"/>
+    <Row Name="ATLAS_CANNON" IconSize="80" Filename="CANNON_80.dds"/>
+    <Row Name="ATLAS_CANNON" IconSize="256" Filename="CANNON_256.dds"/>
+    <Row Name="ATLAS_LANCER" IconSize="22" Filename="LANCER_22.dds"/>
+    <Row Name="ATLAS_LANCER" IconSize="32" Filename="LANCER_32.dds"/>
+    <Row Name="ATLAS_LANCER" IconSize="38" Filename="LANCER_38.dds"/>
+    <Row Name="ATLAS_LANCER" IconSize="50" Filename="LANCER_50.dds"/>
+    <Row Name="ATLAS_LANCER" IconSize="80" Filename="LANCER_80.dds"/>
+    <Row Name="ATLAS_LANCER" IconSize="256" Filename="LANCER_256.dds"/>
+    <Row Name="ATLAS_REITER" IconSize="22" Filename="REITER_22.dds"/>
+    <Row Name="ATLAS_REITER" IconSize="32" Filename="REITER_32.dds"/>
+    <Row Name="ATLAS_REITER" IconSize="38" Filename="REITER_38.dds"/>
+    <Row Name="ATLAS_REITER" IconSize="50" Filename="REITER_50.dds"/>
+    <Row Name="ATLAS_REITER" IconSize="80" Filename="REITER_80.dds"/>
+    <Row Name="ATLAS_REITER" IconSize="256" Filename="REITER_256.dds"/>
+    <Row Name="ATLAS_SAPPER" IconSize="22" Filename="SAPPER_22.dds"/>
+    <Row Name="ATLAS_SAPPER" IconSize="32" Filename="SAPPER_32.dds"/>
+    <Row Name="ATLAS_SAPPER" IconSize="38" Filename="SAPPER_38.dds"/>
+    <Row Name="ATLAS_SAPPER" IconSize="50" Filename="SAPPER_50.dds"/>
+    <Row Name="ATLAS_SAPPER" IconSize="80" Filename="SAPPER_80.dds"/>
+    <Row Name="ATLAS_SAPPER" IconSize="256" Filename="SAPPER_256.dds"/>
+    <Row Name="ATLAS_ENGINEER_CORP" IconSize="22" Filename="ENGINEER_CORP_22.dds"/>
+    <Row Name="ATLAS_ENGINEER_CORP" IconSize="32" Filename="ENGINEER_CORP_32.dds"/>
+    <Row Name="ATLAS_ENGINEER_CORP" IconSize="38" Filename="ENGINEER_CORP_38.dds"/>
+    <Row Name="ATLAS_ENGINEER_CORP" IconSize="50" Filename="ENGINEER_CORP_50.dds"/>
+    <Row Name="ATLAS_ENGINEER_CORP" IconSize="80" Filename="ENGINEER_CORP_80.dds"/>
+    <Row Name="ATLAS_ENGINEER_CORP" IconSize="256" Filename="ENGINEER_CORP_256.dds"/>
+    <Row Name="ATLAS_ARRAY_INFANTRY" IconSize="22" Filename="ARRAY_INFANTRY_22.dds"/>
+    <Row Name="ATLAS_ARRAY_INFANTRY" IconSize="32" Filename="ARRAY_INFANTRY_32.dds"/>
+    <Row Name="ATLAS_ARRAY_INFANTRY" IconSize="38" Filename="ARRAY_INFANTRY_38.dds"/>
+    <Row Name="ATLAS_ARRAY_INFANTRY" IconSize="50" Filename="ARRAY_INFANTRY_50.dds"/>
+    <Row Name="ATLAS_ARRAY_INFANTRY" IconSize="80" Filename="ARRAY_INFANTRY_80.dds"/>
+    <Row Name="ATLAS_ARRAY_INFANTRY" IconSize="256" Filename="ARRAY_INFANTRY_256.dds"/>
+    <Row Name="ATLAS_MORTER_NEW" IconSize="22" Filename="MORTER_NEW_22.dds"/>
+    <Row Name="ATLAS_MORTER_NEW" IconSize="32" Filename="MORTER_NEW_32.dds"/>
+    <Row Name="ATLAS_MORTER_NEW" IconSize="38" Filename="MORTER_NEW_38.dds"/>
+    <Row Name="ATLAS_MORTER_NEW" IconSize="50" Filename="MORTER_NEW_50.dds"/>
+    <Row Name="ATLAS_MORTER_NEW" IconSize="80" Filename="MORTER_NEW_80.dds"/>
+    <Row Name="ATLAS_MORTER_NEW" IconSize="256" Filename="MORTER_NEW_256.dds"/>
+    <Row Name="ATLAS_HALBERDMAN" IconSize="22" Filename="HALBERDMAN_22.dds"/>
+    <Row Name="ATLAS_HALBERDMAN" IconSize="32" Filename="HALBERDMAN_32.dds"/>
+    <Row Name="ATLAS_HALBERDMAN" IconSize="38" Filename="HALBERDMAN_38.dds"/>
+    <Row Name="ATLAS_HALBERDMAN" IconSize="50" Filename="HALBERDMAN_50.dds"/>
+    <Row Name="ATLAS_HALBERDMAN" IconSize="80" Filename="HALBERDMAN_80.dds"/>
+    <Row Name="ATLAS_HALBERDMAN" IconSize="256" Filename="HALBERDMAN_256.dds"/>
+    <Row Name="ATLAS_COMPOSITE_BOWMAN" IconSize="256" Filename="COMPOSITE_BOWMAN_256.dds"/>
+    <Row Name="ATLAS_COMPOSITE_BOWMAN" IconSize="80" Filename="COMPOSITE_BOWMAN_80.dds"/>
+    <Row Name="ATLAS_COMPOSITE_BOWMAN" IconSize="50" Filename="COMPOSITE_BOWMAN_50.dds"/>
+    <Row Name="ATLAS_COMPOSITE_BOWMAN" IconSize="38" Filename="COMPOSITE_BOWMAN_38.dds"/>
+    <Row Name="ATLAS_COMPOSITE_BOWMAN" IconSize="32" Filename="COMPOSITE_BOWMAN_32.dds"/>
+    <Row Name="ATLAS_COMPOSITE_BOWMAN" IconSize="22" Filename="COMPOSITE_BOWMAN_22.dds"/>
+    <!-- <Row Name="ATLAS_PIRATE" IconSize="256" Filename="PIRATE_256.dds"/>
+    <Row Name="ATLAS_PIRATE" IconSize="80" Filename="PIRATE_80.dds"/>
+    <Row Name="ATLAS_PIRATE" IconSize="50" Filename="PIRATE_50.dds"/>
+    <Row Name="ATLAS_PIRATE" IconSize="38" Filename="PIRATE_38.dds"/>
+    <Row Name="ATLAS_PIRATE" IconSize="32" Filename="PIRATE_32.dds"/>
+    <Row Name="ATLAS_PIRATE" IconSize="22" Filename="PIRATE_22.dds"/> -->
+  </IconTextureAtlases>
+  <IconDefinitions>
+    <Row Name="ICON_UNIT_HALBERDMAN" Atlas="ATLAS_HALBERDMAN" Index="0"/>
+    <Row Name="ICON_UNIT_COMPOSITE_BOWMAN" Atlas="ATLAS_COMPOSITE_BOWMAN" Index="0"/>
+    <Row Name="ICON_UNIT_ARMOR_CAVALRY" Atlas="ATLAS_ARMOR_CAVALRY" Index="0"/>
+    <Row Name="ICON_UNIT_CANNON" Atlas="ATLAS_CANNON" Index="0"/>
+    <Row Name="ICON_UNIT_LANCER" Atlas="ATLAS_LANCER" Index="0"/>
+    <Row Name="ICON_UNIT_REITER" Atlas="ATLAS_REITER" Index="0"/>
+    <Row Name="ICON_UNIT_ARRAY_INFANTRY" Atlas="ATLAS_ARRAY_INFANTRY" Index="0"/>
+    <Row Name="ICON_UNIT_MORTER_NEW" Atlas="ATLAS_MORTER_NEW" Index="0"/>
+
+    <Row Name="ICON_UNIT_SAPPER" Atlas="ATLAS_SAPPER" Index="0"/>
+    <Row Name="ICON_UNIT_ENGINEER_CORP" Atlas="ATLAS_ENGINEER_CORP" Index="0"/>
+
+    <Row Name="ICON_UNIT_VELITE" Atlas="ATLAS_HD_NEW_UNITS" Index="3"/>
+    <Row Name="ICON_UNIT_CHASSEUR" Atlas="ATLAS_HD_NEW_UNITS" Index="4"/>
+    <Row Name="ICON_UNIT_PIRATE" Atlas="ATLAS_HD_NEW_UNITS" Index="2"/>
+
+    <!-- This is the portrait of the unit. -->
+    <Row Name="ICON_UNIT_HALBERDMAN_PORTRAIT" Atlas="ICON_ATLAS_UNIT_PORTRAITS" Index="28"/>
+    <Row Name="ICON_UNIT_COMPOSITE_BOWMAN_PORTRAIT" Atlas="ICON_ATLAS_UNIT_PORTRAITS" Index="27"/>
+    <Row Name="ICON_UNIT_ARMOR_CAVALRY_PORTRAIT" Atlas="ICON_ATLAS_UNIT_PORTRAITS" Index="43"/>
+    <Row Name="ICON_UNIT_CANNON_PORTRAIT" Atlas="ICON_ATLAS_UNIT_PORTRAITS" Index="27"/>
+    <Row Name="ICON_UNIT_LANCER_PORTRAIT" Atlas="ICON_ATLAS_UNIT_PORTRAITS"   Index="33"/>
+    <Row Name="ICON_UNIT_REITER_PORTRAIT" Atlas="ICON_ATLAS_UNIT_PORTRAITS"   Index="43"/>
+    <Row Name="ICON_UNIT_ARRAY_INFANTRY_PORTRAIT" Atlas="ICON_ATLAS_UNIT_PORTRAITS" Index="28"/>
+    <Row Name="ICON_UNIT_MORTER_NEW_PORTRAIT" Atlas="ICON_ATLAS_UNIT_PORTRAITS"   Index="38"/>
+
+    <Row Name="ICON_UNIT_SAPPER_PORTRAIT"            Atlas="ICON_ATLAS_UNIT_PORTRAITS"   Index="49"/>
+    <Row Name="ICON_UNIT_ENGINEER_CORP_PORTRAIT"            Atlas="ICON_ATLAS_UNIT_PORTRAITS_2" Index="60"/>
+
+    <Row Name="ICON_UNIT_VELITE_PORTRAIT" Atlas="ICON_ATLAS_UNIT_PORTRAITS" Index="28"/>
+    <Row Name="ICON_UNIT_CHASSEUR_PORTRAIT" Atlas="ICON_ATLAS_UNIT_PORTRAITS"   Index="38"/>
+    <Row Name="ICON_UNIT_PIRATE_PORTRAIT" Atlas="ICON_ATLAS_UNIT_PORTRAITS"   Index="39"/>
+  </IconDefinitions>
+</GameData>

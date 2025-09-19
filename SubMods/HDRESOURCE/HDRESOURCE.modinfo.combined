@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mod id="7a7278a0-70a1-40d8-b3b9-2df04c06d213" version="1">
+  <Properties>
+    <Name>HDRESOURCE</Name>
+    <Description>This is a brief description of the mod.</Description>
+    <Created>1719462315</Created>
+    <Teaser>This is a brief description of the mod.</Teaser>
+    <Authors>C</Authors>
+    <CompatibleVersions>1.2,2.0</CompatibleVersions>
+  </Properties>
+  <Dependencies>
+    <Mod id="4873eb62-8ccc-4574-b784-dda455e74e68" title="Expansion: Gathering Storm" />
+  </Dependencies>
+  <ActionCriteria>
+    <Criteria id="Monopoly">
+      <ConfigurationValueMatches>
+        <ConfigurationId>GAMEMODE_MONOPOLIES</ConfigurationId>
+        <Group>Game</Group>
+        <Value>1</Value>
+      </ConfigurationValueMatches>
+    </Criteria>
+  </ActionCriteria>
+  <InGameActions>
+    <UpdateArt id="Art">
+      <File>HDRESOURCE.dep</File>
+    </UpdateArt>
+    <UpdateIcons id="Icon">
+      <File>Gameplay/HDRESOURCE_Icon.xml</File>
+    </UpdateIcons>
+    <UpdateDatabase id="Database">
+      <File>Gameplay/HDRESOURCE.sql</File>
+    </UpdateDatabase>
+    <UpdateText id="Monopoly_Text" criteria="Monopoly">
+      <File>Gameplay/HDRESOURCE_Localisation.xml</File>
+    </UpdateText>
+    <UpdateText id="HDRESOURCEText"  criteria="Expansion2">
+      <File>Gameplay/HDRESOURCE_Monopoly_Localisation.xml</File>
+    </UpdateText>
+    <UpdateDatabase id="Monopoly_Database" criteria="Monopoly">
+      <File>Gameplay/HDRESOURCE_Monopoly.sql</File>
+    </UpdateDatabase>
+    <UpdateIcons id="Monopoly_Icon" criteria="Monopoly">
+      <File>Gameplay/HDRESOURCE_Monopoly_Icon.xml</File>
+    </UpdateIcons>
+  </InGameActions>
+  <Files>
+    <File>ArtDefs/ImprovementsHDRESOURCE.artdef</File>
+    <File>ArtDefs/LandmarksHDRESOURCE.artdef</File>
+    <File>ArtDefs/ResourcesHDRESOURCE.artdef</File>
+    <File>Gameplay/HDRESOURCE.sql</File>
+    <File>Gameplay/HDRESOURCE_Icon.xml</File>
+    <File>Gameplay/HDRESOURCE_Localisation.xml</File>
+    <File>Gameplay/HDRESOURCE_Monopoly.sql</File>
+    <File>Gameplay/HDRESOURCE_Monopoly_Icon.xml</File>
+    <File>Gameplay/HDRESOURCE_Monopoly_Localisation.xml</File>
+    <File>HDRESOURCE.dep</File>
+    <File>Platforms/MacOS/BLPs/HDResources.blp</File>
+    <File>Platforms/MacOS/BLPs/Improvements.blp</File>
+    <File>Platforms/MacOS/BLPs/SHARED_DATA/TEXTURE_Decals_Parts_Ancient_01_B</File>
+    <File>Platforms/MacOS/BLPs/SHARED_DATA/TEXTURE_Decals_Parts_Ancient_01_FOW</File>
+    <File>Platforms/MacOS/BLPs/SHARED_DATA/TEXTURE_Decals_Parts_Ancient_01_H</File>
+    <File>Platforms/MacOS/BLPs/SHARED_DATA/TEXTURE_Decals_Parts_Ancient_02_B</File>
+    <File>Platforms/MacOS/BLPs/SHARED_DATA/TEXTURE_Decals_Parts_Ancient_02_FOW</File>
+    <File>Platforms/MacOS/BLPs/SHARED_DATA/TEXTURE_Decals_Parts_Ancient_02_H</File>
+    <File>Platforms/MacOS/BLPs/SHARED_DATA/TEXTURE_Decals_Parts_Ancient_PIL_B</File>
+    <File>Platforms/MacOS/BLPs/SHARED_DATA/TEXTURE_Decals_Parts_Ancient_PIL_H</File>
+    <File>Platforms/MacOS/BLPs/SHARED_DATA/TEXTURE_DiffuseTint_Decals_Parts_Ancient_01_B_null</File>
+    <File>Platforms/MacOS/BLPs/SHARED_DATA/TEXTURE_DiffuseTint_Decals_Parts_Ancient_02_B_null</File>
+    <File>Platforms/MacOS/BLPs/SHARED_DATA/TEXTURE_DiffuseTint_Decals_Parts_Ancient_PIL_B_null</File>
+    <File>Platforms/Windows/BLPs/HDResources.blp</File>
+    <File>Platforms/Windows/BLPs/Improvements.blp</File>
+    <File>Platforms/Windows/BLPs/SHARED_DATA/TEXTURE_Decals_Parts_Ancient_01_B</File>
+    <File>Platforms/Windows/BLPs/SHARED_DATA/TEXTURE_Decals_Parts_Ancient_01_FOW</File>
+    <File>Platforms/Windows/BLPs/SHARED_DATA/TEXTURE_Decals_Parts_Ancient_01_H</File>
+    <File>Platforms/Windows/BLPs/SHARED_DATA/TEXTURE_Decals_Parts_Ancient_02_B</File>
+    <File>Platforms/Windows/BLPs/SHARED_DATA/TEXTURE_Decals_Parts_Ancient_02_FOW</File>
+    <File>Platforms/Windows/BLPs/SHARED_DATA/TEXTURE_Decals_Parts_Ancient_02_H</File>
+    <File>Platforms/Windows/BLPs/SHARED_DATA/TEXTURE_Decals_Parts_Ancient_PIL_B</File>
+    <File>Platforms/Windows/BLPs/SHARED_DATA/TEXTURE_Decals_Parts_Ancient_PIL_H</File>
+    <File>Platforms/Windows/BLPs/SHARED_DATA/TEXTURE_DiffuseTint_Decals_Parts_Ancient_01_B_null</File>
+    <File>Platforms/Windows/BLPs/SHARED_DATA/TEXTURE_DiffuseTint_Decals_Parts_Ancient_02_B_null</File>
+    <File>Platforms/Windows/BLPs/SHARED_DATA/TEXTURE_DiffuseTint_Decals_Parts_Ancient_PIL_B_null</File>
+  </Files>
+</Mod>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This is the empty file just for loading the interface lua script
+ --><Context Name="MONO_UI">
+   
+
+    <Grid ID="FaithBuilder_Grid" Anchor="R,B" Size="auto,41" AutoSizePadding="6,0" Texture="SelectionPanel_ActionGroupSlot" SliceCorner="5,19" SliceSize="1,1" SliceTextureSize="12,41" ConsumeMouse="1" Alpha="0.75">
+        <Button ID="FaithBuilder_Button" Anchor="C,B" Size="44,53" Texture="UnitPanel_ActionButton">
+<!--          ToolTip="LOC_CITADEL_OF_GOD_TO_NAME">
+ --><!--              ToolTipString = "LOC_UNITCOMMAND_CITADEL_OF_GOD_DESCRIPTION"
+ -->            <Image ID="FaithBuilder_Icon" Anchor="C,C" Offset="0,-2" Size="38,38" Icon="ICON_UNITCOMMAND_CITADEL_OF_GOD"/>
+        </Button>
+    </Grid>
+</Context>

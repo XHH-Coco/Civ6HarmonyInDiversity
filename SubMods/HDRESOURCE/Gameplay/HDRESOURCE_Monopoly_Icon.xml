@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- GameData1 -->
+<!-- Author: 26640 -->
+<!-- DateCreated: 6/25/2024 11:41:43 PM -->
+<GameData>
+	<IconTextureAtlases>
+		<Row Name="ATLAS_RESOURCE_C_MONOPOLIES" IconSize="32" IconsPerRow="2" IconsPerColumn="1" Filename="RESOURCE_C_MONOPOLIES_32.dds"/>
+		<Row Name="ATLAS_RESOURCE_C_MONOPOLIES" IconSize="38" IconsPerRow="2" IconsPerColumn="1" Filename="RESOURCE_C_MONOPOLIES_38.dds"/>
+		<Row Name="ATLAS_RESOURCE_C_MONOPOLIES" IconSize="50" IconsPerRow="2" IconsPerColumn="1" Filename="RESOURCE_C_MONOPOLIES_50.dds"/>
+		<Row Name="ATLAS_RESOURCE_C_MONOPOLIES" IconSize="64" IconsPerRow="2" IconsPerColumn="1" Filename="RESOURCE_C_MONOPOLIES_64.dds"/>
+		<Row Name="ATLAS_RESOURCE_C_MONOPOLIES" IconSize="256" IconsPerRow="2" IconsPerColumn="1" Filename="RESOURCE_C_MONOPOLIES_256.dds"/>
+		<Row Name="ATLAS_RESOURCE_C_MONOPOLIES_FOW" IconSize="256" IconsPerRow="2" IconsPerColumn="1" Filename="RESOURCE_C_MONOPOLIES_FOW_256.dds"/>
+		<Row Name="ATLAS_RESOURCE_C_MONOPOLIES_FONT" IconSize="22" Baseline="6" IconsPerRow="2" IconsPerColumn="1" Filename="RESOURCE_C_MONOPOLIES_22.dds"/>
+	</IconTextureAtlases>
+	<IconDefinitions>
+		<Row Name="ICON_MONOPOLIES_AND_CORPS_RESOURCE_C_HEAVENLY_HORSE" Atlas="ATLAS_RESOURCE_C_MONOPOLIES" Index="0"/>
+		<Row Name="ICON_PROJECT_CREATE_CORPORATION_PRODUCT_C_HEAVENLY_HORSE" Atlas="ATLAS_RESOURCE_C_MONOPOLIES" Index="0"/>
+		<Row Name="ICON_MONOPOLIES_AND_CORPS_RESOURCE_C_HEAVENLY_HORSE_FOW" Atlas="ATLAS_RESOURCE_C_MONOPOLIES_FOW" Index="0"/>
+		<Row Name="MONOPOLIES_AND_CORPS_RESOURCE_C_HEAVENLY_HORSE" Atlas="ATLAS_RESOURCE_C_MONOPOLIES_FONT" Index="0"/>
+
+		<Row Name="ICON_MONOPOLIES_AND_CORPS_RESOURCE_C_ZEBU" Atlas="ATLAS_RESOURCE_C_MONOPOLIES" Index="1"/>
+		<Row Name="ICON_PROJECT_CREATE_CORPORATION_PRODUCT_C_ZEBU" Atlas="ATLAS_RESOURCE_C_MONOPOLIES" Index="1"/>
+		<Row Name="ICON_MONOPOLIES_AND_CORPS_RESOURCE_C_ZEBU_FOW" Atlas="ATLAS_RESOURCE_C_MONOPOLIES_FOW" Index="1"/>
+		<Row Name="MONOPOLIES_AND_CORPS_RESOURCE_C_ZEBU" Atlas="ATLAS_RESOURCE_C_MONOPOLIES_FONT" Index="1"/>
+	</IconDefinitions>
+</GameData>

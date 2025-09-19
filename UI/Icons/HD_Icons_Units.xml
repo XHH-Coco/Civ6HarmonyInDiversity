@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameInfo>
+  <IconTextureAtlases>
+    <Row Name="ATLAS_ORAL_SCHOLAR" IconSize="22" Filename="ORAL_SCHOLAR_22.dds"/>
+    <Row Name="ATLAS_ORAL_SCHOLAR" IconSize="32" Filename="ORAL_SCHOLAR_32.dds"/>
+    <Row Name="ATLAS_ORAL_SCHOLAR" IconSize="38" Filename="ORAL_SCHOLAR_38.dds"/>
+    <Row Name="ATLAS_ORAL_SCHOLAR" IconSize="50" Filename="ORAL_SCHOLAR_50.dds"/>
+    <Row Name="ATLAS_ORAL_SCHOLAR" IconSize="80" Filename="ORAL_SCHOLAR_80.dds"/>
+    <Row Name="ATLAS_ORAL_SCHOLAR" IconSize="256" Filename="ORAL_SCHOLAR_256.dds"/>
+    <Row Name="ATLAS_TRAVEL_THEATRE" IconSize="22" Filename="TRAVEL_THEATRE_22.dds"/>
+    <Row Name="ATLAS_TRAVEL_THEATRE" IconSize="32" Filename="TRAVEL_THEATRE_32.dds"/>
+    <Row Name="ATLAS_TRAVEL_THEATRE" IconSize="38" Filename="TRAVEL_THEATRE_38.dds"/>
+    <Row Name="ATLAS_TRAVEL_THEATRE" IconSize="50" Filename="TRAVEL_THEATRE_50.dds"/>
+    <Row Name="ATLAS_TRAVEL_THEATRE" IconSize="80" Filename="TRAVEL_THEATRE_80.dds"/>
+    <Row Name="ATLAS_TRAVEL_THEATRE" IconSize="256" Filename="TRAVEL_THEATRE_256.dds"/>
+    <Row Name="ATLAS_MALI_GRIOTS" IconSize="22" Filename="MALI_GRIOTS_22.dds"/>
+    <Row Name="ATLAS_MALI_GRIOTS" IconSize="32" Filename="MALI_GRIOTS_32.dds"/>
+    <Row Name="ATLAS_MALI_GRIOTS" IconSize="38" Filename="MALI_GRIOTS_38.dds"/>
+    <Row Name="ATLAS_MALI_GRIOTS" IconSize="50" Filename="MALI_GRIOTS_50.dds"/>
+    <Row Name="ATLAS_MALI_GRIOTS" IconSize="80" Filename="MALI_GRIOTS_80.dds"/>
+    <Row Name="ATLAS_MALI_GRIOTS" IconSize="256" Filename="MALI_GRIOTS_256.dds"/>
+    <Row Name="ATLAS_CITADEL_OF_GOD" IconSize="22" Filename="CITADEL_OF_GOD_22.dds"/>
+    <Row Name="ATLAS_CITADEL_OF_GOD" IconSize="32" Filename="CITADEL_OF_GOD_32.dds"/>
+    <Row Name="ATLAS_CITADEL_OF_GOD" IconSize="38" Filename="CITADEL_OF_GOD_38.dds"/>
+    <Row Name="ATLAS_CITADEL_OF_GOD" IconSize="50" Filename="CITADEL_OF_GOD_50.dds"/>
+    <Row Name="ATLAS_CITADEL_OF_GOD" IconSize="80" Filename="CITADEL_OF_GOD_80.dds"/>
+    <Row Name="ATLAS_CITADEL_OF_GOD" IconSize="256" Filename="CITADEL_OF_GOD_256.dds"/>
+    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="22" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_UNITS_22.dds"/>
+    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="32" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_UNITS_32.dds"/>
+    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="38" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_UNITS_38.dds"/>
+    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="50" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_UNITS_50.dds"/>
+    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="80" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_UNITS_80.dds"/>
+    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="256" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_UNITS_256.dds"/>
+  </IconTextureAtlases>
+  <IconDefinitions>
+    <!-- <Row Name="ICON_UNIT_BARBARIAN_RAIDER_WHITE" Index="26" Atlas="ICON_ATLAS_UNIT_FLAG_SYMBOLS_WHITE"/>
+    <Row Name="ICON_UNIT_BARBARIAN_RAIDER_BLACK" Index="26" Atlas="ICON_ATLAS_UNIT_FLAG_SYMBOLS_BLACK"/>
+
+    <Row Name="ICON_UNIT_BARBARIAN_RAIDER_PORTRAIT"             Atlas="ICON_ATLAS_UNIT_PORTRAITS"   Index="24"/>
+    <Row Name="ICON_ETHNICITY_ASIAN_UNIT_BARBARIAN_RAIDER_PORTRAIT"             Atlas="ICON_ATLAS_ASIAN_UNIT_PORTRAITS"   Index="24"/>
+    <Row Name="ICON_ETHNICITY_MEDIT_UNIT_BARBARIAN_RAIDER_PORTRAIT"             Atlas="ICON_ATLAS_MEDITERRANEAN_UNIT_PORTRAITS"   Index="24"/>
+    <Row Name="ICON_ETHNICITY_SOUTHAM_UNIT_BARBARIAN_RAIDER_PORTRAIT"             Atlas="ICON_ATLAS_SOUTH_AMERICAN_UNIT_PORTRAITS"   Index="24"/>
+    <Row Name="ICON_ETHNICITY_AFRICAN_UNIT_BARBARIAN_RAIDER_PORTRAIT"             Atlas="ICON_ATLAS_AFRICAN_UNIT_PORTRAITS"   Index="24"/>
+    
+    <Row Name="ICON_UNIT_BARBARIAN_RAIDER"         Atlas="ICON_ATLAS_UNITS" Index="26"/>
+    <Row Name="ICON_UNIT_BARBARIAN_RAIDER_FOW"         Atlas="ICON_ATLAS_UNITS_FOW" Index="26"/> -->
+
+    <Row Name="ICON_UNIT_HD_BARBARIAN_GALLEY_WHITE" Index="27" Atlas="ICON_ATLAS_UNIT_FLAG_SYMBOLS_WHITE"/>
+    <Row Name="ICON_UNIT_HD_BARBARIAN_GALLEY_BLACK" Index="27" Atlas="ICON_ATLAS_UNIT_FLAG_SYMBOLS_BLACK"/>
+
+    <Row Name="ICON_UNIT_HD_BARBARIAN_GALLEY_PORTRAIT"             Atlas="ICON_ATLAS_UNIT_PORTRAITS"   Index="25"/>
+    <Row Name="ICON_ETHNICITY_ASIAN_UNIT_HD_BARBARIAN_GALLEY_PORTRAIT"             Atlas="ICON_ATLAS_ASIAN_UNIT_PORTRAITS"   Index="25"/>
+    <Row Name="ICON_ETHNICITY_MEDIT_UNIT_HD_BARBARIAN_GALLEY_PORTRAIT"             Atlas="ICON_ATLAS_MEDITERRANEAN_UNIT_PORTRAITS"   Index="25"/>
+    <Row Name="ICON_ETHNICITY_SOUTHAM_UNIT_HD_BARBARIAN_GALLEY_PORTRAIT"             Atlas="ICON_ATLAS_SOUTH_AMERICAN_UNIT_PORTRAITS"   Index="25"/>
+    <Row Name="ICON_ETHNICITY_AFRICAN_UNIT_HD_BARBARIAN_GALLEY_PORTRAIT"             Atlas="ICON_ATLAS_AFRICAN_UNIT_PORTRAITS"   Index="25"/>
+    
+    <Row Name="ICON_UNIT_HD_BARBARIAN_GALLEY"         Atlas="ICON_ATLAS_UNITS" Index="26"/>
+    <Row Name="ICON_UNIT_HD_BARBARIAN_GALLEY_FOW"         Atlas="ICON_ATLAS_UNITS_FOW" Index="26"/> 
+
+    <Row Name="ICON_UNIT_HD_BARBARIAN_QUADRIREME_WHITE" Index="41" Atlas="ICON_ATLAS_UNIT_FLAG_SYMBOLS_WHITE"/>
+    <Row Name="ICON_UNIT_HD_BARBARIAN_QUADRIREME_BLACK" Index="41" Atlas="ICON_ATLAS_UNIT_FLAG_SYMBOLS_BLACK"/>
+
+    <Row Name="ICON_UNIT_HD_BARBARIAN_QUADRIREME_PORTRAIT"             Atlas="ICON_ATLAS_UNIT_PORTRAITS"   Index="39"/>
+    <Row Name="ICON_ETHNICITY_ASIAN_UNIT_HD_BARBARIAN_QUADRIREME_PORTRAIT"             Atlas="ICON_ATLAS_ASIAN_UNIT_PORTRAITS"   Index="39"/>
+    <Row Name="ICON_ETHNICITY_MEDIT_UNIT_HD_BARBARIAN_QUADRIREME_PORTRAIT"             Atlas="ICON_ATLAS_MEDITERRANEAN_UNIT_PORTRAITS"   Index="39"/>
+    <Row Name="ICON_ETHNICITY_SOUTHAM_UNIT_HD_BARBARIAN_QUADRIREME_PORTRAIT"             Atlas="ICON_ATLAS_SOUTH_AMERICAN_UNIT_PORTRAITS"   Index="39"/>
+    <Row Name="ICON_ETHNICITY_AFRICAN_UNIT_HD_BARBARIAN_QUADRIREME_PORTRAIT"             Atlas="ICON_ATLAS_AFRICAN_UNIT_PORTRAITS"   Index="39"/>
+    
+    <Row Name="ICON_UNIT_HD_BARBARIAN_QUADRIREME"         Atlas="ICON_ATLAS_UNITS" Index="41"/>
+    <Row Name="ICON_UNIT_HD_BARBARIAN_QUADRIREME_FOW"         Atlas="ICON_ATLAS_UNITS_FOW" Index="41"/> 
+
+    <!-- create ancient_seadog unit. -->
+    <Row Name="ICON_UNIT_ANCIENT_SEADOG_WHITE" Index="27" Atlas="ICON_ATLAS_UNIT_FLAG_SYMBOLS_WHITE"/>
+    <Row Name="ICON_UNIT_ANCIENT_SEADOG_BLACK" Index="27" Atlas="ICON_ATLAS_UNIT_FLAG_SYMBOLS_BLACK"/>
+
+    <Row Name="ICON_UNIT_ANCIENT_SEADOG_PORTRAIT"             Atlas="ICON_ATLAS_UNIT_PORTRAITS"   Index="25"/>
+    <Row Name="ICON_ETHNICITY_ASIAN_UNIT_ANCIENT_SEADOG_PORTRAIT"             Atlas="ICON_ATLAS_ASIAN_UNIT_PORTRAITS"   Index="25"/>
+    <Row Name="ICON_ETHNICITY_MEDIT_UNIT_ANCIENT_SEADOG_PORTRAIT"             Atlas="ICON_ATLAS_MEDITERRANEAN_UNIT_PORTRAITS"   Index="25"/>
+    <Row Name="ICON_ETHNICITY_SOUTHAM_UNIT_ANCIENT_SEADOG_PORTRAIT"             Atlas="ICON_ATLAS_SOUTH_AMERICAN_UNIT_PORTRAITS"   Index="25"/>
+    <Row Name="ICON_ETHNICITY_AFRICAN_UNIT_ANCIENT_SEADOG_PORTRAIT"             Atlas="ICON_ATLAS_AFRICAN_UNIT_PORTRAITS"   Index="25"/>
+    
+    <Row Name="ICON_UNIT_ANCIENT_SEADOG"         Atlas="ATLAS_HD_NEW_UNITS" Index="1"/>
+    <Row Name="ICON_UNIT_ANCIENT_SEADOG_FOW"         Atlas="ATLAS_HD_NEW_UNITS" Index="1"/> 
+    <!-- create ancient_siege unit. -->
+    <Row Name="ICON_UNIT_ANCIENT_SIEGE"                 Atlas="ICON_ATLAS_UNITS" Index="39"/>
+    <Row Name="ICON_UNIT_ANCIENT_SIEGE_FOW"             Atlas="ICON_ATLAS_UNITS_FOW" Index="39"/>
+    <Row Name="ICON_UNIT_ANCIENT_SIEGE_PORTRAIT"        Atlas="ICON_ATLAS_UNIT_PORTRAITS"   Index="37"/>
+
+    <Row Name="ICON_UNIT_ORAL_SCHOLAR" Atlas="ATLAS_ORAL_SCHOLAR" Index="0"/>
+    <Row Name="ICON_UNIT_TRAVEL_THEATRE" Atlas="ATLAS_TRAVEL_THEATRE" Index="0"/>
+    <Row Name="ICON_UNIT_MALI_GRIOTS" Atlas="ATLAS_MALI_GRIOTS" Index="0"/>
+
+    <Row Name="ICON_UNIT_CITADEL_OF_GOD"                 Atlas="ATLAS_CITADEL_OF_GOD" Index="0"/>
+    <Row Name="ICON_UNIT_CITADEL_OF_GOD_PORTRAIT"        Atlas="ICON_ATLAS_UNIT_PORTRAITS" Index="10"/>
+		<Row Name="ICON_UNIT_HD_CODIFIER"                 Atlas="ATLAS_HD_NEW_UNITS" Index="0"/>
+    <Row Name="ICON_UNIT_HD_CODIFIER_FOW"                 Atlas="ATLAS_HD_NEW_UNITS" Index="0"/>
+    <Row Name="ICON_BUILDING_SEOWON" Atlas="ATLAS_HD_NEW_UNITS" Index="0"/>
+		<Row Name="ICON_BUILDING_SEOWON_FOW" Atlas="ATLAS_HD_NEW_UNITS" Index="0"/>
+    <Row Name="ICON_BUILDING_SEOWON_INTERNAL_ONLY" Atlas="ATLAS_HD_NEW_UNITS" Index="0"/>
+		<Row Name="ICON_BUILDING_SEOWON_INTERNAL_ONLY_FOW" Atlas="ATLAS_HD_NEW_UNITS" Index="0"/>
+		<Row Name="ICON_UNIT_ENKIDU_HD"                 Atlas="ATLAS_HD_NEW_UNITS" Index="5"/>
+    <Row Name="ICON_UNIT_ENKIDU_HD_FOW"                 Atlas="ATLAS_HD_NEW_UNITS" Index="5"/>
+		<Row Name="ICON_UNIT_QIN_ELITE_SOLDIER_HD"                 Atlas="ATLAS_HD_NEW_UNITS" Index="6"/>
+    <Row Name="ICON_UNIT_QIN_ELITE_SOLDIER_HD_FOW"                 Atlas="ATLAS_HD_NEW_UNITS" Index="6"/>
+    <Row Name="ICON_UNIT_KEQING"                    Atlas="ATLAS_HD_NEW_UNITS" Index="7"/>
+		<Row Name="ICON_UNIT_KEQING_FOW"                Atlas="ATLAS_HD_NEW_UNITS"   Index="7"/>
+    <Row Name="ICON_UNIT_PLUM_INTERNAL_SECURITY_HD"                    Atlas="ATLAS_HD_NEW_UNITS" Index="8"/>
+		<Row Name="ICON_UNIT_PLUM_INTERNAL_SECURITY_HD_FOW"                Atlas="ATLAS_HD_NEW_UNITS"   Index="8"/>
+  </IconDefinitions>
+
+  <IconAliases>
+    <Row Name="ICON_UNIT_ORAL_SCHOLAR_PORTRAIT" OtherName="ICON_UNIT_GREAT_WRITER_PORTRAIT"/>
+    <Row Name="ICON_UNIT_TRAVEL_THEATRE_PORTRAIT" OtherName="ICON_UNIT_GREAT_WRITER_PORTRAIT"/>
+    <Row Name="ICON_UNIT_MALI_GRIOTS_PORTRAIT" OtherName="ICON_UNIT_GREAT_WRITER_PORTRAIT"/>
+
+		<Row Name="ICON_UNIT_QIN_ELITE_SOLDIER_HD_PORTRAIT"       OtherName="ICON_UNIT_SWORDSMAN_PORTRAIT"/>
+		<Row Name="ICON_UNIT_KEQING_PORTRAIT"                     OtherName="ICON_UNIT_GREAT_GENERAL_PORTRAIT"/>
+		<Row Name="ICON_UNIT_PLUM_INTERNAL_SECURITY_HD_PORTRAIT"  OtherName="ICON_UNIT_SPY_PORTRAIT"/>
+    
+		<Row Name="ICON_UNIT_HD_CODIFIER_PORTRAIT"       OtherName="ICON_UNIT_GREAT_WRITER_PORTRAIT"/>
+		<Row Name="ICON_UNIT_ENKIDU_HD_PORTRAIT"         OtherName="ICON_UNIT_WARRIOR_PORTRAIT"/>
+
+		<Row Name="ICON_UNIT_HD_YUAN_WAN_QING"           OtherName="ICON_UNIT_GREAT_MUSICIAN"/>
+		<Row Name="ICON_UNIT_HD_YUAN_WAN_QING_FOW"       OtherName="ICON_UNIT_GREAT_MUSICIAN_FOW"/>
+		<Row Name="ICON_UNIT_HD_YUAN_WAN_QING_PORTRAIT"  OtherName="ICON_UNIT_GREAT_MUSICIAN_PORTRAIT"/>
+		<Row Name="ICON_BUILDING_HD_YUNSHAO_MANSION"     OtherName="ICON_UNIT_GREAT_MUSICIAN"/>
+		<Row Name="ICON_BUILDING_HD_YUNSHAO_MANSION_FOW" OtherName="ICON_UNIT_GREAT_MUSICIAN_FOW"/>
+
+		<Row Name="ICON_UNIT_HD_SI_NONG_SI"              OtherName="ICON_UNIT_GREAT_WRITER"/>
+		<Row Name="ICON_UNIT_HD_SI_NONG_SI_FOW"          OtherName="ICON_UNIT_GREAT_WRITER_FOW"/>
+		<Row Name="ICON_UNIT_HD_SI_NONG_SI_PORTRAIT"     OtherName="ICON_UNIT_GREAT_WRITER_PORTRAIT"/>
+	</IconAliases>
+</GameInfo>

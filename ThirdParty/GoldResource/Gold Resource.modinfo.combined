@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mod id="e4c781e0-e101-4442-9b1b-2f46dcc12b83" version="2">
+  <Properties>
+    <Name>Gold Resource</Name>
+    <Description>Adds Gold from the Outback Tycoon scenario as a resource in the base game</Description>
+    <Created>1570299373</Created>
+    <Teaser>Adds Gold from the Outback Tycoon scenario as a resource in the base game</Teaser>
+    <Authors>Pouakai</Authors>
+    <CompatibleVersions>1.2,2.0</CompatibleVersions>
+  </Properties>
+  <InGameActions>
+    <UpdateDatabase id="NewAction">
+      <File>Gold_Resources.xml</File>
+    </UpdateDatabase>
+    <UpdateIcons id="NewAction">
+      <File>Gold_Icons_Resources.xml</File>
+    </UpdateIcons>
+    <UpdateText id="NewAction">
+      <File>Gold_Text.xml</File>
+    </UpdateText>
+  </InGameActions>
+  <Files>
+    <File>Gold_Icons_Resources.xml</File>
+    <File>Gold_Resources.xml</File>
+    <File>Gold_Text.xml</File>
+  </Files>
+</Mod>

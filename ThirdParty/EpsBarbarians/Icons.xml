@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameData>
+	
+	<IconTextureAtlases>
+		<Row Name="ICON_ATLAS_EPSTWEAK_BARBARIAN_UNITS" IconSize="22"  IconsPerRow="1" IconsPerColumn="1" Filename="ICON_UNITS_EPSTWEAK_BARBARIAN_22.dds"/>
+		<Row Name="ICON_ATLAS_EPSTWEAK_BARBARIAN_UNITS" IconSize="32"  IconsPerRow="1" IconsPerColumn="1" Filename="ICON_UNITS_EPSTWEAK_BARBARIAN_32.dds"/>
+		<Row Name="ICON_ATLAS_EPSTWEAK_BARBARIAN_UNITS" IconSize="38"  IconsPerRow="1" IconsPerColumn="1" Filename="ICON_UNITS_EPSTWEAK_BARBARIAN_38.dds"/>
+		<Row Name="ICON_ATLAS_EPSTWEAK_BARBARIAN_UNITS" IconSize="50"  IconsPerRow="1" IconsPerColumn="1" Filename="ICON_UNITS_EPSTWEAK_BARBARIAN_50.dds"/>
+		<Row Name="ICON_ATLAS_EPSTWEAK_BARBARIAN_UNITS" IconSize="80"  IconsPerRow="1" IconsPerColumn="1" Filename="ICON_UNITS_EPSTWEAK_BARBARIAN_80.dds"/>
+		<Row Name="ICON_ATLAS_EPSTWEAK_BARBARIAN_UNITS" IconSize="256" IconsPerRow="1" IconsPerColumn="1" Filename="ICON_UNITS_EPSTWEAK_BARBARIAN_256.dds"/>
+	</IconTextureAtlases>
+	
+	<IconDefinitions>
+		
+		<Update><Where Name="ICON_UNIT_BARBARIAN_HORSEMAN"/><Set><Atlas>ICON_ATLAS_EPSTWEAK_BARBARIAN_UNITS</Atlas><Index>0</Index></Set></Update>
+		
+	</IconDefinitions>
+	
+</GameData>

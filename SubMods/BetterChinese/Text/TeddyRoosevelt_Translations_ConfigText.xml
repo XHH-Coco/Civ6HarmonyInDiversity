@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- TeddyRoosevelt_Translations_ConfigText -->
+<!-- Author: hqh-h -->
+<!-- DateCreated: 11/1/2020 1:49:36 PM -->
+<GameData>
+	<LocalizedText>
+		<Replace Tag="LOC_TRAIT_LEADER_ANTIQUES_AND_PARKS_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>与自然奇观或山脉相邻时，魅力值为“惊艳”的单元格+2 [ICON_SCIENCE] 科技值。与奇观建筑或森林相邻时，魅力值为“惊艳”的单元格+2 [ICON_CULTURE] 文化值。在拥有国家公园的城市中，所有单元格+1魅力。</Text>
+		</Replace>
+	</LocalizedText>
+</GameData>

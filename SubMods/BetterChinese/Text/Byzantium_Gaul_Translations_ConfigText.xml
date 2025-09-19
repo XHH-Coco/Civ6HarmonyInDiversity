@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Byzantium_Gaul_Translations_ConfigText -->
+<!-- Author: hqh-h -->
+<!-- DateCreated: 11/1/2020 12:57:46 PM -->
+<GameData>
+	<LocalizedText>
+		<Replace Tag="LOC_TRAIT_CIVILIZATION_DRAMATIC_AGE_QUESTS_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>进入黄金时代后将额外获得一个通配符政策槽位，并能使用黑暗时代政策。建造防御性建筑时+50%建造速度。</Text>
+		</Replace>
+		<Replace Tag="LOC_TRAIT_CIVILIZATION_BYZANTIUM_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>每有1座圣城皈依拜占庭的宗教（也包括拜占庭的圣城），拜占庭的单位便获得+3 [ICON_Strength] 战斗力或 [ICON_Religion] 宗教战斗力。每击杀一个敌方文明或城邦单位，拜占庭创立的宗教都将传播到6格以内的城市（250宗教压力）。如城市拥有圣地区域，其提供的 [ICON_GreatProphet] 大预言家点数+1。</Text>
+		</Replace>
+		<Replace Tag="LOC_ABILITY_BYZANTIUM_COMBAT_UNITS_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>每有一座圣城皈依您的宗教，便+3 [ICON_Strength] 战斗力；主要文明的单位被击杀后，每击杀一个敌方文明或城邦单位，拜占庭创立的宗教都将传播到6格以内的城市（天授规矩）</Text>
+		</Replace>
+		<Replace Tag="LOC_UNIT_BYZANTINE_TAGMA_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>巴兹尔二世的特色中世纪单位，替代骑士。与甲胄骑兵相邻的陆地单位+4 [ICON_Strength] 战斗力或 [ICON_RELIGION] 宗教战斗力（该加成不会叠加）。</Text>
+		</Replace>
+		<Replace Tag="LOC_DISTRICT_HIPPODROME_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>拜占庭特色区域。替代“娱乐设施”区域，提供+3 [ICON_Amenities] 宜居度，且建造花费更低。建成跑马场及其中的建筑时，将获得1个重骑兵单位。</Text>
+		</Replace>
+		<Replace Tag="LOC_DISTRICT_HIPPODROME_EXPANSION2_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>拜占庭特色区域。替代“娱乐设施”区域，提供+3 [ICON_Amenities] 宜居度，且建造花费更低。建成跑马场及其中的建筑时，将获得1个重骑兵单位（此单位创建时不会消耗资源，也不会消耗资源维护）。</Text>
+		</Replace>
+		<Replace Tag="LOC_ABILITY_FREE_RESOURCE_MAITENANCE_HIPPODROME_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>跑马场区域赠送的单位每回合不消耗战略资源。</Text>
+		</Replace>
+		<Replace Tag="LOC_TRAIT_LEADER_BASIL_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>攻击信仰宗教与拜占庭主流宗教相同的城市时，骑兵将对城市外围防御造成全额伤害。解锁“王权神授”市政后将获得特色单位“甲胄骑兵”。</Text>
+		</Replace>
+		<Replace Tag="LOC_UNIT_BYZANTINE_DROMON_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>拜占庭特色古典时代单位，替代四段帆船。拥有更远的射程，对抗其它单位时+10 [ICON_Strength] 战斗力。</Text>
+		</Replace>
+		<Replace Tag="LOC_ABILITY_TAGMA_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>与甲胄骑兵相邻的陆地单位+4 [ICON_Strength] 战斗力或 [ICON_RELIGION] 宗教战斗力。</Text>
+		</Replace>
+		<Replace Tag="LOC_ABILITY_ENABLE_WALL_ATTACK_SAME_RELIGION_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>进攻所信仰宗教与拜占庭相同之城市时，对城墙造成全额伤害（生于紫色）</Text>
+		</Replace>
+		<Replace Tag="LOC_DISTRICT_OPPIDUM_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>高卢特色区域，替代“工业区”，建造花费更低，且出现时间更早。“奥皮杜姆”同“军营”一样拥有区域防御。建成此区域后，如你还没有“学徒”科技，则解锁改科技。[NEWLINE][NEWLINE]如与采石场改良设施或战略资源相邻，则+2 [ICON_Production] 生产力。</Text>
+		</Replace>
+		<Replace Tag="LOC_TRAIT_LEADER_AMBIORIX_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>生产出一个非平民单位时，您的文明获得等同于该单位生产力花费20%的 [ICON_CULTURE] 文化值。近战、抗骑兵和远程单位每与一个其他单位相邻（无论该单位属于哪个文明），便+2 [ICON_Strength] 战斗力。</Text>
+		</Replace>
+		<Replace Tag="LOC_TRAIT_CIVILIZATION_GAUL_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>矿山为所有区域提供少量相邻加成；建造矿山时会对相邻无主领土施放文化炸弹；矿山+1 [ICON_CULTURE] 文化值。专业化区域与其他区域相邻时不会获得相邻加成；无法建在市中心旁建立专业化区域。</Text>
+		</Replace>
+	</LocalizedText>
+</GameData>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameInfo>
+  <IconDefinitions>
+<!--     <Update><Where Name="ICON_PROMOTION_SENTRY"/> <Set Index="18"/></Update>
+    <Update><Where Name="ICON_PROMOTION_SPYGLASS"/> <Set Index="19"/></Update>
+    <Row Name="ICON_BELIEF_FISHING_TRADITION"           Atlas="ICON_ATLAS_BELIEFS_PATHEON" Index="7"/> -->
+  </IconDefinitions>
+</GameInfo>

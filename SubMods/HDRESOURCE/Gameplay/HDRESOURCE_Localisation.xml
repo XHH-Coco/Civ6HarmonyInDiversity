@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: C-->
+<!-- DateCreated: 6/23/2024 6:29:44 PM -->
+<GameData>
+	<LocalizedText>
+		<Row Tag="LOC_RESOURCE_C_HEAVENLY_HORSE_NAME" Language="en_US">
+			<Text>Heavenly Horse</Text>
+		</Row>
+		<Row Tag="LOC_PEDIA_RESOURCES_PAGE_RESOURCE_C_HEAVENLY_HORSE_CHAPTER_HISTORY_PARA_1" Language="en_US">
+			<Text>Placeholder</Text>
+		</Row>
+		<Row Tag="LOC_RESOURCE_C_HEAVENLY_HORSE_NAME" Language="zh_Hans_CN">
+			<Text>汗血马</Text>
+		</Row>
+		<Row Tag="LOC_PEDIA_RESOURCES_PAGE_RESOURCE_C_HEAVENLY_HORSE_CHAPTER_HISTORY_PARA_1" Language="zh_Hans_CN">
+			<Text>Placeholder</Text>
+		</Row>
+		<Row Tag="LOC_RESOURCE_C_ZEBU_NAME" Language="en_US">
+			<Text>Zebu</Text>
+		</Row>
+		<Row Tag="LOC_PEDIA_RESOURCES_PAGE_RESOURCE_C_ZEBU_CHAPTER_HISTORY_PARA_1" Language="en_US">
+			<Text>Placeholder</Text>
+		</Row>
+		<Row Tag="LOC_RESOURCE_C_ZEBU_NAME" Language="zh_Hans_CN">
+			<Text>瘤牛</Text>
+		</Row>
+		<Row Tag="LOC_PEDIA_RESOURCES_PAGE_RESOURCE_C_ZEBU_CHAPTER_HISTORY_PARA_1" Language="zh_Hans_CN">
+			<Text>Placeholder</Text>
+		</Row>
+	</LocalizedText>
+</GameData>

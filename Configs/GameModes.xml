@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameData>
+	<!-- MilitaryMode -->
+	<Parameters>
+		<Row Key1="Ruleset" Key2="RULESET_EXPANSION_2" ParameterId="GameMode_Military" Name="LOC_GAMEMODE_MILITARY_NAME" Description="LOC_GAMEMODE_MILITARY_DESCRIPTION" Domain="bool" DefaultValue="1" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_MILITARY" NameArrayConfigurationId="GAMEMODES_ENABLED_NAMES" GroupId="GameModes" SortIndex="100"/>
+	</Parameters>
+	<ParameterCriteria>
+		<Row ParameterId="GameMode_Military" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_RANDOM" Operator="NotEquals" ConfigurationValue="1"/>
+	</ParameterCriteria>
+	<ParameterDependencies>
+		<Row ParameterID="GameMode_Military" ConfigurationGroup="Game" ConfigurationId="WORLD_BUILDER" Operator="NotEquals" ConfigurationValue="1"/>
+	</ParameterDependencies>
+	<GameModeItems>
+		<Row GameModeType="GAMEMODE_MILITARY" Name="LOC_GAMEMODE_MILITARY_NAME" Description="LOC_GAMEMODE_MILITARY_DESCRIPTION" Portrait="GAMEMODE_TREE_RANDOMIZER_NEUTRAL" Background="GAMEMODE_TREE_RANDOMIZER_BACKGROUND" Icon="ICON_GAMEMODE_MILITARY" SortIndex="10"/>
+	</GameModeItems>
+	<!-- Mode-based Player Overrides -->
+	<PlayerInfoOverrideQueries>
+		<Row QueryId="MilitaryModePlayerInfoOverrides"/>
+	</PlayerInfoOverrideQueries>
+	<PlayerItemOverrideQueries>
+		<Row QueryId="MilitaryModePlayerItemOverrides"/>
+	</PlayerItemOverrideQueries>
+	<Queries>
+		<Row QueryId="MilitaryModePlayerInfoOverrides" SQL="SELECT * FROM GameModePlayerInfoOverrides WHERE GameModeType = 'GAMEMODE_MILITARY'"/>
+		<Row QueryId="MilitaryModePlayerItemOverrides" SQL="SELECT * FROM GameModePlayerItemOverrides WHERE GameModeType = 'GAMEMODE_MILITARY'"/>
+	</Queries>
+	<QueryCriteria>
+		<Row QueryId="MilitaryModePlayerInfoOverrides" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_MILITARY" Operator="Equals" ConfigurationValue="1"/>
+		<Row QueryId="MilitaryModePlayerItemOverrides" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_MILITARY" Operator="Equals" ConfigurationValue="1"/>
+	</QueryCriteria>
+	<!-- AiTestMode -->
+	<Parameters>
+		<Row Key1="Ruleset" Key2="RULESET_EXPANSION_2" ParameterId="GameMode_AItest" Name="LOC_GAMEMODE_AITEST_NAME" Description="LOC_GAMEMODE_AITEST_DESCRIPTION" Domain="bool" DefaultValue="0" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_AITEST" NameArrayConfigurationId="GAMEMODES_ENABLED_NAMES" GroupId="GameModes" SortIndex="100"/>
+	</Parameters>
+	<ParameterCriteria>
+		<Row ParameterId="GameMode_AItest" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_RANDOM" Operator="NotEquals" ConfigurationValue="1"/>
+	</ParameterCriteria>
+	<ParameterDependencies>
+		<Row ParameterID="GameMode_AItest" ConfigurationGroup="Game" ConfigurationId="WORLD_BUILDER" Operator="NotEquals" ConfigurationValue="1"/>
+	</ParameterDependencies>
+	<GameModeItems>
+		<Row GameModeType="GAMEMODE_AITEST" Name="LOC_GAMEMODE_AITEST_NAME" Description="LOC_GAMEMODE_AITEST_DESCRIPTION" Portrait="GAMEMODE_TREE_RANDOMIZER_NEUTRAL" Background="GAMEMODE_TREE_RANDOMIZER_BACKGROUND" Icon="ICON_GAMEMODE_AITEST" SortIndex="10"/>
+	</GameModeItems>
+	<!-- Mode-based Player Overrides -->
+	<PlayerInfoOverrideQueries>
+		<Row QueryId="AiTestModePlayerInfoOverrides"/>
+	</PlayerInfoOverrideQueries>
+	<PlayerItemOverrideQueries>
+		<Row QueryId="AiTestModePlayerItemOverrides"/>
+	</PlayerItemOverrideQueries>
+	<Queries>
+		<Row QueryId="AiTestModePlayerInfoOverrides" SQL="SELECT * FROM GameModePlayerInfoOverrides WHERE GameModeType = 'GAMEMODE_AITEST'"/>
+		<Row QueryId="AiTestModePlayerItemOverrides" SQL="SELECT * FROM GameModePlayerItemOverrides WHERE GameModeType = 'GAMEMODE_AITEST'"/>
+	</Queries>
+	<QueryCriteria>
+		<Row QueryId="AiTestModePlayerInfoOverrides" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_AITEST" Operator="Equals" ConfigurationValue="1"/>
+		<Row QueryId="AiTestModePlayerItemOverrides" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_AITEST" Operator="Equals" ConfigurationValue="1"/>
+	</QueryCriteria>
+	<!-- DevTestMode -->
+	<!-- <Parameters>
+		<Row Key1="Ruleset" Key2="RULESET_EXPANSION_2" ParameterId="GameMode_Devtest" Name="LOC_GAMEMODE_DEVTEST_NAME" Description="LOC_GAMEMODE_DEVTEST_DESCRIPTION" Domain="bool" DefaultValue="0" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_DEVTEST" NameArrayConfigurationId="GAMEMODES_ENABLED_NAMES" GroupId="GameModes" SortIndex="100"/>
+	</Parameters>
+	<ParameterCriteria>
+		<Row ParameterId="GameMode_Devtest" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_RANDOM" Operator="NotEquals" ConfigurationValue="1"/>
+	</ParameterCriteria>
+	<ParameterDependencies>
+		<Row ParameterID="GameMode_Devtest" ConfigurationGroup="Game" ConfigurationId="WORLD_BUILDER" Operator="NotEquals" ConfigurationValue="1"/>
+	</ParameterDependencies>
+	<GameModeItems>
+		<Row GameModeType="GAMEMODE_DEVTEST" Name="LOC_GAMEMODE_DEVTEST_NAME" Description="LOC_GAMEMODE_DEVTEST_DESCRIPTION" Portrait="GAMEMODE_TREE_RANDOMIZER_NEUTRAL" Background="GAMEMODE_TREE_RANDOMIZER_BACKGROUND" Icon="ICON_GAMEMODE_DEVTEST" SortIndex="10"/>
+	</GameModeItems> -->
+	<!-- Mode-based Player Overrides -->
+	<!-- <PlayerInfoOverrideQueries>
+		<Row QueryId="DevTestModePlayerInfoOverrides"/>
+	</PlayerInfoOverrideQueries>
+	<PlayerItemOverrideQueries>
+		<Row QueryId="DevTestModePlayerItemOverrides"/>
+	</PlayerItemOverrideQueries>
+	<Queries>
+		<Row QueryId="DevTestModePlayerInfoOverrides" SQL="SELECT * FROM GameModePlayerInfoOverrides WHERE GameModeType = 'GAMEMODE_DEVTEST'"/>
+		<Row QueryId="DevTestModePlayerItemOverrides" SQL="SELECT * FROM GameModePlayerItemOverrides WHERE GameModeType = 'GAMEMODE_DEVTEST'"/>
+	</Queries>
+	<QueryCriteria>
+		<Row QueryId="DevTestModePlayerInfoOverrides" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_DEVTEST" Operator="Equals" ConfigurationValue="1"/>
+		<Row QueryId="DevTestModePlayerItemOverrides" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_DEVTEST" Operator="Equals" ConfigurationValue="1"/>
+	</QueryCriteria> -->
+	<!-- MultiPlayer test -->
+	<Parameters>
+		<Row Key1="Ruleset" Key2="RULESET_EXPANSION_2" ParameterId="GameMode_MPtest" Name="LOC_GAMEMODE_MPTEST_NAME" Description="LOC_GAMEMODE_MPTEST_DESCRIPTION" Domain="bool" DefaultValue="0" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_MPTEST" NameArrayConfigurationId="GAMEMODES_ENABLED_NAMES" GroupId="GameModes" SortIndex="100"/>
+	</Parameters>
+	<ParameterCriteria>
+		<Row ParameterId="GameMode_MPtest" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_RANDOM" Operator="NotEquals" ConfigurationValue="1"/>
+	</ParameterCriteria>
+	<ParameterDependencies>
+		<Row ParameterID="GameMode_MPtest" ConfigurationGroup="Game" ConfigurationId="WORLD_BUILDER" Operator="NotEquals" ConfigurationValue="1"/>
+	</ParameterDependencies>
+	<GameModeItems>
+		<Row GameModeType="GAMEMODE_MPTEST" Name="LOC_GAMEMODE_MPTEST_NAME" Description="LOC_GAMEMODE_MPTEST_DESCRIPTION" Portrait="GAMEMODE_TREE_RANDOMIZER_NEUTRAL" Background="GAMEMODE_TREE_RANDOMIZER_BACKGROUND" Icon="ICON_GAMEMODE_MPTEST" SortIndex="10"/>
+	</GameModeItems>
+	<!-- Mode-based Player Overrides -->
+	<PlayerInfoOverrideQueries>
+		<Row QueryId="MPtestModePlayerInfoOverrides"/>
+	</PlayerInfoOverrideQueries>
+	<PlayerItemOverrideQueries>
+		<Row QueryId="MPtestModePlayerItemOverrides"/>
+	</PlayerItemOverrideQueries>
+	<Queries>
+		<Row QueryId="MPtestModePlayerInfoOverrides" SQL="SELECT * FROM GameModePlayerInfoOverrides WHERE GameModeType = 'GAMEMODE_MPTEST'"/>
+		<Row QueryId="MPtestModePlayerItemOverrides" SQL="SELECT * FROM GameModePlayerItemOverrides WHERE GameModeType = 'GAMEMODE_MPTEST'"/>
+	</Queries>
+	<QueryCriteria>
+		<Row QueryId="MPtestModePlayerInfoOverrides" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_MPTEST" Operator="Equals" ConfigurationValue="1"/>
+		<Row QueryId="MPtestModePlayerItemOverrides" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_MPTEST" Operator="Equals" ConfigurationValue="1"/>
+	</QueryCriteria>
+	<!-- Wild Mode -->
+	<!-- <Parameters>
+		<Row Key1="Ruleset" Key2="RULESET_EXPANSION_2" ParameterId="GameMode_Wild" Name="LOC_GAMEMODE_WILD_NAME" Description="LOC_GAMEMODE_WILD_DESCRIPTION" Domain="bool" DefaultValue="0" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_WILD" NameArrayConfigurationId="GAMEMODES_ENABLED_NAMES" GroupId="GameModes" SortIndex="100"/>
+	</Parameters>
+	<ParameterCriteria>
+		<Row ParameterId="GameMode_Wild" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_RANDOM" Operator="NotEquals" ConfigurationValue="1"/>
+	</ParameterCriteria>
+	<ParameterDependencies>
+		<Row ParameterID="GameMode_Wild" ConfigurationGroup="Game" ConfigurationId="WORLD_BUILDER" Operator="NotEquals" ConfigurationValue="1"/>
+	</ParameterDependencies>
+	<GameModeItems>
+		<Row GameModeType="GAMEMODE_WILD" Name="LOC_GAMEMODE_WILD_NAME" Description="LOC_GAMEMODE_WILD_DESCRIPTION" Portrait="GAMEMODE_TREE_RANDOMIZER_NEUTRAL" Background="GAMEMODE_TREE_RANDOMIZER_BACKGROUND" Icon="ICON_GAMEMODE_WILD" SortIndex="10"/>
+	</GameModeItems> -->
+	<!-- Mode-based Player Overrides -->
+	<!-- <PlayerInfoOverrideQueries>
+		<Row QueryId="WildModePlayerInfoOverrides"/>
+	</PlayerInfoOverrideQueries>
+	<PlayerItemOverrideQueries>
+		<Row QueryId="WildModePlayerItemOverrides"/>
+	</PlayerItemOverrideQueries>
+	<Queries>
+		<Row QueryId="WildModePlayerInfoOverrides" SQL="SELECT * FROM GameModePlayerInfoOverrides WHERE GameModeType = 'GAMEMODE_WILD'"/>
+		<Row QueryId="WildModePlayerItemOverrides" SQL="SELECT * FROM GameModePlayerItemOverrides WHERE GameModeType = 'GAMEMODE_WILD'"/>
+	</Queries>
+	<QueryCriteria>
+		<Row QueryId="WildModePlayerInfoOverrides" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_WILD" Operator="Equals" ConfigurationValue="1"/>
+		<Row QueryId="WildModePlayerItemOverrides" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_WILD" Operator="Equals" ConfigurationValue="1"/>
+	</QueryCriteria> -->
+	<!-- Riligious Arm Mode -->
+	<!-- <Parameters>
+		<Row Key1="Ruleset" Key2="RULESET_EXPANSION_2" ParameterId="GameMode_Riligious_Arm" Name="LOC_GAMEMODE_RILIGIOUS_ARM_NAME" Description="LOC_GAMEMODE_RILIGIOUS_ARM_DESCRIPTION" Domain="bool" DefaultValue="0" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_RILIGIOUS_ARM" NameArrayConfigurationId="GAMEMODES_ENABLED_NAMES" GroupId="GameModes" SortIndex="200"/>
+	</Parameters>
+	<ParameterCriteria>
+		<Row ParameterId="GameMode_Riligious_Arm" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_RANDOM" Operator="NotEquals" ConfigurationValue="1"/>
+	</ParameterCriteria>
+	<ParameterDependencies>
+		<Row ParameterID="GameMode_Riligious_Arm" ConfigurationGroup="Game" ConfigurationId="WORLD_BUILDER" Operator="NotEquals" ConfigurationValue="1"/>
+	</ParameterDependencies>
+	<GameModeItems>
+		<Row GameModeType="GAMEMODE_RILIGIOUS_ARM" Name="LOC_GAMEMODE_RILIGIOUS_ARM_NAME" Description="LOC_GAMEMODE_RILIGIOUS_ARM_DESCRIPTION" Portrait="GAMEMODE_TREE_RANDOMIZER_NEUTRAL" Background="GAMEMODE_TREE_RANDOMIZER_BACKGROUND" Icon="ICON_GAMEMODE_RILIGIOUS_ARM" SortIndex="10"/>
+	</GameModeItems> -->
+</GameData>

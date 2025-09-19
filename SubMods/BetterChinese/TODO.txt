@@ -1,0 +1,5 @@
+Review the following:
+
+Vanilla_zh_Hans_CN
+Expansion2_Translations_ConfigText
+Expansion2_Translations_Text

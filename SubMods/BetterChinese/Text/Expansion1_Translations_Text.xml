@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Expansion1_Translations_Text -->
+<!-- Author: hqh-h -->
+<!-- DateCreated: 2/10/2020 3:38:17 PM -->
+<GameData>
+	<!--LocalizedText>
+		<Replace Tag="LOC_DISTRICT_STREET_CARNIVAL_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>巴西特色区域，代替娱乐中心。提供+2 [ICON_Amenities] 宜居度，建造费用更低。[NEWLINE]解锁“狂欢节”项目。项目进行时为本城提供+1 [ICON_Amenities] 宜居度，项目完成后可获得若干 [ICON_GreatPerson] 伟人点数。[NEWLINE]为相邻单元格提供+1魅力。</Text>
+		</Replace>
+		<Replace Tag="LOC_MOMENT_BUILDING_CONSTRUCTED_FULL_ENTERTAINMENT_COMPLEX_FIRST" Language="zh_Hans_CN">
+			<Text>首次将娱乐中心发展完全</Text>
+		</Replace>
+		<Replace Tag="LOC_MOMENT_BUILDING_CONSTRUCTED_FULL_ENTERTAINMENT_COMPLEX_FIRST_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>您首次建成了娱乐中心中的所有建筑。</Text>
+		</Replace>
+		<Replace Tag="LOC_BUILDING_STADIUM_EXPANSION1_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>[ICON_Amenities] 宜居度加成延伸到6个单元格中的每个市中心。此加成1座城市仅能应用1次，因此市中心6个单元格以内相同的此建筑不会再额外提供加成。如城市 [ICON_CITIZEN] 人口大于等于10，则+2 [ICON_Tourism] 旅游业绩；如城市 [ICON_CITIZEN] 人口大于等于20，则+5 [ICON_Tourism] 旅游业绩。</Text>
+		</Replace>
+		<Replace Tag="LOC_GOVERNOR_PROMOTION_PARKS_RECREATION_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>能够在该城市中建造市立公园。+1 [ICON_Culture] 文化值，为相邻单元格提供+2魅力。若相邻湖泊、海岸或是河流，+1 [ICON_Amenities] 宜居度。若总督“梁”在此城就职，市立公园提供+3 [ICON_CULTURE] 文化值。</Text>
+		</Replace>
+		<Replace Tag="LOC_IMPROVEMENT_CITY_PARK_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>[ICON_Governor] 总督特色改良设施，可在“测量师”总督（必须拥有“公园与休憩”升级）就职的城市中修建。产出1点 [ICON_Culture] 文化值，为相邻单元格提供+2魅力。如相邻湖泊、海岸或是河流，则+1 [ICON_Amenities] 宜居度。“测量师”总督（必须拥有“公园与休憩”升级）在城市就职时，+3 [ICON_CULTURE] 文化值。无法建在另一个市立公园旁。</Text>
+		</Replace>
+		<Replace Tag="LOC_DISTRICT_ENTERTAINMENT_COMPLEX_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>城市中的区域，可增加 [ICON_Amenities] 宜居度，让人民生活幸福。[NEWLINE]为相邻单元格提供+1魅力。</Text>
+		</Replace>
+		<Replace Tag="LOC_DISTRICT_ENTERTAINMENT_COMPLEX_EXPANSION1_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>城市中的区域，可增加 [ICON_Amenities] 宜居度，让人民生活幸福。[NEWLINE]为相邻单元格提供+1魅力。[NEWLINE]无法建在拥有水上乐园的城市中。</Text>
+		</Replace>
+		<Replace Tag="LOC_DISTRICT_WATER_ENTERTAINMENT_COMPLEX_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>建在海岸单元格上的区域，可增加 [ICON_Amenities] 宜居度，让人民生活幸福。[NEWLINE]为相邻单元格提供+1魅力。[NEWLINE]无法建在拥有娱乐中心的城市中。无法建在礁石上。</Text>
+		</Replace>
+		<Replace Tag="LOC_BUILDING_COLOSSEUM_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>罗马斗兽场为6个单元格以内的所有市中心提供：+2 [ICON_Culture] 文化值、每回合+2忠诚度和+2 [ICON_Amenities] 宜居度。必须建在与娱乐中心（其中须建有竞技场）相邻的平坦地形上。</Text>
+		</Replace>
+		<Replace Tag="LOC_BUILDING_GREAT_LIBRARY_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>获得所有远古和古典时代的科技的尤里卡。其他玩家招募 [ICON_GreatScientist] 大科学家时将随机获得1个科技提升。必须建在与学院（其中须建有图书馆）相邻的平坦地形上。</Text>
+		</Replace>
+		<Replace Tag="LOC_BUILDING_KILWA_KISIWANI_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>建成后+3 [ICON_ENVOY] 使者。对于每一类城邦，若你是其中至少1个的宗主国，本城中此类城邦对应的产出+15%；若是其中至少2个的宗主国，你的所有城市的此类城邦对应的产出+15%。必须建造在与海岸相邻的平坦地形上。</Text>
+		</Replace>
+		<Replace Tag="LOC_EMERGENCY_MEMBER_REWARD_DESCRIPTION_RELIGIOUS_RELICS" Language="zh_Hans_CN">
+			<Text>每个成员均获得一件 [ICON_GreatWork_RELIC] 遗物。</Text>
+		</Replace>
+		<Replace Tag="LOC_PEDIA_CONCEPTS_PAGE_DEDICATIONS_CHAPTER_CONTENT_PARA_8" Language="zh_Hans_CN">
+			<Text>“滚滚蒸汽”：每建造1座工业时代后的建筑+2时代得分。在黄金时代开始时选择此着力点后，建造工业时代后奇观时+10%建造速度。学院区域的 [ICON_SCIENCE] 科技值相邻加成也可提供 [ICON_PRODUCTION] 生产力。可在工业时代到原子能时代之间选择。</Text>
+		</Replace>
+		<Replace Tag="LOC_PEDIA_CONCEPTS_PAGE_DEDICATIONS_CHAPTER_CONTENT_PARA_9" Language="zh_Hans_CN">
+			<Text>“全民皆兵”：在战斗中每击杀1个非蛮族军团+1时代得分、每击杀1个非蛮族军队+2时代得分。在黄金时代开始时选择此着力点后将解锁特殊战争借口，谴责目标后可立即宣战，且好战程度-75%。生产军事单位时+15%建造速度。可在工业时代到原子能时代之间选择。</Text>
+		</Replace>
+		<Replace Tag="LOC_BUILDING_GOV_WIDE_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>在此城中生产开拓者时+50%建造速度。[NEWLINE]新城市获得1个免费的建造者。[NEWLINE]奖励1个 [Icon_Governor] 总督头衔。</Text>
+		</Replace>
+		<Replace Tag="LOC_BUILDING_GOV_CONQUEST_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>占领一座敌方城市后，所有城市 [ICON_Production] 生产力+20%，效果持续5回合。[NEWLINE]奖励1个 [Icon_Governor] 总督头衔。</Text>
+		</Replace>
+		<Replace Tag="LOC_BUILDING_GOV_SCIENCE_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>建造者能使用所有次数为一个区域项目提供 [ICON_Production] 生产力加成（每有1次建造次数便完成项目的2%）。一次只能用于一座城市，每回合仅限使用一次。[NEWLINE]奖励1个 [Icon_Governor] 总督头衔。</Text>
+		</Replace>
+		<Replace Tag="LOC_BUILDING_AMUNDSEN_SCOTT_RESEARCH_STATION_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>所有城市 [ICON_SCIENCE] 科技值+20%、[ICON_PRODUCTION] 生产力+10%。若你的某座城市的3个单元格范围内有5个雪地或雪地丘陵单元格，且这些单元格为你所拥有，则该城这些产出则会加倍。必须建造在雪地或雪地丘陵单元格上。必须建造在学院旁（其中须建有“研究实验室”）。</Text>
+		</Replace>
+		<Replace Tag="LOC_BUILDING_ST_BASILS_CATHEDRAL_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>此城市 [ICON_GreatWork_RELIC] 遗物产出的 [ICON_Tourism] 旅游业绩+100%。此城市所有冻土单元格产出的 [ICON_Food] 食物+1、[ICON_Production] 生产力+1、[ICON_Culture] 文化值+1。必须建在市中心旁。</Text>
+		</Replace>
+		<Replace Tag="LOC_EMERGENCY_MEMBER_REWARD_DESCRIPTION_RELIGIOUS_RELICS" Language="zh_Hans_CN">
+			<Text>每个成员均获得一件 [ICON_GreatWork_RELIC] 遗物。</Text>
+		</Replace>
+		<Replace Tag="LOC_POLICY_LETTERS_OF_MARQUE_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>生产海军袭击者时+100%建造速度，生产的海军袭击者+2 [ICON_Movement] 移动力。掠夺贸易路线的收益加倍。[NEWLINE]但 [ICON_TradeRoute] 贸易路线产量-50%。</Text>
+		</Replace>
+		<Replace Tag="LOC_POLICY_ROGUE_STATE_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>核计划项目和核装置的建造速度+50%。[NEWLINE]但无法通过影响力获得新的 [ICON_Envoy] 使者。</Text>
+		</Replace>
+		<Replace Tag="LOC_ALLIANCE_LV2_MILITARY_EFFECT_1" Language="zh_Hans_CN">
+			<Text>您或盟友处于战争状态时，生产军事单位+15%建造速度</Text>
+		</Replace>
+		<Replace Tag="LOC_GOVT_ACCUMULATED_BONUS_BRIEF_AUTOCRACY_XP1" Language="zh_Hans_CN">
+			<Text>建造奇观时+10%建造速度。</Text>
+		</Replace>
+		<Replace Tag="LOC_GOVT_ACCUMULATED_BONUS_BRIEF_MERCHREP_XP1" Language="zh_Hans_CN">
+			<Text>建造区域时+15%建造速度。</Text>
+		</Replace>
+		<Replace Tag="LOC_GOVT_ACCUMULATED_BONUS_BRIEF_FASCISM_XP1" Language="zh_Hans_CN">
+			<Text>生产单位时+50%建造速度。</Text>
+		</Replace>
+		<Replace Tag="LOC_GOVERNOR_PROMOTION_CARDINAL_DIVINE_ARCHITECT_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>建造圣地建筑时+20%建造速度。</Text>
+		</Replace>
+		<Replace Tag="LOC_GOVERNOR_PROMOTION_RESOURCE_MANAGER_EXPEDITION_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>建造工业区建筑时+20% [ICON_Production] 生产力。城市生产开拓者不消耗 [ICON_Citizen] 人口。</Text>
+		</Replace>
+		<Replace Tag="LOC_GOVERNOR_PROMOTION_INFRASTRUCTURE_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>建造市中心和市政广场建筑时+30%建造速度。</Text>
+		</Replace>
+		<Replace Tag="LOC_GOVERNOR_PROMOTION_ZONING_COMMISSIONER_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>在城市中修建区域时+20%建造速度。</Text>
+		</Replace>
+		<Replace Tag="LOC_GOVERNOR_PROMOTION_ARCHITECT_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>在城市中修建娱乐中心建筑和水上乐园建筑时+30%建造速度。</Text>
+		</Replace>
+		<Replace Tag="LOC_GOVERNOR_PROMOTION_EDUCATOR_ARMS_RACE_PROPONENT_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>在城市中进行核武器项目时+30%建造速度。</Text>
+		</Replace>
+		<Replace Tag="LOC_GOVERNOR_PROMOTION_EDUCATOR_SPACE_INITIATIVE_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>在城市中进行太空计划项目时+30%建造速度。</Text>
+		</Replace>
+		<Replace Tag="LOC_GOVERNOR_PROMOTION_EDUCATOR_CONNOISSEUR_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>在城市中修建剧院广场建筑时+20%建造速度。</Text>
+		</Replace>
+		<Replace Tag="LOC_GOVERNOR_PROMOTION_EDUCATOR_RESEARCHER_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>在城市中修建学院建筑时+20%建造速度。</Text>
+		</Replace>
+		<Replace Tag="LOC_GOVERNOR_PROMOTION_AQUACULTURE_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>渔场特色改良设施，可建造在城市中的海岸单元格上。+1 [ICON_Food] 食物，每相邻1个海洋资源，则额外+1 [ICON_Food] 食物。</Text>
+		 </Replace>
+		<Replace Tag="LOC_GOVERNOR_PROMOTION_RESOURCE_MANAGER_SURPLUS_LOGISTICS_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>城市的人口增长速度+20%。通往本城的国内 [ICON_TradeRoute] 贸易路线为额外+2 [ICON_Food] 食物。</Text>
+		</Replace>
+		<Replace Tag="LOC_UNITCOMMAND_PROJECT_PRODUCTION_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>为项目增加剩余次数*2%的 [ICON_Production] 生产力。一次只能用于一座城市，每回合仅限使用一次。</Text>
+		</Replace>
+		<Replace Tag="LOC_MOMENT_CATEGORY_INDUSTRIAL_BONUS_GOLDEN_AGE" Language="zh_Hans_CN">
+			<Text>“滚滚蒸汽”黄金时代：[NEWLINE]建造工业时代后的奇观时+10%建造速度。学院的 [ICON_SCIENCE] 科技值相邻加成也可提供 [ICON_PRODUCTION] 生产力。</Text>
+		</Replace>
+		<Replace Tag="LOC_MOMENT_CATEGORY_MILITARY_BONUS_GOLDEN_AGE" Language="zh_Hans_CN">
+			<Text>“全民皆兵”黄金时代：[NEWLINE]解锁特殊战争借口，谴责目标后可立即宣战，[ICON_STAT_GRIEVANCE] 不满-75%。生产军事单位时+15%建造速度。</Text>
+		</Replace>
+		<Replace Tag="LOC_PEDIA_CONCEPTS_PAGE_DEDICATIONS_CHAPTER_CONTENT_PARA_3" Language="zh_Hans_CN">
+			<Text>“百花齐放”：每次触发 [ICON_CivicBoosted] 鼓舞+1时代得分。建成拥有巨作槽位的建筑+1时代得分。在黄金时代开始时选择此着力点后，[ICON_CivicBoosted]鼓舞额外提供（对应市政所需文化总量的）10%。城市每拥有1处专业化区域，则+1 [ICON_Culture] 文化值。可在古典和中世纪时代中选择。</Text>
+		</Replace>
+		<Replace Tag="LOC_PEDIA_CONCEPTS_PAGE_DEDICATIONS_CHAPTER_CONTENT_PARA_5" Language="zh_Hans_CN">
+			<Text>“雄伟壮丽”：每修建1座新专业化区域则+1时代得分。在黄金时代开始时选择此着力点后，所有建造者+2 [ICON_Movement] 移动力。可用 [ICON_Faith] 信仰值购买平民单位。用 [ICON_FAITH] 信仰值和 [ICON_GOLD] 黄金购买建造者和开拓者的费用降低30%。可在古典时代到文艺复兴时代之间选择。</Text>
+		</Replace>
+		<Replace Tag="LOC_PEDIA_CONCEPTS_PAGE_DEDICATIONS_CHAPTER_CONTENT_PARA_7" Language="zh_Hans_CN">
+			<Text>“货币改革”：每成功建立1条 [ICON_TradeRoute] 贸易路线+1时代得分。在黄金时代开始时选择此着力点后，商人无法被掠夺。外国城市中每拥有1个专业化区域，国际 [ICON_TradeRoute] 贸易路线提供的 [ICON_Gold] 金币+3。可在文艺复兴时代到现代之间选择。</Text>
+		</Replace>
+		<Replace Tag="LOC_MOMENT_CATEGORY_CULTURAL_BONUS_GOLDEN_AGE" Language="zh_Hans_CN">
+			<Text>“百花齐放”黄金时代：[NEWLINE][ICON_CivicBoosted]鼓舞额外提供（对应市政所需文化总量的）10%。城市每拥有1处专业化区域，则+1 [ICON_Culture] 文化值。</Text>
+		</Replace>
+		<Replace Tag="LOC_MOMENT_CATEGORY_ECONOMIC_BONUS_GOLDEN_AGE" Language="zh_Hans_CN">
+			<Text>“货币改革”黄金时代：[NEWLINE]商人无法被掠夺。外国城市中每拥有1个专业化区域，国际 [ICON_TradeRoute] 贸易路线提供的 [ICON_Gold] 金币+3。</Text>
+		</Replace>
+		<Replace Tag="LOC_LEADER_TRAIT_VILNIUS_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>您当前同盟中等级最高的同盟的每个等级为您所有的剧院广场提供+50%相邻加成。</Text>
+		</Replace>
+		<Replace Tag="LOC_PEDIA_CONCEPTS_PAGE_GOVT_4_CHAPTER_CONTENT_PARA_6" Language="zh_Hans_CN">
+			<Text>政体政策：这些政策能为不同政体类型带来强大的遗产加成。玩家建造市政广场和政体级别相关的建筑后即可解锁这些政策。举例而言：采用“古典共和”政体，然后建造“军阀宝座”、“祠堂”或“谒见厅”即可解锁“共和传承”政策。</Text>
+		</Replace>
+		<Replace Tag="LOC_PEDIA_CONCEPTS_PAGE_SCIENCE_2_CHAPTER_CONTENT_PARA_1" Language="zh_Hans_CN">
+			<Text>[ICON_Science] 科技值有多种来源，其中包括 [ICON_Citizen] 公民（每位 [ICON_Citizen] 提供0.5点）、宫殿、政策、宗教信仰、资源、奇观、贸易，以及学院和其中的建筑。如需了解 [ICON_Science] 科技值来源，请查阅文明百科。</Text>
+		</Replace>
+		<Replace Tag="LOC_PEDIA_CONCEPTS_PAGE_GOVERNORS_1_CHAPTER_CONTENT_PARA_3" Language="zh_Hans_CN">
+			<Text>任命总督：[NEWLINE]使用总督头衔即可任命并升级总督。总督头衔随游戏进程解锁，主要通过市政树获得，也可通过建造市政广场和其中的建筑来获得。此外还可通过建造“西印度交易所”奇观来获得。任命总督后即可将其派遣到城市中行使职责。每种总督文明中仅限保留一个；一次只能指派一个总督到一座城市。</Text>
+		</Replace>
+		<Replace Tag="LOC_PEDIA_CONCEPTS_PAGE_DEDICATIONS_CHAPTER_CONTENT_PARA_2" Language="zh_Hans_CN">
+			<Text>“自由探索”：每次触发 [ICON_TechBoosted] 尤里卡+1时代得分。建造以科技值为基础产出的建筑+1时代得分。在黄金时代开始时选择此着力点后，[ICON_TechBoosted]尤里卡额外提供（对应科技所需科技总量的）10%。商业中心和港口的 [ICON_GOLD] 金币相邻加成也提供 [ICON_Science] 科技值。可在古典和中世纪时代中选择。</Text>
+		</Replace>
+		<Replace Tag="LOC_BUILDING_KOTOKU_IN_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>此城+20% [ICON_Faith] 信仰值。赠送4名武僧。[NEWLINE][NEWLINE]必须建在拥有寺庙的圣地旁。获得武僧的前提条件是玩家创立了宗教，或此玩家/城市拥有主流宗教。</Text>
+		</Replace>
+		<Replace Tag="LOC_BUILDING_STATUE_LIBERTY_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>获得2名开拓者。6个单元格内的所有城市忠诚度固定为100。[NEWLINE]必须建造在与港口相邻且靠近陆地的海岸单元格上。</Text>
+		</Replace>
+		<Replace Tag="LOC_LEADER_TRAIT_CARTHAGE_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>城市中建成的每个军营建筑可使陆地战斗单位的购买 [ICON_GOLD] 金币-20%。</Text>
+		</Replace>
+		<Replace Tag="LOC_LEADER_TRAIT_PRESLAV_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>城市中建成的每个军营建筑可使城市每回合的忠诚度+2。</Text>
+		</Replace>
+		<Replace Tag="LOC_LEADER_TRAIT_STOCKHOLM_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>您拥有建筑的区域使相应类型的 [ICON_GreatPerson] 伟人点数+1（拥有建筑的剧院广场提供 [ICON_GreatWriter] 大作家、[ICON_GreatArtist] 大艺术家和 [ICON_GreatMusician] 大音乐家点数）。</Text>
+		</Replace>
+		<Replace Tag="LOC_MOMENT_BUILDING_CONSTRUCTED_FULL_AERODROME_FIRST_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>您首次建成了航空港中的所有建筑。</Text>
+		</Replace>
+		<Replace Tag="LOC_MOMENT_BUILDING_CONSTRUCTED_FULL_ENCAMPMENT_FIRST_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>您首次建成了军营中的所有建筑。</Text>
+		</Replace>
+		<Replace Tag="LOC_MOMENT_BUILDING_CONSTRUCTED_FULL_WATER_ENTERTAINMENT_COMPLEX_FIRST_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>您首次建成了水上乐园中的所有建筑。</Text>
+		</Replace>
+		<Replace Tag="LOC_MOMENT_DISTRICT_CONSTRUCTED_NEIGHBORHOOD_FIRST" Language="zh_Hans_CN">
+			<Text>首个社区建成</Text>
+		</Replace>
+		<Replace Tag="LOC_MOMENT_DISTRICT_CONSTRUCTED_NEIGHBORHOOD_FIRST_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>您建成了本文明中的首个社区。</Text>
+		</Replace>
+		<Replace Tag="LOC_MOMENT_DISTRICT_CONSTRUCTED_NEIGHBORHOOD_FIRST_IN_WORLD_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>您建成了世界上首个社区。</Text>
+		</Replace>
+		<Replace Tag="LOC_MOMENT_CATEGORY_SCIENTIFIC_BONUS_GOLDEN_AGE" Language="zh_Hans_CN">
+			<Text>“自由探索”黄金时代：[NEWLINE][ICON_TechBoosted]尤里卡额外提供（对应科技所需科技总量的）10%。商业中心和港口的 [ICON_GOLD] 金币相邻加成也提供 [ICON_Science] 科技值。</Text>
+		</Replace>
+		<Replace Tag="LOC_BUILDING_HANGAR_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>当前城市训练的空中单位+25%战斗经验值。航空港+1空中单位槽位。</Text>
+		</Replace>
+		<Replace Tag="LOC_BUILDING_SHIPYARD_EXPANSION2_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>此城中生产的所有海军单位+25%战斗经验值。港口等于其的相邻加成的 [ICON_Production] 生产力加成。此城所有未改良的海岸单元格提供的 [ICON_PRODUCTION] 生产力+1。 </Text>
+		</Replace>
+		<Replace Tag="LOC_DISTRICT_HANSA_DESCRIPTION_ADJACENCY" Language="zh_Hans_CN">
+			<Text>相邻：如相邻于商业中心、水渠、运河和堤坝，则获得大量 [ICON_Production] 生产力加成。将从相邻的每个资源处获得标准的 [ICON_Production] 生产力加成。将从相邻的区域单元格处获得少量 [ICON_Production] 生产力加成。</Text>
+		</Replace>
+		<Replace Tag="LOC_ERA_REVIEW_POPUP_ERA_SCORE_AERODROME_BUILDING_CONSTRUCTIONS" Language="zh_Hans_CN">
+			<Text>着力点加成：在航空港中修建建筑的数量（每个+{1_ScoreIncrement}）</Text>
+		</Replace>
+		<Replace Tag="LOC_ABILITY_PREVIEW_ZEVEN_PROVINCIEN_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>攻击区域防御时+7 [ICON_Strength] 战斗力</Text>
+		</Replace>
+		<Replace Tag="LOC_ABILITY_DUTCH_ZEVEN_PROVINCIEN_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>攻击区域防御时+7 [ICON_Strength] 战斗力。</Text>
+		</Replace>
+		<Replace Tag="LOC_INDUSTRIAL_BUILDING_DEDICATION_NOTIFICATION" Language="zh_Hans_CN">
+			<Text>您建成了1座工业时代后的建筑。</Text>
+		</Replace>
+		<Replace Tag="LOC_MOMENT_CATEGORY_INDUSTRIAL_BONUS_NORMAL_AGE" Language="zh_Hans_CN">
+			<Text>“滚滚蒸汽”着力点加成：[NEWLINE]每建造1座工业时代后的建筑+1时代得分。</Text>
+		</Replace>
+		<Replace Tag="LOC_MOMENT_CATEGORY_INDUSTRIAL_BONUS_DARK_AGE" Language="zh_Hans_CN">
+			<Text>“滚滚蒸汽”着力点加成：[NEWLINE]每建造1座工业时代后的建筑+1时代得分。 </Text>
+		</Replace>
+		<Replace Tag="LOC_ERA_REVIEW_POPUP_ERA_SCORE_INDUSTRIAL_BUILDING_CONSTRUCTIONS" Language="zh_Hans_CN">
+			<Text>着力点加成：修建工业时代后建筑的数量（每座+{1_ScoreIncrement}）</Text>
+		</Replace>
+		<Replace Tag="LOC_POLICY_COLONIAL_OFFICES_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>与您原始 [ICON_Capital] 首都不在同一大陆的城市人口增长速度+15%、每回合+3点忠诚度。</Text>
+		</Replace>
+		<Replace Tag="LOC_POLICY_COLONIAL_TAXES_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>与您原始 [ICON_Capital] 首都不在同一大陆的城市+25% [ICON_Gold] 金币、+10% [ICON_PRODUCTION] 生产力。</Text>
+		</Replace>
+		<Replace Tag="LOC_PEDIA_CONCEPTS_PAGE_DEDICATIONS_CHAPTER_CONTENT_PARA_6" Language="zh_Hans_CN">
+			<Text>“此处有龙”：每发现1个新大陆或自然奇观+3时代得分。在战斗中每击杀1个非蛮族海军单位+1时代得分。在黄金时代开始时选择此着力点后，和原始 [ICON_Capital] 首都不在同一个大陆的城市+3初始 [ICON_Citizen] 人口。海军和水运单位+2 [ICON_Movement] 移动力。和原始 [ICON_Capital] 首都不在同一个大陆的城市每回合+2忠诚度。可在文艺复兴时代到现代之间选择。</Text>
+		</Replace>
+		<Replace Tag="LOC_MOMENT_CATEGORY_EXPLORATION_BONUS_GOLDEN_AGE" Language="zh_Hans_CN">
+			<Text>“此处有龙”黄金时代：和原始 [ICON_Capital] 首都不在同一个大陆上的城市+3初始 [ICON_Citizen] 人口。海军和水运单位+2 [ICON_Movement] 移动力。和原始 [ICON_Capital] 首都不在同一个大陆的城市每回合+2忠诚度。</Text>
+		</Replace>
+		<Replace Tag="LOC_LOYALTY_GROWTH_AND_YIELD_EFFECTS_TEXT" Language="zh_Hans_CN">
+			<Text>人口增长速度{1_GrowthReduction}%[NEWLINE]城市产出{2_YieldPercentage}%</Text>
+		</Replace>
+		<Replace Tag="LOC_MOMENT_CITY_TRANSFERRED_FOREIGN_CAPITAL_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>您已控制一个外邦的原始 [ICON_Capital] 首都。</Text>
+		</Replace>
+		<Replace Tag="LOC_CITY_BANNER_ORIGINAL_CAPITAL_TT" Language="zh_Hant_HK">
+			<Text>{1_Owner}的原始 [ICON_Capital] 首都</Text>
+		</Replace>
+		<Replace Tag="LOC_GOVT_INHERENT_BONUS_CLASSREP_XP1" Language="zh_Hans_CN">
+			<Text>你的每个拥有专业化区域的城市+1 [ICON_Housing] 住房、+1 [ICON_Amenities] 宜居度。</Text>
+		</Replace>
+	</LocalizedText-->
+</GameData>

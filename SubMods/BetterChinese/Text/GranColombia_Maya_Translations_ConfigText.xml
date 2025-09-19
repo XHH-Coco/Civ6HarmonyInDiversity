@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- GranColombia_Maya_Translations_ConfigText -->
+<!-- Author: hqh-h -->
+<!-- DateCreated: 6/26/2020 2:21:12 PM -->
+<GameData>
+	<LocalizedText>
+		<Replace Tag="LOC_TRAIT_CIVILIZATION_MAYAB_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>在淡水和海岸旁定居时不会从水源获得额外的 [ICON_HOUSING] 住房，而每座农场提供的 [ICON_HOUSING] 住房和 [ICON_GOLD] 金币额外+1。距离市中心一格内每有一种奢侈品，该城市+1 [ICON_AMENITIES] 宜居度。</Text>
+		</Replace>
+	</LocalizedText>
+</GameData>

@@ -1,0 +1,27 @@
+<GameInfo>
+	<Types>
+		<Row Type="RESOURCE_GOLD" Kind="KIND_RESOURCE"/>
+	</Types>
+	<TypeTags>
+		<Row Type="RESOURCE_GOLD" Tag="CLASS_GOLD"/>
+		<Row Type="RESOURCE_GOLD" Tag="CLASS_PRODUCTION"/>
+	</TypeTags>
+		<Resources>
+		<Row ResourceType="RESOURCE_GOLD" Name="LOC_RESOURCE_GOLD_NAME" ResourceClassType="RESOURCECLASS_LUXURY" Happiness="4" Frequency="2"/>
+	</Resources>
+	<Resource_ValidTerrains>
+		<Row ResourceType="RESOURCE_GOLD" TerrainType="TERRAIN_DESERT_HILLS"/>
+		<Row ResourceType="RESOURCE_GOLD" TerrainType="TERRAIN_PLAINS_HILLS"/>
+		<Row ResourceType="RESOURCE_GOLD" TerrainType="TERRAIN_TUNDRA_HILLS"/>
+		<Row ResourceType="RESOURCE_GOLD" TerrainType="TERRAIN_DESERT"/>
+		<Row ResourceType="RESOURCE_GOLD" TerrainType="TERRAIN_PLAINS"/>
+		<Row ResourceType="RESOURCE_GOLD" TerrainType="TERRAIN_TUNDRA"/>
+	</Resource_ValidTerrains>
+	<Resource_YieldChanges>
+		<Row ResourceType="RESOURCE_GOLD" YieldType="YIELD_GOLD" YieldChange="4"/>
+	</Resource_YieldChanges>
+	<Improvement_ValidResources>
+		<!-- Mine-->
+		<Row ImprovementType="IMPROVEMENT_MINE" ResourceType="RESOURCE_GOLD"/>
+	</Improvement_ValidResources>
+</GameInfo>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- KuShan_UI -->
+<!-- Author: HSbF6HSO3F -->
+<!-- DateCreated: 2024/7/12 23:11:20 -->
+<Context Name="America_HD_CityPanelAddon">
+	<Stack ID="America_HD_City_Stack" Anchor="C,B" StackGrowth="Right" StackPadding="4">
+		<Button ID="America_HD_City_Button" Anchor="L,B" Size="44,53" Texture="UnitPanel_ActionButton">
+			<!-- An Image inside the Button that requires a texture -->
+			<Image ID="America_HD_City_Icon" Anchor="C,C" Offset="0,-3" Size="38,38" Icon="ICON_UNITCOMMAND_LIBERATION_LINCOLN"/>
+		</Button>
+	</Stack>
+</Context>

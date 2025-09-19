@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- GranColombia_Maya_Translations_Text -->
+<!-- Author: hqh-h -->
+<!-- DateCreated: 6/26/2020 2:20:55 PM -->
+<GameData>
+	<LocalizedText>
+		<Replace Tag="LOC_LEADER_TRAIT_SINGAPORE_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>您的城市中每有1条连接到不相同的其他文明的国际 [ICON_TradeRoute] 贸易路线，便+2 [ICON_Production] 生产力。</Text>
+		</Replace>
+		<Replace Tag="LOC_LEADER_TRAIT_TARUGA_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>您的城市每拥有一种被改良的战略资源，该城市产出的 [ICON_SCIENCE] 科技值+5%。</Text>
+		</Replace>
+		<Replace Tag="LOC_FEATURE_PAITITI_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>占3个单元格且无法通行的自然奇观。为相邻单元格提供+3 [ICON_Gold] 金币和+2 [ICON_Culture] 文化值。从拥有至少1个单元格的城市出发的国际 [ICON_TradeRoute] 贸易路线+4金币。</Text>
+		</Replace>
+		<Replace Tag="LOC_LEADER_TRAIT_TARUGA_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>对于你的每座城市，其3环内每拥有1种已开发的战略资源，则该城市的科技值+5%</Text>
+		</Replace>
+	</LocalizedText>
+</GameData>

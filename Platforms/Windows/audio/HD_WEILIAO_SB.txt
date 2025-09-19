@@ -1,0 +1,5 @@
+Event	ID	Name			Wwise Object Path	Notes
+	3657515151	PLAY_HD_WEILIAO			\Default Work Unit\PLAY_HD_WEILIAO	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	450715744	WEILIAO	E:\

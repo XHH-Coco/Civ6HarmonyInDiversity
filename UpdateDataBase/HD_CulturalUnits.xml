@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameData>
+    <Tags>
+		<Row Tag="CLASS_ORAL_SCHOLAR_HD" Vocabulary="ABILITY_CLASS"/>
+		<Row Tag="CLASS_TRAVEL_THEATRE_HD" Vocabulary="ABILITY_CLASS"/>
+		<Row Tag="CLASS_ROCK_BAND_HD" Vocabulary="ABILITY_CLASS"/>
+		<Row Tag="CLASS_MALI_GRIOTS_HD" Vocabulary="ABILITY_CLASS"/>
+	</Tags>
+    <Types>
+        <Row Type="UNIT_ORAL_SCHOLAR" Kind="KIND_UNIT"/>
+        <Row Type="UNIT_TRAVEL_THEATRE" Kind="KIND_UNIT"/>
+        <Row Type="UNIT_MALI_GRIOTS" Kind="KIND_UNIT"/>
+        <Row Type="TRAIT_CIVILIZATION_UNIT_MALI_GRIOTS" Kind="KIND_TRAIT"/>
+        <!--
+            神秘主义 mysticism
+            古典主义 classicism
+            浪漫主义 romanticism
+            享乐主义 hedonism （合并至浪漫
+            现实主义 realism
+            学院主义 academism
+            通俗主义 popularism
+            普罗主义 pluralism
+            渔歌船号 fisherman's song
+            流浪诗人 gleeman
+            瓦市勾栏 urban opera
+            泛政治化 pan-politicalization
+            闻名遐迩 well-known-->
+        <Row Type="PROMOTION_MYSTICISM_HD" Kind="KIND_PROMOTION"/>
+		<Row Type="PROMOTION_CLASSICISM_HD" Kind="KIND_PROMOTION"/>
+		<Row Type="PROMOTION_ROMANTICISM_HD" Kind="KIND_PROMOTION"/>
+		<!-- <Row Type="PROMOTION_HEDONISM_HD" Kind="KIND_PROMOTION"/> -->
+		<Row Type="PROMOTION_REALISM_HD" Kind="KIND_PROMOTION"/>
+		<Row Type="PROMOTION_ACADEMISM_HD" Kind="KIND_PROMOTION"/>
+		<Row Type="PROMOTION_POPULARISM_HD" Kind="KIND_PROMOTION"/>
+		<Row Type="PROMOTION_PLURALISM_HD" Kind="KIND_PROMOTION"/>
+		<Row Type="PROMOTION_FISHER_SONG_HD" Kind="KIND_PROMOTION"/>
+
+		<Row Type="PROMOTION_MYSTICISM_PRE_HD" Kind="KIND_PROMOTION"/>
+		<Row Type="PROMOTION_CLASSICISM_PRE_HD" Kind="KIND_PROMOTION"/>
+		<Row Type="PROMOTION_ROMANTICISM_PRE_HD" Kind="KIND_PROMOTION"/>
+		<Row Type="PROMOTION_REALISM_PRE_HD" Kind="KIND_PROMOTION"/>
+		<Row Type="PROMOTION_ACADEMISM_PRE_HD" Kind="KIND_PROMOTION"/>
+		<Row Type="PROMOTION_POPULARISM_PRE_HD" Kind="KIND_PROMOTION"/>
+		<Row Type="PROMOTION_PLURALISM_PRE_HD" Kind="KIND_PROMOTION"/>
+		<Row Type="PROMOTION_FISHER_SONG_PRE_HD" Kind="KIND_PROMOTION"/>
+
+		<Row Type="PROMOTION_GLEEMAN_HD" Kind="KIND_PROMOTION"/>
+		<Row Type="PROMOTION_URBAN_OPERA_HD" Kind="KIND_PROMOTION"/>
+		<Row Type="PROMOTION_PAN_POLITICALIZATION_HD" Kind="KIND_PROMOTION"/>
+		<Row Type="PROMOTION_WELL_KNOWN_HD" Kind="KIND_PROMOTION"/>
+
+		<Row Type="RESULT_LEGENDS_NEVER_DIE" Kind="KIND_ROCKBAND_RESULT"/>
+    </Types>
+    <TypeTags>
+		<Row Type="UNIT_ORAL_SCHOLAR" Tag="CLASS_LANDCIVILIAN"/>
+        <Row Type="UNIT_ORAL_SCHOLAR" Tag="CLASS_ORAL_SCHOLAR_HD"/>
+		<Row Type="UNIT_ORAL_SCHOLAR" Tag="CLASS_ROCK_BAND"/>
+        <Row Type="UNIT_TRAVEL_THEATRE" Tag="CLASS_LANDCIVILIAN"/>
+		<Row Type="UNIT_TRAVEL_THEATRE" Tag="CLASS_TRAVEL_THEATRE_HD"/>
+		<Row Type="UNIT_TRAVEL_THEATRE" Tag="CLASS_ROCK_BAND"/>
+		<Row Type="UNIT_ROCK_BAND" Tag="CLASS_ROCK_BAND_HD"/>
+
+		<Row Type="UNIT_MALI_GRIOTS" Tag="CLASS_LANDCIVILIAN"/>
+        <Row Type="UNIT_MALI_GRIOTS" Tag="CLASS_ORAL_SCHOLAR_HD"/>
+		<Row Type="UNIT_MALI_GRIOTS" Tag="CLASS_ROCK_BAND"/>
+		<Row Type="UNIT_MALI_GRIOTS" Tag="CLASS_MALI_GRIOTS_HD"/>
+	</TypeTags>
+	<Traits>
+		<Row TraitType="TRAIT_CIVILIZATION_UNIT_MALI_GRIOTS" Name="LOC_TRAIT_CIVILIZATION_UNIT_MALI_GRIOTS_NAME" Description="LOC_TRAIT_CIVILIZATION_UNIT_MALI_GRIOTS_DESCRIPTION"/>
+	</Traits>
+	<CivilizationTraits>
+		<Row CivilizationType="CIVILIZATION_MALI" TraitType="TRAIT_CIVILIZATION_UNIT_MALI_GRIOTS"/>
+	</CivilizationTraits>
+	<UnitReplaces>
+    	<Row CivUniqueUnitType="UNIT_MALI_GRIOTS" ReplacesUnitType="UNIT_ORAL_SCHOLAR"/>
+  	</UnitReplaces>
+    <Units>
+    	<Row UnitType="UNIT_ORAL_SCHOLAR" 
+        Cost="50" Maintenance="8" BaseMoves="4" BaseSightRange="2" 
+        ZoneOfControl="false" Domain="DOMAIN_LAND" 
+        FormationClass="FORMATION_CLASS_CIVILIAN" 
+        Name="LOC_UNIT_ORAL_SCHOLAR_NAME" 
+        Description="LOC_UNIT_ORAL_SCHOLAR_DESCRIPTION" 
+        PurchaseYield="YIELD_GOLD" PrereqCivic="CIVIC_RECORDED_HISTORY" MandatoryObsoleteCivic="CIVIC_THE_ENLIGHTENMENT"
+        CostProgressionModel="COST_PROGRESSION_PREVIOUS_COPIES" 
+        CanRetreatWhenCaptured="True" 
+        InitialLevel="2" NumRandomChoices="24" 
+		CostProgressionParam1="50"
+        PromotionClass="PROMOTION_CLASS_ROCK_BAND" 
+        PseudoYieldType="PSEUDOYIELD_UNIT_RELIGIOUS"/>
+
+        <Row UnitType="UNIT_TRAVEL_THEATRE" 
+        Cost="100" Maintenance="16" BaseMoves="4" BaseSightRange="2" 
+        ZoneOfControl="false" Domain="DOMAIN_LAND" 
+        FormationClass="FORMATION_CLASS_CIVILIAN" 
+        Name="LOC_UNIT_TRAVEL_THEATRE_NAME" 
+        Description="LOC_UNIT_TRAVEL_THEATRE_DESCRIPTION" 
+        PurchaseYield="YIELD_GOLD" PrereqCivic="CIVIC_THE_ENLIGHTENMENT" MandatoryObsoleteCivic="CIVIC_COLD_WAR"
+        CostProgressionModel="COST_PROGRESSION_PREVIOUS_COPIES" 
+        CanRetreatWhenCaptured="True" 
+        InitialLevel="2" NumRandomChoices="24" 
+		CostProgressionParam1="100"
+        PromotionClass="PROMOTION_CLASS_ROCK_BAND" 
+        PseudoYieldType="PSEUDOYIELD_UNIT_RELIGIOUS"/>
+
+		<Row UnitType="UNIT_MALI_GRIOTS" 
+        Cost="40" Maintenance="8" BaseMoves="4" BaseSightRange="2" 
+        ZoneOfControl="false" Domain="DOMAIN_LAND" 
+        FormationClass="FORMATION_CLASS_CIVILIAN" 
+        Name="LOC_UNIT_MALI_GRIOTS_NAME" 
+        Description="LOC_UNIT_MALI_GRIOTS_DESCRIPTION" 
+        PurchaseYield="YIELD_GOLD" PrereqCivic="CIVIC_RECORDED_HISTORY" MandatoryObsoleteCivic="CIVIC_THE_ENLIGHTENMENT"
+        CostProgressionModel="COST_PROGRESSION_PREVIOUS_COPIES" 
+        CanRetreatWhenCaptured="True" 
+        InitialLevel="2" NumRandomChoices="24" 
+		CostProgressionParam1="40"
+        PromotionClass="PROMOTION_CLASS_ROCK_BAND" 
+        PseudoYieldType="PSEUDOYIELD_UNIT_RELIGIOUS"
+		TraitType="TRAIT_CIVILIZATION_UNIT_MALI_GRIOTS"/>
+    </Units>
+    <Units_XP2>
+    	<Row UnitType="UNIT_ORAL_SCHOLAR" TourismBombPossible="true" CanEarnExperience="false" TourismBomb="0"/>
+    	<Row UnitType="UNIT_MALI_GRIOTS" TourismBombPossible="true" CanEarnExperience="false" TourismBomb="25"/>
+		<Row UnitType="UNIT_TRAVEL_THEATRE" TourismBombPossible="true" CanEarnExperience="false" TourismBomb="200"/>
+    </Units_XP2>
+    <UnitPromotions>
+		<!--Rock Band-->
+		<Row UnitPromotionType="PROMOTION_MYSTICISM_HD" Name="LOC_PROMOTION_MYSTICISM_HD_NAME" Description="LOC_PROMOTION_MYSTICISM_HD_DESCRIPTION" Level="2" PromotionClass="PROMOTION_CLASS_ROCK_BAND"/>
+		<Row UnitPromotionType="PROMOTION_CLASSICISM_HD" Name="LOC_PROMOTION_CLASSICISM_HD_NAME" Description="LOC_PROMOTION_CLASSICISM_HD_DESCRIPTION" Level="2" PromotionClass="PROMOTION_CLASS_ROCK_BAND"/>
+		<Row UnitPromotionType="PROMOTION_ROMANTICISM_HD" Name="LOC_PROMOTION_ROMANTICISM_HD_NAME" Description="LOC_PROMOTION_ROMANTICISM_HD_DESCRIPTION" Level="2" PromotionClass="PROMOTION_CLASS_ROCK_BAND"/>
+		<!-- <Row UnitPromotionType="PROMOTION_HEDONISM_HD" Name="LOC_PROMOTION_HEDONISM_HD_NAME" Description="LOC_PROMOTION_HEDONISM_HD_DESCRIPTION" Level="1" PromotionClass="PROMOTION_CLASS_ROCK_BAND"/> -->
+		<Row UnitPromotionType="PROMOTION_REALISM_HD" Name="LOC_PROMOTION_REALISM_HD_NAME" Description="LOC_PROMOTION_REALISM_HD_DESCRIPTION" Level="2" PromotionClass="PROMOTION_CLASS_ROCK_BAND"/>
+		<Row UnitPromotionType="PROMOTION_ACADEMISM_HD" Name="LOC_PROMOTION_ACADEMISM_HD_NAME" Description="LOC_PROMOTION_ACADEMISM_HD_DESCRIPTION" Level="2" PromotionClass="PROMOTION_CLASS_ROCK_BAND"/>
+		<Row UnitPromotionType="PROMOTION_POPULARISM_HD" Name="LOC_PROMOTION_POPULARISM_HD_NAME" Description="LOC_PROMOTION_POPULARISM_HD_DESCRIPTION" Level="2" PromotionClass="PROMOTION_CLASS_ROCK_BAND"/>
+		<Row UnitPromotionType="PROMOTION_PLURALISM_HD" Name="LOC_PROMOTION_PLURALISM_HD_NAME" Description="LOC_PROMOTION_PLURALISM_HD_DESCRIPTION" Level="2" PromotionClass="PROMOTION_CLASS_ROCK_BAND"/>
+		<Row UnitPromotionType="PROMOTION_FISHER_SONG_HD" Name="LOC_PROMOTION_FISHER_SONG_HD_NAME" Description="LOC_PROMOTION_FISHER_SONG_HD_DESCRIPTION" Level="2" PromotionClass="PROMOTION_CLASS_ROCK_BAND"/>
+
+		<Row UnitPromotionType="PROMOTION_MYSTICISM_PRE_HD" Name="LOC_PROMOTION_MYSTICISM_PRE_HD_NAME" Description="LOC_PROMOTION_MYSTICISM_PRE_HD_DESCRIPTION" Level="1" PromotionClass="PROMOTION_CLASS_ROCK_BAND"/>
+		<Row UnitPromotionType="PROMOTION_CLASSICISM_PRE_HD" Name="LOC_PROMOTION_CLASSICISM_PRE_HD_NAME" Description="LOC_PROMOTION_CLASSICISM_PRE_HD_DESCRIPTION" Level="1" PromotionClass="PROMOTION_CLASS_ROCK_BAND"/>
+		<Row UnitPromotionType="PROMOTION_ROMANTICISM_PRE_HD" Name="LOC_PROMOTION_ROMANTICISM_PRE_HD_NAME" Description="LOC_PROMOTION_ROMANTICISM_PRE_HD_DESCRIPTION" Level="1" PromotionClass="PROMOTION_CLASS_ROCK_BAND"/>
+		<Row UnitPromotionType="PROMOTION_REALISM_PRE_HD" Name="LOC_PROMOTION_REALISM_PRE_HD_NAME" Description="LOC_PROMOTION_REALISM_PRE_HD_DESCRIPTION" Level="1" PromotionClass="PROMOTION_CLASS_ROCK_BAND"/>
+		<Row UnitPromotionType="PROMOTION_ACADEMISM_PRE_HD" Name="LOC_PROMOTION_ACADEMISM_PRE_HD_NAME" Description="LOC_PROMOTION_ACADEMISM_PRE_HD_DESCRIPTION" Level="1" PromotionClass="PROMOTION_CLASS_ROCK_BAND"/>
+		<Row UnitPromotionType="PROMOTION_POPULARISM_PRE_HD" Name="LOC_PROMOTION_POPULARISM_PRE_HD_NAME" Description="LOC_PROMOTION_POPULARISM_PRE_HD_DESCRIPTION" Level="1" PromotionClass="PROMOTION_CLASS_ROCK_BAND"/>
+		<Row UnitPromotionType="PROMOTION_PLURALISM_PRE_HD" Name="LOC_PROMOTION_PLURALISM_PRE_HD_NAME" Description="LOC_PROMOTION_PLURALISM_PRE_HD_DESCRIPTION" Level="1" PromotionClass="PROMOTION_CLASS_ROCK_BAND"/>
+		<Row UnitPromotionType="PROMOTION_FISHER_SONG_PRE_HD" Name="LOC_PROMOTION_FISHER_SONG_PRE_HD_NAME" Description="LOC_PROMOTION_FISHER_SONG_PRE_HD_DESCRIPTION" Level="1" PromotionClass="PROMOTION_CLASS_ROCK_BAND"/>
+
+		<Row UnitPromotionType="PROMOTION_GLEEMAN_HD" Name="LOC_PROMOTION_GLEEMAN_HD_NAME" Description="LOC_PROMOTION_GLEEMAN_HD_DESCRIPTION" Level="2" PromotionClass="PROMOTION_CLASS_ROCK_BAND"/>
+		<Row UnitPromotionType="PROMOTION_URBAN_OPERA_HD" Name="LOC_PROMOTION_URBAN_OPERA_HD_NAME" Description="LOC_PROMOTION_URBAN_OPERA_HD_DESCRIPTION" Level="3" PromotionClass="PROMOTION_CLASS_ROCK_BAND"/>
+		<Row UnitPromotionType="PROMOTION_PAN_POLITICALIZATION_HD" Name="LOC_PROMOTION_PAN_POLITICALIZATION_HD_NAME" Description="LOC_PROMOTION_PAN_POLITICALIZATION_HD_DESCRIPTION" Level="2" PromotionClass="PROMOTION_CLASS_ROCK_BAND"/>
+		<Row UnitPromotionType="PROMOTION_WELL_KNOWN_HD" Name="LOC_PROMOTION_WELL_KNOWN_HD_NAME" Description="LOC_PROMOTION_WELL_KNOWN_HD_DESCRIPTION" Level="3" PromotionClass="PROMOTION_CLASS_ROCK_BAND"/>
+    </UnitPromotions>
+	<Unit_RockbandResults_XP2>
+		<Update>
+			<Where ResultType="RESULT_LEGENDS_OF_ROCK"/>
+			<Set AlbumSales="25" TourismBomb="150" ExtraPromotion="true" Dies="false" GainsLevel="true" BaseProbability="16" PerformanceStars="7"/>
+		</Update>
+		<Update>
+			<Where ResultType="RESULT_HEADLINERS"/>
+			<Set AlbumSales="20" TourismBomb="100" ExtraPromotion="true" Dies="false" GainsLevel="true" BaseProbability="14" PerformanceStars="6"/>
+		</Update>
+		<Update>
+			<Where ResultType="RESULT_RISING_STARS"/>
+			<Set AlbumSales="15" TourismBomb="150" ExtraPromotion="false" Dies="false" GainsLevel="false" BaseProbability="12" PerformanceStars="5"/>
+		</Update>
+		<Update>
+			<Where ResultType="RESULT_OPENING_ACT"/>
+			<Set AlbumSales="10" TourismBomb="100" ExtraPromotion="false" Dies="false" GainsLevel="false" BaseProbability="9" PerformanceStars="4"/>
+		</Update>
+		<Update>
+			<Where ResultType="RESULT_CREATIVE_DIFFERENCES"/>
+			<Set AlbumSales="5" TourismBomb="50" ExtraPromotion="false" Dies="false" GainsLevel="false" BaseProbability="7" PerformanceStars="3"/>
+		</Update>
+		<Update>
+			<Where ResultType="RESULT_AGING_ROCKERS"/>
+			<Set AlbumSales="0" TourismBomb="400" ExtraPromotion="false" Dies="true" GainsLevel="false" BaseProbability="5" PerformanceStars="2"/>
+		</Update>
+		<Row ResultType="RESULT_LEGENDS_NEVER_DIE" Name="LOC_RESULT_LEGENDS_NEVER_DIE_NAME" Description="LOC_RESULT_LEGENDS_NEVER_DIE_DESCRIPTION" Dies="true" AlbumSales="0" TourismBomb="200" BaseProbability="3" PerformanceStars="1"/>
+	</Unit_RockbandResults_XP2>
+</GameData>

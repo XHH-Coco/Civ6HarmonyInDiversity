@@ -1,0 +1,70 @@
+insert or replace into TraitModifiers
+	(TraitType,						ModifierId)
+values
+	('TRAIT_LEADER_SALADIN_ALT',	'SALADIN_ALT_EXTRA_MOVEMENT'),
+	('TRAIT_LEADER_SALADIN_ALT',	'SALADIN_ALT_IGNORE_ZOC');
+insert or replace into UnitAbilityModifiers
+	(UnitAbilityType,						ModifierId)
+values
+	('ABILITY_SALADIN_ALT_EXTRA_MOVEMENT',	'HD_SALADIN_ALT_EXTRA_MOVEMENT');
+insert or replace into Modifiers
+	(ModifierId,							ModifierType,								SubjectRequirementSetId)
+values
+	('SALADIN_ALT_EXTRA_MOVEMENT',			'MODIFIER_ALL_CITIES_ATTACH_MODIFIER',		'CITY_FOLLOWS_RELIGION_REQUIREMENTS'),
+	('SALADIN_ALT_EXTRA_MOVEMENT_MODIFIER',	'MODIFIER_PLAYER_UNITS_ATTACH_MODIFIER',	'SALADIN_ALT_RELIGION_REQUIREMENTS'),
+	('SALADIN_ALT_EXTRA_MOVEMENT_ABILITY',	'MODIFIER_PLAYER_UNIT_GRANT_ABILITY',		NULL),
+	('HD_SALADIN_ALT_EXTRA_MOVEMENT',		'MODIFIER_PLAYER_UNIT_ADJUST_MOVEMENT',		NULL),
+	('SALADIN_ALT_IGNORE_ZOC',				'MODIFIER_PLAYER_UNITS_ATTACH_MODIFIER',	'UNIT_IS_RELIGIOUS');
+
+insert or replace into ModifierArguments
+	(ModifierId,							Name,				Value)
+values
+	('SALADIN_ALT_EXTRA_MOVEMENT',			'ModifierId',		'SALADIN_ALT_EXTRA_MOVEMENT_MODIFIER'),
+	('SALADIN_ALT_EXTRA_MOVEMENT_MODIFIER',	'ModifierId',		'SALADIN_ALT_EXTRA_MOVEMENT_ABILITY'),
+	('SALADIN_ALT_EXTRA_MOVEMENT_ABILITY',	'AbilityType',		'ABILITY_SALADIN_ALT_EXTRA_MOVEMENT'),
+	('HD_SALADIN_ALT_EXTRA_MOVEMENT',		'Amount',			1),
+	('SALADIN_ALT_IGNORE_ZOC',				'ModifierId',		'HD_IGNORE_ZOC');
+
+insert or ignore into RequirementSetRequirements
+	(RequirementSetId,							RequirementId)
+values
+	('SALADIN_ALT_RELIGION_REQUIREMENTS',		'REQUIRES_UNIT_NEAR_RELIGIOUS_CITY1'),
+	('SALADIN_ALT_RELIGION_REQUIREMENTS',		'REQUIRES_UNIT_NEAR_RELIGIOUS_CITY2');
+insert or ignore into RequirementSets
+	(RequirementSetId,							RequirementSetType)
+values
+	('SALADIN_ALT_RELIGION_REQUIREMENTS',		'REQUIREMENTSET_TEST_ANY');
+insert or ignore into Requirements
+	(RequirementId,							RequirementType,					Inverse)
+values
+	('REQUIRES_UNIT_NEAR_RELIGIOUS_CITY1',	'REQUIREMENT_NEAR_RELIGIOUS_CITY',	0),
+	('REQUIRES_UNIT_NEAR_RELIGIOUS_CITY2',	'REQUIREMENT_NEAR_RELIGIOUS_CITY',	0);
+insert or ignore into RequirementArguments
+	(RequirementId,							Name,				Value)
+values
+	('REQUIRES_UNIT_NEAR_RELIGIOUS_CITY1',	'FriendlyCity',		1),
+	('REQUIRES_UNIT_NEAR_RELIGIOUS_CITY2',	'FriendlyCity',		0);
+--女刚果
+update Modifiers set SubjectRequirementSetId = 'HD_CITY_IS_SAME_CONTINENT_NOT_CAPITAL_REQUIREMENTS' where ModifierID = 'TRAIT_SAME_CONTINENT_YIELD';
+--林肯
+delete from TraitModifiers where ModifierId = 'TRAIT_LINCOLN_INDUSTRIAL_ZONE_FREE_MELEE_UNIT' or ModifierId = 'TRAIT_LINCOLN_INDUSTRIAL_ZONE_LOYALTY';
+-- insert or replace into TraitModifiers
+-- 	(TraitType,						ModifierId)
+-- values
+-- 	('TRAIT_LEADER_LINCOLN',		'TRAIT_LINCOLN_INDUSTRIAL_ZONE_FREE_BUILDER');
+insert or replace into Modifiers
+	(ModifierId,									ModifierType,											SubjectRequirementSetId,				SubjectStackLimit)
+values
+	-- ('TRAIT_LINCOLN_INDUSTRIAL_ZONE_FREE_BUILDER',	'MODIFIER_PLAYER_DISTRICT_CREATE_UNIT',					NULL,									NULL),
+	('HD_LIBERATION_LINCOLN',						'MODIFIER_CITY_DISTRICTS_ATTACH_MODIFIER',				'DISTRICT_IS_INDUSTRIAL_ZONE',			NULL),
+	('HD_LIBERATION_LINCOLN_MODIFIER',				'MODIFIER_PLAYER_DISTRICT_ADJUST_BASE_YIELD_CHANGE',	NULL,									NULL),
+	('HD_LIBERATION_LINCOLN_POPULATION',			'MODIFIER_SINGLE_CITY_ADD_POPULATION',					NULL,									1);
+insert or replace into ModifierArguments
+	(ModifierId,									Name,				Value)
+values
+	-- ('TRAIT_LINCOLN_INDUSTRIAL_ZONE_FREE_BUILDER',	'DistrictType',		'DISTRICT_INDUSTRIAL_ZONE'),
+	-- ('TRAIT_LINCOLN_INDUSTRIAL_ZONE_FREE_BUILDER',	'UnitType',			'UNIT_BUILDER'),
+	('HD_LIBERATION_LINCOLN',						'ModifierId',		'HD_LIBERATION_LINCOLN_MODIFIER'),
+	('HD_LIBERATION_LINCOLN_MODIFIER',				'Amount',			1),
+	('HD_LIBERATION_LINCOLN_MODIFIER',				'YieldType',		'YIELD_PRODUCTION'),
+	('HD_LIBERATION_LINCOLN_POPULATION',			'Amount',			1);

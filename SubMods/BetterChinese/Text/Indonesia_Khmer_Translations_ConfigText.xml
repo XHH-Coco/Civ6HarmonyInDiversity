@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Indonesia_Khmer_Translations_ConfigText -->
+<!-- Author: hqh-h -->
+<!-- DateCreated: 2/10/2020 3:36:36 PM -->
+<GameData>
+	<LocalizedText>
+		<Replace Tag="LOC_TRAIT_CIVILIZATION_KHMER_BARAYS_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>拥有水渠的城市+1 [ICON_AMENITIES] 宜居度，且每拥有1人口+1 [ICON_FAITH] 信仰。与水渠相邻的农场提供+2 [ICON_FOOD] 食物，与圣地相邻的农场提供+1 [ICON_FAITH] 信仰。</Text>
+		</Replace>
+		<Replace Tag="LOC_TRAIT_CIVILIZATION_INDONESIA_NUSANTARA_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>海岸和湖泊单元格可为圣地、学院、工业区和剧院广场提供少量相邻加成。与海岸或湖泊单元格相邻的娱乐中心额外+1 [ICON_AMENITIES] 宜居度。</Text>
+		</Replace>
+		<Replace Tag="LOC_UNIT_INDONESIAN_JONG_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>印度尼西亚特色中世纪海军单位，替代护卫舰。编队时，所有编队单位将继承戎克船的 [ICON_Movement] 移动力，且会使戎克船+5 [ICON_Strength] 战斗力。</Text>
+		</Replace>
+	</LocalizedText>
+</GameData>

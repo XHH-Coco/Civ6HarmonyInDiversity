@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: C -->
+<!-- DateCreated: 6/22/2024 10:05:37 PM -->
+<GameData>
+	<IconTextureAtlases>
+		<Row Name="ATLAS_RESOURCE_C" IconSize="38" IconsPerRow="2" IconsPerColumn="1" Filename="RESOURCE_C_38.dds"/>
+		<Row Name="ATLAS_RESOURCE_C" IconSize="50" IconsPerRow="2" IconsPerColumn="1" Filename="RESOURCE_C_50.dds"/>
+		<Row Name="ATLAS_RESOURCE_C" IconSize="64" IconsPerRow="2" IconsPerColumn="1" Filename="RESOURCE_C_64.dds"/>
+		<Row Name="ATLAS_RESOURCE_C" IconSize="256" IconsPerRow="2" IconsPerColumn="1" Filename="RESOURCE_C_256.dds"/>
+		<Row Name="ATLAS_RESOURCE_C_FOW" IconSize="256" IconsPerRow="2" IconsPerColumn="1" Filename="RESOURCE_C_FOW_256.dds"/>
+		<Row Name="ICON_ATLAS_FONT_ICON_RESOURCE_C" IconSize="22" IconsPerRow="2" IconsPerColumn="1" Baseline="6" Filename="RESOURCE_C_22.dds"/>
+	</IconTextureAtlases>
+	<IconDefinitions>
+		<Row Name="ICON_RESOURCE_C_HEAVENLY_HORSE" Atlas="ATLAS_RESOURCE_C" Index="0"/>
+		<Row Name="ICON_RESOURCE_C_HEAVENLY_HORSE_FOW" Atlas="ATLAS_RESOURCE_C_FOW" Index="0"/>
+		<Row Name="RESOURCE_C_HEAVENLY_HORSE" Atlas="ICON_ATLAS_FONT_ICON_RESOURCE_C" Index="0"/>
+		<Row Name="ICON_RESOURCE_C_ZEBU" Atlas="ATLAS_RESOURCE_C" Index="1"/>
+		<Row Name="ICON_RESOURCE_C_ZEBU_FOW" Atlas="ATLAS_RESOURCE_C_FOW" Index="1"/>
+		<Row Name="RESOURCE_C_ZEBU" Atlas="ICON_ATLAS_FONT_ICON_RESOURCE_C" Index="1"/>
+	</IconDefinitions>
+</GameData>

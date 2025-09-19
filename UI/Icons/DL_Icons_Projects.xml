@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameData>
+	<IconTextureAtlases>
+		<Row Name="ICON_ATLAS_HD_RESOURCE_PROJECTS" IconSize="30"  IconsPerRow="8" IconsPerColumn="8" Filename="ResourcesProjects_FOW_30.dds"/>
+		<Row Name="ICON_ATLAS_HD_RESOURCE_PROJECTS" IconSize="32"  IconsPerRow="8" IconsPerColumn="8" Filename="ResourcesProjects_FOW_32.dds"/>
+		<Row Name="ICON_ATLAS_HD_RESOURCE_PROJECTS" IconSize="38"  IconsPerRow="8" IconsPerColumn="8" Filename="ResourcesProjects_FOW_38.dds"/>
+		<Row Name="ICON_ATLAS_HD_RESOURCE_PROJECTS" IconSize="50"  IconsPerRow="8" IconsPerColumn="8" Filename="ResourcesProjects_FOW_50.dds"/>
+		<Row Name="ICON_ATLAS_HD_RESOURCE_PROJECTS" IconSize="70"  IconsPerRow="8" IconsPerColumn="8" Filename="ResourcesProjects_FOW_70.dds"/>
+		<Row Name="ICON_ATLAS_HD_RESOURCE_PROJECTS" IconSize="80"  IconsPerRow="8" IconsPerColumn="8" Filename="ResourcesProjects_FOW_80.dds"/>
+		<Row Name="ICON_ATLAS_HD_RESOURCE_PROJECTS" IconSize="256" IconsPerRow="8" IconsPerColumn="8" Filename="ResourcesProjects_FOW_256.dds"/>
+	</IconTextureAtlases>
+	<IconDefinitions>
+		<Row Name="ICON_PROJECT_GRANT_RESOURCE_HORSES"  	Atlas="ICON_ATLAS_HD_RESOURCE_PROJECTS" Index="42"/>
+		<Row Name="ICON_PROJECT_GRANT_RESOURCE_IRON"  		Atlas="ICON_ATLAS_HD_RESOURCE_PROJECTS" Index="43"/>
+		<Row Name="ICON_PROJECT_GRANT_RESOURCE_NITER"  		Atlas="ICON_ATLAS_HD_RESOURCE_PROJECTS" Index="44"/>
+		<Row Name="ICON_PROJECT_GRANT_RESOURCE_COAL"  		Atlas="ICON_ATLAS_HD_RESOURCE_PROJECTS" Index="41"/>
+		<Row Name="ICON_PROJECT_GRANT_RESOURCE_OIL"  		Atlas="ICON_ATLAS_HD_RESOURCE_PROJECTS" Index="45"/>
+		<Row Name="ICON_PROJECT_GRANT_RESOURCE_ALUMINUM"  	Atlas="ICON_ATLAS_HD_RESOURCE_PROJECTS" Index="40"/>
+		<Row Name="ICON_PROJECT_GRANT_RESOURCE_URANIUM"  	Atlas="ICON_ATLAS_HD_RESOURCE_PROJECTS" Index="46"/>
+		<!-- <Row Name="ICON_PROJECT_GRANT_RESOURCE_HORSES"  Atlas="ICON_ATLAS_PROJECTS" Index="11"/>
+		<Row Name="ICON_PROJECT_GRANT_RESOURCE_IRON"  Atlas="ICON_ATLAS_PROJECTS" Index="11"/>
+		<Row Name="ICON_PROJECT_GRANT_RESOURCE_NITER"  Atlas="ICON_ATLAS_PROJECTS" Index="11"/>
+		<Row Name="ICON_PROJECT_GRANT_RESOURCE_COAL"  Atlas="ICON_ATLAS_PROJECTS" Index="11"/>
+		<Row Name="ICON_PROJECT_GRANT_RESOURCE_OIL"  Atlas="ICON_ATLAS_PROJECTS" Index="11"/>
+		<Row Name="ICON_PROJECT_GRANT_RESOURCE_ALUMINUM"  Atlas="ICON_ATLAS_PROJECTS" Index="11"/>
+		<Row Name="ICON_PROJECT_GRANT_RESOURCE_URANIUM"  Atlas="ICON_ATLAS_PROJECTS" Index="11"/> -->
+
+		<Row Name="ICON_PROJECT_CIRCUSES_AND_BREAD"  	Atlas="ICON_ATLAS_XP1_PROJECTS" Index="1"/>
+		<Row Name="ICON_PROJECT_ENDLESS_MONEY"  		Atlas="ICON_ATLAS_PROJECTS" Index="14"/>
+
+		<Row Name="ICON_PROJECT_RECRUIT_WORKERS_HD" 	Atlas="ICON_ATLAS_PROJECTS" Index="13"/>
+		<Row Name="ICON_PROJECT_BUILDING_PORCELAIN_TOWER"                Atlas="ICON_ATLAS_PROJECTS" Index="13"/>
+		<Row Name="ICON_PROJECT_BUILDING_LEANING_TOWER"                Atlas="ICON_ATLAS_PROJECTS" Index="16"/>
+	</IconDefinitions>
+</GameData>

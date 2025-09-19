@@ -1,0 +1,10 @@
+Event	ID	Name			Wwise Object Path	Notes
+	81197717	Result_Stars6_HD			\Default Work Unit\Result_Stars6_HD	
+	1243600542	Result_Stars3_HD			\Default Work Unit\Result_Stars3_HD	
+	1307188387	Result_Stars4_HD			\Default Work Unit\Result_Stars4_HD	
+	2415737426	Result_Stars7_HD			\Default Work Unit\Result_Stars7_HD	
+	2557617896	Result_Stars5_HD			\Default Work Unit\Result_Stars5_HD	
+	2806958008	Result_Die_HD			\Default Work Unit\Result_Die_HD	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	423151892	03	516391668	02	565827305	01	617362404		700313269	05	767773840	04

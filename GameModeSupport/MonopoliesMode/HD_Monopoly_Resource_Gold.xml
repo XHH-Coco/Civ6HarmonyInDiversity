@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<GameInfo>
+	<Types>
+		<Row Type="PROJECT_CREATE_CORPORATION_PRODUCT_GOLD" Kind="KIND_PROJECT"/>
+	</Types>
+  <GreatWorks>
+    <Row GreatWorkType="GREATWORK_PRODUCT_GOLD_1" GreatWorkObjectType="GREATWORKOBJECT_PRODUCT" Name="LOC_GREATWORK_PRODUCT_GOLD_1_NAME"/>
+    <Row GreatWorkType="GREATWORK_PRODUCT_GOLD_2" GreatWorkObjectType="GREATWORKOBJECT_PRODUCT" Name="LOC_GREATWORK_PRODUCT_GOLD_2_NAME"/>
+    <Row GreatWorkType="GREATWORK_PRODUCT_GOLD_3" GreatWorkObjectType="GREATWORKOBJECT_PRODUCT" Name="LOC_GREATWORK_PRODUCT_GOLD_3_NAME"/>
+    <Row GreatWorkType="GREATWORK_PRODUCT_GOLD_4" GreatWorkObjectType="GREATWORKOBJECT_PRODUCT" Name="LOC_GREATWORK_PRODUCT_GOLD_4_NAME"/>
+    <Row GreatWorkType="GREATWORK_PRODUCT_GOLD_5" GreatWorkObjectType="GREATWORKOBJECT_PRODUCT" Name="LOC_GREATWORK_PRODUCT_GOLD_5_NAME"/>
+  </GreatWorks>
+	<GreatWorks_ImprovementType>
+		<Row GreatWorkType="GREATWORK_PRODUCT_GOLD_1" ResourceType="RESOURCE_GOLD"/>
+		<Row GreatWorkType="GREATWORK_PRODUCT_GOLD_2" ResourceType="RESOURCE_GOLD"/>
+		<Row GreatWorkType="GREATWORK_PRODUCT_GOLD_3" ResourceType="RESOURCE_GOLD"/>
+		<Row GreatWorkType="GREATWORK_PRODUCT_GOLD_4" ResourceType="RESOURCE_GOLD"/>
+		<Row GreatWorkType="GREATWORK_PRODUCT_GOLD_5" ResourceType="RESOURCE_GOLD"/>
+	</GreatWorks_ImprovementType>
+  <GreatWork_YieldChanges>
+    <Row GreatWorkType="GREATWORK_PRODUCT_GOLD_1" YieldType="YIELD_GOLD" YieldChange="6"/>
+    <Row GreatWorkType="GREATWORK_PRODUCT_GOLD_2" YieldType="YIELD_GOLD" YieldChange="6"/>
+    <Row GreatWorkType="GREATWORK_PRODUCT_GOLD_3" YieldType="YIELD_GOLD" YieldChange="6"/>
+    <Row GreatWorkType="GREATWORK_PRODUCT_GOLD_4" YieldType="YIELD_GOLD" YieldChange="6"/>
+    <Row GreatWorkType="GREATWORK_PRODUCT_GOLD_5" YieldType="YIELD_GOLD" YieldChange="6"/>
+  </GreatWork_YieldChanges>
+  <Projects>
+		<Row ProjectType="PROJECT_CREATE_CORPORATION_PRODUCT_GOLD" Name="LOC_PROJECT_CREATE_CORPORATION_PRODUCT_GOLD_NAME" ShortName="LOC_PROJECT_CREATE_CORPORATION_PRODUCT_GOLD_SHORT_NAME" Description="LOC_PROJECT_CREATE_CORPORATION_PRODUCT_GOLD_DESCRIPTION" Cost="500" AdvisorType="ADVISOR_GENERIC"/>
+	</Projects>
+	<Projects_MODE>
+    <Row ProjectType="PROJECT_CREATE_CORPORATION_PRODUCT_GOLD" ResourceType="RESOURCE_GOLD"/>
+	</Projects_MODE>
+	<ProjectCompletionModifiers>
+		<Row ProjectType="PROJECT_CREATE_CORPORATION_PRODUCT_GOLD" ModifierId="PROJECT_COMPLETION_CREATE_CORPORATION_PRODUCT_GOLD"/>
+	</ProjectCompletionModifiers>
+  <GreatWorkModifiers>
+    <Row GreatWorkType="GREATWORK_PRODUCT_GOLD_1" ModifierId="PRODUCT_GOLD_YIELD_BONUS_GOLD"/>
+    <Row GreatWorkType="GREATWORK_PRODUCT_GOLD_2" ModifierId="PRODUCT_GOLD_YIELD_BONUS_GOLD"/>
+    <Row GreatWorkType="GREATWORK_PRODUCT_GOLD_3" ModifierId="PRODUCT_GOLD_YIELD_BONUS_GOLD"/>
+    <Row GreatWorkType="GREATWORK_PRODUCT_GOLD_4" ModifierId="PRODUCT_GOLD_YIELD_BONUS_GOLD"/>
+    <Row GreatWorkType="GREATWORK_PRODUCT_GOLD_5" ModifierId="PRODUCT_GOLD_YIELD_BONUS_GOLD"/>
+  </GreatWorkModifiers>
+	<Improvement_ValidResources>
+    <Row ImprovementType="IMPROVEMENT_INDUSTRY" ResourceType="RESOURCE_GOLD" MustRemoveFeature="false"/>
+    <Row ImprovementType="IMPROVEMENT_CORPORATION" ResourceType="RESOURCE_GOLD" MustRemoveFeature="false"/>
+	</Improvement_ValidResources>
+	<ResourceIndustries>
+		<Row ResourceType="RESOURCE_GOLD" ResourceEffect="INDUSTRY_GOLD_YIELD_BONUS" ResourceEffectText="LOC_INDUSTRY_GOLD_YIELD_BONUS_DESCRIPTION"/>
+	</ResourceIndustries>
+  <ResourceCorporations>
+    <Row ResourceType="RESOURCE_GOLD" ResourceEffect="CORPORATION_GOLD_YIELD_BONUS" ResourceEffectText="LOC_CORPORATION_GOLD_YIELD_BONUS_DESCRIPTION"/>
+  </ResourceCorporations>
+	<Modifiers>
+    <Row ModifierId="PROJECT_COMPLETION_CREATE_CORPORATION_PRODUCT_GOLD" ModifierType="MODIFIER_PLAYER_GRANT_RANDOM_RESOURCE_PRODUCT"/>
+    <Row ModifierId="PRODUCT_GOLD_YIELD_BONUS_GOLD" ModifierType="MODIFIER_SINGLE_CITY_ADJUST_CITY_YIELD_MODIFIER" SubjectStackLimit="1"/>
+  </Modifiers>
+	<ModifierArguments>
+    <Row ModifierId="PROJECT_COMPLETION_CREATE_CORPORATION_PRODUCT_GOLD" Name="ResourceType" Value="RESOURCE_GOLD"/>
+    <Row ModifierId="PRODUCT_GOLD_YIELD_BONUS_GOLD" Name="Amount" Value="25"/>
+    <Row ModifierId="PRODUCT_GOLD_YIELD_BONUS_GOLD" Name="YieldType" Value="YIELD_GOLD"/>
+	</ModifierArguments>
+  <ModifierStrings>
+    <Row ModifierId="PRODUCT_GOLD_YIELD_BONUS_GOLD" Context="Summary" Text="LOC_INDUSTRY_GOLD_YIELD_BONUS_DESCRIPTION"/>
+  </ModifierStrings>
+  
+</GameInfo>

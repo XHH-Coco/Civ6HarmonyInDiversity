@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="10" SoundbankVersion="113">
+	<RootPaths>
+		<ProjectRoot>D:\projects\civ6\Civ6\Wwise\Civ6 Project\</ProjectRoot>
+		<SourceFilesRoot>D:\projects\civ6\Civ6\Wwise\Civ6 Project\.cache\Windows\</SourceFilesRoot>
+		<SoundBanksRoot>D:\projects\civ6\Civ6\Wwise\Civ6 Project\GeneratedSoundBanks\Windows\</SoundBanksRoot>
+		<ExternalSourcesInputFile></ExternalSourcesInputFile>
+		<ExternalSourcesOutputRoot>D:\projects\civ6\Civ6\Wwise\Civ6 Project\GeneratedSoundBanks\Windows\</ExternalSourcesOutputRoot>
+	</RootPaths>
+	<DialogueEvents/>
+	<StreamedFiles/>
+	<MediaFilesNotInAnyBank/>
+	<SoundBanks>
+		<SoundBank Id="1355168291" Language="SFX">
+			<ShortName>Init</ShortName>
+			<Path>Init.bnk</Path>
+		</SoundBank>
+		<SoundBank Id="3370757413" Language="SFX">
+			<ShortName>HD_TechCivic_Quote_Localized</ShortName>
+			<Path>HD_TechCivic_Quote_Localized.bnk</Path>
+			<IncludedEvents>
+				<Event Id="3100817797" Name="Play_ArchaeologyHD_Quote_1"/>
+				<Event Id="3100817798" Name="Play_ArchaeologyHD_Quote_2"/>
+				<Event Id="776153598" Name="Play_BiologyHD_Quote_1"/>
+				<Event Id="776153597" Name="Play_BiologyHD_Quote_2"/>
+				<Event Id="3759297221" Name="Play_CalendarHD_Quote_1"/>
+				<Event Id="3759297222" Name="Play_CalendarHD_Quote_2"/>
+				<Event Id="2967524327" Name="Play_CompassHD_Quote_1"/>
+				<Event Id="2967524324" Name="Play_CompassHD_Quote_2"/>
+				<Event Id="714688583" Name="Play_EthicsHD_Quote_1"/>
+				<Event Id="714688580" Name="Play_EthicsHD_Quote_2"/>
+				<Event Id="3866050843" Name="Play_EvolutionTheoryHD_Quote_1"/>
+				<Event Id="3866050840" Name="Play_EvolutionTheoryHD_Quote_2"/>
+				<Event Id="35734510" Name="Play_HistoricalPhilosophyHD_Quote_1"/>
+				<Event Id="35734509" Name="Play_HistoricalPhilosophyHD_Quote_2"/>
+				<Event Id="1119323694" Name="Play_ImperialExaminationSystemHD_Quote_1"/>
+				<Event Id="1119323693" Name="Play_ImperialExaminationSystemHD_Quote_2"/>
+				<Event Id="48370447" Name="Play_LiteraryTraditionHD_Quote_1"/>
+				<Event Id="48370444" Name="Play_LiteraryTraditionHD_Quote_2"/>
+				<Event Id="2753569954" Name="Play_PaperMakingHD_Quote_1"/>
+				<Event Id="2753569953" Name="Play_PaperMakingHD_Quote_2"/>
+				<Event Id="3733953404" Name="Play_PhysicsHD_Quote_1"/>
+				<Event Id="3733953407" Name="Play_PhysicsHD_Quote_2"/>
+				<Event Id="2962325586" Name="Play_SocialScienceHD_Quote_1"/>
+				<Event Id="2962325585" Name="Play_SocialScienceHD_Quote_2"/>
+				<Event Id="3888695130" Name="Play_SupplyHD_Quote_1"/>
+				<Event Id="3888695129" Name="Play_SupplyHD_Quote_2"/>
+				<Event Id="3426462580" Name="Stop_Speech_CivicsHD"/>
+				<Event Id="3614429708" Name="Stop_Speech_TechsHD"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="31038191" Language="SFX">
+					<ShortName>Civic_Supply2_Chinese.wav</ShortName>
+					<Path>SFX\Civic_Supply2_Chinese_9E69E797.wem</Path>
+				</File>
+				<File Id="33121809" Language="SFX">
+					<ShortName>Tech_Physics1_Chinese.wav</ShortName>
+					<Path>SFX\Tech_Physics1_Chinese_9E69E797.wem</Path>
+				</File>
+				<File Id="75089739" Language="SFX">
+					<ShortName>Civic_EvolutionTheory1_Chinese.wav</ShortName>
+					<Path>SFX\Civic_EvolutionTheory1_Chinese_9E69E797.wem</Path>
+				</File>
+				<File Id="77179291" Language="SFX">
+					<ShortName>Tech_Biology1_Chinese.wav</ShortName>
+					<Path>SFX\Tech_Biology1_Chinese_9E69E797.wem</Path>
+				</File>
+				<File Id="140672782" Language="SFX">
+					<ShortName>Tech_Compass2_Chinese.wav</ShortName>
+					<Path>SFX\Tech_Compass2_Chinese_9E69E797.wem</Path>
+				</File>
+				<File Id="144018363" Language="SFX">
+					<ShortName>Tech_PaperMaking1_Chinese.wav</ShortName>
+					<Path>SFX\Tech_PaperMaking1_Chinese_9E69E797.wem</Path>
+				</File>
+				<File Id="154063041" Language="SFX">
+					<ShortName>Civic_Ethics2_Chinese.wav</ShortName>
+					<Path>SFX\Civic_Ethics2_Chinese_9E69E797.wem</Path>
+				</File>
+				<File Id="253566927" Language="SFX">
+					<ShortName>Civic_LiteraryTradition1_Chinese.wav</ShortName>
+					<Path>SFX\Civic_LiteraryTradition1_Chinese_9E69E797.wem</Path>
+				</File>
+				<File Id="306111608" Language="SFX">
+					<ShortName>Civic_HistoricalPhilosophy2_Chinese.wav</ShortName>
+					<Path>SFX\Civic_HistoricalPhilosophy2_Chinese_9E69E797.wem</Path>
+				</File>
+				<File Id="315269171" Language="SFX">
+					<ShortName>Tech_Calendar1_Chinese.wav</ShortName>
+					<Path>SFX\Tech_Calendar1_Chinese_9E69E797.wem</Path>
+				</File>
+				<File Id="329083830" Language="SFX">
+					<ShortName>Tech_PaperMaking2_Chinese.wav</ShortName>
+					<Path>SFX\Tech_PaperMaking2_Chinese_9E69E797.wem</Path>
+				</File>
+				<File Id="410979778" Language="SFX">
+					<ShortName>Civic_LiteraryTradition2_Chinese.wav</ShortName>
+					<Path>SFX\Civic_LiteraryTradition2_Chinese_9E69E797.wem</Path>
+				</File>
+				<File Id="588775871" Language="SFX">
+					<ShortName>Civic_ImperialExaminationSystem2_Chinese.wav</ShortName>
+					<Path>SFX\Civic_ImperialExaminationSystem2_Chinese_9E69E797.wem</Path>
+				</File>
+				<File Id="605013785" Language="SFX">
+					<ShortName>Civic_HistoricalPhilosophy1_Chinese.wav</ShortName>
+					<Path>SFX\Civic_HistoricalPhilosophy1_Chinese_9E69E797.wem</Path>
+				</File>
+				<File Id="606498038" Language="SFX">
+					<ShortName>Tech_Calendar2_Chinese.wav</ShortName>
+					<Path>SFX\Tech_Calendar2_Chinese_9E69E797.wem</Path>
+				</File>
+				<File Id="696574508" Language="SFX">
+					<ShortName>Civic_Archaeology1_Chinese.wav</ShortName>
+					<Path>SFX\Civic_Archaeology1_Chinese_9E69E797.wem</Path>
+				</File>
+				<File Id="725188898" Language="SFX">
+					<ShortName>Civic_SocialScience1_Chinese.wav</ShortName>
+					<Path>SFX\Civic_SocialScience1_Chinese_9E69E797.wem</Path>
+				</File>
+				<File Id="754257254" Language="SFX">
+					<ShortName>Tech_Compass1_Chinese.wav</ShortName>
+					<Path>SFX\Tech_Compass1_Chinese_9E69E797.wem</Path>
+				</File>
+				<File Id="767187335" Language="SFX">
+					<ShortName>Tech_Physics2_Chinese.wav</ShortName>
+					<Path>SFX\Tech_Physics2_Chinese_9E69E797.wem</Path>
+				</File>
+				<File Id="775310908" Language="SFX">
+					<ShortName>Civic_EvolutionTheory2_Chinese.wav</ShortName>
+					<Path>SFX\Civic_EvolutionTheory2_Chinese_9E69E797.wem</Path>
+				</File>
+				<File Id="802163391" Language="SFX">
+					<ShortName>Civic_SocialScience2_Chinese.wav</ShortName>
+					<Path>SFX\Civic_SocialScience2_Chinese_9E69E797.wem</Path>
+				</File>
+				<File Id="803692144" Language="SFX">
+					<ShortName>Civic_Supply1_Chinese.wav</ShortName>
+					<Path>SFX\Civic_Supply1_Chinese_9E69E797.wem</Path>
+				</File>
+				<File Id="868672280" Language="SFX">
+					<ShortName>Civic_ImperialExaminationSystem1_Chinese.wav</ShortName>
+					<Path>SFX\Civic_ImperialExaminationSystem1_Chinese_9E69E797.wem</Path>
+				</File>
+				<File Id="989872496" Language="SFX">
+					<ShortName>Civic_Ethics1_Chinese.wav</ShortName>
+					<Path>SFX\Civic_Ethics1_Chinese_9E69E797.wem</Path>
+				</File>
+				<File Id="1032632575" Language="SFX">
+					<ShortName>Tech_Biology2_Chinese.wav</ShortName>
+					<Path>SFX\Tech_Biology2_Chinese_9E69E797.wem</Path>
+				</File>
+				<File Id="1053078861" Language="SFX">
+					<ShortName>Civic_Archaeology2_Chinese.wav</ShortName>
+					<Path>SFX\Civic_Archaeology2_Chinese_9E69E797.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
+		<SoundBank Id="4282669275" Language="SFX">
+			<ShortName>HD_GreatWork_Quote_Localized</ShortName>
+			<Path>HD_GreatWork_Quote_Localized.bnk</Path>
+			<IncludedEvents>
+				<Event Id="1475897952" Name="PLAY_GREAT_WRITING_QUOTE_HD_1"/>
+				<Event Id="1475897955" Name="PLAY_GREAT_WRITING_QUOTE_HD_2"/>
+				<Event Id="1475897954" Name="PLAY_GREAT_WRITING_QUOTE_HD_3"/>
+				<Event Id="1475897957" Name="PLAY_GREAT_WRITING_QUOTE_HD_4"/>
+				<Event Id="280632403" Name="Stop_Speech_GreatWriting_HD"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="104463180" Language="SFX">
+					<ShortName>GreatWriting_ZhuangZhou2_Chinese.wav</ShortName>
+					<Path>SFX\GreatWriting_ZhuangZhou2_Chinese_9E69E797.wem</Path>
+				</File>
+				<File Id="160736588" Language="SFX">
+					<ShortName>GreatWriting_SiMaQian1_Chinese.wav</ShortName>
+					<Path>SFX\GreatWriting_SiMaQian1_Chinese_9E69E797.wem</Path>
+				</File>
+				<File Id="837921119" Language="SFX">
+					<ShortName>GreatWriting_SiMaQian2_Chinese.wav</ShortName>
+					<Path>SFX\GreatWriting_SiMaQian2_Chinese_9E69E797.wem</Path>
+				</File>
+				<File Id="1065251639" Language="SFX">
+					<ShortName>GreatWriting_ZhuangZhou1_Chinese.wav</ShortName>
+					<Path>SFX\GreatWriting_ZhuangZhou1_Chinese_9E69E797.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
+		<SoundBank Id="1507145530" Language="SFX">
+			<ShortName>HD_RockBand_SB</ShortName>
+			<Path>HD_RockBand_SB.bnk</Path>
+			<IncludedEvents>
+				<Event Id="2806958008" Name="Result_Die_HD"/>
+				<Event Id="1243600542" Name="Result_Stars3_HD"/>
+				<Event Id="1307188387" Name="Result_Stars4_HD"/>
+				<Event Id="2557617896" Name="Result_Stars5_HD"/>
+				<Event Id="81197717" Name="Result_Stars6_HD"/>
+				<Event Id="2415737426" Name="Result_Stars7_HD"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="423151892" Language="SFX">
+					<ShortName>03【播报】三连 举世皆惊.wav</ShortName>
+					<Path>SFX\03【播报】三连 举世皆惊_9E69E797.wem</Path>
+				</File>
+				<File Id="516391668" Language="SFX">
+					<ShortName>02【播报】双连 一战成名.wav</ShortName>
+					<Path>SFX\02【播报】双连 一战成名_9E69E797.wem</Path>
+				</File>
+				<File Id="565827305" Language="SFX">
+					<ShortName>01【播报】一破 卧龙出山.wav</ShortName>
+					<Path>SFX\01【播报】一破 卧龙出山_9E69E797.wem</Path>
+				</File>
+				<File Id="617362404" Language="SFX">
+					<ShortName>（黄忠）-皮肤-【阵亡】：呃啊，弦，断了…… (online-audio-converter.com).wav</ShortName>
+					<Path>SFX\（黄忠）-皮肤-【阵亡】：呃啊，弦，断了…… (online-audio-converter.com)_9E69E797.wem</Path>
+				</File>
+				<File Id="700313269" Language="SFX">
+					<ShortName>05【播报】五连 诛天灭地.wav</ShortName>
+					<Path>SFX\05【播报】五连 诛天灭地_9E69E797.wem</Path>
+				</File>
+				<File Id="767773840" Language="SFX">
+					<ShortName>04【播报】四连 天下无敌.wav</ShortName>
+					<Path>SFX\04【播报】四连 天下无敌_9E69E797.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
+	</SoundBanks>
+</SoundBanksInfo>

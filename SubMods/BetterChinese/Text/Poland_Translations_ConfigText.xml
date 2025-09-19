@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Poland_Translations_ConfigText -->
+<!-- Author: hqh-h -->
+<!-- DateCreated: 2/10/2020 3:31:01 PM -->
+<GameData>
+	<LocalizedText>
+		<Replace Tag="LOC_TRAIT_LEADER_LITHUANIAN_UNION_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>如城市在波兰文化炸弹的攻击下失去单元格，则波兰的主流宗教将成为此城的主流宗教。圣地从相邻区域获得标准相邻加成。所有遗物均提供加成：+2信仰值、+2文化值、+4金币。</Text>
+		</Replace>
+		<Replace Tag="LOC_TRAIT_LEADER_LITHUANIAN_UNION_ALT_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>如城市在波兰文化炸弹的攻击下失去单元格，则波兰的主流宗教将成为此城的主流宗教。圣地从相邻区域获得标准邻加成。所有遗物均提供加成：+2信仰值、+2文化值、+4金币。</Text>
+		</Replace>
+	</LocalizedText>
+</GameData>

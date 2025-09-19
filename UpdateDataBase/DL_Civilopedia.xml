@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameInfo>
+	<CivilopediaPageLayouts>
+		<Row PageLayoutId="HD_OVERVIEW" ScriptTemplate="Simple" />
+		<Row PageLayoutId="HD_CONCEPTS" ScriptTemplate="Simple" />
+		<Row PageLayoutId="HD_GAME_PROGRESS" ScriptTemplate="Simple" />
+		<Row PageLayoutId="HD_CITY" ScriptTemplate="Simple" />
+		<Row PageLayoutId="HD_GAME_ERA" ScriptTemplate="Simple" />
+		<Row PageLayoutId="HD_COMMEMORATION" ScriptTemplate="Commemoration" />
+		<Row PageLayoutId="HD_CHINA_COMMEMORATION" ScriptTemplate="China_Commemoration" />
+	</CivilopediaPageLayouts>
+
+	<CivilopediaPageLayoutChapters>
+		<Row PageLayoutId="HD_OVERVIEW" ChapterId="HD_DESIGN_PHILOSOPHY" SortIndex="1"/>
+		<Row PageLayoutId="HD_OVERVIEW" ChapterId="HD_NEW_CONTENTS" SortIndex="2"/>
+		<Row PageLayoutId="HD_OVERVIEW" ChapterId="HD_MOD_INTRODUCTION" SortIndex="3"/>
+		
+		<Row PageLayoutId="HD_CONCEPTS" ChapterId="HD_OVERVIEW" SortIndex="1"/>
+		<Row PageLayoutId="HD_CONCEPTS" ChapterId="HD_DISTRICT_YIELDS" SortIndex="2"/>
+		<Row PageLayoutId="HD_CONCEPTS" ChapterId="HD_DISTRICT_GPPS" SortIndex="3"/>
+		<Row PageLayoutId="HD_CONCEPTS" ChapterId="HD_GREAT_PERSON_YIELDS" SortIndex="4"/>
+		<Row PageLayoutId="HD_CONCEPTS" ChapterId="HD_CITY_STATE_YIELDS" SortIndex="5"/>
+		<Row PageLayoutId="HD_CONCEPTS" ChapterId="HD_CITY_STATE_DISTRICTS" SortIndex="6"/>
+		<Row PageLayoutId="HD_CONCEPTS" ChapterId="HD_CITY_STATE_GPPS" SortIndex="7"/>
+		<Row PageLayoutId="HD_CONCEPTS" ChapterId="HD_ALLIANCE_YIELDS" SortIndex="8"/>
+		<Row PageLayoutId="HD_CONCEPTS" ChapterId="HD_ALLIANCE_GPP" SortIndex="9"/>
+
+		<Row PageLayoutId="HD_GAME_PROGRESS" ChapterId="HD_FEATURE_RESOURCE_YIELDS" SortIndex="1"/>
+		<Row PageLayoutId="HD_GAME_PROGRESS" ChapterId="HD_PILLAGE_YIELDS" SortIndex="2"/>
+		<Row PageLayoutId="HD_GAME_PROGRESS" ChapterId="HD_DISTRICT_PROJECT_COST" SortIndex="3"/>
+		<Row PageLayoutId="HD_GAME_PROGRESS" ChapterId="HD_GPP" SortIndex="4"/>
+
+		<Row PageLayoutId="HD_CITY" ChapterId="HD_CITY_CENTER_YIELDS" SortIndex="1"/>
+		<Row PageLayoutId="HD_CITY" ChapterId="HD_POPULATION" SortIndex="2"/>
+		<Row PageLayoutId="HD_CITY" ChapterId="HD_PLOT_PURCHASE" SortIndex="3"/>
+		<Row PageLayoutId="HD_CITY" ChapterId="HD_DISTRICT_CITIZEN" SortIndex="4"/>
+		<Row PageLayoutId="HD_CITY" ChapterId="HD_AMENITY" SortIndex="5"/>
+
+		<Row PageLayoutId="HD_GAME_ERA" ChapterId="HD_GAME_ERA_TURNS" SortIndex="1"/>
+		<Row PageLayoutId="HD_GAME_ERA" ChapterId="HD_GAME_ERA_THRESHOLD" SortIndex="2"/>
+		<Row PageLayoutId="HD_GAME_ERA" ChapterId="HD_ERA_SCORE" SortIndex="3"/>
+	</CivilopediaPageLayoutChapters>
+
+	<CivilopediaPageGroups>
+		<Row SectionID="CONCEPTS" 		PageGroupId="HD" 											Name="LOC_PEDIA_CONCEPTS_PAGEGROUP_HD_NAME" 												Tooltip="" VisibleIfEmpty="true" 	SortIndex="4"/>
+		
+		<Row SectionID="MOMENTS" 			PageGroupId="COMMEMORATIONS" 					Name="LOC_PEDIA_MOMENTS_PAGEGROUP_COMMEMORATIONS_NAME" 							Tooltip="" VisibleIfEmpty="true" 	SortIndex="70" />
+		<Row SectionID="MOMENTS" 			PageGroupId="CHINA_COMMEMORATIONS" 		Name="LOC_PEDIA_MOMENTS_PAGEGROUP_CHINA_COMMEMORATIONS_NAME" 				Tooltip="" VisibleIfEmpty="true" 	SortIndex="71" />
+		
+		<Row SectionID="GOVERNMENTS" 	PageGroupId="CITY_POLICIES" 					Name="LOC_PEDIA_GOVERNMENTS_PAGEGROUP_CITY_POLICIES_NAME" 					Tooltip="" VisibleIfEmpty="true" 	SortIndex="72" />
+		
+		<Row SectionID="DISTRICTS" 		PageGroupId="COMMON_DISTRICTS" 				Name="LOC_PEDIA_DISTRICTS_PAGEGROUP_COMMON_DISTRICTS_NAME" 					Tooltip="" VisibleIfEmpty="true" 	SortIndex="73" />
+		<Row SectionID="DISTRICTS" 		PageGroupId="UNIQUE_DISTRICTS" 				Name="LOC_PEDIA_DISTRICTS_PAGEGROUP_UNIQUE_DISTRICTS_NAME" 					Tooltip="" VisibleIfEmpty="true" 	SortIndex="74" />
+		
+		<Row SectionID="IMPROVEMENTS" PageGroupId="BASIC_IMPROVEMENTS" 			Name="LOC_PEDIA_IMPROVEMENTS_PAGEGROUP_BASIC_IMPROVEMENTS_NAME" 		Tooltip="" VisibleIfEmpty="true" 	SortIndex="10" />
+		<Row SectionID="IMPROVEMENTS" PageGroupId="UNIQUE_IMPROVEMENTS" 		Name="LOC_PEDIA_IMPROVEMENTS_PAGEGROUP_UNIQUE_IMPROVEMENTS_NAME" 		Tooltip="" VisibleIfEmpty="true" 	SortIndex="11" />
+		<Row SectionID="IMPROVEMENTS" PageGroupId="CITYSTATE_IMPROVEMENTS" 	Name="LOC_PEDIA_IMPROVEMENTS_PAGEGROUP_CITYSTATE_IMPROVEMENTS_NAME" Tooltip="" VisibleIfEmpty="true" 	SortIndex="12" />
+		<Row SectionID="IMPROVEMENTS" PageGroupId="URBAN_IMPROVEMENTS" 			Name="LOC_PEDIA_IMPROVEMENTS_PAGEGROUP_URBAN_IMPROVEMENTS_NAME" 		Tooltip="" VisibleIfEmpty="true" 	SortIndex="13" />
+		<Row SectionID="IMPROVEMENTS" PageGroupId="TOURISM_IMPROVEMENTS" 		Name="LOC_PEDIA_IMPROVEMENTS_PAGEGROUP_TOURISM_IMPROVEMENTS_NAME" 	Tooltip="" VisibleIfEmpty="true" 	SortIndex="14" />
+		<Row SectionID="IMPROVEMENTS" PageGroupId="MILITARY_IMPROVEMENTS" 	Name="LOC_PEDIA_IMPROVEMENTS_PAGEGROUP_MILITARY_IMPROVEMENTS_NAME"	Tooltip="" VisibleIfEmpty="true" 	SortIndex="15" />
+		<Update>
+			<Where SectionID="IMPROVEMENTS" PageGroupId="Improvements" />
+			<Set VisibleIfEmpty="false" SortIndex="15" />
+		</Update>
+
+		<Row SectionID="RESOURCES" PageGroupId="IMPROVEMENT_FARM_RESOURCECLASS_BONUS" 					Name="LOC_PEDIA_RESOURCES_PAGEGROUP_FARM_BONUS_NAME"						Tooltip="" VisibleIfEmpty="false" 	SortIndex="10" />
+		<Row SectionID="RESOURCES" PageGroupId="IMPROVEMENT_PLANTATION_RESOURCECLASS_BONUS" 		Name="LOC_PEDIA_RESOURCES_PAGEGROUP_PLANTATION_BONUS_NAME"			Tooltip="" VisibleIfEmpty="false" 	SortIndex="11" />
+		<Row SectionID="RESOURCES" PageGroupId="IMPROVEMENT_PASTURE_RESOURCECLASS_BONUS" 				Name="LOC_PEDIA_RESOURCES_PAGEGROUP_PASTURE_BONUS_NAME"					Tooltip="" VisibleIfEmpty="false" 	SortIndex="12" />
+		<Row SectionID="RESOURCES" PageGroupId="IMPROVEMENT_CAMP_RESOURCECLASS_BONUS" 					Name="LOC_PEDIA_RESOURCES_PAGEGROUP_CAMP_BONUS_NAME"						Tooltip="" VisibleIfEmpty="false" 	SortIndex="13" />
+		<Row SectionID="RESOURCES" PageGroupId="IMPROVEMENT_MINE_RESOURCECLASS_BONUS" 					Name="LOC_PEDIA_RESOURCES_PAGEGROUP_MINE_BONUS_NAME"						Tooltip="" VisibleIfEmpty="false" 	SortIndex="14" />
+		<Row SectionID="RESOURCES" PageGroupId="IMPROVEMENT_QUARRY_RESOURCECLASS_BONUS" 				Name="LOC_PEDIA_RESOURCES_PAGEGROUP_QUARRY_BONUS_NAME"					Tooltip="" VisibleIfEmpty="false" 	SortIndex="15" />
+		<Row SectionID="RESOURCES" PageGroupId="IMPROVEMENT_LUMBER_MILL_RESOURCECLASS_BONUS" 		Name="LOC_PEDIA_RESOURCES_PAGEGROUP_LUMBER_MILL_BONUS_NAME"			Tooltip="" VisibleIfEmpty="false" 	SortIndex="16" />
+		<Row SectionID="RESOURCES" PageGroupId="IMPROVEMENT_FISHING_BOATS_RESOURCECLASS_BONUS" 	Name="LOC_PEDIA_RESOURCES_PAGEGROUP_FISHING_BOATS_BONUS_NAME"		Tooltip="" VisibleIfEmpty="false" 	SortIndex="17" />
+		<Update>
+			<Where SectionID="RESOURCES" PageGroupId="RESOURCECLASS_BONUS" />
+			<Set VisibleIfEmpty="false" SortIndex="18" />
+		</Update>
+		
+		<Row SectionID="RESOURCES" PageGroupId="IMPROVEMENT_FARM_RESOURCECLASS_LUXURY" 					Name="LOC_PEDIA_RESOURCES_PAGEGROUP_FARM_LUXURY_NAME"						Tooltip="" VisibleIfEmpty="false" 	SortIndex="20" />
+		<Row SectionID="RESOURCES" PageGroupId="IMPROVEMENT_PLANTATION_RESOURCECLASS_LUXURY" 		Name="LOC_PEDIA_RESOURCES_PAGEGROUP_PLANTATION_LUXURY_NAME"			Tooltip="" VisibleIfEmpty="false" 	SortIndex="21" />
+		<Row SectionID="RESOURCES" PageGroupId="IMPROVEMENT_PASTURE_RESOURCECLASS_LUXURY" 			Name="LOC_PEDIA_RESOURCES_PAGEGROUP_PASTURE_LUXURY_NAME"				Tooltip="" VisibleIfEmpty="false" 	SortIndex="22" />
+		<Row SectionID="RESOURCES" PageGroupId="IMPROVEMENT_CAMP_RESOURCECLASS_LUXURY" 					Name="LOC_PEDIA_RESOURCES_PAGEGROUP_CAMP_LUXURY_NAME"						Tooltip="" VisibleIfEmpty="false" 	SortIndex="23" />
+		<Row SectionID="RESOURCES" PageGroupId="IMPROVEMENT_MINE_RESOURCECLASS_LUXURY" 					Name="LOC_PEDIA_RESOURCES_PAGEGROUP_MINE_LUXURY_NAME"						Tooltip="" VisibleIfEmpty="false" 	SortIndex="24" />
+		<Row SectionID="RESOURCES" PageGroupId="IMPROVEMENT_QUARRY_RESOURCECLASS_LUXURY" 				Name="LOC_PEDIA_RESOURCES_PAGEGROUP_QUARRY_LUXURY_NAME"					Tooltip="" VisibleIfEmpty="false" 	SortIndex="25" />
+		<Row SectionID="RESOURCES" PageGroupId="IMPROVEMENT_LUMBER_MILL_RESOURCECLASS_LUXURY" 	Name="LOC_PEDIA_RESOURCES_PAGEGROUP_LUMBER_MILL_LUXURY_NAME"		Tooltip="" VisibleIfEmpty="false" 	SortIndex="26" />
+		<Row SectionID="RESOURCES" PageGroupId="IMPROVEMENT_FISHING_BOATS_RESOURCECLASS_LUXURY" Name="LOC_PEDIA_RESOURCES_PAGEGROUP_FISHING_BOATS_LUXURY_NAME"	Tooltip="" VisibleIfEmpty="false" 	SortIndex="27" />
+		<Update>
+			<Where SectionID="RESOURCES" PageGroupId="RESOURCECLASS_LUXURY" />
+			<Set VisibleIfEmpty="false" SortIndex="28" />
+		</Update>
+		<Row SectionID="RESOURCES" PageGroupId="WONDER_LUXURY" 																	Name="LOC_PEDIA_RESOURCES_PAGEGROUP_WONDER_LUXURY_NAME"					Tooltip="" VisibleIfEmpty="false" 	SortIndex="29" />
+		
+		<Row SectionID="WONDERS" 	 PageGroupId="NATIONAL_WONDERS" 															Name="LOC_PEDIA_WONDERS_PAGEGROUP_NATIONAL_WONDERS_NAME"				Tooltip="" VisibleIfEmpty="false" 	SortIndex="40" />
+		<Update>
+			<Where SectionID="WONDERS" PageGroupId="Wonders" />
+			<Set VisibleIfEmpty="false" SortIndex="50" />
+		</Update>
+		<Update>
+			<Where SectionID="WONDERS" PageGroupId="Projects" />
+			<Set SortIndex="60" />
+		</Update>
+
+		<Row SectionID="UNITS" 	 	 PageGroupId="CIVILIAN_UNITS" 																Name="LOC_PEDIA_UNITS_PAGEGROUP_CIVILIAN_UNITS_NAME"						Tooltip="" VisibleIfEmpty="true" 		SortIndex="10" />
+		<Row SectionID="UNITS" 	 	 PageGroupId="RELIGIOUS_UNITS" 																Name="LOC_PEDIA_UNITS_PAGEGROUP_RELIGIOUS_UNITS_NAME"						Tooltip="" VisibleIfEmpty="true" 		SortIndex="11" />
+		<Row SectionID="UNITS" 	 	 PageGroupId="GREAT_PERSON_UNITS" 														Name="LOC_PEDIA_UNITS_PAGEGROUP_GREAT_PERSON_UNITS_NAME"				Tooltip="" VisibleIfEmpty="true" 		SortIndex="12" />
+		<Row SectionID="UNITS" 	 	 PageGroupId="OTHER_UNITS" 																	  Name="LOC_PEDIA_UNITS_PAGEGROUP_OTHER_UNITS_NAME"							  Tooltip="" VisibleIfEmpty="false" 	SortIndex="60" />
+	
+		<Update>
+			<Where SectionID="CIVILIZATIONS" />
+			<Set VisibleIfEmpty="false" />
+		</Update>
+	</CivilopediaPageGroups>
+
+	<CivilopediaPages>
+		<Row SectionId="CONCEPTS" PageId="HD_OVERVIEW_PAGE" 			PageGroupId="HD" PageLayoutId="HD_OVERVIEW"  			Name="LOC_PEDIA_CONCEPTS_PAGE_HD_OVERVIEW_PAGE_CHAPTER_CONTENT_TITLE" 			Tooltip="" SortIndex="1"/>
+		<Row SectionId="CONCEPTS" PageId="HD_CONCEPTS_PAGE" 			PageGroupId="HD" PageLayoutId="HD_CONCEPTS"  			Name="LOC_PEDIA_CONCEPTS_PAGE_HD_CONCEPTS_PAGE_CHAPTER_CONTENT_TITLE" 			Tooltip="" SortIndex="2"/>
+		<Row SectionId="CONCEPTS" PageId="HD_GAME_PROGRESS_PAGE" 	PageGroupId="HD" PageLayoutId="HD_GAME_PROGRESS"  Name="LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_CONTENT_TITLE"  Tooltip="" SortIndex="3"/>
+		<Row SectionId="CONCEPTS" PageId="HD_CITY_PAGE" 					PageGroupId="HD" PageLayoutId="HD_CITY"  					Name="LOC_PEDIA_CONCEPTS_PAGE_HD_CITY_PAGE_CHAPTER_CONTENT_TITLE" 					Tooltip="" SortIndex="4"/>
+		<Row SectionId="CONCEPTS" PageId="HD_GAME_ERA_PAGE" 			PageGroupId="HD" PageLayoutId="HD_GAME_ERA"  			Name="LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_ERA_PAGE_CHAPTER_CONTENT_TITLE" 			Tooltip="" SortIndex="5"/>
+	
+		<Delete SectionId="CIVILIZATIONS" />
+	</CivilopediaPages>
+	
+	<!-- 排序 -->
+	<CivilopediaPageQueries>
+		<!-- 着力点 -->
+		<Row SectionId="MOMENTS" PageGroupIdColumn="PageGroupId" NameColumn="CategoryDescription" TooltipColumn="Tooltip" SortIndexColumn="SortIndex" SortIndex="10">
+			<SQL>SELECT CommemorationTypes.CommemorationType as PageId, "COMMEMORATIONS" as PageGroupId, "HD_COMMEMORATION" as PageLayoutId, CommemorationTypes.CategoryDescription, null as Tooltip, Eras.ChronologyIndex as SortIndex FROM CommemorationTypes INNER JOIN Eras ON CommemorationTypes.MinimumGameEra = Eras.EraType ORDER BY Eras.ChronologyIndex</SQL>
+		</Row>
+		<!-- 中国着力点 -->
+		<Row SectionId="MOMENTS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndexColumn="SortIndex" SortIndex="10">
+			<SQL>SELECT AncientCommemorationType as PageId, "CHINA_COMMEMORATIONS" as PageGroupId, "HD_CHINA_COMMEMORATION" as PageLayoutId, Name, null as Tooltip, SortIndex FROM China_AncientCommemorationTypes_HD</SQL>
+		</Row>
+
+		<!-- 建筑 根据造价排序 -->
+		<Delete SectionId="BUILDINGS" />
+		<Row SectionId="BUILDINGS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndexColumn="Cost" SortIndex="10">
+			<SQL>SELECT BuildingType as PageId, PreReqDistrict as PageGroupId, "Building" as PageLayoutId, Name, null as Tooltip, Cost FROM Buildings Where IsWonder = 0 AND InternalOnly = 0 AND BuildingType NOT LIKE "BUILDING_CITY_POLICY_%"</SQL>
+		</Row>
+
+		<!-- 城市政策 -->
+		<Row SectionId="GOVERNMENTS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndex="10">
+			<SQL>SELECT BuildingType as PageId, "CITY_POLICIES" as PageGroupId, "Building" as PageLayoutId, Name, null as Tooltip FROM Buildings WHERE BuildingType LIKE "BUILDING_CITY_POLICY_%"</SQL>
+		</Row>
+
+		<!-- 伟人 根据时代排序 -->
+		<Delete SectionId="GREATPEOPLE" />
+		<Row SectionId="GREATPEOPLE" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndexColumn="SortIndex" SortIndex="10">
+			<SQL>SELECT GreatPersonIndividualType as PageId, GreatPersonClassType as PageGroupId, "GreatPerson" as PageLayoutId, GreatPersonIndividuals.Name, null as Tooltip, Eras.ChronologyIndex as SortIndex FROM GreatPersonIndividuals INNER JOIN Eras ON GreatPersonIndividuals.EraType = Eras.EraType ORDER BY Eras.ChronologyIndex</SQL>
+		</Row>
+
+		<!-- 区域 区分通用区域和特色区域 -->
+		<Delete SectionId="DISTRICTS" />
+		<Row SectionId="DISTRICTS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndexColumn="SortIndex" SortIndex="10">
+			<SQL>SELECT DistrictType as PageId, "COMMON_DISTRICTS" as PageGroupId, "District" as PageLayoutId, Name, null as Tooltip FROM Districts where InternalOnly = 0 and TraitType is null</SQL>
+		</Row>
+		<Row SectionId="DISTRICTS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndexColumn="SortIndex" SortIndex="10">
+			<SQL>SELECT DistrictType as PageId, "UNIQUE_DISTRICTS" as PageGroupId, "District" as PageLayoutId, Name, null as Tooltip FROM Districts where InternalOnly = 0 and TraitType is not null</SQL>
+		</Row>
+
+		<!-- 改良 分类 -->
+		<Delete SectionId="IMPROVEMENTS" />
+		<Row SectionId="IMPROVEMENTS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndex="10">
+			<SQL>SELECT HD_Basic_Improvements.ImprovementType as PageId, "BASIC_IMPROVEMENTS" as PageGroupId, "Improvement" as PageLayoutId, Improvements.Name, null as Tooltip FROM HD_Basic_Improvements INNER JOIN Improvements ON HD_Basic_Improvements.ImprovementType = Improvements.ImprovementType</SQL>
+		</Row>
+		<Row SectionId="IMPROVEMENTS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndex="11">
+			<SQL>SELECT HD_Unique_Improvements.ImprovementType as PageId, "UNIQUE_IMPROVEMENTS" as PageGroupId, "Improvement" as PageLayoutId, Improvements.Name, null as Tooltip FROM HD_Unique_Improvements INNER JOIN Improvements ON HD_Unique_Improvements.ImprovementType = Improvements.ImprovementType</SQL>
+		</Row>
+		<Row SectionId="IMPROVEMENTS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndex="11">
+			<SQL>SELECT HD_CityState_Improvements.ImprovementType as PageId, "CITYSTATE_IMPROVEMENTS" as PageGroupId, "Improvement" as PageLayoutId, Improvements.Name, null as Tooltip FROM HD_CityState_Improvements INNER JOIN Improvements ON HD_CityState_Improvements.ImprovementType = Improvements.ImprovementType</SQL>
+		</Row>
+		<Row SectionId="IMPROVEMENTS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndex="12">
+			<SQL>SELECT HD_Urban_Facilities_Improvements.ImprovementType as PageId, "URBAN_IMPROVEMENTS" as PageGroupId, "Improvement" as PageLayoutId, Improvements.Name, null as Tooltip FROM HD_Urban_Facilities_Improvements INNER JOIN Improvements ON HD_Urban_Facilities_Improvements.ImprovementType = Improvements.ImprovementType</SQL>
+		</Row>
+		<Row SectionId="IMPROVEMENTS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndex="13">
+			<SQL>SELECT HD_Tourism_Facilities_Improvements.ImprovementType as PageId, "TOURISM_IMPROVEMENTS" as PageGroupId, "Improvement" as PageLayoutId, Improvements.Name, null as Tooltip FROM HD_Tourism_Facilities_Improvements INNER JOIN Improvements ON HD_Tourism_Facilities_Improvements.ImprovementType = Improvements.ImprovementType</SQL>
+		</Row>
+		<Row SectionId="IMPROVEMENTS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndex="14">
+			<SQL>SELECT HD_Military_Facilities_Improvements.ImprovementType as PageId, "MILITARY_IMPROVEMENTS" as PageGroupId, "Improvement" as PageLayoutId, Improvements.Name, null as Tooltip FROM HD_Military_Facilities_Improvements INNER JOIN Improvements ON HD_Military_Facilities_Improvements.ImprovementType = Improvements.ImprovementType</SQL>
+		</Row>
+		<Row SectionId="IMPROVEMENTS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndex="15">
+			<SQL>SELECT HD_Common_Improvements.ImprovementType as PageId, "Improvements" as PageGroupId, "Improvement" as PageLayoutId, Improvements.Name, null as Tooltip FROM HD_Common_Improvements INNER JOIN Improvements ON HD_Common_Improvements.ImprovementType = Improvements.ImprovementType</SQL>
+		</Row>
+		<!-- 道路 -->
+		<Row SectionId="IMPROVEMENTS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndexColumn="SortIndex" SortIndex="16">
+			<SQL>SELECT RouteType as PageId, "Routes" as PageGroupId, "Route" as PageLayoutId, Name, null as Tooltip, PlacementValue as SortIndex FROM Routes</SQL>
+		</Row>
+
+		<!-- 资源 -->
+		<Delete SectionId="RESOURCES" />
+		<Row SectionId="RESOURCES" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndex="10">
+			<SQL>SELECT HD_Civilopedia_Resource_Groups.ResourceType as PageId, HD_Civilopedia_Resource_Groups.PageGroupId, "Resource" as PageLayoutId, "[ICON_" || HD_Civilopedia_Resource_Groups.ResourceType || "] {" || Resources.Name || "}" as Name, null as Tooltip FROM HD_Civilopedia_Resource_Groups INNER JOIN Resources ON HD_Civilopedia_Resource_Groups.ResourceType = Resources.ResourceType</SQL>
+		</Row>
+
+		<!-- 奇观 -->
+		<Delete SectionId="WONDERS" />
+		<!-- 世界奇观 -->
+		<Row SectionId="WONDERS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndexColumn="Cost" SortIndex="10">
+			<SQL>SELECT Buildings.BuildingType as PageId, Technologies.EraType as PageGroupId, "Building" as PageLayoutId, Buildings.Name, null as Tooltip, Buildings.Cost FROM Buildings INNER JOIN Technologies ON Buildings.PrereqTech = Technologies.TechnologyType Where Buildings.IsWonder = 1 AND Buildings.InternalOnly = 0 AND Buildings.MaxWorldInstances = 1</SQL>
+		</Row>
+		<Row SectionId="WONDERS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndexColumn="Cost" SortIndex="10">
+			<SQL>SELECT Buildings.BuildingType as PageId, Civics.EraType as PageGroupId, "Building" as PageLayoutId, Buildings.Name, null as Tooltip, Buildings.Cost FROM Buildings INNER JOIN Civics ON Buildings.PrereqCivic = Civics.CivicType Where Buildings.IsWonder = 1 AND Buildings.InternalOnly = 0 AND Buildings.MaxWorldInstances = 1</SQL>
+		</Row>
+		<Row SectionId="WONDERS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndexColumn="Cost" SortIndex="10">
+			<SQL>SELECT BuildingType as PageId, "ERA_ANCIENT" as PageGroupId, "Building" as PageLayoutId, Name, null as Tooltip, Cost FROM Buildings WHERE PrereqTech is NULL and PrereqCivic is NULL and IsWonder = 1 AND Buildings.InternalOnly = 0 AND Buildings.MaxWorldInstances = 1</SQL>
+		</Row>
+		<!-- 国家奇观 -->
+		<Row SectionId="WONDERS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndexColumn="Cost" SortIndex="10">
+			<SQL>SELECT BuildingType as PageId, "NATIONAL_WONDERS" as PageGroupId, "Building" as PageLayoutId, Name, null as Tooltip, Cost FROM Buildings Where IsWonder = 1 AND InternalOnly = 0 AND MaxPlayerInstances = 1</SQL>
+		</Row>
+		<!-- 项目 -->
+		<Row SectionId="WONDERS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndex="10">
+			<SQL>SELECT ProjectType as PageId, "Projects" as PageGroupId, "Project" as PageLayoutId, ShortName as Name, null as Tooltip FROM Projects</SQL>
+		</Row>
+
+		<!-- 单位 -->
+		<Delete SectionId="UNITS" />
+		<!-- 平民 -->
+		<Row SectionId="UNITS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndexColumn="Cost" SortIndex="10">
+			<SQL>SELECT UnitType as PageId, "CIVILIAN_UNITS" as PageGroupId, "Unit" as PageLayoutId, Name, null as Tooltip, Cost FROM Units where FormationClass = "FORMATION_CLASS_CIVILIAN" and UnitType not in (SELECT UnitType from GreatPersonClasses) and PromotionClass is Null and ReligiousStrength = 0</SQL>
+		</Row>
+		<!-- 宗教单位 -->
+		<Row SectionId="UNITS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndexColumn="Cost" SortIndex="10">
+			<SQL>SELECT UnitType as PageId, "RELIGIOUS_UNITS" as PageGroupId, "Unit" as PageLayoutId, Name, null as Tooltip, Cost FROM Units where ReligiousStrength != 0</SQL>
+		</Row>
+		<!-- 伟人 -->
+		<Row SectionId="UNITS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndexColumn="Cost" SortIndex="10">
+			<SQL>SELECT UnitType as PageId, "GREAT_PERSON_UNITS" as PageGroupId, "Unit" as PageLayoutId, Name, null as Tooltip, Cost FROM Units where UnitType in (SELECT UnitType from GreatPersonClasses)</SQL>
+		</Row>
+		<!-- 按升级树分类 -->
+		<Row SectionId="UNITS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndexColumn="Cost" SortIndex="10">
+			<SQL>SELECT UnitType as PageId, PromotionClass as PageGroupId, "Unit" as PageLayoutId, Name, null as Tooltip, Cost FROM Units where PromotionClass is not Null and PromotionClass not in ("PROMOTION_CLASS_APOSTLE", "PROMOTION_CLASS_INQUISITOR")</SQL>
+		</Row>
+		<!-- 其他单位 -->
+		<Row SectionId="UNITS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndexColumn="Cost" SortIndex="10">
+			<SQL>SELECT UnitType as PageId, "OTHER_UNITS" as PageGroupId, "Unit" as PageLayoutId, Name, null as Tooltip, Cost FROM Units where FormationClass != "FORMATION_CLASS_CIVILIAN" and ReligiousStrength = 0 and PromotionClass is Null and UnitType not in (SELECT UnitType from GreatPersonClasses)</SQL>
+		</Row>
+
+		<!-- 文明 领袖 -->
+		<Delete SectionId="CIVILIZATIONS" />
+		<Row SectionId="CIVILIZATIONS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndex="10">
+			<SQL>SELECT CivilizationType as PageId, CivilizationType as PageGroupId, "Civilization" as PageLayoutId, Name, null as Tooltip FROM Civilizations where StartingCivilizationLevelType = "CIVILIZATION_LEVEL_FULL_CIV"</SQL>
+		</Row>
+		<Row SectionId="CIVILIZATIONS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndex="15" TextKeyPrefixColumn="TextKeyPrefix">
+			<SQL>SELECT distinct Leaders.LeaderType AS PageId, Civilizations.CivilizationType AS PageGroupId, "Leader" AS PageLayoutId, Leaders.Name, null AS Tooltip, "LOC_PEDIA_LEADERS_PAGE" as TextKeyPrefix FROM Leaders INNER JOIN CivilizationLeaders on CivilizationLeaders.LeaderType = Leaders.LeaderType INNER JOIN Civilizations ON CivilizationLeaders.CivilizationType = Civilizations.CivilizationType WHERE Civilizations.StartingCivilizationLevelType = "CIVILIZATION_LEVEL_FULL_CIV"</SQL>
+		</Row>
+	</CivilopediaPageQueries>
+
+	<CivilopediaPageGroupQueries>
+		<!-- 奇观分类 -->
+		<Row SectionId="WONDERS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndexColumn="ChronologyIndex" SortIndex="10">
+			<SQL>SELECT EraType as PageGroupId, "{LOC_PEDIA_WONDERS_PAGEGROUP_WONDERS_NAME} {" || Name|| "}" as Name, Null as Tooltip, 0 as VisibleIfEmpty, ChronologyIndex from Eras</SQL>
+		</Row>
+		<!-- 单位分类 -->
+		<Delete SectionId="UNITS" />
+		<Row SectionId="UNITS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndex="20">
+			<SQL>SELECT PromotionClassType as PageGroupId, Name, null as Tooltip, 1 as VisibleIfEmpty, 20 as SortIndex from UnitPromotionClasses WHERE PromotionClassType not in ("PROMOTION_CLASS_APOSTLE", "PROMOTION_CLASS_INQUISITOR")</SQL>
+		</Row>
+		<!-- 文明 -->
+		<Row SectionId="CIVILIZATIONS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndex="10">
+			<SQL>SELECT CivilizationType PageGroupId, Name, null as Tooltip FROM Civilizations where StartingCivilizationLevelType = "CIVILIZATION_LEVEL_FULL_CIV"</SQL>
+		</Row>
+	</CivilopediaPageGroupQueries>
+
+</GameInfo>

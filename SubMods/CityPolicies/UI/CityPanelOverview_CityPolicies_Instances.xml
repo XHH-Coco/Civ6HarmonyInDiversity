@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Context ColorSet="BodyTextCool" FontStyle="Shadow">
+    <Stack ID="CityPolicyContainer" Size="parent,auto">
+        <Grid ID="CityPolicyHeader" Anchor="L,T" Size="parent,24" Style="DivHeader">
+            <Container Size="parent,24">
+                <Image Texture="Controls_Gradient_HalfRadial" Size="parent, 120" FlipY="1" Anchor="C,T" Color="72,103,130,255"/>
+            </Container>
+            <Label Anchor="C,C" Style="CityPanelSubPanelTitle" String="LOC_HUD_CITY_CITY_POLICIES" />
+        </Grid>
+        <Container ID="NoCityPolicyArea" Size="parent,auto" InnerPadding="0,10">
+            <Grid Anchor="C,T" Size="parent-10,auto" InnerPadding="40,30" Texture="Controls_DecoFrame" SliceCorner="20,19" SliceSize="1,1" SliceTextureSize="40,38" Color="255,255,255,50">
+                <Label Style="CityPanelText" Anchor="C,C" WrapWidth="parent" String="LOC_HUD_CITY_NO_CITY_POLICIES" />
+            </Grid>
+        </Container>
+        <Container ID="CityPolicyArea" Anchor="L,T" Size="parent,auto" Hidden="1">
+            <Stack ID="CityPolicyStack" StackGrowth="Bottom" />
+        </Container>
+        <Container Size="5,5"/>
+    </Stack>
+    <Instance Name="CityPolicyInstance">
+        <Grid ID="Top" Size="parent,auto" Style="CityPanelSubPanelContainer" AutoSizePadding="5,5" MinSize="24,24">
+            <Container Size="24,24" Anchor="L,C">
+                <Image ID="Icon" Offset="0,0" Texture="Buildings32" Size="32,32"/>
+            </Container>
+            <Label ID="CityPolicyName" Anchor="L,C" Offset="36,0" Style="CityPanelText" String="$CityPolicyName$" WrapWidth="parent-50"/>
+        </Grid>
+    </Instance>
+</Context>

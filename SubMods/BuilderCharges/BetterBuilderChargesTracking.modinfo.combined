@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mod id="c6477d9f-6bad-4d24-9e76-49cda4f0a966" version="1">
+  <Properties>
+    <Name>LOC_BETTER_BUILDER_CHARGES_TRACKING_NAME</Name>
+    <Teaser>LOC_BETTER_BUILDER_CHARGES_TRACKING_TEASER</Teaser>
+    <Description>LOC_BETTER_BUILDER_CHARGES_TRACKING_DESCRIPTION</Description>
+    <Authors>wltk</Authors>
+    <SpecialThanks>DeepLogic, 小小雨10101</SpecialThanks>
+    <AffectsSavedGames>0</AffectsSavedGames>
+    <CompatibleVersions>1.2,2.0</CompatibleVersions>
+  </Properties>
+
+  <LocalizedText>
+    <Text id="LOC_BETTER_BUILDER_CHARGES_TRACKING_NAME">
+      <en_US>Better Builder Charges Tracking</en_US>
+      <zh_Hans_CN>工人劳动力查看助手</zh_Hans_CN>
+    </Text>
+    <Text id="LOC_BETTER_BUILDER_CHARGES_TRACKING_TEASER">
+      <en_US>Display Builder's charges on side of its unit flag.</en_US>
+      <zh_Hans_CN>更方便的查看工人剩余劳动力</zh_Hans_CN>
+    </Text>
+    <Text id="LOC_BETTER_BUILDER_CHARGES_TRACKING_DESCRIPTION">
+      <en_US>>This mod can help displaying Builder's current build charges on the side of unit flag for easier tracking, so you don't have to select each Builder to check.</en_US>
+      <zh_Hans_CN>这个模组可以将工人当前的剩余劳动力显示在工人图标旁边，方便玩家查看，从此不需要再一个一个工人的点了。</zh_Hans_CN>
+    </Text>
+  </LocalizedText>
+
+  <InGameActions>
+    <ReplaceUIScript id="BuilderChargesUnitFlagManager">
+      <Properties>
+        <LoadOrder>666</LoadOrder>
+        <LuaContext>UnitFlagManager</LuaContext>
+        <LuaReplace>UnitFlagManager_BuilderCharges.lua</LuaReplace>
+      </Properties>
+    </ReplaceUIScript>
+    <!-- Importing our UnitFlagManager file so that other mods can include it and apply additional logic. -->
+    <ImportFiles id="BuilderChargesUnitFlagManager_Import">
+      <File>UnitFlagManager_BuilderCharges.lua</File>
+    </ImportFiles>
+  </InGameActions>
+
+  <Files>
+    <File>UnitFlagManager_BuilderCharges.lua</File>
+  </Files>
+</Mod>

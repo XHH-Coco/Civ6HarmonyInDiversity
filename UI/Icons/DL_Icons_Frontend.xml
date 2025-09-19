@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameData>
+	<IconTextureAtlases>
+		<Row Name="ATLAS_New_Buildings" IconSize="32" IconsPerRow="5" IconsPerColumn="5" Filename="New_Buildings_32.dds"/>
+		<Row Name="ATLAS_New_Buildings" IconSize="38" IconsPerRow="5" IconsPerColumn="5" Filename="New_Buildings_38.dds"/>
+		<Row Name="ATLAS_New_Buildings" IconSize="50" IconsPerRow="5" IconsPerColumn="5" Filename="New_Buildings_50.dds"/>
+		<Row Name="ATLAS_New_Buildings" IconSize="80" IconsPerRow="5" IconsPerColumn="5" Filename="New_Buildings_80.dds"/>
+		<Row Name="ATLAS_New_Buildings" IconSize="128" IconsPerRow="5" IconsPerColumn="5" Filename="New_Buildings_128.dds"/>
+		<Row Name="ATLAS_New_Buildings" IconSize="256" IconsPerRow="5" IconsPerColumn="5" Filename="New_Buildings_256.dds"/>
+
+		<Row Name="ATLAS_New_Buildings_2" IconSize="32" IconsPerRow="6" IconsPerColumn="6" Filename="New_Buildings_2_32.dds"/>
+		<Row Name="ATLAS_New_Buildings_2" IconSize="38" IconsPerRow="6" IconsPerColumn="6" Filename="New_Buildings_2_38.dds"/>
+		<Row Name="ATLAS_New_Buildings_2" IconSize="50" IconsPerRow="6" IconsPerColumn="6" Filename="New_Buildings_2_50.dds"/>
+		<Row Name="ATLAS_New_Buildings_2" IconSize="80" IconsPerRow="6" IconsPerColumn="6" Filename="New_Buildings_2_80.dds"/>
+		<Row Name="ATLAS_New_Buildings_2" IconSize="128" IconsPerRow="6" IconsPerColumn="6" Filename="New_Buildings_2_128.dds"/>
+		<Row Name="ATLAS_New_Buildings_2" IconSize="256" IconsPerRow="6" IconsPerColumn="6" Filename="New_Buildings_2_256.dds"/>
+
+		<Row Name="ATLAS_HD_NEW_UNITS" IconSize="22" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_UNITS_22.dds"/>
+    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="32" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_UNITS_32.dds"/>
+    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="38" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_UNITS_38.dds"/>
+    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="50" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_UNITS_50.dds"/>
+    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="80" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_UNITS_80.dds"/>
+    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="256" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_UNITS_256.dds"/>
+	</IconTextureAtlases>
+	<IconDefinitions>
+		<Row Name="ICON_BUILDING_HD_WORLD_PARLIAMENT_HEADQUARTERS" 		Atlas="ATLAS_New_Buildings" Index="3"/>
+		<Row Name="ICON_BUILDING_HD_WORLD_PARLIAMENT_HEADQUARTERS_FOW" 	Atlas="ATLAS_New_Buildings" Index="3"/>
+
+		<Row Name="ICON_BUILDING_EL_ESCORIAL_PALACE"                    Atlas="ATLAS_New_Buildings_2" Index="22"/>
+		<Row Name="ICON_BUILDING_EL_ESCORIAL_PALACE_FOW"                Atlas="ATLAS_New_Buildings_2" Index="22"/>
+
+		<Row Name="ICON_BUILDING_HD_PIT_DWELLING"                       Atlas="ATLAS_New_Buildings_2" Index="1"/>
+		<Row Name="ICON_BUILDING_HD_PIT_DWELLING_FOW"                   Atlas="ATLAS_New_Buildings_2" Index="1"/>
+
+		<Row Name="ICON_UNIT_HD_CODIFIER"                 Atlas="ATLAS_HD_NEW_UNITS" Index="0"/>
+    <Row Name="ICON_UNIT_HD_CODIFIER_FOW"                 Atlas="ATLAS_HD_NEW_UNITS" Index="0"/>
+    <Row Name="ICON_BUILDING_SEOWON" Atlas="ATLAS_HD_NEW_UNITS" Index="0"/>
+		<Row Name="ICON_BUILDING_SEOWON_FOW" Atlas="ATLAS_HD_NEW_UNITS" Index="0"/>
+    <Row Name="ICON_BUILDING_SEOWON_INTERNAL_ONLY" Atlas="ATLAS_HD_NEW_UNITS" Index="0"/>
+		<Row Name="ICON_BUILDING_SEOWON_INTERNAL_ONLY_FOW" Atlas="ATLAS_HD_NEW_UNITS" Index="0"/>
+		<Row Name="ICON_UNIT_ENKIDU_HD"                 Atlas="ATLAS_HD_NEW_UNITS" Index="5"/>
+    <Row Name="ICON_UNIT_ENKIDU_HD_FOW"                 Atlas="ATLAS_HD_NEW_UNITS" Index="5"/>
+		<Row Name="ICON_UNIT_QIN_ELITE_SOLDIER_HD"                 Atlas="ATLAS_HD_NEW_UNITS" Index="6"/>
+    <Row Name="ICON_UNIT_QIN_ELITE_SOLDIER_HD_FOW"                 Atlas="ATLAS_HD_NEW_UNITS" Index="6"/>
+    <Row Name="ICON_UNIT_KEQING"                    Atlas="ATLAS_HD_NEW_UNITS" Index="7"/>
+		<Row Name="ICON_UNIT_KEQING_FOW"                Atlas="ATLAS_HD_NEW_UNITS"   Index="7"/>
+    <Row Name="ICON_UNIT_PLUM_INTERNAL_SECURITY_HD"                    Atlas="ATLAS_HD_NEW_UNITS" Index="8"/>
+		<Row Name="ICON_UNIT_PLUM_INTERNAL_SECURITY_HD_FOW"                Atlas="ATLAS_HD_NEW_UNITS"   Index="8"/>
+	</IconDefinitions>
+</GameData>

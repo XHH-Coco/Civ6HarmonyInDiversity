@@ -1,0 +1,123 @@
+中文版本：
+[h1]文明6 Plus：和而不同[/h1]
+
+【文明6 Plus: 和而不同】是由一群有经验的PVE玩家针对原版文明6底层机制的诸多痛点而设计的一套更贴合人类发展实际、游戏各个元素更平衡、玩法更多元多样的大型模组。该模组包含的游戏规则解决了官方版本中较为突出的砍树、劫掠等问题，进行了大量平衡性的调整，并同时引入包容性的差异化发展作为特色。“始于删砍树，却绝不止于删砍树“，模组在减少无聊而困难的重复回合操作、让玩家把精力真正的集中在规划与抉择中的同时，力求做到在游戏进程的各个阶段提供给玩家因地制宜的选择空间，各种发展模式都独具特色而又不可替代，期望能让玩家更好地、真正地体会到《文明》的游戏精髓与乐趣。
+
+【NEWS】由于steam工坊上传出错，目前该模组无法更新，目前有一个已知bug无法更新，请大家打开steam安装目录，进入steamapps\workshop\content\289070\2340346036\UpdateDataBase文件夹，打开DL_GreatPeople.sql，删去第22至24行，以下为需要删除的内容：
+update GreatPersonIndividuals set EraType = 'ERA_RENAISSANCE' where GreatPersonIndividualType = 'GREAT_PERSON_INDIVIDUAL_JANAKI_AMMAL';
+update GreatPersonIndividuals set EraType = 'ERA_RENAISSANCE' where GreatPersonIndividualType = 'GREAT_PERSON_INDIVIDUAL_ERWIN_SCHRODINGER';
+update GreatPersonIndividuals set EraType = 'ERA_RENAISSANCE' where GreatPersonIndividualType = 'GREAT_PERSON_INDIVIDUAL_HG_WELLS';
+该部分内容为错误添加，但因为模组无法更新无法修复，请大家手动修复，我们正在寻求解决方案，可能需要重新开工坊项目，请大家持续关注，感谢理解与支持。
+
+[h3]模组特色[/h3]
+[list]
+[*] 砍树砍石头等移除地貌和资源收获和劫掠的收益不再随游戏进度而变化：砍树不涨价，老马环游、木制火箭、刮地飞天成为过去式
+[*] 区域价格与游戏进度脱钩，与建造数量相关且价格更低：更符合实际的同时鼓励均衡发展
+[*] 平衡建筑收益，提供高级建筑辐射加成和百分比加成：大城市带动小城市、打造属于你的帝国心脏
+[*] 更多的改良区域相互配合，更合理的改良成长加成：由久经考验的文明6PVE骨灰级玩家打磨，给你带来规划上的高级体验。
+[*] 重新平衡的宗教体系：各种万神因地制宜，各个信条各具特色。
+[*] 地图生成、地形产出与出生地平衡：开图就能打，就算上沙下土也不用被迫刷图，就算是盘古也能铺开城市不跳水
+[*] 通过城市政策来对每个城市单独进行管理：每座城市都能发展，每座城市都有自己的特点
+[*] 重做的强力总督：每个总督都自成体系，赋予玩家更多的打法多样性
+[*] 科技人文树更新：科技人文树分叉更明显，发展combo差异化，同时突出更多的关键科技、人文节点，收益提升，让玩家不再为了科技而发展科技。
+[*] 军事体系大改：告别单一小马征服，多兵种相互配合
+[*] 平衡的城邦、伟人收益：弱势城邦、伟人能力增强，旧的伟人，新的体验
+[*] 平滑宜居度分级，提升宜居度收益，让这一游戏元素重新焕发生机。
+[*] 还有更多新奇观、新建筑等你探索。
+[/list]
+
+[h3]模组兼容性[/h3]
+对于界面优化mod，我们推荐使用该合集[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2268223724]collection of useful UI MODs[/url]中的内容，其中项目已做兼容化处理。
+我们也在支持一系列受欢迎的mod，目前已支持的mod已收纳入[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2399536104]该合集[/url]，合集以外的mod的兼容性无法保证。
+
+[h3]链接[/h3]
+[url=https://gitee.com/deeplogic/civ6-harmony-in-diversity/tree/master/] 中文描述链接 [/url]
+[url=https://docs.qq.com/sheet/DRndpYktSdkZlSlBT] 改动汇总链接 [/url]
+交流群群号：1142970145
+
+英文版本：
+[h1]Civ6 Plus: Harmony in Diversity[/h1]
+This is the FIRST large-scale complete [b]OVERHAUL[/b] MOD for the official Civ6 that removes the absurd yields of chopping. Beyond that, we have also introduced a lot of new interesting stuffs and brought brand new strategies to play with. Hope you enjoy it.
+
+In original Civ6, chopping and plunder scales up with tech/civic tree progress, and brings absurdly high yields. Many players prefer to chop and plunder instead of developing the empire, and they are bored with this. Now we are happy to introduce the "Harmony in Diversity" MOD. A Gameplay MOD that removes the scaling factor, and brings many new changes. Universities and Banks now radiate like the factory. More city-center buildings and city policies allow you to decide the developing path of each city. Reworked Religions and Governors provide you more alternatives to expand your empire. Carefully tweaked world wonders, newly added policy cards, and balanced tile yields...more and more interesting elements await you to explore them in ONE MORE TURN.
+
+[h2]NEWS[/h2]
+We meet error when uploading the new version of the MOD, therefore the MOD is not able to update, there is one known issue that need you to fix yourself for now. Method:  open the Steam Folder, enter : steamapps\workshop\content\289070\2340346036\UpdateDataBase. Open DL_GreatPeople.sql and manually remove lines from 22 to 24. Following are the ones need to be removed.
+
+update GreatPersonIndividuals set EraType = 'ERA_RENAISSANCE' where GreatPersonIndividualType = 'GREAT_PERSON_INDIVIDUAL_JANAKI_AMMAL';
+update GreatPersonIndividuals set EraType = 'ERA_RENAISSANCE' where GreatPersonIndividualType = 'GREAT_PERSON_INDIVIDUAL_ERWIN_SCHRODINGER';
+update GreatPersonIndividuals set EraType = 'ERA_RENAISSANCE' where GreatPersonIndividualType = 'GREAT_PERSON_INDIVIDUAL_HG_WELLS';
+
+These contents are added by mistake, please fix it yourself for now. Thanks for understanding. We are looking for the ways to solve the uploading issue. We may need to start a new item instead, keep tuned.
+
+
+We have updated so that is compatible with Portugal DLC.
+We have supported more Wonders in the Community, please checkout the Collection of Supported MODs above.
+
+[url=https://gitee.com/deeplogic/civ6-harmony-in-diversity/tree/master/] [Link]Description in Chinese [/url]
+Gitee Address: https://gitee.com/deeplogic/civ6-harmony-in-diversity
+
+[h2]Introduction[/h2]
+The aspects we have overhauled:
+[list]
+[*] [b]Terrain, Feature and Resource Yields[/b] (remove the scale of the chopping yield)
+[*] [b]Map Generation Fixing[/b] (including the starting position)
+[*] [b]Buildings[/b] (balance and add more regional effects)
+[*] [b]Citizen Yields[/b] (the experts in the districts now produce great person points and have more yields with more buildings in the district)
+[*] [b]Districts[/b] (the costs no longer grows w.r.t. the number of techs/civics completed. Instead, grows w.r.t the number of previous copies)
+[*] [b]Improvements[/b] (We have adjusted the yields of basic improvements, but most unique improvements are not adjusted yet)
+[*] [b]Religions and Beliefs[/b] (We have overhaul the beliefs and make it more balance)
+[*] [b]Governors[/b] (we have re-balanced the governors and make all of them as useful as the Educator, many fun functionalities have been implemented, checkout the figures above!)
+[*] [b]CityStates[/b] Balance
+[*] [b]GreatPerson[/b] Balance
+[*] More Adjustments (to be write in detail)
+[/list]
+NOTE: We haven't balanced the Civilizations yet, so there might be some civilizations are too strong or too weak.
+
+[h2]Content Summary[/h2]
+The Content Summaries of the MOD are already available in Chinese (see the [url=https://docs.qq.com/sheet/DRndpYktSdkZlSlBT] Document [/url])
+The Content Summaries in English are going to be added soon.
+The Texts inside the Game (including Chinese and English) are already updated for the modifications.
+
+[h2]Supports[/h2]
+We recommend to use this [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2268223724]collection of useful UI MODs[/url] which is compatible with our MOD.
+We are also supporting a set of popular MODs in the Community (include new Buildings and Wonders).
+The supported ones are listed in this [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2399536104]Collection[/url]. The MODs outside of this collection is not guaranteed to be compatible.
+
+NOTE: It requires full DLC to work. Shortage of some DLCs might cause problem loading the MOD.
+
+Language supported: Chinese, English
+
+Our own MODs already included: (So do NOT subscribe these)
+[list]
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2343184296]City Policies[/url]
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2385950244]Farms on Fresh Hills[/url]
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2337081565]Map Generation Fixing[/url]
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2380848856]Chinese Icon Fixing[/url]
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2349177304]Bug Fixing for Ayu and Gaul[/url]
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2409116842]Better Builder Charges Tracking[/url]
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2447217603]Better Trade Screen Fix[/url]
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2447220599]Trade Route Smaller Minimal Duration[/url]
+[/list]
+MODs integrated as Third Party: (do NOT need to subscribe these)
+[list]
+[*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1284907124]City Roads[/url] (Added the Wheels Technology as requirement)
+[*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=870865055]Gold Resource[/url]
+[*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2183461036]Hetairoi's general bug fix mod[/url]
+[/list]
+
+[h2]Acknowledge[/h2]
+Thanks the Following MODs:
+[list]
+[*] GoldenAge - Brave New World
+[*] Real Strategy AI
+[*] AI+
+[*] Botanist
+[*] Better Balanced Start
+[*] Religion Expansion
+[*] Real Tech Tree
+[*] Better Trade Screen
+[/list]
+
+[hr][/hr]
+Name used before: DL Game Balance Mod

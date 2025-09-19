@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="10" SoundbankVersion="113">
+	<RootPaths>
+		<ProjectRoot>E:\游戏文档\文明6mod开发\配音\Civ6_HD_Tech_Civic_Quote\</ProjectRoot>
+		<SourceFilesRoot>E:\游戏文档\文明6mod开发\配音\Civ6_HD_Tech_Civic_Quote\.cache\Windows\</SourceFilesRoot>
+		<SoundBanksRoot>E:\游戏文档\文明6mod开发\配音\Civ6_HD_Tech_Civic_Quote\GeneratedSoundBanks\Windows\</SoundBanksRoot>
+		<ExternalSourcesInputFile></ExternalSourcesInputFile>
+		<ExternalSourcesOutputRoot>E:\游戏文档\文明6mod开发\配音\Civ6_HD_Tech_Civic_Quote\GeneratedSoundBanks\Windows\</ExternalSourcesOutputRoot>
+	</RootPaths>
+	<DialogueEvents/>
+	<StreamedFiles/>
+	<MediaFilesNotInAnyBank/>
+	<SoundBanks>
+		<SoundBank Id="1195611481" Language="SFX">
+			<ShortName>HD_Tech_Civic_Quote_2</ShortName>
+			<Path>HD_Tech_Civic_Quote_2.bnk</Path>
+			<IncludedEvents>
+				<Event Id="3552645435" Name="PLAY_CIVIC_ANTHROPOLOGY_HD_QUOTE_1"/>
+				<Event Id="3552645432" Name="PLAY_CIVIC_ANTHROPOLOGY_HD_QUOTE_2"/>
+				<Event Id="831696069" Name="PLAY_CIVIC_COMMERCIAL_CAPITALISM_HD_QUOTE_1"/>
+				<Event Id="831696070" Name="PLAY_CIVIC_COMMERCIAL_CAPITALISM_HD_QUOTE_2"/>
+				<Event Id="504467391" Name="PLAY_CIVIC_EARLY_WARFARE_HD_QUOTE_1"/>
+				<Event Id="504467388" Name="PLAY_CIVIC_EARLY_WARFARE_HD_QUOTE_2"/>
+				<Event Id="2787528263" Name="PLAY_CIVIC_FINANCE_HD_QUOTE_1"/>
+				<Event Id="2787528260" Name="PLAY_CIVIC_FINANCE_HD_QUOTE_2"/>
+				<Event Id="1585255378" Name="PLAY_CIVIC_FUNERAL_HD_QUOTE_1"/>
+				<Event Id="1585255377" Name="PLAY_CIVIC_FUNERAL_HD_QUOTE_2"/>
+				<Event Id="4000778736" Name="PLAY_CIVIC_HERALDRY_HD_QUOTE_1"/>
+				<Event Id="4000778739" Name="PLAY_CIVIC_HERALDRY_HD_QUOTE_2"/>
+				<Event Id="3790507269" Name="PLAY_CIVIC_HIGHER_EDUCATION_HD_QUOTE_1"/>
+				<Event Id="3790507270" Name="PLAY_CIVIC_HIGHER_EDUCATION_HD_QUOTE_2"/>
+				<Event Id="1184085728" Name="PLAY_CIVIC_HOUSEHOLD_REGISTRATION_HD_QUOTE_1"/>
+				<Event Id="1184085731" Name="PLAY_CIVIC_HOUSEHOLD_REGISTRATION_HD_QUOTE_2"/>
+				<Event Id="107965294" Name="PLAY_CIVIC_HUMAN_RIGHTS_HD_QUOTE_1"/>
+				<Event Id="107965293" Name="PLAY_CIVIC_HUMAN_RIGHTS_HD_QUOTE_2"/>
+				<Event Id="550862388" Name="PLAY_CIVIC_INTERNATIONALISM_HD_QUOTE_1"/>
+				<Event Id="550862391" Name="PLAY_CIVIC_INTERNATIONALISM_HD_QUOTE_2"/>
+				<Event Id="155378699" Name="PLAY_CIVIC_JOURNALISM_STUDIES_HD_QUOTE_1"/>
+				<Event Id="155378696" Name="PLAY_CIVIC_JOURNALISM_STUDIES_HD_QUOTE_2"/>
+				<Event Id="594241085" Name="PLAY_CIVIC_LAW_HD_QUOTE_1"/>
+				<Event Id="594241086" Name="PLAY_CIVIC_LAW_HD_QUOTE_2"/>
+				<Event Id="2126454605" Name="PLAY_CIVIC_LEAGUE_OF_NATIONS_HD_QUOTE_1"/>
+				<Event Id="2126454606" Name="PLAY_CIVIC_LEAGUE_OF_NATIONS_HD_QUOTE_2"/>
+				<Event Id="2609887984" Name="PLAY_CIVIC_MACRO_ECONOMICS_HD_QUOTE_1"/>
+				<Event Id="2609887987" Name="PLAY_CIVIC_MACRO_ECONOMICS_HD_QUOTE_2"/>
+				<Event Id="2131066023" Name="PLAY_CIVIC_MODERN_MATIONAL_DEFENSE_HD_QUOTE_1"/>
+				<Event Id="2131066020" Name="PLAY_CIVIC_MODERN_MATIONAL_DEFENSE_HD_QUOTE_2"/>
+				<Event Id="2108355139" Name="PLAY_CIVIC_MODERNISM_HD_QUOTE_1"/>
+				<Event Id="2108355136" Name="PLAY_CIVIC_MODERNISM_HD_QUOTE_2"/>
+				<Event Id="23785460" Name="PLAY_CIVIC_MUSEOLOGY_HD_QUOTE_2"/>
+				<Event Id="3425420375" Name="PLAY_CIVIC_NEOCOLONIALISM_HD_QUOTE_1"/>
+				<Event Id="3425420372" Name="PLAY_CIVIC_NEOCOLONIALISM_HD_QUOTE_2"/>
+				<Event Id="3440071411" Name="PLAY_CIVIC_PALEOBIOLOGY_HD_QUOTE_1"/>
+				<Event Id="3440071408" Name="PLAY_CIVIC_PALEOBIOLOGY_HD_QUOTE_2"/>
+				<Event Id="3504580247" Name="PLAY_CIVIC_POLICE_SYSTEM_HD_QUOTE_1"/>
+				<Event Id="3504580244" Name="PLAY_CIVIC_POLICE_SYSTEM_HD_QUOTE_2"/>
+				<Event Id="2933180541" Name="PLAY_CIVIC_SOCIAL_SECURITY_SYSTEM_HD_QUOTE_1"/>
+				<Event Id="2933180542" Name="PLAY_CIVIC_SOCIAL_SECURITY_SYSTEM_HD_QUOTE_2"/>
+				<Event Id="799099944" Name="PLAY_CIVIC_URBAN_DESIGN_HD_QUOTE_1"/>
+				<Event Id="799099947" Name="PLAY_CIVIC_URBAN_DESIGN_HD_QUOTE_2"/>
+				<Event Id="414693171" Name="PLAY_HD_NEW_HERMITAGE_QUOTE"/>
+				<Event Id="2693231448" Name="PLAY_TECH_ALCHEMY_HD_QUOTE_1"/>
+				<Event Id="2693231451" Name="PLAY_TECH_ALCHEMY_HD_QUOTE_2"/>
+				<Event Id="766006257" Name="PLAY_TECH_ARCH_HD_QUOTE_1"/>
+				<Event Id="766006258" Name="PLAY_TECH_ARCH_HD_QUOTE_2"/>
+				<Event Id="3480545506" Name="PLAY_TECH_BIG_DATA_HD_QUOTE_1"/>
+				<Event Id="3480545505" Name="PLAY_TECH_BIG_DATA_HD_QUOTE_2"/>
+				<Event Id="3968906408" Name="PLAY_TECH_CATERPILLAR_TRACK_HD_QUOTE_1"/>
+				<Event Id="3968906411" Name="PLAY_TECH_CATERPILLAR_TRACK_HD_QUOTE_2"/>
+				<Event Id="1360778873" Name="PLAY_TECH_FUEL_HD_QUOTE_1"/>
+				<Event Id="1360778874" Name="PLAY_TECH_FUEL_HD_QUOTE_2"/>
+				<Event Id="3323573500" Name="PLAY_TECH_GENETIC_ENGINEERING_HD_QUOTE_1"/>
+				<Event Id="3323573503" Name="PLAY_TECH_GENETIC_ENGINEERING_HD_QUOTE_2"/>
+				<Event Id="403914951" Name="PLAY_TECH_GEOLOGY_HD_QUOTE_1"/>
+				<Event Id="403914948" Name="PLAY_TECH_GEOLOGY_HD_QUOTE_2"/>
+				<Event Id="3850425437" Name="PLAY_TECH_GEOMATICS_HD_QUOTE_1"/>
+				<Event Id="3850425438" Name="PLAY_TECH_GEOMATICS_HD_QUOTE_2"/>
+				<Event Id="2296634676" Name="PLAY_TECH_INDUSTRIAL_AUTOMATION_HD_QUOTE_1"/>
+				<Event Id="2296634679" Name="PLAY_TECH_INDUSTRIAL_AUTOMATION_HD_QUOTE_2"/>
+				<Event Id="818949976" Name="PLAY_TECH_INTEGRATED_CIRCUIT_HD_QUOTE_1"/>
+				<Event Id="818949979" Name="PLAY_TECH_INTEGRATED_CIRCUIT_HD_QUOTE_2"/>
+				<Event Id="2132487300" Name="PLAY_TECH_INTERNET_HD_QUOTE_1"/>
+				<Event Id="2132487303" Name="PLAY_TECH_INTERNET_HD_QUOTE_2"/>
+				<Event Id="2385152877" Name="PLAY_TECH_MEDICAL_SCIENCE_HD_QUOTE_1"/>
+				<Event Id="2385152878" Name="PLAY_TECH_MEDICAL_SCIENCE_HD_QUOTE_2"/>
+				<Event Id="1995322820" Name="PLAY_TECH_MODERN_AGRICULTURE_HD_QUOTE_1"/>
+				<Event Id="1995322823" Name="PLAY_TECH_MODERN_AGRICULTURE_HD_QUOTE_2"/>
+				<Event Id="2305459205" Name="PLAY_TECH_MODERN_COMMU_EQUIP_HD_QUOTE_1"/>
+				<Event Id="2305459206" Name="PLAY_TECH_MODERN_COMMU_EQUIP_HD_QUOTE_2"/>
+				<Event Id="3225645560" Name="PLAY_TECH_MODERN_TRAFFIC_HD_QUOTE_1"/>
+				<Event Id="3225645563" Name="PLAY_TECH_MODERN_TRAFFIC_HD_QUOTE_2"/>
+				<Event Id="574354034" Name="PLAY_TECH_NAVIGATIONAL_INSTRU_HD_QUOTE_1"/>
+				<Event Id="574354033" Name="PLAY_TECH_NAVIGATIONAL_INSTRU_HD_QUOTE_2"/>
+				<Event Id="916069737" Name="PLAY_TECH_OCEANOGRAPHY_HD_QUOTE_1"/>
+				<Event Id="916069738" Name="PLAY_TECH_OCEANOGRAPHY_HD_QUOTE_2"/>
+				<Event Id="1411893148" Name="PLAY_TECH_REFRIGERATION_HD_QUOTE_1"/>
+				<Event Id="1411893151" Name="PLAY_TECH_REFRIGERATION_HD_QUOTE_2"/>
+				<Event Id="2125290294" Name="PLAY_TECH_SADDLE_HD_QUOTE_1"/>
+				<Event Id="2125290293" Name="PLAY_TECH_SADDLE_HD_QUOTE_2"/>
+				<Event Id="1638227466" Name="PLAY_TECH_TEXTILE_HD_QUOTE_1"/>
+				<Event Id="1638227465" Name="PLAY_TECH_TEXTILE_HD_QUOTE_2"/>
+				<Event Id="1794403739" Name="PLAY_TECH_VIRTUAL_REALITY_HD_QUOTE_1"/>
+				<Event Id="1794403736" Name="PLAY_TECH_VIRTUAL_REALITY_HD_QUOTE_2"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="27626638" Language="SFX">
+					<ShortName>航海仪器2.wav</ShortName>
+					<Path>SFX\航海仪器2_9E69E797.wem</Path>
+				</File>
+				<File Id="41542395" Language="SFX">
+					<ShortName>丧仪1.wav</ShortName>
+					<Path>SFX\丧仪1_9E69E797.wem</Path>
+				</File>
+				<File Id="45183582" Language="SFX">
+					<ShortName>户籍2.wav</ShortName>
+					<Path>SFX\户籍2_9E69E797.wem</Path>
+				</File>
+				<File Id="80950329" Language="SFX">
+					<ShortName>纺织1.wav</ShortName>
+					<Path>SFX\纺织1_9E69E797.wem</Path>
+				</File>
+				<File Id="119421425" Language="SFX">
+					<ShortName>新殖民主义1.wav</ShortName>
+					<Path>SFX\新殖民主义1_9E69E797.wem</Path>
+				</File>
+				<File Id="130117743" Language="SFX">
+					<ShortName>炼丹术2.wav</ShortName>
+					<Path>SFX\炼丹术2_9E69E797.wem</Path>
+				</File>
+				<File Id="165850450" Language="SFX">
+					<ShortName>国际联盟1.wav</ShortName>
+					<Path>SFX\国际联盟1_9E69E797.wem</Path>
+				</File>
+				<File Id="166334077" Language="SFX">
+					<ShortName>虚拟现实1.wav</ShortName>
+					<Path>SFX\虚拟现实1_9E69E797.wem</Path>
+				</File>
+				<File Id="169135445" Language="SFX">
+					<ShortName>纹章学1.wav</ShortName>
+					<Path>SFX\纹章学1_9E69E797.wem</Path>
+				</File>
+				<File Id="176550392" Language="SFX">
+					<ShortName>人权1.wav</ShortName>
+					<Path>SFX\人权1_9E69E797.wem</Path>
+				</File>
+				<File Id="187500050" Language="SFX">
+					<ShortName>测绘学2.wav</ShortName>
+					<Path>SFX\测绘学2_9E69E797.wem</Path>
+				</File>
+				<File Id="189937479" Language="SFX">
+					<ShortName>现代主义思潮1.wav</ShortName>
+					<Path>SFX\现代主义思潮1_9E69E797.wem</Path>
+				</File>
+				<File Id="222708004" Language="SFX">
+					<ShortName>现代通讯设备2.wav</ShortName>
+					<Path>SFX\现代通讯设备2_9E69E797.wem</Path>
+				</File>
+				<File Id="247390464" Language="SFX">
+					<ShortName>纹章学2.wav</ShortName>
+					<Path>SFX\纹章学2_9E69E797.wem</Path>
+				</File>
+				<File Id="251438402" Language="SFX">
+					<ShortName>原始军事2.wav</ShortName>
+					<Path>SFX\原始军事2_9E69E797.wem</Path>
+				</File>
+				<File Id="263719001" Language="SFX">
+					<ShortName>城市设计2.wav</ShortName>
+					<Path>SFX\城市设计2_9E69E797.wem</Path>
+				</File>
+				<File Id="266654740" Language="SFX">
+					<ShortName>制冷技术1.wav</ShortName>
+					<Path>SFX\制冷技术1_9E69E797.wem</Path>
+				</File>
+				<File Id="267711314" Language="SFX">
+					<ShortName>现代主义思潮2.wav</ShortName>
+					<Path>SFX\现代主义思潮2_9E69E797.wem</Path>
+				</File>
+				<File Id="286706138" Language="SFX">
+					<ShortName>人权2.wav</ShortName>
+					<Path>SFX\人权2_9E69E797.wem</Path>
+				</File>
+				<File Id="291833173" Language="SFX">
+					<ShortName>医药学2.wav</ShortName>
+					<Path>SFX\医药学2_9E69E797.wem</Path>
+				</File>
+				<File Id="296011190" Language="SFX">
+					<ShortName>新闻学1.wav</ShortName>
+					<Path>SFX\新闻学1_9E69E797.wem</Path>
+				</File>
+				<File Id="304933594" Language="SFX">
+					<ShortName>炼丹术1.wav</ShortName>
+					<Path>SFX\炼丹术1_9E69E797.wem</Path>
+				</File>
+				<File Id="327283427" Language="SFX">
+					<ShortName>航海仪器1.wav</ShortName>
+					<Path>SFX\航海仪器1_9E69E797.wem</Path>
+				</File>
+				<File Id="342135917" Language="SFX">
+					<ShortName>地质学1.wav</ShortName>
+					<Path>SFX\地质学1_9E69E797.wem</Path>
+				</File>
+				<File Id="346521751" Language="SFX">
+					<ShortName>履带1.wav</ShortName>
+					<Path>SFX\履带1_9E69E797.wem</Path>
+				</File>
+				<File Id="351832069" Language="SFX">
+					<ShortName>互联网2.wav</ShortName>
+					<Path>SFX\互联网2_9E69E797.wem</Path>
+				</File>
+				<File Id="366985170" Language="SFX">
+					<ShortName>警察制度2.wav</ShortName>
+					<Path>SFX\警察制度2_9E69E797.wem</Path>
+				</File>
+				<File Id="373839365" Language="SFX">
+					<ShortName>大数据1.wav</ShortName>
+					<Path>SFX\大数据1_9E69E797.wem</Path>
+				</File>
+				<File Id="375361437" Language="SFX">
+					<ShortName>社会保障制度1.wav</ShortName>
+					<Path>SFX\社会保障制度1_9E69E797.wem</Path>
+				</File>
+				<File Id="389450970" Language="SFX">
+					<ShortName>户籍1.wav</ShortName>
+					<Path>SFX\户籍1_9E69E797.wem</Path>
+				</File>
+				<File Id="390628083" Language="SFX">
+					<ShortName>法学2.wav</ShortName>
+					<Path>SFX\法学2_9E69E797.wem</Path>
+				</File>
+				<File Id="393275101" Language="SFX">
+					<ShortName>互联网1.wav</ShortName>
+					<Path>SFX\互联网1_9E69E797.wem</Path>
+				</File>
+				<File Id="399140478" Language="SFX">
+					<ShortName>商业资本主义1.wav</ShortName>
+					<Path>SFX\商业资本主义1_9E69E797.wem</Path>
+				</File>
+				<File Id="415517112" Language="SFX">
+					<ShortName>城市设计1.wav</ShortName>
+					<Path>SFX\城市设计1_9E69E797.wem</Path>
+				</File>
+				<File Id="417542524" Language="SFX">
+					<ShortName>新冬宫.wav</ShortName>
+					<Path>SFX\新冬宫_9E69E797.wem</Path>
+				</File>
+				<File Id="418737630" Language="SFX">
+					<ShortName>高等教育2.wav</ShortName>
+					<Path>SFX\高等教育2_9E69E797.wem</Path>
+				</File>
+				<File Id="422288908" Language="SFX">
+					<ShortName>马鞍2.wav</ShortName>
+					<Path>SFX\马鞍2_9E69E797.wem</Path>
+				</File>
+				<File Id="450920154" Language="SFX">
+					<ShortName>履带2.wav</ShortName>
+					<Path>SFX\履带2_9E69E797.wem</Path>
+				</File>
+				<File Id="490284751" Language="SFX">
+					<ShortName>基因工程1.wav</ShortName>
+					<Path>SFX\基因工程1_9E69E797.wem</Path>
+				</File>
+				<File Id="490486797" Language="SFX">
+					<ShortName>现代国防2.wav</ShortName>
+					<Path>SFX\现代国防2_9E69E797.wem</Path>
+				</File>
+				<File Id="494551214" Language="SFX">
+					<ShortName>高等教育1.wav</ShortName>
+					<Path>SFX\高等教育1_9E69E797.wem</Path>
+				</File>
+				<File Id="512712718" Language="SFX">
+					<ShortName>纺织2.wav</ShortName>
+					<Path>SFX\纺织2_9E69E797.wem</Path>
+				</File>
+				<File Id="516953958" Language="SFX">
+					<ShortName>现代国防1.wav</ShortName>
+					<Path>SFX\现代国防1_9E69E797.wem</Path>
+				</File>
+				<File Id="524339131" Language="SFX">
+					<ShortName>工业自动化1.wav</ShortName>
+					<Path>SFX\工业自动化1_9E69E797.wem</Path>
+				</File>
+				<File Id="529097925" Language="SFX">
+					<ShortName>制冷技术2.wav</ShortName>
+					<Path>SFX\制冷技术2_9E69E797.wem</Path>
+				</File>
+				<File Id="554394715" Language="SFX">
+					<ShortName>现代通讯设备1.wav</ShortName>
+					<Path>SFX\现代通讯设备1_9E69E797.wem</Path>
+				</File>
+				<File Id="575469495" Language="SFX">
+					<ShortName>古生物学1.wav</ShortName>
+					<Path>SFX\古生物学1_9E69E797.wem</Path>
+				</File>
+				<File Id="589819296" Language="SFX">
+					<ShortName>国际主义1.wav</ShortName>
+					<Path>SFX\国际主义1_9E69E797.wem</Path>
+				</File>
+				<File Id="602541184" Language="SFX">
+					<ShortName>工业自动化2.wav</ShortName>
+					<Path>SFX\工业自动化2_9E69E797.wem</Path>
+				</File>
+				<File Id="608814913" Language="SFX">
+					<ShortName>制炭2.wav</ShortName>
+					<Path>SFX\制炭2_9E69E797.wem</Path>
+				</File>
+				<File Id="639838739" Language="SFX">
+					<ShortName>拱券2.wav</ShortName>
+					<Path>SFX\拱券2_9E69E797.wem</Path>
+				</File>
+				<File Id="651159512" Language="SFX">
+					<ShortName>人类学1.wav</ShortName>
+					<Path>SFX\人类学1_9E69E797.wem</Path>
+				</File>
+				<File Id="661132218" Language="SFX">
+					<ShortName>原始军事1.wav</ShortName>
+					<Path>SFX\原始军事1_9E69E797.wem</Path>
+				</File>
+				<File Id="676827487" Language="SFX">
+					<ShortName>测绘学1.wav</ShortName>
+					<Path>SFX\测绘学1_9E69E797.wem</Path>
+				</File>
+				<File Id="705392540" Language="SFX">
+					<ShortName>人类学2.wav</ShortName>
+					<Path>SFX\人类学2_9E69E797.wem</Path>
+				</File>
+				<File Id="712613221" Language="SFX">
+					<ShortName>马鞍1.wav</ShortName>
+					<Path>SFX\马鞍1_9E69E797.wem</Path>
+				</File>
+				<File Id="715943758" Language="SFX">
+					<ShortName>拱券1.wav</ShortName>
+					<Path>SFX\拱券1_9E69E797.wem</Path>
+				</File>
+				<File Id="751875865" Language="SFX">
+					<ShortName>金融学2.wav</ShortName>
+					<Path>SFX\金融学2_9E69E797.wem</Path>
+				</File>
+				<File Id="784420993" Language="SFX">
+					<ShortName>古生物学2.wav</ShortName>
+					<Path>SFX\古生物学2_9E69E797.wem</Path>
+				</File>
+				<File Id="794917601" Language="SFX">
+					<ShortName>法学1.wav</ShortName>
+					<Path>SFX\法学1_9E69E797.wem</Path>
+				</File>
+				<File Id="798523792" Language="SFX">
+					<ShortName>宏观经济学1.wav</ShortName>
+					<Path>SFX\宏观经济学1_9E69E797.wem</Path>
+				</File>
+				<File Id="809288428" Language="SFX">
+					<ShortName>社会保障制度2.wav</ShortName>
+					<Path>SFX\社会保障制度2_9E69E797.wem</Path>
+				</File>
+				<File Id="818256335" Language="SFX">
+					<ShortName>国际主义2.wav</ShortName>
+					<Path>SFX\国际主义2_9E69E797.wem</Path>
+				</File>
+				<File Id="819691358" Language="SFX">
+					<ShortName>集成电路1.wav</ShortName>
+					<Path>SFX\集成电路1_9E69E797.wem</Path>
+				</File>
+				<File Id="843744883" Language="SFX">
+					<ShortName>国际联盟2.wav</ShortName>
+					<Path>SFX\国际联盟2_9E69E797.wem</Path>
+				</File>
+				<File Id="849285757" Language="SFX">
+					<ShortName>现代化交通1.wav</ShortName>
+					<Path>SFX\现代化交通1_9E69E797.wem</Path>
+				</File>
+				<File Id="850481525" Language="SFX">
+					<ShortName>丧仪2.wav</ShortName>
+					<Path>SFX\丧仪2_9E69E797.wem</Path>
+				</File>
+				<File Id="854778790" Language="SFX">
+					<ShortName>地质学2.wav</ShortName>
+					<Path>SFX\地质学2_9E69E797.wem</Path>
+				</File>
+				<File Id="863161555" Language="SFX">
+					<ShortName>集成电路2.wav</ShortName>
+					<Path>SFX\集成电路2_9E69E797.wem</Path>
+				</File>
+				<File Id="866766943" Language="SFX">
+					<ShortName>新殖民主义2.wav</ShortName>
+					<Path>SFX\新殖民主义2_9E69E797.wem</Path>
+				</File>
+				<File Id="880906867" Language="SFX">
+					<ShortName>医药学1.wav</ShortName>
+					<Path>SFX\医药学1_9E69E797.wem</Path>
+				</File>
+				<File Id="888935347" Language="SFX">
+					<ShortName>虚拟现实2.wav</ShortName>
+					<Path>SFX\虚拟现实2_9E69E797.wem</Path>
+				</File>
+				<File Id="910580270" Language="SFX">
+					<ShortName>现代农业1.wav</ShortName>
+					<Path>SFX\现代农业1_9E69E797.wem</Path>
+				</File>
+				<File Id="932414277" Language="SFX">
+					<ShortName>现代农业2.wav</ShortName>
+					<Path>SFX\现代农业2_9E69E797.wem</Path>
+				</File>
+				<File Id="946417608" Language="SFX">
+					<ShortName>宏观经济学2.wav</ShortName>
+					<Path>SFX\宏观经济学2_9E69E797.wem</Path>
+				</File>
+				<File Id="946977405" Language="SFX">
+					<ShortName>基因工程2.wav</ShortName>
+					<Path>SFX\基因工程2_9E69E797.wem</Path>
+				</File>
+				<File Id="962598349" Language="SFX">
+					<ShortName>制炭1.wav</ShortName>
+					<Path>SFX\制炭1_9E69E797.wem</Path>
+				</File>
+				<File Id="979877503" Language="SFX">
+					<ShortName>警察制度1.wav</ShortName>
+					<Path>SFX\警察制度1_9E69E797.wem</Path>
+				</File>
+				<File Id="979995352" Language="SFX">
+					<ShortName>博物馆学2.wav</ShortName>
+					<Path>SFX\博物馆学2_9E69E797.wem</Path>
+				</File>
+				<File Id="997676177" Language="SFX">
+					<ShortName>海洋学1.wav</ShortName>
+					<Path>SFX\海洋学1_9E69E797.wem</Path>
+				</File>
+				<File Id="998493368" Language="SFX">
+					<ShortName>新闻学2.wav</ShortName>
+					<Path>SFX\新闻学2_9E69E797.wem</Path>
+				</File>
+				<File Id="1032307718" Language="SFX">
+					<ShortName>大数据2.wav</ShortName>
+					<Path>SFX\大数据2_9E69E797.wem</Path>
+				</File>
+				<File Id="1032771220" Language="SFX">
+					<ShortName>商业资本主义2.wav</ShortName>
+					<Path>SFX\商业资本主义2_9E69E797.wem</Path>
+				</File>
+				<File Id="1047239432" Language="SFX">
+					<ShortName>海洋学2.wav</ShortName>
+					<Path>SFX\海洋学2_9E69E797.wem</Path>
+				</File>
+				<File Id="1058665050" Language="SFX">
+					<ShortName>现代化交通2.wav</ShortName>
+					<Path>SFX\现代化交通2_9E69E797.wem</Path>
+				</File>
+				<File Id="1065845860" Language="SFX">
+					<ShortName>金融学1.wav</ShortName>
+					<Path>SFX\金融学1_9E69E797.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
+		<SoundBank Id="1355168291" Language="SFX">
+			<ShortName>Init</ShortName>
+			<Path>Init.bnk</Path>
+		</SoundBank>
+	</SoundBanks>
+</SoundBanksInfo>

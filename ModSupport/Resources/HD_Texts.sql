@@ -1,0 +1,5 @@
+-- --------------------------------------------------------------------------------
+-- -- Language: zh_Hans_CN
+-- insert or replace into LocalizedText
+--     (Language,      Tag,                                               Text)
+-- values

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Ethiopia_Translations_ConfigText -->
+<!-- Author: hqh-h -->
+<!-- DateCreated: 11/1/2020 1:24:23 PM -->
+<GameData>
+	<LocalizedText>
+		<Replace Tag="LOC_TRAIT_CIVILIZATION_ETHIOPIA_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>城市拥有的每个资源为从本城出发的国际贸易路线提供+0.5 [ICON_Faith] 信仰值。城市的每个已改良的资源会为城市提供信仰，其数值等同于本城改良的该种资源的份数。可用信仰值购买考古博物馆和考古学家。</Text>
+		</Replace>
+		<Replace Tag="LOC_IMPROVEMENT_ROCK_HEWN_CHURCH_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>解锁建造者建造埃塞俄比亚特色建筑独石教堂的能力。[NEWLINE][NEWLINE]拥有独石教堂的城市解锁用信仰购买移民和工人的能力。+2 [ICON_Faith] 信仰值。每相邻1个山脉和丘陵单元格+1 [ICON_Faith] 信仰值。研究完“飞行”后，可从 [ICON_FAITH] 信仰值获得 [ICON_TOURISM] 旅游业绩。+1魅力。只能建在丘陵上，不能与另一座独石教堂相邻。</Text>
+		</Replace>
+	</LocalizedText>
+</GameData>

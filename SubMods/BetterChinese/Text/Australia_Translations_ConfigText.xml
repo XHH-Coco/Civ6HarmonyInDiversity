@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Australia_Translations_ConfigText -->
+<!-- Author: hqh-h -->
+<!-- DateCreated: 2/10/2020 3:32:23 PM -->
+<GameData>
+	<LocalizedText>
+		<Replace Tag="LOC_TRAIT_LEADER_CITADEL_CIVILIZATION_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>如他们在过去10回合内遭到宣战，或在过去20回合内解放过一座城市，则+100% [ICON_Production] 生产力。</Text>
+		</Replace>
+	</LocalizedText>
+</GameData>

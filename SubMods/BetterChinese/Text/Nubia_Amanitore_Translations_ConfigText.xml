@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Nubia_Amanitore_Translations_ConfigText -->
+<!-- Author: hqh-h -->
+<!-- DateCreated: 2/10/2020 3:36:13 PM -->
+<GameData>
+	<LocalizedText>
+		<Replace Tag="LOC_TRAIT_CIVILIZATION_TA_SETI_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>建造远程单位时+50%建造速度。所有远程单位战斗经验值+50%。建立在战略资源上的矿场+1 [ICON_Production] 生产力。建立在加成和奢侈品资源上的矿场+2 [ICON_Gold] 金币。</Text>
+		</Replace>
+		<Replace Tag="LOC_TRAIT_LEADER_KANDAKE_OF_MEROE_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>所有城市建造区域时+20%建造速度。对于市中心与至少一个努比亚金字塔相邻的城市，此加成提高至40%。</Text>
+		</Replace>
+		<Replace Tag="LOC_IMPROVEMENT_PYRAMID_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>“砌砖”科技解锁的改良设施。必须建在沙漠、沙丘或沙漠泛滥平原上。+1 [ICON_Faith] 信仰值。可从相邻区域获得额外产出。如与市中心相邻，+1 [ICON_Food] 食物。如与其他任意提供相邻加成的区域相邻，对应产出+1。</Text>
+		</Replace>
+	</LocalizedText>
+</GameData>

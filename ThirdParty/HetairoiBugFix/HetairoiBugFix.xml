@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- HetairoiBugFix -->
+<!-- Author: Amazer -->
+<!-- DateCreated: 8/1/2020 12:52:59 AM -->
+<GameData>
+	<!-- Modifier -->
+	<UnitAbilityModifiers>
+		<Row>
+			<UnitAbilityType>ABILITY_HETAIROI</UnitAbilityType>
+			<ModifierId>HETAIROI_NEIGHBOR_COMBAT</ModifierId>
+		</Row>
+	</UnitAbilityModifiers>
+	<Modifiers>
+		<Row>
+			<ModifierId>HETAIROI_NEIGHBOR_COMBAT</ModifierId>
+			<ModifierType>MODIFIER_SINGLE_UNIT_ATTACH_MODIFIER</ModifierType>
+			<SubjectRequirementSetId>HETAIROI_PLOT_IS_HETAIROI_REQUIREMENTS</SubjectRequirementSetId>
+		</Row>
+		<Row>
+			<ModifierId>HETAIROI_NEIGHBOR_COMBAT_MODIFIER</ModifierId>
+			<ModifierType>MODIFIER_UNIT_ADJUST_COMBAT_STRENGTH</ModifierType>
+		</Row>
+	</Modifiers>
+	<ModifierArguments>
+		<Row>
+			<ModifierId>HETAIROI_NEIGHBOR_COMBAT</ModifierId>
+			<Name>ModifierId</Name>
+			<Value>HETAIROI_NEIGHBOR_COMBAT_MODIFIER</Value>
+		</Row>
+		<Row>
+			<ModifierId>HETAIROI_NEIGHBOR_COMBAT_MODIFIER</ModifierId>
+			<Name>Amount</Name>
+			<Value>5</Value>
+		</Row>
+	</ModifierArguments>
+	<ModifierStrings>
+		<Row ModifierId="HETAIROI_NEIGHBOR_COMBAT_MODIFIER" Context="Preview" Text="LOC_HETAIROI_GREAT_GENERAL_COMBAT_BONUS_DESCRIPTION"/>
+	</ModifierStrings>
+	<!-- Requirement -->
+	<RequirementSets>
+		<Row>
+			<RequirementSetId>HETAIROI_PLOT_IS_HETAIROI_REQUIREMENTS</RequirementSetId>
+			<RequirementSetType>REQUIREMENTSET_TEST_ALL</RequirementSetType>
+		</Row>
+	</RequirementSets>
+	<RequirementSetRequirements>
+		<Row>
+			<RequirementSetId>HETAIROI_PLOT_IS_HETAIROI_REQUIREMENTS</RequirementSetId>
+			<RequirementId>REQUIRES_UNIT_NEXT_TO_HETAIROI</RequirementId>
+		</Row>
+	</RequirementSetRequirements>
+	<Requirements>
+		<Row>
+			<RequirementId>REQUIRES_UNIT_NEXT_TO_HETAIROI</RequirementId>
+			<RequirementType>REQUIREMENT_PLOT_ADJACENT_FRIENDLY_UNIT_TYPE_MATCHES</RequirementType>
+		</Row>
+	</Requirements>
+	<RequirementArguments>
+		<Row>
+			<RequirementId>REQUIRES_UNIT_NEXT_TO_HETAIROI</RequirementId>
+			<Name>UnitType</Name>
+			<Value>UNIT_GREAT_GENERAL</Value>
+		</Row>
+		<Row>
+			<RequirementId>REQUIRES_UNIT_NEXT_TO_HETAIROI</RequirementId>
+			<Name>IncludeCenter</Name>
+			<Value>true</Value>
+		</Row>
+	</RequirementArguments>
+</GameData>

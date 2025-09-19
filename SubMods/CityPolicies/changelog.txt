@@ -1,0 +1,34 @@
+[v0.1]
+
+support the LABOR city policy.
+支持了徭役城市政策.
+
+Enable LABOR city policy: each population yields 2 Production, but consume extra 1 Food. The city developing speed decreased by 50%. This policy can be disabled by another project.
+启用徭役城市政策：每个人口多2 生产力，但额外减少1粮食。城市余粮减少50%。该政策可通过另一个项目关闭。
+
+[v0.2]
+LABOR city policy: each population yields 1.5 Production, but consume extra 1 Food. Citizen yield of science decreased by 0.2 and culture decreased by 0.1 . The city developing speed decreased by 50%. This policy can be disabled by another project.
+启用徭役城市政策：每个人口多1.5生产力，但额外减少1粮食，每个人口产出减少0.2科技和0.1文化。城市余粮减少50%。该政策可通过另一个项目关闭。
+
+[v0.3]
+LABOR cause -1 amenity.
+徭役追加-1宜居度效果。
+
+[v0.4]
+LABOR no longer decrease science and culture
+徭役不再减瓶琴。
+
+[v0.5]
+fix the icon issue.
+修复图标问题。
+
+[v0.6]
+Trajan's Trait ability change to free Monument (instead of cheapest building in city center) to avoid center issues. (do not influence the game starting from the ancient era.)
+为避免某些问题，图拉真的能力改为送一个免费的纪念碑（而不是市中心最便宜的建筑）。这个改动不影响远古时代的开局。
+
+LABOR city policy enabled by code of law.
+徭役政策改为法典解锁。
+
+[v0.7]
+Make AI less likely to build the city policy buildings directly (though they should not see that directly).
+让ai不锤城市政策建筑 (理论上ai应该不能看到这些建筑).

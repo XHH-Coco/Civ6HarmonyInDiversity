@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Expansion1_Translations_ConfigText -->
+<!-- Author: hqh-h -->
+<!-- DateCreated: 2/10/2020 3:38:00 PM -->
+<GameData>
+	<LocalizedText>
+		<Replace Tag="LOC_DISTRICT_STREET_CARNIVAL_EXPANSION1_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>巴西特色区域，代替娱乐中心。提供+2 [ICON_Amenities] 宜居度，建造费用更低。[NEWLINE]解锁“狂欢节”项目。项目进行时为本城提供+1 [ICON_Amenities] 宜居度，项目完成后可获得若干 [ICON_GreatPerson] 伟人点数。[NEWLINE]为相邻单元格提供+1魅力。[NEWLINE]无法建在拥有“科帕卡瓦纳”的城市中。</Text>
+		</Replace>
+		<Replace Tag="LOC_DISTRICT_WATER_STREET_CARNIVAL_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>巴西特色区域，代替水上乐园。提供+2 [ICON_Amenities] 宜居度，建造费用更低。[NEWLINE]解锁“狂欢节”项目。项目进行时为本城提供+1 [ICON_Amenities] 宜居度，项目完成后可获得若干 [ICON_GreatPerson] 伟人点数。[NEWLINE]为相邻单元格提供+1魅力。[NEWLINE]无法建在拥有“街头狂欢节”的城市中。无法建在礁石上。</Text>
+		</Replace>
+		<Replace Tag="LOC_IMPROVEMENT_GOLF_COURSE_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>解锁建造者建造高尔夫球场（苏格兰特色改良设施）的能力。[NEWLINE]+1 [ICON_AMENITIES] 宜居度、+2 [ICON_GOLD] 金币。如与市中心区域相邻，则+1 [ICON_CULTURE] 文化值；如与娱乐中心相邻，则+1 [ICON_CULTURE] 文化值。解锁更多市政和科技后可获得更多 [ICON_TOURISM] 旅游业绩和 [ICON_HOUSING] 住房。无法建在沙漠或沙漠丘陵地貌上。每座城市仅限建造一座。拥有高尔夫球场的单元格无法切换。为相邻单元格提供+1魅力。</Text>
+		</Replace>
+		<Replace Tag="LOC_TRAIT_CIVILIZATION_MONGOLIAN_ORTOO_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>创建 [ICON_TradeRoute] 贸易路线后， [ICON_TradingPost] 贸易站将立刻出现在目标城市。在一个文明的任意城市中拥有1座您的 [ICON_TradingPost] 贸易站后，您对其的 [ICON_VisLimited] 外交能见度则上升1级。您从 [ICON_VisLimited] 外交能见度获得的 [ICON_Strength] 战斗力加成翻倍。</Text>
+		</Replace>
+		<Replace Tag="LOC_DISTRICT_IKANDA_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>祖鲁特色区域，替代军营。+1 [ICON_Housing] 住房。[NEWLINE]解锁相应的市政或科技后即可生产军团和军队。创建军团和军队的价格变为标准价格的75%。其中每有1座建筑，+1 [ICON_SCIENCE] 科技值，+2 [ICON_GOLD] 金币。[NEWLINE]为相邻单元格提供-1魅力。</Text>
+		</Replace>
+		<Replace Tag="LOC_UNIT_DE_ZEVEN_PROVINCIEN_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>荷兰文艺复兴特色单位，取代护卫舰。攻击区域防御时+7 [ICON_Strength] 战斗力。</Text>
+		</Replace>
+		<Replace Tag="LOC_TRAIT_CIVILIZATION_THREE_KINGDOMS_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>矿山每相邻1个书院+1 [ICON_SCIENCE] 科技值，农场每相邻1个书院+1 [ICON_FOOD] 食物。</Text>
+		</Replace>
+		<Replace Tag="LOC_DISTRICT_SEOWON_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>朝鲜特色科技区域。替代学院。+4 [ICON_SCIENCE] 科技值。必须建造在丘陵上。</Text>
+		</Replace>
+		<Replace Tag="LOC_DISTRICT_SEOWON_DESCRIPTION_ADJACENCY" Language="zh_Hans_CN">
+			<Text>相邻：每相邻一个区域-1 [ICON_SCIENCE] 科技值。</Text>
+		</Replace>
+		<Replace Tag="LOC_BUILDING_ORDU_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>蒙古特色建筑。其所在城市中生产的轻重骑兵单位 [ICON_MOVEMENT] 移动力+1。其所在城市中生产的所有骑兵类单位战斗经验值+25%。无法建造在已拥有兵营的军营中。</Text>
+		</Replace>
+		<Replace Tag="LOC_TRAIT_CIVILIZATION_DYNASTIC_CYCLE_EXPANSION1_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>[ICON_TechBoosted] 尤里卡和 [ICON_CivicBoosted] 鼓舞额外提升（对应科技或人文所需的科技或文化总量的）10%。</Text>
+		</Replace>
+		<Replace Tag="LOC_LEADER_POUNDMAKER_ABILITY_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>与所有类型的同盟均可以共享视野。[NEWLINE]从你城市发起的[ICON_TradeRoute] 贸易路线，目的地城市中的每座营地或牧场可为你提供+1 [ICON_Food] 食物。[NEWLINE]目标为你城市的 [ICON_TradeRoute] 贸易路线，目的地城市中的每座营地或牧场可为你提供+1 [ICON_Gold] 金币。</Text>
+		</Replace>
+	</LocalizedText>
+</GameData>

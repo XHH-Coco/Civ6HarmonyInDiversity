@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameData>
+    <Tags>
+		<Row Tag="CLASS_SAPPER_HD" Vocabulary="ABILITY_CLASS"/>
+		<Row Tag="CLASS_MILITARY_ENGINEER_HD" Vocabulary="ABILITY_CLASS"/>
+		<Row Tag="CLASS_ENGINEER_CORP_HD" Vocabulary="ABILITY_CLASS"/>
+	</Tags>
+    <!-- 工兵 工程部队
+        -->
+    <Types>
+        <Row Type="UNIT_SAPPER" Kind="KIND_UNIT"/>
+        <Row Type="UNIT_ENGINEER_CORP" Kind="KIND_UNIT"/>
+    </Types>
+    <UnitAiInfos>
+    	<Row UnitType="UNIT_SAPPER" AiType="UNITTYPE_SIEGE_SUPPORT"/>
+		<Row UnitType="UNIT_SAPPER" AiType="UNITAI_BUILD"/>
+		<Row UnitType="UNIT_SAPPER" AiType="UNITTYPE_CIVILIAN"/>
+        <Row UnitType="UNIT_ENGINEER_CORP" AiType="UNITTYPE_SIEGE_SUPPORT"/>
+		<Row UnitType="UNIT_ENGINEER_CORP" AiType="UNITAI_BUILD"/>
+		<Row UnitType="UNIT_ENGINEER_CORP" AiType="UNITTYPE_CIVILIAN"/>
+    </UnitAiInfos>
+    <TypeTags>
+		<Row Type="UNIT_SAPPER" Tag="CLASS_SUPPORT"/>
+		<Row Type="UNIT_SAPPER" Tag="CLASS_MILITARY_SP"/>
+		<Row Type="UNIT_SAPPER" Tag="CLASS_LAND_UNITS"/>
+		<Row Type="UNIT_SAPPER" Tag="CLASS_MILITARY_ENGINEER"/>
+		<Row Type="UNIT_SAPPER" Tag="CLASS_SAPPER_HD"/>
+		<Row Type="UNIT_MILITARY_ENGINEER" Tag="CLASS_MILITARY_ENGINEER_HD"/>
+		<Row Type="UNIT_ENGINEER_CORP" Tag="CLASS_SUPPORT"/>
+		<Row Type="UNIT_ENGINEER_CORP" Tag="CLASS_MILITARY_SP"/>
+		<Row Type="UNIT_ENGINEER_CORP" Tag="CLASS_LAND_UNITS"/>
+		<Row Type="UNIT_ENGINEER_CORP" Tag="CLASS_MILITARY_ENGINEER"/>
+		<Row Type="UNIT_ENGINEER_CORP" Tag="CLASS_ENGINEER_CORP_HD"/>
+
+    </TypeTags>
+    <Units>
+        <Row 
+            UnitType="UNIT_SAPPER" 
+            Cost="60" 
+            Maintenance="1" BaseMoves="2" 
+            BaseSightRange="2" 
+            ZoneOfControl="false" 
+            Domain="DOMAIN_LAND" 
+            FormationClass="FORMATION_CLASS_SUPPORT" 
+            PromotionClass="PROMOTION_CLASS_SUPPORT" 
+            AdvisorType="ADVISOR_CONQUEST" 
+            Name="LOC_UNIT_SAPPER_NAME" 
+            Description="LOC_UNIT_SAPPER_DESCRIPTION" 
+            PurchaseYield="YIELD_GOLD" 
+            BuildCharges="3" 
+            PrereqTech="TECH_IRON_WORKING"/>
+        <Row 
+            UnitType="UNIT_ENGINEER_CORP" 
+            Cost="220" 
+            Maintenance="3" BaseMoves="4" 
+            BaseSightRange="2" 
+            ZoneOfControl="false" 
+            Domain="DOMAIN_LAND" 
+            FormationClass="FORMATION_CLASS_SUPPORT" 
+            PromotionClass="PROMOTION_CLASS_SUPPORT" 
+            AdvisorType="ADVISOR_CONQUEST" 
+            Name="LOC_UNIT_ENGINEER_CORP_NAME" 
+            Description="LOC_UNIT_ENGINEER_CORP_DESCRIPTION" 
+            PurchaseYield="YIELD_GOLD" 
+            BuildCharges="4" 
+            PrereqTech="TECH_CIVIL_ENGINEERING_HD"/>
+        <Update>
+            <Where UnitType="UNIT_MILITARY_ENGINEER"/>
+            <Set Cost="100" BaseMoves="3"/>
+        </Update>
+    </Units>
+    <Unit_BuildingPrereqs>
+		<Row Unit="UNIT_SAPPER" PrereqBuilding="BUILDING_BOOTCAMP"/>
+		<Row Unit="UNIT_SAPPER" PrereqBuilding="BUILDING_BARRACKS"/>
+		<Row Unit="UNIT_SAPPER" PrereqBuilding="BUILDING_STABLE"/>
+		<Row Unit="UNIT_ENGINEER_CORP" PrereqBuilding="BUILDING_MILITARY_ACADEMY"/>
+	</Unit_BuildingPrereqs>
+    <Route_ValidBuildUnits>
+		<Row RouteType="ROUTE_RAILROAD" UnitType="UNIT_ENGINEER_CORP"/>
+	</Route_ValidBuildUnits>
+    <Improvement_ValidBuildUnits>
+		<Row ImprovementType="IMPROVEMENT_FORT" UnitType="UNIT_SAPPER"/>
+		<Row ImprovementType="IMPROVEMENT_FORT" UnitType="UNIT_ENGINEER_CORP"/>
+		<Row ImprovementType="IMPROVEMENT_AIRSTRIP" UnitType="UNIT_ENGINEER_CORP"/>
+		<Row ImprovementType="IMPROVEMENT_MISSILE_SILO" UnitType="UNIT_ENGINEER_CORP"/>
+		<Row ImprovementType="IMPROVEMENT_MOUNTAIN_TUNNEL" UnitType="UNIT_ENGINEER_CORP"/>
+	</Improvement_ValidBuildUnits>
+<GameData>

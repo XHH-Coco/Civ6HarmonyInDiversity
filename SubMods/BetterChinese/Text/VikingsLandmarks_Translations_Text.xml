@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- VikingsLandmarks_Translations_Text -->
+<!-- Author: hqh-h -->
+<!-- DateCreated: 2/10/2020 3:32:01 PM -->
+<GameData>
+	<LocalizedText>
+		<Replace Tag="LOC_LEADER_TRAIT_MUSCAT_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>拥有商业中心的城市 [ICON_Amenities] 宜居度+1。</Text>
+		</Replace>
+		<Replace Tag="LOC_LEADER_TRAIT_PALENQUE_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>拥有学院的城市人口增长速度+15%。</Text>
+		</Replace>
+		<Replace Tag="LOC_LEADER_TRAIT_GRANADA_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>建造者可以建造阿卡萨城堡改良设施。[NEWLINE][NEWLINE]阿卡萨城堡+2 [ICON_Culture] 文化值。拥有和堡垒一样的防御加成。无法建在另一座阿卡萨城堡旁。</Text>
+		</Replace>
+		<Replace Tag="LOC_IMPROVEMENT_ALCAZAR_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>解锁建造者修建阿卡萨城堡的能力。[NEWLINE][NEWLINE][ICON_Culture] 文化值+2。拥有和堡垒一样的防御加成。无法修建在另一座阿卡萨城堡旁。</Text>
+		</Replace>
+	</LocalizedText>
+</GameData>

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Expansion1_Translations_Major_Text -->
+<!-- Author: hqh-h -->
+<!-- DateCreated: 2/11/2020 2:24:03 PM -->
+<GameData>
+	<LocalizedText>
+		<Replace Tag="LOC_DIPLO_KUDO_EXIT_LEADER_GENGHIS_KHAN_ANY" Language="zh_Hans_CN">
+			<Text>你的骑兵部队很是难堪，不过好在数量不多。</Text>
+		</Replace>
+	</LocalizedText>
+</GameData>

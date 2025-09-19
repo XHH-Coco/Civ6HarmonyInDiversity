@@ -1,0 +1,5 @@
+Event	ID	Name			Wwise Object Path	Notes
+	2302028998	PLAY_HD_HANFEI			\Default Work Unit\PLAY_HD_HANFEI	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	594657206	HANFEI	E:\

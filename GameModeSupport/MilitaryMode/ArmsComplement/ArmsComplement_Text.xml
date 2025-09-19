@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameData>
+  <LocalizedText>
+    <!-- The name of the unit. -->
+    <Row Tag="LOC_UNIT_HALBERDMAN_NAME" Language="en_US">
+      <Text>Halberdman</Text>
+    </Row>
+
+    <Row Tag="LOC_UNIT_HALBERDMAN_NAME" Language="zh_Hans_CN">
+      <Text>长戟兵</Text>
+    </Row>
+
+    <Row Tag="LOC_UNIT_COMPOSITE_BOWMAN_NAME" Language="en_US">
+      <Text>Composite Bowman</Text>
+    </Row>
+
+    <Row Tag="LOC_UNIT_COMPOSITE_BOWMAN_NAME" Language="zh_Hans_CN">
+      <Text>复合弓手</Text>
+    </Row>
+
+    <Row Tag="LOC_UNIT_ARMOR_CAVALRY_NAME" Language="en_US">
+      <Text>ArmorCavalry</Text>
+    </Row>
+
+    <Row Tag="LOC_UNIT_ARMOR_CAVALRY_NAME" Language="zh_Hans_CN">
+      <Text>甲骑兵</Text>
+    </Row>
+
+    <Row Tag="LOC_UNIT_CANNON_NAME" Language="en_US">
+      <Text>Cannon</Text>
+    </Row>
+
+    <Row Tag="LOC_UNIT_CANNON_NAME" Language="zh_Hans_CN">
+      <Text>加农炮</Text>
+    </Row>
+
+    <Row Tag="LOC_UNIT_LANCER_NAME" Language="en_US">
+      <Text>Lancer</Text>
+    </Row>
+
+    <Row Tag="LOC_UNIT_LANCER_NAME" Language="zh_Hans_CN">
+      <Text>枪骑兵</Text>
+    </Row>
+
+    <Row Tag="LOC_UNIT_REITER_NAME" Language="en_US">
+      <Text>Reiter</Text>
+    </Row>
+
+    <Row Tag="LOC_UNIT_REITER_NAME" Language="zh_Hans_CN">
+      <Text>火枪骑兵</Text>
+    </Row>
+
+    <Row Tag="LOC_UNIT_ARRAY_INFANTRY_NAME" Language="en_US">
+      <Text>ArrayInfantry</Text>
+    </Row>
+
+    <Row Tag="LOC_UNIT_ARRAY_INFANTRY_NAME" Language="zh_Hans_CN">
+      <Text>阵列步兵</Text>
+    </Row>
+
+    <Row Tag="LOC_UNIT_MORTER_NEW_NAME" Language="en_US">
+      <Text>Mortar</Text>
+    </Row>
+
+    <Row Tag="LOC_UNIT_MORTER_NEW_NAME" Language="zh_Hans_CN">
+      <Text>迫击炮</Text>
+    </Row>
+
+	  <Replace Tag="LOC_UNIT_FIELD_CANNON_NAME" Language="en_US">
+      <Text>Fieldpiece</Text>
+    </Replace>
+
+	  <Replace Tag="LOC_UNIT_FIELD_CANNON_NAME" Language="zh_Hans_CN">
+		  <Text>野战炮</Text>
+	  </Replace>
+
+    <Replace Tag="LOC_UNIT_MORTAR_NAME" Language="en_US">
+      <Text>Smoothbore</Text>
+    </Replace>
+
+    <Replace Tag="LOC_UNIT_MORTAR_NAME" Language="zh_Hans_CN">
+      <Text>滑膛炮</Text>
+    </Replace>
+
+    <Replace Tag="LOC_BOOST_TRIGGER_MACHINERY" Language="zh_Hans_CN">
+      <Text>拥有2名复合弓手</Text>
+    </Replace>
+
+    <Row Tag="LOC_UNIT_HALBERDMAN_DESCRIPTION" Language="zh_Hans_CN">
+		  <Text>古典时期抗骑兵单位</Text>
+	  </Row>
+
+	  <Row Tag="LOC_UNIT_COMPOSITE_BOWMAN_DESCRIPTION" Language="zh_Hans_CN">
+		  <Text>古典时期远程单位</Text>
+	  </Row>
+
+	  <Row Tag="LOC_UNIT_ARMOR_CAVALRY_DESCRIPTION" Language="zh_Hans_CN">
+		  <Text>古典时代重骑兵单位</Text>
+	  </Row>
+
+	  <Row Tag="LOC_UNIT_CANNON_DESCRIPTION" Language="zh_Hans_CN">
+		  <Text>文艺复兴时期远程单位</Text>
+	  </Row>
+
+	  <Row Tag="LOC_UNIT_LANCER_DESCRIPTION" Language="zh_Hans_CN">
+		  <Text>文艺复兴时期轻骑兵单位</Text>
+	  </Row>
+
+	  <Row Tag="LOC_UNIT_REITER_DESCRIPTION" Language="zh_Hans_CN">
+		  <Text>文艺复兴时期重骑兵单位</Text>
+	  </Row>
+
+	  <Row Tag="LOC_UNIT_ARRAY_INFANTRY_DESCRIPTION" Language="zh_Hans_CN">
+		  <Text>工业时代抗骑兵单位</Text>
+	  </Row>
+
+	  <Row Tag="LOC_UNIT_MORTER_NEW_DESCRIPTION" Language="zh_Hans_CN">
+		  <Text>工业时代攻城单位，适合对城市发起攻击。如果相邻轻骑兵单位开始一个回合，会获得1 [ICON_MOVEMENT] 移动力加成。无法在一回合内移动并攻击（除非玩家已拥有军事训练市政）。</Text>
+	  </Row>
+
+    <Row Tag="LOC_ABILITY_CHINESE_CROUCHING_TIGER_HD_DESCRIPTION" Language="zh_Hans_CN">
+		  <Text>攻击受伤单位时额外+5 [ICON_STRENGTH] 战斗力</Text>
+	  </Row>
+
+	  <Row Tag="LOC_ABILITY_ENGLISH_LONGBOWMAN_HD_DESCRIPTION" Language="zh_Hans_CN">
+		  <Text>解锁机械科技后进攻时+10 [ICON_STRENGTH] 战斗力</Text>
+	  </Row>
+
+	  <Row Tag="LOC_ABILITY_PERC_50_POST_COMBAT_CULTURAL_HD_DESCRIPTION" Language="zh_Hans_CN">
+		  <Text>击败敌军单位即获得其自身50% [ICON_STRENGTH] 战斗力的 [ICON_GOLD] 金币。</Text>
+	  </Row>
+
+    <Replace Tag="LOC_UNIT_VELITE_NAME" Language="en_US">
+      <Text>Velite</Text>
+    </Replace>
+
+    <Replace Tag="LOC_UNIT_VELITE_NAME" Language="zh_Hans_CN">
+      <Text>斥候</Text>
+    </Replace>
+
+    <Replace Tag="LOC_UNIT_VELITE_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>能够快速移动的古典时代侦察单位。</Text>
+    </Replace>
+
+    <Replace Tag="LOC_UNIT_CHASSEUR_NAME" Language="en_US">
+      <Text>Chasseur</Text>
+    </Replace>
+
+    <Replace Tag="LOC_UNIT_CHASSEUR_NAME" Language="zh_Hans_CN">
+      <Text>猎兵</Text>
+    </Replace>
+
+    <Replace Tag="LOC_UNIT_CHASSEUR_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>能够快速移动的文艺复兴时期侦察单位。</Text>
+    </Replace>
+
+    <Replace Tag="LOC_UNIT_PIRATE_NAME" Language="en_US">
+      <Text>Liburna</Text>
+    </Replace>
+
+    <Replace Tag="LOC_UNIT_PIRATE_NAME" Language="zh_Hans_CN">
+      <Text>艨艟</Text>
+    </Replace>
+
+    <Replace Tag="LOC_UNIT_PIRATE_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>古典时代海军袭击者。</Text>
+    </Replace>
+  </LocalizedText>
+</GameData>

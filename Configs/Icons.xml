@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameData>
+  <!-- <IconTextureAtlases>
+    <Row Name="ICON_ATLAS_TESTING_GAME_MODES" IconSize="64" IconsPerRow="1" IconsPerColumn="1" Filename="RandomTech"/>
+  </IconTextureAtlases> -->
+  <IconDefinitions>
+    <!-- <Row Name="ICON_GAMEMODE_TESTING" Atlas="ICON_ATLAS_TESTING_GAME_MODES" Index="0"/> -->
+    <Row Name="ICON_GAMEMODE_MILITARY" Atlas="ICON_ATLAS_CIVICS" Index="10"/>
+    <Row Name="ICON_GAMEMODE_DEVTEST" Atlas="ICON_ATLAS_TECH" Index="46"/>
+    <Row Name="ICON_GAMEMODE_AITEST" Atlas="ICON_ATLAS_TECH" Index="55"/>
+    <Row Name="ICON_GAMEMODE_MPTEST" Atlas="ICON_ATLAS_TECH" Index="59"/>
+    <Row Name="ICON_GAMEMODE_WILD" Atlas="ICON_ATLAS_CIVICS" Index="34"/>
+    <Row Name="ICON_GAMEMODE_RILIGIOUS_ARM" Atlas="ICON_ATLAS_CIVICS" Index="24"/>
+  </IconDefinitions>
+</GameData>

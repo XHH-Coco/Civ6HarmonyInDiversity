@@ -1,0 +1,580 @@
+-- 领袖特色单位
+insert or replace into LeaderTraits (LeaderType, TraitType) values
+	('LEADER_YONGLE',		'TRAIT_CIVILIZATION_UNIT_CHINESE_CROUCHING_TIGER'),
+	('LEADER_WU_ZETIAN','TRAIT_PLUM_INTERNAL_SECURITY_HD'),
+	('LEADER_QIN_ALT',	'TRAIT_QIN_ELITE_SOLDIER_HD');
+
+-- 全球参数
+insert or replace into GlobalParameters
+	(Name,															Value)
+values
+	('HD_YONGLE_GOODY_HUT_BONUS',				1),
+	('HD_YONGLE_SETTLER_BONUS',					1),
+	('HD_YONGLE_GP_NUM',								4),
+	('HD_YONGLE_TECH_BONUS',						5),
+	('HD_WU_ZETIAN_ERA_SCORE_PER_SPY', 	20),
+	('HD_WU_ZETIAN_SPY_GPP_SELF', 			5),
+	('HD_WU_ZETIAN_SPY_GPP_OTHER', 			10),
+	('HD_WU_ZETIAN_SPY_EXP_SELF', 			1),
+	('HD_WU_ZETIAN_SPY_EXP_OTHER', 			2),
+	('HD_WU_QIN_ERA_SCORE_PER_KEQING', 	8);
+
+-- =====================================================================================================================================
+-- 朱棣
+-- =====================================================================================================================================
+delete from TraitModifiers where TraitType = 'TRAIT_LEADER_YONGLE';
+
+insert or replace into Modifiers
+	(ModifierId,								ModifierType)
+values
+	('HD_YONGLE_GRANT_SETTLER',	'MODIFIER_PLAYER_GRANT_UNIT_IN_CAPITAL');
+
+insert or replace into ModifierArguments
+	(ModifierId,								Name,										Value)
+values
+	('HD_YONGLE_GRANT_SETTLER',	'UnitType',							'UNIT_SETTLER'),
+	('HD_YONGLE_GRANT_SETTLER',	'Amount',								1),
+	('HD_YONGLE_GRANT_SETTLER',	'AllowUniqueOverride',	0);
+
+-- =====================================================================================================================================
+-- 武则天
+-- =====================================================================================================================================
+delete from TraitModifiers where TraitType = 'TRAIT_LEADER_WU_ZETIAN';
+
+-- 航海术后梅花内卫可以下水
+insert or replace into TechnologyModifiers (TechnologyType,	ModifierId) values
+	('TECH_SAILING',       				'HD_UNIT_PLUM_INTERNAL_SECURITY_EMBARK');
+
+-- 梅花内卫
+insert or replace into UnitAbilityModifiers (UnitAbilityType, ModifierId) values
+	-- 本体能力
+	('ABILITY_PLUM_INTERNAL_SECURITY_HD', 'HD_PLAYER_HAS_PLUM_INTERNAL_SECURITY'),
+	('ABILITY_PLUM_INTERNAL_SECURITY_HD', 'HD_PLUM_INTERNAL_SECURITY_HIDDEN_VISIBILITY'),
+	('ABILITY_PLUM_INTERNAL_SECURITY_HD', 'HD_PLUM_INTERNAL_SECURITY_ENTER_FOREIGN_LANDS'),
+	-- 护卫要员
+	('ABILITY_HD_PROTECT_OFFICIALS', 			'HD_PROTECT_OFFICIALS_MOVEMENT'),
+	('ABILITY_HD_PROTECT_OFFICIALS', 			'HD_PROTECT_OFFICIALS_ESCORT_MOBILITY');
+
+insert or replace into UnitPromotionModifiers (UnitPromotionType, ModifierId) values
+	-- 神行太保
+	('PROMOTION_SWIFT_LEGS_HD',	          'HD_SWIFT_LEGS_MOVEMENT'),
+	('PROMOTION_SWIFT_LEGS_HD',	          'HD_SWIFT_LEGS_IGNORE_ALL'),
+	-- 游泳健将
+	('PROMOTION_SWIMMING_EXPERT_HD',			'HD_SWIMMING_EXPERT_MOVEMENT'),
+	('PROMOTION_SWIMMING_EXPERT_HD',			'HD_SWIMMING_EXPERT_IGNORE_RIVER'),
+	('PROMOTION_SWIMMING_EXPERT_HD',			'HD_SWIMMING_EXPERT_IGNORE_EMBARK'),
+	-- 土地丈量
+	('PROMOTION_LAND_SURVEYING_HD',				'HD_LAND_SURVEYING_SIGHT'),
+	('PROMOTION_LAND_SURVEYING_HD',				'HD_LAND_SURVEYING_SIGHT_IGNORE_FEATURE'),
+	('PROMOTION_LAND_SURVEYING_HD',				'HD_LAND_SURVEYING_SIGHT_IGNORE_TERRAIN'),
+	-- 监察百官
+	('PROMOTION_SUPERVISE_OFFICIALS_HD',	'HD_SUPERVISE_OFFICIALS_IDENTITY'),
+	('PROMOTION_SUPERVISE_OFFICIALS_HD',	'HD_SUPERVISE_OFFICIALS_DEFENSE'),
+	-- 街坊夜巡
+	('PROMOTION_NEIGHBORHOOD_PATROL_HD',	'HD_NEIGHBORHOOD_PATROL_IDENTITY'),
+	('PROMOTION_NEIGHBORHOOD_PATROL_HD',	'HD_NEIGHBORHOOD_PATROL_DEFENSE'),
+	-- 刺探情报
+	('PROMOTION_GATHER_INTELLIGENCE_HD',	'HD_GATHER_INTELLIGENCE_DIPLO_VISIBILITY'),
+	('PROMOTION_GATHER_INTELLIGENCE_HD',	'HD_GATHER_INTELLIGENCE_OFFENSE'),
+	-- 乡野督察
+	('PROMOTION_RURAL_SUPERVISION_HD',		'HD_RURAL_SUPERVISION_PLOT_YIELD'),
+	-- 护卫要员
+	('PROMOTION_PROTECT_OFFICIALS_HD',		'HD_PROTECT_OFFICIALS_GRANT_ABILITY'),
+	-- 策反行动
+	('PROMOTION_INCITE_DEFECTION_HD',			'HD_INCITE_DEFECTION_IDENTITY_BUFF'),
+	('PROMOTION_INCITE_DEFECTION_HD',			'HD_INCITE_DEFECTION_IDENTITY_DEBUFF');
+
+
+insert or replace into Modifiers (ModifierId, ModifierType,	OwnerRequirementSetId, SubjectRequirementSetId) values
+	-- 造船术允许梅花内卫上船
+	('HD_UNIT_PLUM_INTERNAL_SECURITY_EMBARK',											'MODIFIER_PLAYER_ADJUST_EMBARK_UNIT_PASS',						NULL,	NULL),
+	-- 适配酷吏政治着力点
+	('HD_CHINA_SPY_SYSTEM_GRANT_PLUM_INTERNAL_SECURITY',					'MODIFIER_PLAYER_GRANT_UNIT_IN_CAPITAL',							NULL,	NULL),
+	('HD_CHINA_SPY_SYSTEM_FAITH_PURCHASE_PLUM_INTERNAL_SECURITY',	'MODIFIER_PLAYER_CITIES_ENABLE_UNIT_FAITH_PURCHASE',	NULL,	NULL),
+	-- 武则天 UA 获得梅花内卫
+	('HD_WU_ZETIAN_GRANT_PLUM_INTERNAL_SECURITY',									'MODIFIER_PLAYER_GRANT_UNIT_IN_CAPITAL',							NULL,	NULL),
+	-- 梅花内卫能力
+	('HD_PLAYER_HAS_PLUM_INTERNAL_SECURITY',											'MODIFIER_PLAYER_ADJUST_PROPERTY',										NULL,	NULL),
+	('HD_PLUM_INTERNAL_SECURITY_HIDDEN_VISIBILITY',								'MODIFIER_PLAYER_UNIT_ADJUST_HIDDEN_VISIBILITY',			NULL,	NULL),
+	('HD_PLUM_INTERNAL_SECURITY_ENTER_FOREIGN_LANDS',							'MODIFIER_PLAYER_UNIT_ADJUST_ENTER_FOREIGN_LANDS',		NULL,	NULL),
+	-- 梅花内卫升级
+	('HD_SWIFT_LEGS_MOVEMENT',																		'MODIFIER_PLAYER_UNIT_ADJUST_MOVEMENT',								NULL,	NULL),
+	('HD_SWIFT_LEGS_IGNORE_ALL',																	'MODIFIER_PLAYER_UNIT_ADJUST_IGNORE_TERRAIN_COST',		NULL,	NULL),
+	('HD_SWIMMING_EXPERT_MOVEMENT',																'MODIFIER_PLAYER_UNIT_ADJUST_MOVEMENT',								NULL,	NULL),
+	('HD_SWIMMING_EXPERT_IGNORE_RIVER',														'MODIFIER_PLAYER_UNIT_ADJUST_IGNORE_RIVERS',					NULL,	NULL),
+	('HD_SWIMMING_EXPERT_IGNORE_EMBARK',													'MODIFIER_PLAYER_UNIT_ADJUST_IGNORE_SHORES',					NULL,	NULL),
+	('HD_LAND_SURVEYING_SIGHT',																		'MODIFIER_PLAYER_UNIT_ADJUST_SIGHT',									NULL,	NULL),
+	('HD_LAND_SURVEYING_SIGHT_IGNORE_FEATURE',										'MODIFIER_PLAYER_UNIT_ADJUST_SEE_THROUGH_TERRAIN',		NULL,	NULL),
+	('HD_LAND_SURVEYING_SIGHT_IGNORE_TERRAIN',										'MODIFIER_PLAYER_UNIT_ADJUST_SEE_THROUGH_FEATURES',		NULL,	NULL),
+	('HD_SUPERVISE_OFFICIALS_IDENTITY',														'MODIFIER_PLAYER_DISTRICTS_ATTACH_MODIFIER',					NULL, 'HD_SUPERVISE_OFFICIALS_REQUIREMENTS'),
+	('HD_SUPERVISE_OFFICIALS_DEFENSE',														'MODIFIER_PLAYER_DISTRICTS_ATTACH_MODIFIER',					NULL, 'HD_SUPERVISE_OFFICIALS_REQUIREMENTS'),
+	('HD_NEIGHBORHOOD_PATROL_IDENTITY',														'MODIFIER_PLAYER_DISTRICTS_ATTACH_MODIFIER',					NULL, 'HD_NEIGHBORHOOD_PATROL_REQUIREMENTS'),
+	('HD_NEIGHBORHOOD_PATROL_DEFENSE',														'MODIFIER_PLAYER_DISTRICTS_ATTACH_MODIFIER',					NULL, 'HD_NEIGHBORHOOD_PATROL_REQUIREMENTS'),
+	('HD_PLUM_INTERNAL_SECURITY_IDENTITY',												'MODIFIER_SINGLE_CITY_ADJUST_IDENTITY_PER_TURN',			NULL, NULL),
+	('HD_PLUM_INTERNAL_SECURITY_DEFENSE',													'MODIFIER_PLAYER_ADJUST_SPY_BONUS',										NULL, NULL),
+	('HD_GATHER_INTELLIGENCE_DIPLO_VISIBILITY',										'MODIFIER_PLAYER_ADD_DIPLO_VISIBILITY',								NULL, NULL),
+	('HD_GATHER_INTELLIGENCE_OFFENSE',														'MODIFIER_PLAYER_ADJUST_SPY_BONUS',										NULL, NULL),
+	('HD_RURAL_SUPERVISION_PLOT_YIELD',														'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',									NULL, 'OBJECT_IS_AT_OR_ADJACENT'),
+	('HD_PROTECT_OFFICIALS_GRANT_ABILITY',												'MODIFIER_PLAYER_UNITS_GRANT_ABILITY',								NULL, 'HD_OBJECT_WITHIN_0_TILES'),
+	('HD_PROTECT_OFFICIALS_MOVEMENT',															'MODIFIER_PLAYER_UNIT_ADJUST_MOVEMENT',								NULL,	NULL),
+	('HD_PROTECT_OFFICIALS_ESCORT_MOBILITY',											'MODIFIER_UNIT_ADJUST_ESCORT_MOBILITY',								NULL,	NULL),
+	('HD_INCITE_DEFECTION_IDENTITY_BUFF',													'MODIFIER_PLAYER_CITIES_ADJUST_IDENTITY_PER_TURN',		NULL,	'REQUIRE_PLOT_ADJACENT_TO_OWNER'),
+	('HD_INCITE_DEFECTION_IDENTITY_DEBUFF',												'MODIFIER_ALL_CITIES_ADJUST_IDENTITY_PER_TURN',				NULL,	'REQUIRE_PLOT_ADJACENT_TO_OWNER'),
+	('HD_RECRUIT_BULIANG_SPY_CAP',																'MODIFIER_PLAYER_GRANT_SPY',													NULL,	NULL),
+	('HD_SECRET_ORDER_GOVERNOR',																	'MODIFIER_PLAYER_ADJUST_GOVERNOR_POINTS',							NULL,	NULL);
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
+	-- 造船术允许梅花内卫上船
+	('HD_UNIT_PLUM_INTERNAL_SECURITY_EMBARK',											'UnitType',							'UNIT_PLUM_INTERNAL_SECURITY_HD'),
+	-- 适配酷吏政治着力点
+	('HD_CHINA_SPY_SYSTEM_GRANT_PLUM_INTERNAL_SECURITY',					'UnitType',							'UNIT_PLUM_INTERNAL_SECURITY_HD'),
+	('HD_CHINA_SPY_SYSTEM_GRANT_PLUM_INTERNAL_SECURITY',					'Amount',								1),
+	('HD_CHINA_SPY_SYSTEM_GRANT_PLUM_INTERNAL_SECURITY',					'AllowUniqueOverride',	0),
+	('HD_CHINA_SPY_SYSTEM_FAITH_PURCHASE_PLUM_INTERNAL_SECURITY',	'Tag',									'CLASS_PLUM_INTERNAL_SECURITY_HD'),
+	-- 武则天 UA 获得梅花内卫
+	('HD_WU_ZETIAN_GRANT_PLUM_INTERNAL_SECURITY',									'UnitType',							'UNIT_PLUM_INTERNAL_SECURITY_HD'),
+	('HD_WU_ZETIAN_GRANT_PLUM_INTERNAL_SECURITY',									'Amount',								1),
+	('HD_WU_ZETIAN_GRANT_PLUM_INTERNAL_SECURITY',									'AllowUniqueOverride',	0),
+	-- 梅花内卫能力
+	('HD_PLAYER_HAS_PLUM_INTERNAL_SECURITY',											'Key',									'HD_PLUM_INTERNAL_SECURITY_NUM'),
+	('HD_PLAYER_HAS_PLUM_INTERNAL_SECURITY',											'Amount',								1),
+	('HD_PLUM_INTERNAL_SECURITY_HIDDEN_VISIBILITY',								'Hidden',								1),
+	('HD_PLUM_INTERNAL_SECURITY_ENTER_FOREIGN_LANDS',							'Enter',								1),
+	-- 梅花内卫升级
+	('HD_SWIFT_LEGS_MOVEMENT',																		'Amount',								1),
+	('HD_SWIFT_LEGS_IGNORE_ALL',																	'Ignore',								1),
+	('HD_SWIFT_LEGS_IGNORE_ALL',																	'Type',									'ALL'),
+	('HD_SWIMMING_EXPERT_MOVEMENT',																'Amount',								1),
+	('HD_SWIMMING_EXPERT_IGNORE_RIVER',														'Ignore',								1),
+	('HD_SWIMMING_EXPERT_IGNORE_EMBARK',													'Ignore',								1),
+	('HD_LAND_SURVEYING_SIGHT',																		'Amount',								2),
+	('HD_LAND_SURVEYING_SIGHT_IGNORE_FEATURE',										'CanSee',								1),
+	('HD_LAND_SURVEYING_SIGHT_IGNORE_TERRAIN',										'CanSee',								1),
+	('HD_SUPERVISE_OFFICIALS_IDENTITY',														'ModifierId',						'HD_PLUM_INTERNAL_SECURITY_IDENTITY'),
+	('HD_SUPERVISE_OFFICIALS_DEFENSE',														'ModifierId',						'HD_PLUM_INTERNAL_SECURITY_DEFENSE'),
+	('HD_NEIGHBORHOOD_PATROL_IDENTITY',														'ModifierId',						'HD_PLUM_INTERNAL_SECURITY_IDENTITY'),
+	('HD_NEIGHBORHOOD_PATROL_DEFENSE',														'ModifierId',						'HD_PLUM_INTERNAL_SECURITY_DEFENSE'),
+	('HD_PLUM_INTERNAL_SECURITY_IDENTITY',												'Amount',								10),
+	('HD_PLUM_INTERNAL_SECURITY_DEFENSE',													'Offense',							0),
+	('HD_PLUM_INTERNAL_SECURITY_DEFENSE',													'Amount',								1),
+	('HD_GATHER_INTELLIGENCE_DIPLO_VISIBILITY',										'Amount',								1),
+	('HD_GATHER_INTELLIGENCE_DIPLO_VISIBILITY',										'Source',								'SOURCE_PLUM_INTERNAL_SECURITY'),
+	('HD_GATHER_INTELLIGENCE_DIPLO_VISIBILITY',										'SourceType',						'DIPLO_SOURCE_ALL_NAMES'),
+	('HD_GATHER_INTELLIGENCE_OFFENSE',														'Offense',							1),
+	('HD_GATHER_INTELLIGENCE_OFFENSE',														'Amount',								1),
+	('HD_RURAL_SUPERVISION_PLOT_YIELD',														'YieldType',						'YIELD_FOOD,YIELD_PRODUCTION'),
+	('HD_RURAL_SUPERVISION_PLOT_YIELD',														'Amount',								'1,1'),
+	('HD_PROTECT_OFFICIALS_GRANT_ABILITY',												'AbilityType',					'ABILITY_HD_PROTECT_OFFICIALS'),
+	('HD_PROTECT_OFFICIALS_MOVEMENT',															'Amount',								1),
+	('HD_PROTECT_OFFICIALS_ESCORT_MOBILITY',											'EscortMobility',				1),
+	('HD_INCITE_DEFECTION_IDENTITY_BUFF',													'Amount',								10),
+	('HD_INCITE_DEFECTION_IDENTITY_DEBUFF',												'Amount',								-10),
+	('HD_RECRUIT_BULIANG_SPY_CAP',																'Amount',								1),
+	('HD_SECRET_ORDER_GOVERNOR',																	'Delta',								1);
+
+-- 招募伟人提供区域产出
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId)
+	select 'WU_ZETIAN_' || GreatPersonClassType, 'MODIFIER_PLAYER_DISTRICTS_ADJUST_YIELD_CHANGE', 'DISTRICT_IS_' || DistrictType || '_REQUIREMENTS'
+from DistrictCorrespondingGPP_HD;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select 'WU_ZETIAN_' || GreatPersonClassType, 'Amount', 2 * Amount
+from GreatPersonCorrespondingYieldType_HD;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select 'WU_ZETIAN_' || GreatPersonClassType, 'YieldType', YieldType
+from GreatPersonCorrespondingYieldType_HD;
+
+-- 梅花内卫 相邻加成
+insert or replace into UnitPromotionModifiers (UnitPromotionType, ModifierId)
+	select 'PROMOTION_SUPERVISE_OFFICIALS_HD', 'HD_SUPERVISE_OFFICIALS_' || DistrictType || '_ATTACH'
+from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+
+insert or replace into Modifiers (ModifierId, ModifierType,	SubjectRequirementSetId)
+	select 'HD_SUPERVISE_OFFICIALS_' || DistrictType || '_ATTACH', 'MODIFIER_PLAYER_DISTRICTS_ATTACH_MODIFIER', 'HD_SUPERVISE_OFFICIALS_REQUIREMENTS'
+from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select 'HD_SUPERVISE_OFFICIALS_' || DistrictType || '_ATTACH', 'ModifierId', 'HD_PLUM_INTERNAL_SECURITY_' || DistrictType || '_ADJACENCY'
+from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+
+insert or replace into UnitPromotionModifiers (UnitPromotionType, ModifierId)
+	select 'PROMOTION_NEIGHBORHOOD_PATROL_HD', 'HD_NEIGHBORHOOD_PATROL_' || DistrictType || '_ATTACH'
+from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+
+insert or replace into Modifiers (ModifierId, ModifierType,	SubjectRequirementSetId)
+	select 'HD_NEIGHBORHOOD_PATROL_' || DistrictType || '_ATTACH', 'MODIFIER_PLAYER_DISTRICTS_ATTACH_MODIFIER', 'HD_NEIGHBORHOOD_PATROL_REQUIREMENTS'
+from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select 'HD_NEIGHBORHOOD_PATROL_' || DistrictType || '_ATTACH', 'ModifierId', 'HD_PLUM_INTERNAL_SECURITY_' || DistrictType || '_ADJACENCY'
+from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+
+insert or replace into Modifiers (ModifierId, ModifierType,	SubjectRequirementSetId)
+	select 'HD_PLUM_INTERNAL_SECURITY_' || DistrictType || '_ADJACENCY', 'MODIFIER_PLAYER_DISTRICTS_ADJUST_BASE_YIELD_CHANGE', 'HD_DISTRICT_IS_' || DistrictType || '_ADJACENT'
+from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select 'HD_PLUM_INTERNAL_SECURITY_' || DistrictType || '_ADJACENCY', 'YieldType', YieldType
+from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select 'HD_PLUM_INTERNAL_SECURITY_' || DistrictType || '_ADJACENCY', 'Amount', 1
+from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+
+-- 梅花内卫 外交能见度
+insert or replace into DiplomaticVisibilitySources
+	(VisibilitySourceType,							Description,                						ActionDescription,                  							GossipString,																PrereqTech)
+values
+	('SOURCE_PLUM_INTERNAL_SECURITY',		'LOC_VIZSOURCE_PLUM_INTERNAL_SECURITY',	'LOC_VIZSOURCE_ACTION_PLUM_INTERNAL_SECURITY',   	'LOC_GOSSIP_SOURCE_PLUM_INTERNAL_SECURITY',	'TECH_WRITING');
+
+-- =====================================================================================================================================
+-- 武秦
+-- =====================================================================================================================================
+delete from TraitModifiers where TraitType = 'TRAIT_LEADER_QIN';
+	-- 长城+1锤
+insert or replace into TraitModifiers (TraitType,	ModifierId) values
+	('TRAIT_LEADER_QIN', 'HD_WU_QIN_GREATWALL_PRODUCTION'),
+	('TRAIT_LEADER_QIN', 'HD_QIN_ELITE_SOLDIER_STRENGTH_ABILITY');
+
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId, SubjectStackLimit) values
+	('HD_WU_QIN_GREATWALL_PRODUCTION',								'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',			'PLOT_HAS_IMPROVEMENT_GREAT_WALL_REQUIREMENTS', 	7),
+	('HD_QIN_ELITE_SOLDIER_STRENGTH_ABILITY',					'MODIFIER_PLAYER_UNITS_GRANT_ABILITY',		'UNIT_IS_UNIT_QIN_ELITE_SOLDIER_HD_REQUIREMENTS', NULL),
+	('HD_QIN_ELITE_SOLDIER_STRENGTH_SET_PROPERTY',		'MODIFIER_PLAYER_UNITS_ADJUST_PROPERTY',	'UNIT_IS_UNIT_QIN_ELITE_SOLDIER_HD_REQUIREMENTS', 6);
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
+	('HD_WU_QIN_GREATWALL_PRODUCTION', 							'YieldType',	'YIELD_PRODUCTION'),
+	('HD_WU_QIN_GREATWALL_PRODUCTION', 							'Amount',			1),
+	('HD_QIN_ELITE_SOLDIER_STRENGTH_ABILITY', 			'AbilityType','ABILITY_HD_QIN_ELITE_SOLDIER_STRENGTH'),
+	('HD_QIN_ELITE_SOLDIER_STRENGTH_SET_PROPERTY', 	'Key',				'HD_QIN_ELITE_SOLDIER_STRENGTH'),
+	('HD_QIN_ELITE_SOLDIER_STRENGTH_SET_PROPERTY', 	'Amount',			3);
+
+	-- 定义特色伟人
+insert or replace into Types
+	(Type,								Kind)
+values
+	('TRAIT_LEADER_UNIT_KEQING',		'KIND_TRAIT'),
+	('UNIT_KEQING',						'KIND_UNIT'),
+	('GREAT_PERSON_CLASS_KEQING',		'KIND_GREAT_PERSON_CLASS'),
+	('ABILITY_KEQING_AOE_MOVEMENT',		'KIND_ABILITY'),
+	('ABILITY_KEQING_AOE_STRENGTH',		'KIND_ABILITY'),
+	('ABILITY_WANGJIAN_IGNORE_HILLS',	'KIND_ABILITY'),
+	('ABILITY_MENGWU_MOVEMENT',	'KIND_ABILITY'),
+	('ABILITY_WANGBEN_WALL',	'KIND_ABILITY'),
+	('ABILITY_GREATWORK_WEILIAO_HD',	'KIND_ABILITY');
+insert or replace into Traits
+	(TraitType,												Name,															Description)
+values
+	('TRAIT_LEADER_UNIT_KEQING',							'LOC_TRAIT_LEADER_UNIT_KEQING_NAME',							'LOC_TRAIT_LEADER_UNIT_KEQING_DESCRIPTION');
+insert or replace into LeaderTraits
+	(TraitType,								LeaderType)
+values
+	('TRAIT_LEADER_UNIT_KEQING',			'LEADER_QIN_ALT');
+
+insert or replace into Units
+	(UnitType,
+	Name,
+	Description,
+	TraitType,
+	Cost,
+	BaseSightRange,
+	BaseMoves,
+	ZoneOfControl,
+	Domain,
+	FormationClass,
+	CanCapture,
+	CanRetreatWhenCaptured,
+	CanTrain,
+	CanEarnExperience
+	)
+values
+	(
+	'UNIT_KEQING',
+	'LOC_UNIT_KEQING_NAME',
+	'LOC_UNIT_KEQING_DESCRIPTION',
+	'TRAIT_LEADER_UNIT_KEQING',
+	1,
+	2,
+	4,
+	0,
+	'DOMAIN_LAND',
+	'FORMATION_CLASS_CIVILIAN',
+	0,
+	1,
+	0,
+	0
+);
+insert or replace into UnitAiInfos
+	(UnitType,				AiType)
+values
+	('UNIT_KEQING',			'UNITTYPE_CIVILIAN');
+insert or replace into TypeTags
+	(Type,					Tag)
+values
+	('UNIT_KEQING',			'CLASS_LANDCIVILIAN'),
+	('UNIT_KEQING',			'CLASS_ALL_ERAS');
+--历史时刻（需要改）	
+insert or replace into MomentIllustrations
+	(MomentIllustrationType, 					MomentDataType,				GameDataType,				Texture)
+values
+	('MOMENT_ILLUSTRATION_UNIQUE_UNIT', 		'MOMENT_DATA_UNIT',			'UNIT_KEQING',				'UNIT_KEQING_MONMENT.dds');
+insert or replace into GreatPersonClasses
+	(
+	GreatPersonClassType,
+	Name,
+	UnitType,
+	DistrictType,
+	AvailableInTimeline,
+	GenerateDuplicateIndividuals,
+	PseudoYieldType,
+	IconString,
+	ActionIcon
+	)
+values
+	(
+	'GREAT_PERSON_CLASS_KEQING',
+	'LOC_GREAT_PERSON_CLASS_KEQING_NAME',
+	'UNIT_KEQING',
+	'DISTRICT_CITY_CENTER',
+	0,
+	1,
+	'PSEUDOYIELD_GPP_GENERAL',
+	'[ICON_GreatGeneral]',
+	'ICON_UNITOPERATION_GENERAL_ACTION'
+);
+
+create temporary table HD_KEQING(
+	GreatPersonIndividualType text not null,
+	GreatPersonClassType text,
+	Gender text,
+	EraType text,
+	ActionCharges int,
+	Sort int,
+	primary key (GreatPersonIndividualType)
+);
+
+insert or replace into HD_KEQING
+	(GreatPersonIndividualType,				GreatPersonClassType,			Gender,			EraType,		ActionCharges,	Sort)
+values
+	('GREAT_PERSON_INDIVIDUAL_MENGTIAN',	'GREAT_PERSON_CLASS_KEQING',	'M',			'ERA_ANCIENT',	1,				1),
+	('GREAT_PERSON_INDIVIDUAL_MENGYI',		'GREAT_PERSON_CLASS_KEQING',	'M',			'ERA_ANCIENT',	1,				1),
+	('GREAT_PERSON_INDIVIDUAL_WANGJIAN',	'GREAT_PERSON_CLASS_KEQING',	'M',			'ERA_ANCIENT',	1,				1),
+	('GREAT_PERSON_INDIVIDUAL_WANGBEN',		'GREAT_PERSON_CLASS_KEQING',	'M',			'ERA_ANCIENT',	1,				1),
+	('GREAT_PERSON_INDIVIDUAL_HANFEI',		'GREAT_PERSON_CLASS_KEQING',	'M',			'ERA_ANCIENT',	0,				2),
+	('GREAT_PERSON_INDIVIDUAL_MENGAO',		'GREAT_PERSON_CLASS_KEQING',	'M',			'ERA_ANCIENT',	3,				1),
+	('GREAT_PERSON_INDIVIDUAL_GANLUO',		'GREAT_PERSON_CLASS_KEQING',	'M',			'ERA_ANCIENT',	1,				2),
+	('GREAT_PERSON_INDIVIDUAL_MENGWU',		'GREAT_PERSON_CLASS_KEQING',	'M',			'ERA_ANCIENT',	1,				1),
+	('GREAT_PERSON_INDIVIDUAL_LISI',			'GREAT_PERSON_CLASS_KEQING',	'M',			'ERA_ANCIENT',	1,				2),
+	('GREAT_PERSON_INDIVIDUAL_LVBUWEI',		'GREAT_PERSON_CLASS_KEQING',	'M',			'ERA_ANCIENT',	1,				2),
+	('GREAT_PERSON_INDIVIDUAL_WEILIAO',		'GREAT_PERSON_CLASS_KEQING',	'M',			'ERA_ANCIENT',	0,				2),
+	('GREAT_PERSON_INDIVIDUAL_ZHAOTUO',		'GREAT_PERSON_CLASS_KEQING',	'M',			'ERA_ANCIENT',	1,				2);
+insert or replace into Types
+	(Type,							Kind)
+select
+	GreatPersonIndividualType,		'KIND_GREAT_PERSON_INDIVIDUAL'
+from HD_KEQING;
+insert or replace into GreatPersonIndividuals
+	(
+	GreatPersonIndividualType,
+	GreatPersonClassType,
+	Name,
+	Gender,
+	EraType,
+	ActionCharges,
+	ActionEffectTileHighlighting,
+	AreaHighlightRadius,
+	ActionNameTextOverride
+	)
+select
+	GreatPersonIndividualType,
+	GreatPersonClassType,
+	'LOC_' || GreatPersonIndividualType || '_NAME',
+	Gender,
+	EraType,
+	ActionCharges,
+	0,
+	2,
+	'LOC_GREATPERSON_ACTION_NAME_RETIRE'
+from HD_KEQING;
+update GreatPersonIndividuals set ActionEffectTileHighlighting = 1 where GreatPersonIndividualType = 'GREAT_PERSON_INDIVIDUAL_HANFEI' or GreatPersonIndividualType = 'GREAT_PERSON_INDIVIDUAL_WEILIAO';
+update GreatPersonIndividuals set ActionRequiresOwnedTile = 0, ActionRequiresUnitCanGainExperience = 1, ActionRequiresMilitaryUnitDomain = 'DOMAIN_LAND' where GreatPersonIndividualType = 'GREAT_PERSON_INDIVIDUAL_MENGAO';
+--客卿效果(常驻)
+insert or replace into GreatPersonIndividualBirthModifiers
+	(GreatPersonIndividualType,							ModifierId)
+select
+	GreatPersonIndividualType,							'GREATPERSON_MOVEMENT_AOE_KEQING'
+from HD_KEQING where Sort = 2;
+insert or replace into GreatPersonIndividualBirthModifiers
+	(GreatPersonIndividualType,							ModifierId)
+select
+	GreatPersonIndividualType,							'GREATPERSON_STRENGTH_AOE_KEQING'
+from HD_KEQING where Sort = 1;
+insert or replace into Modifiers
+	(ModifierId,								ModifierType,											SubjectRequirementSetId)
+values
+	('GREATPERSON_MOVEMENT_AOE_KEQING',			'MODIFIER_PLAYER_UNITS_GRANT_ABILITY',					'KEQING_AOE_LAND_REQUIREMENTS'),
+	('GREAT_KEQING_MOVEMENT',					'MODIFIER_PLAYER_UNIT_ADJUST_MOVEMENT',					NULL),
+	('GREATPERSON_STRENGTH_AOE_KEQING',			'MODIFIER_PLAYER_UNITS_GRANT_ABILITY',					'KEQING_AOE_LAND_REQUIREMENTS'),
+	('GREAT_KEQING_STRENGTH',					'MODIFIER_UNIT_ADJUST_COMBAT_STRENGTH',					NULL),
+	('MENGTIAN_GREATWALL_CULTURE',				'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER',				NULL),
+	('MENGTIAN_GREATWALL_CULTURE_MODIFIER',		'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',			'PLOT_HAS_IMPROVEMENT_GREAT_WALL_REQUIREMENTS'),
+	('MENGTIAN_TEXT',							'MODIFIER_DO_NOTHING',									NULL),
+	('MENGYI_GOVERNORS',						'MODIFIER_PLAYER_ADJUST_GOVERNOR_POINTS',				NULL),
+	('MENGYI_TEXT',								'MODIFIER_DO_NOTHING',									NULL),
+	('WANGJIAN_HILLS',							'MODIFIER_PLAYER_UNITS_GRANT_ABILITY',					NULL),
+	('WANGJIAN_TEXT',							'MODIFIER_DO_NOTHING',									NULL),
+	('WANGJIAN_IGNORE_HILLS_MODIFIER',	'MODIFIER_PLAYER_UNIT_ADJUST_IGNORE_TERRAIN_COST',	NULL),
+	('WANGBEN_WALL',							'MODIFIER_PLAYER_UNITS_GRANT_ABILITY',				NULL),
+	('WANGBEN_WALL_MODIFIER',					'MODIFIER_UNIT_ADJUST_COMBAT_STRENGTH',					'OPPONENT_IS_DISTRICT_REQUIREMENTS'),
+	('WANGBEN_TEXT',							'MODIFIER_DO_NOTHING',									NULL),
+	('MENGAO_LEVEL',							'MODIFIER_PLAYER_UNIT_ADJUST_GRANT_EXPERIENCE',			NULL),
+	('MENGAO_TEXT',								'MODIFIER_DO_NOTHING',									NULL),
+	('GANLUO_INFLUENCE',						'MODIFIER_PLAYER_ADJUST_INFLUENCE_POINTS_PER_TURN',		NULL),
+	('GANLUO_ENVOY',							'MODIFIER_PLAYER_GRANT_INFLUENCE_TOKEN',				NULL),
+	('GANLUO_TEXT',								'MODIFIER_DO_NOTHING',									NULL),
+	('MENGWU_MOVEMENT',							'MODIFIER_PLAYER_UNITS_GRANT_ABILITY',				NULL),
+	('MENGWU_MOVEMENT_MODIFIER',				'MODIFIER_PLAYER_UNIT_ADJUST_MOVEMENT',					'BERSERKER_PLOT_IS_ENEMY_TERRITORY'),
+	('MENGWU_TEXT',								'MODIFIER_DO_NOTHING',									NULL),
+	('LISI_TEXT',								'MODIFIER_DO_NOTHING',									NULL),
+	('LVBUWE_TRADE_CAPACITY',					'MODIFIER_PLAYER_ADJUST_TRADE_ROUTE_CAPACITY',			NULL),
+	('LVBUWE_TRADE',							'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER',				'CITY_HAS_BUILDING_PALACE_REQUIREMENTS'),
+	('LVBUWE_TRADE_MODIFIER',					'MODIFIER_SINGLE_CITY_GRANT_UNIT_IN_CITY',				NULL),
+	('LVBUWE_AMENITY',							'MODIFIER_PLAYER_CITIES_ADJUST_POLICY_AMENITY',			'CITY_HAS_BUILDING_PALACE_REQUIREMENTS'),
+	('LVBUWE_TEXT',								'MODIFIER_DO_NOTHING',									NULL),
+	('ZHAOTUO_BUILDER_MOVEMENT',				'MODIFIER_PLAYER_UNITS_ADJUST_MOVEMENT',				'UNIT_IS_BUILDER'),
+	('ZHAOTUO_SETTLER_MOVEMENT',				'MODIFIER_PLAYER_UNITS_ADJUST_MOVEMENT',				'UNIT_IS_UNIT_SETTLER_REQUIREMENTS'),
+	('ZHAOTUO_TEXT',							'MODIFIER_DO_NOTHING',									NULL),
+	('GREATWORK_HANFEI_ATTACH',					'MODIFIER_SINGLE_CITY_ADJUST_UNIT_PRODUCTION',			NULL),
+	('GREATWORK_HANFEI_ATTACH_1',				'MODIFIER_SINGLE_CITY_ADJUST_UNIT_PRODUCTION',			NULL),
+	('GREATWORK_WEILIAO_ATTACH',				'MODIFIER_PLAYER_UNITS_GRANT_ABILITY',					NULL),
+	('GREATWORK_WEILIAO_HD',					'MODIFIER_UNIT_ADJUST_COMBAT_STRENGTH',					NULL);
+
+insert or replace into ModifierArguments
+	(ModifierId,									Name,			Value)
+values
+	('GREATPERSON_MOVEMENT_AOE_KEQING',				'AbilityType',	'ABILITY_KEQING_AOE_MOVEMENT'),
+	('GREAT_KEQING_MOVEMENT',						'Amount',		1),
+	('GREATPERSON_STRENGTH_AOE_KEQING',				'AbilityType',	'ABILITY_KEQING_AOE_STRENGTH'),
+	('GREAT_KEQING_STRENGTH',						'Amount',		5),
+	('MENGTIAN_GREATWALL_CULTURE',					'ModifierId',	'MENGTIAN_GREATWALL_CULTURE_MODIFIER'),
+	('MENGTIAN_GREATWALL_CULTURE_MODIFIER',			'YieldType',	'YIELD_CULTURE'),
+	('MENGTIAN_GREATWALL_CULTURE_MODIFIER',			'Amount',		1),
+	('MENGYI_GOVERNORS',							'Delta',		1),
+	('WANGJIAN_HILLS',								'AbilityType',	'ABILITY_WANGJIAN_IGNORE_HILLS'),
+	('WANGJIAN_IGNORE_HILLS_MODIFIER',	'Ignore',	1),
+	('WANGJIAN_IGNORE_HILLS_MODIFIER',	'Type',	'HILLS'),
+	('WANGBEN_WALL',								'AbilityType',	'ABILITY_WANGBEN_WALL'),
+	('WANGBEN_WALL_MODIFIER',						'Amount',		5),
+	('MENGAO_LEVEL',								'Amount',		-1),
+	('GANLUO_INFLUENCE',							'Amount',		3),
+	('GANLUO_ENVOY',								'Amount',		3),
+	('MENGWU_MOVEMENT',								'AbilityType',	'ABILITY_MENGWU_MOVEMENT'),
+	('MENGWU_MOVEMENT_MODIFIER',					'Amount',		1),
+	('LVBUWE_TRADE_CAPACITY',						'Amount',		1),
+	('LVBUWE_TRADE',								'ModifierId',	'LVBUWE_TRADE_MODIFIER'),
+	('LVBUWE_TRADE_MODIFIER',						'Amount',		1),
+	('LVBUWE_TRADE_MODIFIER',						'UnitType',		'UNIT_TRADER'),
+	('LVBUWE_AMENITY',								'Amount',		1),
+	('ZHAOTUO_BUILDER_MOVEMENT',					'Amount',		1),
+	('ZHAOTUO_SETTLER_MOVEMENT',					'Amount',		1),
+	('GREATWORK_HANFEI_ATTACH',						'UnitType',		'UNIT_SETTLER'),
+	('GREATWORK_HANFEI_ATTACH',						'Amount',		25),
+	('GREATWORK_HANFEI_ATTACH_1',					'UnitType',		'UNIT_BUILDER'),
+	('GREATWORK_HANFEI_ATTACH_1',					'Amount',		25),
+	('GREATWORK_WEILIAO_ATTACH',					'AbilityType',	'ABILITY_GREATWORK_WEILIAO_HD'),
+	('GREATWORK_WEILIAO_HD',						'Amount',		2);
+insert or replace into ModifierStrings
+	(ModifierId,									Context,		Text)
+values
+	('GREATPERSON_MOVEMENT_AOE_KEQING',				'Summary',		'LOC_GREATPERSON_MOVEMENT_AOE_KEQING'),
+	('GREATPERSON_STRENGTH_AOE_KEQING',				'Summary',		'LOC_GREATPERSON_STRENGTH_AOE_KEQING'),
+	('GREAT_KEQING_STRENGTH',						'Preview',		'+{1_Amount} {LOC_KEQING_STRENGTH}'),
+	('MENGTIAN_TEXT',								'Summary',		'LOC_MENGTIAN_GREATWALL_CULTURE'),
+	('MENGYI_TEXT',									'Summary',		'LOC_MENGYI_GOVERNORS'),
+	('WANGJIAN_TEXT',								'Summary',		'LOC_WANGJIAN_HILLS'),
+	('WANGBEN_TEXT',								'Summary',		'LOC_WANGBEN_WALL'),
+	('WANGBEN_WALL_MODIFIER',						'Preview',		'+{1_Amount} {LOC_WANGBEN_WALL_TEXT}'),
+	('MENGAO_TEXT',									'Summary',		'LOC_MENGAO_LEVEL'),
+	('GANLUO_TEXT',									'Summary',		'LOC_GANLUO_ENVOY'),
+	('MENGWU_TEXT',									'Summary',		'LOC_MENGWU_MOVEMENT'),
+	('LISI_TEXT',									'Summary',		'LOC_LISI_TEXT'),
+	('LVBUWE_TEXT',									'Summary',		'LOC_LVBUWE_TEXT'),
+	('ZHAOTUO_TEXT',								'Summary',		'LOC_ZHAOTUO_TEXT'),
+	('GREATWORK_WEILIAO_HD',						'Preview',		'+{1_Amount} {LOC_WEILIAO_STRENGTH}');
+insert or replace into UnitAbilities
+	(UnitAbilityType,					Name,										Description,																						Inactive,	ShowFloatTextWhenEarned,	Permanent)
+values
+	('ABILITY_KEQING_AOE_MOVEMENT',		'LOC_UNIT_KEQING_NAME',	'LOC_ABILITY_KEQING_AOE_MOVEMENT_DESCRIPTION',	1,			0,							0),
+	('ABILITY_KEQING_AOE_STRENGTH',		'LOC_UNIT_KEQING_NAME',	'LOC_ABILITY_KEQING_AOE_STRENGTH_DESCRIPTION',	1,			0,							0),
+	('ABILITY_WANGJIAN_IGNORE_HILLS',	'LOC_UNIT_KEQING_NAME',	'LOC_ABILITY_WANGJIAN_IGNORE_HILLS_DESCRIPTION',1,			0,							0),
+	('ABILITY_MENGWU_MOVEMENT',				'LOC_UNIT_KEQING_NAME',	'LOC_ABILITY_MENGWU_MOVEMENT_DESCRIPTION',			1,			0,							0),
+	('ABILITY_WANGBEN_WALL',					'LOC_UNIT_KEQING_NAME',	'LOC_ABILITY_WANGBEN_WALL_DESCRIPTION',					1,			0,							0),
+	('ABILITY_GREATWORK_WEILIAO_HD',	'LOC_UNIT_KEQING_NAME',	'LOC_ABILITY_GREATWORK_WEILIAO_HD_DESCRIPTION',	1,			0,							0);
+insert or replace into UnitAbilityModifiers 
+	(UnitAbilityType,					ModifierId)
+values
+	('ABILITY_KEQING_AOE_MOVEMENT',		'GREAT_KEQING_MOVEMENT'),
+	('ABILITY_KEQING_AOE_STRENGTH',		'GREAT_KEQING_STRENGTH'),
+	('ABILITY_WANGJIAN_IGNORE_HILLS',	'WANGJIAN_IGNORE_HILLS_MODIFIER'),
+	('ABILITY_MENGWU_MOVEMENT',				'MENGWU_MOVEMENT_MODIFIER'),
+	('ABILITY_WANGBEN_WALL',					'WANGBEN_WALL_MODIFIER'),
+	('ABILITY_GREATWORK_WEILIAO_HD',	'GREATWORK_WEILIAO_HD');
+insert or replace into TypeTags
+	(Type,								Tag)
+values
+	('ABILITY_KEQING_AOE_MOVEMENT',		'CLASS_KEQING_BUFF_UNITS'),
+	('ABILITY_KEQING_AOE_STRENGTH',		'CLASS_KEQING_BUFF_MILITARY'),
+	('ABILITY_WANGJIAN_IGNORE_HILLS',	'CLASS_KEQING_BUFF_UNITS'),
+	('ABILITY_MENGWU_MOVEMENT',				'CLASS_KEQING_BUFF_UNITS'),
+	('ABILITY_WANGBEN_WALL',					'CLASS_KEQING_BUFF_MILITARY'),
+	('ABILITY_GREATWORK_WEILIAO_HD',	'CLASS_KEQING_BUFF_MILITARY');
+insert or replace into GreatPersonIndividualActionModifiers
+	(GreatPersonIndividualType,					ModifierId,						AttachmentTargetType)
+values
+	('GREAT_PERSON_INDIVIDUAL_MENGTIAN',		'MENGTIAN_GREATWALL_CULTURE',	'GREAT_PERSON_ACTION_ATTACHMENT_TARGET_PLAYER'),
+	('GREAT_PERSON_INDIVIDUAL_MENGTIAN',		'MENGTIAN_TEXT',				'GREAT_PERSON_ACTION_ATTACHMENT_TARGET_PLAYER'),
+	('GREAT_PERSON_INDIVIDUAL_MENGYI',			'MENGYI_GOVERNORS',				'GREAT_PERSON_ACTION_ATTACHMENT_TARGET_PLAYER'),
+	('GREAT_PERSON_INDIVIDUAL_MENGYI',			'MENGYI_TEXT',					'GREAT_PERSON_ACTION_ATTACHMENT_TARGET_PLAYER'),
+	('GREAT_PERSON_INDIVIDUAL_WANGJIAN',		'WANGJIAN_HILLS',				'GREAT_PERSON_ACTION_ATTACHMENT_TARGET_PLAYER'),
+	('GREAT_PERSON_INDIVIDUAL_WANGJIAN',		'WANGJIAN_TEXT',				'GREAT_PERSON_ACTION_ATTACHMENT_TARGET_PLAYER'),
+	('GREAT_PERSON_INDIVIDUAL_WANGBEN',			'WANGBEN_WALL',					'GREAT_PERSON_ACTION_ATTACHMENT_TARGET_PLAYER'),
+	('GREAT_PERSON_INDIVIDUAL_WANGBEN',			'WANGBEN_TEXT',					'GREAT_PERSON_ACTION_ATTACHMENT_TARGET_PLAYER'),
+	('GREAT_PERSON_INDIVIDUAL_MENGAO',			'MENGAO_LEVEL',					'GREAT_PERSON_ACTION_ATTACHMENT_TARGET_UNIT_DOMAIN_MILITARY_IN_TILE'),
+	('GREAT_PERSON_INDIVIDUAL_MENGAO',			'MENGAO_TEXT',					'GREAT_PERSON_ACTION_ATTACHMENT_TARGET_PLAYER'),
+	('GREAT_PERSON_INDIVIDUAL_GANLUO',			'GANLUO_INFLUENCE',				'GREAT_PERSON_ACTION_ATTACHMENT_TARGET_PLAYER'),
+	('GREAT_PERSON_INDIVIDUAL_GANLUO',			'GANLUO_ENVOY',					'GREAT_PERSON_ACTION_ATTACHMENT_TARGET_PLAYER'),
+	('GREAT_PERSON_INDIVIDUAL_GANLUO',			'GANLUO_TEXT',					'GREAT_PERSON_ACTION_ATTACHMENT_TARGET_PLAYER'),
+	('GREAT_PERSON_INDIVIDUAL_MENGWU',			'MENGWU_MOVEMENT',				'GREAT_PERSON_ACTION_ATTACHMENT_TARGET_PLAYER'),
+	('GREAT_PERSON_INDIVIDUAL_MENGWU',			'MENGWU_TEXT',					'GREAT_PERSON_ACTION_ATTACHMENT_TARGET_PLAYER'),
+	('GREAT_PERSON_INDIVIDUAL_LISI',				'LISI_TEXT',					'GREAT_PERSON_ACTION_ATTACHMENT_TARGET_PLAYER'),
+	('GREAT_PERSON_INDIVIDUAL_LVBUWEI',			'LVBUWE_TRADE_CAPACITY',		'GREAT_PERSON_ACTION_ATTACHMENT_TARGET_PLAYER'),
+	('GREAT_PERSON_INDIVIDUAL_LVBUWEI',			'LVBUWE_TRADE',					'GREAT_PERSON_ACTION_ATTACHMENT_TARGET_PLAYER'),
+	('GREAT_PERSON_INDIVIDUAL_LVBUWEI',			'LVBUWE_AMENITY',				'GREAT_PERSON_ACTION_ATTACHMENT_TARGET_PLAYER'),	
+	('GREAT_PERSON_INDIVIDUAL_LVBUWEI',			'LVBUWE_TEXT',					'GREAT_PERSON_ACTION_ATTACHMENT_TARGET_PLAYER'),
+	('GREAT_PERSON_INDIVIDUAL_ZHAOTUO',			'ZHAOTUO_BUILDER_MOVEMENT',		'GREAT_PERSON_ACTION_ATTACHMENT_TARGET_PLAYER'),
+	('GREAT_PERSON_INDIVIDUAL_ZHAOTUO',			'ZHAOTUO_SETTLER_MOVEMENT',		'GREAT_PERSON_ACTION_ATTACHMENT_TARGET_PLAYER'),
+	('GREAT_PERSON_INDIVIDUAL_ZHAOTUO',			'ZHAOTUO_TEXT',					'GREAT_PERSON_ACTION_ATTACHMENT_TARGET_PLAYER');
+--巨作
+insert or replace into Types
+	(Type,								Kind)
+values
+	('GREATWORK_HANFEI',				'KIND_GREATWORK'),
+	('GREATWORK_WEILIAO',				'KIND_GREATWORK');
+
+insert or replace into GreatWorks
+	(GreatWorkType,					GreatWorkObjectType,			GreatPersonIndividualType,				Name,								Audio,				Quote,									Tourism,	EraType)
+values
+	('GREATWORK_HANFEI',			'GREATWORKOBJECT_WRITING',		'GREAT_PERSON_INDIVIDUAL_HANFEI',		'LOC_GREATWORK_HANFEI_NAME',		'HD_HANFEI',		'LOC_GREATWORK_HANFEI_QUOTE',			3,			'ERA_CLASSICAL'),
+	('GREATWORK_WEILIAO',			'GREATWORKOBJECT_WRITING',		'GREAT_PERSON_INDIVIDUAL_WEILIAO',		'LOC_GREATWORK_WEILIAO_NAME',		'HD_WEILIAO',		'LOC_GREATWORK_WEILIAO_QUOTE',			3,			'ERA_CLASSICAL');
+
+insert or replace into GreatWork_YieldChanges
+	(GreatWorkType,					YieldType,				YieldChange)
+values
+	('GREATWORK_HANFEI',			'YIELD_CULTURE',		3),
+	('GREATWORK_WEILIAO',			'YIELD_CULTURE',		3);
+insert or replace into GreatWorkModifiers
+	(GreatWorkType,					ModifierId)
+values
+	('GREATWORK_HANFEI',			'GREATWORK_HANFEI_ATTACH'),
+	('GREATWORK_HANFEI',			'GREATWORK_HANFEI_ATTACH_1'),
+	('GREATWORK_WEILIAO',			'GREATWORK_WEILIAO_ATTACH');

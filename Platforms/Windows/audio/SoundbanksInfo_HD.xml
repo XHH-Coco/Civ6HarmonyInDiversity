@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="10" SoundbankVersion="113">
+	<RootPaths>
+		<ProjectRoot>E:\文档\WwiseProjects\HD_HANFEI\</ProjectRoot>
+		<SourceFilesRoot>E:\文档\WwiseProjects\HD_HANFEI\.cache\Windows\</SourceFilesRoot>
+		<SoundBanksRoot>E:\文档\WwiseProjects\HD_HANFEI\GeneratedSoundBanks\Windows\</SoundBanksRoot>
+		<ExternalSourcesInputFile></ExternalSourcesInputFile>
+		<ExternalSourcesOutputRoot>E:\文档\WwiseProjects\HD_HANFEI\GeneratedSoundBanks\Windows\</ExternalSourcesOutputRoot>
+	</RootPaths>
+	<DialogueEvents/>
+	<StreamedFiles/>
+	<MediaFilesNotInAnyBank/>
+	<SoundBanks>
+		<SoundBank Id="26792757" Language="SFX">
+			<ShortName>HD_HANFEI_SB</ShortName>
+			<Path>HD_HANFEI_SB.bnk</Path>
+			<IncludedEvents>
+				<Event Id="2302028998" Name="PLAY_HD_HANFEI"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="594657206" Language="SFX">
+					<ShortName>HANFEI.wav</ShortName>
+					<Path>SFX\HANFEI_9E69E797.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
+		<SoundBank Id="1355168291" Language="SFX">
+			<ShortName>Init</ShortName>
+			<Path>Init.bnk</Path>
+		</SoundBank>
+		<SoundBank Id="1475354988" Language="SFX">
+			<ShortName>HD_WEILIAO_SB</ShortName>
+			<Path>HD_WEILIAO_SB.bnk</Path>
+			<IncludedEvents>
+				<Event Id="3657515151" Name="PLAY_HD_WEILIAO"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="450715744" Language="SFX">
+					<ShortName>WEILIAO.wav</ShortName>
+					<Path>SFX\WEILIAO_9E69E797.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
+	</SoundBanks>
+</SoundBanksInfo>

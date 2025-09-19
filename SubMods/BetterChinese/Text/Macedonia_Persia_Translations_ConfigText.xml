@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Macedonia_Persia_Translations_ConfigText -->
+<!-- Author: hqh-h -->
+<!-- DateCreated: 2/10/2020 3:33:07 PM -->
+<GameData>
+	<LocalizedText>
+		<Replace Tag="LOC_UNIT_MACEDONIAN_HYPASPIST_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>马其顿特色近战单位，替代剑士。攻击区域防御时+5 [ICON_Strength] 战斗力。拥有50%的额外支援加成。</Text>
+		</Replace>
+		<Replace Tag="LOC_ABILITY_HYPASPIST_SIEGE_BONUS_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>攻击区域防御时+5</Text>
+		</Replace>
+		<Replace Tag="LOC_ABILITY_HYPASPIST_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>攻击区域防御时+5 [ICON_Strength] 战斗力。[NEWLINE][ICON_Bullet]+50%支援加成。</Text>
+		</Replace>
+		<Replace Tag="LOC_BUILDING_BASILIKOI_PAIDES_EXPANSION2_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>马其顿特色建筑。该城中训练的陆地近战、远程单位和伙友骑兵+25%战斗经验值。非平民单位在此城中创建时，获得等同于单位花费25%的 [ICON_SCIENCE] 科技值。[NEWLINE][NEWLINE]战略资源储备+10（标准速度下）。[NEWLINE][NEWLINE]无法建造在已拥有马厩的军营中。</Text>
+		</Replace>
+		<Replace Tag="LOC_UNIT_PERSIAN_IMMORTAL_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>波斯特色近战单位，替代剑士。此近战单位可进行远程攻击，[ICON_Range] 范围为2。</Text>
+		</Replace>
+	</LocalizedText>
+</GameData>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameData>
+	<IconTextureAtlases>
+		<Row Name="ATLAS_UNIT_RELIGIOUS_ARM" IconSize="256" IconsPerRow="4" IconsPerColumn="4" Filename="ReligiousArm_256.dds"/>
+		<Row Name="ATLAS_UNIT_RELIGIOUS_ARM" IconSize="80" IconsPerRow="4" IconsPerColumn="4" Filename="ReligiousArm_80.dds"/>
+		<Row Name="ATLAS_UNIT_RELIGIOUS_ARM" IconSize="50" IconsPerRow="4" IconsPerColumn="4" Filename="ReligiousArm_50.dds"/>
+		<Row Name="ATLAS_UNIT_RELIGIOUS_ARM" IconSize="38" IconsPerRow="4" IconsPerColumn="4" Filename="ReligiousArm_38.dds"/>
+		<Row Name="ATLAS_UNIT_RELIGIOUS_ARM" IconSize="32" IconsPerRow="4" IconsPerColumn="4" Filename="ReligiousArm_32.dds"/>
+		<Row Name="ATLAS_UNIT_RELIGIOUS_ARM" IconSize="22" IconsPerRow="4" IconsPerColumn="4" Filename="ReligiousArm_22.dds"/>
+	</IconTextureAtlases>
+	<IconDefinitions>
+		<Row Name="ICON_UNIT_HD_ARMED_BELIEVER" Atlas="ATLAS_UNIT_RELIGIOUS_ARM" Index="0"/>
+		<Row Name="ICON_UNIT_HD_EXPEDITIONARY" Atlas="ATLAS_UNIT_RELIGIOUS_ARM" Index="1"/>
+		<Row Name="ICON_UNIT_HD_THEOCRATIC_GUARDIAN" Atlas="ATLAS_UNIT_RELIGIOUS_ARM" Index="2"/>
+		<Row Name="ICON_UNIT_HD_RESISTANCE_ARMY" Atlas="ATLAS_UNIT_RELIGIOUS_ARM" Index="3"/>
+		<Row Name="ICON_UNIT_HD_REVOLUTIONARY_GUARDIAN" Atlas="ATLAS_UNIT_RELIGIOUS_ARM" Index="4"/>
+		<Row Name="ICON_UNIT_HD_DEUX_EX_MACHINA" Atlas="ATLAS_UNIT_RELIGIOUS_ARM" Index="5"/>
+
+		<Row Name="ICON_UNITCOMMAND_RELIGIOUS_ARM_NRYANA" Atlas="ATLAS_UNIT_RELIGIOUS_ARM" Index="6"/>
+		<Row Name="ICON_UNITCOMMAND_RELIGIOUS_ARM_UNIVERSAL_RESTORATION" Atlas="ATLAS_UNIT_RELIGIOUS_ARM" Index="7"/>
+		<Row Name="ICON_UNITCOMMAND_RELIGIOUS_ARM_PUNCITIVE_LAND" Atlas="ATLAS_UNIT_RELIGIOUS_ARM" Index="8"/>
+		<Row Name="ICON_UNITCOMMAND_RELIGIOUS_ARM_PROMISED_LAND" Atlas="ATLAS_UNIT_RELIGIOUS_ARM" Index="9"/>
+		<Row Name="ICON_UNITCOMMAND_RELIGIOUS_ARM_MIND_OVER_MATTER" Atlas="ATLAS_UNIT_RELIGIOUS_ARM" Index="10"/>
+		<Row Name="ICON_UNITCOMMAND_RELIGIOUS_ARM_HD_PILGRIM" Atlas="ATLAS_UNIT_RELIGIOUS_ARM" Index="11"/>
+
+		
+   		<Row Name="ICON_BELIEF_FRATERNITY"                  Atlas="ICON_ATLAS_BELIEFS_PATHEON" Index="24"/>
+    	<Row Name="ICON_BELIEF_SILKH_SWORD_BAPTISM"        	Atlas="ICON_ATLAS_BELIEFS_PATHEON" Index="24"/>
+     	<Row Name="ICON_BELIEF_SHAOLIN_TEMPLE"              Atlas="ICON_ATLAS_BELIEFS_PATHEON" Index="22"/>
+     	<Row Name="ICON_BUILDING_SHAOLIN_TEMPLE"          	Atlas="ICON_ATLAS_BUILDINGS" Index="46"/>
+
+
+	</IconDefinitions>
+</GameData>

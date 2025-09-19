@@ -1,0 +1,272 @@
+--------------------------------------------------------------------------------
+-- Language: en_US
+insert or replace into EnglishText (Tag, Text) values
+	("LOC_HD_CORE_MODS_NAME",            "HD Main"),
+	("LOC_HD_NECESSARY_PREREQ_NAME",     "HD Necessary Prereqs"),
+	("LOC_DISTRICTS_EXTENSION_NAME",     "HD Districts Extensions"),
+	("LOC_WONDERS_MODS_NAME",            "HD World Wonders"),
+	("LOC_ECOLOGY_EXTENSION_NAME",       "HD Ecology Extensions"),
+	("LOC_CONTENT_EXTENSION_NAME",       "HD Content Extensions"),
+	("LOC_MECHANISM_FIX_NAME",       		 "HD Mechanism Fix"),
+	("LOC_CIV_EXTENSION_NAME",       		 "HD Civilization Extensions"),
+	("LOC_ART_RESOURCES_NAME",       		 "HD Art Resources"),
+	("LOC_HD_UI_MODS_NAME",              "HD UI Optimization"),
+
+	("LOC_HD_FULL_MODS_NAME",            "HD Full Set"),
+	("LOC_HD_OPTIONAL_MODS_NAME",        "HD Optional Set"),
+	("LOC_OFFICIAL_SCENARIO_NAME",       "Official Scenario (Recommended to disable)"),
+	("LOC_HD_NON_COMPATIBLE_MODS_NAME",  "HD Known [COLOR_Red]NOT Compatible[ENDCOLOR]"),
+	
+	("LOC_FF16_NUMOF_CUSTOM_FILTERS",           "14"),
+	("LOC_FF16_CUSTOM_FILTER_1",                "{LOC_HD_CORE_MODS_NAME};{LOC_HD_CORE_MODS_LIST}"),
+	("LOC_FF16_CUSTOM_FILTER_2",                "{LOC_HD_NECESSARY_PREREQ_NAME};{LOC_HD_NECESSARY_PREREQ_LIST}"),
+	("LOC_FF16_CUSTOM_FILTER_3",                "{LOC_DISTRICTS_EXTENSION_NAME};{LOC_DISTRICTS_EXTENSION_LIST}"),
+	("LOC_FF16_CUSTOM_FILTER_4",                "{LOC_WONDERS_MODS_NAME};{LOC_WONDERS_MODS_LIST}"),
+	("LOC_FF16_CUSTOM_FILTER_5",                "{LOC_ECOLOGY_EXTENSION_NAME};{LOC_ECOLOGY_EXTENSION_LIST}"),
+	("LOC_FF16_CUSTOM_FILTER_6",                "{LOC_CONTENT_EXTENSION_NAME};{LOC_CONTENT_EXTENSION_LIST}"),
+	("LOC_FF16_CUSTOM_FILTER_7",                "{LOC_MECHANISM_FIX_NAME};{LOC_MECHANISM_FIX_LIST}"),
+	("LOC_FF16_CUSTOM_FILTER_8",                "{LOC_CIV_EXTENSION_NAME};{LOC_CIV_EXTENSION_LIST}"),
+	("LOC_FF16_CUSTOM_FILTER_9",                "{LOC_ART_RESOURCES_NAME};{LOC_ART_RESOURCES_LIST}"),
+	("LOC_FF16_CUSTOM_FILTER_10",               "{LOC_HD_UI_MODS_NAME};{LOC_HD_UI_MODS_LIST}"),
+	("LOC_FF16_CUSTOM_FILTER_11",               "{LOC_HD_FULL_MODS_NAME};{LOC_HD_FULL_MODS_LIST}"),
+	("LOC_FF16_CUSTOM_FILTER_12",               "{LOC_HD_OPTIONAL_MODS_NAME};{LOC_HD_OPTIONAL_MODS_LIST}"),
+	("LOC_FF16_CUSTOM_FILTER_13",               "{LOC_OFFICIAL_SCENARIO_NAME};{LOC_OFFICIAL_SCENARIO_LIST}"),
+	("LOC_FF16_CUSTOM_FILTER_14",               "{LOC_HD_NON_COMPATIBLE_MODS_NAME};{LOC_HD_NON_COMPATIBLE_MODS_LIST}");
+
+-- Language: zh_Hans_CN
+insert or replace into LocalizedText (Language, Tag, Text) values
+	("zh_Hans_CN",  "LOC_HD_CORE_MODS_NAME",            "和而不同：核心"),
+	("zh_Hans_CN",  "LOC_HD_NECESSARY_PREREQ_NAME",     "和而不同：必要前置"),
+	("zh_Hans_CN",  "LOC_DISTRICTS_EXTENSION_NAME",    	"和而不同：区域拓展"),
+	("zh_Hans_CN",  "LOC_WONDERS_MODS_NAME",            "和而不同：世界奇观"),
+	("zh_Hans_CN",  "LOC_ECOLOGY_EXTENSION_NAME",       "和而不同：生态拓展"),
+	("zh_Hans_CN",  "LOC_CONTENT_EXTENSION_NAME",       "和而不同：内容拓展"),
+	("zh_Hans_CN",  "LOC_MECHANISM_FIX_NAME",       	  "和而不同：机制修复"),
+	("zh_Hans_CN",  "LOC_CIV_EXTENSION_NAME",       	  "和而不同：文明拓展"),
+	("zh_Hans_CN",  "LOC_ART_RESOURCES_NAME",       	  "和而不同：美术资源"),
+	("zh_Hans_CN",  "LOC_HD_UI_MODS_NAME",              "和而不同：界面优化"),
+
+	("zh_Hans_CN",  "LOC_HD_FULL_MODS_NAME",            "和而不同：全集"),
+	("zh_Hans_CN",  "LOC_HD_OPTIONAL_MODS_NAME",        "和而不同：可选集"),
+	("zh_Hans_CN",  "LOC_OFFICIAL_SCENARIO_NAME",       "官方情景包（建议禁用）"),
+	("zh_Hans_CN",  "LOC_HD_NON_COMPATIBLE_MODS_NAME",  "和而不同[COLOR_Red]已知不兼容[ENDCOLOR]");
+--------------------------------------------------------------------------------
+-- Language: en_US
+insert or replace into EnglishText (Tag, Text) values
+	-- 官方情景包
+	("LOC_OFFICIAL_SCENARIO_LIST", "
+		2F3A65C2-0883-4BF6-8C70-EDA688C66F3C,
+		D70C8F1F-3954-460F-A9D9-09498BF773C9,
+		C1F775D8-59B5-401B-B86D-78FAF3446EC7,
+		F264EE10-F21B-4A9A-BBCD-D534E9843E90,
+		8550ED6C-E370-426C-80CD-AB4B46B201DD,
+		7619F77B-BAA7-4912-AA6E-45C124E6ECFD,
+		A55FAFB4-9070-4597-9453-B28A99910CDA,
+		CD953AD5-2869-4654-91EC-E48D118EF3F3,
+		05698E46-1032-43C7-A40C-FA3D02858D2A,
+		5B0445C9-1376-45AD-9B51-C96A83A8F17D,
+		F653805E-F7C8-44E1-8CBD-FB48D7AABCBA,
+		648CD2A8-057A-4EB5-9E41-E1F7D86B5443,
+		5E991A08-08FD-4774-968B-A85377ECF60D,
+		455B6E2D-821D-4D49-9FCD-FC950AC6A521
+	"),
+	-- 核心
+	("LOC_HD_CORE_MODS_LIST", "
+		521b8777-0977-4859-a5ee-3e411a732e5c,
+		c086b5a6-90d2-4dea-a32f-c642639b9469,
+		c0417322-9747-42d5-9717-b0df5a4c6e5d,
+		66add898-b3bb-4bd9-98a2-805d37f0da2e,
+		32936394-6ae7-4e19-929d-fa47ebc7d055
+	"),
+	-- 必要前置
+	("LOC_HD_NECESSARY_PREREQ_LIST", "
+		7d0b57ba-6a5c-4de0-ac10-e1e464ac82f6,
+		b248a322-3e2a-4a6a-830a-6b0d1f3435fc,
+		a64e1c66-ce48-4d80-8225-47402db353aa,
+		eaffc7c2-21d2-47e5-a060-ae55780d1337
+	"),
+	-- 区域拓展
+	("LOC_DISTRICTS_EXTENSION_LIST", "
+		1373373a-f34d-4041-a0f8-49e2004e19a1,
+		1047a269-38a8-4cee-b70a-a7681015eed7,
+		8be477ae-8642-462d-bcad-768fda353127,
+		7d1c74a2-2f3e-452c-8d3e-16b6e383ab9d,
+		ccd2f70b-2257-400f-bc59-9e1919f37473,
+		52c17bf1-d630-42c8-a2d6-f20d8e019993,
+		39c78c55-8c39-4f0d-b4c8-0097f6bcd87a,
+		72d77fd9-7d34-4539-97d9-f5c23de67814,
+		93e0f97a-a9cc-494d-8560-b3b6b9aabdf2,
+		cc42ab93-1a06-4095-b0a4-64ca2aab241a,
+		a3aa04e1-af4a-4364-a53f-d2ce6433ad71
+	"),
+	-- 世界奇观
+	("LOC_WONDERS_MODS_LIST", "
+		b8a7c566-c2ab-44d4-a52d-a97416faf690,
+		f6556753-3531-4d36-b448-5a4053064524,
+		aab33283-4b8f-46a4-83c0-784a8bfa177e,
+		fd3f13ba-3d51-442f-9435-3aeca0116b46,
+		6366039a-6cd8-48d5-99ce-d7832a617629,
+		9f162187-9342-47ca-9085-78fc3f80f25d,
+		ce086704-334c-43cd-b26a-478365503137,
+		3db98aba-d7ca-4b4d-9596-e2344e593ed0,
+		cfba692b-a7f8-4d6e-aa4b-a25aa704867c,
+		f87fe104-c6c5-4e11-9251-db958c80c589,
+		d1c3ef16-00ed-4d72-a468-1e584fdb85ad,
+		89a948de-5e48-4608-81a4-c52bd68bc4eb,
+		06d0b218-87e4-4b69-9a16-f620e1019150,
+		be61704a-a0b5-45e5-b2d8-6dfc524c31c1,
+		7f75eef4-7c10-4d00-a1fb-1de83f11db85,
+		e3052708-b650-4f3a-8e5c-da8f2a287524,
+		1cfe2a52-233b-4d4c-8bdf-209ec10352c1,
+		e12c350d-df6a-4d21-9302-4466cab4353c,
+		943808b8-5913-4cfc-93a8-0d5d4a0bc4af,
+		5a5601c5-090c-4172-89fe-8f1da9e2b96d,
+		ffa02d2f-e5d4-43fd-bb97-0a4868c7b3a7,
+		ecc4e31d-8c79-4e4b-98e7-d96226cb95d9,
+		e5f66e35-a710-4f89-afe7-a42e3e51cf9f,
+		a3c1c60d-76e0-4088-94e2-497f5e85d888,
+		8719d97f-0db4-4c18-9863-82eb9b0c6175,
+		0fe4104b-80e1-434a-88fc-914ce2632944,
+		43e4ac68-4ce4-4e6a-8eca-fbe81fdbd1df
+	"),
+	-- 生态拓展
+	("LOC_ECOLOGY_EXTENSION_LIST", "
+		1ec10c1f-677c-4af8-be22-e7df2f4de858,
+		73b1478a-73bf-4907-8914-b1b5acca388b,
+		23879c66-7cbb-4320-a891-ad24026f1b6b,
+		4922ba47-61e1-4b15-9281-db996b14522d,
+		37fdca0b-9275-4235-9c18-c7ec348f930e,
+		78aa4d0b-742a-4d7a-be7d-a8317d69fb30,
+		664d17a5-f3be-493a-9332-8e20da1166fa
+	"),
+	-- 内容拓展
+	("LOC_CONTENT_EXTENSION_LIST", "
+		77281183-8482-4160-9ed5-77760cd45bf6,
+		01159f41-7ca0-4181-84cf-2f2c912edfdd,
+		72950284-90dc-424d-ba04-4a1d8de2b336,
+		de7af20f-843f-4a69-b32a-136af6fb2115
+	"),
+	-- 机制修复
+	("LOC_MECHANISM_FIX_LIST", "
+		967e466f-28e0-42a0-8f21-0e7bed5d7552,
+		850b838e-bb79-49ee-b61e-e71ee75296f9,
+		05003a81-c381-411c-8aec-4759bd0c0ec4
+	"),
+	-- 文明拓展
+	("LOC_CIV_EXTENSION_LIST", "
+		7d155dc3-4a94-4923-a306-d8fd40fb0003,
+		d3cbeba5-2100-475d-8c47-74573c80d406,
+		ff430ab5-54c1-4dae-8f94-6d4c55cfefa5,
+		87d7a272-36b8-4339-a1f1-42334559808d,
+		e6f25862-9c65-4cba-bff9-1298e2040a01,
+		bd44cfa2-b70d-4099-b584-7ceb089249d2,
+		b2a21d80-eee9-41da-87c0-c09e9ff78458,
+		ba7d3560-2e89-4f92-960a-b6171ce51926,
+		d2d63e78-9c11-4d82-a943-ac7c49dcc909,
+		4b8a9503-6be5-481a-a446-a029e750f41e,
+		b77c610e-e9f8-4373-8e54-16db48639ae4,
+		3e43d019-c7e2-4cfd-8694-e18caa0a2018,
+		41dadd30-1c1f-4641-b877-b4cafbed5343,
+		1c757aea-0da4-4934-8520-96a59f6157b9,
+		b7e6d8a8-4d36-42d8-8523-9e4e828f45ad,
+		9c73d5f9-82a0-4da6-8071-10db495978c2,
+		5c5ed34e-f66b-41e4-aa7b-4546b298f2a0,
+		48942672-fc9b-ced5-5f67-f3be148892fc,
+		be5b6091-8219-4d62-8b75-e2492adbccd8,
+		473fa987-2dee-44d7-bfc7-5bcfd69b8784,
+		5b14c25c-0b9c-4f03-b22b-4c744bc8f9ea
+	"),
+	-- 美术资源
+	("LOC_ART_RESOURCES_LIST", "
+		f00f068e-c47b-4fcb-974d-7e86ae0cae46,
+		83710098-5cae-4c9f-a1e4-8dc652a537fe,
+		aa42d206-0aa1-4bbf-9ac0-27d338e2d91e,
+		9735472b-05d1-4427-8fc2-b44ff2c39088,
+		2e6d1093-6689-4dd5-a47a-9539bc3f8a29
+	"),
+	-- 界面优化
+	("LOC_HD_UI_MODS_LIST", "
+		5aceed03-8639-4a81-8cbf-03f54d543502,
+		4ecfcc62-5471-4435-b295-590df213e8d8,
+		ebdf2824-352e-49c3-90c1-743a89180da8,
+		fbb7b86a-9ac9-4a8e-9439-9ded6aceda0e,
+		38C7FAFB-58EB-0C14-7377-92A810E9860B,
+		67B4DBCB-82AD-3F90-1595-43C677C1301E,
+		8d4fa23a-ef43-440c-8422-2bec11f8f5d7,
+		74D4FDCC-14FE-5F52-7676-03B229E7845D,
+		e83d6977-7baf-4e4f-abd2-2a9f59a537ad,
+		969e373a-58ea-4ffd-9c6d-dbefffd6034c,
+		48219711-51e7-4d25-bf91-0d557e754fd2,
+		185e05a2-c6ac-4e09-b257-2bdb1f3714cd,
+		47dccacd-f1d0-4f25-bb02-deb2b528c833,
+		389034b7-460b-40c1-be0c-a3240ebeff7b,
+		382a187f-c8ba-4094-a6a7-0d5315661f32,
+		382a187f-c8ba-4094-a6a7-0d5315661f33,
+		6745dafc-d633-4781-a28a-d3fa5ada0f46,
+		bcdbbbea-984f-474c-b921-6ea0be143600,
+		be80630c-536b-4aab-be68-d76453a6f439,
+		81423aeb-17fa-4b7b-ab73-0a25bfcb0e8c,
+		107a9043-4c73-4d5b-8007-79b55f19ba4a,
+		35f33319-ad93-4d6b-bf27-406fac382d06,
+		736a13ed-465a-4722-b759-873058c03763,
+		2778f75d-9c72-4919-a081-620f6482f5d6,
+		23e2436b-2f6e-4ec4-bee9-e27c2005fac1,
+		9e9923e5-6842-4e7d-97e7-c9a56a85cf03,
+		805cc499-c534-4e0a-bdce-32fb3c53ba38,
+		6f2888d4-79dc-415f-a8ff-f9d81d7afb53,
+		013654fc-425d-4df6-aeda-825bb27df885,
+		577c5284-9691-458c-a861-db802265a325,
+		6a18ae19-df93-4322-a3d5-33c5a5087b36,
+		8446e6e9-7703-434d-ba10-0bd70a291d28
+	"),
+	-- 可选集
+	("LOC_HD_OPTIONAL_MODS_LIST", "
+		43e4ac68-4ce4-4e6a-8eca-fbe81fdbd1df,
+		7d155dc3-4a94-4923-a306-d8fd40fb0003,
+		d3cbeba5-2100-475d-8c47-74573c80d406,
+		ff430ab5-54c1-4dae-8f94-6d4c55cfefa5,
+		87d7a272-36b8-4339-a1f1-42334559808d,
+		e6f25862-9c65-4cba-bff9-1298e2040a01,
+		bd44cfa2-b70d-4099-b584-7ceb089249d2,
+		b2a21d80-eee9-41da-87c0-c09e9ff78458,
+		ba7d3560-2e89-4f92-960a-b6171ce51926,
+		d2d63e78-9c11-4d82-a943-ac7c49dcc909,
+		4b8a9503-6be5-481a-a446-a029e750f41e,
+		b77c610e-e9f8-4373-8e54-16db48639ae4,
+		3e43d019-c7e2-4cfd-8694-e18caa0a2018,
+		41dadd30-1c1f-4641-b877-b4cafbed5343,
+		1c757aea-0da4-4934-8520-96a59f6157b9,
+		b7e6d8a8-4d36-42d8-8523-9e4e828f45ad,
+		9c73d5f9-82a0-4da6-8071-10db495978c2,
+		5c5ed34e-f66b-41e4-aa7b-4546b298f2a0,
+		aa42d206-0aa1-4bbf-9ac0-27d338e2d91e,
+		9735472b-05d1-4427-8fc2-b44ff2c39088,
+		2e6d1093-6689-4dd5-a47a-9539bc3f8a29,
+		48942672-fc9b-ced5-5f67-f3be148892fc,
+		de7af20f-843f-4a69-b32a-136af6fb2115,
+		be5b6091-8219-4d62-8b75-e2492adbccd8,
+		473fa987-2dee-44d7-bfc7-5bcfd69b8784,
+		5b14c25c-0b9c-4f03-b22b-4c744bc8f9ea
+	"),
+	-- 全集
+	("LOC_HD_FULL_MODS_LIST", "
+		{LOC_HD_CORE_MODS_LIST},
+		{LOC_HD_NECESSARY_PREREQ_LIST},
+		{LOC_DISTRICTS_EXTENSION_LIST},
+		{LOC_WONDERS_MODS_LIST},
+		{LOC_ECOLOGY_EXTENSION_LIST},
+		{LOC_CONTENT_EXTENSION_LIST},
+		{LOC_MECHANISM_FIX_LIST},
+		{LOC_CIV_EXTENSION_LIST},
+		{LOC_ART_RESOURCES_LIST},
+		{LOC_HD_UI_MODS_LIST}
+	"),
+	-- 不兼容
+	("LOC_HD_NON_COMPATIBLE_MODS_LIST", "
+		4a03cf08-f557-490c-a095-04907f251915,
+		aa162e00-b301-425f-8666-af258a8f16e8,
+		ceebba6a-2185-4b6d-80cf-a24fdf803cb7,
+		632a4fa1-e907-4426-815b-8424aeb81bb0,
+		97ff0be1-268e-4acc-adda-5c2a820b6521,
+		17bd9dd4-01f7-4c42-acb0-b703c9ad85c9
+	");

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: 26640 -->
+<!-- DateCreated: 6/24/2024 11:01:19 PM -->
+<GameData>
+	<LocalizedText>
+	<Row Tag="LOC_PROJECT_CREATE_CORPORATION_PRODUCT_C_HEAVENLY_HORSE_NAME" Language="en_US">
+		<Text> [ICON_MONOPOLIES_AND_CORPS_RESOURCE_C_HEAVENLY_HORSE] HEAVENLY HORSE CORPORATION: CREATE NEW PRODUCT</Text>
+	</Row>
+	<Row Tag="LOC_PROJECT_CREATE_CORPORATION_PRODUCT_C_HEAVENLY_HORSE_SHORT_NAME" Language="en_US">
+		<Text>[ICON_MONOPOLIES_AND_CORPS_RESOURCE_C_HEAVENLY_HORSE] Create New Heavenly Horse product</Text>
+	</Row>
+	<Row Tag="LOC_PROJECT_CREATE_CORPORATION_PRODUCT_C_HEAVENLY_HORSE_DESCRIPTION" Language="en_US">
+		<Text>Create a new product for the world based on the [ICON_MONOPOLIES_AND_CORPS_RESOURCE_C_HEAVENLY_HORSE] Heavenly Horse resource.</Text>
+	</Row>
+	<Row Tag="LOC_PROJECT_CREATE_CORPORATION_PRODUCT_C_HEAVENLY_HORSE_NAME" Language="zh_Hans_CN">
+		<Text>[ICON_MONOPOLIES_AND_CORPS_RESOURCE_C_HEAVENLY_HORSE] 汗血马公司：开发新产品</Text>
+	</Row>
+	<Row Tag="LOC_PROJECT_CREATE_CORPORATION_PRODUCT_C_HEAVENLY_HORSE_SHORT_NAME" Language="zh_Hans_CN">
+		<Text>[ICON_MONOPOLIES_AND_CORPS_RESOURCE_C_HEAVENLY_HORSE] 开发新的汗血马产品</Text>
+	</Row>
+	<Row Tag="LOC_PROJECT_CREATE_CORPORATION_PRODUCT_C_HEAVENLY_HORSE_DESCRIPTION" Language="zh_Hans_CN">
+		<Text>利用 [ICON_MONOPOLIES_AND_CORPS_RESOURCE_C_HEAVENLY_HORSE] 汗血马资源为世界开发新产品。</Text>
+	</Row>
+	<Row Tag="LOC_GREATWORK_PRODUCT_C_HEAVENLY_HORSE_1_NAME" Language="en_US">
+		<Text>Arabian Horses</Text>
+	</Row>
+	<Row Tag="LOC_GREATWORK_PRODUCT_C_HEAVENLY_HORSE_2_NAME" Language="en_US">
+		<Text>Andalusian Horses</Text>
+	</Row>
+	<Row Tag="LOC_GREATWORK_PRODUCT_C_HEAVENLY_HORSE_3_NAME" Language="en_US">
+		<Text>Mongolian Horses</Text>
+	</Row>
+	<Row Tag="LOC_GREATWORK_PRODUCT_C_HEAVENLY_HORSE_4_NAME" Language="en_US">
+		<Text>Ferghana Horses</Text>
+	</Row>
+	<Row Tag="LOC_GREATWORK_PRODUCT_C_HEAVENLY_HORSE_5_NAME" Language="en_US">
+		<Text>Thoroughbred</Text>
+	</Row>
+	<Row Tag="LOC_GREATWORK_PRODUCT_C_HEAVENLY_HORSE_1_NAME" Language="zh_Hans_CN">
+		<Text>阿拉伯马</Text>
+	</Row>
+	<Row Tag="LOC_GREATWORK_PRODUCT_C_HEAVENLY_HORSE_2_NAME" Language="zh_Hans_CN">
+		<Text>安达卢西亚马</Text>
+	</Row>
+	<Row Tag="LOC_GREATWORK_PRODUCT_C_HEAVENLY_HORSE_3_NAME" Language="zh_Hans_CN">
+		<Text>蒙古马</Text>
+	</Row>
+	<Row Tag="LOC_GREATWORK_PRODUCT_C_HEAVENLY_HORSE_4_NAME" Language="zh_Hans_CN">
+		<Text>阿哈尔捷金马</Text>
+	</Row>
+	<Row Tag="LOC_GREATWORK_PRODUCT_C_HEAVENLY_HORSE_5_NAME" Language="zh_Hans_CN">
+		<Text>纯种赛马</Text>
+	</Row>
+
+	<Row Tag="LOC_PROJECT_CREATE_CORPORATION_PRODUCT_C_ZEBU_NAME" Language="en_US">
+		<Text> [ICON_MONOPOLIES_AND_CORPS_RESOURCE_C_ZEBU] ZEBU CORPORATION: CREATE NEW PRODUCT</Text>
+	</Row>
+	<Row Tag="LOC_PROJECT_CREATE_CORPORATION_PRODUCT_C_ZEBU_SHORT_NAME" Language="en_US">
+		<Text>[ICON_MONOPOLIES_AND_CORPS_RESOURCE_C_ZEBU] Create New Zebu product</Text>
+	</Row>
+	<Row Tag="LOC_PROJECT_CREATE_CORPORATION_PRODUCT_C_ZEBU_DESCRIPTION" Language="en_US">
+		<Text>Create a new product for the world based on the [ICON_MONOPOLIES_AND_CORPS_RESOURCE_C_ZEBU] Zebu resource.</Text>
+	</Row>
+	<Row Tag="LOC_PROJECT_CREATE_CORPORATION_PRODUCT_C_ZEBU_NAME" Language="zh_Hans_CN">
+		<Text>[ICON_MONOPOLIES_AND_CORPS_RESOURCE_C_ZEBU] 瘤牛公司：开发新产品</Text>
+	</Row>
+	<Row Tag="LOC_PROJECT_CREATE_CORPORATION_PRODUCT_C_ZEBU_SHORT_NAME" Language="zh_Hans_CN">
+		<Text>[ICON_MONOPOLIES_AND_CORPS_RESOURCE_C_ZEBU] 开发新的瘤牛产品</Text>
+	</Row>
+	<Row Tag="LOC_PROJECT_CREATE_CORPORATION_PRODUCT_C_ZEBU_DESCRIPTION" Language="zh_Hans_CN">
+		<Text>利用 [ICON_MONOPOLIES_AND_CORPS_RESOURCE_C_ZEBU] 瘤牛资源为世界开发新产品。</Text>
+	</Row>
+	<Row Tag="LOC_GREATWORK_PRODUCT_C_ZEBU_1_NAME" Language="en_US">
+		<Text>Miniature Zebu</Text>
+	</Row>
+	<Row Tag="LOC_GREATWORK_PRODUCT_C_ZEBU_2_NAME" Language="en_US">
+		<Text>Zebu Dung</Text>
+	</Row>
+	<Row Tag="LOC_GREATWORK_PRODUCT_C_ZEBU_3_NAME" Language="en_US">
+		<Text>American Brahman</Text>
+	</Row>
+	<Row Tag="LOC_GREATWORK_PRODUCT_C_ZEBU_4_NAME" Language="en_US">
+		<Text>Ongole Cattle</Text>
+	</Row>
+	<Row Tag="LOC_GREATWORK_PRODUCT_C_ZEBU_5_NAME" Language="en_US">
+		<Text>Ghee</Text>
+	</Row>
+	<Row Tag="LOC_GREATWORK_PRODUCT_C_ZEBU_1_NAME" Language="zh_Hans_CN">
+		<Text>宠物迷你神牛</Text>
+	</Row>
+	<Row Tag="LOC_GREATWORK_PRODUCT_C_ZEBU_2_NAME" Language="zh_Hans_CN">
+		<Text>神牛粪</Text>
+	</Row>
+	<Row Tag="LOC_GREATWORK_PRODUCT_C_ZEBU_3_NAME" Language="zh_Hans_CN">
+		<Text>婆罗门牛</Text>
+	</Row>
+	<Row Tag="LOC_GREATWORK_PRODUCT_C_ZEBU_4_NAME" Language="zh_Hans_CN">
+		<Text>盎哥勒牛</Text>
+	</Row>
+	<Row Tag="LOC_GREATWORK_PRODUCT_C_ZEBU_5_NAME" Language="zh_Hans_CN">
+		<Text>醍醐</Text>
+	</Row>
+	</LocalizedText>
+</GameData>
