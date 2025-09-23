@@ -272,6 +272,7 @@ function HagiaSophiaGetWorship(playerId, cityId, eVisibility)
   if isHolyCity then
     -- 获取城市当前宗教
     local city = CityManager.GetCity(playerId, cityId);
+    if not city then return; end
     local cityReligion = city:GetReligion():GetMajorityReligion();
     -- 获取该圣城原本的宗教
     local player = Players[playerId];

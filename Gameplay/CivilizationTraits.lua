@@ -1528,6 +1528,7 @@ Events.TradeRouteActivityChanged.Add(SumeriaTradeRouteActivityChanged)
 local Sumeria_CityReligionFollowersChanged_Tag = 'HD_Sumeria_CityReligionFollowersChanged_'
 function SumeriaCityReligionFollowersChanged(ownerId, cityId, eVisibility)
 	local city = CityManager.GetCity(ownerId, cityId);
+	if not city then return; end
 	local cityReligion = city:GetReligion():GetMajorityReligion();
 
 	for _, playerId in ipairs(PlayerManager.GetAliveMajorIDs()) do
