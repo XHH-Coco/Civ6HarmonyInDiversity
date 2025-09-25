@@ -37,7 +37,7 @@ update Buildings set Cost = 750, PrereqTech = 'TECH_APPRENTICESHIP' where Buildi
 update Buildings set Cost = 1000 where BuildingType = 'BUILDING_FORBIDDEN_CITY';
 update Buildings set Cost = 1000 where BuildingType = 'BUILDING_ST_BASILS_CATHEDRAL';
 update Buildings set Cost = 1000 where BuildingType = 'BUILDING_TAJ_MAHAL';
-update Buildings set Cost = 1000 where BuildingType = 'BUILDING_CASA_DE_CONTRATACION';
+update Buildings set Cost = 1000, AdjacentDistrict = 'DISTRICT_HARBOR' where BuildingType = 'BUILDING_CASA_DE_CONTRATACION';
 update Buildings set Cost = 1000 where BuildingType = 'BUILDING_TORRE_DE_BELEM';
 update Buildings set Cost = 750, PrereqCivic = 'CIVIC_FEUDALISM', PrereqTech = null where BuildingType = 'BUILDING_POTALA_PALACE';
 update Buildings set Cost = 1360 where BuildingType = 'BUILDING_PANAMA_CANAL';
