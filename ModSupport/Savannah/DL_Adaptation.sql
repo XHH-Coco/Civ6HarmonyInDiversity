@@ -51,6 +51,8 @@ delete from Resource_ValidTerrains where ResourceType = 'RESOURCE_IVORY' and Ter
 insert or replace into Feature_YieldChanges
 	(FeatureType,			    YieldType,			YieldChange)
 values
+	('FEATURE_FLOODPLAINS',	    'YIELD_FOOD',		2),
+	('FEATURE_FLOODPLAINS',     'YIELD_GOLD',		1),
 	('FEATURE_JNR_SAVANNAH',    'YIELD_GOLD',		1);
 
 --Feature_Removes
