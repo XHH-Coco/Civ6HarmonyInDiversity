@@ -136,7 +136,7 @@ values
     ("zh_Hans_CN",  "LOC_BELIEF_PRACTICAL_APPLICATION_NAME",                 "经世致用"),
     ("zh_Hans_CN",  "LOC_BELIEF_PRACTICAL_APPLICATION_DL_DESCRIPTION",       "拥有圣地的城市中每 [ICON_Citizen] 人口提供+3 [ICON_Gold] 金币。购买商业中心区域内建筑的费用降低20%且可以用 [ICON_Faith] 信仰值购买。"),
     ("zh_Hans_CN",  "LOC_BELIEF_RELIGIOUS_COLONIZATION_DL_DESCRIPTION",      "购买开拓者和建造者的费用降低20%。可以使用 [ICON_Faith] 信仰值购买市政广场和外交区内的建筑。城市中生产的开拓者和建造者+2 [ICON_MOVEMENT] 移动力。"),
-    ("zh_Hans_CN",  "LOC_BELIEF_ZEN_MEDITATION_DL_DESCRIPTION",              "圣地+1 [ICON_Amenities] 宜居度。拥有圣地的城市所有单元格+1魅力。建造在惊艳为魅力的单元格上的区域+3相邻加成。"),
+    ("zh_Hans_CN",  "LOC_BELIEF_ZEN_MEDITATION_DL_DESCRIPTION",              "圣地+1 [ICON_Amenities] 宜居度。拥有圣地的城市所有单元格+1魅力。建造在惊艳单元格上的区域+3相邻加成。"),
     ("zh_Hans_CN",  "LOC_BELIEF_ZEN_MEDITATION_VIETNAM_DESCRIPTION",         "{LOC_BELIEF_ZEN_MEDITATION_DL_DESCRIPTION}购买保护区区域内建筑的费用降低20%且可以用 [ICON_Faith] 信仰值购买。"),
     ("zh_Hans_CN",  "LOC_BELIEF_INITIATION_RITES_NAME",                      "入会仪式"),
     ("zh_Hans_CN",  "LOC_BELIEF_INITIATION_RITES_DL_DESCRIPTION",            "利用宗教单位使城市首次改变信仰时，该城市每拥有1点 [ICON_Citizen] 人口，则提供50点 [ICON_Gold] 金币（标准速度下）。"),
