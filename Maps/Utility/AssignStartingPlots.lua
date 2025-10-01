@@ -414,7 +414,7 @@ function AssignStartingPlots:__DLPreparePlotFertilities()
 
                     if (PlayerConfigurations[0]:GetCivilizationTypeName() == "CIVILIZATION_CANADA") or (PlayerConfigurations[0]:GetCivilizationTypeName() == "CIVILIZATION_RUSSIA")then
                         if 9 <= anotherPlot:GetTerrainType() and anotherPlot:GetTerrainType() <= 14 then
-                            totalFertility = totalFertility + 1;
+                            totalFertility = totalFertility + 5 / 3; -- 原权重为1。
                         end
                     end
 
