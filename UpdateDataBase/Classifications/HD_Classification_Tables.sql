@@ -3,7 +3,7 @@ create table if not exists HD_ResourceClassificationTypes(
   ResourceClassificationType  TEXT    not NULL,
   Name                        TEXT,
   SortIndex                   Integer Default 0,
-  Display                     boolean not null default true,
+  Display                     boolean not null default 1,
 PRIMARY KEY('ResourceClassificationType'));
 
 create table if not exists HD_Resource_Classification(
