@@ -218,26 +218,23 @@ values
     ('AmbiorixYields',          'YIELD_FOOD',               1,          10),
     ('AmbiorixYields',          'YIELD_PRODUCTION',         1,          10);
 
-update Districts set PrereqCivic = NULL, PrereqTech = 'TECH_ANIMAL_HUSBANDRY' where DistrictType = 'DISTRICT_HIPPODROME';
+update Districts set PrereqCivic = NULL, PrereqTech = 'TECH_HORSEBACK_RIDING' where DistrictType = 'DISTRICT_HIPPODROME';
 insert or replace into DistrictModifiers
 	(DistrictType,					ModifierId)
 values
 	('DISTRICT_HIPPODROME',	'HD_DISTRICT_HIPPODROME_EXTRA_AMENITY'),
-	('DISTRICT_HIPPODROME',	'HD_DISTRICT_HIPPODROME_TECH_HORSEBACK_RIDING'),
 	('DISTRICT_HIPPODROME',	'HD_DISTRICT_HIPPODROME_TECH_SADDLE_HD');
 
 insert or replace into Modifiers
 	(ModifierId,																			ModifierType,																	OwnerRequirementSetId)
 values
 	('HD_DISTRICT_HIPPODROME_EXTRA_AMENITY',					'MODIFIER_ADJUST_AMENITIES_IN_DISTRICT',			'HD_PLOT_ADJACENT_TO_IMPROVEMENT_CAMP_OR_PASTURE'),
-	('HD_DISTRICT_HIPPODROME_TECH_HORSEBACK_RIDING',	'MODIFIER_PLAYER_GRANT_SPECIFIC_TECHNOLOGY',	Null),
 	('HD_DISTRICT_HIPPODROME_TECH_SADDLE_HD',					'MODIFIER_PLAYER_GRANT_SPECIFIC_TECHNOLOGY',	Null);
 
 insert or replace into ModifierArguments
 	(ModifierId,																			Name,				Value)
 values
 	('HD_DISTRICT_HIPPODROME_EXTRA_AMENITY',					'Amount',		1),
-	('HD_DISTRICT_HIPPODROME_TECH_HORSEBACK_RIDING',	'TechType',	'TECH_HORSEBACK_RIDING'),
 	('HD_DISTRICT_HIPPODROME_TECH_SADDLE_HD',					'TechType',	'TECH_SADDLE_HD');
 
 

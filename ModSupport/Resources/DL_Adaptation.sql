@@ -34,10 +34,13 @@ insert or replace into Resource_ValidFeatures
     (ResourceType,   FeatureType)
 select
     ResourceType,    'FEATURE_FOREST'
-from Resources where ResourceType = 'RESOURCE_DLV_BISON';
+from Resources where ResourceType in ('RESOURCE_DLV_BISON', 'RESOURCE_P0K_MAPLE');
 
 insert or ignore into Resource_ValidTerrains (ResourceType, TerrainType) select
-    ResourceType,   'TERRAIN_COAST'
+    ResourceType, 'TERRAIN_COAST'
+from Resources where ResourceType = 'RESOURCE_P0K_PENGUINS';
+insert or replace into Resource_ValidFeatures (ResourceType, FeatureType) select
+    ResourceType, 'FEATURE_REEF'
 from Resources where ResourceType = 'RESOURCE_P0K_PENGUINS';
 insert or ignore into Improvement_ValidResources (ImprovementType, ResourceType, MustRemoveFeature) select
     'IMPROVEMENT_FISHING_BOATS',    ResourceType,   0

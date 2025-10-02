@@ -52,15 +52,9 @@
 		<Row SectionID="DISTRICTS" 		PageGroupId="COMMON_DISTRICTS" 				Name="LOC_PEDIA_DISTRICTS_PAGEGROUP_COMMON_DISTRICTS_NAME" 					Tooltip="" VisibleIfEmpty="true" 	SortIndex="73" />
 		<Row SectionID="DISTRICTS" 		PageGroupId="UNIQUE_DISTRICTS" 				Name="LOC_PEDIA_DISTRICTS_PAGEGROUP_UNIQUE_DISTRICTS_NAME" 					Tooltip="" VisibleIfEmpty="true" 	SortIndex="74" />
 		
-		<Row SectionID="IMPROVEMENTS" PageGroupId="BASIC_IMPROVEMENTS" 			Name="LOC_PEDIA_IMPROVEMENTS_PAGEGROUP_BASIC_IMPROVEMENTS_NAME" 		Tooltip="" VisibleIfEmpty="true" 	SortIndex="10" />
-		<Row SectionID="IMPROVEMENTS" PageGroupId="UNIQUE_IMPROVEMENTS" 		Name="LOC_PEDIA_IMPROVEMENTS_PAGEGROUP_UNIQUE_IMPROVEMENTS_NAME" 		Tooltip="" VisibleIfEmpty="true" 	SortIndex="11" />
-		<Row SectionID="IMPROVEMENTS" PageGroupId="CITYSTATE_IMPROVEMENTS" 	Name="LOC_PEDIA_IMPROVEMENTS_PAGEGROUP_CITYSTATE_IMPROVEMENTS_NAME" Tooltip="" VisibleIfEmpty="true" 	SortIndex="12" />
-		<Row SectionID="IMPROVEMENTS" PageGroupId="URBAN_IMPROVEMENTS" 			Name="LOC_PEDIA_IMPROVEMENTS_PAGEGROUP_URBAN_IMPROVEMENTS_NAME" 		Tooltip="" VisibleIfEmpty="true" 	SortIndex="13" />
-		<Row SectionID="IMPROVEMENTS" PageGroupId="TOURISM_IMPROVEMENTS" 		Name="LOC_PEDIA_IMPROVEMENTS_PAGEGROUP_TOURISM_IMPROVEMENTS_NAME" 	Tooltip="" VisibleIfEmpty="true" 	SortIndex="14" />
-		<Row SectionID="IMPROVEMENTS" PageGroupId="MILITARY_IMPROVEMENTS" 	Name="LOC_PEDIA_IMPROVEMENTS_PAGEGROUP_MILITARY_IMPROVEMENTS_NAME"	Tooltip="" VisibleIfEmpty="true" 	SortIndex="15" />
 		<Update>
 			<Where SectionID="IMPROVEMENTS" PageGroupId="Improvements" />
-			<Set VisibleIfEmpty="false" SortIndex="15" />
+			<Set VisibleIfEmpty="false" SortIndex="100" />
 		</Update>
 
 		<Row SectionID="RESOURCES" PageGroupId="IMPROVEMENT_FARM_RESOURCECLASS_BONUS" 					Name="LOC_PEDIA_RESOURCES_PAGEGROUP_FARM_BONUS_NAME"						Tooltip="" VisibleIfEmpty="false" 	SortIndex="10" />
@@ -124,11 +118,11 @@
 	<!-- 排序 -->
 	<CivilopediaPageQueries>
 		<!-- 着力点 -->
-		<Row SectionId="MOMENTS" PageGroupIdColumn="PageGroupId" NameColumn="CategoryDescription" TooltipColumn="Tooltip" SortIndexColumn="SortIndex" SortIndex="10">
+		<Row SectionId="MOMENTS" PageGroupIdColumn="PageGroupId" NameColumn="CategoryDescription" TooltipColumn="Tooltip" SortIndexColumn="SortIndex">
 			<SQL>SELECT CommemorationTypes.CommemorationType as PageId, "COMMEMORATIONS" as PageGroupId, "HD_COMMEMORATION" as PageLayoutId, CommemorationTypes.CategoryDescription, null as Tooltip, Eras.ChronologyIndex as SortIndex FROM CommemorationTypes INNER JOIN Eras ON CommemorationTypes.MinimumGameEra = Eras.EraType ORDER BY Eras.ChronologyIndex</SQL>
 		</Row>
 		<!-- 中国着力点 -->
-		<Row SectionId="MOMENTS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndexColumn="SortIndex" SortIndex="10">
+		<Row SectionId="MOMENTS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndexColumn="SortIndex">
 			<SQL>SELECT AncientCommemorationType as PageId, "CHINA_COMMEMORATIONS" as PageGroupId, "HD_CHINA_COMMEMORATION" as PageLayoutId, Name, null as Tooltip, SortIndex FROM China_AncientCommemorationTypes_HD</SQL>
 		</Row>
 
@@ -161,28 +155,11 @@
 		<!-- 改良 分类 -->
 		<Delete SectionId="IMPROVEMENTS" />
 		<Row SectionId="IMPROVEMENTS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndex="10">
-			<SQL>SELECT HD_Basic_Improvements.ImprovementType as PageId, "BASIC_IMPROVEMENTS" as PageGroupId, "Improvement" as PageLayoutId, Improvements.Name, null as Tooltip FROM HD_Basic_Improvements INNER JOIN Improvements ON HD_Basic_Improvements.ImprovementType = Improvements.ImprovementType</SQL>
+			<SQL>SELECT HD_Improvement_Classification.ImprovementType as PageId, HD_Improvement_Classification.ImprovementClassificationType as PageGroupId, "Improvement" as PageLayoutId, Improvements.Name, null as Tooltip FROM HD_Improvement_Classification INNER JOIN Improvements ON HD_Improvement_Classification.ImprovementType = Improvements.ImprovementType</SQL>
 		</Row>
-		<Row SectionId="IMPROVEMENTS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndex="11">
-			<SQL>SELECT HD_Unique_Improvements.ImprovementType as PageId, "UNIQUE_IMPROVEMENTS" as PageGroupId, "Improvement" as PageLayoutId, Improvements.Name, null as Tooltip FROM HD_Unique_Improvements INNER JOIN Improvements ON HD_Unique_Improvements.ImprovementType = Improvements.ImprovementType</SQL>
-		</Row>
-		<Row SectionId="IMPROVEMENTS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndex="11">
-			<SQL>SELECT HD_CityState_Improvements.ImprovementType as PageId, "CITYSTATE_IMPROVEMENTS" as PageGroupId, "Improvement" as PageLayoutId, Improvements.Name, null as Tooltip FROM HD_CityState_Improvements INNER JOIN Improvements ON HD_CityState_Improvements.ImprovementType = Improvements.ImprovementType</SQL>
-		</Row>
-		<Row SectionId="IMPROVEMENTS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndex="12">
-			<SQL>SELECT HD_Urban_Facilities_Improvements.ImprovementType as PageId, "URBAN_IMPROVEMENTS" as PageGroupId, "Improvement" as PageLayoutId, Improvements.Name, null as Tooltip FROM HD_Urban_Facilities_Improvements INNER JOIN Improvements ON HD_Urban_Facilities_Improvements.ImprovementType = Improvements.ImprovementType</SQL>
-		</Row>
-		<Row SectionId="IMPROVEMENTS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndex="13">
-			<SQL>SELECT HD_Tourism_Facilities_Improvements.ImprovementType as PageId, "TOURISM_IMPROVEMENTS" as PageGroupId, "Improvement" as PageLayoutId, Improvements.Name, null as Tooltip FROM HD_Tourism_Facilities_Improvements INNER JOIN Improvements ON HD_Tourism_Facilities_Improvements.ImprovementType = Improvements.ImprovementType</SQL>
-		</Row>
-		<Row SectionId="IMPROVEMENTS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndex="14">
-			<SQL>SELECT HD_Military_Facilities_Improvements.ImprovementType as PageId, "MILITARY_IMPROVEMENTS" as PageGroupId, "Improvement" as PageLayoutId, Improvements.Name, null as Tooltip FROM HD_Military_Facilities_Improvements INNER JOIN Improvements ON HD_Military_Facilities_Improvements.ImprovementType = Improvements.ImprovementType</SQL>
-		</Row>
-		<Row SectionId="IMPROVEMENTS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndex="15">
-			<SQL>SELECT HD_Common_Improvements.ImprovementType as PageId, "Improvements" as PageGroupId, "Improvement" as PageLayoutId, Improvements.Name, null as Tooltip FROM HD_Common_Improvements INNER JOIN Improvements ON HD_Common_Improvements.ImprovementType = Improvements.ImprovementType</SQL>
-		</Row>
+
 		<!-- 道路 -->
-		<Row SectionId="IMPROVEMENTS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndexColumn="SortIndex" SortIndex="16">
+		<Row SectionId="IMPROVEMENTS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndexColumn="SortIndex">
 			<SQL>SELECT RouteType as PageId, "Routes" as PageGroupId, "Route" as PageLayoutId, Name, null as Tooltip, PlacementValue as SortIndex FROM Routes</SQL>
 		</Row>
 
@@ -251,14 +228,21 @@
 		<Row SectionId="WONDERS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndexColumn="ChronologyIndex" SortIndex="10">
 			<SQL>SELECT EraType as PageGroupId, "{LOC_PEDIA_WONDERS_PAGEGROUP_WONDERS_NAME} {" || Name|| "}" as Name, Null as Tooltip, 0 as VisibleIfEmpty, ChronologyIndex from Eras</SQL>
 		</Row>
+		
 		<!-- 单位分类 -->
 		<Delete SectionId="UNITS" />
 		<Row SectionId="UNITS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndex="20">
 			<SQL>SELECT PromotionClassType as PageGroupId, Name, null as Tooltip, 1 as VisibleIfEmpty, 20 as SortIndex from UnitPromotionClasses WHERE PromotionClassType not in ("PROMOTION_CLASS_APOSTLE", "PROMOTION_CLASS_INQUISITOR")</SQL>
 		</Row>
+		
 		<!-- 文明 -->
 		<Row SectionId="CIVILIZATIONS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndex="10">
-			<SQL>SELECT CivilizationType PageGroupId, Name, null as Tooltip FROM Civilizations where StartingCivilizationLevelType = "CIVILIZATION_LEVEL_FULL_CIV"</SQL>
+			<SQL>SELECT CivilizationType as PageGroupId, Name, null as Tooltip FROM Civilizations where StartingCivilizationLevelType = "CIVILIZATION_LEVEL_FULL_CIV"</SQL>
+		</Row>
+		
+		<!-- 改良分类 -->
+		<Row SectionId="IMPROVEMENTS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndexColumn="SortIndex">
+			<SQL>SELECT ImprovementClassificationType as PageGroupId, Name, null as Tooltip, SortIndex FROM HD_ImprovementClassificationTypes</SQL>
 		</Row>
 	</CivilopediaPageGroupQueries>
 

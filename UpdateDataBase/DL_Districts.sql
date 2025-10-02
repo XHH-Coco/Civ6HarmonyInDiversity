@@ -175,6 +175,8 @@ update Districts set Maintenance = 50 where DistrictType = 'DISTRICT_SPACEPORT';
 insert or replace into DistrictModifiers
 	(DistrictType,						ModifierId)
 values
+	-- 商业和港口提供贸易站
+	('DISTRICT_CITY_CENTER',		'COMMERCIAL_HUB_OR_HARBOR_GRANT_TRADING_POST'),
 	-- Yield Modifiers
 	('DISTRICT_HARBOR',					'HARBOR_ADD_FISHING_BOATS_FOOD'),
 	('DISTRICT_HARBOR',					'LIGHTHOUSE_COASTAL_CITY_HOUSING'),
@@ -243,6 +245,7 @@ update Modifiers set Permanent = 1 where ModifierId = 'IKANDA_CITY_ANTI_CAVALRY_
 insert or replace into Modifiers
 	(ModifierId,										ModifierType,									SubjectRequirementSetId)
 values
+	('COMMERCIAL_HUB_OR_HARBOR_GRANT_TRADING_POST',			'MODIFIER_SINGLE_CITY_GRANT_TRADING_POST', 'CITY_HAS_COMMERCIAL_OR_HARBOR'),
 	-- Yield Modifiers
 	('HARBOR_ADD_FISHING_BOATS_FOOD',					'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',	'PLOT_HAS_FISHINGBOATS_REQUIREMENTS'),
 	-- ('ENCAMPMENT_ADD_MINE_BONUS_PRODUCTION',			'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',	'HAS_IMPROVED_MINE_BONUS'),
@@ -259,6 +262,7 @@ values
 	('DAM_ADJACENT_FARM_FOOD',							'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',			'PLOT_IS_IMPROVED_ADJACENT'),
 	('HD_COMMERCIAL_HUB_IMPROVEMENT_GOLD',							'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',			'PLOT_IS_IMPROVED_ADJACENT');
 
+update Modifiers set Permanent = 1 where ModifierId = 'COMMERCIAL_HUB_OR_HARBOR_GRANT_TRADING_POST';
 -- update Modifiers set OwnerRequirementSetId = 'PLAYER_HAS_TECH_CALENDAR_HD_REQUIREMENTS' where ModifierId = 'AQUEDUCT_ADD_FRESH_FARM_FOOD';
 
 insert or replace into ModifierArguments

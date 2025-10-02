@@ -77,9 +77,9 @@ values
     ("LOC_BELIEF_STARLIGHT_NAVIGATER_NAME",                       "Starlight Navigater"),
     ("LOC_BELIEF_STARLIGHT_NAVIGATER_DESCRIPTION",               "Coastal Capital grain a Nacal Raider unit with a free Promotion. Nacal Raider units +1 [ICON_MOVEMENT] Movement and +5 [ICON_CoMBATSTRENGTH] Combat Strength and share its  [ICON_MOVEMENT] Movement with all units in the formation."),
     ("LOC_BELIEF_ITANG_NAME",                                    "Itang"),
-    ("LOC_BELIEF_ITANG_DESCRIPTION",                             "City Centers gain +1 [ICON_PRODUCTION] Production for every adjacent Coast and Lake tile. City Centers gain +1 [ICON_CULTURE] Culture for every 2 adjacent Coast and Lake tiles. +1 [ICON_AMENITIES] Amenity to coastal cities."),
-    ("LOC_BELIEF_HD_DIONYSIAN_MYSTERIES_NAME",                   "Dionysian Mysteries"),
-    ("LOC_BELIEF_HD_DIONYSIAN_MYSTERIES_DESCRIPTION",            "When chosen, receive a free Cellar in your capital. Cellar provides +2 [ICON_FOOD] Food and +1 [ICON_AMENITIES] Amenity to the city. May purchase Cellar with [ICON_Faith] Faith.");
+    ("LOC_BELIEF_ITANG_DESCRIPTION",                             "City Centers gain +1 [ICON_PRODUCTION] Production for every adjacent Coast and Lake tile. City Centers gain +1 [ICON_CULTURE] Culture for every 2 adjacent Coast and Lake tiles. +1 [ICON_AMENITIES] Amenity to coastal cities.");
+    -- ("LOC_BELIEF_HD_DIONYSIAN_MYSTERIES_NAME",                   "Dionysian Mysteries"),
+    -- ("LOC_BELIEF_HD_DIONYSIAN_MYSTERIES_DESCRIPTION",            "When chosen, receive a free Cellar in your capital. Cellar provides +2 [ICON_FOOD] Food and +1 [ICON_AMENITIES] Amenity to the city. May purchase Cellar with [ICON_Faith] Faith.");
 
 --------------------------------------------------------------------------------
 -- Language: zh_Hans_CN
@@ -160,6 +160,6 @@ values
     ("zh_Hans_CN",  "LOC_BELIEF_STARLIGHT_NAVIGATER_NAME",                      "星光引航者"),
     ("zh_Hans_CN",  "LOC_BELIEF_STARLIGHT_NAVIGATER_DESCRIPTION",               "选择后在首都中获得1个有免费晋升的海军袭击者。海军袭击者+1 [ICON_MOVEMENT] 移动力 +5 [ICON_STRENGTH] 战斗力。被海军袭击者被护送的单位将以同样的速度移动。允许单位进入深海。"),
     ("zh_Hans_CN",  "LOC_BELIEF_ITANG_NAME",                                    "渔巫传统"),
-    ("zh_Hans_CN",  "LOC_BELIEF_ITANG_DESCRIPTION",                             "市中心每相邻1个海岸和湖泊单元格，获得+1 [ICON_PRODUCTION] 生产力；市中心每相邻2个海岸和湖泊单元格+1 [ICON_CULTURE] 文化。沿海城市+1 [ICON_AMENITIES] 宜居度。"),
-    ("zh_Hans_CN",  "LOC_BELIEF_HD_DIONYSIAN_MYSTERIES_NAME",                   "酒神秘仪"),
-    ("zh_Hans_CN",  "LOC_BELIEF_HD_DIONYSIAN_MYSTERIES_DESCRIPTION",            "选择后即可在首都中获得一个免费的酒窖。酒窖+2 [ICON_PRODUCTION] 生产力。拥有酒窖的城市+1 [ICON_AMENITIES] 宜居度。可以使用 [ICON_Faith] 信仰值购买酒窖。");
+    ("zh_Hans_CN",  "LOC_BELIEF_ITANG_DESCRIPTION",                             "市中心每相邻1个海岸和湖泊单元格，获得+1 [ICON_PRODUCTION] 生产力；市中心每相邻2个海岸和湖泊单元格+1 [ICON_CULTURE] 文化。沿海城市+1 [ICON_AMENITIES] 宜居度。");
+    -- ("zh_Hans_CN",  "LOC_BELIEF_HD_DIONYSIAN_MYSTERIES_NAME",                   "酒神秘仪"),
+    -- ("zh_Hans_CN",  "LOC_BELIEF_HD_DIONYSIAN_MYSTERIES_DESCRIPTION",            "选择后即可在首都中获得一个免费的酒窖。酒窖+2 [ICON_PRODUCTION] 生产力。拥有酒窖的城市+1 [ICON_AMENITIES] 宜居度。可以使用 [ICON_Faith] 信仰值购买酒窖。");

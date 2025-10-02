@@ -286,3 +286,70 @@ function MadrasaGovernmentPolicyChanged(playerId, policyId)
 	end
 end
 Events.GovernmentPolicyChanged.Add(MadrasaGovernmentPolicyChanged);
+
+-- =====================================================================================================================================
+-- 自然环境保护部
+-- =====================================================================================================================================
+local BUILDING_SANCTUARY = GameInfo.Buildings['BUILDING_SANCTUARY'];
+
+function SanctuaryConstructed(playerId, cityId, buildingId, plotId, bOriginalConstruction)
+	if BUILDING_SANCTUARY and buildingId == BUILDING_SANCTUARY.Index then
+		local city = CityManager.GetCity(playerId, cityId);
+		if not city then return; end
+
+		local validResourceList = {};
+		local cityPlots = city:GetOwnedPlots();
+		for _, plot in pairs(cityPlots) do
+			if plot then
+				local resourceId = plot:GetResourceType();
+				-- 判断是否为生物类资源
+				if resourceId ~= nil and resourceId ~= -1 and Utils.IsResourceVisible(playerId, resourceId)
+				and Utils.BiologicalResourceList[resourceId] == true then
+					print("保护部 本城生物资源" .. Locale.Lookup(GameInfo.Resources[resourceId].Name))
+					-- 判断一环内是否有合法单元格
+					local vaildPlots = {};
+
+					for direction = 0, 5 do
+						local adjacentPlot = Map.GetAdjacentPlot(plot:GetX(), plot:GetY(), direction);
+						if adjacentPlot then
+							local districtId = adjacentPlot:GetDistrictType();
+							local improvementId = adjacentPlot:GetImprovementType();
+
+							if (districtId == nil or districtId == -1)
+							and (improvementId == nil or improvementId == -1)
+							and ResourceBuilder.CanHaveResource(adjacentPlot, resourceId) then
+								table.insert(vaildPlots, adjacentPlot);
+							end
+						end
+					end
+
+					print("一环内有" .. #vaildPlots .. "个可用单元格")
+					if #vaildPlots > 0 then
+						table.insert(validResourceList, {
+							resourceId = resourceId,
+							vaildPlots = vaildPlots
+						})
+					end
+					
+				end
+			end
+		end
+
+		if #validResourceList > 0 then
+			local randomResourceIndex = Game.GetRandNum(#validResourceList, "Sanctuary Get Random Resource For Player " .. playerId) + 1
+			local resourceId = validResourceList[randomResourceIndex].resourceId;
+			local vaildPlots = validResourceList[randomResourceIndex].vaildPlots;
+			local randomPlotIndex = Game.GetRandNum(#vaildPlots, "Sanctuary Get Random Plot For Player " .. playerId) + 1
+			local targetPlot = vaildPlots[randomPlotIndex];
+			
+			local resourceInfo = GameInfo.Resources[resourceId];
+			if resourceInfo then
+				Utils.GenerateResource(targetPlot, resourceId);
+				local msg = '[ICON_' .. resourceInfo.ResourceType .. ']' .. Locale.Lookup(resourceInfo.Name);
+				Game.AddWorldViewText(playerId, Locale.Lookup('LOC_BUILDING_SANCTUARY_TEXT', msg), targetPlot:GetX(), targetPlot:GetY());
+			end
+		end
+
+	end
+end
+GameEvents.BuildingConstructed.Add(SanctuaryConstructed)

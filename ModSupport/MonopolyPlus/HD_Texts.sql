@@ -7,7 +7,6 @@ where Tag LIKE "LOC_PROJECT_CREATE_CORPORATION_PRODUCT_%_DESCRIPTION" and Langua
 insert or replace into EnglishText
     (Tag,                                                           Text)
 values
-    ("LOC_PUBLIC_TRANSPORT_STATION",                                "Station, "),
     ("LOC_IMPROVEMENT_LEU_STATION_DESCRIPTION",                     "Improvement built by Tycoon or Military Engineers. Cannot be built Marsh, Swamp or Geothermal Fissure tiles. Only one may be built in each city, and may not be built adjacent to another Station. Railroads are instantly built on current and adjacent passable land tiles. Cost 2 [ICON_POWER] Power. [NEWLINE][NEWLINE]Improvements of this City provided +50% [ICON_TOURISM] Tourism. [NEWLINE][NEWLINE]Each type of adjacent Specialized districts or adjacent Aqueduct provide corresponding yield to International [ICON_TradeRoute] Trade Routes from this city. This bonus is doubled if this city is fully [ICON_POWER] Powered.");
 
 -- Language: zh_Hans_CN
@@ -18,7 +17,6 @@ values
     ("zh_Hans_CN",  "LOC_UNIT_LEU_TYCOON_NOMONOPOLY_DESCRIPTION",      "需要“工作坊”方可建造或购买的高价平民单位。[NEWLINE][NEWLINE]可以创建铁路和火车站来改善你的领土上的区域产出、贸易和 [ICON_PRODUCTION] 生产力。"),
     ("zh_Hans_CN",  "LOC_STATION_ADJ_PRODUCTION",                      "+{1_num} [ICON_PRODUCTION] 生产力来自相邻火车站。"),
     ("zh_Hans_CN",  "LOC_IMPROVEMENT_LEU_STATION_NAME",                "火车站"),
-    ("zh_Hans_CN",  "LOC_PUBLIC_TRANSPORT_STATION",                    "火车站、"),
     ("zh_Hans_CN",  "LOC_IMPROVEMENT_LEU_STATION_DESCRIPTION",         "由大亨或军事工程师建造，不能建在沼泽或地热裂缝上，一座城市只能拥有一个火车站，火车站不能与另一个火车站相邻。在所在单元格和所有相邻的可通行陆地单元格上自动创建铁路。消耗2 [ICON_POWER] 电力。[NEWLINE][NEWLINE]本城改良提供的 [ICON_TOURISM] 旅游业绩+50%。[NEWLINE][NEWLINE]相邻的每种专业化区域或水渠为本城出发的国际 [ICON_TradeRoute] 贸易路线提供对应产出；此城 [ICON_POWER] 供电充足时效果翻倍。");
 
 --------------------------------------------------------------------------------
@@ -82,16 +80,16 @@ values
     "+50% construction speed towards Tycoons in all cities."),
     ("zh_Hans_CN", 
     "LOC_GREAT_PERSON_INDIVIDUAL_LEU_ANDREW_CARNEGIE_ACTIVE",                   
-    "立即在该区域建造银行、市场和证券交易所。[NEWLINE]所有商业中心三级建筑+15 [ICON_GOLD] 金币。"),
+    "立即在该区域建造集市、银行、市场和证券交易所。[NEWLINE]所有商业中心三级建筑+15 [ICON_GOLD] 金币。"),
     ("en_US", 
     "LOC_GREAT_PERSON_INDIVIDUAL_LEU_ANDREW_CARNEGIE_ACTIVE",                   
-    "Instantly builds a Market, a Bank and a Stock Exchange in this city. [NEWLINE]Provides +15 [ICON_GOLD] Gold to Tier 3 buildings in Commercial Hub districts."),
+    "Instantly builds a Fair, a Market, a Bank and a Stock Exchange in this city. [NEWLINE]Provides +15 [ICON_GOLD] Gold to Tier 3 buildings in Commercial Hub districts."),
     ("zh_Hans_CN", 
     "LOC_JNR_GREAT_PERSON_INDIVIDUAL_LEU_ANDREW_CARNEGIE_ACTIVE",                   
-    "立即在该区域建造银行、市场和证券交易所。[NEWLINE]所有商业中心三级建筑+15 [ICON_GOLD] 金币。"),
+    "立即在该区域建造集市、银行、市场和证券交易所。[NEWLINE]所有商业中心三级建筑+15 [ICON_GOLD] 金币。"),
     ("en_US", 
     "LOC_JNR_GREAT_PERSON_INDIVIDUAL_LEU_ANDREW_CARNEGIE_ACTIVE",                   
-    "Instantly builds a Market, a Bank and a Stock Exchange in this city. [NEWLINE]Provides +15 [ICON_GOLD] Gold to Tier 3 buildings in Commercial Hub districts."),
+    "Instantly builds a Fair, a Market, a Bank and a Stock Exchange in this city. [NEWLINE]Provides +15 [ICON_GOLD] Gold to Tier 3 buildings in Commercial Hub districts."),
 
 -- --------------------------------------------------------------------
 -- -- Great Person Pedia

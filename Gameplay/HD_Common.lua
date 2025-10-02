@@ -678,17 +678,17 @@ local function GetCityPlotsResources(playerId, cityId, needImproved)
 	local cityPlots = city:GetOwnedPlots();
 	for _, plot in pairs(cityPlots) do
 		if plot then
-			local resourceHash = plot:GetResourceTypeHash();
-			if Utils.IsResourceVisible(playerId, resourceHash) then
+			local resourceId = plot:GetResourceType();
+			if resourceId ~= nil and resourceId ~= -1 and Utils.IsResourceVisible(playerId, resourceId) then
 				if not needImproved then
-					resourceList[GameInfo.Resources[resourceHash].ResourceType] = true;
-					-- print(Locale.Lookup(city:GetName()) .. ' 拥有 ' .. Locale.Lookup(GameInfo.Resources[resourceHash].Name))
+					resourceList[GameInfo.Resources[resourceId].ResourceType] = true;
+					print(Locale.Lookup(city:GetName()) .. ' 拥有 ' .. Locale.Lookup(GameInfo.Resources[resourceId].Name))
 				else
 					local districtId = plot:GetDistrictType();
 					local improvementId = plot:GetImprovementType();
 					if (districtId ~= nil and districtId > -1) or (improvementId ~= nil and improvementId > -1) then
-						resourceList[GameInfo.Resources[resourceHash].ResourceType] = true;
-						-- print(Locale.Lookup(city:GetName()) .. ' 拥有改良的 ' .. Locale.Lookup(GameInfo.Resources[resourceHash].Name))
+						resourceList[GameInfo.Resources[resourceId].ResourceType] = true;
+						print(Locale.Lookup(city:GetName()) .. ' 拥有改良的 ' .. Locale.Lookup(GameInfo.Resources[resourceId].Name))
 					end
 				end
 			end
@@ -709,3 +709,15 @@ function InitDummyBuildings()
 end
 InitDummyBuildings();
 Utils.DummyBuildingList = DummyBuildingList;
+
+-- 记录生物类资源
+local BiologicalResourceList = {};
+function InitBiologicalResourceList()
+	for row in GameInfo.HD_Resource_Classification() do
+		if row.ResourceClassificationType == 'RESOURCE_CLASSIFICATION_BIOLOGICAL' then
+			BiologicalResourceList[GameInfo.Resources[row.ResourceType].Index] = true;
+		end
+	end
+end
+InitBiologicalResourceList();
+Utils.BiologicalResourceList = BiologicalResourceList;

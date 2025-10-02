@@ -218,7 +218,7 @@ from HD_AIGreatPersonPoints union all select
 	ModifierId,		'Amount',					1
 from HD_AIGreatPersonPoints;
 
-update ModifierArguments set Value = 1 where Name = 'Amount' and ModifierId in
+update ModifierArguments set Value = 2 where Name = 'Amount' and ModifierId in
 	(select ModifierId from HD_AIGreatPersonPoints where GreatPersonClassType in ('GREAT_PERSON_CLASS_WRITER', 'GREAT_PERSON_CLASS_ARTIST', 'GREAT_PERSON_CLASS_MUSICIAN'));
 ------------------------------------------------------------------
 -- adjust district priority   调整基础产出倾向，这会让AI的坐地、科技市政、总督选择、建造选择等有所变化。
@@ -282,16 +282,8 @@ insert or replace into AiFavoredItems
 	(ListType,					Item,									Favored,	Value)
 values
 --将【粮仓】设置为比较热衷的建筑,设置额外价值粮仓0→20，-by siv1.35
---将【图腾柱】设置为不偏爱的建筑，但设置额外价值1，让有了宗教胜利欲望的AI去出。-by siv1.35
---为【工官】和【训练营】增加了价值-by siv1.35
---为【集市】和【贸易港市】降低了价值-by siv1.35
 --但是【远古城墙】从偏爱改为不偏爱，设置额外价值5，以避免砌砖后落地固定出城墙不出碑的情况-by siv1.35
 	('DLAdjustBuildings',		'BUILDING_GRANARY',						1,			20),
-	('DLAdjustBuildings',		'BUILDING_TOTEMS',						0,			1),	
-	('DLAdjustBuildings',		'BUILDING_OFFICIAL_RUN_HANDCRAFT',		1,			1),	
-	('DLAdjustBuildings',		'BUILDING_BOOTCAMP',					1,			0),	
-	('DLAdjustBuildings',		'BUILDING_FAIR',						0,			0),	
-	('DLAdjustBuildings',		'BUILDING_JNR_WHARF_TRADE',				0,			-3),	
 	('DLAdjustBuildings',		'BUILDING_WALLS',						0,			5),
 --增加【神社】的偏爱，以解锁传教士（应用于已经出了圣地的AI）-by siv1.35
 	('DLAdjustBuildings',		'BUILDING_SHRINE',						1,			60),
@@ -344,9 +336,9 @@ values
 	('DLAdjustCivics',			'CIVIC_CRAFTSMANSHIP',					1,			0),
 	('DLAdjustCivics',			'CIVIC_STATE_WORKFORCE',				1,			0),
 	('DLAdjustCivics',			'CIVIC_EARLY_EMPIRE',					1,			0),
-	('DLAdjustCivics',			'CIVIC_POLITICAL_PHILOSOPHY',			1,			0),
+	('DLAdjustCivics',			'CIVIC_POLITICAL_PHILOSOPHY',			1,			20),
 --戏剧诗歌/行政部门/历史哲学（解锁文艺学院，关键）
-	('DLAdjustCivics',			'CIVIC_DRAMA_POETRY',					1,			0),
+	('DLAdjustCivics',			'CIVIC_DRAMA_POETRY',					1,			20),
 	('DLAdjustCivics',			'CIVIC_CIVIL_SERVICE',					1,			0),
 	('DLAdjustCivics',			'CIVIC_HISTORICAL_PHILOSOPHY_HD',		1,			80),--上调，by siv1.35
 --为避免AI不换政体的情况，增加2级政体市政偏爱（归正会和探索） by siv1.35（但测试中AI还是基本不切政体）
@@ -454,11 +446,10 @@ values
 --保护区、水渠和外交区的偏好，避免AI错过有用的建筑资源
 	('DLAdjustDistricts',		'DISTRICT_PRESERVE',					1,			70),
 --神谕碑、古树林、观海石偏好（使AI大后期可以正常解锁并建造到后面的保护区高级建筑）
-	('DLAdjustBuildings',		'BUILDING_HD_MONASTERY.',				1,			500),
-	('DLAdjustBuildings',		'BUILDING_HD_HOLYWATERS',				1,			400),
 	('DLAdjustBuildings',		'BUILDING_GROVE',						1,			400),
 	('DLAdjustDistricts',		'DISTRICT_DIPLOMATIC_QUARTER',			1,			110),	
-	('DLAdjustDistricts',		'DISTRICT_AQUEDUCT',					1,			40);
+	('DLAdjustDistricts',		'DISTRICT_AQUEDUCT',					1,			40),	
+	('DLAdjustDistricts',		'DISTRICT_THEATER',					1,			40);
 
 
 

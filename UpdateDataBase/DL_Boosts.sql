@@ -75,7 +75,7 @@ update Boosts set BoostClass = 'BOOST_TRIGGER_NONE_LATE_GAME_CRITICAL_TECH', Bui
     TriggerDescription = 'LOC_BOOST_TRIGGER_OPERA_BALLET_HD', TriggerLongDescription = 'LOC_BOOST_TRIGGER_LONGDESC_OPERA_BALLET_HD'
 where CivicType = 'CIVIC_OPERA_BALLET';
 -- 大众媒体
-update Boosts set BoostClass = 'BOOST_TRIGGER_HAVE_X_BUILDINGS', BuildingType = 'BUILDING_HD_NEWSPAPER_OFFICE', NumItems = 2, BoostingTechType = null,
+update Boosts set BoostClass = 'BOOST_TRIGGER_CULTURVATE_CIVIC', BoostingCivicType = 'CIVIC_JOURNALISM_STUDIES_HD', NumItems = 0, BoostingTechType = null,
     TriggerDescription = 'LOC_BOOST_TRIGGER_MASS_MEDIA_HD', TriggerLongDescription = 'LOC_BOOST_TRIGGER_LONGDESC_MASS_MEDIA_HD'
 where CivicType = 'CIVIC_MASS_MEDIA';
 -- 阶级斗争
@@ -136,7 +136,7 @@ values
     -- 古生物学
     (217,       'CIVIC_PALEOBIOLOGY_HD',                    40,     'LOC_BOOST_TRIGGER_PALEOBIOLOGY_HD',                    'LOC_BOOST_TRIGGER_LONGDESC_PALEOBIOLOGY_HD',                       NULL,                       'BOOST_TRIGGER_RESEARCH_TECH',                      NULL,           NULL,                   NULL,                   'TECH_GEOLOGY_HD',          NULL,           0,          NULL,                   0),
     -- 法典
-    (218,       'CIVIC_CODE_OF_LAWS',                       40,     'LOC_BOOST_TRIGGER_CODE_OF_LAWS',                       'LOC_BOOST_TRIGGER_LONGDESC_CODE_OF_LAWS',                          NULL,                       'BOOST_TRIGGER_EMPIRE_POPULATION',                  NULL,           NULL,                   NULL,                   NULL,                       NULL,           4,          NULL,                   0),
+    (218,       'CIVIC_CODE_OF_LAWS',                       40,     'LOC_BOOST_TRIGGER_CODE_OF_LAWS',                       'LOC_BOOST_TRIGGER_LONGDESC_CODE_OF_LAWS',                          NULL,                       'BOOST_TRIGGER_EMPIRE_POPULATION',                  NULL,           NULL,                   NULL,                   NULL,                       NULL,           3,          NULL,                   0),
     -- 人类学
     (219,       'CIVIC_ANTHROPOLOGY_HD',                    40,     'LOC_BOOST_TRIGGER_ANTHROPOLOGY_HD',                    'LOC_BOOST_TRIGGER_LONGDESC_ANTHROPOLOGY_HD',                       NULL,                       'BOOST_TRIGGER_NONE_LATE_GAME_CRITICAL_TECH',       NULL,           NULL,                   NULL,                   NULL,                       NULL,           0,          NULL,                   0),
     -- 城市设计
@@ -183,7 +183,7 @@ values
     -- 大数据
     (262,       'TECH_BIG_DATA_HD',                         40,     'LOC_BOOST_TRIGGER_MUST_STEAL',                         'Critical late game tech - boost description not needed',           NULL,                        'BOOST_TRIGGER_NONE_LATE_GAME_CRITICAL_TECH',       NULL,           NULL,                      NULL,                         NULL,                    NULL,                       NULL,                0,          NULL,                   0),
     -- 马鞍
-    (263,       'TECH_SADDLE_HD',                           40,     'LOC_BOOST_TRIGGER_SADDLE_HD',                          'LOC_BOOST_TRIGGER_LONGDESC_SADDLE_HD',                             NULL,                        'BOOST_TRIGGER_HAVE_X_BUILDINGS',                   NULL,           'BUILDING_BOOTCAMP',       NULL,                         NULL,                    NULL,                       NULL,                1,          NULL,                   0),
+    (263,       'TECH_SADDLE_HD',                           40,     'LOC_BOOST_TRIGGER_SADDLE_HD',                          'LOC_BOOST_TRIGGER_LONGDESC_SADDLE_HD',                             'UNIT_BARBARIAN_HORSEMAN',   'BOOST_TRIGGER_KILL_WITH',                          NULL,           NULL,                      NULL,                         NULL,                    NULL,                       NULL,                0,          NULL,                   0),
     -- 集成电路
     (264,       'TECH_INTEGRATED_CIRCUIT_HD',               40,     'LOC_BOOST_TRIGGER_MUST_STEAL',                         'Critical late game tech - boost description not neededD',          NULL,                        'BOOST_TRIGGER_NONE_LATE_GAME_CRITICAL_TECH',       NULL,           NULL,                      NULL,                         NULL,                    NULL,                       NULL,                0,          NULL,                   0),
     -- 工业自动化
@@ -191,7 +191,7 @@ values
     -- 测绘学
     (266,       'TECH_GEOMATICS_HD',                        40,     'LOC_BOOST_TRIGGER_GEOMATICS_HD',                       'LOC_BOOST_TRIGGER_LONGDESC_GEOMATICS_HD',                          NULL,                        'BOOST_TRIGGER_HAVE_X_BUILDINGS',                   NULL,           'BUILDING_NILOMETER_HD',   NULL,                         NULL,                    NULL,                       NULL,                1,          NULL,                   0),
     -- 纺织
-    (267,       'TECH_TEXTILE_HD',                          40,     'LOC_BOOST_TRIGGER_TEXTILE_HD',                         'LOC_BOOST_TRIGGER_LONGDESC_TEXTILE_HD',                            NULL,                        'BOOST_TRIGGER_HAVE_X_BUILDINGS',                   NULL,           'BUILDING_FAIR',           NULL,                         NULL,                    NULL,                       NULL,                2,          NULL,                   0),
+    (267,       'TECH_TEXTILE_HD',                          40,     'LOC_BOOST_TRIGGER_TEXTILE_HD',                         'LOC_BOOST_TRIGGER_LONGDESC_TEXTILE_HD',                            NULL,                        'BOOST_TRIGGER_HAVE_X_BUILDINGS',                   NULL,           'BUILDING_FAIR',           NULL,                         NULL,                    NULL,                       NULL,                1,          NULL,                   0),
     -- 炼丹术
     (268,       'TECH_ALCHEMY_HD',                          40,     'LOC_BOOST_TRIGGER_ALCHEMY_HD',                         'LOC_BOOST_TRIGGER_LONGDESC_ALCHEMY_HD',                            NULL,                        'BOOST_TRIGGER_HAVE_X_IMPROVEMENTS',                NULL,           NULL,                      'IMPROVEMENT_MINE',           NULL,                    NULL,                       NULL,                1,          NULL,                   1),
     -- 制炭
@@ -223,7 +223,7 @@ update Boosts set BoostClass = 'BOOST_TRIGGER_OWN_X_UNITS_OF_TYPE', Unit1Type = 
 --update Boosts set BoostClass = 'BOOST_TRIGGER_HAVE_X_BUILDINGS', NumItems = 2,
 --    BuildingType = 'BUILDING_TEMPLE' where CivicType = 'CIVIC_REFORMED_CHURCH';
     -- 【后勤补给】市政鼓舞改为：拥有轮子科技
-update Boosts set BoostClass = 'BOOST_TRIGGER_RESEARCH_TECH', Unit1Type = NULL, NumItems = 0,
+update Boosts set BoostClass = 'BOOST_TRIGGER_RESEARCH_TECH', Unit1Type = NULL, NumItems = 0, GovernmentTierType = NULL,
     BoostingTechType = 'TECH_THE_WHEEL' where CivicType = 'CIVIC_DEFENSIVE_TACTICS';
     -- 【飞行】科技尤里卡改为：训练2个观测气球
 update Boosts set BoostClass = 'BOOST_TRIGGER_OWN_X_UNITS_OF_TYPE', Unit1Type = 'UNIT_OBSERVATION_BALLOON',

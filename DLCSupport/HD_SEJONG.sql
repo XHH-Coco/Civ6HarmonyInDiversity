@@ -150,21 +150,6 @@ from HD_NEW_CODIFIER;
 -- LA 获得槽位
 insert or replace into TraitModifiers
 	(TraitType,							ModifierId)
-values
-	('TRAIT_LEADER_SEJONG',	'HD_SEJONG_DISTRICT_SEOWON_WRITING_SLOT');
-
-insert or replace into Modifiers
-	(ModifierId,																ModifierType,																							SubjectRequirementSetId)
-values
-	('HD_SEJONG_DISTRICT_SEOWON_WRITING_SLOT',	'MODIFIER_PLAYER_CITIES_GRANT_BUILDING_IN_CITY_IGNORE',		'CITY_HAS_DISTRICT_SEOWON_REQUIREMENTS');
-
-insert or replace into ModifierArguments
-	(ModifierId,																Name,						Value)
-values
-	('HD_SEJONG_DISTRICT_SEOWON_WRITING_SLOT',	'BuildingType',	'BUILDING_SEOWON');
-
-insert or replace into TraitModifiers
-	(TraitType,							ModifierId)
 select
 	'TRAIT_LEADER_SEJONG',	'HD_SEJONG_' || BuildingType || '_WRITING_SLOT'
 from Buildings where PrereqDistrict = 'DISTRICT_CAMPUS' and TraitType is null and BuildingType not in (select BuildingType from HD_DUMMY_BUILDINGS);
@@ -196,8 +181,7 @@ from Buildings where PrereqDistrict = 'DISTRICT_CAMPUS' and TraitType is null an
 insert or replace into MomentIllustrations
 	(MomentIllustrationType, 								MomentDataType,					GameDataType,				Texture)
 values
-	('MOMENT_ILLUSTRATION_UNIQUE_UNIT', 		'MOMENT_DATA_UNIT',			'UNIT_HD_CODIFIER',	'Moment_Infrastructure_Korea.dds'),
-	('MOMENT_ILLUSTRATION_UNIQUE_BUILDING', 'MOMENT_DATA_BUILDING',	'BUILDING_SEOWON',	'Moment_Infrastructure_Korea.dds');
+	('MOMENT_ILLUSTRATION_UNIQUE_UNIT', 		'MOMENT_DATA_UNIT',			'UNIT_HD_CODIFIER',	'Moment_Infrastructure_Korea.dds');
 
 --狄奥多拉la拜占庭的宠儿：圣地和跑马场建成时对相邻单元格释放文化炸弹。建成圣地时获得一个建造者，建成圣地建筑时获得一个人口。创力宗教时可以额外选取一个信条。
 delete from TraitModifiers where TraitType = 'TRAIT_LEADER_THEODORA';

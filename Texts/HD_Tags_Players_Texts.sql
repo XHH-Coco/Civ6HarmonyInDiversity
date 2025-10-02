@@ -91,18 +91,8 @@ values
     ("Players:Expansion1_Players",  "CIVILIZATION_SPAIN",    "LEADER_PHILIP_II",     "BUILDING_EL_ESCORIAL_PALACE",  "ICON_BUILDING_EL_ESCORIAL_PALACE",     "LOC_BUILDING_EL_ESCORIAL_PALACE_NAME",     "LOC_BUILDING_EL_ESCORIAL_PALACE_DESCRIPTION",      31),
     ("Players:Expansion2_Players",  "CIVILIZATION_SPAIN",    "LEADER_PHILIP_II",     "BUILDING_EL_ESCORIAL_PALACE",  "ICON_BUILDING_EL_ESCORIAL_PALACE",     "LOC_BUILDING_EL_ESCORIAL_PALACE_NAME",     "LOC_BUILDING_EL_ESCORIAL_PALACE_DESCRIPTION",      31);
 
--- 印加
-update PlayerItems set Description = 'LOC_IMPROVEMENT_MOUNTAIN_ROAD_FRONTEND_DESCRIPTION' where Type = 'IMPROVEMENT_MOUNTAIN_ROAD';
-
 -- 日本
-update PlayerItems set
-    Type = 'BUILDING_HD_PIT_DWELLING',
-    Icon = 'ICON_BUILDING_HD_PIT_DWELLING',
-    Name = 'LOC_BUILDING_HD_PIT_DWELLING_NAME',
-    Description = 'LOC_BUILDING_HD_PIT_DWELLING_DESCRIPTION'
-where Type = 'BUILDING_ELECTRONICS_FACTORY';
--- 如果存在JNR道场，则竖穴坑居下放通用建筑
-delete from PlayerItems where Type = 'BUILDING_HD_PIT_DWELLING' and exists (select Type from PlayerItems where Type = 'BUILDING_JNR_DOJO');
+delete from PlayerItems where Type = 'BUILDING_ELECTRONICS_FACTORY';
 update PlayerItems set Description = 'LOC_BUILDING_JNR_DOJO_HD_DESCRIPTION' where Type = 'BUILDING_JNR_DOJO';
 
 -- 李裪
@@ -110,11 +100,6 @@ insert or ignore into PlayerItems
     (Domain,                        CivilizationType,        LeaderType,             Type,                  Icon,                        Name,                            Description,                             SortIndex)
 select
     "Players:Expansion2_Players",   "CIVILIZATION_KOREA",    "LEADER_SEJONG",        "UNIT_HD_CODIFIER",    "ICON_UNIT_HD_CODIFIER",     "LOC_UNIT_HD_CODIFIER_NAME",     "LOC_UNIT_HD_CODIFIER_DESCRIPTION",      50
-where exists (select LeaderType from Players where LeaderType = 'LEADER_SEJONG');
-insert or ignore into PlayerItems
-    (Domain,                        CivilizationType,        LeaderType,             Type,                  Icon,                        Name,                            Description,                             SortIndex)
-select
-    "Players:Expansion2_Players",   "CIVILIZATION_KOREA",    "LEADER_SEJONG",        "BUILDING_SEOWON",     "ICON_UNIT_HD_CODIFIER",     "LOC_BUILDING_SEOWON_NAME",      "LOC_BUILDING_SEOWON_DESCRIPTION",       51
 where exists (select LeaderType from Players where LeaderType = 'LEADER_SEJONG');
 
 --挪威
