@@ -140,7 +140,7 @@ values
     ("LOC_CIVIC_HOUSEHOLD_REGISTRATION_HD_DESCRIPTION",                      "+1 [ICON_FOOD] Food from Farms."),
     ("LOC_TECH_SQUARE_SAIL_HD_DESCRIPTION",                                  "Naval melee units can escort units (formation units all inherit escort's [ICON_MOVEMENT] Movement speed)."),
     -- Boosts
-    ("LOC_BOOST_TRIGGER_CONSTRUCTION",                                       "Build a Water Mill."),
+    ("LOC_BOOST_TRIGGER_CONSTRUCTION",                                       "Build a Mill."),
     ("LOC_BOOST_TRIGGER_LONGDESC_CONSTRUCTION",                              "Building grain processing facilities taught people a lot about engineering construction."),
     ("LOC_BOOST_TRIGGER_MASS_PRODUCTION",                                    "Build 2 Lumber Mills."),
     ("LOC_BOOST_TRIGGER_BRONZE_WORKING",                                     "Kill 2 Barbarians."),
@@ -521,7 +521,7 @@ values
 	("zh_Hans_CN",	"LOC_CIVIC_HOUSEHOLD_REGISTRATION_HD_DESCRIPTION",						"农场+1 [ICON_FOOD] 食物。"),
     ("zh_Hans_CN",  "LOC_TECH_SQUARE_SAIL_HD_DESCRIPTION",                                  "海军近战单位获得能力：所有编队单位将继承护卫队的 [ICON_MOVEMENT] 移动力。"),
     -- Boosts
-    ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_CONSTRUCTION",                                       "建造1座水磨。"),
+    ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_CONSTRUCTION",                                       "建造1座磨坊。"),
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_LONGDESC_CONSTRUCTION",                              "建造谷物加工设施让人们了解了很多关于工程建筑的知识。"),
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_FEUDALISM",                                          "建造4座农场。"),
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_MASS_PRODUCTION",                                    "建造2座伐木场。"),
