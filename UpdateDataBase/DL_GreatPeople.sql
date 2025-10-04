@@ -752,27 +752,27 @@ insert or replace into GreatPersonIndividualActionModifiers
 	(GreatPersonIndividualType,							ModifierId,									AttachmentTargetType)
 select
 	'GREAT_PERSON_INDIVIDUAL_HD_CROESUS',				'CROESUS_' || BuildingType || '_GOLD',		'GREAT_PERSON_ACTION_ATTACHMENT_TARGET_DISTRICT_IN_TILE'
-from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_COMMERCIAL_HUB' and Tier = 1 and ReplacesOther = 0;
+from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_COMMERCIAL_HUB' and Tier = 2 and ReplacesOther = 0;
 insert or replace into Modifiers
 	(ModifierId,										ModifierType)
 select
 	'CROESUS_' || BuildingType || '_GOLD',				'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE'
-from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_COMMERCIAL_HUB' and Tier = 1 and ReplacesOther = 0;
+from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_COMMERCIAL_HUB' and Tier = 2 and ReplacesOther = 0;
 insert or replace into ModifierArguments
 	(ModifierId,										Name,				Value)
 select
 	'CROESUS_' || BuildingType || '_GOLD',				'BuildingType',		BuildingType
-from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_COMMERCIAL_HUB' and Tier = 1 and ReplacesOther = 0;
+from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_COMMERCIAL_HUB' and Tier = 2 and ReplacesOther = 0;
 insert or replace into ModifierArguments
 	(ModifierId,										Name,				Value)
 select
 	'CROESUS_' || BuildingType || '_GOLD',				'YieldType',		'YIELD_GOLD'
-from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_COMMERCIAL_HUB' and Tier = 1 and ReplacesOther = 0;
+from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_COMMERCIAL_HUB' and Tier = 2 and ReplacesOther = 0;
 insert or replace into ModifierArguments
 	(ModifierId,										Name,				Value)
 select
 	'CROESUS_' || BuildingType || '_GOLD',				'Amount',			3
-from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_COMMERCIAL_HUB' and Tier = 1 and ReplacesOther = 0;
+from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_COMMERCIAL_HUB' and Tier = 2 and ReplacesOther = 0;
 
 -- Jamsetji Tata and Masaru Ibuka
 update ModifierArguments set Value = 100 where ModifierId in ('GREATPERSON_CAMPUS_TOURISM', 'GREATPERSON_INDUSTRIAL_ZONE_TOURISM') and Name = 'Amount';
