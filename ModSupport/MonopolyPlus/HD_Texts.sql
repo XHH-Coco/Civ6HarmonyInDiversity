@@ -80,16 +80,16 @@ values
     "+50% construction speed towards Tycoons in all cities."),
     ("zh_Hans_CN", 
     "LOC_GREAT_PERSON_INDIVIDUAL_LEU_ANDREW_CARNEGIE_ACTIVE",                   
-    "立即在该区域建造集市、银行、市场和证券交易所。[NEWLINE]所有商业中心三级建筑+15 [ICON_GOLD] 金币。"),
+    "立即在该区域建造集市、银行、市场和证券交易所。[NEWLINE]所有商业中心四级建筑+15 [ICON_GOLD] 金币。"),
     ("en_US", 
     "LOC_GREAT_PERSON_INDIVIDUAL_LEU_ANDREW_CARNEGIE_ACTIVE",                   
-    "Instantly builds a Fair, a Market, a Bank and a Stock Exchange in this city. [NEWLINE]Provides +15 [ICON_GOLD] Gold to Tier 3 buildings in Commercial Hub districts."),
+    "Instantly builds a Fair, a Market, a Bank and a Stock Exchange in this city. [NEWLINE]Provides +15 [ICON_GOLD] Gold to Tier 4 buildings in Commercial Hub districts."),
     ("zh_Hans_CN", 
     "LOC_JNR_GREAT_PERSON_INDIVIDUAL_LEU_ANDREW_CARNEGIE_ACTIVE",                   
-    "立即在该区域建造集市、银行、市场和证券交易所。[NEWLINE]所有商业中心三级建筑+15 [ICON_GOLD] 金币。"),
+    "立即在该区域建造集市、银行、市场和证券交易所。[NEWLINE]所有商业中心四级建筑+15 [ICON_GOLD] 金币。"),
     ("en_US", 
     "LOC_JNR_GREAT_PERSON_INDIVIDUAL_LEU_ANDREW_CARNEGIE_ACTIVE",                   
-    "Instantly builds a Fair, a Market, a Bank and a Stock Exchange in this city. [NEWLINE]Provides +15 [ICON_GOLD] Gold to Tier 3 buildings in Commercial Hub districts."),
+    "Instantly builds a Fair, a Market, a Bank and a Stock Exchange in this city. [NEWLINE]Provides +15 [ICON_GOLD] Gold to Tier 4 buildings in Commercial Hub districts."),
 
 -- --------------------------------------------------------------------
 -- -- Great Person Pedia
