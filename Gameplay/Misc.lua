@@ -450,44 +450,6 @@ GameEvents.GreatPersonHandleActivation.Add(function (unitOwner, unitId, greatPer
 	end
 end);
 
--- 切换政策事件
--- local BUILDING_HD_BUS_STOP_POLICY_TAG = 'BUILDING_HD_BUS_STOP_'
--- local BUILDING_HD_NEWSPAPER_OFFICE_POLICY_TAG = 'BUILDING_HD_NEWSPAPER_OFFICE_'
--- local BUILDING_HD_LAW_OFFICE_POLICY_TAG = 'BUILDING_HD_LAW_OFFICE_'
--- function OnPolicyChangedBuildingYieldChange(playerId, policyId)
--- 	local player = Players[playerId];
--- 	local playerCulture = player:GetCulture()
--- 	local numSlots = playerCulture:GetNumPolicySlots();
--- 	for i = 0, numSlots-1, 1 do
--- 		local	policyId = playerCulture:GetSlotPolicy(i);
--- 		if policyId ~= nil and policyId ~= -1 then
--- 			local policy = GameInfo.Policies[policyId]
--- 			if policy.GovernmentSlotType == 'SLOT_MILITARY' then
--- 				if player:GetProperty(BUILDING_HD_LAW_OFFICE_POLICY_TAG .. policy.PolicyType) ~= 1 then
--- 					player:AttachModifierByID('HD_BUILDING_HD_LAW_OFFICE_PRODUCTION')
--- 					player:SetProperty(BUILDING_HD_LAW_OFFICE_POLICY_TAG .. policy.PolicyType, 1)
--- 					-- print('OnPolicyChangedBuildingYieldChange', Locale.Lookup(policy.Name), policy.GovernmentSlotType)
--- 				end
--- 			elseif policy.GovernmentSlotType == 'SLOT_ECONOMIC' then
--- 				if player:GetProperty(BUILDING_HD_BUS_STOP_POLICY_TAG .. policy.PolicyType) ~= 1 then
--- 					player:AttachModifierByID('HD_BUILDING_HD_BUS_STOP_GOLD')
--- 					player:SetProperty(BUILDING_HD_BUS_STOP_POLICY_TAG .. policy.PolicyType, 1)
--- 					-- print('OnPolicyChangedBuildingYieldChange', Locale.Lookup(policy.Name), policy.GovernmentSlotType)
--- 				end
--- 			elseif policy.GovernmentSlotType == 'SLOT_DIPLOMATIC' then
-
--- 			elseif policy.GovernmentSlotType == 'SLOT_GREAT_PERSON' or policy.GovernmentSlotType == 'SLOT_WILDCARD' then
--- 				if player:GetProperty(BUILDING_HD_NEWSPAPER_OFFICE_POLICY_TAG .. policy.PolicyType) ~= 1 then
--- 					player:AttachModifierByID('HD_BUILDING_HD_NEWSPAPER_OFFICE_CULTURE')
--- 					player:SetProperty(BUILDING_HD_NEWSPAPER_OFFICE_POLICY_TAG .. policy.PolicyType, 1)
--- 					-- print('OnPolicyChangedBuildingYieldChange', Locale.Lookup(policy.Name), policy.GovernmentSlotType)
--- 				end
--- 			end
--- 		end
--- 	end
--- end
--- Events.GovernmentPolicyChanged.Add(OnPolicyChangedBuildingYieldChange);
-
 -- 随机部落村庄奖励
 local goodyHutRewards = {};
 function initGoodyHutReward()

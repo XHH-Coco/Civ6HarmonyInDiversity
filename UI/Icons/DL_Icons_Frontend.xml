@@ -29,15 +29,10 @@
 		<Row Name="ICON_BUILDING_EL_ESCORIAL_PALACE"                    Atlas="ATLAS_New_Buildings_2" Index="22"/>
 		<Row Name="ICON_BUILDING_EL_ESCORIAL_PALACE_FOW"                Atlas="ATLAS_New_Buildings_2" Index="22"/>
 
-		<Row Name="ICON_BUILDING_HD_PIT_DWELLING"                       Atlas="ATLAS_New_Buildings_2" Index="1"/>
-		<Row Name="ICON_BUILDING_HD_PIT_DWELLING_FOW"                   Atlas="ATLAS_New_Buildings_2" Index="1"/>
-
 		<Row Name="ICON_UNIT_HD_CODIFIER"                 Atlas="ATLAS_HD_NEW_UNITS" Index="0"/>
     <Row Name="ICON_UNIT_HD_CODIFIER_FOW"                 Atlas="ATLAS_HD_NEW_UNITS" Index="0"/>
     <Row Name="ICON_BUILDING_SEOWON" Atlas="ATLAS_HD_NEW_UNITS" Index="0"/>
 		<Row Name="ICON_BUILDING_SEOWON_FOW" Atlas="ATLAS_HD_NEW_UNITS" Index="0"/>
-    <Row Name="ICON_BUILDING_SEOWON_INTERNAL_ONLY" Atlas="ATLAS_HD_NEW_UNITS" Index="0"/>
-		<Row Name="ICON_BUILDING_SEOWON_INTERNAL_ONLY_FOW" Atlas="ATLAS_HD_NEW_UNITS" Index="0"/>
 		<Row Name="ICON_UNIT_ENKIDU_HD"                 Atlas="ATLAS_HD_NEW_UNITS" Index="5"/>
     <Row Name="ICON_UNIT_ENKIDU_HD_FOW"                 Atlas="ATLAS_HD_NEW_UNITS" Index="5"/>
 		<Row Name="ICON_UNIT_QIN_ELITE_SOLDIER_HD"                 Atlas="ATLAS_HD_NEW_UNITS" Index="6"/>

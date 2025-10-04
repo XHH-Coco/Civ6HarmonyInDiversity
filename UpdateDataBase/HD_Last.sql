@@ -6,77 +6,7 @@ insert or ignore into CivilopediaPageExcludes (SectionId, PageId)
 UPDATE Buildings SET Description = "{" || Description || "}{LOC_EPSTWEAK_WONDER_WORDING_TOURISM}" WHERE IsWonder = 1;
 
 --------------------------------------------------------------------------------------------------------------------
--- 改良分类
-  -- 基础改良
-insert into HD_Basic_Improvements (ImprovementType) select ImprovementType from Improvements where ImprovementType in (
-  'IMPROVEMENT_FARM',
-  'IMPROVEMENT_MINE',
-  'IMPROVEMENT_QUARRY',
-  'IMPROVEMENT_FISHING_BOATS',
-  'IMPROVEMENT_PASTURE',
-  'IMPROVEMENT_PLANTATION',
-  'IMPROVEMENT_CAMP',
-  'IMPROVEMENT_LUMBER_MILL',
-  'IMPROVEMENT_FISHERY',
-  'IMPROVEMENT_OIL_WELL',
-  'IMPROVEMENT_OFFSHORE_OIL_RIG'
-);
-
-  -- 特色改良
-insert into HD_Unique_Improvements (ImprovementType) select ImprovementType from Improvements where TraitType is not Null and TraitType not like 'MINOR_%' and BarbarianCamp = 0 and Goody = 0;
-
-  -- 城邦特色改良
-insert into HD_CityState_Improvements (ImprovementType) select ImprovementType from Improvements where TraitType is not Null and TraitType like 'MINOR_%' and BarbarianCamp = 0 and Goody = 0;
-
-  -- 城市设施改良
-insert into HD_Urban_Facilities_Improvements (ImprovementType) select ImprovementType from Improvements where ImprovementType in (
-  'IMPROVEMENT_GEOTHERMAL_PLANT',
-  'IMPROVEMENT_SOLAR_FARM',
-  'IMPROVEMENT_WIND_FARM',
-  'IMPROVEMENT_OFFSHORE_WIND_FARM',
-  'IMPROVEMENT_MOUNTAIN_TUNNEL',
-  'IMPROVEMENT_INDUSTRY',
-  'IMPROVEMENT_CORPORATION',
-  'IMPROVEMENT_LEU_WAREHOUSE',
-  'IMPROVEMENT_LEU_CONTAINER_PORT',
-  'IMPROVEMENT_LEU_STATION',
-  'IMPROVEMENT_LEU_TRANSNATIONAL',
-  'IMPROVEMENT_LEU_TRANSNATIONAL_SEA',
-  'IMPROVEMENT_MOUNTAIN_ROAD'
-);
-
-  -- 旅游设施改良
-insert into HD_Tourism_Facilities_Improvements (ImprovementType) select ImprovementType from Improvements where ImprovementType in (
-  'IMPROVEMENT_BEACH_RESORT',
-  'IMPROVEMENT_CITY_PARK',
-  'IMPROVEMENT_SKI_RESORT',
-  'IMPROVEMENT_SEASTEAD',
-  'IMPROVEMENT_JNR_OASIS_FARM',
-  'IMPROVEMENT_JNR_REED_HOME'
-);
-
-  -- 军事设施改良
-insert into HD_Military_Facilities_Improvements (ImprovementType) select ImprovementType from Improvements where ImprovementType in (
-  'IMPROVEMENT_FORT',
-  'IMPROVEMENT_AIRSTRIP',
-  'IMPROVEMENT_MISSILE_SILO',
-  'IMPROVEMENT_ROMAN_FORT',
-  'IMPROVEMENT_MAORI_PA',
-  'IMPROVEMENT_SAILOR_WATCHTOWER'
-);
-
-  -- 其他通用改良
-insert into HD_Common_Improvements (ImprovementType) select ImprovementType from Improvements where
-  ImprovementType not in (select ImprovementType from HD_Basic_Improvements) and
-  ImprovementType not in (select ImprovementType from HD_Unique_Improvements) and
-  ImprovementType not in (select ImprovementType from HD_CityState_Improvements) and
-  ImprovementType not in (select ImprovementType from HD_Urban_Facilities_Improvements) and
-  ImprovementType not in (select ImprovementType from HD_Tourism_Facilities_Improvements) and
-  ImprovementType not in (select ImprovementType from HD_Military_Facilities_Improvements) and
-  BarbarianCamp = 0 and Goody = 0;
-
---------------------------------------------------------------------------------------------------------------------
--- 资源分类
+-- 百科资源分类
   -- 战略 文物资源
 insert into HD_Civilopedia_Resource_Groups (ResourceType, PageGroupId)
   select ResourceType, ResourceClassType from Resources where ResourceClassType not in ("RESOURCECLASS_BONUS", "RESOURCECLASS_LUXURY");
@@ -86,7 +16,7 @@ insert into HD_Civilopedia_Resource_Groups (ResourceType, PageGroupId)
   select a.ResourceType, b.ImprovementType || "_" || a.ResourceClassType
   from Resources a inner join Improvement_ValidResources b on a.ResourceType = b.ResourceType
   where ResourceClassType in ("RESOURCECLASS_BONUS", "RESOURCECLASS_LUXURY")
-  and b.ImprovementType in (select ImprovementType from HD_Basic_Improvements);
+  and b.ImprovementType in (select ImprovementType from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_BASIC');
 
   -- 奇观 奢侈资源
 insert into HD_Civilopedia_Resource_Groups (ResourceType, PageGroupId)

@@ -784,7 +784,6 @@
       <File>Assets/Moments/UNIT_ENKIDU_HD_MONMENT.dds</File>
       <File>Assets/Moments/UNIT_QIN_ELITE_SOLDIER_HD_MONMENT.dds</File>
       <File>Assets/Moments/UNIT_PLUM_INTERNAL_SECURITY_HD_MONMENT.dds</File>
-      <File>Assets/Moments/BUILDING_HD_PIT_DWELLING_MONMENT.dds</File>
       <File>Assets/Moments/BUILDING_EL_ESCORIAL_PALACE_MOMENT.dds</File>
       <File>Assets/GreatPeople/GREAT_PERSON_INDIVIDUAL_ABDUS_SALAM.dds</File>
       <File>Assets/GreatPeople/GREAT_PERSON_INDIVIDUAL_CWON_CARAVAGGIO.dds</File>
@@ -1077,7 +1076,7 @@
     </AddGameplayScripts>
     <!-- Wetlands -->
     <UpdateDatabase id="WetLands_mod_support_removes" criteria="WetLands_Expansion2">
-      <Properties><LoadOrder>15003</LoadOrder></Properties>
+      <Properties><LoadOrder>12000</LoadOrder></Properties>
       <File>ModSupport/WetLands/DL_Removes.sql</File>
     </UpdateDatabase>
     <UpdateDatabase id="WetLands_mod_support" criteria="WetLands_Expansion2">
@@ -1495,7 +1494,15 @@
       <File>UpdateDataBase/DL_UnitDefinations.sql</File>
       <File>UpdateDataBase/DL_ImprovementDefinations.sql</File>
       <File>UpdateDataBase/DL_ProjectDefinations.sql</File>
-      <File>UpdateDataBase/HD_Resource_Classification.sql</File>
+      <File>UpdateDataBase/Classifications/HD_Classification_Tables.sql</File>
+    </UpdateDatabase>
+
+    <UpdateDatabase id="BuildingDefinations" criteria="Expansion2">
+      <Properties><LoadOrder>15000</LoadOrder></Properties>
+      <File>UpdateDataBase/Classifications/HD_Building_Classification.sql</File>
+      <File>UpdateDataBase/Classifications/HD_District_Classification.sql</File>
+      <File>UpdateDataBase/Classifications/HD_Improvement_Classification.sql</File>
+      <File>UpdateDataBase/Classifications/HD_Resource_Classification.sql</File>
     </UpdateDatabase>
 
     <UpdateDatabase id="FasterStartingSettlers" criteria="Expansion2">
@@ -1817,10 +1824,6 @@
       <File>UI/Icons/HD_Icons_Units.xml</File>
       <File>UI/Icons/HD_Icons_STUUexpansion.xml</File>
     </UpdateIcons>
-    <UpdateIcons id="DL_Icons_Vietnam" criteria="DLC_Vietnam">
-      <Properties><LoadOrder>16016</LoadOrder></Properties>
-      <File>UI/Icons/DL_Icons_Buildings_Vietnam.xml</File>
-    </UpdateIcons>
     <!-- Gameplay-->
     <AddGameplayScripts id="DL_Scripts_Gameplay" criteria="Expansion2">
       <Properties><LoadOrder>16017</LoadOrder></Properties>
@@ -1903,6 +1906,7 @@
       <File>Texts/HD_Text_Projects.sql</File>
       <File>Texts/HD_Text_GreatPerson.sql</File>
       <File>Texts/HD_Text_GreatPerson_New.sql</File>
+      <File>Texts/HD_Text_Classifications.sql</File>
     </UpdateText>
     <UpdateText id="DL_Text_Late" criteria="Expansion2">
       <Properties><LoadOrder>20000</LoadOrder></Properties>
@@ -2407,7 +2411,6 @@
     <File>UI/Icons/DL_Icons_Fixing.sql</File>
     <File>UI/Icons/DL_Icons_Beliefs.xml</File>
     <File>UI/Icons/DL_Icons_Buildings.xml</File>
-    <File>UI/Icons/DL_Icons_Buildings_Vietnam.xml</File>
 	  <File>UI/Icons/DL_Icons_Frontend.xml</File>
     <File>UI/Icons/DL_Icons_Policies.xml</File>
     <File>UI/Icons/DL_Icons_Projects.xml</File>
@@ -2703,7 +2706,11 @@
     <File>UpdateDataBase/DL_Wonders.sql</File>
     <File>UpdateDataBase/DL_WonderTheming.sql</File>
     <File>UpdateDataBase/DL_ModifierString.sql</File>
-    <File>UpdateDataBase/HD_Resource_Classification.sql</File>
+    <File>UpdateDataBase/Classifications/HD_Classification_Tables.sql</File>
+    <File>UpdateDataBase/Classifications/HD_Building_Classification.sql</File>
+    <File>UpdateDataBase/Classifications/HD_District_Classification.sql</File>
+    <File>UpdateDataBase/Classifications/HD_Improvement_Classification.sql</File>
+    <File>UpdateDataBase/Classifications/HD_Resource_Classification.sql</File>
 
     <!-- Texts -->
     <File>Texts/HD_Tags_Players_Texts_Early.sql</File>
@@ -2744,6 +2751,7 @@
     <File>Texts/HD_Text_GreatPerson_New.sql</File>
     <File>Texts/HD_Text_Catherine_De_Medici.sql</File>
     <File>Texts/HD_Text_Mod_Titles.sql</File>
+    <File>Texts/HD_Text_Classifications.sql</File>
     
     <!-- Assets -->
     <File>Assets/TechCivics/HDCivicIcons_38.dds</File>
@@ -2908,7 +2916,6 @@
     <File>Assets/Moments/UNIT_ENKIDU_HD_MONMENT.dds</File>
     <File>Assets/Moments/UNIT_QIN_ELITE_SOLDIER_HD_MONMENT.dds</File>
     <File>Assets/Moments/UNIT_PLUM_INTERNAL_SECURITY_HD_MONMENT.dds</File>
-    <File>Assets/Moments/BUILDING_HD_PIT_DWELLING_MONMENT.dds</File>
     <File>Assets/Moments/BUILDING_EL_ESCORIAL_PALACE_MOMENT.dds</File>
     <File>Assets/GreatPeople/GREAT_PERSON_INDIVIDUAL_ABDUS_SALAM.dds</File>
     <File>Assets/GreatPeople/GREAT_PERSON_INDIVIDUAL_CWON_CARAVAGGIO.dds</File>

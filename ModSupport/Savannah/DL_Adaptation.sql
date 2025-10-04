@@ -88,36 +88,6 @@ delete from TraitModifiers where TraitType = 'TRAIT_CIVILIZATION_VIETNAM' and Mo
 delete from TraitModifiers where TraitType = 'TRAIT_CIVILIZATION_VIETNAM' and ModifierId = 'TRAIT_JNR_SAVANNAH_BUILDINGS_FAITH';
 delete from BuildingModifiers where BuildingType = 'BUILDING_ZOO' and ModifierId = 'ZOO_JNR_SAVANNAH_SCIENCE';
 
---古树林与森林保护部
-insert or ignore into RequirementSets
-	(RequirementSetId, 						        RequirementSetType)
-values
-    ('HD_PLOT_HAS_GROVE_FEATURE',					'REQUIREMENTSET_TEST_ANY'),
-	('HD_PLOT_HAS_SANCTUARY_FEATURE',		        'REQUIREMENTSET_TEST_ANY'),
-    ('HD_PLOT_HAS_CHARMING_SANCTUARY_FEATURE',		'REQUIREMENTSET_TEST_ALL'),
-    ('HD_PLOT_HAS_BREATHTAKING_SANCTUARY_FEATURE',	'REQUIREMENTSET_TEST_ALL'),
-    ('HD_ON_OR_ADJACENT_FOREST',					'REQUIREMENTSET_TEST_ANY');
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId, 						        RequirementId)
-values
-    ('HD_PLOT_HAS_GROVE_FEATURE',			        'HD_REQUIRES_PLOT_HAS_FEATURE_JNR_SAVANNAH'),
-	('HD_PLOT_HAS_SANCTUARY_FEATURE',		        'HD_REQUIRES_PLOT_HAS_FEATURE_FOREST'),
-    ('HD_PLOT_HAS_SANCTUARY_FEATURE',		        'HD_REQUIRES_PLOT_HAS_FEATURE_JNR_SAVANNAH'),
-    ('HD_PLOT_HAS_CHARMING_SANCTUARY_FEATURE',		'REQUIRES_PLOT_CHARMING_APPEAL'),
-    ('HD_PLOT_HAS_CHARMING_SANCTUARY_FEATURE',		'HD_PLOT_HAS_SANCTUARY_FEATURE_MET'),
-    ('HD_PLOT_HAS_BREATHTAKING_SANCTUARY_FEATURE',	'REQUIRES_PLOT_BREATHTAKING_APPEAL'),
-    ('HD_PLOT_HAS_BREATHTAKING_SANCTUARY_FEATURE',	'HD_PLOT_HAS_SANCTUARY_FEATURE_MET'),
-    ('HD_ON_OR_ADJACENT_FOREST',					'HD_REQUIRES_PLOT_HAS_FEATURE_JNR_SAVANNAH'),
-    ('HD_ON_OR_ADJACENT_FOREST',					'HD_REQUIRES_PLOT_ADJACENT_TO_FEATURE_JNR_SAVANNAH');
-insert or ignore into Requirements
-	(RequirementId,									                RequirementType)
-values
-    ('HD_PLOT_HAS_SANCTUARY_FEATURE_MET',   		                'REQUIREMENT_REQUIREMENTSET_IS_MET');
-insert or ignore into RequirementArguments
-	(RequirementId,									                Name,				    Value)
-values
-    ('HD_PLOT_HAS_SANCTUARY_FEATURE_MET',                           'RequirementSetId',     'HD_PLOT_HAS_SANCTUARY_FEATURE');
-
 insert or replace into TraitModifiers
 	(TraitType,								ModifierId)
 select

@@ -41,8 +41,7 @@ insert or replace into RequirementSets
 values  ('SUK_OCEANS_AQUARIUM_KELP_REQUIREMENTS',                   'REQUIREMENTSET_TEST_ANY');
 insert or replace into RequirementSetRequirements
         (RequirementSetId,                                          RequirementId)
-values  ('SUK_OCEANS_AQUARIUM_KELP_REQUIREMENTS',                   'REQUIRES_PLOT_HAS_SUK_KELP'),
-        ('TOTEMS_ADJACENT_REQUIREMENT',                             'HD_REQUIRES_PLOT_ADJACENT_TO_FEATURE_SUK_KELP');
+values  ('SUK_OCEANS_AQUARIUM_KELP_REQUIREMENTS',                   'REQUIRES_PLOT_HAS_SUK_KELP');
 
 insert or ignore into Resource_ValidFeatures
         (ResourceType,				FeatureType)

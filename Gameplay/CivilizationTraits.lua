@@ -2847,15 +2847,25 @@ function SeJongBuildingConstructed(playerId, cityId, buildingType, plotId, origi
 end
 GameEvents.BuildingConstructed.Add(SeJongBuildingConstructed);
 
--- 书院地基送伟人
+-- 书院地基送伟人 送槽位
+local BUILDING_SEOWON_INDEX = GameInfo.Buildings["BUILDING_SEOWON"].Index
 function SeJongDistrictConstructed(playerId, districtType, x, y)
 	if not LeaderHasTrait(playerId, 'TRAIT_LEADER_SEJONG') then
 		return;
 	end
-	local player = Players[playerId];
 
 	if districtType == DISTRICT_SEOWON_INDEX or districtType == DISTRICT_CAMPUS_INDEX then
+		-- 送伟人
 		GrantCodifier(playerId);
+
+		-- 送虚拟建筑 槽位
+		local plot = Map.GetPlot(x, y);
+		if plot then
+			local city = Cities.GetPlotPurchaseCity(plot);
+      if city then
+        city:GetBuildQueue():CreateBuilding(BUILDING_SEOWON_INDEX)
+      end
+		end
 	end
 end
 GameEvents.OnDistrictConstructed.Add(SeJongDistrictConstructed);

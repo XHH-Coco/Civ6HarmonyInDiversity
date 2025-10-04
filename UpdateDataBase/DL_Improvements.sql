@@ -918,56 +918,25 @@ values
 insert or replace into Modifiers
 	(ModifierId,											ModifierType,																						SubjectRequirementSetId)
 values
-	('HD_MOUNTAIN_ROAD_GOLD',					'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'PLOT_HAS_IMPROVEMENT_MOUNTAIN_ROAD_REQUIREMENTS'),
-	('HD_MOUNTAIN_ROAD_PRODUCTION',		'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'PLOT_HAS_IMPROVEMENT_MOUNTAIN_ROAD_REQUIREMENTS');
+	('HD_MOUNTAIN_ROAD_YIELD',				'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'PLOT_HAS_IMPROVEMENT_MOUNTAIN_ROAD_REQUIREMENTS');
 
 insert or replace into ModifierArguments
 	(ModifierId,											Name,							Value)
 values
-	('HD_MOUNTAIN_ROAD_GOLD',					'YieldType',			'YIELD_GOLD'),
-	('HD_MOUNTAIN_ROAD_GOLD',					'Amount',					3),
-	('HD_MOUNTAIN_ROAD_PRODUCTION',		'YieldType',			'YIELD_PRODUCTION'),
-	('HD_MOUNTAIN_ROAD_PRODUCTION',		'Amount',					2);
+	('HD_MOUNTAIN_ROAD_YIELD',				'YieldType',			'YIELD_GOLD,YIELD_PRODUCTION'),
+	('HD_MOUNTAIN_ROAD_YIELD',				'Amount',					'3,2');
 
 insert or replace into ImprovementModifiers (ImprovementType, ModifierId)
-	select ImprovementType, 'HD_MOUNTAIN_ROAD_GOLD'
-	from Improvements where ImprovementType in (
-		'IMPROVEMENT_LEU_STATION',
-		'IMPROVEMENT_MOUNTAIN_TUNNEL'
-	);
+	select ImprovementType, 'HD_MOUNTAIN_ROAD_YIELD'
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_TRANSPORTATION_FACILITIES' and ImprovementType != 'IMPROVEMENT_MOUNTAIN_ROAD';
 
 insert or replace into BuildingModifiers (BuildingType, ModifierId)
-	select BuildingType, 'HD_MOUNTAIN_ROAD_GOLD'
-	from Buildings where BuildingType in (
-		'BUILDING_HD_BUS_STOP',
-		'BUILDING_JNR_TRANSIT_HUB'
-	);
+	select BuildingType, 'HD_MOUNTAIN_ROAD_YIELD'
+from HD_Building_Classification where BuildingClassificationType = 'BUILDING_CLASSIFICATION_TRANSPORTATION_FACILITIES';
 
 insert or replace into DistrictModifiers (DistrictType, ModifierId)
-	select DistrictType, 'HD_MOUNTAIN_ROAD_GOLD'
-	from Districts where DistrictType in (
-		'DISTRICT_AERODROME'
-	);
-
-insert or replace into ImprovementModifiers (ImprovementType, ModifierId)
-	select ImprovementType, 'HD_MOUNTAIN_ROAD_PRODUCTION'
-	from Improvements where ImprovementType in (
-		'IMPROVEMENT_LEU_STATION',
-		'IMPROVEMENT_MOUNTAIN_TUNNEL'
-	);
-
-insert or replace into BuildingModifiers (BuildingType, ModifierId)
-	select BuildingType, 'HD_MOUNTAIN_ROAD_PRODUCTION'
-	from Buildings where BuildingType in (
-		'BUILDING_HD_BUS_STOP',
-		'BUILDING_JNR_TRANSIT_HUB'
-	);
-
-insert or replace into DistrictModifiers (DistrictType, ModifierId)
-	select DistrictType, 'HD_MOUNTAIN_ROAD_PRODUCTION'
-	from Districts where DistrictType in (
-		'DISTRICT_AERODROME'
-	);
+	select DistrictType, 'HD_MOUNTAIN_ROAD_YIELD'
+from HD_District_Classification where DistrictClassificationType = 'DISTRICT_CLASSIFICATION_TRANSPORTATION_FACILITIES';
 
 -- Sphinx (Egypt)
 -- In order to adapt the wonder yield change made in UpdateDatabse/DL_Wonders.sql at LoadOrder 16010, Modifiers about adjacent wonders are written in UpdateDatabse/DL_PostProcess.sql, which is at LoadOrder 20000
@@ -1587,9 +1556,9 @@ values
 	('IMPROVEMENT_BEACH_RESORT_GOLD_WATER_ENTERTAINMENT_COMPLEX_TIER_1',	'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'CITY_HAS_DISTRICT_WATER_ENTERTAINMENT_COMPLEX_TIER_1_BUILDING_REQUIREMENTS'),
 	('IMPROVEMENT_BEACH_RESORT_GOLD_WATER_ENTERTAINMENT_COMPLEX_TIER_2',	'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'CITY_HAS_DISTRICT_WATER_ENTERTAINMENT_COMPLEX_TIER_2_BUILDING_REQUIREMENTS'),
 	('IMPROVEMENT_BEACH_RESORT_GOLD_WATER_ENTERTAINMENT_COMPLEX_TIER_3',	'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'CITY_HAS_DISTRICT_WATER_ENTERTAINMENT_COMPLEX_TIER_3_BUILDING_REQUIREMENTS'),
-	('IMPROVEMENT_BEACH_RESORT_GOLD_HARBOR_TIER_1',					'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'HD_CITY_HAS_HARBOR_TIER_1_BUILDING_REQUIREMENTS'),
-	('IMPROVEMENT_BEACH_RESORT_GOLD_HARBOR_TIER_2',					'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'HD_CITY_HAS_HARBOR_TIER_2_BUILDING_REQUIREMENTS'),
-	('IMPROVEMENT_BEACH_RESORT_GOLD_HARBOR_TIER_3',					'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'HD_CITY_HAS_HARBOR_TIER_3_BUILDING_REQUIREMENTS');
+	('IMPROVEMENT_BEACH_RESORT_GOLD_HARBOR_TIER_1',					'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'CITY_HAS_DISTRICT_HARBOR_TIER_1_BUILDING_REQUIREMENTS'),
+	('IMPROVEMENT_BEACH_RESORT_GOLD_HARBOR_TIER_2',					'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'CITY_HAS_DISTRICT_HARBOR_TIER_2_BUILDING_REQUIREMENTS'),
+	('IMPROVEMENT_BEACH_RESORT_GOLD_HARBOR_TIER_3',					'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'CITY_HAS_DISTRICT_HARBOR_TIER_3_BUILDING_REQUIREMENTS');
 
 insert or ignore into ModifierArguments
 	(ModifierId,                                            Name,         Value)

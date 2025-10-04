@@ -23,11 +23,6 @@ values
 	('BUILDING_MADRASA',					'YIELD_GOLD',		-1),
 	('BUILDING_RESEARCH_LAB',				'YIELD_SCIENCE',	2),
 	('BUILDING_RESEARCH_LAB',				'YIELD_GOLD',		-2),
-	('BUILDING_HD_AGRICULTURE_COLLEGE',				'YIELD_SCIENCE',		1),
-	('BUILDING_HD_AGRICULTURE_COLLEGE',				'YIELD_FOOD',		1),
-	('BUILDING_HD_AGRICULTURE_COLLEGE',				'YIELD_GOLD',		-1),
-	('BUILDING_HD_FINANCE_COLLEGE',				'YIELD_SCIENCE',	1),
-	('BUILDING_HD_FINANCE_COLLEGE',				'YIELD_GOLD',		2),
 	('BUILDING_HD_DATA_CENTER',				'YIELD_SCIENCE',	1),
 	('BUILDING_HD_DATA_CENTER',				'YIELD_CULTURE',	1),
 	('BUILDING_HD_DATA_CENTER',				'YIELD_GOLD',		-2),
@@ -83,6 +78,7 @@ values
 	('BUILDING_MILITARY_ACADEMY',			'YIELD_PRODUCTION', 2),
 	('BUILDING_MILITARY_ACADEMY',			'YIELD_GOLD',		-2),
 	-- Commercial Hub
+	('BUILDING_FAIR',						'YIELD_GOLD',		2),
 	('BUILDING_MARKET',						'YIELD_GOLD',		2),
 	('BUILDING_BANK',						'YIELD_GOLD',		2),
 	('BUILDING_GRAND_BAZAAR',				'YIELD_GOLD',		2),
@@ -170,9 +166,8 @@ values
 	-- City Center
 	('BUILDING_PALACE',				'YIELD_FOOD',		1),
 	('BUILDING_PALACE',				'YIELD_PRODUCTION',	3),
-	('BUILDING_GRANARY',			'YIELD_FOOD',		1),
-	('BUILDING_WATER_MILL',			'YIELD_FOOD',	2),
-	('BUILDING_HD_CELLAR',			'YIELD_PRODUCTION',	2),
+	('BUILDING_GRANARY',			'YIELD_FOOD',		3),
+	('BUILDING_WATER_MILL',			'YIELD_PRODUCTION',	3),
 	('BUILDING_SEWER',			'YIELD_FOOD',		3),
 	('BUILDING_SEWER',			'YIELD_PRODUCTION',		3),
 	-- Holy Site
@@ -201,8 +196,6 @@ values
 	('BUILDING_MADRASA',			'YIELD_CULTURE',	2),
 	('BUILDING_MADRASA',			'YIELD_FAITH',	2),
 	('BUILDING_RESEARCH_LAB',		'YIELD_SCIENCE',	4),
-	('BUILDING_HD_AGRICULTURE_COLLEGE',			'YIELD_SCIENCE',	3),
-	('BUILDING_HD_FINANCE_COLLEGE',			'YIELD_SCIENCE',	3),
 	('BUILDING_HD_DATA_CENTER',		'YIELD_SCIENCE',	10),
 	-- Theater Square
 	('BUILDING_MUSEUM_ART',			'YIELD_CULTURE',	4),
@@ -221,10 +214,7 @@ values
 	('BUILDING_ZOO',		'YIELD_FOOD',		2),
 	('BUILDING_ZOO',		'YIELD_GOLD',		12),
 	('BUILDING_AQUARIUM',		'YIELD_FOOD',		2),
-	('BUILDING_AQUARIUM',		'YIELD_GOLD',		12),
-	('BUILDING_HD_CIRCUS',		'YIELD_GOLD',		6),
-	('BUILDING_HD_JEWELRY_SHOP',		'YIELD_PRODUCTION',		2),
-	('BUILDING_HD_JEWELRY_SHOP',		'YIELD_GOLD',		12);
+	('BUILDING_AQUARIUM',		'YIELD_GOLD',		12);
 insert or replace into Building_YieldChangesBonusWithPower
 	(BuildingType,					YieldType,			YieldChange)
 values
@@ -234,8 +224,6 @@ values
 	('BUILDING_FILM_STUDIO',		'YIELD_CULTURE',	3),
 	('BUILDING_SHOPPING_MALL',		'YIELD_GOLD',		18),
 	('BUILDING_FOOD_MARKET',		'YIELD_FOOD',		6),
-	('BUILDING_HD_AGRICULTURE_COLLEGE',			'YIELD_SCIENCE',	3),
-	('BUILDING_HD_FINANCE_COLLEGE',			'YIELD_SCIENCE',	3),
 	('BUILDING_HD_DATA_CENTER',		'YIELD_SCIENCE',	10);
 
 -- Yield Percentage
@@ -366,9 +354,9 @@ update ModifierArguments set Value = 50 where ModifierId = 'FILMSTUDIO_ENHANCEDL
 -- Maintenance and Cost
 -- City Center
 update Buildings set Maintenance = 0,	Cost = 50	where BuildingType = 'BUILDING_MONUMENT';
-update Buildings set Maintenance = 1,	Cost = 70	where BuildingType = 'BUILDING_GRANARY';
-update Buildings set Maintenance = 1,	Cost = 60	where BuildingType = 'BUILDING_WATER_MILL';
-update Buildings set Maintenance = 1,	Cost = 60	where BuildingType = 'BUILDING_HD_CELLAR';
+update Buildings set Maintenance = 1,	Cost = 60	where BuildingType = 'BUILDING_GRANARY';
+update Buildings set Maintenance = 1,	Cost = 60,
+	PrereqTech = Null, PrereqCivic = 'CIVIC_CRAFTSMANSHIP', RequiresAdjacentRiver = 0	where BuildingType = 'BUILDING_WATER_MILL';
 update Buildings set Maintenance = 1,	Cost = 80	where BuildingType = 'BUILDING_PALGUM';
 update Buildings set Maintenance = 0,	Cost = 60	where BuildingType = 'BUILDING_WALLS';
 update Buildings set Maintenance = 1,	Cost = 180	where BuildingType = 'BUILDING_CASTLE';
@@ -443,8 +431,8 @@ update Buildings set Maintenance = 6,	Cost = 360	where BuildingType = 'BUILDING_
 update Buildings set Maintenance = 1,	Cost = 150	where BuildingType = 'BUILDING_CONSULATE';
 update Buildings set Maintenance = 4,	Cost = 300	where BuildingType = 'BUILDING_CHANCERY';
 -- Neighborhood
-update Buildings set Maintenance = 7,	Cost = 360	where BuildingType = 'BUILDING_FOOD_MARKET';
-update Buildings set Maintenance = 7,	Cost = 360	where BuildingType = 'BUILDING_SHOPPING_MALL';
+update Buildings set Maintenance = 7,	Cost = 360, MaxPlayerInstances = 1 where BuildingType = 'BUILDING_FOOD_MARKET';
+update Buildings set Maintenance = 7,	Cost = 360, MaxPlayerInstances = 1 where BuildingType = 'BUILDING_SHOPPING_MALL';
 -- Government Plaza
 update Buildings set Maintenance = 1,	Cost = 150	where BuildingType = 'BUILDING_GOV_TALL';
 update Buildings set Maintenance = 1,	Cost = 150	where BuildingType = 'BUILDING_GOV_WIDE';
@@ -472,6 +460,7 @@ delete from BuildingModifiers where BuildingType = 'BUILDING_AIRPORT' and Modifi
 update ModifierArguments set Value = 2 where ModifierId = 'HANGAR_BONUS_AIR_SLOTS' and Name = 'Amount';
 delete from BuildingModifiers where ModifierId like '%_ADJUST_RESOURCE_STOCKPILE_CAP';
 delete from BuildingModifiers where BuildingType = 'BUILDING_SHOPPING_MALL' and ModifierId = 'SHOPPING_MALL_TOURISM';
+delete from BuildingModifiers where BuildingType = 'BUILDING_WATER_MILL';
 
 insert or replace into Unit_BuildingPrereqs
     (Unit,                  PrereqBuilding)
@@ -485,9 +474,22 @@ insert or replace into BuildingModifiers
 	(BuildingType,					ModifierId)
 values
 	-- City Center
-	('BUILDING_GRANARY',			'GRANARY_POP_FOOD_MODIFIER'),
-	('BUILDING_GRANARY',			'GRANARY_BONUS_PLANTATION_FOOD'),
+	('BUILDING_GRANARY',			'GRANARY_BONUS_LUMBER_MILL_FOOD'),
 	('BUILDING_GRANARY',			'GRANARY_BONUS_PASTURE_FOOD'),
+	('BUILDING_GRANARY',			'GRANARY_BONUS_CAMP_FOOD'),
+	('BUILDING_GRANARY',			'GRANARY_BONUS_FISHING_BOAT_FOOD'),
+	('BUILDING_GRANARY',			'GRANARY_BONUS_LUMBER_MILL_FOOD_LATE'),
+	('BUILDING_GRANARY',			'GRANARY_BONUS_PASTURE_FOOD_LATE'),
+	('BUILDING_GRANARY',			'GRANARY_BONUS_CAMP_FOOD_LATE'),
+	('BUILDING_GRANARY',			'GRANARY_BONUS_FISHING_BOAT_FOOD_LATE'),
+	('BUILDING_WATER_MILL',		'WATER_MILL_BONUS_FARM_PRODUCTION'),
+	('BUILDING_WATER_MILL',		'WATER_MILL_BONUS_MINE_PRODUCTION'),
+	('BUILDING_WATER_MILL',		'WATER_MILL_BONUS_QUARRY_PRODUCTION'),
+	('BUILDING_WATER_MILL',		'WATER_MILL_BONUS_PLANTATION_PRODUCTION'),
+	('BUILDING_WATER_MILL',		'WATER_MILL_BONUS_FARM_PRODUCTION_LATE'),
+	('BUILDING_WATER_MILL',		'WATER_MILL_BONUS_MINE_PRODUCTION_LATE'),
+	('BUILDING_WATER_MILL',		'WATER_MILL_BONUS_QUARRY_PRODUCTION_LATE'),
+	('BUILDING_WATER_MILL',		'WATER_MILL_BONUS_PLANTATION_PRODUCTION_LATE'),
 	-- Holy Site
 	('BUILDING_SHRINE',				'SHRINE_BUILDER_PURCHASE'),
 	('BUILDING_TEMPLE',				'TEMPLE_SETTLER_PURCHASE'),
@@ -541,10 +543,22 @@ values
 insert or replace into Modifiers
 	(ModifierId,									ModifierType,													SubjectRequirementSetId)
 values
-	('GRANARY_BONUS_PLANTATION_FOOD',				'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'HD_PLOT_HAS_PLANTATION_OVER_BONUS_RESOURCES'),
-	('GRANARY_BONUS_PASTURE_FOOD',						'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'HD_PLOT_HAS_PASTURE_OVER_BONUS_RESOURCES'),
-	('GRANARY_POP_FOOD_MODIFIER',					'MODIFIER_SINGLE_CITY_ADJUST_CITY_YIELD_PER_POPULATION',		'PLAYER_HAS_TECH_CALENDAR_HD_REQUIREMENTS'),
-	-- ('LIGHTHOUSE_ADD_FISHERY_GOLD',					'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'PLOT_HAS_IMPROVEMENT_FISHERY_REQUIREMENTS'), 
+	('GRANARY_BONUS_LUMBER_MILL_FOOD',				'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'HD_PLOT_HAS_LUMBER_MILL_OVER_BONUS_RESOURCES'),
+	('GRANARY_BONUS_PASTURE_FOOD',					'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'HD_PLOT_HAS_PASTURE_OVER_BONUS_RESOURCES'),
+	('GRANARY_BONUS_CAMP_FOOD',							'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'HD_PLOT_HAS_CAMP_OVER_BONUS_RESOURCES'),
+	('GRANARY_BONUS_FISHING_BOAT_FOOD',			'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'HD_PLOT_HAS_FISHING_BOATS_OVER_BONUS_RESOURCES'),
+	('GRANARY_BONUS_LUMBER_MILL_FOOD_LATE',				'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'HD_PLOT_HAS_LUMBER_MILL_OVER_BONUS_RESOURCES'),
+	('GRANARY_BONUS_PASTURE_FOOD_LATE',					'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'HD_PLOT_HAS_PASTURE_OVER_BONUS_RESOURCES'),
+	('GRANARY_BONUS_CAMP_FOOD_LATE',							'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'HD_PLOT_HAS_CAMP_OVER_BONUS_RESOURCES'),
+	('GRANARY_BONUS_FISHING_BOAT_FOOD_LATE',			'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'HD_PLOT_HAS_FISHING_BOATS_OVER_BONUS_RESOURCES'),
+	('WATER_MILL_BONUS_FARM_PRODUCTION',					'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'HD_PLOT_HAS_FARM_OVER_BONUS_RESOURCES'),
+	('WATER_MILL_BONUS_MINE_PRODUCTION',					'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'HD_PLOT_HAS_MINE_OVER_BONUS_RESOURCES'),
+	('WATER_MILL_BONUS_QUARRY_PRODUCTION',				'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'HD_PLOT_HAS_QUARRY_OVER_BONUS_RESOURCES'),
+	('WATER_MILL_BONUS_PLANTATION_PRODUCTION',		'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'HD_PLOT_HAS_PLANTATION_OVER_BONUS_RESOURCES'),
+	('WATER_MILL_BONUS_FARM_PRODUCTION_LATE',					'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'HD_PLOT_HAS_FARM_OVER_BONUS_RESOURCES'),
+	('WATER_MILL_BONUS_MINE_PRODUCTION_LATE',					'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'HD_PLOT_HAS_MINE_OVER_BONUS_RESOURCES'),
+	('WATER_MILL_BONUS_QUARRY_PRODUCTION_LATE',				'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'HD_PLOT_HAS_QUARRY_OVER_BONUS_RESOURCES'),
+	('WATER_MILL_BONUS_PLANTATION_PRODUCTION_LATE',		'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'HD_PLOT_HAS_PLANTATION_OVER_BONUS_RESOURCES'),
 	('BARRACKS_ADD_IRON_PRODUCTION',				'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'HAS_IMPROVED_IRON'),
 	('STABLE_ADD_HORSES_PRODUCTION',				'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'HAS_IMPROVED_HORSES'),
 	('ARMORY_ADD_RESOURCE_PRODUCTION',				'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'HAS_ARMORY_RESOURCE'),
@@ -553,6 +567,19 @@ values
 	('WORKSHOP_IMPROVEMENT_PRODUCTION',          	'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',          		'PLOT_IS_IMPROVED'),
 	('HYDROELECTRIC_DAM_ADD_RIVER_PRODUCTION',		'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'PLOT_ADJACENT_TO_RIVER_REQUIREMENTS'),
 	('LIBRARY_POP_SCIENCE_MODIFIER',				'MODIFIER_SINGLE_CITY_ADJUST_CITY_YIELD_PER_POPULATION',		'PLAYER_HAS_PAPER_MAKING_REQUIREMENTS');
+
+update Modifiers set OwnerRequirementSetId = 'PLAYER_HAS_TECH_MATHEMATICS_REQUIREMENTS' where ModifierId in (
+	'GRANARY_BONUS_LUMBER_MILL_FOOD_LATE',
+	'GRANARY_BONUS_PASTURE_FOOD_LATE',
+	'GRANARY_BONUS_CAMP_FOOD_LATE',
+	'GRANARY_BONUS_FISHING_BOAT_FOOD_LATE'
+);
+update Modifiers set OwnerRequirementSetId = 'PLAYER_HAS_TECH_ENGINEERING_REQUIREMENTS' where ModifierId in (
+	'WATER_MILL_BONUS_FARM_PRODUCTION_LATE',
+	'WATER_MILL_BONUS_MINE_PRODUCTION_LATE',
+	'WATER_MILL_BONUS_QUARRY_PRODUCTION_LATE',
+	'WATER_MILL_BONUS_PLANTATION_PRODUCTION_LATE'
+);
 
 insert or replace into Modifiers
 	(ModifierId,									ModifierType,												Permanent)
@@ -571,8 +598,6 @@ values
 	('TEMPLE_SETTLER_PURCHASE',						'Tag',						'CLASS_SETTLER'),
 	('HD_ALCHEMY_ROOM_POP_SCIENCE',					'YieldType',				'YIELD_SCIENCE'),
 	('HD_ALCHEMY_ROOM_POP_SCIENCE',					'Amount',					0.3),
-	('GRANARY_POP_FOOD_MODIFIER',					'YieldType',				'YIELD_FOOD'),
-	('GRANARY_POP_FOOD_MODIFIER',					'Amount',					'0.5'),
 	('LIBRARY_POP_SCIENCE_MODIFIER',				'YieldType',				'YIELD_SCIENCE'),
 	('LIBRARY_POP_SCIENCE_MODIFIER',				'Amount',					'0.3'),
 	('FACTORY_POP_PRODUCTION_MODIFIER',				'YieldType',				'YIELD_PRODUCTION'),
@@ -586,12 +611,38 @@ values
 	('HANGAR_AIR_UNIT_PRODUCTION',					'Amount',					50),
 	('SHIPYARD_NAVAL_UNIT_PRODUCTION',				'Domain',					'DOMAIN_SEA'),
 	('SHIPYARD_NAVAL_UNIT_PRODUCTION',				'Amount',					25),
-	('GRANARY_BONUS_PLANTATION_FOOD',				'YieldType',				'YIELD_FOOD'),
-	('GRANARY_BONUS_PLANTATION_FOOD',				'Amount',					1),
+	('GRANARY_BONUS_LUMBER_MILL_FOOD',				'YieldType',				'YIELD_FOOD'),
+	('GRANARY_BONUS_LUMBER_MILL_FOOD',				'Amount',					1),
 	('GRANARY_BONUS_PASTURE_FOOD',						'YieldType',				'YIELD_FOOD'),
 	('GRANARY_BONUS_PASTURE_FOOD',						'Amount',					1),
-	-- ('LIGHTHOUSE_ADD_FISHERY_GOLD',					'YieldType',				'YIELD_GOLD'),
-	-- ('LIGHTHOUSE_ADD_FISHERY_GOLD',					'Amount',					1),
+	('GRANARY_BONUS_CAMP_FOOD',								'YieldType',				'YIELD_FOOD'),
+	('GRANARY_BONUS_CAMP_FOOD',								'Amount',					1),
+	('GRANARY_BONUS_FISHING_BOAT_FOOD',						'YieldType',				'YIELD_FOOD'),
+	('GRANARY_BONUS_FISHING_BOAT_FOOD',						'Amount',					1),
+	('GRANARY_BONUS_LUMBER_MILL_FOOD_LATE',				'YieldType',				'YIELD_FOOD'),
+	('GRANARY_BONUS_LUMBER_MILL_FOOD_LATE',				'Amount',					1),
+	('GRANARY_BONUS_PASTURE_FOOD_LATE',						'YieldType',				'YIELD_FOOD'),
+	('GRANARY_BONUS_PASTURE_FOOD_LATE',						'Amount',					1),
+	('GRANARY_BONUS_CAMP_FOOD_LATE',								'YieldType',				'YIELD_FOOD'),
+	('GRANARY_BONUS_CAMP_FOOD_LATE',								'Amount',					1),
+	('GRANARY_BONUS_FISHING_BOAT_FOOD_LATE',						'YieldType',				'YIELD_FOOD'),
+	('GRANARY_BONUS_FISHING_BOAT_FOOD_LATE',						'Amount',					1),
+	('WATER_MILL_BONUS_FARM_PRODUCTION',				'YieldType',				'YIELD_PRODUCTION'),
+	('WATER_MILL_BONUS_FARM_PRODUCTION',				'Amount',					1),
+	('WATER_MILL_BONUS_MINE_PRODUCTION',						'YieldType',				'YIELD_PRODUCTION'),
+	('WATER_MILL_BONUS_MINE_PRODUCTION',						'Amount',					1),
+	('WATER_MILL_BONUS_QUARRY_PRODUCTION',								'YieldType',				'YIELD_PRODUCTION'),
+	('WATER_MILL_BONUS_QUARRY_PRODUCTION',								'Amount',					1),
+	('WATER_MILL_BONUS_PLANTATION_PRODUCTION',						'YieldType',				'YIELD_PRODUCTION'),
+	('WATER_MILL_BONUS_PLANTATION_PRODUCTION',						'Amount',					1),
+	('WATER_MILL_BONUS_FARM_PRODUCTION_LATE',				'YieldType',				'YIELD_PRODUCTION'),
+	('WATER_MILL_BONUS_FARM_PRODUCTION_LATE',				'Amount',					1),
+	('WATER_MILL_BONUS_MINE_PRODUCTION_LATE',						'YieldType',				'YIELD_PRODUCTION'),
+	('WATER_MILL_BONUS_MINE_PRODUCTION_LATE',						'Amount',					1),
+	('WATER_MILL_BONUS_QUARRY_PRODUCTION_LATE',								'YieldType',				'YIELD_PRODUCTION'),
+	('WATER_MILL_BONUS_QUARRY_PRODUCTION_LATE',								'Amount',					1),
+	('WATER_MILL_BONUS_PLANTATION_PRODUCTION_LATE',						'YieldType',				'YIELD_PRODUCTION'),
+	('WATER_MILL_BONUS_PLANTATION_PRODUCTION_LATE',						'Amount',					1),
 	('BARRACKS_ADD_IRON_PRODUCTION',				'YieldType',				'YIELD_PRODUCTION'),
 	('BARRACKS_ADD_IRON_PRODUCTION',				'Amount',					2),
 	('STABLE_ADD_HORSES_PRODUCTION',				'YieldType',				'YIELD_PRODUCTION'),
@@ -929,75 +980,23 @@ delete from Building_YieldChanges where BuildingType = 'BUILDING_SEAPORT' and Yi
 update Building_YieldChanges set YieldChange = 2 where BuildingType = 'BUILDING_MONUMENT' and YieldType = 'YIELD_CULTURE';
 delete from BuildingModifiers where BuildingType = 'BUILDING_MONUMENT' and ModifierId = 'MONUMENT_CULTURE_AT_FULL_LOYALTY';
 
--- insert or replace into Building_GreatPersonPoints
--- 	(BuildingType,		GreatPersonClassType,			PointsPerTurn)
--- values
--- 	('BUILDING_TOTEMS',	'GREAT_PERSON_CLASS_PROPHET',	2);
-
 insert or replace into Building_YieldChanges 
 	(BuildingType,													YieldType,					YieldChange)
 values 
-	('BUILDING_NILOMETER_HD',										'YIELD_SCIENCE',			2),
-	('BUILDING_TRIUMPHAL_ARCH',										'YIELD_CULTURE',			2),
-	('BUILDING_KAREZ',												'YIELD_FOOD',				3),
-	('BUILDING_OFFICIAL_RUN_HANDCRAFT',								'YIELD_PRODUCTION',			2),
-	('BUILDING_HD_CAMPFIRE',								'YIELD_FOOD',			1),
-	('BUILDING_HD_CAMPFIRE',								'YIELD_PRODUCTION',			1),
-	('BUILDING_BOOTCAMP',											'YIELD_PRODUCTION',			1),
-	('BUILDING_FAIR',												'YIELD_GOLD',				6),
-	('BUILDING_HD_WHARF_RIVER',												'YIELD_GOLD',				6),
-	('BUILDING_TOTEMS',												'YIELD_FAITH',				1),
-	('BUILDING_HD_PIT_DWELLING',							'YIELD_FOOD',				2),
-	('BUILDING_HD_ROYAL_COURT',							'YIELD_CULTURE',				1);
+	('BUILDING_NILOMETER_HD',								'YIELD_SCIENCE',		2),
+	('BUILDING_FAIR',												'YIELD_GOLD',				12);
 
 insert or replace into BuildingModifiers 
  	(BuildingType,													ModifierId)
 values 
  	('BUILDING_NILOMETER_HD',										'NILOMETER_SCIENCE'),
- 	('BUILDING_TRIUMPHAL_ARCH',										'TRIUMPHAL_ARCH_CULTURE'),
- 	('BUILDING_KAREZ',												'KAREZ_FOOD'),
- 	-- ('BUILDING_OFFICIAL_RUN_HANDCRAFT',								'HANDCRAFT_BUILDING_PRODUCTION'),
- 	-- ('BUILDING_OFFICIAL_RUN_HANDCRAFT',								'HANDCRAFT_DISTRICT_PRODUCTION'),
-	('BUILDING_OFFICIAL_RUN_HANDCRAFT',								'HANDCRAFT_BONUS_MINE_PRODUCTION'),
-	('BUILDING_OFFICIAL_RUN_HANDCRAFT',								'HANDCRAFT_BONUS_QUARRY_PRODUCTION'),
-	('BUILDING_HD_CAMPFIRE',								'CAMPFIRE_BONUS_CAMP_FOOD'),
-	('BUILDING_HD_CAMPFIRE',								'CAMPFIRE_BONUS_LUMBER_MILL_FOOD'),
- 	('BUILDING_BOOTCAMP',											'BOOTCAMP_UNIT_PRODUCTION'),
- 	('BUILDING_FAIR',												'FAIR_GOLD'),
- 	('BUILDING_HD_WHARF_RIVER',												'WHARF_RIVER_GOLD'),
- 	('BUILDING_TOTEMS',												'TOTEMS_FAITH_HD'),
- 	('BUILDING_HD_PIT_DWELLING',												'HD_PIT_DWELLING_FOOD'),
- 	('BUILDING_HD_PIT_DWELLING',												'HD_PIT_DWELLING_PRODUCTION'),
- 	('BUILDING_HD_ROYAL_COURT',												'HD_ROYAL_COURT_CULTURE'),
- 	('BUILDING_HD_ROYAL_COURT',												'HD_ROYAL_COURT_PRODUCTION'),
  	('BUILDING_HD_YUNSHAO_MANSION',												'HD_YUNSHAO_MANSION_MUSIC_TOURISM');
-
-delete from BuildingModifiers where BuildingType = 'BUILDING_HD_PIT_DWELLING' and ModifierId = 'HD_PIT_DWELLING_PRODUCTION'
-	and exists (select BuildingType from Buildings where BuildingType = 'BUILDING_JNR_DOJO');
 
 insert or replace into Modifiers
 	(ModifierId,							ModifierType,											SubjectRequirementSetId)
 values
 	('NILOMETER_SCIENCE',					'MODIFIER_BUILDING_YIELD_CHANGE',						'HD_NILOMETER_REQUIREMENTS'),
- 	('TRIUMPHAL_ARCH_CULTURE',				'MODIFIER_BUILDING_YIELD_CHANGE',						'DL_CITY_HAS_WONDER_REQUIREMENTS'),
- 	('KAREZ_FOOD',							'MODIFIER_BUILDING_YIELD_CHANGE',						'PLOT_IS_HILLS_OR_ADJACENT_TO_MOUNTAIN'),
- 	-- ('HANDCRAFT_BUILDING_PRODUCTION',		'MODIFIER_SINGLE_CITY_ADJUST_BUILDING_PRODUCTION_CHANGE', 'OFFICIAL_RUN_HANDCRAFT_REQUIREMENT'),
- 	-- ('HANDCRAFT_DISTRICT_PRODUCTION',		'MODIFIER_SINGLE_CITY_ADJUST_DISTRICT_PRODUCTION_CHANGE', 'OFFICIAL_RUN_HANDCRAFT_REQUIREMENT'),
- 	('HANDCRAFT_BONUS_MINE_PRODUCTION',		'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD', 'HAS_IMPROVED_MINE_BONUS'),
- 	('HANDCRAFT_BONUS_QUARRY_PRODUCTION',		'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD', 'HAS_IMPROVED_QUARRY_BONUS'),
- 	('CAMPFIRE_BONUS_CAMP_FOOD',		'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD', 'HD_PLOT_HAS_CAMP_OVER_BONUS_RESOURCES'),
- 	('CAMPFIRE_BONUS_LUMBER_MILL_FOOD',		'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD', 'HAS_IMPROVED_LUMBER_MILL_BONUS'),
- 	('BOOTCAMP_UNIT_PRODUCTION',			'MODIFIER_SINGLE_CITY_ADJUST_UNIT_PRODUCTION_CHANGE',	'BOOTCAMP_REQUIREMENT'),
- 	('FAIR_GOLD',							'MODIFIER_BUILDING_YIELD_CHANGE',						'FAIR_REQUIREMENT'),
- 	('WHARF_RIVER_GOLD',							'MODIFIER_BUILDING_YIELD_CHANGE',						'WHARF_RIVER_REQUIREMENT'),
- 	('TOTEMS_FAITH_HD',						'MODIFIER_BUILDING_YIELD_CHANGE',						'TOTEMS_ADJACENT_REQUIREMENT'),
- 	('HD_PIT_DWELLING_FOOD',						'MODIFIER_BUILDING_YIELD_CHANGE',						'HD_PIT_DWELLING_REQUIREMENT'),
- 	('HD_PIT_DWELLING_PRODUCTION',						'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',						'HD_PLOT_HAS_CAMP_FISHING_BOAT'),
- 	('HD_ROYAL_COURT_CULTURE',						'MODIFIER_PLAYER_CAPITAL_CITY_ADJUST_CITY_YIELD_PER_POPULATION',						null),
- 	('HD_ROYAL_COURT_PRODUCTION',						'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_PER_POPULATION',						'REQUIRES_CITY_HAS_DISTRICT_GOVERNMENT_UDMET'),
  	('HD_YUNSHAO_MANSION_MUSIC_TOURISM',						'MODIFIER_SINGLE_CITY_ADJUST_TOURISM',						null);
-
-update Modifiers set OwnerRequirementSetId = 'PLAYER_HAS_CIVIC_EARLY_EMPIRE_REQUIREMENTS' where ModifierId = 'HD_PIT_DWELLING_PRODUCTION';
 
 insert or replace into ModifierArguments
 	(ModifierId,							Name,												Value)
@@ -1005,41 +1004,6 @@ values
 	('NILOMETER_SCIENCE',					'BuildingType',										'BUILDING_NILOMETER_HD'),
 	('NILOMETER_SCIENCE',					'YieldType',										'YIELD_SCIENCE'),
 	('NILOMETER_SCIENCE',					'Amount',											1),
-	('TRIUMPHAL_ARCH_CULTURE',				'BuildingType',										'BUILDING_TRIUMPHAL_ARCH'),
-	('TRIUMPHAL_ARCH_CULTURE',				'YieldType',										'YIELD_CULTURE'),
-	('TRIUMPHAL_ARCH_CULTURE',				'Amount',											1),
-	('KAREZ_FOOD',							'BuildingType',										'BUILDING_KAREZ'),
-	('KAREZ_FOOD',							'YieldType',										'YIELD_FOOD'),
-	('KAREZ_FOOD',							'Amount',											1),
-	-- ('HANDCRAFT_BUILDING_PRODUCTION',		'Amount',											2),
-	-- ('HANDCRAFT_DISTRICT_PRODUCTION',		'Amount',											2),
-	('HANDCRAFT_BONUS_MINE_PRODUCTION',							'YieldType',										'YIELD_PRODUCTION'),
-	('HANDCRAFT_BONUS_MINE_PRODUCTION',							'Amount',											1),
-	('HANDCRAFT_BONUS_QUARRY_PRODUCTION',							'YieldType',										'YIELD_PRODUCTION'),
-	('HANDCRAFT_BONUS_QUARRY_PRODUCTION',							'Amount',											1),
-	('CAMPFIRE_BONUS_CAMP_FOOD',							'YieldType',										'YIELD_FOOD'),
-	('CAMPFIRE_BONUS_CAMP_FOOD',							'Amount',											1),
-	('CAMPFIRE_BONUS_LUMBER_MILL_FOOD',							'YieldType',										'YIELD_FOOD'),
-	('CAMPFIRE_BONUS_LUMBER_MILL_FOOD',							'Amount',											1),
-	('BOOTCAMP_UNIT_PRODUCTION',			'Amount',											2),
-	('FAIR_GOLD',							'BuildingType',										'BUILDING_FAIR'),
-	('FAIR_GOLD',							'YieldType',										'YIELD_GOLD'),
-	('FAIR_GOLD',							'Amount',											6),
-	('WHARF_RIVER_GOLD',							'BuildingType',										'BUILDING_HD_WHARF_RIVER'),
-	('WHARF_RIVER_GOLD',							'YieldType',										'YIELD_GOLD'),
-	('WHARF_RIVER_GOLD',							'Amount',											6),
-	('TOTEMS_FAITH_HD',						'BuildingType',										'BUILDING_TOTEMS'),
-	('TOTEMS_FAITH_HD',						'YieldType',										'YIELD_FAITH'),
-	('TOTEMS_FAITH_HD',						'Amount',											2),
-	('HD_PIT_DWELLING_FOOD',						'BuildingType',										'BUILDING_HD_PIT_DWELLING'),
-	('HD_PIT_DWELLING_FOOD',						'YieldType',										'YIELD_FOOD'),
-	('HD_PIT_DWELLING_FOOD',						'Amount',											2),
-	('HD_PIT_DWELLING_PRODUCTION',						'YieldType',										'YIELD_PRODUCTION'),
-	('HD_PIT_DWELLING_PRODUCTION',						'Amount',											1),
-	('HD_ROYAL_COURT_CULTURE',						'YieldType',										'YIELD_CULTURE'),
-	('HD_ROYAL_COURT_CULTURE',						'Amount',											0.3),
-	('HD_ROYAL_COURT_PRODUCTION',						'YieldType',										'YIELD_PRODUCTION'),
-	('HD_ROYAL_COURT_PRODUCTION',						'Amount',											0.3),
 	('HD_YUNSHAO_MANSION_MUSIC_TOURISM',						'GreatWorkObjectType',								'GREATWORKOBJECT_MUSIC'),
 	('HD_YUNSHAO_MANSION_MUSIC_TOURISM',						'ScalingFactor',											300);
 
@@ -1089,9 +1053,7 @@ values
 	('BUILDING_ZOO',										'HD_ZOO_CAMP_PASTURE_GOLD_1'),
 	('BUILDING_ZOO',										'HD_ZOO_CAMP_PASTURE_GOLD_2'),
 	('BUILDING_AQUARIUM',								'HD_AQUARIUM_FISHING_GOLD_1'),
-	('BUILDING_AQUARIUM',								'HD_AQUARIUM_FISHING_GOLD_2'),
-	('BUILDING_HD_JEWELRY_SHOP',				'HD_JEWELRY_SHOP_MINE_QUARRY_GOLD_1'),
-	('BUILDING_HD_JEWELRY_SHOP',				'HD_JEWELRY_SHOP_MINE_QUARRY_GOLD_2');
+	('BUILDING_AQUARIUM',								'HD_AQUARIUM_FISHING_GOLD_2');
 
 insert or replace into Modifiers
 	(ModifierId,																ModifierType,																				OwnerRequirementSetId,												SubjectRequirementSetId)
@@ -1099,9 +1061,7 @@ values
 	('HD_ZOO_CAMP_PASTURE_GOLD_1',							'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',			null,																					'HD_ZOO_REQUIREMENTS'),
 	('HD_ZOO_CAMP_PASTURE_GOLD_2',							'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',			'PLAYER_HAS_TECH_BIOLOGY_HD_REQUIREMENTS',		'HD_ZOO_REQUIREMENTS'),
 	('HD_AQUARIUM_FISHING_GOLD_1',							'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',			null,																					'HD_AQUARIUM_REQUIREMENTS'),
-	('HD_AQUARIUM_FISHING_GOLD_2',							'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',			'PLAYER_HAS_TECH_BIOLOGY_HD_REQUIREMENTS',		'HD_AQUARIUM_REQUIREMENTS'),
-	('HD_JEWELRY_SHOP_MINE_QUARRY_GOLD_1',			'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',			null,																					'HD_JEWELRY_SHOP_REQUIREMENTS'),
-	('HD_JEWELRY_SHOP_MINE_QUARRY_GOLD_2',			'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',			'PLAYER_HAS_CIVIC_CAPITALISM_REQUIREMENTS',		'HD_JEWELRY_SHOP_REQUIREMENTS');
+	('HD_AQUARIUM_FISHING_GOLD_2',							'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',			'PLAYER_HAS_TECH_BIOLOGY_HD_REQUIREMENTS',		'HD_AQUARIUM_REQUIREMENTS');
 
 insert or replace into ModifierArguments
 	(ModifierId,																Name,				Value)
@@ -1113,11 +1073,7 @@ values
 	('HD_AQUARIUM_FISHING_GOLD_1',							'YieldType',		'YIELD_GOLD'),
 	('HD_AQUARIUM_FISHING_GOLD_1',							'Amount',			6),
 	('HD_AQUARIUM_FISHING_GOLD_2',							'YieldType',		'YIELD_GOLD'),
-	('HD_AQUARIUM_FISHING_GOLD_2',							'Amount',			6),
-	('HD_JEWELRY_SHOP_MINE_QUARRY_GOLD_1',			'YieldType',		'YIELD_GOLD'),
-	('HD_JEWELRY_SHOP_MINE_QUARRY_GOLD_1',			'Amount',			6),
-	('HD_JEWELRY_SHOP_MINE_QUARRY_GOLD_2',			'YieldType',		'YIELD_GOLD'),
-	('HD_JEWELRY_SHOP_MINE_QUARRY_GOLD_2',			'Amount',			6);
+	('HD_AQUARIUM_FISHING_GOLD_2',							'Amount',			6);
 
 	-- 动物园
 insert or replace into TraitModifiers
@@ -1216,84 +1172,6 @@ select
 from Improvement_ValidResources a, Yields b
 	where a.ImprovementType in ('IMPROVEMENT_FISHING_BOATS')
 	and b.YieldType in ('YIELD_GOLD');
-
-	-- 珠宝行
-insert or replace into TraitModifiers
-	(TraitType,          			ModifierId)
-select
-	'TRAIT_LEADER_MAJOR_CIV', 'HD_JEWELRY_SHOP_' || a.ResourceType || '_' || b.YieldType || '_BONUS'
-from Improvement_ValidResources a, Yields b
-	where a.ImprovementType in ('IMPROVEMENT_MINE', 'IMPROVEMENT_QUARRY')
-	and b.YieldType in ('YIELD_PRODUCTION', 'YIELD_CULTURE', 'YIELD_GOLD');
-
-insert or replace into Modifiers
-	(ModifierId,																														ModifierType,																						OwnerRequirementSetId)
-select
-	'HD_JEWELRY_SHOP_' || a.ResourceType || '_' || b.YieldType || '_BONUS',	'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE',	'HD_PLAYER_HAS_IMPROVED_' || a.ResourceType || '_REQUIRMENTS'
-from Improvement_ValidResources a, Yields b
-	where a.ImprovementType in ('IMPROVEMENT_MINE', 'IMPROVEMENT_QUARRY')
-	and b.YieldType in ('YIELD_PRODUCTION', 'YIELD_CULTURE', 'YIELD_GOLD');
-
-insert or replace into ModifierArguments
-	(ModifierId,																														Name,						Value)
-select
-	'HD_JEWELRY_SHOP_' || a.ResourceType || '_' || b.YieldType || '_BONUS',	'BuildingType',	'BUILDING_HD_JEWELRY_SHOP'
-from Improvement_ValidResources a, Yields b
-	where a.ImprovementType in ('IMPROVEMENT_MINE', 'IMPROVEMENT_QUARRY')
-	and b.YieldType in ('YIELD_PRODUCTION', 'YIELD_CULTURE', 'YIELD_GOLD');
-
-insert or replace into ModifierArguments
-	(ModifierId,																														Name,						Value)
-select
-	'HD_JEWELRY_SHOP_' || a.ResourceType || '_' || b.YieldType || '_BONUS',	'YieldType',		b.YieldType
-from Improvement_ValidResources a, Yields b
-	where a.ImprovementType in ('IMPROVEMENT_MINE', 'IMPROVEMENT_QUARRY')
-	and b.YieldType in ('YIELD_PRODUCTION', 'YIELD_CULTURE', 'YIELD_GOLD');
-
-insert or replace into ModifierArguments
-	(ModifierId,																														Name,						Value)
-select
-	'HD_JEWELRY_SHOP_' || a.ResourceType || '_' || b.YieldType || '_BONUS',	'Amount',				1
-from Improvement_ValidResources a, Yields b
-	where a.ImprovementType in ('IMPROVEMENT_MINE', 'IMPROVEMENT_QUARRY')
-	and b.YieldType in ('YIELD_PRODUCTION', 'YIELD_CULTURE');
-
-insert or replace into ModifierArguments
-	(ModifierId,																														Name,						Value)
-select
-	'HD_JEWELRY_SHOP_' || a.ResourceType || '_' || b.YieldType || '_BONUS',	'Amount',				3
-from Improvement_ValidResources a, Yields b
-	where a.ImprovementType in ('IMPROVEMENT_MINE', 'IMPROVEMENT_QUARRY')
-	and b.YieldType in ('YIELD_GOLD');
-	
-	-- 马戏团
-insert or replace into BuildingModifiers
-	(BuildingType,					ModifierId)
-select
-	'BUILDING_HD_CIRCUS',		'HD_CIRCUS_' || DistrictType || '_' || YieldType || '_BONUS'
-from DistrictCorrespondingYieldType_HD;
-
-insert or replace into Modifiers
-	(ModifierId, ModifierType, OwnerRequirementSetId, SubjectRequirementSetId, SubjectStackLimit)
-select
-	'HD_CIRCUS_' || DistrictType || '_' || YieldType || '_BONUS',
-	'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',
-	'PLOT_ADJACENT_TO_' || DistrictType || '_REQUIREMENTS',
-	'HD_OBJECT_WITHIN_6_TILES',
-	1
-from DistrictCorrespondingYieldType_HD;
-
-insert or replace into ModifierArguments
-	(ModifierId,																									Name,					Value)
-select
-	'HD_CIRCUS_' || DistrictType || '_' || YieldType || '_BONUS',	'YieldType',	YieldType
-from DistrictCorrespondingYieldType_HD;
-
-insert or replace into ModifierArguments
-	(ModifierId,																									Name,					Value)
-select
-	'HD_CIRCUS_' || DistrictType || '_' || YieldType || '_BONUS',	'Amount',			Amount
-from DistrictCorrespondingYieldType_HD;
 
 -- 温泉浴场 by xhh
 delete from BuildingModifiers where ModifierId = 'THERMALBATH_ADDTOURISM' and BuildingType = 'BUILDING_THERMAL_BATH';
@@ -1631,92 +1509,24 @@ select
 	'HD_SHOPPING_MALL_PRODUCT_GOLD_BOOST',	'ScalingFactor',		300
 where exists (select GreatWorkSlotType from GreatWorkSlotTypes where GreatWorkSlotType = 'GREATWORKSLOT_PRODUCT');
 
-	-- 水磨
-delete from BuildingModifiers where BuildingType = 'BUILDING_WATER_MILL';
-
-insert or replace into BuildingModifiers
-	(BuildingType,								ModifierId)
-values
-	('BUILDING_WATER_MILL',						'WATERMILL_ADDFARMBONUSRESOURCEFOOD'),
-	('BUILDING_HD_CELLAR',						'HD_CELLAR_ADDFARMBONUSRESOURCEPRODUCTION'),
-	('BUILDING_HD_CELLAR',						'HD_CELLAR_TECH_CONSTRUCTION_BOOST');
-
-insert or replace into Modifiers
-	(ModifierId,								ModifierType,										SubjectRequirementSetId)
-values
-	('WATERMILL_ADDFARMBONUSRESOURCEFOOD',					'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',		'HD_PLOT_HAS_FARM_OVER_BONUS_RESOURCES'),
-	('HD_CELLAR_ADDFARMBONUSRESOURCEPRODUCTION',		'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',		'HD_PLOT_HAS_FARM_OVER_BONUS_RESOURCES'),
-	('HD_CELLAR_TECH_CONSTRUCTION_BOOST',		'MODIFIER_PLAYER_GRANT_SPECIFIC_TECH_BOOST',		null);
-
-insert or replace into ModifierArguments
-	(ModifierId,								Name,			Value)
-values
-	('WATERMILL_ADDFARMBONUSRESOURCEFOOD',		'YieldType',	'YIELD_PRODUCTION'),
-	('WATERMILL_ADDFARMBONUSRESOURCEFOOD',		'Amount',		1),
-	('HD_CELLAR_ADDFARMBONUSRESOURCEPRODUCTION',		'YieldType',	'YIELD_FOOD'),
-	('HD_CELLAR_ADDFARMBONUSRESOURCEPRODUCTION',		'Amount',		1),
-	('HD_CELLAR_TECH_CONSTRUCTION_BOOST',		'TechType',		'TECH_CONSTRUCTION');
-
-insert or ignore into RequirementSets
-	(RequirementSetId,				RequirementSetType)
-values
-	('FARM_BONUS_RESOURCE',			'REQUIREMENTSET_TEST_ANY');
-
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,				RequirementId)
-select
-	'FARM_BONUS_RESOURCE',			'REQUIRES_' || Improvement_ValidResources.ResourceType || '_IN_PLOT'
-from Improvement_ValidResources
-inner join Resources
-on Improvement_ValidResources.ResourceType = Resources.ResourceType
-where Resources.ResourceClassType = 'RESOURCECLASS_BONUS' and Improvement_ValidResources.ImprovementType = 'IMPROVEMENT_FARM';
-
-
-
-
 -- 社区一级建筑
 insert or replace into Building_YieldChanges
 	(BuildingType,									YieldType,					YieldChange)
 values
 	('BUILDING_HD_ANCESTRAL_TEMPLE','YIELD_CULTURE',    1),
 	('BUILDING_HD_ANCESTRAL_TEMPLE','YIELD_FAITH',     	6),
-	('BUILDING_HD_TAVERN',  				'YIELD_FOOD',     	2),
-	('BUILDING_HD_TAVERN',  				'YIELD_GOLD',     	6),
-	('BUILDING_HD_INN',    					'YIELD_SCIENCE',   	1),
-	('BUILDING_HD_INN',    					'YIELD_GOLD',     	9),
-	('BUILDING_HD_DRAMA_STAGE',    	'YIELD_CULTURE',   	1),
-	('BUILDING_HD_DRAMA_STAGE',    	'YIELD_GOLD',     	9),
-	('BUILDING_HD_BUS_STOP',    		'YIELD_GOLD',     	6),
-	('BUILDING_HD_NEWSPAPER_OFFICE','YIELD_CULTURE',    2),
-	('BUILDING_HD_LAW_OFFICE',    	'YIELD_CULTURE', 		4);
+	('BUILDING_HD_BUS_STOP',    		'YIELD_GOLD',     	6);
+
 insert or replace into Building_CitizenYieldChanges
 	(BuildingType,												YieldType,					YieldChange)
 values
 	('BUILDING_HD_ANCESTRAL_TEMPLE',			'YIELD_FAITH',			1),
-	('BUILDING_HD_TAVERN',								'YIELD_FOOD',				1),
-	('BUILDING_HD_INN',										'YIELD_SCIENCE',		1),
-	('BUILDING_HD_DRAMA_STAGE',						'YIELD_CULTURE',		1),
-	('BUILDING_HD_BUS_STOP',							'YIELD_GOLD',				3),
-	('BUILDING_HD_NEWSPAPER_OFFICE',			'YIELD_CULTURE',		1),
-	('BUILDING_HD_LAW_OFFICE',						'YIELD_CULTURE',		1),
-	('BUILDING_HD_LOCAL_POLICE_STATION',	'YIELD_PRODUCTION',	1);
+	('BUILDING_HD_BUS_STOP',							'YIELD_GOLD',				3);
 
 insert or replace into BuildingModifiers
 	(BuildingType,										ModifierId)
 values
-	('BUILDING_HD_ANCESTRAL_TEMPLE',	'HD_ANCESTRAL_TEMPLE_GROWTH'),
 	('BUILDING_HD_ANCESTRAL_TEMPLE',	'HD_ANCESTRAL_TEMPLE_NEIGHBORHOOD_FAITH_BONUS'),
-	('BUILDING_HD_TAVERN',						'HD_TAVERN_EXTRA_GREAT_ARTIST_PONITS'),
-	('BUILDING_HD_TAVERN',						'HD_TAVERN_NEIGHBORHOOD_FOOD_BONUS'),
-	('BUILDING_HD_INN',								'HD_INN_EXTRA_GREAT_WRITER_PONITS'),
-	('BUILDING_HD_INN',								'HD_INN_NEIGHBORHOOD_SCIENCE_BONUS'),
-	('BUILDING_HD_INN',								'HD_INN_NEIGHBORHOOD_GOLD_BONUS'),
-	('BUILDING_HD_DRAMA_STAGE',				'HD_DRAMA_STAGE_EXTRA_GREAT_MUSICIAN_PONITS'),
-	('BUILDING_HD_DRAMA_STAGE',				'HD_DRAMA_STAGE_NEIGHBORHOOD_CULTURE_BONUS'),
-	('BUILDING_HD_DRAMA_STAGE',				'HD_DRAMA_STAGE_NEIGHBORHOOD_GOLD_BONUS'),
-	('BUILDING_HD_NEWSPAPER_OFFICE',	'HD_NEWSPAPER_OFFICE_POP_CULTURE_1'),
-	('BUILDING_HD_NEWSPAPER_OFFICE',	'HD_NEWSPAPER_OFFICE_POP_CULTURE_2'),
-	('BUILDING_HD_NEWSPAPER_OFFICE',	'HD_NEWSPAPER_OFFICE_WRITING_TOURISM'),
 	('BUILDING_HD_BUS_STOP',					'HD_BUS_STOP_DISTRICT_GOLD'),
 	('BUILDING_HD_BUS_STOP',					'HD_BUS_STOP_COMMERCIAL_BONUS'),
 	('BUILDING_HD_BUS_STOP',					'HD_BUS_STOP_HARBOR_BONUS');
@@ -1724,69 +1534,22 @@ values
 insert or replace into Modifiers
 	(ModifierId,																			ModifierType,																							OwnerRequirementSetId,																SubjectRequirementSetId)
 values
-	('HD_ANCESTRAL_TEMPLE_GROWTH',										'MODIFIER_SINGLE_CITY_ADJUST_CITY_GROWTH',								'CITY_HAS_BUILDING_TOTEMS_REQUIREMENTS',							null),
 	('HD_ANCESTRAL_TEMPLE_NEIGHBORHOOD_FAITH_BONUS',	'MODIFIER_CITY_DISTRICTS_ADJUST_YIELD_CHANGE',						null,																									'REQUIRES_DISTRICT_IS_DISTRICT_NEIGHBORHOOD_UDMET'),
-	('HD_TAVERN_EXTRA_GREAT_ARTIST_PONITS',						'MODIFIER_PLAYER_DISTRICT_ADJUST_GREAT_PERSON_POINTS',		'CITY_HAS_BUILDING_HD_CELLAR_REQUIREMENTS',						null),
-	('HD_TAVERN_NEIGHBORHOOD_FOOD_BONUS',							'MODIFIER_CITY_DISTRICTS_ADJUST_YIELD_CHANGE',						null,																									'REQUIRES_DISTRICT_IS_DISTRICT_NEIGHBORHOOD_UDMET'),
-	('HD_INN_EXTRA_GREAT_WRITER_PONITS',							'MODIFIER_PLAYER_DISTRICT_ADJUST_GREAT_PERSON_POINTS',		'CITY_HAS_BUILDING_WATER_MILL_REQUIREMENTS',					null),
-	('HD_INN_NEIGHBORHOOD_SCIENCE_BONUS',							'MODIFIER_CITY_DISTRICTS_ADJUST_YIELD_CHANGE',						null,																									'REQUIRES_DISTRICT_IS_DISTRICT_NEIGHBORHOOD_UDMET'),
-	('HD_INN_NEIGHBORHOOD_GOLD_BONUS',								'MODIFIER_CITY_DISTRICTS_ADJUST_YIELD_CHANGE',						null,																									'REQUIRES_DISTRICT_IS_DISTRICT_NEIGHBORHOOD_UDMET'),
-	('HD_DRAMA_STAGE_EXTRA_GREAT_MUSICIAN_PONITS',		'MODIFIER_PLAYER_DISTRICT_ADJUST_GREAT_PERSON_POINTS',		'CITY_HAS_BUILDING_GRANARY_REQUIREMENTS',							null),
-	('HD_DRAMA_STAGE_NEIGHBORHOOD_CULTURE_BONUS',			'MODIFIER_CITY_DISTRICTS_ADJUST_YIELD_CHANGE',						null,																									'REQUIRES_DISTRICT_IS_DISTRICT_NEIGHBORHOOD_UDMET'),
-	('HD_DRAMA_STAGE_NEIGHBORHOOD_GOLD_BONUS',				'MODIFIER_CITY_DISTRICTS_ADJUST_YIELD_CHANGE',						null,																									'REQUIRES_DISTRICT_IS_DISTRICT_NEIGHBORHOOD_UDMET'),
-	('HD_NEWSPAPER_OFFICE_POP_CULTURE_1',							'MODIFIER_SINGLE_CITY_ADJUST_CITY_YIELD_PER_POPULATION',	null,																									null),
-	('HD_NEWSPAPER_OFFICE_POP_CULTURE_2',							'MODIFIER_SINGLE_CITY_ADJUST_CITY_YIELD_PER_POPULATION',	null,																									'CITY_HAS_3_SPECIALTY_DISTRICTS_REQUIREMENTS'),
-	('HD_NEWSPAPER_OFFICE_WRITING_TOURISM',						'MODIFIER_SINGLE_CITY_ADJUST_TOURISM',										null,																									null),
 	('HD_BUS_STOP_DISTRICT_GOLD',											'MODIFIER_PLAYER_DISTRICTS_ADJUST_YIELD_CHANGE',					null,																									'REQUIRE_PLOT_ADJACENT_TO_OWNER'),
 	('HD_BUS_STOP_COMMERCIAL_BONUS',									'MODIFIER_CITY_DISTRICTS_ADJUST_YIELD_MODIFIER',					null,																									'DISTRICT_IS_COMMERCIAL_HUB'),
 	('HD_BUS_STOP_HARBOR_BONUS',											'MODIFIER_CITY_DISTRICTS_ADJUST_YIELD_MODIFIER',					null,																									'DISTRICT_IS_HARBOR');
-	-- ('HD_BUILDING_HD_BUS_STOP_GOLD',									'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE',null,																									null),
-	-- ('HD_BUILDING_HD_NEWSPAPER_OFFICE_CULTURE',				'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE',null,																									null),
-	-- ('HD_BUILDING_HD_LAW_OFFICE_PRODUCTION',					'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE',null,																									null);
 
 insert or replace into ModifierArguments
 	(ModifierId,																			Name,											Value)
 values
-	('HD_ANCESTRAL_TEMPLE_GROWTH',										'Amount',									10),
 	('HD_ANCESTRAL_TEMPLE_NEIGHBORHOOD_FAITH_BONUS',	'YieldType',							'YIELD_FAITH'),
 	('HD_ANCESTRAL_TEMPLE_NEIGHBORHOOD_FAITH_BONUS',	'Amount',									3),
-	('HD_TAVERN_EXTRA_GREAT_ARTIST_PONITS',						'GreatPersonClassType',		'GREAT_PERSON_CLASS_ARTIST'),
-	('HD_TAVERN_EXTRA_GREAT_ARTIST_PONITS',						'Amount',									4),
-	('HD_TAVERN_NEIGHBORHOOD_FOOD_BONUS',							'YieldType',							'YIELD_FOOD'),
-	('HD_TAVERN_NEIGHBORHOOD_FOOD_BONUS',							'Amount',									2),
-	('HD_INN_EXTRA_GREAT_WRITER_PONITS',							'GreatPersonClassType',		'GREAT_PERSON_CLASS_WRITER'),
-	('HD_INN_EXTRA_GREAT_WRITER_PONITS',							'Amount',									4),
-	('HD_INN_NEIGHBORHOOD_SCIENCE_BONUS',							'YieldType',							'YIELD_SCIENCE'),
-	('HD_INN_NEIGHBORHOOD_SCIENCE_BONUS',							'Amount',									1),
-	('HD_INN_NEIGHBORHOOD_GOLD_BONUS',								'YieldType',							'YIELD_GOLD'),
-	('HD_INN_NEIGHBORHOOD_GOLD_BONUS',								'Amount',									3),
-	('HD_DRAMA_STAGE_EXTRA_GREAT_MUSICIAN_PONITS',		'GreatPersonClassType',		'GREAT_PERSON_CLASS_MUSICIAN'),
-	('HD_DRAMA_STAGE_EXTRA_GREAT_MUSICIAN_PONITS',		'Amount',									4),
-	('HD_DRAMA_STAGE_NEIGHBORHOOD_CULTURE_BONUS',			'YieldType',							'YIELD_CULTURE'),
-	('HD_DRAMA_STAGE_NEIGHBORHOOD_CULTURE_BONUS',			'Amount',									1),
-	('HD_DRAMA_STAGE_NEIGHBORHOOD_GOLD_BONUS',				'YieldType',							'YIELD_GOLD'),
-	('HD_DRAMA_STAGE_NEIGHBORHOOD_GOLD_BONUS',				'Amount',									3),
-	('HD_NEWSPAPER_OFFICE_POP_CULTURE_1',							'YieldType',							'YIELD_CULTURE'),
-	('HD_NEWSPAPER_OFFICE_POP_CULTURE_1',							'Amount',									0.5),
-	('HD_NEWSPAPER_OFFICE_POP_CULTURE_2',							'YieldType',							'YIELD_CULTURE'),
-	('HD_NEWSPAPER_OFFICE_POP_CULTURE_2',							'Amount',									0.5),
-	('HD_NEWSPAPER_OFFICE_WRITING_TOURISM',						'GreatWorkObjectType',		'GREATWORKOBJECT_WRITING'),
-	('HD_NEWSPAPER_OFFICE_WRITING_TOURISM',						'ScalingFactor',					150),
 	('HD_BUS_STOP_DISTRICT_GOLD',											'YieldType',							'YIELD_GOLD'),
 	('HD_BUS_STOP_DISTRICT_GOLD',											'Amount',									6),
 	('HD_BUS_STOP_COMMERCIAL_BONUS',									'YieldType',							'YIELD_GOLD'),
 	('HD_BUS_STOP_COMMERCIAL_BONUS',									'Amount',									50),
 	('HD_BUS_STOP_HARBOR_BONUS',											'YieldType',							'YIELD_GOLD'),
 	('HD_BUS_STOP_HARBOR_BONUS',											'Amount',									50);
-	-- ('HD_BUILDING_HD_BUS_STOP_GOLD',									'BuildingType',						'BUILDING_HD_BUS_STOP'),
-	-- ('HD_BUILDING_HD_BUS_STOP_GOLD',									'YieldType',							'YIELD_GOLD'),
-	-- ('HD_BUILDING_HD_BUS_STOP_GOLD',									'Amount',									3),
-	-- ('HD_BUILDING_HD_NEWSPAPER_OFFICE_CULTURE',				'BuildingType',						'BUILDING_HD_NEWSPAPER_OFFICE'),
-	-- ('HD_BUILDING_HD_NEWSPAPER_OFFICE_CULTURE',				'YieldType',							'YIELD_CULTURE'),
-	-- ('HD_BUILDING_HD_NEWSPAPER_OFFICE_CULTURE',				'Amount',									1),
-	-- ('HD_BUILDING_HD_LAW_OFFICE_PRODUCTION',					'BuildingType',						'BUILDING_HD_LAW_OFFICE'),
-	-- ('HD_BUILDING_HD_LAW_OFFICE_PRODUCTION',					'YieldType',							'YIELD_PRODUCTION'),
-	-- ('HD_BUILDING_HD_LAW_OFFICE_PRODUCTION',					'Amount',									1);
 
 -- 警署
 	-- 本城
@@ -1860,81 +1623,6 @@ insert or replace into ModifierArguments
 	(ModifierId, Name, Value)
 select
 	'HD_POLICE_STATION_ ' || DistrictType || '_' || YieldType || '_BONUS_2',
-	'Amount', Amount * 2
-from DistrictCorrespondingYieldType_HD;
-
--- 公安局
-	-- 本城
-insert or replace into BuildingModifiers
-	(BuildingType,											ModifierId)
-select
-	'BUILDING_HD_LOCAL_POLICE_STATION',	'HD_LOCAL_POLICE_STATION_ ' || DistrictType || '_' || YieldType || '_BONUS_1'
-from DistrictCorrespondingYieldType_HD;
-
-insert or replace into Modifiers
-	(ModifierId, ModifierType, OwnerRequirementSetId, SubjectStackLimit)
-select
-	'HD_LOCAL_POLICE_STATION_ ' || DistrictType || '_' || YieldType || '_BONUS_1',
-	'MODIFIER_BUILDING_YIELD_CHANGE',
-	'REQUIRES_CITY_HAS_' || DistrictType || '_UDMET',
-	1
-from DistrictCorrespondingYieldType_HD;
-
-insert or replace into ModifierArguments
-	(ModifierId, Name, Value)
-select
-	'HD_LOCAL_POLICE_STATION_ ' || DistrictType || '_' || YieldType || '_BONUS_1',
-	'BuildingType', 'BUILDING_HD_LOCAL_POLICE_STATION'
-from DistrictCorrespondingYieldType_HD;
-
-insert or replace into ModifierArguments
-	(ModifierId, Name, Value)
-select
-	'HD_LOCAL_POLICE_STATION_ ' || DistrictType || '_' || YieldType || '_BONUS_1',
-	'YieldType', YieldType
-from DistrictCorrespondingYieldType_HD;
-
-insert or replace into ModifierArguments
-	(ModifierId, Name, Value)
-select
-	'HD_LOCAL_POLICE_STATION_ ' || DistrictType || '_' || YieldType || '_BONUS_1',
-	'Amount', Amount * 2
-from DistrictCorrespondingYieldType_HD;
-
-	-- 相邻
-insert or replace into BuildingModifiers
-	(BuildingType,											ModifierId)
-select
-	'BUILDING_HD_LOCAL_POLICE_STATION',	'HD_LOCAL_POLICE_STATION_ ' || DistrictType || '_' || YieldType || '_BONUS_2'
-from DistrictCorrespondingYieldType_HD;
-
-insert or replace into Modifiers
-	(ModifierId, ModifierType, OwnerRequirementSetId, SubjectStackLimit)
-select
-	'HD_LOCAL_POLICE_STATION_ ' || DistrictType || '_' || YieldType || '_BONUS_2',
-	'MODIFIER_BUILDING_YIELD_CHANGE',
-	'PLOT_ADJACENT_TO_' || DistrictType || '_REQUIREMENTS',
-	1
-from DistrictCorrespondingYieldType_HD;
-
-insert or replace into ModifierArguments
-	(ModifierId, Name, Value)
-select
-	'HD_LOCAL_POLICE_STATION_ ' || DistrictType || '_' || YieldType || '_BONUS_2',
-	'BuildingType', 'BUILDING_HD_LOCAL_POLICE_STATION'
-from DistrictCorrespondingYieldType_HD;
-
-insert or replace into ModifierArguments
-	(ModifierId, Name, Value)
-select
-	'HD_LOCAL_POLICE_STATION_ ' || DistrictType || '_' || YieldType || '_BONUS_2',
-	'YieldType', YieldType
-from DistrictCorrespondingYieldType_HD;
-
-insert or replace into ModifierArguments
-	(ModifierId, Name, Value)
-select
-	'HD_LOCAL_POLICE_STATION_ ' || DistrictType || '_' || YieldType || '_BONUS_2',
 	'Amount', Amount * 2
 from DistrictCorrespondingYieldType_HD;
 
@@ -2639,40 +2327,14 @@ select
 from Buildings where PrereqDistrict = 'DISTRICT_CITY_CENTER' and BuildingType not in (select BuildingType from HD_DUMMY_BUILDINGS) and BuildingType not in (select CivUniqueBuildingType from BuildingReplaces);
 
 -- 新学院建筑
-insert or replace into Building_YieldDistrictCopies
-	(BuildingType,                      	OldYieldType,        NewYieldType)
-values
-	-- ('BUILDING_HD_AGRICULTURE_COLLEGE',   'YIELD_SCIENCE',     'YIELD_FOOD'),
-	('BUILDING_HD_FINANCE_COLLEGE',   		'YIELD_SCIENCE',     'YIELD_GOLD');
-
 insert or replace into BuildingModifiers
 	(BuildingType,                  	 		ModifierId)
 values
-	('BUILDING_HD_AGRICULTURE_COLLEGE',   'HD_AGRICULTURE_COLLEGE_CAMPUS_FOOD'),
-	('BUILDING_HD_AGRICULTURE_COLLEGE',   'HD_AGRICULTURE_COLLEGE_POP_SCIENCE_1'),
-	('BUILDING_HD_AGRICULTURE_COLLEGE',   'HD_AGRICULTURE_COLLEGE_POP_SCIENCE_2'),
-	('BUILDING_HD_AGRICULTURE_COLLEGE',   'HD_AGRICULTURE_COLLEGE_POP_SCIENCE_3'),
-	('BUILDING_HD_FINANCE_COLLEGE',   		'HD_FINANCE_COLLEGE_COMMERCIAL_SCIENCE'),
-	('BUILDING_HD_FINANCE_COLLEGE',   		'HD_FINANCE_COLLEGE_HARBOR_SCIENCE'),
-	-- ('BUILDING_HD_FINANCE_COLLEGE',   		'HD_FINANCE_COLLEGE_COMMERCIAL_BONUS_1'),
-	-- ('BUILDING_HD_FINANCE_COLLEGE',   		'HD_FINANCE_COLLEGE_HARBOR_BONUS_1'),
-	-- ('BUILDING_HD_FINANCE_COLLEGE',   		'HD_FINANCE_COLLEGE_COMMERCIAL_BONUS_2'),
-	-- ('BUILDING_HD_FINANCE_COLLEGE',   		'HD_FINANCE_COLLEGE_HARBOR_BONUS_2'),
 	('BUILDING_HD_DATA_CENTER',    				'HD_DATA_CENTER_WILDCARD_SLOT');
 
 insert or replace into Modifiers
 	(ModifierId,                              ModifierType,                                            								OwnerRequirementSetId,																		SubjectRequirementSetId)
 values
-	('HD_AGRICULTURE_COLLEGE_CAMPUS_FOOD',  	'MODIFIER_PLAYER_DISTRICT_ADJUST_YIELD_BASED_ON_ADJACENCY_BONUS', 			null,																											null),
-	('HD_AGRICULTURE_COLLEGE_POP_SCIENCE_1',  'MODIFIER_SINGLE_CITY_ADJUST_CITY_YIELD_PER_POPULATION', 								null,																											null),
-	('HD_AGRICULTURE_COLLEGE_POP_SCIENCE_2', 	'MODIFIER_SINGLE_CITY_ADJUST_CITY_YIELD_PER_POPULATION', 								'PLAYER_HAS_TECH_GENETIC_ENGINEERING_HD_REQUIREMENTS',		null),
-	('HD_AGRICULTURE_COLLEGE_POP_SCIENCE_3',  'MODIFIER_SINGLE_CITY_ADJUST_CITY_YIELD_PER_POPULATION', 								'CITY_IS_POWERED',																				null),
-	('HD_FINANCE_COLLEGE_COMMERCIAL_SCIENCE', 'MODIFIER_SINGLE_CITY_DISTRICT_ADJUST_YIELD_BASED_ON_ADJACENCY_BONUS', 	null,																											'REQUIRES_DISTRICT_IS_DISTRICT_COMMERCIAL_HUB_UDMET'),
-	('HD_FINANCE_COLLEGE_HARBOR_SCIENCE',  		'MODIFIER_SINGLE_CITY_DISTRICT_ADJUST_YIELD_BASED_ON_ADJACENCY_BONUS', 	null,																											'REQUIRES_DISTRICT_IS_DISTRICT_HARBOR_UDMET'),
-	-- ('HD_FINANCE_COLLEGE_COMMERCIAL_BONUS_1', 'MODIFIER_CITY_DISTRICTS_ADJUST_YIELD_MODIFIER', 												'PLAYER_HAS_CIVIC_NEOCOLONIALISM_HD_REQUIREMENTS',				'REQUIRES_DISTRICT_IS_DISTRICT_COMMERCIAL_HUB_UDMET'),
-	-- ('HD_FINANCE_COLLEGE_HARBOR_BONUS_1', 		'MODIFIER_CITY_DISTRICTS_ADJUST_YIELD_MODIFIER', 												'PLAYER_HAS_CIVIC_NEOCOLONIALISM_HD_REQUIREMENTS',				'REQUIRES_DISTRICT_IS_DISTRICT_HARBOR_UDMET'),
-	-- ('HD_FINANCE_COLLEGE_COMMERCIAL_BONUS_2', 'MODIFIER_CITY_DISTRICTS_ADJUST_YIELD_MODIFIER', 												'CITY_IS_POWERED',																				'REQUIRES_DISTRICT_IS_DISTRICT_COMMERCIAL_HUB_UDMET'),
-	-- ('HD_FINANCE_COLLEGE_HARBOR_BONUS_2', 		'MODIFIER_CITY_DISTRICTS_ADJUST_YIELD_MODIFIER', 												'CITY_IS_POWERED',																				'REQUIRES_DISTRICT_IS_DISTRICT_HARBOR_UDMET'),
 	('HD_DATA_CENTER_WILDCARD_SLOT', 					'MODIFIER_PLAYER_CULTURE_ADJUST_GOVERNMENT_SLOTS_MODIFIER', 						null,																											null),
 	('HD_DATA_CENTER_SCIENCE', 								'MODIFIER_PLAYER_GRANT_YIELD',															 						null,																											null),
 	('HD_DATA_CENTER_CULTURE', 								'MODIFIER_PLAYER_GRANT_YIELD',															 						null,																											null);
@@ -2680,26 +2342,6 @@ values
 insert or replace into ModifierArguments
   (ModifierId,                              Name,           				Value)
 values
-	('HD_AGRICULTURE_COLLEGE_CAMPUS_FOOD',  	'YieldTypeToMirror',    'YIELD_SCIENCE'),
-	('HD_AGRICULTURE_COLLEGE_CAMPUS_FOOD',  	'YieldTypeToGrant',    	'YIELD_FOOD'),
-	('HD_AGRICULTURE_COLLEGE_POP_SCIENCE_1',  'YieldType',    				'YIELD_SCIENCE'),
-	('HD_AGRICULTURE_COLLEGE_POP_SCIENCE_1',  'Amount',       				1),
-	('HD_AGRICULTURE_COLLEGE_POP_SCIENCE_2',  'YieldType',    				'YIELD_SCIENCE'),
-	('HD_AGRICULTURE_COLLEGE_POP_SCIENCE_2',  'Amount',       				1),
-	('HD_AGRICULTURE_COLLEGE_POP_SCIENCE_3',  'YieldType',    				'YIELD_SCIENCE'),
-	('HD_AGRICULTURE_COLLEGE_POP_SCIENCE_3',  'Amount',       				1),
-	('HD_FINANCE_COLLEGE_COMMERCIAL_SCIENCE', 'YieldTypeToMirror',    'YIELD_GOLD'),
-	('HD_FINANCE_COLLEGE_COMMERCIAL_SCIENCE', 'YieldTypeToGrant',     'YIELD_SCIENCE'),
-	('HD_FINANCE_COLLEGE_HARBOR_SCIENCE', 		'YieldTypeToMirror',    'YIELD_GOLD'),
-	('HD_FINANCE_COLLEGE_HARBOR_SCIENCE', 		'YieldTypeToGrant',     'YIELD_SCIENCE'),
-	-- ('HD_FINANCE_COLLEGE_COMMERCIAL_BONUS_1', 'YieldType',    				'YIELD_GOLD'),
-	-- ('HD_FINANCE_COLLEGE_COMMERCIAL_BONUS_1', 'Amount',       				50),
-	-- ('HD_FINANCE_COLLEGE_HARBOR_BONUS_1', 		'YieldType',    				'YIELD_GOLD'),
-	-- ('HD_FINANCE_COLLEGE_HARBOR_BONUS_1', 		'Amount',       				50),
-	-- ('HD_FINANCE_COLLEGE_COMMERCIAL_BONUS_2', 'YieldType',    				'YIELD_GOLD'),
-	-- ('HD_FINANCE_COLLEGE_COMMERCIAL_BONUS_2', 'Amount',       				50),
-	-- ('HD_FINANCE_COLLEGE_HARBOR_BONUS_2', 		'YieldType',    				'YIELD_GOLD'),
-	-- ('HD_FINANCE_COLLEGE_HARBOR_BONUS_2', 		'Amount',       				50),
 	('HD_DATA_CENTER_WILDCARD_SLOT', 					'GovernmentSlotType',   'SLOT_WILDCARD'),
 	('HD_DATA_CENTER_SCIENCE', 								'YieldType',    				'YIELD_SCIENCE'),
 	('HD_DATA_CENTER_SCIENCE', 								'Scale',       					1),
@@ -2707,28 +2349,6 @@ values
 	('HD_DATA_CENTER_CULTURE', 								'YieldType',    				'YIELD_CULTURE'),
 	('HD_DATA_CENTER_CULTURE', 								'Scale',       					1),
 	('HD_DATA_CENTER_CULTURE', 								'Amount',       				1600);
-
--- 医学院（适配农业区）
-delete from BuildingModifiers where BuildingType = 'BUILDING_HD_AGRICULTURE_COLLEGE' and ModifierId = 'HD_AGRICULTURE_COLLEGE_CAMPUS_FOOD'
-	and exists (select DistrictType from Districts where DistrictType = 'DISTRICT_C_AGRICULTURE');
-
-insert or replace into BuildingModifiers
-	(BuildingType,                  	 		ModifierId)
-select
-	'BUILDING_HD_AGRICULTURE_COLLEGE',		'HD_AGRICULTURE_COLLEGE_GROWTH_RATE'
-and exists (select DistrictType from Districts where DistrictType = 'DISTRICT_C_AGRICULTURE');
-
-insert or replace into Modifiers
-	(ModifierId,													ModifierType)
-select
-	'HD_AGRICULTURE_COLLEGE_GROWTH_RATE',	'MODIFIER_SINGLE_CITY_ADJUST_CITY_GROWTH'
-and exists (select DistrictType from Districts where DistrictType = 'DISTRICT_C_AGRICULTURE');
-
-insert or replace into ModifierArguments
-	(ModifierId,													Name,				Value)
-select
-	'HD_AGRICULTURE_COLLEGE_GROWTH_RATE',	'Amount',		20
-and exists (select DistrictType from Districts where DistrictType = 'DISTRICT_C_AGRICULTURE');
 
 -- 伊斯兰学校
 delete from BuildingModifiers where BuildingType = 'BUILDING_MADRASA';

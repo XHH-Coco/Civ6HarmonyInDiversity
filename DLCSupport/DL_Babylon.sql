@@ -181,6 +181,23 @@ select
 	ModifierId,				'Amount',		Amount
 from HD_BabylonDistrictBonuses;
 
+-- 沟渠 BUILDING_PALGUM
+insert or replace into BuildingModifiers
+	(BuildingType,					ModifierId)
+values
+	('BUILDING_PALGUM',			'HD_PALGUM_ADD_PRODUCTION');
+
+insert or replace into Modifiers
+	(ModifierId,									ModifierType,																		OwnerRequirementSetId,											SubjectRequirementSetId)
+values
+	('HD_PALGUM_ADD_PRODUCTION',	'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',	'PLAYER_HAS_TECH_ENGINEERING_REQUIREMENTS',	'PLOT_IS_FRESH');
+
+insert or replace into ModifierArguments
+	(ModifierId,									Name,						Value)
+values
+	('HD_PALGUM_ADD_PRODUCTION',	'YieldType',		'YIELD_PRODUCTION'),
+	('HD_PALGUM_ADD_PRODUCTION',	'Amount',				1);
+
 -- Kenzo Tange
 delete from GreatPersonIndividualActionModifiers where GreatPersonIndividualType = 'GREAT_PERSON_INDIVIDUAL_KENZO_TANGE';
 

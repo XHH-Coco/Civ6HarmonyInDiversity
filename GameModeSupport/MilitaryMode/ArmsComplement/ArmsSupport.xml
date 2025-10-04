@@ -70,9 +70,6 @@
         </Update>
     </Units>
     <Unit_BuildingPrereqs>
-		<Row Unit="UNIT_SAPPER" PrereqBuilding="BUILDING_BOOTCAMP"/>
-		<Row Unit="UNIT_SAPPER" PrereqBuilding="BUILDING_BARRACKS"/>
-		<Row Unit="UNIT_SAPPER" PrereqBuilding="BUILDING_STABLE"/>
 		<Row Unit="UNIT_ENGINEER_CORP" PrereqBuilding="BUILDING_MILITARY_ACADEMY"/>
 	</Unit_BuildingPrereqs>
     <Route_ValidBuildUnits>

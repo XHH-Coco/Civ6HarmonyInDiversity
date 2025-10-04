@@ -103,8 +103,7 @@ function PolicyBuildingConstructed(playerId, cityId, buildingId, plotId, bOrigin
   local plot = Map.GetPlotByIndex(plotId)
   if (building.BuildingType == 'BUILDING_BROADCAST_CENTER'
       or building.BuildingType == 'BUILDING_FILM_STUDIO'
-      or building.BuildingType == 'BUILDING_JNR_MEDIA_CENTER'
-      or building.BuildingType == 'BUILDING_HD_CINEMA') then
+      or building.BuildingType == 'BUILDING_JNR_MEDIA_CENTER') then
     -- 宗教电台
     if RELIGIOUS_BROADCASTING_RELIGIOUS_PRESSURE ~= 0 and PlayerHasPolicy(playerId, POLICY_HD_RELIGIOUS_BROADCASTING_INDEX) then
       local religionId = player:GetReligion():GetReligionTypeCreated()
