@@ -356,7 +356,7 @@ update ModifierArguments set Value = 50 where ModifierId = 'FILMSTUDIO_ENHANCEDL
 update Buildings set Maintenance = 0,	Cost = 50	where BuildingType = 'BUILDING_MONUMENT';
 update Buildings set Maintenance = 1,	Cost = 60	where BuildingType = 'BUILDING_GRANARY';
 update Buildings set Maintenance = 1,	Cost = 60,
-	PrereqTech = Null, PrereqCivic = 'CIVIC_CRAFTSMANSHIP', RequiresAdjacentRiver = 0	where BuildingType = 'BUILDING_WATER_MILL';
+	PrereqTech = 'TECH_MINING', RequiresAdjacentRiver = 0	where BuildingType = 'BUILDING_WATER_MILL';
 update Buildings set Maintenance = 1,	Cost = 80	where BuildingType = 'BUILDING_PALGUM';
 update Buildings set Maintenance = 0,	Cost = 60	where BuildingType = 'BUILDING_WALLS';
 update Buildings set Maintenance = 1,	Cost = 180	where BuildingType = 'BUILDING_CASTLE';

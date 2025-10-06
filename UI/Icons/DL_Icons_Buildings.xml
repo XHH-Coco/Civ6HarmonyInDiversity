@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GameData>
 	<IconTextureAtlases>
-		<Row Name="ATLAS_HD_CityCenter_Buildings" IconSize="32" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_CITY_CENTER_BUILDING_32.dds"/>
-		<Row Name="ATLAS_HD_CityCenter_Buildings" IconSize="38" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_CITY_CENTER_BUILDING_38.dds"/>
-		<Row Name="ATLAS_HD_CityCenter_Buildings" IconSize="50" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_CITY_CENTER_BUILDING_50.dds"/>
-		<Row Name="ATLAS_HD_CityCenter_Buildings" IconSize="80" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_CITY_CENTER_BUILDING_80.dds"/>
-		<Row Name="ATLAS_HD_CityCenter_Buildings" IconSize="128" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_CITY_CENTER_BUILDING_128.dds"/>
-		<Row Name="ATLAS_HD_CityCenter_Buildings" IconSize="256" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_CITY_CENTER_BUILDING_256.dds"/>
-
 		<Row Name="ATLAS_HD_Mod_Icon_Fix" IconSize="32" IconsPerRow="3" IconsPerColumn="3" Filename="Mod_Icon_Fix_32.dds"/>
 		<Row Name="ATLAS_HD_Mod_Icon_Fix" IconSize="38" IconsPerRow="3" IconsPerColumn="3" Filename="Mod_Icon_Fix_38.dds"/>
 		<Row Name="ATLAS_HD_Mod_Icon_Fix" IconSize="50" IconsPerRow="3" IconsPerColumn="3" Filename="Mod_Icon_Fix_50.dds"/>
@@ -15,121 +8,162 @@
 		<Row Name="ATLAS_HD_Mod_Icon_Fix" IconSize="128" IconsPerRow="3" IconsPerColumn="3" Filename="Mod_Icon_Fix_128.dds"/>
 		<Row Name="ATLAS_HD_Mod_Icon_Fix" IconSize="256" IconsPerRow="3" IconsPerColumn="3" Filename="Mod_Icon_Fix_256.dds"/>
 
-		<Row Name="ATLAS_New_Buildings" IconSize="32" IconsPerRow="5" IconsPerColumn="5" Filename="New_Buildings_32.dds"/>
-		<Row Name="ATLAS_New_Buildings" IconSize="38" IconsPerRow="5" IconsPerColumn="5" Filename="New_Buildings_38.dds"/>
-		<Row Name="ATLAS_New_Buildings" IconSize="50" IconsPerRow="5" IconsPerColumn="5" Filename="New_Buildings_50.dds"/>
-		<Row Name="ATLAS_New_Buildings" IconSize="80" IconsPerRow="5" IconsPerColumn="5" Filename="New_Buildings_80.dds"/>
-		<Row Name="ATLAS_New_Buildings" IconSize="128" IconsPerRow="5" IconsPerColumn="5" Filename="New_Buildings_128.dds"/>
-		<Row Name="ATLAS_New_Buildings" IconSize="256" IconsPerRow="5" IconsPerColumn="5" Filename="New_Buildings_256.dds"/>
-
-		<Row Name="ATLAS_New_Buildings_2" IconSize="32" IconsPerRow="6" IconsPerColumn="6" Filename="New_Buildings_2_32.dds"/>
-		<Row Name="ATLAS_New_Buildings_2" IconSize="38" IconsPerRow="6" IconsPerColumn="6" Filename="New_Buildings_2_38.dds"/>
-		<Row Name="ATLAS_New_Buildings_2" IconSize="50" IconsPerRow="6" IconsPerColumn="6" Filename="New_Buildings_2_50.dds"/>
-		<Row Name="ATLAS_New_Buildings_2" IconSize="80" IconsPerRow="6" IconsPerColumn="6" Filename="New_Buildings_2_80.dds"/>
-		<Row Name="ATLAS_New_Buildings_2" IconSize="128" IconsPerRow="6" IconsPerColumn="6" Filename="New_Buildings_2_128.dds"/>
-		<Row Name="ATLAS_New_Buildings_2" IconSize="256" IconsPerRow="6" IconsPerColumn="6" Filename="New_Buildings_2_256.dds"/>
+		<Row Name="ATLAS_HD_Buildings" IconSize="32" IconsPerRow="8" IconsPerColumn="8" Filename="HD_Buildings_32.dds"/>
+		<Row Name="ATLAS_HD_Buildings" IconSize="38" IconsPerRow="8" IconsPerColumn="8" Filename="HD_Buildings_38.dds"/>
+		<Row Name="ATLAS_HD_Buildings" IconSize="50" IconsPerRow="8" IconsPerColumn="8" Filename="HD_Buildings_50.dds"/>
+		<Row Name="ATLAS_HD_Buildings" IconSize="80" IconsPerRow="8" IconsPerColumn="8" Filename="HD_Buildings_80.dds"/>
+		<Row Name="ATLAS_HD_Buildings" IconSize="128" IconsPerRow="8" IconsPerColumn="8" Filename="HD_Buildings_128.dds"/>
+		<Row Name="ATLAS_HD_Buildings" IconSize="256" IconsPerRow="8" IconsPerColumn="8" Filename="HD_Buildings_256.dds"/>
 	</IconTextureAtlases>
 	<IconDefinitions>
-		<Row Name="ICON_BUILDING_NILOMETER_HD" 						Atlas="ATLAS_HD_CityCenter_Buildings" Index="0"/>
-		<Row Name="ICON_BUILDING_FAIR"	 									Atlas="ATLAS_HD_CityCenter_Buildings" Index="4"/>
-		<Row Name="ICON_BUILDING_NILOMETER_HD_FOW" 						Atlas="ATLAS_HD_CityCenter_Buildings" Index="0"/>
-		<Row Name="ICON_BUILDING_FAIR_FOW"	 									Atlas="ATLAS_HD_CityCenter_Buildings" Index="4"/>
+		<Delete Name="ICON_BUILDING_CONSULATE"/>
+		<Delete Name="ICON_BUILDING_CONSULATE_FOW"/>
+		<Delete Name="ICON_BUILDING_JNR_CONSULATE_SPIES"/>
+		<Delete Name="ICON_BUILDING_JNR_CONSULATE_SPIES_FOW"/>
+		<Delete Name="ICON_BUILDING_JNR_CONSULATE_CITYSTATES"/>
+		<Delete Name="ICON_BUILDING_JNR_CONSULATE_CITYSTATES_FOW"/>
+		<Delete Name="ICON_BUILDING_CHANCERY"/>
+		<Delete Name="ICON_BUILDING_CHANCERY_FOW"/>
+		<Delete Name="ICON_BUILDING_JNR_CHANCERY_SPIES"/>
+		<Delete Name="ICON_BUILDING_JNR_CHANCERY_SPIES_FOW"/>
+		<Delete Name="ICON_BUILDING_JNR_CHANCERY_CITYSTATES"/>
+		<Delete Name="ICON_BUILDING_JNR_CHANCERY_CITYSTATES_FOW"/>
+		<Delete Name="ICON_BUILDING_GROVE"/>
+		<Delete Name="ICON_BUILDING_GROVE_FOW"/>
+		<Delete Name="ICON_BUILDING_SANCTUARY"/>
+		<Delete Name="ICON_BUILDING_SANCTUARY_FOW"/>
 
-		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_HOLY_SITE"               Atlas="ICON_ATLAS_DISTRICTS" Index="1"/>
-		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_CAMPUS"                  Atlas="ICON_ATLAS_DISTRICTS" Index="2"/>
-		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_ENCAMPMENT"              Atlas="ICON_ATLAS_DISTRICTS" Index="3"/>
-		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_HARBOR"                  Atlas="ICON_ATLAS_DISTRICTS" Index="4"/>
-		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_COMMERCIAL_HUB"          Atlas="ICON_ATLAS_DISTRICTS" Index="6"/>
-		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_THEATER"                 Atlas="ICON_ATLAS_DISTRICTS" Index="8"/>
-		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_INDUSTRIAL_ZONE"         Atlas="ICON_ATLAS_DISTRICTS" Index="9"/>
-		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_HOLY_SITE_FOW"             Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="1"/>
-		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_CAMPUS_FOW"                Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="2"/>
-		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_ENCAMPMENT_FOW"            Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="3"/>
-		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_HARBOR_FOW"                Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="4"/>
-		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_COMMERCIAL_HUB_FOW"        Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="6"/>
-		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_THEATER_FOW"               Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="8"/>
-		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_INDUSTRIAL_ZONE_FOW"       Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="9"/>
+		<Row Name="ICON_BUILDING_NILOMETER_HD" 																	Atlas="ATLAS_HD_Buildings" Index="0"/>
+		<Row Name="ICON_BUILDING_NILOMETER_HD_FOW" 															Atlas="ATLAS_HD_Buildings" Index="0"/>
+		<Row Name="ICON_BUILDING_HD_POLICE_STATION" 														Atlas="ATLAS_HD_Buildings" Index="1"/>
+		<Row Name="ICON_BUILDING_HD_POLICE_STATION_FOW"													Atlas="ATLAS_HD_Buildings" Index="1"/>
 
-		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_HOLY_SITE"               Atlas="ICON_ATLAS_DISTRICTS" Index="1"/>
-		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_CAMPUS"                  Atlas="ICON_ATLAS_DISTRICTS" Index="2"/>
-		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_ENCAMPMENT"              Atlas="ICON_ATLAS_DISTRICTS" Index="3"/>
-		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_HARBOR"                  Atlas="ICON_ATLAS_DISTRICTS" Index="4"/>
-		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_COMMERCIAL_HUB"          Atlas="ICON_ATLAS_DISTRICTS" Index="6"/>
-		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_THEATER"                 Atlas="ICON_ATLAS_DISTRICTS" Index="8"/>
-		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_INDUSTRIAL_ZONE"         Atlas="ICON_ATLAS_DISTRICTS" Index="9"/>
-		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_NEIGHBORHOOD"            Atlas="ICON_ATLAS_DISTRICTS" Index="10"/>
-		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_HOLY_SITE_FOW"             Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="1"/>
-		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_CAMPUS_FOW"                Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="2"/>
-		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_ENCAMPMENT_FOW"            Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="3"/>
-		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_HARBOR_FOW"                Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="4"/>
-		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_COMMERCIAL_HUB_FOW"        Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="6"/>
-		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_THEATER_FOW"               Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="8"/>
-		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_INDUSTRIAL_ZONE_FOW"       Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="9"/>
-		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_NEIGHBORHOOD_FOW"          Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="10"/>
+		<Row Name="ICON_BUILDING_HD_ALCHEMY_ROOM" 															Atlas="ATLAS_HD_Buildings" Index="2"/>
+		<Row Name="ICON_BUILDING_HD_ALCHEMY_ROOM_FOW" 													Atlas="ATLAS_HD_Buildings" Index="2"/>
 
-		<Row Name="ICON_BUILDING_HD_REGIONAL_COUNCIL_CENTER" 			Atlas="ATLAS_New_Buildings" Index="2"/>
-		<Row Name="ICON_BUILDING_HD_WORLD_PARLIAMENT_HEADQUARTERS" 		Atlas="ATLAS_New_Buildings" Index="3"/>
-		<Row Name="ICON_BUILDING_HD_REGIONAL_COUNCIL_CENTER_FOW" 		Atlas="ATLAS_New_Buildings" Index="2"/>
-		<Row Name="ICON_BUILDING_HD_WORLD_PARLIAMENT_HEADQUARTERS_FOW" 	Atlas="ATLAS_New_Buildings" Index="3"/>
+		<Row Name="ICON_BUILDING_HD_HYDRAULIC_SPINNING_WHEEL" 									Atlas="ATLAS_HD_Buildings" Index="3"/>
+		<Row Name="ICON_BUILDING_HD_HYDRAULIC_SPINNING_WHEEL_FOW" 							Atlas="ATLAS_HD_Buildings" Index="3"/>
 
-		<Row Name="ICON_BUILDING_GROVE" 		Atlas="ATLAS_New_Buildings" Index="4"/>
-		<Row Name="ICON_BUILDING_GROVE_FOW" 	Atlas="ATLAS_New_Buildings" Index="4"/>
+		<Replace Name="ICON_BUILDING_LIBRARY" 																	Atlas="ATLAS_HD_Buildings" Index="4"/>
+		<Replace Name="ICON_BUILDING_LIBRARY_FOW" 															Atlas="ATLAS_HD_Buildings" Index="4"/>
+		<Row Name="ICON_BUILDING_JNR_ACADEMY" 																	Atlas="ATLAS_HD_Buildings" Index="5"/>
+		<Row Name="ICON_BUILDING_JNR_ACADEMY_FOW" 															Atlas="ATLAS_HD_Buildings" Index="5"/>
+		<Row Name="ICON_BUILDING_JNR_LABORATORY" 																Atlas="ATLAS_HD_Buildings" Index="6"/>
+		<Row Name="ICON_BUILDING_JNR_LABORATORY_FOW" 														Atlas="ATLAS_HD_Buildings" Index="6"/>
+		<Row Name="ICON_BUILDING_JNR_REAL_ACADEMY" 															Atlas="ATLAS_HD_Buildings" Index="7"/>
+		<Row Name="ICON_BUILDING_JNR_REAL_ACADEMY_FOW" 													Atlas="ATLAS_HD_Buildings" Index="7"/>
+		<Row Name="ICON_BUILDING_JNR_ARCHITECTURE" 															Atlas="ATLAS_HD_Buildings" Index="8"/>
+		<Row Name="ICON_BUILDING_JNR_ARCHITECTURE_FOW" 													Atlas="ATLAS_HD_Buildings" Index="8"/>
+		<Row Name="ICON_BUILDING_HD_DATA_CENTER" 																Atlas="ATLAS_HD_Buildings" Index="9"/>
+		<Row Name="ICON_BUILDING_HD_DATA_CENTER_FOW" 														Atlas="ATLAS_HD_Buildings" Index="9"/>
 
-		<Row Name="ICON_BUILDING_SANCTUARY" 		Atlas="ATLAS_New_Buildings" Index="7"/>
-		<Row Name="ICON_BUILDING_SANCTUARY_FOW" 	Atlas="ATLAS_New_Buildings" Index="7"/>
-		<Row Name="ICON_BUILDING_HD_CULTURE_HERITAGE_PRESERVE" 		Atlas="ATLAS_New_Buildings" Index="11"/>
-		<Row Name="ICON_BUILDING_HD_CULTURE_HERITAGE_PRESERVE_FOW" 	Atlas="ATLAS_New_Buildings" Index="11"/>
+		<Row Name="ICON_BUILDING_JNR_CABINET" 																	Atlas="ATLAS_HD_Buildings" Index="10"/>
+		<Row Name="ICON_BUILDING_JNR_CABINET_FOW" 															Atlas="ATLAS_HD_Buildings" Index="10"/>
+		<Row Name="ICON_BUILDING_JNR_MANSION" 																	Atlas="ATLAS_HD_Buildings" Index="11"/>
+		<Row Name="ICON_BUILDING_JNR_MANSION_FOW" 															Atlas="ATLAS_HD_Buildings" Index="11"/>
+		<Row Name="ICON_BUILDING_HD_ART_PUBLISHING_HOUSE" 											Atlas="ATLAS_HD_Buildings" Index="12"/>
+		<Row Name="ICON_BUILDING_HD_ART_PUBLISHING_HOUSE_FOW" 									Atlas="ATLAS_HD_Buildings" Index="12"/>
 
-		<Row Name="ICON_BUILDING_HD_LANDFORM_EPO" 		Atlas="ATLAS_New_Buildings" Index="12"/>
-		<Row Name="ICON_BUILDING_HD_LANDFORM_EPO_FOW" 	Atlas="ATLAS_New_Buildings" Index="12"/>
-		<Row Name="ICON_BUILDING_HD_RESOURCE_EPO" 		Atlas="ATLAS_New_Buildings" Index="13"/>
-		<Row Name="ICON_BUILDING_HD_RESOURCE_EPO_FOW" 	Atlas="ATLAS_New_Buildings" Index="13"/>
-		<Row Name="ICON_BUILDING_HD_SPECIES_EPO" 		Atlas="ATLAS_New_Buildings" Index="14"/>
-		<Row Name="ICON_BUILDING_HD_SPECIES_EPO_FOW" 	Atlas="ATLAS_New_Buildings" Index="14"/>
-		<Row Name="ICON_BUILDING_HD_SCENIC_EPO" 		Atlas="ATLAS_New_Buildings" Index="15"/>
-		<Row Name="ICON_BUILDING_HD_SCENIC_EPO_FOW" 	Atlas="ATLAS_New_Buildings" Index="15"/>
+		<Row Name="ICON_BUILDING_HD_ELECTRONICS_FACTORY" 												Atlas="ATLAS_HD_Buildings" Index="13"/>
+		<Row Name="ICON_BUILDING_HD_ELECTRONICS_FACTORY_FOW" 										Atlas="ATLAS_HD_Buildings" Index="13"/>
+		<Row Name="ICON_BUILDING_HD_INTERNET_COMPANY" 													Atlas="ATLAS_HD_Buildings" Index="14"/>
+		<Row Name="ICON_BUILDING_HD_INTERNET_COMPANY_FOW" 											Atlas="ATLAS_HD_Buildings" Index="14"/>
 
-		<Row Name="ICON_BUILDING_HD_POLICE_STATION" Atlas="ATLAS_New_Buildings_2" Index="2"/>
-		<Row Name="ICON_BUILDING_HD_POLICE_STATION_FOW" Atlas="ATLAS_New_Buildings_2" Index="2"/>
+		<Row Name="ICON_BUILDING_FAIR"	 																				Atlas="ATLAS_HD_Buildings" Index="15"/>
+		<Row Name="ICON_BUILDING_FAIR_FOW"	 																		Atlas="ATLAS_HD_Buildings" Index="15"/>
 
-		<Row Name="ICON_BUILDING_HD_ELECTRONICS_FACTORY" Atlas="ATLAS_New_Buildings_2" Index="5"/>
-		<Row Name="ICON_BUILDING_HD_ELECTRONICS_FACTORY_FOW" Atlas="ATLAS_New_Buildings_2" Index="5"/>
-		<Row Name="ICON_BUILDING_HD_INTERNET_COMPANY" Atlas="ATLAS_New_Buildings_2" Index="6"/>
-		<Row Name="ICON_BUILDING_HD_INTERNET_COMPANY_FOW" Atlas="ATLAS_New_Buildings_2" Index="6"/>
+		<Row Name="ICON_BUILDING_JNR_NAVAL_BASE"	 															Atlas="ATLAS_HD_Buildings" Index="16"/>
+		<Row Name="ICON_BUILDING_JNR_NAVAL_BASE_FOW"	 													Atlas="ATLAS_HD_Buildings" Index="16"/>
+		<Row Name="ICON_BUILDING_JNR_OFFSHORE_TERMINAL"	 												Atlas="ATLAS_HD_Buildings" Index="17"/>
+		<Row Name="ICON_BUILDING_JNR_OFFSHORE_TERMINAL_FOW"	 										Atlas="ATLAS_HD_Buildings" Index="17"/>
 
-		<Row Name="ICON_BUILDING_HD_ANCESTRAL_TEMPLE" Atlas="ATLAS_New_Buildings_2" Index="7"/>
-		<Row Name="ICON_BUILDING_HD_ANCESTRAL_TEMPLE_FOW" Atlas="ATLAS_New_Buildings_2" Index="7"/>
-		<Row Name="ICON_BUILDING_HD_MANSION" Atlas="ATLAS_New_Buildings_2" Index="10"/>
-		<Row Name="ICON_BUILDING_HD_MANSION_FOW" Atlas="ATLAS_New_Buildings_2" Index="10"/>
-		<Row Name="ICON_BUILDING_HD_BUS_STOP" Atlas="ATLAS_New_Buildings_2" Index="11"/>
-		<Row Name="ICON_BUILDING_HD_BUS_STOP_FOW" Atlas="ATLAS_New_Buildings_2" Index="11"/>
-		<Row Name="ICON_BUILDING_FOOD_MARKET" Atlas="ATLAS_New_Buildings_2" Index="14"/>
-		<Row Name="ICON_BUILDING_FOOD_MARKET_FOW" Atlas="ATLAS_New_Buildings_2" Index="14"/>
-		<Row Name="ICON_BUILDING_SHOPPING_MALL" Atlas="ATLAS_New_Buildings_2" Index="15"/>
-		<Row Name="ICON_BUILDING_SHOPPING_MALL_FOW" Atlas="ATLAS_New_Buildings_2" Index="15"/>
-		<Row Name="ICON_BUILDING_JNR_ART_GALLERY" Atlas="ATLAS_New_Buildings_2" Index="16"/>
-		<Row Name="ICON_BUILDING_JNR_ART_GALLERY_FOW" Atlas="ATLAS_New_Buildings_2" Index="16"/>
+		<Row Name="ICON_BUILDING_HD_ANCESTRAL_TEMPLE" 													Atlas="ATLAS_HD_Buildings" Index="18"/>
+		<Row Name="ICON_BUILDING_HD_ANCESTRAL_TEMPLE_FOW" 											Atlas="ATLAS_HD_Buildings" Index="18"/>
+		<Row Name="ICON_BUILDING_HD_MANSION" 																		Atlas="ATLAS_HD_Buildings" Index="19"/>
+		<Row Name="ICON_BUILDING_HD_MANSION_FOW" 																Atlas="ATLAS_HD_Buildings" Index="19"/>
+		<Row Name="ICON_BUILDING_HD_BUS_STOP" 																	Atlas="ATLAS_HD_Buildings" Index="20"/>
+		<Row Name="ICON_BUILDING_HD_BUS_STOP_FOW" 															Atlas="ATLAS_HD_Buildings" Index="20"/>
+		<Replace Name="ICON_BUILDING_FOOD_MARKET" 															Atlas="ATLAS_HD_Buildings" Index="21"/>
+		<Replace Name="ICON_BUILDING_FOOD_MARKET_FOW" 													Atlas="ATLAS_HD_Buildings" Index="21"/>
+		<Replace Name="ICON_BUILDING_SHOPPING_MALL" 														Atlas="ATLAS_HD_Buildings" Index="22"/>
+		<Replace Name="ICON_BUILDING_SHOPPING_MALL_FOW" 												Atlas="ATLAS_HD_Buildings" Index="22"/>
+		<Row Name="ICON_BUILDING_JNR_ART_GALLERY" 															Atlas="ATLAS_HD_Buildings" Index="23"/>
+		<Row Name="ICON_BUILDING_JNR_ART_GALLERY_FOW" 													Atlas="ATLAS_HD_Buildings" Index="23"/>
+		<Row Name="ICON_BUILDING_JNR_MEDITATION" 																Atlas="ATLAS_HD_Buildings" Index="24"/>
+		<Row Name="ICON_BUILDING_JNR_MEDITATION_FOW" 														Atlas="ATLAS_HD_Buildings" Index="24"/>
 
-		<Row Name="ICON_BUILDING_HD_ART_PUBLISHING_HOUSE" Atlas="ATLAS_New_Buildings_2" Index="17"/>
-		<Row Name="ICON_BUILDING_HD_ART_PUBLISHING_HOUSE_FOW" Atlas="ATLAS_New_Buildings_2" Index="17"/>
+		<Row Name="ICON_BUILDING_EL_ESCORIAL_PALACE" 														Atlas="ATLAS_HD_Buildings" Index="25"/>
+		<Row Name="ICON_BUILDING_EL_ESCORIAL_PALACE_FOW" 												Atlas="ATLAS_HD_Buildings" Index="25"/>
 
-		<Row Name="ICON_BUILDING_HD_DATA_CENTER" Atlas="ATLAS_New_Buildings_2" Index="21"/>
-		<Row Name="ICON_BUILDING_HD_DATA_CENTER_FOW" Atlas="ATLAS_New_Buildings_2" Index="21"/>
+		<Row Name="ICON_BUILDING_CONSULATE" 																		Atlas="ATLAS_HD_Buildings" Index="26"/>
+		<Row Name="ICON_BUILDING_CONSULATE_FOW" 																Atlas="ATLAS_HD_Buildings" Index="26"/>
+		<Row Name="ICON_BUILDING_JNR_CONSULATE_SPIES" 													Atlas="ATLAS_HD_Buildings" Index="27"/>
+		<Row Name="ICON_BUILDING_JNR_CONSULATE_SPIES_FOW" 											Atlas="ATLAS_HD_Buildings" Index="27"/>
+		<Row Name="ICON_BUILDING_JNR_CONSULATE_CITYSTATES" 											Atlas="ATLAS_HD_Buildings" Index="28"/>
+		<Row Name="ICON_BUILDING_JNR_CONSULATE_CITYSTATES_FOW" 									Atlas="ATLAS_HD_Buildings" Index="28"/>
+		<Row Name="ICON_BUILDING_CHANCERY" 																			Atlas="ATLAS_HD_Buildings" Index="29"/>
+		<Row Name="ICON_BUILDING_CHANCERY_FOW" 																	Atlas="ATLAS_HD_Buildings" Index="29"/>
+		<Row Name="ICON_BUILDING_JNR_CHANCERY_SPIES" 														Atlas="ATLAS_HD_Buildings" Index="30"/>
+		<Row Name="ICON_BUILDING_JNR_CHANCERY_SPIES_FOW" 												Atlas="ATLAS_HD_Buildings" Index="30"/>
+		<Row Name="ICON_BUILDING_JNR_CHANCERY_CITYSTATES" 											Atlas="ATLAS_HD_Buildings" Index="31"/>
+		<Row Name="ICON_BUILDING_JNR_CHANCERY_CITYSTATES_FOW" 									Atlas="ATLAS_HD_Buildings" Index="31"/>
 
-		<Row Name="ICON_BUILDING_EL_ESCORIAL_PALACE" Atlas="ATLAS_New_Buildings_2" Index="22"/>
-		<Row Name="ICON_BUILDING_EL_ESCORIAL_PALACE_FOW" Atlas="ATLAS_New_Buildings_2" Index="22"/>
+		<Row Name="ICON_BUILDING_HD_MINISTRY_OF_NATIONAL_DEFENSE" 							Atlas="ATLAS_HD_Buildings" Index="32"/>
+		<Row Name="ICON_BUILDING_HD_MINISTRY_OF_NATIONAL_DEFENSE_FOW" 					Atlas="ATLAS_HD_Buildings" Index="32"/>
+		<Row Name="ICON_BUILDING_HD_HUMAN_RIGHTS_COUNCIL" 											Atlas="ATLAS_HD_Buildings" Index="33"/>
+		<Row Name="ICON_BUILDING_HD_HUMAN_RIGHTS_COUNCIL_FOW" 									Atlas="ATLAS_HD_Buildings" Index="33"/>
+		<Row Name="ICON_BUILDING_HD_REGIONAL_COUNCIL_CENTER" 										Atlas="ATLAS_HD_Buildings" Index="34"/>
+		<Row Name="ICON_BUILDING_HD_REGIONAL_COUNCIL_CENTER_FOW" 								Atlas="ATLAS_HD_Buildings" Index="34"/>
+		<Row Name="ICON_BUILDING_HD_WORLD_PARLIAMENT_HEADQUARTERS" 							Atlas="ATLAS_HD_Buildings" Index="35"/>
+		<Row Name="ICON_BUILDING_HD_WORLD_PARLIAMENT_HEADQUARTERS_FOW" 					Atlas="ATLAS_HD_Buildings" Index="35"/>
 
-		<Row Name="ICON_BUILDING_HD_HUMAN_RIGHTS_COUNCIL" Atlas="ATLAS_New_Buildings_2" Index="23"/>
-		<Row Name="ICON_BUILDING_HD_HUMAN_RIGHTS_COUNCIL_FOW" Atlas="ATLAS_New_Buildings_2" Index="23"/>
-		<Row Name="ICON_BUILDING_HD_MINISTRY_OF_NATIONAL_DEFENSE" Atlas="ATLAS_New_Buildings_2" Index="24"/>
-		<Row Name="ICON_BUILDING_HD_MINISTRY_OF_NATIONAL_DEFENSE_FOW" Atlas="ATLAS_New_Buildings_2" Index="24"/>
+		<Row Name="ICON_BUILDING_GROVE" 																				Atlas="ATLAS_HD_Buildings" Index="36"/>
+		<Row Name="ICON_BUILDING_GROVE_FOW" 																		Atlas="ATLAS_HD_Buildings" Index="36"/>
+		<Row Name="ICON_BUILDING_SANCTUARY" 																		Atlas="ATLAS_HD_Buildings" Index="37"/>
+		<Row Name="ICON_BUILDING_SANCTUARY_FOW" 																Atlas="ATLAS_HD_Buildings" Index="37"/>
+		<Row Name="ICON_BUILDING_HD_CULTURE_HERITAGE_PRESERVE" 									Atlas="ATLAS_HD_Buildings" Index="38"/>
+		<Row Name="ICON_BUILDING_HD_CULTURE_HERITAGE_PRESERVE_FOW" 							Atlas="ATLAS_HD_Buildings" Index="38"/>
+		<Row Name="ICON_BUILDING_HD_LANDFORM_EPO" 															Atlas="ATLAS_HD_Buildings" Index="39"/>
+		<Row Name="ICON_BUILDING_HD_LANDFORM_EPO_FOW" 													Atlas="ATLAS_HD_Buildings" Index="39"/>
+		<Row Name="ICON_BUILDING_HD_RESOURCE_EPO" 															Atlas="ATLAS_HD_Buildings" Index="40"/>
+		<Row Name="ICON_BUILDING_HD_RESOURCE_EPO_FOW" 													Atlas="ATLAS_HD_Buildings" Index="40"/>
+		<Row Name="ICON_BUILDING_HD_SPECIES_EPO" 																Atlas="ATLAS_HD_Buildings" Index="41"/>
+		<Row Name="ICON_BUILDING_HD_SPECIES_EPO_FOW" 														Atlas="ATLAS_HD_Buildings" Index="41"/>
+		<Row Name="ICON_BUILDING_HD_SCENIC_EPO" 																Atlas="ATLAS_HD_Buildings" Index="42"/>
+		<Row Name="ICON_BUILDING_HD_SCENIC_EPO_FOW" 														Atlas="ATLAS_HD_Buildings" Index="42"/>
 
-		<Row Name="ICON_BUILDING_HD_HYDRAULIC_SPINNING_WHEEL" Atlas="ATLAS_New_Buildings_2" Index="25"/>
-		<Row Name="ICON_BUILDING_HD_HYDRAULIC_SPINNING_WHEEL_FOW" Atlas="ATLAS_New_Buildings_2" Index="25"/>
-		
-		<Row Name="ICON_BUILDING_HD_ALCHEMY_ROOM" Atlas="ATLAS_New_Buildings_2" Index="28"/>
-		<Row Name="ICON_BUILDING_HD_ALCHEMY_ROOM_FOW" Atlas="ATLAS_New_Buildings_2" Index="28"/>
+		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_HOLY_SITE"             Atlas="ICON_ATLAS_DISTRICTS" Index="1"/>
+		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_CAMPUS"                Atlas="ICON_ATLAS_DISTRICTS" Index="2"/>
+		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_ENCAMPMENT"            Atlas="ICON_ATLAS_DISTRICTS" Index="3"/>
+		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_HARBOR"                Atlas="ICON_ATLAS_DISTRICTS" Index="4"/>
+		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_COMMERCIAL_HUB"        Atlas="ICON_ATLAS_DISTRICTS" Index="6"/>
+		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_THEATER"               Atlas="ICON_ATLAS_DISTRICTS" Index="8"/>
+		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_INDUSTRIAL_ZONE"       Atlas="ICON_ATLAS_DISTRICTS" Index="9"/>
+		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_HOLY_SITE_FOW"         Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="1"/>
+		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_CAMPUS_FOW"            Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="2"/>
+		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_ENCAMPMENT_FOW"        Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="3"/>
+		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_HARBOR_FOW"            Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="4"/>
+		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_COMMERCIAL_HUB_FOW"    Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="6"/>
+		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_THEATER_FOW"           Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="8"/>
+		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_INDUSTRIAL_ZONE_FOW"   Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="9"/>
 
-		<Row Name="ICON_BUILDING_YELLOW_CRANE_HD" Atlas="ATLAS_HD_Mod_Icon_Fix" Index="0"/>
+		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_HOLY_SITE"            Atlas="ICON_ATLAS_DISTRICTS" Index="1"/>
+		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_CAMPUS"               Atlas="ICON_ATLAS_DISTRICTS" Index="2"/>
+		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_ENCAMPMENT"           Atlas="ICON_ATLAS_DISTRICTS" Index="3"/>
+		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_HARBOR"               Atlas="ICON_ATLAS_DISTRICTS" Index="4"/>
+		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_COMMERCIAL_HUB"       Atlas="ICON_ATLAS_DISTRICTS" Index="6"/>
+		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_THEATER"              Atlas="ICON_ATLAS_DISTRICTS" Index="8"/>
+		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_INDUSTRIAL_ZONE"      Atlas="ICON_ATLAS_DISTRICTS" Index="9"/>
+		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_NEIGHBORHOOD"         Atlas="ICON_ATLAS_DISTRICTS" Index="10"/>
+		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_HOLY_SITE_FOW"        Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="1"/>
+		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_CAMPUS_FOW"           Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="2"/>
+		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_ENCAMPMENT_FOW"       Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="3"/>
+		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_HARBOR_FOW"           Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="4"/>
+		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_COMMERCIAL_HUB_FOW"   Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="6"/>
+		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_THEATER_FOW"          Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="8"/>
+		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_INDUSTRIAL_ZONE_FOW"  Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="9"/>
+		<Row Name="ICON_BUILDING_MEENAKSHI_DUMMY_DISTRICT_NEIGHBORHOOD_FOW"     Atlas="ICON_ATLAS_DISTRICTS_FOW" Index="10"/>
+
+		<Row Name="ICON_BUILDING_YELLOW_CRANE_HD" 															Atlas="ATLAS_HD_Mod_Icon_Fix" Index="0"/>
 	</IconDefinitions>
 </GameData>

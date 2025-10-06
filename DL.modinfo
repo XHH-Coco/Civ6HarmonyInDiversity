@@ -565,6 +565,7 @@
       <Properties><LoadOrder>16019</LoadOrder></Properties>
       <File>UI/Icons/HD_Icons.xml</File>
       <File>UI/Icons/DL_Icons_Frontend.xml</File>
+      <File>UI/Icons/DL_Icons_Districts.xml</File>
     </UpdateIcons>
     <UpdateText id="SukOceans_mod_support_text">
       <Properties><LoadOrder>17000</LoadOrder></Properties>
@@ -610,24 +611,26 @@
       <File>Assets/CityStates/CivBaikonur_128.dds</File>
       <File>Assets/CityStates/CivBaikonur_200.dds</File>
       <File>Assets/CityStates/CivBaikonur_256.dds</File>
-      <File>Assets/Buildings/New_Buildings_32.dds</File>
-      <File>Assets/Buildings/New_Buildings_38.dds</File>
-      <File>Assets/Buildings/New_Buildings_50.dds</File>
-      <File>Assets/Buildings/New_Buildings_80.dds</File>
-      <File>Assets/Buildings/New_Buildings_128.dds</File>
-      <File>Assets/Buildings/New_Buildings_256.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_32.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_38.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_50.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_80.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_128.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_256.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_22.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_32.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_38.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_50.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_80.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_256.dds</File>
+      <File>Assets/Buildings/HD_Buildings_32.dds.dds</File>
+      <File>Assets/Buildings/HD_Buildings_38.dds</File>
+      <File>Assets/Buildings/HD_Buildings_50.dds</File>
+      <File>Assets/Buildings/HD_Buildings_80.dds</File>
+      <File>Assets/Buildings/HD_Buildings_128.dds</File>
+      <File>Assets/Buildings/HD_Buildings_256.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_22.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_32.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_38.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_50.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_80.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_128.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_256.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_FOW_256.dds</File>
     </ImportFiles>
     <!-- Suk wonders -->
     <UpdateText id="Suk_wonders_text">
@@ -671,30 +674,26 @@
       <File>Assets/TechCivics/New_Tech_Civic_128.dds</File>
       <File>Assets/TechCivics/New_Tech_Civic_160.dds</File>
       <File>Assets/TechCivics/New_Tech_Civic_FOW_42.dds</File>
-      <File>Assets/Buildings/New_Buildings_32.dds</File>
-      <File>Assets/Buildings/New_Buildings_38.dds</File>
-      <File>Assets/Buildings/New_Buildings_50.dds</File>
-      <File>Assets/Buildings/New_Buildings_80.dds</File>
-      <File>Assets/Buildings/New_Buildings_128.dds</File>
-      <File>Assets/Buildings/New_Buildings_256.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_32.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_38.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_50.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_80.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_128.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_256.dds</File>
-      <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_32.dds</File>
-      <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_38.dds</File>
-      <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_50.dds</File>
-      <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_80.dds</File>
-      <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_128.dds</File>
-      <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_256.dds</File>
       <File>Assets/Buildings/Mod_Icon_Fix_32.dds</File>
       <File>Assets/Buildings/Mod_Icon_Fix_38.dds</File>
       <File>Assets/Buildings/Mod_Icon_Fix_50.dds</File>
       <File>Assets/Buildings/Mod_Icon_Fix_80.dds</File>
       <File>Assets/Buildings/Mod_Icon_Fix_128.dds</File>
       <File>Assets/Buildings/Mod_Icon_Fix_256.dds</File>
+      <File>Assets/Buildings/HD_Buildings_32.dds.dds</File>
+      <File>Assets/Buildings/HD_Buildings_38.dds</File>
+      <File>Assets/Buildings/HD_Buildings_50.dds</File>
+      <File>Assets/Buildings/HD_Buildings_80.dds</File>
+      <File>Assets/Buildings/HD_Buildings_128.dds</File>
+      <File>Assets/Buildings/HD_Buildings_256.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_22.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_32.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_38.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_50.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_80.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_128.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_256.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_FOW_256.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_22.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_32.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_38.dds</File>
@@ -1811,6 +1810,7 @@
       <Properties><LoadOrder>16016</LoadOrder></Properties>
       <File>UI/Icons/DL_Icons_Beliefs.xml</File>
       <File>UI/Icons/DL_Icons_Buildings.xml</File>
+      <File>UI/Icons/DL_Icons_Districts.xml</File>
       <File>UI/Icons/DL_Icons_Policies.xml</File>
       <File>UI/Icons/DL_Icons_Projects.xml</File>
       <File>UI/Icons/HD_Icons_UnitCommands.xml</File>
@@ -2411,6 +2411,7 @@
     <File>UI/Icons/DL_Icons_Fixing.sql</File>
     <File>UI/Icons/DL_Icons_Beliefs.xml</File>
     <File>UI/Icons/DL_Icons_Buildings.xml</File>
+    <File>UI/Icons/DL_Icons_Districts.xml</File>
 	  <File>UI/Icons/DL_Icons_Frontend.xml</File>
     <File>UI/Icons/DL_Icons_Policies.xml</File>
     <File>UI/Icons/DL_Icons_Projects.xml</File>
@@ -2776,30 +2777,26 @@
     <File>Assets/TechCivics/New_Tech_Civic_128.dds</File>
     <File>Assets/TechCivics/New_Tech_Civic_160.dds</File>
     <File>Assets/TechCivics/New_Tech_Civic_FOW_42.dds</File>
-    <File>Assets/Buildings/New_Buildings_32.dds</File>
-    <File>Assets/Buildings/New_Buildings_38.dds</File>
-    <File>Assets/Buildings/New_Buildings_50.dds</File>
-    <File>Assets/Buildings/New_Buildings_80.dds</File>
-    <File>Assets/Buildings/New_Buildings_128.dds</File>
-    <File>Assets/Buildings/New_Buildings_256.dds</File>
-    <File>Assets/Buildings/New_Buildings_2_32.dds</File>
-    <File>Assets/Buildings/New_Buildings_2_38.dds</File>
-    <File>Assets/Buildings/New_Buildings_2_50.dds</File>
-    <File>Assets/Buildings/New_Buildings_2_80.dds</File>
-    <File>Assets/Buildings/New_Buildings_2_128.dds</File>
-    <File>Assets/Buildings/New_Buildings_2_256.dds</File>
-    <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_32.dds</File>
-    <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_38.dds</File>
-    <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_50.dds</File>
-    <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_80.dds</File>
-    <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_128.dds</File>
-    <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_256.dds</File>
     <File>Assets/Buildings/Mod_Icon_Fix_32.dds</File>
     <File>Assets/Buildings/Mod_Icon_Fix_38.dds</File>
     <File>Assets/Buildings/Mod_Icon_Fix_50.dds</File>
     <File>Assets/Buildings/Mod_Icon_Fix_80.dds</File>
     <File>Assets/Buildings/Mod_Icon_Fix_128.dds</File>
     <File>Assets/Buildings/Mod_Icon_Fix_256.dds</File>
+    <File>Assets/Buildings/HD_Buildings_32.dds.dds</File>
+    <File>Assets/Buildings/HD_Buildings_38.dds</File>
+    <File>Assets/Buildings/HD_Buildings_50.dds</File>
+    <File>Assets/Buildings/HD_Buildings_80.dds</File>
+    <File>Assets/Buildings/HD_Buildings_128.dds</File>
+    <File>Assets/Buildings/HD_Buildings_256.dds</File>
+    <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_22.dds</File>
+    <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_32.dds</File>
+    <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_38.dds</File>
+    <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_50.dds</File>
+    <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_80.dds</File>
+    <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_128.dds</File>
+    <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_256.dds</File>
+    <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_FOW_256.dds</File>
     <File>Assets/Units/HD_NEW_UNITS_22.dds</File>
     <File>Assets/Units/HD_NEW_UNITS_32.dds</File>
     <File>Assets/Units/HD_NEW_UNITS_38.dds</File>
