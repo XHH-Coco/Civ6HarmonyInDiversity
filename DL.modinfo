@@ -617,7 +617,7 @@
       <File>Assets/Units/HD_NEW_UNITS_50.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_80.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_256.dds</File>
-      <File>Assets/Buildings/HD_Buildings_32.dds.dds</File>
+      <File>Assets/Buildings/HD_Buildings_32.dds</File>
       <File>Assets/Buildings/HD_Buildings_38.dds</File>
       <File>Assets/Buildings/HD_Buildings_50.dds</File>
       <File>Assets/Buildings/HD_Buildings_80.dds</File>
@@ -680,7 +680,7 @@
       <File>Assets/Buildings/Mod_Icon_Fix_80.dds</File>
       <File>Assets/Buildings/Mod_Icon_Fix_128.dds</File>
       <File>Assets/Buildings/Mod_Icon_Fix_256.dds</File>
-      <File>Assets/Buildings/HD_Buildings_32.dds.dds</File>
+      <File>Assets/Buildings/HD_Buildings_32.dds</File>
       <File>Assets/Buildings/HD_Buildings_38.dds</File>
       <File>Assets/Buildings/HD_Buildings_50.dds</File>
       <File>Assets/Buildings/HD_Buildings_80.dds</File>
@@ -2784,7 +2784,7 @@
     <File>Assets/Buildings/Mod_Icon_Fix_80.dds</File>
     <File>Assets/Buildings/Mod_Icon_Fix_128.dds</File>
     <File>Assets/Buildings/Mod_Icon_Fix_256.dds</File>
-    <File>Assets/Buildings/HD_Buildings_32.dds.dds</File>
+    <File>Assets/Buildings/HD_Buildings_32.dds</File>
     <File>Assets/Buildings/HD_Buildings_38.dds</File>
     <File>Assets/Buildings/HD_Buildings_50.dds</File>
     <File>Assets/Buildings/HD_Buildings_80.dds</File>
