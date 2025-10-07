@@ -108,7 +108,7 @@ insert or replace into EnglishText (Tag, Text) values
 		6366039a-6cd8-48d5-99ce-d7832a617629,
 		9f162187-9342-47ca-9085-78fc3f80f25d,
 		ce086704-334c-43cd-b26a-478365503137,
-		3db98aba-d7ca-4b4d-9596-e2344e593ed0,
+		2217fddf-b466-45e1-950c-fc3747f076b6,
 		cfba692b-a7f8-4d6e-aa4b-a25aa704867c,
 		f87fe104-c6c5-4e11-9251-db958c80c589,
 		d1c3ef16-00ed-4d72-a468-1e584fdb85ad,

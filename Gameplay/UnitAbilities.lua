@@ -83,11 +83,11 @@ end
 GameEvents.HDChiChenItzaSacrifice.Add(HDChiChenItzaSacrifice);
 
 -- 高德院剃度出家，by xiaoxiao
-function HDKotokuInPravrajya (playerId, unitId)
-    local player = Players[playerId];
-    player:AttachModifierByID('KOTOKU_IN_GRANTS_CIVILIAN_MONK');
-end
-GameEvents.HDKotokuInPravrajya.Add(HDKotokuInPravrajya);
+-- function HDKotokuInPravrajya (playerId, unitId)
+--     local player = Players[playerId];
+--     player:AttachModifierByID('KOTOKU_IN_GRANTS_CIVILIAN_MONK');
+-- end
+-- GameEvents.HDKotokuInPravrajya.Add(HDKotokuInPravrajya);
 
 -- 津巴布韦探路者，by xiaoxiao
 local PATHFINDER_RESOURCE_KEY = "PATHFINDER_RESOURCE";

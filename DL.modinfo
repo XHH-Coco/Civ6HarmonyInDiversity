@@ -156,6 +156,10 @@
       <RuleSetInUse>RULESET_EXPANSION_2</RuleSetInUse>
       <ModInUse>9f162187-9342-47ca-9085-78fc3f80f25d</ModInUse>
     </Criteria>
+    <Criteria id="Suk_NotreDame_Expansion2">
+      <RuleSetInUse>RULESET_EXPANSION_2</RuleSetInUse>
+      <ModInUse>2217fddf-b466-45e1-950c-fc3747f076b6</ModInUse>
+    </Criteria>
     <Criteria id="CityPolicies_With_Suk">
       <RuleSetInUse>RULESET_EXPANSION_2</RuleSetInUse>
       <ModInUse>805cc499-c534-4e0a-bdce-32fb3c53ba38</ModInUse>
@@ -1188,7 +1192,7 @@
       <Properties><LoadOrder>17000</LoadOrder></Properties>
       <File>ModSupport/Wonders/HD_National_Wonders.sql</File>
     </UpdateDatabase>
-    <AddGameplayScripts id="National_Wonders_support" criteria="National_Wonders_Expansion2">
+    <AddGameplayScripts id="National_Wonders_support_lua" criteria="National_Wonders_Expansion2">
       <Properties><LoadOrder>17000</LoadOrder></Properties>
       <File>ModSupport/Wonders/HD_National_Wonders.lua</File>
     </AddGameplayScripts>
@@ -1199,9 +1203,14 @@
     </UpdateDatabase>
     <!-- 国家奇观 End -->
     <!-- 黄鹤楼Lua覆盖 -->
-    <ImportFiles id="National_Wonders_support" criteria="Yellow_Crane_Expansion2">
+    <ImportFiles id="Yellow_Crane_Override" criteria="Yellow_Crane_Expansion2">
       <Properties><LoadOrder>17000</LoadOrder></Properties>
       <File>ModSupport/Wonders/YellowCraneGreatPeople.lua</File>
+    </ImportFiles>
+    <!-- 圣母院Lua覆盖 -->
+    <ImportFiles id="Notre_Dame_Override" criteria="Suk_NotreDame_Expansion2">
+      <Properties><LoadOrder>17000</LoadOrder></Properties>
+      <File>ModSupport/Wonders/Suk_AdjacencyHandlerItem_Suk_NotreDame.lua</File>
     </ImportFiles>
     <!-- 丰富资源2 Start -->
     <UpdateDatabase id="Resouceful2_support" criteria="Resouceful2_Expansion2">
@@ -2466,6 +2475,7 @@
     <File>ModSupport/Wonders/HD_National_Wonders.lua</File>
     <File>ModSupport/Wonders/HD_National_Wonders_PackOne.sql</File>
     <File>ModSupport/Wonders/YellowCraneGreatPeople.lua</File>
+    <File>ModSupport/Wonders/Suk_AdjacencyHandlerItem_Suk_NotreDame.lua</File>
     <File>ModSupport/GeneralChineseSupport/Texts.sql</File>
     <File>ModSupport/BetterTradeScreen/TradeSupport.lua</File>
     <File>ModSupport/BetterTradeScreen/TradeRouteChooser.lua</File>

@@ -181,7 +181,6 @@ update Building_GreatWorks set ThemingBonusDescription = 'LOC_BUILDING_THEMINGBO
 update Building_GreatWorks set ThemingBonusDescription = 'LOC_BUILDING_THEMINGBONUS_GOV_CULTURE' where BuildingType = 'BUILDING_GOV_CULTURE';
 update Building_GreatWorks set ThemingBonusDescription = 'LOC_BUILDING_THEMINGBONUS_NEUSCHWANSTEIN' where BuildingType = 'BUILDING_NEUSCHWANSTEIN';
 update Building_GreatWorks set ThemingBonusDescription = 'LOC_BUILDING_THEMINGBONUS_UFFIZI' where BuildingType = 'BUILDING_UFFIZI';
--- update Building_GreatWorks set ThemingBonusDescription = 'LOC_BUILDING_THEMINGBONUS_NOTRE_DAME' where BuildingType = 'BUILDING_NOTRE_DAME';
 update Building_GreatWorks set ThemingBonusDescription = 'LOC_BUILDING_THEMINGBONUS_DL_STPETERSBASILICA' where BuildingType = 'BUILDING_AL_STPETERSBASILICA';
 
 --------------------------------------------------------------------------------
