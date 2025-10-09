@@ -298,7 +298,7 @@ values
 	('DLAdjustDistricts',		'DISTRICT_INDUSTRIAL_ZONE',				1,			1),
 --1.37版本，加入商业和港口调整
 --	('DLAdjustDistricts',		'DISTRICT_HARBOR',						1,			0),	
---	('DLAdjustDistricts',		'DISTRICT_COMMERCIAL_HUB',				1,			0),		
+	('DLAdjustDistricts',		'DISTRICT_COMMERCIAL_HUB',				0,			-1),		
 --传教单位（修复不出传教单位的BUG，让能传教的文明更激情传教）-by siv1.35
 	('DLAdjustUnits',			'UNIT_MISSIONARY',						1,			10),
 	('DLAdjustUnits',			'UNIT_APOSTLE',							1,			10),
@@ -570,9 +570,9 @@ update PseudoYields set DefaultValue = 1 where PseudoYieldType = 'PSEUDOYIELD_CL
 update PseudoYields set DefaultValue = 5.5 where PseudoYieldType = 'PSEUDOYIELD_IMPROVEMENT'; -- 	0.5 => 3.0 in NFP, 13.5 too much
 --影响力点数热衷
 update PseudoYields set DefaultValue = 0.8 where PseudoYieldType = 'PSEUDOYIELD_INFLUENCE'; -- 	0.5
---常备军（让AI更加容易爆兵）
-update PseudoYields set DefaultValue = 1.25 where PseudoYieldType = 'PSEUDOYIELD_STANDING_ARMY_NUMBER'; -- 	1 -- controls size of the army
-update PseudoYields set DefaultValue = 0.13 where PseudoYieldType = 'PSEUDOYIELD_STANDING_ARMY_VALUE'; -- 	0.1 -- controls size of the army
+--常备军
+update PseudoYields set DefaultValue = 0.9 where PseudoYieldType = 'PSEUDOYIELD_STANDING_ARMY_NUMBER'; -- 	1 -- controls size of the army
+update PseudoYields set DefaultValue = 0.08 where PseudoYieldType = 'PSEUDOYIELD_STANDING_ARMY_VALUE'; -- 	0.1 -- controls size of the army
 --旅游业绩渴求度降低，理论上降低遗物价格
 --update PseudoYields set DefaultValue = 0.1 where PseudoYieldType = 'PSEUDOYIELD_TOURISM'; -- 	1
 --更加热衷出开拓者
@@ -584,7 +584,7 @@ update PseudoYields set DefaultValue = 7.0 where PseudoYieldType = 'PSEUDOYIELD_
 --世界上的不满传播
 update PseudoYields set DefaultValue = -0.25 where PseudoYieldType = 'PSEUDOYIELD_DIPLOMATIC_GRIEVANCE';
 --奇观倾向
-update PseudoYields set DefaultValue = 1.0 where PseudoYieldType = 'PSEUDOYIELD_WONDER'; -- 2, AI+ 0.55
+update PseudoYields set DefaultValue = 1.1 where PseudoYieldType = 'PSEUDOYIELD_WONDER'; -- 2, AI+ 0.55
 --间谍
 update PseudoYields set DefaultValue = 1.0 where PseudoYieldType = 'PSEUDOYIELD_UNIT_SPY'; -- 20
 --大亨、投资人

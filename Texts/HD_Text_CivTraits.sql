@@ -693,7 +693,7 @@ values
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_WU_ZETIAN_NAME",                                      "凤集上阳宫"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_WU_ZETIAN_DESCRIPTION",                               "你每招募一个 [ICON_GREATPERSON] 伟人，则全国所有对应类型区域获得2份对应产出。每获得20点 [ICON_GLORY_NORMAL_AGE] 时代得分，获得1个梅花内卫。"),
 	("zh_Hans_CN",  "LOC_UNIT_PLUM_INTERNAL_SECURITY_HD_NAME",                              "梅花内卫"),
-	("zh_Hans_CN",  "LOC_UNIT_PLUM_INTERNAL_SECURITY_HD_DESCRIPTION",                       "武则天特色支援单位。拥有独特的升级树。{LOC_ABILITY_PLUM_INTERNAL_SECURITY_HD_DESCRIPTION}解锁“航海术”科技后允许上船。每回合从所在区域和相邻区域获得5点对应 [ICON_GREATPERSON] 伟人点数和1点经验值；若为其他文明的区域，则改为偷取10点 [ICON_GREATPERSON] 伟人点数，并获得2点经验值。"),
+	("zh_Hans_CN",  "LOC_UNIT_PLUM_INTERNAL_SECURITY_HD_DESCRIPTION",                       "武则天特色支援单位。拥有独特的升级树。{LOC_ABILITY_PLUM_INTERNAL_SECURITY_HD_DESCRIPTION}解锁“航行”科技后允许上船。每回合从所在区域和相邻区域获得5点对应 [ICON_GREATPERSON] 伟人点数和1点经验值；若为其他文明的区域，则改为偷取10点 [ICON_GREATPERSON] 伟人点数，并获得2点经验值。"),
 	("zh_Hans_CN",  "LOC_ABILITY_PLUM_INTERNAL_SECURITY_HD_DESCRIPTION",                    "能够在没有开放边界的情况下进入外国。只有相邻敌军单位才能发现该单位。"),
 	("zh_Hans_CN",  "LOC_PROMOTION_CLASS_PLUM_INTERNAL_SECURITY_HD_NAME",                   "梅花内卫"),
 	("zh_Hans_CN",  "LOC_PROMOTION_SWIFT_LEGS_HD_NAME",                              				"神行太保"),
@@ -1039,7 +1039,7 @@ values
 -- =====================================================================================================================================
 -- 毛利
 -- =====================================================================================================================================
-	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_MAORI_MANA_DESCRIPTION",                 "游戏初始便解锁“航海术”与“造船术”科技，同时拥有进入海洋单元格的能力。水运单位+2 [ICON_Movement] 移动力。解锁“占星术”后，雨林和草本沼泽提供+1 [ICON_PRODUCTION] 生产力，森林和木本沼泽提供+1 [ICON_FOOD] 食物。渔船提供+1 [ICON_FOOD] 食物，并向相邻单元格投放文化炸弹。"),
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_MAORI_MANA_DESCRIPTION",                 "游戏初始便解锁“航行”与“造船术”科技，同时拥有进入海洋单元格的能力。水运单位+2 [ICON_Movement] 移动力。解锁“占星术”后，雨林和草本沼泽提供+1 [ICON_PRODUCTION] 生产力，森林和木本沼泽提供+1 [ICON_FOOD] 食物。渔船提供+1 [ICON_FOOD] 食物，并向相邻单元格投放文化炸弹。"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_KUPES_VOYAGE_DESCRIPTION",                     "游戏开始时位于海洋单元格中。建立首座城市时+1 [ICON_CITIZEN] 人口。宫殿额外+3 [ICON_HOUSING] 住房与+1 [ICON_AMENITIES] 宜居度。建立首座城市前每回合获得+2 [ICON_SCIENCE] 科技值与+2 [ICON_CULTURE] 文化值。"),
 -- =====================================================================================================================================
 -- 埃及

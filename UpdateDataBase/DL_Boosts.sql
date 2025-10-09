@@ -209,6 +209,9 @@ values
     -- 拱券
     (275,       'TECH_ARCH_HD',                             40,     'LOC_BOOST_TRIGGER_ARCH_HD',                            'LOC_BOOST_TRIGGER_LONGDESC_ARCH_HD',                               NULL,                        'BOOST_TRIGGER_HAVE_X_WONDERS',                     NULL,           NULL,                      NULL,                         NULL,                    NULL,                       NULL,                3,          NULL,                   0);
 
+    -- 【航行】科技尤里卡改为：沿湖也可以触发
+update Boosts set TriggerDescription = 'LOC_BOOST_TRIGGER_SAILING_HD', TriggerLongDescription = 'LOC_BOOST_TRIGGER_LONGDESC_SAILING_HD'
+    where TechnologyType = 'TECH_SAILING';
 -- 新科文版本 原有科文尤里卡&鼓舞调整
     -- 【教育】科技尤里卡改为：拥有科举制市政
 update Boosts set BoostClass = 'BOOST_TRIGGER_CULTURVATE_CIVIC', Unit1Type = NULL, NumItems = 0,
