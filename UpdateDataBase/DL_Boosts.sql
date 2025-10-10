@@ -183,7 +183,7 @@ values
     -- 大数据
     (262,       'TECH_BIG_DATA_HD',                         40,     'LOC_BOOST_TRIGGER_MUST_STEAL',                         'Critical late game tech - boost description not needed',           NULL,                        'BOOST_TRIGGER_NONE_LATE_GAME_CRITICAL_TECH',       NULL,           NULL,                      NULL,                         NULL,                    NULL,                       NULL,                0,          NULL,                   0),
     -- 马鞍
-    (263,       'TECH_SADDLE_HD',                           40,     'LOC_BOOST_TRIGGER_SADDLE_HD',                          'LOC_BOOST_TRIGGER_LONGDESC_SADDLE_HD',                             'UNIT_BARBARIAN_HORSEMAN',   'BOOST_TRIGGER_KILL_WITH',                          NULL,           NULL,                      NULL,                         NULL,                    NULL,                       NULL,                0,          NULL,                   0),
+    (263,       'TECH_SADDLE_HD',                           40,     'LOC_BOOST_TRIGGER_SADDLE_HD',                          'LOC_BOOST_TRIGGER_LONGDESC_SADDLE_HD',                             'UNIT_BARBARIAN_HORSEMAN',   'BOOST_TRIGGER_OWN_X_UNITS_OF_TYPE',                NULL,           NULL,                      NULL,                         NULL,                    NULL,                       NULL,                2,          NULL,                   0),
     -- 集成电路
     (264,       'TECH_INTEGRATED_CIRCUIT_HD',               40,     'LOC_BOOST_TRIGGER_MUST_STEAL',                         'Critical late game tech - boost description not neededD',          NULL,                        'BOOST_TRIGGER_NONE_LATE_GAME_CRITICAL_TECH',       NULL,           NULL,                      NULL,                         NULL,                    NULL,                       NULL,                0,          NULL,                   0),
     -- 工业自动化
@@ -209,6 +209,9 @@ values
     -- 拱券
     (275,       'TECH_ARCH_HD',                             40,     'LOC_BOOST_TRIGGER_ARCH_HD',                            'LOC_BOOST_TRIGGER_LONGDESC_ARCH_HD',                               NULL,                        'BOOST_TRIGGER_HAVE_X_WONDERS',                     NULL,           NULL,                      NULL,                         NULL,                    NULL,                       NULL,                3,          NULL,                   0);
 
+    -- 【航行】科技尤里卡改为：沿湖也可以触发
+update Boosts set TriggerDescription = 'LOC_BOOST_TRIGGER_SAILING_HD', TriggerLongDescription = 'LOC_BOOST_TRIGGER_LONGDESC_SAILING_HD'
+    where TechnologyType = 'TECH_SAILING';
 -- 新科文版本 原有科文尤里卡&鼓舞调整
     -- 【教育】科技尤里卡改为：拥有科举制市政
 update Boosts set BoostClass = 'BOOST_TRIGGER_CULTURVATE_CIVIC', Unit1Type = NULL, NumItems = 0,

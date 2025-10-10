@@ -140,6 +140,7 @@ values
     ("LOC_CIVIC_HOUSEHOLD_REGISTRATION_HD_DESCRIPTION",                      "+1 [ICON_FOOD] Food from Farms."),
     ("LOC_TECH_SQUARE_SAIL_HD_DESCRIPTION",                                  "Naval melee units can escort units (formation units all inherit escort's [ICON_MOVEMENT] Movement speed)."),
     -- Boosts
+    ("LOC_BOOST_TRIGGER_SAILING_HD",                                         "Build a city adjacent to sea or lake."),
     ("LOC_BOOST_TRIGGER_CONSTRUCTION",                                       "Build a Mill."),
     ("LOC_BOOST_TRIGGER_LONGDESC_CONSTRUCTION",                              "Building grain processing facilities taught people a lot about engineering construction."),
     ("LOC_BOOST_TRIGGER_MASS_PRODUCTION",                                    "Build 2 Lumber Mills."),
@@ -259,7 +260,7 @@ values
     ("LOC_BOOST_TRIGGER_FUEL_HD_RSC2",                                       "Log a resource."),
     ("LOC_BOOST_TRIGGER_LONGDESC_FUEL_HD",                                   "Woods come from a wide variety of sources, but are not easy to ignite or preserve. Is there any way to make the most of these natural fuels?"),
     ("LOC_TECH_SADDLE_HD_NAME",                                              "Saddle"),
-    ("LOC_BOOST_TRIGGER_SADDLE_HD",                                          "Kill a unit with a Nomadic Raider."),
+    ("LOC_BOOST_TRIGGER_SADDLE_HD",                                          "Own 2 Nomadic Raiders."),
     ("LOC_BOOST_TRIGGER_LONGDESC_SADDLE_HD",                                 "In order to more easily control the horses, the cavalry in the boot camp need some useful objects."),
     ("LOC_TECH_SQUARE_SAIL_HD_NAME",                                         "Square Rigging"),
     ("LOC_BOOST_TRIGGER_SQUARE_SAIL_HD",                                     "Produce or purchase 8 naval units in your military."),
@@ -408,6 +409,7 @@ values
     ("zh_Hans_CN",  "LOC_TECH_MINING_HD_DESCRIPTION",                                       "允许砍伐树林、雨林和收获由矿山改良的资源。"),
     ("zh_Hans_CN",  "LOC_TECH_ANIMAL_HUSBANDRY_HD_DESCRIPTION",                             "允许收获由牧场或营地改良的资源。"),
     ("zh_Hans_CN",  "LOC_TECH_POTTERY_DESCRIPTION",                                         "允许收获由农场改良的资源。"),
+    ("zh_Hans_CN",  "LOC_TECH_SAILING_NAME",                                                "航行"),
     ("zh_Hans_CN",  "LOC_TECH_SAILING_HD_DESCRIPTION",                                      "允许收获由渔船改良的资源。允许建造者和商人上船。"),
     ("zh_Hans_CN",  "LOC_TECH_IRRIGATION_DESCRIPTION",                                      "相邻淡水或水渠的种植园+1 [ICON_FOOD] 食物。[NEWLINE]允许清理沼泽和收获由种植园改良的资源。允许在相邻淡水或水渠的平原和草原丘陵上修建农场。"),
     ("zh_Hans_CN",  "LOC_TECH_ARCHERY_HD_DESCRIPTION",                                      "允许在树林上建造营地。[NEWLINE]建造在地貌上的营地+1 [ICON_PRODUCTION] 生产力。"), -- 营地+1 [ICON_gold] 金币。
@@ -521,6 +523,8 @@ values
 	("zh_Hans_CN",	"LOC_CIVIC_HOUSEHOLD_REGISTRATION_HD_DESCRIPTION",						"农场+1 [ICON_FOOD] 食物。"),
     ("zh_Hans_CN",  "LOC_TECH_SQUARE_SAIL_HD_DESCRIPTION",                                  "海军近战单位获得能力：所有编队单位将继承护卫队的 [ICON_MOVEMENT] 移动力。"),
     -- Boosts
+    ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_SAILING_HD",                                         "建造1座沿海或沿湖城市。"),
+    ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_LONGDESC_SAILING_HD",                                "建立一座滨水城市让您的文明能深刻明白如何在水上航行。"),
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_CONSTRUCTION",                                       "建造1座磨坊。"),
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_LONGDESC_CONSTRUCTION",                              "建造谷物加工设施让人们了解了很多关于工程建筑的知识。"),
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_FEUDALISM",                                          "建造4座农场。"),
@@ -649,7 +653,7 @@ values
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_FUEL_HD_RSC2",                                       "改良1种伐木资源。"),
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_LONGDESC_FUEL_HD",                                   "木材来源广泛，但不易点燃也不易保存。有没有什么方法充分利用这些天然的燃料呢？"),
     ("zh_Hans_CN",  "LOC_TECH_SADDLE_HD_NAME",                                              "马鞍"),
-    ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_SADDLE_HD",                                          "使用游牧袭击者击杀1个单位。"),
+    ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_SADDLE_HD",                                          "拥有2个游牧袭击者。"),
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_LONGDESC_SADDLE_HD",                                 "骑兵在训练中不断改良自身的马具，这或许能让他们更加善战。"),
     ("zh_Hans_CN",  "LOC_TECH_SQUARE_SAIL_HD_NAME",                                         "方帆"),
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_SQUARE_SAIL_HD",                                     "建造或购买8个海军单位。"),

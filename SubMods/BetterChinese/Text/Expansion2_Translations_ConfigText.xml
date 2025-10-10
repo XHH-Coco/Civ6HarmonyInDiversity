@@ -56,7 +56,7 @@
 			<Text>建立城市可获得5格额外领土。冻土提供+1 [ICON_Faith] 信仰值与+1 [ICON_Production] 生产力。与俄罗斯交战的文明单位如处于俄罗斯领土中，遭遇暴风雪时受到的伤害+100%。</Text>
 		</Replace>
 		<Replace Tag="LOC_TRAIT_LEADER_THUNDERBOLT_EXPANSION2_DESCRIPTION" Language="zh_Hans_CN">
-			<Text>海军近战单位可发动海岸扫荡，生产所有海军近战单位时+50%建造速度。对矿山发动掠夺或海岸扫荡时除 [ICON_GOLD] 金币外还将获得 [ICON_SCIENCE] 科技值。对采石场、牧场、种植园和露营地发动掠夺或海岸扫荡时除 [ICON_FAITH] 信仰值外还将获得 [ICON_CULTURE] 文化值。解锁“航海术”科技后即可获得特色单位维京长船。</Text>
+			<Text>海军近战单位可发动海岸扫荡，生产所有海军近战单位时+50%建造速度。对矿山发动掠夺或海岸扫荡时除 [ICON_GOLD] 金币外还将获得 [ICON_SCIENCE] 科技值。对采石场、牧场、种植园和露营地发动掠夺或海岸扫荡时除 [ICON_FAITH] 信仰值外还将获得 [ICON_CULTURE] 文化值。解锁“航行”科技后即可获得特色单位维京长船。</Text>
 		</Replace>
 		<Replace Tag="LOC_TRAIT_LEADER_KUPES_VOYAGE_DESCRIPTION" Language="zh_Hans_CN">
 			<Text>游戏开始时位于海洋单元格中。建立首座城市时+1 [ICON_Citizen] 人口并获得1名建造者。宫殿额外+3 [ICON_HOUSING] 住房与+1 [ICON_AMENITIES] 宜居度。建立首座城市前每回合获得+2 [ICON_SCIENCE] 科技值与+2 [ICON_CULTURE] 文化值。</Text>

@@ -207,46 +207,46 @@ end
 -- ======================================================================================================================================================
 -- 高德院出家
 -- ======================================================================================================================================================
-m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN = {};
-m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.Properties = {};
+-- m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN = {};
+-- m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.Properties = {};
 
--- UI Data
-m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.EventName = "HDKotokuInPravrajya";
-m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.CategoryInUI = "SPECIFIC";
-m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.Icon = "ICON_UNITCOMMAND_PRAVRAJYA_KOTOKU_IN";
-m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.ToolTipString = Locale.Lookup("LOC_UNITCOMMAND_PRAVRAJYA_KOTOKU_IN_NAME") .. "[NEWLINE][NEWLINE]" .. 
-										Locale.Lookup("LOC_UNITCOMMAND_PRAVRAJYA_KOTOKU_IN_DESCRIPTION");
-m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.DisabledToolTipString = Locale.Lookup("LOC_UNITCOMMAND_PRAVRAJYA_KOTOKU_IN_DISABLED_TT");
-m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.VisibleInUI = true;
-function m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.CanUse(pUnit : object)
-	if pUnit == nil then
-		return false;
-	end
-	local unitInfo = GameInfo.Units[pUnit:GetType()];
-	return (unitInfo.FormationClass == "FORMATION_CLASS_CIVILIAN") and (unitInfo.ReligiousStrength == 0);
-end
+-- -- UI Data
+-- m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.EventName = "HDKotokuInPravrajya";
+-- m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.CategoryInUI = "SPECIFIC";
+-- m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.Icon = "ICON_UNITCOMMAND_PRAVRAJYA_KOTOKU_IN";
+-- m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.ToolTipString = Locale.Lookup("LOC_UNITCOMMAND_PRAVRAJYA_KOTOKU_IN_NAME") .. "[NEWLINE][NEWLINE]" .. 
+-- 										Locale.Lookup("LOC_UNITCOMMAND_PRAVRAJYA_KOTOKU_IN_DESCRIPTION");
+-- m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.DisabledToolTipString = Locale.Lookup("LOC_UNITCOMMAND_PRAVRAJYA_KOTOKU_IN_DISABLED_TT");
+-- m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.VisibleInUI = true;
+-- function m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.CanUse(pUnit : object)
+-- 	if pUnit == nil then
+-- 		return false;
+-- 	end
+-- 	local unitInfo = GameInfo.Units[pUnit:GetType()];
+-- 	return (unitInfo.FormationClass == "FORMATION_CLASS_CIVILIAN") and (unitInfo.ReligiousStrength == 0);
+-- end
 
-local KOTOKU_IN_INDEX = GameInfo.Buildings['BUILDING_KOTOKU_IN'].Index;
-function m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.IsVisible(pUnit : object)
-	local ownerId = pUnit:GetOwner();
-	local owner = Players[ownerId];
-	return Utils.PlayerHasWonder(owner, KOTOKU_IN_INDEX);
-end
+-- local KOTOKU_IN_INDEX = GameInfo.Buildings['BUILDING_KOTOKU_IN'].Index;
+-- function m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.IsVisible(pUnit : object)
+-- 	local ownerId = pUnit:GetOwner();
+-- 	local owner = Players[ownerId];
+-- 	return Utils.PlayerHasWonder(owner, KOTOKU_IN_INDEX);
+-- end
 
--- ===========================================================================
-function m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.IsDisabled(pUnit : object)
-	if pUnit == nil then
-		return true;
-	end
-	if pUnit:GetMovesRemaining() == 0 then
-		return true;
-	end
-	local location = pUnit:GetLocation();
-	local x = location.x;
-	local y = location.y;
-	local plot = Map.GetPlot(x, y);
-	return plot:GetWonderType() ~= KOTOKU_IN_INDEX;
-end
+-- -- ===========================================================================
+-- function m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.IsDisabled(pUnit : object)
+-- 	if pUnit == nil then
+-- 		return true;
+-- 	end
+-- 	if pUnit:GetMovesRemaining() == 0 then
+-- 		return true;
+-- 	end
+-- 	local location = pUnit:GetLocation();
+-- 	local x = location.x;
+-- 	local y = location.y;
+-- 	local plot = Map.GetPlot(x, y);
+-- 	return plot:GetWonderType() ~= KOTOKU_IN_INDEX;
+-- end
 
 -- ======================================================================================================================================================
 -- 津巴布韦种植奢侈

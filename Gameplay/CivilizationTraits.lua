@@ -264,7 +264,7 @@ GameEvents.HD_Qin_Builder_Later_Wonder.Add(QinBuilderLaterWonder)
 -- =====================================================================================================================================
 -- 武老秦
 -- 客卿招募
-local KeqingPersonClass = GameInfo.GreatPersonClasses["GREAT_PERSON_CLASS_KEQING"].Index;
+local KeqingPersonClass = GameInfo.GreatPersonClasses["GREAT_PERSON_CLASS_KEQING"];
 local EraScorePerKeqing = GlobalParameters.HD_WU_QIN_ERA_SCORE_PER_KEQING or 0;
 local KeqingListTag = "HD_KeqingList";
 local KeqingNumTag = "HD_KeqingNum";
@@ -280,6 +280,8 @@ function InitKeqing()
 end
 
 function GrantKeqing(playerId)
+	if KeqingPersonClass == nil then return; end
+
 	local player = Players[playerId];
 	local keqingList = player:GetProperty(KeqingListTag);
 
@@ -296,7 +298,7 @@ function GrantKeqing(playerId)
 		player:SetProperty(KeqingNumTag, alreadyNum + 1)
 		local randomIndex = Game.GetRandNum(#keqingList, "Random Keqing for Player " .. playerId) + 1
 		local era = Game.GetEras():GetCurrentEra();
-		Game.GetGreatPeople():GrantPerson(keqingList[randomIndex], KeqingPersonClass, era, 0, playerId, false);
+		Game.GetGreatPeople():GrantPerson(keqingList[randomIndex], KeqingPersonClass.Index, era, 0, playerId, false);
 		table.remove(keqingList, randomIndex);
 		player:SetProperty(KeqingListTag, keqingList);
 	end
@@ -481,18 +483,18 @@ end
 GameEvents.PlayerTurnStarted.Add(WuZetianSpyEarnGPP);
 
 -- 梅花内卫单位操作
-local PROMOTION_ASSASSINATION_HD_INDEX = GameInfo.UnitPromotions['PROMOTION_ASSASSINATION_HD'].Index;
-local PROMOTION_HIJACKING_HD_INDEX = GameInfo.UnitPromotions['PROMOTION_HIJACKING_HD'].Index;
-local PROMOTION_INCITE_DEFECTION_HD_INDEX = GameInfo.UnitPromotions['PROMOTION_INCITE_DEFECTION_HD'].Index;
-local PROMOTION_RECRUIT_BULIANG_HD_INDEX = GameInfo.UnitPromotions['PROMOTION_RECRUIT_BULIANG_HD'].Index;
-local PROMOTION_DESTRUCTION_EXPERT_HD_INDEX = GameInfo.UnitPromotions['PROMOTION_DESTRUCTION_EXPERT_HD'].Index;
-local PROMOTION_DEVELOP_DOWNLINES_HD_INDEX = GameInfo.UnitPromotions['PROMOTION_DEVELOP_DOWNLINES_HD'].Index;
-local PROMOTION_SECRET_ORDER_HD_INDEX = GameInfo.UnitPromotions['PROMOTION_SECRET_ORDER_HD'].Index;
-local PROMOTION_KUNG_FU_MASTER_HD_INDEX = GameInfo.UnitPromotions['PROMOTION_KUNG_FU_MASTER_HD'].Index;
-local PROMOTION_ROYAL_GUARD_HD_INDEX = GameInfo.UnitPromotions['PROMOTION_ROYAL_GUARD_HD'].Index;
-local PROMOTION_ROYAL_ENVOY_HD_INDEX = GameInfo.UnitPromotions['PROMOTION_ROYAL_ENVOY_HD'].Index;
-local PROMOTION_ROYAL_TRIBUTE_HD_INDEX = GameInfo.UnitPromotions['PROMOTION_ROYAL_TRIBUTE_HD'].Index;
-local PROMOTION_SECRETS_OF_NATURE_HD_INDEX = GameInfo.UnitPromotions['PROMOTION_SECRETS_OF_NATURE_HD'].Index;
+local PROMOTION_ASSASSINATION_HD_INFO = GameInfo.UnitPromotions['PROMOTION_ASSASSINATION_HD'];
+local PROMOTION_HIJACKING_HD_INFO = GameInfo.UnitPromotions['PROMOTION_HIJACKING_HD'];
+local PROMOTION_INCITE_DEFECTION_HD_INFO = GameInfo.UnitPromotions['PROMOTION_INCITE_DEFECTION_HD'];
+local PROMOTION_RECRUIT_BULIANG_HD_INFO = GameInfo.UnitPromotions['PROMOTION_RECRUIT_BULIANG_HD'];
+local PROMOTION_DESTRUCTION_EXPERT_HD_INFO = GameInfo.UnitPromotions['PROMOTION_DESTRUCTION_EXPERT_HD'];
+local PROMOTION_DEVELOP_DOWNLINES_HD_INFO = GameInfo.UnitPromotions['PROMOTION_DEVELOP_DOWNLINES_HD'];
+local PROMOTION_SECRET_ORDER_HD_INFO = GameInfo.UnitPromotions['PROMOTION_SECRET_ORDER_HD'];
+local PROMOTION_KUNG_FU_MASTER_HD_INFO = GameInfo.UnitPromotions['PROMOTION_KUNG_FU_MASTER_HD'];
+local PROMOTION_ROYAL_GUARD_HD_INFO = GameInfo.UnitPromotions['PROMOTION_ROYAL_GUARD_HD'];
+local PROMOTION_ROYAL_ENVOY_HD_INFO = GameInfo.UnitPromotions['PROMOTION_ROYAL_ENVOY_HD'];
+local PROMOTION_ROYAL_TRIBUTE_HD_INFO = GameInfo.UnitPromotions['PROMOTION_ROYAL_TRIBUTE_HD'];
+local PROMOTION_SECRETS_OF_NATURE_HD_INFO = GameInfo.UnitPromotions['PROMOTION_SECRETS_OF_NATURE_HD'];
 
 local PROMOTION_USED_TIMES_TAG = 'HD_PLUM_INTERNAL_SECURITY_PROMOTION_USED_TIMES_';
 
@@ -504,8 +506,8 @@ local PROMOTION_SECRETS_OF_NATURE_GPP = GlobalParameters.HD_PROMOTION_SECRETS_OF
 function HD_Promotion_Assassination(playerId, unitId)
 	local unit = UnitManager.GetUnit(playerId, unitId);
 	if unit == nil then return; end
-	local used = unit:GetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_ASSASSINATION_HD_INDEX) or 0;
-	unit:SetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_ASSASSINATION_HD_INDEX, used + 1)
+	local used = unit:GetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_ASSASSINATION_HD_INFO.Index) or 0;
+	unit:SetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_ASSASSINATION_HD_INFO.Index, used + 1)
 	print("梅花内卫 刺杀行动 已使用" .. used + 1 .. '次')
 
 	for direction = 0, 5 do
@@ -536,8 +538,8 @@ GameEvents.HD_Promotion_Assassination.Add(HD_Promotion_Assassination)
 function HD_Promotion_Hijacking(playerId, unitId)
 	local unit = UnitManager.GetUnit(playerId, unitId);
 	if unit == nil then return; end
-	local used = unit:GetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_HIJACKING_HD_INDEX) or 0;
-	unit:SetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_HIJACKING_HD_INDEX, used + 1)
+	local used = unit:GetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_HIJACKING_HD_INFO.Index) or 0;
+	unit:SetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_HIJACKING_HD_INFO.Index, used + 1)
 	print("梅花内卫 劫持行动 已使用" .. used + 1 .. '次')
 
 	local plot = Map.GetPlot(unit:GetX(), unit:GetY());
@@ -576,8 +578,8 @@ GameEvents.HD_Promotion_Hijacking.Add(HD_Promotion_Hijacking)
 function HD_Promotion_Incite_Defection(playerId, unitId)
 	local unit = UnitManager.GetUnit(playerId, unitId);
 	if unit == nil then return; end
-	local used = unit:GetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_INCITE_DEFECTION_HD_INDEX) or 0;
-	unit:SetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_INCITE_DEFECTION_HD_INDEX, used + 1)
+	local used = unit:GetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_INCITE_DEFECTION_HD_INFO.Index) or 0;
+	unit:SetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_INCITE_DEFECTION_HD_INFO.Index, used + 1)
 	print("梅花内卫 策反行动 已使用" .. used + 1 .. '次')
 
 	for direction = 0, 5 do
@@ -611,8 +613,8 @@ GameEvents.HD_Promotion_Incite_Defection.Add(HD_Promotion_Incite_Defection)
 function HD_Promotion_Recruit_Buliang(playerId, unitId)
 	local unit = UnitManager.GetUnit(playerId, unitId);
 	if unit == nil then return; end
-	local used = unit:GetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_RECRUIT_BULIANG_HD_INDEX) or 0;
-	unit:SetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_RECRUIT_BULIANG_HD_INDEX, used + 1)
+	local used = unit:GetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_RECRUIT_BULIANG_HD_INFO.Index) or 0;
+	unit:SetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_RECRUIT_BULIANG_HD_INFO.Index, used + 1)
 	print("梅花内卫 招募不良人 已使用" .. used + 1 .. '次')
 
 	local player = Players[playerId];
@@ -634,8 +636,8 @@ GameEvents.HD_Promotion_Recruit_Buliang.Add(HD_Promotion_Recruit_Buliang)
 function HD_Promotion_Develop_Downlines(playerId, unitId)
 	local unit = UnitManager.GetUnit(playerId, unitId);
 	if unit == nil then return; end
-	local used = unit:GetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_DEVELOP_DOWNLINES_HD_INDEX) or 0;
-	unit:SetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_DEVELOP_DOWNLINES_HD_INDEX, used + 1)
+	local used = unit:GetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_DEVELOP_DOWNLINES_HD_INFO.Index) or 0;
+	unit:SetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_DEVELOP_DOWNLINES_HD_INFO.Index, used + 1)
 	print("梅花内卫 发展下线 已使用" .. used + 1 .. '次')
 
 	local player = Players[playerId];
@@ -651,8 +653,8 @@ GameEvents.HD_Promotion_Develop_Downlines.Add(HD_Promotion_Develop_Downlines)
 function HD_Promotion_Destruction_Expert(playerId, unitId)
 	local unit = UnitManager.GetUnit(playerId, unitId);
 	if unit == nil then return; end
-	local used = unit:GetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_DESTRUCTION_EXPERT_HD_INDEX) or 0;
-	unit:SetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_DESTRUCTION_EXPERT_HD_INDEX, used + 1)
+	local used = unit:GetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_DESTRUCTION_EXPERT_HD_INFO.Index) or 0;
+	unit:SetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_DESTRUCTION_EXPERT_HD_INFO.Index, used + 1)
 	print("梅花内卫 破坏专家 已使用" .. used + 1 .. '次')
 
 	local plot = Map.GetPlot(unit:GetX(), unit:GetY());
@@ -712,8 +714,8 @@ GameEvents.HD_Promotion_Destruction_Expert.Add(HD_Promotion_Destruction_Expert)
 function HD_Promotion_Secret_Order(playerId, unitId)
 	local unit = UnitManager.GetUnit(playerId, unitId);
 	if unit == nil then return; end
-	local used = unit:GetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_SECRET_ORDER_HD_INDEX) or 0;
-	unit:SetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_SECRET_ORDER_HD_INDEX, used + 1)
+	local used = unit:GetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_SECRET_ORDER_HD_INFO.Index) or 0;
+	unit:SetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_SECRET_ORDER_HD_INFO.Index, used + 1)
 	print("梅花内卫 梅花密令 已使用" .. used + 1 .. '次')
 
 	local player = Players[playerId];
@@ -729,8 +731,8 @@ GameEvents.HD_Promotion_Secret_Order.Add(HD_Promotion_Secret_Order)
 function HD_Promotion_Kung_Fu_Master(playerId, unitId)
 	local unit = UnitManager.GetUnit(playerId, unitId);
 	if unit == nil then return; end
-	local used = unit:GetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_KUNG_FU_MASTER_HD_INDEX) or 0;
-	unit:SetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_KUNG_FU_MASTER_HD_INDEX, used + 1)
+	local used = unit:GetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_KUNG_FU_MASTER_HD_INFO.Index) or 0;
+	unit:SetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_KUNG_FU_MASTER_HD_INFO.Index, used + 1)
 	print("梅花内卫 大内高手 已使用" .. used + 1 .. '次')
 
 	local plot = Map.GetPlot(unit:GetX(), unit:GetY());
@@ -765,8 +767,8 @@ GameEvents.HD_Promotion_Kung_Fu_Master.Add(HD_Promotion_Kung_Fu_Master)
 function HD_Promotion_Royal_Guard(playerId, unitId)
 	local unit = UnitManager.GetUnit(playerId, unitId);
 	if unit == nil then return; end
-	local used = unit:GetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_ROYAL_GUARD_HD_INDEX) or 0;
-	unit:SetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_ROYAL_GUARD_HD_INDEX, used + 1)
+	local used = unit:GetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_ROYAL_GUARD_HD_INFO.Index) or 0;
+	unit:SetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_ROYAL_GUARD_HD_INFO.Index, used + 1)
 	print("梅花内卫 皇家禁军 已使用" .. used + 1 .. '次')
 
 	local plot = Map.GetPlot(unit:GetX(), unit:GetY());
@@ -799,8 +801,8 @@ GameEvents.HD_Promotion_Royal_Guard.Add(HD_Promotion_Royal_Guard)
 function HD_Promotion_Royal_Envoy(playerId, unitId)
 	local unit = UnitManager.GetUnit(playerId, unitId);
 	if unit == nil then return; end
-	local used = unit:GetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_ROYAL_ENVOY_HD_INDEX) or 0;
-	unit:SetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_ROYAL_ENVOY_HD_INDEX, used + 1)
+	local used = unit:GetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_ROYAL_ENVOY_HD_INFO.Index) or 0;
+	unit:SetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_ROYAL_ENVOY_HD_INFO.Index, used + 1)
 	print("梅花内卫 皇家特使 已使用" .. used + 1 .. '次')
 
 	local plot = Map.GetPlot(unit:GetX(), unit:GetY());
@@ -825,8 +827,8 @@ GameEvents.HD_Promotion_Royal_Envoy.Add(HD_Promotion_Royal_Envoy)
 function HD_Promotion_Royal_Tribute(playerId, unitId)
 	local unit = UnitManager.GetUnit(playerId, unitId);
 	if unit == nil then return; end
-	local used = unit:GetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_ROYAL_TRIBUTE_HD_INDEX) or 0;
-	unit:SetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_ROYAL_TRIBUTE_HD_INDEX, used + 1)
+	local used = unit:GetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_ROYAL_TRIBUTE_HD_INFO.Index) or 0;
+	unit:SetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_ROYAL_TRIBUTE_HD_INFO.Index, used + 1)
 	print("梅花内卫 皇家贡品 已使用" .. used + 1 .. '次')
 
 	local plot = Map.GetPlot(unit:GetX(), unit:GetY());
@@ -855,8 +857,8 @@ GameEvents.HD_Promotion_Royal_Tribute.Add(HD_Promotion_Royal_Tribute)
 function HD_Promotion_Secrets_Of_Nature(playerId, unitId)
 	local unit = UnitManager.GetUnit(playerId, unitId);
 	if unit == nil then return; end
-	local used = unit:GetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_SECRETS_OF_NATURE_HD_INDEX) or 0;
-	unit:SetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_SECRETS_OF_NATURE_HD_INDEX, used + 1)
+	local used = unit:GetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_SECRETS_OF_NATURE_HD_INFO.Index) or 0;
+	unit:SetProperty(PROMOTION_USED_TIMES_TAG .. PROMOTION_SECRETS_OF_NATURE_HD_INFO.Index, used + 1)
 	print("梅花内卫 山水秘闻 已使用" .. used + 1 .. '次')
 
 	if PROMOTION_SECRETS_OF_NATURE_GPP <= 0 then return; end
@@ -2798,7 +2800,7 @@ Events.TechBoostTriggered.Add(KristinaBoostTriggered)
 
 -- 编撰官招募
 local CodifierListTag = "HD_CodifierList";
-local CodifierPersonClass = GameInfo.GreatPersonClasses["GREAT_PERSON_CLASS_HD_CODIFIER"].Index;
+local CodifierPersonClass = GameInfo.GreatPersonClasses["GREAT_PERSON_CLASS_HD_CODIFIER"];
 function InitCodifier()
 	local codifierList = {};
 	for row in GameInfo.GreatPersonIndividuals() do
@@ -2810,6 +2812,8 @@ function InitCodifier()
 end
 
 function GrantCodifier(playerId)
+	if CodifierPersonClass == nil then return; end
+
 	local player = Players[playerId];
 	local codifierList = player:GetProperty(CodifierListTag);
 
@@ -2824,7 +2828,7 @@ function GrantCodifier(playerId)
 		print("男朝鲜招募编撰官 剩余可招募编撰官数量", #codifierList)
 		local randomIndex = Game.GetRandNum(#codifierList, "Random Codifier for Player " .. playerId) + 1
 		local era = Game.GetEras():GetCurrentEra();
-		Game.GetGreatPeople():GrantPerson(codifierList[randomIndex], CodifierPersonClass, era, 0, playerId, false);
+		Game.GetGreatPeople():GrantPerson(codifierList[randomIndex], CodifierPersonClass.Index, era, 0, playerId, false);
 		table.remove(codifierList, randomIndex);
 		player:SetProperty(CodifierListTag, codifierList);
 	end
@@ -2848,9 +2852,9 @@ end
 GameEvents.BuildingConstructed.Add(SeJongBuildingConstructed);
 
 -- 书院地基送伟人 送槽位
-local BUILDING_SEOWON_INDEX = GameInfo.Buildings["BUILDING_SEOWON"].Index
+local BUILDING_SEOWON_INFO = GameInfo.Buildings["BUILDING_SEOWON"];
 function SeJongDistrictConstructed(playerId, districtType, x, y)
-	if not LeaderHasTrait(playerId, 'TRAIT_LEADER_SEJONG') then
+	if BUILDING_SEOWON_INFO == nil or not LeaderHasTrait(playerId, 'TRAIT_LEADER_SEJONG') then
 		return;
 	end
 
@@ -2863,7 +2867,7 @@ function SeJongDistrictConstructed(playerId, districtType, x, y)
 		if plot then
 			local city = Cities.GetPlotPurchaseCity(plot);
       if city then
-        city:GetBuildQueue():CreateBuilding(BUILDING_SEOWON_INDEX)
+        city:GetBuildQueue():CreateBuilding(BUILDING_SEOWON_INFO.Index)
       end
 		end
 	end

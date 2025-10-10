@@ -356,7 +356,7 @@ update ModifierArguments set Value = 50 where ModifierId = 'FILMSTUDIO_ENHANCEDL
 update Buildings set Maintenance = 0,	Cost = 50	where BuildingType = 'BUILDING_MONUMENT';
 update Buildings set Maintenance = 1,	Cost = 60	where BuildingType = 'BUILDING_GRANARY';
 update Buildings set Maintenance = 1,	Cost = 60,
-	PrereqTech = Null, PrereqCivic = 'CIVIC_CRAFTSMANSHIP', RequiresAdjacentRiver = 0	where BuildingType = 'BUILDING_WATER_MILL';
+	PrereqTech = 'TECH_MINING', RequiresAdjacentRiver = 0	where BuildingType = 'BUILDING_WATER_MILL';
 update Buildings set Maintenance = 1,	Cost = 80	where BuildingType = 'BUILDING_PALGUM';
 update Buildings set Maintenance = 0,	Cost = 60	where BuildingType = 'BUILDING_WALLS';
 update Buildings set Maintenance = 1,	Cost = 180	where BuildingType = 'BUILDING_CASTLE';
@@ -795,7 +795,7 @@ values
 	('BUILDING_GOV_FAITH',							'GOV_FAITH_MISSIONARY_DISCOUNT'),
 	('BUILDING_GOV_FAITH',							'GOV_FAITH_APOSTLE_DISCOUNT'),
 	('BUILDING_GOV_FAITH',							'GOV_FAITH_INQUISITOR_DISCOUNT'),
-	('BUILDING_GOV_FAITH',							'GOV_FAITH_FAITH_PER_FOREIGN_CITY_FOLLOWING_RELIGION'),
+	('BUILDING_GOV_FAITH',							'GOV_FAITH_MODIFIER'),
 	('BUILDING_GOV_FAITH',							'GOV_FAITH_COMBAT_BUFF');
 
 insert or replace into Modifiers
@@ -808,7 +808,7 @@ values
 	('GOV_FAITH_MISSIONARY_DISCOUNT',												'MODIFIER_PLAYER_CITIES_ADJUST_UNIT_PURCHASE_COST',											NULL),
 	('GOV_FAITH_APOSTLE_DISCOUNT',													'MODIFIER_PLAYER_CITIES_ADJUST_UNIT_PURCHASE_COST',											NULL),
 	('GOV_FAITH_INQUISITOR_DISCOUNT',												'MODIFIER_PLAYER_CITIES_ADJUST_UNIT_PURCHASE_COST',											NULL),
-	('GOV_FAITH_FAITH_PER_FOREIGN_CITY_FOLLOWING_RELIGION', 'MODIFIER_PLAYER_RELIGION_ADD_PLAYER_BELIEF_YIELD',											NULL),
+	('GOV_FAITH_MODIFIER', 																	'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER',										'REQUIRES_CITY_HAS_DISTRICT_HOLY_SITE_UDMET'),
 	('GOV_FAITH_COMBAT_BUFF',																'MODIFIER_PLAYER_UNITS_GRANT_ABILITY',																	NULL),
 	('GOV_SPIES_TRADE_ROUTE_CAPACITY',              				'MODIFIER_PLAYER_ADJUST_TRADE_ROUTE_CAPACITY',                          NULL),
 	('GOV_SPIES_TRADER',              											'MODIFIER_SINGLE_CITY_GRANT_UNIT_IN_CITY',                          		NULL),
@@ -834,10 +834,8 @@ values
 	('GOV_FAITH_APOSTLE_DISCOUNT',					'Amount',						20),
 	('GOV_FAITH_INQUISITOR_DISCOUNT',				'UnitType',						'UNIT_INQUISITOR'),
 	('GOV_FAITH_INQUISITOR_DISCOUNT',				'Amount',						20),
-	('GOV_FAITH_FAITH_PER_FOREIGN_CITY_FOLLOWING_RELIGION', 'BeliefYieldType',	'BELIEF_YIELD_PER_FOREIGN_CITY'),
-	('GOV_FAITH_FAITH_PER_FOREIGN_CITY_FOLLOWING_RELIGION', 'YieldType',			'YIELD_FAITH'),
-	('GOV_FAITH_FAITH_PER_FOREIGN_CITY_FOLLOWING_RELIGION', 'Amount',				8),
-	('GOV_FAITH_FAITH_PER_FOREIGN_CITY_FOLLOWING_RELIGION', 'PerXItems',			1),
+	('GOV_FAITH_MODIFIER', 									'YieldType',			'YIELD_FAITH'),
+	('GOV_FAITH_MODIFIER', 									'Amount',				10),
 	('GOV_FAITH_COMBAT_BUFF',						'AbilityType',					'ABILITY_GOV_FAITH_COMBAT_STRENGTH'),
 	('GOV_SPIES_TRADE_ROUTE_CAPACITY',              'Amount',       1),
 	('GOV_SPIES_TRADER',              							'Amount',       1),

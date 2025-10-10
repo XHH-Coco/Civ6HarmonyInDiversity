@@ -28,8 +28,8 @@ delete from ImprovementModifiers where ImprovementType = 'IMPROVEMENT_LEU_STATIO
     (ModifierId like 'LEU_STATION_DOMESTIC_CULTURE_%_OTHERS') or
     (ModifierId like 'LEU_STATION_DOMESTIC_CULTURE_%_OTHERS_POWERED') or
     (ModifierId like 'LEU_STATION_DOMESTIC_FOOD_%_OTHERS') or
-    (ModifierId like 'LEU_STATION_DOMESTIC_FOOD_%_OTHERS_POWERED')
-    -- (ModifierId = 'LEU_STATION_REQUIRED_POWER')
+    (ModifierId like 'LEU_STATION_DOMESTIC_FOOD_%_OTHERS_POWERED') or
+    (ModifierId = 'LEU_STATION_REQUIRED_POWER')
 );
 
     -- 相邻加成

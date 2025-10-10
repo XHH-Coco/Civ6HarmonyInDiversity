@@ -611,6 +611,7 @@ local NATIONALISM_INDEX = GameInfo.Civics['CIVIC_NATIONALISM'].Index;
 local NATIONALISM_BOOST_TAG = 'HD_NationalismBoost'
 local COLONIALISM_INDEX = GameInfo.Civics['CIVIC_COLONIALISM'].Index;
 local COLONIALISM_BOOST_TAG = 'HD_ColonialismBoost'
+local SAILING_INDEX = GameInfo.Technologies['TECH_SAILING'].Index;
 function NationalismBoost(playerId, cityId, x, y)
   local plot = Map.GetPlot(x, y)
   local newCityContinent = plot:GetContinentType()
@@ -649,6 +650,17 @@ function NationalismBoost(playerId, cityId, x, y)
       if (player:GetProperty(COLONIALISM_BOOST_TAG) ~= nil
           and player:GetProperty(COLONIALISM_BOOST_TAG) >= 2) then
         player:GetCulture():TriggerBoost(COLONIALISM_INDEX);
+      end
+    end
+  end
+
+  -- 航行
+  if not player:GetTechs():HasBoostBeenTriggered(SAILING_INDEX) then
+    for direction = 0, 5 do
+      local adjacentPlot = Map.GetAdjacentPlot(plot:GetX(), plot:GetY(), direction);
+      if adjacentPlot and adjacentPlot:IsLake() then
+        player:GetTechs():TriggerBoost(SAILING_INDEX);
+        break;
       end
     end
   end

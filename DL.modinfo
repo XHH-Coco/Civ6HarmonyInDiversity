@@ -156,6 +156,10 @@
       <RuleSetInUse>RULESET_EXPANSION_2</RuleSetInUse>
       <ModInUse>9f162187-9342-47ca-9085-78fc3f80f25d</ModInUse>
     </Criteria>
+    <Criteria id="Suk_NotreDame_Expansion2">
+      <RuleSetInUse>RULESET_EXPANSION_2</RuleSetInUse>
+      <ModInUse>2217fddf-b466-45e1-950c-fc3747f076b6</ModInUse>
+    </Criteria>
     <Criteria id="CityPolicies_With_Suk">
       <RuleSetInUse>RULESET_EXPANSION_2</RuleSetInUse>
       <ModInUse>805cc499-c534-4e0a-bdce-32fb3c53ba38</ModInUse>
@@ -565,6 +569,7 @@
       <Properties><LoadOrder>16019</LoadOrder></Properties>
       <File>UI/Icons/HD_Icons.xml</File>
       <File>UI/Icons/DL_Icons_Frontend.xml</File>
+      <File>UI/Icons/DL_Icons_Districts.xml</File>
     </UpdateIcons>
     <UpdateText id="SukOceans_mod_support_text">
       <Properties><LoadOrder>17000</LoadOrder></Properties>
@@ -610,24 +615,26 @@
       <File>Assets/CityStates/CivBaikonur_128.dds</File>
       <File>Assets/CityStates/CivBaikonur_200.dds</File>
       <File>Assets/CityStates/CivBaikonur_256.dds</File>
-      <File>Assets/Buildings/New_Buildings_32.dds</File>
-      <File>Assets/Buildings/New_Buildings_38.dds</File>
-      <File>Assets/Buildings/New_Buildings_50.dds</File>
-      <File>Assets/Buildings/New_Buildings_80.dds</File>
-      <File>Assets/Buildings/New_Buildings_128.dds</File>
-      <File>Assets/Buildings/New_Buildings_256.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_32.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_38.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_50.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_80.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_128.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_256.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_22.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_32.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_38.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_50.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_80.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_256.dds</File>
+      <File>Assets/Buildings/HD_Buildings_32.dds</File>
+      <File>Assets/Buildings/HD_Buildings_38.dds</File>
+      <File>Assets/Buildings/HD_Buildings_50.dds</File>
+      <File>Assets/Buildings/HD_Buildings_80.dds</File>
+      <File>Assets/Buildings/HD_Buildings_128.dds</File>
+      <File>Assets/Buildings/HD_Buildings_256.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_22.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_32.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_38.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_50.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_80.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_128.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_256.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_FOW_256.dds</File>
     </ImportFiles>
     <!-- Suk wonders -->
     <UpdateText id="Suk_wonders_text">
@@ -671,30 +678,26 @@
       <File>Assets/TechCivics/New_Tech_Civic_128.dds</File>
       <File>Assets/TechCivics/New_Tech_Civic_160.dds</File>
       <File>Assets/TechCivics/New_Tech_Civic_FOW_42.dds</File>
-      <File>Assets/Buildings/New_Buildings_32.dds</File>
-      <File>Assets/Buildings/New_Buildings_38.dds</File>
-      <File>Assets/Buildings/New_Buildings_50.dds</File>
-      <File>Assets/Buildings/New_Buildings_80.dds</File>
-      <File>Assets/Buildings/New_Buildings_128.dds</File>
-      <File>Assets/Buildings/New_Buildings_256.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_32.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_38.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_50.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_80.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_128.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_256.dds</File>
-      <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_32.dds</File>
-      <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_38.dds</File>
-      <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_50.dds</File>
-      <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_80.dds</File>
-      <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_128.dds</File>
-      <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_256.dds</File>
       <File>Assets/Buildings/Mod_Icon_Fix_32.dds</File>
       <File>Assets/Buildings/Mod_Icon_Fix_38.dds</File>
       <File>Assets/Buildings/Mod_Icon_Fix_50.dds</File>
       <File>Assets/Buildings/Mod_Icon_Fix_80.dds</File>
       <File>Assets/Buildings/Mod_Icon_Fix_128.dds</File>
       <File>Assets/Buildings/Mod_Icon_Fix_256.dds</File>
+      <File>Assets/Buildings/HD_Buildings_32.dds</File>
+      <File>Assets/Buildings/HD_Buildings_38.dds</File>
+      <File>Assets/Buildings/HD_Buildings_50.dds</File>
+      <File>Assets/Buildings/HD_Buildings_80.dds</File>
+      <File>Assets/Buildings/HD_Buildings_128.dds</File>
+      <File>Assets/Buildings/HD_Buildings_256.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_22.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_32.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_38.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_50.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_80.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_128.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_256.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_FOW_256.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_22.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_32.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_38.dds</File>
@@ -785,6 +788,7 @@
       <File>Assets/Moments/UNIT_QIN_ELITE_SOLDIER_HD_MONMENT.dds</File>
       <File>Assets/Moments/UNIT_PLUM_INTERNAL_SECURITY_HD_MONMENT.dds</File>
       <File>Assets/Moments/BUILDING_EL_ESCORIAL_PALACE_MOMENT.dds</File>
+      <File>Assets/Moments/BUILDING_HD_WORLD_PARLIAMENT_HEADQUARTERS_MONMENT.dds</File>
       <File>Assets/GreatPeople/GREAT_PERSON_INDIVIDUAL_ABDUS_SALAM.dds</File>
       <File>Assets/GreatPeople/GREAT_PERSON_INDIVIDUAL_CWON_CARAVAGGIO.dds</File>
       <File>Assets/GreatPeople/GREAT_PERSON_INDIVIDUAL_CWON_DANTE.dds</File>
@@ -1188,7 +1192,7 @@
       <Properties><LoadOrder>17000</LoadOrder></Properties>
       <File>ModSupport/Wonders/HD_National_Wonders.sql</File>
     </UpdateDatabase>
-    <AddGameplayScripts id="National_Wonders_support" criteria="National_Wonders_Expansion2">
+    <AddGameplayScripts id="National_Wonders_support_lua" criteria="National_Wonders_Expansion2">
       <Properties><LoadOrder>17000</LoadOrder></Properties>
       <File>ModSupport/Wonders/HD_National_Wonders.lua</File>
     </AddGameplayScripts>
@@ -1199,9 +1203,14 @@
     </UpdateDatabase>
     <!-- 国家奇观 End -->
     <!-- 黄鹤楼Lua覆盖 -->
-    <ImportFiles id="National_Wonders_support" criteria="Yellow_Crane_Expansion2">
+    <ImportFiles id="Yellow_Crane_Override" criteria="Yellow_Crane_Expansion2">
       <Properties><LoadOrder>17000</LoadOrder></Properties>
       <File>ModSupport/Wonders/YellowCraneGreatPeople.lua</File>
+    </ImportFiles>
+    <!-- 圣母院Lua覆盖 -->
+    <ImportFiles id="Notre_Dame_Override" criteria="Suk_NotreDame_Expansion2">
+      <Properties><LoadOrder>17000</LoadOrder></Properties>
+      <File>ModSupport/Wonders/Suk_AdjacencyHandlerItem_Suk_NotreDame.lua</File>
     </ImportFiles>
     <!-- 丰富资源2 Start -->
     <UpdateDatabase id="Resouceful2_support" criteria="Resouceful2_Expansion2">
@@ -1811,6 +1820,7 @@
       <Properties><LoadOrder>16016</LoadOrder></Properties>
       <File>UI/Icons/DL_Icons_Beliefs.xml</File>
       <File>UI/Icons/DL_Icons_Buildings.xml</File>
+      <File>UI/Icons/DL_Icons_Districts.xml</File>
       <File>UI/Icons/DL_Icons_Policies.xml</File>
       <File>UI/Icons/DL_Icons_Projects.xml</File>
       <File>UI/Icons/HD_Icons_UnitCommands.xml</File>
@@ -2411,6 +2421,7 @@
     <File>UI/Icons/DL_Icons_Fixing.sql</File>
     <File>UI/Icons/DL_Icons_Beliefs.xml</File>
     <File>UI/Icons/DL_Icons_Buildings.xml</File>
+    <File>UI/Icons/DL_Icons_Districts.xml</File>
 	  <File>UI/Icons/DL_Icons_Frontend.xml</File>
     <File>UI/Icons/DL_Icons_Policies.xml</File>
     <File>UI/Icons/DL_Icons_Projects.xml</File>
@@ -2464,6 +2475,7 @@
     <File>ModSupport/Wonders/HD_National_Wonders.lua</File>
     <File>ModSupport/Wonders/HD_National_Wonders_PackOne.sql</File>
     <File>ModSupport/Wonders/YellowCraneGreatPeople.lua</File>
+    <File>ModSupport/Wonders/Suk_AdjacencyHandlerItem_Suk_NotreDame.lua</File>
     <File>ModSupport/GeneralChineseSupport/Texts.sql</File>
     <File>ModSupport/BetterTradeScreen/TradeSupport.lua</File>
     <File>ModSupport/BetterTradeScreen/TradeRouteChooser.lua</File>
@@ -2776,30 +2788,26 @@
     <File>Assets/TechCivics/New_Tech_Civic_128.dds</File>
     <File>Assets/TechCivics/New_Tech_Civic_160.dds</File>
     <File>Assets/TechCivics/New_Tech_Civic_FOW_42.dds</File>
-    <File>Assets/Buildings/New_Buildings_32.dds</File>
-    <File>Assets/Buildings/New_Buildings_38.dds</File>
-    <File>Assets/Buildings/New_Buildings_50.dds</File>
-    <File>Assets/Buildings/New_Buildings_80.dds</File>
-    <File>Assets/Buildings/New_Buildings_128.dds</File>
-    <File>Assets/Buildings/New_Buildings_256.dds</File>
-    <File>Assets/Buildings/New_Buildings_2_32.dds</File>
-    <File>Assets/Buildings/New_Buildings_2_38.dds</File>
-    <File>Assets/Buildings/New_Buildings_2_50.dds</File>
-    <File>Assets/Buildings/New_Buildings_2_80.dds</File>
-    <File>Assets/Buildings/New_Buildings_2_128.dds</File>
-    <File>Assets/Buildings/New_Buildings_2_256.dds</File>
-    <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_32.dds</File>
-    <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_38.dds</File>
-    <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_50.dds</File>
-    <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_80.dds</File>
-    <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_128.dds</File>
-    <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_256.dds</File>
     <File>Assets/Buildings/Mod_Icon_Fix_32.dds</File>
     <File>Assets/Buildings/Mod_Icon_Fix_38.dds</File>
     <File>Assets/Buildings/Mod_Icon_Fix_50.dds</File>
     <File>Assets/Buildings/Mod_Icon_Fix_80.dds</File>
     <File>Assets/Buildings/Mod_Icon_Fix_128.dds</File>
     <File>Assets/Buildings/Mod_Icon_Fix_256.dds</File>
+    <File>Assets/Buildings/HD_Buildings_32.dds</File>
+    <File>Assets/Buildings/HD_Buildings_38.dds</File>
+    <File>Assets/Buildings/HD_Buildings_50.dds</File>
+    <File>Assets/Buildings/HD_Buildings_80.dds</File>
+    <File>Assets/Buildings/HD_Buildings_128.dds</File>
+    <File>Assets/Buildings/HD_Buildings_256.dds</File>
+    <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_22.dds</File>
+    <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_32.dds</File>
+    <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_38.dds</File>
+    <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_50.dds</File>
+    <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_80.dds</File>
+    <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_128.dds</File>
+    <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_256.dds</File>
+    <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_FOW_256.dds</File>
     <File>Assets/Units/HD_NEW_UNITS_22.dds</File>
     <File>Assets/Units/HD_NEW_UNITS_32.dds</File>
     <File>Assets/Units/HD_NEW_UNITS_38.dds</File>
@@ -2917,6 +2925,7 @@
     <File>Assets/Moments/UNIT_QIN_ELITE_SOLDIER_HD_MONMENT.dds</File>
     <File>Assets/Moments/UNIT_PLUM_INTERNAL_SECURITY_HD_MONMENT.dds</File>
     <File>Assets/Moments/BUILDING_EL_ESCORIAL_PALACE_MOMENT.dds</File>
+    <File>Assets/Moments/BUILDING_HD_WORLD_PARLIAMENT_HEADQUARTERS_MONMENT.dds</File>
     <File>Assets/GreatPeople/GREAT_PERSON_INDIVIDUAL_ABDUS_SALAM.dds</File>
     <File>Assets/GreatPeople/GREAT_PERSON_INDIVIDUAL_CWON_CARAVAGGIO.dds</File>
     <File>Assets/GreatPeople/GREAT_PERSON_INDIVIDUAL_CWON_DANTE.dds</File>

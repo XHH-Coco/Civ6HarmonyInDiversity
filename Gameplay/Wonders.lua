@@ -176,11 +176,14 @@ local STATUE_LIBERTY_NAVAL_FLEET = GlobalParameters.HD_STATUE_LIBERTY_NAVAL_FLEE
 local STATUE_LIBERTY_INFLUENCE_POINT_PERCENTAGE = GlobalParameters.HD_STATUE_LIBERTY_INFLUENCE_POINT_PERCENTAGE or 0;
 local STATUE_LIBERTY_POS_X_TAG = 'HD_STATUE_LIBERTY_POS_X';
 local STATUE_LIBERTY_POS_Y_TAG = 'HD_STATUE_LIBERTY_POS_Y';
+local STATUE_LIBERTY_HARBOR_TAG = 'HD_STATUE_LIBERTY_HARBOR_';
 function StatueLibertyWonderCompleted(x, y, buildingId, playerId, cityId, percentComplete, unknown)
 	if buildingId == STATUE_LIBERTY_INDEX then
     Game.SetProperty(STATUE_LIBERTY_POS_X_TAG, x)
     Game.SetProperty(STATUE_LIBERTY_POS_Y_TAG, y)
     local player = Players[playerId]
+
+    -- 海军回血 组建舰队
     for _, unit in player:GetUnits():Members() do
       local unitInfo = GameInfo.Units[unit:GetType()]
       local domian = unitInfo.Domain
@@ -231,6 +234,21 @@ function StatueLibertyOnGameTurnEnded()
   end
 end
 GameEvents.OnGameTurnEnded.Add(StatueLibertyOnGameTurnEnded)
+
+function StatueLibertyDistrictConstructed(playerId, districtType, x, y)
+  local player = Players[playerId];
+  local plot = Map.GetPlot(x, y);
+	if player ~= nil and plot ~= nil and not plot:IsLake() and Utils.IsDistrictType(districtType, 'DISTRICT_HARBOR') then
+		-- 获取本格海洋名字
+		local seaName = Utils.GetPlotSeaName(x, y);
+		if seaName ~= nil and player:GetProperty(STATUE_LIBERTY_HARBOR_TAG .. seaName) ~= 1 then
+      player:SetProperty(STATUE_LIBERTY_HARBOR_TAG .. seaName, 1)
+      print('自由女神像', seaName)
+      player:AttachModifierByID('HD_STATUE_LIBERTY_TRADE_ROUTE_CAPACITY');
+    end
+	end
+end
+GameEvents.OnDistrictConstructed.Add(StatueLibertyDistrictConstructed);
 
 -- 宙斯像
 local STATUE_OF_ZEUS_DOUBLE_PANTHEON_TAG = 'HD_StatueOfZeusDoublePantheon';
@@ -320,7 +338,7 @@ function HagiaSophiaGetWorship(playerId, cityId, eVisibility)
         end
       end
 
-      -- 如果两种建筑都存在，则 AttachModifer
+      -- 如果两种建筑都存在
       if buildings.copyBuilding ~= nil and buildings.targetBuilding ~= nil and buildings.copyBuilding ~= buildings.targetBuilding then
         -- print('HagiaSophiaGetWorship 被复制的祭祀建筑', buildings.copyBuilding)
         -- print('HagiaSophiaGetWorship 目标祭祀建筑', buildings.targetBuilding)
@@ -361,7 +379,7 @@ end
 GameEvents.SydneyOperaHouseTurnBeginSwitch.Add(SydneyOperaHouseTurnBeginGold);
 
 --圣母院
-local NOTRE_DAME = GameInfo.Buildings['BUILDING_NOTRE_DAME']
+local NOTRE_DAME = GameInfo.Buildings['BUILDING_SUK_NOTRE_DAME_DE_PARIS']
 function NotreDameCivicBoostTriggered(playerId, iBoostedCivic)
   if not NOTRE_DAME then
     return;
@@ -372,10 +390,11 @@ function NotreDameCivicBoostTriggered(playerId, iBoostedCivic)
     return;
   end
 
-  local cost = GameInfo.Civics[iBoostedCivic].Cost;
+  local cost = player:GetCulture():GetCultureCost(iBoostedCivic);
+  print("圣母院 市政需求", cost)
   local percentage = GlobalParameters.HD_NOTRE_DAME_CIVIC_BOOST_PERCENTAGE or 0;
   local amount = cost * percentage / 100;
-  player:GetGreatPeoplePoints():ChangePointsTotal(GameInfo.GreatPersonClasses['GREAT_PERSON_CLASS_ARTIST'].Index, amount);
+  -- player:GetGreatPeoplePoints():ChangePointsTotal(GameInfo.GreatPersonClasses['GREAT_PERSON_CLASS_ARTIST'].Index, amount);
   player:GetGreatPeoplePoints():ChangePointsTotal(GameInfo.GreatPersonClasses['GREAT_PERSON_CLASS_MUSICIAN'].Index, amount);
 end
 
@@ -993,6 +1012,116 @@ function BorobudurUnitExcavate(playerId, unitId)
   end
 end
 GameEvents.HD_Borobudur_Excavate.Add(BorobudurUnitExcavate)
+
+-- 圣彼得大教堂
+local BUILDING_AL_STPETERSBASILICA_INFO = GameInfo.Buildings['BUILDING_AL_STPETERSBASILICA'];
+local AL_STPETERSBASILICA_PLAYER_TAG = 'HD_AL_STPETERSBASILICA_PLAYER';
+local AL_STPETERSBASILICA_RELIGION_TAG = 'HD_AL_STPETERSBASILICA_RELIGION';
+local AL_STPETERSBASILICA_HAS_GRANTED_APOSTLE_TAG = 'HD_AL_STPETERSBASILICA_HAS_GRANTED_APOSTLE';
+function AlStpetersbasilicaWonderCompleted(x, y, buildingId, playerId, cityId, percentComplete, unknown)
+  if BUILDING_AL_STPETERSBASILICA_INFO == nil then
+    return;
+  end
+
+  local player = Players[playerId];
+  if not player then return; end
+
+  -- 记录玩家创建的宗教
+  local playerReligion = player:GetReligion():GetReligionTypeCreated();
+  Game:SetProperty(AL_STPETERSBASILICA_PLAYER_TAG, playerId);
+  Game:SetProperty(AL_STPETERSBASILICA_RELIGION_TAG, playerReligion);
+
+  if buildingId == BUILDING_AL_STPETERSBASILICA_INFO.Index then
+    local alivePlayers = PlayerManager.GetAliveMajorIDs()
+    for _, alivePlayerId in ipairs(alivePlayers) do
+      local alivePlayer = Players[alivePlayerId];
+      local capitalCity = alivePlayer:GetCities():GetCapitalCity();
+      if capitalCity and capitalCity:GetProperty(AL_STPETERSBASILICA_HAS_GRANTED_APOSTLE_TAG) ~= 1 then
+        -- 判断是否信奉玩家的宗教
+        local cityReligion = capitalCity:GetReligion():GetMajorityReligion();
+        if cityReligion ~= -1 and cityReligion == playerReligion then
+          player:AttachModifierByID('HD_AL_STPETERSBASILICA_GRANT_APOSTLE');
+          capitalCity:SetProperty(AL_STPETERSBASILICA_HAS_GRANTED_APOSTLE_TAG, 1);
+          print("圣彼得大教堂 " .. Locale.Lookup(capitalCity:GetName()) .. "信教 获得使者");
+        end
+      end
+    end
+
+  end
+end
+Events.WonderCompleted.Add(AlStpetersbasilicaWonderCompleted);
+
+function AlStpetersbasilicaCityReligionFollowersChanged(playerId, cityId, eVisibility)
+  local player = Players[playerId];
+  if not player:IsMajor() then return; end
+
+  local city = CityManager.GetCity(playerId, cityId);
+  local cityReligion = city:GetReligion():GetMajorityReligion();
+  local alStpetersbasilicaReligion = Game:GetProperty(AL_STPETERSBASILICA_RELIGION_TAG) or -1;
+
+  if Utils.IsPlayerCapital(playerId, cityId)
+  and city:GetProperty(AL_STPETERSBASILICA_HAS_GRANTED_APOSTLE_TAG) ~= 1
+  and cityReligion ~= -1 and alStpetersbasilicaReligion ~= -1 and cityReligion == alStpetersbasilicaReligion then
+
+    city:SetProperty(AL_STPETERSBASILICA_HAS_GRANTED_APOSTLE_TAG, 1)
+    local alStpetersbasilicaPlayerId = Game.GetProperty(AL_STPETERSBASILICA_PLAYER_TAG)
+    local alStpetersbasilicaPlayer = Players[alStpetersbasilicaPlayerId];
+    if alStpetersbasilicaPlayer and alStpetersbasilicaPlayer:IsAlive() then
+      alStpetersbasilicaPlayer:AttachModifierByID('HD_AL_STPETERSBASILICA_GRANT_APOSTLE');
+      print("圣彼得大教堂 " .. Locale.Lookup(city:GetName()) .. "信教 获得使者");
+    end
+  end
+end
+Events.CityReligionFollowersChanged.Add(AlStpetersbasilicaCityReligionFollowersChanged);
+
+-- 瓦西里升天教堂
+local BUILDING_ST_BASILS_CATHEDRAL_INDEX = GameInfo.Buildings['BUILDING_ST_BASILS_CATHEDRAL'].Index;
+local ST_BASILS_CATHEDRAL_CULTURE_FOLLOWER = GlobalParameters.HD_ST_BASILS_CATHEDRAL_CULTURE_FOLLOWER or 0;
+local ST_BASILS_CATHEDRAL_CULTURE_AMOUNT = GlobalParameters.HD_ST_BASILS_CATHEDRAL_CULTURE_AMOUNT or 0;
+local ST_BASILS_CATHEDRAL_FAITH_FOLLOWER = GlobalParameters.HD_ST_BASILS_CATHEDRAL_FAITH_FOLLOWER or 0;
+local ST_BASILS_CATHEDRAL_FAITH_AMOUNT = GlobalParameters.HD_ST_BASILS_CATHEDRAL_FAITH_AMOUNT or 0;
+local ST_BASILS_CATHEDRAL_POS_X_TAG = 'HD_ST_BASILS_CATHEDRAL_POS_X';
+local ST_BASILS_CATHEDRAL_POS_Y_TAG = 'HD_ST_BASILS_CATHEDRAL_POS_Y';
+
+function StBasilsWonderCompleted(x, y, buildingId, playerId, cityId, percentComplete, unknown)
+	if buildingId == BUILDING_ST_BASILS_CATHEDRAL_INDEX then
+    Game.SetProperty(ST_BASILS_CATHEDRAL_POS_X_TAG, x)
+    Game.SetProperty(ST_BASILS_CATHEDRAL_POS_Y_TAG, y)
+    
+    RefreshStBasils()
+	end
+end
+Events.WonderCompleted.Add(StBasilsWonderCompleted);
+
+function RefreshStBasils()
+  if Game.GetProperty(ST_BASILS_CATHEDRAL_POS_X_TAG) == nil then return; end
+
+  local alives = PlayerManager.GetAlive()
+  for _, player in ipairs(alives) do
+    if PlayerHasWonder(player, BUILDING_ST_BASILS_CATHEDRAL_INDEX) then
+      local followerAmount = Utils.GetReligionFollowerNum(player:GetReligion():GetReligionTypeCreated());
+      print("瓦西里升天教堂 信徒数量 " .. followerAmount)
+
+      -- 文化值
+      if ST_BASILS_CATHEDRAL_CULTURE_FOLLOWER > 0 and ST_BASILS_CATHEDRAL_CULTURE_AMOUNT > 0 then
+        local amount = math.floor(followerAmount / ST_BASILS_CATHEDRAL_CULTURE_FOLLOWER) * ST_BASILS_CATHEDRAL_CULTURE_AMOUNT;
+        local plot = Map.GetPlot(Game.GetProperty(ST_BASILS_CATHEDRAL_POS_X_TAG), Game.GetProperty(ST_BASILS_CATHEDRAL_POS_Y_TAG))
+        Utils.BinaryCompress(amount, plot, 1)
+      end
+
+      -- 信仰值
+      if ST_BASILS_CATHEDRAL_FAITH_FOLLOWER > 0 and ST_BASILS_CATHEDRAL_FAITH_AMOUNT > 0 then
+        local amount = math.floor(followerAmount / ST_BASILS_CATHEDRAL_FAITH_FOLLOWER) * ST_BASILS_CATHEDRAL_FAITH_AMOUNT;
+        local plot = Map.GetPlot(Game.GetProperty(ST_BASILS_CATHEDRAL_POS_X_TAG), Game.GetProperty(ST_BASILS_CATHEDRAL_POS_Y_TAG))
+        Utils.BinaryCompress(amount, plot, 2)
+      end
+      
+    end
+  end
+end
+
+GameEvents.OnGameTurnEnded.Add(RefreshStBasils)
+Events.CitySelectionChanged.Add(RefreshStBasils)
 --------------------------------------------------------------
 -- Initialize
 function initialize()

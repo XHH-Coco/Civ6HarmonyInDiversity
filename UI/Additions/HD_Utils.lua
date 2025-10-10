@@ -464,3 +464,24 @@ function GetGameDifficulty()
   return GameConfiguration.GetHandicapType()
 end
 Utils.GetGameDifficulty = GetGameDifficulty;
+
+-- 获得宗教总信徒
+function GetReligionFollowerNum(religionId)
+  local num = 0;
+  local majorPlayers = PlayerManager.GetAlive();
+
+	for _, player in ipairs(majorPlayers) do
+    for _, city in player:GetCities():Members() do
+      local religionsInCity = city:GetReligion():GetReligionsInCity();
+
+      for _, cityReligionData in ipairs(religionsInCity) do
+        if cityReligionData.Religion == religionId then
+          num = num + cityReligionData.Followers;
+        end
+      end
+    end
+  end
+
+  return num;
+end
+Utils.GetReligionFollowerNum = GetReligionFollowerNum;
