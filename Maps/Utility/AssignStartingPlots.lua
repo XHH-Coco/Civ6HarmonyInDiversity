@@ -356,6 +356,7 @@ end
 ------------------------------------------------------------------------------
 function AssignStartingPlots:__DLPreparePlotFertilities()
     print('start __DLPreparePlotFertilities');
+
     self.plotFertilities = {};
 
     self.resourceList = {};
@@ -403,9 +404,28 @@ function AssignStartingPlots:__DLPreparePlotFertilities()
                         local yield = anotherPlot:GetYield(row.Index) * row.DefaultValue;
                         plotYields[row.YieldType] = plotYields[row.YieldType] + yield;
                         -- print(x, y, anotherPlot:GetX(), anotherPlot:GetY(), row.YieldType, yield);
-
-
                     end
+					
+					local coastflag = false;
+					for row in GameInfo.StartBiasTerrains() do
+						local civilizationType = row.CivilizationType;
+						local terrainType = row.TerrainType;
+						if PlayerConfigurations[0]:GetCivilizationTypeName() == civilizationType and terrainType == "TERRAIN_COAST" then
+							coastflag = true;
+							break
+						end
+					end
+
+					if coastflag then
+                        if 15 <= anotherPlot:GetTerrainType() and anotherPlot:GetTerrainType() <= 16 then
+                            totalFertility = totalFertility + 2;
+                        end
+					else
+						if 15 <= anotherPlot:GetTerrainType() and anotherPlot:GetTerrainType() <= 16 then
+                            totalFertility = totalFertility - 2;
+                        end
+                    end
+
                     if (PlayerConfigurations[0]:GetCivilizationTypeName() == "CIVILIZATION_INCA") then
                         if anotherPlot:GetTerrainType()%3 == 0 then
                             totalFertility = totalFertility + 4;
@@ -2512,3 +2532,4 @@ function AssignStartingPlots:__RemoveBonus(plot)
         end
     end 
 end
+
