@@ -934,6 +934,7 @@
     <ImportFiles id="HD_BetterReportScreen_Override_Import" criteria="BetterReportScreen_Override_Expansion2">
       <Properties><LoadOrder>150000</LoadOrder></Properties>
       <File>UI/Replacement/RealModifierAnalysis.lua</File>
+      <File>UI/Replacement/BRSPage_Resources.lua</File>
     </ImportFiles>
     <AddUserInterfaces id="DL_Custom_Interface" criteria="Expansion2">
       <Properties>
@@ -944,6 +945,7 @@
       <File>UI/Custom/Potala_Panel.xml</File>
       <File>UI/Custom/China_NotificationManager.xml</File>
       <File>UI/Custom/China_Panel.xml</File>
+      <File>UI/Custom/CityButton_ResourceClassification.xml</File>
     </AddUserInterfaces>
     <ReplaceUIScript id="DL_CityPanelOverview" criteria="Expansion2">
       <Properties>
@@ -1506,11 +1508,15 @@
       <File>UpdateDataBase/Classifications/HD_Classification_Tables.sql</File>
     </UpdateDatabase>
 
-    <UpdateDatabase id="BuildingDefinations" criteria="Expansion2">
+    <UpdateDatabase id="HD_Classifications" criteria="Expansion2">
       <Properties><LoadOrder>15000</LoadOrder></Properties>
       <File>UpdateDataBase/Classifications/HD_Building_Classification.sql</File>
       <File>UpdateDataBase/Classifications/HD_District_Classification.sql</File>
       <File>UpdateDataBase/Classifications/HD_Improvement_Classification.sql</File>
+    </UpdateDatabase>
+
+    <UpdateDatabase id="HD_Classifications" criteria="Expansion2">
+      <Properties><LoadOrder>15001</LoadOrder></Properties>
       <File>UpdateDataBase/Classifications/HD_Resource_Classification.sql</File>
     </UpdateDatabase>
 
@@ -1586,7 +1592,7 @@
     </ImportFiles>
     <ImportFiles id="TechCivicProgress_Override" criteria="TechCivicProgress_Override">
       <Properties><LoadOrder>200</LoadOrder></Properties>
-      <File>UI/Additions/ToolTipLoader_TCP.lua</File>
+      <File>UI/Loaders/ToolTipLoader_TCP.lua</File>
     </ImportFiles>
     <UpdateDatabase id="HD_Ingame_setup" criteria="Civitas_CityStates_Conflict_Expansion2">
       <Properties><LoadOrder>16000</LoadOrder></Properties>
@@ -1825,6 +1831,7 @@
       <File>UI/Icons/DL_Icons_Projects.xml</File>
       <File>UI/Icons/HD_Icons_UnitCommands.xml</File>
       <File>UI/Icons/HD_Icons.xml</File>
+      <File>UI/Icons/HD_Icons_Notifications.xml</File>
       <File>UI/Icons/HD_Icons_Commemorations.xml</File>
       <File>UI/Icons/HD_Icons_GreatPeople.sql</File>
       <File>UI/Icons/DL_Icons_Cultural_Policies.sql</File>
@@ -1853,6 +1860,7 @@
       <File>Gameplay/Buildings.lua</File>
       <File>Gameplay/BinaryCompress.lua</File>
       <File>Gameplay/UnitAbilities.lua</File>
+      <File>Gameplay/ResourceClassification.lua</File>
     </AddGameplayScripts>
     <!-- UI scripts for gameplay -->
     <AddUserInterfaces id="DL_Scripts_Interface" criteria="Expansion2">
@@ -2339,6 +2347,7 @@
     <File>Gameplay/Temp_Interface.xml</File>
     <File>Gameplay/RegionalYield.lua</File>
     <File>Gameplay/RegionalYield.xml</File>
+    <File>Gameplay/ResourceClassification.lua</File>
 
     <!-- UI Overwrites -->
     <File>UI/Civilopedia/CivilopediaPage_Building.lua</File>
@@ -2356,6 +2365,7 @@
 
     <!-- UI Loaders -->
     <File>UI/Loaders/ToolTipLoader_DL.lua</File>
+    <File>UI/Loaders/ToolTipLoader_TCP.lua</File>
 
     <!-- UI Additions -->
     <File>UI/Additions/MVC_521b8777-0977-4859-a5ee-3e411a732e5c.lua</File> <!-- Mod Version Checker for multiplayer -->
@@ -2368,7 +2378,6 @@
     <File>UI/Additions/RockBandPopup.lua</File>
     <File>UI/Additions/UnitPanel_Expansion2.lua</File>
     <File>UI/Additions/ModLens_Seadog.lua</File>
-    <File>UI/Additions/ToolTipLoader_TCP.lua</File>
     <File>UI/Additions/HD_China_UnitCommandDefs.lua</File>
 
     <!-- Custom UI -->
@@ -2383,6 +2392,8 @@
     <File>UI/Custom/NotificationPanel_China.lua</File>
     <File>UI/Custom/China_Panel.lua</File>
     <File>UI/Custom/China_Panel.xml</File>
+    <File>UI/Custom/CityButton_ResourceClassification.lua</File>
+    <File>UI/Custom/CityButton_ResourceClassification.xml</File>
 
     <!-- UI replacements -->
     <File>UI/Replacement/StagingRoom.lua</File>
@@ -2416,6 +2427,7 @@
     <File>UI/Replacement/HD_ActionPanel.lua</File>
     <File>UI/Replacement/RealModifierAnalysis.lua</File>
     <File>UI/Replacement/PlayerSetupLogic.lua</File>
+    <File>UI/Replacement/BRSPage_Resources.lua</File>
 
     <!-- Icons -->
     <File>UI/Icons/DL_Icons_Fixing.sql</File>
@@ -2427,6 +2439,7 @@
     <File>UI/Icons/DL_Icons_Projects.xml</File>
     <File>UI/Icons/HD_Icons_UnitCommands.xml</File>
     <File>UI/Icons/HD_Icons.xml</File>
+    <File>UI/Icons/HD_Icons_Notifications.xml</File>
     <File>UI/Icons/HD_Icons_Commemorations.xml</File>
     <File>UI/Icons/HD_Icons_GreatPeople.sql</File>
     <File>UI/Icons/DL_Icons_Cultural_Policies.sql</File>

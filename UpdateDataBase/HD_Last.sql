@@ -31,6 +31,33 @@ insert into HD_Civilopedia_Resource_Groups (ResourceType, PageGroupId)
   and ResourceType not like "RESOURCE_C_ALCOHOL_%" 
   and ResourceType != "RESOURCE_C_ALCOHOL_GENERAL";
 
+-- 按改良类型给资源分类
+insert or ignore into HD_Resource_Classification (ResourceType, ResourceClassificationType) select
+  ResourceType, 'RESOURCE_CLASSIFICATION_' || ImprovementType
+from Improvement_ValidResources where ImprovementType in (select ImprovementType from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_BASIC');
+
+--------------------------------------------------------------------------------------------------------------------
+-- 二进制
+insert or ignore into Requirements (RequirementId, RequirementType)
+	select 'REQUIRES_' || Key || '_' || Exp, 'REQUIREMENT_PLOT_PROPERTY_MATCHES'
+	from HD_Binary_Compress, HD_Binary_Compress_Keys where Exp <= MaxExp;
+
+insert or ignore into RequirementArguments (RequirementId, Name, Value)
+	select 'REQUIRES_' || Key || '_' || Exp, 'PropertyName', Key || '_' || Exp
+	from HD_Binary_Compress, HD_Binary_Compress_Keys where Exp <= MaxExp;
+
+insert or ignore into RequirementArguments (RequirementId, Name, Value)
+	select 'REQUIRES_' || Key || '_' || Exp, 'PropertyMinimum', 1
+	from HD_Binary_Compress, HD_Binary_Compress_Keys where Exp <= MaxExp;
+
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
+	select Key || '_' || Exp || '_REQUIREMENTS', 'REQUIREMENTSET_TEST_ANY'
+	from HD_Binary_Compress, HD_Binary_Compress_Keys where Exp <= MaxExp;
+
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select Key || '_' || Exp || '_REQUIREMENTS', 'REQUIRES_' || Key || '_' || Exp
+	from HD_Binary_Compress, HD_Binary_Compress_Keys where Exp <= MaxExp;
+
 --------------------------------------------------------------------------------------------------------------------
 -- 宙斯像万神殿收益翻倍
 -- MODIFIER_ALL_PLAYERS_ATTACH_MODIFIER -> MODIFIER_PLAYER_CAPITAL_CITY_ATTACH_MODIFIER

@@ -738,7 +738,7 @@ Events.InfluenceChanged.Add(LeagueOfNationsBoost)
 
 -- 户籍
 local HOUSEHOLD_REGISTRATION_INDEX = GameInfo.Civics['CIVIC_HOUSEHOLD_REGISTRATION_HD'].Index;
-function HouseholdRegistrationBoost(playerId, cityId, cityPopulation)
+function HouseholdRegistrationBoost(playerId, cityId)
   local player = Players[playerId]
 
   if not player:GetCulture():HasBoostBeenTriggered(HOUSEHOLD_REGISTRATION_INDEX) then
@@ -760,7 +760,7 @@ function HouseholdRegistrationBoost(playerId, cityId, cityPopulation)
     end
   end
 end
-Events.CityPopulationChanged.Add(HouseholdRegistrationBoost)
+GameEvents.OnCityPopulationChanged.Add(HouseholdRegistrationBoost)
 --------------------------------------------------------------
 -- Initialize
 function initialize()

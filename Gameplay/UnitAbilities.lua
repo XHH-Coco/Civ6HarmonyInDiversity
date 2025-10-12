@@ -23,27 +23,22 @@ end
 Events.Combat.Add(OnCombat)
 
 -- 垃圾回收中心, by xiaoxiao
+local RECYCLING_PLANT_PRODUCTION_PERCENT = GlobalParameters.RECYCLING_PLANT_PRODUCTION_PERCENT or 0;
 function HDRecyclingPlantRecycle (playerId, unitId)
     local unit = UnitManager.GetUnit(playerId, unitId);
     local unitInfo = GameInfo.Units[unit:GetType()];
     local cost = unitInfo.Cost;
-    local costRate = GlobalParameters.RECYCLING_PLANT_PRODUCTION_PERCENT or 0;
     local resourceType = unitInfo.StrategicResource;
     local resourceCost = 0;
-    for row in GameInfo.Units_XP2() do
-        if row.UnitType == unitInfo.UnitType then
-            resourceCost = row.ResourceCost;
-        end
+    local unitXP2Info = GameInfo.Units_XP2[unitInfo.UnitType];
+    if unitXP2Info ~= nil then
+        resourceCost = unitXP2Info.ResourceCost;
     end
     local resourceCostMultiplier = 0;
     if resourceType ~= nil then
-        for row in GameInfo.GlobalParameters() do
-            if row.Name == 'RECYCLING_PLANT_' .. resourceType .. '_MULTIPLIER' then
-                resourceCostMultiplier = row.Value;
-            end
-        end
+        resourceCostMultiplier = GlobalParameters['RECYCLING_PLANT_' .. resourceType .. '_MULTIPLIER'] or 0;
     end
-    local gold = costRate * cost / 100 + resourceCostMultiplier * resourceCost;
+    local gold = RECYCLING_PLANT_PRODUCTION_PERCENT * cost / 100 + resourceCostMultiplier * resourceCost;
     local player = Players[playerId];
     player:GetTreasury():ChangeGoldBalance(gold);
     
@@ -52,11 +47,6 @@ function HDRecyclingPlantRecycle (playerId, unitId)
 	local y = location.y;
     Game.AddWorldViewText(playerId, '+' .. gold ..' [ICON_GOLD]', x, y);
 
-    -- original version: provides production
-    -- local production = costRate * cost / 100 + resourceCostMultiplier * resourceCost;
-	-- local district = CityManager.GetDistrictAt(x, y);
-	-- local city = district:GetCity();
-    -- city:GetBuildQueue():AddProgress(production);
 end
 GameEvents.HDRecyclingPlantRecycle.Add(HDRecyclingPlantRecycle);
 

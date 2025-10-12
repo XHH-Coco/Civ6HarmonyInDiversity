@@ -780,13 +780,16 @@ insert or replace into GlobalParameters (Name, Value) values
 	('HD_STATUE_LIBERTY_NAVAL_FLEET',									1),
 	('HD_STATUE_LIBERTY_INFLUENCE_POINT_PERCENTAGE',	5);
 
+insert or replace into HD_Binary_Compress_Keys (Key) values
+	('HD_PLOT_BINARY_COMPRESS_STATUE_LIBERTY');
+
 	-- 影响力 二进制压缩
 insert or replace into BuildingModifiers (BuildingType, ModifierId)
 	select 'BUILDING_STATUE_LIBERTY', 'HD_STATUE_LIBERTY_INFLUENCE_POINT_' || Exp
 	from HD_Binary_Compress where Exp < 10;
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId)
-	select 'HD_STATUE_LIBERTY_INFLUENCE_POINT_' || Exp, 'MODIFIER_PLAYER_ADJUST_INFLUENCE_POINTS_PER_TURN', 'HD_PLOT_BINARY_COMPRESS_' || Exp || '_1_REQUIREMENTS'
+	select 'HD_STATUE_LIBERTY_INFLUENCE_POINT_' || Exp, 'MODIFIER_PLAYER_ADJUST_INFLUENCE_POINTS_PER_TURN', 'HD_PLOT_BINARY_COMPRESS_STATUE_LIBERTY_' || Exp || '_REQUIREMENTS'
 	from HD_Binary_Compress where Exp < 10;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
@@ -1431,13 +1434,17 @@ insert or replace into ModifierArguments (ModifierId, Name, value) values
 	('ST_BASILS_CATHEDRAL_YIELD_IMPROVEMENT',	'Amount',			'1,2,1,1'),
 	('ST_BASILS_CATHEDRAL_TOURISM_ATTACH',		'ModifierId',	'STBASILS_ADDRELIGIOUSTOURISM');
 
+insert or replace into HD_Binary_Compress_Keys (Key) values
+	('HD_PLOT_BINARY_COMPRESS_ST_BASILS_CATHEDRAL_1'),
+	('HD_PLOT_BINARY_COMPRESS_ST_BASILS_CATHEDRAL_2');
+
 	-- 信徒提供产出
 insert or replace into BuildingModifiers (BuildingType, ModifierId)
 	select 'BUILDING_ST_BASILS_CATHEDRAL', 'HD_ST_BASILS_CATHEDRAL_CULTURE_' || Exp
 	from HD_Binary_Compress where Exp < 10;
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId)
-	select 'HD_ST_BASILS_CATHEDRAL_CULTURE_' || Exp, 'MODIFIER_BUILDING_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_' || Exp || '_1_REQUIREMENTS'
+	select 'HD_ST_BASILS_CATHEDRAL_CULTURE_' || Exp, 'MODIFIER_BUILDING_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_ST_BASILS_CATHEDRAL_1_' || Exp || '_REQUIREMENTS'
 	from HD_Binary_Compress where Exp < 10;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
@@ -1457,7 +1464,7 @@ insert or replace into BuildingModifiers (BuildingType, ModifierId)
 	from HD_Binary_Compress where Exp < 10;
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId)
-	select 'HD_ST_BASILS_CATHEDRAL_FAITH_' || Exp, 'MODIFIER_BUILDING_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_' || Exp || '_2_REQUIREMENTS'
+	select 'HD_ST_BASILS_CATHEDRAL_FAITH_' || Exp, 'MODIFIER_BUILDING_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_ST_BASILS_CATHEDRAL_2_' || Exp || '_REQUIREMENTS'
 	from HD_Binary_Compress where Exp < 10;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
@@ -1529,15 +1536,15 @@ values
 	('HUEY_FOOD_HD',						'YieldType',			'YIELD_FOOD'),
 	('HUEY_FOOD_HD',						'Amount',				2),
 	('HUEY_PRODUCTION_HD',					'YieldType',			'YIELD_PRODUCTION'),
-	('HUEY_PRODUCTION_HD',					'Amount',				2),
+	('HUEY_PRODUCTION_HD',					'Amount',				1),
 	('HUEY_FOOD_HD_DISTRICT',						'YieldType',			'YIELD_FOOD'),
 	('HUEY_FOOD_HD_DISTRICT',						'Amount',				2),
 	('HUEY_PRODUCTION_HD_DISTRICT',					'YieldType',			'YIELD_PRODUCTION'),
-	('HUEY_PRODUCTION_HD_DISTRICT',					'Amount',				2),
+	('HUEY_PRODUCTION_HD_DISTRICT',					'Amount',				1),
 	('HUEY_FOOD_HD_WONDER',						'YieldType',			'YIELD_FOOD'),
 	('HUEY_FOOD_HD_WONDER',						'Amount',				2),
 	('HUEY_PRODUCTION_HD_WONDER',					'YieldType',			'YIELD_PRODUCTION'),
-	('HUEY_PRODUCTION_HD_WONDER',					'Amount',				2);
+	('HUEY_PRODUCTION_HD_WONDER',					'Amount',				1);
 
 -- 埃菲尔铁塔
 	-- 相邻加成

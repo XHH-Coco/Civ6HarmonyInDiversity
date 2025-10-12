@@ -59,6 +59,7 @@ end
 Events.TechBoostTriggered.Add(CommemorationTechBoostTriggered)
 
 -- 征服城市
+local NOTIFICATION_GLORIOUS_VICTORY_REWARD_HASH = GameInfo.Types['NOTIFICATION_GLORIOUS_VICTORY_REWARD'].Hash;
 function CommemorationCityConquered(newPlayerId, oldPlayerId, newCityId, x, y)
   local player = Players[newPlayerId];
   if player == nil then
@@ -72,11 +73,11 @@ function CommemorationCityConquered(newPlayerId, oldPlayerId, newCityId, x, y)
       if COMMEMORATION_RELIGIOUS_CONQUER_CITY_GOODY_HUT == 1 then
         if TRAIT_LEADER_SULEIMAN_ALT_TRIPLE_COMMEMORATION == 1 and Utils.LeaderHasTrait(newPlayerId, 'TRAIT_LEADER_SULEIMAN_ALT') then
           -- 大帝
-          GameEvents.GetRandomGoodyHutReward.Call(newPlayerId, "LOC_MOMENT_CATEGORY_RELIGIOUS")
-          GameEvents.GetRandomGoodyHutReward.Call(newPlayerId, "LOC_MOMENT_CATEGORY_RELIGIOUS")
-          GameEvents.GetRandomGoodyHutReward.Call(newPlayerId, "LOC_MOMENT_CATEGORY_RELIGIOUS")
+          GameEvents.GetRandomGoodyHutReward.Call(newPlayerId, "LOC_MOMENT_CATEGORY_RELIGIOUS", NOTIFICATION_GLORIOUS_VICTORY_REWARD_HASH, {ContinuousTriggered = true})
+          GameEvents.GetRandomGoodyHutReward.Call(newPlayerId, "LOC_MOMENT_CATEGORY_RELIGIOUS", NOTIFICATION_GLORIOUS_VICTORY_REWARD_HASH, {ContinuousTriggered = true})
+          GameEvents.GetRandomGoodyHutReward.Call(newPlayerId, "LOC_MOMENT_CATEGORY_RELIGIOUS", NOTIFICATION_GLORIOUS_VICTORY_REWARD_HASH)
         else
-          GameEvents.GetRandomGoodyHutReward.Call(newPlayerId, "LOC_MOMENT_CATEGORY_RELIGIOUS")
+          GameEvents.GetRandomGoodyHutReward.Call(newPlayerId, "LOC_MOMENT_CATEGORY_RELIGIOUS", NOTIFICATION_GLORIOUS_VICTORY_REWARD_HASH)
         end
       end
     else

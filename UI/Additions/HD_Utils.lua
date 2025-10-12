@@ -485,3 +485,50 @@ function GetReligionFollowerNum(religionId)
   return num;
 end
 Utils.GetReligionFollowerNum = GetReligionFollowerNum;
+
+-- 玩家拥有的资源个数
+function GetPlayerResourceAmount(playerId, resourceId)
+  local player = Players[playerId];
+  if player then
+    return player:GetResources():GetResourceAmount(resourceId);
+  end
+  return 0;
+end
+Utils.GetPlayerResourceAmount = GetPlayerResourceAmount;
+
+-- 用于UI端建筑界面上显示玩家拥有多少相关资源
+function GetBuildingNeedPlayerResource(playerId, buildingType)
+  local totalNum = 0;
+  local data = {};
+  local player = Players[playerId];
+  local propertyKeyList = Utils.BuildingNeedDetectList['PLAYER'][buildingType]
+
+  if player and propertyKeyList ~= nil then
+    -- 需要的资源类型
+    for propertyKey, list in pairs(propertyKeyList) do
+      for _, classificationType in ipairs(list) do
+        data[classificationType] = {
+          Amount = 0,
+          ResourceString = ""
+        };
+      end
+    end
+
+    -- 统计每种资源类型的数量
+    for row in GameInfo.HD_Resource_Classification() do
+      if data[row.ResourceClassificationType] ~= nil and player:GetResources():GetResourceAmount(row.ResourceType) > 0 then
+        totalNum = totalNum + 1;
+        data[row.ResourceClassificationType].Amount = data[row.ResourceClassificationType].Amount + 1;
+
+        local resourceInfo = GameInfo.Resources[row.ResourceType];
+        if resourceInfo then
+          data[row.ResourceClassificationType].ResourceString = data[row.ResourceClassificationType].ResourceString .. " [ICON_" .. row.ResourceType .. "] " .. Locale.Lookup(resourceInfo.Name)
+        end
+      end
+    end
+
+  end
+
+  return totalNum, data;
+end
+Utils.GetBuildingNeedPlayerResource = GetBuildingNeedPlayerResource;

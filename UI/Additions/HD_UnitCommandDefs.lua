@@ -17,6 +17,9 @@ Utils = ExposedMembers.DLHD.Utils;
 
 m_HDUnitCommands = {};
 
+local CITY_HAS_JNR_RECYCLING_PLANT_TAG = 'HD_CITY_HAS_JNR_RECYCLING_PLANT';
+local RECYCLING_PLANT_PRODUCTION_PERCENT = GlobalParameters.RECYCLING_PLANT_PRODUCTION_PERCENT or 0;
+
 local COAST_INDEX = GameInfo.Terrains['TERRAIN_COAST'].Index;
 local OCEAN_INDEX = GameInfo.Terrains['TERRAIN_OCEAN'].Index;
 -- ======================================================================================================================================================
@@ -86,8 +89,23 @@ m_HDUnitCommands.RECYCLE.Properties = {};
 m_HDUnitCommands.RECYCLE.EventName = "HDRecyclingPlantRecycle";
 m_HDUnitCommands.RECYCLE.CategoryInUI = "SPECIFIC";
 m_HDUnitCommands.RECYCLE.Icon = "ICON_UNITCOMMAND_RECYCLE";
-m_HDUnitCommands.RECYCLE.ToolTipString = Locale.Lookup("LOC_UNITCOMMAND_RECYCLE_NAME") .. "[NEWLINE][NEWLINE]" .. 
-										Locale.Lookup("LOC_UNITCOMMAND_RECYCLE_DESCRIPTION");
+m_HDUnitCommands.RECYCLE.GetToolTipString = function (unit)
+	local unitInfo = GameInfo.Units[unit:GetType()];
+	local cost = unitInfo.Cost;
+	local resourceType = unitInfo.StrategicResource;
+	local resourceCost = 0;
+	local unitXP2Info = GameInfo.Units_XP2[unitInfo.UnitType];
+	if unitXP2Info ~= nil then
+			resourceCost = unitXP2Info.ResourceCost;
+	end
+	local resourceCostMultiplier = 0;
+	if resourceType ~= nil then
+			resourceCostMultiplier = GlobalParameters['RECYCLING_PLANT_' .. resourceType .. '_MULTIPLIER'] or 0;
+	end
+	local gold = RECYCLING_PLANT_PRODUCTION_PERCENT * cost / 100 + resourceCostMultiplier * resourceCost;
+
+	return Locale.Lookup("LOC_UNITCOMMAND_RECYCLE_NAME") .. "[NEWLINE][NEWLINE]" .. Locale.Lookup("LOC_UNITCOMMAND_RECYCLE_DESCRIPTION", gold);
+end
 m_HDUnitCommands.RECYCLE.DisabledToolTipString = Locale.Lookup("LOC_UNITCOMMAND_RECYCLE_DISABLED_TT");
 m_HDUnitCommands.RECYCLE.VisibleInUI = true;
 function m_HDUnitCommands.RECYCLE.CanUse(pUnit : object)
@@ -98,15 +116,11 @@ function m_HDUnitCommands.RECYCLE.CanUse(pUnit : object)
 	return formationClass == 'FORMATION_CLASS_LAND_COMBAT' or formationClass == 'FORMATION_CLASS_AIR' or formationClass == 'FORMATION_CLASS_NAVAL';
 end
 
-local RECYCLING_PLANT_INDEX;
-if GameInfo.Buildings['BUILDING_JNR_RECYCLING_PLANT'] ~= nil then
-	RECYCLING_PLANT_INDEX = GameInfo.Buildings['BUILDING_JNR_RECYCLING_PLANT'].Index;
-end
 function m_HDUnitCommands.RECYCLE.IsVisible(pUnit : object)
 	if pUnit == nil then
 		return;
 	end
-	if GlobalParameters.RECYCLING_PLANT_PRODUCTION_PERCENT == nil then
+	if RECYCLING_PLANT_PRODUCTION_PERCENT == 0 then
 		return false;
 	end
 	local formationClass = GameInfo.Units[pUnit:GetType()].FormationClass;
@@ -119,26 +133,19 @@ function m_HDUnitCommands.RECYCLE.IsVisible(pUnit : object)
 	if plot:GetOwner() ~= playerID then
 		return false;
 	end
-	local district = CityManager.GetDistrictAt(x, y);
-	if district == nil then
+	local districtType = plot:GetDistrictType();
+
+	if (formationClass == 'FORMATION_CLASS_LAND_COMBAT' and Utils.IsDistrictType(districtType, 'DISTRICT_NEIGHBORHOOD'))
+	or (formationClass == 'FORMATION_CLASS_NAVAL' and Utils.IsDistrictType(districtType, 'DISTRICT_HARBOR'))
+	or (formationClass == 'FORMATION_CLASS_AIR' and Utils.IsDistrictType(districtType, 'DISTRICT_AERODROME')) then
+		local city = Cities.GetPlotPurchaseCity(plot);
+		local hasRecyclingPlant = city:GetProperty(CITY_HAS_JNR_RECYCLING_PLANT_TAG) or 0;
+		return hasRecyclingPlant > 0;
+	else
 		return false;
 	end
-	local districtInfo = GameInfo.Districts[district:GetType()];
-	local districtType = districtInfo.DistrictType;
-	for row in GameInfo.DistrictReplaces() do
-		if row.CivUniqueDistrictType == districtType then
-			districtType = row.ReplacesDistrictType;
-			break;
-		end
-	end
-	if (formationClass == 'FORMATION_CLASS_LAND_COMBAT' or formationClass == 'FORMATION_CLASS_AIR') and districtType ~= 'DISTRICT_NEIGHBORHOOD' then
-		return false;
-	end
-	if (formationClass == 'FORMATION_CLASS_NAVAL') and districtType ~= 'DISTRICT_HARBOR' then
-		return false;
-	end
-	local city = district:GetCity();
-	return city:GetBuildings():HasBuilding(RECYCLING_PLANT_INDEX);
+
+	return false;
 end
 
 -- ===========================================================================

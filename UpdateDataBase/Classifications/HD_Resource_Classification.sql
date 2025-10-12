@@ -2,6 +2,11 @@ insert or ignore into HD_ResourceClassificationTypes (ResourceClassificationType
   ('RESOURCE_CLASSIFICATION_BIOLOGICAL',    200, 0),
   ('RESOURCE_CLASSIFICATION_MINERAL',       201, 0);
 
+-- 按改良分类
+insert or ignore into HD_ResourceClassificationTypes (ResourceClassificationType, Name, SortIndex, Display) select
+  'RESOURCE_CLASSIFICATION_' || ImprovementType, 'LOC_' || ImprovementType || '_NAME', 500, 0
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_BASIC';
+
 update HD_ResourceClassificationTypes set Name = 'LOC_' || ResourceClassificationType || '_NAME' where Name is NULL;
 
 -- 生物资源

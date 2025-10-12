@@ -17,6 +17,12 @@ insert or ignore into HD_Binary_Compress ('Exp', 'Amount') values (0,1),(1,2),(2
 
 insert or replace into GlobalParameters (Name, Value) values ('HD_BINARY_COMPRESS_MAX_EXP', 9);
 
+create table if not exists 'HD_Binary_Compress_Keys'(
+	'Key' TEXT NOT NULL,
+	'MaxExp' INT NOT NULL Default 9,
+	PRIMARY KEY('Key')
+);
+
 -- Influence Bonus
 --delete from TraitModifiers where
 --    (TraitType in (select TraitType from CSE_ClassTypes)) and 

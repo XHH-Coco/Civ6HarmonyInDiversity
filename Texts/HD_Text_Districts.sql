@@ -59,7 +59,7 @@ insert or replace into LocalizedText
 	(Language,		Tag,															 Text)
 values
 	-- 政府区
-	("zh_Hans_CN",	"LOC_DISTRICT_GOVERNMENT_HD_DESCRIPTION",						 "为纪念所选政体而在帝国中建造的区域。使此城每回合的忠诚度+8、使相邻区域获得的相邻加成+1。[NEWLINE][NEWLINE]奖励1个 [ICON_GOVERNOR] 总督头衔。"),
+	("zh_Hans_CN",	"LOC_DISTRICT_GOVERNMENT_HD_DESCRIPTION",						 "为纪念所选政体而在文明中建造的区域。使此城每回合的忠诚度+8、使相邻区域获得的相邻加成+1。[NEWLINE][NEWLINE]奖励1个 [ICON_GOVERNOR] 总督头衔。"),
 	-- 圣地
 	("zh_Hans_CN",	"LOC_DISTRICT_HOLY_SITE_HD_DESCRIPTION",						 "您城市里的宗教祭祀区域。若该区域内含有三级宗教建筑，则本城+10% [ICON_Faith] 信仰值。为相邻单元格+1魅力。"),
 	("zh_Hans_CN",	"LOC_DISTRICT_LAVRA_HD_DESCRIPTION",							 "俄罗斯特色宗教活动区域，替代“圣地”，建造费用更低。[NEWLINE][NEWLINE]该区域内的专家也产出大作家、大艺术家、大音乐家点数。此城市每消耗一位伟人，城市边界则扩张一个单元格。若该区域内含有三级宗教建筑，则本城+10% [ICON_Faith] 信仰值。为相邻单元格+1魅力。"),

@@ -420,7 +420,7 @@ local firstCivicBoosted = nil;
 local firstTechBoosted = nil;
 local NOTIFICATION_DISCOVER_GOODY_HUT_HASH = GameInfo.Types['NOTIFICATION_DISCOVER_GOODY_HUT'].Hash;
 
-function GetRandomGoodyHutReward(playerId, title, extra)
+function GetRandomGoodyHutReward(playerId, title, notificationHash, extra)
 	local player = Players[playerId]
 	if player:IsMajor() then
 		print('GetRandomGoodyHutReward', playerId)
@@ -430,6 +430,7 @@ function GetRandomGoodyHutReward(playerId, title, extra)
 		if checkResult ~= 0 then
 			m_PendingGoodyHut = {
 				Title = title,
+				NotificationHash = notificationHash or NOTIFICATION_DISCOVER_GOODY_HUT_HASH,
 				ModifierId = reward.ModifierId
 			};
 
@@ -448,14 +449,14 @@ function GetRandomGoodyHutReward(playerId, title, extra)
 				and reward.SubTypeGoodyHut ~= 'GOODYHUT_TWO_TECH_BOOSTS'
 				and reward.SubTypeGoodyHut ~= 'GOODYHUT_RESOURCES' then
 					local msg = GetGoodyHutRewardDescription(reward.ModifierId)
-					SendRewardNotification(playerId, NOTIFICATION_DISCOVER_GOODY_HUT_HASH, Locale.Lookup(title), msg);
+					SendRewardNotification(playerId, notificationHash, Locale.Lookup(title), msg);
 			end
 			
 			print("GetRandomGoodyHutReward", "应用奖励", reward.ModifierId)
 		else
 			-- 重新随机
 			print("GetRandomGoodyHutReward", "重新随机")
-			GetRandomGoodyHutReward(playerId, title, extra)
+			GetRandomGoodyHutReward(playerId, title, notificationHash, extra)
 		end
 	end
 end
@@ -619,11 +620,12 @@ function OnCivicBoostTriggered(playerId, boostedCivic)
 	if pendingHut ~= nil then
 		local modifierId = pendingHut.ModifierId;
 		local title = pendingHut.Title;
+		local notificationHash = pendingHut.NotificationHash;
 		local msg;
 		if modifierId == "GOODY_CULTURE_GRANT_ONE_CIVIC_BOOST" then
 			local civicName = GameInfo.Civics[boostedCivic].Name;
 			msg = "[ICON_CivicBoosted]" .. Locale.Lookup(civicName);
-			SendRewardNotification(playerId, NOTIFICATION_DISCOVER_GOODY_HUT_HASH, Locale.Lookup(title), msg);
+			SendRewardNotification(playerId, notificationHash, Locale.Lookup(title), msg);
 			m_PendingGoodyHut = nil;
 		elseif modifierId == "GOODY_CULTURE_GRANT_TWO_CIVIC_BOOSTS" then
 			if firstCivicBoosted == nil then
@@ -634,7 +636,7 @@ function OnCivicBoostTriggered(playerId, boostedCivic)
 				msg = "[ICON_CivicBoosted]" .. firstCivicName .. "&" .. civicName;
 				firstCivicBoosted = nil;
 				m_PendingGoodyHut = nil;
-				SendRewardNotification(playerId, NOTIFICATION_DISCOVER_GOODY_HUT_HASH, Locale.Lookup(title), msg);
+				SendRewardNotification(playerId, notificationHash, Locale.Lookup(title), msg);
 			end
 		end
 	end
@@ -648,11 +650,12 @@ function OnTechBoostTriggered(playerId, boostedTech)
 	if pendingHut ~= nil then
 		local modifierId = pendingHut.ModifierId;
 		local title = pendingHut.Title;
+		local notificationHash = pendingHut.NotificationHash;
 		local msg;
 		if modifierId == "GOODY_SCIENCE_GRANT_ONE_TECH_BOOST" then
 			local techName = GameInfo.Technologies[boostedTech].Name;
 			msg = "[ICON_TechBoosted]" .. Locale.Lookup(techName);
-			SendRewardNotification(playerId, NOTIFICATION_DISCOVER_GOODY_HUT_HASH, Locale.Lookup(title), msg);
+			SendRewardNotification(playerId, notificationHash, Locale.Lookup(title), msg);
 			m_PendingGoodyHut = nil;
 		elseif modifierId == "GOODY_SCIENCE_GRANT_TWO_TECH_BOOSTS" then
 			if firstTechBoosted == nil then
@@ -663,7 +666,7 @@ function OnTechBoostTriggered(playerId, boostedTech)
 				msg = "[ICON_TechBoosted]" .. firstTechName .. "&" .. techName;
 				firstTechBoosted = nil;
 				m_PendingGoodyHut = nil;
-				SendRewardNotification(playerId, NOTIFICATION_DISCOVER_GOODY_HUT_HASH, Locale.Lookup(title), msg);
+				SendRewardNotification(playerId, notificationHash, Locale.Lookup(title), msg);
 			end
 		end
 	end
@@ -677,12 +680,13 @@ function OnPlayerResourceChanged(playerId, resourceId)
 	if pendingHut ~= nil then
 		local modifierId = pendingHut.ModifierId;
 		local title = pendingHut.Title;
+		local notificationHash = pendingHut.NotificationHash;
 		local msg;
 		if modifierId == "GOODY_MILITARY_ADJUST_STRATEGIC_RESOURCES" then
 			local resourceName = GameInfo.Resources[resourceId].Name;
 			local amount = Utils.GetModifierAmount(modifierId);
 			msg = amount .. Locale.Lookup(resourceName);
-			SendRewardNotification(playerId, NOTIFICATION_DISCOVER_GOODY_HUT_HASH, Locale.Lookup(title), msg);
+			SendRewardNotification(playerId, notificationHash, Locale.Lookup(title), msg);
 			m_PendingGoodyHut = nil;
 		end
 	end
