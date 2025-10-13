@@ -298,7 +298,7 @@ values
 	('DLAdjustDistricts',		'DISTRICT_INDUSTRIAL_ZONE',				1,			1),
 --1.37版本，加入商业和港口调整
 --	('DLAdjustDistricts',		'DISTRICT_HARBOR',						1,			0),	
-	('DLAdjustDistricts',		'DISTRICT_COMMERCIAL_HUB',				0,			-1),		
+	-- ('DLAdjustDistricts',		'DISTRICT_COMMERCIAL_HUB',				0,			-1),		
 --传教单位（修复不出传教单位的BUG，让能传教的文明更激情传教）-by siv1.35
 	('DLAdjustUnits',			'UNIT_MISSIONARY',						1,			10),
 	('DLAdjustUnits',			'UNIT_APOSTLE',							1,			10),

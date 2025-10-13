@@ -1,7 +1,12 @@
 insert or replace into EnglishText (Tag, Text) values
+  -- ToolTip
+  ("LOC_BUILDING_PLAYER_RESOURCE_TOTAL_TOOLTIP_TEXT",               "Player has {1_Amount} related resources in total"),
+  ("LOC_BUILDING_PLAYER_RESOURCE_CLASSIFICATION_TOOLTIP_TEXT",      "[ICON_BULLET] {1_Amount} {2_Name} resources"),
+
   ("LOC_BUILDING_CLASSIFICATION_TRANSPORTATION_FACILITIES_NAME",    "Transportation Facilities Buildings"),
 
   ("LOC_DISTRICT_CLASSIFICATION_TRANSPORTATION_FACILITIES_NAME",    "Transportation Facilities Districts"),
+  ("LOC_DISTRICT_CLASSIFICATION_WATER_CONSERVANCY_FACILITIES_NAME", "Water Conservancy Facilities Districts"),
 
   ("LOC_IMPROVEMENT_CLASSIFICATION_BASIC_NAME",                     "Basic Improvements"),
   ("LOC_IMPROVEMENT_CLASSIFICATION_UNIQUE_NAME",                    "Unique Improvements"),
@@ -16,9 +21,14 @@ insert or replace into EnglishText (Tag, Text) values
   ("LOC_RESOURCE_CLASSIFICATION_MINERAL_NAME",                      "Mineral");
 
 insert or replace into LocalizedText (Language, Tag, Text) values
+  -- ToolTip
+  ("zh_Hans_CN", "LOC_BUILDING_PLAYER_RESOURCE_TOTAL_TOOLTIP_TEXT",               "玩家共拥有{1_Amount}个相关资源"),
+  ("zh_Hans_CN", "LOC_BUILDING_PLAYER_RESOURCE_CLASSIFICATION_TOOLTIP_TEXT",      "[ICON_BULLET]{1_Amount}个{2_Name}资源"),
+
   ("zh_Hans_CN", "LOC_BUILDING_CLASSIFICATION_TRANSPORTATION_FACILITIES_NAME",    "交通设施建筑"),
 
   ("zh_Hans_CN", "LOC_DISTRICT_CLASSIFICATION_TRANSPORTATION_FACILITIES_NAME",    "交通设施区域"),
+  ("zh_Hans_CN", "LOC_DISTRICT_CLASSIFICATION_WATER_CONSERVANCY_FACILITIES_NAME", "水利设施区域"),
 
   ("zh_Hans_CN", "LOC_IMPROVEMENT_CLASSIFICATION_BASIC_NAME",                     "基础改良"),
   ("zh_Hans_CN", "LOC_IMPROVEMENT_CLASSIFICATION_UNIQUE_NAME",                    "特色改良"),

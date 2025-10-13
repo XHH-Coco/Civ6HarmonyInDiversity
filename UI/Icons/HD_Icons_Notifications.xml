@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<GameData>
+  <IconTextureAtlases>
+    <Row Name="ATLAS_HD_Notifications" IconSize="40" IconsPerRow="6" IconsPerColumn="6" Filename="HD_Notifications_40.dds"/>
+    <Row Name="ATLAS_HD_Notifications" IconSize="100" IconsPerRow="6" IconsPerColumn="6" Filename="HD_Notifications_100.dds"/>
+  </IconTextureAtlases>
+  <IconDefinitions>
+    <Row Name="ICON_NOTIFICATION_JNR_HOSPITAL_PREVENT_POP_LOST" Atlas="ATLAS_HD_Notifications" Index="0"/>
+    <Row Name="ICON_NOTIFICATION_JNR_HOSPITAL_EXTRA_POP_BOOST" Atlas="ATLAS_HD_Notifications" Index="1"/>
+    <Row Name="ICON_NOTIFICATION_POTALA_EXTRA_BELIEF" Atlas="ATLAS_HD_Notifications" Index="2"/>
+		<Row Name="ICON_NOTIFICATION_CHINA_CHOOSE_FIRST_TURN_COMMEMORATION"  Atlas="ATLAS_HD_Notifications" Index="3"/>
+		<Row Name="ICON_NOTIFICATION_CHINA_CHOOSE_ERA_ANCIENT_COMMEMORATION"  Atlas="ATLAS_HD_Notifications" Index="3"/>
+		<Row Name="ICON_NOTIFICATION_CHINA_CHOOSE_ERA_CLASSICAL_COMMEMORATION"  Atlas="ATLAS_HD_Notifications" Index="3"/>
+		<Row Name="ICON_NOTIFICATION_CHINA_CHOOSE_ERA_MEDIEVAL_COMMEMORATION"  Atlas="ATLAS_HD_Notifications" Index="3"/>
+		<Row Name="ICON_NOTIFICATION_CHINA_CHOOSE_ERA_RENAISSANCE_COMMEMORATION"  Atlas="ATLAS_HD_Notifications" Index="3"/>
+		<Row Name="ICON_NOTIFICATION_CHINA_CHOOSE_ERA_INDUSTRIAL_COMMEMORATION"  Atlas="ATLAS_HD_Notifications" Index="3"/>
+		<Row Name="ICON_NOTIFICATION_CHINA_CHOOSE_ERA_MODERN_COMMEMORATION"  Atlas="ATLAS_HD_Notifications" Index="3"/>
+		<Row Name="ICON_NOTIFICATION_CHINA_CHOOSE_ERA_ATOMIC_COMMEMORATION"  Atlas="ATLAS_HD_Notifications" Index="3"/>
+		<Row Name="ICON_NOTIFICATION_CHINA_CHOOSE_ERA_INFORMATION_COMMEMORATION"  Atlas="ATLAS_HD_Notifications" Index="3"/>
+		<Row Name="ICON_NOTIFICATION_CHINA_CHOOSE_ERA_FUTURE_COMMEMORATION"  Atlas="ATLAS_HD_Notifications" Index="3"/>
+    <Row Name="ICON_NOTIFICATION_YONGLE_REWARD" Atlas="ATLAS_HD_Notifications" Index="4"/>
+    <Row Name="ICON_NOTIFICATION_QIXIA_XIYANG" Atlas="ATLAS_HD_Notifications" Index="5"/>
+    <Row Name="ICON_NOTIFICATION_PLUM_INTERNAL_SECURITY_GPP" Atlas="ATLAS_HD_Notifications" Index="6"/>
+    <Row Name="ICON_NOTIFICATION_SUMERIA_FREE_TECH" Atlas="ATLAS_HD_Notifications" Index="7"/>
+    <Row Name="ICON_NOTIFICATION_SUMERIA_FREE_CIVIC" Atlas="ATLAS_HD_Notifications" Index="8"/>
+    <Row Name="ICON_NOTIFICATION_SUMERIA_SPECIAL_QUEST" Atlas="ATLAS_HD_Notifications" Index="9"/>
+    <Row Name="ICON_NOTIFICATION_SUMERIA_SPECIAL_QUEST_REWORD" Atlas="ATLAS_HD_Notifications" Index="10"/>
+    <Row Name="ICON_NOTIFICATION_LEADER_MAGNIFICENCES_WONDER" Atlas="ATLAS_HD_Notifications" Index="11"/>
+    <Row Name="ICON_NOTIFICATION_ARABIA_TRANSFORM_GPP" Atlas="ATLAS_HD_Notifications" Index="12"/>
+    <Row Name="ICON_NOTIFICATION_POLAND_ALLIANCE_COPY_GPP" Atlas="ATLAS_HD_Notifications" Index="13"/>
+    <Row Name="ICON_NOTIFICATION_MEDITERRANEAN_REWARD" Atlas="ATLAS_HD_Notifications" Index="14"/>
+    <Row Name="ICON_NOTIFICATION_GLORIOUS_VICTORY_REWARD" Atlas="ATLAS_HD_Notifications" Index="15"/>
+  </IconDefinitions>
+</GameData>

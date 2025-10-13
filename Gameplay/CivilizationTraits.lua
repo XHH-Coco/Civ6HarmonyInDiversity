@@ -901,6 +901,7 @@ GameEvents.HD_Promotion_Secrets_Of_Nature.Add(HD_Promotion_Secrets_Of_Nature)
 local YONGLE_GOODY_HUT_BONUS = GlobalParameters.HD_YONGLE_GOODY_HUT_BONUS or 0;
 local YONGLE_SETTLER_BONUS = GlobalParameters.HD_YONGLE_SETTLER_BONUS or 0;
 local YONGLE_LAST_SCORE_TAG = 'HD_YONGLE_LAST_SCORE_TAG'
+local NOTIFICATION_YONGLE_REWARD_HASH = GameInfo.Types['NOTIFICATION_YONGLE_REWARD'].Hash;
 function YonglePlayerEraScoreChanged(playerId, score)
 	if score == 0 then
 		return;
@@ -916,10 +917,10 @@ function YonglePlayerEraScoreChanged(playerId, score)
 				if YONGLE_GOODY_HUT_BONUS == 1 then
 					if i == diff then
 						print("YonglePlayerEraScoreChanged 循环最后一次")
-						GameEvents.GetRandomGoodyHutReward.Call(playerId, "LOC_TRAIT_LEADER_YONGLE_NAME")
+						GameEvents.GetRandomGoodyHutReward.Call(playerId, "LOC_TRAIT_LEADER_YONGLE_NAME", NOTIFICATION_YONGLE_REWARD_HASH)
 					else
 						print("YonglePlayerEraScoreChanged 循环中")
-						GameEvents.GetRandomGoodyHutReward.Call(playerId, "LOC_TRAIT_LEADER_YONGLE_NAME", {ContinuousTriggered = true})
+						GameEvents.GetRandomGoodyHutReward.Call(playerId, "LOC_TRAIT_LEADER_YONGLE_NAME", NOTIFICATION_YONGLE_REWARD_HASH, {ContinuousTriggered = true})
 					end
 					print("YonglePlayerEraScoreChanged 村庄奖励")
 				end
@@ -3161,6 +3162,7 @@ end
 Events.CityProjectCompleted.Add(DidoCityProjectCompleted)
 
 -- 阿拉伯
+local NOTIFICATION_ARABIA_TRANSFORM_GPP_HASH = GameInfo.Types['NOTIFICATION_ARABIA_TRANSFORM_GPP'].Hash;
 function ArabiaPlayerTurnActivated(playerId, isFirstTime)
 	local player = Players[playerId];
 	if isFirstTime and CivilizationHasTrait(playerId, 'TRAIT_CIVILIZATION_LAST_PROPHET') then
@@ -3170,11 +3172,11 @@ function ArabiaPlayerTurnActivated(playerId, isFirstTime)
 			player:GetGreatPeoplePoints():ChangePointsTotal(ARTIST_INDEX, amount);
 			player:GetGreatPeoplePoints():ChangePointsTotal(SCIENTIST_INDEX, amount);
 
-			local msg = Locale.Lookup('LOC_TRAIT_CIVILIZATION_LAST_PROPHET_NAME') .. ": "
+			local msg = ""
 			msg = msg .. "+" .. amount .. " [ICON_GreatScientist]" .. ' '
 			msg = msg .. "+" .. amount .. " [ICON_GreatWriter]" .. ' '
 			msg = msg .. "+" .. amount .. " [ICON_GreatArtist]"
-			NotificationManager.SendNotification(playerId, "NOTIFICATION_RELIC_CREATED", msg);
+			Utils.SendMergableNotification(playerId, NOTIFICATION_ARABIA_TRANSFORM_GPP_HASH, Locale.Lookup('LOC_TRAIT_CIVILIZATION_LAST_PROPHET_NAME'), msg)
 		end
 	end
 end
@@ -3303,7 +3305,7 @@ function InitMapLuxuryResources()
 end
 InitMapLuxuryResources()
 
-local NOTIFICATION_WONDER_COMPLETED_HASH = GameInfo.Types['NOTIFICATION_WONDER_COMPLETED'].Hash;
+local NOTIFICATION_LEADER_MAGNIFICENCES_WONDER_HASH = GameInfo.Types['NOTIFICATION_LEADER_MAGNIFICENCES_WONDER'].Hash;
 function MagnificencesWonderCompleted(x, y, buildingId, playerId, cityId, percentComplete, unknown)
   if LeaderHasTrait(playerId, 'TRAIT_LEADER_MAGNIFICENCES') then
 		local wonderInfo = GameInfo.Buildings[buildingId]
@@ -3326,7 +3328,7 @@ function MagnificencesWonderCompleted(x, y, buildingId, playerId, cityId, percen
 				local wonderName = Locale.Lookup(wonderInfo.Name)
 				local resourceName = Locale.Lookup('LOC_' .. resourceType .. '_NAME')
 				local msg = wonderName .. ': 2 [ICON_' .. resourceType .. '] ' .. resourceName
-				Utils.SendMergableNotification(playerId, NOTIFICATION_WONDER_COMPLETED_HASH, Locale.Lookup('LOC_TRAIT_LEADER_MAGNIFICENCES_NAME'), msg)
+				Utils.SendMergableNotification(playerId, NOTIFICATION_LEADER_MAGNIFICENCES_WONDER_HASH, Locale.Lookup('LOC_TRAIT_LEADER_MAGNIFICENCES_NAME'), msg)
 			end
 		end
 	end

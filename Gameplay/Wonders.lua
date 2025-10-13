@@ -229,7 +229,7 @@ function StatueLibertyOnGameTurnEnded()
       end
       amount = math.floor(amount * STATUE_LIBERTY_INFLUENCE_POINT_PERCENTAGE / 100);
       local plot = Map.GetPlot(Game.GetProperty(STATUE_LIBERTY_POS_X_TAG), Game.GetProperty(STATUE_LIBERTY_POS_Y_TAG))
-      Utils.BinaryCompress(amount, plot)
+      Utils.BinaryCompress(amount, plot, 'HD_PLOT_BINARY_COMPRESS_STATUE_LIBERTY')
     end
   end
 end
@@ -1106,14 +1106,14 @@ function RefreshStBasils()
       if ST_BASILS_CATHEDRAL_CULTURE_FOLLOWER > 0 and ST_BASILS_CATHEDRAL_CULTURE_AMOUNT > 0 then
         local amount = math.floor(followerAmount / ST_BASILS_CATHEDRAL_CULTURE_FOLLOWER) * ST_BASILS_CATHEDRAL_CULTURE_AMOUNT;
         local plot = Map.GetPlot(Game.GetProperty(ST_BASILS_CATHEDRAL_POS_X_TAG), Game.GetProperty(ST_BASILS_CATHEDRAL_POS_Y_TAG))
-        Utils.BinaryCompress(amount, plot, 1)
+        Utils.BinaryCompress(amount, plot, 'HD_PLOT_BINARY_COMPRESS_ST_BASILS_CATHEDRAL_1')
       end
 
       -- 信仰值
       if ST_BASILS_CATHEDRAL_FAITH_FOLLOWER > 0 and ST_BASILS_CATHEDRAL_FAITH_AMOUNT > 0 then
         local amount = math.floor(followerAmount / ST_BASILS_CATHEDRAL_FAITH_FOLLOWER) * ST_BASILS_CATHEDRAL_FAITH_AMOUNT;
         local plot = Map.GetPlot(Game.GetProperty(ST_BASILS_CATHEDRAL_POS_X_TAG), Game.GetProperty(ST_BASILS_CATHEDRAL_POS_Y_TAG))
-        Utils.BinaryCompress(amount, plot, 2)
+        Utils.BinaryCompress(amount, plot, 'HD_PLOT_BINARY_COMPRESS_ST_BASILS_CATHEDRAL_2')
       end
       
     end

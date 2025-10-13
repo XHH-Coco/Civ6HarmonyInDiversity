@@ -58,3 +58,11 @@ create table if not exists HD_Building_Classification(
   BuildingType                TEXT    not NULL,
   BuildingClassificationType  TEXT    not NULL,
 PRIMARY KEY('BuildingType', 'BuildingClassificationType'));
+
+------------------- 依赖资源分类的建筑 -------------------
+create table if not exists HD_Building_ResourceClassification(
+  BuildingType                TEXT    not NULL,
+  ResourceClassificationType  TEXT    not NULL,
+  DetectRange                 TEXT    not NULL,
+  PropertyKey                 TEXT    not NULL,
+PRIMARY KEY('BuildingType', 'ResourceClassificationType', 'DetectRange'));

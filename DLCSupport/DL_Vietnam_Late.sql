@@ -182,71 +182,96 @@ insert or replace into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_LANDFORM_EPO_' || FeatureType || '_SCIENCE_1', 'Amount', 8
 	from Features where FeatureType not in ('FEATURE_BURNING_FOREST','FEATURE_BURNT_FOREST','FEATURE_BURNING_JUNGLE','FEATURE_BURNT_JUNGLE', 'FEATURE_JNR_BURNING_SAVANNAH', 'FEATURE_JNR_BURNT_SAVANNAH') and NaturalWonder = 0;
 
+-- 资源分类产出
+insert or replace into HD_Building_ResourceClassification (BuildingType, ResourceClassificationType, DetectRange, PropertyKey) values
+	('BUILDING_HD_RESOURCE_EPO', 	'RESOURCE_CLASSIFICATION_MINERAL',			'PLAYER', 'HD_PLOT_BINARY_COMPRESS_RESOURCE_EPO'),
+	('BUILDING_HD_SPECIES_EPO', 	'RESOURCE_CLASSIFICATION_BIOLOGICAL',		'PLAYER',	'HD_PLOT_BINARY_COMPRESS_SPECIES_EPO');
+
+insert or replace into HD_Binary_Compress_Keys (Key, MaxExp) values
+	('HD_PLOT_BINARY_COMPRESS_RESOURCE_EPO', 	6),
+	('HD_PLOT_BINARY_COMPRESS_SPECIES_EPO', 	6);
+
 -- 资源
 insert or replace into BuildingModifiers (BuildingType, ModifierId)
-	select distinct 'BUILDING_HD_RESOURCE_EPO', 'HD_RESOURCE_EPO' || ResourceType || '_SCIENCE_1'
-	from HD_Resource_Classification where ResourceClassificationType = 'RESOURCE_CLASSIFICATION_MINERAL';
+	select 'BUILDING_HD_RESOURCE_EPO', 'HD_RESOURCE_EPO_SCIENCE_' || Exp
+	from HD_Binary_Compress where Exp < 7;
+
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId)
-	select distinct 'HD_RESOURCE_EPO' || ResourceType || '_SCIENCE_1', 'MODIFIER_BUILDING_YIELD_CHANGE', 'HD_PLAYER_HAS_IMPROVED_' || ResourceType || '_REQUIRMENTS'
-	from HD_Resource_Classification where ResourceClassificationType = 'RESOURCE_CLASSIFICATION_MINERAL';
+	select 'HD_RESOURCE_EPO_SCIENCE_' || Exp, 'MODIFIER_BUILDING_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_RESOURCE_EPO_' || Exp || '_REQUIREMENTS'
+	from HD_Binary_Compress where Exp < 7;
+
 insert or replace into ModifierArguments (ModifierId, Name, Value)
-	select distinct 'HD_RESOURCE_EPO' || ResourceType || '_SCIENCE_1', 'BuildingType', 'BUILDING_HD_RESOURCE_EPO'
-	from HD_Resource_Classification where ResourceClassificationType = 'RESOURCE_CLASSIFICATION_MINERAL';
+	select 'HD_RESOURCE_EPO_SCIENCE_' || Exp, 'BuildingType', 'BUILDING_HD_RESOURCE_EPO'
+	from HD_Binary_Compress where Exp < 7;
+
 insert or replace into ModifierArguments (ModifierId, Name, Value)
-	select distinct 'HD_RESOURCE_EPO' || ResourceType || '_SCIENCE_1', 'YieldType', 'YIELD_SCIENCE'
-	from HD_Resource_Classification where ResourceClassificationType = 'RESOURCE_CLASSIFICATION_MINERAL';
+	select 'HD_RESOURCE_EPO_SCIENCE_' || Exp, 'YieldType', 'YIELD_SCIENCE'
+	from HD_Binary_Compress where Exp < 7;
+
 insert or replace into ModifierArguments (ModifierId, Name, Value)
-	select distinct 'HD_RESOURCE_EPO' || ResourceType || '_SCIENCE_1', 'Amount', 4
-	from HD_Resource_Classification where ResourceClassificationType = 'RESOURCE_CLASSIFICATION_MINERAL';
+	select 'HD_RESOURCE_EPO_SCIENCE_' || Exp, 'Amount', Amount * 4
+	from HD_Binary_Compress where Exp < 7;
 
 insert or replace into BuildingModifiers (BuildingType, ModifierId)
-	select distinct 'BUILDING_HD_RESOURCE_EPO', 'HD_RESOURCE_EPO' || ResourceType || '_PRODUCTION_1'
-	from HD_Resource_Classification where ResourceClassificationType = 'RESOURCE_CLASSIFICATION_MINERAL';
+	select 'BUILDING_HD_RESOURCE_EPO', 'HD_RESOURCE_EPO_PRODUCTION_' || Exp
+	from HD_Binary_Compress where Exp < 7;
+
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId)
-	select distinct 'HD_RESOURCE_EPO' || ResourceType || '_PRODUCTION_1', 'MODIFIER_BUILDING_YIELD_CHANGE', 'HD_PLAYER_HAS_IMPROVED_' || ResourceType || '_REQUIRMENTS'
-	from HD_Resource_Classification where ResourceClassificationType = 'RESOURCE_CLASSIFICATION_MINERAL';
+	select 'HD_RESOURCE_EPO_PRODUCTION_' || Exp, 'MODIFIER_BUILDING_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_RESOURCE_EPO_' || Exp || '_REQUIREMENTS'
+	from HD_Binary_Compress where Exp < 7;
+
 insert or replace into ModifierArguments (ModifierId, Name, Value)
-	select distinct 'HD_RESOURCE_EPO' || ResourceType || '_PRODUCTION_1', 'BuildingType', 'BUILDING_HD_RESOURCE_EPO'
-	from HD_Resource_Classification where ResourceClassificationType = 'RESOURCE_CLASSIFICATION_MINERAL';
+	select 'HD_RESOURCE_EPO_PRODUCTION_' || Exp, 'BuildingType', 'BUILDING_HD_RESOURCE_EPO'
+	from HD_Binary_Compress where Exp < 7;
+
 insert or replace into ModifierArguments (ModifierId, Name, Value)
-	select distinct 'HD_RESOURCE_EPO' || ResourceType || '_PRODUCTION_1', 'YieldType', 'YIELD_PRODUCTION'
-	from HD_Resource_Classification where ResourceClassificationType = 'RESOURCE_CLASSIFICATION_MINERAL';
+	select 'HD_RESOURCE_EPO_PRODUCTION_' || Exp, 'YieldType', 'YIELD_PRODUCTION'
+	from HD_Binary_Compress where Exp < 7;
+
 insert or replace into ModifierArguments (ModifierId, Name, Value)
-	select distinct 'HD_RESOURCE_EPO' || ResourceType || '_PRODUCTION_1', 'Amount', 4
-	from HD_Resource_Classification where ResourceClassificationType = 'RESOURCE_CLASSIFICATION_MINERAL';
+	select 'HD_RESOURCE_EPO_PRODUCTION_' || Exp, 'Amount', Amount * 4
+	from HD_Binary_Compress where Exp < 7;
 
 -- 物种
 insert or replace into BuildingModifiers (BuildingType, ModifierId)
-	select distinct 'BUILDING_HD_SPECIES_EPO', 'HD_SPECIES_EPO' || ResourceType || '_CULTURE_1'
-	from HD_Resource_Classification where ResourceClassificationType = 'RESOURCE_CLASSIFICATION_BIOLOGICAL';
+	select 'BUILDING_HD_SPECIES_EPO', 'HD_SPECIES_EPO_CULTURE_' || Exp
+	from HD_Binary_Compress where Exp < 7;
+
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId)
-	select distinct 'HD_SPECIES_EPO' || ResourceType || '_CULTURE_1', 'MODIFIER_BUILDING_YIELD_CHANGE', 'HD_PLAYER_HAS_IMPROVED_' || ResourceType || '_REQUIRMENTS'
-	from HD_Resource_Classification where ResourceClassificationType = 'RESOURCE_CLASSIFICATION_BIOLOGICAL';
+	select 'HD_SPECIES_EPO_CULTURE_' || Exp, 'MODIFIER_BUILDING_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_SPECIES_EPO_' || Exp || '_REQUIREMENTS'
+	from HD_Binary_Compress where Exp < 7;
+
 insert or replace into ModifierArguments (ModifierId, Name, Value)
-	select distinct 'HD_SPECIES_EPO' || ResourceType || '_CULTURE_1', 'BuildingType', 'BUILDING_HD_SPECIES_EPO'
-	from HD_Resource_Classification where ResourceClassificationType = 'RESOURCE_CLASSIFICATION_BIOLOGICAL';
+	select 'HD_SPECIES_EPO_CULTURE_' || Exp, 'BuildingType', 'BUILDING_HD_SPECIES_EPO'
+	from HD_Binary_Compress where Exp < 7;
+
 insert or replace into ModifierArguments (ModifierId, Name, Value)
-	select distinct 'HD_SPECIES_EPO' || ResourceType || '_CULTURE_1', 'YieldType', 'YIELD_CULTURE'
-	from HD_Resource_Classification where ResourceClassificationType = 'RESOURCE_CLASSIFICATION_BIOLOGICAL';
+	select 'HD_SPECIES_EPO_CULTURE_' || Exp, 'YieldType', 'YIELD_CULTURE'
+	from HD_Binary_Compress where Exp < 7;
+
 insert or replace into ModifierArguments (ModifierId, Name, Value)
-	select distinct 'HD_SPECIES_EPO' || ResourceType || '_CULTURE_1', 'Amount', 4
-	from HD_Resource_Classification where ResourceClassificationType = 'RESOURCE_CLASSIFICATION_BIOLOGICAL';
+	select 'HD_SPECIES_EPO_CULTURE_' || Exp, 'Amount', Amount * 4
+	from HD_Binary_Compress where Exp < 7;
 
 insert or replace into BuildingModifiers (BuildingType, ModifierId)
-	select distinct 'BUILDING_HD_SPECIES_EPO', 'HD_SPECIES_EPO' || ResourceType || '_FOOD_1'
-	from HD_Resource_Classification where ResourceClassificationType = 'RESOURCE_CLASSIFICATION_BIOLOGICAL';
+	select 'BUILDING_HD_SPECIES_EPO', 'HD_SPECIES_EPO_FOOD_' || Exp
+	from HD_Binary_Compress where Exp < 7;
+
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId)
-	select distinct 'HD_SPECIES_EPO' || ResourceType || '_FOOD_1', 'MODIFIER_BUILDING_YIELD_CHANGE', 'HD_PLAYER_HAS_IMPROVED_' || ResourceType || '_REQUIRMENTS'
-	from HD_Resource_Classification where ResourceClassificationType = 'RESOURCE_CLASSIFICATION_BIOLOGICAL';
+	select 'HD_SPECIES_EPO_FOOD_' || Exp, 'MODIFIER_BUILDING_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_SPECIES_EPO_' || Exp || '_REQUIREMENTS'
+	from HD_Binary_Compress where Exp < 7;
+
 insert or replace into ModifierArguments (ModifierId, Name, Value)
-	select distinct 'HD_SPECIES_EPO' || ResourceType || '_FOOD_1', 'BuildingType', 'BUILDING_HD_SPECIES_EPO'
-	from HD_Resource_Classification where ResourceClassificationType = 'RESOURCE_CLASSIFICATION_BIOLOGICAL';
+	select 'HD_SPECIES_EPO_FOOD_' || Exp, 'BuildingType', 'BUILDING_HD_SPECIES_EPO'
+	from HD_Binary_Compress where Exp < 7;
+
 insert or replace into ModifierArguments (ModifierId, Name, Value)
-	select distinct 'HD_SPECIES_EPO' || ResourceType || '_FOOD_1', 'YieldType', 'YIELD_FOOD'
-	from HD_Resource_Classification where ResourceClassificationType = 'RESOURCE_CLASSIFICATION_BIOLOGICAL';
+	select 'HD_SPECIES_EPO_FOOD_' || Exp, 'YieldType', 'YIELD_FOOD'
+	from HD_Binary_Compress where Exp < 7;
+
 insert or replace into ModifierArguments (ModifierId, Name, Value)
-	select distinct 'HD_SPECIES_EPO' || ResourceType || '_FOOD_1', 'Amount', 4
-	from HD_Resource_Classification where ResourceClassificationType = 'RESOURCE_CLASSIFICATION_BIOLOGICAL';
+	select 'HD_SPECIES_EPO_FOOD_' || Exp, 'Amount', Amount * 4
+	from HD_Binary_Compress where Exp < 7;
 
 -- 名胜
 insert or replace into BuildingModifiers (BuildingType, ModifierId)

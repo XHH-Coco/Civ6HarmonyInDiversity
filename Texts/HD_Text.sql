@@ -147,7 +147,8 @@ values
   ("zh_Hans_CN",  "LOC_TIER_1_GOVERNMRNT_NAME",         	"一级政体"),
   ("zh_Hans_CN",  "LOC_TIER_2_GOVERNMRNT_NAME",         	"二级政体"),
   ("zh_Hans_CN",  "LOC_TIER_3_GOVERNMRNT_NAME",         	"三级政体"),
-  ("zh_Hans_CN",  "LOC_TIER_4_GOVERNMRNT_NAME",         	"四级政体");
+  ("zh_Hans_CN",  "LOC_TIER_4_GOVERNMRNT_NAME",         	"四级政体"),
+  ("zh_Hans_CN",  "LOC_HUD_REPORTS_SUK_OTHER_ADJACENCY_BONUS",         	"其他加成");
 
 -- 外交区DLC文本
 update LocalizedText set Text = "and {LOC_DISTRICT_DIPLOMATIC_QUARTER_NAME} " where Tag = 'LOC_AND_DIPLOMATIC_QUARTER'

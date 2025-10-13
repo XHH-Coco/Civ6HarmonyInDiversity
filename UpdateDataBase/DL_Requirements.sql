@@ -211,6 +211,15 @@ insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
 	select 'DISTRICT_IS_' || DistrictType || '_REQUIREMENTS', 'REQUIRES_DISTRICT_IS_' || DistrictType from Districts;
 
+-- 3环内区域
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
+	select 'DISTRICT_IS_' || DistrictType || '_WITHIN_3_TILES_REQUIREMENTS', 'REQUIREMENTSET_TEST_ALL' from Districts;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'DISTRICT_IS_' || DistrictType || '_WITHIN_3_TILES_REQUIREMENTS', 'REQUIRES_DISTRICT_IS_' || DistrictType from Districts;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'DISTRICT_IS_' || DistrictType || '_WITHIN_3_TILES_REQUIREMENTS', 'REQUIRES_OBJECT_WITHIN_3_TILES' from Districts;
+
+-- 6环内区域
 insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
 	select 'DISTRICT_IS_' || DistrictType || '_WITHIN_6_TILES_REQUIREMENTS', 'REQUIREMENTSET_TEST_ALL' from Districts;
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
@@ -579,24 +588,6 @@ insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
 	select 'CITY_HAS_' || Pop || '_POPULATION', 'REQUIREMENTSET_TEST_ALL' from PopulationMaintenance;
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
 	select 'CITY_HAS_' || Pop || '_POPULATION', 'REQUIRES_CITY_HAS_'  || Pop || '_POPULATION' from PopulationMaintenance;
-
--- 二进制折叠Reqs
-insert or ignore into Requirements (RequirementId, RequirementType)
-	select 'HD_REQUIRES_PLOT_BINARY_COMPRESS_' || Exp || '_' || Count, 'REQUIREMENT_PLOT_PROPERTY_MATCHES'
-	from HD_Binary_Compress, HDCounter where Exp < 10 and Count <= 3;
-insert or ignore into RequirementArguments (RequirementId, Name, Value)
-	select 'HD_REQUIRES_PLOT_BINARY_COMPRESS_' || Exp || '_' || Count, 'PropertyName', 'HD_PLOT_BINARY_COMPRESS_' || Exp || '_' || Count
-	from HD_Binary_Compress, HDCounter where Exp < 10 and Count <= 3;
-insert or ignore into RequirementArguments (RequirementId, Name, Value)
-	select 'HD_REQUIRES_PLOT_BINARY_COMPRESS_' || Exp || '_' || Count, 'PropertyMinimum', 1
-	from HD_Binary_Compress, HDCounter where Exp < 10 and Count <= 3;
-
-insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
-	select 'HD_PLOT_BINARY_COMPRESS_' || Exp || '_' || Count || '_REQUIREMENTS', 'REQUIREMENTSET_TEST_ANY'
-	from HD_Binary_Compress, HDCounter where Exp < 10 and Count <= 3;
-insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
-	select 'HD_PLOT_BINARY_COMPRESS_' || Exp || '_' || Count || '_REQUIREMENTS', 'HD_REQUIRES_PLOT_BINARY_COMPRESS_' || Exp || '_' || Count
-	from HD_Binary_Compress, HDCounter where Exp < 10 and Count <= 3;
 
 -- Use insert or ignore to support the missing DLC case.
 insert or ignore into Requirements
@@ -983,10 +974,7 @@ values
 	('HD_NILOMETER_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
 	('UNIT_IS_SCIENTIST',				'REQUIREMENTSET_TEST_ANY'),
 	('HD_CHARCOAL_KILN_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
-	('HD_ZOO_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
-	('HD_AQUARIUM_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
 	('HD_PLOT_HAS_SEA_FEATURE',								'REQUIREMENTSET_TEST_ANY'),
-	('HD_BOTANICAL_GARDEN_REQUIREMENTS',								'REQUIREMENTSET_TEST_ANY'),
 	('HD_PLOT_ADJACENT_TO_COAST_REQUIREMENTS',								'REQUIREMENTSET_TEST_ALL'),
 	('PLOT_ON_OR_ADJACENT_TO_GEOTHERMAL_FISSURE',								'REQUIREMENTSET_TEST_ANY'),
 	-- ('HD_PUBLIC_TRANSPORT_AT_RADIUS_ONE_REQUIREMENTS',								'REQUIREMENTSET_TEST_ANY'),
@@ -1099,7 +1087,8 @@ values
 	('HD_PLOT_BREATHTAKING_UNIQUE_IMPROVEMENT',					  'REQUIREMENTSET_TEST_ALL'),
 	('HD_PLOT_CHARMING_WONDER',					                  'REQUIREMENTSET_TEST_ALL'),
 	('HD_PLOT_BREATHTAKING_WONDER',					              'REQUIREMENTSET_TEST_ALL'),
-	('HD_PLOT_ON_OR_ADJACENT_TO_LUXURY',					              'REQUIREMENTSET_TEST_ANY');
+	('HD_PLOT_ON_OR_ADJACENT_TO_LUXURY',					              'REQUIREMENTSET_TEST_ANY'),
+	('HD_IMPROVED_PLOT_WITHIN_3_TIELS',					              'REQUIREMENTSET_TEST_ALL');
 
 insert or ignore into RequirementSetRequirements
 	(RequirementSetId,												RequirementId)
@@ -1294,13 +1283,6 @@ values
 	('HD_RIVER_PLOT_APPEAL_LESS_THAN_0',								'HD_PLOT_APPEAL_LESS_THAN_0'),
 	('HD_RIVER_PLOT_APPEAL_LESS_THAN_0',								'REQUIRES_PLOT_ADJACENT_TO_RIVER'),
 	('UNIT_IS_SCIENTIST',								'REQUIREMENT_UNIT_IS_SCIENTIST'),
-	('HD_ZOO_REQUIREMENTS',				'REQUIRES_PLOT_HAS_IMPROVEMENT_CAMP'),
-	('HD_ZOO_REQUIREMENTS',				'REQUIRES_PLOT_HAS_IMPROVEMENT_PASTURE'),
-	('HD_AQUARIUM_REQUIREMENTS',				'REQUIRES_PLOT_HAS_IMPROVEMENT_FISHING_BOATS'),
-	('HD_AQUARIUM_REQUIREMENTS',				'REQUIRES_PLOT_HAS_IMPROVEMENT_FISHERY'),
-	('HD_BOTANICAL_GARDEN_REQUIREMENTS',				'REQUIRES_PLOT_HAS_IMPROVEMENT_FARM'),
-	('HD_BOTANICAL_GARDEN_REQUIREMENTS',				'REQUIRES_PLOT_HAS_IMPROVEMENT_PLANTATION'),
-	('HD_BOTANICAL_GARDEN_REQUIREMENTS',				'REQUIRES_PLOT_HAS_IMPROVEMENT_LUMBER_MILL'),
 	('HD_PLOT_ADJACENT_TO_COAST_REQUIREMENTS',				'HD_REQUIRES_PLOT_ADJACENT_TO_COAST'),
 	('PLOT_ON_OR_ADJACENT_TO_GEOTHERMAL_FISSURE',				'HD_REQUIRES_PLOT_HAS_FEATURE_GEOTHERMAL_FISSURE'),
 	('PLOT_ON_OR_ADJACENT_TO_GEOTHERMAL_FISSURE',				'HD_REQUIRES_PLOT_ADJACENT_TO_FEATURE_GEOTHERMAL_FISSURE'),
@@ -1529,7 +1511,9 @@ values
 	('HD_PLOT_BREATHTAKING_WONDER',					              'REQUIRES_DISTRICT_IS_DISTRICT_WONDER'),
 	('HD_PLOT_BREATHTAKING_WONDER',					              'REQUIRES_PLOT_HAS_COMPLETE_WONDER'),
 	('HD_PLOT_ON_OR_ADJACENT_TO_LUXURY',					              'REQUIRES_PLOT_ADJACENT_TO_LUXURY'),
-	('HD_PLOT_ON_OR_ADJACENT_TO_LUXURY',					              'REQUIRES_PLOT_HAS_LUXURY');
+	('HD_PLOT_ON_OR_ADJACENT_TO_LUXURY',					              'REQUIRES_PLOT_HAS_LUXURY'),
+	('HD_IMPROVED_PLOT_WITHIN_3_TIELS',					              'REQUIRES_PLOT_IS_IMPROVED'),
+	('HD_IMPROVED_PLOT_WITHIN_3_TIELS',					              'REQUIRES_OBJECT_WITHIN_3_TILES');
 
 -- 文明&城邦特色改良
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)

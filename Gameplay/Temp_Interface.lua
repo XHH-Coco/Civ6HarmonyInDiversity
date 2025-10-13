@@ -418,13 +418,14 @@ Events.TurnBegin.Add(SydneyOperaHouseTurnBegin);
 
 -- 埃及女王
 local Cleopatra_Trait = 'TRAIT_LEADER_MEDITERRANEAN'
+local NOTIFICATION_MEDITERRANEAN_REWARD_HASH = GameInfo.Types['NOTIFICATION_MEDITERRANEAN_REWARD'].Hash;
 function CleopatraDiplomacyStatement(fromPlayer: number, toPlayer: number, kVariants: table)
 	local statementType = DiplomacyManager.GetKeyName(kVariants.StatementType)
 	local statementSubType = DiplomacyManager.GetKeyName(kVariants.StatementSubType)
 	if (statementType == 'DIPLOMATIC_DELEGATION' or statementType == 'RESIDENT_EMBASSY') and statementSubType == 'AI_ACCEPT_DEAL' then
 		print('CleopatraDiplomacyStatement', fromPlayer, toPlayer, statementType, statementSubType)
 		if Utils.LeaderHasTrait(toPlayer, Cleopatra_Trait) then
-			GameEvents.GetRandomGoodyHutReward.Call(toPlayer, "LOC_TRAIT_LEADER_MEDITERRANEAN_NAME")
+			GameEvents.GetRandomGoodyHutReward.Call(toPlayer, "LOC_TRAIT_LEADER_MEDITERRANEAN_NAME", NOTIFICATION_MEDITERRANEAN_REWARD_HASH)
 		end
 	end
 end
