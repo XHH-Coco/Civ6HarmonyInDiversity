@@ -6,6 +6,7 @@ insert or replace into EnglishText (Tag, Text) values
   ("LOC_BUILDING_CLASSIFICATION_TRANSPORTATION_FACILITIES_NAME",    "Transportation Facilities Buildings"),
 
   ("LOC_DISTRICT_CLASSIFICATION_TRANSPORTATION_FACILITIES_NAME",    "Transportation Facilities Districts"),
+  ("LOC_DISTRICT_CLASSIFICATION_WATER_CONSERVANCY_FACILITIES_NAME", "Water Conservancy Facilities Districts"),
 
   ("LOC_IMPROVEMENT_CLASSIFICATION_BASIC_NAME",                     "Basic Improvements"),
   ("LOC_IMPROVEMENT_CLASSIFICATION_UNIQUE_NAME",                    "Unique Improvements"),
@@ -27,6 +28,7 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_BUILDING_CLASSIFICATION_TRANSPORTATION_FACILITIES_NAME",    "交通设施建筑"),
 
   ("zh_Hans_CN", "LOC_DISTRICT_CLASSIFICATION_TRANSPORTATION_FACILITIES_NAME",    "交通设施区域"),
+  ("zh_Hans_CN", "LOC_DISTRICT_CLASSIFICATION_WATER_CONSERVANCY_FACILITIES_NAME", "水利设施区域"),
 
   ("zh_Hans_CN", "LOC_IMPROVEMENT_CLASSIFICATION_BASIC_NAME",                     "基础改良"),
   ("zh_Hans_CN", "LOC_IMPROVEMENT_CLASSIFICATION_UNIQUE_NAME",                    "特色改良"),

@@ -631,7 +631,7 @@ values
 	("zh_Hans_CN",  "LOC_HD_CHINA_ANCIENT_COMMEMORATION_SAME_MEASURE_NAME",                 "统一度量衡"),
 	("zh_Hans_CN",  "LOC_HD_CHINA_ANCIENT_COMMEMORATION_SAME_MEASURE_DESCRIPTION",          "+1 [ICON_TRADEROUTE] 贸易路线容量。所有 [ICON_TRADEROUTE] 贸易路线+2 [ICON_Production] 生产力和+6 [ICON_GOLD] 金币。"),
 	("zh_Hans_CN",  "LOC_HD_CHINA_ANCIENT_COMMEMORATION_WATER_CONSERVATION_NAME",           "修筑水利"),
-	("zh_Hans_CN",  "LOC_HD_CHINA_ANCIENT_COMMEMORATION_WATER_CONSERVATION_DESCRIPTION",    "解锁“采矿业”科技后解锁所有水利区域。建造水利区域+200%建造速度。每座水利区域为所在城市+10%余粮。"),
+	("zh_Hans_CN",  "LOC_HD_CHINA_ANCIENT_COMMEMORATION_WATER_CONSERVATION_DESCRIPTION",    "解锁“采矿业”科技后解锁所有水利设施区域。建造水利设施区域+200%建造速度。每座水利设施区域为所在城市+10%余粮。"),
 	("zh_Hans_CN",  "LOC_HD_CHINA_ANCIENT_COMMEMORATION_IMPERIAL_EXAM_NAME",                "发展科举"),
 	("zh_Hans_CN",  "LOC_HD_CHINA_ANCIENT_COMMEMORATION_IMPERIAL_EXAM_DESCRIPTION",         "[ICON_Capital] 首都每回合产出的 [ICON_GREATPERSON] 伟人点数+100%。"),
 	("zh_Hans_CN",  "LOC_HD_CHINA_ANCIENT_COMMEMORATION_ACCEPT_ADVICE_NAME",                "广开言路"),
