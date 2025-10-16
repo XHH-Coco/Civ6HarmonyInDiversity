@@ -1,6 +1,7 @@
 insert or ignore into HD_DistrictClassificationTypes (DistrictClassificationType, SortIndex) values
-  ('DISTRICT_CLASSIFICATION_TRANSPORTATION_FACILITIES', 0),
-  ('DISTRICT_CLASSIFICATION_WATER_CONSERVANCY_FACILITIES', 0);
+  ('DISTRICT_CLASSIFICATION_TRANSPORTATION_FACILITIES',     0),
+  ('DISTRICT_CLASSIFICATION_WATER_CONSERVANCY_FACILITIES',  1),
+  ('DISTRICT_CLASSIFICATION_TOURISM_FACILITIES',            2);
 
 update HD_DistrictClassificationTypes set Name = 'LOC_' || DistrictClassificationType || '_NAME' where Name is NULL;
 
@@ -20,6 +21,14 @@ from Districts where DistrictType in (
   'DISTRICT_AQUEDUCT',
   'DISTRICT_CANAL',
   'DISTRICT_DAM'
+);
+
+-- 旅游设施
+insert or ignore into HD_District_Classification (DistrictType, DistrictClassificationType) select
+  DistrictType, 'DISTRICT_CLASSIFICATION_TOURISM_FACILITIES'
+from Districts where DistrictType in (
+  'DISTRICT_ENTERTAINMENT_COMPLEX',
+  'DISTRICT_WATER_ENTERTAINMENT_COMPLEX'
 );
 
 -- 适配UD

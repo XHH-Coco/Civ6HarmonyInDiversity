@@ -865,6 +865,8 @@
 	    <File>UI/Civilopedia/CivilopediaPage_CityState.lua</File>
 	    <File>UI/Civilopedia/CivilopediaPage_Commemoration.lua</File>
       <File>UI/Civilopedia/CivilopediaPage_Resource.lua</File>
+      <File>UI/Civilopedia/CivilopediaPage_Improvement.lua</File>
+      <File>UI/Civilopedia/CivilopediaPage_Route.lua</File>
     </ImportFiles>
     <ImportFiles id="CityStatesDiversity_BST_Import" criteria="Expansion2">
       <Properties><LoadOrder>5000</LoadOrder></Properties>
@@ -1514,10 +1516,13 @@
       <File>UpdateDataBase/Classifications/HD_District_Classification.sql</File>
       <File>UpdateDataBase/Classifications/HD_Improvement_Classification.sql</File>
     </UpdateDatabase>
-
-    <UpdateDatabase id="HD_Classifications" criteria="Expansion2">
+    <UpdateDatabase id="HD_Resource_Classification" criteria="Expansion2">
       <Properties><LoadOrder>15001</LoadOrder></Properties>
       <File>UpdateDataBase/Classifications/HD_Resource_Classification.sql</File>
+    </UpdateDatabase>
+    <UpdateDatabase id="HD_Classification_Adjacency" criteria="Expansion2">
+      <Properties><LoadOrder>16011</LoadOrder></Properties>
+      <File>UpdateDataBase/Classifications/HD_Classification_Adjacency.sql</File>
     </UpdateDatabase>
 
     <UpdateDatabase id="FasterStartingSettlers" criteria="Expansion2">
@@ -1925,6 +1930,7 @@
       <File>Texts/HD_Text_GreatPerson.sql</File>
       <File>Texts/HD_Text_GreatPerson_New.sql</File>
       <File>Texts/HD_Text_Classifications.sql</File>
+      <File>Texts/HD_Text_ToolTip.sql</File>
     </UpdateText>
     <UpdateText id="DL_Text_Late" criteria="Expansion2">
       <Properties><LoadOrder>20000</LoadOrder></Properties>
@@ -2358,10 +2364,8 @@
     <File>UI/Civilopedia/CivilopediaPage_CityState.lua</File>
     <File>UI/Civilopedia/CivilopediaPage_Commemoration.lua</File>
     <File>UI/Civilopedia/CivilopediaPage_Resource.lua</File>
-    <File>UI/Replacement/CitySupport.lua</File>
-    <File>UI/Replacement/NotificationPanel_HD.lua</File>
-    <File>UI/Replacement/GreatWorkShowcase_HD.lua</File>
-    <File>UI/Replacement/SettlerInfluenceIconManager.lua</File>
+    <File>UI/Civilopedia/CivilopediaPage_Improvement.lua</File>
+    <File>UI/Civilopedia/CivilopediaPage_Route.lua</File>
 
     <!-- UI Loaders -->
     <File>UI/Loaders/ToolTipLoader_DL.lua</File>
@@ -2396,6 +2400,10 @@
     <File>UI/Custom/CityButton_ResourceClassification.xml</File>
 
     <!-- UI replacements -->
+    <File>UI/Replacement/CitySupport.lua</File>
+    <File>UI/Replacement/NotificationPanel_HD.lua</File>
+    <File>UI/Replacement/GreatWorkShowcase_HD.lua</File>
+    <File>UI/Replacement/SettlerInfluenceIconManager.lua</File>
     <File>UI/Replacement/StagingRoom.lua</File>
     <File>UI/Replacement/citystates.xml</File>
     <File>UI/Replacement/citystates.lua</File>
@@ -2736,6 +2744,7 @@
     <File>UpdateDataBase/Classifications/HD_District_Classification.sql</File>
     <File>UpdateDataBase/Classifications/HD_Improvement_Classification.sql</File>
     <File>UpdateDataBase/Classifications/HD_Resource_Classification.sql</File>
+    <File>UpdateDataBase/Classifications/HD_Classification_Adjacency.sql</File>
 
     <!-- Texts -->
     <File>Texts/HD_Tags_Players_Texts_Early.sql</File>
@@ -2777,6 +2786,7 @@
     <File>Texts/HD_Text_Catherine_De_Medici.sql</File>
     <File>Texts/HD_Text_Mod_Titles.sql</File>
     <File>Texts/HD_Text_Classifications.sql</File>
+    <File>Texts/HD_Text_ToolTip.sql</File>
     
     <!-- Assets -->
     <File>Assets/TechCivics/HDCivicIcons_38.dds</File>

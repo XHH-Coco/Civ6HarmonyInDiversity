@@ -29,7 +29,7 @@ update Buildings set Cost = 750 where BuildingType = 'BUILDING_MONT_ST_MICHEL';
 update Buildings set Cost = 750 where BuildingType = 'BUILDING_GREAT_ZIMBABWE';
 update Buildings set Cost = 750 where BuildingType = 'BUILDING_ANGKOR_WAT';
 update Buildings set Cost = 750 where BuildingType = 'BUILDING_KILWA_KISIWANI';
-update Buildings set Cost = 750 where BuildingType = 'BUILDING_KOTOKU_IN';
+update Buildings set Cost = 750, Coast = 1 where BuildingType = 'BUILDING_KOTOKU_IN';
 update Buildings set Cost = 750 where BuildingType = 'BUILDING_MACHU_PICCHU';
 update Buildings set Cost = 750 where BuildingType = 'BUILDING_MEENAKSHI_TEMPLE';
 update Buildings set Cost = 750 where BuildingType = 'BUILDING_UNIVERSITY_SANKORE';

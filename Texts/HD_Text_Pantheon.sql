@@ -39,7 +39,7 @@ values
     ("LOC_BELIEF_TENGRI_DL_DESCRIPTION",                          "Pastures provide +1 [ICON_FOOD] Food and +1 [ICON_Faith] Faith. Cities having Pastures provide +2 [ICON_GreatProphet] Great Prophet points per turn."),
     ("LOC_BELIEF_GODDESS_OF_THE_HARVEST_DL_DESCRIPTION",          "Farms over resource provide +1 [ICON_Food] Food and +1 [ICON_Production] Production."),
     ("LOC_BELIEF_GOD_OF_THE_SEA_DL_DESCRIPTION",                  "Fishing Boats provide +1 [ICON_Food] Food. +2 [ICON_GOLD] Golds to Fishing Boats that inprove Luxury resources. Cities having Fishing Boats provide +2 [ICON_GreatProphet] Great Prophet points per turn."),
-    ("LOC_BELIEF_OCEAN_MOTHER_DL_DESCRIPTION",                    "City center receive +1 [ICON_Food] Food and +1 [ICON_Faith] Faith from each adjacent Coast tile. +2 [ICON_GreatProphet] Great Prophet point per turn for cities adjacent to Coasts.+1 [ICON_FOOD] to Coast and Lake tiles in city with a Holy Site district."),
+    ("LOC_BELIEF_OCEAN_MOTHER_DL_DESCRIPTION",                    "City center receive +1 [ICON_Food] Food and +1 [ICON_Faith] Faith from each adjacent Shallow Sea and Lake tile. +2 [ICON_GreatProphet] Great Prophet point per turn for cities adjacent to Shallow Sea. +1 [ICON_FOOD] Food to Shallow Sea and Lake tiles in city with a Holy Site district."),
     ("LOC_BELIEF_OCEAN_MOTHER_NAME",                              "Ocean Mother"),
     ("LOC_BELIEF_HD_DRUID_NAME",                                  "Druid"),
     ("LOC_BELIEF_HD_DRUID_DL_DESCRIPTION",                        "Forest tiles provide +1 [ICON_Food] Food. Rainforest tiles provide +1 [ICON_Production] Production."),
@@ -77,7 +77,7 @@ values
     ("LOC_BELIEF_STARLIGHT_NAVIGATER_NAME",                       "Starlight Navigater"),
     ("LOC_BELIEF_STARLIGHT_NAVIGATER_DESCRIPTION",               "Coastal Capital grain a Nacal Raider unit with a free Promotion. Nacal Raider units +1 [ICON_MOVEMENT] Movement and +5 [ICON_CoMBATSTRENGTH] Combat Strength and share its  [ICON_MOVEMENT] Movement with all units in the formation."),
     ("LOC_BELIEF_ITANG_NAME",                                    "Itang"),
-    ("LOC_BELIEF_ITANG_DESCRIPTION",                             "City Centers gain +1 [ICON_PRODUCTION] Production for every adjacent Coast and Lake tile. City Centers gain +1 [ICON_CULTURE] Culture for every 2 adjacent Coast and Lake tiles. +1 [ICON_AMENITIES] Amenity to coastal cities.");
+    ("LOC_BELIEF_ITANG_DESCRIPTION",                             "City Centers gain +1 [ICON_PRODUCTION] Production for every adjacent Shallow Sea and Lake tile. City Centers gain +1 [ICON_CULTURE] Culture for every 2 adjacent Shallow Sea and Lake tiles. +1 [ICON_AMENITIES] Amenity to coastal cities.");
     -- ("LOC_BELIEF_HD_DIONYSIAN_MYSTERIES_NAME",                   "Dionysian Mysteries"),
     -- ("LOC_BELIEF_HD_DIONYSIAN_MYSTERIES_DESCRIPTION",            "When chosen, receive a free Cellar in your capital. Cellar provides +2 [ICON_FOOD] Food and +1 [ICON_AMENITIES] Amenity to the city. May purchase Cellar with [ICON_Faith] Faith.");
 
@@ -122,7 +122,7 @@ values
     ("zh_Hans_CN",  "LOC_BELIEF_TENGRI_DL_DESCRIPTION",                          "牧场+1 [ICON_Food] 食物和+1 [ICON_Faith] 信仰值。如城市中有牧场，则每回合+2 [ICON_GreatProphet] 大预言家点数。"),
     ("zh_Hans_CN",  "LOC_BELIEF_GODDESS_OF_THE_HARVEST_DL_DESCRIPTION",          "改良资源的农场+1 [ICON_Food] 食物和+1 [ICON_Production] 生产力。"),
     ("zh_Hans_CN",  "LOC_BELIEF_GOD_OF_THE_SEA_DL_DESCRIPTION",                  "渔船+1 [ICON_FOOD] 食物。开发奢侈品资源的渔船+1 [ICON_SCIENCE] 科技值。如城市中有渔船，则每回合+2 [ICON_GreatProphet] 大预言家点数。"),
-    ("zh_Hans_CN",  "LOC_BELIEF_OCEAN_MOTHER_DL_DESCRIPTION",                    "市中心每相邻1个海岸和湖泊单元格，获得+1 [ICON_Food] 食物和+1 [ICON_Faith] 信仰值。有圣地的城市海岸与湖泊单元格+1 [ICON_FOOD] 粮食。相邻海岸的城市每回合+2 [ICON_GreatProphet] 大预言家点数。"),
+    ("zh_Hans_CN",  "LOC_BELIEF_OCEAN_MOTHER_DL_DESCRIPTION",                    "市中心每相邻1个浅海与湖泊单元格，获得+1 [ICON_Food] 食物和+1 [ICON_Faith] 信仰值。有圣地的城市浅海与湖泊单元格+1 [ICON_FOOD] 粮食。相邻浅海的城市每回合+2 [ICON_GreatProphet] 大预言家点数。"),
     ("zh_Hans_CN",  "LOC_BELIEF_OCEAN_MOTHER_NAME",                              "海洋母亲"),
     ("zh_Hans_CN",  "LOC_BELIEF_HD_DRUID_NAME",                                  "德鲁伊"),
     ("zh_Hans_CN",  "LOC_BELIEF_HD_DRUID_DL_DESCRIPTION",                        "森林单元格+1 [ICON_Food] 食物，雨林单元格+1 [ICON_Production] 生产力。"),
@@ -160,6 +160,6 @@ values
     ("zh_Hans_CN",  "LOC_BELIEF_STARLIGHT_NAVIGATER_NAME",                      "星光引航者"),
     ("zh_Hans_CN",  "LOC_BELIEF_STARLIGHT_NAVIGATER_DESCRIPTION",               "选择后在首都中获得1个有免费晋升的海军袭击者。海军袭击者+1 [ICON_MOVEMENT] 移动力 +5 [ICON_STRENGTH] 战斗力。被海军袭击者被护送的单位将以同样的速度移动。允许单位进入深海。"),
     ("zh_Hans_CN",  "LOC_BELIEF_ITANG_NAME",                                    "渔巫传统"),
-    ("zh_Hans_CN",  "LOC_BELIEF_ITANG_DESCRIPTION",                             "市中心每相邻1个海岸和湖泊单元格，获得+1 [ICON_PRODUCTION] 生产力；市中心每相邻2个海岸和湖泊单元格+1 [ICON_CULTURE] 文化。沿海城市+1 [ICON_AMENITIES] 宜居度。");
+    ("zh_Hans_CN",  "LOC_BELIEF_ITANG_DESCRIPTION",                             "市中心每相邻1个浅海与湖泊单元格，获得+1 [ICON_PRODUCTION] 生产力；市中心每相邻2个浅海与湖泊单元格+1 [ICON_CULTURE] 文化。沿海城市+1 [ICON_AMENITIES] 宜居度。");
     -- ("zh_Hans_CN",  "LOC_BELIEF_HD_DIONYSIAN_MYSTERIES_NAME",                   "酒神秘仪"),
     -- ("zh_Hans_CN",  "LOC_BELIEF_HD_DIONYSIAN_MYSTERIES_DESCRIPTION",            "选择后即可在首都中获得一个免费的酒窖。酒窖+2 [ICON_PRODUCTION] 生产力。拥有酒窖的城市+1 [ICON_AMENITIES] 宜居度。可以使用 [ICON_Faith] 信仰值购买酒窖。");

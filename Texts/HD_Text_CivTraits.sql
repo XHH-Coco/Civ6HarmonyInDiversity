@@ -290,7 +290,7 @@ values
 	("LOC_TRAIT_CIVILIZATION_EARLY_OCEAN_NAVIGATION_DESCRIPTION", 			     "Fishing Boats provide +1 [ICON_Production] Production. Naval melee units heal in neutral territory. Units ignore additional [ICON_Movement] Movement costs from embarking and disembarking."),
 	-- 劫掠挪威
 	("LOC_LEADER_HARDRADA_ORIGINAL_NAME",                         			     "Harald Hardrada (Heimskringla)"),
-	("LOC_TRAIT_LEADER_THUNDERBOLT_EXPANSION2_DESCRIPTION",      			       "Allows coastal raiding for all naval units. Pillaging costs only 1 [ICON_MOVEMENT] Movement point, and coastal raiding does not cost [ICON_MOVEMENT] Movement point. In addition to normal pillage gains, receive [ICON_SCIENCE] Science from pillaging Fishing Boats, receive [ICON_CULTURE] Culture from pillaging Fishery. Units gain the ability to enter Ocean tiles after researching the Shipbuilding technology. Ancient and Classical era naval units gain +1 [ICON_MOVEMENT] Movement. Gain the Berserker unique unit with Metal Casting."),
+	("LOC_TRAIT_LEADER_THUNDERBOLT_EXPANSION2_DESCRIPTION",      			       "Allows coastal raiding for all naval units. Pillaging costs only 1 [ICON_MOVEMENT] Movement point, and coastal raiding does not cost [ICON_MOVEMENT] Movement point. In addition to normal pillage gains, receive [ICON_SCIENCE] Science from pillaging Fishing Boats, receive [ICON_CULTURE] Culture from pillaging Fishery. Units gain the ability to enter Deep Ocean tiles after researching the Shipbuilding technology. Ancient and Classical era naval units gain +1 [ICON_MOVEMENT] Movement. Gain the Berserker unique unit with Metal Casting."),
 	-- 瓦良格
 	("LOC_LEADER_HARALD_ALT_NAME",                              			       "Harald Hardrada (Varangian)"),
 	("LOC_TRAIT_LEADER_HARALD_ALT_NAME",                       			         "Varangian Adventure"),
@@ -373,7 +373,7 @@ values
 -- =====================================================================================================================================
 -- 印度尼西亚
 -- =====================================================================================================================================
-	("LOC_TRAIT_CIVILIZATION_INDONESIA_NUSANTARA_DESCRIPTION",               "Coast and Lake tiles provide a standard adjacency bonus for Holy Site, Campus, Industrial Zone, and Theater Square districts. Cities adjacent to a Kampung +2 [ICON_AMENITIES] Amenity and +30% [ICON_Production] Production towards Harbor and Water Park districts."),
+	("LOC_TRAIT_CIVILIZATION_INDONESIA_NUSANTARA_DESCRIPTION",               "Shallow Sea and Lake tiles provide a standard adjacency bonus for Holy Site, Campus, Industrial Zone, and Theater Square districts. Cities adjacent to a Kampung +2 [ICON_AMENITIES] Amenity and +30% [ICON_Production] Production towards Harbor and Water Park districts."),
 -- =====================================================================================================================================
 -- 波兰
 -- =====================================================================================================================================
@@ -414,7 +414,7 @@ values
 -- =====================================================================================================================================
 -- 玛雅
 -- =====================================================================================================================================
-	("LOC_TRAIT_CIVILIZATION_MAYAB_DESCRIPTION",                             "Settling adjacent to Fresh Water and Coast does not provide extra [ICON_HOUSING] Housing. Instead each Farm provides an additional +1 [ICON_HOUSING] Housing, +1 [ICON_Production] Production for every adjacent Observatory, and +1 [ICON_GOLD] Gold. +1 [ICON_AMENITIES] Amenity for every Luxury resource adjacent to the City Center."),
+	("LOC_TRAIT_CIVILIZATION_MAYAB_DESCRIPTION",                             "Settling adjacent to Fresh Water and Shallow Sea does not provide extra [ICON_HOUSING] Housing. Instead each Farm provides an additional +1 [ICON_HOUSING] Housing, +1 [ICON_Production] Production for every adjacent Observatory, and +1 [ICON_GOLD] Gold. +1 [ICON_AMENITIES] Amenity for every Luxury resource adjacent to the City Center."),
 	("LOC_TRAIT_LEADER_MUTAL_DESCRIPTION",                                   "Reveal plots within 6 tiles of the starting plot. Cities within 6 tiles of the [ICON_Capital] Capital gain +10% to all yields, and when founded receive a builder. Non capital cities within 9 tiles and outside 6 tiles of the [ICON_Capital] Capital yields remain usual. Other non capital cities receive -15% to all yields. +5 [ICON_Strength] Combat Strength to units within 6 tiles of the [ICON_Capital] Capital."),
 -- =====================================================================================================================================
 -- 罗马
@@ -429,7 +429,7 @@ values
 -- =====================================================================================================================================
 -- 毛利
 -- =====================================================================================================================================
-	("LOC_TRAIT_CIVILIZATION_MAORI_MANA_DESCRIPTION",                        "Begin the game with the Sailing and Shipbuilding technologies unlocked and with the ability to enter Ocean tiles. Embarked units gain +2 [ICON_Movement] Movement. Rainforest and Marsh gain +1 [ICON_PRODUCTION] Production, and Woods and Swamp gain +1 [ICON_FOOD] Food after progressing 'Astrology' Technology. Fishing Boats provide +1 [ICON_FOOD] Food and a Culture Bomb to adjacent tiles."),
+	("LOC_TRAIT_CIVILIZATION_MAORI_MANA_DESCRIPTION",                        "Begin the game with the Sailing and Shipbuilding technologies unlocked and with the ability to enter Deep Ocean tiles. Embarked units gain +2 [ICON_Movement] Movement. Rainforest and Marsh gain +1 [ICON_PRODUCTION] Production, and Woods and Swamp gain +1 [ICON_FOOD] Food after progressing 'Astrology' Technology. Fishing Boats provide +1 [ICON_FOOD] Food and a Culture Bomb to adjacent tiles."),
 	("LOC_TRAIT_LEADER_KUPES_VOYAGE_DESCRIPTION",                            "Begin the game in an Ocean tile. Gain +1 [ICON_CITIZEN] Population when settling your first city. The Palace receives +3 [ICON_HOUSING] Housing and +1 [ICON_AMENITIES] Amenity. +2 [ICON_SCIENCE] Science and +2 [ICON_CULTURE] Culture per turn before you settle your first city."),
 -- =====================================================================================================================================
 -- 埃及
@@ -542,7 +542,7 @@ values
 	("LOC_TRAIT_CIVILIZATION_ADJACENT_DISTRICTS_DESCRIPTION",                "All districts receive an additional standard adjacency bonus for being adjacent to another district."),
 	-- 北条
 	("LOC_TRAIT_LEADER_DIVINE_WIND_NAME",                                    "Kamakura Bakufu"),
-	("LOC_TRAIT_LEADER_DIVINE_WIND_EXPANSION2_DESCRIPTION",                  "Land units receive +5 [ICON_Strength] Combat Strength in land tiles adjacent to Coast; naval units receive +5 [ICON_Strength] Combat Strength in shallow water tiles. +50% [ICON_PRODUCTION] Production towards Harbor, Holy Site and Theater Square districts."),
+	("LOC_TRAIT_LEADER_DIVINE_WIND_EXPANSION2_DESCRIPTION",                  "Land units receive +5 [ICON_Strength] Combat Strength in land tiles adjacent to Coast; naval units receive +5 [ICON_Strength] Combat Strength in Shallow Sea and Lake tiles. +50% [ICON_PRODUCTION] Production towards Harbor, Holy Site and Theater Square districts."),
 	-- 德川
 	("LOC_TRAIT_LEADER_TOKUGAWA_XP_DESCRIPTION",                             "Grant boost [ICON_CIVICBOOSTED] to 'Feudalism' each time a Encampment district is built (complete 'Feudalism' if already boosted). Gain a [ICON_GOVERNOR] Governor Title with the 'Feudalism' Civic. Each non-capital city without a [ICON_GOVERNOR] Governor -20% [ICON_GOLD] Gold and provide +5% [ICON_GOLD] Gold to [icon_capital] Capital or city with a [ICON_GOVERNOR] Governor."),
 -- =====================================================================================================================================
@@ -900,7 +900,7 @@ values
 	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_EARLY_OCEAN_NAVIGATION_DESCRIPTION",     "渔船提供+1 [ICON_Production] 生产力。海军近战单位可在中立领土上回复。单位忽略来自上船和下船的额外 [ICON_Movement] 移动力消耗。"),
 	-- 劫掠挪威
 	("zh_Hans_CN",  "LOC_LEADER_HARDRADA_ORIGINAL_NAME",                             "无情者哈拉尔（挪威诸王萨迦）"),
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_THUNDERBOLT_EXPANSION2_DESCRIPTION",           "所有海军单位均能发动海岸扫荡。掠夺只消耗1个 [ICON_MOVEMENT] 移动力，海岸扫荡不消耗 [ICON_MOVEMENT] 移动力。除常规劫掠收益外，对渔船发动掠夺时还将获得 [ICON_SCIENCE] 科技值，对渔场发动掠夺时还将获得 [ICON_CULTURE] 文化值。在研究造船术后，单位获得进入海洋单元格的能力。所有远古和古典时期的海军单位+1 [ICON_MOVEMENT] 移动力。解锁“金属铸造”后即可获得特色单位“狂暴武士”。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_THUNDERBOLT_EXPANSION2_DESCRIPTION",           "所有海军单位均能发动海岸扫荡。掠夺只消耗1个 [ICON_MOVEMENT] 移动力，海岸扫荡不消耗 [ICON_MOVEMENT] 移动力。除常规劫掠收益外，对渔船发动掠夺时还将获得 [ICON_SCIENCE] 科技值，对渔场发动掠夺时还将获得 [ICON_CULTURE] 文化值。在研究造船术后，单位获得进入深海单元格的能力。所有远古和古典时期的海军单位+1 [ICON_MOVEMENT] 移动力。解锁“金属铸造”后即可获得特色单位“狂暴武士”。"),
 	-- 瓦良格
 	("zh_Hans_CN",  "LOC_LEADER_HARALD_ALT_NAME",                                    "无情者哈拉尔（瓦良格）"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_HARALD_ALT_NAME",                              "瓦良格冒险"),
@@ -983,7 +983,7 @@ values
 -- =====================================================================================================================================
 -- 印度尼西亚
 -- =====================================================================================================================================
-	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_INDONESIA_NUSANTARA_DESCRIPTION",        "海岸和湖泊单元格可为圣地、学院、工业区和剧院广场提供标准相邻加成。市中心相邻甘榜屋的城市+2 [ICON_AMENITIES] 宜居度，且建造港口和水上乐园+30%建造速度。"),
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_INDONESIA_NUSANTARA_DESCRIPTION",        "浅海与湖泊单元格可为圣地、学院、工业区和剧院广场提供标准相邻加成。市中心相邻甘榜屋的城市+2 [ICON_AMENITIES] 宜居度，且建造港口和水上乐园+30%建造速度。"),
 -- =====================================================================================================================================
 -- 波兰
 -- =====================================================================================================================================
@@ -1024,7 +1024,7 @@ values
 -- =====================================================================================================================================
 -- 玛雅
 -- =====================================================================================================================================
-	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_MAYAB_DESCRIPTION",                      "在淡水和海岸旁定居时不提供额外 [ICON_HOUSING] 住房。但农场提供额外+1 [ICON_HOUSING] 住房和+1 [ICON_GOLD] 金币，且每与一座天文台相邻则+1 [ICON_Production] 生产力。每有一个奢侈品与市中心相邻，则+1 [ICON_AMENITIES] 宜居度。"),
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_MAYAB_DESCRIPTION",                      "在淡水和浅海旁定居时不提供额外 [ICON_HOUSING] 住房。但农场提供额外+1 [ICON_HOUSING] 住房和+1 [ICON_GOLD] 金币，且每与一座天文台相邻则+1 [ICON_Production] 生产力。每有一个奢侈品与市中心相邻，则+1 [ICON_AMENITIES] 宜居度。"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MUTAL_DESCRIPTION",                            "揭示出生点6个单元格内的单元格。[ICON_Capital] 首都6个单元格范围内城市所有产出+10%，且建成时将获得1名建造者。[ICON_Capital] 首都9个单元格范围内6个单元格外的非首都城市所有产出不变。其他非首都城市所有产出-15%。[ICON_Capital] 首都6个单元格范围内的单位+5 [ICON_Strength] 战斗力。"),
 -- =====================================================================================================================================
 -- 罗马
@@ -1039,7 +1039,7 @@ values
 -- =====================================================================================================================================
 -- 毛利
 -- =====================================================================================================================================
-	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_MAORI_MANA_DESCRIPTION",                 "游戏初始便解锁“航行”与“造船术”科技，同时拥有进入海洋单元格的能力。水运单位+2 [ICON_Movement] 移动力。解锁“占星术”后，雨林和草本沼泽提供+1 [ICON_PRODUCTION] 生产力，森林和木本沼泽提供+1 [ICON_FOOD] 食物。渔船提供+1 [ICON_FOOD] 食物，并向相邻单元格投放文化炸弹。"),
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_MAORI_MANA_DESCRIPTION",                 "游戏初始便解锁“航行”与“造船术”科技，同时拥有进入深海单元格的能力。水运单位+2 [ICON_Movement] 移动力。解锁“占星术”后，雨林和草本沼泽提供+1 [ICON_PRODUCTION] 生产力，森林和木本沼泽提供+1 [ICON_FOOD] 食物。渔船提供+1 [ICON_FOOD] 食物，并向相邻单元格投放文化炸弹。"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_KUPES_VOYAGE_DESCRIPTION",                     "游戏开始时位于海洋单元格中。建立首座城市时+1 [ICON_CITIZEN] 人口。宫殿额外+3 [ICON_HOUSING] 住房与+1 [ICON_AMENITIES] 宜居度。建立首座城市前每回合获得+2 [ICON_SCIENCE] 科技值与+2 [ICON_CULTURE] 文化值。"),
 -- =====================================================================================================================================
 -- 埃及
@@ -1152,7 +1152,7 @@ values
 	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_ADJACENT_DISTRICTS_DESCRIPTION",         "区域与区域相邻时额外获得标准相邻加成。"),
 	-- 北条
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_DIVINE_WIND_NAME",                             "镰仓幕府"),
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_DIVINE_WIND_EXPANSION2_DESCRIPTION",           "陆地单位处于相邻海岸的陆地单元格时+5 [ICON_Strength] 战斗力；浅水单元格上的海军单位+5 [ICON_Strength] 战斗力。建造港口、圣地和剧院广场+50% [ICON_Production] 生产力。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_DIVINE_WIND_EXPANSION2_DESCRIPTION",           "陆地单位处于相邻海岸的陆地单元格时+5 [ICON_Strength] 战斗力；浅海与湖泊单元格上的海军单位+5 [ICON_Strength] 战斗力。建造港口、圣地和剧院广场+50% [ICON_Production] 生产力。"),
 	-- 德川
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_TOKUGAWA_XP_DESCRIPTION",                      "每次建造军营后，触发“封建主义” [ICON_CIVICBOOSTED] 鼓舞，若“封建主义” [ICON_CIVICBOOSTED] 鼓舞已触发，则直接完成“封建主义”市政。完成“封建主义”市政后获得1个 [ICON_GOVERNOR] 总督头衔。每座没有 [ICON_GOVERNOR] 总督就职的非 [icon_capital] 首都城市-20% [icon_gold] 金币，并为 [icon_capital] 首都和每座有 [ICON_GOVERNOR] 总督就职的城市+5% [icon_gold] 金币。"),
 -- =====================================================================================================================================

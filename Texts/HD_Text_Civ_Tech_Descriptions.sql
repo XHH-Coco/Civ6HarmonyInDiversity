@@ -31,7 +31,7 @@ values
     ("LOC_TECH_ANIMAL_HUSBANDRY_HD_DESCRIPTION",                             "Allows harvesting of resources improved by Pastures and Camps."),
     ("LOC_TECH_POTTERY_DESCRIPTION",                                         "Allows harvesting of resources improved by Farms."),
     ("LOC_TECH_SAILING_HD_DESCRIPTION",                                      "Allows harvesting of resources improved by Fishing Boats. Allows Builders and Traders to embark."),
-    ("LOC_TECH_IRRIGATION_DESCRIPTION",                                      "+1 [ICON_FOOD] Food from Plantations adjacent to fresh water or Aqueduct.[NEWLINE]Allows clearing of Marsh, and harvesting of resources improved by Plantations. Allows Builders to build Farms on Plains Hills or Grassland Hills adjacent to fresh water or Aqueduct."),
+    ("LOC_TECH_IRRIGATION_DESCRIPTION",                                      "+1 [ICON_FOOD] Food from Plantations adjacent to fresh water or Aqueduct.[NEWLINE]Allows clearing of Marsh, and harvesting of resources improved by Plantations. [NEWLINE]Allows Builders to build Farms on Plains Hills or Grassland Hills adjacent to fresh water or Aqueduct."),
     ("LOC_TECH_ARCHERY_HD_DESCRIPTION",                                      "Allows Camps to be built on Forests. [NEWLINE]Camps built on feature provide +1 [ICON_PRODUCTION] Production."), -- Camp improvements receive +1 [ICON_GOLD] Gold.
     ("LOC_TECH_CALENDAR_HD_DESCRIPTION",                                     "+1 [ICON_Food] Food from Farms."),
 	("LOC_TECH_COMPASS_HD_DESCRIPTION",										 "+1 [ICON_PRODUCTION] Production from Fishing Boats."),
@@ -113,7 +113,7 @@ values
     ("LOC_BOOST_TRIGGER_LONGDESC_SOCIAL_SCIENCE_HD",                         "Complex cities form complex social relationships, while some geniuses see it through clearly."),
     -- Civics
     ("LOC_CIVIC_NATURAL_HISTORY_NAME",                                       "Archaeology"),
-    ("LOC_CIVIC_FEUDALISM_HD_DESCRIPTION",                                   "Farms provide +1 [ICON_Food] Food from every 2 adjacent Farms.[NEWLINE]Plantations provide +1 [ICON_Food] Food.[NEWLINE]Campus districts with university receive an additional standard adjacency bonus from rainforest tiles. [NEWLINE]Melee units gain the ability: +3 [ICON_Strength] Combat Strength when fighting in Rainforest or Woods tiles."),
+    ("LOC_CIVIC_FEUDALISM_HD_DESCRIPTION",                                   "Farms provide +1 [ICON_Food] Food from every 2 adjacent Farms.[NEWLINE]Plantations provide +1 [ICON_Food] Food. [NEWLINE]Melee units gain the ability: +3 [ICON_Strength] Combat Strength when fighting in Rainforest or Woods tiles."),
     ("LOC_CIVIC_DEFENSIVE_TACTICS_HD_DESCRIPTION",                           "Ranged units gain the ability: +5 [ICON_Strength] Combat Strength when occupying either an improvement that provides [ICON_Strength] Defense Strength or a District. [NEWLINE]Anti-cavalry units gain the ability: +7 [ICON_Strength] Combat Strength when defending from melee attack on Hills."),
     ("LOC_CIVIC_MILITARY_TRAINING_HD_DESCRIPTION",                           "Heavy Cavalry units gain the ability: +5 [ICON_Strength] Combat Strength when attacking wounded units. [NEWLINE]Siege units gain the ability: Can attack after moving. [NEWLINE] Allows one new Casus Belli that can be used to justify wars: War of Territorial Expansion."), -- +5 [ICON_Strength] Combat Strength when fighting on flat tiles without Woods, Jungle, or Marsh.
     -- ("LOC_CIVIC_MERCENARIES_HD_DESCRIPTION",                                 "Light Cavalry units gain the ability: Pillaging Improvements and Districts provides extra 25 [ICON_Faith] Faith."),
@@ -411,7 +411,7 @@ values
     ("zh_Hans_CN",  "LOC_TECH_POTTERY_DESCRIPTION",                                         "允许收获由农场改良的资源。"),
     ("zh_Hans_CN",  "LOC_TECH_SAILING_NAME",                                                "航行"),
     ("zh_Hans_CN",  "LOC_TECH_SAILING_HD_DESCRIPTION",                                      "允许收获由渔船改良的资源。允许建造者和商人上船。"),
-    ("zh_Hans_CN",  "LOC_TECH_IRRIGATION_DESCRIPTION",                                      "相邻淡水或水渠的种植园+1 [ICON_FOOD] 食物。[NEWLINE]允许清理沼泽和收获由种植园改良的资源。允许在相邻淡水或水渠的平原和草原丘陵上修建农场。"),
+    ("zh_Hans_CN",  "LOC_TECH_IRRIGATION_DESCRIPTION",                                      "相邻淡水或水渠的种植园+1 [ICON_FOOD] 食物。[NEWLINE]允许清理沼泽和收获由种植园改良的资源。[NEWLINE]允许在相邻淡水或水渠的平原和草原丘陵上修建农场。"),
     ("zh_Hans_CN",  "LOC_TECH_ARCHERY_HD_DESCRIPTION",                                      "允许在树林上建造营地。[NEWLINE]建造在地貌上的营地+1 [ICON_PRODUCTION] 生产力。"), -- 营地+1 [ICON_gold] 金币。
     ("zh_Hans_CN",  "LOC_TECH_CALENDAR_HD_DESCRIPTION",                                     "农场+1 [ICON_Food] 食物。"),
 	("zh_Hans_CN",  "LOC_TECH_COMPASS_HD_DESCRIPTION",										"渔船+1 [ICON_PRODUCTION] 生产力。"),
@@ -498,7 +498,7 @@ values
     ("zh_Hans_CN",  "LOC_CIVIC_DEFENSIVE_TACTICS_HD_DESCRIPTION",                           "远程单位获得能力：占领一个区域或一个提供 [ICON_Strength] 防御力的改良设施时+5 [ICON_Strength] 战斗力。[NEWLINE]抗骑兵单位获得能力：在丘陵上防御近距离攻击时+7 [ICON_Strength] 战斗力。"),
     ("zh_Hans_CN",  "LOC_CIVIC_MILITARY_TRAINING_HD_DESCRIPTION",                           "重骑兵单位获得能力：攻击受伤单位时+5 [ICON_Strength] 战斗力。 [NEWLINE]攻城单位获得能力：可移动后攻击。[NEWLINE]有一个新战争借口可用：领土扩张战争。"), -- 在没有雨林、树林、沼泽地貌的平坦地形作战时+5 [ICON_Strength] 战斗力。
     ("zh_Hans_CN",  "LOC_CIVIC_MEDIEVAL_FAIRES_HD_DESCRIPTION",                             "营地+1 [ICON_Production] 生产力。[NEWLINE]渔场+3 [ICON_GOLD] 金币。"),
-    ("zh_Hans_CN",  "LOC_CIVIC_FEUDALISM_HD_DESCRIPTION",                                   "农场每与2个农场相邻+1 [ICON_Food] 食物。[NEWLINE]种植园+1 [ICON_FOOD] 食物。[NEWLINE]拥有大学的学院从雨林获得额外标准相邻加成。[NEWLINE]近战单位获得能力：在森林或雨林中战斗时+3 [ICON_Strength] 战斗力。"),
+    ("zh_Hans_CN",  "LOC_CIVIC_FEUDALISM_HD_DESCRIPTION",                                   "农场每与2个农场相邻+1 [ICON_Food] 食物。[NEWLINE]种植园+1 [ICON_FOOD] 食物。[NEWLINE]近战单位获得能力：在森林或雨林中战斗时+3 [ICON_Strength] 战斗力。"),
     ("zh_Hans_CN",  "LOC_CIVIC_GUILDS_HD_DESCRIPTION",                                      "允许在雨林上建造伐木场和营地。[NEWLINE]允许建造者植树造林（人造林）。[NEWLINE]您领土上从未被移除的树林（非人造林）获得+1魅力。"),
     ("zh_Hans_CN",  "LOC_CIVIC_MERCENARIES_HD_DESCRIPTION",                                 "轻骑兵单位获得能力：在敌方领土内开始回合时+1 [ICON_Movement] 移动力。"),
     ("zh_Hans_CN",  "LOC_CIVIC_MERCENARIES_NAME",                                            "职业军队"),

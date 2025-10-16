@@ -2693,7 +2693,7 @@ insert or ignore into RequirementArguments
 values
 	('REQUIRES_PLOT_HAS_FISHING_BOATS',       		'ImprovementType',		'IMPROVEMENT_FISHING_BOATS');
 
---Pantheon 御岳（Utaki）：海岸和湖泊单元格可为港口提供标准相邻加成。相邻市中心的近海和湖泊单元格+1 [ICON_FOOD] 食物，+1 [ICON_PRODUCTION] 生产力。
+--Pantheon 御岳（Utaki）：浅海与湖泊单元格可为港口提供标准相邻加成。相邻市中心的浅海与湖泊单元格+1 [ICON_FOOD] 食物，+1 [ICON_PRODUCTION] 生产力。
 insert or replace into Types
 	(Type,								Kind)
 values

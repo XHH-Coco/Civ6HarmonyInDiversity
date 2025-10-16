@@ -183,7 +183,7 @@ insert or replace into ModifierArguments (ModifierId, Name, Value)
 	from Features where FeatureType not in ('FEATURE_BURNING_FOREST','FEATURE_BURNT_FOREST','FEATURE_BURNING_JUNGLE','FEATURE_BURNT_JUNGLE', 'FEATURE_JNR_BURNING_SAVANNAH', 'FEATURE_JNR_BURNT_SAVANNAH') and NaturalWonder = 0;
 
 -- 资源分类产出
-insert or replace into HD_Building_ResourceClassification (BuildingType, ResourceClassificationType, DetectRange, PropertyKey) values
+insert or replace into HD_Building_Base_On_ResourceClassification (BuildingType, ResourceClassificationType, DetectRange, PropertyKey) values
 	('BUILDING_HD_RESOURCE_EPO', 	'RESOURCE_CLASSIFICATION_MINERAL',			'PLAYER', 'HD_PLOT_BINARY_COMPRESS_RESOURCE_EPO'),
 	('BUILDING_HD_SPECIES_EPO', 	'RESOURCE_CLASSIFICATION_BIOLOGICAL',		'PLAYER',	'HD_PLOT_BINARY_COMPRESS_SPECIES_EPO');
 

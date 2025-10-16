@@ -4,7 +4,7 @@ insert or replace into EnglishText
     (Tag,                                                     Text)
 values
     ("LOC_DISTRICT_FEATURE_PLANTATION_FAITH",                 "+{1_num} [ICON_Faith] Faith from the adjacent Plantation {1_Num : plural 2?tile; other?tiles;}."),
-    ("LOC_DISTRICT_UTAKI_GOLD",                               "+{1_num} [ICON_Gold] Gold from the adjacent Coast and Lake {1_Num : plural 2?tile; other?tiles;}"),
+    ("LOC_DISTRICT_UTAKI_GOLD",                               "+{1_num} [ICON_Gold] Gold from the adjacent Shallow Sea and Lake {1_Num : plural 2?tile; other?tiles;}"),
     ("LOC_DISTRICT_FEATURE_MOUNTAIN_FAITH",                   "+{1_num} [ICON_Faith] Faith from the adjacent Mountain {1_Num : plural 2?tile; other?tiles;}."),
     ("LOC_DISTRICT_REEF_SCIENCE",                             "+{1_num} [ICON_Science] Science from the adjacent Reef {1_Num : plural 2?tile; other?tiles;}."),
     ("LOC_DISTRICT_SUK_KELP_SCIENCE",                         "+{1_num} [ICON_Science] Science from the adjacent Kelp {1_Num : plural 2?tile; other?tiles;}."),
@@ -70,7 +70,7 @@ values
     ("LOC_BELIEF_DEFENDER_OF_FAITH_DL_DESCRIPTION",           "Combat units gain +5 [ICON_Strength] Combat Strength when within the borders of friendly cities that follow this Religion."),
     ("LOC_BELIEF_JUST_WAR_DL_DESCRIPTION",                    "Combat units gain +5 [ICON_Strength] Combat Strength when within the borders of foreign cities that follow this Religion. Pillaging Improvements and Districts provides +25 [ICON_Faith] Faith."),
     ("LOC_BELIEF_HOLY_WATERS_NAME",                           "Sea Festival"),
-    ("LOC_BELIEF_HOLY_WATERS_DL_DESCRIPTION",                 "+100% adjacency bonuses to Holy Site districts adjacent to Lake or Coast tiles. Districts (Except City Center) on or adjacent to Lake or Coast tiles provide +4 [ICON_Faith] Faith in cities with Holy Site. Harbor buildings are 20% cheaper to purchase. May purchase Harbor district buildings with [ICON_Faith] Faith."),
+    ("LOC_BELIEF_HOLY_WATERS_DL_DESCRIPTION",                 "+100% adjacency bonuses to Holy Site districts adjacent to Shallow Sea and Lake tiles. Districts (Except City Center) on or adjacent to Shallow Sea and Lake tiles provide +4 [ICON_Faith] Faith in cities with Holy Site. Harbor buildings are 20% cheaper to purchase. May purchase Harbor district buildings with [ICON_Faith] Faith."),
     ("LOC_BELIEF_MONASTIC_ISOLATION_DL_DESCRIPTION",          "Your Religious Pressure never drops due to losses in Theological Combat. Cities following this religion receive -100% religion pressure from other religions. -30% purchase cost for Inquisitors. Inquisitors newly obtained from cities following this religion have +1 charge."),
     ("LOC_BELIEF_HOLY_ORDER_DESCRIPTION",                     "Missionaries and Apostles are 30% cheaper to purchase in cities following this religion."),
     ("LOC_BELIEF_MISSIONARY_ZEAL_DESCRIPTION",                "Religious units newly obtained from cities following this religion ignore [ICON_Movement] Movement costs of terrain and features."),
@@ -91,7 +91,7 @@ insert or replace into LocalizedText
     (Language,      Tag,                                                     Text)
 values
     ("zh_Hans_CN",  "LOC_DISTRICT_FEATURE_REEF_SCIENCE",                     "+{1_num} [ICON_Science] 科技值来自相邻礁石 {1_Num : plural 2?单元格; other?单元格;}。"),
-    ("zh_Hans_CN",  "LOC_DISTRICT_UTAKI_GOLD",                               "+{1_num} [ICON_Gold] 金币来自相邻海岸和湖泊{1_Num : plural 2?单元格; other?单元格;}。"),
+    ("zh_Hans_CN",  "LOC_DISTRICT_UTAKI_GOLD",                               "+{1_num} [ICON_Gold] 金币来自相邻浅海与湖泊{1_Num : plural 2?单元格; other?单元格;}。"),
     ("zh_Hans_CN",  "LOC_DISTRICT_FEATURE_SUK_KELP_SCIENCE",                 "+{1_num} [ICON_Science] 科技值来自相邻海藻森林 {1_Num : plural 2?单元格; other?单元格;}。"),
     ("zh_Hans_CN",  "LOC_DISTRICT_PLANTATION_FAITH",                         "+{1_num} [ICON_Faith] 信仰值来自相邻种植园{1_Num : plural 2?单元格; other?单元格;}。"),
     ("zh_Hans_CN",  "LOC_DISTRICT_MINE_FAITH",                               "+{1_num} [ICON_Faith] 信仰值来自相邻矿山{1_Num : plural 2?单元格; other?单元格;}。"),
@@ -155,7 +155,7 @@ values
     ("zh_Hans_CN",  "LOC_BELIEF_DEFENDER_OF_FAITH_DL_DESCRIPTION",           "战斗单位处于信奉该宗教的友好城市境内时+5 [ICON_Strength] 战斗力。"),
     ("zh_Hans_CN",  "LOC_BELIEF_JUST_WAR_DL_DESCRIPTION",                    "战斗单位处于信奉该宗教的外国城市境内时+5 [ICON_Strength] 战斗力，掠夺改良设施和区域时+25 [ICON_Faith] 信仰值。"),
     ("zh_Hans_CN",  "LOC_BELIEF_HOLY_WATERS_NAME",                           "海祭"),
-    ("zh_Hans_CN",  "LOC_BELIEF_HOLY_WATERS_DL_DESCRIPTION",                 "相邻海岸或湖泊的圣地获得+100%相邻加成。拥有圣地的城市中每个位于或相邻海岸或湖泊的区域(市中心外)+4 [ICON_Faith] 信仰值。购买港口区域内建筑的费用降低20%且可以用 [ICON_Faith] 信仰值购买。"),
+    ("zh_Hans_CN",  "LOC_BELIEF_HOLY_WATERS_DL_DESCRIPTION",                 "相邻浅海与湖泊的圣地获得+100%相邻加成。拥有圣地的城市中每个位于或相邻浅海与湖泊的区域（市中心外）+4 [ICON_Faith] 信仰值。购买港口区域内建筑的费用降低20%且可以用 [ICON_Faith] 信仰值购买。"),
     ("zh_Hans_CN",  "LOC_BELIEF_WARRIOR_MONKS_EXPANSION2_DESCRIPTION",       "允许花费 [ICON_FAITH] 信仰值来在有圣地二级建筑的城市生产陆地战斗单位“武僧”。建成圣地后对相邻单元格施放文化炸弹。圣地区域的 [ICON_FAITH] 信仰值相邻加成提供额外等量的 [ICON_FAITH] 信仰值。"),
     ("zh_Hans_CN",  "LOC_BELIEF_MONASTIC_ISOLATION_DL_DESCRIPTION",          "您的宗教压力不会因为神学战斗失败而减少。强化后信仰此宗教的城市减少100%外来宗教压力影响，购买审判官的费用降低30%，购买的审判官+1使用次数。"),
     ("zh_Hans_CN",  "LOC_BELIEF_HOLY_ORDER_DESCRIPTION",                     "信仰此宗教的城市购买传教士和使徒的费用降低30%。"),

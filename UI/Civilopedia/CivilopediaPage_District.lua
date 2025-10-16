@@ -227,113 +227,6 @@ PageLayouts["District"] = function(page)
 
 
 	local stats = {};
-	
-	
-	-- Generate list of adjacency bonuses.
-	local yield_changes = {};
-	local has_bonus = {};
-	for row in GameInfo.District_Adjacencies() do
-		if(row.DistrictType == districtType) then
-			has_bonus[row.YieldChangeId] = true;
-		end
-	end
-
-	for row in GameInfo.Adjacency_YieldChanges() do
-		if(has_bonus[row.ID]) then
-			
-			local object;
-			if(row.OtherDistrictAdjacent) then
-				object = "LOC_TYPE_TRAIT_ADJACENT_OBJECT_DISTRICT";
-			elseif(row.AdjacentResource) then
-				object = "LOC_TYPE_TRAIT_ADJACENT_OBJECT_RESOURCE";
-			elseif(row.AdjacentSeaResource) then
-				object = "LOC_TYPE_TRAIT_ADJACENT_OBJECT_SEA_RESOURCE";
-			elseif(row.AdjacentResourceClass ~= "NO_RESOURCECLASS") then
-				if(row.AdjacentResourceClass == "RESOURCECLASS_BONUS") then
-					object = "LOC_TOOLTIP_BONUS_RESOURCE";
-				elseif(row.AdjacentResourceClass == "RESOURCECLASS_LUXURY") then
-					object = "LOC_TOOLTIP_LUXURY_RESOURCE";
-				elseif(row.AdjacentResourceClass == "RESOURCECLASS_STRATEGIC") then
-					object = "LOC_TOOLTIP_BONUS_STRATEGIC";
-				elseif(row.AdjacentResourceClass == "RESOURCECLASS_LEY_LINE") then
-					object = "LOC_TOOLTIP_LEY_LINE_RESOURCE";
-				else
-					object = "LOC_TYPE_TRAIT_ADJACENT_OBJECT_RESOURCE_CLASS";
-				end
-			elseif(row.AdjacentRiver) then
-				object = "LOC_TYPE_TRAIT_ADJACENT_OBJECT_RIVER";
-			elseif(row.AdjacentWonder) then
-				object = "LOC_TYPE_TRAIT_ADJACENT_OBJECT_WONDER";
-			elseif(row.AdjacentNaturalWonder) then
-				object = "LOC_TYPE_TRAIT_ADJACENT_OBJECT_NATURAL_WONDER";
-			elseif(row.AdjacentTerrain) then
-				local terrain = GameInfo.Terrains[row.AdjacentTerrain];
-				if(terrain) then
-					object = terrain.Name;
-				end
-			elseif(row.AdjacentFeature) then
-				local feature = GameInfo.Features[row.AdjacentFeature];
-				if(feature) then
-					object = feature.Name;
-				end
-			elseif(row.AdjacentImprovement) then
-				local improvement = GameInfo.Improvements[row.AdjacentImprovement];
-				if(improvement) then
-					object = improvement.Name;
-				end
-			elseif(row.AdjacentDistrict) then		
-				local district = GameInfo.Districts[row.AdjacentDistrict];
-				if(district) then
-					object = district.Name;
-				end
-			end
-
-			local yield = GameInfo.Yields[row.YieldType];
-
-			if(object and yield) then
-
-				local key = (row.TilesRequired > 1) and "LOC_TYPE_TRAIT_ADJACENT_BONUS_PER" or "LOC_TYPE_TRAIT_ADJACENT_BONUS";
-
-				-- Exception - Adjacent river gold bonuses can only be gained once
-				if row.AdjacentRiver == true then
-					key = "LOC_TYPE_TRAIT_ADJACENT_BONUS_ONCE";
-				end
-
-				local value = Locale.Lookup(key, row.YieldChange, yield.IconString, yield.Name, row.TilesRequired, object);
-
-				if(row.PrereqCivic or row.PrereqTech) then
-					local item;
-					if(row.PrereqCivic) then
-						item = GameInfo.Civics[row.PrereqCivic];
-					else
-						item = GameInfo.Technologies[row.PrereqTech];
-					end
-
-					if(item) then
-						local text = Locale.Lookup("LOC_TYPE_TRAIT_ADJACENT_BONUS_REQUIRES_TECH_OR_CIVIC", item.Name);
-						value = value .. text;
-					end
-				end
-
-				if(row.ObsoleteCivic or row.ObsoleteTech) then
-					local item;
-					if(row.ObsoleteCivic) then
-						item = GameInfo.Civics[row.ObsoleteCivic];
-					else
-						item = GameInfo.Technologies[row.ObsoleteTech];
-					end
-				
-					if(item) then
-						local text = Locale.Lookup("LOC_TYPE_TRAIT_ADJACENT_BONUS_OBSOLETE_WITH_TECH_OR_CIVIC", item.Name);
-						value = value .. text;
-					end
-				end
-
-				table.insert(yield_changes, value);
-			end		
-		end
-	end
-
 
 	local citizen_yields = {};
 	for row in GameInfo.District_CitizenYieldChanges() do
@@ -422,6 +315,14 @@ PageLayouts["District"] = function(page)
 
 	local maintenance = district.Maintenance;
 	
+	-- 区域分类
+	local classificationList = {};
+	for row in GameInfo.HD_District_Classification() do
+		if row.DistrictType == districtType then
+			table.insert(classificationList, '[ICON_BULLET]' .. Locale.Lookup(GameInfo.HD_DistrictClassificationTypes[row.DistrictClassificationType].Name));
+		end
+	end
+
 	-- Right Column
 	AddPortrait("ICON_" .. districtType);
 
@@ -459,14 +360,6 @@ PageLayouts["District"] = function(page)
 			s:AddSeparator();
 		end
 
-		if(#yield_changes > 0) then
-			s:AddHeader("LOC_UI_PEDIA_ADJACENCY_BONUS");
-			for i,v in ipairs(yield_changes) do
-				s:AddLabel(v);
-			end
-			s:AddSeparator();
-		end
-
 		if(#citizen_yields > 0) then
 			s:AddHeader("LOC_UI_PEDIA_CITIZEN_YIELDS");
 			for i,v in ipairs(citizen_yields) do
@@ -494,6 +387,16 @@ PageLayouts["District"] = function(page)
 			s:AddSeparator();
 		end
 	end);
+
+	if #classificationList > 0 then
+		AddRightColumnStatBox("LOC_PEDIA_HD_CLASSIFICATION_TEXT", function(s)
+			s:AddSeparator();
+			for _, text in ipairs(classificationList) do
+				s:AddLabel(text);
+			end
+			s:AddSeparator();
+		end)
+	end
 
 	AddRightColumnStatBox("LOC_UI_PEDIA_REQUIREMENTS", function(s)
 		s:AddSeparator();
@@ -590,6 +493,19 @@ PageLayouts["District"] = function(page)
 
 	-- Left Column
 	AddChapter("LOC_UI_PEDIA_DESCRIPTION", district.Description);
+
+	-- 相邻加成
+	local adjacency_yields = ExposedMembers.DLHD.Utils.GetSortedAdjacencyBonuses("DistrictType", districtType);
+	if adjacency_yields and #adjacency_yields > 0 then
+		local adjacencyText = '';
+
+    for i,v in ipairs(adjacency_yields) do
+			if i > 1 then adjacencyText = adjacencyText .. '[NEWLINE]'; end
+      adjacencyText = adjacencyText .. "[ICON_Bullet] " .. v;
+    end
+
+		AddChapter("LOC_UI_PEDIA_ADJACENCY_BONUS", adjacencyText);
+  end
 
 	local chapters = GetPageChapters(page.PageLayoutId);
 	for i, chapter in ipairs(chapters) do

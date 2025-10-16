@@ -2,9 +2,6 @@
 insert or ignore into CivilopediaPageExcludes (SectionId, PageId)
   select 'BUILDINGS', BuildingType from HD_DUMMY_BUILDINGS;
 
--- 奇观添加业绩文本
-UPDATE Buildings SET Description = "{" || Description || "}{LOC_EPSTWEAK_WONDER_WORDING_TOURISM}" WHERE IsWonder = 1;
-
 --------------------------------------------------------------------------------------------------------------------
 -- 百科资源分类
   -- 战略 文物资源

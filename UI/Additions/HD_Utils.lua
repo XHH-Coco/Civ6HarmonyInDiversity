@@ -532,3 +532,451 @@ function GetBuildingNeedPlayerResource(playerId, buildingType)
   return totalNum, data;
 end
 Utils.GetBuildingNeedPlayerResource = GetBuildingNeedPlayerResource;
+
+-- 获取相邻加成
+-- 相邻加成排序规则
+-- 分类
+  -- 自我
+  -- 地形
+    -- 某个地形
+    -- 地形分类
+  -- 河流
+  -- 地貌
+  -- 自然奇观
+  -- 奇观
+  -- 区域
+    -- 任何区域
+    -- 某个区域
+    -- 区域分类
+  -- 资源
+    -- 任何资源
+    -- 海洋资源
+    -- 加成/奢侈/战略
+    -- 资源分类（需要马良相邻）
+  -- 改良
+    -- 某个改良
+    -- 改良分类
+function GetSortedAdjacencyBonuses(objectKind, objectType)
+	-- 获取该区域/改良的相邻加成Id
+  local gameInfoTable;
+  local gameInfoTable_Classification;
+  if objectKind == 'DistrictType' then
+    gameInfoTable = GameInfo.District_Adjacencies;
+    gameInfoTable_Classification = GameInfo.HD_District_Adjacencies_Base_On_Classification;
+  elseif objectKind == 'ImprovementType' then
+    gameInfoTable = GameInfo.Improvement_Adjacencies;
+    gameInfoTable_Classification = GameInfo.HD_Improvement_Adjacencies_Base_On_Classification;
+  else
+    return {};
+  end
+
+	local bonuseDataList = {
+    {}, -- 1  SELF
+    {}, -- 2  TERRAIN_SPECIFIC
+    {}, -- 3  TERRAIN_CLASSIFICATION
+    {}, -- 4  RIVER
+    {}, -- 5  FEATURE
+    {}, -- 6  NATURAL_WONDER
+    {}, -- 7  WONDER
+    {}, -- 8  DISTRICT_ALL
+    {}, -- 9  DISTRICT_SPECIFIC
+    {}, -- 10 DISTRICT_CLASSIFICATION
+    {}, -- 11 RESOURCE_ALL
+    {}, -- 12 RESOURCE_SEA
+    {}, -- 13 RESOURCE_CLASS_BONUS
+    {}, -- 14 RESOURCE_CLASS_LUXURY
+    {}, -- 15 RESOURCE_CLASS_STRATEGIC
+    {}, -- 16 RESOURCE_CLASS_OTHER
+    {}, -- 17 RESOURCE_CLASSIFICATION
+    {}, -- 18 IMPROVEMENT_SPECIFIC
+    {}  -- 19 IMPROVEMENT_CLASSIFICATION
+  };
+
+  -- TODO：地形/区域/改良/资源分类相邻加成
+  for row in gameInfoTable_Classification() do
+    if row[objectKind] == objectType then
+      local data = GameInfo.HD_Adjacency_Base_On_Classification[row.YieldChangeId];
+      local yield = GameInfo.Yields[data.YieldType];
+
+      -- 权重计算 较小的排序靠前
+      local score = data.YieldChange / data.TilesRequired + 10 * yield.Index;
+
+      if data.TerrainClassType then
+        table.insert(bonuseDataList[3], {
+          YieldName = yield.Name,
+          YieldIcon = yield.IconString,
+          YieldChange = data.YieldChange,
+          ObjectName = GameInfo.TerrainClasses[data.TerrainClassType].Name,
+          TilesRequired = data.TilesRequired,
+          PrereqCivic = (data.PrereqCivic) and GameInfo.Civics[data.PrereqCivic].Name or nil,
+          PrereqTech = (data.PrereqTech) and GameInfo.Technologies[data.PrereqTech].Name or nil,
+          ObsoleteCivic = (data.ObsoleteCivic) and GameInfo.Civics[data.ObsoleteCivic].Name or nil,
+          ObsoleteTech = (data.ObsoleteTech) and GameInfo.Technologies[data.ObsoleteTech].Name or nil,
+          TextTemplate = (data.TilesRequired > 1) and "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_PER_TEXT" or "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_TEXT",
+          Score = score
+        })
+      elseif data.DistrictClassificationType then
+        table.insert(bonuseDataList[10], {
+          YieldName = yield.Name,
+          YieldIcon = yield.IconString,
+          YieldChange = data.YieldChange,
+          ObjectName = GameInfo.HD_DistrictClassificationTypes[data.DistrictClassificationType].Name,
+          TilesRequired = data.TilesRequired,
+          PrereqCivic = (data.PrereqCivic) and GameInfo.Civics[data.PrereqCivic].Name or nil,
+          PrereqTech = (data.PrereqTech) and GameInfo.Technologies[data.PrereqTech].Name or nil,
+          ObsoleteCivic = (data.ObsoleteCivic) and GameInfo.Civics[data.ObsoleteCivic].Name or nil,
+          ObsoleteTech = (data.ObsoleteTech) and GameInfo.Technologies[data.ObsoleteTech].Name or nil,
+          TextTemplate = (data.TilesRequired > 1) and "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_PER_TEXT" or "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_TEXT",
+          Score = score
+        })
+      elseif data.ResourceClassificationType then
+        table.insert(bonuseDataList[17], {
+          YieldName = yield.Name,
+          YieldIcon = yield.IconString,
+          YieldChange = data.YieldChange,
+          ObjectName = GameInfo.HD_ResourceClassificationTypes[data.ResourceClassificationType].Name,
+          TilesRequired = data.TilesRequired,
+          PrereqCivic = (data.PrereqCivic) and GameInfo.Civics[data.PrereqCivic].Name or nil,
+          PrereqTech = (data.PrereqTech) and GameInfo.Technologies[data.PrereqTech].Name or nil,
+          ObsoleteCivic = (data.ObsoleteCivic) and GameInfo.Civics[data.ObsoleteCivic].Name or nil,
+          ObsoleteTech = (data.ObsoleteTech) and GameInfo.Technologies[data.ObsoleteTech].Name or nil,
+          TextTemplate = (data.TilesRequired > 1) and "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_PER_TEXT" or "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_TEXT",
+          Score = score
+        })
+      elseif data.ImprovementClassificationType then
+        table.insert(bonuseDataList[19], {
+          YieldName = yield.Name,
+          YieldIcon = yield.IconString,
+          YieldChange = data.YieldChange,
+          ObjectName = GameInfo.HD_ImprovementClassificationTypes[data.ImprovementClassificationType].Name,
+          TilesRequired = data.TilesRequired,
+          PrereqCivic = (data.PrereqCivic) and GameInfo.Civics[data.PrereqCivic].Name or nil,
+          PrereqTech = (data.PrereqTech) and GameInfo.Technologies[data.PrereqTech].Name or nil,
+          ObsoleteCivic = (data.ObsoleteCivic) and GameInfo.Civics[data.ObsoleteCivic].Name or nil,
+          ObsoleteTech = (data.ObsoleteTech) and GameInfo.Technologies[data.ObsoleteTech].Name or nil,
+          TextTemplate = (data.TilesRequired > 1) and "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_PER_TEXT" or "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_TEXT",
+          Score = score
+        })
+      else
+        -- 非法情况
+        print("非法的相邻加成数据", row.YieldChangeId)
+      end
+    end
+  end
+
+  -- 原版的相邻加成系统
+  for row in gameInfoTable() do
+    if row[objectKind] == objectType and GameInfo.HD_Adjacencies_YieldChangeId_ParentId[row.YieldChangeId] == nil then
+      local data = GameInfo.Adjacency_YieldChanges[row.YieldChangeId];
+      local yield = GameInfo.Yields[data.YieldType];
+
+      -- 权重计算 较小的排序靠前
+      local score = data.YieldChange / data.TilesRequired + 10 * yield.Index;
+
+      if data.Self then
+        table.insert(bonuseDataList[1], {
+          YieldName = yield.Name,
+          YieldIcon = yield.IconString,
+          YieldChange = data.YieldChange,
+          TilesRequired = data.TilesRequired,
+          PrereqCivic = (data.PrereqCivic) and GameInfo.Civics[data.PrereqCivic].Name or nil,
+          PrereqTech = (data.PrereqTech) and GameInfo.Technologies[data.PrereqTech].Name or nil,
+          ObsoleteCivic = (data.ObsoleteCivic) and GameInfo.Civics[data.ObsoleteCivic].Name or nil,
+          ObsoleteTech = (data.ObsoleteTech) and GameInfo.Technologies[data.ObsoleteTech].Name or nil,
+          TextTemplate = 'LOC_TOOLTIP_HD_ADJACENCIES_SELF_TEXT',
+          Score = score
+        })
+      elseif data.AdjacentTerrain then
+        table.insert(bonuseDataList[2], {
+          YieldName = yield.Name,
+          YieldIcon = yield.IconString,
+          YieldChange = data.YieldChange,
+          ObjectName = GameInfo.Terrains[data.AdjacentTerrain].Name,
+          TilesRequired = data.TilesRequired,
+          PrereqCivic = (data.PrereqCivic) and GameInfo.Civics[data.PrereqCivic].Name or nil,
+          PrereqTech = (data.PrereqTech) and GameInfo.Technologies[data.PrereqTech].Name or nil,
+          ObsoleteCivic = (data.ObsoleteCivic) and GameInfo.Civics[data.ObsoleteCivic].Name or nil,
+          ObsoleteTech = (data.ObsoleteTech) and GameInfo.Technologies[data.ObsoleteTech].Name or nil,
+          TextTemplate = (data.TilesRequired > 1) and "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_PER_TEXT" or "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_TEXT",
+          Score = score
+        })
+      elseif data.AdjacentRiver then
+        table.insert(bonuseDataList[4], {
+          YieldName = yield.Name,
+          YieldIcon = yield.IconString,
+          YieldChange = data.YieldChange,
+          TilesRequired = data.TilesRequired,
+          PrereqCivic = (data.PrereqCivic) and GameInfo.Civics[data.PrereqCivic].Name or nil,
+          PrereqTech = (data.PrereqTech) and GameInfo.Technologies[data.PrereqTech].Name or nil,
+          ObsoleteCivic = (data.ObsoleteCivic) and GameInfo.Civics[data.ObsoleteCivic].Name or nil,
+          ObsoleteTech = (data.ObsoleteTech) and GameInfo.Technologies[data.ObsoleteTech].Name or nil,
+          TextTemplate = 'LOC_TOOLTIP_HD_ADJACENCIES_RIVER_TEXT',
+          Score = score
+        })
+      elseif data.AdjacentFeature then
+        local featureInfo = GameInfo.Features[data.AdjacentFeature];
+        if not featureInfo.NaturalWonder then
+          table.insert(bonuseDataList[5], {
+            YieldName = yield.Name,
+            YieldIcon = yield.IconString,
+            YieldChange = data.YieldChange,
+            ObjectName = featureInfo.Name,
+            TilesRequired = data.TilesRequired,
+            PrereqCivic = (data.PrereqCivic) and GameInfo.Civics[data.PrereqCivic].Name or nil,
+            PrereqTech = (data.PrereqTech) and GameInfo.Technologies[data.PrereqTech].Name or nil,
+            ObsoleteCivic = (data.ObsoleteCivic) and GameInfo.Civics[data.ObsoleteCivic].Name or nil,
+            ObsoleteTech = (data.ObsoleteTech) and GameInfo.Technologies[data.ObsoleteTech].Name or nil,
+            TextTemplate = (data.TilesRequired > 1) and "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_PER_TEXT" or "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_TEXT",
+            Score = score
+          })
+        end
+      elseif data.AdjacentNaturalWonder then
+        table.insert(bonuseDataList[6], {
+          YieldName = yield.Name,
+          YieldIcon = yield.IconString,
+          YieldChange = data.YieldChange,
+          ObjectName = 'LOC_TYPE_TRAIT_ADJACENT_OBJECT_NATURAL_WONDER',
+          TilesRequired = data.TilesRequired,
+          PrereqCivic = (data.PrereqCivic) and GameInfo.Civics[data.PrereqCivic].Name or nil,
+          PrereqTech = (data.PrereqTech) and GameInfo.Technologies[data.PrereqTech].Name or nil,
+          ObsoleteCivic = (data.ObsoleteCivic) and GameInfo.Civics[data.ObsoleteCivic].Name or nil,
+          ObsoleteTech = (data.ObsoleteTech) and GameInfo.Technologies[data.ObsoleteTech].Name or nil,
+          TextTemplate = (data.TilesRequired > 1) and "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_PER_TEXT" or "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_TEXT",
+          Score = score
+        })
+      elseif data.AdjacentWonder then
+        table.insert(bonuseDataList[7], {
+          YieldName = yield.Name,
+          YieldIcon = yield.IconString,
+          YieldChange = data.YieldChange,
+          ObjectName = 'LOC_TYPE_TRAIT_ADJACENT_OBJECT_WONDER',
+          TilesRequired = data.TilesRequired,
+          PrereqCivic = (data.PrereqCivic) and GameInfo.Civics[data.PrereqCivic].Name or nil,
+          PrereqTech = (data.PrereqTech) and GameInfo.Technologies[data.PrereqTech].Name or nil,
+          ObsoleteCivic = (data.ObsoleteCivic) and GameInfo.Civics[data.ObsoleteCivic].Name or nil,
+          ObsoleteTech = (data.ObsoleteTech) and GameInfo.Technologies[data.ObsoleteTech].Name or nil,
+          TextTemplate = (data.TilesRequired > 1) and "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_PER_TEXT" or "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_TEXT",
+          Score = score
+        })
+      elseif data.OtherDistrictAdjacent then
+        table.insert(bonuseDataList[8], {
+          YieldName = yield.Name,
+          YieldIcon = yield.IconString,
+          YieldChange = data.YieldChange,
+          ObjectName = 'LOC_TYPE_TRAIT_ADJACENT_OBJECT_DISTRICT',
+          TilesRequired = data.TilesRequired,
+          PrereqCivic = (data.PrereqCivic) and GameInfo.Civics[data.PrereqCivic].Name or nil,
+          PrereqTech = (data.PrereqTech) and GameInfo.Technologies[data.PrereqTech].Name or nil,
+          ObsoleteCivic = (data.ObsoleteCivic) and GameInfo.Civics[data.ObsoleteCivic].Name or nil,
+          ObsoleteTech = (data.ObsoleteTech) and GameInfo.Technologies[data.ObsoleteTech].Name or nil,
+          TextTemplate = (data.TilesRequired > 1) and "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_PER_TEXT" or "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_TEXT",
+          Score = score
+        })
+      elseif data.AdjacentDistrict then
+        table.insert(bonuseDataList[9], {
+          YieldName = yield.Name,
+          YieldIcon = yield.IconString,
+          YieldChange = data.YieldChange,
+          ObjectName = GameInfo.Districts[data.AdjacentDistrict].Name,
+          TilesRequired = data.TilesRequired,
+          PrereqCivic = (data.PrereqCivic) and GameInfo.Civics[data.PrereqCivic].Name or nil,
+          PrereqTech = (data.PrereqTech) and GameInfo.Technologies[data.PrereqTech].Name or nil,
+          ObsoleteCivic = (data.ObsoleteCivic) and GameInfo.Civics[data.ObsoleteCivic].Name or nil,
+          ObsoleteTech = (data.ObsoleteTech) and GameInfo.Technologies[data.ObsoleteTech].Name or nil,
+          TextTemplate = (data.TilesRequired > 1) and "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_PER_TEXT" or "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_TEXT",
+          Score = score
+        })
+      elseif data.AdjacentResource then
+        table.insert(bonuseDataList[11], {
+          YieldName = yield.Name,
+          YieldIcon = yield.IconString,
+          YieldChange = data.YieldChange,
+          ObjectName = 'LOC_TYPE_TRAIT_ADJACENT_OBJECT_RESOURCE',
+          TilesRequired = data.TilesRequired,
+          PrereqCivic = (data.PrereqCivic) and GameInfo.Civics[data.PrereqCivic].Name or nil,
+          PrereqTech = (data.PrereqTech) and GameInfo.Technologies[data.PrereqTech].Name or nil,
+          ObsoleteCivic = (data.ObsoleteCivic) and GameInfo.Civics[data.ObsoleteCivic].Name or nil,
+          ObsoleteTech = (data.ObsoleteTech) and GameInfo.Technologies[data.ObsoleteTech].Name or nil,
+          TextTemplate = (data.TilesRequired > 1) and "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_PER_TEXT" or "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_TEXT",
+          Score = score
+        })
+      elseif data.AdjacentSeaResource then
+        table.insert(bonuseDataList[12], {
+          YieldName = yield.Name,
+          YieldIcon = yield.IconString,
+          YieldChange = data.YieldChange,
+          ObjectName = 'LOC_TYPE_TRAIT_ADJACENT_OBJECT_SEA_RESOURCE',
+          TilesRequired = data.TilesRequired,
+          PrereqCivic = (data.PrereqCivic) and GameInfo.Civics[data.PrereqCivic].Name or nil,
+          PrereqTech = (data.PrereqTech) and GameInfo.Technologies[data.PrereqTech].Name or nil,
+          ObsoleteCivic = (data.ObsoleteCivic) and GameInfo.Civics[data.ObsoleteCivic].Name or nil,
+          ObsoleteTech = (data.ObsoleteTech) and GameInfo.Technologies[data.ObsoleteTech].Name or nil,
+          TextTemplate = (data.TilesRequired > 1) and "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_PER_TEXT" or "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_TEXT",
+          Score = score
+        })
+      elseif data.AdjacentResourceClass ~= "NO_RESOURCECLASS" then
+        if data.AdjacentResourceClass == "RESOURCECLASS_BONUS" then
+          table.insert(bonuseDataList[13], {
+            YieldName = yield.Name,
+            YieldIcon = yield.IconString,
+            YieldChange = data.YieldChange,
+            ObjectName = 'LOC_TOOLTIP_BONUS_RESOURCE',
+            TilesRequired = data.TilesRequired,
+            PrereqCivic = (data.PrereqCivic) and GameInfo.Civics[data.PrereqCivic].Name or nil,
+            PrereqTech = (data.PrereqTech) and GameInfo.Technologies[data.PrereqTech].Name or nil,
+            ObsoleteCivic = (data.ObsoleteCivic) and GameInfo.Civics[data.ObsoleteCivic].Name or nil,
+            ObsoleteTech = (data.ObsoleteTech) and GameInfo.Technologies[data.ObsoleteTech].Name or nil,
+            TextTemplate = (data.TilesRequired > 1) and "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_PER_TEXT" or "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_TEXT",
+            Score = score
+          })
+        elseif data.AdjacentResourceClass == "RESOURCECLASS_LUXURY" then
+          table.insert(bonuseDataList[14], {
+            YieldName = yield.Name,
+            YieldIcon = yield.IconString,
+            YieldChange = data.YieldChange,
+            ObjectName = 'LOC_TOOLTIP_LUXURY_RESOURCE',
+            TilesRequired = data.TilesRequired,
+            PrereqCivic = (data.PrereqCivic) and GameInfo.Civics[data.PrereqCivic].Name or nil,
+            PrereqTech = (data.PrereqTech) and GameInfo.Technologies[data.PrereqTech].Name or nil,
+            ObsoleteCivic = (data.ObsoleteCivic) and GameInfo.Civics[data.ObsoleteCivic].Name or nil,
+            ObsoleteTech = (data.ObsoleteTech) and GameInfo.Technologies[data.ObsoleteTech].Name or nil,
+            TextTemplate = (data.TilesRequired > 1) and "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_PER_TEXT" or "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_TEXT",
+            Score = score
+          })
+        elseif data.AdjacentResourceClass == "RESOURCECLASS_STRATEGIC" then
+          table.insert(bonuseDataList[15], {
+            YieldName = yield.Name,
+            YieldIcon = yield.IconString,
+            YieldChange = data.YieldChange,
+            ObjectName = 'LOC_TOOLTIP_BONUS_STRATEGIC',
+            TilesRequired = data.TilesRequired,
+            PrereqCivic = (data.PrereqCivic) and GameInfo.Civics[data.PrereqCivic].Name or nil,
+            PrereqTech = (data.PrereqTech) and GameInfo.Technologies[data.PrereqTech].Name or nil,
+            ObsoleteCivic = (data.ObsoleteCivic) and GameInfo.Civics[data.ObsoleteCivic].Name or nil,
+            ObsoleteTech = (data.ObsoleteTech) and GameInfo.Technologies[data.ObsoleteTech].Name or nil,
+            TextTemplate = (data.TilesRequired > 1) and "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_PER_TEXT" or "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_TEXT",
+            Score = score
+          })
+        else
+          table.insert(bonuseDataList[16], {
+            YieldName = yield.Name,
+            YieldIcon = yield.IconString,
+            YieldChange = data.YieldChange,
+            ObjectName = 'LOC_TYPE_TRAIT_ADJACENT_OBJECT_RESOURCE_CLASS',
+            TilesRequired = data.TilesRequired,
+            PrereqCivic = (data.PrereqCivic) and GameInfo.Civics[data.PrereqCivic].Name or nil,
+            PrereqTech = (data.PrereqTech) and GameInfo.Technologies[data.PrereqTech].Name or nil,
+            ObsoleteCivic = (data.ObsoleteCivic) and GameInfo.Civics[data.ObsoleteCivic].Name or nil,
+            ObsoleteTech = (data.ObsoleteTech) and GameInfo.Technologies[data.ObsoleteTech].Name or nil,
+            TextTemplate = (data.TilesRequired > 1) and "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_PER_TEXT" or "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_TEXT",
+            Score = score
+          })
+        end
+      elseif data.AdjacentImprovement then
+        table.insert(bonuseDataList[18], {
+          YieldName = yield.Name,
+          YieldIcon = yield.IconString,
+          YieldChange = data.YieldChange,
+          ObjectName = GameInfo.Improvements[data.AdjacentImprovement].Name,
+          TilesRequired = data.TilesRequired,
+          PrereqCivic = (data.PrereqCivic) and GameInfo.Civics[data.PrereqCivic].Name or nil,
+          PrereqTech = (data.PrereqTech) and GameInfo.Technologies[data.PrereqTech].Name or nil,
+          ObsoleteCivic = (data.ObsoleteCivic) and GameInfo.Civics[data.ObsoleteCivic].Name or nil,
+          ObsoleteTech = (data.ObsoleteTech) and GameInfo.Technologies[data.ObsoleteTech].Name or nil,
+          TextTemplate = (data.TilesRequired > 1) and "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_PER_TEXT" or "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_TEXT",
+          Score = score
+        })
+      else
+        -- 非法情况
+        print("非法的相邻加成数据", row.YieldChangeId)
+      end
+    end
+  end
+
+  -- 排序
+  for _, list in ipairs(bonuseDataList) do
+    table.sort(list, function(a, b) return a.Score < b.Score; end)
+  end
+
+  -- 生成文本
+  local textList = {};
+  for _, list in ipairs(bonuseDataList) do
+    for _, data in ipairs(list) do
+      local text = '';
+      if data.ObjectName == nil then
+        text = Locale.Lookup(data.TextTemplate, data.YieldChange, data.YieldIcon, data.YieldName);
+      else
+        text = Locale.Lookup(data.TextTemplate, data.YieldChange, data.YieldIcon, data.YieldName, data.TilesRequired, data.ObjectName);
+      end
+
+      if data.PrereqCivic or data.PrereqTech then
+        text = text .. Locale.Lookup("LOC_TOOLTIP_HD_ADJACENCIES_REQUIRES_TEXT", (data.PrereqCivic and data.PrereqCivic or data.PrereqTech))
+      end
+
+      if data.ObsoleteCivic or data.ObsoleteTech then
+        text = text .. Locale.Lookup("LOC_TOOLTIP_HD_ADJACENCIES_OBSOLETE_TEXT", (data.ObsoleteCivic and data.ObsoleteCivic or data.ObsoleteTech))
+      end
+
+      table.insert(textList, text);
+    end
+  end
+
+	return textList;
+end
+Utils.GetSortedAdjacencyBonuses = GetSortedAdjacencyBonuses;
+
+-- 获得改良产出和加产节点
+function GetSortedImprovementYieldChanges(improvementType)
+  local yieldChanges = {};
+
+  for row in GameInfo.Improvement_YieldChanges() do
+		if row.ImprovementType == improvementType and row.YieldChange ~= 0 then
+			local yield = GameInfo.Yields[row.YieldType];
+			if yield then
+				table.insert(yieldChanges, {
+          Text = Locale.Lookup("LOC_TOOLTIP_HD_BASIC_YIELDS_TEXT", row.YieldChange, yield.IconString, yield.Name),
+          Score = yield.Index
+        });
+			end
+		end
+	end
+
+  for row in GameInfo.Improvement_BonusYieldChanges() do
+		if row.ImprovementType == improvementType and row.BonusYieldChange ~= 0 then
+			local yield = GameInfo.Yields[row.YieldType];
+			if yield then
+
+				local item;
+				if row.PrereqCivic then
+					item = GameInfo.Civics[row.PrereqCivic];
+				else
+					item = GameInfo.Technologies[row.PrereqTech];
+				end
+
+				if item then
+					table.insert(yieldChanges, {
+            Text = Locale.Lookup("LOC_TOOLTIP_HD_YIELD_CHANGES_REQUIRES_TEXT", row.BonusYieldChange, yield.IconString, yield.Name, item.Name),
+            Score = yield.Index + item.Cost
+          });
+				end
+			end
+		end
+	end
+
+  table.sort(yieldChanges, function(a, b) return a.Score < b.Score; end)
+
+  local textList = {};
+  for _, data in ipairs(yieldChanges) do
+    table.insert(textList, data.Text)
+  end
+
+  -- 魅力转产
+  local improvement = GameInfo.Improvements[improvementType];
+  if improvement.YieldFromAppeal then
+    local yield = GameInfo.Yields[improvement.YieldFromAppeal];
+    table.insert(textList, Locale.Lookup('LOC_TOOLTIP_HD_YIELD_FROM_APPEAL_TEXT', improvement.YieldFromAppealPercent, yield.IconString, yield.Name))
+  end
+
+  return textList;
+end
+Utils.GetSortedImprovementYieldChanges = GetSortedImprovementYieldChanges;

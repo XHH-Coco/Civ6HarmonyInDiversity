@@ -67,6 +67,10 @@ values
 	("LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_ERA_PAGE_CHAPTER_HD_ERA_SCORE_TITLE",                      "Gain Gold from Era Score"),
 	("LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_ERA_PAGE_CHAPTER_HD_ERA_SCORE_PARA_1",                     "New mechanism: Gains 5 [ICON_Gold] Gold for every era score earned. If one loses their era points through certain means, the corresponding amount of [ICON_GOLD] gold coins will also be deducted."),
 
+	("LOC_PEDIA_HD_YIELD_CHANGES_NAME",                         									 "Yields Changes"),
+	("LOC_PEDIA_HD_IMPROVEMENT_UNIT_TEXT",                         							 	 "Built By"),
+	("LOC_PEDIA_HD_CLASSIFICATION_TEXT",                         						 			 "Classification"),
+
 	-- 百科分类
 	("LOC_PEDIA_GOVERNMENTS_PAGEGROUP_CITY_POLICIES_NAME",                         "City Policies"),
 	("LOC_PEDIA_MOMENTS_TITLE",      			                 												 "Historic Moments and Commemorations"),
@@ -283,6 +287,10 @@ values
 	("zh_Hans_CN",  "LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_ERA_PAGE_CHAPTER_HD_ERA_SCORE_TITLE",                      "时代得分获得金币"),
 	("zh_Hans_CN",  "LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_ERA_PAGE_CHAPTER_HD_ERA_SCORE_PARA_1",                     "新增机制：每获得1点时代得分获得5 [ICON_GOLD] 金币，如果通过某些手段失去时代分，则也会扣除对应数量的 [ICON_GOLD] 金币。"),
 	
+	("zh_Hans_CN",  "LOC_PEDIA_HD_YIELD_CHANGES_NAME",                         									 "加产节点"),
+	("zh_Hans_CN",  "LOC_PEDIA_HD_IMPROVEMENT_UNIT_TEXT",                         						 	 "改良单位"),
+	("zh_Hans_CN",  "LOC_PEDIA_HD_CLASSIFICATION_TEXT",                         						     "分类"),
+
 	-- 百科分类
 	("zh_Hans_CN",  "LOC_PEDIA_GOVERNMENTS_PAGEGROUP_CITY_POLICIES_NAME",                        "城市政策"),
 

@@ -17,11 +17,10 @@ values
     ("LOC_RESOURCE_BARLEY_NAME",                                  "Highland Barley"),
     ("LOC_RESOURCE_STONE_NAME",                                   "Andesite"),
     ("LOC_RESOURCE_FISH_NAME",                                    "Chum Salmon"),
-    ("LOC_IMPROVEMENT_LUMBER_MILL_HD_DESCRIPTION",                "+1 [ICON_Production] Production. [NEWLINE][NEWLINE]Can be built on Woods or valid Resources. If built on Luxury resources, the city will gain use of that Resource. +1 [ICON_Production] Production for each adjacent Industrial Zone District (except Hansa District). Once Guilds is unlocked it can also be built on Rainforest.[NEWLINE][NEWLINE]After researching Bronze Working Technology, for each improved Lumber Mill Resource in this city, +10% Production towards districts and buildings."),
+    ("LOC_IMPROVEMENT_LUMBER_MILL_HD_DESCRIPTION",                "Can be built on Woods or valid Resources. Once Guilds is unlocked it can also be built on Rainforest.[NEWLINE][NEWLINE]After researching Bronze Working Technology, for each improved Lumber Mill Resource in this city, +10% Production towards districts and buildings."),
     ("LOC_BUILDING_STONEHENGE_DESCRIPTION",                       "Grants a free [ICON_GreatProphet] Great Prophet. [ICON_GreatProphet] Great Prophets may found a Religion on Stonehenge instead of a Holy Site. Must be adjacent to [ICON_RESOURCE_STONE] Andesite and on flat land."),
     ("LOC_BELIEF_PAN_NAME",                                       "Pan"),
     ("LOC_BELIEF_PAN_DL_DESCRIPTION",                             "+1 [ICON_FAITH] Faith and +1 [ICON_CULTURE] Culture from Lumber Mills over resource. +2 [ICON_GREATPROPHET] Great Prophet points per turn for cities having Lumber Mill over resource."),
-    ("LOC_DISTRICT_LUMBER_MILL_FAITH",                            "+{1_num} [ICON_Faith] Faith from the adjacent Lumber Mill {1_Num : plural 2?tile; other?tiles;}."),
     ("LOC_BELIEF_HEART_OF_THE_WOODS_NAME",                        "Heart of the Woods"),
     ("LOC_BELIEF_HEART_OF_THE_WOODS_DL_DESCRIPTION",              "Lumber Mills over Luxury and Bonus resources provide +1 [ICON_Food] Food and +1 [ICON_Science] Science."),
     ("LOC_TECH_BRONZE_WORKING_DESCRIPTION_RS2",                   "{LOC_TECH_BRONZE_WORKING_DESCRIPTION}[NEWLINE]For each improved Lumber Mill Resource in this city, +10% Production towards districts and buildings.");
@@ -49,21 +48,15 @@ values
     ("zh_Hans_CN",  "LOC_RESOURCE_STONE_NAME",                                   "安山岩"),
     ("zh_Hans_CN",  "LOC_RESOURCE_FISH_NAME",                                    "马哈鱼"),
     ("zh_Hans_CN",  "LOC_RESOURCE_COPPER_NAME",                                  "铜矿"),
-	("zh_Hans_CN",	"LOC_IMPROVEMENT_LUMBER_MILL_HD_DESCRIPTION",				 "+1 [ICON_Production] 生产力。每相邻1个工业区（商业同业公会除外）单元格，额外+1 [ICON_Production] 生产力。[NEWLINE][NEWLINE]只能在森林或有效资源上建造。如果建在奢侈品资源上，城市则可以利用该资源。解锁“公会”市政后也能建造在雨林上。[NEWLINE][NEWLINE]解锁“铸铜术”科技后，城市每拥有一种改良的伐木场资源，则建造区域和建筑时+10%建造速度。"), 
+	("zh_Hans_CN",	"LOC_IMPROVEMENT_LUMBER_MILL_HD_DESCRIPTION",				 "只能在森林或有效资源上建造。解锁“公会”市政后也能建造在雨林上。[NEWLINE][NEWLINE]解锁“铸铜术”科技后，城市每拥有一种改良的伐木场资源，则建造区域和建筑时+10%建造速度。"), 
     ("zh_Hans_CN",  "LOC_BUILDING_STONEHENGE_DESCRIPTION",                       "免费获得1个 [ICON_GreatProphet] 大预言家。 [ICON_GreatProphet] 大预言家可在巨石阵（代替圣地）创立一个宗教。必须建在靠近 [ICON_RESOURCE_STONE] 安山岩的平坦地形上。"),
     ("zh_Hans_CN",  "LOC_BELIEF_PAN_NAME",                                       "潘神"),
     ("zh_Hans_CN",  "LOC_BELIEF_PAN_DL_DESCRIPTION",                             "所有改良资源的伐木场+1 [ICON_CULTURE] 文化值和+1 [ICON_FAITH] 信仰值。如城市拥有改良资源的伐木场，则每回合+2 [ICON_GREATPROPHET] 大预言家点数。"),
-    ("zh_Hans_CN",  "LOC_DISTRICT_LUMBER_MILL_FAITH",                            "+{1_num} [ICON_Faith] 信仰值来自相邻森林{1_Num : plural 2?单元格; other?单元格;}。"),
     ("zh_Hans_CN",  "LOC_BELIEF_HEART_OF_THE_WOODS_NAME",                        "森灵之心"),
     ("zh_Hans_CN",  "LOC_BELIEF_HEART_OF_THE_WOODS_DL_DESCRIPTION",              "改良奢侈品资源和加成资源的伐木场+1 [ICON_Food] 食物和 +1 [ICON_Science] 科技值。"),
     ("zh_Hans_CN",  "LOC_TECH_BRONZE_WORKING_DESCRIPTION_RS2",                   "{LOC_TECH_BRONZE_WORKING_DESCRIPTION}[NEWLINE]城市每拥有一种改良的伐木场资源，则建造区域和建筑时+10%建造速度。");
 
 --------------------------------------------------------------------------------
--- update LocalizedText set Text = Text || " +1 [ICON_Production] Production to Lumber Mills over bonus resources in this city." where Language = 'en_US' and
---     (Tag = 'LOC_DISTRICT_INDUSTRIAL_ZONE_HD_DESCRIPTION' or Tag = 'LOC_DISTRICT_HANSA_HD_DESCRIPTION' or Tag = 'LOC_DISTRICT_OPPIDUM_HD_DESCRIPTION');
--- update LocalizedText set Text = Text || "为本城改良加成资源的伐木场+1 [ICON_Production] 生产力。" where Language = 'zh_Hans_CN' and
---     (Tag = 'LOC_DISTRICT_INDUSTRIAL_ZONE_HD_DESCRIPTION' or Tag = 'LOC_DISTRICT_HANSA_HD_DESCRIPTION' or Tag = 'LOC_DISTRICT_OPPIDUM_HD_DESCRIPTION');
-
 CREATE TEMPORARY TABLE "HDResourceful2_Pedia_Text"(
     "ResourceType"  TEXT
 );

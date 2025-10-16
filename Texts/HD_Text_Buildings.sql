@@ -23,13 +23,13 @@ values
     ("LOC_BUILDING_UNIVERSITY_DESCRIPTION",                       "[ICON_CITIZEN] Citizens in this city provide +0.5 [ICON_SCIENCE] Science."),
     ("LOC_BUILDING_MADRASA_NAME",                                 "Al-Azhar University"),
     ("LOC_BUILDING_MADRASA_DESCRIPTION",                          "A building unique to Arabia. This building can only be built once per civilization. [NEWLINE][NEWLINE]Campus and Theater Square districts within 6 tiles provide [ICON_Faith] Faith equal to the adjacency bonus. [NEWLINE]For each city follows your Religion, Campus district in this city receives +1 adjacency bonus. If at least 20 cities follow your Religion, your cities can purchase buildings in Campus districts with [ICON_FAITH] Faith. [NEWLINE]For each cultural policy slot in your government, Theater Square district in this city receives +2 adjacency bonus. If your governmrnt has at least 6 cultural policy slots, your cities can purchase buildings in Theater Square districts with [ICON_FAITH] Faith."),
-    ("LOC_BUILDING_NAVIGATION_SCHOOL_DESCRIPTION",                "A building unique to Portugal. +25% [ICON_PRODUCTION] Production towards naval units in this city. +1 [ICON_SCIENCE] Science for every two coast or lake tiles in this city. +2 [ICON_GreatAdmiral] Great Admiral points. [ICON_CITIZEN] Citizens in this city provide +0.5 [ICON_SCIENCE] Science."),
+    ("LOC_BUILDING_NAVIGATION_SCHOOL_DESCRIPTION",                "A building unique to Portugal. +25% [ICON_PRODUCTION] Production towards naval units in this city. +1 [ICON_SCIENCE] Science for every 2 Shallow Sea and Lake tiles in this city. +2 [ICON_GreatAdmiral] Great Admiral points. [ICON_CITIZEN] Citizens in this city provide +0.5 [ICON_SCIENCE] Science."),
     ("LOC_BUILDING_RESEARCH_LAB_DESCRIPTION",                     "+5% [ICON_SCIENCE] Science in this city. +10% [ICON_SCIENCE] Science if this city is fully powered. "),
     ("LOC_BUILDING_SEOWON_NAME",                                  "Bibliothecary"),
     ("LOC_BUILDING_HD_DATA_CENTER_NAME",                          "Data Center"),
     ("LOC_BUILDING_HD_DATA_CENTER_DESCRIPTION",                   "+1 Wildcard Policy Slot. After finishing construction, Gain +1600 [ICON_SCIENCE] Science and +1600 [ICON_CULTURE] Culture from each level 3 Alliance. [NEWLINE]Can only be built once in a civilization."),
     -- Theater
-    ("LOC_BUILDING_MARAE_DESCRIPTION",                            "A building unique to the Māori. +2 [ICON_CULTURE] Culture and +2 [ICON_FAITH] Faith to all of this city's tiles with a passable feature or natural wonder. +1 [ICON_CULTURE] Culture for every three coast or lake tiles in this city. After Flight is researched, receive +1 [ICON_TOURISM] Tourism to all of this city's tiles with a feature or natural wonder. Has no Great Work slots."),
+    ("LOC_BUILDING_MARAE_DESCRIPTION",                            "A building unique to the Māori. +2 [ICON_CULTURE] Culture and +2 [ICON_FAITH] Faith to all of this city's tiles with a passable feature or natural wonder. +1 [ICON_CULTURE] Culture for every 3 Shallow Sea and Lake tiles in this city. After Flight is researched, receive +1 [ICON_TOURISM] Tourism to all of this city's tiles with a feature or natural wonder. Has no Great Work slots."),
     ("LOC_BUILDING_MUSEUM_ARTIFACT_DESCRIPTION",                  "Holds [ICON_GreatWork_Artifact] Artifacts. May not be built in a Theater Square district that already has an Art Museum. +5% [ICON_CULTURE] Culture in this city."),
     ("LOC_BUILDING_MUSEUM_ART_DESCRIPTION",                       "Holds [ICON_GreatWork_Landscape] Great Works of Art. May not be built in a Theater Square district that already has an Archaeological Museum. +5% [ICON_CULTURE] Culture in this city."),
     ("LOC_BUILDING_FILM_STUDIO_EXPANSION2_DESCRIPTION",           "A building unique to America. +50% [ICON_Tourism] Tourism pressure from this city. +5% [ICON_CULTURE] Culture in this city. +5% [ICON_CULTURE] culture if this city is fully [ICON_POWER] powered."),
@@ -80,9 +80,9 @@ values
     ("LOC_BUILDING_BANK_DESCRIPTION",                             "+5% [ICON_gold] Gold in this city."),
     ("LOC_BUILDING_STOCK_EXCHANGE_DESCRIPTION",                   "+10% [ICON_gold] Gold and +10% accumulation rate for [ICON_GREATMERCHANT] Great Merchant Points from all cities within 6 tiles that do not already have a bonus from another Stock Exchange. These bonuses are doubled if the city is fully powered."),
     -- Harbor
-    ("LOC_BUILDING_LIGHTHOUSE_EXPANSION2_DESCRIPTION",            "+25% combat experience for all naval units trained in this city. +1 [ICON_Food] Food to all Coast and Lake tiles in this city. +1 [ICON_TradeRoute] Trade Route capacity."), -- each [ICON_Resource_Fish] Fish, [ICON_Resource_Crabs] Crabs, [ICON_Resource_Whales] Whales, [ICON_Resource_Pearls] Pearls
-    ("LOC_BUILDING_SHIPYARD_EXPANSION2_DESCRIPTION",              "+25% combat experience for all naval units trained in this city. Bonus [ICON_Production] Production equal to adjacency bonus of the Harbor district. +1 [ICON_Production] Production on all Coast and Lake tiles for this city. +25% [ICON_PRODUCTION] production towards all naval units."),
-    ("LOC_BUILDING_SEAPORT_DESCRIPTION",                          "+25% combat experience for all naval units trained in this city. Allows Fleets and Armadas to be trained directly. Fleet and Armada training costs reduced by 25%. +1 [ICON_FOOD] Gold on all Coast and Lake tiles for this city. Bonus [ICON_FOOD] Food equal to adjacency bonus of the Harbor district.[NEWLINE]+10% accumulation rate for [ICON_GREATADMIRAL] Great Admiral Points. +3 [ICON_STRENGTH] Combat Strength for all navy units trained in this city."),
+    ("LOC_BUILDING_LIGHTHOUSE_EXPANSION2_DESCRIPTION",            "+25% combat experience for all naval units trained in this city. +1 [ICON_Food] Food to all Shallow Sea and Lake tiles in this city. +1 [ICON_TradeRoute] Trade Route capacity."), -- each [ICON_Resource_Fish] Fish, [ICON_Resource_Crabs] Crabs, [ICON_Resource_Whales] Whales, [ICON_Resource_Pearls] Pearls
+    ("LOC_BUILDING_SHIPYARD_EXPANSION2_DESCRIPTION",              "+25% combat experience for all naval units trained in this city. Bonus [ICON_Production] Production equal to adjacency bonus of the Harbor district. +1 [ICON_Production] Production on all Shallow Sea and Lake tiles for this city. +25% [ICON_PRODUCTION] production towards all naval units."),
+    ("LOC_BUILDING_SEAPORT_DESCRIPTION",                          "+25% combat experience for all naval units trained in this city. Allows Fleets and Armadas to be trained directly. Fleet and Armada training costs reduced by 25%. +1 [ICON_FOOD] Gold on all Shallow Sea and Lake tiles for this city. Bonus [ICON_FOOD] Food equal to adjacency bonus of the Harbor district.[NEWLINE]+10% accumulation rate for [ICON_GREATADMIRAL] Great Admiral Points. +3 [ICON_STRENGTH] Combat Strength for all navy units trained in this city."),
     -- Government
     ("LOC_BUILDING_GOV_WIDE_NAME",                                "Ekklesiasterion"),
     ("LOC_BUILDING_GOV_WIDE_DESCRIPTION",                         "+50% [ICON_PRODUCTION] Production toward Settlers in this City. New cities receive a free Builder. +50% [ICON_Production] Production towards buildings in City Center which already built in this city."),
@@ -131,7 +131,7 @@ values
     ("LOC_THERMAL_BATH_PRODUCTION",                               "+{1_num} [ICON_PRODUCTION] Production from the adjacent geothermal fissure {1_Num : plural 1?tile; other?tiles;}."),
     -- Water Entertainment Complex
     ("LOC_BUILDING_FERRIS_WHEEL_DESCRIPTION_HD",                  "+3 [ICON_Tourism] Tourism."),
-    ("LOC_BUILDING_AQUATICS_CENTER_DL_DESCRIPTION",               "+2 [ICON_Tourism] Tourism for each Wonder built in this city on or adjacent to a Coast tile."),
+    ("LOC_BUILDING_AQUATICS_CENTER_DL_DESCRIPTION",               "+2 [ICON_Tourism] Tourism for each Wonder built in this city on or adjacent to a Shallow Sea tile."),
     ("LOC_BUILDING_AQUARIUM_DL_DESCRIPTION",                      "+1 [ICON_SCIENCE] Science and [ICON_Culture] Culture from every type of Fishing Boat Resource you controlled."),
     -- Aerodrome
     ("LOC_BUILDING_HANGAR_DESCRIPTION",                           "+25% combat experience for air units trained in this city. +2 air unit slot in Aerodrome district. +50% [Icon_Production] Production towards Air Units."),
@@ -198,13 +198,13 @@ values
     ("zh_Hans_CN",  "LOC_BUILDING_UNIVERSITY_DESCRIPTION",                       "每位 [ICON_CITIZEN] 市民+0.5 [ICON_Science] 科技值。"),
     ("zh_Hans_CN",  "LOC_BUILDING_MADRASA_NAME",                                 "艾孜哈尔伊斯兰大学"),
     ("zh_Hans_CN",  "LOC_BUILDING_MADRASA_DESCRIPTION",                          "阿拉伯特色建筑，文明中一次仅限建造一座该建筑。[NEWLINE][NEWLINE]6个单元格内的学院和剧院广场的相邻加成也提供 [ICON_FAITH] 信仰值。[NEWLINE][NEWLINE]每座信仰你创立的宗教的城市为本城的学院+1相邻加成；若至少有20座城市信仰你创立的宗教，则你的所有城市可以用 [ICON_FAITH] 信仰值购买学院建筑。[NEWLINE]你的政体中的每个文化政策槽位为本城的剧院广场+2相邻加成；若你的政体至少有6个文化政策槽位，则你的所有城市可以用 [ICON_FAITH] 信仰值购买剧院广场建筑。"),
-    ("zh_Hans_CN",  "LOC_BUILDING_NAVIGATION_SCHOOL_DESCRIPTION",                "葡萄牙特色建筑。在此城中生产海军单位时+25%生产力。此城中每拥有2个海岸或湖泊单元格，则+1 [ICON_SCiENCE] 科技值。+2 [ICON_GreatAdmiral] 海军统帅点数。每位 [ICON_CITIZEN] 市民+0.5 [ICON_Science] 科技值。"),
+    ("zh_Hans_CN",  "LOC_BUILDING_NAVIGATION_SCHOOL_DESCRIPTION",                "葡萄牙特色建筑。在此城中生产海军单位时+25%生产力。此城中每拥有2个浅海与湖泊单元格，则+1 [ICON_SCiENCE] 科技值。+2 [ICON_GreatAdmiral] 海军统帅点数。每位 [ICON_CITIZEN] 市民+0.5 [ICON_Science] 科技值。"),
     ("zh_Hans_CN",  "LOC_BUILDING_RESEARCH_LAB_DESCRIPTION",                     "本城 [ICON_SCIENCE] 科技值+5%。通电后额外为本城+10% [ICON_SCIENCE] 科技值。"),
     ("zh_Hans_CN",  "LOC_BUILDING_SEOWON_NAME",                                  "编书馆"),
     ("zh_Hans_CN",  "LOC_BUILDING_HD_DATA_CENTER_NAME",                          "数据中心"),
     ("zh_Hans_CN",  "LOC_BUILDING_HD_DATA_CENTER_DESCRIPTION",                   "+1通配符政策槽位。建成时，每个3级同盟提供1600 [ICON_SCIENCE] 科技值和1600 [ICON_CULTURE] 文化值。[NEWLINE]文明中一次仅限建造一座该建筑。"),
     -- 剧院
-    ("zh_Hans_CN",  "LOC_BUILDING_MARAE_DESCRIPTION",                            "毛利特色建筑。城市中所有包含可通行地貌或自然奇观的单元格+2 [ICON_CULTURE] 文化值与 [ICON_FAITH] 信仰值。此城中每拥有3个海岸或湖泊单元格，则+1 [ICON_CULTURE] 文化值。解锁“飞行”科技后，城市中所有包含地貌或自然奇观的单元格+1 [ICON_TOURISM] 旅游业绩。无巨作槽位。"),
+    ("zh_Hans_CN",  "LOC_BUILDING_MARAE_DESCRIPTION",                            "毛利特色建筑。城市中所有包含可通行地貌或自然奇观的单元格+2 [ICON_CULTURE] 文化值与 [ICON_FAITH] 信仰值。此城中每拥有3个浅海与湖泊单元格，则+1 [ICON_CULTURE] 文化值。解锁“飞行”科技后，城市中所有包含地貌或自然奇观的单元格+1 [ICON_TOURISM] 旅游业绩。无巨作槽位。"),
     ("zh_Hans_CN",  "LOC_BUILDING_MUSEUM_ARTIFACT_DESCRIPTION",                  "可存放 [ICON_GreatWork_Artifact] 文物。如果在剧院广场区域已经有一座艺术博物馆则无法修建。[NEWLINE]本城 [ICON_CULTURE] 文化值+5%。"),
     ("zh_Hans_CN",  "LOC_BUILDING_MUSEUM_ART_DESCRIPTION",                       "可存放 [ICON_GreatWork_Landscape] 艺术巨作。如果在剧院广场区域已经有一座考古博物馆则无法修建。[NEWLINE]本城 [ICON_CULTURE] 文化值+5%。"),
     ("zh_Hans_CN",  "LOC_BUILDING_BROADCAST_CENTER_DESCRIPTION",                 "本城 [ICON_CULTURE] 文化值+5%，通电后额外为本城+5% [ICON_CULTURE] 文化值。"),
@@ -256,9 +256,9 @@ values
     ("zh_Hans_CN",  "LOC_BUILDING_GRAND_BAZAAR_DESCRIPTION",                     "奥斯曼特色建筑。城市中改良的每种不同战略资源均可额外增加1点。城市改良的每个奢侈品资源均可提供1点 [ICON_AMENITIES] 宜居度。本城 [ICON_GOLD] 金币产出+5%。"),
     ("zh_Hans_CN",  "LOC_BUILDING_STOCK_EXCHANGE_DESCRIPTION",                   "6个单元格内的城市+10% [ICON_GOLD] 金币，玩家的 [ICON_GREATMERCHANT] 大商人点数积累速度+10%（前提是其尚未从其他的“证券交易所”建筑获得加成）；通电后效果翻倍。"),
     -- 港口
-    ("zh_Hans_CN",  "LOC_BUILDING_LIGHTHOUSE_EXPANSION2_DESCRIPTION",            "此城生产的所有海军单位+25%战斗经验值。此城的所有近海和湖泊单元格+1 [ICON_Food] 食物。+1 [ICON_TradeRoute] 贸易路线容量。"), -- [ICON_Resource_Fish] 鱼、 [ICON_Resource_Crabs] 螃蟹、 [ICON_Resource_Whales] 鲸鱼、 [ICON_Resource_Pearls] 珍珠
-    ("zh_Hans_CN",  "LOC_BUILDING_SHIPYARD_EXPANSION2_DESCRIPTION",              "此城中生产的所有海军单位+25%战斗经验值。[ICON_Production] 生产力加成等于港口区域的相邻加成。此城所有海岸和湖泊单元格+1 [ICON_PRODUCTION] 生产力。对所有海军单位+25% [ICON_PRODUCTION] 生产力。"),
-    ("zh_Hans_CN",  "LOC_BUILDING_SEAPORT_DESCRIPTION",                          "此城中生产的所有海军单位+25%经验值。可直接生产舰队和无敌舰队。舰队和无敌舰队的生产费用降低25%。此城所有海岸和湖泊单元格+1 [ICON_FOOD] 食物。额外产出相当于港口相邻加成的 [ICON_FOOD] 食物。 [NEWLINE]玩家的 [ICON_GREATADMIRAL] 海军统帅点数积累速度+10%，且所有训练的海军单位+3 [ICON_STRENGTH] 战斗力。"),
+    ("zh_Hans_CN",  "LOC_BUILDING_LIGHTHOUSE_EXPANSION2_DESCRIPTION",            "此城生产的所有海军单位+25%战斗经验值。此城的所有浅海与湖泊单元格+1 [ICON_Food] 食物。+1 [ICON_TradeRoute] 贸易路线容量。"), -- [ICON_Resource_Fish] 鱼、 [ICON_Resource_Crabs] 螃蟹、 [ICON_Resource_Whales] 鲸鱼、 [ICON_Resource_Pearls] 珍珠
+    ("zh_Hans_CN",  "LOC_BUILDING_SHIPYARD_EXPANSION2_DESCRIPTION",              "此城中生产的所有海军单位+25%战斗经验值。[ICON_Production] 生产力加成等于港口区域的相邻加成。此城所有浅海与湖泊单元格+1 [ICON_PRODUCTION] 生产力。对所有海军单位+25% [ICON_PRODUCTION] 生产力。"),
+    ("zh_Hans_CN",  "LOC_BUILDING_SEAPORT_DESCRIPTION",                          "此城中生产的所有海军单位+25%经验值。可直接生产舰队和无敌舰队。舰队和无敌舰队的生产费用降低25%。此城所有浅海与湖泊单元格+1 [ICON_FOOD] 食物。额外产出相当于港口相邻加成的 [ICON_FOOD] 食物。 [NEWLINE]玩家的 [ICON_GREATADMIRAL] 海军统帅点数积累速度+10%，且所有训练的海军单位+3 [ICON_STRENGTH] 战斗力。"),
     -- 政府区
     ("zh_Hans_CN",  "LOC_BUILDING_GOV_WIDE_NAME",                                "会议堂"),
     ("zh_Hans_CN",  "LOC_BUILDING_GOV_WIDE_DESCRIPTION",                         "在此城中生产开拓者时+50%建造速度。新建立的城市获得1个免费的建造者。建造本城拥有的市中心建筑+50%建造速度。"),
@@ -306,7 +306,7 @@ values
     ("zh_Hans_CN",  "LOC_THERMAL_BATH_PRODUCTION",                               "+{1_num} [ICON_PRODUCTION] 生产力来自相邻地热裂缝{1_Num : plural 1?单元格; other?单元格;}。"),
     -- 水上娱乐
     ("zh_Hans_CN",  "LOC_BUILDING_FERRIS_WHEEL_DESCRIPTION_HD",                  "+3 [ICON_Tourism] 旅游业绩。"),
-    ("zh_Hans_CN",  "LOC_BUILDING_AQUATICS_CENTER_DL_DESCRIPTION",               "此城中建在海岸单元格之上或周围的每座奇观+2 [ICON_Tourism] 旅游业绩。"),
+    ("zh_Hans_CN",  "LOC_BUILDING_AQUATICS_CENTER_DL_DESCRIPTION",               "此城中沿海或海上的奇观+2 [ICON_Tourism] 旅游业绩。"),
     ("zh_Hans_CN",  "LOC_BUILDING_AQUARIUM_DL_DESCRIPTION",                      "你每拥有一种渔船资源，额外+1 [ICON_SCIENCE] 科技值和 [ICON_CULTURE] 文化值。"),
     -- 航空港
     ("zh_Hans_CN",  "LOC_BUILDING_HANGAR_DESCRIPTION",                           "当前城市训练的空中单位+25%战斗经验值。航空港区域+2空中单位槽位。建造空中单位时，+50% [Icon_Production] 生产力。"),

@@ -13,7 +13,7 @@ local BuildingNeedDetectList = {
     -- PropertyKey
       -- ResourceClassificationType
 function Init()
-  for row in GameInfo.HD_Building_ResourceClassification() do
+  for row in GameInfo.HD_Building_Base_On_ResourceClassification() do
     local propertyKeyList = BuildingNeedDetectList[row.DetectRange][row.BuildingType] or {};
     local resourceClassificationTypeList = propertyKeyList[row.PropertyKey] or {};
 

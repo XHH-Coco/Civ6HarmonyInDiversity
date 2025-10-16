@@ -420,18 +420,18 @@ function InitRouteTypeList()
 			table.insert(routeTypeLevelList, routeIndex)
 		end
 
-		print(
-			Locale.Lookup(GameInfo.Eras[eraIndex].Name),
-			Locale.Lookup(GameInfo.Routes[routeIndex].Name)
-		)
+		-- print(
+		-- 	Locale.Lookup(GameInfo.Eras[eraIndex].Name),
+		-- 	Locale.Lookup(GameInfo.Routes[routeIndex].Name)
+		-- )
 	end
 
-	for level, routeIndex in ipairs(routeTypeLevelList) do
-		print(
-			level,
-			Locale.Lookup(GameInfo.Routes[routeIndex].Name)
-		)
-	end
+	-- for level, routeIndex in ipairs(routeTypeLevelList) do
+	-- 	print(
+	-- 		level,
+	-- 		Locale.Lookup(GameInfo.Routes[routeIndex].Name)
+	-- 	)
+	-- end
 end
 InitRouteTypeList()
 
@@ -649,18 +649,18 @@ function InitHasAdjacencyDistrictList()
     return;
   end
 
-  print("开始统计有相邻加成的区域")
+  -- print("开始统计有相邻加成的区域")
 
   for row in GameInfo.DistrictCorrespondingYieldType_HD() do
     if row.HasAdjacency == true then
       HasAdjacencyDistrictList[GameInfo.Districts[row.DistrictType].Index] = true;
-      print(Locale.Lookup(GameInfo.Districts[row.DistrictType].Name))
+      -- print(Locale.Lookup(GameInfo.Districts[row.DistrictType].Name))
 
       -- 检测UD
       for rrow in GameInfo.DistrictReplaces() do
         if row.DistrictType == rrow.ReplacesDistrictType then
           HasAdjacencyDistrictList[GameInfo.Districts[rrow.CivUniqueDistrictType].Index] = true;
-          print(Locale.Lookup(GameInfo.Districts[rrow.CivUniqueDistrictType].Name))
+          -- print(Locale.Lookup(GameInfo.Districts[rrow.CivUniqueDistrictType].Name))
         end
       end
     end

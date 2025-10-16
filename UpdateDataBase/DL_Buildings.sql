@@ -670,28 +670,18 @@ values
 insert or replace into BuildingModifiers
 	(BuildingType,					ModifierId)
 values
-	('BUILDING_UNIVERSITY',			'FEUDALISM_ADD_RAINFOREST_ADJACENCY'),
 	('BUILDING_UNIVERSITY',			'UNIVERSITY_ADD_POPULATION_SCIENCE');
 
 insert or ignore into Modifiers
 	(ModifierId,									ModifierType,												SubjectRequirementSetId)
 values
-	('FEUDALISM_ADD_RAINFOREST_ADJACENCY',			'MODIFIER_SINGLE_CITY_FEATURE_ADJACENCY',					'PLAYER_HAS_CIVIC_FEUDALISM_REQUIREMENTS'),
-	('UNIVERSITY_ADD_POPULATION_SCIENCE',			'MODIFIER_SINGLE_CITY_ADJUST_CITY_YIELD_PER_POPULATION',	NULL),
-	('UNIVERSITY_ADD_ADJACENT_RAINFOREST_SCIENCE',	'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',						'UNIVERSITY_ADJACENCY_SCIENCE_JUNGLE_REQUIREMENTS');
+	('UNIVERSITY_ADD_POPULATION_SCIENCE',			'MODIFIER_SINGLE_CITY_ADJUST_CITY_YIELD_PER_POPULATION',	NULL);
 
 insert or ignore into ModifierArguments
 	(ModifierId,										Name,				Value)
 values
-	('FEUDALISM_ADD_RAINFOREST_ADJACENCY',				'DistrictType',		'DISTRICT_CAMPUS'),
-	('FEUDALISM_ADD_RAINFOREST_ADJACENCY',				'FeatureType',		'FEATURE_JUNGLE'),
-	('FEUDALISM_ADD_RAINFOREST_ADJACENCY',				'YieldType',		'YIELD_SCIENCE'),
-	('FEUDALISM_ADD_RAINFOREST_ADJACENCY',				'Amount',			1),
-	('FEUDALISM_ADD_RAINFOREST_ADJACENCY',				'Description',		'LOC_UNIVERSITY_JUNGLE_SCIENCE'),
 	('UNIVERSITY_ADD_POPULATION_SCIENCE',				'YieldType',		'YIELD_SCIENCE'),
-	('UNIVERSITY_ADD_POPULATION_SCIENCE',				'Amount',			0.5),
-	('UNIVERSITY_ADD_ADJACENT_RAINFOREST_SCIENCE',		'YieldType',		'YIELD_SCIENCE'),
-	('UNIVERSITY_ADD_ADJACENT_RAINFOREST_SCIENCE',		'Amount',			1);
+	('UNIVERSITY_ADD_POPULATION_SCIENCE',				'Amount',			0.5);
 
 --政体建筑改动
 --一级政体建筑
@@ -1048,7 +1038,7 @@ delete from BuildingModifiers where ModifierId = 'AQUARIUM_SEARESOURCE_SCIENCE';
 delete from BuildingModifiers where ModifierId = 'AQUARIUM_REEF_SCIENCE';
 
 -- 资源分类产出
-insert or replace into HD_Building_ResourceClassification (BuildingType, ResourceClassificationType, DetectRange, PropertyKey) values
+insert or replace into HD_Building_Base_On_ResourceClassification (BuildingType, ResourceClassificationType, DetectRange, PropertyKey) values
 	('BUILDING_ZOO', 			'RESOURCE_CLASSIFICATION_IMPROVEMENT_PASTURE',				'PLAYER', 'HD_PLOT_BINARY_COMPRESS_ZOO'),
 	('BUILDING_ZOO', 			'RESOURCE_CLASSIFICATION_IMPROVEMENT_CAMP',						'PLAYER',	'HD_PLOT_BINARY_COMPRESS_ZOO'),
 	('BUILDING_AQUARIUM', 'RESOURCE_CLASSIFICATION_IMPROVEMENT_FISHING_BOATS',	'PLAYER', 'HD_PLOT_BINARY_COMPRESS_AQUARIUM');
@@ -1346,7 +1336,7 @@ update ModifierArguments set Value = 'GREAT_PERSON_CLASS_AGRONOMIST' where Modif
 and exists (select DistrictType from Districts where DistrictType = 'DISTRICT_C_AGRICULTURE');
 
 -- 资源分类产出
-insert or replace into HD_Building_ResourceClassification (BuildingType, ResourceClassificationType, DetectRange, PropertyKey) values
+insert or replace into HD_Building_Base_On_ResourceClassification (BuildingType, ResourceClassificationType, DetectRange, PropertyKey) values
 	('BUILDING_FOOD_MARKET', 		'RESOURCE_CLASSIFICATION_IMPROVEMENT_FARM',						'PLAYER', 'HD_PLOT_BINARY_COMPRESS_FOOD_MARKET'),
 	('BUILDING_FOOD_MARKET', 		'RESOURCE_CLASSIFICATION_IMPROVEMENT_PLANTATION',			'PLAYER', 'HD_PLOT_BINARY_COMPRESS_FOOD_MARKET'),
 	('BUILDING_FOOD_MARKET', 		'RESOURCE_CLASSIFICATION_IMPROVEMENT_PASTURE',				'PLAYER', 'HD_PLOT_BINARY_COMPRESS_FOOD_MARKET'),

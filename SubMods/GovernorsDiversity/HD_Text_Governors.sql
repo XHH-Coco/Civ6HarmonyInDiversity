@@ -142,7 +142,7 @@ values
     -- ("zh_Hans_CN",  "LOC_GOVERNOR_PROMOTION_MERCHANT_EQUITY_INVESTMENT_DESCRIPTION_CORP",        "允许在城市中建造投资人。所有城市获得一个可以存放 [ICON_GREATWORK_PRODUCT] 产品的巨作槽位。在城市中进行开发产品的项目时+100%建造速度。"),  
     --     -- 右三
     -- ("zh_Hans_CN",  "LOC_GOVERNOR_PROMOTION_MERCHANT_TAX_COLLECTOR_NAME",                        "远洋贸易"),
-    -- ("zh_Hans_CN",  "LOC_GOVERNOR_PROMOTION_MERCHANT_TAX_COLLECTOR_DESCRIPTION",                 "起始城市中的每个湖泊、海岸或海洋单元格为国际 [ICON_TRADEROUTE] 贸易路线提供+2 [ICON_GOLD] 金币。"),
+    -- ("zh_Hans_CN",  "LOC_GOVERNOR_PROMOTION_MERCHANT_TAX_COLLECTOR_DESCRIPTION",                 "起始城市中的每个水域单元格为国际 [ICON_TRADEROUTE] 贸易路线提供+2 [ICON_GOLD] 金币。"),
     --     -- 左四
     -- ("zh_Hans_CN",  "LOC_GOVERNOR_PROMOTION_MERCHANT_CONTRACTOR_NAME",                           "跨国公司"),
     -- ("zh_Hans_CN",  "LOC_GOVERNOR_PROMOTION_MERCHANT_CONTRACTOR_DESCRIPTION",                    "本城每有一座商业中心建筑或港口建筑，玩家的 [ICON_GREATMERCHANT] 大商人点数积累速度+25%。"),

@@ -5,6 +5,7 @@
 -- 大亨和投资人修改
 update Units set Cost = 200, CostProgressionParam1 = 20, MustPurchase = 0, PrereqTech = 'TECH_MASS_PRODUCTION', PseudoYieldType = 'PSEUDOYIELD_UNIT_LEU_TYCOON' where UnitType = 'UNIT_LEU_TYCOON';
 update Units set PseudoYieldType = 'PSEUDOYIELD_UNIT_LEU_INVESTOR' where UnitType = 'UNIT_LEU_INVESTOR';
+delete from TypeProperties where Type in ('UNIT_LEU_INVESTOR', 'UNIT_LEU_TYCOON') and Name = 'LIFESPAN';
 
 -- 回调海滨度假区和滑雪场的建造单位
 update Improvement_ValidBuildUnits set UnitType = 'UNIT_BUILDER' where ImprovementType = 'IMPROVEMENT_BEACH_RESORT';
