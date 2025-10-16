@@ -1360,7 +1360,7 @@ insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetI
 	from HD_Binary_Compress where Exp < 7;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
-	select 'HD_FOOD_MARKET_GOLD_' || Exp, 'Amount', Amount * 3
+	select 'HD_FOOD_MARKET_GOLD_' || Exp, 'Amount', Amount * 2
 	from HD_Binary_Compress where Exp < 7;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
@@ -1377,7 +1377,7 @@ insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetI
 	from HD_Binary_Compress where Exp < 7;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
-	select 'HD_SHOPPING_MALL_GOLD_' || Exp, 'Amount', Amount * 3
+	select 'HD_SHOPPING_MALL_GOLD_' || Exp, 'Amount', Amount * 2
 	from HD_Binary_Compress where Exp < 7;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
