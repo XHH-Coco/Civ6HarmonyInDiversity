@@ -160,7 +160,7 @@
       <RuleSetInUse>RULESET_EXPANSION_2</RuleSetInUse>
       <ModInUse>2217fddf-b466-45e1-950c-fc3747f076b6</ModInUse>
     </Criteria>
-    <Criteria id="CityPolicies_With_Suk">
+    <Criteria id="Suk_Simple_UI_Adjustments">
       <RuleSetInUse>RULESET_EXPANSION_2</RuleSetInUse>
       <ModInUse>805cc499-c534-4e0a-bdce-32fb3c53ba38</ModInUse>
     </Criteria>
@@ -937,6 +937,9 @@
       <Properties><LoadOrder>150000</LoadOrder></Properties>
       <File>UI/Replacement/RealModifierAnalysis.lua</File>
       <File>UI/Replacement/BRSPage_Resources.lua</File>
+      <File>UI/Replacement/BRSPage_ResourceClassifications.lua</File>
+      <File>UI/Replacement/reportscreen.lua</File>
+      <File>UI/Replacement/reportscreen.xml</File>
     </ImportFiles>
     <AddUserInterfaces id="DL_Custom_Interface" criteria="Expansion2">
       <Properties>
@@ -1061,6 +1064,10 @@
       </Properties>
     </ReplaceUIScript>
     <!-- Mod Support -->
+    <UpdateDatabase id="HD_BetterReportScreen_Database" criteria="BetterReportScreen_Override_Expansion2">
+      <Properties><LoadOrder>15001</LoadOrder></Properties>
+      <File>ModSupport/BetterReportScreen/ReportsListLoader.sql</File>
+    </UpdateDatabase>
     <UpdateDatabase id="Worships_mod_support_removes" criteria="Worships_Expansion2">
       <Properties><LoadOrder>15001</LoadOrder></Properties>
       <File>ModSupport/Worships/DL_Removes.sql</File>
@@ -1377,9 +1384,10 @@
       <Properties><LoadOrder>15605</LoadOrder></Properties>
       <File>SubMods/CityPolicies/UI/CityPanelOverview_CityPolicies.lua</File>
     </ImportFiles>
-    <ImportFiles id="CityPolicy_CityPanelOverview_Suk_Import" criteria="CityPolicies_With_Suk">
+    <ImportFiles id="Suk_Simple_UI_Adjustments_Import" criteria="Suk_Simple_UI_Adjustments">
       <Properties><LoadOrder>15605</LoadOrder></Properties>
       <File>SubMods/CityPolicies/UI/CityPanelOverview_CityPolicies_Suk.lua</File>
+      <File>UI/Replacement/Suk_YieldTT.lua</File>
     </ImportFiles>
     <ImportFiles id="ToolTipLoader_CityPolicies_Import" criteria="Expansion2">
       <Properties><LoadOrder>15605</LoadOrder></Properties>
@@ -1931,6 +1939,7 @@
       <File>Texts/HD_Text_GreatPerson_New.sql</File>
       <File>Texts/HD_Text_Classifications.sql</File>
       <File>Texts/HD_Text_ToolTip.sql</File>
+      <File>Texts/HD_Text_Report_Screen.sql</File>
     </UpdateText>
     <UpdateText id="DL_Text_Late" criteria="Expansion2">
       <Properties><LoadOrder>20000</LoadOrder></Properties>
@@ -2436,6 +2445,10 @@
     <File>UI/Replacement/RealModifierAnalysis.lua</File>
     <File>UI/Replacement/PlayerSetupLogic.lua</File>
     <File>UI/Replacement/BRSPage_Resources.lua</File>
+    <File>UI/Replacement/BRSPage_ResourceClassifications.lua</File>
+    <File>UI/Replacement/reportscreen.lua</File>
+    <File>UI/Replacement/reportscreen.xml</File>
+    <File>UI/Replacement/Suk_YieldTT.lua</File>
 
     <!-- Icons -->
     <File>UI/Icons/DL_Icons_Fixing.sql</File>
@@ -2525,6 +2538,7 @@
     <File>ModSupport/ModularAdjacencyBonus/Database.sql</File>
     <File>ModSupport/ModularAdjacencyBonus/Config.sql</File>
     <File>ModSupport/ModularAdjacencyBonus/Text.sql</File>
+    <File>ModSupport/BetterReportScreen/ReportsListLoader.sql</File>
 
     <!-- SubMods -->
     <File>SubMods/BetterChinese/Text/Australia_Translations_ConfigText.xml</File>
@@ -2787,6 +2801,7 @@
     <File>Texts/HD_Text_Mod_Titles.sql</File>
     <File>Texts/HD_Text_Classifications.sql</File>
     <File>Texts/HD_Text_ToolTip.sql</File>
+    <File>Texts/HD_Text_Report_Screen.sql</File>
     
     <!-- Assets -->
     <File>Assets/TechCivics/HDCivicIcons_38.dds</File>

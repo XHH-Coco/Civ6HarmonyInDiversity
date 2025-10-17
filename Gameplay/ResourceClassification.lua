@@ -71,10 +71,14 @@ function RefreshPlayerResourceDetect(player)
   end
 
   -- 遍历检查玩家是否拥有某资源 按分类记录
-  for row in GameInfo.HD_Resource_Classification() do
-    if classificationTypeList[row.ResourceClassificationType] ~= nil and Utils.GetPlayerResourceAmount(player:GetID(), row.ResourceType) > 0 then
-      print("玩家拥有资源 " .. row.ResourceType)
-      classificationTypeList[row.ResourceClassificationType] = classificationTypeList[row.ResourceClassificationType] + 1;
+  for classificationType, resourceList in pairs(Utils.Classification_Resource_Map) do
+    if classificationTypeList[classificationType] ~= nil then
+      for _, resourceType in ipairs(resourceList) do
+        if Utils.GetPlayerResourceAmount(player:GetID(), resourceType) > 0 then
+          print("玩家拥有资源 " .. resourceType)
+          classificationTypeList[classificationType] = classificationTypeList[classificationType] + 1;
+        end
+      end
     end
   end
 

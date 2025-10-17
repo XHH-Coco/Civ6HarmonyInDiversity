@@ -5,7 +5,8 @@ insert or ignore into HD_ResourceClassificationTypes (ResourceClassificationType
 -- 按改良分类
 insert or ignore into HD_ResourceClassificationTypes (ResourceClassificationType, Name, SortIndex, Display) select
   'RESOURCE_CLASSIFICATION_' || ImprovementType, 'LOC_' || ImprovementType || '_NAME', 500, 0
-from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_BASIC';
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_BASIC'
+  and ImprovementType not in ('IMPROVEMENT_OFFSHORE_OIL_RIG');
 
 update HD_ResourceClassificationTypes set Name = 'LOC_' || ResourceClassificationType || '_NAME' where Name is NULL;
 
@@ -97,7 +98,11 @@ from Resources where ResourceType in (
   'RESOURCE_SANDALWOOD',
   'RESOURCE_BAMBOO',
   'RESOURCE_EBONY',
-  'RESOURCE_SAKURA'
+  'RESOURCE_SAKURA',
+
+  -- 城邦奢侈
+  'RESOURCE_CINNAMON',
+  'RESOURCE_CLOVES'
 );
 
 -- 矿产资源

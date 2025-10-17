@@ -69,7 +69,8 @@ values
 
 	("LOC_PEDIA_HD_YIELD_CHANGES_NAME",                         									 "Yields Changes"),
 	("LOC_PEDIA_HD_IMPROVEMENT_UNIT_TEXT",                         							 	 "Built By"),
-	("LOC_PEDIA_HD_CLASSIFICATION_TEXT",                         						 			 "Classification"),
+	("LOC_PEDIA_HD_CLASSIFICATION_TEXT",                         						 			 "Classifications"),
+	("LOC_PEDIA_HD_RESOURCE_CLASSIFICATIONS_TEXT",                         				 "Usages"),
 
 	-- 百科分类
 	("LOC_PEDIA_GOVERNMENTS_PAGEGROUP_CITY_POLICIES_NAME",                         "City Policies"),
@@ -290,6 +291,7 @@ values
 	("zh_Hans_CN",  "LOC_PEDIA_HD_YIELD_CHANGES_NAME",                         									 "加产节点"),
 	("zh_Hans_CN",  "LOC_PEDIA_HD_IMPROVEMENT_UNIT_TEXT",                         						 	 "改良单位"),
 	("zh_Hans_CN",  "LOC_PEDIA_HD_CLASSIFICATION_TEXT",                         						     "分类"),
+	("zh_Hans_CN",  "LOC_PEDIA_HD_RESOURCE_CLASSIFICATIONS_TEXT",                         			 "用途"),
 
 	-- 百科分类
 	("zh_Hans_CN",  "LOC_PEDIA_GOVERNMENTS_PAGEGROUP_CITY_POLICIES_NAME",                        "城市政策"),

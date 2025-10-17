@@ -342,7 +342,11 @@ function ViewResourcesPage()
 	end
 
 	--for eResourceType,kSingleResourceData in pairs(m_kResourceData) do
-	for eResourceType,kSingleResourceData in spairs(m_kResourceData, function(t,a,b) return Locale.Lookup(GameInfo.Resources[a].Name) < Locale.Lookup(GameInfo.Resources[b].Name) end) do
+	for eResourceType,kSingleResourceData in spairs(m_kResourceData, function(t,a,b)
+		local a_score = ExposedMembers.DLHD.Utils.ResourceClassSortList[GameInfo.Resources[a].ResourceClassType] or 100;
+		local b_score = ExposedMembers.DLHD.Utils.ResourceClassSortList[GameInfo.Resources[b].ResourceClassType] or 100;
+		return a_score < b_score;
+	end) do
 		
 		local kResource :table = GameInfo.Resources[eResourceType];
 		
@@ -353,7 +357,18 @@ function ViewResourcesPage()
 
 		local instance:table = NewCollapsibleGroupInstance();	
 
-		instance.RowHeaderButton:SetText(  kSingleResourceData.Icon..Locale.Lookup( kResource.Name ) );
+		instance.RowHeaderButton:SetText(  kSingleResourceData.Icon .. " " .. Locale.Lookup( kResource.Name ) );
+		----------------------------------
+		-- 分类
+		local classificationList = ExposedMembers.DLHD.Utils.Resource_Classification_Map[kResource.ResourceType] or {};
+		if #classificationList > 0 then
+			local classificationsText = kSingleResourceData.Icon .. " " .. Locale.Lookup(kResource.Name) .. " " .. Locale.Lookup('LOC_HD_REPORTS_USAGE_TEXT');
+			for _, classificationType in ipairs(classificationList) do
+				classificationsText = classificationsText .. '[NEWLINE][ICON_Bullet] ' .. Locale.Lookup(GameInfo.HD_ResourceClassificationTypes[classificationType].Name);
+			end
+			instance.RowHeaderButton:SetToolTipString(classificationsText);
+		end
+		---------------------------------
 		instance.RowHeaderLabel:SetHide( false ); --BRS
 		if kSingleResourceData.Total < 0 then
 			instance.RowHeaderLabel:SetText( Locale.Lookup("LOC_HUD_REPORTS_TOTALS").." [COLOR_Red]"..tostring(kSingleResourceData.Total).."[ENDCOLOR]" );

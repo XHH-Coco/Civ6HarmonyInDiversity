@@ -209,16 +209,16 @@ function GetDataHelper(playerID:number, pSelectedCity:table)
             local iProductionCost :number = buildQueue:GetDistrictCost( row.Index );
             local iProductionProgress :number = buildQueue:GetDistrictProgress( row.Index );
 
-            sToolTip = sToolTip .. "[NEWLINE][NEWLINE]";
-            sToolTip = sToolTip .. ComposeProductionCostString( iProductionProgress, iProductionCost);
+            -- sToolTip = sToolTip .. "[NEWLINE][NEWLINE]";
+            sToolTip = sToolTip .. "[NEWLINE]" .. ComposeProductionCostString( iProductionProgress, iProductionCost);
 
-            local iMaintenanceCost :number = row.Maintenance or 0;
-            if (iMaintenanceCost ~= nil and iMaintenanceCost > 0) then
-                local yield = GameInfo.Yields["YIELD_GOLD"];
-                if(yield) then
-                    sToolTip = sToolTip .. "[NEWLINE]" .. Locale.Lookup("LOC_TOOLTIP_MAINTENANCE", iMaintenanceCost, yield.IconString, yield.Name);
-                end
-            end
+            -- local iMaintenanceCost :number = row.Maintenance or 0;
+            -- if (iMaintenanceCost ~= nil and iMaintenanceCost > 0) then
+            --     local yield = GameInfo.Yields["YIELD_GOLD"];
+            --     if(yield) then
+            --         sToolTip = sToolTip .. "[NEWLINE]" .. Locale.Lookup("LOC_TOOLTIP_MAINTENANCE", iMaintenanceCost, yield.IconString, yield.Name);
+            --     end
+            -- end
 
             local bIsContaminated:boolean = cityDistricts:IsContaminated( row.Index );
             local iContaminatedTurns:number = 0;
@@ -299,18 +299,21 @@ function GetDataHelper(playerID:number, pSelectedCity:table)
 
             local iProductionCost :number = buildQueue:GetBuildingCost( row.Index );
             local iProductionProgress :number = buildQueue:GetBuildingProgress( row.Index );
-            sToolTip = sToolTip .. "[NEWLINE][NEWLINE]";
-            sToolTip = sToolTip .. ComposeProductionCostString( iProductionProgress, iProductionCost);
+            -- sToolTip = sToolTip .. "[NEWLINE][NEWLINE]";
+            sToolTip = sToolTip .. "[NEWLINE]" .. ComposeProductionCostString( iProductionProgress, iProductionCost);
 
-            local iMaintenanceCost :number = row.Maintenance or 0;
-            if (iMaintenanceCost ~= nil and iMaintenanceCost > 0) then
-                local yield = GameInfo.Yields["YIELD_GOLD"];
-                if(yield) then
-                    sToolTip = sToolTip .. "[NEWLINE]" .. Locale.Lookup("LOC_TOOLTIP_MAINTENANCE", iMaintenanceCost, yield.IconString, yield.Name);
-                end
-            end
+            -- local iMaintenanceCost :number = row.Maintenance or 0;
+            -- if (iMaintenanceCost ~= nil and iMaintenanceCost > 0) then
+            --     local yield = GameInfo.Yields["YIELD_GOLD"];
+            --     if(yield) then
+            --         sToolTip = sToolTip .. "[NEWLINE]" .. Locale.Lookup("LOC_TOOLTIP_MAINTENANCE", iMaintenanceCost, yield.IconString, yield.Name);
+            --     end
+            -- end
 
-            sToolTip = sToolTip .. "[NEWLINE]" .. AddBuildingExtraCostTooltip(row.Hash);
+            -- local extraCostText = AddBuildingExtraCostTooltip(row.Hash);
+            -- if extraCostText ~= "" then
+            --     sToolTip = sToolTip .. "[NEWLINE]" .. AddBuildingExtraCostTooltip(row.Hash);
+            -- end
 
             table.insert( new_data.BuildingItems, {
                 Type            = row.BuildingType,
@@ -630,6 +633,19 @@ function ViewHelper(pSelectedCity:table, data)
     else
         Controls.NoFaithContent:SetHide(true);
     end
+end
+
+function ComposeProductionCostString( iProductionProgress:number, iProductionCost:number)
+	-- Show production progress only if there is progress present
+	if iProductionCost ~= 0 then
+		local costString		:string = tostring(iProductionCost);
+		
+		if iProductionProgress > 0 then -- Only show fraction if build progress has been made.
+			costString = tostring(iProductionProgress) .. "/" .. costString;
+		end
+		return Locale.Lookup('LOC_TOOLTIP_ACTUAL_COST_TEXT', costString, "[ICON_Production]", 'LOC_HUD_PRODUCTION');
+	end
+	return "";
 end
 
 

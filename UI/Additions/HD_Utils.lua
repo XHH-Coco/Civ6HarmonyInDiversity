@@ -515,14 +515,18 @@ function GetBuildingNeedPlayerResource(playerId, buildingType)
     end
 
     -- 统计每种资源类型的数量
-    for row in GameInfo.HD_Resource_Classification() do
-      if data[row.ResourceClassificationType] ~= nil and player:GetResources():GetResourceAmount(row.ResourceType) > 0 then
-        totalNum = totalNum + 1;
-        data[row.ResourceClassificationType].Amount = data[row.ResourceClassificationType].Amount + 1;
+    for classificationType, resourceList in pairs(Utils.Classification_Resource_Map) do
+      if data[classificationType] ~= nil then
+        for _, resourceType in ipairs(resourceList) do
+          if player:GetResources():GetResourceAmount(resourceType) > 0 then
+            totalNum = totalNum + 1;
+            data[classificationType].Amount = data[classificationType].Amount + 1;
 
-        local resourceInfo = GameInfo.Resources[row.ResourceType];
-        if resourceInfo then
-          data[row.ResourceClassificationType].ResourceString = data[row.ResourceClassificationType].ResourceString .. " [ICON_" .. row.ResourceType .. "] " .. Locale.Lookup(resourceInfo.Name)
+            local resourceInfo = GameInfo.Resources[resourceType];
+            if resourceInfo then
+              data[classificationType].ResourceString = data[classificationType].ResourceString .. " [ICON_" .. resourceType .. "] " .. Locale.Lookup(resourceInfo.Name)
+            end
+          end
         end
       end
     end

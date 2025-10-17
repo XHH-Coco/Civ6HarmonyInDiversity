@@ -18,6 +18,7 @@ insert or replace into EnglishText (Tag, Text) values
   ("LOC_TOOLTIP_HD_GENERAL_BUILDING_TEXT",          "General Building"),
   ("LOC_TOOLTIP_HD_UNIQUE_BUILDING_TEXT",           "Unique Building"),
   ("LOC_TOOLTIP_HD_REPLACE_BUILDING_TEXT",          "Unique Building (Replacing {1_Name})"),
+  ("LOC_TOOLTIP_HD_RESOURCE_CLASSIFICATIONS_TEXT",  "Usages:"),
 
   ("LOC_TOOLTIP_HD_REQUIRES_TEXT",                  "Requires:"),
   ("LOC_TOOLTIP_HD_TERRAIN_REQUIRES_TEXT",          "Terrains:"),
@@ -46,12 +47,13 @@ insert or replace into EnglishText (Tag, Text) values
   ("LOC_TOOLTIP_HD_IMPROVEMENT_UNIT_TEXT",          "Built By:"),
 
   ("LOC_TOOLTIP_COST_PROGRESSION_PARAM",						"Cost Progression Param: {1_num}"),
+  ("LOC_TOOLTIP_ACTUAL_COST_TEXT",						      "Actual Cost: {1_Num} {2_Icon} {3_Name}"),
 
 	("LOC_TOOLTIP_BUILDING_CITIZEN_YIELDS_HEADER",		"Citizen Yields change:"),
 	("LOC_TOOLTIP_DISTRICT_CITIZEN_YIELDS_HEADER",		"Citizen Yields:"),
 
-	("LOC_TOOLTIP_RESOURCE_IMPROVED_BY",							"Can be improved by: "),
-	("LOC_TOOLTIP_RESOURCE_CORP_CATEGORY",						"Industry and Corporation: "),
+	("LOC_TOOLTIP_RESOURCE_IMPROVED_BY",							"Improved by: "),
+	("LOC_TOOLTIP_RESOURCE_CORP_CATEGORY",						"Industry & Corporation: "),
   
   ("LOC_TOOLTIP_REGIONAL_EFFECT_RANGE",							"{1_num}-tile Regional Effect: The basic yields of this Wonder are extend to other cities within {1_num} tiles."),
 	("LOC_TOOLTIP_REGIONAL_EFFECT_RANGE_MODIFIER",		"{1_num}-tile Regional Effect: Cities with City Center or Neighborhood within {1_num} tiles of this building recieve the following bonuses, except those cities that have already recieved this bonus from the same building:"),
@@ -77,6 +79,7 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_TOOLTIP_HD_GENERAL_BUILDING_TEXT",          "通用建筑"),
   ("zh_Hans_CN", "LOC_TOOLTIP_HD_UNIQUE_BUILDING_TEXT",           "特色建筑"),
   ("zh_Hans_CN", "LOC_TOOLTIP_HD_REPLACE_BUILDING_TEXT",          "特色建筑（取代{1_Name}）"),
+  ("zh_Hans_CN", "LOC_TOOLTIP_HD_RESOURCE_CLASSIFICATIONS_TEXT",  "用途："),
 
   ("zh_Hans_CN", "LOC_TOOLTIP_HD_REQUIRES_TEXT",                  "需求："),
   ("zh_Hans_CN", "LOC_TOOLTIP_HD_TERRAIN_REQUIRES_TEXT",          "地形需求："),
@@ -105,12 +108,13 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_TOOLTIP_HD_IMPROVEMENT_UNIT_TEXT",          "改良单位："),
 
   ("zh_Hans_CN", "LOC_TOOLTIP_COST_PROGRESSION_PARAM",						"涨价系数：{1_num}"),
+  ("zh_Hans_CN", "LOC_TOOLTIP_ACTUAL_COST_TEXT",						      "实际花费：{1_Num} {2_Icon} {3_Name}"),
 
 	("zh_Hans_CN", "LOC_TOOLTIP_BUILDING_CITIZEN_YIELDS_HEADER",		"专家收益变动："),
 	("zh_Hans_CN", "LOC_TOOLTIP_DISTRICT_CITIZEN_YIELDS_HEADER",		"专家收益："),
 
-	("zh_Hans_CN", "LOC_TOOLTIP_RESOURCE_IMPROVED_BY",							"改良设施类型："),
-	("zh_Hans_CN", "LOC_TOOLTIP_RESOURCE_CORP_CATEGORY",						"行业与公司类别："),
+	("zh_Hans_CN", "LOC_TOOLTIP_RESOURCE_IMPROVED_BY",							"改良设施："),
+	("zh_Hans_CN", "LOC_TOOLTIP_RESOURCE_CORP_CATEGORY",						"行业与公司："),
 
 	("zh_Hans_CN", "LOC_TOOLTIP_REGIONAL_EFFECT_RANGE",						  "{1_num}环辐射：此奇观的基础产出延伸到{1_num}个单元格内的其它城市。"),
 	("zh_Hans_CN", "LOC_TOOLTIP_REGIONAL_EFFECT_RANGE_MODIFIER",		"{1_num}环辐射：拥有在此建筑{1_num}个单元格内的市中心或社区的城市获得以下加成，但不包括已经从相同建筑获得过此加成的城市："),

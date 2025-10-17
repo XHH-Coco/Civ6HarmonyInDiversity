@@ -220,7 +220,6 @@ ToolTipHelper.GetDistrictToolTip = function(districtType)
 
   return table.concat(toolTipLines, "[NEWLINE]");
 end
-
 g_ToolTipGenerators.KIND_DISTRICT = ToolTipHelper.GetDistrictToolTip;
 
 -------------------------------------------------------------------------------
@@ -600,13 +599,17 @@ ToolTipHelper.GetBuildingToolTip = function(buildingHash, playerId, city)
       table.insert(toolTipLines, Locale.Lookup("LOC_TOOLTIP_MAINTENANCE", maintenance, yield.IconString, yield.Name));
     end
   end
+  -- 电力消耗
+  local extraCostText = AddBuildingExtraCostTooltip(buildingHash);
+  if extraCostText and extraCostText ~= '' then
+    table.insert(toolTipLines, extraCostText);
+  end
   -------------------------------------------------------------
 
   -- Return the composite tooltip!
   return table.concat(toolTipLines, "[NEWLINE]");
 
 end
-
 g_ToolTipGenerators.KIND_BUILDING = ToolTipHelper.GetBuildingToolTip;
 
 -------------------------------------------------------------------------------

@@ -145,133 +145,100 @@ function SetResourceIcon( pInstance:table, pPlot, type, state)
 			local toolTipItems:table = {};
 			table.insert(toolTipItems, Locale.Lookup(resourceInfo.Name));
 			if (resourceInfo.ResourceClassType == "RESOURCECLASS_BONUS") then
-				table.insert(toolTipItems, Locale.Lookup("LOC_TOOLTIP_BONUS_RESOURCE"));
+				table.insert(toolTipItems, "[COLOR:0,102,0,255]" .. Locale.Lookup("LOC_TOOLTIP_BONUS_RESOURCE") .. "[ENDCOLOR]");
 			elseif (resourceInfo.ResourceClassType == "RESOURCECLASS_LUXURY") then
-				table.insert(toolTipItems, Locale.Lookup("LOC_TOOLTIP_LUXURY_RESOURCE"));
+				table.insert(toolTipItems, "[COLOR:153,102,0,255]" .. Locale.Lookup("LOC_TOOLTIP_LUXURY_RESOURCE") .. "[ENDCOLOR]");
 			elseif (resourceInfo.ResourceClassType == "RESOURCECLASS_STRATEGIC") then
-				table.insert(toolTipItems, Locale.Lookup("LOC_TOOLTIP_STRATEGIC_RESOURCE"));
+				table.insert(toolTipItems, "[COLOR:ResScienceLabelCS]" .. Locale.Lookup("LOC_TOOLTIP_STRATEGIC_RESOURCE") .. "[ENDCOLOR]");
 			elseif (resourceInfo.ResourceClassType == "RESOURCECLASS_ARTIFACT") then
-				table.insert(toolTipItems, Locale.Lookup("LOC_TOOLTIP_ARTIFACT_RESOURCE"));
+				table.insert(toolTipItems, "[COLOR:ResCultureLabelCS]" .. Locale.Lookup("LOC_TOOLTIP_ARTIFACT_RESOURCE") .. "[ENDCOLOR]");
 				table.insert(toolTipItems, Locale.Lookup("LOC_TOOLTIP_ARTIFACT_RESOURCE_DETAILS"));
 			end
 
 			local tValidImprovements:table = {}
 			for row in GameInfo.Improvement_ValidResources() do
-                if row.ImprovementType ~= 'IMPROVEMENT_CORPORATION'
-                    and row.ImprovementType ~= 'IMPROVEMENT_INDUSTRY'
-                    and row.ImprovementType ~= 'IMPROVEMENT_LEU_TRANSNATIONAL'
-                    and row.ImprovementType ~= 'IMPROVEMENT_LEU_TRANSNATIONAL_SEA'
-                then
-                    if (row.ResourceType == resourceType) and (GameInfo.Improvements[row.ImprovementType].TraitType == nil) then
-                        if( terrainType == "TERRAIN_COAST") then
-                            if ("DOMAIN_SEA" == GameInfo.Improvements[ row.ImprovementType].Domain) then
-                                table.insert(tValidImprovements, row.ImprovementType);
-                            elseif ("DOMAIN_LAND" == GameInfo.Improvements[ row.ImprovementType].Domain) then
-                                valid_domain = false;
-                            end
-                        else
-                            if ("DOMAIN_SEA" == GameInfo.Improvements[ row.ImprovementType].Domain) then
-                                valid_domain = false;
-                            elseif ("DOMAIN_LAND" == GameInfo.Improvements[ row.ImprovementType].Domain) then
-                                table.insert(tValidImprovements, row.ImprovementType);
-                            end
-                        end
-                    end
-                end
-			end
-
-			local resourceTechType;
-			local resourceCivicType;
-            local resourceImprovementType;
-			if (table.count(tValidImprovements) > 0) then
-				if (table.count(tValidImprovements) > 1) then
-					for i, improvement in ipairs(tValidImprovements) do
-						local improvementType = improvement;
-
-						local has_feature = false;
-						local valid_feature = false;
-						for inner_row in GameInfo.Improvement_ValidFeatures() do
-							if(inner_row.ImprovementType == improvementType) then
-								has_feature = true;
-								if(inner_row.FeatureType == featureType) then
-									valid_feature = true;
-								end
-							end
+				if row.ResourceType == resourceType and ExposedMembers.DLHD.Utils.IsImprovementHasClassification(row.ImprovementType, 'IMPROVEMENT_CLASSIFICATION_BASIC') then
+					if terrainType == "TERRAIN_COAST" or terrainType == "TERRAIN_OCEAN" then
+						if "DOMAIN_SEA" == GameInfo.Improvements[row.ImprovementType].Domain then
+							table.insert(tValidImprovements, row.ImprovementType);
+						elseif "DOMAIN_LAND" == GameInfo.Improvements[row.ImprovementType].Domain then
+							valid_domain = false;
 						end
-						valid_feature = not has_feature or valid_feature;
-
-						local has_terrain = false;
-						local valid_terrain = false;
-						for inner_row in GameInfo.Improvement_ValidTerrains() do
-							if(inner_row.ImprovementType == improvementType) then
-								has_terrain = true;
-								if(inner_row.TerrainType == terrainType) then
-									valid_terrain = true;
-								end
-							end
+					else
+						if "DOMAIN_SEA" == GameInfo.Improvements[row.ImprovementType].Domain then
+							valid_domain = false;
+						elseif "DOMAIN_LAND" == GameInfo.Improvements[row.ImprovementType].Domain then
+							table.insert(tValidImprovements, row.ImprovementType);
 						end
-						valid_terrain = not has_terrain or valid_terrain;
-
-						-- if we match the resource in Improvement_ValidResources it's a get-out-of-jail-free card for feature and terrain checks
-						local valid_resources = false;
-						for inner_row in GameInfo.Improvement_ValidResources() do
-							if(inner_row.ImprovementType == improvementType) then
-								if(inner_row.ResourceType == resourceType) then
-									valid_resources = true;
-									break;
-								end
-							end
-						end
-
-						if ((valid_feature == true and valid_terrain == true) or (valid_resources == true)) then
-							resourceTechType = GameInfo.Improvements[improvementType].PrereqTech;
-							resourceCivicType = GameInfo.Improvements[improvementType].PrereqCivic;
-							resourceImprovementType = improvementType;
-                            break;
-						end
-					end
-				else
-					local improvementType = tValidImprovements[1];
-					resourceTechType = GameInfo.Improvements[improvementType].PrereqTech;
-					resourceCivicType = GameInfo.Improvements[improvementType].PrereqCivic;
-                    resourceImprovementType = improvementType;
-                end
-			end
-
-			if (resourceTechType ~= nil) then
-				local localPlayer	= Players[Game.GetLocalPlayer()];
-				if (localPlayer ~= nil) then
-					local playerTechs	= localPlayer:GetTechs();
-					local techType = GameInfo.Technologies[resourceTechType];
-					if (techType ~= nil and not playerTechs:HasTech(techType.Index)) then
-						table.insert(toolTipItems,"[COLOR:Civ6Red](".. Locale.Lookup("LOC_TOOLTIP_REQUIRES") .. " " .. Locale.Lookup(techType.Name) .. ")[ENDCOLOR]");
 					end
 				end
 			end
 
-			if (resourceCivicType ~= nil) then
-				local localPlayer	= Players[Game.GetLocalPlayer()];
-				if (localPlayer ~= nil) then
-					local playerCulture	= localPlayer:GetCulture();
-					local civicType = GameInfo.Civics[resourceCivicType];
-					if (civicType ~= nil and not playerCulture:HasCivic(civicType.Index)) then
-						table.insert(toolTipItems,"[COLOR:Civ6Red](".. Locale.Lookup("LOC_TOOLTIP_REQUIRES") .. " " .. Locale.Lookup(civicType.Name) .. ")[ENDCOLOR]");
+			local resourceImprovementTextList = {};
+			for _, improvement in ipairs(tValidImprovements) do
+				local improvementInfo = GameInfo.Improvements[improvement];
+				local text = Locale.Lookup(improvementInfo.Name);
+
+				local techType = improvementInfo.PrereqTech;
+				local civicType = improvementInfo.PrereqCivic;
+
+				if techType ~= nil then
+					local localPlayer	= Players[Game.GetLocalPlayer()];
+					if localPlayer ~= nil then
+						local playerTechs	= localPlayer:GetTechs();
+						local techInfo = GameInfo.Technologies[techType];
+						if techInfo ~= nil and not playerTechs:HasTech(techInfo.Index) then
+							text = text .. "[COLOR:Civ6Red](".. Locale.Lookup("LOC_TOOLTIP_REQUIRES") .. " " .. Locale.Lookup(techInfo.Name) .. ")[ENDCOLOR]"
+						end
+					end
+				elseif civicType ~= nil then
+					local localPlayer	= Players[Game.GetLocalPlayer()];
+					if localPlayer ~= nil then
+						local playerCulture	= localPlayer:GetCulture();
+						local civicInfo = GameInfo.Civics[civicType];
+						if civicInfo ~= nil and not playerCulture:HasCivic(civicInfo.Index) then
+							text = text .. "[COLOR:Civ6Red](".. Locale.Lookup("LOC_TOOLTIP_REQUIRES") .. " " .. Locale.Lookup(civicInfo.Name) .. ")[ENDCOLOR]"
+						end
 					end
 				end
+
+				table.insert(resourceImprovementTextList, text);
 			end
 
-            -- Add some tooltip information about the resource
-            if resourceImprovementType ~= nil then
-                local improvementString = Locale.Lookup(GameInfo.Improvements[resourceImprovementType].Name);
-                table.insert(toolTipItems, Locale.Lookup("LOC_TOOLTIP_RESOURCE_IMPROVED_BY") .. improvementString);
-                if GameInfo.HDMonopolyResourceEffects ~= nil then
-                    local corpInfo = GameInfo.HDMonopolyResourceEffects[resourceType];
-                    if corpInfo ~= nil then
-                        local categoryString = Locale.Lookup("LOC_HD_PEDIA_CATEGORY_" .. corpInfo.Category .. "_NAME")
-                        table.insert(toolTipItems, Locale.Lookup("LOC_TOOLTIP_RESOURCE_CORP_CATEGORY") .. categoryString);
-                    end
-                end
-            end
+			-- 所需改良信息
+			if #resourceImprovementTextList > 0 then
+				local improvementString = Locale.Lookup("LOC_TOOLTIP_RESOURCE_IMPROVED_BY");
+				for _, text in ipairs(resourceImprovementTextList) do
+					improvementString = improvementString .. ' ' .. text;
+				end
+				table.insert(toolTipItems, improvementString);
+			end
+
+			-- 资源分类
+			local classificationList = ExposedMembers.DLHD.Utils.Resource_Classification_Map[resourceType] or {};
+			local textList = {};
+			for _, classificationType in ipairs(classificationList) do
+				local classificationInfo = GameInfo.HD_ResourceClassificationTypes[classificationType];
+				if classificationInfo and classificationInfo.Display then
+					table.insert(textList, Locale.Lookup(classificationInfo.Name))
+				end
+			end
+			if #textList > 0 then
+				local classificationText = Locale.Lookup('LOC_TOOLTIP_HD_RESOURCE_CLASSIFICATIONS_TEXT');
+				for _, text in ipairs(textList) do
+					classificationText = classificationText .. ' ' .. text;
+				end
+				table.insert(toolTipItems, classificationText);
+			end
+
+			-- 行业公司效果
+			if GameInfo.HDMonopolyResourceEffects ~= nil then
+				local corpInfo = GameInfo.HDMonopolyResourceEffects[resourceType];
+				if corpInfo ~= nil then
+					local categoryString = Locale.Lookup("LOC_HD_PEDIA_CATEGORY_" .. corpInfo.Category .. "_NAME")
+					table.insert(toolTipItems, Locale.Lookup("LOC_TOOLTIP_RESOURCE_CORP_CATEGORY") .. categoryString);
+				end
+			end
 
 			table.insert(toolTipItems, resourceString)
 			pInstance.ResourceIcon:SetToolTipString(table.concat(toolTipItems, "[NEWLINE]"));

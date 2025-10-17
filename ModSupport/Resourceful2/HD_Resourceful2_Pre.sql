@@ -66,16 +66,13 @@ values
 	('IMPROVEMENT_QUARRY',		'RESOURCE_SEASHELLS',		0);
 
 -- Delete
-delete from Types where Type = 'RESOURCE_MAPLE';
-delete from Types where Type = 'RESOURCE_CORAL';
-delete from Types where Type = 'RESOURCE_CAVIAR';
-delete from Types where Type = 'RESOURCE_OXEN';
-delete from Types where Type = 'RESOURCE_MACKEREL';
-delete from Types where Type = 'RESOURCE_ALGAE';
-delete from Types where Type = 'RESOURCE_GOLD2';
-delete from Types where Type = 'RESOURCE_POTATO';
-delete from Types where Type = 'RESOURCE_HONEY2';
-delete from Types where Type = 'RESOURCE_MAIZE2';
+create table "HDResourceful2_ToDelete"(
+	"ResourceType"  TEXT NOT NULL,
+	PRIMARY KEY(ResourceType)
+);
+insert or ignore into HDResourceful2_ToDelete (ResourceType) values
+	('RESOURCE_MAPLE'), ('RESOURCE_CORAL'), ('RESOURCE_CAVIAR'), ('RESOURCE_OXEN'), ('RESOURCE_MACKEREL'), ('RESOURCE_ALGAE'), ('RESOURCE_GOLD2'), ('RESOURCE_POTATO'), ('RESOURCE_HONEY2'), ('RESOURCE_MAIZE2');
+delete from Types where Type in (select ResourceType from HDResourceful2_ToDelete);
 
 delete from Resource_YieldChanges where ResourceType in (select ResourceType from HDResourceful2_Basic);
 delete from Resource_ValidTerrains where ResourceType in (select ResourceType from HDResourceful2_Basic);
