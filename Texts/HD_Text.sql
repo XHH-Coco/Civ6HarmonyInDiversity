@@ -141,7 +141,6 @@ values
   ("zh_Hans_CN",  "LOC_TIER_2_GOVERNMRNT_NAME",         	"二级政体"),
   ("zh_Hans_CN",  "LOC_TIER_3_GOVERNMRNT_NAME",         	"三级政体"),
   ("zh_Hans_CN",  "LOC_TIER_4_GOVERNMRNT_NAME",         	"四级政体"),
-  ("zh_Hans_CN",  "LOC_HUD_REPORTS_SUK_OTHER_ADJACENCY_BONUS",         	"其他加成"),
   ("zh_Hans_CN",  "LOC_TERRAIN_COAST_NAME",         					"浅海与湖泊"),
   ("zh_Hans_CN",  "LOC_TOOLTIP_COAST",         								"浅海"),
   ("zh_Hans_CN",  "LOC_TERRAIN_OCEAN_NAME",         					"深海"),

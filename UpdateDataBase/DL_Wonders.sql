@@ -56,7 +56,7 @@ update Buildings set Cost = 2000 where BuildingType = 'BUILDING_ESTADIO_DO_MARAC
 update Buildings set Cost = 2000 where BuildingType = 'BUILDING_BIOSPHERE';
 update Buildings set Cost = 2000 where BuildingType = 'BUILDING_SYDNEY_OPERA_HOUSE';
 update Buildings set Cost = 2000 where BuildingType = 'BUILDING_AMUNDSEN_SCOTT_RESEARCH_STATION';
-
+update Buildings set ObsoleteEra = 'NO_ERA' where IsWonder = 1 and ObsoleteEra != 'NO_ERA';
 update Buildings set DefenseModifier = 4 where DefenseModifier != 0;
 
 -- Adjust basic yield

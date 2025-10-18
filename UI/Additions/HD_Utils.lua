@@ -984,3 +984,79 @@ function GetSortedImprovementYieldChanges(improvementType)
   return textList;
 end
 Utils.GetSortedImprovementYieldChanges = GetSortedImprovementYieldChanges;
+
+-- 区域排序 用于界面显示等
+
+local DistrictSortMap = {
+  DISTRICT_CITY_CENTER = 0,
+
+  DISTRICT_HOLY_SITE = 100,
+    DISTRICT_LAVRA = 101,
+  DISTRICT_CAMPUS = 200,
+    DISTRICT_SEOWON = 201,
+    DISTRICT_OBSERVATORY = 202,
+  DISTRICT_THEATER = 300,
+    DISTRICT_ACROPOLIS = 301,
+    DISTRICT_XHH_FESTIVAL_THEATER = 302,
+  DISTRICT_COMMERCIAL_HUB = 400,
+    DISTRICT_SUGUBA = 401,
+    DISTRICT_SUK_FLOATINGMARKET = 402,
+  DISTRICT_HARBOR = 500,
+    DISTRICT_ROYAL_NAVY_DOCKYARD = 501,
+    DISTRICT_COTHON = 502,
+  DISTRICT_C_AGRICULTURE = 600,
+    DIS_C_IKU = 601,
+  DISTRICT_INDUSTRIAL_ZONE = 700,
+    DISTRICT_HANSA = 701,
+    DISTRICT_OPPIDUM = 702,
+  DISTRICT_ENCAMPMENT = 800,
+    DISTRICT_IKANDA = 801,
+    DISTRICT_THANH = 802,
+  DISTRICT_GOVERNMENT = 900,
+  DISTRICT_DIPLOMATIC_QUARTER = 1000,
+
+  DISTRICT_AQUEDUCT = 2000,
+    DISTRICT_BATH = 2001,
+  DISTRICT_C_FISHING = 2100,
+    DISTRICT_C_ROMAN_GARUM = 2101,
+  DISTRICT_C_MARITIMEWORKS = 2200,
+    DISTRICT_C_PHOENICIAN_PURPLE = 2201,
+  DISTRICT_ENTERTAINMENT_COMPLEX = 2300,
+    DISTRICT_STREET_CARNIVAL = 2301,
+    DISTRICT_HIPPODROME = 2302,
+  DISTRICT_WATER_ENTERTAINMENT_COMPLEX = 2400,
+    DISTRICT_WATER_STREET_CARNIVAL = 2401,
+  DISTRICT_NEIGHBORHOOD = 2500,
+    DISTRICT_MBANZA = 2501,
+  DISTRICT_PRESERVE = 2600,
+  DISTRICT_CANAL = 2700,
+  DISTRICT_DAM = 2800,
+  DISTRICT_AERODROME = 2900,
+
+  DISTRICT_SPACEPORT = 10000,
+
+  DISTRICT_WONDER = 100000
+};
+function InitDistrictSortList()
+  for row in GameInfo.Districts() do
+    if DistrictSortMap[row.DistrictType] == nil then
+      local repalceInfo = GameInfo.DistrictReplaces[row.DistrictType];
+      if repalceInfo ~= nil and DistrictSortMap[repalceInfo.ReplacesDistrictType] ~= nil then
+        local score = DistrictSortMap[repalceInfo.ReplacesDistrictType] + 1;
+        DistrictSortMap[row.DistrictType] = score;
+      else
+        local score = 1100;
+        if not row.RequiresPopulation then score = 3000; end
+      end
+    end
+  end
+
+  -- print("=============================================================")
+  -- print("区域排序")
+  -- for key, score in pairs(DistrictSortMap) do
+  --   print(key, GameInfo.Districts[key], score);
+  -- end
+  -- print("=============================================================")
+end
+InitDistrictSortList();
+Utils.DistrictSortMap = DistrictSortMap;
