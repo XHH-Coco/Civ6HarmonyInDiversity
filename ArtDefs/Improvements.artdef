@@ -250,7 +250,9 @@
 													or [RESOURCE:RESOURCE_RUBY] 
 													or [RESOURCE:RESOURCE_SUK_OBSIDIAN] 
 													or [RESOURCE:RESOURCE_TRAVERTINE] 
-													or [RESOURCE:RESOURCE_ALABASTER]"/>
+													or [RESOURCE:RESOURCE_ALABASTER] 
+													or [RESOURCE:RESOURCE_MAPLE] 
+													or [RESOURCE:RESOURCE_GOLD2]"/>
 										<m_ParamName text="SelectionRule"/>
 									</Element>
 								</m_Values>

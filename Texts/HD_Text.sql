@@ -64,7 +64,9 @@ values
   ("LOC_TERRAIN_SNOW_HILLS_NAME",         			"Snow Hills"),
   ("LOC_TERRAIN_SNOW_MOUNTAIN_NAME",         		"Snow Mountain"),
   ("LOC_TERRAIN_CLASS_MOUNTAIN_NAME",         	"Mountain"),
-  ("LOC_TERRAIN_CLASS_WATER_NAME",         			"Water Area");
+  ("LOC_TERRAIN_CLASS_WATER_NAME",         			"Water Area"),
+	("LOC_RESOURCE_STONE_NAME",                                   "Andesite"),
+	("LOC_RESOURCE_FISH_NAME",                                    "Common Carp");
 
 --------------------------------------------------------------------------------
 -- Language: zh_Hans_CN
@@ -155,7 +157,12 @@ values
   ("zh_Hans_CN",  "LOC_TERRAIN_SNOW_HILLS_NAME",         			"雪地丘陵"),
   ("zh_Hans_CN",  "LOC_TERRAIN_SNOW_MOUNTAIN_NAME",         		"雪地山脉"),
   ("zh_Hans_CN",  "LOC_TERRAIN_CLASS_MOUNTAIN_NAME",         		"山脉"),
-  ("zh_Hans_CN",  "LOC_TERRAIN_CLASS_WATER_NAME",         		"水域");
+  ("zh_Hans_CN",  "LOC_TERRAIN_CLASS_WATER_NAME",         		"水域"),
+	("zh_Hans_CN",  "LOC_RESOURCE_STONE_NAME",                                   "安山岩"),
+	("zh_Hans_CN",  "LOC_RESOURCE_FISH_NAME",                                    "鲤鱼"),
+	("zh_Hans_CN",  "LOC_RESOURCE_COPPER_NAME",                                  "铜矿"),
+	("zh_Hans_CN",  "LOC_RESOURCE_CATTLE_NAME",                                  "奶牛"),
+	("zh_Hans_CN",  "LOC_RESOURCE_SHEEP_NAME",                                   "绵羊");
 
 -- 外交区DLC文本
 update LocalizedText set Text = "and {LOC_DISTRICT_DIPLOMATIC_QUARTER_NAME} " where Tag = 'LOC_AND_DIPLOMATIC_QUARTER'
@@ -308,3 +315,18 @@ values
 	("zh_Hans_CN",  "LOC_CITY_YIELD_MODIFIER_PER_GOVERNOR_TITLE_TOOLTIP",				"{Value : number +#;-#}%（{ActualValue : number +#.#;-#.#}）来自拥有{1}次{1 : plural 1?升级; other?升级;}的 [ICON_Governor] 总督"),
 --	("zh_Hans_CN",	"LOC_WORLD_RANKINGS_CULTURE_TOURIST_TOOLTIP_GOVERNMENT",			"{1_Tooltip}[NEWLINE]总的 [ICON_Tourism] 旅游业绩因不同政体而提升{2_Percent}%");
 	("zh_Hans_CN",	"LOC_WORLD_RANKINGS_CULTURE_TOURIST_TOOLTIP_GOVERNMENT",			"{1_Tooltip}");
+
+-- 糖改名甘蔗
+update  LocalizedText set Text = REPLACE(Text, '糖', '甘蔗')
+where Language = 'zh_Hans_CN' and (Tag in (
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUGAR_DESCRIPTION',
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUGAR_SHORT_NAME',
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUGAR_NAME'
+));
+
+update  LocalizedText set Text = REPLACE(Text, 'Sugar', 'Sugarcane')
+where Tag in (
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUGAR_DESCRIPTION',
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUGAR_SHORT_NAME',
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUGAR_NAME'
+);

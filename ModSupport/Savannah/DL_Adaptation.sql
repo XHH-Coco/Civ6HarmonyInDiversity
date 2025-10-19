@@ -24,7 +24,9 @@ from Resources where ResourceType in
     'RESOURCE_RUBY',
     'RESOURCE_WOLF',
     'RESOURCE_BAMBOO',
-    'RESOURCE_TIGER');
+    'RESOURCE_TIGER',
+    'RESOURCE_POTATO',
+    'RESOURCE_MUSHROOMS');
 insert or replace into Resource_ValidFeatures
     (ResourceType,                  FeatureType)
 select

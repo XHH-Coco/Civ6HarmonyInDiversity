@@ -113,7 +113,6 @@ function GenerateMap()
 						"RESOURCE_PINE",			--松木
 						"RESOURCE_PINE",			--额外松木
 						"RESOURCE_BARLEY",			--青稞
-						"RESOURCE_MUSHROOMS",		--蘑菇
 						"RESOURCE_DEER",			--鹿
 						"RESOURCE_DEER"},			--额外鹿				--增加的陆地加成资源,水资无效，奢侈战略无效
 	};

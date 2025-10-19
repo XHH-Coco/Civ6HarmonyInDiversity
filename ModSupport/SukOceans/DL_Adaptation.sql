@@ -6,11 +6,13 @@ update Resources set LakeEligible = 1 where ResourceType = 'RESOURCE_SUK_LOBSTER
 
 delete from Resource_YieldChanges where ResourceType = 'RESOURCE_SUK_SQUID' and YieldType = 'YIELD_GOLD';
 delete from Resource_YieldChanges where ResourceType = 'RESOURCE_SUK_ABALONE' and YieldType = 'YIELD_FOOD';
+delete from Resource_YieldChanges where ResourceType = 'RESOURCE_SUK_CORAL';
 update Resource_YieldChanges set YieldChange = 4 where ResourceType = 'RESOURCE_SUK_CAVIAR' and YieldType = 'YIELD_GOLD';
 update Resource_YieldChanges set YieldChange = 4 where ResourceType = 'RESOURCE_SUK_ABALONE' and YieldType = 'YIELD_GOLD';
 insert or replace into Resource_YieldChanges
     (ResourceType,              YieldType,              YieldChange)
 values
+    ('RESOURCE_SUK_CORAL',      'YIELD_PRODUCTION',     1),
     ('RESOURCE_SUK_CORAL',      'YIELD_GOLD',           1),
     ('RESOURCE_SUK_LOBSTER',    'YIELD_GOLD',           1);
 

@@ -15,8 +15,15 @@ values
     ("LOC_RESOURCE_BERRIES_NAME",                                 "Berries"),
     ("LOC_RESOURCE_LIMESTONE_NAME",                               "Dolomite"),
     ("LOC_RESOURCE_BARLEY_NAME",                                  "Highland Barley"),
-    ("LOC_RESOURCE_STONE_NAME",                                   "Andesite"),
-    ("LOC_RESOURCE_FISH_NAME",                                    "Chum Salmon"),
+    ("LOC_RESOURCE_OXEN_NAME",                                    "Water Buffalo"),
+    ("LOC_RESOURCE_MAPLE_NAME",                                   "Zelkova"),
+    ("LOC_RESOURCE_GOLD2_NAME",                                   "Sulphur"),
+    ("LOC_RESOURCE_CAVIAR_NAME",                                  "Rainbow Trout"),
+    ("LOC_RESOURCE_MACKEREL_NAME",                                "Mackerel"),
+    ("LOC_RESOURCE_ALGAE_NAME",                                   "Sea Mustard"),
+    ("LOC_RESOURCE_CORAL_NAME",                                   "Red Coral"),
+    ("LOC_RESOURCE_POTATO_NAME",                                  "Sweet Potato"),
+    ("LOC_RESOURCE_MUSHROOMS_NAME",                               "Agaricus Bisporus"),
     ("LOC_IMPROVEMENT_LUMBER_MILL_HD_DESCRIPTION",                "Can be built on Woods or valid Resources. Once Guilds is unlocked it can also be built on Rainforest.[NEWLINE][NEWLINE]After researching Bronze Working Technology, for each improved Lumber Mill Resource in this city, +10% Production towards districts and buildings."),
     ("LOC_BUILDING_STONEHENGE_DESCRIPTION",                       "Grants a free [ICON_GreatProphet] Great Prophet. [ICON_GreatProphet] Great Prophets may found a Religion on Stonehenge instead of a Holy Site. Must be adjacent to [ICON_RESOURCE_STONE] Andesite and on flat land."),
     ("LOC_BELIEF_PAN_NAME",                                       "Pan"),
@@ -45,9 +52,15 @@ values
     ("zh_Hans_CN",  "LOC_RESOURCE_BARLEY_NAME",                                  "青稞"),
     ("zh_Hans_CN",  "LOC_RESOURCE_LIMESTONE_NAME",                               "白云石"),
     ("zh_Hans_CN",  "LOC_RESOURCE_DATES_NAME",                                   "椰枣"),
-    ("zh_Hans_CN",  "LOC_RESOURCE_STONE_NAME",                                   "安山岩"),
-    ("zh_Hans_CN",  "LOC_RESOURCE_FISH_NAME",                                    "马哈鱼"),
-    ("zh_Hans_CN",  "LOC_RESOURCE_COPPER_NAME",                                  "铜矿"),
+	("zh_Hans_CN",  "LOC_RESOURCE_OXEN_NAME",                                    "水牛"),
+    ("zh_Hans_CN",  "LOC_RESOURCE_MAPLE_NAME",                                   "榉树"),
+    ("zh_Hans_CN",  "LOC_RESOURCE_GOLD2_NAME",                                   "硫磺"),
+    ("zh_Hans_CN",  "LOC_RESOURCE_CAVIAR_NAME",                                  "虹鳟"),
+    ("zh_Hans_CN",  "LOC_RESOURCE_MACKEREL_NAME",                                "鲭鱼"),
+    ("zh_Hans_CN",  "LOC_RESOURCE_ALGAE_NAME",                                   "海带"),
+    ("zh_Hans_CN",  "LOC_RESOURCE_CORAL_NAME",                                   "红珊瑚"),
+    ("zh_Hans_CN",  "LOC_RESOURCE_POTATO_NAME",                                  "番薯"),
+    ("zh_Hans_CN",  "LOC_RESOURCE_MUSHROOMS_NAME",                               "口蘑"),
 	("zh_Hans_CN",	"LOC_IMPROVEMENT_LUMBER_MILL_HD_DESCRIPTION",				 "只能在森林或有效资源上建造。解锁“公会”市政后也能建造在雨林上。[NEWLINE][NEWLINE]解锁“铸铜术”科技后，城市每拥有一种改良的伐木场资源，则建造区域和建筑时+10%建造速度。"), 
     ("zh_Hans_CN",  "LOC_BUILDING_STONEHENGE_DESCRIPTION",                       "免费获得1个 [ICON_GreatProphet] 大预言家。 [ICON_GreatProphet] 大预言家可在巨石阵（代替圣地）创立一个宗教。必须建在靠近 [ICON_RESOURCE_STONE] 安山岩的平坦地形上。"),
     ("zh_Hans_CN",  "LOC_BELIEF_PAN_NAME",                                       "潘神"),
@@ -57,42 +70,3 @@ values
     ("zh_Hans_CN",  "LOC_TECH_BRONZE_WORKING_DESCRIPTION_RS2",                   "{LOC_TECH_BRONZE_WORKING_DESCRIPTION}[NEWLINE]城市每拥有一种改良的伐木场资源，则建造区域和建筑时+10%建造速度。");
 
 --------------------------------------------------------------------------------
-CREATE TEMPORARY TABLE "HDResourceful2_Pedia_Text"(
-    "ResourceType"  TEXT
-);
-insert or replace into HDResourceful2_Pedia_Text
-    (ResourceType)
-values
-    ('RESOURCE_SPONGE'),('RESOURCE_CASHMERE'),('RESOURCE_SANDALWOOD'),('RESOURCE_EBONY'),('RESOURCE_STRAWBERRY'),('RESOURCE_SALMON'),('RESOURCE_BAMBOO'),
-    ('RESOURCE_ALABASTER'),('RESOURCE_QUARTZ'),('RESOURCE_LAPIS'),('RESOURCE_RUBY'),('RESOURCE_PLATINUM'),('RESOURCE_SEA_URCHIN'),('RESOURCE_SORGHUM'),
-    ('RESOURCE_COD'),('RESOURCE_WOLF'),('RESOURCE_TIGER'),('RESOURCE_SAKURA'),('RESOURCE_POPPIES'),('RESOURCE_ORCA'),('RESOURCE_LION'),
-    ('RESOURCE_TRAVERTINE'),('RESOURCE_TOXINS'),('RESOURCE_SAFFRON'),('RESOURCE_ALOE'),('RESOURCE_MEDIHERBS'),('RESOURCE_SEASHELLS'),
-    ('RESOURCE_TOMATO'),('RESOURCE_TIN'),('RESOURCE_RUBBER'),('RESOURCE_PINE'),('RESOURCE_OAK'),('RESOURCE_MUSSELS'),('RESOURCE_MUSHROOMS'),
-    ('RESOURCE_GRANITE'),('RESOURCE_LIMESTONE'),('RESOURCE_LEAD'),('RESOURCE_HAM'),('RESOURCE_DATES'),('RESOURCE_BERRIES'),('RESOURCE_BARLEY');
-
-insert or replace into EnglishText
-    (Tag,                                                                       Text)
-select
-    'LOC_PEDIA_RESOURCES_PAGE_' || ResourceType ||'_CHAPTER_HISTORY_PARA_1',    " "
-from HDResourceful2_Pedia_Text;
-
-insert or replace into LocalizedText
-    (Language,      Tag,                                                                        Text)
-select
-    "zh_Hans_CN",   'LOC_PEDIA_RESOURCES_PAGE_' || ResourceType ||'_CHAPTER_HISTORY_PARA_1',    " "
-from HDResourceful2_Pedia_Text;
-
--- 糖改名甘蔗
-update  LocalizedText set Text = REPLACE(Text, '糖', '甘蔗')
-where Language = 'zh_Hans_CN' and (Tag in (
-  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUGAR_DESCRIPTION',
-  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUGAR_SHORT_NAME',
-  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUGAR_NAME'
-));
-
-update  LocalizedText set Text = REPLACE(Text, 'Sugar', 'Sugarcane')
-where Tag in (
-  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUGAR_DESCRIPTION',
-  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUGAR_SHORT_NAME',
-  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUGAR_NAME'
-);

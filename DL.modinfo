@@ -774,15 +774,6 @@
       <File>Assets/CityStates/CivBaikonur_256.dds</File>
       <File>Assets/GreatPeople/GreatPeople_ZhuangZhou_160.dds</File>
       <File>Assets/GreatPeople/GreatPeople_SiNaQian_160.dds</File>
-      <File>Assets/Wetlands/HD_Peat_22.dds</File>
-      <File>Assets/Wetlands/HD_Peat_32.dds</File>
-      <File>Assets/Wetlands/HD_Peat_38.dds</File>
-      <File>Assets/Wetlands/HD_Peat_50.dds</File>
-      <File>Assets/Wetlands/HD_Peat_64.dds</File>
-      <File>Assets/Wetlands/HD_Peat_80.dds</File>
-      <File>Assets/Wetlands/HD_Peat_128.dds</File>
-      <File>Assets/Wetlands/HD_Peat_256.dds</File>
-      <File>Assets/Wetlands/HD_Peat_FOW_256.dds</File>
       <File>Assets/Moments/UNIT_KEQING_MONMENT.dds</File>
       <File>Assets/Moments/UNIT_ENKIDU_HD_MONMENT.dds</File>
       <File>Assets/Moments/UNIT_QIN_ELITE_SOLDIER_HD_MONMENT.dds</File>
@@ -817,30 +808,20 @@
       <File>Assets/GreatWorks/New_Greatworks_256.dds</File>
       <File>Assets/Notifications/HD_Notifications_40.dds</File>
       <File>Assets/Notifications/HD_Notifications_100.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_22.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_38.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_50.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_64.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_256.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_FOW_256.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_22.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_32.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_38.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_50.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_64.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_256.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_FOW_256.dds</File>
-    </ImportFiles>
-    <ImportFiles id="Resouceful2_Adapt_Import" criteria="Resouceful2_Expansion2">
-      <Properties><LoadOrder>1</LoadOrder></Properties>
-      <File>Assets/Resourceful2/Resourceful2_New_22.dds</File>
-      <File>Assets/Resourceful2/Resourceful2_New_32.dds</File>
-      <File>Assets/Resourceful2/Resourceful2_New_38.dds</File>
-      <File>Assets/Resourceful2/Resourceful2_New_50.dds</File>
-      <File>Assets/Resourceful2/Resourceful2_New_64.dds</File>
-      <File>Assets/Resourceful2/Resourceful2_New_128.dds</File>
-      <File>Assets/Resourceful2/Resourceful2_New_256.dds</File>
-      <File>Assets/Resourceful2/Resourceful2_New_FOW_256.dds</File>
+      <File>Assets/Resources/HD_Resources_22.dds</File>
+      <File>Assets/Resources/HD_Resources_32.dds</File>
+      <File>Assets/Resources/HD_Resources_38.dds</File>
+      <File>Assets/Resources/HD_Resources_50.dds</File>
+      <File>Assets/Resources/HD_Resources_64.dds</File>
+      <File>Assets/Resources/HD_Resources_256.dds</File>
+      <File>Assets/Resources/HD_Resources_FOW_256.dds</File>
+      <File>Assets/Resources/HD_Resources_Monopoly_22.dds</File>
+      <File>Assets/Resources/HD_Resources_Monopoly_32.dds</File>
+      <File>Assets/Resources/HD_Resources_Monopoly_38.dds</File>
+      <File>Assets/Resources/HD_Resources_Monopoly_50.dds</File>
+      <File>Assets/Resources/HD_Resources_Monopoly_64.dds</File>
+      <File>Assets/Resources/HD_Resources_Monopoly_256.dds</File>
+      <File>Assets/Resources/HD_Resources_Monopoly_FOW_256.dds</File>
     </ImportFiles>
     <!-- Fix Icon -->
     <UpdateIcons id="FixIcons" criteria="Expansion2">
@@ -1241,10 +1222,6 @@
       <Properties><LoadOrder>17001</LoadOrder></Properties>
       <File>ModSupport/Resourceful2/HD_Resourceful2_Text.sql</File>
     </UpdateText>
-    <UpdateIcons id="Resouceful2_support_icon" criteria="Resouceful2_Expansion2">
-      <Properties><LoadOrder>17001</LoadOrder></Properties>
-      <File>ModSupport/Resourceful2/HD_Resourceful2_Icons.sql</File>
-    </UpdateIcons>
     <!-- 丰富资源2 End -->
     <!-- Better Trade Scrren -->
     <ImportFiles id="DL_BetterTradeScreen_Imports" criteria="BetterTradeScreen_Expansion2">
@@ -1440,10 +1417,8 @@
       <File>SubMods/HDRESOURCE/ArtDefs/Landmarks.artdef</File>
       <File>SubMods/HDRESOURCE/ArtDefs/Resources.artdef</File>
       <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE.sql</File>
-      <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Icon.xml</File>
       <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Localisation.xml</File>
       <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly.sql</File>
-      <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly_Icon.xml</File>
       <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly_Localisation.xml</File>
       <File>SubMods/HDRESOURCE/HDRESOURCE.dep</File>
       <File>SubMods/HDRESOURCE/Platforms/MacOS/BLPs/HDResources.blp</File>
@@ -1463,15 +1438,9 @@
     <UpdateText id="HDRESOURCEText"  criteria="Expansion2">
       <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly_Localisation.xml</File>
     </UpdateText>
-    <UpdateIcons id="HDRESOURCEIcon"  criteria="Expansion2">
-      <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Icon.xml</File>
-    </UpdateIcons>
     <UpdateDatabase id="HDRESOURCEMonopoly" criteria="Monopolies_Mode_Expansion2">
       <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly.sql</File>
     </UpdateDatabase>
-    <UpdateIcons id="HDRESOURCEMonopoly_Icon" criteria="Monopolies_Mode_Expansion2">
-      <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly_Icon.xml</File>
-    </UpdateIcons>
     <!-- Third Party -->
     <UpdateText id="CNforMods_Texts" criteria="MonopoliesMode">
       <Properties><LoadOrder>10000</LoadOrder></Properties>
@@ -1857,6 +1826,7 @@
       <File>UI/Icons/HD_Icons_Techs_Civics.sql</File>
       <File>UI/Icons/HD_Icons_Units.xml</File>
       <File>UI/Icons/HD_Icons_STUUexpansion.xml</File>
+      <File>UI/Icons/HD_Icons_Resources.sql</File>
     </UpdateIcons>
     <!-- Gameplay-->
     <AddGameplayScripts id="DL_Scripts_Gameplay" criteria="Expansion2">
@@ -1955,6 +1925,10 @@
     </UpdateText>
     <!-- GameMode Support (at end) -->
     <!-- Monopolies -->
+    <UpdateIcons id="Monopolies_Icon" criteria="Monopolies_Mode_Expansion2">
+      <Properties><LoadOrder>16050</LoadOrder></Properties>
+      <File>UI/Icons/HD_Icons_Monopoply.sql</File>
+    </UpdateIcons>
     <UpdateDatabase id="Monopolies_Adapt" criteria="Monopolies_Mode_Expansion2">
       <Properties><LoadOrder>16050</LoadOrder></Properties>
       <File>GameModeSupport/MonopoliesMode/HD_Monopoly_Adapt.sql</File>
@@ -2478,6 +2452,8 @@
     <File>UI/Icons/HD_Icons_Units.xml</File>
     <File>UI/Icons/HD_Icons_STUUexpansion.xml</File>
     <File>UI/Icons/HD_Icons_Wonder_Resources.sql</File>
+    <File>UI/Icons/HD_Icons_Resources.sql</File>
+    <File>UI/Icons/HD_Icons_Monopoply.sql</File>
 
     <!-- Mod Support -->
     <File>ModSupport/HistoricalReligions/Switch.sql</File>
@@ -2538,7 +2514,6 @@
     <File>ModSupport/Resourceful2/HD_Resourceful2_Pre.sql</File>
 	  <File>ModSupport/Resourceful2/HD_Resourceful2_Late.sql</File>
     <File>ModSupport/Resourceful2/HD_Resourceful2_Text.sql</File>
-    <File>ModSupport/Resourceful2/HD_Resourceful2_Icons.sql</File>
     <File>ModSupport/RemovableDistricts/DL_Adaptation.sql</File>
     <File>ModSupport/RemovableDistricts/DL_Texts.sql</File>
     <File>ModSupport/SukWonders/HD_Suk_Wonders.sql</File>
@@ -2592,10 +2567,8 @@
     <File>SubMods/HDRESOURCE/ArtDefs/Landmarks.artdef</File>
     <File>SubMods/HDRESOURCE/ArtDefs/Resources.artdef</File>
     <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE.sql</File>
-    <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Icon.xml</File>
     <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Localisation.xml</File>
     <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly.sql</File>
-    <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly_Icon.xml</File>
     <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly_Localisation.xml</File>
     <File>SubMods/HDRESOURCE/HDRESOURCE.dep</File>
     <File>SubMods/HDRESOURCE/Platforms/MacOS/BLPs/HDResources.blp</File>
@@ -2930,42 +2903,12 @@
     <File>Assets/CityStates/CivBaikonur_256.dds</File>
     <File>Assets/GreatPeople/GreatPeople_ZhuangZhou_160.dds</File>
     <File>Assets/GreatPeople/GreatPeople_SiNaQian_160.dds</File>
-    <File>Assets/Resourceful2/Resourceful2_New_22.dds</File>
-    <File>Assets/Resourceful2/Resourceful2_New_32.dds</File>
-    <File>Assets/Resourceful2/Resourceful2_New_38.dds</File>
-    <File>Assets/Resourceful2/Resourceful2_New_50.dds</File>
-    <File>Assets/Resourceful2/Resourceful2_New_64.dds</File>
-    <File>Assets/Resourceful2/Resourceful2_New_128.dds</File>
-    <File>Assets/Resourceful2/Resourceful2_New_256.dds</File>
-    <File>Assets/Resourceful2/Resourceful2_New_FOW_256.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_22.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_38.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_50.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_64.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_256.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_FOW_256.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_22.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_32.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_38.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_50.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_64.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_256.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_FOW_256.dds</File>
     <File>Assets/WonderResources/Wonder_Resources_22.dds</File>
     <File>Assets/WonderResources/Wonder_Resources_32.dds</File>
     <File>Assets/WonderResources/Wonder_Resources_38.dds</File>
     <File>Assets/WonderResources/Wonder_Resources_50.dds</File>
     <File>Assets/WonderResources/Wonder_Resources_64.dds</File>
     <File>Assets/WonderResources/Wonder_Resources_256.dds</File>
-    <File>Assets/Wetlands/HD_Peat_22.dds</File>
-    <File>Assets/Wetlands/HD_Peat_32.dds</File>
-    <File>Assets/Wetlands/HD_Peat_38.dds</File>
-    <File>Assets/Wetlands/HD_Peat_50.dds</File>
-    <File>Assets/Wetlands/HD_Peat_64.dds</File>
-    <File>Assets/Wetlands/HD_Peat_80.dds</File>
-    <File>Assets/Wetlands/HD_Peat_128.dds</File>
-    <File>Assets/Wetlands/HD_Peat_256.dds</File>
-    <File>Assets/Wetlands/HD_Peat_FOW_256.dds</File>
     <File>Assets/Moments/UNIT_KEQING_MONMENT.dds</File>
     <File>Assets/Moments/UNIT_ENKIDU_HD_MONMENT.dds</File>
     <File>Assets/Moments/UNIT_QIN_ELITE_SOLDIER_HD_MONMENT.dds</File>
@@ -3000,6 +2943,20 @@
     <File>Assets/GreatWorks/New_Greatworks_256.dds</File>
     <File>Assets/Notifications/HD_Notifications_40.dds</File>
     <File>Assets/Notifications/HD_Notifications_100.dds</File>
+    <File>Assets/Resources/HD_Resources_22.dds</File>
+    <File>Assets/Resources/HD_Resources_32.dds</File>
+    <File>Assets/Resources/HD_Resources_38.dds</File>
+    <File>Assets/Resources/HD_Resources_50.dds</File>
+    <File>Assets/Resources/HD_Resources_64.dds</File>
+    <File>Assets/Resources/HD_Resources_256.dds</File>
+    <File>Assets/Resources/HD_Resources_FOW_256.dds</File>
+    <File>Assets/Resources/HD_Resources_Monopoly_22.dds</File>
+    <File>Assets/Resources/HD_Resources_Monopoly_32.dds</File>
+    <File>Assets/Resources/HD_Resources_Monopoly_38.dds</File>
+    <File>Assets/Resources/HD_Resources_Monopoly_50.dds</File>
+    <File>Assets/Resources/HD_Resources_Monopoly_64.dds</File>
+    <File>Assets/Resources/HD_Resources_Monopoly_256.dds</File>
+    <File>Assets/Resources/HD_Resources_Monopoly_FOW_256.dds</File>
 
     <!-- Platforms -->
     <File>Platforms/Windows/audio/HD_CHINA.ini</File>

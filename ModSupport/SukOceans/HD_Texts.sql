@@ -162,13 +162,13 @@ VALUES
 insert or replace into EnglishText
     (Tag,                                                                                   Text)
 values
+    ("LOC_RESOURCE_SUK_CORAL_NAME",                                                         "Stony Coral"),
     ("LOC_TECH_SAILING_HD_DESCRIPTION",                                                     "Allows harvesting of Kelp Forest and resources improved by Fishing Boats. Allows Builders and Traders to embark."),
-    -- ("LOC_TECH_CELESTIAL_NAVIGATION_HD_DESCRIPTION",                                        "Allows harvesting of Kelp Forest and resources improved by Fishing Boats. If Ship Building is not researched, also allows all land units to embark."),
     ("LOC_BELIEF_HD_SONG_OF_SIREN_DL_DESCRIPTION",                                          "+2 [ICON_Production] Production, +1 [ICON_GOLD] Gold from Reefs and Kelps.");
 
 insert or replace into LocalizedText
     (Language,      Tag,                                                                    Text)
 values
+    ("zh_Hans_CN",  "LOC_RESOURCE_SUK_CORAL_NAME",                                          "石珊瑚"),
     ("zh_Hans_CN",  "LOC_TECH_SAILING_HD_DESCRIPTION",                                      "允许收获海藻森林和由渔船改良的资源。允许建造者和商人上船。"),
-    -- ("zh_Hans_CN",  "LOC_TECH_CELESTIAL_NAVIGATION_HD_DESCRIPTION",                         "允许收获海藻森林和由渔船改良的资源。若未掌握造船术，也允许所有陆地单位上船。"),
     ("zh_Hans_CN",  "LOC_BELIEF_HD_SONG_OF_SIREN_DL_DESCRIPTION",                           "礁石和海藻森林单元格+2 [ICON_Production] 生产力和+1 [ICON_GOLD] 金币。");
