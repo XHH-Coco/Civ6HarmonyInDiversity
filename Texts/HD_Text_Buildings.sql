@@ -148,7 +148,7 @@ values
     ("LOC_BUILDING_HD_ANCESTRAL_TEMPLE_NAME",                     "Ancestral Temple"),
     ("LOC_BUILDING_HD_ANCESTRAL_TEMPLE_DESCRIPTION",              "+3 [ICON_Faith] Faith to Neighborhood in this city."),
     ("LOC_BUILDING_HD_MANSION_NAME",                              "Official Mansion"),
-    ("LOC_BUILDING_HD_MANSION_DESCRIPTION",                       "Cities with a [ICON_GOVERNOR] Governor and Neighborhood distirct can receive an extra basic regional yield from Buildings and Wonders. [NEWLINE]Awards +1 [ICON_Governor] Governor Title. [NEWLINE][NEWLINE]Must be built in [ICON_CAPITAL] Capital. Can only be built once in a civilization."),
+    ("LOC_BUILDING_HD_MANSION_DESCRIPTION",                       "Cities with a [ICON_GOVERNOR] Governor and Neighborhood distirct can receive double regional yield from Buildings and Wonders. [NEWLINE]Awards +1 [ICON_Governor] Governor Title. [NEWLINE][NEWLINE]Must be built in [ICON_CAPITAL] Capital. Can only be built once in a civilization."),
     ("LOC_BUILDING_HD_BUS_STOP_NAME",                             "Bus Stop"),
     ("LOC_BUILDING_HD_BUS_STOP_DESCRIPTION",                      "Provide corresponding yield to districts within 3 tiles. +3 [ICON_GOLD] Gold to improvements within 3 tiles. +100% Commercial Hub and Harbor district adjacency bonuses in this city."),
     -- Dam
@@ -323,7 +323,7 @@ values
     ("zh_Hans_CN",  "LOC_BUILDING_HD_ANCESTRAL_TEMPLE_NAME",                     "宗祠"),
     ("zh_Hans_CN",  "LOC_BUILDING_HD_ANCESTRAL_TEMPLE_DESCRIPTION",              "本城的社区+3 [ICON_FAITH] 信仰值。"),
     ("zh_Hans_CN",  "LOC_BUILDING_HD_MANSION_NAME",                              "官邸"),
-    ("zh_Hans_CN",  "LOC_BUILDING_HD_MANSION_DESCRIPTION",                       "有 [ICON_GOVERNOR] 总督就职且有社区的城市可以从建筑和奇观获得一份额外的基础辐射产出。[NEWLINE]奖励1个 [ICON_GOVERNOR] 总督头衔。[NEWLINE][NEWLINE]必须建造在 [ICON_CAPITAL] 首都。文明中一次仅限建造一座该建筑。"),
+    ("zh_Hans_CN",  "LOC_BUILDING_HD_MANSION_DESCRIPTION",                       "有 [ICON_GOVERNOR] 总督就职且有社区的城市从建筑和奇观获得2倍的辐射产出。[NEWLINE]奖励1个 [ICON_GOVERNOR] 总督头衔。[NEWLINE][NEWLINE]必须建造在 [ICON_CAPITAL] 首都。文明中一次仅限建造一座该建筑。"),
     ("zh_Hans_CN",  "LOC_BUILDING_HD_BUS_STOP_NAME",                             "公交站"),
     ("zh_Hans_CN",  "LOC_BUILDING_HD_BUS_STOP_DESCRIPTION",                      "3个单元格内的区域获得一份对应产出。3个单元格内的改良+3 [ICON_GOLD] 金币。本城的商业中心和港口+100%相邻加成。"),
     -- 堤坝

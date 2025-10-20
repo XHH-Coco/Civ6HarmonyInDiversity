@@ -416,9 +416,9 @@ ToolTipHelper.GetBuildingToolTip = function(buildingHash, playerId, city)
     end
   end
   if range ~= 0 then
-    table.insert(toolTipLines, "[NEWLINE]" .. Locale.Lookup("LOC_TOOLTIP_REGIONAL_EFFECT_RANGE_MODIFIER", range));
+    local regionalTextList = {};
     for row in GameInfo.HD_BuildingRegionalYields() do
-      if row.BuildingType == building.BuildingType then
+      if row.BuildingType == building.BuildingType and row.YieldChange > 0 then
         local line;
         if row.YieldType == 'AMENITY' then
           local tooltip;
@@ -450,17 +450,24 @@ ToolTipHelper.GetBuildingToolTip = function(buildingHash, playerId, city)
             line = line .. " " .. text;
           end
         end
-        table.insert(toolTipLines, line);
+        table.insert(regionalTextList, line);
+      end
+    end
+
+    if #regionalTextList > 0 then
+      table.insert(toolTipLines, "[NEWLINE]" .. Locale.Lookup("LOC_TOOLTIP_REGIONAL_EFFECT_RANGE_MODIFIER", range));
+      for _, text in ipairs(regionalTextList) do
+          table.insert(toolTipLines, text);
       end
     end
   end
   
-  if district ~= nil and building.RegionalRange ~= 0 then
-    local extraRange = district:GetExtraRegionalRange();
-    if extraRange ~= 0 then
-      table.insert(toolTipLines, Locale.Lookup("LOC_TOOLTIP_EXTRA_REGIONAL_RANGE", extraRange)); 
-    end
-  end
+  -- if district ~= nil and building.RegionalRange ~= 0 then
+  --   local extraRange = district:GetExtraRegionalRange();
+  --   if extraRange ~= 0 then
+  --     table.insert(toolTipLines, Locale.Lookup("LOC_TOOLTIP_EXTRA_REGIONAL_RANGE", extraRange)); 
+  --   end
+  -- end
 
   -----------------------------------------------------------------------------------
   -- 专家产出

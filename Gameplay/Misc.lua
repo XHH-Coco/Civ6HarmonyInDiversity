@@ -3,14 +3,6 @@ Utils = ExposedMembers.DLHD.Utils;
 
 ExposedMembers.GameEvents = GameEvents
 
-function SetPlotProperty(x, y, key, value)
-	local plot = Map.GetPlot(x, y);
-	if plot ~= nil then
-		plot:SetProperty(key, value);
-	end
-end
-GameEvents.SetPlotPropertySwitch.Add(SetPlotProperty);
-
 function AttachModifier(playerId, cityId, modifierId)
 	local city = CityManager.GetCity(playerId, cityId);
 	city:AttachModifierByID(modifierId);
@@ -196,25 +188,6 @@ function ArcherForCityState ()
 	end
 end
 Events.TurnBegin.Add(ArcherForCityState);
-
--- James Watt
-local JAMES_WATT_INDEX = GameInfo.GreatPersonIndividuals['GREAT_PERSON_INDIVIDUAL_ADA_LOVELACE'].Index;
-local SANG_HONGYANG = GameInfo.GreatPersonIndividuals['GREAT_PERSON_INDIVIDUAL_HD_SANG_HONGYANG'];
-local JAMES_WATT_ACTIVATION_TIME_KEY = 'JAMES_WATT_ACTIVATION_TIME';
-local SANG_HONGYANG_ACTIVATION_TIME_KEY = 'SANG_HONGYANG_ACTIVATION_TIME';
-function JamesWattCounter (playerId, unitId, greatPersonClassId, greatPersonIndividualId)
-	if greatPersonIndividualId == JAMES_WATT_INDEX then
-		local player = Players[playerId];
-		local watt = player:GetProperty(JAMES_WATT_ACTIVATION_TIME_KEY) or 0;
-		player:SetProperty(JAMES_WATT_ACTIVATION_TIME_KEY, watt + 1);
-	end
-	if (SANG_HONGYANG ~= nil) and (greatPersonIndividualId == SANG_HONGYANG.Index) then
-		local player = Players[playerId];
-		local hongyang = player:GetProperty(SANG_HONGYANG_ACTIVATION_TIME_KEY) or 0;
-		player:SetProperty(SANG_HONGYANG_ACTIVATION_TIME_KEY, hongyang + 1);
-	end
-end
-Events.UnitGreatPersonActivated.Add(JamesWattCounter);
 
 -- Reyna
 local REYNA_CULTURE_KEY = 'REYNA_CULTURE_';

@@ -1120,8 +1120,18 @@ function RefreshStBasils()
   end
 end
 
-GameEvents.OnGameTurnEnded.Add(RefreshStBasils)
-Events.CitySelectionChanged.Add(RefreshStBasils)
+local pendingRefreshStBasils = false;
+function RefreshStBasilsIfPending(playerId)
+	if pendingRefreshStBasils == true then
+		RefreshStBasils();
+		pendingRefreshStBasils = false;
+	end
+end
+Events.CityReligionFollowersChanged.Add(function()
+  pendingRefreshStBasils = true;
+end)
+GameEvents.OnGameTurnEnded.Add(RefreshStBasilsIfPending)
+Events.CitySelectionChanged.Add(RefreshStBasilsIfPending)
 --------------------------------------------------------------
 -- Initialize
 function initialize()

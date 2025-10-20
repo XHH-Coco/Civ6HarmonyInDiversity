@@ -796,3 +796,12 @@ function IsImprovementHasClassification(improvementId, classificationType)
 	return false;
 end
 Utils.IsImprovementHasClassification = IsImprovementHasClassification;
+
+-- 获取城市参数
+local function GetCityProperty(playerId, cityId, tag)
+	local city = CityManager.GetCity(playerId, cityId);
+	if not city then return nil; end
+
+	return city:GetProperty(tag);
+end
+Utils.GetCityProperty = GetCityProperty;

@@ -596,7 +596,6 @@ function GetSortedAdjacencyBonuses(objectKind, objectType)
     {}  -- 19 IMPROVEMENT_CLASSIFICATION
   };
 
-  -- TODO：地形/区域/改良/资源分类相邻加成
   for row in gameInfoTable_Classification() do
     if row[objectKind] == objectType then
       local data = GameInfo.HD_Adjacency_Base_On_Classification[row.YieldChangeId];
@@ -1060,3 +1059,14 @@ function InitDistrictSortList()
 end
 InitDistrictSortList();
 Utils.DistrictSortMap = DistrictSortMap;
+
+-- 获取城市电力
+function IsCityFullyPowered(playerId, cityId)
+  local city = CityManager.GetCity(playerId, cityId)
+  if city then
+    return city:GetPower():IsFullyPowered();
+  end
+
+  return false;
+end
+Utils.IsCityFullyPowered = IsCityFullyPowered;

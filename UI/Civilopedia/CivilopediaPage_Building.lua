@@ -219,7 +219,7 @@ PageLayouts["Building" ] = function(page)
     -- DL specific logic: regional effects.
     -- ================================================================================
     local range = building.RegionalRange or 0;
-    if(range ~= 0) then
+    if building.IsWonder and range ~= 0 then
         table.insert(stats, Locale.Lookup("LOC_TOOLTIP_REGIONAL_EFFECT_RANGE", range));
     end
 	-- Building Regional Effect
@@ -231,9 +231,9 @@ PageLayouts["Building" ] = function(page)
 		end
 	end
     if range ~= 0 then
-        table.insert(stats, "[NEWLINE]" .. Locale.Lookup("LOC_TOOLTIP_REGIONAL_EFFECT_RANGE_MODIFIER", range));
+        local regionalTextList = {};
 		for row in GameInfo.HD_BuildingRegionalYields() do
-			if row.BuildingType == building.BuildingType then
+			if row.BuildingType == building.BuildingType and row.YieldChange > 0 then
 				local line = "";
 				if row.YieldType == 'AMENITY' then
 					local tooltip;
@@ -242,7 +242,7 @@ PageLayouts["Building" ] = function(page)
 					else
 						tooltip = "LOC_TYPE_TRAIT_AMENITY_ENTERTAINMENT";
 					end
-					table.insert(stats, "[ICON_Bullet] " .. Locale.Lookup(tooltip, row.YieldChange));
+					table.insert(regionalTextList, "[ICON_Bullet] " .. Locale.Lookup(tooltip, row.YieldChange));
 				else
 					local yield = GameInfo.Yields[row.YieldType];
 					local tooltip;
@@ -251,10 +251,17 @@ PageLayouts["Building" ] = function(page)
 					else
 						tooltip = "LOC_TYPE_TRAIT_YIELD";
 					end
-					table.insert(stats, "[ICON_Bullet] " .. Locale.Lookup(tooltip, row.YieldChange, yield.IconString, yield.Name));
+					table.insert(regionalTextList, "[ICON_Bullet] " .. Locale.Lookup(tooltip, row.YieldChange, yield.IconString, yield.Name));
 				end
 			end
 		end
+
+        if #regionalTextList > 0 then
+            table.insert(stats, "[NEWLINE]" .. Locale.Lookup("LOC_TOOLTIP_REGIONAL_EFFECT_RANGE_MODIFIER", range));
+            for _, text in ipairs(regionalTextList) do
+                table.insert(stats, text);
+            end
+        end
     end
     -- ================================================================================
     -- End DL specific logic.

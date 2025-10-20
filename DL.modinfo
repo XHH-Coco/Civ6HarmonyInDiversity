@@ -933,6 +933,7 @@
       <File>UI/Custom/China_NotificationManager.xml</File>
       <File>UI/Custom/China_Panel.xml</File>
       <File>UI/Custom/CityButton_ResourceClassification.xml</File>
+      <File>UI/Custom/CityButton_RegionalYields.xml</File>
     </AddUserInterfaces>
     <ReplaceUIScript id="DL_CityPanelOverview" criteria="Expansion2">
       <Properties>
@@ -1484,7 +1485,8 @@
       <Properties><LoadOrder>12000</LoadOrder></Properties>
       <File>UpdateDataBase/HD_CulturalUnits.xml</File>
       <File>UpdateDataBase/DL_BuildingDefinations.sql</File>
-      <File>UpdateDataBase/HD_Definations.sql</File>
+      <File>UpdateDataBase/HD_TableDefinations.sql</File>
+      <File>UpdateDataBase/HD_NotificationDefinations.sql</File>
       <File>UpdateDataBase/DL_UnitDefinations.sql</File>
       <File>UpdateDataBase/DL_ImprovementDefinations.sql</File>
       <File>UpdateDataBase/DL_ProjectDefinations.sql</File>
@@ -1796,13 +1798,13 @@
     </UpdateDatabase>
     <UpdateDatabase id="DL_Main_Late" criteria="Expansion2">
       <Properties><LoadOrder>20000</LoadOrder></Properties>
-      <File>UpdateDataBase/DL_Buildings_Late.sql</File>
       <File>UpdateDataBase/DL_PostProcess.sql</File>
       <File>UpdateDataBase/DL_GreatPeople_Late.sql</File>
     </UpdateDatabase>
     <UpdateDatabase id="DL_Main_GreatWorks_YieldChanges" criteria="Expansion2">
       <Properties><LoadOrder>25000</LoadOrder></Properties>
       <File>UpdateDataBase/DL_GreatWorks_YieldChanges.sql</File>
+      <File>UpdateDataBase/HD_Regional_Yields.sql</File>
     </UpdateDatabase>
     <UpdateDatabase id="DL_Main_Last" criteria="Expansion2">
       <Properties><LoadOrder>30000</LoadOrder></Properties>
@@ -1848,6 +1850,7 @@
       <File>Gameplay/BinaryCompress.lua</File>
       <File>Gameplay/UnitAbilities.lua</File>
       <File>Gameplay/ResourceClassification.lua</File>
+      <File>Gameplay/RegionalYields.lua</File>
     </AddGameplayScripts>
     <!-- UI scripts for gameplay -->
     <AddUserInterfaces id="DL_Scripts_Interface" criteria="Expansion2">
@@ -1856,13 +1859,11 @@
         <LoadOrder>16018</LoadOrder>
       </Properties>
       <File>Gameplay/Temp_Interface.xml</File>
-      <File>Gameplay/RegionalYield.xml</File>
     </AddUserInterfaces>
     <ImportFiles id="DL_lua_Scripts" criteria="Expansion2">
       <Properties><LoadOrder>16017</LoadOrder></Properties>
       <File>Gameplay/Temp_Interface.lua</File>
       <File>Gameplay/HD_StateUtils.lua</File>
-      <File>Gameplay/RegionalYield.lua</File>
     </ImportFiles>
     <!-- Texts and Tags -->
     <UpdateDatabase id="DL_Text_Tag" criteria="Expansion2">
@@ -2338,8 +2339,7 @@
 	  <File>Gameplay/Buildings.lua</File>
     <File>Gameplay/Temp_Interface.lua</File>
     <File>Gameplay/Temp_Interface.xml</File>
-    <File>Gameplay/RegionalYield.lua</File>
-    <File>Gameplay/RegionalYield.xml</File>
+    <File>Gameplay/RegionalYields.lua</File>
     <File>Gameplay/ResourceClassification.lua</File>
 
     <!-- UI Overwrites -->
@@ -2385,6 +2385,8 @@
     <File>UI/Custom/China_Panel.xml</File>
     <File>UI/Custom/CityButton_ResourceClassification.lua</File>
     <File>UI/Custom/CityButton_ResourceClassification.xml</File>
+    <File>UI/Custom/CityButton_RegionalYields.lua</File>
+    <File>UI/Custom/CityButton_RegionalYields.xml</File>
 
     <!-- UI replacements -->
     <File>UI/Replacement/CitySupport.lua</File>
@@ -2684,7 +2686,8 @@
     <File>UpdateDataBase/DL_Boosts.sql</File>
     <File>UpdateDataBase/DL_Buildings.sql</File>
     <File>UpdateDataBase/DL_BuildingDefinations.sql</File>
-    <File>UpdateDataBase/HD_Definations.sql</File>
+    <File>UpdateDataBase/HD_TableDefinations.sql</File>
+    <File>UpdateDataBase/HD_NotificationDefinations.sql</File>
     <File>UpdateDataBase/DL_ImprovementDefinations.sql</File>
     <File>UpdateDataBase/DL_ProjectDefinations.sql</File>
     <File>UpdateDataBase/DL_UnitDefinations.sql</File>
@@ -2712,7 +2715,6 @@
     <File>UpdateDataBase/DL_Policies.sql</File>
     <File>UpdateDataBase/DL_Governments.sql</File>
     <File>UpdateDataBase/DL_Commemorations.sql</File>
-    <File>UpdateDataBase/DL_Buildings_Late.sql</File>
     <File>UpdateDataBase/DL_PostProcess.sql</File>
     <File>UpdateDataBase/HD_Last.sql</File>
     <File>UpdateDataBase/DL_Projects.sql</File>
@@ -2734,6 +2736,7 @@
     <File>UpdateDataBase/DL_Wonders.sql</File>
     <File>UpdateDataBase/DL_WonderTheming.sql</File>
     <File>UpdateDataBase/DL_ModifierString.sql</File>
+    <File>UpdateDataBase/HD_Regional_Yields.sql</File>
     <File>UpdateDataBase/Classifications/HD_Classification_Tables.sql</File>
     <File>UpdateDataBase/Classifications/HD_Building_Classification.sql</File>
     <File>UpdateDataBase/Classifications/HD_District_Classification.sql</File>

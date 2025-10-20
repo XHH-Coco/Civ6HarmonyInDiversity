@@ -74,7 +74,7 @@ values
     -- ("LOC_CIVILIZATION_ANTIOCH_BONUS",                    "Your [ICON_TradeRoute] Trade Routes to foreign cities earn +2 [ICON_Gold] Gold for each Luxury resource at the destination."),
     -- ("LOC_LEADER_TRAIT_BRUSSELS_DESCRIPTION",             "Your cities get +25% [ICON_Production] Production towards Wonders."), -- Each World Wonder +2 [ICON_Production] Production for your city.
     -- ("LOC_CIVILIZATION_BRUSSELS_BONUS",                   "Your cities get +25% [ICON_Production] Production towards Wonders."), -- Each World Wonder +2 [ICON_Production] Production for your city.
-    ("LOC_LEADER_TRAIT_MEXICO_CITY_DESCRIPTION",          "Your building with Regional effect provides extra yields equal to half (rounded down and at least 1) of its basic yields, which can be extended with its Regional effect."),
+    ("LOC_LEADER_TRAIT_MEXICO_CITY_DESCRIPTION",          "Your buildings and wonders with Regional effect provides 1.5 times the yields, which can be extended with its Regional effect."),
     --("LOC_CIVILIZATION_MEXICO_CITY_BONUS",                "Regional effects from your Industrial Zone, Water Park and Entertainment Complex districts reach 3 tiles farther."), -- Industrial Zone +1 [ICON_AMENITIES] Amenity。Entertainment Complex +5 [ICON_Production] Production.
     ("LOC_LEADER_TRAIT_ANTIOCH_DESCRIPTION",              "[ICON_CITIZEN] Citizens in Cities with established governor provide +2 [ICON_GOLD] Gold."),
     --("LOC_CIVILIZATION_ANTIOCH_BONUS",                    "-15% cost when purchasing buildings in Cities with established governor."),
@@ -200,7 +200,7 @@ values
     --("zh_Hans_CN",  "LOC_CIVILIZATION_CARDIFF_BONUS",                    "每个造船厂和码头向城市提供3点 [ICON_POWER] 电力。"), -- 通电建筑额外产出+4
     ("zh_Hans_CN",  "LOC_LEADER_TRAIT_HONG_KONG_DESCRIPTION",            "每个学院和学院建筑+1 [ICON_PRODUCTION] 生产力。城市建造项目时+15% [ICON_PRODUCTION] 生产力。"),
     --("zh_Hans_CN",  "LOC_CIVILIZATION_HONG_KONG_BONUS",                  "城市建造项目时+20% [ICON_PRODUCTION] 生产力。"),
-    ("zh_Hans_CN",  "LOC_LEADER_TRAIT_MEXICO_CITY_DESCRIPTION",          "辐射建筑额外提供等同于其基础产出一半（向下取整且至少为1）的产出，该额外产出可以被辐射效果延伸。"),
+    ("zh_Hans_CN",  "LOC_LEADER_TRAIT_MEXICO_CITY_DESCRIPTION",          "辐射建筑和奇观提供1.5倍的产出，该额外产出可以被辐射效果延伸。"),
     --("zh_Hans_CN",  "LOC_CIVILIZATION_MEXICO_CITY_BONUS",                "工业区、娱乐中心、水上乐园的辐射距离+3格。"), -- 工业区为城市+1 [ICON_AMENITIES] 宜居度。娱乐中心提供+5 [ICON_Production] 生产力。
     -- ("zh_Hans_CN",  "LOC_LEADER_TRAIT_BRUSSELS_DESCRIPTION",             "城市建造奇观时+25% [ICON_Production] 生产力。"), -- 每个奇观提供+2 [ICON_Production] 生产力。
     -- ("zh_Hans_CN",  "LOC_CIVILIZATION_BRUSSELS_BONUS",                   "城市建造奇观时+25% [ICON_Production] 生产力。"), -- 每个奇观提供+2 [ICON_Production] 生产力。

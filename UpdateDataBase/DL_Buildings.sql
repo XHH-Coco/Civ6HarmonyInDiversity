@@ -191,6 +191,7 @@ values
 	-- Industrial Zone
 	('BUILDING_WORKSHOP',			'YIELD_PRODUCTION',	5),
 	('BUILDING_FACTORY',			'YIELD_PRODUCTION',	8),
+	('BUILDING_COAL_POWER_PLANT',			'YIELD_PRODUCTION',	1),
 	-- Campus
 	('BUILDING_LIBRARY',			'YIELD_SCIENCE',	3),
 	('BUILDING_UNIVERSITY',			'YIELD_SCIENCE',	4),
@@ -1843,7 +1844,8 @@ insert or replace into GameModifiers (ModifierId) values
 	('HD_HRC_AWARD_GOVERNOR'),
 	('HD_MND_AWARD_GOVERNOR'),
 	('HD_RCC_AWARD_GOVERNOR'),
-	('HD_WPH_AWARD_GOVERNOR');
+	('HD_WPH_AWARD_GOVERNOR'),
+	('HD_MANSION_AWARD_GOVERNOR');
 
 insert or replace into Modifiers
 	(ModifierId,                      ModifierType,                                    SubjectRequirementSetId,                    													RunOnce,Permanent,SubjectStackLimit)
@@ -1851,7 +1853,8 @@ values
 	('HD_HRC_AWARD_GOVERNOR',     		'MODIFIER_ALL_PLAYERS_ADJUST_GOVERNOR_POINTS',   'PLAYER_HAS_BUILDING_HD_HUMAN_RIGHTS_COUNCIL_REQUIREMENTS',  				1,      1,        1),
 	('HD_MND_AWARD_GOVERNOR',     		'MODIFIER_ALL_PLAYERS_ADJUST_GOVERNOR_POINTS',   'PLAYER_HAS_BUILDING_HD_MINISTRY_OF_NATIONAL_DEFENSE_REQUIREMENTS',  1,      1,        1),
 	('HD_RCC_AWARD_GOVERNOR',     		'MODIFIER_ALL_PLAYERS_ADJUST_GOVERNOR_POINTS',   'PLAYER_HAS_BUILDING_HD_REGIONAL_COUNCIL_CENTER_REQUIREMENTS',  			1,      1,        1),
-	('HD_WPH_AWARD_GOVERNOR',     		'MODIFIER_ALL_PLAYERS_ADJUST_GOVERNOR_POINTS',   'PLAYER_HAS_BUILDING_HD_WORLD_PARLIAMENT_HEADQUARTERS_REQUIREMENTS', 1,      1,        1);
+	('HD_WPH_AWARD_GOVERNOR',     		'MODIFIER_ALL_PLAYERS_ADJUST_GOVERNOR_POINTS',   'PLAYER_HAS_BUILDING_HD_WORLD_PARLIAMENT_HEADQUARTERS_REQUIREMENTS', 1,      1,        1),
+	('HD_MANSION_AWARD_GOVERNOR',     'MODIFIER_ALL_PLAYERS_ADJUST_GOVERNOR_POINTS',   'PLAYER_HAS_BUILDING_HD_MANSION_REQUIREMENTS',  											1,      1,        1);
 
 insert or replace into Modifiers
 	(ModifierId,					        					ModifierType,			                                        			SubjectRequirementSetId)
@@ -1887,6 +1890,7 @@ values
 	('HD_MND_AWARD_GOVERNOR',	              'Delta',								1),
 	('HD_RCC_AWARD_GOVERNOR',	              'Delta',								1),
 	('HD_WPH_AWARD_GOVERNOR',	              'Delta',								1),
+	('HD_MANSION_AWARD_GOVERNOR',	          'Delta',								1),
 
 	('HD_HRC_ECONOMIC_SLOT',	              'GovernmentSlotType',   'SLOT_ECONOMIC'),
 	('HD_MND_MILITARY_SLOT',	              'GovernmentSlotType',   'SLOT_MILITARY'),

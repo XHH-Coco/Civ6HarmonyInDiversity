@@ -3138,6 +3138,42 @@ select a.PolicyType, b.PromotionClassType,	'Sea' from Policies a CROSS JOIN Unit
 insert or replace into PolicyUnitProductionValidClasses (PolicyType,	PromotionClassType,	UnitDomain) values
 	('POLICY_HD_SCOUT_TRAINING',	'PROMOTION_CLASS_RECON',	'Land'),
 	('POLICY_HD_SCOUT_TRAINING',	'PROMOTION_CLASS_NAVAL_RAIDER',	'Sea');
+
+-------------------------------------------------------------------------------------------------------------------
+-- 辐射范围
+insert or replace into HD_PolicyRegionalRange (PolicyType, DistrictType, RegionalRange) values
+	('POLICY_HD_LITERARY_NEWS_AGENCY',	'DISTRICT_CAMPUS',											3),
+	('POLICY_HD_LITERARY_NEWS_AGENCY',	'DISTRICT_THEATER',											3),
+	('POLICY_MERCHANT_CONFEDERATION',		'DISTRICT_COMMERCIAL_HUB',							3),
+	('POLICY_MERCHANT_CONFEDERATION',		'DISTRICT_INDUSTRIAL_ZONE',							3),
+	('POLICY_OVERALL_PLANNING',					'DISTRICT_NEIGHBORHOOD',								3),
+	('POLICY_OVERALL_PLANNING',					'DISTRICT_ENTERTAINMENT_COMPLEX',				3),
+	('POLICY_OVERALL_PLANNING',					'DISTRICT_WATER_ENTERTAINMENT_COMPLEX',	3),
+	('POLICY_HD_BLOCK_MANAGEMENT',			'DISTRICT_CAMPUS',											3),
+	('POLICY_HD_BLOCK_MANAGEMENT',			'DISTRICT_THEATER',											3),
+	('POLICY_HD_BLOCK_MANAGEMENT',			'DISTRICT_COMMERCIAL_HUB',							3),
+	('POLICY_HD_BLOCK_MANAGEMENT',			'DISTRICT_INDUSTRIAL_ZONE',							3),
+	('POLICY_HD_BLOCK_MANAGEMENT',			'DISTRICT_NEIGHBORHOOD',								3),
+	('POLICY_HD_BLOCK_MANAGEMENT',			'DISTRICT_ENTERTAINMENT_COMPLEX',				3),
+	('POLICY_HD_BLOCK_MANAGEMENT',			'DISTRICT_WATER_ENTERTAINMENT_COMPLEX',	3),
+	('POLICY_HD_BLOCK_MANAGEMENT',			'DISTRICT_HOLY_SITE',										3);
+
+insert or replace into PolicyModifiers (PolicyType, ModifierId) select
+	PolicyType, 'HD_ADD_PLAYER_' || DistrictType || '_' || RegionalRange || '_REGIONAL_RANGE'
+from HD_PolicyRegionalRange;
+
+insert or replace into Modifiers (ModifierId, ModifierType) select
+	'HD_ADD_PLAYER_' || DistrictType || '_' || RegionalRange || '_REGIONAL_RANGE', 'MODIFIER_PLAYER_CITIES_ADJUST_PROPERTY'
+from HD_PolicyRegionalRange;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) select
+	'HD_ADD_PLAYER_' || DistrictType || '_' || RegionalRange || '_REGIONAL_RANGE', 'Key', 'HD_SINGLE_DISTRICT_EXTRA_REGIONAL_RANGE_' || DistrictType
+from HD_PolicyRegionalRange;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) select
+	'HD_ADD_PLAYER_' || DistrictType || '_' || RegionalRange || '_REGIONAL_RANGE', 'Amount', RegionalRange
+from HD_PolicyRegionalRange;
+
 -------------------------------------------------------------------------------------------------------------------
 -- 隐修会
 -- update ModifierArguments set Value = 50 where ModifierId = 'MONASTICISM_HOLYSITE_SCIENCE' and Name = 'Amount';
