@@ -303,3 +303,34 @@ insert or replace into StartBiasTerrains (CivilizationType, TerrainType, Tier) s
 insert or replace into StartBiasFeatures (CivilizationType, FeatureType, Tier) select CivilizationType, FeatureType, Tier from HD_StartBiasFeatures;
 insert or replace into StartBiasResources (CivilizationType, ResourceType, Tier) select CivilizationType, ResourceType, Tier from HD_StartBiasResources;
 insert or replace into StartBiasRivers (CivilizationType, Tier) select CivilizationType, Tier from HD_StartBiasRivers;
+
+-- =======================================================================================================================
+-- 负面关联
+-- =======================================================================================================================
+
+CREATE TABLE 'HD_Negative_StartBiasTerrains'(
+	'CivilizationType' TEXT NOT NULL,
+	'TerrainType' TEXT NOT NULL
+);
+
+CREATE TABLE 'HD_Negative_StartBiasFeatures'(
+	'CivilizationType' TEXT NOT NULL,
+	'FeatureType' TEXT NOT NULL
+);
+
+CREATE TABLE 'HD_Negative_StartBiasResources'(
+	'CivilizationType' TEXT NOT NULL,
+	'ResourceType' TEXT NOT NULL
+);
+
+CREATE TABLE 'HD_Negative_StartBiasRivers'(
+	'CivilizationType' TEXT NOT NULL
+);
+
+insert or replace into HD_Negative_StartBiasFeatures (CivilizationType, FeatureType) values
+	('CIVILIZATION_AMERICA', 		'FEATURE_FLOODPLAINS'),
+	('CIVILIZATION_AMERICA', 		'FEATURE_FLOODPLAINS_GRASSLAND'),
+	('CIVILIZATION_AMERICA', 		'FEATURE_FLOODPLAINS_PLAINS'),
+	('CIVILIZATION_AUSTRALIA', 	'FEATURE_FLOODPLAINS'),
+	('CIVILIZATION_AUSTRALIA', 	'FEATURE_FLOODPLAINS_GRASSLAND'),
+	('CIVILIZATION_AUSTRALIA', 	'FEATURE_FLOODPLAINS_PLAINS');
