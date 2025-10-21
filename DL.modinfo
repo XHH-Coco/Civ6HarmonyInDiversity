@@ -160,7 +160,7 @@
       <RuleSetInUse>RULESET_EXPANSION_2</RuleSetInUse>
       <ModInUse>2217fddf-b466-45e1-950c-fc3747f076b6</ModInUse>
     </Criteria>
-    <Criteria id="CityPolicies_With_Suk">
+    <Criteria id="Suk_Simple_UI_Adjustments">
       <RuleSetInUse>RULESET_EXPANSION_2</RuleSetInUse>
       <ModInUse>805cc499-c534-4e0a-bdce-32fb3c53ba38</ModInUse>
     </Criteria>
@@ -774,15 +774,6 @@
       <File>Assets/CityStates/CivBaikonur_256.dds</File>
       <File>Assets/GreatPeople/GreatPeople_ZhuangZhou_160.dds</File>
       <File>Assets/GreatPeople/GreatPeople_SiNaQian_160.dds</File>
-      <File>Assets/Wetlands/HD_Peat_22.dds</File>
-      <File>Assets/Wetlands/HD_Peat_32.dds</File>
-      <File>Assets/Wetlands/HD_Peat_38.dds</File>
-      <File>Assets/Wetlands/HD_Peat_50.dds</File>
-      <File>Assets/Wetlands/HD_Peat_64.dds</File>
-      <File>Assets/Wetlands/HD_Peat_80.dds</File>
-      <File>Assets/Wetlands/HD_Peat_128.dds</File>
-      <File>Assets/Wetlands/HD_Peat_256.dds</File>
-      <File>Assets/Wetlands/HD_Peat_FOW_256.dds</File>
       <File>Assets/Moments/UNIT_KEQING_MONMENT.dds</File>
       <File>Assets/Moments/UNIT_ENKIDU_HD_MONMENT.dds</File>
       <File>Assets/Moments/UNIT_QIN_ELITE_SOLDIER_HD_MONMENT.dds</File>
@@ -817,30 +808,20 @@
       <File>Assets/GreatWorks/New_Greatworks_256.dds</File>
       <File>Assets/Notifications/HD_Notifications_40.dds</File>
       <File>Assets/Notifications/HD_Notifications_100.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_22.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_38.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_50.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_64.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_256.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_FOW_256.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_22.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_32.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_38.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_50.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_64.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_256.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_FOW_256.dds</File>
-    </ImportFiles>
-    <ImportFiles id="Resouceful2_Adapt_Import" criteria="Resouceful2_Expansion2">
-      <Properties><LoadOrder>1</LoadOrder></Properties>
-      <File>Assets/Resourceful2/Resourceful2_New_22.dds</File>
-      <File>Assets/Resourceful2/Resourceful2_New_32.dds</File>
-      <File>Assets/Resourceful2/Resourceful2_New_38.dds</File>
-      <File>Assets/Resourceful2/Resourceful2_New_50.dds</File>
-      <File>Assets/Resourceful2/Resourceful2_New_64.dds</File>
-      <File>Assets/Resourceful2/Resourceful2_New_128.dds</File>
-      <File>Assets/Resourceful2/Resourceful2_New_256.dds</File>
-      <File>Assets/Resourceful2/Resourceful2_New_FOW_256.dds</File>
+      <File>Assets/Resources/HD_Resources_22.dds</File>
+      <File>Assets/Resources/HD_Resources_32.dds</File>
+      <File>Assets/Resources/HD_Resources_38.dds</File>
+      <File>Assets/Resources/HD_Resources_50.dds</File>
+      <File>Assets/Resources/HD_Resources_64.dds</File>
+      <File>Assets/Resources/HD_Resources_256.dds</File>
+      <File>Assets/Resources/HD_Resources_FOW_256.dds</File>
+      <File>Assets/Resources/HD_Resources_Monopoly_22.dds</File>
+      <File>Assets/Resources/HD_Resources_Monopoly_32.dds</File>
+      <File>Assets/Resources/HD_Resources_Monopoly_38.dds</File>
+      <File>Assets/Resources/HD_Resources_Monopoly_50.dds</File>
+      <File>Assets/Resources/HD_Resources_Monopoly_64.dds</File>
+      <File>Assets/Resources/HD_Resources_Monopoly_256.dds</File>
+      <File>Assets/Resources/HD_Resources_Monopoly_FOW_256.dds</File>
     </ImportFiles>
     <!-- Fix Icon -->
     <UpdateIcons id="FixIcons" criteria="Expansion2">
@@ -865,6 +846,8 @@
 	    <File>UI/Civilopedia/CivilopediaPage_CityState.lua</File>
 	    <File>UI/Civilopedia/CivilopediaPage_Commemoration.lua</File>
       <File>UI/Civilopedia/CivilopediaPage_Resource.lua</File>
+      <File>UI/Civilopedia/CivilopediaPage_Improvement.lua</File>
+      <File>UI/Civilopedia/CivilopediaPage_Route.lua</File>
     </ImportFiles>
     <ImportFiles id="CityStatesDiversity_BST_Import" criteria="Expansion2">
       <Properties><LoadOrder>5000</LoadOrder></Properties>
@@ -919,6 +902,7 @@
       <File>UI/Custom/NotificationPanel_Misc.lua</File>
       <File>UI/Replacement/HD_ActionPanel.lua</File>
       <File>UI/Replacement/PlayerSetupLogic.lua</File>
+      <File>UI/Replacement/ProductionPanel.xml</File>
     </ImportFiles>
     <ReplaceUIScript id="HD_ActionPanel" criteria="Expansion2">
 			<Properties>
@@ -935,6 +919,9 @@
       <Properties><LoadOrder>150000</LoadOrder></Properties>
       <File>UI/Replacement/RealModifierAnalysis.lua</File>
       <File>UI/Replacement/BRSPage_Resources.lua</File>
+      <File>UI/Replacement/BRSPage_ResourceClassifications.lua</File>
+      <File>UI/Replacement/reportscreen.lua</File>
+      <File>UI/Replacement/reportscreen.xml</File>
     </ImportFiles>
     <AddUserInterfaces id="DL_Custom_Interface" criteria="Expansion2">
       <Properties>
@@ -946,6 +933,7 @@
       <File>UI/Custom/China_NotificationManager.xml</File>
       <File>UI/Custom/China_Panel.xml</File>
       <File>UI/Custom/CityButton_ResourceClassification.xml</File>
+      <File>UI/Custom/CityButton_RegionalYields.xml</File>
     </AddUserInterfaces>
     <ReplaceUIScript id="DL_CityPanelOverview" criteria="Expansion2">
       <Properties>
@@ -1059,6 +1047,10 @@
       </Properties>
     </ReplaceUIScript>
     <!-- Mod Support -->
+    <UpdateDatabase id="HD_BetterReportScreen_Database" criteria="BetterReportScreen_Override_Expansion2">
+      <Properties><LoadOrder>15001</LoadOrder></Properties>
+      <File>ModSupport/BetterReportScreen/ReportsListLoader.sql</File>
+    </UpdateDatabase>
     <UpdateDatabase id="Worships_mod_support_removes" criteria="Worships_Expansion2">
       <Properties><LoadOrder>15001</LoadOrder></Properties>
       <File>ModSupport/Worships/DL_Removes.sql</File>
@@ -1231,10 +1223,6 @@
       <Properties><LoadOrder>17001</LoadOrder></Properties>
       <File>ModSupport/Resourceful2/HD_Resourceful2_Text.sql</File>
     </UpdateText>
-    <UpdateIcons id="Resouceful2_support_icon" criteria="Resouceful2_Expansion2">
-      <Properties><LoadOrder>17001</LoadOrder></Properties>
-      <File>ModSupport/Resourceful2/HD_Resourceful2_Icons.sql</File>
-    </UpdateIcons>
     <!-- 丰富资源2 End -->
     <!-- Better Trade Scrren -->
     <ImportFiles id="DL_BetterTradeScreen_Imports" criteria="BetterTradeScreen_Expansion2">
@@ -1375,9 +1363,13 @@
       <Properties><LoadOrder>15605</LoadOrder></Properties>
       <File>SubMods/CityPolicies/UI/CityPanelOverview_CityPolicies.lua</File>
     </ImportFiles>
-    <ImportFiles id="CityPolicy_CityPanelOverview_Suk_Import" criteria="CityPolicies_With_Suk">
+    <ImportFiles id="Suk_Simple_UI_Adjustments_Import" criteria="Suk_Simple_UI_Adjustments">
       <Properties><LoadOrder>15605</LoadOrder></Properties>
       <File>SubMods/CityPolicies/UI/CityPanelOverview_CityPolicies_Suk.lua</File>
+      <File>UI/Replacement/Suk_CityPanelOverview_Instances.lua</File>
+      <File>UI/Replacement/Suk_CityPanelOverview_Instances.xml</File>
+      <File>UI/Replacement/CityPanel.xml</File>
+      <File>UI/Replacement/Suk_YieldTT.lua</File>
     </ImportFiles>
     <ImportFiles id="ToolTipLoader_CityPolicies_Import" criteria="Expansion2">
       <Properties><LoadOrder>15605</LoadOrder></Properties>
@@ -1426,10 +1418,8 @@
       <File>SubMods/HDRESOURCE/ArtDefs/Landmarks.artdef</File>
       <File>SubMods/HDRESOURCE/ArtDefs/Resources.artdef</File>
       <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE.sql</File>
-      <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Icon.xml</File>
       <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Localisation.xml</File>
       <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly.sql</File>
-      <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly_Icon.xml</File>
       <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly_Localisation.xml</File>
       <File>SubMods/HDRESOURCE/HDRESOURCE.dep</File>
       <File>SubMods/HDRESOURCE/Platforms/MacOS/BLPs/HDResources.blp</File>
@@ -1449,15 +1439,9 @@
     <UpdateText id="HDRESOURCEText"  criteria="Expansion2">
       <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly_Localisation.xml</File>
     </UpdateText>
-    <UpdateIcons id="HDRESOURCEIcon"  criteria="Expansion2">
-      <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Icon.xml</File>
-    </UpdateIcons>
     <UpdateDatabase id="HDRESOURCEMonopoly" criteria="Monopolies_Mode_Expansion2">
       <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly.sql</File>
     </UpdateDatabase>
-    <UpdateIcons id="HDRESOURCEMonopoly_Icon" criteria="Monopolies_Mode_Expansion2">
-      <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly_Icon.xml</File>
-    </UpdateIcons>
     <!-- Third Party -->
     <UpdateText id="CNforMods_Texts" criteria="MonopoliesMode">
       <Properties><LoadOrder>10000</LoadOrder></Properties>
@@ -1501,7 +1485,8 @@
       <Properties><LoadOrder>12000</LoadOrder></Properties>
       <File>UpdateDataBase/HD_CulturalUnits.xml</File>
       <File>UpdateDataBase/DL_BuildingDefinations.sql</File>
-      <File>UpdateDataBase/HD_Definations.sql</File>
+      <File>UpdateDataBase/HD_TableDefinations.sql</File>
+      <File>UpdateDataBase/HD_NotificationDefinations.sql</File>
       <File>UpdateDataBase/DL_UnitDefinations.sql</File>
       <File>UpdateDataBase/DL_ImprovementDefinations.sql</File>
       <File>UpdateDataBase/DL_ProjectDefinations.sql</File>
@@ -1514,10 +1499,13 @@
       <File>UpdateDataBase/Classifications/HD_District_Classification.sql</File>
       <File>UpdateDataBase/Classifications/HD_Improvement_Classification.sql</File>
     </UpdateDatabase>
-
-    <UpdateDatabase id="HD_Classifications" criteria="Expansion2">
+    <UpdateDatabase id="HD_Resource_Classification" criteria="Expansion2">
       <Properties><LoadOrder>15001</LoadOrder></Properties>
       <File>UpdateDataBase/Classifications/HD_Resource_Classification.sql</File>
+    </UpdateDatabase>
+    <UpdateDatabase id="HD_Classification_Adjacency" criteria="Expansion2">
+      <Properties><LoadOrder>16011</LoadOrder></Properties>
+      <File>UpdateDataBase/Classifications/HD_Classification_Adjacency.sql</File>
     </UpdateDatabase>
 
     <UpdateDatabase id="FasterStartingSettlers" criteria="Expansion2">
@@ -1810,13 +1798,13 @@
     </UpdateDatabase>
     <UpdateDatabase id="DL_Main_Late" criteria="Expansion2">
       <Properties><LoadOrder>20000</LoadOrder></Properties>
-      <File>UpdateDataBase/DL_Buildings_Late.sql</File>
       <File>UpdateDataBase/DL_PostProcess.sql</File>
       <File>UpdateDataBase/DL_GreatPeople_Late.sql</File>
     </UpdateDatabase>
     <UpdateDatabase id="DL_Main_GreatWorks_YieldChanges" criteria="Expansion2">
       <Properties><LoadOrder>25000</LoadOrder></Properties>
       <File>UpdateDataBase/DL_GreatWorks_YieldChanges.sql</File>
+      <File>UpdateDataBase/HD_Regional_Yields.sql</File>
     </UpdateDatabase>
     <UpdateDatabase id="DL_Main_Last" criteria="Expansion2">
       <Properties><LoadOrder>30000</LoadOrder></Properties>
@@ -1840,6 +1828,7 @@
       <File>UI/Icons/HD_Icons_Techs_Civics.sql</File>
       <File>UI/Icons/HD_Icons_Units.xml</File>
       <File>UI/Icons/HD_Icons_STUUexpansion.xml</File>
+      <File>UI/Icons/HD_Icons_Resources.sql</File>
     </UpdateIcons>
     <!-- Gameplay-->
     <AddGameplayScripts id="DL_Scripts_Gameplay" criteria="Expansion2">
@@ -1861,6 +1850,7 @@
       <File>Gameplay/BinaryCompress.lua</File>
       <File>Gameplay/UnitAbilities.lua</File>
       <File>Gameplay/ResourceClassification.lua</File>
+      <File>Gameplay/RegionalYields.lua</File>
     </AddGameplayScripts>
     <!-- UI scripts for gameplay -->
     <AddUserInterfaces id="DL_Scripts_Interface" criteria="Expansion2">
@@ -1869,13 +1859,11 @@
         <LoadOrder>16018</LoadOrder>
       </Properties>
       <File>Gameplay/Temp_Interface.xml</File>
-      <File>Gameplay/RegionalYield.xml</File>
     </AddUserInterfaces>
     <ImportFiles id="DL_lua_Scripts" criteria="Expansion2">
       <Properties><LoadOrder>16017</LoadOrder></Properties>
       <File>Gameplay/Temp_Interface.lua</File>
       <File>Gameplay/HD_StateUtils.lua</File>
-      <File>Gameplay/RegionalYield.lua</File>
     </ImportFiles>
     <!-- Texts and Tags -->
     <UpdateDatabase id="DL_Text_Tag" criteria="Expansion2">
@@ -1925,6 +1913,8 @@
       <File>Texts/HD_Text_GreatPerson.sql</File>
       <File>Texts/HD_Text_GreatPerson_New.sql</File>
       <File>Texts/HD_Text_Classifications.sql</File>
+      <File>Texts/HD_Text_ToolTip.sql</File>
+      <File>Texts/HD_Text_Report_Screen.sql</File>
     </UpdateText>
     <UpdateText id="DL_Text_Late" criteria="Expansion2">
       <Properties><LoadOrder>20000</LoadOrder></Properties>
@@ -1936,6 +1926,10 @@
     </UpdateText>
     <!-- GameMode Support (at end) -->
     <!-- Monopolies -->
+    <UpdateIcons id="Monopolies_Icon" criteria="Monopolies_Mode_Expansion2">
+      <Properties><LoadOrder>16050</LoadOrder></Properties>
+      <File>UI/Icons/HD_Icons_Monopoply.sql</File>
+    </UpdateIcons>
     <UpdateDatabase id="Monopolies_Adapt" criteria="Monopolies_Mode_Expansion2">
       <Properties><LoadOrder>16050</LoadOrder></Properties>
       <File>GameModeSupport/MonopoliesMode/HD_Monopoly_Adapt.sql</File>
@@ -2345,8 +2339,7 @@
 	  <File>Gameplay/Buildings.lua</File>
     <File>Gameplay/Temp_Interface.lua</File>
     <File>Gameplay/Temp_Interface.xml</File>
-    <File>Gameplay/RegionalYield.lua</File>
-    <File>Gameplay/RegionalYield.xml</File>
+    <File>Gameplay/RegionalYields.lua</File>
     <File>Gameplay/ResourceClassification.lua</File>
 
     <!-- UI Overwrites -->
@@ -2358,10 +2351,8 @@
     <File>UI/Civilopedia/CivilopediaPage_CityState.lua</File>
     <File>UI/Civilopedia/CivilopediaPage_Commemoration.lua</File>
     <File>UI/Civilopedia/CivilopediaPage_Resource.lua</File>
-    <File>UI/Replacement/CitySupport.lua</File>
-    <File>UI/Replacement/NotificationPanel_HD.lua</File>
-    <File>UI/Replacement/GreatWorkShowcase_HD.lua</File>
-    <File>UI/Replacement/SettlerInfluenceIconManager.lua</File>
+    <File>UI/Civilopedia/CivilopediaPage_Improvement.lua</File>
+    <File>UI/Civilopedia/CivilopediaPage_Route.lua</File>
 
     <!-- UI Loaders -->
     <File>UI/Loaders/ToolTipLoader_DL.lua</File>
@@ -2394,8 +2385,14 @@
     <File>UI/Custom/China_Panel.xml</File>
     <File>UI/Custom/CityButton_ResourceClassification.lua</File>
     <File>UI/Custom/CityButton_ResourceClassification.xml</File>
+    <File>UI/Custom/CityButton_RegionalYields.lua</File>
+    <File>UI/Custom/CityButton_RegionalYields.xml</File>
 
     <!-- UI replacements -->
+    <File>UI/Replacement/CitySupport.lua</File>
+    <File>UI/Replacement/NotificationPanel_HD.lua</File>
+    <File>UI/Replacement/GreatWorkShowcase_HD.lua</File>
+    <File>UI/Replacement/SettlerInfluenceIconManager.lua</File>
     <File>UI/Replacement/StagingRoom.lua</File>
     <File>UI/Replacement/citystates.xml</File>
     <File>UI/Replacement/citystates.lua</File>
@@ -2428,6 +2425,14 @@
     <File>UI/Replacement/RealModifierAnalysis.lua</File>
     <File>UI/Replacement/PlayerSetupLogic.lua</File>
     <File>UI/Replacement/BRSPage_Resources.lua</File>
+    <File>UI/Replacement/BRSPage_ResourceClassifications.lua</File>
+    <File>UI/Replacement/reportscreen.lua</File>
+    <File>UI/Replacement/reportscreen.xml</File>
+    <File>UI/Replacement/Suk_YieldTT.lua</File>
+    <File>UI/Replacement/ProductionPanel.xml</File>
+    <File>UI/Replacement/Suk_CityPanelOverview_Instances.lua</File>
+    <File>UI/Replacement/Suk_CityPanelOverview_Instances.xml</File>
+    <File>UI/Replacement/CityPanel.xml</File>
 
     <!-- Icons -->
     <File>UI/Icons/DL_Icons_Fixing.sql</File>
@@ -2449,6 +2454,8 @@
     <File>UI/Icons/HD_Icons_Units.xml</File>
     <File>UI/Icons/HD_Icons_STUUexpansion.xml</File>
     <File>UI/Icons/HD_Icons_Wonder_Resources.sql</File>
+    <File>UI/Icons/HD_Icons_Resources.sql</File>
+    <File>UI/Icons/HD_Icons_Monopoply.sql</File>
 
     <!-- Mod Support -->
     <File>ModSupport/HistoricalReligions/Switch.sql</File>
@@ -2509,7 +2516,6 @@
     <File>ModSupport/Resourceful2/HD_Resourceful2_Pre.sql</File>
 	  <File>ModSupport/Resourceful2/HD_Resourceful2_Late.sql</File>
     <File>ModSupport/Resourceful2/HD_Resourceful2_Text.sql</File>
-    <File>ModSupport/Resourceful2/HD_Resourceful2_Icons.sql</File>
     <File>ModSupport/RemovableDistricts/DL_Adaptation.sql</File>
     <File>ModSupport/RemovableDistricts/DL_Texts.sql</File>
     <File>ModSupport/SukWonders/HD_Suk_Wonders.sql</File>
@@ -2517,6 +2523,7 @@
     <File>ModSupport/ModularAdjacencyBonus/Database.sql</File>
     <File>ModSupport/ModularAdjacencyBonus/Config.sql</File>
     <File>ModSupport/ModularAdjacencyBonus/Text.sql</File>
+    <File>ModSupport/BetterReportScreen/ReportsListLoader.sql</File>
 
     <!-- SubMods -->
     <File>SubMods/BetterChinese/Text/Australia_Translations_ConfigText.xml</File>
@@ -2562,10 +2569,8 @@
     <File>SubMods/HDRESOURCE/ArtDefs/Landmarks.artdef</File>
     <File>SubMods/HDRESOURCE/ArtDefs/Resources.artdef</File>
     <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE.sql</File>
-    <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Icon.xml</File>
     <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Localisation.xml</File>
     <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly.sql</File>
-    <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly_Icon.xml</File>
     <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly_Localisation.xml</File>
     <File>SubMods/HDRESOURCE/HDRESOURCE.dep</File>
     <File>SubMods/HDRESOURCE/Platforms/MacOS/BLPs/HDResources.blp</File>
@@ -2681,7 +2686,8 @@
     <File>UpdateDataBase/DL_Boosts.sql</File>
     <File>UpdateDataBase/DL_Buildings.sql</File>
     <File>UpdateDataBase/DL_BuildingDefinations.sql</File>
-    <File>UpdateDataBase/HD_Definations.sql</File>
+    <File>UpdateDataBase/HD_TableDefinations.sql</File>
+    <File>UpdateDataBase/HD_NotificationDefinations.sql</File>
     <File>UpdateDataBase/DL_ImprovementDefinations.sql</File>
     <File>UpdateDataBase/DL_ProjectDefinations.sql</File>
     <File>UpdateDataBase/DL_UnitDefinations.sql</File>
@@ -2709,7 +2715,6 @@
     <File>UpdateDataBase/DL_Policies.sql</File>
     <File>UpdateDataBase/DL_Governments.sql</File>
     <File>UpdateDataBase/DL_Commemorations.sql</File>
-    <File>UpdateDataBase/DL_Buildings_Late.sql</File>
     <File>UpdateDataBase/DL_PostProcess.sql</File>
     <File>UpdateDataBase/HD_Last.sql</File>
     <File>UpdateDataBase/DL_Projects.sql</File>
@@ -2731,11 +2736,13 @@
     <File>UpdateDataBase/DL_Wonders.sql</File>
     <File>UpdateDataBase/DL_WonderTheming.sql</File>
     <File>UpdateDataBase/DL_ModifierString.sql</File>
+    <File>UpdateDataBase/HD_Regional_Yields.sql</File>
     <File>UpdateDataBase/Classifications/HD_Classification_Tables.sql</File>
     <File>UpdateDataBase/Classifications/HD_Building_Classification.sql</File>
     <File>UpdateDataBase/Classifications/HD_District_Classification.sql</File>
     <File>UpdateDataBase/Classifications/HD_Improvement_Classification.sql</File>
     <File>UpdateDataBase/Classifications/HD_Resource_Classification.sql</File>
+    <File>UpdateDataBase/Classifications/HD_Classification_Adjacency.sql</File>
 
     <!-- Texts -->
     <File>Texts/HD_Tags_Players_Texts_Early.sql</File>
@@ -2777,6 +2784,8 @@
     <File>Texts/HD_Text_Catherine_De_Medici.sql</File>
     <File>Texts/HD_Text_Mod_Titles.sql</File>
     <File>Texts/HD_Text_Classifications.sql</File>
+    <File>Texts/HD_Text_ToolTip.sql</File>
+    <File>Texts/HD_Text_Report_Screen.sql</File>
     
     <!-- Assets -->
     <File>Assets/TechCivics/HDCivicIcons_38.dds</File>
@@ -2897,42 +2906,12 @@
     <File>Assets/CityStates/CivBaikonur_256.dds</File>
     <File>Assets/GreatPeople/GreatPeople_ZhuangZhou_160.dds</File>
     <File>Assets/GreatPeople/GreatPeople_SiNaQian_160.dds</File>
-    <File>Assets/Resourceful2/Resourceful2_New_22.dds</File>
-    <File>Assets/Resourceful2/Resourceful2_New_32.dds</File>
-    <File>Assets/Resourceful2/Resourceful2_New_38.dds</File>
-    <File>Assets/Resourceful2/Resourceful2_New_50.dds</File>
-    <File>Assets/Resourceful2/Resourceful2_New_64.dds</File>
-    <File>Assets/Resourceful2/Resourceful2_New_128.dds</File>
-    <File>Assets/Resourceful2/Resourceful2_New_256.dds</File>
-    <File>Assets/Resourceful2/Resourceful2_New_FOW_256.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_22.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_38.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_50.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_64.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_256.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_FOW_256.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_22.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_32.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_38.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_50.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_64.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_256.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_FOW_256.dds</File>
     <File>Assets/WonderResources/Wonder_Resources_22.dds</File>
     <File>Assets/WonderResources/Wonder_Resources_32.dds</File>
     <File>Assets/WonderResources/Wonder_Resources_38.dds</File>
     <File>Assets/WonderResources/Wonder_Resources_50.dds</File>
     <File>Assets/WonderResources/Wonder_Resources_64.dds</File>
     <File>Assets/WonderResources/Wonder_Resources_256.dds</File>
-    <File>Assets/Wetlands/HD_Peat_22.dds</File>
-    <File>Assets/Wetlands/HD_Peat_32.dds</File>
-    <File>Assets/Wetlands/HD_Peat_38.dds</File>
-    <File>Assets/Wetlands/HD_Peat_50.dds</File>
-    <File>Assets/Wetlands/HD_Peat_64.dds</File>
-    <File>Assets/Wetlands/HD_Peat_80.dds</File>
-    <File>Assets/Wetlands/HD_Peat_128.dds</File>
-    <File>Assets/Wetlands/HD_Peat_256.dds</File>
-    <File>Assets/Wetlands/HD_Peat_FOW_256.dds</File>
     <File>Assets/Moments/UNIT_KEQING_MONMENT.dds</File>
     <File>Assets/Moments/UNIT_ENKIDU_HD_MONMENT.dds</File>
     <File>Assets/Moments/UNIT_QIN_ELITE_SOLDIER_HD_MONMENT.dds</File>
@@ -2967,6 +2946,20 @@
     <File>Assets/GreatWorks/New_Greatworks_256.dds</File>
     <File>Assets/Notifications/HD_Notifications_40.dds</File>
     <File>Assets/Notifications/HD_Notifications_100.dds</File>
+    <File>Assets/Resources/HD_Resources_22.dds</File>
+    <File>Assets/Resources/HD_Resources_32.dds</File>
+    <File>Assets/Resources/HD_Resources_38.dds</File>
+    <File>Assets/Resources/HD_Resources_50.dds</File>
+    <File>Assets/Resources/HD_Resources_64.dds</File>
+    <File>Assets/Resources/HD_Resources_256.dds</File>
+    <File>Assets/Resources/HD_Resources_FOW_256.dds</File>
+    <File>Assets/Resources/HD_Resources_Monopoly_22.dds</File>
+    <File>Assets/Resources/HD_Resources_Monopoly_32.dds</File>
+    <File>Assets/Resources/HD_Resources_Monopoly_38.dds</File>
+    <File>Assets/Resources/HD_Resources_Monopoly_50.dds</File>
+    <File>Assets/Resources/HD_Resources_Monopoly_64.dds</File>
+    <File>Assets/Resources/HD_Resources_Monopoly_256.dds</File>
+    <File>Assets/Resources/HD_Resources_Monopoly_FOW_256.dds</File>
 
     <!-- Platforms -->
     <File>Platforms/Windows/audio/HD_CHINA.ini</File>

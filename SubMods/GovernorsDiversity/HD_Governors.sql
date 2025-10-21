@@ -56,10 +56,8 @@ values
 	('GOVERNOR_PROMOTION_RESOURCE_MANAGER_BLACK_MARKETEER',			'MAGNUS_ADJUST_CITY_YIELD'),
 	('GOVERNOR_PROMOTION_RESOURCE_MANAGER_INDUSTRIALIST',			'MAGNUS_REGIONAL_EARLY_FOOD'),
 	('GOVERNOR_PROMOTION_RESOURCE_MANAGER_INDUSTRIALIST',			'MAGNUS_REGIONAL_EARLY_PRODUCTION'),
-	-- ('GOVERNOR_PROMOTION_RESOURCE_MANAGER_INDUSTRIALIST',			'MAGNUS_REGIONAL_EARLY_GOLD'),
 	('GOVERNOR_PROMOTION_RESOURCE_MANAGER_INDUSTRIALIST',			'MAGNUS_REGIONAL_LATE_FOOD'),
 	('GOVERNOR_PROMOTION_RESOURCE_MANAGER_INDUSTRIALIST',			'MAGNUS_REGIONAL_LATE_PRODUCTION');
-	-- ('GOVERNOR_PROMOTION_RESOURCE_MANAGER_INDUSTRIALIST',			'MAGNUS_REGIONAL_LATE_GOLD');
 
 insert or replace into Modifiers
 	(ModifierId,													ModifierType,													OwnerRequirementSetId,							SubjectRequirementSetId)
@@ -72,15 +70,12 @@ values
 	('MAGNUS_PLACEHOLDER',											'MODIFIER_SINGLE_CITY_ADJUST_YIELD_CHANGE',						null,											null),
 	('MAGNUS_REGIONAL_EARLY_FOOD',									'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',				null,											'HD_OBJECT_WITHIN_9_TILES'),
 	('MAGNUS_REGIONAL_EARLY_PRODUCTION',							'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',				null,											'HD_OBJECT_WITHIN_9_TILES'),
-	-- ('MAGNUS_REGIONAL_EARLY_GOLD',									'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',				null,											'HD_OBJECT_WITHIN_9_TILES'),
 	('MAGNUS_REGIONAL_LATE_FOOD',									'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',				'PLAYER_HAS_CIVIC_CIVIL_SERVICE_REQUIREMENTS',	'HD_OBJECT_WITHIN_9_TILES'),
 	('MAGNUS_REGIONAL_LATE_PRODUCTION',								'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',				'PLAYER_HAS_CIVIC_CIVIL_SERVICE_REQUIREMENTS',	'HD_OBJECT_WITHIN_9_TILES');
-	-- ('MAGNUS_REGIONAL_LATE_GOLD',									'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',				'PLAYER_HAS_CIVIC_CIVIL_SERVICE_REQUIREMENTS',	'HD_OBJECT_WITHIN_9_TILES');
 
 insert or replace into ModifierArguments
 	(ModifierId,										Name,				Value)
 values
-	-- ('MAGNUS_WONDERS_BOOST',							'Amount',			20),
 	('MAGNUS_EXTRA_DISTRICT',							'Amount',			1),
 	('MAGNUS_FASTER_DISTRICT_CONSTRUCTION',				'Amount',			30),
 	('MAGNUS_FASTER_BUILDING_CONSTRUCTION',				'Amount',			30),
@@ -96,102 +91,11 @@ values
 	('MAGNUS_REGIONAL_EARLY_FOOD',						'Amount',			5),
 	('MAGNUS_REGIONAL_EARLY_PRODUCTION',				'YieldType',		'YIELD_PRODUCTION'),
 	('MAGNUS_REGIONAL_EARLY_PRODUCTION',				'Amount',			5),
-	-- ('MAGNUS_REGIONAL_EARLY_GOLD',						'YieldType',		'YIELD_GOLD'),
-	-- ('MAGNUS_REGIONAL_EARLY_GOLD',						'Amount',			6),
 	('MAGNUS_REGIONAL_LATE_FOOD',						'YieldType',		'YIELD_FOOD'),
 	('MAGNUS_REGIONAL_LATE_FOOD',						'Amount',			5),
 	('MAGNUS_REGIONAL_LATE_PRODUCTION',					'YieldType',		'YIELD_PRODUCTION'),
 	('MAGNUS_REGIONAL_LATE_PRODUCTION',					'Amount',			5);
-	-- ('MAGNUS_REGIONAL_LATE_GOLD',						'YieldType',		'YIELD_GOLD'),
-	-- ('MAGNUS_REGIONAL_LATE_GOLD',						'Amount',			6);
-	-- ('VERTICAL_INTEGRATION_FOOD_REGIONAL_STACKING',		'YieldType',		'YIELD_FOOD'),
-	-- ('VERTICAL_INTEGRATION_GOLD_REGIONAL_STACKING',		'YieldType',		'YIELD_GOLD'),
-	-- ('VERTICAL_INTEGRATION_SCIENCE_REGIONAL_STACKING',	'YieldType',		'YIELD_SCIENCE'),
-	-- ('VERTICAL_INTEGRATION_CULTURE_REGIONAL_STACKING',	'YieldType',		'YIELD_CULTURE'),
-	-- ('VERTICAL_INTEGRATION_FAITH_REGIONAL_STACKING',	'YieldType',		'YIELD_FAITH');
 
--- Magnus Effect based on buildings
--- create temporary table HD_MagnusRegionalEffects (
--- 	DistrictType text not null,
--- 	YieldType text not null,
--- 	Amount int,
--- 	OwnerRequirementSetId text,
--- 	AttachModifierId text,
--- 	ModifierId text,
--- 	primary key (DistrictType, YieldType, OwnerRequirementSetId)
--- );
--- insert or replace into HD_MagnusRegionalEffects
--- 	(DistrictType,				OwnerRequirementSetId,											YieldType,			Amount)
--- values
--- 	('DISTRICT_GOVERNMENT',		'NULL',															'YIELD_FOOD',		1),
--- 	('DISTRICT_GOVERNMENT',		'CITY_HAS_DISTRICT_GOVERNMENT_TIER_1_BUILDING_REQUIREMENTS',	'YIELD_FOOD',		1),
--- 	('DISTRICT_GOVERNMENT',		'CITY_HAS_DISTRICT_GOVERNMENT_TIER_2_BUILDING_REQUIREMENTS',	'YIELD_FOOD',		2),
--- 	('DISTRICT_GOVERNMENT',		'CITY_HAS_DISTRICT_GOVERNMENT_TIER_3_BUILDING_REQUIREMENTS',	'YIELD_FOOD',		4);
--- insert or replace into HD_MagnusRegionalEffects
--- 	(DistrictType,						OwnerRequirementSetId,									YieldType,			Amount)
--- select
--- 	'DISTRICT_DIPLOMATIC_QUARTER',		'NULL',													'YIELD_CULTURE',	1
--- where exists (select DistrictType from Districts where DistrictType = 'DISTRICT_DIPLOMATIC_QUARTER');
--- insert or replace into HD_MagnusRegionalEffects
--- 	(DistrictType,						OwnerRequirementSetId,									YieldType,			Amount)
--- select
--- 	'DISTRICT_DIPLOMATIC_QUARTER',		'CITY_HAS_' || BuildingType || '_REQUIREMENTS',			'YIELD_CULTURE',	1
--- from Buildings where PrereqDistrict = 'DISTRICT_DIPLOMATIC_QUARTER' and TraitType is null;
--- update HD_MagnusRegionalEffects set Amount = 2 where OwnerRequirementSetId = 'CITY_HAS_BUILDING_CHANCERY_REQUIREMENTS';
--- update HD_MagnusRegionalEffects set Amount = 4 where OwnerRequirementSetId = 'CITY_HAS_BUILDING_HD_REGIONAL_COUNCIL_CENTER_REQUIREMENTS';
--- -- Culture / Science buffs are also given by Government Plaza when Diplomatic Quater is not enabled.
--- insert or replace into HD_MagnusRegionalEffects
--- 	(DistrictType,	OwnerRequirementSetId,	YieldType,			Amount)
--- select
--- 	DistrictType,	OwnerRequirementSetId,	'YIELD_CULTURE',	Amount
--- from HD_MagnusRegionalEffects where YieldType = 'YIELD_FOOD' and not exists (select DistrictType from Districts where DistrictType = 'DISTRICT_DIPLOMATIC_QUARTER');
--- -- Replace text
--- update GovernorPromotions set Description = 'LOC_GOVERNOR_PROMOTION_RESOURCE_MANAGER_INDUSTRIALIST_VIETNAM_DESCRIPTION' where GovernorPromotionType = 'GOVERNOR_PROMOTION_RESOURCE_MANAGER_INDUSTRIALIST' and exists (select DistrictType from Districts where DistrictType = 'DISTRICT_DIPLOMATIC_QUARTER');
--- -- Copy buffs
--- insert or replace into HD_MagnusRegionalEffects
--- 	(DistrictType,	OwnerRequirementSetId,	YieldType,				Amount)
--- select
--- 	DistrictType,	OwnerRequirementSetId,	'YIELD_PRODUCTION',		Amount
--- from HD_MagnusRegionalEffects where YieldType = 'YIELD_FOOD';
--- insert or replace into HD_MagnusRegionalEffects
--- 	(DistrictType,	OwnerRequirementSetId,	YieldType,				Amount)
--- select
--- 	DistrictType,	OwnerRequirementSetId,	'YIELD_SCIENCE',		Amount
--- from HD_MagnusRegionalEffects where YieldType = 'YIELD_CULTURE';
--- -- Name Modifiers
--- update HD_MagnusRegionalEffects set ModifierId = 'MAGNUS_' || DistrictType || '_' || YieldType || '_' || OwnerRequirementSetId;
--- update HD_MagnusRegionalEffects set AttachModifierId = ModifierId || '_ATTACH';
--- update HD_MagnusRegionalEffects set OwnerRequirementSetId = null where OwnerRequirementSetId = 'NULL';
--- insert or replace into GovernorPromotionModifiers
--- 	(GovernorPromotionType,										ModifierId)
--- select
--- 	'GOVERNOR_PROMOTION_RESOURCE_MANAGER_INDUSTRIALIST',		AttachModifierId
--- from HD_MagnusRegionalEffects;
--- insert or replace into Modifiers
--- 	(ModifierId,		ModifierType,								SubjectRequirementSetId)
--- select
--- 	AttachModifierId,	'MODIFIER_CITY_DISTRICTS_ATTACH_MODIFIER',	'DISTRICT_IS_' || DistrictType || '_REQUIREMENTS'
--- from HD_MagnusRegionalEffects;
--- insert or replace into ModifierArguments
--- 	(ModifierId,		Name,			Value)
--- select
--- 	AttachModifierId,	'ModifierId',	ModifierId
--- from HD_MagnusRegionalEffects;
--- insert or replace into Modifiers
--- 	(ModifierId,		ModifierType,										OwnerRequirementSetId,	SubjectRequirementSetId)
--- select
--- 	ModifierId,			'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',	OwnerRequirementSetId,	'HD_OBJECT_WITHIN_8_TILES'
--- from HD_MagnusRegionalEffects;
--- insert or replace into ModifierArguments
--- 	(ModifierId,		Name,			Value)
--- select
--- 	ModifierId,			'YieldType',	YieldType
--- from HD_MagnusRegionalEffects;
--- insert or replace into ModifierArguments
--- 	(ModifierId,		Name,			Value)
--- select
--- 	ModifierId,			'Amount',		Amount
--- from HD_MagnusRegionalEffects;
 -- -----------------------------------------------------------------------------------------------------------------------------------
 
 -- Reyna -金融家=瑞娜

@@ -133,9 +133,6 @@ PageLayouts["Resource" ] = function(page)
 		end
 	end
 
-
-
-
 	-- Now to the right!
 	AddPortrait("ICON_" .. resourceType);
 
@@ -169,6 +166,26 @@ PageLayouts["Resource" ] = function(page)
       end
     end
 	end);
+
+	-- 资源分类
+	local classificationList = ExposedMembers.DLHD.Utils.Resource_Classification_Map[resourceType] or {};
+	local textList = {};
+	for _, classificationType in ipairs(classificationList) do
+		local classificationInfo = GameInfo.HD_ResourceClassificationTypes[classificationType];
+		if classificationInfo and classificationInfo.Display then
+			table.insert(textList, '[ICON_BULLET]' .. Locale.Lookup(classificationInfo.Name))
+		end
+	end
+
+	if #textList > 0 then
+		AddRightColumnStatBox("LOC_PEDIA_HD_RESOURCE_CLASSIFICATIONS_TEXT", function(s)
+			s:AddSeparator();
+			for _, text in ipairs(textList) do
+				s:AddLabel(text);
+			end
+			s:AddSeparator();
+		end)
+	end
 	
 	AddRightColumnStatBox("LOC_UI_PEDIA_REQUIREMENTS", function(s)
 		s:AddSeparator();

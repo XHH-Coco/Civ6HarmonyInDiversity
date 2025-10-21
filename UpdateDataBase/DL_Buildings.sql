@@ -191,6 +191,7 @@ values
 	-- Industrial Zone
 	('BUILDING_WORKSHOP',			'YIELD_PRODUCTION',	5),
 	('BUILDING_FACTORY',			'YIELD_PRODUCTION',	8),
+	('BUILDING_COAL_POWER_PLANT',			'YIELD_PRODUCTION',	1),
 	-- Campus
 	('BUILDING_LIBRARY',			'YIELD_SCIENCE',	3),
 	('BUILDING_UNIVERSITY',			'YIELD_SCIENCE',	4),
@@ -670,28 +671,18 @@ values
 insert or replace into BuildingModifiers
 	(BuildingType,					ModifierId)
 values
-	('BUILDING_UNIVERSITY',			'FEUDALISM_ADD_RAINFOREST_ADJACENCY'),
 	('BUILDING_UNIVERSITY',			'UNIVERSITY_ADD_POPULATION_SCIENCE');
 
 insert or ignore into Modifiers
 	(ModifierId,									ModifierType,												SubjectRequirementSetId)
 values
-	('FEUDALISM_ADD_RAINFOREST_ADJACENCY',			'MODIFIER_SINGLE_CITY_FEATURE_ADJACENCY',					'PLAYER_HAS_CIVIC_FEUDALISM_REQUIREMENTS'),
-	('UNIVERSITY_ADD_POPULATION_SCIENCE',			'MODIFIER_SINGLE_CITY_ADJUST_CITY_YIELD_PER_POPULATION',	NULL),
-	('UNIVERSITY_ADD_ADJACENT_RAINFOREST_SCIENCE',	'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',						'UNIVERSITY_ADJACENCY_SCIENCE_JUNGLE_REQUIREMENTS');
+	('UNIVERSITY_ADD_POPULATION_SCIENCE',			'MODIFIER_SINGLE_CITY_ADJUST_CITY_YIELD_PER_POPULATION',	NULL);
 
 insert or ignore into ModifierArguments
 	(ModifierId,										Name,				Value)
 values
-	('FEUDALISM_ADD_RAINFOREST_ADJACENCY',				'DistrictType',		'DISTRICT_CAMPUS'),
-	('FEUDALISM_ADD_RAINFOREST_ADJACENCY',				'FeatureType',		'FEATURE_JUNGLE'),
-	('FEUDALISM_ADD_RAINFOREST_ADJACENCY',				'YieldType',		'YIELD_SCIENCE'),
-	('FEUDALISM_ADD_RAINFOREST_ADJACENCY',				'Amount',			1),
-	('FEUDALISM_ADD_RAINFOREST_ADJACENCY',				'Description',		'LOC_UNIVERSITY_JUNGLE_SCIENCE'),
 	('UNIVERSITY_ADD_POPULATION_SCIENCE',				'YieldType',		'YIELD_SCIENCE'),
-	('UNIVERSITY_ADD_POPULATION_SCIENCE',				'Amount',			0.5),
-	('UNIVERSITY_ADD_ADJACENT_RAINFOREST_SCIENCE',		'YieldType',		'YIELD_SCIENCE'),
-	('UNIVERSITY_ADD_ADJACENT_RAINFOREST_SCIENCE',		'Amount',			1);
+	('UNIVERSITY_ADD_POPULATION_SCIENCE',				'Amount',			0.5);
 
 --政体建筑改动
 --一级政体建筑
@@ -1048,7 +1039,7 @@ delete from BuildingModifiers where ModifierId = 'AQUARIUM_SEARESOURCE_SCIENCE';
 delete from BuildingModifiers where ModifierId = 'AQUARIUM_REEF_SCIENCE';
 
 -- 资源分类产出
-insert or replace into HD_Building_ResourceClassification (BuildingType, ResourceClassificationType, DetectRange, PropertyKey) values
+insert or replace into HD_Building_Base_On_ResourceClassification (BuildingType, ResourceClassificationType, DetectRange, PropertyKey) values
 	('BUILDING_ZOO', 			'RESOURCE_CLASSIFICATION_IMPROVEMENT_PASTURE',				'PLAYER', 'HD_PLOT_BINARY_COMPRESS_ZOO'),
 	('BUILDING_ZOO', 			'RESOURCE_CLASSIFICATION_IMPROVEMENT_CAMP',						'PLAYER',	'HD_PLOT_BINARY_COMPRESS_ZOO'),
 	('BUILDING_AQUARIUM', 'RESOURCE_CLASSIFICATION_IMPROVEMENT_FISHING_BOATS',	'PLAYER', 'HD_PLOT_BINARY_COMPRESS_AQUARIUM');
@@ -1346,7 +1337,7 @@ update ModifierArguments set Value = 'GREAT_PERSON_CLASS_AGRONOMIST' where Modif
 and exists (select DistrictType from Districts where DistrictType = 'DISTRICT_C_AGRICULTURE');
 
 -- 资源分类产出
-insert or replace into HD_Building_ResourceClassification (BuildingType, ResourceClassificationType, DetectRange, PropertyKey) values
+insert or replace into HD_Building_Base_On_ResourceClassification (BuildingType, ResourceClassificationType, DetectRange, PropertyKey) values
 	('BUILDING_FOOD_MARKET', 		'RESOURCE_CLASSIFICATION_IMPROVEMENT_FARM',						'PLAYER', 'HD_PLOT_BINARY_COMPRESS_FOOD_MARKET'),
 	('BUILDING_FOOD_MARKET', 		'RESOURCE_CLASSIFICATION_IMPROVEMENT_PLANTATION',			'PLAYER', 'HD_PLOT_BINARY_COMPRESS_FOOD_MARKET'),
 	('BUILDING_FOOD_MARKET', 		'RESOURCE_CLASSIFICATION_IMPROVEMENT_PASTURE',				'PLAYER', 'HD_PLOT_BINARY_COMPRESS_FOOD_MARKET'),
@@ -1370,7 +1361,7 @@ insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetI
 	from HD_Binary_Compress where Exp < 7;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
-	select 'HD_FOOD_MARKET_GOLD_' || Exp, 'Amount', Amount * 3
+	select 'HD_FOOD_MARKET_GOLD_' || Exp, 'Amount', Amount * 2
 	from HD_Binary_Compress where Exp < 7;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
@@ -1387,7 +1378,7 @@ insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetI
 	from HD_Binary_Compress where Exp < 7;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
-	select 'HD_SHOPPING_MALL_GOLD_' || Exp, 'Amount', Amount * 3
+	select 'HD_SHOPPING_MALL_GOLD_' || Exp, 'Amount', Amount * 2
 	from HD_Binary_Compress where Exp < 7;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
@@ -1853,7 +1844,8 @@ insert or replace into GameModifiers (ModifierId) values
 	('HD_HRC_AWARD_GOVERNOR'),
 	('HD_MND_AWARD_GOVERNOR'),
 	('HD_RCC_AWARD_GOVERNOR'),
-	('HD_WPH_AWARD_GOVERNOR');
+	('HD_WPH_AWARD_GOVERNOR'),
+	('HD_MANSION_AWARD_GOVERNOR');
 
 insert or replace into Modifiers
 	(ModifierId,                      ModifierType,                                    SubjectRequirementSetId,                    													RunOnce,Permanent,SubjectStackLimit)
@@ -1861,7 +1853,8 @@ values
 	('HD_HRC_AWARD_GOVERNOR',     		'MODIFIER_ALL_PLAYERS_ADJUST_GOVERNOR_POINTS',   'PLAYER_HAS_BUILDING_HD_HUMAN_RIGHTS_COUNCIL_REQUIREMENTS',  				1,      1,        1),
 	('HD_MND_AWARD_GOVERNOR',     		'MODIFIER_ALL_PLAYERS_ADJUST_GOVERNOR_POINTS',   'PLAYER_HAS_BUILDING_HD_MINISTRY_OF_NATIONAL_DEFENSE_REQUIREMENTS',  1,      1,        1),
 	('HD_RCC_AWARD_GOVERNOR',     		'MODIFIER_ALL_PLAYERS_ADJUST_GOVERNOR_POINTS',   'PLAYER_HAS_BUILDING_HD_REGIONAL_COUNCIL_CENTER_REQUIREMENTS',  			1,      1,        1),
-	('HD_WPH_AWARD_GOVERNOR',     		'MODIFIER_ALL_PLAYERS_ADJUST_GOVERNOR_POINTS',   'PLAYER_HAS_BUILDING_HD_WORLD_PARLIAMENT_HEADQUARTERS_REQUIREMENTS', 1,      1,        1);
+	('HD_WPH_AWARD_GOVERNOR',     		'MODIFIER_ALL_PLAYERS_ADJUST_GOVERNOR_POINTS',   'PLAYER_HAS_BUILDING_HD_WORLD_PARLIAMENT_HEADQUARTERS_REQUIREMENTS', 1,      1,        1),
+	('HD_MANSION_AWARD_GOVERNOR',     'MODIFIER_ALL_PLAYERS_ADJUST_GOVERNOR_POINTS',   'PLAYER_HAS_BUILDING_HD_MANSION_REQUIREMENTS',  											1,      1,        1);
 
 insert or replace into Modifiers
 	(ModifierId,					        					ModifierType,			                                        			SubjectRequirementSetId)
@@ -1897,6 +1890,7 @@ values
 	('HD_MND_AWARD_GOVERNOR',	              'Delta',								1),
 	('HD_RCC_AWARD_GOVERNOR',	              'Delta',								1),
 	('HD_WPH_AWARD_GOVERNOR',	              'Delta',								1),
+	('HD_MANSION_AWARD_GOVERNOR',	          'Delta',								1),
 
 	('HD_HRC_ECONOMIC_SLOT',	              'GovernmentSlotType',   'SLOT_ECONOMIC'),
 	('HD_MND_MILITARY_SLOT',	              'GovernmentSlotType',   'SLOT_MILITARY'),

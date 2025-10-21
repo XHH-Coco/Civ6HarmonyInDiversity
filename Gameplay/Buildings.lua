@@ -304,7 +304,7 @@ function SanctuaryConstructed(playerId, cityId, buildingId, plotId, bOriginalCon
 				local resourceId = plot:GetResourceType();
 				-- 判断是否为生物类资源
 				if resourceId ~= nil and resourceId ~= -1 and Utils.IsResourceVisible(playerId, resourceId)
-				and Utils.BiologicalResourceList[resourceId] == true then
+				and Utils.IsResourceHasClassification(resourceId, 'RESOURCE_CLASSIFICATION_BIOLOGICAL') == true then
 					print("保护部 本城生物资源" .. Locale.Lookup(GameInfo.Resources[resourceId].Name))
 					-- 判断一环内是否有合法单元格
 					local vaildPlots = {};

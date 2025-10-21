@@ -420,18 +420,18 @@ function InitRouteTypeList()
 			table.insert(routeTypeLevelList, routeIndex)
 		end
 
-		print(
-			Locale.Lookup(GameInfo.Eras[eraIndex].Name),
-			Locale.Lookup(GameInfo.Routes[routeIndex].Name)
-		)
+		-- print(
+		-- 	Locale.Lookup(GameInfo.Eras[eraIndex].Name),
+		-- 	Locale.Lookup(GameInfo.Routes[routeIndex].Name)
+		-- )
 	end
 
-	for level, routeIndex in ipairs(routeTypeLevelList) do
-		print(
-			level,
-			Locale.Lookup(GameInfo.Routes[routeIndex].Name)
-		)
-	end
+	-- for level, routeIndex in ipairs(routeTypeLevelList) do
+	-- 	print(
+	-- 		level,
+	-- 		Locale.Lookup(GameInfo.Routes[routeIndex].Name)
+	-- 	)
+	-- end
 end
 InitRouteTypeList()
 
@@ -649,18 +649,18 @@ function InitHasAdjacencyDistrictList()
     return;
   end
 
-  print("开始统计有相邻加成的区域")
+  -- print("开始统计有相邻加成的区域")
 
   for row in GameInfo.DistrictCorrespondingYieldType_HD() do
     if row.HasAdjacency == true then
       HasAdjacencyDistrictList[GameInfo.Districts[row.DistrictType].Index] = true;
-      print(Locale.Lookup(GameInfo.Districts[row.DistrictType].Name))
+      -- print(Locale.Lookup(GameInfo.Districts[row.DistrictType].Name))
 
       -- 检测UD
       for rrow in GameInfo.DistrictReplaces() do
         if row.DistrictType == rrow.ReplacesDistrictType then
           HasAdjacencyDistrictList[GameInfo.Districts[rrow.CivUniqueDistrictType].Index] = true;
-          print(Locale.Lookup(GameInfo.Districts[rrow.CivUniqueDistrictType].Name))
+          -- print(Locale.Lookup(GameInfo.Districts[rrow.CivUniqueDistrictType].Name))
         end
       end
     end
@@ -710,14 +710,98 @@ end
 InitDummyBuildings();
 Utils.DummyBuildingList = DummyBuildingList;
 
--- 记录生物类资源
-local BiologicalResourceList = {};
-function InitBiologicalResourceList()
+-- 资源类型排序 奢侈 > 战略 > 加成 > 其他
+Utils.ResourceClassSortList = {
+	RESOURCECLASS_LUXURY = 0,
+	RESOURCECLASS_STRATEGIC = 1,
+	RESOURCECLASS_BONUS = 2,
+	RESOURCECLASS_ARTIFACT = 3
+};
+
+-- 缓存每种类型对应的资源
+local Classification_Resource_Map = {};
+-- 缓存每种资源对应的类型
+local Resource_Classification_Map = {};
+function InitResourceClassificationList()
 	for row in GameInfo.HD_Resource_Classification() do
-		if row.ResourceClassificationType == 'RESOURCE_CLASSIFICATION_BIOLOGICAL' then
-			BiologicalResourceList[GameInfo.Resources[row.ResourceType].Index] = true;
+		-- 缓存每种类型对应的资源
+		if Classification_Resource_Map[row.ResourceClassificationType] == nil then
+			Classification_Resource_Map[row.ResourceClassificationType] = {};
 		end
+		table.insert(Classification_Resource_Map[row.ResourceClassificationType], row.ResourceType);
+
+		-- 缓存每种资源对应的类型
+		if Resource_Classification_Map[row.ResourceType] == nil then
+			Resource_Classification_Map[row.ResourceType] = {};
+		end
+		table.insert(Resource_Classification_Map[row.ResourceType], row.ResourceClassificationType);
+	end
+
+	-- 排序
+	for _, list in pairs(Classification_Resource_Map) do
+		table.sort(list, function(a, b)
+			local a_score = Utils.ResourceClassSortList[GameInfo.Resources[a].ResourceClassType] or 100;
+			local b_score = Utils.ResourceClassSortList[GameInfo.Resources[b].ResourceClassType] or 100;
+			return a_score < b_score;
+		end);
+	end
+	
+	for _, list in pairs(Resource_Classification_Map) do
+		table.sort(list, function(a, b)
+			return GameInfo.HD_ResourceClassificationTypes[a].SortIndex < GameInfo.HD_ResourceClassificationTypes[b].SortIndex;
+		end);
 	end
 end
-InitBiologicalResourceList();
-Utils.BiologicalResourceList = BiologicalResourceList;
+InitResourceClassificationList();
+Utils.Classification_Resource_Map = Classification_Resource_Map;
+Utils.Resource_Classification_Map = Resource_Classification_Map;
+
+-- 判断某种资源是否是某个分类
+function IsResourceHasClassification(resourceId, classificationType)
+	local resourceInfo = GameInfo.Resources[resourceId];
+	if resourceInfo and Utils.Resource_Classification_Map[resourceInfo.ResourceType] then
+		for _, v in ipairs(Utils.Resource_Classification_Map[resourceInfo.ResourceType]) do
+			if v == classificationType then
+				return true;
+			end
+		end
+	end
+	return false;
+end
+Utils.IsResourceHasClassification = IsResourceHasClassification;
+
+-- 缓存每种改良对应的类型
+local Improvement_Classification_Map = {};
+function InitImprovementClassificationList()
+	for row in GameInfo.HD_Improvement_Classification() do
+		if Improvement_Classification_Map[row.ImprovementType] == nil then
+			Improvement_Classification_Map[row.ImprovementType] = {};
+		end
+		table.insert(Improvement_Classification_Map[row.ImprovementType], row.ImprovementClassificationType);
+	end
+end
+InitImprovementClassificationList()
+Utils.Improvement_Classification_Map = Improvement_Classification_Map;
+
+-- 判断某种改良是否是某个分类
+function IsImprovementHasClassification(improvementId, classificationType)
+	local improvementInfo = GameInfo.Improvements[improvementId];
+	if improvementInfo and Utils.Improvement_Classification_Map[improvementInfo.ImprovementType] then
+		for _, v in ipairs(Utils.Improvement_Classification_Map[improvementInfo.ImprovementType]) do
+			if v == classificationType then
+				return true;
+			end
+		end
+	end
+	return false;
+end
+Utils.IsImprovementHasClassification = IsImprovementHasClassification;
+
+-- 获取城市参数
+local function GetCityProperty(playerId, cityId, tag)
+	local city = CityManager.GetCity(playerId, cityId);
+	if not city then return nil; end
+
+	return city:GetProperty(tag);
+end
+Utils.GetCityProperty = GetCityProperty;

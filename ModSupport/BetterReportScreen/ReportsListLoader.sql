@@ -1,0 +1,2 @@
+INSERT OR REPLACE INTO RLLReports (ReportType, ButtonLabel, LuaEvent, StackID, SortOrder, GameCapability) VALUES
+('REPORT_EMPIRE_RESOURCE_CLASSIFICATIONS', 'LOC_HUD_REPORTS_TAB_RESOURCE_CLASSIFICATIONS', 'ReportsList_OpenResourceClassifications', 'EmpireReportsStack', 121, NULL);

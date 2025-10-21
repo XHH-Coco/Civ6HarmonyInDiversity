@@ -18,7 +18,7 @@ values
     ("LOC_UNIT_BARBARIAN_HORSEMAN_NAME",			      "Nomadic Raider"),
     ("LOC_UNIT_BARBARIAN_HORSE_ARCHER_NAME",			  "Nomadic Bowrider"),
     -- Unique Units
-    ("LOC_UNIT_NORWEGIAN_LONGSHIP_DESCRIPTION",           "Norwegian unique Ancient era naval unit that replaces the Galley. Can pillage enemy coastal lands and capture civilians if adjacent using its coastal raiding ability. Gains 1 bonus [ICON_MOVEMENT] Movement if it begins a turn on a Coast and Lake tile."),
+    ("LOC_UNIT_NORWEGIAN_LONGSHIP_DESCRIPTION",           "Norwegian unique Ancient era naval unit that replaces the Galley. Can pillage enemy coastal lands and capture civilians if adjacent using its coastal raiding ability. Gains 1 bonus [ICON_MOVEMENT] Movement if it begins a turn on a Water Area tile."),
     --("LOC_UNIT_ENGLISH_SEADOG_DESCRIPTION",               "Elizabeth I's unique Renaissance era naval unit that replaces the Privateer. Has a chance to capture defeated enemy ships."), -- Can only be seen by other Naval Raiders unless adjacent to it. Reveals Naval Raiders within sight range.
     ("LOC_UNIT_ENGLISH_SEADOG_DESCRIPTION",               "English unique Renaissance era naval unit that replaces the Privateer. Has a chance to capture defeated enemy ships. "), -- Can only be seen by other Naval Raiders unless adjacent to it. Reveals Naval Raiders within sight range.
     ("LOC_UNIT_OTTOMAN_BARBARY_CORSAIR_DESCRIPTION",      "Ottoman unique Medieval era naval unit that replaces the Pirate Ship. It costs no [ICON_Movement] Movement to coastal raid."), -- Can only be seen by other Naval Raiders unless adjacent to it. Reveals Naval Raiders within sight range.
@@ -62,7 +62,7 @@ values
     ("zh_Hans_CN",  "LOC_UNIT_BARBARIAN_HORSEMAN_NAME",			         "游牧袭击者"),
     ("zh_Hans_CN",  "LOC_UNIT_BARBARIAN_HORSE_ARCHER_NAME",			     "游牧弓骑手"),
     -- 特色单位
-    ("zh_Hans_CN",  "LOC_UNIT_NORWEGIAN_LONGSHIP_DESCRIPTION",           "取代桨帆船的挪威远古时代特色海军单位。能在中立领土上恢复。通过海岸扫荡能力，可掠夺敌方海岸土地，并俘获附近的平民。如果在海岸和湖泊单元格上开始一个回合，会获得1 [ICON_MOVEMENT] 移动力加成。"),
+    ("zh_Hans_CN",  "LOC_UNIT_NORWEGIAN_LONGSHIP_DESCRIPTION",           "取代桨帆船的挪威远古时代特色海军单位。能在中立领土上恢复。通过海岸扫荡能力，可掠夺敌方海岸土地，并俘获附近的平民。如果在水域单元格上开始一个回合，会获得1 [ICON_MOVEMENT] 移动力加成。"),
     --("zh_Hans_CN",  "LOC_UNIT_ENGLISH_SEADOG_DESCRIPTION",               "伊丽莎白一世的文艺复兴时代特色海军单位，取代私掠船。击败敌方船只后有几率将其俘获。"),
     ("zh_Hans_CN",  "LOC_UNIT_ENGLISH_SEADOG_DESCRIPTION",               "文艺复兴时代英国特色海军单位，取代私掠船。击败敌方船只后有几率将其俘获。"),
     ("zh_Hans_CN",  "LOC_UNIT_OTTOMAN_BARBARY_CORSAIR_DESCRIPTION",      "中世纪奥斯曼特色海军单位，取代海盗船。进行海岸扫荡时无需花费 [ICON_Movement] 移动力。"),

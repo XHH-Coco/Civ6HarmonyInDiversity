@@ -108,9 +108,6 @@ function GenerateMap()
 			"RESOURCE_JNR_PEAT",		--泥炭
 			"RESOURCE_RUBBER",			--橡胶
 			"RESOURCE_RUBBER",			--额外橡胶
-			"RESOURCE_MUSHROOMS",		--蘑菇
-			"RESOURCE_MUSHROOMS",		--额外蘑菇
-			"RESOURCE_MUSHROOMS",		--额外蘑菇
 			"RESOURCE_TOMATO",			--番茄
 			"RESOURCE_TOMATO"			--额外番茄				
 		},--增加的陆地加成资源,水资无效，奢侈战略无效
@@ -120,6 +117,9 @@ function GenerateMap()
 			"RESOURCE_BAMBOO",			--竹子
 			"RESOURCE_EBONY",			--乌木
 			"RESOURCE_COCOA",			--可可豆
+			"RESOURCE_MUSHROOMS",		--蘑菇
+			"RESOURCE_MUSHROOMS",		--额外蘑菇
+			"RESOURCE_MUSHROOMS",		--额外蘑菇
 			"RESOURCE_COFFEE",			--咖啡
 		}
 	};

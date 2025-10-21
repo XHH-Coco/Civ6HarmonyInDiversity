@@ -2,9 +2,6 @@
 insert or ignore into CivilopediaPageExcludes (SectionId, PageId)
   select 'BUILDINGS', BuildingType from HD_DUMMY_BUILDINGS;
 
--- 奇观添加业绩文本
-UPDATE Buildings SET Description = "{" || Description || "}{LOC_EPSTWEAK_WONDER_WORDING_TOURISM}" WHERE IsWonder = 1;
-
 --------------------------------------------------------------------------------------------------------------------
 -- 百科资源分类
   -- 战略 文物资源
@@ -34,7 +31,13 @@ insert into HD_Civilopedia_Resource_Groups (ResourceType, PageGroupId)
 -- 按改良类型给资源分类
 insert or ignore into HD_Resource_Classification (ResourceType, ResourceClassificationType) select
   ResourceType, 'RESOURCE_CLASSIFICATION_' || ImprovementType
-from Improvement_ValidResources where ImprovementType in (select ImprovementType from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_BASIC');
+from Improvement_ValidResources where ImprovementType in (
+  select ImprovementType from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_BASIC'
+    and ImprovementType not in ('IMPROVEMENT_OFFSHORE_OIL_RIG')
+);
+
+-- 删除没有任何对应资源的分类
+delete from HD_ResourceClassificationTypes where ResourceClassificationType not in (select distinct ResourceClassificationType from HD_Resource_Classification);
 
 --------------------------------------------------------------------------------------------------------------------
 -- 二进制

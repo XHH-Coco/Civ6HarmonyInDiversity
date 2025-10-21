@@ -2,6 +2,7 @@ ExposedMembers.DLHD = ExposedMembers.DLHD or {};
 ExposedMembers.DLHD.Utils = ExposedMembers.DLHD.Utils or {};
 Utils = ExposedMembers.DLHD.Utils;
 
+local pendingRefresh = {};
 -- 初始化需要用Lua按分类统计资源的建筑列表
 
 local BuildingNeedDetectList = {
@@ -13,7 +14,7 @@ local BuildingNeedDetectList = {
     -- PropertyKey
       -- ResourceClassificationType
 function Init()
-  for row in GameInfo.HD_Building_ResourceClassification() do
+  for row in GameInfo.HD_Building_Base_On_ResourceClassification() do
     local propertyKeyList = BuildingNeedDetectList[row.DetectRange][row.BuildingType] or {};
     local resourceClassificationTypeList = propertyKeyList[row.PropertyKey] or {};
 
@@ -47,7 +48,7 @@ function CompleteBuildingNeedDetect(playerId, cityId, buildingId, plotId, bOrigi
     playerTotalList[buildingInfo.BuildingType] = dataList;
     player:SetProperty(PLAYER_BUILDING_NEED_DETECT_LIST_TAG, playerTotalList)
 
-    RefreshPlayerResourceDetect(player);
+    pendingRefresh[playerId] = 1;
   end
 
   -- 城市资源
@@ -71,10 +72,14 @@ function RefreshPlayerResourceDetect(player)
   end
 
   -- 遍历检查玩家是否拥有某资源 按分类记录
-  for row in GameInfo.HD_Resource_Classification() do
-    if classificationTypeList[row.ResourceClassificationType] ~= nil and Utils.GetPlayerResourceAmount(player:GetID(), row.ResourceType) > 0 then
-      print("玩家拥有资源 " .. row.ResourceType)
-      classificationTypeList[row.ResourceClassificationType] = classificationTypeList[row.ResourceClassificationType] + 1;
+  for classificationType, resourceList in pairs(Utils.Classification_Resource_Map) do
+    if classificationTypeList[classificationType] ~= nil then
+      for _, resourceType in ipairs(resourceList) do
+        if Utils.GetPlayerResourceAmount(player:GetID(), resourceType) > 0 then
+          print("玩家拥有资源 " .. resourceType)
+          classificationTypeList[classificationType] = classificationTypeList[classificationType] + 1;
+        end
+      end
     end
   end
 
@@ -105,12 +110,23 @@ end
 
 -- TODO 刷新按分类统计城市资源
 
--- 资源变化时刷新
-function PlayerResourceChangedRefresh(playerId, resourceId)
-  local player = Players[playerId];
-  if not player then return; end
-
-  print("玩家资源变化", resourceId);
-  RefreshPlayerResourceDetect(player);
+function RefreshPlayerResourceDetectIfPending(playerId)
+	if (pendingRefresh[playerId] == nil) or (pendingRefresh[playerId] == 1) then
+    local player = Players[playerId];
+    if not player then return; end
+		RefreshPlayerResourceDetect(player);
+		pendingRefresh[playerId] = 0;
+	end
 end
-Events.PlayerResourceChanged.Add(PlayerResourceChangedRefresh);
+
+local function Initialize()
+  Events.CitySelectionChanged.Add(RefreshPlayerResourceDetectIfPending);
+  GameEvents.PlayerTurnStarted.Add(RefreshPlayerResourceDetectIfPending);
+  GameEvents.OnPlayerTurnEnded.Add(RefreshPlayerResourceDetectIfPending);
+
+  -- 资源变化时记录允许刷新状态
+  Events.PlayerResourceChanged.Add(function (playerId, resourceId)
+    pendingRefresh[playerId] = 1;
+  end);
+end
+Events.LoadGameViewStateDone.Add(Initialize);

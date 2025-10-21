@@ -182,7 +182,8 @@ PageLayouts["Building" ] = function(page)
             local terrain = GameInfo.Terrains[row.TerrainType];
             if(terrain ~= nil) then
                 -- Do not list coast as a requirement if we're going to list it further down anyways.
-                if(terrain.TerrainType ~= "TERRAIN_COAST" or not(building.Coast or building.MustBeAdjacentLand)) then
+                if(terrain.TerrainType ~= "TERRAIN_COAST"
+                or not (building.MustBeLake or building.MustNotBeLake)) then
                     table.insert(placement_requirements, {Locale.Lookup(terrain.Name), terrain.TerrainType});
                 end
             end
@@ -192,15 +193,18 @@ PageLayouts["Building" ] = function(page)
 
     local additional_placement_requirements = {};
     if(building.MustBeLake) then
-        table.insert(additional_placement_requirements, Locale.Lookup("LOC_UI_PEDIA_PLACEMENT_REQUIRES_LAKE"));
+        table.insert(additional_placement_requirements, Locale.Lookup("LOC_TOOLTIP_HD_MUST_LAKE_TEXT"));
     end
 
     if(building.MustNotBeLake) then
-        table.insert(additional_placement_requirements, Locale.Lookup("LOC_UI_PEDIA_PLACEMENT_REQUIRES_NOT_LAKE"));
+        table.insert(additional_placement_requirements, Locale.Lookup("LOC_TOOLTIP_HD_MUST_SEA_TEXT"));
     end
 
-    if(building.Coast or building.MustBeAdjacentLand) then
-        table.insert(additional_placement_requirements, Locale.Lookup("LOC_UI_PEDIA_PLACEMENT_REQUIRES_COAST"));
+    if(building.Coast) then
+        table.insert(additional_placement_requirements, Locale.Lookup("LOC_TOOLTIP_HD_MUST_COAST_TEXT"));
+    end
+    if(building.MustBeAdjacentLand) then
+        table.insert(additional_placement_requirements, Locale.Lookup("LOC_TOOLTIP_HD_MUST_ADJACENT_LAND_TEXT"));
     end
     
     table.sort(additional_placement_requirements, function(a,b) return Locale.Compare(a,b) == -1 end);
@@ -215,7 +219,7 @@ PageLayouts["Building" ] = function(page)
     -- DL specific logic: regional effects.
     -- ================================================================================
     local range = building.RegionalRange or 0;
-    if(range ~= 0) then
+    if building.IsWonder and range ~= 0 then
         table.insert(stats, Locale.Lookup("LOC_TOOLTIP_REGIONAL_EFFECT_RANGE", range));
     end
 	-- Building Regional Effect
@@ -227,9 +231,9 @@ PageLayouts["Building" ] = function(page)
 		end
 	end
     if range ~= 0 then
-        table.insert(stats, "[NEWLINE]" .. Locale.Lookup("LOC_TOOLTIP_REGIONAL_EFFECT_RANGE_MODIFIER", range));
+        local regionalTextList = {};
 		for row in GameInfo.HD_BuildingRegionalYields() do
-			if row.BuildingType == building.BuildingType then
+			if row.BuildingType == building.BuildingType and row.YieldChange > 0 then
 				local line = "";
 				if row.YieldType == 'AMENITY' then
 					local tooltip;
@@ -238,7 +242,7 @@ PageLayouts["Building" ] = function(page)
 					else
 						tooltip = "LOC_TYPE_TRAIT_AMENITY_ENTERTAINMENT";
 					end
-					table.insert(stats, "[ICON_Bullet] " .. Locale.Lookup(tooltip, row.YieldChange));
+					table.insert(regionalTextList, "[ICON_Bullet] " .. Locale.Lookup(tooltip, row.YieldChange));
 				else
 					local yield = GameInfo.Yields[row.YieldType];
 					local tooltip;
@@ -247,10 +251,17 @@ PageLayouts["Building" ] = function(page)
 					else
 						tooltip = "LOC_TYPE_TRAIT_YIELD";
 					end
-					table.insert(stats, "[ICON_Bullet] " .. Locale.Lookup(tooltip, row.YieldChange, yield.IconString, yield.Name));
+					table.insert(regionalTextList, "[ICON_Bullet] " .. Locale.Lookup(tooltip, row.YieldChange, yield.IconString, yield.Name));
 				end
 			end
 		end
+
+        if #regionalTextList > 0 then
+            table.insert(stats, "[NEWLINE]" .. Locale.Lookup("LOC_TOOLTIP_REGIONAL_EFFECT_RANGE_MODIFIER", range));
+            for _, text in ipairs(regionalTextList) do
+                table.insert(stats, text);
+            end
+        end
     end
     -- ================================================================================
     -- End DL specific logic.
@@ -363,6 +374,20 @@ PageLayouts["Building" ] = function(page)
         end
     end
 
+    -- 旅游业绩
+    if building.IsWonder then
+        table.insert(stats, Locale.Lookup('LOC_EPSTWEAK_WONDER_WORDING_TOURISM_1'));
+        table.insert(stats, Locale.Lookup('LOC_EPSTWEAK_WONDER_WORDING_TOURISM_2'));
+    end
+
+    -- 建筑分类
+    local classificationList = {};
+    for row in GameInfo.HD_Building_Classification() do
+        if row.BuildingType == buildingType then
+        table.insert(classificationList, '[ICON_BULLET]' .. Locale.Lookup(GameInfo.HD_BuildingClassificationTypes[row.BuildingClassificationType].Name));
+        end
+    end
+
     -- Right Column
     AddPortrait("ICON_" .. buildingType);
 
@@ -436,6 +461,16 @@ PageLayouts["Building" ] = function(page)
             s:AddSeparator();
         end
     end);
+
+    if #classificationList > 0 then
+        AddRightColumnStatBox("LOC_PEDIA_HD_CLASSIFICATION_TEXT", function(s)
+            s:AddSeparator();
+            for _, text in ipairs(classificationList) do
+                s:AddLabel(text);
+            end
+            s:AddSeparator();
+        end)
+    end
 
     AddRightColumnStatBox("LOC_UI_PEDIA_REQUIREMENTS", function(s)
         s:AddSeparator();

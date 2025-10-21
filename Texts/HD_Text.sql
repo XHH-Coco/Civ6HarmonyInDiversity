@@ -13,18 +13,11 @@ values
 	("LOC_UNITCOMMAND_SACRIFICE_DISABLED_TT",								 "[COLOR_RED]Must occupy City Center[ENDCOLOR]"),
 	("LOC_FLYOVER_AZTEC_SACRIFICE",										   "Human Sacrifice[COLOR:ResCultureLabelCS]+{1_Amount}[ENDCOLOR][ICON_Culture][COLOR:ResFaithLabelCS]+{1_Amount}[ENDCOLOR][ICON_Faith]"),
 	-- Main
-	("LOC_EPSTWEAK_WONDER_WORDING_TOURISM",								   "[NEWLINE][NEWLINE]+2 [ICON_Tourism] Tourism[NEWLINE]+1 [ICON_Tourism] extra per Era that you've advanced past this Wonder's era"),
+	("LOC_EPSTWEAK_WONDER_WORDING_TOURISM_1",								   "+2 [ICON_Tourism] Tourism"),
+	("LOC_EPSTWEAK_WONDER_WORDING_TOURISM_2",								   "+1 [ICON_Tourism] extra per Era that you've advanced past this Wonder's era"),
 	("LOC_DISTRICT_HD_IS_SPECIALTY_DISTRICT",								 "Specialty District"),
 	("LOC_DISTRICT_HD_IS_NOT_SPECIALTY_DISTRICT",							 "District"),
-	("LOC_TOOLTIP_COST_PROGRESSION_PARAM",									"Cost Progression Param: {1_num}"),
-	("LOC_TOOLTIP_BUILDING_CITIZEN_YIELDS_HEADER",							"Citizen Yields change (per citizen in this district):"),
-	("LOC_TOOLTIP_DISTRICT_CITIZEN_YIELDS_HEADER",							"Citizen Yields (per citizen in this district):"),
-	("LOC_TOOLTIP_RESOURCE_IMPROVED_BY",									  "Can be improved by: "),
-	("LOC_TOOLTIP_RESOURCE_CORP_CATEGORY",									"Industry and Corporation: "),
 	("LOC_UI_PEDIA_CITIZEN_YIELDS",										   "Citizen Yields (per citizen in this district)"),
-	("LOC_TOOLTIP_REGIONAL_EFFECT_RANGE",										"{1_num}-tile Regional Effect: The basic yields of this Wonder are extend to other cities within {1_num} tiles."),
-	("LOC_TOOLTIP_REGIONAL_EFFECT_RANGE_MODIFIER",								"{1_num}-tile Regional Effect: Cities with City Center or Neighborhood within {1_num} tiles of this building recieve the following bonuses, except those cities that have already recieved this bonus from the same building:"),
-	("LOC_TOOLTIP_REGIONAL_EFFECT_REQ",								"(requires {1_TechOrCivicName})"),
 	("LOC_TYPE_TRAIT_AMENITY_ENTERTAINMENT_POWER_ENHANCEMENT",				"{1_Amount: number +#,###;-#,###} [ICON_Amenities] {1_Amount : plural 1?Amenity; other?Amenities;} additionally when this city is [ICON_Power] Powered"),
 	("LOC_TYPE_TRAIT_YIELD_POWER_ENHANCEMENT",								"{1_Amount: number +#,###;-#,###} {2_Icon} {3_Name} additionally when this city is [ICON_Power] Powered"),
 	("LOC_HAPPINESS_DELIGHTED_NAME",										  "Delighted"),
@@ -41,18 +34,14 @@ values
 	("LOC_VIZSOURCE_GOV_SPIES",											   "Built Building International parliamentary Body"),
 	("LOC_VIZSOURCE_ACTION_GOV_SPIES",										"Build Building International parliamentary Body"),
 	("LOC_DISTRICT_LUMBER_MILL_1_PRODUCTION",								 "+{1_num} [ICON_Production] Production from the adjacent Lumber Mill."),
-	("LOC_UNIVERSITY_JUNGLE_SCIENCE",										 "+{1_num} [ICON_Science] Science from the adjacent {1_num : plural 1?Jungle; other?Jungles;}."),
 	("LOC_DISTRICT_DESERT_SCIENCE",										   "+{1_num} [ICON_Science] Science from adjacent Desert {1_Num : plural 1?Tile; other?Tiles;}."),
-	("LOC_DISTRICT_DESERT_HILLS_SCIENCE",									 "+{1_num} [ICON_Science] Science from adjacent Desert hill {1_Num : plural 1?Tile; other?Tiles;}."),
+	("LOC_DISTRICT_DESERT_HILLS_SCIENCE",									 "+{1_num} [ICON_Science] Science from adjacent Desert Hills {1_Num : plural 1?Tile; other?Tiles;}."),
 	("LOC_DISTRICT_HARBOR_HANSA_PRODUCTION",								  "+{1_num} [ICON_Production] Production from adjacent Harbor {1_Num : plural 2?district; other?districts;}."),
 	("LOC_DISTRICT_ROYALDOCK_HANSA_PRODUCTION",							   "+{1_num} [ICON_Production] Production from adjacent RoyalDock {1_Num : plural 2?district; other?districts;}."),
 	("LOC_DISTRICT_COTHON_HANSA_PRODUCTION",								  "+{1_num} [ICON_Production] Production from adjacent Cothon {1_Num : plural 2?district; other?districts;}."),
 	("LOC_ALLIANCE_LV2_RESEARCH_EFFECT_1",									"Every 10 turns (on Standard), you unlock a [ICON_TechBoosted] Eureka for a tech that your ally has researched or boosted, but you have not."),
 	("LOC_ALLIANCE_LV1_MILITARY_EFFECT_2",									"+2 [ICON_Production] Production from [ICON_TradeRoute] Trade Routes to your ally"),
 	("LOC_ALLIANCE_LV1_MILITARY_EFFECT_3",									"+1 [ICON_Production] Production from [ICON_TradeRoute] Trade Routes from your ally"),
-	("LOC_TOOLTIP_COLLECTED",												"Collected: "),
-	("LOC_TOOLTIP_UNCOLLECTED",												"Uncollected: "),
-	("LOC_TOOLTIP_FULL_COLLECTED",											"All items collected."),
   ("LOC_AND_DIPLOMATIC_QUARTER",                         ""),
   ("LOC_OR_DIPLOMATIC_QUARTER",                         ""),
   ("LOC_HUD_SEADOG_LENS",                         "Naval Raider"),
@@ -60,7 +49,24 @@ values
   ("LOC_TIER_1_GOVERNMRNT_NAME",         	"Tier 1 Government"),
   ("LOC_TIER_2_GOVERNMRNT_NAME",         	"Tier 2 Government"),
   ("LOC_TIER_3_GOVERNMRNT_NAME",         	"Tier 3 Government"),
-  ("LOC_TIER_4_GOVERNMRNT_NAME",         	"Tier 4 Government");
+  ("LOC_TIER_4_GOVERNMRNT_NAME",         	"Tier 4 Government"),
+  ("LOC_TERRAIN_GRASS_HILLS_NAME",         			"Grassland Hills"),
+  ("LOC_TERRAIN_COAST_NAME",         						"Shallow Sea and Lake"),
+  ("LOC_TOOLTIP_COAST",         								"Shallow Sea"),
+  ("LOC_TERRAIN_OCEAN_NAME",         						"Deep Ocean"),
+  ("LOC_TERRAIN_GRASS_MOUNTAIN_NAME",         	"Grassland Mountain"),
+  ("LOC_TERRAIN_PLAINS_HILLS_NAME",         		"Plains Hills"),
+  ("LOC_TERRAIN_PLAINS_MOUNTAIN_NAME",         	"Plains Mountain"),
+  ("LOC_TERRAIN_DESERT_HILLS_NAME",         		"Desert Hills"),
+  ("LOC_TERRAIN_DESERT_MOUNTAIN_NAME",         	"Desert Mountain"),
+  ("LOC_TERRAIN_TUNDRA_HILLS_NAME",         		"Tundra Hills"),
+  ("LOC_TERRAIN_TUNDRA_MOUNTAIN_NAME",         	"Tundra Mountain"),
+  ("LOC_TERRAIN_SNOW_HILLS_NAME",         			"Snow Hills"),
+  ("LOC_TERRAIN_SNOW_MOUNTAIN_NAME",         		"Snow Mountain"),
+  ("LOC_TERRAIN_CLASS_MOUNTAIN_NAME",         	"Mountain"),
+  ("LOC_TERRAIN_CLASS_WATER_NAME",         			"Water Area"),
+	("LOC_RESOURCE_STONE_NAME",                                   "Andesite"),
+	("LOC_RESOURCE_FISH_NAME",                                    "Common Carp");
 
 --------------------------------------------------------------------------------
 -- Language: zh_Hans_CN
@@ -79,20 +85,13 @@ values
 	-- Main
 	("zh_Hans_CN",  "LOC_GOVERNMENT_INHERENT_BONUS",										 "传承效果"), -- 官方好像在ui上面写反了。
 
-	("zh_Hans_CN",  "LOC_EPSTWEAK_WONDER_WORDING_TOURISM",								   "[NEWLINE][NEWLINE]+2 [ICON_Tourism] 旅游业绩。[NEWLINE]您所处时代每超越该奇观所属的时代一个时代，则+1 [ICON_Tourism] 旅游业绩。"),
+	("zh_Hans_CN",  "LOC_EPSTWEAK_WONDER_WORDING_TOURISM_1",								   "+2 [ICON_Tourism] 旅游业绩"),
+	("zh_Hans_CN",  "LOC_EPSTWEAK_WONDER_WORDING_TOURISM_2",								   "您所处时代每超越该奇观所属的时代一个时代，则+1 [ICON_Tourism] 旅游业绩"),
 	("zh_Hans_CN",  "LOC_DISTRICT_HD_IS_SPECIALTY_DISTRICT",								 "专业化区域"),
 	("zh_Hans_CN",  "LOC_DISTRICT_HD_IS_NOT_SPECIALTY_DISTRICT",							 "非专业化区域"),
-	("zh_Hans_CN",  "LOC_TOOLTIP_COST_PROGRESSION_PARAM",									"涨价系数：{1_num}"),
-	("zh_Hans_CN",  "LOC_TOOLTIP_BUILDING_CITIZEN_YIELDS_HEADER",							"在此区域中工作的 [ICON_Citizen] 专家收益变动："),
-	("zh_Hans_CN",  "LOC_TOOLTIP_DISTRICT_CITIZEN_YIELDS_HEADER",							"每个在此区域中工作的 [ICON_Citizen] 专家收益："),
-	("zh_Hans_CN",  "LOC_TOOLTIP_RESOURCE_IMPROVED_BY",									  "改良设施类型："),
-	("zh_Hans_CN",  "LOC_TOOLTIP_RESOURCE_CORP_CATEGORY",									"行业与公司类别："),
 	("zh_Hans_CN",  "LOC_UI_PEDIA_CITIZEN_YIELDS",										   "每个在此区域中工作的 [ICON_Citizen] 专家收益"),
 	("zh_Hans_CN",  "LOC_TYPE_TRAIT_CITIZENS",											   "{1_Amount: number +#,###;-#,###} [ICON_Citizen] 专家{1_Amount : plural 1?槽位; other?槽位;}"),
 	("zh_Hans_CN",  "LOC_TYPE_TRAIT_CITIZENSLOTS",										   "{1_Amount: number +#,###;-#,###} [ICON_Citizen] 专家{1_Amount : plural 1?槽位; other?槽位;}"),
-	("zh_Hans_CN",  "LOC_TOOLTIP_REGIONAL_EFFECT_RANGE",									 "{1_num}环辐射：此奇观的基础产出延伸到{1_num}个单元格内的其它城市。"),
-	("zh_Hans_CN",  "LOC_TOOLTIP_REGIONAL_EFFECT_RANGE_MODIFIER",							"{1_num}环辐射：拥有在此建筑{1_num}个单元格内的市中心或社区的城市获得以下加成，但不包括已经从相同建筑获得过此加成的城市："),
-	("zh_Hans_CN",  "LOC_TOOLTIP_REGIONAL_EFFECT_REQ",								"（需要{1_TechOrCivicName}）"),
 	("zh_Hans_CN",  "LOC_TYPE_TRAIT_AMENITY_ENTERTAINMENT_POWER_ENHANCEMENT",				"此城 [ICON_Power] 供电充足时，额外{1_Amount: number +#,###;-#,###} [ICON_Amenities] {1_Amount : plural 1?宜居度; other?宜居度;}"),
 	("zh_Hans_CN",  "LOC_TYPE_TRAIT_YIELD_POWER_ENHANCEMENT",								"此城 [ICON_Power] 供电充足时，额外{1_Amount: number +#,###;-#,###} {2_Icon} {3_Name}"),
 	("zh_Hans_CN",  "LOC_HAPPINESS_DELIGHTED_NAME",										  "愉悦"),
@@ -113,9 +112,8 @@ values
 	("zh_Hans_CN",  "LOC_PROMOTION_SHELLS_DESCRIPTION",									  "与区域防御战斗时+10 [ICON_Strength] 战斗力。"),
 	("zh_Hans_CN",  "LOC_UNIT_GAUL_GAESATAE_DESCRIPTION",									"高卢特色远古时代单位，替代勇士。此单位拥有更高花费。与基础战斗力更高的单位作战时+10 [ICON_Strength] 战斗力。与区域防御战斗时+5 [ICON_Strength] 战斗力。"),
 	("zh_Hans_CN",  "LOC_DISTRICT_LUMBER_MILL_1_PRODUCTION",								 "相邻伐木场提供+{1_num} [ICON_Production] 生产力。"),
-	("zh_Hans_CN",  "LOC_UNIVERSITY_JUNGLE_SCIENCE",										 "+{1_num} [ICON_Science] 科技值来自相邻雨林{1_Num : plural 1?单元格; other?单元格;}。"),
 	("zh_Hans_CN",  "LOC_DISTRICT_DESERT_SCIENCE",										   "+{1_num} [ICON_Science] 科技值来自相邻的沙漠单元格。"),
-	("zh_Hans_CN",  "LOC_DISTRICT_DESERT_HILLS_SCIENCE",									 "+{1_num} [ICON_Science] 科技值来自相邻的沙漠（丘陵）单元格。"),
+	("zh_Hans_CN",  "LOC_DISTRICT_DESERT_HILLS_SCIENCE",									 "+{1_num} [ICON_Science] 科技值来自相邻的沙漠丘陵单元格。"),
 	--研究同盟
 	("zh_Hans_CN",  "LOC_ALLIANCE_LV2_RESEARCH_EFFECT_1",									"每5回合（标准游戏速度下）解锁1个您盟友已研究或提升，而您尚未研究之科技的 [ICON_TechBoosted] 尤里卡"),
 	("zh_Hans_CN",  "LOC_ALLIANCE_LV1_RESEARCH_EFFECT_1",									"从通往盟友城市的 [ICON_TradeRoute] 贸易路线处获得的 [ICON_SCIENCE] 科技值+2，需要“行政部门”市政"),
@@ -132,9 +130,6 @@ values
 	--文化同盟
 	("zh_Hans_CN",  "LOC_ALLIANCE_LV1_CULTURAL_EFFECT_1",									"从通往盟友城市的 [ICON_TradeRoute] 贸易路线处获得的 [ICON_Culture] 文化值+2，需要“行政部门”市政"),
 	("zh_Hans_CN",  "LOC_ALLIANCE_LV1_CULTURAL_EFFECT_2",									"从源自盟友城市的 [ICON_TradeRoute] 贸易路线处获得的 [ICON_Culture] 文化值+1，需要“行政部门”市政"),
-	("zh_Hans_CN",  "LOC_TOOLTIP_COLLECTED",																"已收集："),
-	("zh_Hans_CN",  "LOC_TOOLTIP_UNCOLLECTED",															"未收集："),
-	("zh_Hans_CN",  "LOC_TOOLTIP_FULL_COLLECTED",														"已完成全收集。"),
   ("zh_Hans_CN",  "LOC_AND_DIPLOMATIC_QUARTER",                         	""),
   ("zh_Hans_CN",  "LOC_OR_DIPLOMATIC_QUARTER",                         		""),
   ("zh_Hans_CN",  "LOC_HUD_SEADOG_LENS",                         					"海狗"),
@@ -148,7 +143,26 @@ values
   ("zh_Hans_CN",  "LOC_TIER_2_GOVERNMRNT_NAME",         	"二级政体"),
   ("zh_Hans_CN",  "LOC_TIER_3_GOVERNMRNT_NAME",         	"三级政体"),
   ("zh_Hans_CN",  "LOC_TIER_4_GOVERNMRNT_NAME",         	"四级政体"),
-  ("zh_Hans_CN",  "LOC_HUD_REPORTS_SUK_OTHER_ADJACENCY_BONUS",         	"其他加成");
+  ("zh_Hans_CN",  "LOC_TERRAIN_COAST_NAME",         					"浅海与湖泊"),
+  ("zh_Hans_CN",  "LOC_TOOLTIP_COAST",         								"浅海"),
+  ("zh_Hans_CN",  "LOC_TERRAIN_OCEAN_NAME",         					"深海"),
+  ("zh_Hans_CN",  "LOC_TERRAIN_GRASS_HILLS_NAME",         			"草原丘陵"),
+  ("zh_Hans_CN",  "LOC_TERRAIN_GRASS_MOUNTAIN_NAME",         	"草原山脉"),
+  ("zh_Hans_CN",  "LOC_TERRAIN_PLAINS_HILLS_NAME",         		"平原丘陵"),
+  ("zh_Hans_CN",  "LOC_TERRAIN_PLAINS_MOUNTAIN_NAME",         	"平原山脉"),
+  ("zh_Hans_CN",  "LOC_TERRAIN_DESERT_HILLS_NAME",         		"沙漠丘陵"),
+  ("zh_Hans_CN",  "LOC_TERRAIN_DESERT_MOUNTAIN_NAME",         	"沙漠山脉"),
+  ("zh_Hans_CN",  "LOC_TERRAIN_TUNDRA_HILLS_NAME",         		"冻土丘陵"),
+  ("zh_Hans_CN",  "LOC_TERRAIN_TUNDRA_MOUNTAIN_NAME",         	"冻土山脉"),
+  ("zh_Hans_CN",  "LOC_TERRAIN_SNOW_HILLS_NAME",         			"雪地丘陵"),
+  ("zh_Hans_CN",  "LOC_TERRAIN_SNOW_MOUNTAIN_NAME",         		"雪地山脉"),
+  ("zh_Hans_CN",  "LOC_TERRAIN_CLASS_MOUNTAIN_NAME",         		"山脉"),
+  ("zh_Hans_CN",  "LOC_TERRAIN_CLASS_WATER_NAME",         		"水域"),
+	("zh_Hans_CN",  "LOC_RESOURCE_STONE_NAME",                                   "安山岩"),
+	("zh_Hans_CN",  "LOC_RESOURCE_FISH_NAME",                                    "鲤鱼"),
+	("zh_Hans_CN",  "LOC_RESOURCE_COPPER_NAME",                                  "铜矿"),
+	("zh_Hans_CN",  "LOC_RESOURCE_CATTLE_NAME",                                  "奶牛"),
+	("zh_Hans_CN",  "LOC_RESOURCE_SHEEP_NAME",                                   "绵羊");
 
 -- 外交区DLC文本
 update LocalizedText set Text = "and {LOC_DISTRICT_DIPLOMATIC_QUARTER_NAME} " where Tag = 'LOC_AND_DIPLOMATIC_QUARTER'
@@ -301,3 +315,18 @@ values
 	("zh_Hans_CN",  "LOC_CITY_YIELD_MODIFIER_PER_GOVERNOR_TITLE_TOOLTIP",				"{Value : number +#;-#}%（{ActualValue : number +#.#;-#.#}）来自拥有{1}次{1 : plural 1?升级; other?升级;}的 [ICON_Governor] 总督"),
 --	("zh_Hans_CN",	"LOC_WORLD_RANKINGS_CULTURE_TOURIST_TOOLTIP_GOVERNMENT",			"{1_Tooltip}[NEWLINE]总的 [ICON_Tourism] 旅游业绩因不同政体而提升{2_Percent}%");
 	("zh_Hans_CN",	"LOC_WORLD_RANKINGS_CULTURE_TOURIST_TOOLTIP_GOVERNMENT",			"{1_Tooltip}");
+
+-- 糖改名甘蔗
+update  LocalizedText set Text = REPLACE(Text, '糖', '甘蔗')
+where Language = 'zh_Hans_CN' and (Tag in (
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUGAR_DESCRIPTION',
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUGAR_SHORT_NAME',
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUGAR_NAME'
+));
+
+update  LocalizedText set Text = REPLACE(Text, 'Sugar', 'Sugarcane')
+where Tag in (
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUGAR_DESCRIPTION',
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUGAR_SHORT_NAME',
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUGAR_NAME'
+);

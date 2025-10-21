@@ -29,7 +29,7 @@ update Buildings set Cost = 750 where BuildingType = 'BUILDING_MONT_ST_MICHEL';
 update Buildings set Cost = 750 where BuildingType = 'BUILDING_GREAT_ZIMBABWE';
 update Buildings set Cost = 750 where BuildingType = 'BUILDING_ANGKOR_WAT';
 update Buildings set Cost = 750 where BuildingType = 'BUILDING_KILWA_KISIWANI';
-update Buildings set Cost = 750 where BuildingType = 'BUILDING_KOTOKU_IN';
+update Buildings set Cost = 750, Coast = 1 where BuildingType = 'BUILDING_KOTOKU_IN';
 update Buildings set Cost = 750 where BuildingType = 'BUILDING_MACHU_PICCHU';
 update Buildings set Cost = 750 where BuildingType = 'BUILDING_MEENAKSHI_TEMPLE';
 update Buildings set Cost = 750 where BuildingType = 'BUILDING_UNIVERSITY_SANKORE';
@@ -56,7 +56,7 @@ update Buildings set Cost = 2000 where BuildingType = 'BUILDING_ESTADIO_DO_MARAC
 update Buildings set Cost = 2000 where BuildingType = 'BUILDING_BIOSPHERE';
 update Buildings set Cost = 2000 where BuildingType = 'BUILDING_SYDNEY_OPERA_HOUSE';
 update Buildings set Cost = 2000 where BuildingType = 'BUILDING_AMUNDSEN_SCOTT_RESEARCH_STATION';
-
+update Buildings set ObsoleteEra = 'NO_ERA' where IsWonder = 1 and ObsoleteEra != 'NO_ERA';
 update Buildings set DefenseModifier = 4 where DefenseModifier != 0;
 
 -- Adjust basic yield
