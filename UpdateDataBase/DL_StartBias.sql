@@ -334,3 +334,10 @@ insert or replace into HD_Negative_StartBiasFeatures (CivilizationType, FeatureT
 	('CIVILIZATION_AUSTRALIA', 	'FEATURE_FLOODPLAINS'),
 	('CIVILIZATION_AUSTRALIA', 	'FEATURE_FLOODPLAINS_GRASSLAND'),
 	('CIVILIZATION_AUSTRALIA', 	'FEATURE_FLOODPLAINS_PLAINS');
+
+delete from HD_Negative_StartBiasTerrains where CivilizationType not in (select CivilizationType from Civilizations);
+delete from HD_Negative_StartBiasFeatures where CivilizationType not in (select CivilizationType from Civilizations);
+delete from HD_Negative_StartBiasFeatures where FeatureType not in (select FeatureType from Features);
+delete from HD_Negative_StartBiasResources where CivilizationType not in (select CivilizationType from Civilizations);
+delete from HD_Negative_StartBiasResources where ResourceType not in (select ResourceType from Resources);
+delete from HD_Negative_StartBiasRivers where CivilizationType not in (select CivilizationType from Civilizations);
