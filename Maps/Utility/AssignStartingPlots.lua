@@ -373,6 +373,36 @@ function AssignStartingPlots:__DLPreparePlotFertilities()
 
     local gridWidth, gridHeight = Map.GetGridSize();
     local numPlots = gridWidth * gridHeight;
+	local t_count = 0
+	------------------------------------------------------------------------------
+	-- 判断是否是海洋关联文明
+	print('debug -- 判断海洋文明')
+	local coastflag = false;
+	for row in GameInfo.StartBiasTerrains() do
+		local civilizationType = row.CivilizationType;
+		local terrainType = row.TerrainType;
+		if PlayerConfigurations[0]:GetCivilizationTypeName() == civilizationType and terrainType == "TERRAIN_COAST" then
+			coastflag = true;
+		end
+	end
+
+	-- 判断是否存在负关联表，并将对应的负关联地貌记录
+	print('debug -- 载入负关联地貌')
+	local featureList = {};
+	for row in GameInfo.HD_Negative_StartBiasFeatures() do
+		local civilizationType = row.CivilizationType;
+		if PlayerConfigurations[0]:GetCivilizationTypeName() == civilizationType then
+			table.insert(featureList, row.FeatureType);
+			print(row.FeatureType);
+		end
+	end
+
+	-- 载入地貌表
+	local Features = {};
+	for row in GameInfo.Features() do
+        table.insert(Features, row.FeatureType);
+    end
+	------------------------------------------------------------------------------
     for i = 0, numPlots -1 do
         local plot = Map.GetPlotByIndex(i);
         local x = plot:GetX();
@@ -380,16 +410,6 @@ function AssignStartingPlots:__DLPreparePlotFertilities()
         local totalFertility = 0;
         local RingOnePlotYields = {};
         local RingTwoPlotYields = {};
-
-		local coastflag = false;
-		for row in GameInfo.StartBiasTerrains() do
-			local civilizationType = row.CivilizationType;
-			local terrainType = row.TerrainType;
-			if PlayerConfigurations[0]:GetCivilizationTypeName() == civilizationType and terrainType == "TERRAIN_COAST" then
-				coastflag = true;
-				break
-			end
-		end
 
         for row in GameInfo.Yields() do
             RingOnePlotYields[row.YieldType] = 0;
@@ -415,7 +435,9 @@ function AssignStartingPlots:__DLPreparePlotFertilities()
                         plotYields[row.YieldType] = plotYields[row.YieldType] + yield;
                         -- print(x, y, anotherPlot:GetX(), anotherPlot:GetY(), row.YieldType, yield);
                     end
-
+					
+					------------------------------------------------------------------------------
+					-- 判断地形是否是海岸地形
 					if coastflag then
                         if 15 <= anotherPlot:GetTerrainType() and anotherPlot:GetTerrainType() <= 16 then
                             totalFertility = totalFertility + 2;
@@ -425,7 +447,18 @@ function AssignStartingPlots:__DLPreparePlotFertilities()
                             totalFertility = totalFertility - 2;
                         end
                     end
-
+					-- 判断是否是负关联地貌，如果是则扣分降低权重
+					if (anotherPlot) then
+						if (anotherPlot:GetFeatureType() ~= -1) then
+							for i, feature in ipairs(featureList) do
+								if Features[anotherPlot:GetFeatureType()+1] == feature then
+									totalFertility = totalFertility - 2;
+									t_count = t_count + 1;
+								end
+							end
+						end
+					end
+					------------------------------------------------------------------------------
                     if (PlayerConfigurations[0]:GetCivilizationTypeName() == "CIVILIZATION_INCA") then
                         if anotherPlot:GetTerrainType()%3 == 0 then
                             totalFertility = totalFertility + 4;
@@ -453,7 +486,7 @@ function AssignStartingPlots:__DLPreparePlotFertilities()
                         end
                     end
                     -- TODO: include rivers & fresh water.
-                    -- 如果范围内存在自然奇观，则大幅降低肥沃度
+                    -- 如果范围内存在自然奇观，则大幅降低权重
                     -- if anotherPlot:IsNaturalWonder() then
                     --     totalFertility = totalFertility - 30;
                     -- end
@@ -491,6 +524,7 @@ function AssignStartingPlots:__DLPreparePlotFertilities()
         -- print(i, plot:GetX(), plot:GetY(), 'Fertility', StartPositioner.GetPlotFertility(i, -1));
         --print(totalFertility);
     end
+	print('debug - 负关联地貌共降低' .. t_count .. '次')
     print('end __DLPreparePlotFertilities');
 end
 ------------------------------------------------------------------------------
