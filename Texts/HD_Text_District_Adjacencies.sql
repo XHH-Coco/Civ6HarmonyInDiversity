@@ -93,8 +93,8 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN",  "LOC_HD_URBAN_FACILITIES_IMPROVEMENTS_PRODUCTION_TEXT",     			"+{1_num} [ICON_Production] 生产力来自相邻城市设施改良"),
   ("zh_Hans_CN",  "LOC_HD_TRANSPORTATION_FACILITIES_IMPROVEMENTS_GOLD_TEXT",     		"+{1_num} [ICON_Gold] 金币来自相邻交通设施改良"),
   ("zh_Hans_CN",  "LOC_HD_COMMERCIAL_FACILITIES_IMPROVEMENTS_GOLD_TEXT",     				"+{1_num} [ICON_Gold] 金币来自相邻商业设施改良"),
-  ("zh_Hans_CN",  "LOC_HD_MILITARY_FACILITIES_IMPROVEMENTS_PRODUCTION_TEXT",     		"+{1_num} [ICON_Gold] 金币来自相邻军事设施改良"),
-  ("zh_Hans_CN",  "LOC_HD_TRANSPORTATION_FACILITIES_IMPROVEMENTS_PRODUCTION_TEXT",  "+{1_num} [ICON_Gold] 金币来自相邻交通设施改良"),
+  ("zh_Hans_CN",  "LOC_HD_MILITARY_FACILITIES_IMPROVEMENTS_PRODUCTION_TEXT",     		"+{1_num} [ICON_Production] 生产力来自相邻军事设施改良"),
+  ("zh_Hans_CN",  "LOC_HD_TRANSPORTATION_FACILITIES_IMPROVEMENTS_PRODUCTION_TEXT",  "+{1_num} [ICON_Production] 生产力来自相邻交通设施改良"),
   ("zh_Hans_CN",  "LOC_HD_TOURISM_FACILITIES_IMPROVEMENTS_CULTURE_TEXT",  					"+{1_num} [ICON_CULTURE] 文化值来自相邻旅游设施改良"),
 	
   ("zh_Hans_CN",  "LOC_DISTRICT_NUSANTARA_FAITH",               "+{1_num} [ICON_FAITH] 信仰值来自相邻浅海与湖泊"),
