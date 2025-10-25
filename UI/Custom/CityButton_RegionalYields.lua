@@ -27,10 +27,10 @@ function RegionalYieldsButtonReset()
         if textList[yieldType] == nil then
           textList[yieldType] = {};
         end
-        local totalAmount = 0;
+
         for powerTag, data in pairs(powerList) do
           if buildingInfo and yieldInfo then
-            totalAmount = totalAmount + data.Amount;
+            totalList[yieldType] = (totalList[yieldType] or 0) + data.Amount;
 
             local text = Locale.Lookup(
               'LOC_CITY_REGIONAL_YIELD_DETAILS_TEXT',
@@ -48,8 +48,6 @@ function RegionalYieldsButtonReset()
             })
           end
         end
-        
-        totalList[yieldType] = totalAmount;
       end
     end
 

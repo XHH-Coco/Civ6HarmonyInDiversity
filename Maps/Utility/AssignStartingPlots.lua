@@ -166,14 +166,6 @@ function AssignStartingPlots:__InitStartingData()
             StartPositioner.MarkMajorRegionUsed(i);
             table.insert(self.majorStartPlots, startPlot);
             info = StartPositioner.GetMajorCivStartInfo(i);
---          print ("ContinentType: " .. tostring(info.ContinentType));
---          print ("LandmassID: " .. tostring(info.LandmassID));
---          print ("Fertility: " .. tostring(info.Fertility));
---          print ("TotalPlots: " .. tostring(info.TotalPlots));
---          print ("WestEdge: " .. tostring(info.WestEdge));
---          print ("EastEdge: " .. tostring(info.EastEdge));
---          print ("NorthEdge: " .. tostring(info.NorthEdge));
---          print ("SouthEdge: " .. tostring(info.SouthEdge));
         else
             failed = failed + 1;
             info = StartPositioner.GetMajorCivStartInfo(i);
@@ -262,14 +254,6 @@ function AssignStartingPlots:__InitStartingData()
         info = StartPositioner.GetMinorCivStartInfo(i);
         if(startPlot ~= nil) then
             table.insert(self.minorStartPlots, startPlot);
---          print ("Minor ContinentType: " .. tostring(info.ContinentType));
---          print ("Minor LandmassID: " .. tostring(info.LandmassID));
---          print ("Minor Fertility: " .. tostring(info.Fertility));
---          print ("Minor TotalPlots: " .. tostring(info.TotalPlots));
---          print ("Minor WestEdge: " .. tostring(info.WestEdge));
---          print ("Minor EastEdge: " .. tostring(info.EastEdge));
---          print ("Minor NorthEdge: " .. tostring(info.NorthEdge));
---          print ("Minor SouthEdge: " .. tostring(info.SouthEdge));
             valid = valid + 1;
         else
             print ("-- START FAILED MINOR --");

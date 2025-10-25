@@ -926,7 +926,7 @@ insert or replace into ModifierArguments
 	(ModifierId,											Name,							Value)
 values
 	('HD_MOUNTAIN_ROAD_YIELD',				'YieldType',			'YIELD_GOLD,YIELD_PRODUCTION'),
-	('HD_MOUNTAIN_ROAD_YIELD',				'Amount',					'3,2');
+	('HD_MOUNTAIN_ROAD_YIELD',				'Amount',					'1,1');
 
 insert or replace into ImprovementModifiers (ImprovementType, ModifierId)
 	select ImprovementType, 'HD_MOUNTAIN_ROAD_YIELD'

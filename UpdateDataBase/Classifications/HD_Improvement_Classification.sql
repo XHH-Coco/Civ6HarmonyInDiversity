@@ -7,10 +7,11 @@ insert or ignore into HD_ImprovementClassificationTypes (ImprovementClassificati
   ('IMPROVEMENT_CLASSIFICATION_CITYSTATE',                  5),
   ('IMPROVEMENT_CLASSIFICATION_URBAN_FACILITIES',           6),
   ('IMPROVEMENT_CLASSIFICATION_TRANSPORTATION_FACILITIES',  7),
-  ('IMPROVEMENT_CLASSIFICATION_TOURISM_FACILITIES',         8),
-  ('IMPROVEMENT_CLASSIFICATION_MILITARY_FACILITIES',        9),
-  ('IMPROVEMENT_CLASSIFICATION_RELIGIOUS_FACILITIES',       10),
-  ('IMPROVEMENT_CLASSIFICATION_COMMERCIAL_FACILITIES',      11),
+  ('IMPROVEMENT_CLASSIFICATION_RESIDENTIAL_FACILITIES',     8),
+  ('IMPROVEMENT_CLASSIFICATION_TOURISM_FACILITIES',         9),
+  ('IMPROVEMENT_CLASSIFICATION_MILITARY_FACILITIES',        10),
+  ('IMPROVEMENT_CLASSIFICATION_RELIGIOUS_FACILITIES',       11),
+  ('IMPROVEMENT_CLASSIFICATION_COMMERCIAL_FACILITIES',      12),
   ('IMPROVEMENT_CLASSIFICATION_COMMON',                     90);
 
 update HD_ImprovementClassificationTypes set Name = 'LOC_' || ImprovementClassificationType || '_NAME' where Name is NULL;
@@ -109,6 +110,18 @@ from Improvements where ImprovementType in (
   'IMPROVEMENT_MOUNTAIN_ROAD'
 );
 
+  -- 住宅设施改良
+insert or ignore into HD_Improvement_Classification (ImprovementType, ImprovementClassificationType) select
+  ImprovementType, 'IMPROVEMENT_CLASSIFICATION_RESIDENTIAL_FACILITIES'
+from Improvements where ImprovementType in (
+  'IMPROVEMENT_SEASTEAD',
+  'IMPROVEMENT_JNR_REED_HOME',
+
+  'IMPROVEMENT_MOUND',
+  'IMPROVEMENT_MEKEWAP',
+  'IMPROVEMENT_KAMPUNG'
+);
+
   -- 旅游设施改良
 insert or ignore into HD_Improvement_Classification (ImprovementType, ImprovementClassificationType) select
   ImprovementType, 'IMPROVEMENT_CLASSIFICATION_TOURISM_FACILITIES'
@@ -118,7 +131,6 @@ from Improvements where ImprovementType in (
   'IMPROVEMENT_SKI_RESORT',
   'IMPROVEMENT_SEASTEAD',
   'IMPROVEMENT_JNR_OASIS_FARM',
-  'IMPROVEMENT_JNR_REED_HOME',
 
   'IMPROVEMENT_COLOSSAL_HEAD',
   'IMPROVEMENT_ALCAZAR',
