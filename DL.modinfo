@@ -822,6 +822,7 @@
       <File>Assets/Resources/HD_Resources_Monopoly_64.dds</File>
       <File>Assets/Resources/HD_Resources_Monopoly_256.dds</File>
       <File>Assets/Resources/HD_Resources_Monopoly_FOW_256.dds</File>
+      <File>Assets/CityButtons/CityButtons_32.dds</File>
     </ImportFiles>
     <!-- Fix Icon -->
     <UpdateIcons id="FixIcons" criteria="Expansion2">
@@ -1829,6 +1830,7 @@
       <File>UI/Icons/HD_Icons_Units.xml</File>
       <File>UI/Icons/HD_Icons_STUUexpansion.xml</File>
       <File>UI/Icons/HD_Icons_Resources.sql</File>
+      <File>UI/Icons/HD_Icons_CityButtons.xml</File>
     </UpdateIcons>
     <!-- Gameplay-->
     <AddGameplayScripts id="DL_Scripts_Gameplay" criteria="Expansion2">
@@ -2456,6 +2458,7 @@
     <File>UI/Icons/HD_Icons_Wonder_Resources.sql</File>
     <File>UI/Icons/HD_Icons_Resources.sql</File>
     <File>UI/Icons/HD_Icons_Monopoply.sql</File>
+    <File>UI/Icons/HD_Icons_CityButtons.xml</File>
 
     <!-- Mod Support -->
     <File>ModSupport/HistoricalReligions/Switch.sql</File>
@@ -2960,6 +2963,7 @@
     <File>Assets/Resources/HD_Resources_Monopoly_64.dds</File>
     <File>Assets/Resources/HD_Resources_Monopoly_256.dds</File>
     <File>Assets/Resources/HD_Resources_Monopoly_FOW_256.dds</File>
+    <File>Assets/CityButtons/CityButtons_32.dds</File>
 
     <!-- Platforms -->
     <File>Platforms/Windows/audio/HD_CHINA.ini</File>

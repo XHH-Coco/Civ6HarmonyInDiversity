@@ -248,6 +248,8 @@ values
     ("LOC_BOOST_TRIGGER_SQUARE_RIGGING_HD",                                  "Earn a Great Scientist after having the Naval Tradition civic."),
     ("LOC_BOOST_TRIGGER_LONGDESC_SQUARE_RIGGING_HD",                         "People in our country have always been good at navigation. In recent years, scientists have drawn many patterns from sailors' experiences."),
     ("LOC_BOOST_TRIGGER_BALLISTICS",                                         "Build 2 Forts in your territory."),
+    ("LOC_BOOST_TRIGGER_SHIPBUILDING",                                       "Own 2 Canoes."),
+    ("LOC_BOOST_TRIGGER_LONGDESC_SHIPBUILDING",                              "Simple canoes can no longer meet the demands of navigation, so you start to think about how to build large ships."),
 
     ("LOC_TECH_ALCHEMY_HD_NAME",                                             "Alchemy"),
     ("LOC_BOOST_TRIGGER_ALCHEMY_HD",                                         "Mine a resource."),
@@ -641,6 +643,8 @@ values
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_LONGDESC_SQUARE_RIGGING_HD",                         "我国人民素来善于航海。近年来，科学家已经从水手们的经验中总结出许多规律。"),
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_CURRENCY",                                           "建立1条贸易路线。"),
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_BALLISTICS",                                         "在领土中建造2座堡垒。"),
+    ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_SHIPBUILDING",                                       "拥有2艘独木舟。"),
+    ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_LONGDESC_SHIPBUILDING",                              "简单的独木舟已经无法满足航行的需求，你开始思考如何建造大型船只。"),
 
     ("zh_Hans_CN",  "LOC_TECH_ALCHEMY_HD_NAME",                                             "炼丹术"),
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_ALCHEMY_HD",                                         "改良1种矿产资源。"),

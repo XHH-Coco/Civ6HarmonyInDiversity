@@ -25,12 +25,12 @@
     <Row Name="ATLAS_CITADEL_OF_GOD" IconSize="50" Filename="CITADEL_OF_GOD_50.dds"/>
     <Row Name="ATLAS_CITADEL_OF_GOD" IconSize="80" Filename="CITADEL_OF_GOD_80.dds"/>
     <Row Name="ATLAS_CITADEL_OF_GOD" IconSize="256" Filename="CITADEL_OF_GOD_256.dds"/>
-    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="22" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_UNITS_22.dds"/>
-    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="32" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_UNITS_32.dds"/>
-    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="38" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_UNITS_38.dds"/>
-    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="50" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_UNITS_50.dds"/>
-    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="80" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_UNITS_80.dds"/>
-    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="256" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_UNITS_256.dds"/>
+    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="22" IconsPerRow="4" IconsPerColumn="4" Filename="HD_NEW_UNITS_22.dds"/>
+    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="32" IconsPerRow="4" IconsPerColumn="4" Filename="HD_NEW_UNITS_32.dds"/>
+    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="38" IconsPerRow="4" IconsPerColumn="4" Filename="HD_NEW_UNITS_38.dds"/>
+    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="50" IconsPerRow="4" IconsPerColumn="4" Filename="HD_NEW_UNITS_50.dds"/>
+    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="80" IconsPerRow="4" IconsPerColumn="4" Filename="HD_NEW_UNITS_80.dds"/>
+    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="256" IconsPerRow="4" IconsPerColumn="4" Filename="HD_NEW_UNITS_256.dds"/>
   </IconTextureAtlases>
   <IconDefinitions>
     <!-- <Row Name="ICON_UNIT_BARBARIAN_RAIDER_WHITE" Index="26" Atlas="ICON_ATLAS_UNIT_FLAG_SYMBOLS_WHITE"/>
@@ -81,6 +81,8 @@
     
     <Row Name="ICON_UNIT_ANCIENT_SEADOG"         Atlas="ATLAS_HD_NEW_UNITS" Index="1"/>
     <Row Name="ICON_UNIT_ANCIENT_SEADOG_FOW"         Atlas="ATLAS_HD_NEW_UNITS" Index="1"/> 
+    <Row Name="ICON_UNIT_HD_CANOE"         Atlas="ATLAS_HD_NEW_UNITS" Index="3"/>
+    <Row Name="ICON_UNIT_HD_CANOE_FOW"         Atlas="ATLAS_HD_NEW_UNITS" Index="3"/> 
     <!-- create ancient_siege unit. -->
     <Row Name="ICON_UNIT_ANCIENT_SIEGE"                 Atlas="ICON_ATLAS_UNITS" Index="39"/>
     <Row Name="ICON_UNIT_ANCIENT_SIEGE_FOW"             Atlas="ICON_ATLAS_UNITS_FOW" Index="39"/>
@@ -96,17 +98,19 @@
     <Row Name="ICON_UNIT_HD_CODIFIER_FOW"                 Atlas="ATLAS_HD_NEW_UNITS" Index="0"/>
     <Row Name="ICON_BUILDING_SEOWON" Atlas="ATLAS_HD_NEW_UNITS" Index="0"/>
 		<Row Name="ICON_BUILDING_SEOWON_FOW" Atlas="ATLAS_HD_NEW_UNITS" Index="0"/>
-		<Row Name="ICON_UNIT_ENKIDU_HD"                 Atlas="ATLAS_HD_NEW_UNITS" Index="5"/>
-    <Row Name="ICON_UNIT_ENKIDU_HD_FOW"                 Atlas="ATLAS_HD_NEW_UNITS" Index="5"/>
-		<Row Name="ICON_UNIT_QIN_ELITE_SOLDIER_HD"                 Atlas="ATLAS_HD_NEW_UNITS" Index="6"/>
-    <Row Name="ICON_UNIT_QIN_ELITE_SOLDIER_HD_FOW"                 Atlas="ATLAS_HD_NEW_UNITS" Index="6"/>
-    <Row Name="ICON_UNIT_KEQING"                    Atlas="ATLAS_HD_NEW_UNITS" Index="7"/>
-		<Row Name="ICON_UNIT_KEQING_FOW"                Atlas="ATLAS_HD_NEW_UNITS"   Index="7"/>
-    <Row Name="ICON_UNIT_PLUM_INTERNAL_SECURITY_HD"                    Atlas="ATLAS_HD_NEW_UNITS" Index="8"/>
-		<Row Name="ICON_UNIT_PLUM_INTERNAL_SECURITY_HD_FOW"                Atlas="ATLAS_HD_NEW_UNITS"   Index="8"/>
+		<Row Name="ICON_UNIT_ENKIDU_HD"                 Atlas="ATLAS_HD_NEW_UNITS" Index="6"/>
+    <Row Name="ICON_UNIT_ENKIDU_HD_FOW"                 Atlas="ATLAS_HD_NEW_UNITS" Index="6"/>
+    <Row Name="ICON_UNIT_PLUM_INTERNAL_SECURITY_HD"                    Atlas="ATLAS_HD_NEW_UNITS" Index="7"/>
+		<Row Name="ICON_UNIT_PLUM_INTERNAL_SECURITY_HD_FOW"                Atlas="ATLAS_HD_NEW_UNITS"   Index="7"/>
+		<Row Name="ICON_UNIT_QIN_ELITE_SOLDIER_HD"                 Atlas="ATLAS_HD_NEW_UNITS" Index="8"/>
+    <Row Name="ICON_UNIT_QIN_ELITE_SOLDIER_HD_FOW"                 Atlas="ATLAS_HD_NEW_UNITS" Index="8"/>
+    <Row Name="ICON_UNIT_KEQING"                    Atlas="ATLAS_HD_NEW_UNITS" Index="9"/>
+		<Row Name="ICON_UNIT_KEQING_FOW"                Atlas="ATLAS_HD_NEW_UNITS"   Index="9"/>
   </IconDefinitions>
 
   <IconAliases>
+    <Row Name="ICON_UNIT_HD_CANOE_PORTRAIT" OtherName="ICON_UNIT_GALLEY_PORTRAIT"/>
+    
     <Row Name="ICON_UNIT_ORAL_SCHOLAR_PORTRAIT" OtherName="ICON_UNIT_GREAT_WRITER_PORTRAIT"/>
     <Row Name="ICON_UNIT_TRAVEL_THEATRE_PORTRAIT" OtherName="ICON_UNIT_GREAT_WRITER_PORTRAIT"/>
     <Row Name="ICON_UNIT_MALI_GRIOTS_PORTRAIT" OtherName="ICON_UNIT_GREAT_WRITER_PORTRAIT"/>

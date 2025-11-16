@@ -374,8 +374,8 @@ update Buildings set Maintenance = 0,	Cost = 420, CitizenSlots = 4, MaxPlayerIns
 update Buildings set Maintenance = 10,	Cost = 600	where BuildingType = 'BUILDING_RESEARCH_LAB';
 -- Commercial Hub
 update Buildings set Maintenance = 1,	Cost = 120	where BuildingType = 'BUILDING_MARKET';
-update Buildings set Maintenance = 4,	Cost = 275	where BuildingType = 'BUILDING_BANK';
-update Buildings set Maintenance = 4,	Cost = 220	where BuildingType = 'BUILDING_GRAND_BAZAAR';
+update Buildings set Maintenance = 4,	Cost = 250	where BuildingType = 'BUILDING_BANK';
+update Buildings set Maintenance = 4,	Cost = 225	where BuildingType = 'BUILDING_GRAND_BAZAAR';
 update Buildings set Maintenance = 10,	Cost = 550	where BuildingType = 'BUILDING_STOCK_EXCHANGE';
 -- Harbor
 update Buildings set Maintenance = 1,	Cost = 120	where BuildingType = 'BUILDING_LIGHTHOUSE';
@@ -434,8 +434,8 @@ update Buildings set Maintenance = 6,	Cost = 360	where BuildingType = 'BUILDING_
 update Buildings set Maintenance = 1,	Cost = 150	where BuildingType = 'BUILDING_CONSULATE';
 update Buildings set Maintenance = 4,	Cost = 300	where BuildingType = 'BUILDING_CHANCERY';
 -- Neighborhood
-update Buildings set Maintenance = 7,	Cost = 500, MaxPlayerInstances = 1, RegionalRange = 6 where BuildingType = 'BUILDING_FOOD_MARKET';
-update Buildings set Maintenance = 7,	Cost = 500, MaxPlayerInstances = 1, RegionalRange = 6 where BuildingType = 'BUILDING_SHOPPING_MALL';
+update Buildings set Maintenance = 7,	Cost = 400, MaxPlayerInstances = 1, RegionalRange = 6 where BuildingType = 'BUILDING_FOOD_MARKET';
+update Buildings set Maintenance = 7,	Cost = 400, MaxPlayerInstances = 1, RegionalRange = 6 where BuildingType = 'BUILDING_SHOPPING_MALL';
 -- Government Plaza
 update Buildings set Maintenance = 1,	Cost = 150	where BuildingType = 'BUILDING_GOV_TALL';
 update Buildings set Maintenance = 1,	Cost = 150	where BuildingType = 'BUILDING_GOV_WIDE';
@@ -1361,7 +1361,7 @@ insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetI
 	from HD_Binary_Compress where Exp < 7;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
-	select 'HD_FOOD_MARKET_GOLD_' || Exp, 'Amount', Amount * 2
+	select 'HD_FOOD_MARKET_GOLD_' || Exp, 'Amount', Amount * 1
 	from HD_Binary_Compress where Exp < 7;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
@@ -1378,7 +1378,7 @@ insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetI
 	from HD_Binary_Compress where Exp < 7;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
-	select 'HD_SHOPPING_MALL_GOLD_' || Exp, 'Amount', Amount * 2
+	select 'HD_SHOPPING_MALL_GOLD_' || Exp, 'Amount', Amount * 1
 	from HD_Binary_Compress where Exp < 7;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<GameData>
+  <IconTextureAtlases>
+    <Row Name="HD_CITYBUTTONS" IconSize="32" IconsPerRow="3" IconsPerColumn="3" Filename="CityButtons_32.dds"/>
+  </IconTextureAtlases>
+  <IconDefinitions>
+    <Row Name="ICON_HD_CITYBUTTONS_RESOURCE_CLASSIFICATION" Atlas="HD_CITYBUTTONS" Index="0"/>
+    <Row Name="ICON_HD_CITYBUTTONS_REGIONAL_YIELDS" Atlas="HD_CITYBUTTONS" Index="1"/>
+  </IconDefinitions>
+</GameData>

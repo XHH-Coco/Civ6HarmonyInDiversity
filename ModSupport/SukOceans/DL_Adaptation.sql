@@ -3,6 +3,7 @@
 -------------------------------------
 
 update Resources set LakeEligible = 1 where ResourceType = 'RESOURCE_SUK_LOBSTER';
+update Resources set LakeEligible = 1 where ResourceType = 'RESOURCE_SUK_SEALS';
 
 delete from Resource_YieldChanges where ResourceType = 'RESOURCE_SUK_SQUID' and YieldType = 'YIELD_GOLD';
 delete from Resource_YieldChanges where ResourceType = 'RESOURCE_SUK_ABALONE' and YieldType = 'YIELD_FOOD';

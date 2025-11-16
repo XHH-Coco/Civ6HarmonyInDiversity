@@ -178,6 +178,8 @@ insert or ignore into HD_Improvement_Classification (ImprovementType, Improvemen
 from Improvements where ImprovementType in (
   'IMPROVEMENT_INDUSTRY',
   'IMPROVEMENT_CORPORATION',
+  'IMPROVEMENT_LEU_WAREHOUSE',
+  'IMPROVEMENT_LEU_CONTAINER_PORT',
   'IMPROVEMENT_LEU_TRANSNATIONAL',
   'IMPROVEMENT_LEU_TRANSNATIONAL_SEA',
 

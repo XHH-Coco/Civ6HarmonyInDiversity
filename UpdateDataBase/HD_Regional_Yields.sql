@@ -158,5 +158,5 @@ insert or ignore into ModifierArguments (ModifierId, Name, Value) select
 from HD_BuildingRegionalYieldTypes where YieldType in ('YIELD_FOOD', 'YIELD_PRODUCTION', 'YIELD_SCIENCE', 'YIELD_CULTURE', 'YIELD_GOLD', 'YIELD_FAITH');
 
 insert or ignore into ModifierArguments (ModifierId, Name, Value) select
-  'HD_MANSION_CITY_RECEIVE_REGIONAL_YIELDS_BONUS_' || YieldType, 'Amount', 100
+  'HD_MANSION_CITY_RECEIVE_REGIONAL_YIELDS_BONUS_' || YieldType, 'Amount', 50
 from HD_BuildingRegionalYieldTypes where YieldType in ('YIELD_FOOD', 'YIELD_PRODUCTION', 'YIELD_SCIENCE', 'YIELD_CULTURE', 'YIELD_GOLD', 'YIELD_FAITH');

@@ -18,7 +18,7 @@ values
     ("LOC_UNIT_BARBARIAN_HORSEMAN_NAME",			      "Nomadic Raider"),
     ("LOC_UNIT_BARBARIAN_HORSE_ARCHER_NAME",			  "Nomadic Bowrider"),
     -- Unique Units
-    ("LOC_UNIT_NORWEGIAN_LONGSHIP_DESCRIPTION",           "Norwegian unique Ancient era naval unit that replaces the Galley. Can pillage enemy coastal lands and capture civilians if adjacent using its coastal raiding ability. Gains 1 bonus [ICON_MOVEMENT] Movement if it begins a turn on a Water Area tile."),
+    ("LOC_UNIT_NORWEGIAN_LONGSHIP_DESCRIPTION",           "Norwegian unique Classical era naval unit that replaces the Galley. Can pillage enemy coastal lands and capture civilians if adjacent using its coastal raiding ability. Gains 1 bonus [ICON_MOVEMENT] Movement if it begins a turn on a Water Area tile."),
     --("LOC_UNIT_ENGLISH_SEADOG_DESCRIPTION",               "Elizabeth I's unique Renaissance era naval unit that replaces the Privateer. Has a chance to capture defeated enemy ships."), -- Can only be seen by other Naval Raiders unless adjacent to it. Reveals Naval Raiders within sight range.
     ("LOC_UNIT_ENGLISH_SEADOG_DESCRIPTION",               "English unique Renaissance era naval unit that replaces the Privateer. Has a chance to capture defeated enemy ships. "), -- Can only be seen by other Naval Raiders unless adjacent to it. Reveals Naval Raiders within sight range.
     ("LOC_UNIT_OTTOMAN_BARBARY_CORSAIR_DESCRIPTION",      "Ottoman unique Medieval era naval unit that replaces the Pirate Ship. It costs no [ICON_Movement] Movement to coastal raid."), -- Can only be seen by other Naval Raiders unless adjacent to it. Reveals Naval Raiders within sight range.
@@ -62,7 +62,7 @@ values
     ("zh_Hans_CN",  "LOC_UNIT_BARBARIAN_HORSEMAN_NAME",			         "游牧袭击者"),
     ("zh_Hans_CN",  "LOC_UNIT_BARBARIAN_HORSE_ARCHER_NAME",			     "游牧弓骑手"),
     -- 特色单位
-    ("zh_Hans_CN",  "LOC_UNIT_NORWEGIAN_LONGSHIP_DESCRIPTION",           "取代桨帆船的挪威远古时代特色海军单位。能在中立领土上恢复。通过海岸扫荡能力，可掠夺敌方海岸土地，并俘获附近的平民。如果在水域单元格上开始一个回合，会获得1 [ICON_MOVEMENT] 移动力加成。"),
+    ("zh_Hans_CN",  "LOC_UNIT_NORWEGIAN_LONGSHIP_DESCRIPTION",           "取代桨帆船的挪威古典时代特色海军单位。能在中立领土上恢复。通过海岸扫荡能力，可掠夺敌方海岸土地，并俘获附近的平民。如果在水域单元格上开始一个回合，会获得1 [ICON_MOVEMENT] 移动力加成。"),
     --("zh_Hans_CN",  "LOC_UNIT_ENGLISH_SEADOG_DESCRIPTION",               "伊丽莎白一世的文艺复兴时代特色海军单位，取代私掠船。击败敌方船只后有几率将其俘获。"),
     ("zh_Hans_CN",  "LOC_UNIT_ENGLISH_SEADOG_DESCRIPTION",               "文艺复兴时代英国特色海军单位，取代私掠船。击败敌方船只后有几率将其俘获。"),
     ("zh_Hans_CN",  "LOC_UNIT_OTTOMAN_BARBARY_CORSAIR_DESCRIPTION",      "中世纪奥斯曼特色海军单位，取代海盗船。进行海岸扫荡时无需花费 [ICON_Movement] 移动力。"),
@@ -99,14 +99,18 @@ insert or replace into EnglishText
     (Tag,                                                                       Text)
 values
 
-    ("LOC_UNIT_HD_BARBARIAN_GALLEY_NAME",                                       "Primitive Galley"),
+    ("LOC_UNIT_HD_BARBARIAN_GALLEY_NAME",                                       "Barbarian Dinghy"),
     ("LOC_UNIT_HD_BARBARIAN_GALLEY_DESCRIPTION",                                "Ancient era naval raider unit, unique to Barbarians."),
     ("LOC_ESPIONAGE_LEVEL_5_NAME",                                              "Legendary Spy"), 
-    ("LOC_UNIT_HD_BARBARIAN_QUADRIREME_NAME",                                   "Primitive Quadrireme"),
+    ("LOC_UNIT_HD_BARBARIAN_QUADRIREME_NAME",                                   "Barbarian Sailboat"),
     ("LOC_UNIT_HD_BARBARIAN_QUADRIREME_DESCRIPTION",                            "Ancient era naval ranged unit, unique to Barbarians."),
     ("LOC_UNIT_DL_MEDIEVAL_PIRATE_DESCRIPTION",                                 "Medieval era Naval Raider unit."), -- have the ability to coastal raid. Can only be seen by other Naval Raiders unless adjacent to it. Reveals Naval Raiders within sight range."),
     ("LOC_UNIT_PRIVATEER_DESCRIPTION",                                          "Renaissance era Naval Raider unit."), -- ranged naval unit with the ability to coastal raid. Can only be seen by other Naval Raiders unless adjacent to it. Reveals Naval Raiders within sight range."),
     ("LOC_UNIT_SUBMARINE_DESCRIPTION",                                          "Modern era Naval Raider unit."), -- ranged naval unit with the ability to coastal raid. Can only be seen by other Naval Raiders unless adjacent to it. Reveals Naval Raiders within sight range."),
+    ("LOC_UNIT_HD_CANOE_NAME",                                                  "Canoe"),
+    ("LOC_UNIT_HD_CANOE_DESCRIPTION",                                           "Ancient era melee naval combat unit."),
+    ("LOC_UNIT_GALLEY_DESCRIPTION",                                             "Classical era melee naval combat unit."),
+    ("LOC_UNIT_PHOENICIA_BIREME_DESCRIPTION",                                   "Phoenician unique Classical Era unit that replaces the Galley. Increased [ICON_STRENGTH] Combat Strength and [ICON_MOVEMENT] Movement. Trader units are immune to being plundered if they are within 4 tiles of a Bireme and on a water tile."),
     ("LOC_UNIT_NUCLEAR_SUBMARINE_DESCRIPTION",                                  "Highly advanced Information era Naval Raider unit that can be armed with nuclear weapons."),
     ("LOC_UNIT_CATAPULT_DESCRIPTION",                                           "Classical era siege unit, ideal for attacking cities. Gains 1 bonus [ICON_MOVEMENT] Movement if it begins a turn near a light cavalry unit. Cannot move and attack on the same turn unless player has Military Training Civic."),
     ("LOC_UNIT_BOMBARD_DESCRIPTION",                                            "Renaissance era siege unit, ideal for attacking cities. Gains 1 bonus [ICON_MOVEMENT] Movement if it begins a turn near a light cavalry unit. Cannot move and attack on the same turn unless player has Military Training Civic."),
@@ -123,16 +127,19 @@ values
 insert or replace into LocalizedText
     (Language,      Tag,                                                                    Text)
 values
-    ("zh_Hans_CN",  "LOC_UNIT_HD_BARBARIAN_GALLEY_NAME",                                    "原始桨帆船"),
+    ("zh_Hans_CN",  "LOC_UNIT_HD_BARBARIAN_GALLEY_NAME",                                    "蛮族小艇"),
     ("zh_Hans_CN",  "LOC_UNIT_HD_BARBARIAN_GALLEY_DESCRIPTION",                             "远古时代蛮族部落的海上侦察单位。"),
     ("zh_Hans_CN",  "LOC_ESPIONAGE_LEVEL_5_NAME",                                           "传奇间谍"),
 
-    ("zh_Hans_CN",  "LOC_UNIT_HD_BARBARIAN_QUADRIREME_NAME",                                "原始四段帆船"),
+    ("zh_Hans_CN",  "LOC_UNIT_HD_BARBARIAN_QUADRIREME_NAME",                                "蛮族帆船"),
     ("zh_Hans_CN",  "LOC_UNIT_HD_BARBARIAN_QUADRIREME_DESCRIPTION",                         "远古时代蛮族部落的海上远程单位。"),
     ("zh_Hans_CN",  "LOC_UNIT_DL_MEDIEVAL_PIRATE_DESCRIPTION",                              "中世纪时代海军袭击者。"),
     ("zh_Hans_CN",  "LOC_UNIT_PRIVATEER_DESCRIPTION",                                       "文艺复兴时代的海军袭击者。"),
     ("zh_Hans_CN",  "LOC_UNIT_SUBMARINE_DESCRIPTION",                                       "现代海军袭击者。"),
-    ("zh_Hans_CN",  "LOC_UNIT_PHOENICIA_BIREME_DESCRIPTION",                                "腓尼基远古时代特色单位，取代桨帆船，拥有更高战斗力及移动力。位于水域且与双层桨座战船相距4个单元格内的商人可免遭掠夺。"),
+    ("zh_Hans_CN",  "LOC_UNIT_HD_CANOE_NAME",                                               "独木舟"),
+    ("zh_Hans_CN",  "LOC_UNIT_HD_CANOE_DESCRIPTION",                                        "远古时代近战海军战斗单位。"),
+    ("zh_Hans_CN",  "LOC_UNIT_GALLEY_DESCRIPTION",                                          "古典时代近战海军战斗单位。"),
+    ("zh_Hans_CN",  "LOC_UNIT_PHOENICIA_BIREME_DESCRIPTION",                                "腓尼基古典时代特色单位，取代桨帆船，拥有更高战斗力及移动力。位于水域且与双层桨座战船相距4个单元格内的商人可免遭掠夺。"),
     ("zh_Hans_CN",  "LOC_UNIT_NUCLEAR_SUBMARINE_DESCRIPTION",                               "高度发达的信息时代海军袭击者，能配备核武器。"),
     ("zh_Hans_CN",  "LOC_UNIT_CATAPULT_DESCRIPTION",                                        "古典时代攻城单位，适合对城市发起攻击。如果相邻轻骑兵单位开始一个回合，会获得1 [ICON_MOVEMENT] 移动力加成。无法在一回合内移动并攻击（除非玩家已拥有军事训练市政）。"),
     ("zh_Hans_CN",  "LOC_UNIT_BOMBARD_DESCRIPTION",                                         "文艺复兴时代攻城单位，适合对城市发起攻击。如果相邻轻骑兵单位开始一个回合，会获得1 [ICON_MOVEMENT] 移动力加成。无法在一回合内移动并攻击（除非玩家已拥有军事训练市政）。"),

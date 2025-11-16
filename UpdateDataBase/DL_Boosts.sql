@@ -102,6 +102,8 @@ where CivicType = 'CIVIC_EARLY_EMPIRE';
 update Boosts set BoostClass = 'BOOST_TRIGGER_NONE_LATE_GAME_CRITICAL_TECH', BoostingTechType = null, NumItems = 0, ImprovementType = NULL, ResourceType = NULL, Unit1Type = NULL,
     TriggerDescription = 'LOC_BOOST_TRIGGER_STEEL_HD', TriggerLongDescription = 'LOC_BOOST_TRIGGER_LONGDESC_STEEL_HD'
 where TechnologyType = 'TECH_STEEL';
+-- 造船术
+update Boosts set BoostClass = 'BOOST_TRIGGER_OWN_X_UNITS_OF_TYPE', Unit1Type = 'UNIT_HD_CANOE', NumItems = 2 where TechnologyType = 'TECH_SHIPBUILDING';
 
 -- 设定市政的鼓舞
 insert or replace into Boosts

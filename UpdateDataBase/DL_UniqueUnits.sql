@@ -55,7 +55,7 @@ update Units set Cost = 210, Maintenance = 5, BaseMoves = 5, Range = 0, Combat =
 update Units_XP2 set ResourceCost = 5, ResourceMaintenanceType = 'RESOURCE_HORSES', ResourceMaintenanceAmount = 1 where UnitType = 'UNIT_RUSSIAN_COSSACK';
 ------ UNIT_RUSSIAN_DRUZHINA
 -- 挪威
-update Units set Cost = 55, Maintenance = 1, BaseMoves = 3, Range = 0, Combat = 35, RangedCombat = 0, StrategicResource = NULL where UnitType = 'UNIT_NORWEGIAN_LONGSHIP';
+update Units set Cost = 55, Maintenance = 1, BaseMoves = 3, Range = 0, Combat = 35, RangedCombat = 0, StrategicResource = NULL, PrereqTech = 'TECH_SHIPBUILDING' where UnitType = 'UNIT_NORWEGIAN_LONGSHIP';
 update Units_XP2 set ResourceCost = 0, ResourceMaintenanceType = NULL, ResourceMaintenanceAmount = 0 where UnitType = 'UNIT_NORWEGIAN_LONGSHIP';
 insert or replace into TypeTags (Type, Tag) values ('ABILITY_LONGSHIP_COASTAL_RAID', 'CLASS_LONGSHIP');
 update Units set Cost = 90, Maintenance = 3, BaseMoves = 2, Range = 0, Combat = 48, RangedCombat = 0, StrategicResource = 'RESOURCE_IRON' where UnitType = 'UNIT_NORWEGIAN_BERSERKER';
@@ -304,7 +304,7 @@ update Units set Cost = 105, Maintenance = 4, BaseMoves = 2, Range = 0, Combat =
 update Units_XP2 set ResourceCost = 5, ResourceMaintenanceType = 'RESOURCE_NITER', ResourceMaintenanceAmount = 1 where UnitType = 'UNIT_SULEIMAN_JANISSARY';
 ------ UNIT_OTTOMAN_SIPAHI
 -- 腓尼基
-update Units set Cost = 55, Maintenance = 1, BaseMoves = 4, Range = 0, Combat = 35, RangedCombat = 0, StrategicResource = NULL where UnitType = 'UNIT_PHOENICIA_BIREME';
+update Units set Cost = 55, Maintenance = 1, BaseMoves = 4, Range = 0, Combat = 35, RangedCombat = 0, StrategicResource = NULL, PrereqTech = 'TECH_SHIPBUILDING' where UnitType = 'UNIT_PHOENICIA_BIREME';
 update Units_XP2 set ResourceCost = 0, ResourceMaintenanceType = NULL, ResourceMaintenanceAmount = 0 where UnitType = 'UNIT_PHOENICIA_BIREME';
 ------ UNIT_PHOENICIA_NUMIDIAN_CAVALRY
 -- 瑞典

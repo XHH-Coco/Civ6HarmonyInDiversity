@@ -20,6 +20,9 @@ m_HDUnitCommands = {};
 local CITY_HAS_JNR_RECYCLING_PLANT_TAG = 'HD_CITY_HAS_JNR_RECYCLING_PLANT';
 local RECYCLING_PLANT_PRODUCTION_PERCENT = GlobalParameters.RECYCLING_PLANT_PRODUCTION_PERCENT or 0;
 
+local SPAIN_NATURAL_WONDER_REVEALED_TAG = 'HD_SpainNaturalWonderRevealed_';
+local SPAIN_NATURAL_WONDER_REVEALED_LIST_TAG = 'HD_SpainNaturalWonderRevealedList';
+
 local COAST_INDEX = GameInfo.Terrains['TERRAIN_COAST'].Index;
 local OCEAN_INDEX = GameInfo.Terrains['TERRAIN_OCEAN'].Index;
 -- ======================================================================================================================================================
@@ -662,4 +665,90 @@ function m_HDUnitCommands.QIN_BULDER_WONDER.IsVisible(unit: object)
 	end
 
 	return buildingInfo.Index == wonderId;
+end
+
+-- ======================================================================================================================================================
+-- 黄金七城
+-- ======================================================================================================================================================
+m_HDUnitCommands.SPAIN_EL_DORADO_HD = {};
+m_HDUnitCommands.SPAIN_EL_DORADO_HD.Properties = {};
+
+m_HDUnitCommands.SPAIN_EL_DORADO_HD.EventName = "HD_SPAIN_EL_DORADO";
+m_HDUnitCommands.SPAIN_EL_DORADO_HD.CategoryInUI = "SPECIFIC";
+m_HDUnitCommands.SPAIN_EL_DORADO_HD.Icon = "ICON_UNITCOMMAND_SPAIN_EL_DORADO_HD";
+m_HDUnitCommands.SPAIN_EL_DORADO_HD.VisibleInUI = true;
+m_HDUnitCommands.SPAIN_EL_DORADO_HD.DoNotDelete = true;
+
+m_HDUnitCommands.SPAIN_EL_DORADO_HD.GetToolTipString = function(unit)
+	local text = Locale.Lookup("LOC_SPAIN_EL_DORADO_HD_TEXT");
+
+	local ownerId = unit:GetOwner();
+	local owner = Players[ownerId];
+	local list = owner:GetProperty(SPAIN_NATURAL_WONDER_REVEALED_LIST_TAG) or {};
+	if #list > 0 then
+		text = text .. Locale.Lookup("LOC_SPAIN_EL_DORADO_HD_LIST");
+		for i, featureId in ipairs(list) do
+			local featureInfo = GameInfo.Features[featureId];
+
+			if featureInfo then
+				if i > 1 then
+					text = text .. Locale.Lookup("LOC_TOOLTIP_HD_COMMA_TEXT");
+				end
+				text = text .. Locale.Lookup(featureInfo.Name);
+			end
+		end
+	end
+
+	return text;
+end
+
+m_HDUnitCommands.SPAIN_EL_DORADO_HD.GetDisabledToolTipString = function(unit)
+  if unit == nil then return ""; end
+  return Locale.Lookup("LOC_SPAIN_EL_DORADO_HD_DISABLED");
+end
+
+function m_HDUnitCommands.SPAIN_EL_DORADO_HD.CanUse(unit)
+  if unit == nil then return false; end
+
+	-- 判断文明特质
+	local ownerId = unit:GetOwner();
+	if not Utils.CivilizationHasTrait(ownerId, 'TRAIT_CIVILIZATION_TREASURE_FLEET') then
+		return false;
+	end
+
+	-- 判断军事单位
+	local unitInfo = GameInfo.Units[unit:GetType()];
+	if unitInfo then
+		local formationClass = unitInfo.FormationClass;
+		if (formationClass == 'FORMATION_CLASS_LAND_COMBAT' or formationClass == 'FORMATION_CLASS_NAVAL' or formationClass == 'FORMATION_CLASS_AIR') then
+			return true;
+		end
+	end
+
+	return false;
+end
+
+function m_HDUnitCommands.SPAIN_EL_DORADO_HD.IsDisabled(unit)
+	if unit == nil then return true; end
+
+	-- 判断移动力
+	if unit:GetMovesRemaining() == 0 then return true; end
+
+	-- 判断相邻或位于奇观
+	local enabled = false;
+	local ownerId = unit:GetOwner();
+	local owner = Players[ownerId];
+	local plots = Map.GetNeighborPlots(unit:GetX(), unit:GetY(), 1);
+	for _, plot in ipairs(plots) do
+		if plot and plot:IsNaturalWonder() then
+			-- 判断是否探索过
+			local featureId = plot:GetFeatureType();
+			if featureId and featureId ~= -1 and owner:GetProperty(SPAIN_NATURAL_WONDER_REVEALED_TAG .. featureId) ~= 1 then
+				enabled = true;
+      	break;
+			end
+		end
+	end
+
+	return not enabled;
 end

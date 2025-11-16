@@ -66,7 +66,7 @@ values
   ("LOC_TERRAIN_CLASS_MOUNTAIN_NAME",         	"Mountain"),
   ("LOC_TERRAIN_CLASS_WATER_NAME",         			"Water Area"),
 	("LOC_RESOURCE_STONE_NAME",                                   "Andesite"),
-	("LOC_RESOURCE_FISH_NAME",                                    "Common Carp");
+	("LOC_RESOURCE_FISH_NAME",                                    "Threadfin");
 
 --------------------------------------------------------------------------------
 -- Language: zh_Hans_CN
@@ -159,7 +159,7 @@ values
   ("zh_Hans_CN",  "LOC_TERRAIN_CLASS_MOUNTAIN_NAME",         		"山脉"),
   ("zh_Hans_CN",  "LOC_TERRAIN_CLASS_WATER_NAME",         		"水域"),
 	("zh_Hans_CN",  "LOC_RESOURCE_STONE_NAME",                                   "安山岩"),
-	("zh_Hans_CN",  "LOC_RESOURCE_FISH_NAME",                                    "鲤鱼"),
+	("zh_Hans_CN",  "LOC_RESOURCE_FISH_NAME",                                    "鲅鱼"),
 	("zh_Hans_CN",  "LOC_RESOURCE_COPPER_NAME",                                  "铜矿"),
 	("zh_Hans_CN",  "LOC_RESOURCE_CATTLE_NAME",                                  "奶牛"),
 	("zh_Hans_CN",  "LOC_RESOURCE_SHEEP_NAME",                                   "绵羊");
