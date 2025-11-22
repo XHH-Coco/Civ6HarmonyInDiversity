@@ -75,7 +75,7 @@ values
     -- 测绘学
     ('TECH_GEOMATICS_HD',               'LOC_TECH_GEOMATICS_HD_NAME',               NULL,                                               300,    'ERA_MEDIEVAL',     -2,         'ADVISOR_TECHNOLOGY'),
     -- 拱券
-    ('TECH_ARCH_HD',                    'LOC_TECH_ARCH_HD_NAME',                    'LOC_TECH_ARCH_HD_DESCRIPTION',                     300,    'ERA_MEDIEVAL',     2,          'ADVISOR_GENERIC'),
+    ('TECH_ARCH_HD',                    'LOC_TECH_ARCH_HD_NAME',                    NULL,                                               300,    'ERA_MEDIEVAL',     2,          'ADVISOR_GENERIC'),
     -- 海洋学
     ('TECH_OCEANOGRAPHY_HD',            'LOC_TECH_OCEANOGRAPHY_HD_NAME',            'LOC_TECH_OCEANOGRAPHY_HD_DESCRIPTION',             930,    'ERA_INDUSTRIAL',   -3,         'ADVISOR_GENERIC'),
     -- 地质学
@@ -495,6 +495,7 @@ values
 	('TECH_STEAM_POWER',						'TRAIT_WATER_TRADE_ROUTE_RANGE'),
 	('TECH_CALENDAR_HD',						'TECH_CALENDAR_HD_MONUMENT_CULTURE'),
 	('TECH_SAILING',							'TECH_SAILING_TRADER_EMBARK'),
+	('TECH_SAILING',							'TECH_SAILING_SETTLER_EMBARK'),
 	('TECH_GEOMATICS_HD',						'TECH_GEOMATICS_NILOMETER_SCIENCE');
 
 insert or replace into Modifiers
@@ -503,7 +504,8 @@ values
     ('ASTRONOMY_ADJACENT_MOUNTAIN_CAMPUS_SCIENCE',                  'MODIFIER_PLAYER_DISTRICTS_ADJUST_YIELD_CHANGE'),
     ('TECH_CALENDAR_HD_MONUMENT_CULTURE',                           'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE'),
     ('TECH_GEOMATICS_NILOMETER_SCIENCE',                            'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE'),
-	('TECH_SAILING_TRADER_EMBARK',									'MODIFIER_PLAYER_ADJUST_EMBARK_UNIT_PASS');
+	('TECH_SAILING_TRADER_EMBARK',									'MODIFIER_PLAYER_ADJUST_EMBARK_UNIT_PASS'),
+	('TECH_SAILING_SETTLER_EMBARK',					                'MODIFIER_PLAYER_ADJUST_EMBARK_UNIT_PASS');
 
 update Modifiers set SubjectRequirementSetId = 'IS_CAMPUS_ADJACENT_TO_MOUNTAIN_REQUIREMENTS'
     where ModifierId = 'ASTRONOMY_ADJACENT_MOUNTAIN_CAMPUS_SCIENCE';
@@ -519,7 +521,8 @@ values
     ('TECH_GEOMATICS_NILOMETER_SCIENCE',                        'BuildingType',             'BUILDING_NILOMETER_HD'),
     ('TECH_GEOMATICS_NILOMETER_SCIENCE',                        'YieldType',                'YIELD_SCIENCE'),
     ('TECH_GEOMATICS_NILOMETER_SCIENCE',                        'Amount',                   1),
-	('TECH_SAILING_TRADER_EMBARK',								'UnitType',					'UNIT_TRADER');
+	('TECH_SAILING_TRADER_EMBARK',								'UnitType',					'UNIT_TRADER'),
+	('TECH_SAILING_SETTLER_EMBARK',						        'UnitType',		'UNIT_SETTLER');
 
 
 --移除雨林前移到采矿

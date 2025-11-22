@@ -1123,7 +1123,7 @@ values
 -- 西班牙
 -- =====================================================================================================================================
 	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_TREASURE_FLEET_NAME",                    "黄金七城"),
-	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_TREASURE_FLEET_EXPANSION2_DESCRIPTION",  "你的军事单位可以在相邻或位于自然奇观的单元格进行“探索黄金城”，获得一次晋升并奖励1个 [ICON_GOVERNOR] 总督头衔，每个自然奇观限一次。每个有 [ICON_GOVERNOR] 总督就职的城市为所有 [ICON_TRADEROUTE] 贸易路线+1 [ICON_PRODUCTION] 生产力、+2 [ICON_GOLD] 金币；如 [ICON_TRADEROUTE] 贸易路线横跨多个大陆，则这些数值将翻倍。在每个异大陆上建立首座城市时+1 [ICON_TRADEROUTE] 贸易路线容量。"),
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_TREASURE_FLEET_EXPANSION2_DESCRIPTION",  "你的军事单位可以在相邻或位于自然奇观的单元格进行“探索黄金城”，获得一次晋升并奖励1个 [ICON_GOVERNOR] 总督头衔，每个自然奇观限一次。每个有 [ICON_GOVERNOR] 总督就职的城市为所有 [ICON_TRADEROUTE] 贸易路线+1 [ICON_PRODUCTION] 生产力、+2 [ICON_GOLD] 金币；如 [ICON_TRADEROUTE] 贸易路线横跨多个大陆则该收益翻倍。在每个异大陆上建立首座城市时+1 [ICON_TRADEROUTE] 贸易路线容量。"),
 	("zh_Hans_CN",  "LOC_SPAIN_EL_DORADO_HD_TEXT",                                   "探索黄金城[NEWLINE][NEWLINE]获得一次晋升并奖励1个 [ICON_GOVERNOR] 总督头衔。"),
 	("zh_Hans_CN",  "LOC_SPAIN_EL_DORADO_HD_LIST",                                   "[NEWLINE][NEWLINE]已经探索的“黄金城”："),
 	("zh_Hans_CN",  "LOC_SPAIN_EL_DORADO_HD_DISABLED",                               "[COLOR:Red]必须位于或相邻没有探索过的自然奇观单元格，且有剩余 [ICON_Movement] 移动力。[ENDCOLOR]"),

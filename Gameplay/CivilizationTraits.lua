@@ -142,7 +142,22 @@ function ChinaGameEraChanged(previousEraIndex, newEraIndex)
 						and row.ModifierId ~= 'COMMEMORATION_HD_RELIGIOUS_WAR_RELIGIOUS_CHARGE_ATTACH_EXTRA'
 						and row.ModifierId ~= 'COMMEMORATION_AUTOMATON_GA_FREE_GDR'
 						and row.ModifierId ~= 'COMMEMORATION_AUTOMATON_GA_FREE_GDR_ATTACH'
-						and row.ModifierId ~= 'COMMEMORATION_AUTOMATON_GA_FREE_GDR_ATTACH_EXTRA' then
+						and row.ModifierId ~= 'COMMEMORATION_AUTOMATON_GA_FREE_GDR_ATTACH_EXTRA'
+						and row.ModifierId ~= 'COMMEMORATION_HD_WORLD_WAR_GRANT_GENERAL'
+						and row.ModifierId ~= 'COMMEMORATION_HD_WORLD_WAR_GRANT_GENERAL_ATTACH'
+						and row.ModifierId ~= 'COMMEMORATION_HD_WORLD_WAR_GRANT_GENERAL_ATTACH_EXTRA'
+						and row.ModifierId ~= 'COMMEMORATION_ESPIONAGE_GRANT_SPY'
+						and row.ModifierId ~= 'COMMEMORATION_ESPIONAGE_GRANT_SPY_ATTACH'
+						and row.ModifierId ~= 'COMMEMORATION_ESPIONAGE_GRANT_SPY_ATTACH_EXTRA'
+						and row.ModifierId ~= 'COMMEMORATION_HD_IDEOLOGY_STORM_FREE_CIVIC'
+						and row.ModifierId ~= 'COMMEMORATION_HD_IDEOLOGY_STORM_FREE_CIVIC_ATTACH'
+						and row.ModifierId ~= 'COMMEMORATION_HD_IDEOLOGY_STORM_FREE_CIVIC_ATTACH_EXTRA'
+						and row.ModifierId ~= 'COMMEMORATION_HD_MEGA_CORPORATION_GRANT_MERCHANT'
+						and row.ModifierId ~= 'COMMEMORATION_HD_MEGA_CORPORATION_GRANT_MERCHANT_ATTACH'
+						and row.ModifierId ~= 'COMMEMORATION_HD_MEGA_CORPORATION_GRANT_MERCHANT_ATTACH_EXTRA'
+						and row.ModifierId ~= 'COMMEMORATION_HD_DIGITAL_REVOLUTION_GRANT_SCIENTIST'
+						and row.ModifierId ~= 'COMMEMORATION_HD_DIGITAL_REVOLUTION_GRANT_SCIENTIST_ATTACH'
+						and row.ModifierId ~= 'COMMEMORATION_HD_DIGITAL_REVOLUTION_GRANT_SCIENTIST_ATTACH_EXTRA' then
 							player:AttachModifierByID(row.ModifierId)
 							print("中国上个时代选择的着力点 应用效果", row.ModifierId)
 						end
@@ -2523,6 +2538,7 @@ function TheodoraOnDistrictConstructed (playerId, districtId, x, y)
 	end
 end
 GameEvents.OnDistrictConstructed.Add(TheodoraOnDistrictConstructed);
+
 --迪奥多拉圣地建筑送人口
 local Theodora_Add_POP_TAG = 'HD_Theodora_Add_POP_TAG_'
 function TheodoraBuildingConstructed(playerId, cityId, buildingId, plotId, bOriginalConstruction)
@@ -2547,6 +2563,16 @@ function TheodoraBuildingConstructed(playerId, cityId, buildingId, plotId, bOrig
 	end
 end
 GameEvents.BuildingConstructed.Add(TheodoraBuildingConstructed)
+
+-- 迪奥多拉创立宗教额外多选一个信条
+function TheodoraReligionFounded(playerId, religionId)
+	local player = Players[playerId]
+	if player and LeaderHasTrait(playerId, 'TRAIT_LEADER_THEODORA') then
+		player:AttachModifierByID('THEODORA_ADD_BELIEF');
+		print("迪奥多拉创立宗教额外多选一个信条");
+	end
+end
+Events.ReligionFounded.Add(TheodoraReligionFounded)
 
 --林肯工业区送建造者
 function LincolnOnDistrictConstructed (playerId, districtId, x, y)

@@ -23,6 +23,13 @@ create table if not exists 'HD_Binary_Compress_Keys'(
 	PRIMARY KEY('Key')
 );
 
+-- 着力点图标
+create table if not exists 'CommemorationIcons'(
+	'CommemorationType' TEXT    not NULL,
+	'Icon'              TEXT    not NULL,
+	PRIMARY KEY('CommemorationType')
+);
+
 -- Influence Bonus
 --delete from TraitModifiers where
 --    (TraitType in (select TraitType from CSE_ClassTypes)) and 

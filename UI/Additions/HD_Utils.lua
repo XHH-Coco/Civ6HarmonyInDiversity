@@ -1070,3 +1070,16 @@ function IsCityFullyPowered(playerId, cityId)
   return false;
 end
 Utils.IsCityFullyPowered = IsCityFullyPowered;
+
+-- 获取单位级别
+function GetUnitLevelNum(playerId, unitId)
+  local pUnit = UnitManager.GetUnit(playerId, unitId);
+  local level = 0;
+  for row in GameInfo.UnitPromotions() do
+    if (row ~= nil) and (pUnit:GetExperience() ~= nil) and (pUnit:GetExperience():HasPromotion(row.Index)) then
+      level = level + 1;
+    end
+  end
+  return level;
+end
+Utils.GetUnitLevelNum = GetUnitLevelNum;

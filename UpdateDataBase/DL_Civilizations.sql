@@ -73,6 +73,10 @@ insert or replace into China_AncientCommemorationTypes_HD (AncientCommemorationT
 
 update China_AncientCommemorationTypes_HD set Name = 'LOC_' || AncientCommemorationType || '_NAME', Description = 'LOC_' || AncientCommemorationType || '_DESCRIPTION';
 
+insert or ignore into CommemorationIcons(CommemorationType, Icon) select
+  AncientCommemorationType, 'ICON_' || AncientCommemorationType
+from China_AncientCommemorationTypes_HD;
+
 insert or replace into ChinaLeaders_AncientCommemorationTypes_HD
 	(LeaderType,										AncientCommemorationType)
 values

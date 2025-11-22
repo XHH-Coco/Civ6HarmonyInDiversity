@@ -9,7 +9,7 @@ function BinaryCompress(amount, plot, key)
 
   local pre_total = plot:GetProperty(total_key) or 0;
   if pre_total == amount then
-    print("二进制折叠 与前值相同 跳过");
+    -- print("二进制折叠 与前值相同 跳过");
     return;
   end
   plot:SetProperty(total_key, amount);

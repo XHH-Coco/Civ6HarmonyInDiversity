@@ -823,6 +823,8 @@
       <File>Assets/Resources/HD_Resources_Monopoly_256.dds</File>
       <File>Assets/Resources/HD_Resources_Monopoly_FOW_256.dds</File>
       <File>Assets/CityButtons/CityButtons_32.dds</File>
+      <File>Assets/Commemorations/HD_Commemorations_86.dds</File>
+      <File>Assets/Commemorations/HD_Commemorations_256.dds</File>
     </ImportFiles>
     <!-- Fix Icon -->
     <UpdateIcons id="FixIcons" criteria="Expansion2">
@@ -1692,7 +1694,7 @@
       <File>DLCSupport/HD_RulersOfTheSahara.sql</File>
     </UpdateDatabase>
     <UpdateDatabase id="DL_SULEIMAN_ALT" criteria="DLC_Suleiman_Alt">
-      <Properties><LoadOrder>20000</LoadOrder></Properties>
+      <Properties><LoadOrder>25001</LoadOrder></Properties>
       <File>DLCSupport/DL_SULEIMAN_ALT.sql</File>
     </UpdateDatabase>
     <UpdateDatabase id="HD_SEJONG" criteria="DLC_Sejong">
@@ -2964,6 +2966,8 @@
     <File>Assets/Resources/HD_Resources_Monopoly_256.dds</File>
     <File>Assets/Resources/HD_Resources_Monopoly_FOW_256.dds</File>
     <File>Assets/CityButtons/CityButtons_32.dds</File>
+    <File>Assets/Commemorations/HD_Commemorations_86.dds</File>
+    <File>Assets/Commemorations/HD_Commemorations_256.dds</File>
 
     <!-- Platforms -->
     <File>Platforms/Windows/audio/HD_CHINA.ini</File>

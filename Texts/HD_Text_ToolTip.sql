@@ -43,6 +43,7 @@ insert or replace into EnglishText (Tag, Text) values
   ("LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_PER_TEXT",    "{LOC_TYPE_TRAIT_ADJACENT_BONUS_PER}"),
   ("LOC_TOOLTIP_HD_ADJACENCIES_REQUIRES_TEXT",      " {LOC_TYPE_TRAIT_ADJACENT_BONUS_REQUIRES_TECH_OR_CIVIC}"),
   ("LOC_TOOLTIP_HD_ADJACENCIES_OBSOLETE_TEXT",      " {LOC_TYPE_TRAIT_ADJACENT_BONUS_OBSOLETE_WITH_TECH_OR_CIVIC}"),
+  ("LOC_TYPE_TRAIT_ADJACENT_OBJECT_SEA_RESOURCE",   "Water Area Resources"),
 
   ("LOC_TOOLTIP_HD_IMPROVEMENT_UNIT_TEXT",          "Built By:"),
 
@@ -104,6 +105,7 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_PER_TEXT",    "{1_Amount: number +#,###.#;-#,###.#} {2_YieldIcon} {3_YieldName}，来自每{4_Count}个相邻{5_AdjacentObject}"),
   ("zh_Hans_CN", "LOC_TOOLTIP_HD_ADJACENCIES_REQUIRES_TEXT",      "；需要{1_Name}"),
   ("zh_Hans_CN", "LOC_TOOLTIP_HD_ADJACENCIES_OBSOLETE_TEXT",      "；{1_Name}后失效"),
+  ("zh_Hans_CN", "LOC_TYPE_TRAIT_ADJACENT_OBJECT_SEA_RESOURCE",   "水域资源"),
 
   ("zh_Hans_CN", "LOC_TOOLTIP_HD_IMPROVEMENT_UNIT_TEXT",          "改良单位："),
 

@@ -446,7 +446,3 @@ select
 from Resources r, Improvement_ValidResources i
 where r.ResourceType = i.ResourceType and i.ImprovementType = 'IMPROVEMENT_LUMBER_MILL'
 	and (r.ResourceClassType = 'RESOURCECLASS_LUXURY' or r.ResourceClassType = 'RESOURCECLASS_BONUS');
-
-delete from Improvement_Adjacencies where ImprovementType = 'IMPROVEMENT_LUMBER_MILL' and YieldChangeId = 'Lumber_Mill_River_Production';
-
-update Technologies set Description = 'LOC_TECH_BRONZE_WORKING_DESCRIPTION_RS2' where TechnologyType = 'TECH_BRONZE_WORKING';

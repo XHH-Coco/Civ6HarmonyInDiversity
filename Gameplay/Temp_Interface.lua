@@ -460,6 +460,9 @@ function ChinaSelectCommemoration(playerId, operationId)
 			end
 			SetObjectState(player, CHINA_LAST_ERA_SELECTED_COMMEMORATION_TAG, selectedCommemorationTypes)
 		end
+
+		-- 唤起GP端事件
+		GameEvents.HD_ChooseCommemoration.Call(playerId);
 	end
 end
 Events.PlayerOperationComplete.Add(ChinaSelectCommemoration)

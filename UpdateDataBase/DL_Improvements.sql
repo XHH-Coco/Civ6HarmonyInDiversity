@@ -4,7 +4,9 @@ insert or replace into Improvement_YieldChanges
 values
 	('IMPROVEMENT_FISHING_BOATS',		'YIELD_FOOD',			0),
 	('IMPROVEMENT_FISHING_BOATS',		'YIELD_PRODUCTION',		1),
-	('IMPROVEMENT_FISHING_BOATS',		'YIELD_GOLD',			0),
+	
+	('IMPROVEMENT_FISHERY', 'YIELD_FOOD',       1),
+	('IMPROVEMENT_FISHERY', 'YIELD_PRODUCTION', 1),
 
 	('IMPROVEMENT_PLANTATION',			'YIELD_FOOD',			1),
 	('IMPROVEMENT_PLANTATION',			'YIELD_PRODUCTION',		0),
@@ -54,6 +56,7 @@ delete from Improvement_BonusYieldChanges where ImprovementType in (
 	'IMPROVEMENT_MINE',
 	'IMPROVEMENT_LUMBER_MILL',
 	'IMPROVEMENT_FISHING_BOATS');
+
 insert or replace into Improvement_BonusYieldChanges
 	(Id,	ImprovementType,								YieldType,							BonusYieldChange,	PrereqCivic,										PrereqTech)
 values
@@ -97,13 +100,14 @@ values
 	(638,	'IMPROVEMENT_PASTURE',					'YIELD_PRODUCTION',		1,					null,							'TECH_ROBOTICS'),
 
 	(640,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					null,							'TECH_ENGINEERING'),
-	(641,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					null,							'TECH_GUNPOWDER'),
-	(642,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					null,							'TECH_GEOLOGY_HD'),
-	(643,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					null,							'TECH_STEEL'),
-	(644,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					'CIVIC_PALEOBIOLOGY_HD',							null),
-	(645,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					null,							'TECH_INDUSTRIAL_AUTOMATION_HD'),
-	(646,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					null,							'TECH_SYNTHETIC_MATERIALS'),
-	(647,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					null,							'TECH_COMPOSITES'),
+	(641,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					null,							'TECH_METAL_CASTING'),
+	(642,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					null,							'TECH_GUNPOWDER'),
+	(643,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					null,							'TECH_GEOLOGY_HD'),
+	(644,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					null,							'TECH_STEEL'),
+	(645,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					'CIVIC_PALEOBIOLOGY_HD',							null),
+	(646,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					null,							'TECH_INDUSTRIAL_AUTOMATION_HD'),
+	(647,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					null,							'TECH_SYNTHETIC_MATERIALS'),
+	(648,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					null,							'TECH_COMPOSITES'),
 
 	(650,	'IMPROVEMENT_MINE',						'YIELD_PRODUCTION',		1,					null,							'TECH_ALCHEMY_HD'),
 	(651,	'IMPROVEMENT_MINE',						'YIELD_PRODUCTION',		1,					null,							'TECH_APPRENTICESHIP'),
@@ -125,31 +129,51 @@ values
 	(667,	'IMPROVEMENT_LUMBER_MILL',				'YIELD_PRODUCTION',		1,					null,							'TECH_GENETIC_ENGINEERING_HD'),
 	(668,	'IMPROVEMENT_LUMBER_MILL',				'YIELD_PRODUCTION',		1,					null,							'TECH_COMPOSITES'),
 
-	(670,	'IMPROVEMENT_FISHING_BOATS',			'YIELD_PRODUCTION',		1,					null,							'TECH_COMPASS_HD'),
-	(671,	'IMPROVEMENT_FISHING_BOATS',			'YIELD_GOLD',			2,					null,							'TECH_OCEANOGRAPHY_HD'),
-	(672,	'IMPROVEMENT_FISHING_BOATS',			'YIELD_FOOD',			1,					null,							'TECH_REFRIGERATION_HD'),
-	(673,	'IMPROVEMENT_FISHING_BOATS',			'YIELD_FOOD',			1,					null,							'TECH_PLASTICS'),
+	(670,	'IMPROVEMENT_FISHING_BOATS',			'YIELD_FOOD',					1,					null,							'TECH_SHIPBUILDING'),
+	(671,	'IMPROVEMENT_FISHING_BOATS',			'YIELD_FOOD',					1,					null,							'TECH_COMPASS_HD'),
+	(672,	'IMPROVEMENT_FISHING_BOATS',			'YIELD_PRODUCTION',		1,					null,							'TECH_MASS_PRODUCTION'),
+	(673,	'IMPROVEMENT_FISHING_BOATS',			'YIELD_FOOD',					1,					null,							'TECH_OCEANOGRAPHY_HD'),
+	(674,	'IMPROVEMENT_FISHING_BOATS',			'YIELD_FOOD',					1,					null,							'TECH_REFRIGERATION_HD'),
+	(675,	'IMPROVEMENT_FISHING_BOATS',			'YIELD_FOOD',					1,					null,							'TECH_BIOLOGY_HD'),
+	(676,	'IMPROVEMENT_FISHING_BOATS',			'YIELD_PRODUCTION',		1,					null,							'TECH_PLASTICS'),
+	(677,	'IMPROVEMENT_FISHING_BOATS',			'YIELD_FOOD',					1,					null,							'TECH_GENETIC_ENGINEERING_HD'),
+	(678,	'IMPROVEMENT_FISHING_BOATS',			'YIELD_FOOD',					1,					null,							'TECH_ROBOTICS'),
 
-	(700,	'IMPROVEMENT_OIL_WELL',					'YIELD_PRODUCTION',		2,					null,							'TECH_REFINING'),
-	(701,	'IMPROVEMENT_OIL_WELL',					'YIELD_SCIENCE',		2,					null,							'TECH_REFINING'),
-	(702,	'IMPROVEMENT_OFFSHORE_OIL_RIG',			'YIELD_PRODUCTION',		2,					null,							'TECH_REFINING'),
-	(703,	'IMPROVEMENT_OFFSHORE_OIL_RIG',			'YIELD_SCIENCE',		2,					null,							'TECH_REFINING');
+	(710,	'IMPROVEMENT_FISHERY',		'YIELD_PRODUCTION',	1,								null,												'TECH_TEXTILE_HD'),
+	(711,	'IMPROVEMENT_FISHERY',		'YIELD_FOOD',				1,								null,												'TECH_SQUARE_SAIL_HD'),
+	(712,	'IMPROVEMENT_FISHERY',		'YIELD_PRODUCTION',	1,								'CIVIC_NAVAL_TRADITION',		null),
+	(713,	'IMPROVEMENT_FISHERY',		'YIELD_FOOD',				1,								null,												'TECH_CARTOGRAPHY'),
+	(714,	'IMPROVEMENT_FISHERY',		'YIELD_PRODUCTION',	1,								'CIVIC_EXPLORATION',				null),
+	(715,	'IMPROVEMENT_FISHERY',		'YIELD_PRODUCTION',	1,								'CIVIC_COLONIALISM',				null),
+	(716,	'IMPROVEMENT_FISHERY',		'YIELD_FOOD',				1,								null,												'TECH_REFRIGERATION_HD'),
+	(717,	'IMPROVEMENT_FISHERY',		'YIELD_PRODUCTION',	1,								null,												'TECH_BIOLOGY_HD'),
+	(718,	'IMPROVEMENT_FISHERY',		'YIELD_FOOD',				1,								null,												'TECH_PLASTICS'),
+	(719,	'IMPROVEMENT_FISHERY',		'YIELD_PRODUCTION',	1,								'CIVIC_NEOCOLONIALISM_HD',	null),
+	(720,	'IMPROVEMENT_FISHERY',		'YIELD_FOOD',				1,								null,												'TECH_NANOTECHNOLOGY'),
+
+	(800,	'IMPROVEMENT_OIL_WELL',					'YIELD_PRODUCTION',		2,					null,							'TECH_REFINING'),
+	(801,	'IMPROVEMENT_OIL_WELL',					'YIELD_SCIENCE',		2,					null,							'TECH_REFINING'),
+	(802,	'IMPROVEMENT_OFFSHORE_OIL_RIG',			'YIELD_PRODUCTION',		2,					null,							'TECH_REFINING'),
+	(803,	'IMPROVEMENT_OFFSHORE_OIL_RIG',			'YIELD_SCIENCE',		2,					null,							'TECH_REFINING');
 
 -- Adjacency Yield
-delete from Improvement_Adjacencies where ImprovementType = 'IMPROVEMENT_ICE_HOCKEY_RINK'
+delete from Improvement_Adjacencies where
+	ImprovementType = 'IMPROVEMENT_ICE_HOCKEY_RINK'
 	or (ImprovementType = 'IMPROVEMENT_TERRACE_FARM' and YieldChangeId = 'Terrace_AqueductAdjacency')
 	or (ImprovementType = 'IMPROVEMENT_CHATEAU' and YieldChangeId = 'Chateau_River')
 	or (ImprovementType = 'IMPROVEMENT_CHATEAU' and YieldChangeId = 'Chateau_WonderEarly')
-	or (YieldChangeId in ('Terrace_MedievalAdjacency', 'Terrace_MechanizedAdjacency'));
+	or (YieldChangeId in ('Terrace_MedievalAdjacency', 'Terrace_MechanizedAdjacency'))
+	or ImprovementType = 'IMPROVEMENT_FISHERY';
+
 delete from Adjacency_YieldChanges where ID in (
 	'Mekewap_FirstBonusAdjacency',
 	'Mekewap_SecondBonusAdjacency',
 	'Mekewap_ThirdBonusAdjacency'
 );
+
 insert or replace into Improvement_Adjacencies
 	(ImprovementType,				YieldChangeId)
 values
-	('IMPROVEMENT_LUMBER_MILL',		'Lumber_Mill_River_Production'),
 	('IMPROVEMENT_LUMBER_MILL',		'Lumber_Mill_Industrial_Production'),
 	('IMPROVEMENT_MINE',			'Mine_Industrial_Production'),
 	('IMPROVEMENT_QUARRY',			'Quarry_Industrial_Production'),
@@ -159,9 +183,8 @@ values
 	('IMPROVEMENT_PASTURE',			'Pasture_Suguba_Gold'),
 	('IMPROVEMENT_CAMP',			'Camp_Commercial_Gold'),
 	('IMPROVEMENT_CAMP',			'Camp_Suguba_Gold'),
-	('IMPROVEMENT_FISHING_BOATS',	'Fishing_Boats_Harbor_Gold'),
-	('IMPROVEMENT_FISHING_BOATS',	'Fishing_Boats_Royal_Navy_Gold'),
-	('IMPROVEMENT_FISHING_BOATS',	'Fishing_Boats_Cothon_Gold'),
+	('IMPROVEMENT_FISHERY',			'Fishery_Production_from_Fishing_Boat'),
+	('IMPROVEMENT_FISHERY',			'Fishery_Food_from_Fishery'),
 
 	('IMPROVEMENT_MEKEWAP',			'Mekewap_Luxury_Production_Tier1'),
 	('IMPROVEMENT_MEKEWAP',			'Mekewap_Luxury_Production_Tier2'),
@@ -169,12 +192,6 @@ values
 	('IMPROVEMENT_MEKEWAP',		    'Mekewap_Strategic_Production_Tier2'),
 	('IMPROVEMENT_MEKEWAP',		    'Mekewap_Bonus_Food_Tier1'),
 	('IMPROVEMENT_MEKEWAP',		    'Mekewap_Bonus_Food_Tier2'),
-	-- ('IMPROVEMENT_TERRACE_FARM',	'Terrace_GrassMountainAdjacency_Late'),
-	-- ('IMPROVEMENT_TERRACE_FARM',	'Terrace_PlainsMountainAdjacency_Late'),
-	-- ('IMPROVEMENT_TERRACE_FARM',	'Terrace_DesertMountainAdjacency_Late'),
-	-- ('IMPROVEMENT_TERRACE_FARM',	'Terrace_TundraMountainAdjacency_Late'),
-	-- ('IMPROVEMENT_TERRACE_FARM',	'Terrace_SnowMountainAdjacency_Late'),
-	-- ('IMPROVEMENT_TERRACE_FARM',	'Terrace_ConstructionAdjacency'),
 	('IMPROVEMENT_CHATEAU',			'Chateau_Bonus_Food'),
 	('IMPROVEMENT_CHATEAU',			'Chateau_Luxury_Culture'),
 	-- 传教团
@@ -190,6 +207,7 @@ values
 	('IMPROVEMENT_MISSION',			'Mission_Neighborhood_Production2'),
 	('IMPROVEMENT_MISSION',			'Mission_Neighborhood_Food3'),
 	('IMPROVEMENT_MISSION',			'Mission_Neighborhood_Production3');
+
 insert or replace into Adjacency_YieldChanges
 	(ID,										Description,	YieldType,			YieldChange,	AdjacentDistrict)
 values
@@ -201,10 +219,7 @@ values
 	('Pasture_Commercial_Gold', 				'Placeholder',	'YIELD_GOLD',		3,				'DISTRICT_COMMERCIAL_HUB'),
 	('Pasture_Suguba_Gold', 					'Placeholder',	'YIELD_GOLD',		3,				'DISTRICT_SUGUBA'),
 	('Camp_Commercial_Gold', 					'Placeholder',	'YIELD_GOLD',		3,				'DISTRICT_COMMERCIAL_HUB'),
-	('Camp_Suguba_Gold', 						'Placeholder',	'YIELD_GOLD',		3,				'DISTRICT_SUGUBA'),
-	('Fishing_Boats_Harbor_Gold', 				'Placeholder',	'YIELD_GOLD',		2,				'DISTRICT_HARBOR'),
-	('Fishing_Boats_Royal_Navy_Gold', 			'Placeholder',	'YIELD_GOLD',		2,				'DISTRICT_ROYAL_NAVY_DOCKYARD'),
-	('Fishing_Boats_Cothon_Gold', 				'Placeholder',	'YIELD_GOLD',		2,				'DISTRICT_COTHON');
+	('Camp_Suguba_Gold', 						'Placeholder',	'YIELD_GOLD',		3,				'DISTRICT_SUGUBA');
 
 update Adjacency_YieldChanges set PrereqTech = 'TECH_CURRENCY' where ID in (
 	'Plantation_Commercial_Gold',
@@ -233,9 +248,10 @@ values
 	('Mission_Neighborhood_Production3',	'Placeholder',	'YIELD_PRODUCTION',		1,						'DISTRICT_NEIGHBORHOOD','TECH_SANITATION',		null);
 
 insert or replace into Adjacency_YieldChanges
-	(ID,										Description,	YieldType,			YieldChange,	AdjacentRiver,	PrereqTech,				ObsoleteTech)
+	(ID,																			Description,		YieldType,						YieldChange,	AdjacentImprovement,					PrereqTech,		        				PrereqCivic)
 values
-	('Lumber_Mill_River_Production', 			'Placeholder',	'YIELD_PRODUCTION',	1,				1,				'TECH_BRONZE_WORKING',	'TECH_MACHINERY');
+	('Fishery_Production_from_Fishing_Boat',	'Placeholder',	'YIELD_PRODUCTION',		1,						'IMPROVEMENT_FISHING_BOATS',	NULL,													NULL),
+	('Fishery_Food_from_Fishery',							'Placeholder',	'YIELD_FOOD',					1,						'IMPROVEMENT_FISHERY',				'TECH_CELESTIAL_NAVIGATION',	NULL);
 
 insert or replace into Adjacency_YieldChanges
 	(ID,										Description,	YieldType,			YieldChange,	AdjacentResourceClass,		PrereqTech,		        PrereqCivic,            ObsoleteTech,           ObsoleteCivic)
@@ -248,18 +264,6 @@ values
 	('Mekewap_Bonus_Food_Tier2',                'PlaceHolder',  'YIELD_FOOD',       2,              'RESOURCECLASS_BONUS',      null,                   'CIVIC_CIVIL_SERVICE',  null,                   null),
 	('Chateau_Bonus_Food', 					'Placeholder',	'YIELD_FOOD',	1,				'RESOURCECLASS_BONUS',		null,	        null,                   null,                   null),
 	('Chateau_Luxury_Culture', 					'Placeholder',	'YIELD_CULTURE',	2,				'RESOURCECLASS_LUXURY',		null,	        null,                   null,                   null);
--- insert or replace into Adjacency_YieldChanges
--- 	(ID,										Description,	YieldType,			YieldChange,	AdjacentTerrain,			PrereqTech)
--- values
--- 	('Terrace_GrassMountainAdjacency_Late',		'Placeholder',	'YIELD_FOOD',		2,				'TERRAIN_GRASS_MOUNTAIN',	'TECH_ENGINEERING'),
--- 	('Terrace_PlainsMountainAdjacency_Late',	'Placeholder',	'YIELD_FOOD',		2,				'TERRAIN_PLAINS_MOUNTAIN',	'TECH_ENGINEERING'),
--- 	('Terrace_DesertMountainAdjacency_Late',	'Placeholder',	'YIELD_FOOD',		2,				'TERRAIN_DESERT_MOUNTAIN',	'TECH_ENGINEERING'),
--- 	('Terrace_TundraMountainAdjacency_Late',	'Placeholder',	'YIELD_FOOD',		2,				'TERRAIN_TUNDRA_MOUNTAIN',	'TECH_ENGINEERING'),
--- 	('Terrace_SnowMountainAdjacency_Late',		'Placeholder',	'YIELD_FOOD',		2,				'TERRAIN_SNOW_MOUNTAIN',	'TECH_ENGINEERING');
--- insert or replace into Adjacency_YieldChanges
--- 	(ID,										Description,	YieldType,			YieldChange,	TilesRequired,	AdjacentImprovement,		PrereqTech)
--- values
--- 	('Terrace_ConstructionAdjacency',			'Placeholder',	'YIELD_PRODUCTION',	1,				2,				'IMPROVEMENT_TERRACE_FARM',	'TECH_CONSTRUCTION');
 
 -- Prereq Tech / Civic
 update Improvements set PrereqTech = 'TECH_POTTERY'					where ImprovementType = 'IMPROVEMENT_PLANTATION';
@@ -382,7 +386,6 @@ from Improvements where ImprovementType in (
 	'IMPROVEMENT_CAMP',
 	'IMPROVEMENT_PASTURE',
 	'IMPROVEMENT_LUMBER_MILL',
-	'IMPROVEMENT_FISHING_BOATS',
 	'IMPROVEMENT_MEKEWAP',
 	'IMPROVEMENT_POLDER',
 	'IMPROVEMENT_LAND_POLDER',
@@ -422,218 +425,71 @@ from Improvements where ImprovementType in (
 	'IMPROVEMENT_SEASTEAD'
 );
 
--- Common Improvements
+-- 基础改良提前产
 -- Farm
 update Adjacency_YieldChanges set PrereqTech = 'TECH_MODERN_AGRICULTURE_HD' where ID = 'Farms_MechanizedAdjacency' or ID = 'Terrace_MechanizedAdjacency';
 update Adjacency_YieldChanges set ObsoleteTech = 'TECH_MODERN_AGRICULTURE_HD' where ID = 'Farms_MedievalAdjacency' or ID = 'Terrace_MedievalAdjacency';
 
--- Plantation
-insert or replace into ImprovementModifiers
-	(ImprovementType,			ModifierID)
-values
+delete from ImprovementModifiers where ImprovementType = 'IMPROVEMENT_FISHERY';
+insert or replace into ImprovementModifiers (ImprovementType, ModifierID) values
+	-- Plantation
 	('IMPROVEMENT_PLANTATION',	'PLANTATION_FRESH_WATER_NO_AQUEDUCT_FEUDALISM_GOLD'),
-	('IMPROVEMENT_PLANTATION',	'PLANTATION_AQUEDUCT_NO_FEUDALISM_GOLD');
-insert or replace into Modifiers
-	(ModifierId,											ModifierType,								SubjectRequirementSetId)
-values
+	('IMPROVEMENT_PLANTATION',	'PLANTATION_AQUEDUCT_NO_FEUDALISM_GOLD'),
+	-- Camp
+	('IMPROVEMENT_CAMP',				'CAMP_FEATURE_NO_MEDIEVAL_FAIRES_PRODUCTION'),
+	-- Pasture
+	('IMPROVEMENT_PASTURE',			'PASTURE_HILL_NO_HERALDRY_PRODUCTION'),
+	-- Mine
+	('IMPROVEMENT_MINE', 				'MINE_NO_APPRENTICESHIP_PRODUCTION'),
+	-- Quarry
+	('IMPROVEMENT_QUARRY', 			'QUARRY_NO_METAL_CASTING_PRODUCTION'),
+	-- Lumber Mill
+	('IMPROVEMENT_LUMBER_MILL', 'LUMBER_MILL_NO_MACHINERY_PRODUCTION'),
+	-- 渔船
+	('IMPROVEMENT_FISHING_BOATS', 'FISHING_BOATS_NO_COMPASS_FOOD');
+
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) values
 	('PLANTATION_FRESH_WATER_NO_AQUEDUCT_FEUDALISM_GOLD',	'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'PLOT_IS_ADJACENT_TO_FRESH_WATER_NOT_AQUEDUCT_NO_FEUDALISM'),
-	('PLANTATION_AQUEDUCT_NO_FEUDALISM_GOLD',				'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'IS_ADJACENT_TO_AQUEDUCT_NO_FEUDALISM');
-insert or replace into ModifierArguments
-	(ModifierId,											Name,		Value)
-values
+	('PLANTATION_AQUEDUCT_NO_FEUDALISM_GOLD',							'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'IS_ADJACENT_TO_AQUEDUCT_NO_FEUDALISM'),
+	('CAMP_FEATURE_NO_MEDIEVAL_FAIRES_PRODUCTION',				'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'HD_HAS_FEATURE_NO_MEDIEVAL_FAIRES'),
+	('PASTURE_HILL_NO_HERALDRY_PRODUCTION',								'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'HD_HAS_HILL_NO_HERALDRY'),
+	('MINE_NO_APPRENTICESHIP_PRODUCTION',									'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'HD_ADJACENT_TO_MOUNTAIN_NO_APPRENTICESHIP'),
+	('QUARRY_NO_METAL_CASTING_PRODUCTION',								'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'HD_HAS_HILL_NO_METAL_CASTING'),
+	('LUMBER_MILL_NO_MACHINERY_PRODUCTION',								'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'HD_ADJACENT_TO_RIVER_NO_MACHINERY'),
+	('FISHING_BOATS_NO_COMPASS_FOOD',											'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'HD_ADJACENT_TO_LAND_OR_HARBOR_NO_COMPASS');
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
 	('PLANTATION_FRESH_WATER_NO_AQUEDUCT_FEUDALISM_GOLD',	'YieldType',	'YIELD_FOOD'),
 	('PLANTATION_FRESH_WATER_NO_AQUEDUCT_FEUDALISM_GOLD',	'Amount',		1),
-	('PLANTATION_AQUEDUCT_NO_FEUDALISM_GOLD',				'YieldType',	'YIELD_FOOD'),
-	('PLANTATION_AQUEDUCT_NO_FEUDALISM_GOLD',				'Amount',		1);
-
--- Camp
-insert or replace into ImprovementModifiers
-	(ImprovementType,			ModifierID)
-values
-	('IMPROVEMENT_CAMP',	'CAMP_FEATURE_NO_MEDIEVAL_FAIRES_PRODUCTION');
-insert or replace into Modifiers
-	(ModifierId,											ModifierType,								SubjectRequirementSetId)
-values
-	('CAMP_FEATURE_NO_MEDIEVAL_FAIRES_PRODUCTION',				'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'HD_HAS_FEATURE_NO_MEDIEVAL_FAIRES');
-insert or replace into ModifierArguments
-	(ModifierId,											Name,		Value)
-values
+	('PLANTATION_AQUEDUCT_NO_FEUDALISM_GOLD',							'YieldType',	'YIELD_FOOD'),
+	('PLANTATION_AQUEDUCT_NO_FEUDALISM_GOLD',							'Amount',		1),
 	('CAMP_FEATURE_NO_MEDIEVAL_FAIRES_PRODUCTION',				'YieldType',	'YIELD_PRODUCTION'),
-	('CAMP_FEATURE_NO_MEDIEVAL_FAIRES_PRODUCTION',				'Amount',		1);
+	('CAMP_FEATURE_NO_MEDIEVAL_FAIRES_PRODUCTION',				'Amount',		1),
+	('PASTURE_HILL_NO_HERALDRY_PRODUCTION',								'YieldType',	'YIELD_PRODUCTION'),
+	('PASTURE_HILL_NO_HERALDRY_PRODUCTION',								'Amount',		1),
+	('MINE_NO_APPRENTICESHIP_PRODUCTION',									'YieldType',	'YIELD_PRODUCTION'),
+	('MINE_NO_APPRENTICESHIP_PRODUCTION',									'Amount',		1),
+	('QUARRY_NO_METAL_CASTING_PRODUCTION',								'YieldType',	'YIELD_PRODUCTION'),
+	('QUARRY_NO_METAL_CASTING_PRODUCTION',								'Amount',		1),
+	('LUMBER_MILL_NO_MACHINERY_PRODUCTION',								'YieldType',	'YIELD_PRODUCTION'),
+	('LUMBER_MILL_NO_MACHINERY_PRODUCTION',								'Amount',		1),
+	('FISHING_BOATS_NO_COMPASS_FOOD',											'YieldType',	'YIELD_FOOD'),
+	('FISHING_BOATS_NO_COMPASS_FOOD',											'Amount',		1);
 
--- Pasture
-insert or replace into ImprovementModifiers
-	(ImprovementType,			ModifierID)
-values
-	('IMPROVEMENT_PASTURE',	'PASTURE_HILL_NO_HERALDRY_PRODUCTION');
-insert or replace into Modifiers
-	(ModifierId,											ModifierType,								SubjectRequirementSetId)
-values
-	('PASTURE_HILL_NO_HERALDRY_PRODUCTION',				'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'HD_HAS_HILL_NO_HERALDRY');
-insert or replace into ModifierArguments
-	(ModifierId,											Name,		Value)
-values
-	('PASTURE_HILL_NO_HERALDRY_PRODUCTION',				'YieldType',	'YIELD_PRODUCTION'),
-	('PASTURE_HILL_NO_HERALDRY_PRODUCTION',				'Amount',		1);
-
--- 采石场 奇观加速
--- 远古古典
-insert or replace into TechnologyModifiers
-	(TechnologyType,			ModifierID)
-select
-	'TECH_MASONRY',				'QUARRY_' || i.ResourceType || '_ADJUST_ANCIENT_AND_CLASSICAL_WONDER_PRODUCTION'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_QUARRY';
-insert or replace into Modifiers
-	(ModifierId, ModifierType, SubjectRequirementSetId)
-select
-	'QUARRY_' || i.ResourceType || '_ADJUST_ANCIENT_AND_CLASSICAL_WONDER_PRODUCTION',
-	'MODIFIER_PLAYER_CITIES_ADJUST_WONDER_ERA_PRODUCTION',
-	'HD_CITY_HAS_IMPROVED_' || i.ResourceType || '_REQUIRMENTS'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_QUARRY';
-insert or replace into ModifierArguments
-	(ModifierId,																																			Name,					Value)
-select
-	'QUARRY_' || i.ResourceType || '_ADJUST_ANCIENT_AND_CLASSICAL_WONDER_PRODUCTION',	'IsWonder',		1
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_QUARRY';
-insert or replace into ModifierArguments
-	(ModifierId,																																			Name,					Value)
-select
-	'QUARRY_' || i.ResourceType || '_ADJUST_ANCIENT_AND_CLASSICAL_WONDER_PRODUCTION',	'Amount',			10
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_QUARRY';
-insert or replace into ModifierArguments
-	(ModifierId,																																			Name,					Value)
-select
-	'QUARRY_' || i.ResourceType || '_ADJUST_ANCIENT_AND_CLASSICAL_WONDER_PRODUCTION',	'StartEra',		'ERA_ANCIENT'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_QUARRY';
-insert or replace into ModifierArguments
-	(ModifierId,																																			Name,					Value)
-select
-	'QUARRY_' || i.ResourceType || '_ADJUST_ANCIENT_AND_CLASSICAL_WONDER_PRODUCTION',	'EndEra',			'ERA_CLASSICAL'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_QUARRY';
-
--- 中世纪文艺复兴 拱券
-insert or replace into TechnologyModifiers
-	(TechnologyType,		ModifierID)
-select
-	'TECH_ARCH_HD',			'QUARRY_' || i.ResourceType || '_ADJUST_MEDIEVAL_AND_RENAISSANCE_WONDER_PRODUCTION'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_QUARRY';
-insert or replace into Modifiers
-	(ModifierId, ModifierType, SubjectRequirementSetId)
-select
-	'QUARRY_' || i.ResourceType || '_ADJUST_MEDIEVAL_AND_RENAISSANCE_WONDER_PRODUCTION',
-	'MODIFIER_PLAYER_CITIES_ADJUST_WONDER_ERA_PRODUCTION',
-	'HD_CITY_HAS_IMPROVED_' || i.ResourceType || '_REQUIRMENTS'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_QUARRY';
-insert or replace into ModifierArguments
-	(ModifierId,																																					Name,					Value)
-select
-	'QUARRY_' || i.ResourceType || '_ADJUST_MEDIEVAL_AND_RENAISSANCE_WONDER_PRODUCTION',	'IsWonder',		1
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_QUARRY';
-insert or replace into ModifierArguments
-	(ModifierId,																																					Name,					Value)
-select
-	'QUARRY_' || i.ResourceType || '_ADJUST_MEDIEVAL_AND_RENAISSANCE_WONDER_PRODUCTION',	'Amount',			10
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_QUARRY';
-insert or replace into ModifierArguments
-	(ModifierId,																																					Name,					Value)
-select
-	'QUARRY_' || i.ResourceType || '_ADJUST_MEDIEVAL_AND_RENAISSANCE_WONDER_PRODUCTION',	'StartEra',		'ERA_MEDIEVAL'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_QUARRY';
-insert or replace into ModifierArguments
-	(ModifierId,																																					Name,					Value)
-select
-	'QUARRY_' || i.ResourceType || '_ADJUST_MEDIEVAL_AND_RENAISSANCE_WONDER_PRODUCTION',	'EndEra',			'ERA_RENAISSANCE'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_QUARRY';
-
--- 矿山 单位加速
-	-- 军事单位
-insert or replace into TraitModifiers (TraitType,	ModifierId)
-	select 'TRAIT_LEADER_MAJOR_CIV',	'MINE_' || i.ResourceType || '_ADJUST_MILITARY_UNIT_PRODUCTION'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_MINE';
-
-insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId)
-select
-	'MINE_' || i.ResourceType || '_ADJUST_MILITARY_UNIT_PRODUCTION',
-	'MODIFIER_PLAYER_CITIES_ADJUST_MILITARY_UNITS_PRODUCTION',
-	'HD_CITY_HAS_IMPROVED_' || i.ResourceType || '_REQUIRMENTS'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_MINE';
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-select
-	'MINE_' || i.ResourceType || '_ADJUST_MILITARY_UNIT_PRODUCTION', 'Amount', 15
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_MINE';
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-select
-	'MINE_' || i.ResourceType || '_ADJUST_MILITARY_UNIT_PRODUCTION', 'StartEra', 'ERA_ANCIENT'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_MINE';
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-select
-	'MINE_' || i.ResourceType || '_ADJUST_MILITARY_UNIT_PRODUCTION', 'EndEra', 'ERA_CLASSICAL'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_MINE';
-
-	-- 开拓者和建造者
-insert or replace into TraitModifiers (TraitType,	ModifierId)
-	select 'TRAIT_LEADER_MAJOR_CIV',	'MINE_' || i.ResourceType || '_ADJUST_' || k.UnitType || '_PRODUCTION'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType, Units k where j.ImprovementType = 'IMPROVEMENT_MINE' and k.UnitType in ('UNIT_SETTLER', 'UNIT_BUILDER');
-
-insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId)
-select
-	'MINE_' || i.ResourceType || '_ADJUST_' || k.UnitType || '_PRODUCTION',
-	'MODIFIER_PLAYER_CITIES_ADJUST_UNIT_PRODUCTION',
-	'HD_CITY_HAS_IMPROVED_' || i.ResourceType || '_REQUIRMENTS'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType, Units k where j.ImprovementType = 'IMPROVEMENT_MINE' and k.UnitType in ('UNIT_SETTLER', 'UNIT_BUILDER');
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-select
-	'MINE_' || i.ResourceType || '_ADJUST_' || k.UnitType || '_PRODUCTION', 'Amount', 15
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType, Units k where j.ImprovementType = 'IMPROVEMENT_MINE' and k.UnitType in ('UNIT_SETTLER', 'UNIT_BUILDER');
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-select
-	'MINE_' || i.ResourceType || '_ADJUST_' || k.UnitType || '_PRODUCTION', 'UnitType', k.UnitType
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType, Units k where j.ImprovementType = 'IMPROVEMENT_MINE' and k.UnitType in ('UNIT_SETTLER', 'UNIT_BUILDER');
-
--- 伐木场 区域建筑加速
-	-- 区域
-insert or replace into TechnologyModifiers (TechnologyType, ModifierID)
-	select 'TECH_BRONZE_WORKING',	'LUMBER_MILL_' || i.ResourceType || '_ADJUST_DISTRICT_PRODUCTION'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_LUMBER_MILL';
-
-insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId)
-select
-	'LUMBER_MILL_' || i.ResourceType || '_ADJUST_DISTRICT_PRODUCTION',
-	'MODIFIER_PLAYER_CITIES_ADJUST_ALL_DISTRICTS_PRODUCTION',
-	'HD_CITY_HAS_IMPROVED_' || i.ResourceType || '_REQUIRMENTS'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_LUMBER_MILL';
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-select
-	'LUMBER_MILL_' || i.ResourceType || '_ADJUST_DISTRICT_PRODUCTION', 'Amount', 10
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_LUMBER_MILL';
-
-	-- 建筑
-insert or replace into TechnologyModifiers (TechnologyType, ModifierID)
-	select 'TECH_BRONZE_WORKING',	'LUMBER_MILL_' || i.ResourceType || '_ADJUST_BUILDING_PRODUCTION'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_LUMBER_MILL';
-
-insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId)
-select
-	'LUMBER_MILL_' || i.ResourceType || '_ADJUST_BUILDING_PRODUCTION',
-	'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_PRODUCTION_MODIFIER',
-	'HD_CITY_HAS_IMPROVED_' || i.ResourceType || '_REQUIRMENTS'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_LUMBER_MILL';
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-select
-	'LUMBER_MILL_' || i.ResourceType || '_ADJUST_BUILDING_PRODUCTION', 'Amount', 10
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_LUMBER_MILL';
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-select
-	'LUMBER_MILL_' || i.ResourceType || '_ADJUST_BUILDING_PRODUCTION', 'IsWonder', 0
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_LUMBER_MILL';
+-- 渔场
+-- insert or ignore into ImprovementModifiers
+-- 	(ImprovementType,			ModifierId)
+-- values
+-- 	('IMPROVEMENT_FISHERY',		'FISHERY_EXTRA_PRODUCTION_ON_FEATURE');
+-- insert or ignore into Modifiers
+-- 	(ModifierID,									ModifierType,											SubjectRequirementSetId)
+-- values
+-- 	('FISHERY_EXTRA_PRODUCTION_ON_FEATURE',				'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',				'HD_PLOT_HAS_FEATURE_REQUIREMENTS');
+-- insert or ignore into ModifierArguments
+-- 	(ModifierID,									Name,				Value)
+-- values
+-- 	('FISHERY_EXTRA_PRODUCTION_ON_FEATURE',				'YieldType',	'YIELD_PRODUCTION'),
+-- 	('FISHERY_EXTRA_PRODUCTION_ON_FEATURE',				'Amount',		1);
 
 -- City State UI
 -- Cahokia Mounds

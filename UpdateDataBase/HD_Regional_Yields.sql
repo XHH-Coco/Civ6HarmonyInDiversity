@@ -160,3 +160,47 @@ from HD_BuildingRegionalYieldTypes where YieldType in ('YIELD_FOOD', 'YIELD_PROD
 insert or ignore into ModifierArguments (ModifierId, Name, Value) select
   'HD_MANSION_CITY_RECEIVE_REGIONAL_YIELDS_BONUS_' || YieldType, 'Amount', 50
 from HD_BuildingRegionalYieldTypes where YieldType in ('YIELD_FOOD', 'YIELD_PRODUCTION', 'YIELD_SCIENCE', 'YIELD_CULTURE', 'YIELD_GOLD', 'YIELD_FAITH');
+
+-------------------------------------------------------------------
+-- 着力点
+-------------------------------------------------------------------
+-- 灯火通明
+insert or replace into CommemorationModifiers (CommemorationType, ModifierId) select
+  'COMMEMORATION_HD_ILLUMINATED_CITY', 'COMMEMORATION_HD_ILLUMINATED_CITY_' || BuildingType || '_BASIC_' || YieldType
+from Building_YieldChangesBonusWithPower where BuildingType not in (select BuildingType from HD_DUMMY_BUILDINGS);
+
+insert or replace into CommemorationModifiers (CommemorationType, ModifierId) select
+  'COMMEMORATION_HD_ILLUMINATED_CITY', 'COMMEMORATION_HD_ILLUMINATED_CITY_' || BuildingType || '_REGIONAL_' || YieldType
+from HD_BuildingRegionalYields where YieldType in ('YIELD_FOOD', 'YIELD_PRODUCTION', 'YIELD_SCIENCE', 'YIELD_CULTURE', 'YIELD_GOLD', 'YIELD_FAITH')
+  and RequiresPower = 1 and BuildingType not in (select BuildingType from HD_DUMMY_BUILDINGS);
+
+insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId, SubjectRequirementSetId) select
+  'COMMEMORATION_HD_ILLUMINATED_CITY_' || BuildingType || '_BASIC_' || YieldType, 'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE', 'PLAYER_HAS_GOLDEN_AGE', 'CITY_IS_POWERED'
+from Building_YieldChangesBonusWithPower where BuildingType not in (select BuildingType from HD_DUMMY_BUILDINGS);
+
+insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId, SubjectRequirementSetId) select
+  'COMMEMORATION_HD_ILLUMINATED_CITY_' || BuildingType || '_REGIONAL_' || YieldType, 'MODIFIER_PLAYER_CITIES_ADJUST_PROPERTY', 'PLAYER_HAS_GOLDEN_AGE', 'CITY_IS_POWERED'
+from HD_BuildingRegionalYields where YieldType in ('YIELD_FOOD', 'YIELD_PRODUCTION', 'YIELD_SCIENCE', 'YIELD_CULTURE', 'YIELD_GOLD', 'YIELD_FAITH')
+  and RequiresPower = 1 and BuildingType not in (select BuildingType from HD_DUMMY_BUILDINGS);
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) select
+  'COMMEMORATION_HD_ILLUMINATED_CITY_' || BuildingType || '_BASIC_' || YieldType, 'BuildingType', BuildingType
+from Building_YieldChangesBonusWithPower where BuildingType not in (select BuildingType from HD_DUMMY_BUILDINGS);
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) select
+  'COMMEMORATION_HD_ILLUMINATED_CITY_' || BuildingType || '_BASIC_' || YieldType, 'YieldType', YieldType
+from Building_YieldChangesBonusWithPower where BuildingType not in (select BuildingType from HD_DUMMY_BUILDINGS);
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) select
+  'COMMEMORATION_HD_ILLUMINATED_CITY_' || BuildingType || '_BASIC_' || YieldType, 'Amount', 8
+from Building_YieldChangesBonusWithPower where BuildingType not in (select BuildingType from HD_DUMMY_BUILDINGS);
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) select
+  'COMMEMORATION_HD_ILLUMINATED_CITY_' || BuildingType || '_REGIONAL_' || YieldType, 'Key', 'HD_SINGLE_BUILDING_PROVIDE_REGIONAL_YIELD_BONUS_' || BuildingType || '_' || YieldType || '_POWERED'
+from HD_BuildingRegionalYields where YieldType in ('YIELD_FOOD', 'YIELD_PRODUCTION', 'YIELD_SCIENCE', 'YIELD_CULTURE', 'YIELD_GOLD', 'YIELD_FAITH')
+  and RequiresPower = 1 and BuildingType not in (select BuildingType from HD_DUMMY_BUILDINGS);
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) select
+  'COMMEMORATION_HD_ILLUMINATED_CITY_' || BuildingType || '_REGIONAL_' || YieldType, 'Amount', 8
+from HD_BuildingRegionalYields where YieldType in ('YIELD_FOOD', 'YIELD_PRODUCTION', 'YIELD_SCIENCE', 'YIELD_CULTURE', 'YIELD_GOLD', 'YIELD_FAITH')
+  and RequiresPower = 1 and BuildingType not in (select BuildingType from HD_DUMMY_BUILDINGS);

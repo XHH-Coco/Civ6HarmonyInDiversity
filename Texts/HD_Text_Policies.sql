@@ -248,6 +248,7 @@ values
   ("LOC_POLICY_INTEGRATED_SPACE_CELL_DESCRIPTION",                                "+15% [ICON_PRODUCTION] Production toward Space Race projects if a city has Tier 3 buildings of Encampment or Harbor district."),
   ("LOC_POLICY_DEFENSE_OF_MOTHERLAND_DESCRIPTION_XP2",                            "No war weariness from combat in your territory. Units ignore [ICON_STRENGTH] Combat Strength reduction from being injured. When you are at war with any Civilization, cities receive +5% [ICON_Production] Production and +5% [ICON_CULTURE] Culture if on the same continent as your [ICON_CAPITAL] Capital."),
   ("LOC_POLICY_CRYPTOGRAPHY_DESCRIPTION",                                         "+100% [ICON_PRODUCTION] Production toward Spies. Enemy Spy level reduced by 2 in your lands. Your Spy level is increased by 1 for offensive operations."),
+  ("LOC_POLICY_FUTURE_COUNTER_SCIENCE_DESCRIPTION",                               "All offensive Spies operate at 2 level higher. Whenever an offensive spy mission is successful, you also gain 500% of the [ICON_Faith] Faith, [ICON_Culture] Culture, and [ICON_SCIENCE] Science that the targeted city earned that turn."),
   -- 新科文 v2.0
   ("LOC_POLICY_HD_WORRIER_CLASS_NAME",                                            "Worrier Class"),
   ("LOC_POLICY_HD_WORRIER_CLASS_DESCRIPTION",                                     "+1 [ICON_FOOD] Food and [ICON_PRODUCTION] Production for cities with a garrisoned unit."),
@@ -705,7 +706,6 @@ values
   ("zh_Hans_CN", "LOC_POLICY_HD_FIVE_YEAR_PLAN_DESCRIPTION",                                     "建造区域时+30% [ICON_PRODUCTION] 生产力。"),
   ("zh_Hans_CN", "LOC_POLICY_HOUSEHOOD_REGISTRATION_NAME",                                       "编户齐民"),
   ("zh_Hans_CN", "LOC_POLICY_HOUSEHOOD_REGISTRATION_DESCRIPTION",                                "修建蓄水池和社区以及其中建筑时+50%建造速度。"),
-  ("zh_Hans_CN", "LOC_POLICY_CRYPTOGRAPHY_DESCRIPTION",                                          "我方间谍出击时+1级成功率，领土内的敌方间谍下降2级。"),    
   ("zh_Hans_CN", "LOC_POLICY_HAJJ_NAME",                                                         "朝觐"),
   ("zh_Hans_CN", "LOC_POLICY_HAJJ_DESCRIPTION",                                                  "作为宗主国，从每个下属城邦获得+1 [ICON_Science] 科技值、[ICON_Faith] 信仰值和 [ICON_GOLD] 金币。"),
   ("zh_Hans_CN", "LOC_POLICY_HD_I_PROMISE_NAME",                                                 "歃血为盟"),
@@ -744,6 +744,7 @@ values
   ("zh_Hans_CN", "LOC_POLICY_SECOND_STRIKE_CAPABILITY_DESCRIPTION",                              "核装置每回合的维护费降低50%。"),
   ("zh_Hans_CN", "LOC_POLICY_DEFENSE_OF_MOTHERLAND_DESCRIPTION_XP2",                             "在您领土中发生的战斗不会产生厌战情绪。单位无视受到伤害后的 [ICON_STRENGTH] 战斗力减益。当您与任何文明发生战争时，本大陆的城市+5% [ICON_PRODUCTION] 生产力和 [ICON_Culture] 文化值。"),
   ("zh_Hans_CN", "LOC_POLICY_CRYPTOGRAPHY_DESCRIPTION",                                          "生产间谍时+100%建造速度。我方间谍出击时+1级成功率，领土内的敌方间谍下降2级。"),
+  ("zh_Hans_CN", "LOC_POLICY_FUTURE_COUNTER_SCIENCE_DESCRIPTION",                                "进攻性间谍的行动效果提升2级。进攻性间谍任务成功时，获得目标城市该回合 [ICON_Faith] 信仰值、[ICON_Culture] 文化值和 [ICON_SCIENCE] 科技值的500%。"),
   -- 新科文 v2.0
   ("zh_Hans_CN", "LOC_POLICY_HD_WORRIER_CLASS_NAME",                                             "战士阶层"),
   ("zh_Hans_CN", "LOC_POLICY_HD_WORRIER_CLASS_DESCRIPTION",                                      "拥有驻军的城市+1 [ICON_FOOD] 食物和 [ICON_PRODUCTION] 生产力。"),

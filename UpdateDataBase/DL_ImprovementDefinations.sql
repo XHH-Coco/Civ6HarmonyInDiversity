@@ -1,5 +1,5 @@
 -- 渔场下放通用
-update Improvements set TraitType = NULL, PrereqTech = 'TECH_SHIPBUILDING' where ImprovementType = 'IMPROVEMENT_FISHERY';
+update Improvements set TraitType = NULL, PrereqTech = 'TECH_SAILING', Housing = 1, TilesRequired = 2, SameAdjacentValid = 1, AdjacentSeaResource = 1, Workable = 1 where ImprovementType = 'IMPROVEMENT_FISHERY';
 
 -- 陆地圩田
 insert or ignore into Types
