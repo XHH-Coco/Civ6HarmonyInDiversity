@@ -168,10 +168,6 @@
       <RuleSetInUse>RULESET_EXPANSION_2</RuleSetInUse>
       <ModInUse>8d4fa23a-ef43-440c-8422-2bec11f8f5d7</ModInUse>
     </Criteria>
-    <Criteria id="BetterBuilderChargesTracking_Conflict_Expansion2">
-      <RuleSetInUse>RULESET_EXPANSION_2</RuleSetInUse>
-      <ModInUse inverse="1">c6477d9f-6bad-4d24-9e76-49cda4f0a966</ModInUse>
-    </Criteria>
     <Criteria id="Civitas_CityStates_Conflict_Expansion2">
       <RuleSetInUse>RULESET_EXPANSION_2</RuleSetInUse>
       <ModInUse inverse="1">7d0b57ba-6a5c-4de0-ac10-e1e464ac82f6</ModInUse>
@@ -1337,14 +1333,6 @@
       <Properties><LoadOrder>6</LoadOrder></Properties>
       <File>SubMods/BetterChinese/Text/BetterChineseAddon_Text.sql</File>
     </UpdateText>
-    <!-- Better builder charges tracking -->
-    <ReplaceUIScript id="BuilderChargesUnitFlagManager" criteria="BetterBuilderChargesTracking_Conflict_Expansion2">
-      <Properties>
-        <LoadOrder>666</LoadOrder>
-        <LuaContext>UnitFlagManager</LuaContext>
-        <LuaReplace>SubMods/BuilderCharges/UnitFlagManager_BuilderCharges.lua</LuaReplace>
-      </Properties>
-    </ReplaceUIScript>
     <!-- Farm on fresh hills -->
     <UpdateDatabase id="DL_FarmsOnFreshHills_Database" criteria="Expansion2">
       <Properties><LoadOrder>15500</LoadOrder></Properties>
@@ -2558,7 +2546,6 @@
     <File>SubMods/BetterChinese/Text/Vanilla_zh_Hans_CN.xml</File>
     <File>SubMods/BetterChinese/Text/VikingsLandmarks_Translations_Text.xml</File>
     <File>SubMods/BetterChinese/Text/BetterChineseAddon_Text.sql</File>
-    <File>SubMods/BuilderCharges/UnitFlagManager_BuilderCharges.lua</File>
     <File>SubMods/CityPolicies/CityPolicies.sql</File>
     <File>SubMods/CityPolicies/HD_CityPolicies_Texts.sql</File>
     <File>SubMods/CityPolicies/CityPolicies_Icons.xml</File>
