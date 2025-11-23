@@ -1018,6 +1018,8 @@ local BUILDING_AL_STPETERSBASILICA_INFO = GameInfo.Buildings['BUILDING_AL_STPETE
 local AL_STPETERSBASILICA_PLAYER_TAG = 'HD_AL_STPETERSBASILICA_PLAYER';
 local AL_STPETERSBASILICA_RELIGION_TAG = 'HD_AL_STPETERSBASILICA_RELIGION';
 local AL_STPETERSBASILICA_HAS_GRANTED_APOSTLE_TAG = 'HD_AL_STPETERSBASILICA_HAS_GRANTED_APOSTLE';
+local NEED_REFRESH_RELIGION_FLAG_TAG = 'HD_NEED_REFRESH_RELIGION_FLAG';
+local AL_STPETERSBASILICA_HAS_GRANTED_YIELD_TAG = 'HD_AL_STPETERSBASILICA_HAS_GRANTED_YIELD';
 function AlStpetersbasilicaWonderCompleted(x, y, buildingId, playerId, cityId, percentComplete, unknown)
   if BUILDING_AL_STPETERSBASILICA_INFO == nil then
     return;
@@ -1032,17 +1034,25 @@ function AlStpetersbasilicaWonderCompleted(x, y, buildingId, playerId, cityId, p
   Game:SetProperty(AL_STPETERSBASILICA_RELIGION_TAG, playerReligion);
 
   if buildingId == BUILDING_AL_STPETERSBASILICA_INFO.Index then
-    local alivePlayers = PlayerManager.GetAliveMajorIDs()
+    local alivePlayers = PlayerManager.GetAliveIDs()
     for _, alivePlayerId in ipairs(alivePlayers) do
       local alivePlayer = Players[alivePlayerId];
       local capitalCity = alivePlayer:GetCities():GetCapitalCity();
-      if capitalCity and capitalCity:GetProperty(AL_STPETERSBASILICA_HAS_GRANTED_APOSTLE_TAG) ~= 1 then
+      if alivePlayer:IsMajor() and capitalCity and capitalCity:GetProperty(AL_STPETERSBASILICA_HAS_GRANTED_APOSTLE_TAG) ~= 1 then
         -- 判断是否信奉玩家的宗教
         local cityReligion = capitalCity:GetReligion():GetMajorityReligion();
         if cityReligion ~= -1 and cityReligion == playerReligion then
-          player:AttachModifierByID('HD_AL_STPETERSBASILICA_GRANT_APOSTLE');
           capitalCity:SetProperty(AL_STPETERSBASILICA_HAS_GRANTED_APOSTLE_TAG, 1);
-          print("圣彼得大教堂 " .. Locale.Lookup(capitalCity:GetName()) .. "信教 获得使者");
+          AlStpetersbasilicaInitUnit(playerId, capitalCity, playerReligion);
+        end
+      end
+
+      -- 标记已经信仰该宗教的城市
+      local aliveCities = alivePlayer:GetCities()
+      for _, city in aliveCities:Members() do
+        local cityReligion = city:GetReligion():GetMajorityReligion();
+        if cityReligion == playerReligion then
+          city:SetProperty(AL_STPETERSBASILICA_HAS_GRANTED_YIELD_TAG, 1);
         end
       end
     end
@@ -1051,28 +1061,141 @@ function AlStpetersbasilicaWonderCompleted(x, y, buildingId, playerId, cityId, p
 end
 Events.WonderCompleted.Add(AlStpetersbasilicaWonderCompleted);
 
+local AL_STPETERSBASILICA_YIELD_SCIENCE_PER_POP = GlobalParameters.HD_AL_STPETERSBASILICA_YIELD_SCIENCE_PER_POP or 0;
+local AL_STPETERSBASILICA_YIELD_CULTURE_PER_POP = GlobalParameters.HD_AL_STPETERSBASILICA_YIELD_CULTURE_PER_POP or 0;
+local AL_STPETERSBASILICA_YIELD_FAITH_PER_POP = GlobalParameters.HD_AL_STPETERSBASILICA_YIELD_FAITH_PER_POP or 0;
+local AL_STPETERSBASILICA_YIELD_GOLD_PER_POP = GlobalParameters.HD_AL_STPETERSBASILICA_YIELD_GOLD_PER_POP or 0;
 function AlStpetersbasilicaCityReligionFollowersChanged(playerId, cityId, eVisibility)
   local player = Players[playerId];
-  if not player:IsMajor() then return; end
 
   local city = CityManager.GetCity(playerId, cityId);
   local cityReligion = city:GetReligion():GetMajorityReligion();
   local alStpetersbasilicaReligion = Game:GetProperty(AL_STPETERSBASILICA_RELIGION_TAG) or -1;
 
-  if Utils.IsPlayerCapital(playerId, cityId)
-  and city:GetProperty(AL_STPETERSBASILICA_HAS_GRANTED_APOSTLE_TAG) ~= 1
-  and cityReligion ~= -1 and alStpetersbasilicaReligion ~= -1 and cityReligion == alStpetersbasilicaReligion then
-
-    city:SetProperty(AL_STPETERSBASILICA_HAS_GRANTED_APOSTLE_TAG, 1)
+  if cityReligion ~= -1 and alStpetersbasilicaReligion ~= -1 and cityReligion == alStpetersbasilicaReligion then
     local alStpetersbasilicaPlayerId = Game.GetProperty(AL_STPETERSBASILICA_PLAYER_TAG)
     local alStpetersbasilicaPlayer = Players[alStpetersbasilicaPlayerId];
     if alStpetersbasilicaPlayer and alStpetersbasilicaPlayer:IsAlive() then
-      alStpetersbasilicaPlayer:AttachModifierByID('HD_AL_STPETERSBASILICA_GRANT_APOSTLE');
-      print("圣彼得大教堂 " .. Locale.Lookup(city:GetName()) .. "信教 获得使者");
+      -- 若为首都 获得使徒
+      if player:IsMajor() and Utils.IsPlayerCapital(playerId, cityId) and city:GetProperty(AL_STPETERSBASILICA_HAS_GRANTED_APOSTLE_TAG) ~= 1 then
+        city:SetProperty(AL_STPETERSBASILICA_HAS_GRANTED_APOSTLE_TAG, 1);
+        AlStpetersbasilicaInitUnit(alStpetersbasilicaPlayerId, city, alStpetersbasilicaReligion);
+      end
+      
+      -- 根据人口和区域获得产出
+      if city:GetProperty(AL_STPETERSBASILICA_HAS_GRANTED_YIELD_TAG) ~= 1 then
+        city:SetProperty(AL_STPETERSBASILICA_HAS_GRANTED_YIELD_TAG, 1);
+
+        local districtsNum = city:GetDistricts():GetNumDistricts();
+        for index = 0, districtsNum - 1 do
+          local district = city:GetDistricts():GetDistrictByIndex(index);
+          if district and not district:IsPillaged() and district:IsComplete() then
+            local districtInfo = GameInfo.Districts[district:GetType()];
+            if districtInfo and districtInfo.DistrictType ~= 'DISTRICT_WONDER' then
+              local districtType = districtInfo.DistrictType;
+
+              -- 检测 UD
+              local districtReplaceInfo = GameInfo.DistrictReplaces[districtType];
+              if districtReplaceInfo then
+                districtType = districtReplaceInfo.ReplacesDistrictType;
+              end
+
+              -- 查询区域对应产出
+              local correspondingYieldInfo = GameInfo.DistrictCorrespondingYieldType_HD[districtType];
+              if correspondingYieldInfo then
+                local popNum = city:GetPopulation();
+                local yieldType = correspondingYieldInfo.YieldType;
+                if yieldType == 'YIELD_FOOD' or yieldType == 'YIELD_FAITH' then
+                  local amount = popNum * AL_STPETERSBASILICA_YIELD_FAITH_PER_POP
+                  alStpetersbasilicaPlayer:GetReligion():ChangeFaithBalance(amount);
+                  local msg = "+" .. amount .. " [ICON_Faith]"
+                  Game.AddWorldViewText(alStpetersbasilicaPlayerId, msg, district:GetX(), district:GetY())
+                elseif yieldType == 'YIELD_PRODUCTION' or yieldType == 'YIELD_GOLD' then
+                  local amount = popNum * AL_STPETERSBASILICA_YIELD_GOLD_PER_POP
+                  alStpetersbasilicaPlayer:GetTreasury():ChangeGoldBalance(amount);
+                  local msg = "+" .. amount .. " [ICON_Gold]"
+                  Game.AddWorldViewText(alStpetersbasilicaPlayerId, msg, district:GetX(), district:GetY())
+                elseif yieldType == 'YIELD_SCIENCE' then
+                  local amount = popNum * AL_STPETERSBASILICA_YIELD_SCIENCE_PER_POP
+                  alStpetersbasilicaPlayer:GetTechs():ChangeCurrentResearchProgress(amount);
+                  local msg = "+" .. amount .. " [ICON_Science]"
+                  Game.AddWorldViewText(alStpetersbasilicaPlayerId, msg, district:GetX(), district:GetY())
+                elseif yieldType == 'YIELD_CULTURE' then
+                  local amount = popNum * AL_STPETERSBASILICA_YIELD_CULTURE_PER_POP
+                  alStpetersbasilicaPlayer:GetCulture():ChangeCurrentCulturalProgress(amount);
+                  local msg = "+" .. amount .. " [ICON_Culture]"
+                  Game.AddWorldViewText(alStpetersbasilicaPlayerId, msg, district:GetX(), district:GetY())
+                end
+              end
+            end
+          end
+        end
+      end
     end
   end
 end
 Events.CityReligionFollowersChanged.Add(AlStpetersbasilicaCityReligionFollowersChanged);
+
+local TECH_CELESTIAL_NAVIGATION_INDEX = GameInfo.Technologies['TECH_CELESTIAL_NAVIGATION'].Index;
+local TECH_SHIPBUILDING_INDEX = GameInfo.Technologies['TECH_SHIPBUILDING'].Index;
+function AlStpetersbasilicaInitUnit(playerId, city, religionId)
+  local player = Players[playerId];
+  if not player or not player:IsAlive() then return; end
+
+  local targetPlot;
+
+  -- 选取目标首都周围的可用单元格
+  for direction = 0, 5 do
+    local plot = Map.GetAdjacentPlot(city:GetX(), city:GetY(), direction);
+    if plot and not plot:IsImpassable() then
+      if not plot:IsWater() or (player:GetTechs():HasTech(TECH_CELESTIAL_NAVIGATION_INDEX) or player:GetTechs():HasTech(TECH_SHIPBUILDING_INDEX)) then
+        -- 获取单元格内的单位
+        local units = Units.GetUnitsInPlot(plot:GetX(), plot:GetY());
+        if units ~= nil then
+          -- 无单位
+          if #units == 0 then
+            targetPlot = plot;
+            break;
+          end
+
+          -- 有友方单位
+          for _, pUnit in ipairs(units) do
+            if pUnit:GetOwner() == playerId then
+              targetPlot = plot;
+              break;
+            end
+          end
+
+          if targetPlot then
+            break;
+          end
+        end
+      end
+    end
+  end
+
+  -- 如果没有合法单位 则生成在首都
+  if not targetPlot then
+    local playerCapitalCity = player:GetCities():GetCapitalCity();
+    if playerCapitalCity then
+      targetPlot = Map.GetPlot(playerCapitalCity:GetX(), playerCapitalCity:GetY());
+    end
+  end
+
+  -- 生成单位
+  if targetPlot then
+    print("圣彼得大教堂 " .. Locale.Lookup(city:GetName()) .. "信教 获得使徒");
+    local newUnit = UnitManager.InitUnit(playerId, 'UNIT_APOSTLE', targetPlot:GetX(), targetPlot:GetY());
+    if newUnit and newUnit:GetReligion() then
+      newUnit:GetReligion():SetReligionType(religionId);
+      newUnit:SetProperty(NEED_REFRESH_RELIGION_FLAG_TAG, 1);
+      ReportingEvents.SendLuaEvent('HD_UpdateUnitReligionIcon', {
+        playerId = newUnit:GetOwner(),
+        unitId = newUnit:GetID()
+      });
+    end
+  end
+end
 
 -- 瓦西里升天教堂
 local BUILDING_ST_BASILS_CATHEDRAL_INDEX = GameInfo.Buildings['BUILDING_ST_BASILS_CATHEDRAL'].Index;

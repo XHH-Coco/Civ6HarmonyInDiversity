@@ -906,7 +906,15 @@
       <File>UI/Replacement/HD_ActionPanel.lua</File>
       <File>UI/Replacement/PlayerSetupLogic.lua</File>
       <File>UI/Replacement/ProductionPanel.xml</File>
+      <File>UI/Replacement/UnitFlagManager_UpdateReligionIcon.lua</File>
     </ImportFiles>
+    <ReplaceUIScript id="UpdateReligionIcon_UnitFlagManager">
+      <Properties>
+        <LoadOrder>150000</LoadOrder>
+        <LuaContext>UnitFlagManager</LuaContext>
+        <LuaReplace>UI/Replacement/UnitFlagManager_UpdateReligionIcon.lua</LuaReplace>
+      </Properties>
+    </ReplaceUIScript>
     <ReplaceUIScript id="HD_ActionPanel" criteria="Expansion2">
 			<Properties>
         <LoadOrder>150000</LoadOrder>
@@ -2437,6 +2445,7 @@
     <File>UI/Replacement/Suk_CityPanelOverview_Instances.lua</File>
     <File>UI/Replacement/Suk_CityPanelOverview_Instances.xml</File>
     <File>UI/Replacement/CityPanel.xml</File>
+    <File>UI/Replacement/UnitFlagManager_UpdateReligionIcon.lua</File>
 
     <!-- Icons -->
     <File>UI/Icons/DL_Icons_Fixing.sql</File>

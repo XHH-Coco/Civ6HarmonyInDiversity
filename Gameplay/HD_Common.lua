@@ -805,3 +805,12 @@ local function GetCityProperty(playerId, cityId, tag)
 	return city:GetProperty(tag);
 end
 Utils.GetCityProperty = GetCityProperty;
+
+-- 获取单位参数
+local function GetUnitProperty(playerId, unitId, tag)
+	local unit = UnitManager.GetUnit(playerId, unitId);
+	if not unit then return nil; end
+
+	return unit:GetProperty(tag);
+end
+Utils.GetUnitProperty = GetUnitProperty;

@@ -20,7 +20,7 @@
       <zh_Hans_CN>更方便的查看工人剩余劳动力</zh_Hans_CN>
     </Text>
     <Text id="LOC_BETTER_BUILDER_CHARGES_TRACKING_DESCRIPTION">
-      <en_US>>This mod can help displaying Builder's current build charges on the side of unit flag for easier tracking, so you don't have to select each Builder to check.</en_US>
+      <en_US>This mod can help displaying Builder's current build charges on the side of unit flag for easier tracking, so you don't have to select each Builder to check.</en_US>
       <zh_Hans_CN>这个模组可以将工人当前的剩余劳动力显示在工人图标旁边，方便玩家查看，从此不需要再一个一个工人的点了。</zh_Hans_CN>
     </Text>
   </LocalizedText>

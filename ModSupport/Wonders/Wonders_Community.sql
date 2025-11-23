@@ -933,32 +933,11 @@ insert or replace into ModifierArguments (ModifierId, Name, Value) select
 from GreatWorkObjectTypes where GreatWorkObjectType in ('GREATWORKOBJECT_SCULPTURE', 'GREATWORKOBJECT_PORTRAIT', 'GREATWORKOBJECT_LANDSCAPE', 'GREATWORKOBJECT_RELIGIOUS')
 	and exists (select BuildingType from Buildings where BuildingType = 'BUILDING_AL_STPETERSBASILICA');
 
-	-- 传教琴
-insert or replace into BuildingModifiers (BuildingType, ModifierId) select
-	'BUILDING_AL_STPETERSBASILICA', 'HD_AL_STPETERSBASILICA_SPREAD_CULTURE_POPULATION'
-where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_AL_STPETERSBASILICA');
-
-insert or replace into Modifiers (ModifierId, ModifierType) select
-	'HD_AL_STPETERSBASILICA_SPREAD_CULTURE_POPULATION', 'MODIFIER_PLAYER_UNITS_ADJUST_INITIATION_YIELD_POPULATION'
-where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_AL_STPETERSBASILICA');
-
-insert or replace into ModifierArguments (ModifierId, Name, Value) select
-	'HD_AL_STPETERSBASILICA_SPREAD_CULTURE_POPULATION', 'YieldType', 'YIELD_CULTURE'
-where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_AL_STPETERSBASILICA');
-insert or replace into ModifierArguments (ModifierId, Name, Value) select
-	'HD_AL_STPETERSBASILICA_SPREAD_CULTURE_POPULATION', 'Amount', 15
-where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_AL_STPETERSBASILICA');
-
-	-- 首都信教送使徒
-insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) select
-	'HD_AL_STPETERSBASILICA_GRANT_APOSTLE', 'MODIFIER_PLAYER_GRANT_UNIT_IN_CAPITAL', 'REQ_SET_CL_CITY_HAS_STPETERSBASILICA'
-where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_AL_STPETERSBASILICA');
-insert or replace into ModifierArguments (ModifierId, Name, Value) select
-	'HD_AL_STPETERSBASILICA_GRANT_APOSTLE', 'UnitType', 'UNIT_APOSTLE'
-where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_AL_STPETERSBASILICA');
-insert or replace into ModifierArguments (ModifierId, Name, Value) select
-	'HD_AL_STPETERSBASILICA_GRANT_APOSTLE', 'Amount', 1
-where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_AL_STPETERSBASILICA');
+insert or replace into GlobalParameters (Name, Value) values
+	('HD_AL_STPETERSBASILICA_YIELD_SCIENCE_PER_POP',	10),
+	('HD_AL_STPETERSBASILICA_YIELD_CULTURE_PER_POP',	10),
+	('HD_AL_STPETERSBASILICA_YIELD_FAITH_PER_POP',		15),
+	('HD_AL_STPETERSBASILICA_YIELD_GOLD_PER_POP',			30);
 
 -- 帝国大厦
 update Buildings set PrereqCivic = 'CIVIC_CAPITALISM' where BuildingType = 'WON_CL_EMPIRE_STATES';

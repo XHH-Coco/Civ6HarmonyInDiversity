@@ -2015,9 +2015,9 @@ values
 
 -- LB 大仙点
 insert or replace into Modifiers
-	(ModifierId, ModifierType, SubjectRequirementSetId, RunOnce, Permanent, SubjectStackLimit)
+	(ModifierId, ModifierType, SubjectRequirementSetId, Permanent, SubjectStackLimit)
 select
-	'TRAIT_' || FeatureType || '_ADD_PROPHET_POINT', 'MODIFIER_PLAYER_DISTRICTS_ADJUST_GREAT_PERSON_POINTS', 'HD_PLOT_HAS_BUILDING_EL_ESCORIAL_PALACE_REQUIREMENTS', 1, 1,	1
+	'TRAIT_' || FeatureType || '_ADD_PROPHET_POINT', 'MODIFIER_PLAYER_DISTRICTS_ADJUST_GREAT_PERSON_POINTS', 'HD_PLOT_HAS_BUILDING_EL_ESCORIAL_PALACE_REQUIREMENTS', 1,	1
 from Features where NaturalWonder = 1;
 
 insert or replace into ModifierArguments
@@ -2034,9 +2034,9 @@ from Features where NaturalWonder = 1;
 
 -- LB 大作点
 insert or replace into Modifiers
-	(ModifierId, ModifierType, SubjectRequirementSetId, RunOnce, Permanent, SubjectStackLimit)
+	(ModifierId, ModifierType, SubjectRequirementSetId, Permanent, SubjectStackLimit)
 select
-	'TRAIT_' || FeatureType || '_ADD_WRITER_POINT', 'MODIFIER_PLAYER_DISTRICTS_ADJUST_GREAT_PERSON_POINTS', 'HD_PLOT_HAS_BUILDING_EL_ESCORIAL_PALACE_REQUIREMENTS', 1, 1,	1
+	'TRAIT_' || FeatureType || '_ADD_WRITER_POINT', 'MODIFIER_PLAYER_DISTRICTS_ADJUST_GREAT_PERSON_POINTS', 'HD_PLOT_HAS_BUILDING_EL_ESCORIAL_PALACE_REQUIREMENTS', 1,	1
 from Features where NaturalWonder = 1;
 
 insert or replace into ModifierArguments
@@ -2053,9 +2053,9 @@ from Features where NaturalWonder = 1;
 
 -- LB 大艺点
 insert or replace into Modifiers
-	(ModifierId, ModifierType, SubjectRequirementSetId, RunOnce, Permanent, SubjectStackLimit)
+	(ModifierId, ModifierType, SubjectRequirementSetId, Permanent, SubjectStackLimit)
 select
-	'TRAIT_' || FeatureType || '_ADD_ARTIST_POINT', 'MODIFIER_PLAYER_DISTRICTS_ADJUST_GREAT_PERSON_POINTS', 'HD_PLOT_HAS_BUILDING_EL_ESCORIAL_PALACE_REQUIREMENTS', 1, 1,	1
+	'TRAIT_' || FeatureType || '_ADD_ARTIST_POINT', 'MODIFIER_PLAYER_DISTRICTS_ADJUST_GREAT_PERSON_POINTS', 'HD_PLOT_HAS_BUILDING_EL_ESCORIAL_PALACE_REQUIREMENTS', 1,	1
 from Features where NaturalWonder = 1;
 
 insert or replace into ModifierArguments
