@@ -20,6 +20,7 @@ insert or replace into LeaderTraits (LeaderType, TraitType) select
 from Leaders where LeaderType in ('LEADER_GENGHIS_KHAN', 'LEADER_KUBLAI_KHAN_MONGOLIA', 'LEADER_KUBLAI_KHAN_CHINA');
 
 -- 文老秦
+update ModifierArguments set Value = 20 where ModifierId = 'TRAIT_BUILDER_WONDER_PERCENT' and Name = 'Amount';
 insert or ignore into CityNames (CivilizationType, CityName) values
 	('CIVILIZATION_CHINA',	'LOC_CITY_NAME_XIANYANG');
 update CivilizationLeaders set CapitalName = 'LOC_CITY_NAME_XIANYANG' where LeaderType in ('LEADER_QIN', 'LEADER_QIN_ALT');
