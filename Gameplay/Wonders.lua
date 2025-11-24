@@ -749,18 +749,6 @@ function MichelWonderCompleted(x, y, buildingId, playerId, cityId, percentComple
     Game:SetProperty(MICHEL_TAG, playerReligion)
     Game:SetProperty(MICHEL_PLAYER_TAG, playerId)
 
-    -- -- 记录可获得点数的伟人类型
-    -- local MichelGreatPeopleList = {}
-    -- for row in GameInfo.GreatPersonClasses() do
-    --   if row.AvailableInTimeline == true and row.GreatPersonClassType ~= 'GREAT_PERSON_CLASS_PROPHET' then
-    --     table.insert(MichelGreatPeopleList, {
-    --       Index = row.Index,
-    --       Icon = row.IconString
-    --     })
-    --   end
-    -- end
-    -- Game:SetProperty(MICHEL_LIST_TAG, MichelGreatPeopleList)
-
     -- 标记已经信仰该宗教的城市
     local alives = PlayerManager.GetAlive()
     for _, alivePlayer in ipairs(alives) do
@@ -1028,12 +1016,12 @@ function AlStpetersbasilicaWonderCompleted(x, y, buildingId, playerId, cityId, p
   local player = Players[playerId];
   if not player then return; end
 
-  -- 记录玩家创建的宗教
-  local playerReligion = player:GetReligion():GetReligionTypeCreated();
-  Game:SetProperty(AL_STPETERSBASILICA_PLAYER_TAG, playerId);
-  Game:SetProperty(AL_STPETERSBASILICA_RELIGION_TAG, playerReligion);
-
   if buildingId == BUILDING_AL_STPETERSBASILICA_INFO.Index then
+    -- 记录玩家创建的宗教
+    local playerReligion = player:GetReligion():GetReligionTypeCreated();
+    Game:SetProperty(AL_STPETERSBASILICA_PLAYER_TAG, playerId);
+    Game:SetProperty(AL_STPETERSBASILICA_RELIGION_TAG, playerReligion);
+
     local alivePlayers = PlayerManager.GetAliveIDs()
     for _, alivePlayerId in ipairs(alivePlayers) do
       local alivePlayer = Players[alivePlayerId];
