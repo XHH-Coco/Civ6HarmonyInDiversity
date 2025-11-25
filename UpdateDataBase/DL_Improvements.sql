@@ -1291,7 +1291,8 @@ update Improvements set PrereqCivic = 'CIVIC_GAMES_RECREATION' where Improvement
 update Improvement_YieldChanges set YieldChange = 0 where ImprovementType = 'IMPROVEMENT_ICE_HOCKEY_RINK' and YieldType = 'YIELD_FOOD';
 delete from Improvement_BonusYieldChanges where ImprovementType = 'IMPROVEMENT_ICE_HOCKEY_RINK';
 delete from ImprovementModifiers where ImprovementType = 'IMPROVEMENT_ICE_HOCKEY_RINK' and ModifierId = 'ICEHOCKEYRINK_CULTURE_STADIUM';
-delete from ImprovementModifiers where ImprovementType = 'IMPROVEMENT_ICE_HOCKEY_RINK' and ModifierId = 'ICEHOCKEYRINK_AMENITY';
+-- delete from ImprovementModifiers where ImprovementType = 'IMPROVEMENT_ICE_HOCKEY_RINK' and ModifierId = 'ICEHOCKEYRINK_AMENITY';
+update ModifierArguments set Value = 2 where ModifierId = 'ICEHOCKEYRINK_AMENITY' and Name = 'Amount';
 insert or replace into ImprovementModifiers
 	(ImprovementType,					ModifierId)
 values

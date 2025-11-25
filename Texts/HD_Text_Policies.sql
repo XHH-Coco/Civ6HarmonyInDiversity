@@ -488,11 +488,11 @@ values
   ("LOC_POLICY_HD_CHARCOAL_KILN_NAME",                                            "Charcoal Kiln"),
   ("LOC_POLICY_HD_CHARCOAL_KILN_DESCRIPTION",                                     "Cities with improved [ICON_RESOURCE_COAL] Coal, Farm, Plantation or Lumber Mill Resources receive +2 [ICON_Production] Production and +1 [ICON_Amenities] Amenity."),
   ("LOC_POLICY_HD_AGRICULTURAL_MECHANIZATION_NAME",                               "Agricultural Mechanization"),
-  ("LOC_POLICY_HD_AGRICULTURAL_MECHANIZATION_DESCRIPTION",                        "Each Farm, Plantation, Pasture, Camp, Lumber Mill, Fishing Boat and Fishery provides +2 [ICON_FOOD] Food and [ICON_Production] Production to these improvements adjacnet."),
+  ("LOC_POLICY_HD_AGRICULTURAL_MECHANIZATION_DESCRIPTION",                        "Each Agricultural Production Improvement provides +2 [ICON_FOOD] Food and [ICON_Production] Production to adjacnet Agricultural Production Improvements."),
   ("LOC_POLICY_HD_UNMANNED_FACTORY_NAME",                                         "Unmanned Factory"),
-  ("LOC_POLICY_HD_UNMANNED_FACTORY_DESCRIPTION",                                  "Tier 2 and Tier 3 buildings in Industrial Zone -5 [ICON_GOLD] Gold, and provide +5 [ICON_Production] Production to Mines, Quarries, Oil Wells and Offshore Oil Rigs in the city if full [ICON_POWER] Powered."),
+  ("LOC_POLICY_HD_UNMANNED_FACTORY_DESCRIPTION",                                  "Tier 2 and Tier 3 buildings in Industrial Zone -5 [ICON_GOLD] Gold, and provide +5 [ICON_Production] Production to Industrial Production Improvements in the city if full [ICON_POWER] Powered."),
   ("LOC_POLICY_HD_ROBOT_PRODUCTION_NAME",                                         "Robot-engaged Production"),
-  ("LOC_POLICY_HD_ROBOT_PRODUCTION_DESCRIPTION",                                  "Basic improvements receive +2 [ICON_FOOD] Food and [ICON_Production] Production, and provide +2 [ICON_FOOD] Food and [ICON_Production] Production to adjacnet basic improvements.");
+  ("LOC_POLICY_HD_ROBOT_PRODUCTION_DESCRIPTION",                                  "Agricultural Production and Industrial Production Improvements receive +2 [ICON_FOOD] Food and [ICON_Production] Production, and provide +2 [ICON_FOOD] Food and [ICON_Production] Production to adjacnet Agricultural Production and Industrial Production Improvements.");
 --------------------------------------------------------------------------------
 -- Language: zh_Hans_CN
 insert or replace into LocalizedText
@@ -984,11 +984,11 @@ values
   ("zh_Hans_CN", "LOC_POLICY_HD_CHARCOAL_KILN_NAME",                                             "炭窑"),
   ("zh_Hans_CN", "LOC_POLICY_HD_CHARCOAL_KILN_DESCRIPTION",                                      "有改良的 [ICON_RESOURCE_COAL] 煤、农场、种植园或伐木场资源的城市+2 [ICON_Production] 生产力和+1 [ICON_Amenities] 宜居度。"),
   ("zh_Hans_CN", "LOC_POLICY_HD_AGRICULTURAL_MECHANIZATION_NAME",                                "农业机械化"),
-  ("zh_Hans_CN", "LOC_POLICY_HD_AGRICULTURAL_MECHANIZATION_DESCRIPTION",                         "每个农场、种植园、牧场、营地、伐木场、渔船和渔场为相邻的这些改良+2 [ICON_FOOD] 食物和 [ICON_Production] 生产力。"),
+  ("zh_Hans_CN", "LOC_POLICY_HD_AGRICULTURAL_MECHANIZATION_DESCRIPTION",                         "每个农业生产改良为相邻的农业生产改良+2 [ICON_FOOD] 食物和 [ICON_Production] 生产力。"),
   ("zh_Hans_CN", "LOC_POLICY_HD_UNMANNED_FACTORY_NAME",                                          "黑灯工厂"),
-  ("zh_Hans_CN", "LOC_POLICY_HD_UNMANNED_FACTORY_DESCRIPTION",                                   "工业区二级建筑和三级建筑-5 [ICON_GOLD] 金币，若城市 [ICON_POWER] 供电充足，则为该城市的矿山、采石场、油井和海上石油钻机+5 [ICON_Production] 生产力。"),
+  ("zh_Hans_CN", "LOC_POLICY_HD_UNMANNED_FACTORY_DESCRIPTION",                                   "工业区二级建筑和三级建筑-5 [ICON_GOLD] 金币，若城市 [ICON_POWER] 供电充足，则为该城市的工业生产改良+5 [ICON_Production] 生产力。"),
   ("zh_Hans_CN", "LOC_POLICY_HD_ROBOT_PRODUCTION_NAME",                                          "机器人生产"),
-  ("zh_Hans_CN", "LOC_POLICY_HD_ROBOT_PRODUCTION_DESCRIPTION",                                   "基础改良+2 [ICON_FOOD] 食物和 [ICON_Production] 生产力，并为相邻的基础改良+2 [ICON_FOOD] 食物和 [ICON_Production] 生产力。");
+  ("zh_Hans_CN", "LOC_POLICY_HD_ROBOT_PRODUCTION_DESCRIPTION",                                   "农业生产和工业生产改良+2 [ICON_FOOD] 食物和 [ICON_Production] 生产力，并为相邻的农业生产和工业生产改良+2 [ICON_FOOD] 食物和 [ICON_Production] 生产力。");
 
 insert or replace into LocalizedText
   (Language, Tag, Text)
