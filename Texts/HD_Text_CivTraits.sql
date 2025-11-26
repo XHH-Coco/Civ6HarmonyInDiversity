@@ -1188,7 +1188,7 @@ values
 -- 荷兰
 -- =====================================================================================================================================
 	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_GROTE_RIVIEREN_NAME",                    "风车之国"),
-	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_GROTE_RIVIEREN_EXPANSION2_DESCRIPTION",  "每次完成港口建筑后，触发“探索” [ICON_CIVICBOOSTED] 鼓舞，若“探索” [ICON_CIVICBOOSTED] 鼓舞已触发，则直接完成“探索”市政。建造堤坝区域和拦海堤建筑时加速50%。所有商业中心建筑为本城的淤滩圩田+1 [ICON_PRODUCTION] 生产力、+2 [ICON_GOLD] 金币，所有港口建筑为本城的滨海圩田+1 [ICON_PRODUCTION] 生产力、+2 [ICON_GOLD] 金币。"),
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_GROTE_RIVIEREN_EXPANSION2_DESCRIPTION",  "每次完成港口建筑后，触发“探索” [ICON_CIVICBOOSTED] 鼓舞，若“探索” [ICON_CIVICBOOSTED] 鼓舞已触发，则直接完成“探索”市政。建造堤坝区域和拦海堤建筑时加速50%。"),
 	("zh_Hans_CN",  "LOC_TRAIT_RADIO_ORANJE_DESCRIPTION",                            "造船厂提供+1 [ICON_TradeRoute] 贸易路线容量。您通往其他文明的 [ICON_TRADEROUTE] 贸易路线为荷兰+2 [ICON_SCIENCE] 科技值。其他文明通往荷兰的 [ICON_TRADEROUTE] 贸易路线能为荷兰+2 [ICON_SCIENCE] 科技值。如您处于黑暗时代，则这些数值将乘以2倍。"),
 -- =====================================================================================================================================
 -- 马其顿

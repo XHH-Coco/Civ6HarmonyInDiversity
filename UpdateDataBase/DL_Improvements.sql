@@ -39,7 +39,10 @@ values
 	('IMPROVEMENT_CHATEAU',				'YIELD_FOOD',		2),
 	('IMPROVEMENT_CHATEAU',				'YIELD_CULTURE',		1),
 	('IMPROVEMENT_CHATEAU',				'YIELD_GOLD',		0),
-	('IMPROVEMENT_LAND_POLDER',			'YIELD_FOOD',			1),
+	('IMPROVEMENT_POLDER',				'YIELD_FOOD',			2),
+	('IMPROVEMENT_POLDER',				'YIELD_PRODUCTION',		1),
+	('IMPROVEMENT_POLDER',				'YIELD_GOLD',			0),
+	('IMPROVEMENT_LAND_POLDER',			'YIELD_FOOD',			2),
 	('IMPROVEMENT_LAND_POLDER',			'YIELD_PRODUCTION',		1),
 	('IMPROVEMENT_LAND_POLDER',			'YIELD_GOLD',			0),
 	('IMPROVEMENT_MISSION',				'YIELD_FOOD',			0),
@@ -1056,6 +1059,44 @@ values
 	('LP_LAND_POLDER_PRODUCTION_TIRE2',	'Placeholder',		'YIELD_PRODUCTION',		1,				1,					'IMPROVEMENT_LAND_POLDER',	'TECH_MASS_PRODUCTION',		NULL,						NULL,						NULL),
 	('LP_LAND_POLDER_FOOD_TIRE1',		'Placeholder',		'YIELD_FOOD',			1,				2,					'IMPROVEMENT_LAND_POLDER',	NULL,						NULL,						NULL,						'CIVIC_FEUDALISM'),
 	('LP_LAND_POLDER_FOOD_TIRE2',		'Placeholder',		'YIELD_FOOD',			1,				1,					'IMPROVEMENT_LAND_POLDER',	NULL,						NULL,						'CIVIC_FEUDALISM',			NULL);
+
+-- modifiers
+insert or replace into ImprovementModifiers
+	(ImprovementType, 					ModifierID)
+select
+	'IMPROVEMENT_POLDER',				'POLOER_' || substr(PrereqDistrict, 9) || '_TIER_' || Tier
+from HD_BuildingTiers where PrereqDistrict in ('DISTRICT_COMMERCIAL_HUB', 'DISTRICT_HARBOR');
+
+insert or replace into ImprovementModifiers
+	(ImprovementType,					ModifierID)
+select
+	'IMPROVEMENT_LAND_POLDER',			'POLOER_' || substr(PrereqDistrict, 9) || '_TIER_' || Tier
+from HD_BuildingTiers where PrereqDistrict in ('DISTRICT_COMMERCIAL_HUB', 'DISTRICT_HARBOR');
+
+insert or replace into Modifiers
+	(ModifierId, ModifierType, SubjectRequirementSetId)
+select
+	'POLOER_' || substr(PrereqDistrict, 9) || '_TIER_' || Tier,
+	'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',
+	'PLAYER_HAS_'|| PrereqDistrict ||'_TIER_' || Tier ||'_BUILDING_REQUIREMENTS'
+from HD_BuildingTiers where PrereqDistrict in ('DISTRICT_COMMERCIAL_HUB', 'DISTRICT_HARBOR');
+
+insert or replace into ModifierArguments
+	(ModifierId, Name, Value)
+select
+	'POLOER_' || substr(PrereqDistrict, 9) || '_TIER_' || Tier,
+	'Amount',
+	'1, 3'
+from HD_BuildingTiers where PrereqDistrict in ('DISTRICT_COMMERCIAL_HUB', 'DISTRICT_HARBOR');
+
+insert or replace into ModifierArguments
+	(ModifierId, Name, Value)
+select
+	'POLOER_' || substr(PrereqDistrict, 9) || '_TIER_' || Tier,
+	'YieldType',
+	'YIELD_PRODUCTION, YIELD_GOLD'
+from HD_BuildingTiers where PrereqDistrict in ('DISTRICT_COMMERCIAL_HUB', 'DISTRICT_HARBOR');
+
 
 -- Mission (Spain)
 update Improvements set PrereqTech = null, PrereqCivic = 'CIVIC_THEOLOGY', CanBuildOutsideTerritory = 1 where ImprovementType = 'IMPROVEMENT_MISSION';
