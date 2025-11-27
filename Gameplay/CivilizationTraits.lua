@@ -264,7 +264,7 @@ function QinBuilderLaterWonder(playerId, unitId)
 
 	-- 消耗次数
 	local movesRemaining = Utils.GetUnitMovesRemaining(playerId, unitId)
-	print('QinBuilderLaterWonder', movesRemaining)
+	-- print('QinBuilderLaterWonder', movesRemaining)
   unit:ChangeMovesRemaining(-movesRemaining)
   local unitAbility = unit:GetAbility()
   for i=1, 15, 1 do
@@ -2478,15 +2478,15 @@ function RoughRiderCityConquered(playerID, iX, iY)
 		for citystateID, player in ipairs(Players) do
 			if (player ~= nil) and (player:GetInfluence() ~= nil) and player:GetInfluence():CanReceiveInfluence() then
 				local citystateConfig = PlayerConfigurations[citystateID];
-				print(player:GetInfluence():GetSuzerain());
-				print(originalOwnerID);
-				print(citystateConfig:GetLeaderTypeName());
+				-- print(player:GetInfluence():GetSuzerain());
+				-- print(originalOwnerID);
+				-- print(citystateConfig:GetLeaderTypeName());
 				if player:GetInfluence():GetSuzerain() == originalOwnerID then
-					print(playerID);
-					print(player:GetInfluence():GetSuzerain());
+					-- print(playerID);
+					-- print(player:GetInfluence():GetSuzerain());
 					count = player:GetInfluence():GetTokensReceived(originalOwnerID);
-					print(count);
-					print(player:GetInfluence():GetTokensReceived(originalOwnerID));
+					-- print(count);
+					-- print(player:GetInfluence():GetTokensReceived(originalOwnerID));
 					while ((count ~= -1) and (player:GetInfluence():GetSuzerain() ~= playerID)) do
 						pPlayer:GetInfluence():GiveFreeTokenToPlayer(citystateID);
 						count = count - 1;
@@ -2596,7 +2596,7 @@ function VarangianAdventure()
 		local player = Players[iPlayer];
 		if LeaderHasTrait(iPlayer, 'TRAIT_LEADER_HARALD_ALT') then
 			local pPlayerVisibility = PlayersVisibility[iPlayer];
-			print(pPlayerVisibility);
+			-- print(pPlayerVisibility);
 			if pPlayerVisibility then
 				local curExploredCount:number = pPlayerVisibility:GetNumRevealedHexes();
 				local amount = player:GetProperty(VarangianAdventurenumber) or 0;

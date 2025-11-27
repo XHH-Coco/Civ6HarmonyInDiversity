@@ -194,7 +194,7 @@ function BuildingConstructedBoost(playerId, cityId, buildingId, plotId, bOrigina
 
   -- 警察制度
   if not player:GetCulture():HasBoostBeenTriggered(POLICE_SYSTEM_INDEX) then
-    if (building.BuildingType == 'BUILDING_HD_ANCESTRAL_TEMPLE'
+    if (building.BuildingType == 'BUILDING_HD_VILLA'
       or building.BuildingType == 'BUILDING_HD_MANSION') then
       local num = player:GetProperty(POLICE_SYSTEM_BOOST_TAG) or 0;
       num = num + 1;
@@ -761,6 +761,28 @@ function HouseholdRegistrationBoost(playerId, cityId)
   end
 end
 GameEvents.OnCityPopulationChanged.Add(HouseholdRegistrationBoost)
+
+-- 探索
+local EXPLORATION_INDEX = GameInfo.Civics['CIVIC_EXPLORATION'].Index;
+local NOTIFICATION_PRIDE_MOMENT_RECORDED_HASH = GameInfo.Notifications['NOTIFICATION_PRIDE_MOMENT_RECORDED'].Hash
+function NotificationAddedBoost(playerId, notificationId)
+  local notificationEntry = NotificationManager.Find(playerId, notificationId)
+  if notificationEntry and notificationEntry:GetType() == NOTIFICATION_PRIDE_MOMENT_RECORDED_HASH then
+    local momentId = notificationEntry:GetValue("MomentID");
+    if momentId then
+      local momentData = Utils.GetHistoricalMomentData(momentId);
+      local momentInfo = momentData and GameInfo.Moments[momentData.Type] or nil
+      -- print(Locale.Lookup(momentInfo.Name))
+      if momentInfo and (momentInfo.MomentType == 'MOMENT_WORLD_CIRCUMNAVIGATED' or momentInfo.MomentType == 'MOMENT_WORLD_CIRCUMNAVIGATED_FIRST_IN_WORLD') then
+        local player = Players[playerId];
+        if not player:GetCulture():HasBoostBeenTriggered(EXPLORATION_INDEX) then
+          player:GetCulture():TriggerBoost(EXPLORATION_INDEX);
+        end
+      end
+    end
+  end
+end
+Events.NotificationAdded.Add(NotificationAddedBoost);
 --------------------------------------------------------------
 -- Initialize
 function initialize()

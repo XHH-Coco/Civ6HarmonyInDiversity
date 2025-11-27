@@ -38,8 +38,7 @@ values
 	("LOC_GREATWORK_YUE_SHU_YAO_LU_QUOTE",                                   "Volume V: sound differentiation, source analysis, and the seven-tone system...[NEWLINE]Volume VI: temperament calculation and astronomical correlations...[NEWLINE]Volume VII: musical rotation methods..."),
 	("LOC_BUILDING_HD_YUNSHAO_MANSION_INTERNAL_ONLY_NAME",                   "Choose 'Yue Shu Yao Lu' Commemoration"),
 	("LOC_BUILDING_HD_YUNSHAO_MANSION_NAME",                                 "Yunshao Mansion"),
-	("LOC_BUILDING_HD_YUNSHAO_MANSION_DESCRIPTION",                          "Provides +2 [ICON_GREATMUSICIAN] Great Musician Points and 6 [ICON_GREATWORK_MUSIC] Music Greatwork slots. {LOC_BUILDING_THEMINGBONUS_HD_YUNSHAO_MANSION} +200% [ICON_TOURISM] Tourism from [ICON_GREATWORK_MUSIC] Music Greatwork in this city."),
-	("LOC_BUILDING_THEMINGBONUS_HD_YUNSHAO_MANSION",                         "+100% Theming bonus when all slots filled."),
+	("LOC_BUILDING_HD_YUNSHAO_MANSION_DESCRIPTION",                          "Provides +2 [ICON_GREATMUSICIAN] Great Musician Points and 6 [ICON_GREATWORK_MUSIC] Music Greatwork slots. +200% [ICON_TOURISM] Tourism from [ICON_GREATWORK_MUSIC] Music Greatwork in this city."),
 	("LOC_HD_CHINA_ANCIENT_COMMEMORATION_PROVINCIAL_NAME",                   "Provincial System"),
 	("LOC_HD_CHINA_ANCIENT_COMMEMORATION_PROVINCIAL_DESCRIPTION",            "+10 Loyalty, +5% [ICON_Production] Production and [ICON_GOLD] Gold in cities without [ICON_GOVERNOR] Governors."),
 	("LOC_HD_CHINA_ANCIENT_COMMEMORATION_AGRICULTURAL_BOOK_NAME",            "Agricultural Compendium"),
@@ -66,7 +65,7 @@ values
 	("LOC_CITY_NAME_XIANYANG",                           			 							 "Xianyang"),
 	("LOC_LEADER_QIN_ORIGINAL_NAME",                  			      					 "Ying Zheng (Mandate of Heaven)"),
 	("LOC_TRAIT_LEADER_FIRST_EMPEROR_NAME",                           			 "The Greatest Emperor Ever"),
-	("LOC_TRAIT_LEADER_FIRST_EMPEROR_EXPANSION2_DESCRIPTION",         			 "Builders receive an additional charge. Builder may spend a charge to: complete 15% cost of Ancient and Classical Wonders, or complete 10% cost of Medieval and later Wonders with additionally consuming 5 [ICON_GLORY_NORMAL_AGE] Era Scores."),
+	("LOC_TRAIT_LEADER_FIRST_EMPEROR_EXPANSION2_DESCRIPTION",         			 "Builders receive an additional charge. Builder may spend a charge to: complete 20% cost of Ancient and Classical Wonders, or complete 10% cost of Medieval and later Wonders with additionally consuming 5 [ICON_GLORY_NORMAL_AGE] Era Scores."),
 	("LOC_UNITCOMMAND_WONDER_PRODUCTION_DESCRIPTION",                        "Complete 15% of the original wonder cost per charge."),
 	("LOC_UNITCOMMAND_QIN_BULDER_WONDER_DESCRIPTION",                        "Complete 10% of the original wonder cost per charge, additionally consuming 5 [ICON_GLORY_NORMAL_AGE] Era Scores for Medieval and later Wonders."),
 	("LOC_UNIT_QIN_ELITE_SOLDIER_HD_NAME",                                   "Qin Elite Soldier"),
@@ -348,8 +347,10 @@ values
 -- =====================================================================================================================================
 -- 加拿大
 -- =====================================================================================================================================
-	("LOC_TRAIT_CIVILIZATION_FACES_OF_PEACE_DESCRIPTION",                    "Cannot declare war on City-States or surprise wars. Surprise wars cannot be declared on Canada. Your cities earn +15% [ICON_Culture] Culture and +25% [ICON_Tourism] Tourism across your empire whenever you are not at war with any major civilization. When you dispersed a Barbarian Outpost, receive a builder reward in addition."),
-	("LOC_TRAIT_LEADER_LAST_BEST_WEST_DESCRIPTION",                          "Allows Farms to be built on Tundra terrain. After Civil Engineering is unlocked Farms can be built on Tundra Hills. In Snow, Tundra, Snow Hills, and Tundra Hills all Mines, Lumber Mills, Pastures and Quarries provide +2 [ICON_PRODUCTION] Production, Farms, Camps and Plantations provide +2 [ICON_FOOD] Food, and strategic resource accumulation rate is +100%. Reduces the purchase cost of tiles in these terrain types by 50%."),
+	("LOC_TRAIT_CIVILIZATION_FACES_OF_PEACE_NAME",             			 				 "The Last Best West"),
+	("LOC_TRAIT_CIVILIZATION_FACES_OF_PEACE_DESCRIPTION",                    "Allows Farms to be built on Tundra terrain. After Civil Engineering is unlocked Farms can be built on Tundra Hills. Basic Improvements on Tundra, Snow and these Hills provide +1 [ICON_FOOD] Food and [ICON_PRODUCTION] Production. Reduces the purchase cost of tiles in these terrain types by 50%."),
+	("LOC_TRAIT_LEADER_LAST_BEST_WEST_NAME",             			 			 				 "Four Faces of Peace"),
+	("LOC_TRAIT_LEADER_LAST_BEST_WEST_DESCRIPTION",                          "Cannot declare war on City-States or surprise wars. Surprise wars cannot be declared on you. Your cities earn +15% [ICON_Culture] Culture and +25% [ICON_Tourism] Tourism across your empire whenever you are not at war with any major civilization. When you dispersed a Barbarian Outpost, receive a builder reward in addition."),
 -- =====================================================================================================================================
 -- 俄罗斯
 -- =====================================================================================================================================
@@ -651,8 +652,7 @@ values
 	("zh_Hans_CN",  "LOC_GREATWORK_YUE_SHU_YAO_LU_QUOTE",                                   "第五卷载“辨音声”、“审声源”、“论七声相生法”、“论三分损益通诸管弦”等九目；[NEWLINE]第六卷载“纪律吕”、“乾坤唱和义”、“谨权量”、“审飞候”等四目；[NEWLINE]第七卷载“律吕旋宫法”、“识声律法”、“论一律有七声义”等三目……"),
 	("zh_Hans_CN",  "LOC_BUILDING_HD_YUNSHAO_MANSION_INTERNAL_ONLY_NAME",                   "选择“天命”着力点“乐书要录”"),
 	("zh_Hans_CN",  "LOC_BUILDING_HD_YUNSHAO_MANSION_NAME",                                 "云韶府"),
-	("zh_Hans_CN",  "LOC_BUILDING_HD_YUNSHAO_MANSION_DESCRIPTION",                          "提供+2 [ICON_GREATMUSICIAN] 大音乐家点数、+6 [ICON_GREATWORK_MUSIC] 音乐槽位。{LOC_BUILDING_THEMINGBONUS_HD_YUNSHAO_MANSION}本城来自 [ICON_GREATWORK_MUSIC] 音乐巨作的 [ICON_TOURISM] 旅游业绩+200%。"),
-	("zh_Hans_CN",  "LOC_BUILDING_THEMINGBONUS_HD_YUNSHAO_MANSION",                         "当槽位被全部填满时，+100%主题化加成。"),
+	("zh_Hans_CN",  "LOC_BUILDING_HD_YUNSHAO_MANSION_DESCRIPTION",                          "提供+2 [ICON_GREATMUSICIAN] 大音乐家点数、+6 [ICON_GREATWORK_MUSIC] 音乐槽位。本城来自 [ICON_GREATWORK_MUSIC] 音乐巨作的 [ICON_TOURISM] 旅游业绩+200%。"),
 	("zh_Hans_CN",  "LOC_HD_CHINA_ANCIENT_COMMEMORATION_PROVINCIAL_NAME",                   "行省制度"),
 	("zh_Hans_CN",  "LOC_HD_CHINA_ANCIENT_COMMEMORATION_PROVINCIAL_DESCRIPTION",            "没有 [ICON_GOVERNOR] 总督就职的城市+10忠诚度、+5% [ICON_Production] 生产力和 [ICON_GOLD] 金币。"),
 	("zh_Hans_CN",  "LOC_HD_CHINA_ANCIENT_COMMEMORATION_AGRICULTURAL_BOOK_NAME",            "农桑辑要"),
@@ -679,7 +679,7 @@ values
 	("zh_Hans_CN",  "LOC_CITY_NAME_XIANYANG",                           			 							"咸阳"),
 	("zh_Hans_CN",  "LOC_LEADER_QIN_ORIGINAL_NAME",                                         "嬴政（受命于天）"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_FIRST_EMPEROR_NAME",                                  "千古一帝"),
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_FIRST_EMPEROR_EXPANSION2_DESCRIPTION",                "建造者获得额外一次劳动力。建造者可消耗劳动力，为正在建造的远古或古典奇观推进15%的建造进程；或额外消耗5点 [ICON_GLORY_NORMAL_AGE] 时代得分为中世纪或以后的奇观推进10%的建造进程。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_FIRST_EMPEROR_EXPANSION2_DESCRIPTION",                "建造者获得额外一次劳动力。建造者可消耗劳动力，为正在建造的远古或古典奇观推进20%的建造进程；或额外消耗5点 [ICON_GLORY_NORMAL_AGE] 时代得分为中世纪或以后的奇观推进10%的建造进程。"),
 	("zh_Hans_CN",  "LOC_UNITCOMMAND_WONDER_PRODUCTION_DESCRIPTION",                        "消耗劳动力为正在建造的奇观推进15%的建造进程。"),
 	("zh_Hans_CN",  "LOC_UNITCOMMAND_QIN_BULDER_WONDER_DESCRIPTION",                        "消耗劳动力为正在建造的奇观推进10%的建造进程。[NEWLINE]需要消耗5点 [ICON_GLORY_NORMAL_AGE] 时代得分。"),
 	("zh_Hans_CN",  "LOC_UNIT_QIN_ELITE_SOLDIER_HD_NAME",                                  	"秦锐士"),
@@ -961,8 +961,10 @@ values
 -- =====================================================================================================================================
 -- 加拿大
 -- =====================================================================================================================================
-	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_FACES_OF_PEACE_DESCRIPTION",             "无法对城邦宣战或发动突袭战争。无法对加拿大发动突袭战争。与主要文明处于和平时所有城市+15% [ICON_Culture] 文化值，且全境内+25% [ICON_Tourism] 旅游业绩。当您摧毁 [ICON_Barbarian] 蛮族哨站时，奖励一个建造者。"),
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_LAST_BEST_WEST_DESCRIPTION",                   "允许在冻土上建造农场。解锁“土木工程”后，即可在冻土丘陵上建造农场。在雪地、冻土、雪地丘陵和冻土丘陵上的所有矿山、伐木场、牧场和采石场提供的 [ICON_PRODUCTION] 生产力+2，农场、营地、种植园提供的 [ICON_FOOD] 食物+2，战略资源积累速度+100%。这些地形上的单元格购买费用降低50%。"),
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_FACES_OF_PEACE_NAME",             			 "西部净土"),
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_FACES_OF_PEACE_DESCRIPTION",             "允许在冻土上建造农场。解锁“土木工程”后，即可在冻土丘陵上建造农场。在冻土、雪地和对应丘陵上的基础改良+1 [ICON_FOOD] 食物和 [ICON_PRODUCTION] 生产力。这些地形上的单元格购买费用降低50%。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_LAST_BEST_WEST_NAME",             			 			 "和平四颜"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_LAST_BEST_WEST_DESCRIPTION",                   "无法对城邦宣战，发动突袭战争或被突袭。与主要文明处于和平时所有城市+15% [ICON_Culture] 文化值，且全境内+25% [ICON_Tourism] 旅游业绩。每次摧毁 [ICON_Barbarian] 蛮族哨站时，获得一个建造者。"),
 -- =====================================================================================================================================
 -- 俄罗斯
 -- =====================================================================================================================================

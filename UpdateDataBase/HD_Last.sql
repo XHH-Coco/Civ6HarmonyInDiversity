@@ -40,6 +40,13 @@ from Improvement_ValidResources where ImprovementType in (
 delete from HD_ResourceClassificationTypes where ResourceClassificationType not in (select distinct ResourceClassificationType from HD_Resource_Classification);
 
 --------------------------------------------------------------------------------------------------------------------
+-- 艺术巨作 文物 重复创作者产出和业绩减益
+update Building_GreatWorks set NonUniquePersonYield = 1, NonUniquePersonTourism = 1 where
+  GreatWorkSlotType in ('GREATWORKSLOT_PALACE', 'GREATWORKSLOT_ART', 'GREATWORKSLOT_ARTIFACT');
+update Building_GreatWorks set NonUniquePersonYield = 0, NonUniquePersonTourism = 0 where
+  GreatWorkSlotType not in ('GREATWORKSLOT_PALACE', 'GREATWORKSLOT_ART', 'GREATWORKSLOT_ARTIFACT');
+
+--------------------------------------------------------------------------------------------------------------------
 -- 二进制
 insert or ignore into Requirements (RequirementId, RequirementType)
 	select 'REQUIRES_' || Key || '_' || Exp, 'REQUIREMENT_PLOT_PROPERTY_MATCHES'

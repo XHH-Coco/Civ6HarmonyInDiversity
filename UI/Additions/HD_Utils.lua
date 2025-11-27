@@ -1083,3 +1083,9 @@ function GetUnitLevelNum(playerId, unitId)
   return level;
 end
 Utils.GetUnitLevelNum = GetUnitLevelNum;
+
+-- 获取历史时刻
+function GetHistoricalMomentData(momentId)
+  return Game.GetHistoryManager():GetMomentData(momentId);
+end
+Utils.GetHistoricalMomentData = GetHistoricalMomentData;

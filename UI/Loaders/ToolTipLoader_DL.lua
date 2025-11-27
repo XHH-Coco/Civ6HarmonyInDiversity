@@ -348,28 +348,6 @@ ToolTipHelper.GetBuildingToolTip = function(buildingHash, playerId, city)
       end
     end
   end
-  
-  -- 巨作槽位
-  local slotStrings = {
-    ["GREATWORKSLOT_PALACE"] = "LOC_TYPE_TRAIT_GREAT_WORKS_PALACE_SLOTS";
-    ["GREATWORKSLOT_ART"] = "LOC_TYPE_TRAIT_GREAT_WORKS_ART_SLOTS";
-    ["GREATWORKSLOT_WRITING"] = "LOC_TYPE_TRAIT_GREAT_WORKS_WRITING_SLOTS";
-    ["GREATWORKSLOT_MUSIC"] = "LOC_TYPE_TRAIT_GREAT_WORKS_MUSIC_SLOTS";
-    ["GREATWORKSLOT_RELIC"] = "LOC_TYPE_TRAIT_GREAT_WORKS_RELIC_SLOTS";
-    ["GREATWORKSLOT_ARTIFACT"] = "LOC_TYPE_TRAIT_GREAT_WORKS_ARTIFACT_SLOTS";
-    ["GREATWORKSLOT_CATHEDRAL"] = "LOC_TYPE_TRAIT_GREAT_WORKS_CATHEDRAL_SLOTS";
-    ["GREATWORKSLOT_PRODUCT"] = "LOC_TYPE_TRAIT_GREAT_WORKS_PRODUCT_SLOTS";
-  };
-
-  for row in GameInfo.Building_GreatWorks() do
-    if(row.BuildingType == buildingType) then
-      local slotType = row.GreatWorkSlotType;
-      local key = slotStrings[slotType];
-      if(key) then
-        table.insert(stats, Locale.Lookup(key, row.NumSlots));
-      end
-    end
-  end
 
   -- 旅游业绩
   if building.IsWonder then
@@ -384,7 +362,89 @@ ToolTipHelper.GetBuildingToolTip = function(buildingHash, playerId, city)
       table.insert(toolTipLines, '[ICON_BULLET]' .. v);
     end
   end
-  
+
+  -----------------------------------------------------------------------------------
+  -- 巨作槽位
+  local slotText = {};
+
+  local slotStrings = {
+    ["GREATWORKSLOT_PALACE"] = "LOC_TYPE_TRAIT_GREAT_WORKS_PALACE_SLOTS";
+    ["GREATWORKSLOT_ART"] = "LOC_TYPE_TRAIT_GREAT_WORKS_ART_SLOTS";
+    ["GREATWORKSLOT_WRITING"] = "LOC_TYPE_TRAIT_GREAT_WORKS_WRITING_SLOTS";
+    ["GREATWORKSLOT_MUSIC"] = "LOC_TYPE_TRAIT_GREAT_WORKS_MUSIC_SLOTS";
+    ["GREATWORKSLOT_RELIC"] = "LOC_TYPE_TRAIT_GREAT_WORKS_RELIC_SLOTS";
+    ["GREATWORKSLOT_ARTIFACT"] = "LOC_TYPE_TRAIT_GREAT_WORKS_ARTIFACT_SLOTS";
+    ["GREATWORKSLOT_CATHEDRAL"] = "LOC_TYPE_TRAIT_GREAT_WORKS_CATHEDRAL_SLOTS";
+    ["GREATWORKSLOT_PRODUCT"] = "LOC_TYPE_TRAIT_GREAT_WORKS_PRODUCT_SLOTS";
+  };
+
+  local firstRowInfo;
+
+  for row in GameInfo.Building_GreatWorks() do
+    if row.BuildingType == buildingType then
+      local slotType = row.GreatWorkSlotType;
+      local key = slotStrings[slotType];
+      if key then
+        table.insert(slotText, '[ICON_BULLET]' .. Locale.Lookup(key, row.NumSlots));
+      end
+
+      if not firstRowInfo then
+        firstRowInfo = row;
+      end
+    end
+  end
+
+  if #slotText > 0 then
+    table.insert(toolTipLines, "[NEWLINE]" .. Locale.Lookup('LOC_TOOLTIP_GREATWORK_SOLT_TEXT'));
+    for _, text in ipairs(slotText) do
+      table.insert(toolTipLines, text)
+    end
+  end
+
+  -- 主题化
+  if #slotText == 1 and firstRowInfo and (firstRowInfo.ThemingYieldMultiplier > 0 or firstRowInfo.ThemingTourismMultiplier > 0) then
+    local themingReqText = {};
+    -- 主题化条件
+    if firstRowInfo.ThemingUniquePerson == true then
+      if firstRowInfo.GreatWorkSlotType == 'GREATWORKSLOT_PRODUCT' then
+        table.insert(themingReqText, '[ICON_BULLET]' .. Locale.Lookup('LOC_TOOLTIP_THEMING_UNIQUE_PRODUCT_REQ'));
+      else
+        table.insert(themingReqText, '[ICON_BULLET]' .. Locale.Lookup('LOC_TOOLTIP_THEMING_UNIQUE_PERSON_REQ'));
+      end
+    end
+    if firstRowInfo.ThemingUniqueCivs == true then
+        table.insert(themingReqText, '[ICON_BULLET]' .. Locale.Lookup('LOC_TOOLTIP_THEMING_UNIQUE_CIVS_REQ'));
+    end
+    if firstRowInfo.ThemingSameObjectType == true then
+      if firstRowInfo.GreatWorkSlotType == 'GREATWORKSLOT_PALACE'
+      or firstRowInfo.GreatWorkSlotType == 'GREATWORKSLOT_ART'
+      or firstRowInfo.GreatWorkSlotType == 'GREATWORKSLOT_CATHEDRAL' then
+        table.insert(themingReqText, '[ICON_BULLET]' .. Locale.Lookup('LOC_TOOLTIP_THEMING_SAME_OBJECT_TYPE_REQ'));
+      else
+        table.insert(themingReqText, '[ICON_BULLET]' .. Locale.Lookup('LOC_TOOLTIP_THEMING_ALL_FILLED_REQ'));
+      end
+    end
+    if firstRowInfo.ThemingSameEras == true then
+      table.insert(themingReqText, '[ICON_BULLET]' .. Locale.Lookup('LOC_TOOLTIP_THEMING_SAME_ERAS_REQ'));
+    end
+
+    if #themingReqText > 0 then
+      table.insert(toolTipLines, Locale.Lookup('LOC_TOOLTIP_THEMING_REQ_TITLE'));
+      for _, reqText in ipairs(themingReqText) do
+        table.insert(toolTipLines, reqText)
+      end
+    end
+
+    -- 主题化收益
+    table.insert(toolTipLines, Locale.Lookup('LOC_TOOLTIP_THEMING_BONUS_TITLE'));
+    if firstRowInfo.ThemingYieldMultiplier > 0 then
+      table.insert(toolTipLines, '[ICON_BULLET]' .. Locale.Lookup('LOC_TOOLTIP_THEMING_YIELD_BONUS_TEXT', firstRowInfo.ThemingYieldMultiplier));
+    end
+    if firstRowInfo.ThemingTourismMultiplier > 0 then
+      table.insert(toolTipLines, '[ICON_BULLET]' .. Locale.Lookup('LOC_TOOLTIP_THEMING_TOURISM_BONUS_TEXT', firstRowInfo.ThemingTourismMultiplier));
+    end
+  end
+
   -----------------------------------------------------------------------------------
   if playerId ~= nil and playerId ~= -1 then
     local kPlayerCulture:table = Players[playerId]:GetCulture();

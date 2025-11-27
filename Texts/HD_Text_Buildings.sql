@@ -98,7 +98,7 @@ values
     ("LOC_BUILDING_GOV_SCIENCE_DESCRIPTION",                      "Campus Buildings provide [ICON_Production] Production equal to their basic [ICON_Science] Science yield.[NEWLINE]Industrial Zone Buildings provide [ICON_Science] Science equal to their basic [ICON_Production] Production yield.[NEWLINE]Awards +1 [ICON_Governor] Governor Title."),
     --("LOC_BUILDING_GOV_SCIENCE_DESCRIPTION",                      "Builders gain the ability to use all of their charges to provide bonus [ICON_Production] Production to a District Project (2% per charge). Once per city per turn.[NEWLINE]Awards +1 [Icon_Governor] Governor Title."),
     ("LOC_BUILDING_GOV_MILITARY_DESCRIPTION",                     "All military units gain +1 [ICON_Movement] Movement and +3 [ICON_Strength] Combat Strength.[NEWLINE]Unit maintenance cost reduced by 2 [ICON_Gold] Gold per turn, per unit.[NEWLINE]25% [ICON_Gold] Gold and Resource discount on all unit upgrades.[NEWLINE]Awards +1 [ICON_Governor] Governor Title."),
-    ("LOC_BUILDING_GOV_CULTURE_DESCRIPTION",                      "Provides 6 slots for any Great Work. Themed when displaying objects from the same era, with +200% theming bonus. +100% and [ICON_Tourism] Tourism to all Great Works, extra +100% in this city. +20% [ICON_TOURISM] Tourism across your empire. +25% [ICON_CULTURE] Culture to cities with an Art Museum or an Artifact Museum. [NEWLINE]Awards +1 [Icon_Governor] Governor Title."),
+    ("LOC_BUILDING_GOV_CULTURE_DESCRIPTION",                      "Provides 6 slots for any Great Work. +100% and [ICON_Tourism] Tourism to all Great Works, extra +100% in this city. +20% [ICON_TOURISM] Tourism across your empire. +25% [ICON_CULTURE] Culture to cities with an Art Museum or an Artifact Museum. [NEWLINE]Awards +1 [Icon_Governor] Governor Title."),
     ("LOC_ABILITY_GOV_FAITH_COMBAT_STRENGTH_DESCRIPTION",         "+5 [ICON_Religion] Religious Combat Strength from Episcopal Church."),
     ("LOC_ABILITY_GOV_MILITARY_MOVEMENT_DESCRIPTION",             "+1 [ICON_Movement] Movement from War Department."),
     ("LOC_ABILITY_GOV_MILITARY_COMBAT_STRENGTH_DESCRIPTION",      "+3 [ICON_Strength] Combat Strength from War Department."),
@@ -145,8 +145,8 @@ values
     ("LOC_BUILDING_SHOPPING_MALL_NAME",                           "Department Store"),
     ("LOC_BUILDING_SHOPPING_MALL_DESCRIPTION",                    "+10% accumulation rate for [ICON_GREATMERCHANT] Great Merchant Points, this bonus is doubled after Finance is researched. Provide +1 [ICON_GOLD] Gold to your cities from each type of Mine, Quarry, Camp or Lumber Mill Resource you controlled. [NEWLINE][NEWLINE]Can only be built once in a civilization."),
     ("LOC_BUILDING_SHOPPING_MALL_DESCRIPTION_CORP",               "+10% accumulation rate for [ICON_GREATMERCHANT] Great Merchant Points, this bonus is doubled after Finance is researched. Provide +1 [ICON_GOLD] Gold to your cities from each type of Mine, Quarry, Camp or Lumber Mill Resource you controlled. [NEWLINE][NEWLINE]When the city is [ICON_POWER] powered, +50% [ICON_Gold] Gold and [ICON_Faith] Faith and +100% [ICON_TOURISM] Tourism from [ICON_GreatWork_Product] Products. [NEWLINE][NEWLINE]Can only be built once in a civilization."),
-    ("LOC_BUILDING_HD_ANCESTRAL_TEMPLE_NAME",                     "Ancestral Temple"),
-    ("LOC_BUILDING_HD_ANCESTRAL_TEMPLE_DESCRIPTION",              "+3 [ICON_Faith] Faith to Neighborhood in this city."),
+    ("LOC_BUILDING_HD_VILLA_NAME",                                "Villa"),
+    ("LOC_BUILDING_HD_VILLA_DESCRIPTION",                         "+1 [ICON_Food] Food and +3 [ICON_GOLD] Gold to Neighborhood and Residential Facilities Improvements in this city."),
     ("LOC_BUILDING_HD_MANSION_NAME",                              "Official Mansion"),
     ("LOC_BUILDING_HD_MANSION_DESCRIPTION",                       "Cities with a [ICON_GOVERNOR] Governor and Neighborhood distirct can receive 1.5 times of regional yield from Buildings and Wonders. [NEWLINE]Awards +1 [ICON_Governor] Governor Title. [NEWLINE][NEWLINE]Must be built in [ICON_CAPITAL] Capital. Can only be built once in a civilization."),
     ("LOC_BUILDING_HD_BUS_STOP_NAME",                             "Bus Stop"),
@@ -168,10 +168,7 @@ values
     ("LOC_BUILDING_HD_SPECIES_EPO_NAME",                          "Species Diversity Conservation Agency"),
     ("LOC_BUILDING_HD_SPECIES_EPO_DESCRIPTION",                   "+4 [ICON_FOOD] Food and [ICON_CULTURE] Culture for every type of Biological Resource you controlled. [NEWLINE][NEWLINE]Can only be built once in a civilization."),
     ("LOC_BUILDING_HD_SCENIC_EPO_NAME",                           "Natural Attractions Tourism Agency"),
-    ("LOC_BUILDING_HD_SCENIC_EPO_DESCRIPTION",                    "Triples the yield of Natural Wonders across your empire. +5% all yields in cities with a Natural Wonder or a National Park, quadrupled if you have every Natural Wonder inside your empire. Immediately gain a Naturalist. Naturalists are 50% cheaper to purchase with Faith. [NEWLINE][NEWLINE]Can only be built once in a civilization."),
-    -- 主题化
-    ("LOC_BUILDING_THEMINGBONUS_BROADCAST_CENTER",                "+100% Theming bonus when displaying objects from different musicians of same era."),
-    ("LOC_BUILDING_THEMINGBONUS_GOV_CULTURE",                     "+200% Theming bonus when displaying objects from the same era.");
+    ("LOC_BUILDING_HD_SCENIC_EPO_DESCRIPTION",                    "Triples the yield of Natural Wonders across your empire. +5% all yields in cities with a Natural Wonder or a National Park, quadrupled if you have every Natural Wonder inside your empire. Immediately gain a Naturalist. Naturalists are 50% cheaper to purchase with Faith. [NEWLINE][NEWLINE]Can only be built once in a civilization.");
 
 --------------------------------------------------------------------------------
 -- Language: zh_Hans_CN
@@ -273,7 +270,7 @@ values
     ("zh_Hans_CN",  "LOC_BUILDING_GOV_CITYSTATES_MONOPOLY_DESCRIPTION",          "+1 [ICON_TRADEROUTE] 贸易路线容量。获得1个商人。购买商人时-10%花费。创建 [ICON_TRADEROUTE] 贸易路线后，[ICON_TRADINGPOST] 贸易站将立刻出现在目标城市。您的 [ICON_TRADEROUTE] 贸易路线每经过一个您在国外城市的 [ICON_TRADINGPOST] 贸易站便+1 [ICON_GOLD] 金币。有 [ICON_GOVERNOR] 总督就职的城市+15% [ICON_GOLD] 金币产出。解锁对应科技后，分别获得一个大亨和投资人。[NEWLINE]奖励1个 [Icon_Governor] 总督头衔。"),
     ("zh_Hans_CN",  "LOC_BUILDING_GOV_SCIENCE_DESCRIPTION",                      "学院建筑提供等同于基础 [ICON_Science] 科技值产出的 [ICON_Production] 生产力。[NEWLINE]工业区建筑提供等同于基础 [ICON_Production] 生产力产出的 [ICON_Science] 科技值。[NEWLINE]奖励1个 [ICON_Governor] 总督头衔。"),
     ("zh_Hans_CN",  "LOC_BUILDING_GOV_MILITARY_DESCRIPTION",                     "所有军事单位+1 [ICON_Movement] 移动力和+3 [ICON_Strength] 战斗力。[NEWLINE]每个单位每回合维护费减少2 [ICON_Gold] 金币。[NEWLINE]升级单位所需的 [ICON_Gold] 金币和资源减少25%。[NEWLINE]奖励1个 [ICON_Governor] 总督头衔。"),
-    ("zh_Hans_CN",  "LOC_BUILDING_GOV_CULTURE_DESCRIPTION",                      "提供6个可保存任意类型的巨作槽位。当展示来自相同时代的作品时，+200%主题化加成。所有城市来自巨作的 [ICON_Tourism] 旅游业绩+100%；该效果对本城的巨作翻倍。全境内+20% [ICON_TOURISM] 旅游业绩。建有艺术博物馆或考古博物馆的城市+25% [ICON_CULTURE] 文化值。[NEWLINE]奖励1个 [Icon_Governor] 总督头衔。"),
+    ("zh_Hans_CN",  "LOC_BUILDING_GOV_CULTURE_DESCRIPTION",                      "提供6个可保存任意类型的巨作槽位。所有城市来自巨作的 [ICON_Tourism] 旅游业绩+100%；该效果对本城的巨作翻倍。全境内+20% [ICON_TOURISM] 旅游业绩。建有艺术博物馆或考古博物馆的城市+25% [ICON_CULTURE] 文化值。[NEWLINE]奖励1个 [Icon_Governor] 总督头衔。"),
     ("zh_Hans_CN",  "LOC_ABILITY_GOV_FAITH_COMBAT_STRENGTH_DESCRIPTION",         "+5 [ICON_Religion] 宗教力量来自主教座堂。"),
     ("zh_Hans_CN",  "LOC_ABILITY_GOV_MILITARY_MOVEMENT_DESCRIPTION",             "+1 [ICON_Movement] 移动力来自作战部。"),
     ("zh_Hans_CN",  "LOC_ABILITY_GOV_MILITARY_COMBAT_STRENGTH_DESCRIPTION",      "+3 [ICON_Strength] 战斗力来自作战部。"),
@@ -320,8 +317,8 @@ values
     ("zh_Hans_CN",  "LOC_BUILDING_SHOPPING_MALL_NAME",                           "百货大楼"),
     ("zh_Hans_CN",  "LOC_BUILDING_SHOPPING_MALL_DESCRIPTION",                    "玩家的 [ICON_GREATMERCHANT] 大商人点数积累速度+10%，解锁“金融学”市政后翻倍。你拥有的每种矿山、采石场、营地或伐木场资源，为所有城市+1 [ICON_GOLD] 金币。[NEWLINE][NEWLINE]文明中一次仅限建造一座该建筑。"),
     ("zh_Hans_CN",  "LOC_BUILDING_SHOPPING_MALL_DESCRIPTION_CORP",               "玩家的 [ICON_GREATMERCHANT] 大商人点数积累速度+10%，解锁“金融学”市政后翻倍。你拥有的每种矿山、采石场、营地或伐木场资源，为所有城市+1 [ICON_GOLD] 金币。[NEWLINE][NEWLINE]若此城 [ICON_POWER] 供电充足，全国 [ICON_GreatWork_Product] 产品提供1.5倍的 [ICON_Gold] 金币和 [ICON_Faith] 信仰，且 [ICON_TOURISM] 旅游业绩+100%。[NEWLINE][NEWLINE]文明中一次仅限建造一座该建筑。"),
-    ("zh_Hans_CN",  "LOC_BUILDING_HD_ANCESTRAL_TEMPLE_NAME",                     "宗祠"),
-    ("zh_Hans_CN",  "LOC_BUILDING_HD_ANCESTRAL_TEMPLE_DESCRIPTION",              "本城的社区+3 [ICON_FAITH] 信仰值。"),
+    ("zh_Hans_CN",  "LOC_BUILDING_HD_VILLA_NAME",                                "别墅"),
+    ("zh_Hans_CN",  "LOC_BUILDING_HD_VILLA_DESCRIPTION",                         "本城的社区和住宅设施改良+1 [ICON_FOOD] 食物和+3 [ICON_GOLD] 金币。"),
     ("zh_Hans_CN",  "LOC_BUILDING_HD_MANSION_NAME",                              "官邸"),
     ("zh_Hans_CN",  "LOC_BUILDING_HD_MANSION_DESCRIPTION",                       "有 [ICON_GOVERNOR] 总督就职且有社区的城市从建筑和奇观获得1.5倍的辐射产出。[NEWLINE]奖励1个 [ICON_GOVERNOR] 总督头衔。[NEWLINE][NEWLINE]必须建造在 [ICON_CAPITAL] 首都。文明中一次仅限建造一座该建筑。"),
     ("zh_Hans_CN",  "LOC_BUILDING_HD_BUS_STOP_NAME",                             "公交站"),
@@ -343,7 +340,4 @@ values
     ("zh_Hans_CN",  "LOC_BUILDING_HD_SPECIES_EPO_NAME",                          "物种多样性维护专局"),
     ("zh_Hans_CN",  "LOC_BUILDING_HD_SPECIES_EPO_DESCRIPTION",                   "你每拥有一种生物类资源，获得+4 [ICON_FOOD] 食物、+4 [ICON_CULTURE] 文化值。[NEWLINE][NEWLINE]文明中一次仅限建造一座该建筑。"),
     ("zh_Hans_CN",  "LOC_BUILDING_HD_SCENIC_EPO_NAME",                           "自然名胜旅游专局"),
-    ("zh_Hans_CN",  "LOC_BUILDING_HD_SCENIC_EPO_DESCRIPTION",                    "境内的自然奇观提供的产出翻三倍。拥有自然奇观或国家公园的城市+5%所有产出。国家公园提供的 [ICON_TOURISM] 旅游业绩+100%。建成时获得1个自然学家。购买自然学家的费用降低50%。[NEWLINE][NEWLINE]文明中一次仅限建造一座该建筑。"),
-    -- 主题化
-    ("zh_Hans_CN",  "LOC_BUILDING_THEMINGBONUS_BROADCAST_CENTER",                "当展示来自相同时代不同音乐家的作品时，+100%主题化加成。 "),
-    ("zh_Hans_CN",  "LOC_BUILDING_THEMINGBONUS_GOV_CULTURE",                     "当展示来自相同时代的作品时，+200%主题化加成。 ");
+    ("zh_Hans_CN",  "LOC_BUILDING_HD_SCENIC_EPO_DESCRIPTION",                    "境内的自然奇观提供的产出翻三倍。拥有自然奇观或国家公园的城市+5%所有产出。国家公园提供的 [ICON_TOURISM] 旅游业绩+100%。建成时获得1个自然学家。购买自然学家的费用降低50%。[NEWLINE][NEWLINE]文明中一次仅限建造一座该建筑。");

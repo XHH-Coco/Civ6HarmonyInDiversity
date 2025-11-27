@@ -20,6 +20,7 @@ insert or replace into LeaderTraits (LeaderType, TraitType) select
 from Leaders where LeaderType in ('LEADER_GENGHIS_KHAN', 'LEADER_KUBLAI_KHAN_MONGOLIA', 'LEADER_KUBLAI_KHAN_CHINA');
 
 -- 文老秦
+update ModifierArguments set Value = 20 where ModifierId = 'TRAIT_BUILDER_WONDER_PERCENT' and Name = 'Amount';
 insert or ignore into CityNames (CivilizationType, CityName) values
 	('CIVILIZATION_CHINA',	'LOC_CITY_NAME_XIANYANG');
 update CivilizationLeaders set CapitalName = 'LOC_CITY_NAME_XIANYANG' where LeaderType in ('LEADER_QIN', 'LEADER_QIN_ALT');
@@ -2289,59 +2290,42 @@ values
 	('HD_CULTURE_BONUS_WITH_SPECILTY_DISTRICT',				'YieldType',	'YIELD_CULTURE'),
 	('HD_CULTURE_BONUS_WITH_SPECILTY_DISTRICT',				'Amount',		1);
 
-----------------------------------------------------------------------------------------------------------------------
--- Canada
-delete from TraitModifiers where TraitType = 'TRAIT_CIVILIZATION_FACES_OF_PEACE' and ModifierId = 'TRAIT_TOURISM_INTO_FAVOR';
-delete from TraitModifiers where TraitType = 'TRAIT_CIVILIZATION_FACES_OF_PEACE' and ModifierId = 'TRAIT_EMERGENCY_FAVOR_MODIFIER';
+-- =====================================================================================================================================
+-- 加拿大
+-- =====================================================================================================================================
+delete from TraitModifiers where TraitType = 'TRAIT_CIVILIZATION_FACES_OF_PEACE';
+delete from TraitModifiers where TraitType = 'TRAIT_LEADER_LAST_BEST_WEST';
 
-insert or replace into TraitModifiers
-	(TraitType,								ModifierId)
-values
-	('TRAIT_CIVILIZATION_FACES_OF_PEACE',	'PEACE_ADD_CULTURE'),
-	('TRAIT_CIVILIZATION_FACES_OF_PEACE',	'PEACE_ADD_TOURISM'),
-	('TRAIT_CIVILIZATION_FACES_OF_PEACE',	'TRAIT_BARBARIAN_CAMP_BUILDER_HD');
+insert or replace into TraitModifiers (TraitType, ModifierId) values
+	-- UA
+	('TRAIT_CIVILIZATION_FACES_OF_PEACE',	'TUNDRA_FARMS'),
+	('TRAIT_CIVILIZATION_FACES_OF_PEACE',	'TUNDRA_HILLS_FARMS'),
+	('TRAIT_CIVILIZATION_FACES_OF_PEACE',	'TUNDRA_PLOT_COST'),
+	('TRAIT_CIVILIZATION_FACES_OF_PEACE',	'TUNDRA_HILLS_PLOT_COST'),
+	('TRAIT_CIVILIZATION_FACES_OF_PEACE',	'SNOW_PLOT_COST'),
+	('TRAIT_CIVILIZATION_FACES_OF_PEACE',	'SNOW_HILLS_PLOT_COST'),
+	('TRAIT_CIVILIZATION_FACES_OF_PEACE',	'FRESH_WATER_TUNDRA_HILL_FARMS'),
+	('TRAIT_CIVILIZATION_FACES_OF_PEACE',	'HD_CANADA_IMPROVEMENT_YIELD'),
+	-- LA
+	('TRAIT_LEADER_LAST_BEST_WEST',	'TRAIT_NO_SUPRISE_WAR_FOR_CANADA'),
+	('TRAIT_LEADER_LAST_BEST_WEST',	'PEACE_ADD_CULTURE'),
+	('TRAIT_LEADER_LAST_BEST_WEST',	'PEACE_ADD_TOURISM'),
+	('TRAIT_LEADER_LAST_BEST_WEST',	'TRAIT_BARBARIAN_CAMP_BUILDER_HD');
 
-insert or replace into Modifiers
-	(ModifierId,							ModifierType,											SubjectRequirementSetId)
-values
-	('PEACE_ADD_CULTURE',					'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER',	'PLAYER_IS_AT_PEACE_WITH_ALL_MAJORS'),
-	('PEACE_ADD_TOURISM',					'MODIFIER_PLAYER_ADJUST_TOURISM',						'PLAYER_IS_AT_PEACE_WITH_ALL_MAJORS'),
-	('TRAIT_BARBARIAN_CAMP_BUILDER_HD',		'MODIFIER_PLAYER_ADJUST_IMPROVEMENT_GOODY_HUT',			NULL);
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) values
+	('PEACE_ADD_CULTURE',									'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER',	'PLAYER_IS_AT_PEACE_WITH_ALL_MAJORS'),
+	('PEACE_ADD_TOURISM',									'MODIFIER_PLAYER_ADJUST_TOURISM',											'PLAYER_IS_AT_PEACE_WITH_ALL_MAJORS'),
+	('TRAIT_BARBARIAN_CAMP_BUILDER_HD',		'MODIFIER_PLAYER_ADJUST_IMPROVEMENT_GOODY_HUT',				NULL),
+	('HD_CANADA_IMPROVEMENT_YIELD',				'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',									'HD_CANADA_IMPROVEMENT_REQUIREMENTS');
 
-insert or replace into ModifierArguments
-	(ModifierId,							Name,						Value)
-values
-	('PEACE_ADD_CULTURE',					'YieldType',				'YIELD_CULTURE'),
-	('PEACE_ADD_CULTURE',					'Amount',					15),
-	('PEACE_ADD_TOURISM',					'Amount',					25),
-	('TRAIT_BARBARIAN_CAMP_BUILDER_HD',		'ImprovementType',			'IMPROVEMENT_BARBARIAN_CAMP'),
-	('TRAIT_BARBARIAN_CAMP_BUILDER_HD',		'GoodyHutImprovementType',	'IMPROVEMENT_GOODY_BUILDER');
-
-update ModifierArguments set Value = 2 where ModifierId = 'SNOW_MINES_PRODUCTION' and Name = 'Amount';
-delete from TraitModifiers where TraitType = 'TRAIT_LEADER_LAST_BEST_WEST' and ModifierId like 'TUNDRA%_FOOD';
-delete from TraitModifiers where TraitType = 'TRAIT_LEADER_LAST_BEST_WEST' and ModifierId like 'TUNDRA%_PRODUCTION';
-delete from TraitModifiers where TraitType = 'TRAIT_LEADER_LAST_BEST_WEST' and ModifierId like 'SNOW_%_FOOD';
-delete from TraitModifiers where TraitType = 'TRAIT_LEADER_LAST_BEST_WEST' and ModifierId like 'SNOW_%_PRODUCTION';
-
-insert or replace into TraitModifiers
-	(TraitType,								ModifierId)
-values
-	('TRAIT_LEADER_LAST_BEST_WEST',			'TRAIT_TUNDRA_SNOW_SOME_IMPROVEMENTS_PRODUCTION'),
-	('TRAIT_LEADER_LAST_BEST_WEST',			'TRAIT_TUNDRA_SNOW_SOME_IMPROVEMENTS_FOOD');
-
-insert or replace into Modifiers
-	(ModifierId,										ModifierType,							SubjectRequirementSetId)
-values
-	('TRAIT_TUNDRA_SNOW_SOME_IMPROVEMENTS_PRODUCTION',	'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',	'HD_IS_TUNDRA_SNOW_PRODUCTION_IMPROVEMENTS_REQUIREMENTS'),
-	('TRAIT_TUNDRA_SNOW_SOME_IMPROVEMENTS_FOOD',		'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',	'HD_IS_TUNDRA_SNOW_FOOD_IMPROVEMENTS_REQUIREMENTS');
-
-insert or replace into ModifierArguments
-	(ModifierId,										Name,			Value)
-values
-	('TRAIT_TUNDRA_SNOW_SOME_IMPROVEMENTS_PRODUCTION',	'YieldType',	'YIELD_PRODUCTION'),
-	('TRAIT_TUNDRA_SNOW_SOME_IMPROVEMENTS_PRODUCTION',	'Amount',		2),
-	('TRAIT_TUNDRA_SNOW_SOME_IMPROVEMENTS_FOOD',		'YieldType',	'YIELD_FOOD'),
-	('TRAIT_TUNDRA_SNOW_SOME_IMPROVEMENTS_FOOD',		'Amount',		2);
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
+	('PEACE_ADD_CULTURE',									'YieldType',								'YIELD_CULTURE'),
+	('PEACE_ADD_CULTURE',									'Amount',										15),
+	('PEACE_ADD_TOURISM',									'Amount',										25),
+	('TRAIT_BARBARIAN_CAMP_BUILDER_HD',		'ImprovementType',					'IMPROVEMENT_BARBARIAN_CAMP'),
+	('TRAIT_BARBARIAN_CAMP_BUILDER_HD',		'GoodyHutImprovementType',	'IMPROVEMENT_GOODY_BUILDER'),
+	('HD_CANADA_IMPROVEMENT_YIELD',				'YieldType',								'YIELD_FOOD,YIELD_PRODUCTION'),
+	('HD_CANADA_IMPROVEMENT_YIELD',				'Amount',										'1,1');
 
 ------------------------------------------------------------------------------------------------
 -- Korea ability updated
