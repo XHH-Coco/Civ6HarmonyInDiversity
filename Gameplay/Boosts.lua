@@ -194,7 +194,7 @@ function BuildingConstructedBoost(playerId, cityId, buildingId, plotId, bOrigina
 
   -- 警察制度
   if not player:GetCulture():HasBoostBeenTriggered(POLICE_SYSTEM_INDEX) then
-    if (building.BuildingType == 'BUILDING_HD_ANCESTRAL_TEMPLE'
+    if (building.BuildingType == 'BUILDING_HD_VILLA'
       or building.BuildingType == 'BUILDING_HD_MANSION') then
       local num = player:GetProperty(POLICE_SYSTEM_BOOST_TAG) or 0;
       num = num + 1;

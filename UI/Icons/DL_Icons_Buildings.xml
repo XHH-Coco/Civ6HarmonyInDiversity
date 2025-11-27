@@ -77,8 +77,8 @@
 		<Row Name="ICON_BUILDING_JNR_OFFSHORE_TERMINAL"	 												Atlas="ATLAS_HD_Buildings" Index="17"/>
 		<Row Name="ICON_BUILDING_JNR_OFFSHORE_TERMINAL_FOW"	 										Atlas="ATLAS_HD_Buildings" Index="17"/>
 
-		<Row Name="ICON_BUILDING_HD_ANCESTRAL_TEMPLE" 													Atlas="ATLAS_HD_Buildings" Index="18"/>
-		<Row Name="ICON_BUILDING_HD_ANCESTRAL_TEMPLE_FOW" 											Atlas="ATLAS_HD_Buildings" Index="18"/>
+		<Row Name="ICON_BUILDING_HD_VILLA" 																		  Atlas="ATLAS_HD_Buildings" Index="18"/>
+		<Row Name="ICON_BUILDING_HD_VILLA_FOW" 																  Atlas="ATLAS_HD_Buildings" Index="18"/>
 		<Row Name="ICON_BUILDING_HD_MANSION" 																		Atlas="ATLAS_HD_Buildings" Index="19"/>
 		<Row Name="ICON_BUILDING_HD_MANSION_FOW" 																Atlas="ATLAS_HD_Buildings" Index="19"/>
 		<Row Name="ICON_BUILDING_HD_BUS_STOP" 																	Atlas="ATLAS_HD_Buildings" Index="20"/>

@@ -84,7 +84,7 @@ insert or replace into HD_DUMMY_BUILDINGS (BuildingType) values ('BUILDING_HD_YU
 insert or ignore into Types
 	(Type,																		Kind)
 values
-	('BUILDING_HD_ANCESTRAL_TEMPLE',	        'KIND_BUILDING'),
+	('BUILDING_HD_VILLA',	        						'KIND_BUILDING'),
 	('BUILDING_HD_POLICE_STATION',						'KIND_BUILDING'),
 	('BUILDING_HD_MANSION',										'KIND_BUILDING'),
 	('BUILDING_HD_BUS_STOP',									'KIND_BUILDING');
@@ -92,7 +92,7 @@ values
 insert or ignore into Buildings
 	(BuildingType,														PrereqDistrict,						PrereqCivic,															Cost,	Maintenance,	CitizenSlots,	Housing,		PurchaseYield,		AdvisorType,					Name,																						Description)
 values
-	('BUILDING_HD_ANCESTRAL_TEMPLE',					'DISTRICT_NEIGHBORHOOD',	'CIVIC_HOUSEHOLD_REGISTRATION_HD',				140,	1,						1,						1,					'YIELD_GOLD',			'ADVISOR_RELIGIOUS',	'LOC_BUILDING_HD_ANCESTRAL_TEMPLE_NAME',				'LOC_BUILDING_HD_ANCESTRAL_TEMPLE_DESCRIPTION'),
+	('BUILDING_HD_VILLA',											'DISTRICT_NEIGHBORHOOD',	'CIVIC_HOUSEHOLD_REGISTRATION_HD',				140,	1,						1,						1,					'YIELD_GOLD',			'ADVISOR_RELIGIOUS',	'LOC_BUILDING_HD_VILLA_NAME',				'LOC_BUILDING_HD_VILLA_DESCRIPTION'),
 	('BUILDING_HD_POLICE_STATION',						'DISTRICT_CITY_CENTER',		'CIVIC_POLICE_SYSTEM_HD',									220,	4,						0,						1,					'YIELD_GOLD',			'ADVISOR_GENERIC',		'LOC_BUILDING_HD_POLICE_STATION_NAME',					'LOC_BUILDING_HD_POLICE_STATION_DESCRIPTION'),
 	('BUILDING_HD_MANSION',										'DISTRICT_NEIGHBORHOOD',	'CIVIC_COMMERCIAL_CAPITALISM_HD',					400,	7,						2,						2,					null,							'ADVISOR_GENERIC',		'LOC_BUILDING_HD_MANSION_NAME',									'LOC_BUILDING_HD_MANSION_DESCRIPTION'),
 	('BUILDING_HD_BUS_STOP',									'DISTRICT_NEIGHBORHOOD',	'CIVIC_SOCIAL_SCIENCE_HD',								220,	4,						1,						0,					'YIELD_GOLD',			'ADVISOR_GENERIC',		'LOC_BUILDING_HD_BUS_STOP_NAME',								'LOC_BUILDING_HD_BUS_STOP_DESCRIPTION');
@@ -102,7 +102,7 @@ insert or ignore into BuildingPrereqs
 	(Building,															PrereqBuilding)
 values
 	('BUILDING_HD_MANSION',									'BUILDING_PALACE'),
-	('BUILDING_HD_BUS_STOP',								'BUILDING_HD_ANCESTRAL_TEMPLE'),
+	('BUILDING_HD_BUS_STOP',								'BUILDING_HD_VILLA'),
 	('BUILDING_HD_BUS_STOP',								'BUILDING_HD_MANSION'),
 	('BUILDING_FOOD_MARKET',								'BUILDING_HD_BUS_STOP'),
 	('BUILDING_SHOPPING_MALL',							'BUILDING_HD_BUS_STOP');
@@ -110,7 +110,7 @@ values
 insert or replace into Building_GreatWorks
 	(BuildingType,													GreatWorkSlotType,						NumSlots)
 values
-	('BUILDING_HD_ANCESTRAL_TEMPLE',				'GREATWORKSLOT_PALACE',				2),
+	('BUILDING_HD_VILLA',										'GREATWORKSLOT_PALACE',				2),
 	('BUILDING_HD_MANSION',									'GREATWORKSLOT_PALACE',				3);
 
 -- 新学院建筑

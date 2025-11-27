@@ -58,7 +58,19 @@ insert or replace into EnglishText (Tag, Text) values
   
   ("LOC_TOOLTIP_REGIONAL_EFFECT_RANGE",							"{1_num}-tile Regional Effect: The basic yields of this Wonder are extend to other cities within {1_num} tiles."),
 	("LOC_TOOLTIP_REGIONAL_EFFECT_RANGE_MODIFIER",		"{1_num}-tile Regional Effect: Cities with City Center or Neighborhood within {1_num} tiles of this building recieve the following bonuses, except those cities that have already recieved this bonus from the same building:"),
-	("LOC_TOOLTIP_REGIONAL_EFFECT_REQ",								"(requires {1_TechOrCivicName})");
+	("LOC_TOOLTIP_REGIONAL_EFFECT_REQ",								"(requires {1_TechOrCivicName})"),
+
+  ("LOC_TOOLTIP_GREATWORK_SOLT_TEXT",							  "Great Work Slot: "),
+	("LOC_TOOLTIP_THEMING_REQ_TITLE",							    "Theming Requirements: "),
+	("LOC_TOOLTIP_THEMING_UNIQUE_PERSON_REQ",					"Display Great Works from different creators"),
+	("LOC_TOOLTIP_THEMING_UNIQUE_PRODUCT_REQ",				"Display [ICON_GreatWork_Product] Products of different classes"),
+	("LOC_TOOLTIP_THEMING_UNIQUE_CIVS_REQ",					  "Display Great Works from different civilizations"),
+	("LOC_TOOLTIP_THEMING_SAME_OBJECT_TYPE_REQ",			"Display Great Works of the same kind"),
+	("LOC_TOOLTIP_THEMING_SAME_ERAS_REQ",							"Display Great Works of the same era"),
+	("LOC_TOOLTIP_THEMING_ALL_FILLED_REQ",						"All slots are filled"),
+	("LOC_TOOLTIP_THEMING_BONUS_TITLE",							  "Theming Bonus: "),
+	("LOC_TOOLTIP_THEMING_YIELD_BONUS_TEXT",					"+{1_Amount}% Yields"),
+	("LOC_TOOLTIP_THEMING_TOURISM_BONUS_TEXT",				"+{1_Amount}% [ICON_TOURISM] Tourism");
 
 insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_TOOLTIP_HD_COMMA_TEXT",                     "、"),
@@ -120,4 +132,16 @@ insert or replace into LocalizedText (Language, Tag, Text) values
 
 	("zh_Hans_CN", "LOC_TOOLTIP_REGIONAL_EFFECT_RANGE",						  "{1_num}环辐射：此奇观的基础产出延伸到{1_num}个单元格内的其它城市。"),
 	("zh_Hans_CN", "LOC_TOOLTIP_REGIONAL_EFFECT_RANGE_MODIFIER",		"{1_num}环辐射：拥有在此建筑{1_num}个单元格内的市中心或社区的城市获得以下加成，但不包括已经从相同建筑获得过此加成的城市："),
-	("zh_Hans_CN", "LOC_TOOLTIP_REGIONAL_EFFECT_REQ",							  "（需要{1_TechOrCivicName}）");
+	("zh_Hans_CN", "LOC_TOOLTIP_REGIONAL_EFFECT_REQ",							  "（需要{1_TechOrCivicName}）"),
+
+  ("zh_Hans_CN", "LOC_TOOLTIP_GREATWORK_SOLT_TEXT",							  "巨作槽位："),
+	("zh_Hans_CN", "LOC_TOOLTIP_THEMING_REQ_TITLE",							    "主题化条件："),
+	("zh_Hans_CN", "LOC_TOOLTIP_THEMING_UNIQUE_PERSON_REQ",					"展示不同作者的巨作"),
+	("zh_Hans_CN", "LOC_TOOLTIP_THEMING_UNIQUE_PRODUCT_REQ",				"展示不同类别的 [ICON_GreatWork_Product] 产品"),
+	("zh_Hans_CN", "LOC_TOOLTIP_THEMING_UNIQUE_CIVS_REQ",					  "展示不同文明的巨作"),
+	("zh_Hans_CN", "LOC_TOOLTIP_THEMING_SAME_OBJECT_TYPE_REQ",			"展示相同类型的巨作"),
+	("zh_Hans_CN", "LOC_TOOLTIP_THEMING_SAME_ERAS_REQ",							"展示相同时代的巨作"),
+	("zh_Hans_CN", "LOC_TOOLTIP_THEMING_ALL_FILLED_REQ",						"填满所有槽位"),
+	("zh_Hans_CN", "LOC_TOOLTIP_THEMING_BONUS_TITLE",							  "主题化收益："),
+	("zh_Hans_CN", "LOC_TOOLTIP_THEMING_YIELD_BONUS_TEXT",					"+{1_Amount}%产出"),
+	("zh_Hans_CN", "LOC_TOOLTIP_THEMING_TOURISM_BONUS_TEXT",				"+{1_Amount}% [ICON_TOURISM] 旅游业绩");
