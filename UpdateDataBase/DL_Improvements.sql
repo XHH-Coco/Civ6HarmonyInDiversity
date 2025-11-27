@@ -1014,6 +1014,8 @@ values
 insert or replace into Improvement_Adjacencies
 	(ImprovementType,			YieldChangeId)
 values
+	('IMPROVEMENT_POLDER',		'P_POLDER_PLAINS_FOOD'),
+	('IMPROVEMENT_POLDER',		'P_POLDER_GRASS_FOOD'),
 	('IMPROVEMENT_POLDER',		'P_POLDER_PRODUCTION_TIRE1'),
 	('IMPROVEMENT_POLDER',		'P_POLDER_PRODUCTION_TIRE2'),
 	('IMPROVEMENT_POLDER',		'P_POLDER_FOOD_TIRE1'),
@@ -1022,6 +1024,12 @@ values
 	('IMPROVEMENT_POLDER',		'P_LAND_POLDER_PRODUCTION_TIRE2'),
 	('IMPROVEMENT_POLDER',		'P_LAND_POLDER_FOOD_TIRE1'),
 	('IMPROVEMENT_POLDER',		'P_LAND_POLDER_FOOD_TIRE2');
+
+insert or replace into Adjacency_YieldChanges
+	(ID, 								Description,		YieldType, 				YieldChange, 	TilesRequired,      AdjacentTerrain)
+values
+	('P_POLDER_PLAINS_FOOD',			'Placeholder',		'YIELD_FOOD',			1,				1,					'TERRAIN_PLAINS'),
+	('P_POLDER_GRASS_FOOD',				'Placeholder',		'YIELD_FOOD',			1,				1,					'TERRAIN_GRASS');
 
 -- yieldchange
 insert or replace into Adjacency_YieldChanges
