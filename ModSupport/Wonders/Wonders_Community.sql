@@ -909,30 +909,6 @@ insert or replace into ModifierArguments (ModifierId, Name, Value) select
 	'HD_AL_STPETERSBASILICA_GREAT_ARTIST_POINT', 'Amount', 4
 where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_AL_STPETERSBASILICA');
 
-	-- 艺术巨作信仰值
-insert or replace into BuildingModifiers (BuildingType, ModifierId) select
-	'BUILDING_AL_STPETERSBASILICA', 'HD_AL_STPETERSBASILICA_' || GreatWorkObjectType || '_FAITH'
-from GreatWorkObjectTypes where GreatWorkObjectType in ('GREATWORKOBJECT_SCULPTURE', 'GREATWORKOBJECT_PORTRAIT', 'GREATWORKOBJECT_LANDSCAPE', 'GREATWORKOBJECT_RELIGIOUS')
-	and exists (select BuildingType from Buildings where BuildingType = 'BUILDING_AL_STPETERSBASILICA');
-
-insert or replace into Modifiers (ModifierId, ModifierType) select
-	'HD_AL_STPETERSBASILICA_' || GreatWorkObjectType || '_FAITH', 'MODIFIER_SINGLE_CITY_ADJUST_GREATWORK_YIELD'
-from GreatWorkObjectTypes where GreatWorkObjectType in ('GREATWORKOBJECT_SCULPTURE', 'GREATWORKOBJECT_PORTRAIT', 'GREATWORKOBJECT_LANDSCAPE', 'GREATWORKOBJECT_RELIGIOUS')
-	and exists (select BuildingType from Buildings where BuildingType = 'BUILDING_AL_STPETERSBASILICA');
-
-insert or replace into ModifierArguments (ModifierId, Name, Value) select
-	'HD_AL_STPETERSBASILICA_' || GreatWorkObjectType || '_FAITH', 'GreatWorkObjectType', GreatWorkObjectType
-from GreatWorkObjectTypes where GreatWorkObjectType in ('GREATWORKOBJECT_SCULPTURE', 'GREATWORKOBJECT_PORTRAIT', 'GREATWORKOBJECT_LANDSCAPE', 'GREATWORKOBJECT_RELIGIOUS')
-	and exists (select BuildingType from Buildings where BuildingType = 'BUILDING_AL_STPETERSBASILICA');
-insert or replace into ModifierArguments (ModifierId, Name, Value) select
-	'HD_AL_STPETERSBASILICA_' || GreatWorkObjectType || '_FAITH', 'YieldType', 'YIELD_FAITH'
-from GreatWorkObjectTypes where GreatWorkObjectType in ('GREATWORKOBJECT_SCULPTURE', 'GREATWORKOBJECT_PORTRAIT', 'GREATWORKOBJECT_LANDSCAPE', 'GREATWORKOBJECT_RELIGIOUS')
-	and exists (select BuildingType from Buildings where BuildingType = 'BUILDING_AL_STPETERSBASILICA');
-insert or replace into ModifierArguments (ModifierId, Name, Value) select
-	'HD_AL_STPETERSBASILICA_' || GreatWorkObjectType || '_FAITH', 'YieldChange', 3
-from GreatWorkObjectTypes where GreatWorkObjectType in ('GREATWORKOBJECT_SCULPTURE', 'GREATWORKOBJECT_PORTRAIT', 'GREATWORKOBJECT_LANDSCAPE', 'GREATWORKOBJECT_RELIGIOUS')
-	and exists (select BuildingType from Buildings where BuildingType = 'BUILDING_AL_STPETERSBASILICA');
-
 insert or replace into GlobalParameters (Name, Value) values
 	('HD_AL_STPETERSBASILICA_YIELD_SCIENCE_PER_POP',	10),
 	('HD_AL_STPETERSBASILICA_YIELD_CULTURE_PER_POP',	10),
