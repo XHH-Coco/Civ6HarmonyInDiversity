@@ -3,7 +3,7 @@
 --		When the following conditions are BOTH met:
 -- 			There is a Modifier that extends the Regional Range of B, e.g. Rationalism
 -- 			The CURRENT yield (including basic yield plus the yields given by EFFECT_ADJUST_BUILDING_YIELD_CHANGE) of A >= the BASIC yield of B
---		Then the bug happens, and the city of A cannot recieve the regional yield of B
+--		Then the bug happens, and the city of A cannot receive the regional yield of B
 -- To fix the bug, rewrite all regional yield by Modifiers. Things to adapt: Policy, Mexico City, Magnus, Watt, England, Forging Iron
 -- Record regional range in HD_BuildingRegionalRange
 

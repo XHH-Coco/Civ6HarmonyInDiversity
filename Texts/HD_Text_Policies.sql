@@ -422,7 +422,7 @@ values
   ("LOC_POLICY_HD_WATERSIDE_PAVILIONS_NAME",                                      "Waterside Pavilions"),
   ("LOC_POLICY_HD_WATERSIDE_PAVILIONS_DESCRIPTION",                               "+1 [ICON_AMENITIES] Amenity and +2 [ICON_CULTURE] Culture to cities with Neighborhood or Aqueduct district which built adjacent to an Oasis or on a Geothermal Fissure."),
   ("LOC_POLICY_HD_AIR_CONDITIONING_SYSTEM_NAME",                                  "Air Conditioning System"),
-  ("LOC_POLICY_HD_AIR_CONDITIONING_SYSTEM_DESCRIPTION",                           "Cities on Desert, Tundra or Snow (and Hills) or adjacent to Rainforest or Oasis, or owned such kind of Neighborhood disctrict, recieve +2 [ICON_AMENITIES] Amenities and +12 [ICON_GOLD] Gold."),
+  ("LOC_POLICY_HD_AIR_CONDITIONING_SYSTEM_DESCRIPTION",                           "Cities on Desert, Tundra or Snow (and Hills) or adjacent to Rainforest or Oasis, or owned such kind of Neighborhood disctrict, receive +2 [ICON_AMENITIES] Amenities and +12 [ICON_GOLD] Gold."),
   ("LOC_POLICY_HD_SOCIAL_WELFARE_NAME",                                           "Social Welfare"),
   ("LOC_POLICY_HD_SOCIAL_WELFARE_DESCRIPTION",                                    "Every 5 [ICON_Citizen] Citizens provide +1 [ICON_AMENITIES] Amenity, but -1 [ICON_GOLD] Gold per [ICON_Citizen] Citizen in all cities (max. 30 [ICON_Citizen] Citizens)."),
   ("LOC_POLICY_HD_PUBLIC_MEDICAL_SYSTEM_NAME",                                    "Public Medical System"),

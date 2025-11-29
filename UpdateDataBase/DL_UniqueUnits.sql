@@ -287,7 +287,7 @@ update Units set Cost = 60, Maintenance = 2, BaseMoves = BaseMoves + 1, Range = 
     PrereqTech = null, PrereqCivic = 'CIVIC_MILITARY_TRAINING'
     where UnitType = 'UNIT_INCA_WARAKAQ';
 update Units_XP2 set ResourceCost = 0, ResourceMaintenanceType = NULL, ResourceMaintenanceAmount = 0 where UnitType = 'UNIT_INCA_WARAKAQ';
-update UnitUpgrades set UpgradeUnit = 'UNIT_CHASSEUR' where Unit = 'UNIT_INCA_WARAKAQ';
+update UnitUpgrades set UpgradeUnit = 'UNIT_RANGER' where Unit = 'UNIT_INCA_WARAKAQ';
 -- maybe not add melee to encourage the ranged attack.
 ------ UNIT_INCA_CHASQUI
 -- 马里

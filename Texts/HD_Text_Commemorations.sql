@@ -7,7 +7,7 @@ values
   ("LOC_MOMENT_CIVILOPEDIA_TEXT",                                                 "[ICON_GLORY_NORMAL_AGE] Normal Age: {1_NormalBonus}[NEWLINE][NEWLINE][ICON_GLORY_GOLDEN_AGE] Golden Age: {2_GoldenBonus}"),
   -- Natural Philosophy
   ("LOC_MOMENT_CATEGORY_SCIENTIFIC",                                              "Natural Philosophy"),
-  ("LOC_MOMENT_CATEGORY_SCIENTIFIC_BONUS_GOLDEN_AGE",                             "Academies, Ports, and Aqueducts provide +1 [ICON_SCIENCE] Science and +1 [ICON_CULTURE] Culture. Each triggered [ICON_TECHBOOSTED] Eureka provides 10 [ICON_GREATSCIENTIST] Great Scientist points."),
+  ("LOC_MOMENT_CATEGORY_SCIENTIFIC_BONUS_GOLDEN_AGE",                             "Campus, Harbor, and Aqueducts provide +1 [ICON_SCIENCE] Science and +1 [ICON_CULTURE] Culture. Each triggered [ICON_TECHBOOSTED] Eureka provides 10 [ICON_GREATSCIENTIST] Great Scientist points."),
   ("LOC_MOMENT_CATEGORY_SCIENTIFIC_BONUS_NORMAL_AGE",                             "Each triggered [ICON_TECHBOOSTED] Eureka provides +1 [ICON_GLORY_NORMAL_AGE] Era Score. Buildings whose production is based on Science provide +1 [ICON_GLORY_NORMAL_AGE] Era Score."),
   ("LOC_MOMENT_CATEGORY_SCIENTIFIC_BONUS_DARK_AGE",                               "Each triggered [ICON_TECHBOOSTED] Eureka provides +1 [ICON_GLORY_NORMAL_AGE] Era Score. Buildings whose production is based on Science provide +1 [ICON_GLORY_NORMAL_AGE] Era Score."),
 
@@ -130,7 +130,7 @@ values
 
   -- All's Fair in War
   ("LOC_MOMENT_CATEGORY_ESPIONAGE",                                               "Bodyguard of Lies"),
-  ("LOC_MOMENT_CATEGORY_ESPIONAGE_BONUS_GOLDEN_AGE",                              "+3 Spy capacity and gain 3 free Spies. All your spies can promote to max level immediately. Spies deployed to cities of other civilizations require no time. Time for completing offensive missions is reduced by 25%."),
+  ("LOC_MOMENT_CATEGORY_ESPIONAGE_BONUS_GOLDEN_AGE",                              "+3 Spy capacity and gain 3 free Spies. Each time your Spies get promoted, they will immediately receive another promotion until they reach the maximum level. Spies deployed to cities of other civilizations require no time. Time for completing offensive missions is reduced by 25%."),
   ("LOC_MOMENT_CATEGORY_ESPIONAGE_BONUS_NORMAL_AGE",                              "Each successful offensive espionage mission provides +1 [ICON_GLORY_NORMAL_AGE] Era Score."),
   ("LOC_MOMENT_CATEGORY_ESPIONAGE_BONUS_DARK_AGE",                                "Each successful offensive espionage mission provides +1 [ICON_GLORY_NORMAL_AGE] Era Score."),
   ------------------------------------------------
@@ -333,7 +333,7 @@ values
   ("zh_Hans_CN",  "LOC_MOMENT_CATEGORY_WORLD_WAR_BONUS_DARK_AGE",                                 "军团和军队每击杀一个单位+1 [ICON_GLORY_NORMAL_AGE] 时代得分。"),
   -- 兵不厌诈
   ("zh_Hans_CN",  "LOC_MOMENT_CATEGORY_ESPIONAGE",                                                "兵不厌诈"),
-  ("zh_Hans_CN",  "LOC_MOMENT_CATEGORY_ESPIONAGE_BONUS_GOLDEN_AGE",                               "获得3个间谍容量和3个间谍。你的所有间谍都可立即升至满级。间谍部署到另一文明的城市无需时间。完成进攻性任务的时间缩短25%。"),
+  ("zh_Hans_CN",  "LOC_MOMENT_CATEGORY_ESPIONAGE_BONUS_GOLDEN_AGE",                               "获得3个间谍容量和3个间谍。你的间谍每完成一次晋升后，立即获得一次晋升，直到升至满级。间谍部署到另一文明的城市无需时间。完成进攻性任务的时间缩短25%。"),
   ("zh_Hans_CN",  "LOC_MOMENT_CATEGORY_ESPIONAGE_BONUS_NORMAL_AGE",                               "每次进攻性间谍行动成功+1 [ICON_GLORY_NORMAL_AGE] 时代得分。"),
   ("zh_Hans_CN",  "LOC_MOMENT_CATEGORY_ESPIONAGE_BONUS_DARK_AGE",                                 "每次进攻性间谍行动成功+1 [ICON_GLORY_NORMAL_AGE] 时代得分。"),
   ------------------------------------------------

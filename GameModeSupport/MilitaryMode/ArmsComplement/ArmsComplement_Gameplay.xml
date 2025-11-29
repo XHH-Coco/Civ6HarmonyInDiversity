@@ -642,5 +642,9 @@
       <Where Unit="UNIT_POLISH_HUSSAR"/>
       <Set UpgradeUnit="UNIT_CUIRASSIER"/>
     </Update>
+    <Update>
+      <Where Unit="UNIT_INCA_WARAKAQ"/>
+      <Set UpgradeUnit="UNIT_CHASSEUR"/>
+    </Update>
   </UnitUpgrades>
 </GameData>

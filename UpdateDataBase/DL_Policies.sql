@@ -3311,26 +3311,26 @@ insert or ignore into UnitAbilityModifiers
 values
     ('ABILITY_DIPLOMATIC_SPY_INFLUENCE',              	'DIPLOMATIC_SPY_INFLUENCE'),
     ('ABILITY_DIPLOMATIC_SPY_INFLUENCE_DOUBLE',      	'DIPLOMATIC_SPY_INFLUENCE_DOUBLE'),
-	('ABILITY_SPY_FOOD_PRODUCTION',              		'SPY_RECIEVE_FOOD'),
-    ('ABILITY_SPY_FOOD_PRODUCTION',      				'SPY_RECIEVE_PRODUCTION');
+	('ABILITY_SPY_FOOD_PRODUCTION',              		'SPY_RECEIVE_FOOD'),
+    ('ABILITY_SPY_FOOD_PRODUCTION',      				'SPY_RECEIVE_PRODUCTION');
 
 insert or replace into Modifiers
     (ModifierId,                                    ModifierType,                                                   SubjectStackLimit,      SubjectRequirementSetId)
 values
     ('DIPLOMATIC_SPY_INFLUENCE',           			'MODIFIER_PLAYER_ADJUST_INFLUENCE_POINTS_PER_TURN',          	NULL,              		NULL),
     ('DIPLOMATIC_SPY_INFLUENCE_DOUBLE',  			'MODIFIER_PLAYER_ADJUST_INFLUENCE_POINTS_PER_TURN',           	NULL,              		NULL),
-	('SPY_RECIEVE_FOOD',           					'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER',          	1,              		'WITHIN_6_TILES_FROM_OWNER'),
-    ('SPY_RECIEVE_PRODUCTION',  					'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER',           	1,              		'WITHIN_6_TILES_FROM_OWNER');
+	('SPY_RECEIVE_FOOD',           					'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER',          	1,              		'WITHIN_6_TILES_FROM_OWNER'),
+    ('SPY_RECEIVE_PRODUCTION',  					'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER',           	1,              		'WITHIN_6_TILES_FROM_OWNER');
 
 insert or replace into ModifierArguments
     (ModifierId,                                 Name,                      Value)
 values
     ('DIPLOMATIC_SPY_INFLUENCE',         		'Amount',                  2),
 	('DIPLOMATIC_SPY_INFLUENCE_DOUBLE',  		'Amount',                  4),
-	('SPY_RECIEVE_FOOD',         				'YieldType',               'YIELD_FOOD'),
-	('SPY_RECIEVE_FOOD',  						'Amount',                  5),
-	('SPY_RECIEVE_PRODUCTION',         			'YieldType',               'YIELD_PRODUCTION'),
-	('SPY_RECIEVE_PRODUCTION',  				'Amount',                  5);
+	('SPY_RECEIVE_FOOD',         				'YieldType',               'YIELD_FOOD'),
+	('SPY_RECEIVE_FOOD',  						'Amount',                  5),
+	('SPY_RECEIVE_PRODUCTION',         			'YieldType',               'YIELD_PRODUCTION'),
+	('SPY_RECEIVE_PRODUCTION',  				'Amount',                  5);
 
 insert or ignore into RequirementSets
 	(RequirementSetId,					RequirementSetType)

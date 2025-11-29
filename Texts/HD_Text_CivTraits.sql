@@ -323,7 +323,7 @@ values
 	("LOC_TRAIT_CIVILIZATION_THREE_KINGDOMS_DESCRIPTION",                    "Receive +1 [Icon_Governor] Governor Title each time a Seowon district or buildings inside a Seowon District is constructed in your [ICON_Capital] Capital."),
 	-- 女朝鲜
 	("LOC_LEADER_SEONDEOK_NAME",                                             "Kim Deokman"),
-	("LOC_TRAIT_LEADER_HWARANG_DESCRIPTION",                                 "+5 [Icon_Housing] Housing and +20 Loyalty per turn for your Capital and cities with an assigned Governor. -20 Loyalty per turn and -50% to all yields for cities that are not your Capital and do not have an assigned Governors. [NEWLINE]+25% [ICON_PRODUCTION] Production towards Districts and Buildings for cities that have a Seowon district. [NEWLINE]+15% [ICON_Production] Production and +15% [ICON_FOOD] Food for Cities with a Tier 1 building of Campus district. [NEWLINE]+100% districts ddjacency bonuses to all Districts for Cities with a Tier 2 building of Campus district. [NEWLINE]Each [ICON_CITIZEN] citizen provieds +1 all yields for Cities with a Tier 3 building of Campus district. [NEWLINE]+10% to all yields for Cities with a Tier 4 building of Campus district."),
+	("LOC_TRAIT_LEADER_HWARANG_DESCRIPTION",                                 "+5 [Icon_Housing] Housing and +20 Loyalty per turn for your Capital and cities with an assigned Governor. -20 Loyalty per turn and -50% to all yields for cities that are not your Capital and do not have an assigned Governors. [NEWLINE]+25% [ICON_PRODUCTION] Production towards Districts and Buildings for cities that have a Seowon district. [NEWLINE]+15% [ICON_Production] Production and +15% [ICON_FOOD] Food for Cities with a Tier 1 building of Campus district. [NEWLINE]+100% districts adjacency bonuses to all Districts for Cities with a Tier 2 building of Campus district. [NEWLINE]Each [ICON_CITIZEN] citizen provieds +1 all yields for Cities with a Tier 3 building of Campus district. [NEWLINE]+10% to all yields for Cities with a Tier 4 building of Campus district."),
 	-- 男朝鲜
 	("LOC_LEADER_SEJONG_NAME",                                               "Yi Do"),
 	("LOC_TRAIT_LEADER_SEJONG_NAME",                                         "Hunminjeongeum"),
@@ -435,7 +435,7 @@ values
 -- =====================================================================================================================================
 -- 埃及
 -- =====================================================================================================================================
-	("LOC_TRAIT_CIVILIZATION_ITERU_EXPANSION2_DESCRIPTION",                  "Does not receive damage from Floods. +1 [ICON_FOOD] to Resources on Floodplains tiles. +20% construction speed towards Districts and Wonders if placed next to a River. Receive a free Builder every time you finish a Wonder. Campus and Theater Square districts recieve major adjacency bonus from being adjacent to River."),
+	("LOC_TRAIT_CIVILIZATION_ITERU_EXPANSION2_DESCRIPTION",                  "Does not receive damage from Floods. +1 [ICON_FOOD] to Resources on Floodplains tiles. +20% construction speed towards Districts and Wonders if placed next to a River. Receive a free Builder every time you finish a Wonder. Campus and Theater Square districts receive major adjacency bonus from being adjacent to River."),
 	-- 拉二
 	("LOC_TRAIT_LEADER_RAMSES_NAME",                                         "Usermaatre Setepenre"),    
 	("LOC_TRAIT_LEADER_RAMSES_DESCRIPTION",                                  "Gain [ICON_CULTURE] Culture equal to 15% of the construction cost when finishing Buildings and 30% when completing Wonders. All land units ignores [ICON_MOVEMENT] Movement and [ICON_STRENGTH] Combat Strength penalties across rivers."),
@@ -533,7 +533,7 @@ values
 -- 印度
 -- =====================================================================================================================================
 	("LOC_TRAIT_CIVILIZATION_DHARMA_NAME",                                   "The Faith of Mother Ganga"),
-	("LOC_TRAIT_CIVILIZATION_DHARMA_EXPANSION2_DESCRIPTION",                 "Improvements which adjacent to River and at most 0 Appeal receive +1 [icon_culture] Culture and +1 [icon_faith] Faith. Cities which adjacent to River and at most 0 Appeal receive +100% [ICON_PRODUCTION] Production towards Holy Site districts. Each 4 [Icon_citizen] Citizens consume 1 [ICON_Amenities] Amenity in a city with less than 30 [ICON_CITIZEN] Citizens (not each 2 [ICON_CITIZEN] Citizens). Can purchase buildings in Holy Site with [ICON_FAITH] Faith. Receives Follower Belief bonuses in a city from each Religion that has at least 1 Follower."),
+	("LOC_TRAIT_CIVILIZATION_DHARMA_EXPANSION2_DESCRIPTION",                 "Improvements adjacent to River and at most 0 Appeal receive +1 [icon_culture] Culture and +1 [icon_faith] Faith. Cities adjacent to River and at most 0 Appeal receive +100% [ICON_PRODUCTION] Production towards Holy Site districts. Each 4 [Icon_citizen] Citizens consume 1 [ICON_Amenities] Amenity in a city with less than 30 [ICON_CITIZEN] Citizens (not each 2 [ICON_CITIZEN] Citizens). Can purchase buildings in Holy Site with [ICON_FAITH] Faith. Receives Follower Belief bonuses in a city from each Religion that has at least 1 Follower."),
 	-- 文印度
 	("LOC_TRAIT_LEADER_SATYAGRAHA_DESCRIPTION",                              "ALL cities have +15% [icon_food] Food, 15% [ICON_Faith] Faith when you are at peace with all other major civilizations. +5 [ICON_Faith] Faith for each civilization (including India) they have met that has founded a Religion and is not currently at war. Opposing civilizations receive double the war weariness for fighting against Gandhi."),
 	-- 武印度
@@ -610,7 +610,7 @@ values
 	("LOC_ABILITY_BASIL_PRESSURE_KILLS_DESCRIPTION",                         "Byzantium's Religion is spread to nearby cities when a major civilization's unit is defeated. (Porphyrogénnētos)"),
 	-- 女拜占庭
 	("LOC_TRAIT_LEADER_THEODORA_NAME",                                       "The Favourite of Byzantium"),
-	("LOC_TRAIT_LEADER_THEODORA_DESCRIPTION",                                "Holy Sites and Hippodromes provide a Culture Bomb of unowned territory. Whenever you complete a Holy Site, grant a free builder in the city.Whenever you complete a Holy Site Building,  grant a [ICON_CITIZEN] Citizen in the city. Immediately evangelize a belief after you found your religion.");
+	("LOC_TRAIT_LEADER_THEODORA_DESCRIPTION",                                "Holy Sites and Hippodromes provide a Culture Bomb of unowned territory. Whenever you complete a Holy Site, grant a free builder in the city. Whenever you complete a Holy Site Building, grant a [ICON_CITIZEN] Citizen in the city. Immediately evangelize a belief after you found your religion.");
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Language: zh_Hans_CN
