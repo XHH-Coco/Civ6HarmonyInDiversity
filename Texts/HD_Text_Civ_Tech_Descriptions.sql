@@ -30,7 +30,7 @@ values
     ("LOC_TECH_MINING_HD_DESCRIPTION",                                       "Allows chopping of Woods and Rainforest, and harvesting of resources improved by Mines."),
     ("LOC_TECH_ANIMAL_HUSBANDRY_HD_DESCRIPTION",                             "Allows harvesting of resources improved by Pastures and Camps."),
     ("LOC_TECH_POTTERY_DESCRIPTION",                                         "Allows harvesting of resources improved by Farms."),
-    ("LOC_TECH_SAILING_HD_DESCRIPTION",                                      "Allows harvesting of resources improved by Fishing Boats. Allows Builders, Settlers and Traders to embark."),
+    ("LOC_TECH_SAILING_HD_DESCRIPTION",                                      "Allows harvesting of resources improved by Fishing Boats. [NEWLINE]Allows Builders, Settlers and Traders to embark."),
     ("LOC_TECH_IRRIGATION_DESCRIPTION",                                      "+1 [ICON_FOOD] Food from Plantations adjacent to fresh water or Aqueduct.[NEWLINE]Allows clearing of Marsh, and harvesting of resources improved by Plantations. [NEWLINE]Allows Builders to build Farms on Plains Hills or Grassland Hills adjacent to fresh water or Aqueduct."),
     ("LOC_TECH_ARCHERY_HD_DESCRIPTION",                                      "Allows Camps to be built on Forests. [NEWLINE]Camps built on feature provide +1 [ICON_PRODUCTION] Production."), -- Camp improvements receive +1 [ICON_GOLD] Gold.
     ("LOC_TECH_CALENDAR_HD_DESCRIPTION",                                     "+1 [ICON_Food] Food from Farms."),
@@ -418,7 +418,7 @@ values
     ("zh_Hans_CN",  "LOC_TECH_ANIMAL_HUSBANDRY_HD_DESCRIPTION",                             "允许收获由牧场或营地改良的资源。"),
     ("zh_Hans_CN",  "LOC_TECH_POTTERY_DESCRIPTION",                                         "允许收获由农场改良的资源。"),
     ("zh_Hans_CN",  "LOC_TECH_SAILING_NAME",                                                "航行"),
-    ("zh_Hans_CN",  "LOC_TECH_SAILING_HD_DESCRIPTION",                                      "允许收获由渔船改良的资源。允许建造者、开拓者和商人上船。"),
+    ("zh_Hans_CN",  "LOC_TECH_SAILING_HD_DESCRIPTION",                                      "允许收获由渔船改良的资源。[NEWLINE]允许建造者、开拓者和商人上船。"),
     ("zh_Hans_CN",  "LOC_TECH_IRRIGATION_DESCRIPTION",                                      "相邻淡水或水渠的种植园+1 [ICON_FOOD] 食物。[NEWLINE]允许清理沼泽和收获由种植园改良的资源。[NEWLINE]允许在相邻淡水或水渠的平原和草原丘陵上修建农场。"),
     ("zh_Hans_CN",  "LOC_TECH_ARCHERY_HD_DESCRIPTION",                                      "允许在树林上建造营地。[NEWLINE]建造在地貌上的营地+1 [ICON_PRODUCTION] 生产力。"), -- 营地+1 [ICON_gold] 金币。
     ("zh_Hans_CN",  "LOC_TECH_CALENDAR_HD_DESCRIPTION",                                     "农场+1 [ICON_Food] 食物。"),
