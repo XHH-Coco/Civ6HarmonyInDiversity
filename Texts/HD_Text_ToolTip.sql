@@ -2,10 +2,10 @@ insert or replace into EnglishText (Tag, Text) values
   ("LOC_TOOLTIP_HD_COMMA_TEXT",                     ", "),
   ("LOC_TOOLTIP_HD_OR_TEXT",                        " or "),
 
-  ("LOC_TOOLTIP_HD_TRAIT_TEXTS",                    "Traits:"),
+  ("LOC_TOOLTIP_HD_TRAITS_TEXT",                    "Traits:"),
   ("LOC_TOOLTIP_HD_APPEAL_TEXT",                    "{1_Amount: number +#,###.#;-#,###.#} Appeal to adjacent tiles"),
-  ("LOC_TOOLTIP_HD_TOURISM_FROM_YIELD_TEXT",        "Provide [ICON_TOURISM] Tourism equal to {1_ScalingFactor}% of {2_Icon} {3_Name}. Requires{4_TechCivicName}."),
-  ("LOC_TOOLTIP_HD_TOURISM_FROM_APPEAL_TEXT",       "Provide [ICON_TOURISM] Tourism equal to {1_ScalingFactor}% of Appeal. Requires{2_TechCivicName}."),
+  ("LOC_TOOLTIP_HD_TOURISM_FROM_YIELD_TEXT",        "Provide [ICON_TOURISM] Tourism equal to {1_ScalingFactor}% of {2_Icon} {3_Name}. Requires {4_TechCivicName}."),
+  ("LOC_TOOLTIP_HD_TOURISM_FROM_APPEAL_TEXT",       "Provide [ICON_TOURISM] Tourism equal to {1_ScalingFactor}% of Appeal. Requires {2_TechCivicName}."),
   ("LOC_TOOLTIP_HD_TOURISM_FROM_YIELD_NOREQ_TEXT",  "Provide [ICON_TOURISM] Tourism equal to {1_ScalingFactor}% of {2_Icon} {3_Name}."),
   ("LOC_TOOLTIP_HD_TOURISM_FROM_APPEAL_NOREQ_TEXT", "Provide [ICON_TOURISM] Tourism equal to {1_ScalingFactor}% of Appeal."),
 
@@ -57,7 +57,7 @@ insert or replace into EnglishText (Tag, Text) values
 	("LOC_TOOLTIP_RESOURCE_CORP_CATEGORY",						"Industry & Corporation: "),
   
   ("LOC_TOOLTIP_REGIONAL_EFFECT_RANGE",							"{1_num}-tile Regional Effect: The basic yields of this Wonder are extend to other cities within {1_num} tiles."),
-	("LOC_TOOLTIP_REGIONAL_EFFECT_RANGE_MODIFIER",		"{1_num}-tile Regional Effect: Cities with City Center or Neighborhood within {1_num} tiles of this building recieve the following bonuses, except those cities that have already recieved this bonus from the same building:"),
+	("LOC_TOOLTIP_REGIONAL_EFFECT_RANGE_MODIFIER",		"{1_num}-tile Regional Effect: Cities with City Center or Neighborhood within {1_num} tiles of this building receive the following bonuses, except those cities that have already received this bonus from the same building:"),
 	("LOC_TOOLTIP_REGIONAL_EFFECT_REQ",								"(requires {1_TechOrCivicName})"),
 
   ("LOC_TOOLTIP_GREATWORK_SOLT_TEXT",							  "Great Work Slot: "),

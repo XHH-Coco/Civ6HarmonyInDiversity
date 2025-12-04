@@ -208,8 +208,11 @@ function SetResourceIcon( pInstance:table, pPlot, type, state)
 			-- 所需改良信息
 			if #resourceImprovementTextList > 0 then
 				local improvementString = Locale.Lookup("LOC_TOOLTIP_RESOURCE_IMPROVED_BY");
-				for _, text in ipairs(resourceImprovementTextList) do
-					improvementString = improvementString .. ' ' .. text;
+				for i, text in ipairs(resourceImprovementTextList) do
+					if i > 1 then
+						improvementString = improvementString .. Locale.Lookup('LOC_TOOLTIP_HD_COMMA_TEXT')
+					end
+					improvementString = improvementString .. text;
 				end
 				table.insert(toolTipItems, improvementString);
 			end

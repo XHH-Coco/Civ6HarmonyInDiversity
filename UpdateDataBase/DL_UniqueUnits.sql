@@ -283,7 +283,7 @@ update Units set Cost = 205, Maintenance = 5, BaseMoves = 5, Range = 0, Combat =
 update Units_XP2 set ResourceCost = 5, ResourceMaintenanceType = 'RESOURCE_HORSES', ResourceMaintenanceAmount = 1 where UnitType = 'UNIT_HUNGARY_HUSZAR';
 ------ UNIT_HUNGARY_KALANDOZO
 -- 印加
-update Units set Cost = 60, Maintenance = 2, BaseMoves = BaseMoves + 1, Range = 1, Combat = 36, RangedCombat = 28, StrategicResource = NULL,
+update Units set Cost = 60, Maintenance = 2, BaseMoves = BaseMoves + 1, Range = 1, Combat = 36, RangedCombat = 26, StrategicResource = NULL,
     PrereqTech = null, PrereqCivic = 'CIVIC_MILITARY_TRAINING'
     where UnitType = 'UNIT_INCA_WARAKAQ';
 update Units_XP2 set ResourceCost = 0, ResourceMaintenanceType = NULL, ResourceMaintenanceAmount = 0 where UnitType = 'UNIT_INCA_WARAKAQ';

@@ -358,7 +358,6 @@ insert or replace into CommemorationModifiers (CommemorationType, ModifierId) va
   ('COMMEMORATION_HD_WORLD_WAR',                'COMMEMORATION_HD_WORLD_WAR_ARMY_STRENGTH'),
   ('COMMEMORATION_HD_WORLD_WAR',                'COMMEMORATION_HD_WORLD_WAR_PRODUCTION'),
   -- 兵不厌诈
-  ('COMMEMORATION_ESPIONAGE',                   'COMMEMORATION_ESPIONAGE_SPY_FREE_PROMOTION'),
   ('COMMEMORATION_ESPIONAGE',                   'COMMEMORATION_ESPIONAGE_SPY_CAPACITY'),
   ('COMMEMORATION_ESPIONAGE',                   'COMMEMORATION_ESPIONAGE_GRANT_SPY'),
   -- 星球大战
@@ -554,7 +553,6 @@ insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetI
   ('COMMEMORATION_HD_WORLD_WAR_ARMY_STRENGTH',                            'MODIFIER_PLAYER_CORPS_ARMY_MODIFIED_STRENGTH',                     'PLAYER_HAS_GOLDEN_AGE',    Null),
   ('COMMEMORATION_HD_WORLD_WAR_PRODUCTION',                               'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER',                'PLAYER_HAS_GOLDEN_AGE',    'REQUIRES_CITY_HAS_DISTRICT_ENCAMPMENT_UDMET'),
   -- 兵不厌诈
-  ('COMMEMORATION_ESPIONAGE_SPY_FREE_PROMOTION',                          'MODIFIER_PLAYER_UNITS_GRANT_ABILITY',                              'PLAYER_HAS_GOLDEN_AGE',    'UNIT_IS_SPY'),
   ('COMMEMORATION_ESPIONAGE_SPY_CAPACITY',                                'MODIFIER_PLAYER_GRANT_SPY',                                        'PLAYER_HAS_GOLDEN_AGE',    Null),
   ('COMMEMORATION_ESPIONAGE_GRANT_SPY',                                   'MODIFIER_PLAYER_GRANT_UNIT_IN_CAPITAL',                            'PLAYER_HAS_GOLDEN_AGE',    Null),
   -- 宇宙大战
@@ -840,7 +838,6 @@ insert or replace into ModifierArguments (ModifierId, Name, Value) values
   ('COMMEMORATION_HD_WORLD_WAR_PRODUCTION',                               'YieldType',              'YIELD_PRODUCTION'),
   ('COMMEMORATION_HD_WORLD_WAR_PRODUCTION',                               'Amount',                 10),
   -- 兵不厌诈
-  ('COMMEMORATION_ESPIONAGE_SPY_FREE_PROMOTION',                          'AbilityType',            'ABILITY_COMMEMORATION_ESPIONAGE_SPY_FREE_PROMOTION'),
   ('COMMEMORATION_ESPIONAGE_SPY_CAPACITY',                                'Amount',                 3),
   ('COMMEMORATION_ESPIONAGE_GRANT_SPY',                                   'UnitType',               'UNIT_SPY'),
   ('COMMEMORATION_ESPIONAGE_GRANT_SPY',                                   'Amount',                 3),

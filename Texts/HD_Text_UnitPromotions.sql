@@ -201,7 +201,7 @@ values
     ("LOC_SPY_PIONEER_IGNORE_DESCRIPTION",                                      "Ignore [ICON_MOVEMENT] movement penalty from all Terrians and Features because of your Trail-blazer's exploration."),
     ("LOC_PROMOTION_SPY_PIONEER_DESCRIPTION",                                   "All units within 6 tiles ignore [ICON_MOVEMENT] movement penalty from all Terrians and Features."), 
     ("LOC_PROMOTION_REACTIVE_ARMOR_DESCRIPTION",                                "+2 [ICON_STRENGTH] Combat Strength to all land units within 1 tiles."),
-    ("LOC_ABILITY_SCOUNT_IGNORE_ALL_HD_DESCRIPTION",                            "Ignore the extra [ICON_Movement] Movement cost from Marsh.");
+    ("LOC_ABILITY_SCOUNT_IGNORE_ALL_HD_DESCRIPTION",                            "Ignore the extra [ICON_Movement] Movement cost from Features.");
 
 --------------------------------------------------------------------------------
 -- Language: zh_Hans_CN
@@ -335,4 +335,4 @@ values
     ("zh_Hans_CN",  "LOC_SPY_PIONEER_IGNORE_DESCRIPTION",                                   "在拓路先驱已勘察地区移动，可穿越地形和地貌而不消耗额外 [ICON_MOVEMENT] 移动力。"),
     ("zh_Hans_CN",  "LOC_PROMOTION_SPY_PIONEER_DESCRIPTION",                                "就位后，6个单元格内的友方单位可穿越地形和地貌而不消耗额外 [ICON_MOVEMENT] 移动力。"),    
     ("zh_Hans_CN",  "LOC_PROMOTION_REACTIVE_ARMOR_DESCRIPTION",                             "在一个单元格以内，为所有陆地单位+2 [ICON_STRENGTH] 战斗力。"),
-    ("zh_Hans_CN",  "LOC_ABILITY_SCOUNT_IGNORE_ALL_HD_DESCRIPTION",                         "忽略沼泽带来的额外 [ICON_Movement] 移动力消耗。");
+    ("zh_Hans_CN",  "LOC_ABILITY_SCOUNT_IGNORE_ALL_HD_DESCRIPTION",                         "忽略地貌带来的额外 [ICON_Movement] 移动力消耗。");

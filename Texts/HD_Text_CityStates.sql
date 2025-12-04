@@ -49,8 +49,8 @@ values
     --("LOC_CIVILIZATION_KUMASI_BONUS",                     "Your [ICON_TradeRoute] Trade Routes to any city-state provide +1 [ICON_Culture] Culture for every specialty district in the origin city."), -- and +1 [ICON_Gold] Gold 
     ("LOC_LEADER_TRAIT_CHINGUETTI_DESCRIPTION",           "International and domestic [ICON_TradeRoute] Trade Routes receive +0.3 [ICON_FAITH] Faith for every follower in this city, of your founded or majority religion. [ICON_TradeRoute]Trade Routes provide +3 [Icon_Faith] Faith."),
     --("LOC_CIVILIZATION_CHINGUETTI_BONUS",                 "International and domestic [ICON_TradeRoute] Trade Routes receive +0.3 [ICON_FAITH] Faith for every follower in this city, of your founded or majority religion. [ICON_TradeRoute]Trade Routes provide +3 [Icon_Faith] Faith."),
-    ("LOC_LEADER_TRAIT_NGAZARGAMU_DESCRIPTION",           "Encampment recieves a small adjacency bonus from Desert and Desert Hills. Encampment on or adjacent to Desert or Desert Hills provides [ICON_FOOD] Food equal to its [ICON_PRODUCTION] Production adjacency bonus."),
-    --("LOC_CIVILIZATION_NGAZARGAMU_BONUS",                 "Encampment recieves a small adjacency bonus from Desert and Desert Hills. Encampment adjacent to Lake provides [ICON_FOOD] Food equal to its adjacency bonus."),
+    ("LOC_LEADER_TRAIT_NGAZARGAMU_DESCRIPTION",           "Encampment receives a small adjacency bonus from Desert and Desert Hills. Encampment on or adjacent to Desert or Desert Hills provides [ICON_FOOD] Food equal to its [ICON_PRODUCTION] Production adjacency bonus."),
+    --("LOC_CIVILIZATION_NGAZARGAMU_BONUS",                 "Encampment receives a small adjacency bonus from Desert and Desert Hills. Encampment adjacent to Lake provides [ICON_FOOD] Food equal to its adjacency bonus."),
     ("LOC_MINOR_CIV_NGAZARGAMU_DESERT_ENCAMPMENT_DESCRIPTION", "+{1_num} [ICON_PRODUCTION] Production from adjacent Desert {1_Num : plural 2?Tiles; other?Tile;}."),
     ("LOC_MINOR_CIV_NGAZARGAMU_DESERT_HILLS_ENCAMPMENT_DESCRIPTION", "+{1_num} [ICON_PRODUCTION] Production from adjacent Desert Hills {1_Num : plural 2?Tiles; other?Tile;}."),
     ("LOC_LEADER_TRAIT_BOLOGNA_DESCRIPTION",              "+3 corresponding [ICON_GREATPERSON] Great Person Points for each Districts."),
@@ -64,7 +64,7 @@ values
     ("LOC_LEADER_TRAIT_VATICAN_CITY_DESCRIPTION",         "If city has a wonder, Holy Site distirct gains standard adjacency bonus from districts."),
     --("LOC_CIVILIZATION_VATICAN_CITY_BONUS",               "Theater Square provides [ICON_Faith] Faith equal to its adjacency bonus. [ICON_GreatWork_Sculpture] Great Work of Sculpture, [ICON_GreatWork_Portrait] Great Work of Portrait, [ICON_GreatWork_Landscape] Great Work of Landscape,, [ICON_GreatWork_Religious] Great Work of Religious and [ICON_GreatWork_RELIC] Relic provide +3 [ICON_Culture] Culture."), -- 
     ("LOC_LEADER_TRAIT_BABYLON_DESCRIPTION",              "+3 [ICON_SCIENCE] Science if the Campus is on Hills or is adjacent to Mountains."), -- Campus provides +4 Great Writer points per turn.
-    --("LOC_CIVILIZATION_BABYLON_BONUS",                    "+1 [ICON_SCIENCE] Science from cities on Hills. Campus recieves a standard adjacency bonus from Hills."), -- Campus provides +4 Great Writer points per turn.
+    --("LOC_CIVILIZATION_BABYLON_BONUS",                    "+1 [ICON_SCIENCE] Science from cities on Hills. Campus receives a standard adjacency bonus from Hills."), -- Campus provides +4 Great Writer points per turn.
     ("LOC_MINOR_CIV_BABYLON_HILLS_CAMPUS_ADJACENCY_DESCRIPTION",    "+{1_num} [ICON_SCIENCE] Science from adjacent {1_Num : plural 2?Hills; other?Hill;}."),
     ("LOC_LEADER_TRAIT_FEZ_DESCRIPTION",                  "+2 [ICON_SCIENCE] Science from each building inside Holy Site."),
     --("LOC_CIVILIZATION_FEZ_BONUS",                        "+2 [ICON_SCIENCE] Science from each building inside Holy Site."),
@@ -83,7 +83,7 @@ values
     ("LOC_LEADER_TRAIT_JAKARTA_DESCRIPTION",              "Your districts (except City center) and wonders on or next to Shallow Sea and Lake tiles provide +3 [ICON_Gold] Gold."),
    -- ("LOC_CIVILIZATION_JAKARTA_BONUS",                    "Your districts (except City center) and wonders on or next to Shallow Sea and Lake tiles provide +3 [ICON_Gold] Gold."),
     ("LOC_LEADER_TRAIT_MUSCAT_DESCRIPTION",               "Your cities not on your original [ICON_CAPITAL] Capital's continent and your [ICON_CAPITAL] Capital gets +3 [ICON_GOLD] for each city on your original [ICON_CAPITAL] Capital's continent with a Commercial Hub. Your cities not on your original [ICON_CAPITAL] Capital's continent and your [ICON_CAPITAL] Capital gets +1 [ICON_PRODUCTION] for each city on your original [ICON_CAPITAL] Capital's continent with a Harbor."),
-    --("LOC_CIVILIZATION_MUSCAT_BONUS",                     "Commercial Hub and Harbor recieve a standard adjacency bonus from Mine, Quarry and Reef."),
+    --("LOC_CIVILIZATION_MUSCAT_BONUS",                     "Commercial Hub and Harbor receive a standard adjacency bonus from Mine, Quarry and Reef."),
     ("LOC_MINOR_CIV_MUSCAT_MINE_DESCRIPTION",             "+{1_num} [ICON_GOLD] Gold from adjacent {1_Num : plural 2?Mines; other?Mine;}."),
     ("LOC_MINOR_CIV_MUSCAT_QUARRY_DESCRIPTION",           "+{1_num} [ICON_GOLD] Gold from adjacent {1_Num : plural 2?Quarries; other?Quarry;}."),
     ("LOC_MINOR_CIV_MUSCAT_REEF_DESCRIPTION",             "+{1_num} [ICON_GOLD] Gold from adjacent {1_Num : plural 2?Reefs; other?Reef;}."),
@@ -105,8 +105,8 @@ values
     --("LOC_CIVILIZATION_NAN_MADOL_BONUS",                  "Your Districts(except City center) and Wonders on or next to Shallow Sea and Lake tiles provide +1 [ICON_Culture] Culture."),   
     ("LOC_LEADER_TRAIT_GENEVA_DESCRIPTION",               "Your cities earn +10% [ICON_SCIENCE] Science whenever you are not at war with any civilization."),
     --("LOC_CIVILIZATION_GENEVA_BONUS",                     "Your cities earn +10% [ICON_SCIENCE] Science whenever you are not at war with any civilization."),
-    ("LOC_LEADER_TRAIT_JOHANNESBURG_DESCRIPTION",         "Each of your city recieves +1 [ICON_PRODUCTION] Production and +3 [ICON_GOLD] Gold for each type of resource improved by Mine or Quarry in that city. Extra +1 [ICON_PRODUCTION] Production per type after researching 'Apprenticeship'."),
-    --("LOC_CIVILIZATION_JOHANNESBURG_BONUS",               "Each of your city recieves +1 [ICON_PRODUCTION] Production for each type of resource improved by Mine or Quarry in that city. Extra +1 [ICON_PRODUCTION] Production per type after researching 'Apprenticeship'."),
+    ("LOC_LEADER_TRAIT_JOHANNESBURG_DESCRIPTION",         "Each of your city receives +1 [ICON_PRODUCTION] Production and +3 [ICON_GOLD] Gold for each type of resource improved by Mine or Quarry in that city. Extra +1 [ICON_PRODUCTION] Production per type after researching 'Apprenticeship'."),
+    --("LOC_CIVILIZATION_JOHANNESBURG_BONUS",               "Each of your city receives +1 [ICON_PRODUCTION] Production for each type of resource improved by Mine or Quarry in that city. Extra +1 [ICON_PRODUCTION] Production per type after researching 'Apprenticeship'."),
     ("LOC_LEADER_TRAIT_BUENOS_AIRES_DESCRIPTION",         "Each district with at least +9 adjacency bonus provides +9% of the corresponding yield to the city."),
     --("LOC_CIVILIZATION_BUENOS_AIRES_BONUS",               "Each district with at least +9 adjacency bonus provides +9% of the corresponding yield to the city."),
 	("LOC_LEADER_TRAIT_LAHORE_DESCRIPTION",				  "Your cities can now train Nihang units.[NEWLINE][NEWLINE]A unit with a unique Promotion tree that can be purchased with [ICON_Faith] Faith. [ICON_Strength] Combat Strength is increased when Barracks, Armory, and Military Academy buildings are first constructed.");;
