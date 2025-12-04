@@ -1351,7 +1351,7 @@ values
 insert or replace into Modifiers
 	(ModifierId,								ModifierType,								SubjectRequirementSetId,								SubjectStackLimit)
 values
-	('ICE_HOCKEY_RINK_CITY_CULTURE_ATTACH',		'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER',	'PLOT_IS_TUNDRA_OR_SNOW_REQUIREMENTS',					1),
+	('ICE_HOCKEY_RINK_CITY_CULTURE_ATTACH',		'MODIFIER_ALL_DISTRICTS_ATTACH_MODIFIER',	'PLOT_IS_TUNDRA_OR_SNOW_REQUIREMENTS',					1),
 	('ICE_HOCKEY_RINK_CITY_CULTURE',			'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',		'PLOT_HAS_IMPROVEMENT_ICE_HOCKEY_RINK_REQUIREMENTS',	null);
 insert or replace into ModifierArguments
 	(ModifierId,								Name,			Value)
@@ -1364,7 +1364,7 @@ create temporary table HD_IceHockeyRinkBonuses (
 	AttachModifierId text,
 	ModifierId text
 );
-insert or replace into HD_IceHockeyRinkBonuses (DistrictType) select DistrictType from Districts where RequiresPopulation = 1 and TraitType is null;
+insert or replace into HD_IceHockeyRinkBonuses (DistrictType) select DistrictType from Districts where TraitType is null;
 update HD_IceHockeyRinkBonuses set ModifierId = 'ICE_HOCKEY_RINK_' || DistrictType || '_PRODUCTION';
 update HD_IceHockeyRinkBonuses set AttachModifierId = ModifierId || '_ATTACH';
 insert or replace into ImprovementModifiers
