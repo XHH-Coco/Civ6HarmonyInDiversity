@@ -1786,7 +1786,7 @@ insert or ignore into HD_CustomEventSelections (SelectionType, CustomEventType, 
 
 insert or ignore into HD_CustomEventSelectionModifiers(SelectionType, ModifierId) values
 	('HD_SELECTION_GOODY_HUT_BUILDER',	'HD_BANNOCKBURN_SELECTION_GRANT_BUILDER'),
-	('HD_SELECTION_GOODY_HUT_BUILDER',	'HD_BANNOCKBURN_SELECTION_GRANT_BUILDER');
+	('HD_SELECTION_BARBARIAN_BUILDER',	'HD_BANNOCKBURN_SELECTION_GRANT_BUILDER');
 
 -- 选项权重
 create table if not exists HD_Scotland_Selections(
