@@ -3488,6 +3488,7 @@ local BANNOCKBURN_CLEAR_BARBARIAN_EVENT = GlobalParameters.HD_BANNOCKBURN_CLEAR_
 local BANNOCKBURN_DECLARE_WAR_TAG = 'HD_BANNOCKBURN_DECLARE_WAR';
 local BANNOCKBURN_AT_WAR_WITH_MAJOR_TAG = 'HD_BANNOCKBURN_AT_WAR_WITH_MAJOR';
 
+local TERRAIN_OCEAN_INDEX = GameInfo.Terrains['TERRAIN_OCEAN'].Index;
 function BannockburnDiplomacyMeet(player1Id, player2Id)
 	local player1 = Players[player1Id];
 	local player2 = Players[player2Id];
@@ -3519,7 +3520,7 @@ function BannockburnTriggerEvents(playerId, eventId, x, y)
 	local isAdjacentToWater = false;
 	for direction = 0, 5 do
 		local plot = Map.GetAdjacentPlot(x, y, direction);
-		if plot and not plot:IsImpassable() and plot:IsWater() then
+		if plot and not plot:IsImpassable() and plot:IsWater() and plot:GetTerrainType() ~= TERRAIN_OCEAN_INDEX then
 			local units = Units.GetUnitsInPlot(plot:GetX(), plot:GetY());
 			if units ~= nil then
 				if #units == 0 then
@@ -3784,7 +3785,7 @@ function BannockburnTriggerEvents(playerId, eventId, x, y)
 					ScriptParam = {UnitType = 'UNIT_SAPPER', X = x, Y = y}
 				})
 			elseif (selectionType == 'HD_SELECTION_GOODY_HUT_GOLD' or selectionType == 'HD_SELECTION_BARBARIAN_GOLD') then
-				local amount = Game.GetRandNum(81, "Random gold amount for Player " .. playerId) + 40;
+				local amount = Game.GetRandNum(111, "Random gold amount for Player " .. playerId) + 10;
 				table.insert(param.SelectionList, {
 					Id = selectionType,
 					ButtonToolTip = Locale.Lookup(selectionInfo.ButtonToolTip, amount),
@@ -3807,7 +3808,7 @@ function BannockburnTriggerEvents(playerId, eventId, x, y)
 					table.insert(resourceList, RESOURCE_HORSES_INDEX);
 				end
 				randomIndex = Game.GetRandNum(#resourceList, "Random resource for Player " .. playerId) + 1;
-				local amount = Game.GetRandNum(31, "Random gold amount for Player " .. playerId) + 10;
+				local amount = Game.GetRandNum(11, "Random resource amount for Player " .. playerId) + 10;
 				local resourceInfo = GameInfo.Resources[resourceList[randomIndex]];
 				if resourceInfo then
 					table.insert(param.SelectionList, {
@@ -3923,7 +3924,7 @@ function Bannockburn_CustomEvent_OnChooseSelection(playerId, param)
 				local targetPlot;
 				for direction = 0, 5 do
 					local adjacentPlot = Map.GetAdjacentPlot(x, y, direction);
-					if adjacentPlot and not adjacentPlot:IsImpassable() and adjacentPlot:IsWater() then
+					if adjacentPlot and not adjacentPlot:IsImpassable() and adjacentPlot:IsWater() and adjacentPlot:GetTerrainType() ~= TERRAIN_OCEAN_INDEX then
 						local units = Units.GetUnitsInPlot(adjacentPlot:GetX(), adjacentPlot:GetY());
 						if units ~= nil then
 							if #units == 0 then
