@@ -350,7 +350,7 @@ values
 	("LOC_TRAIT_CIVILIZATION_FACES_OF_PEACE_NAME",             			 				 "The Last Best West"),
 	("LOC_TRAIT_CIVILIZATION_FACES_OF_PEACE_DESCRIPTION",                    "Allows Farms to be built on Tundra terrain. After Civil Engineering is unlocked Farms can be built on Tundra Hills. Basic Improvements on Tundra, Snow and these Hills provide +1 [ICON_FOOD] Food and [ICON_PRODUCTION] Production. Reduces the purchase cost of tiles in these terrain types by 50%."),
 	("LOC_TRAIT_LEADER_LAST_BEST_WEST_NAME",             			 			 				 "Four Faces of Peace"),
-	("LOC_TRAIT_LEADER_LAST_BEST_WEST_DESCRIPTION",                          "Cannot declare war on City-States or surprise wars. Surprise wars cannot be declared on you. Your cities earn +15% [ICON_Culture] Culture and +25% [ICON_Tourism] Tourism across your empire whenever you are not at war with any major civilization. When you dispersed a Barbarian Outpost, receive a builder reward in addition."),
+	("LOC_TRAIT_LEADER_LAST_BEST_WEST_DESCRIPTION",                          "Cannot declare war on City-States or surprise wars. Surprise wars cannot be declared on you. Your cities earn +15% [ICON_Culture] Culture and +25% [ICON_Tourism] Tourism across your empire whenever you are not at war with any major civilization. When you dispersed a [ICON_Barbarian] Barbarian Outpost, receive a builder reward in addition."),
 -- =====================================================================================================================================
 -- 俄罗斯
 -- =====================================================================================================================================
@@ -425,7 +425,7 @@ values
 	("LOC_TRAIT_LEADER_TRAJANS_COLUMN_NAME",                                 "Trajan's Forum"),
 	("LOC_TRAIT_LEADER_TRAJANS_COLUMN_DESCRIPTION",                          "All cities start with a Monument building. +100% construction speed towads builings in City Center. The construction of the Government Plaza district and buildings in it can be done immediately."),
 	-- 凯撒
-	("LOC_TRAIT_LEADER_CAESAR_DESCRIPTION",      			         			         "+300 [ICON_GOLD] Gold when you build or conquer a city. +300 [ICON_GOLD] Gold when you clear a Barbarian Outpost. When you conquer a city, all units within 3 tiles permanetly gets +1 [ICON_STRENGTH] Combat Strength."),
+	("LOC_TRAIT_LEADER_CAESAR_DESCRIPTION",      			         			         "+300 [ICON_GOLD] Gold when you build or conquer a city. +300 [ICON_GOLD] Gold when you clear a [ICON_Barbarian] Barbarian Outpost. When you conquer a city, all units within 3 tiles permanetly gets +1 [ICON_STRENGTH] Combat Strength."),
 	("LOC_CAESAR_STRENGTH_MODIFIER",                                         "+{1_Amount} [ICON_STRENGTH] Strength from conquered city."),
 -- =====================================================================================================================================
 -- 毛利
@@ -488,8 +488,8 @@ values
 -- =====================================================================================================================================
 -- 苏格兰
 -- =====================================================================================================================================
-	("LOC_TRAIT_CIVILIZATION_SCOTTISH_ENLIGHTENMENT_DESCRIPTION",            "Happy cities receive an additional +8% [ICON_SCIENCE] Science and +8% [ICON_PRODUCTION] Production. Happy cities generate +2 [ICON_GreatScientist] Great Scientist point per Campus, +2 [ICON_GreatEngineer] Great Engineer point per Industrial Zone. Joyful cities double all these values, Ecstatic cities triple all these values. Campus and Industrial Zone receive +1 [ICON_Amenities] Amenity and extra standard adjacency (instead of minor adjacency) from other Districts."),
-	("LOC_TRAIT_LEADER_BANNOCKBURN_DESCRIPTION",                             "Military units receive +4 [ICON_Strength] Combat Strength when defending in your territory. Military units trained in the cities with 5 or less [ICON_CITIZEN] Citizens start with a free promotion. Can declare a War of Liberation after gaining the Supply Civic. +100% [ICON_Production] Production and +2 [ICON_Movement] Movement for the first 10 turns after declaring a War of Liberation."),
+	("LOC_TRAIT_CIVILIZATION_SCOTTISH_ENLIGHTENMENT_DESCRIPTION",            "Happy cities receive an additional +8% [ICON_SCIENCE] Science and [ICON_PRODUCTION] Production. Happy cities generate +2 [ICON_GreatScientist] Great Scientist point per Campus, +2 [ICON_GreatEngineer] Great Engineer point per Industrial Zone. Joyful cities double all these values, Ecstatic cities triple all these values. Campus and Industrial Zone receive +1 [ICON_Amenities] Amenity and extra standard adjacency (instead of minor adjacency) from other Districts."),
+	("LOC_TRAIT_LEADER_BANNOCKBURN_DESCRIPTION",                             "Military units receive +4 [ICON_Strength] Combat Strength in your territory. The first civilization you meet will declare war on you. When you are at war with any Civilization: your cities receive +15% [ICON_PRODUCTION] Production; every time your units visit a Goody Hut or clear a [ICON_Barbarian] Barbarian Outpost, you can choose to recruit troops or get supplies."),
 -- =====================================================================================================================================
 -- 格鲁吉亚
 -- =====================================================================================================================================
@@ -1102,8 +1102,8 @@ values
 -- =====================================================================================================================================
 -- 苏格兰
 -- =====================================================================================================================================
-	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_SCOTTISH_ENLIGHTENMENT_DESCRIPTION",     "幸福度为快乐的城市额外+8% [ICON_SCIENCE] 科技值、+8% [ICON_PRODUCTION] 生产力。快乐的城市中每个学院+2 [ICON_GreatScientist] 大科学家点数、每个工业区+2 [ICON_GreatEngineer] 大工程师点数。喜悦的城市获得的上述加成将加倍，欣喜若狂的城市获得的上述加成将变为三倍。学院和工业区+1 [ICON_AMENITIES] 宜居度，且从其他区域获得额外标准相邻加成。"),
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_BANNOCKBURN_DESCRIPTION",                      "国境内的单位防御时+4 [ICON_Strength] 战斗力。低于5 [ICON_Citizen] 人口的城市生产的所有军事单位获得1次免费晋升。解锁“后勤补给”后即可宣布解放战争。宣布解放战争后的10回合内+100% [ICON_Production] 生产力、+2 [ICON_Movement] 移动力。"),
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_SCOTTISH_ENLIGHTENMENT_DESCRIPTION",     "幸福度为高兴的城市额外+8% [ICON_SCIENCE] 科技值和 [ICON_PRODUCTION] 生产力；其中的学院+2 [ICON_GreatScientist] 大科学家点数，工业区+2 [ICON_GreatEngineer] 大工程师点数。喜悦的城市获得的上述加成将加倍，欣喜若狂的城市获得的上述加成将变为三倍。学院和工业区+1 [ICON_AMENITIES] 宜居度，且从其他区域获得额外标准相邻加成。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_BANNOCKBURN_DESCRIPTION",                      "国境内的单位+4 [ICON_Strength] 战斗力。遇见的第一个文明会向你宣战。当您与任何文明发生战争时：你的城市+15% [ICON_PRODUCTION] 生产力；你的单位造访部落村庄或摧毁 [ICON_Barbarian] 蛮族哨站时，可以选择招募部队或获得补给。"),
 -- =====================================================================================================================================
 -- 格鲁吉亚
 -- =====================================================================================================================================

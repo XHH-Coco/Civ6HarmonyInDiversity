@@ -31,6 +31,10 @@ values
 	('IMPROVEMENT_COLOSSAL_HEAD',		'YIELD_FAITH',			2),
 	('IMPROVEMENT_MOAI',				'YIELD_CULTURE',		2),
 	
+	('IMPROVEMENT_GOLF_COURSE',		'YIELD_CULTURE',		2),
+	('IMPROVEMENT_GOLF_COURSE',		'YIELD_GOLD',				3),
+	('IMPROVEMENT_GOLF_COURSE',		'YIELD_PRODUCTION',	0),
+	
 	('IMPROVEMENT_ZIGGURAT',			'YIELD_SCIENCE',		1),
 	('IMPROVEMENT_ZIGGURAT',			'YIELD_FAITH',		0),
 	('IMPROVEMENT_MEKEWAP',				'YIELD_GOLD',			2),
@@ -159,6 +163,7 @@ values
 -- Adjacency Yield
 delete from Improvement_Adjacencies where
 	ImprovementType = 'IMPROVEMENT_ICE_HOCKEY_RINK'
+	or ImprovementType = 'IMPROVEMENT_GOLF_COURSE'
 	or (ImprovementType = 'IMPROVEMENT_TERRACE_FARM' and YieldChangeId = 'Terrace_AqueductAdjacency')
 	or (ImprovementType = 'IMPROVEMENT_CHATEAU' and YieldChangeId = 'Chateau_River')
 	or (ImprovementType = 'IMPROVEMENT_CHATEAU' and YieldChangeId = 'Chateau_WonderEarly')
@@ -206,7 +211,16 @@ values
 	('IMPROVEMENT_MISSION',			'Mission_Neighborhood_Food2'),
 	('IMPROVEMENT_MISSION',			'Mission_Neighborhood_Production2'),
 	('IMPROVEMENT_MISSION',			'Mission_Neighborhood_Food3'),
-	('IMPROVEMENT_MISSION',			'Mission_Neighborhood_Production3');
+	('IMPROVEMENT_MISSION',			'Mission_Neighborhood_Production3'),
+	-- 高尔夫球场
+	('IMPROVEMENT_GOLF_COURSE',			'HD_Golf_District_Production'),
+	('IMPROVEMENT_GOLF_COURSE',			'HD_Golf_District_Gold'),
+	('IMPROVEMENT_GOLF_COURSE',			'HD_Golf_Wonder_Culture');
+
+insert or replace into Adjacency_YieldChanges (ID, Description, YieldType, YieldChange, OtherDistrictAdjacent, AdjacentWonder) values
+	('HD_Golf_District_Production',	'Placeholder', 'YIELD_PRODUCTION',	1, 1, 0),
+	('HD_Golf_District_Gold',				'Placeholder', 'YIELD_GOLD',				3, 1, 0),
+	('HD_Golf_Wonder_Culture',			'Placeholder', 'YIELD_CULTURE',			2, 0, 1);
 
 insert or replace into Adjacency_YieldChanges
 	(ID,										Description,	YieldType,			YieldChange,	AdjacentDistrict)
@@ -647,7 +661,7 @@ insert or replace into Adjacency_YieldChanges (ID, Description, YieldType, Yield
 
 -- 建造圣地建筑允许额外建造金字形神塔
 insert or replace into TraitModifiers (TraitType,	ModifierId)
-	select distinct 'TRAIT_LEADER_MAJOR_CIV', 'HD_CITY_ALLOW_EXTRA_ZIGGURAT_FROM_TIER_' || Tier || '_HOLY_SITE_BUILDING'
+	select distinct 'TRAIT_CIVILIZATION_IMPROVEMENT_ZIGGURAT', 'HD_CITY_ALLOW_EXTRA_ZIGGURAT_FROM_TIER_' || Tier || '_HOLY_SITE_BUILDING'
 from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_HOLY_SITE';
 
 insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId)
@@ -1087,92 +1101,71 @@ values
 	('HD_MISSION_FOREIGN_CITY_CENTER_PRODUCTION',		'YieldType',	'YIELD_PRODUCTION'),
 	('HD_MISSION_FOREIGN_CITY_CENTER_PRODUCTION',		'Amount',			1);
 
--- Golf Course (Scotland)(fox)
-	-- pre
-update Improvements set PrereqCivic = 'CIVIC_GAMES_RECREATION', SameAdjacentValid = 0, Workable = 0 where ImprovementType = 'IMPROVEMENT_GOLF_COURSE';
-
-delete from Improvement_YieldChanges where ImprovementType = 'IMPROVEMENT_GOLF_COURSE';
-
+-- 高尔夫球场
+update Improvements set PrereqCivic = 'CIVIC_GAMES_RECREATION', OnePerCity = 0 where ImprovementType = 'IMPROVEMENT_GOLF_COURSE';
 delete from Improvement_BonusYieldChanges where ImprovementType = 'IMPROVEMENT_GOLF_COURSE';
-
-delete from Improvement_Adjacencies where ImprovementType = 'IMPROVEMENT_GOLF_COURSE';
-
 delete from ImprovementModifiers where ImprovementType = 'IMPROVEMENT_GOLF_COURSE';
-		
-	-- modifier
-insert or replace into ImprovementModifiers
-	(ImprovementType,				ModifierId)
-values
-	('IMPROVEMENT_GOLF_COURSE',		'GOLFCOURSE_AMENITY_TIER1'),
-	('IMPROVEMENT_GOLF_COURSE',		'GOLFCOURSE_AMENITY_TIER2'),
-	('IMPROVEMENT_GOLF_COURSE',		'GOLFCOURSE_DISTRICT_CULTURE');
 
-insert or replace into Modifiers
-	(ModifierId,																ModifierType,																				SubjectRequirementSetId)
-values
-	('GOLFCOURSE_AMENITY_TIER1',								'MODIFIER_SINGLE_CITY_ADJUST_IMPROVEMENT_AMENITY',	NULL),
-	('GOLFCOURSE_AMENITY_TIER2',								'MODIFIER_SINGLE_CITY_ADJUST_IMPROVEMENT_AMENITY',	'PLAYER_HAS_CIVIC_HUMANISM_REQUIREMENTS'),
-	('GOLFCOURSE_DISTRICT_CULTURE',							'MODIFIER_PLAYER_DISTRICTS_ADJUST_YIELD_CHANGE',		'REQUIRE_PLOT_ADJACENT_TO_OWNER_AND_NOT_WONDER');
+insert or replace into ImprovementModifiers (ImprovementType, ModifierId) values
+	('IMPROVEMENT_GOLF_COURSE', 'GOLFCOURSE_AMENITY_TIER');
 
-insert or replace into ModifierArguments
-	(ModifierId,						Name,				Value)
-values
-	('GOLFCOURSE_AMENITY_TIER1',		'Type',				'ARGTYPE_IDENTITY'),
-	('GOLFCOURSE_AMENITY_TIER1',		'Amount',			1),
-	('GOLFCOURSE_AMENITY_TIER2',		'Type',				'ARGTYPE_IDENTITY'),
-	('GOLFCOURSE_AMENITY_TIER2',		'Amount',			1),
-	('GOLFCOURSE_DISTRICT_CULTURE',		'YieldType',				'YIELD_CULTURE'),
-	('GOLFCOURSE_DISTRICT_CULTURE',		'Amount',			1);
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) values
+	('GOLFCOURSE_AMENITY_TIER', 'MODIFIER_SINGLE_CITY_ADJUST_IMPROVEMENT_AMENITY', NULL);
 
--- 区域加速
-insert or replace into ImprovementModifiers
-	(ImprovementType,						ModifierId)
-select
-	'IMPROVEMENT_GOLF_COURSE',	'IMPROVEMENT_GOLF_COURSE_' || DistrictType || '_PRODUCTION'
-from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
+	('GOLFCOURSE_AMENITY_TIER', 'Amount', 1);
 
-insert or replace into Modifiers
-	(ModifierId,																									ModifierType,																					OwnerRequirementSetId,																	SubjectStackLimit)
-select
-	'IMPROVEMENT_GOLF_COURSE_' || DistrictType || '_PRODUCTION',	'MODIFIER_PLAYER_CITIES_ADJUST_DISTRICT_PRODUCTION',	'PLOT_ADJACENT_TO_' || DistrictType || '_REQUIREMENTS',	1
-from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+-- 伟人点
+insert or replace into ImprovementModifiers (ImprovementType, ModifierId) select
+	'IMPROVEMENT_GOLF_COURSE',	'HD_GOLF_COURSE_' || DistrictType || '_' || GreatPersonClassType
+from DistrictCorrespondingGPP_HD;
 
-insert or replace into ModifierArguments
-	(ModifierId,																									Name,						Value)
-select
-	'IMPROVEMENT_GOLF_COURSE_' || DistrictType || '_PRODUCTION',	'DistrictType',	DistrictType
-from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) select
+	'HD_GOLF_COURSE_' || DistrictType || '_' || GreatPersonClassType, 'MODIFIER_PLAYER_DISTRICTS_ADJUST_GREAT_PERSON_POINTS', 'HD_DISTRICT_IS_' || DistrictType || '_WITHIN_1_TILE'
+from DistrictCorrespondingGPP_HD;
 
-insert or replace into ModifierArguments
-	(ModifierId,																									Name,						Value)
-select
-	'IMPROVEMENT_GOLF_COURSE_' || DistrictType || '_PRODUCTION',	'Amount',				30
-from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+insert or replace into ModifierArguments (ModifierId, Name, Value) select
+	'HD_GOLF_COURSE_' || DistrictType || '_' || GreatPersonClassType, 'GreatPersonClassType', GreatPersonClassType
+from DistrictCorrespondingGPP_HD;
 
--- 相邻加成
-insert or replace into ImprovementModifiers
-	(ImprovementType,						ModifierId)
-select
-	'IMPROVEMENT_GOLF_COURSE',	'IMPROVEMENT_GOLF_COURSE_' || DistrictType || '_ADJACENCY'
-from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+insert or replace into ModifierArguments (ModifierId, Name, Value) select
+	'HD_GOLF_COURSE_' || DistrictType || '_' || GreatPersonClassType, 'Amount', 4
+from DistrictCorrespondingGPP_HD;
 
-insert or replace into Modifiers
-	(ModifierId,																									ModifierType,																					OwnerRequirementSetId,																	SubjectRequirementSetId,															SubjectStackLimit)
-select
-	'IMPROVEMENT_GOLF_COURSE_' || DistrictType || '_ADJACENCY',		'MODIFIER_PLAYER_DISTRICTS_ADJUST_YIELD_MODIFIER',		'PLOT_ADJACENT_TO_' || DistrictType || '_REQUIREMENTS',	'REQUIRES_DISTRICT_IS_' || DistrictType || '_UDMET',	1
-from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+-- 建造个数限制
+insert or ignore into ImprovementsNeedCount_HD (ImprovementType) values ('IMPROVEMENT_GOLF_COURSE');
 
-insert or replace into ModifierArguments
-	(ModifierId,																									Name,						Value)
-select
-	'IMPROVEMENT_GOLF_COURSE_' || DistrictType || '_ADJACENCY',		'YieldType',		YieldType
-from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+insert or replace into TraitModifiers (TraitType,	ModifierId)
+	select distinct 'TRAIT_CIVILIZATION_IMPROVEMENT_GOLF_COURSE', 'HD_CITY_ALLOW_EXTRA_GOLF_COURSE_FROM_TIER_' || Tier || '_ENTERTAINMENT_BUILDING'
+from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_ENTERTAINMENT_COMPLEX';
 
-insert or replace into ModifierArguments
-	(ModifierId,																									Name,						Value)
-select
-	'IMPROVEMENT_GOLF_COURSE_' || DistrictType || '_ADJACENCY',		'Amount',				50
-from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId)
+	select distinct 'HD_CITY_ALLOW_EXTRA_GOLF_COURSE_FROM_TIER_' || Tier || '_ENTERTAINMENT_BUILDING', 'MODIFIER_PLAYER_CITIES_ADJUST_PROPERTY', 'CITY_HAS_DISTRICT_ENTERTAINMENT_COMPLEX_TIER_' || Tier || '_BUILDING_REQUIREMENTS'
+from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_ENTERTAINMENT_COMPLEX';
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select distinct 'HD_CITY_ALLOW_EXTRA_GOLF_COURSE_FROM_TIER_' || Tier || '_ENTERTAINMENT_BUILDING', 'Key', 'HD_CITY_ALLOW_EXTRA_IMPROVEMENT_GOLF_COURSE'
+from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_ENTERTAINMENT_COMPLEX';
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select distinct 'HD_CITY_ALLOW_EXTRA_GOLF_COURSE_FROM_TIER_' || Tier || '_ENTERTAINMENT_BUILDING', 'Amount', 1
+from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_ENTERTAINMENT_COMPLEX';
+
+insert or replace into TraitModifiers (TraitType,	ModifierId)
+	select distinct 'TRAIT_CIVILIZATION_IMPROVEMENT_GOLF_COURSE', 'HD_CITY_ALLOW_EXTRA_GOLF_COURSE_FROM_TIER_' || Tier || '_WATER_ENTERTAINMENT_BUILDING'
+from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_WATER_ENTERTAINMENT_COMPLEX';
+
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId)
+	select distinct 'HD_CITY_ALLOW_EXTRA_GOLF_COURSE_FROM_TIER_' || Tier || '_WATER_ENTERTAINMENT_BUILDING', 'MODIFIER_PLAYER_CITIES_ADJUST_PROPERTY', 'CITY_HAS_DISTRICT_WATER_ENTERTAINMENT_COMPLEX_TIER_' || Tier || '_BUILDING_REQUIREMENTS'
+from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_WATER_ENTERTAINMENT_COMPLEX';
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select distinct 'HD_CITY_ALLOW_EXTRA_GOLF_COURSE_FROM_TIER_' || Tier || '_WATER_ENTERTAINMENT_BUILDING', 'Key', 'HD_CITY_ALLOW_EXTRA_IMPROVEMENT_GOLF_COURSE'
+from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_WATER_ENTERTAINMENT_COMPLEX';
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select distinct 'HD_CITY_ALLOW_EXTRA_GOLF_COURSE_FROM_TIER_' || Tier || '_WATER_ENTERTAINMENT_BUILDING', 'Amount', 1
+from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_WATER_ENTERTAINMENT_COMPLEX';
 
 
 -- Open-Air Museum (Sweden)

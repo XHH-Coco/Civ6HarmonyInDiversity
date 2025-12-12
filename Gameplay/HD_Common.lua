@@ -814,3 +814,96 @@ local function GetUnitProperty(playerId, unitId, tag)
 	return unit:GetProperty(tag);
 end
 Utils.GetUnitProperty = GetUnitProperty;
+
+-- 宣战
+local function DeclareWarBetweenPlayers(player1Id, player2Id, warId)
+	local player1 = Players[player1Id];
+	if player1 and player1:GetDiplomacy():CanDeclareWarOn(player2Id, warId, true) then
+		player1:GetDiplomacy():DeclareWarOn(player2Id, warId, true);
+		return true;
+	end
+
+	return false;
+end
+Utils.DeclareWarBetweenPlayers = DeclareWarBetweenPlayers;
+
+-- 按权重展开的列表
+local function GetListByWeight(dataList, resultList, dataName)
+	local list = resultList or {};
+	dataName = dataName or 'Data';
+	for _, data in ipairs(dataList) do
+		for i = 1, data.Weight do
+			table.insert(list, data[dataName]);
+		end
+	end
+
+	return list;
+end
+Utils.GetListByWeight = GetListByWeight;
+
+-- 获取已解锁的某个兵种的列表
+local function GetUnlockedUnitListByPromotionClass(playerId, promotionClass, Domain, resultList)
+	local list = resultList or {};
+	local player = Players[playerId];
+	if player then
+		for row in GameInfo.Units() do
+			if row.PromotionClass == promotionClass and
+			(not row.PrereqTech or player:GetTechs():HasTech(GameInfo.Technologies[row.PrereqTech].Index)) and
+			(not row.PrereqCivic or player:GetCulture():HasCivic(GameInfo.Civics[row.PrereqCivic].Index)) and
+			(not Domain or row.Domain == Domain) then
+				table.insert(list, row.Index);
+			end
+		end
+	end
+
+	return list;
+end
+Utils.GetUnlockedUnitListByPromotionClass = GetUnlockedUnitListByPromotionClass;
+
+-- 根据当前世界时代获取某个兵种的列表
+local function GetUnitListByPromotionClassByWorldEra(promotionClass, Domain, resultList)
+	local list = resultList or {};
+
+	for row in GameInfo.Units() do
+		if row.PromotionClass == promotionClass and (not Domain or row.Domain == Domain) then
+			local unitEraIndex = 1;
+			local gameEraIndex = GameInfo.Eras[Game.GetEras():GetCurrentEra()].ChronologyIndex;
+
+			if row.PrereqTech then
+				unitEraIndex = GameInfo.Eras[GameInfo.Technologies[row.PrereqTech].EraType].ChronologyIndex;
+			end
+
+			if row.PrereqCivic then
+				unitEraIndex = GameInfo.Eras[GameInfo.Civics[row.PrereqCivic].EraType].ChronologyIndex;
+			end
+
+			if unitEraIndex <= gameEraIndex then
+				table.insert(list, row.Index);
+				-- print(Locale.Lookup(row.Name))
+			end
+		end
+	end
+
+	return list;
+end
+Utils.GetUnitListByPromotionClassByWorldEra = GetUnitListByPromotionClassByWorldEra;
+
+-- 获取已解锁的某个类型的资源
+local function GetUnlockedResourceListByClass(playerId, resourceClassType)
+	local list = {};
+	local player = Players[playerId];
+
+	if player then
+		for row in GameInfo.Resources() do
+			if row.ResourceClassType == resourceClassType and (row.Frequency ~= 0 or row.SeaFrequency ~= 0) and
+			(not row.PrereqTech or player:GetTechs():HasTech(GameInfo.Technologies[row.PrereqTech].Index)) and
+			(not row.PrereqCivic or player:GetCulture():HasCivic(GameInfo.Civics[row.PrereqCivic].Index)) then
+				table.insert(list, row.Index);
+				-- print(Locale.Lookup(row.Name))
+			end
+		end
+	end
+
+	return list;
+end
+Utils.GetUnlockedResourceListByClass = GetUnlockedResourceListByClass;

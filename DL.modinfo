@@ -821,6 +821,7 @@
       <File>Assets/CityButtons/CityButtons_32.dds</File>
       <File>Assets/Commemorations/HD_Commemorations_86.dds</File>
       <File>Assets/Commemorations/HD_Commemorations_256.dds</File>
+      <File>Assets/CustomEvents/HD_SCOTLAND_SELECTIONS_256.dds</File>
     </ImportFiles>
     <!-- Fix Icon -->
     <UpdateIcons id="FixIcons" criteria="Expansion2">
@@ -1829,6 +1830,7 @@
       <File>UI/Icons/HD_Icons_STUUexpansion.xml</File>
       <File>UI/Icons/HD_Icons_Resources.sql</File>
       <File>UI/Icons/HD_Icons_CityButtons.xml</File>
+      <File>UI/Icons/HD_Icons_CustomEvents.sql</File>
     </UpdateIcons>
     <!-- Gameplay-->
     <AddGameplayScripts id="DL_Scripts_Gameplay" criteria="Expansion2">
@@ -1915,6 +1917,7 @@
       <File>Texts/HD_Text_Classifications.sql</File>
       <File>Texts/HD_Text_ToolTip.sql</File>
       <File>Texts/HD_Text_Report_Screen.sql</File>
+      <File>Texts/HD_Text_CustomEvents.sql</File>
     </UpdateText>
     <UpdateText id="DL_Text_Late" criteria="Expansion2">
       <Properties><LoadOrder>20000</LoadOrder></Properties>
@@ -2194,6 +2197,30 @@
       <Properties><LoadOrder>1</LoadOrder></Properties>
       <File>SubMods/GovernorsDiversity/bishop2-2/Temp_Interface2.lua</File>
     </ImportFiles>
+
+    <!-- 自定义事件框架 -->
+    <UpdateDatabase id="HD_CustomEvents_Database" criteria="Expansion2">
+      <File>CustomEvents/Database/TableDefinations.sql</File>
+    </UpdateDatabase>
+    <UpdateText id="HD_CustomEvents_Texts" criteria="Expansion2">
+      <File>CustomEvents/Texts/Texts.sql</File>
+    </UpdateText>
+    <UpdateIcons id="HD_CustomEvents_Icons" criteria="Expansion2">
+      <File>CustomEvents/Icons/Icons.sql</File>
+    </UpdateIcons>
+    <AddGameplayScripts id="HD_CustomEvents_Gameplay" criteria="Expansion2">
+      <File>CustomEvents/Gameplay/HD_CustomEvent_GP.lua</File>
+    </AddGameplayScripts>
+    <AddUserInterfaces id="HD_CustomEvents_UI" criteria="Expansion2">
+      <Properties><Context>InGame</Context></Properties>
+      <File>CustomEvents/UI/HD_CustomEventPanel_Dark.xml</File>
+      <File>CustomEvents/UI/HD_CustomEventPanel_Light.xml</File>
+    </AddUserInterfaces>
+    <ImportFiles id="HD_CustomEvents_Import" criteria="Expansion2">
+      <File>CustomEvents/UI/HD_CustomEventPanel_Dark.lua</File>
+      <File>CustomEvents/UI/HD_CustomEventPanel_Light.lua</File>
+    </ImportFiles>
+
   </InGameActions>
 
   <!-- 文件导入 -->
@@ -2458,6 +2485,7 @@
     <File>UI/Icons/HD_Icons_Resources.sql</File>
     <File>UI/Icons/HD_Icons_Monopoply.sql</File>
     <File>UI/Icons/HD_Icons_CityButtons.xml</File>
+    <File>UI/Icons/HD_Icons_CustomEvents.sql</File>
 
     <!-- Mod Support -->
     <File>ModSupport/HistoricalReligions/Switch.sql</File>
@@ -2787,7 +2815,18 @@
     <File>Texts/HD_Text_Classifications.sql</File>
     <File>Texts/HD_Text_ToolTip.sql</File>
     <File>Texts/HD_Text_Report_Screen.sql</File>
+    <File>Texts/HD_Text_CustomEvents.sql</File>
     
+    <!-- CustomEvents -->
+    <File>CustomEvents/Database/TableDefinations.sql</File>
+    <File>CustomEvents/Texts/Texts.sql</File>
+    <File>CustomEvents/Icons/Icons.sql</File>
+    <File>CustomEvents/Gameplay/HD_CustomEvent_GP.lua</File>
+    <File>CustomEvents/UI/HD_CustomEventPanel_Dark.lua</File>
+    <File>CustomEvents/UI/HD_CustomEventPanel_Dark.xml</File>
+    <File>CustomEvents/UI/HD_CustomEventPanel_Light.lua</File>
+    <File>CustomEvents/UI/HD_CustomEventPanel_Light.xml</File>
+
     <!-- Assets -->
     <File>Assets/TechCivics/HDCivicIcons_38.dds</File>
     <File>Assets/TechCivics/HDCivicIcons_42.dds</File>
@@ -2964,6 +3003,7 @@
     <File>Assets/CityButtons/CityButtons_32.dds</File>
     <File>Assets/Commemorations/HD_Commemorations_86.dds</File>
     <File>Assets/Commemorations/HD_Commemorations_256.dds</File>
+    <File>Assets/CustomEvents/HD_SCOTLAND_SELECTIONS_256.dds</File>
 
     <!-- Platforms -->
     <File>Platforms/Windows/audio/HD_CHINA.ini</File>

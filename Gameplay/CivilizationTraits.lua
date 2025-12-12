@@ -3477,6 +3477,531 @@ function OutbackStationImprovementAddedToMap(x, y, improvementId, playerId, reso
 		end
 	end
 end
+
+-- =====================================================================================================================================
+-- 苏格兰
+-- =====================================================================================================================================
+local BANNOCKBURN_FIRST_CIV_DECLARE_WAR = GlobalParameters.HD_BANNOCKBURN_FIRST_CIV_DECLARE_WAR or 0;
+local BANNOCKBURN_VISIT_GOODY_HUT_EVENT = GlobalParameters.HD_BANNOCKBURN_VISIT_GOODY_HUT_EVENT or 0;
+local BANNOCKBURN_CLEAR_BARBARIAN_EVENT = GlobalParameters.HD_BANNOCKBURN_CLEAR_BARBARIAN_EVENT or 0;
+
+local BANNOCKBURN_DECLARE_WAR_TAG = 'HD_BANNOCKBURN_DECLARE_WAR';
+local BANNOCKBURN_AT_WAR_WITH_MAJOR_TAG = 'HD_BANNOCKBURN_AT_WAR_WITH_MAJOR';
+
+function BannockburnDiplomacyMeet(player1Id, player2Id)
+	local player1 = Players[player1Id];
+	local player2 = Players[player2Id];
+
+	if BANNOCKBURN_FIRST_CIV_DECLARE_WAR == 1 and player1 and player1:IsMajor() and player2 and player2:IsMajor() then
+		if LeaderHasTrait(player1Id, 'TRAIT_LEADER_BANNOCKBURN') and player1:GetProperty(BANNOCKBURN_DECLARE_WAR_TAG) ~= 1 then
+			if Utils.DeclareWarBetweenPlayers(player2Id, player1Id, WarTypes.SURPRISE_WAR) then
+				player1:SetProperty(BANNOCKBURN_DECLARE_WAR_TAG, 1);
+			end
+		elseif LeaderHasTrait(player2Id, 'TRAIT_LEADER_BANNOCKBURN') and player2:GetProperty(BANNOCKBURN_DECLARE_WAR_TAG) ~= 1 then
+			if Utils.DeclareWarBetweenPlayers(player1Id, player2Id, WarTypes.SURPRISE_WAR) then
+				player2:SetProperty(BANNOCKBURN_DECLARE_WAR_TAG, 1);
+			end
+		end
+	end
+end
+Events.DiplomacyMeet.Add(BannockburnDiplomacyMeet);
+
+local RESOURCE_HORSES_INDEX = GameInfo.Resources['RESOURCE_HORSES'].Index;
+local RESOURCE_IRON_INDEX = GameInfo.Resources['RESOURCE_IRON'].Index;
+function BannockburnTriggerEvents(playerId, eventId, x, y)
+	local param = {
+		PlayerId = playerId,
+		EventId = eventId,
+		SelectionList = {}
+	};
+
+	-- 是否靠近水域 且可以生成海军
+	local isAdjacentToWater = false;
+	for direction = 0, 5 do
+		local plot = Map.GetAdjacentPlot(x, y, direction);
+		if plot and not plot:IsImpassable() and plot:IsWater() then
+			local units = Units.GetUnitsInPlot(plot:GetX(), plot:GetY());
+			if units ~= nil then
+				if #units == 0 then
+					isAdjacentToWater = true;
+					break;
+				end
+			end
+		end
+	end
+
+	-- 3环内是否有马/铁
+	local hasHorse = false;
+	local hasIron = false;
+	local adjacentPlots = Map.GetNeighborPlots(x, y, 3);
+	for _, adjacentPlot in pairs(adjacentPlots) do
+		if adjacentPlot:GetResourceType() == RESOURCE_HORSES_INDEX then
+			hasHorse = true;
+		end
+		if adjacentPlot:GetResourceType() == RESOURCE_IRON_INDEX then
+			hasIron = true;
+		end
+		if hasHorse and hasIron then break; end
+	end
+
+	-- 是否有地貌
+	local plot = Map.GetPlot(x, y);
+	local hasFeature = plot:GetFeatureType() ~= -1;
+
+	-- 单位相关判定
+	local canHeal = false;
+	local canPromote = false;
+	local units = Units.GetUnitsInPlot(x, y);
+	if units ~= nil then
+		for _, unit in ipairs(units) do
+			local unitInfo = GameInfo.Units[unit:GetType()];
+			if unitInfo and unit:GetOwner() == playerId then
+				if unit:GetDamage() > 0 then
+					canHeal = true;
+				end
+
+				local formationClass = unitInfo.FormationClass;
+				if (formationClass == 'FORMATION_CLASS_LAND_COMBAT' or formationClass == 'FORMATION_CLASS_NAVAL') then
+					local nextExp = unit:GetExperience():GetExperienceForNextLevel();
+					local nowExp = unit:GetExperience():GetExperiencePoints();
+					if nextExp > nowExp and nowExp >= 0 then
+						canPromote = true;
+					end
+				end
+			end
+			
+			if canHeal and canPromote then break; end
+		end
+	end
+
+	print("==========================================================================")
+	print('isAdjacentToWater', isAdjacentToWater);
+	print('hasHorse', hasHorse);
+	print('hasIron', hasIron);
+	print('hasFeature', hasFeature);
+
+	-- 查询可用选项列表
+	local recruitList = {};
+	local supplyList = {};
+	for row in GameInfo.HD_CustomEventSelections() do
+		if row.CustomEventType == eventId then
+			-- 查询子分类和权重
+			local info = GameInfo.HD_Scotland_Selections[row.SelectionType];
+			if info then
+				-- 追加额外判断
+				if (row.SelectionType == 'HD_SELECTION_GOODY_HUT_RECON' or row.SelectionType == 'HD_SELECTION_BARBARIAN_RECON') then
+					-- 侦察兵：有地貌
+					if hasFeature then
+						table.insert(recruitList, {
+							SelectionType = row.SelectionType,
+							Weight = info.Weight
+						});
+					end
+				elseif (row.SelectionType == 'HD_SELECTION_GOODY_HUT_LAND' or row.SelectionType == 'HD_SELECTION_BARBARIAN_LAND') then
+					-- 陆军：附近没马
+					if not hasHorse then
+						table.insert(recruitList, {
+							SelectionType = row.SelectionType,
+							Weight = info.Weight
+						});
+					end
+				elseif (row.SelectionType == 'HD_SELECTION_GOODY_HUT_CAVALRY' or row.SelectionType == 'HD_SELECTION_BARBARIAN_CAVALRY') then
+					-- 骑兵：附近有马
+					if hasHorse then
+						table.insert(recruitList, {
+							SelectionType = row.SelectionType,
+							Weight = info.Weight
+						});
+					end
+				elseif (row.SelectionType == 'HD_SELECTION_GOODY_HUT_NAVAL' or row.SelectionType == 'HD_SELECTION_BARBARIAN_NAVAL') then
+					-- 海军：沿海
+					if isAdjacentToWater then
+						table.insert(recruitList, {
+							SelectionType = row.SelectionType,
+							Weight = info.Weight
+						});
+					end
+				elseif (row.SelectionType == 'HD_SELECTION_GOODY_HUT_SAPPER' or row.SelectionType == 'HD_SELECTION_BARBARIAN_SAPPER') then
+					-- 工兵：不沿海，附近有铁
+					if hasIron then
+						table.insert(recruitList, {
+							SelectionType = row.SelectionType,
+							Weight = info.Weight
+						});
+					end
+				elseif (row.SelectionType == 'HD_SELECTION_GOODY_HUT_HEAL' or row.SelectionType == 'HD_SELECTION_BARBARIAN_HEAL') then
+					-- 治疗：单位不是满血
+					if canHeal then
+						table.insert(supplyList, {
+							SelectionType = row.SelectionType,
+							Weight = info.Weight
+						});
+					end
+				elseif (row.SelectionType == 'HD_SELECTION_GOODY_HUT_PROMOTION' or row.SelectionType == 'HD_SELECTION_BARBARIAN_PROMOTION') then
+					-- 晋升：军事单位 经验不满
+					if canPromote then
+						table.insert(supplyList, {
+							SelectionType = row.SelectionType,
+							Weight = info.Weight
+						});
+					end
+				else
+					-- 其余选项 无特殊条件
+					if info.SubType == 'RECRUIT' then
+						table.insert(recruitList, {
+							SelectionType = row.SelectionType,
+							Weight = info.Weight
+						});
+					elseif info.SubType == 'SUPPLY' then
+						table.insert(supplyList, {
+							SelectionType = row.SelectionType,
+							Weight = info.Weight
+						});
+					end
+				end
+			end
+		end
+	end
+
+	print("==========================================================================")
+	for _, data in ipairs(recruitList) do
+		print(data.SelectionType);
+	end
+	for _, data in ipairs(supplyList) do
+		print(data.SelectionType);
+	end
+
+	-- 随机选取选项
+	local recruitPool = Utils.GetListByWeight(recruitList, {}, 'SelectionType');
+	local supplyPool = Utils.GetListByWeight(supplyList, {}, 'SelectionType');
+
+	print("==========================================================================")
+	for _, selectionType in ipairs(recruitPool) do
+		print(selectionType);
+	end
+	for _, selectionType in ipairs(supplyPool) do
+		print(selectionType);
+	end
+
+	print("==========================================================================")
+	local resultList = {};
+	-- 1、招募
+	local randomIndex = Game.GetRandNum(#recruitPool, "Random recruit selection for Player " .. playerId) + 1;
+	local recruitType = recruitPool[randomIndex];
+	table.insert(resultList, recruitPool[randomIndex]);
+
+	-- 2、补给
+	randomIndex = Game.GetRandNum(#supplyPool, "Random supply selection for Player " .. playerId) + 1;
+	local supplyType = supplyPool[randomIndex];
+	table.insert(resultList, supplyPool[randomIndex]);
+
+	-- 3、招募/补给
+	local allPool = {};
+	for _, selectionType in ipairs(recruitPool) do
+		if selectionType ~= recruitType then
+			table.insert(allPool, selectionType);
+		end
+	end
+	for _, selectionType in ipairs(supplyPool) do
+		if selectionType ~= supplyType then
+			table.insert(allPool, selectionType);
+		end
+	end
+
+	for _, selectionType in ipairs(allPool) do
+		print(selectionType);
+	end
+
+	randomIndex = Game.GetRandNum(#allPool, "Random all selection for Player " .. playerId) + 1;
+	table.insert(resultList, allPool[randomIndex]);
+
+	print("==========================================================================")
+	-- Id
+	-- ButtonToolTip
+	-- ScriptParam
+		-- UnitType
+		-- Amount
+		-- ResourceType
+		-- X
+		-- Y
+	for _, selectionType in ipairs(resultList) do
+		print(selectionType)
+		local selectionInfo = GameInfo.HD_CustomEventSelections[selectionType];
+		if selectionInfo then
+			if (selectionType == 'HD_SELECTION_GOODY_HUT_RECON' or selectionType == 'HD_SELECTION_BARBARIAN_RECON') then
+				local unitList = Utils.GetUnitListByPromotionClassByWorldEra('PROMOTION_CLASS_RECON', 'DOMAIN_LAND');
+				randomIndex = Game.GetRandNum(#unitList, "Random recruit unit for Player " .. playerId) + 1;
+				local unitInfo = GameInfo.Units[unitList[randomIndex]];
+				if unitInfo then
+					table.insert(param.SelectionList, {
+						Id = selectionType,
+						ButtonToolTip = Locale.Lookup(selectionInfo.ButtonToolTip, unitInfo.Name),
+						ScriptParam = {UnitType = unitInfo.UnitType, X = x, Y = y}
+					})
+				end
+			elseif (selectionType == 'HD_SELECTION_GOODY_HUT_LAND' or selectionType == 'HD_SELECTION_BARBARIAN_LAND') then
+				local unitList = Utils.GetUnitListByPromotionClassByWorldEra('PROMOTION_CLASS_MELEE', 'DOMAIN_LAND');
+				unitList = Utils.GetUnitListByPromotionClassByWorldEra('PROMOTION_CLASS_RANGED', 'DOMAIN_LAND', unitList);
+				unitList = Utils.GetUnitListByPromotionClassByWorldEra('PROMOTION_CLASS_ANTI_CAVALRY', 'DOMAIN_LAND', unitList);
+				randomIndex = Game.GetRandNum(#unitList, "Random recruit unit for Player " .. playerId) + 1;
+				local unitInfo = GameInfo.Units[unitList[randomIndex]];
+				if unitInfo then
+					table.insert(param.SelectionList, {
+						Id = selectionType,
+						ButtonToolTip = Locale.Lookup(selectionInfo.ButtonToolTip, unitInfo.Name),
+						ScriptParam = {UnitType = unitInfo.UnitType, X = x, Y = y}
+					})
+				end
+			elseif (selectionType == 'HD_SELECTION_GOODY_HUT_CAVALRY' or selectionType == 'HD_SELECTION_BARBARIAN_CAVALRY') then
+				local unitList = Utils.GetUnitListByPromotionClassByWorldEra('PROMOTION_CLASS_LIGHT_CAVALRY', 'DOMAIN_LAND');
+				unitList = Utils.GetUnitListByPromotionClassByWorldEra('PROMOTION_CLASS_HEAVY_CAVALRY', 'DOMAIN_LAND', unitList);
+				randomIndex = Game.GetRandNum(#unitList, "Random recruit unit for Player " .. playerId) + 1;
+				local unitInfo = GameInfo.Units[unitList[randomIndex]];
+				if unitInfo then
+					table.insert(param.SelectionList, {
+						Id = selectionType,
+						ButtonToolTip = Locale.Lookup(selectionInfo.ButtonToolTip, unitInfo.Name),
+						ScriptParam = {UnitType = unitInfo.UnitType, X = x, Y = y}
+					})
+				end
+			elseif (selectionType == 'HD_SELECTION_GOODY_HUT_NAVAL' or selectionType == 'HD_SELECTION_BARBARIAN_NAVAL') then
+				local unitList = Utils.GetUnitListByPromotionClassByWorldEra('PROMOTION_CLASS_NAVAL_MELEE', 'DOMAIN_SEA');
+				unitList = Utils.GetUnitListByPromotionClassByWorldEra('PROMOTION_CLASS_NAVAL_RANGED', 'DOMAIN_SEA', unitList);
+				unitList = Utils.GetUnitListByPromotionClassByWorldEra('PROMOTION_CLASS_NAVAL_RAIDER', 'DOMAIN_SEA', unitList);
+				randomIndex = Game.GetRandNum(#unitList, "Random recruit unit for Player " .. playerId) + 1;
+				local unitInfo = GameInfo.Units[unitList[randomIndex]];
+				if unitInfo then
+					table.insert(param.SelectionList, {
+						Id = selectionType,
+						ButtonToolTip = Locale.Lookup(selectionInfo.ButtonToolTip, unitInfo.Name),
+						ScriptParam = {UnitType = unitInfo.UnitType, X = x, Y = y}
+					})
+				end
+			elseif (selectionType == 'HD_SELECTION_GOODY_HUT_SAPPER' or selectionType == 'HD_SELECTION_BARBARIAN_SAPPER') then
+				table.insert(param.SelectionList, {
+					Id = selectionType,
+					ButtonToolTip = Locale.Lookup(selectionInfo.ButtonToolTip, 'LOC_UNIT_SAPPER_NAME'),
+					ScriptParam = {UnitType = 'UNIT_SAPPER', X = x, Y = y}
+				})
+			elseif (selectionType == 'HD_SELECTION_GOODY_HUT_GOLD' or selectionType == 'HD_SELECTION_BARBARIAN_GOLD') then
+				local amount = Game.GetRandNum(81, "Random gold amount for Player " .. playerId) + 40;
+				table.insert(param.SelectionList, {
+					Id = selectionType,
+					ButtonToolTip = Locale.Lookup(selectionInfo.ButtonToolTip, amount),
+					ScriptParam = {Amount = amount, X = x, Y = y}
+				})
+			elseif (selectionType == 'HD_SELECTION_GOODY_HUT_LUXURY' or selectionType == 'HD_SELECTION_BARBARIAN_LUXURY') then
+				local resourceList = Utils.GetUnlockedResourceListByClass(playerId, 'RESOURCECLASS_LUXURY');
+				randomIndex = Game.GetRandNum(#resourceList, "Random resource for Player " .. playerId) + 1;
+				local resourceInfo = GameInfo.Resources[resourceList[randomIndex]];
+				if resourceInfo then
+					table.insert(param.SelectionList, {
+						Id = selectionType,
+						ButtonToolTip = Locale.Lookup(selectionInfo.ButtonToolTip, "[ICON_" .. resourceInfo.ResourceType .. "] " .. Locale.Lookup(resourceInfo.Name)),
+						ScriptParam = {ResourceType = resourceInfo.ResourceType, X = x, Y = y}
+					})
+				end
+			elseif (selectionType == 'HD_SELECTION_GOODY_HUT_STRATEGIC' or selectionType == 'HD_SELECTION_BARBARIAN_STRATEGIC') then
+				local resourceList = Utils.GetUnlockedResourceListByClass(playerId, 'RESOURCECLASS_STRATEGIC');
+				if #resourceList == 0 then
+					table.insert(resourceList, RESOURCE_HORSES_INDEX);
+				end
+				randomIndex = Game.GetRandNum(#resourceList, "Random resource for Player " .. playerId) + 1;
+				local amount = Game.GetRandNum(31, "Random gold amount for Player " .. playerId) + 10;
+				local resourceInfo = GameInfo.Resources[resourceList[randomIndex]];
+				if resourceInfo then
+					table.insert(param.SelectionList, {
+						Id = selectionType,
+						ButtonToolTip = Locale.Lookup(selectionInfo.ButtonToolTip, amount, "[ICON_" .. resourceInfo.ResourceType .. "] " .. Locale.Lookup(resourceInfo.Name)),
+						ScriptParam = {ResourceType = resourceInfo.ResourceType, Amount = amount, X = x, Y = y}
+					})
+				end
+			else
+				table.insert(param.SelectionList, {
+					Id = selectionType,
+					ScriptParam = {X = x, Y = y}
+				})
+			end
+		end
+	end
+
+	ReportingEvents.SendLuaEvent('HD_TriggerCustomEventPanel_Light', param);
+end
+
+function BannockburnGoodyHutReward(playerId, unitId, rewardType, rewardSubType)
+	if BANNOCKBURN_VISIT_GOODY_HUT_EVENT == 1 and playerId == Game.GetLocalPlayer() and LeaderHasTrait(playerId, 'TRAIT_LEADER_BANNOCKBURN') then
+		local rewardInfo = GameInfo.GoodyHuts[rewardType];
+		if rewardInfo and rewardInfo.ImprovementType == 'IMPROVEMENT_GOODY_HUT' then
+			local player = Players[playerId];
+			local unit = UnitManager.GetUnit(playerId, unitId);
+			if player and unit then
+				local isAtWar = player:GetProperty(BANNOCKBURN_AT_WAR_WITH_MAJOR_TAG) or 0;
+				if isAtWar > 0 then
+					BannockburnTriggerEvents(playerId, 'HD_CUSTOMEVENT_SCOTLAND_VISIT_GOODY_HUT', unit:GetX(), unit:GetY());
+				end
+			end
+		end
+	end
+end
+Events.GoodyHutReward.Add(BannockburnGoodyHutReward);
+
+function BannockburnClearBarbarian(x, y, playerId)
+  if BANNOCKBURN_CLEAR_BARBARIAN_EVENT == 1 and playerId == Game.GetLocalPlayer() and LeaderHasTrait(playerId, 'TRAIT_LEADER_BANNOCKBURN') then
+		local player = Players[playerId];
+		if player then
+			local isAtWar = player:GetProperty(BANNOCKBURN_AT_WAR_WITH_MAJOR_TAG) or 0;
+			if isAtWar > 0 then
+				BannockburnTriggerEvents(playerId, 'HD_CUSTOMEVENT_SCOTLAND_CLEAR_BARBARIAN', x, y);
+			end
+		end
+	end
+end
+GameEvents.HDClearBarbarianCamp.Add(BannockburnClearBarbarian)
+
+-- 处理选项事件
+function Bannockburn_CustomEvent_OnChooseSelection(playerId, param)
+  local player = Players[playerId];
+  local selectionInfo = GameInfo.HD_CustomEventSelections[param.SelectionId];
+	local selectionType = selectionInfo.SelectionType;
+	local scriptParam = param.Param;
+	local x = scriptParam.X;
+	local y = scriptParam.Y;
+	local plot = Map.GetPlot(x, y);
+
+	print("==========================================================================")
+	print('Bannockburn_CustomEvent_OnChooseSelection', playerId, param.SelectionId, x, y);
+
+  if player and selectionInfo and plot then
+    if selectionType == 'HD_SELECTION_GOODY_HUT_RECON'
+		or selectionType == 'HD_SELECTION_BARBARIAN_RECON'
+		or selectionType == 'HD_SELECTION_GOODY_HUT_LAND'
+		or selectionType == 'HD_SELECTION_BARBARIAN_LAND'
+		or selectionType == 'HD_SELECTION_GOODY_HUT_CAVALRY'
+		or selectionType == 'HD_SELECTION_BARBARIAN_CAVALRY'
+		or selectionType == 'HD_SELECTION_GOODY_HUT_SAPPER'
+		or selectionType == 'HD_SELECTION_BARBARIAN_SAPPER' then
+			local unitInfo = GameInfo.Units[scriptParam.UnitType];
+			if unitInfo then
+				local targetPlot;
+
+				if not plot:IsWater() then
+					targetPlot = plot;
+				else
+					for direction = 0, 5 do
+						local adjacentPlot = Map.GetAdjacentPlot(x, y, direction);
+						if adjacentPlot and not adjacentPlot:IsImpassable() and not adjacentPlot:IsWater() then
+							local units = Units.GetUnitsInPlot(adjacentPlot:GetX(), adjacentPlot:GetY());
+							if units ~= nil then
+								if #units == 0 then
+									targetPlot = adjacentPlot;
+									break;
+								end
+
+								for _, pUnit in ipairs(units) do
+									if pUnit:GetOwner() == playerId then
+										targetPlot = adjacentPlot;
+										break;
+									end
+								end
+			
+								if targetPlot then
+									break;
+								end
+							end
+						end
+					end
+				end
+
+				if targetPlot then
+					UnitManager.InitUnit(playerId, scriptParam.UnitType, targetPlot:GetX(), targetPlot:GetY());
+					Game.AddWorldViewText(playerId, Locale.Lookup(selectionInfo.ButtonToolTip, unitInfo.Name), targetPlot:GetX(), targetPlot:GetY());
+				end
+			end
+		elseif (selectionType == 'HD_SELECTION_GOODY_HUT_NAVAL' or selectionType == 'HD_SELECTION_BARBARIAN_NAVAL') then
+			local unitInfo = GameInfo.Units[scriptParam.UnitType];
+			if unitInfo then
+				local targetPlot;
+				for direction = 0, 5 do
+					local adjacentPlot = Map.GetAdjacentPlot(x, y, direction);
+					if adjacentPlot and not adjacentPlot:IsImpassable() and adjacentPlot:IsWater() then
+						local units = Units.GetUnitsInPlot(adjacentPlot:GetX(), adjacentPlot:GetY());
+						if units ~= nil then
+							if #units == 0 then
+								targetPlot = adjacentPlot;
+								break;
+							end
+						end
+					end
+				end
+
+				if targetPlot then
+					UnitManager.InitUnit(playerId, scriptParam.UnitType, targetPlot:GetX(), targetPlot:GetY());
+					Game.AddWorldViewText(playerId, Locale.Lookup(selectionInfo.ButtonToolTip, unitInfo.Name), targetPlot:GetX(), targetPlot:GetY());
+				end
+			end
+		elseif (selectionType == 'HD_SELECTION_GOODY_HUT_GOLD' or selectionType == 'HD_SELECTION_BARBARIAN_GOLD') then
+			player:GetTreasury():ChangeGoldBalance(scriptParam.Amount);
+			Game.AddWorldViewText(playerId, Locale.Lookup(selectionInfo.ButtonToolTip, scriptParam.Amount), x, y);
+		elseif (selectionType == 'HD_SELECTION_GOODY_HUT_LUXURY' or selectionType == 'HD_SELECTION_BARBARIAN_LUXURY') then
+			local resourceInfo = GameInfo.Resources[scriptParam.ResourceType];
+			if resourceInfo then
+				player:AttachModifierByID('HD_GRANT_' .. scriptParam.ResourceType);
+				Game.AddWorldViewText(playerId, Locale.Lookup(selectionInfo.ButtonToolTip, "[ICON_" .. resourceInfo.ResourceType .. "] " .. Locale.Lookup(resourceInfo.Name)), x, y);
+			end
+		elseif (selectionType == 'HD_SELECTION_GOODY_HUT_STRATEGIC' or selectionType == 'HD_SELECTION_BARBARIAN_STRATEGIC') then
+			local resourceInfo = GameInfo.Resources[scriptParam.ResourceType];
+			if resourceInfo then
+				player:GetResources():ChangeResourceAmount(resourceInfo.Index, scriptParam.Amount);
+				Game.AddWorldViewText(playerId, Locale.Lookup(selectionInfo.ButtonToolTip, scriptParam.Amount, "[ICON_" .. resourceInfo.ResourceType .. "] " .. Locale.Lookup(resourceInfo.Name)), x, y);
+			end
+		elseif (selectionType == 'HD_SELECTION_GOODY_HUT_HEAL' or selectionType == 'HD_SELECTION_BARBARIAN_HEAL') then
+			local units = Units.GetUnitsInPlot(x, y);
+			if units ~= nil then
+				for _, pUnit in ipairs(units) do
+					if pUnit:GetOwner() == playerId and pUnit:GetDamage() > 0 then
+						pUnit:SetDamage(0);
+					end
+				end
+			end
+			Game.AddWorldViewText(playerId, Locale.Lookup(selectionInfo.ButtonToolTip), x, y);
+		elseif (selectionType == 'HD_SELECTION_GOODY_HUT_PROMOTION' or selectionType == 'HD_SELECTION_BARBARIAN_PROMOTION') then
+			local units = Units.GetUnitsInPlot(x, y);
+			if units ~= nil then
+				for _, pUnit in ipairs(units) do
+					local unitInfo = GameInfo.Units[pUnit:GetType()];
+					if unitInfo then
+						local formationClass = unitInfo.FormationClass;
+						if (formationClass == 'FORMATION_CLASS_LAND_COMBAT' or formationClass == 'FORMATION_CLASS_NAVAL') and pUnit:GetOwner() == playerId then
+							local nextExp = pUnit:GetExperience():GetExperienceForNextLevel();
+							local nowExp = pUnit:GetExperience():GetExperiencePoints();
+							if nextExp > nowExp and nowExp >= 0 then
+								pUnit:GetExperience():ChangeExperience(nextExp - nowExp);
+							end
+						end
+					end
+				end
+			end
+			Game.AddWorldViewText(playerId, Locale.Lookup(selectionInfo.ButtonToolTip), x, y);
+		elseif (selectionType == 'HD_SELECTION_GOODY_HUT_MOVEMENT' or selectionType == 'HD_SELECTION_BARBARIAN_MOVEMENT') then
+			local units = Units.GetUnitsInPlot(x, y);
+			if units ~= nil then
+				for _, pUnit in ipairs(units) do
+					if pUnit:GetOwner() == playerId then
+						local amount = pUnit:GetMaxMoves() - Utils.GetUnitMovesRemaining(playerId, pUnit:GetID());
+						if amount > 0 then
+							pUnit:ChangeMovesRemaining(amount);
+						end
+					end
+				end
+			end
+			Game.AddWorldViewText(playerId, Locale.Lookup(selectionInfo.ButtonToolTip), x, y);
+		else
+			Game.AddWorldViewText(playerId, Locale.Lookup(selectionInfo.ButtonToolTip), x, y);
+		end
+  end
+end
+GameEvents.HD_CustomEvent_OnChooseSelection.Add(Bannockburn_CustomEvent_OnChooseSelection);
+
 --------------------------------------------------------------
 -- Initialize
 function initialize()

@@ -1,9 +1,7 @@
-insert or replace into EnglishText
-  (Tag,                                               Text)
-values
-  ("LOC_TRAIT_LEADER_MAGNIFICENCES_DESCRIPTION_MAB",  "If a city has improved luxury resources, units produced gain +1 [ICON_MOVEMENT] Movement. Each time a wonder is constructed, gain 2 copies of the corresponding luxury resource. Districts gain +1 adjacency bonus for every 3 excess [ICON_AMENITIES] Amenities from the city. Can undertake the 'Court Festival' project in any city with a Theater Square.");
+insert or replace into EnglishText (Tag, Text) values
+  ("LOC_TRAIT_LEADER_MAGNIFICENCES_DESCRIPTION_MAB",                  "If a city has improved luxury resources, units produced gain +1 [ICON_MOVEMENT] Movement. Each time a wonder is constructed, gain 2 copies of the corresponding luxury resource. Districts gain +1 adjacency bonus for every 3 excess [ICON_AMENITIES] Amenities from the city. Can undertake the 'Court Festival' project in any city with a Theater Square."),
+  ("LOC_TRAIT_CIVILIZATION_SCOTTISH_ENLIGHTENMENT_DESCRIPTION_MAB",   "+100% building speed toward Campus and Industrial Zone districts. Each working [ICON_CITIZEN] Citizen provides +1 adjacency bonus and +2 corresponding [ICON_GREATPERSON] Great Person points to adjacent specialized districts.");
 
-insert or replace into LocalizedText
-  (Language,      Tag,                                                              Text)
-values
-  ("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNIFICENCES_DESCRIPTION_MAB",                 "如果城市拥有改良的奢侈资源，生产的单位+1 [ICON_MOVEMENT] 移动力。每建造一座奇观，获得2份该奇观对应的特色奢侈资源。区域从城市的每3点溢出的 [ICON_AMENITIES] 宜居度获得+1相邻加成。可在拥有剧院广场区域的任意城市中开展“宫廷盛会”项目。");
+insert or replace into LocalizedText (Language, Tag, Text) values
+  ("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNIFICENCES_DESCRIPTION_MAB",                 "如果城市拥有改良的奢侈资源，生产的单位+1 [ICON_MOVEMENT] 移动力。每建造一座奇观，获得2份该奇观对应的特色奢侈资源。区域从城市的每3点溢出的 [ICON_AMENITIES] 宜居度获得+1相邻加成。可在拥有剧院广场区域的任意城市中开展“宫廷盛会”项目。"),
+  ("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_SCOTTISH_ENLIGHTENMENT_DESCRIPTION_MAB",  "建造学院和工业区时+100%建造速度。每位在岗 [ICON_CITIZEN] 公民为相邻的专业化区域+1相邻加成和+2对应 [ICON_GREATPERSON] 伟人点数。");

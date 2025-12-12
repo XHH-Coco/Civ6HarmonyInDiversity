@@ -285,13 +285,15 @@ function HumanRightsBoost(playerId, cityId, eVisibility)
   local player = Players[playerId];
   if not player:GetCulture():HasBoostBeenTriggered(HUMAN_RIGHTS_INDEX) then
     local city = CityManager.GetCity(playerId, cityId);
-    local cityReligion = city:GetReligion():GetMajorityReligion();
-    if cityReligion ~= -1 then
-      if (city:GetBuildings():HasBuilding(BANK.Index)
-          or (GRAND_BAZAAR ~= nil and city:GetBuildings():HasBuilding(GRAND_BAZAAR.Index))
-          or (JNR_GUILDHALL ~= nil and city:GetBuildings():HasBuilding(JNR_GUILDHALL.Index))
-          or (JNR_MERCHANT_QUARTER ~= nil and city:GetBuildings():HasBuilding(JNR_MERCHANT_QUARTER.Index))) then
-        player:GetCulture():TriggerBoost(HUMAN_RIGHTS_INDEX);
+    if city then
+      local cityReligion = city:GetReligion():GetMajorityReligion();
+      if cityReligion ~= -1 then
+        if (city:GetBuildings():HasBuilding(BANK.Index)
+            or (GRAND_BAZAAR ~= nil and city:GetBuildings():HasBuilding(GRAND_BAZAAR.Index))
+            or (JNR_GUILDHALL ~= nil and city:GetBuildings():HasBuilding(JNR_GUILDHALL.Index))
+            or (JNR_MERCHANT_QUARTER ~= nil and city:GetBuildings():HasBuilding(JNR_MERCHANT_QUARTER.Index))) then
+          player:GetCulture():TriggerBoost(HUMAN_RIGHTS_INDEX);
+        end
       end
     end
   end

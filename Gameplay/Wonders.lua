@@ -771,6 +771,8 @@ Events.WonderCompleted.Add(MichelWonderCompleted);
 
 function MichelCityReligionFollowersChanged(playerId, cityId, eVisibility)
   local city = CityManager.GetCity(playerId, cityId);
+  if not city then return; end
+
   local cityReligion = city:GetReligion():GetMajorityReligion();
   local michelReligion = Game:GetProperty(MICHEL_TAG) or -1;
   if MICHEL_GPP_AMOUNT ~= 0 and city:GetProperty(MICHEL_TAG) ~= 1 and cityReligion ~= -1 and michelReligion ~= -1 and cityReligion == michelReligion then

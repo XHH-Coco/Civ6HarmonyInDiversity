@@ -85,7 +85,7 @@ values
     ("LOC_BUILDING_SEAPORT_DESCRIPTION",                          "+25% combat experience for all naval units trained in this city. Allows Fleets and Armadas to be trained directly. Fleet and Armada training costs reduced by 25%. +1 [ICON_FOOD] Gold on all Shallow Sea and Lake tiles for this city. Bonus [ICON_FOOD] Food equal to adjacency bonus of the Harbor district.[NEWLINE]+10% accumulation rate for [ICON_GREATADMIRAL] Great Admiral Points. +3 [ICON_STRENGTH] Combat Strength for all navy units trained in this city."),
     -- Government
     ("LOC_BUILDING_GOV_WIDE_NAME",                                "Ekklesiasterion"),
-    ("LOC_BUILDING_GOV_WIDE_DESCRIPTION",                         "+50% [ICON_PRODUCTION] Production toward Settlers in this City. New cities receive a free Builder. +50% [ICON_Production] Production towards buildings in City Center which are already built in this city."),
+    ("LOC_BUILDING_GOV_WIDE_DESCRIPTION",                         "+50% [ICON_PRODUCTION] Production toward Settlers in this City. New cities receive a free Builder. +50% [ICON_Production] Production towards buildings in City Center which are already built in this city.[NEWLINE]Awards +1 [ICON_Governor] Governor Title."),
     ("LOC_BUILDING_GOV_TALL_DESCRIPTION",                         "+2 [ICON_Housing] Housing in all cities.[NEWLINE]+20% construction speed towards wonders, districts and buildings in this city, and can build 1 more district than the [ICON_CITIZEN] Population limit allows.[NEWLINE]Awards +1 [ICON_Governor] Governor Title."),
     ("LOC_BUILDING_GOV_CONQUEST_DESCRIPTION",                     "Capturing an enemy City grants 15% bonus [ICON_Production] Production in all Cities for 5 turns.[NEWLINE]+20% [ICON_Production] Production towards training military units in this city. [NEWLINE]+100% Yields gained from pilaging and coastal raids.[NEWLINE]Awards +1 [ICON_Governor] Governor Title."),
     ("LOC_BUILDING_GOV_SPIES_NAME",                               "Secretariat"),
@@ -258,7 +258,7 @@ values
     ("zh_Hans_CN",  "LOC_BUILDING_SEAPORT_DESCRIPTION",                          "此城中生产的所有海军单位+25%经验值。可直接生产舰队和无敌舰队。舰队和无敌舰队的生产费用降低25%。此城所有浅海与湖泊单元格+1 [ICON_FOOD] 食物。额外产出相当于港口相邻加成的 [ICON_FOOD] 食物。 [NEWLINE]玩家的 [ICON_GREATADMIRAL] 海军统帅点数积累速度+10%，且所有训练的海军单位+3 [ICON_STRENGTH] 战斗力。"),
     -- 政府区
     ("zh_Hans_CN",  "LOC_BUILDING_GOV_WIDE_NAME",                                "会议堂"),
-    ("zh_Hans_CN",  "LOC_BUILDING_GOV_WIDE_DESCRIPTION",                         "在此城中生产开拓者时+50%建造速度。新建立的城市获得1个免费的建造者。建造本城拥有的市中心建筑+50%建造速度。"),
+    ("zh_Hans_CN",  "LOC_BUILDING_GOV_WIDE_DESCRIPTION",                         "在此城中生产开拓者时+50%建造速度。新建立的城市获得1个免费的建造者。建造本城拥有的市中心建筑+50%建造速度。[NEWLINE]奖励1个 [ICON_Governor] 总督头衔。"),
     ("zh_Hans_CN",  "LOC_BUILDING_GOV_TALL_DESCRIPTION",                         "所有城市+2 [ICON_Housing] 住房。[NEWLINE]本城建造奇观、区域和建筑时+20%建造速度，可以无视 [ICON_CITIZEN] 人口限制额外建造1个区域。[NEWLINE]奖励1个 [ICON_Governor] 总督头衔。"),
     ("zh_Hans_CN",  "LOC_BUILDING_GOV_CONQUEST_DESCRIPTION",                     "占领一座敌方城市后，所有城市将获得15%的 [ICON_Production] 生产力加成，效果持续5回合。[NEWLINE]本城建造军事单位时+20% [ICON_Production] 生产力。[NEWLINE]掠夺和海岸扫荡的收益+100%。[NEWLINE]奖励1个 [ICON_Governor] 总督头衔。"),
     ("zh_Hans_CN",  "LOC_BUILDING_GOV_SPIES_NAME",                               "中书省"),

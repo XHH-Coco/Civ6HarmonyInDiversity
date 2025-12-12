@@ -5,16 +5,16 @@
 -- 该文件于DL_Resources.sql文件之前加载
 
 create table "HDResourceful2_Basic"(
-    "ResourceType"  TEXT NOT NULL,
-    "Class"  TEXT NOT NULL,
-    "Harvests"  TEXT NOT NULL,
-    "Frequency"  INTEGER NOT NULL,
-    "SeaFrequency"  INTEGER NOT NULL,
-    PRIMARY KEY(ResourceType)
-    FOREIGN KEY(ResourceType) REFERENCES Resources(ResourceType) ON DELETE CASCADE ON UPDATE CASCADE
+	"ResourceType"  TEXT NOT NULL,
+	"Class"  TEXT NOT NULL,
+	"Harvests"  TEXT NOT NULL,
+	"Frequency"  INTEGER NOT NULL,
+	"SeaFrequency"  INTEGER NOT NULL,
+	PRIMARY KEY(ResourceType),
+	FOREIGN KEY(ResourceType) REFERENCES Resources(ResourceType) ON DELETE CASCADE ON UPDATE CASCADE
 );
 insert or replace into HDResourceful2_Basic
-    (ResourceType,				Class,      					Harvests,				Frequency,		SeaFrequency)
+	(ResourceType,				Class,      					Harvests,				Frequency,		SeaFrequency)
 values
 	-- 奢侈
 	('RESOURCE_WOLF',			'RESOURCECLASS_LUXURY',			'YIELD_GOLD',			2,				0),
