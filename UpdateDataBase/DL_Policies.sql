@@ -263,7 +263,7 @@ values
 	('POLICY_HD_TECH_REVOLUTION',     'LOC_POLICY_HD_TECH_REVOLUTION_NAME',     'LOC_POLICY_HD_TECH_REVOLUTION_DESCRIPTION',      null,                  			'TECH_INDUSTRIALIZATION',                       'SLOT_GREAT_PERSON'),
 	('POLICY_HD_ACADEMIC_MEETING',     'LOC_POLICY_HD_ACADEMIC_MEETING_NAME',     'LOC_POLICY_HD_ACADEMIC_MEETING_DESCRIPTION',      null,                  			'TECH_SCIENTIFIC_THEORY',                       'SLOT_GREAT_PERSON'),
 	('POLICY_HD_NATIONAL_CULTURE',     'LOC_POLICY_HD_NATIONAL_CULTURE_NAME',     'LOC_POLICY_HD_NATIONAL_CULTURE_DESCRIPTION',      'CIVIC_NATIONALISM',                  			null,                       'SLOT_GREAT_PERSON'),
-	('POLICY_HD_PATTERN',     'LOC_POLICY_HD_PATTERN_NAME',     'LOC_POLICY_HD_PATTERN_DESCRIPTION',      'CIVIC_CRAFTSMANSHIP',                  			null,                       'SLOT_MILITARY'),
+	('POLICY_HD_PATTERN',     'LOC_POLICY_HD_PATTERN_NAME',     'LOC_POLICY_HD_PATTERN_DESCRIPTION',      null,                  			'TECH_MINING',                       'SLOT_MILITARY'),
 	('POLICY_HD_PSALM',     'LOC_POLICY_HD_PSALM_NAME',     'LOC_POLICY_HD_PSALM_DESCRIPTION',      'CIVIC_THEOLOGY',                  			null,                       'SLOT_GREAT_PERSON'),
 	('POLICY_HD_SUBCULTURAL_TREND',     'LOC_POLICY_HD_SUBCULTURAL_TREND_NAME',     'LOC_POLICY_HD_SUBCULTURAL_TREND_DESCRIPTION',      'CIVIC_MODERNISM_HD',                  			null,                       'SLOT_GREAT_PERSON'),
 	('POLICY_HD_OCEAN_VOYAGE',     'LOC_POLICY_HD_OCEAN_VOYAGE_NAME',     'LOC_POLICY_HD_OCEAN_VOYAGE_DESCRIPTION',      null,                  			'TECH_OCEANOGRAPHY_HD',                       'SLOT_GREAT_PERSON'),
@@ -3871,7 +3871,7 @@ insert or replace into PolicyModifiers
 	(PolicyType,						ModifierId)
 select distinct
 	'POLICY_HD_PATTERN',		'HD_PATTERN_' || ResourceType || '_FAITH'
-from Improvement_ValidResources where ImprovementType in ('IMPROVEMENT_MINE', 'IMPROVEMENT_QUARRY');
+from Improvement_ValidResources where ImprovementType in ('IMPROVEMENT_MINE', 'IMPROVEMENT_QUARRY', 'IMPROVEMENT_LUMBER_MILL');
 
 insert or replace into Modifiers
 	(ModifierId, ModifierType, SubjectRequirementSetId)
@@ -3879,25 +3879,25 @@ select distinct
 	'HD_PATTERN_' || ResourceType || '_FAITH',
 	'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',
 	'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIRMENTS'
-from Improvement_ValidResources where ImprovementType in ('IMPROVEMENT_MINE', 'IMPROVEMENT_QUARRY');
+from Improvement_ValidResources where ImprovementType in ('IMPROVEMENT_MINE', 'IMPROVEMENT_QUARRY', 'IMPROVEMENT_LUMBER_MILL');
 
 insert or replace into ModifierArguments
 	(ModifierId, Name, Value)
 select distinct
 	'HD_PATTERN_' || ResourceType || '_FAITH', 'YieldType', 'YIELD_FAITH'
-from Improvement_ValidResources where ImprovementType in ('IMPROVEMENT_MINE', 'IMPROVEMENT_QUARRY');
+from Improvement_ValidResources where ImprovementType in ('IMPROVEMENT_MINE', 'IMPROVEMENT_QUARRY', 'IMPROVEMENT_LUMBER_MILL');
 
 insert or replace into ModifierArguments
 	(ModifierId, Name, Value)
 select distinct
 	'HD_PATTERN_' || ResourceType || '_FAITH', 'Amount', 1
-from Improvement_ValidResources where ImprovementType in ('IMPROVEMENT_MINE', 'IMPROVEMENT_QUARRY');
+from Improvement_ValidResources where ImprovementType in ('IMPROVEMENT_MINE', 'IMPROVEMENT_QUARRY', 'IMPROVEMENT_LUMBER_MILL');
 
 insert or replace into PolicyModifiers
 	(PolicyType,						ModifierId)
 select distinct
 	'POLICY_HD_PATTERN',		'HD_PATTERN_' || ResourceType || '_GOLD'
-from Improvement_ValidResources where ImprovementType in ('IMPROVEMENT_MINE', 'IMPROVEMENT_QUARRY');
+from Improvement_ValidResources where ImprovementType in ('IMPROVEMENT_MINE', 'IMPROVEMENT_QUARRY', 'IMPROVEMENT_LUMBER_MILL');
 
 insert or replace into Modifiers
 	(ModifierId, ModifierType, SubjectRequirementSetId)
@@ -3905,19 +3905,19 @@ select distinct
 	'HD_PATTERN_' || ResourceType || '_GOLD',
 	'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',
 	'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIRMENTS'
-from Improvement_ValidResources where ImprovementType in ('IMPROVEMENT_MINE', 'IMPROVEMENT_QUARRY');
+from Improvement_ValidResources where ImprovementType in ('IMPROVEMENT_MINE', 'IMPROVEMENT_QUARRY', 'IMPROVEMENT_LUMBER_MILL');
 
 insert or replace into ModifierArguments
 	(ModifierId, Name, Value)
 select distinct
 	'HD_PATTERN_' || ResourceType || '_GOLD', 'YieldType', 'YIELD_GOLD'
-from Improvement_ValidResources where ImprovementType in ('IMPROVEMENT_MINE', 'IMPROVEMENT_QUARRY');
+from Improvement_ValidResources where ImprovementType in ('IMPROVEMENT_MINE', 'IMPROVEMENT_QUARRY', 'IMPROVEMENT_LUMBER_MILL');
 
 insert or replace into ModifierArguments
 	(ModifierId, Name, Value)
 select distinct
 	'HD_PATTERN_' || ResourceType || '_GOLD', 'Amount', 2
-from Improvement_ValidResources where ImprovementType in ('IMPROVEMENT_MINE', 'IMPROVEMENT_QUARRY');
+from Improvement_ValidResources where ImprovementType in ('IMPROVEMENT_MINE', 'IMPROVEMENT_QUARRY', 'IMPROVEMENT_LUMBER_MILL');
 
 -- 生物分类学 POLICY_HD_BIOSYSTEMATICS
 insert or replace into PolicyModifiers (PolicyType, ModifierId) select
