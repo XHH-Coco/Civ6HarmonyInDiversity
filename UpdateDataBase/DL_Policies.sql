@@ -6,7 +6,6 @@ values
 	('POLICY_MARITIME_INFRASTRUCTURE',		'KIND_POLICY'),
 	('POLICY_SEABORNE_SUPPLY',				'KIND_POLICY'),
 	('POLICY_GARRISON_RECLAMATION',			'KIND_POLICY'),
-	('POLICY_PRIMITIVE_COMMUNE',			'KIND_POLICY'),
 	('POLICY_OVERALL_PLANNING',				'KIND_POLICY'),
 	('POLICY_DOMESTIC_TRADE',				'KIND_POLICY'),
 	('POLICY_HIGHWAY',						'KIND_POLICY'),
@@ -165,7 +164,12 @@ values
 	('POLICY_HD_CHARCOAL_KILN',     'KIND_POLICY'),
 	('POLICY_HD_AGRICULTURAL_MECHANIZATION',     'KIND_POLICY'),
 	('POLICY_HD_UNMANNED_FACTORY',     'KIND_POLICY'),
-	('POLICY_HD_ROBOT_PRODUCTION',     'KIND_POLICY');
+	('POLICY_HD_ROBOT_PRODUCTION',     'KIND_POLICY'),
+	('POLICY_HD_STONE_STATUE',     'KIND_POLICY'),
+	('POLICY_HD_DIVINATION',     'KIND_POLICY'),
+	('POLICY_PRIMITIVE_COMMUNE',			'KIND_POLICY'),
+	('POLICY_HD_WRITING_ON_HIDE',     'KIND_POLICY'),
+	('POLICY_HD_MIDDEN',     'KIND_POLICY');
 
 insert or replace into Policies
 	(PolicyType,							Name,											Description,											PrereqCivic,								PrereqTech,					GovernmentSlotType)
@@ -174,7 +178,6 @@ values
 	('POLICY_MARITIME_INFRASTRUCTURE',		'LOC_POLICY_MARITIME_INFRASTRUCTURE_NAME',		'LOC_POLICY_MARITIME_INFRASTRUCTURE_DESCRIPTION',		'CIVIC_NAVAL_TRADITION',					null,						'SLOT_ECONOMIC'),
 	('POLICY_SEABORNE_SUPPLY',				'LOC_POLICY_SEABORNE_SUPPLY_NAME',				'LOC_POLICY_SEABORNE_SUPPLY_DESCRIPTION',				'CIVIC_EXPLORATION',						null,						'SLOT_ECONOMIC'),
 	('POLICY_GARRISON_RECLAMATION',			'LOC_POLICY_GARRISON_RECLAMATION_NAME',			'LOC_POLICY_GARRISON_RECLAMATION_DESCRIPTION',			'CIVIC_FEUDALISM',							null,						'SLOT_MILITARY'),
-	('POLICY_PRIMITIVE_COMMUNE',			'LOC_POLICY_PRIMITIVE_COMMUNE_NAME',			'LOC_POLICY_PRIMITIVE_COMMUNE_DESCRIPTION',				'CIVIC_CRAFTSMANSHIP',						null,						'SLOT_ECONOMIC'),
 	('POLICY_OVERALL_PLANNING',				'LOC_POLICY_OVERALL_PLANNING_NAME',				'LOC_POLICY_OVERALL_PLANNING_DESCRIPTION',				'CIVIC_COMMERCIAL_CAPITALISM_HD',						null,						'SLOT_MILITARY'),
 	('POLICY_DOMESTIC_TRADE',				'LOC_POLICY_DOMESTIC_TRADE_NAME',				'LOC_POLICY_DOMESTIC_TRADE_DESCRIPTION',				null,										'TECH_TEXTILE_HD',			'SLOT_ECONOMIC'),
 	('POLICY_HIGHWAY',						'LOC_POLICY_HIGHWAY_NAME',						'LOC_POLICY_HIGHWAY_DESCRIPTION',						'CIVIC_IMPERIAL_EXAMINATION_SYSTEM_HD',		null,						'SLOT_ECONOMIC'),
@@ -223,7 +226,7 @@ values
 	('POLICY_HD_WORRIER_CLASS',     'LOC_POLICY_HD_WORRIER_CLASS_NAME',     'LOC_POLICY_HD_WORRIER_CLASS_DESCRIPTION',      'CIVIC_EARLY_WARFARE_HD',                  			null,                       'SLOT_ECONOMIC'),
 	('POLICY_HD_GULF_TRADE',     'LOC_POLICY_HD_GULF_TRADE_NAME',     'LOC_POLICY_HD_GULF_TRADE_DESCRIPTION',      'CIVIC_FOREIGN_TRADE',                  			null,                       'SLOT_ECONOMIC'),
 	('POLICY_HD_MUDBRICK_WHARF',     'LOC_POLICY_HD_MUDBRICK_WHARF_NAME',     'LOC_POLICY_HD_MUDBRICK_WHARF_DESCRIPTION',      'CIVIC_FOREIGN_TRADE',                  			null,                       'SLOT_MILITARY'),
-	('POLICY_HD_ORACLE',     'LOC_POLICY_HD_ORACLE_NAME',     'LOC_POLICY_HD_ORACLE_DESCRIPTION',      'CIVIC_FUNERAL_HD',                  			null,                       'SLOT_ECONOMIC'),
+	('POLICY_HD_ORACLE',     'LOC_POLICY_HD_ORACLE_NAME',     'LOC_POLICY_HD_ORACLE_DESCRIPTION',      null,                  			'TECH_ANIMAL_HUSBANDRY',                       'SLOT_MILITARY'),
 	('POLICY_HD_SCOUT_TRAINING',     'LOC_POLICY_HD_SCOUT_TRAINING_NAME',     'LOC_POLICY_HD_SCOUT_TRAINING_DESCRIPTION',      'CIVIC_CRAFTSMANSHIP',                  			null,                       'SLOT_MILITARY'),
 	('POLICY_HD_HUMAN_SACRIFICE',     'LOC_POLICY_HD_HUMAN_SACRIFICE_NAME',     'LOC_POLICY_HD_HUMAN_SACRIFICE_DESCRIPTION',      'CIVIC_FUNERAL_HD',                  			null,                       'SLOT_MILITARY'),
 	('POLICY_HD_MONUMENT_CEREMONY',     'LOC_POLICY_HD_MONUMENT_CEREMONY_NAME',     'LOC_POLICY_HD_MONUMENT_CEREMONY_DESCRIPTION',      'CIVIC_FUNERAL_HD',                  			null,                       'SLOT_ECONOMIC'),
@@ -333,7 +336,12 @@ values
 	('POLICY_HD_CHARCOAL_KILN',     'LOC_POLICY_HD_CHARCOAL_KILN_NAME',     'LOC_POLICY_HD_CHARCOAL_KILN_DESCRIPTION',      null,                  			'TECH_FUEL_HD',                       'SLOT_ECONOMIC'),
 	('POLICY_HD_AGRICULTURAL_MECHANIZATION',    'LOC_POLICY_HD_AGRICULTURAL_MECHANIZATION_NAME',    'LOC_POLICY_HD_AGRICULTURAL_MECHANIZATION_DESCRIPTION',      null,              'TECH_MODERN_AGRICULTURE_HD',                       'SLOT_ECONOMIC'),
 	('POLICY_HD_UNMANNED_FACTORY',     					'LOC_POLICY_HD_UNMANNED_FACTORY_NAME',     					'LOC_POLICY_HD_UNMANNED_FACTORY_DESCRIPTION',      null,                  			'TECH_INDUSTRIAL_AUTOMATION_HD',                       'SLOT_ECONOMIC'),
-	('POLICY_HD_ROBOT_PRODUCTION',     					'LOC_POLICY_HD_ROBOT_PRODUCTION_NAME',     					'LOC_POLICY_HD_ROBOT_PRODUCTION_DESCRIPTION',      null,                  			'TECH_ROBOTICS',                       'SLOT_ECONOMIC');
+	('POLICY_HD_ROBOT_PRODUCTION',     					'LOC_POLICY_HD_ROBOT_PRODUCTION_NAME',     					'LOC_POLICY_HD_ROBOT_PRODUCTION_DESCRIPTION',      null,                  			'TECH_ROBOTICS',                       'SLOT_ECONOMIC'),
+	('POLICY_HD_STONE_STATUE',     					'LOC_POLICY_HD_STONE_STATUE_NAME',     					'LOC_POLICY_HD_STONE_STATUE_DESCRIPTION',      null,                  			'TECH_MINING',                       'SLOT_ECONOMIC'),
+	('POLICY_HD_DIVINATION',     					'LOC_POLICY_HD_DIVINATION_NAME',     					'LOC_POLICY_HD_DIVINATION_DESCRIPTION',      null,                  			'TECH_POTTERY',                       'SLOT_MILITARY'),
+	('POLICY_PRIMITIVE_COMMUNE',			'LOC_POLICY_PRIMITIVE_COMMUNE_NAME',			'LOC_POLICY_PRIMITIVE_COMMUNE_DESCRIPTION',				null,						'TECH_POTTERY',						'SLOT_ECONOMIC'),
+	('POLICY_HD_WRITING_ON_HIDE',     					'LOC_POLICY_HD_WRITING_ON_HIDE_NAME',     					'LOC_POLICY_HD_WRITING_ON_HIDE_DESCRIPTION',      null,                  			'TECH_ANIMAL_HUSBANDRY',                       'SLOT_ECONOMIC'),
+	('POLICY_HD_MIDDEN',     					'LOC_POLICY_HD_MIDDEN_NAME',     					'LOC_POLICY_HD_MIDDEN_DESCRIPTION',      null,                  			'TECH_SAILING',                       'SLOT_ECONOMIC');
 
 update Policies set Description = 'LOC_POLICY_HD_TRANSLATE_DESCRIPTION_DIP' where PolicyType = 'POLICY_HD_TRANSLATE' and exists (select DistrictType from Districts where DistrictType = 'DISTRICT_DIPLOMATIC_QUARTER');
 
@@ -431,7 +439,6 @@ values
 	('POLICY_HD_MONUMENT_CEREMONY',		'POLICY_HD_DIONYSIAN_CARNIVAL'),
 	('POLICY_HD_HUMAN_SACRIFICE',		'POLICY_RAID'),
 	('POLICY_HD_HUMAN_SACRIFICE',		'POLICY_TOTAL_WAR'),
-	('POLICY_HD_PRIEST_CLASS',		'POLICY_SCRIPTURE'),
 	('POLICY_AESTHETICS',		'POLICY_HD_SECULAR_LITERATURE'),
 	('POLICY_HD_LEVEL',		'POLICY_SKYSCRAPERS'),
 	('POLICY_CORVEE',		'POLICY_HD_LEVEL'),
@@ -461,8 +468,6 @@ values
 	('POLICY_OVERALL_PLANNING',		'POLICY_HD_BLOCK_MANAGEMENT'),
 	('POLICY_HD_LITERARY_NEWS_AGENCY',		'POLICY_HD_BLOCK_MANAGEMENT'),
 	('POLICY_MERCHANT_CONFEDERATION',		'POLICY_HD_BLOCK_MANAGEMENT'),
-	('POLICY_GOD_KING',		'POLICY_MINARET'),
-	('POLICY_GOD_KING',		'POLICY_HD_REINDUSTRIALIZATION'),
 	('POLICY_TRADE_CONFEDERATION',		'POLICY_HD_INTANGIBLE_TRADE'),
 	('POLICY_SILK_ROAD',		'POLICY_HD_INTANGIBLE_TRADE'),
 	('POLICY_NEW_ROUTE',		'POLICY_HD_INTANGIBLE_TRADE'),
@@ -583,7 +588,6 @@ values
 	('POLICY_DISCIPLINE',		'POLICY_FINEST_HOUR'),
 	('POLICY_WARS_OF_RELIGION',		'POLICY_FINEST_HOUR'),
 	('POLICY_RELIGIOUS_ORDERS',		'POLICY_FINEST_HOUR'),
-	('POLICY_HD_DRY_STONE',		'POLICY_HD_INTELLIGENT_INDUSTRY'),
 	('POLICY_HD_CHARCOAL_KILN',		'POLICY_HD_AIR_CONDITIONING_SYSTEM'),
 	-- 社区市政外交-超级大国系
 	('POLICY_HD_TRANSLATE',								'POLICY_HD_MODERNIZATION_LAW'),
@@ -598,12 +602,20 @@ values
 	('POLICY_HD_CONSTITUTIONAL_STUDY',		'POLICY_HD_MODERNIZATION_LAW'),
 	('POLICY_HD_CONSTITUTIONAL_STUDY',		'POLICY_HD_SEPARATION_OF_POWERS'),
 	('POLICY_HD_MODERNIZATION_LAW',				'POLICY_SUPERPOWER'),
+	-- 初始鸽子卡
+	('POLICY_GOD_KING',		'POLICY_SCRIPTURE'),
+	('POLICY_HD_WAR_DANCE',		'POLICY_SCRIPTURE'),
+	('POLICY_HD_ORACLE',		'POLICY_SCRIPTURE'),
+	('POLICY_HD_DIVINATION',		'POLICY_SCRIPTURE'),
+	('POLICY_HD_PRIEST_CLASS',		'POLICY_SCRIPTURE'),
+	('POLICY_HD_MIDDEN',		'POLICY_SCRIPTURE'),
+	('POLICY_HD_PATTERN',		'POLICY_SCRIPTURE'),
 	-- 固定产出卡
-	('POLICY_HD_ORACLE',		'POLICY_CITY_CENTRALIZATION'),
+	('POLICY_HD_STONE_STATUE',		'POLICY_HD_DRY_STONE'),
+	('POLICY_HD_STONE_STATUE',		'POLICY_HD_INTELLIGENT_INDUSTRY'),
+	('POLICY_HD_DRY_STONE',		'POLICY_HD_INTELLIGENT_INDUSTRY'),
 	-- 百分比卡
-	('POLICY_HD_PATTERN',		'POLICY_HD_FOSSIL_RESEARCH'),
 	-- 驻军卡
-	('POLICY_HD_WAR_DANCE',		'POLICY_RETAINERS'),
 	-- 同盟商队卡
 	('POLICY_HD_INTERNATIONAL_AID',		'POLICY_HD_MANKIND_FUTURE'),
 	-- 工人移民卡
@@ -616,6 +628,10 @@ values
 	('POLICY_SKYSCRAPERS',		'POLICY_HD_INTELLIGENT_INDUSTRY'),
 	-- 人口产出卡
 	('POLICY_HD_DISTANCE_EDUCATION',		'POLICY_HD_DIGITAL_TWIN'),
+	('POLICY_HD_WRITING_ON_HIDE',		'POLICY_SISHU'),
+	('POLICY_HD_WRITING_ON_HIDE',		'POLICY_HD_COMPULSORY_EDUCATION'),
+	('POLICY_HD_WRITING_ON_HIDE',		'POLICY_SOCIAL_STATISTICS'),
+	('POLICY_HD_WRITING_ON_HIDE',		'POLICY_HD_DISTANCE_EDUCATION'),
 	-- 相邻卡
 	('POLICY_CARAVANSARIES',				'POLICY_TOWN_CHARTERS'),
 	('POLICY_CARAVANSARIES',				'POLICY_TRIANGULAR_TRADE'),
@@ -723,7 +739,7 @@ update Policies set PrereqCivic = NULL, PrereqTech = 'TECH_CHEMISTRY'	where Poli
 update Policies set PrereqCivic = NULL, PrereqTech = 'TECH_BALLISTICS'	where PolicyType = 'POLICY_TOTAL_WAR';
 update Policies set PrereqCivic = 'CIVIC_EARLY_WARFARE_HD', PrereqTech = NULL	where PolicyType = 'POLICY_DISCIPLINE';
 update Policies set PrereqCivic = 'CIVIC_EARLY_WARFARE_HD', PrereqTech = NULL	where PolicyType = 'POLICY_AGOGE';
-update Policies set PrereqCivic = 'CIVIC_EARLY_WARFARE_HD', PrereqTech = NULL	where PolicyType = 'POLICY_MARITIME_INDUSTRIES';
+update Policies set PrereqCivic = NULL, PrereqTech = 'TECH_SAILING'	where PolicyType = 'POLICY_MARITIME_INDUSTRIES';
 update Policies set PrereqCivic = NULL, PrereqTech = 'TECH_STIRRUPS'	where PolicyType = 'POLICY_EQUESTRIAN_ORDERS';
 update Policies set PrereqCivic = 'CIVIC_INTERNATIONALISM_HD', PrereqTech = NULL	where PolicyType = 'POLICY_FINEST_HOUR';
 update Policies set PrereqCivic = 'CIVIC_IDEOLOGY', PrereqTech = NULL	where PolicyType = 'POLICY_DEFENSE_OF_MOTHERLAND';
@@ -1239,6 +1255,7 @@ values
 	('POLICY_MERCHANT_CONFEDERATION',				'MERCHANT_CONFEDERATION_INDUSTRIAL_ZONE_RANGE_BONUS'),
 	('POLICY_HD_BLOCK_MANAGEMENT',				'MERCHANT_CONFEDERATION_INDUSTRIAL_ZONE_RANGE_BONUS'),
 	('POLICY_GOD_KING',				'GOD_KING_POP_FAITH'),
+	('POLICY_HD_ORACLE',				'HD_ORACLE_CULTURE'),
 	('POLICY_HD_ORACLE',				'HD_ORACLE_FAITH'),
 	('POLICY_HD_INTANGIBLE_TRADE',				'INTANGIBLE_TRADE_CULTURE'),
 	('POLICY_HD_INTANGIBLE_TRADE',				'INTANGIBLE_TRADE_SCIENCE'),
@@ -1556,7 +1573,12 @@ values
 	('POLICY_FUTURE_COUNTER_SCIENCE',		'HD_FUTURE_COUNTER_SCIENCE_OFFENSIVE_SPY_BETTER'),
 	('POLICY_FUTURE_COUNTER_SCIENCE',		'HD_FUTURE_COUNTER_SCIENCE_OFFENSIVE_SPY_SCIENCE'),
 	('POLICY_FUTURE_COUNTER_SCIENCE',		'HD_FUTURE_COUNTER_SCIENCE_OFFENSIVE_SPY_CULTURE'),
-	('POLICY_FUTURE_COUNTER_SCIENCE',		'HD_FUTURE_COUNTER_SCIENCE_OFFENSIVE_SPY_FAITH');
+	('POLICY_FUTURE_COUNTER_SCIENCE',		'HD_FUTURE_COUNTER_SCIENCE_OFFENSIVE_SPY_FAITH'),
+	('POLICY_HD_STONE_STATUE',		'HD_STONE_STATUE_PALACE_PRODUCTION'),
+	('POLICY_HD_STONE_STATUE',		'HD_STONE_STATUE_WONDER_PRODUCTION'),
+	('POLICY_HD_STONE_STATUE',		'HD_STONE_STATUE_GREAT_ENGINEER_POINTS_ATTACH'),
+	('POLICY_HD_DIVINATION',		'HD_DIVINATION_FAITH'),
+	('POLICY_HD_WRITING_ON_HIDE',		'HD_WRITING_ON_HIDE_POP_SCIENCE');
 
 delete from PolicyModifiers where ModifierId in ('HD_TRANSLATE_SCIENCE_4', 'HD_TRANSLATE_FAVOR_4')
 	and exists (select DistrictType from Districts where DistrictType = 'DISTRICT_DIPLOMATIC_QUARTER');
@@ -1748,7 +1770,8 @@ values
 	('COMPULSORY_EDUCATION_POPULATION_CULTURE',			'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_PER_POPULATION',				'CITY_HAS_3_SPECIALTY_DISTRICTS_REQUIREMENTS'),
 	('MERCHANT_CONFEDERATION_INDUSTRIAL_ZONE_RANGE_BONUS',			'MODIFIER_PLAYER_DISTRICTS_ADJUST_EXTRA_REGIONAL_RANGE',				'REQUIRES_DISTRICT_IS_DISTRICT_INDUSTRIAL_ZONE_UDMET'),
 	('GOD_KING_POP_FAITH',			'MODIFIER_PLAYER_CAPITAL_CITY_ADJUST_CITY_YIELD_PER_POPULATION',				null),
-	('HD_ORACLE_FAITH',			'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',				'HD_CITY_HAS_IMPROVED_CAMP_FISHING_BOAT_RESOURCE_REQUIREMENTS'),
+	('HD_ORACLE_CULTURE',			'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',				'HD_ORACLE_REQUIREMENTS'),
+	('HD_ORACLE_FAITH',			'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',				'HD_ORACLE_REQUIREMENTS'),
 	('INTANGIBLE_TRADE_CULTURE',			'MODIFIER_PLAYER_ADJUST_TRADE_ROUTE_YIELD_FOR_INTERNATIONAL',				null),
 	('INTANGIBLE_TRADE_SCIENCE',			'MODIFIER_PLAYER_ADJUST_TRADE_ROUTE_YIELD_FOR_INTERNATIONAL',				null),
 	('NATIONAL_DEFENSE_ROAD_FOOD',						'MODIFIER_PLAYER_ADJUST_TRADE_ROUTE_YIELD_FOR_DOMESTIC',				null),
@@ -2058,7 +2081,13 @@ values
 	('HD_FUTURE_COUNTER_SCIENCE_OFFENSIVE_SPY_BETTER',	'MODIFIER_PLAYER_ADJUST_SPY_BONUS',												NULL),
 	('HD_FUTURE_COUNTER_SCIENCE_OFFENSIVE_SPY_SCIENCE',	'MODIFIER_PLAYER_ADJUST_TARGET_CITY_SPY_YIELD_PERCENT',		NULL),
 	('HD_FUTURE_COUNTER_SCIENCE_OFFENSIVE_SPY_CULTURE',	'MODIFIER_PLAYER_ADJUST_TARGET_CITY_SPY_YIELD_PERCENT',		NULL),
-	('HD_FUTURE_COUNTER_SCIENCE_OFFENSIVE_SPY_FAITH',		'MODIFIER_PLAYER_ADJUST_TARGET_CITY_SPY_YIELD_PERCENT',		NULL);
+	('HD_FUTURE_COUNTER_SCIENCE_OFFENSIVE_SPY_FAITH',		'MODIFIER_PLAYER_ADJUST_TARGET_CITY_SPY_YIELD_PERCENT',		NULL),
+	('HD_STONE_STATUE_PALACE_PRODUCTION',								'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE',		NULL),
+	('HD_STONE_STATUE_WONDER_PRODUCTION',								'MODIFIER_PLAYER_DISTRICTS_ADJUST_YIELD_CHANGE',					'HD_STONE_STATUE_REQUIREMENTS'),
+	('HD_STONE_STATUE_GREAT_ENGINEER_POINTS_ATTACH',		'MODIFIER_PLAYER_DISTRICTS_ATTACH_MODIFIER',							'HD_STONE_STATUE_REQUIREMENTS'),
+	('HD_STONE_STATUE_GREAT_ENGINEER_POINTS',						'MODIFIER_PLAYER_DISTRICT_ADJUST_GREAT_PERSON_POINTS',		NULL),
+	('HD_DIVINATION_FAITH',									'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',					'HD_DIVINATION_REQUIREMENTS'),
+	('HD_WRITING_ON_HIDE_POP_SCIENCE',			'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_PER_POPULATION',	'HD_WRITING_ON_HIDE_REQUIREMENTS');
 
 insert or replace into Modifiers
 	(ModifierId,																		ModifierType,																								OwnerRequirementSetId,								SubjectRequirementSetId)
@@ -2466,7 +2495,9 @@ values
 	('MERCHANT_CONFEDERATION_INDUSTRIAL_ZONE_RANGE_BONUS',								'Amount',						3),
 	('GOD_KING_POP_FAITH',								'Amount',						0.5),
 	('GOD_KING_POP_FAITH',								'YieldType',				'YIELD_FAITH'),
-	('HD_ORACLE_FAITH',								'Amount',						2),
+	('HD_ORACLE_CULTURE',								'Amount',						1),
+	('HD_ORACLE_CULTURE',								'YieldType',				'YIELD_CULTURE'),
+	('HD_ORACLE_FAITH',								'Amount',						1),
 	('HD_ORACLE_FAITH',								'YieldType',				'YIELD_FAITH'),
 	('INTANGIBLE_TRADE_CULTURE',								'YieldType',				'YIELD_SCIENCE'),
 	('INTANGIBLE_TRADE_CULTURE',								'Amount',						5),
@@ -3023,7 +3054,19 @@ values
 	('HD_FUTURE_COUNTER_SCIENCE_OFFENSIVE_SPY_CULTURE',	'YieldType',		'YIELD_CULTURE'),
 	('HD_FUTURE_COUNTER_SCIENCE_OFFENSIVE_SPY_CULTURE',	'Percent',			500),
 	('HD_FUTURE_COUNTER_SCIENCE_OFFENSIVE_SPY_FAITH',		'YieldType',		'YIELD_FAITH'),
-	('HD_FUTURE_COUNTER_SCIENCE_OFFENSIVE_SPY_FAITH',		'Percent',			500);
+	('HD_FUTURE_COUNTER_SCIENCE_OFFENSIVE_SPY_FAITH',		'Percent',			500),
+	('HD_STONE_STATUE_PALACE_PRODUCTION',		'BuildingType',			'BUILDING_PALACE'),
+	('HD_STONE_STATUE_PALACE_PRODUCTION',		'YieldType',			'YIELD_PRODUCTION'),
+	('HD_STONE_STATUE_PALACE_PRODUCTION',		'Amount',					1),
+	('HD_STONE_STATUE_WONDER_PRODUCTION',		'YieldType',			'YIELD_PRODUCTION'),
+	('HD_STONE_STATUE_WONDER_PRODUCTION',		'Amount',					1),
+	('HD_STONE_STATUE_GREAT_ENGINEER_POINTS_ATTACH',		'ModifierId',			'HD_STONE_STATUE_GREAT_ENGINEER_POINTS'),
+	('HD_STONE_STATUE_GREAT_ENGINEER_POINTS',		'Amount',			1),
+	('HD_STONE_STATUE_GREAT_ENGINEER_POINTS',		'GreatPersonClassType',			'GREAT_PERSON_CLASS_ENGINEER'),
+	('HD_DIVINATION_FAITH',		'YieldType',			'YIELD_FAITH'),
+	('HD_DIVINATION_FAITH',		'Amount',					1),
+	('HD_WRITING_ON_HIDE_POP_SCIENCE',		'YieldType',			'YIELD_SCIENCE'),
+	('HD_WRITING_ON_HIDE_POP_SCIENCE',		'Amount',					0.2);
 
 insert or replace into ModifierStrings
 	(ModifierId,							Context,	Text)
@@ -3826,45 +3869,33 @@ select
 from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
 
 -- 战舞仪式
-insert or replace into PolicyModifiers
-	(PolicyType,							 ModifierId)
-select distinct
+insert or ignore into PolicyModifiers (PolicyType, ModifierId) select distinct
 	'POLICY_HD_WAR_DANCE',		'HD_WAR_DANCE_' || PromotionClass || '_FAITH'
-from Units where FormationClass not in ('FORMATION_CLASS_CIVILIAN', 'FORMATION_CLASS_SUPPORT');
+from Units where PromotionClass is not null and FormationClass not in ('FORMATION_CLASS_CIVILIAN', 'FORMATION_CLASS_SUPPORT');
 
-insert or replace into Modifiers
-	(ModifierId, ModifierType, SubjectRequirementSetId)
-select
+insert or ignore into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) select distinct
 	'HD_WAR_DANCE_' || PromotionClass || '_FAITH',
 	'MODIFIER_PLAYER_UNITS_ATTACH_MODIFIER',
 	'UNIT_PROMOTION_IS_' || PromotionClass || '_REQUIREMENTS'
-from Units where FormationClass not in ('FORMATION_CLASS_CIVILIAN', 'FORMATION_CLASS_SUPPORT');
+from Units where PromotionClass is not null and FormationClass not in ('FORMATION_CLASS_CIVILIAN', 'FORMATION_CLASS_SUPPORT');
 
-insert or replace into Modifiers
-	(ModifierId, ModifierType, SubjectStackLimit)
-select
+insert or ignore into Modifiers (ModifierId, ModifierType, SubjectStackLimit) select distinct
 	'HD_WAR_DANCE_' || PromotionClass || '_FAITH_MODIFIER',
 	'MODIFIER_PLAYER_CAPITAL_CITY_ADJUST_CITY_YIELD_CHANGE',
 	1
-from Units where FormationClass not in ('FORMATION_CLASS_CIVILIAN', 'FORMATION_CLASS_SUPPORT');
+from Units where PromotionClass is not null and FormationClass not in ('FORMATION_CLASS_CIVILIAN', 'FORMATION_CLASS_SUPPORT');
 
-insert or replace into ModifierArguments
-	(ModifierId, Name, Value)
-select
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select distinct
 	'HD_WAR_DANCE_' || PromotionClass || '_FAITH', 'ModifierId', 'HD_WAR_DANCE_' || PromotionClass || '_FAITH_MODIFIER'
-from Units where FormationClass not in ('FORMATION_CLASS_CIVILIAN', 'FORMATION_CLASS_SUPPORT');
+from Units where PromotionClass is not null and FormationClass not in ('FORMATION_CLASS_CIVILIAN', 'FORMATION_CLASS_SUPPORT');
 
-insert or replace into ModifierArguments
-	(ModifierId, Name, Value)
-select
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select distinct
 	'HD_WAR_DANCE_' || PromotionClass || '_FAITH_MODIFIER', 'YieldType', 'YIELD_FAITH'
-from Units where FormationClass not in ('FORMATION_CLASS_CIVILIAN', 'FORMATION_CLASS_SUPPORT');
+from Units where PromotionClass is not null and FormationClass not in ('FORMATION_CLASS_CIVILIAN', 'FORMATION_CLASS_SUPPORT');
 
-insert or replace into ModifierArguments
-	(ModifierId, Name, Value)
-select
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select distinct
 	'HD_WAR_DANCE_' || PromotionClass || '_FAITH_MODIFIER', 'Amount', 1
-from Units where FormationClass not in ('FORMATION_CLASS_CIVILIAN', 'FORMATION_CLASS_SUPPORT');
+from Units where PromotionClass is not null and FormationClass not in ('FORMATION_CLASS_CIVILIAN', 'FORMATION_CLASS_SUPPORT');
 
 -- 纹饰
 insert or replace into PolicyModifiers
@@ -3916,7 +3947,7 @@ from Improvement_ValidResources where ImprovementType in ('IMPROVEMENT_MINE', 'I
 insert or replace into ModifierArguments
 	(ModifierId, Name, Value)
 select distinct
-	'HD_PATTERN_' || ResourceType || '_GOLD', 'Amount', 2
+	'HD_PATTERN_' || ResourceType || '_GOLD', 'Amount', 3
 from Improvement_ValidResources where ImprovementType in ('IMPROVEMENT_MINE', 'IMPROVEMENT_QUARRY', 'IMPROVEMENT_LUMBER_MILL');
 
 -- 生物分类学 POLICY_HD_BIOSYSTEMATICS
@@ -3995,3 +4026,52 @@ from Buildings where BuildingType in (
 	'BUILDING_AQUARIUM',
 	'BUILDING_SANCTUARY'
 );
+
+-- 贝冢 POLICY_HD_MIDDEN
+insert or ignore into PolicyModifiers (PolicyType, ModifierId) select
+	'POLICY_HD_MIDDEN', 'HD_MIDDEN_' || ImprovementType || '_FOOD_ATTACH'
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
+
+insert or ignore into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) select
+	'HD_MIDDEN_' || ImprovementType || '_FOOD_ATTACH', 'MODIFIER_PLAYER_IMPROVEMENTS_ATTACH_MODIFIER', 'PLOT_HAS_' || ImprovementType || '_REQUIREMENTS'
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select
+	'HD_MIDDEN_' || ImprovementType || '_FOOD_ATTACH', 'ModifierId', 'HD_MIDDEN_' || ImprovementType || '_FOOD'
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
+
+insert or ignore into Modifiers (ModifierId, ModifierType, SubjectStackLimit) select
+	'HD_MIDDEN_' || ImprovementType || '_FOOD', 'MODIFIER_SINGLE_CITY_ADJUST_CITY_YIELD_CHANGE', 1
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select
+	'HD_MIDDEN_' || ImprovementType || '_FOOD', 'YieldType', 'YIELD_FOOD'
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select
+	'HD_MIDDEN_' || ImprovementType || '_FOOD', 'Amount', 1
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
+
+insert or ignore into PolicyModifiers (PolicyType, ModifierId) select
+	'POLICY_HD_MIDDEN', 'HD_MIDDEN_' || ImprovementType || '_FAITH_ATTACH'
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
+
+insert or ignore into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) select
+	'HD_MIDDEN_' || ImprovementType || '_FAITH_ATTACH', 'MODIFIER_PLAYER_IMPROVEMENTS_ATTACH_MODIFIER', 'PLOT_HAS_' || ImprovementType || '_REQUIREMENTS'
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select
+	'HD_MIDDEN_' || ImprovementType || '_FAITH_ATTACH', 'ModifierId', 'HD_MIDDEN_' || ImprovementType || '_FAITH'
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
+
+insert or ignore into Modifiers (ModifierId, ModifierType, SubjectStackLimit) select
+	'HD_MIDDEN_' || ImprovementType || '_FAITH', 'MODIFIER_SINGLE_CITY_ADJUST_CITY_YIELD_CHANGE', 1
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select
+	'HD_MIDDEN_' || ImprovementType || '_FAITH', 'YieldType', 'YIELD_FAITH'
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select
+	'HD_MIDDEN_' || ImprovementType || '_FAITH', 'Amount', 1
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';

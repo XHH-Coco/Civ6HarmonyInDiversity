@@ -307,7 +307,7 @@ values
   ("LOC_POLICY_HD_BLOCK_MANAGEMENT_NAME",                                         "Block management"),
   ("LOC_POLICY_HD_BLOCK_MANAGEMENT_DESCRIPTION",                                  "Regional effects from all your districts reach 3 tiles farther."),
   ("LOC_POLICY_HD_ORACLE_NAME",                                                   "Oracle"),
-  ("LOC_POLICY_HD_ORACLE_DESCRIPTION",                                            "+2 [ICON_FAITH] Faith to cities with improved Camp or Fishing Boat resources."),
+  ("LOC_POLICY_HD_ORACLE_DESCRIPTION",                                            "Cities with improved Pasture or Camp Resources receive +1 [ICON_Culture] Culture and [ICON_FAITH] Faith."),
   ("LOC_POLICY_HD_INTANGIBLE_TRADE_NAME",                                         "Intangible Trade"),
   ("LOC_POLICY_HD_INTANGIBLE_TRADE_DESCRIPTION",                                  "International [ICON_TradeRoute] Trade Routes provide +5 [ICON_Culture] Culture and +5 [ICON_Science] Science."),
   ("LOC_POLICY_HD_NATIONAL_DEFENSE_ROAD_NAME",                                    "National Defense Road"),
@@ -478,7 +478,7 @@ values
   ("LOC_POLICY_HD_MANKIND_FUTURE_NAME",                                           "Shared Future for Mankind"),
   ("LOC_POLICY_HD_MANKIND_FUTURE_DESCRIPTION",                                    "Your [ICON_TRADEROUTE] Trade Routes to an Ally's city or vassal city-state provide +6 all yields for both cities. Alliance Points with all allies increase by an additional 6 per turn."),
   ("LOC_POLICY_HD_WAR_DANCE_NAME",                                                "War Dance Ceremony"),
-  ("LOC_POLICY_HD_WAR_DANCE_DESCRIPTION",                                         "+1 [ICON_FAITH] Faith from each type of Combat Units."),
+  ("LOC_POLICY_HD_WAR_DANCE_DESCRIPTION",                                         "[ICON_Capital] Capital receives +1 [ICON_FAITH] Faith from each type of Combat Units."),
   ("LOC_POLICY_HD_DRY_STONE_NAME",                                                "Dry Stone"),
   ("LOC_POLICY_HD_DRY_STONE_DESCRIPTION",                                         "Each Renaissance, Medieval, Classical, and Ancient wonder provides +1 [ICON_Production] Production and +2 [ICON_GreatEngineer] Great Engineer points."),
   ("LOC_POLICY_HD_BIOSYSTEMATICS_NAME",                                           "Biosystematics"),
@@ -492,7 +492,15 @@ values
   ("LOC_POLICY_HD_UNMANNED_FACTORY_NAME",                                         "Unmanned Factory"),
   ("LOC_POLICY_HD_UNMANNED_FACTORY_DESCRIPTION",                                  "Tier 2 and Tier 3 buildings in Industrial Zone -5 [ICON_GOLD] Gold, and provide +5 [ICON_Production] Production to Industrial Production Improvements in the city if full [ICON_POWER] Powered."),
   ("LOC_POLICY_HD_ROBOT_PRODUCTION_NAME",                                         "Robot-engaged Production"),
-  ("LOC_POLICY_HD_ROBOT_PRODUCTION_DESCRIPTION",                                  "Agricultural Production and Industrial Production Improvements receive +2 [ICON_FOOD] Food and [ICON_Production] Production, and provide +2 [ICON_FOOD] Food and [ICON_Production] Production to adjacnet Agricultural Production and Industrial Production Improvements.");
+  ("LOC_POLICY_HD_ROBOT_PRODUCTION_DESCRIPTION",                                  "Agricultural Production and Industrial Production Improvements receive +2 [ICON_FOOD] Food and [ICON_Production] Production, and provide +2 [ICON_FOOD] Food and [ICON_Production] Production to adjacnet Agricultural Production and Industrial Production Improvements."),
+  ("LOC_POLICY_HD_STONE_STATUE_NAME",                                             "Stone Statue"),
+  ("LOC_POLICY_HD_STONE_STATUE_DESCRIPTION",                                      "Palace provides +1 [ICON_Production] Production. Each Ancient wonder provides +1 [ICON_Production] Production and +1 [ICON_GreatEngineer] Great Engineer points."),
+  ("LOC_POLICY_HD_DIVINATION_NAME",                                               "Divination"),
+  ("LOC_POLICY_HD_DIVINATION_DESCRIPTION",                                        "Cities adjacent to Flood Plains, Oasis or {LOC_MARSH_OR_SWAMP} receive +1 [ICON_Faith] Faith."),
+  ("LOC_POLICY_HD_WRITING_ON_HIDE_NAME",                                          "Writing On Hide"),
+  ("LOC_POLICY_HD_WRITING_ON_HIDE_DESCRIPTION",                                   "Cities with improved Pasture or Camp Resources receive +0.2 [ICON_SCIENCE] Science per [ICON_CITIZEN] Citizen."),
+  ("LOC_POLICY_HD_MIDDEN_NAME",                                                   "Midden"),
+  ("LOC_POLICY_HD_MIDDEN_DESCRIPTION",                                            "Each kind of Water-based Production Improvements provides +1 [ICON_FOOD] Food and [ICON_Faith] Faith to its city.");
 --------------------------------------------------------------------------------
 -- Language: zh_Hans_CN
 insert or replace into LocalizedText
@@ -802,8 +810,8 @@ values
   ("zh_Hans_CN", "LOC_POLICY_MERCHANT_CONFEDERATION_DESCRIPTION",                                "商业中心和工业区建筑的辐射范围增加3个单元格。"),
   ("zh_Hans_CN", "LOC_POLICY_HD_BLOCK_MANAGEMENT_NAME",                                          "区块化管理"),
   ("zh_Hans_CN", "LOC_POLICY_HD_BLOCK_MANAGEMENT_DESCRIPTION",                                   "所有区域建筑的辐射范围增加3个单元格。"),
-  ("zh_Hans_CN", "LOC_POLICY_HD_ORACLE_NAME",                                                    "甲骨占卜"),
-  ("zh_Hans_CN", "LOC_POLICY_HD_ORACLE_DESCRIPTION",                                             "有改良营地或渔船资源的城市+2 [ICON_FAITH] 信仰值。"),
+  ("zh_Hans_CN", "LOC_POLICY_HD_ORACLE_NAME",                                                    "甲骨卜辞"),
+  ("zh_Hans_CN", "LOC_POLICY_HD_ORACLE_DESCRIPTION",                                             "拥有改良的牧场或营地资源的城市+1 [ICON_Culture] 文化值和 [ICON_FAITH] 信仰值。"),
   ("zh_Hans_CN", "LOC_POLICY_HD_INTANGIBLE_TRADE_NAME",                                          "无形贸易"),
   ("zh_Hans_CN", "LOC_POLICY_HD_INTANGIBLE_TRADE_DESCRIPTION",                                   "国际 [ICON_TradeRoute] 贸易路线+5 [ICON_Culture] 文化值和 [ICON_Science] 科技值。"),
   ("zh_Hans_CN", "LOC_POLICY_HD_NATIONAL_DEFENSE_ROAD_NAME",                                     "国防道路"),
@@ -827,7 +835,7 @@ values
   ("zh_Hans_CN", "LOC_POLICY_HD_NATIONAL_CULTURE_NAME",                                          "民族文化"),
   ("zh_Hans_CN", "LOC_POLICY_HD_NATIONAL_CULTURE_DESCRIPTION",                                   "每一级剧院广场建筑提供+4 [ICON_GreatWriter] 大作家点数。"),
   ("zh_Hans_CN", "LOC_POLICY_HD_PATTERN_NAME",                                                   "纹饰"),
-  ("zh_Hans_CN", "LOC_POLICY_HD_PATTERN_DESCRIPTION",                                            "每种改良的矿山、采石场或伐木场资源为所在城市提供+2 [ICON_GOLD] 金币和+1 [ICON_Faith] 信仰值。"),
+  ("zh_Hans_CN", "LOC_POLICY_HD_PATTERN_DESCRIPTION",                                            "每种改良的矿山、采石场或伐木场资源为所在城市提供+3 [ICON_GOLD] 金币和+1 [ICON_Faith] 信仰值。"),
   ("zh_Hans_CN", "LOC_POLICY_HD_PSALM_NAME",                                                     "圣咏"),
   ("zh_Hans_CN", "LOC_POLICY_HD_PSALM_DESCRIPTION",                                              "+4 [ICON_GreatMusician] 大音乐家点数。每座圣地提供+2 [ICON_GreatMusician] 大音乐家点数。"),
   ("zh_Hans_CN", "LOC_POLICY_HD_SUBCULTURAL_TREND_NAME",                                         "亚文化潮流"),
@@ -974,7 +982,7 @@ values
   ("zh_Hans_CN", "LOC_POLICY_HD_MANKIND_FUTURE_NAME",                                            "人类命运共同体"),
   ("zh_Hans_CN", "LOC_POLICY_HD_MANKIND_FUTURE_DESCRIPTION",                                     "您通往盟友城市或宗主城邦的 [ICON_TRADEROUTE] 贸易路线为双边城市+6所有产出。所有盟友的同盟点数每回合额外增加6点。"),
   ("zh_Hans_CN", "LOC_POLICY_HD_WAR_DANCE_NAME",                                                 "战舞仪式"),
-  ("zh_Hans_CN", "LOC_POLICY_HD_WAR_DANCE_DESCRIPTION",                                          "每拥有一种不同单位升级的军事单位+1 [ICON_FAITH] 信仰值。"),
+  ("zh_Hans_CN", "LOC_POLICY_HD_WAR_DANCE_DESCRIPTION",                                          "每拥有一种不同单位升级的军事单位，[ICON_Capital] 首都+1 [ICON_FAITH] 信仰值。"),
   ("zh_Hans_CN", "LOC_POLICY_HD_DRY_STONE_NAME",                                                 "干石"),
   ("zh_Hans_CN", "LOC_POLICY_HD_DRY_STONE_DESCRIPTION",                                          "每座远古、古典、中世纪和文艺复兴时代的奇观+1 [ICON_Production] 生产力和+2 [ICON_GreatEngineer] 大工程师点数。"),
   ("zh_Hans_CN", "LOC_POLICY_HD_BIOSYSTEMATICS_NAME",                                            "生物分类学"),
@@ -988,7 +996,15 @@ values
   ("zh_Hans_CN", "LOC_POLICY_HD_UNMANNED_FACTORY_NAME",                                          "黑灯工厂"),
   ("zh_Hans_CN", "LOC_POLICY_HD_UNMANNED_FACTORY_DESCRIPTION",                                   "工业区二级建筑和三级建筑-5 [ICON_GOLD] 金币，若城市 [ICON_POWER] 供电充足，则为该城市的工业生产改良+5 [ICON_Production] 生产力。"),
   ("zh_Hans_CN", "LOC_POLICY_HD_ROBOT_PRODUCTION_NAME",                                          "机器人生产"),
-  ("zh_Hans_CN", "LOC_POLICY_HD_ROBOT_PRODUCTION_DESCRIPTION",                                   "农业生产和工业生产改良+2 [ICON_FOOD] 食物和 [ICON_Production] 生产力，并为相邻的农业生产和工业生产改良+2 [ICON_FOOD] 食物和 [ICON_Production] 生产力。");
+  ("zh_Hans_CN", "LOC_POLICY_HD_ROBOT_PRODUCTION_DESCRIPTION",                                   "农业生产和工业生产改良+2 [ICON_FOOD] 食物和 [ICON_Production] 生产力，并为相邻的农业生产和工业生产改良+2 [ICON_FOOD] 食物和 [ICON_Production] 生产力。"),
+  ("zh_Hans_CN", "LOC_POLICY_HD_STONE_STATUE_NAME",                                              "石雕"),
+  ("zh_Hans_CN", "LOC_POLICY_HD_STONE_STATUE_DESCRIPTION",                                       "宫殿+1 [ICON_Production] 生产力。每座远古时代的奇观+1 [ICON_Production] 生产力和+1 [ICON_GreatEngineer] 大工程师点数。"),
+  ("zh_Hans_CN", "LOC_POLICY_HD_DIVINATION_NAME",                                                "筮卜"),
+  ("zh_Hans_CN", "LOC_POLICY_HD_DIVINATION_DESCRIPTION",                                         "靠近泛滥平原、绿洲或{LOC_MARSH_OR_SWAMP}的城市+1 [ICON_Faith] 信仰值。"),
+  ("zh_Hans_CN", "LOC_POLICY_HD_WRITING_ON_HIDE_NAME",                                           "兽皮文书"),
+  ("zh_Hans_CN", "LOC_POLICY_HD_WRITING_ON_HIDE_DESCRIPTION",                                    "拥有改良的牧场或营地资源的城市每位 [ICON_CITIZEN] 公民+0.2 [ICON_SCIENCE] 科技值。"),
+  ("zh_Hans_CN", "LOC_POLICY_HD_MIDDEN_NAME",                                                    "贝冢"),
+  ("zh_Hans_CN", "LOC_POLICY_HD_MIDDEN_DESCRIPTION",                                             "每种水上生产改良为所在城市+1 [ICON_FOOD] 食物和 [ICON_Faith] 信仰值。");
 
 insert or replace into LocalizedText
   (Language, Tag, Text)

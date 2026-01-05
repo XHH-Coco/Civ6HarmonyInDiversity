@@ -1032,7 +1032,6 @@ values
 	('CITYCENTER_ADJACENT_TO_COAST_REQUIREMENTS',			'REQUIREMENTSET_TEST_ALL'),
 	('PLOT_HAS_COAST_AND_CITY_HAS_HOLYSITE_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
 	('PLOT_HAS_IMPROVEMENT_OIL_WELL_OR_OFFSHORE_OIL_RIG',	'REQUIREMENTSET_TEST_ANY'),
-	('HD_CITY_HAS_IMPROVED_CAMP_FISHING_BOAT_RESOURCE_REQUIREMENTS',	'REQUIREMENTSET_TEST_ANY'),
 	('HD_AI_CITY_FOLLOWS_RELIGION_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
 	('HD_AI_CAPITAL_FOLLOWS_RELIGION_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
 	('HD_COLOSSUS_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
@@ -1093,7 +1092,10 @@ values
 	('HD_WIND_MILL_PLOT_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
 	('HD_WIND_MILL_REQUIREMENTS',				'REQUIREMENTSET_TEST_ALL'),
 	('HD_PLOT_IS_COAST_OR_OCEAN_AND_PLAYER_HAS_CONSTRUCTION',	'REQUIREMENTSET_TEST_ALL'),
-	('HD_PLOT_IS_COAST_OR_OCEAN',								'REQUIREMENTSET_TEST_ANY');
+	('HD_PLOT_IS_COAST_OR_OCEAN',								'REQUIREMENTSET_TEST_ANY'),
+	('HD_DIVINATION_REQUIREMENTS',								'REQUIREMENTSET_TEST_ANY'),
+	('HD_ORACLE_REQUIREMENTS',								'REQUIREMENTSET_TEST_ANY'),
+	('HD_WRITING_ON_HIDE_REQUIREMENTS',								'REQUIREMENTSET_TEST_ANY');
 
 insert or ignore into RequirementSetRequirements
 	(RequirementSetId,												RequirementId)
@@ -1663,6 +1665,7 @@ select
 from Feature_ValidTerrains i, Features j
 where i.FeatureType = j.FeatureType and (i.TerrainType = 'TERRAIN_COAST' and j.Impassable = 0 and j.NaturalWonder = 0);
 
+-- 测量仪
 insert or ignore into RequirementSetRequirements
 	(RequirementSetId,						RequirementId)
 select
@@ -1670,6 +1673,31 @@ select
 from Features
 where FeatureType in ('FEATURE_FLOODPLAINS', 'FEATURE_OASIS', 'FEATURE_MARSH', 'FEATURE_FLOODPLAINS_GRASSLAND', 'FEATURE_FLOODPLAINS_PLAINS', 'FEATURE_HD_SWAMP');
 
+-- 卜筮
+insert or ignore into RequirementSetRequirements
+	(RequirementSetId,						RequirementId)
+select
+	'HD_DIVINATION_REQUIREMENTS',	'HD_REQUIRES_PLOT_ADJACENT_TO_' || FeatureType
+from Features
+where FeatureType in ('FEATURE_FLOODPLAINS', 'FEATURE_OASIS', 'FEATURE_MARSH', 'FEATURE_FLOODPLAINS_GRASSLAND', 'FEATURE_FLOODPLAINS_PLAINS', 'FEATURE_HD_SWAMP');
+
+-- 甲骨卜辞
+insert or ignore into RequirementSetRequirements
+	(RequirementSetId,								RequirementId)
+select
+	'HD_ORACLE_REQUIREMENTS',					'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType
+from Improvement_ValidResources
+where ImprovementType = 'IMPROVEMENT_PASTURE' or ImprovementType = 'IMPROVEMENT_CAMP';
+
+-- 兽皮文书
+insert or ignore into RequirementSetRequirements
+	(RequirementSetId,								RequirementId)
+select
+	'HD_WRITING_ON_HIDE_REQUIREMENTS',	'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType
+from Improvement_ValidResources
+where ImprovementType = 'IMPROVEMENT_PASTURE' or ImprovementType = 'IMPROVEMENT_CAMP';
+
+-- 竞技场
 insert or ignore into RequirementSetRequirements
 	(RequirementSetId,								RequirementId)
 select
@@ -1677,13 +1705,7 @@ select
 from Improvement_ValidResources
 where ImprovementType = 'IMPROVEMENT_PASTURE' or ImprovementType = 'IMPROVEMENT_CAMP';
 
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,																											RequirementId)
-select
-	'HD_CITY_HAS_IMPROVED_CAMP_FISHING_BOAT_RESOURCE_REQUIREMENTS',					'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType
-from Improvement_ValidResources
-where ImprovementType = 'IMPROVEMENT_FISHING_BOATS' or ImprovementType = 'IMPROVEMENT_CAMP';
-
+-- 克隆研究
 insert or ignore into RequirementSetRequirements
 	(RequirementSetId,								RequirementId)
 select
@@ -2853,11 +2875,19 @@ insert or ignore into RequirementSets
 	(RequirementSetId, 							RequirementSetType)
 values
 	('PLOT_HAS_COMPLETE_WONDER',				'REQUIREMENTSET_TEST_ANY'),
+	('HD_STONE_STATUE_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
 	('HD_DRY_STONE_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
 	('PLOT_DOES_NOT_HAVE_INCOMPLETE_WONDER',	'REQUIREMENTSET_TEST_ANY'),
 	('PLOT_HAS_WONDER',							'REQUIREMENTSET_TEST_ANY');
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
 select 'PLOT_HAS_COMPLETE_WONDER',	'PLOT_HAS_' || BuildingType from Buildings where IsWonder = 1;
+
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+select 'HD_STONE_STATUE_REQUIREMENTS',	'PLOT_HAS_' || BuildingType from Buildings where IsWonder = 1
+and PrereqTech in (select TechnologyType from Technologies where EraType in ('ERA_ANCIENT'));
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+select 'HD_STONE_STATUE_REQUIREMENTS',	'PLOT_HAS_' || BuildingType from Buildings where IsWonder = 1
+and PrereqCivic in (select CivicType from Civics where EraType in ('ERA_ANCIENT'));
 
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
 select 'HD_DRY_STONE_REQUIREMENTS',	'PLOT_HAS_' || BuildingType from Buildings where IsWonder = 1
