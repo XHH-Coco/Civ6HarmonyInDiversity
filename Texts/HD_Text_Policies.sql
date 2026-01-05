@@ -500,7 +500,7 @@ values
   ("LOC_POLICY_HD_WRITING_ON_HIDE_NAME",                                          "Writing On Hide"),
   ("LOC_POLICY_HD_WRITING_ON_HIDE_DESCRIPTION",                                   "Cities with improved Pasture or Camp Resources receive +0.2 [ICON_SCIENCE] Science per [ICON_CITIZEN] Citizen."),
   ("LOC_POLICY_HD_MIDDEN_NAME",                                                   "Midden"),
-  ("LOC_POLICY_HD_MIDDEN_DESCRIPTION",                                            "Each kind of Water-based Production Improvements provides +1 [ICON_FOOD] Food and [ICON_Faith] Faith to its city.");
+  ("LOC_POLICY_HD_MIDDEN_DESCRIPTION",                                            "Each kind of Water-based Production Improvements provides +1 [ICON_Culture] Culture and [ICON_Faith] Faith to its city.");
 --------------------------------------------------------------------------------
 -- Language: zh_Hans_CN
 insert or replace into LocalizedText
@@ -1004,7 +1004,7 @@ values
   ("zh_Hans_CN", "LOC_POLICY_HD_WRITING_ON_HIDE_NAME",                                           "兽皮文书"),
   ("zh_Hans_CN", "LOC_POLICY_HD_WRITING_ON_HIDE_DESCRIPTION",                                    "拥有改良的牧场或营地资源的城市每位 [ICON_CITIZEN] 公民+0.2 [ICON_SCIENCE] 科技值。"),
   ("zh_Hans_CN", "LOC_POLICY_HD_MIDDEN_NAME",                                                    "贝冢"),
-  ("zh_Hans_CN", "LOC_POLICY_HD_MIDDEN_DESCRIPTION",                                             "每种水上生产改良为所在城市+1 [ICON_FOOD] 食物和 [ICON_Faith] 信仰值。");
+  ("zh_Hans_CN", "LOC_POLICY_HD_MIDDEN_DESCRIPTION",                                             "每种水上生产改良为所在城市+1 [ICON_Culture] 文化值和 [ICON_Faith] 信仰值。");
 
 insert or replace into LocalizedText
   (Language, Tag, Text)

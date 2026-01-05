@@ -4029,27 +4029,27 @@ from Buildings where BuildingType in (
 
 -- 贝冢 POLICY_HD_MIDDEN
 insert or ignore into PolicyModifiers (PolicyType, ModifierId) select
-	'POLICY_HD_MIDDEN', 'HD_MIDDEN_' || ImprovementType || '_FOOD_ATTACH'
+	'POLICY_HD_MIDDEN', 'HD_MIDDEN_' || ImprovementType || '_CULTURE_ATTACH'
 from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
 
 insert or ignore into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) select
-	'HD_MIDDEN_' || ImprovementType || '_FOOD_ATTACH', 'MODIFIER_PLAYER_IMPROVEMENTS_ATTACH_MODIFIER', 'PLOT_HAS_' || ImprovementType || '_REQUIREMENTS'
+	'HD_MIDDEN_' || ImprovementType || '_CULTURE_ATTACH', 'MODIFIER_PLAYER_IMPROVEMENTS_ATTACH_MODIFIER', 'PLOT_HAS_' || ImprovementType || '_REQUIREMENTS'
 from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
 
 insert or ignore into ModifierArguments (ModifierId, Name, Value) select
-	'HD_MIDDEN_' || ImprovementType || '_FOOD_ATTACH', 'ModifierId', 'HD_MIDDEN_' || ImprovementType || '_FOOD'
+	'HD_MIDDEN_' || ImprovementType || '_CULTURE_ATTACH', 'ModifierId', 'HD_MIDDEN_' || ImprovementType || '_CULTURE'
 from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
 
 insert or ignore into Modifiers (ModifierId, ModifierType, SubjectStackLimit) select
-	'HD_MIDDEN_' || ImprovementType || '_FOOD', 'MODIFIER_SINGLE_CITY_ADJUST_CITY_YIELD_CHANGE', 1
+	'HD_MIDDEN_' || ImprovementType || '_CULTURE', 'MODIFIER_SINGLE_CITY_ADJUST_CITY_YIELD_CHANGE', 1
 from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
 
 insert or ignore into ModifierArguments (ModifierId, Name, Value) select
-	'HD_MIDDEN_' || ImprovementType || '_FOOD', 'YieldType', 'YIELD_FOOD'
+	'HD_MIDDEN_' || ImprovementType || '_CULTURE', 'YieldType', 'YIELD_CULTURE'
 from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
 
 insert or ignore into ModifierArguments (ModifierId, Name, Value) select
-	'HD_MIDDEN_' || ImprovementType || '_FOOD', 'Amount', 1
+	'HD_MIDDEN_' || ImprovementType || '_CULTURE', 'Amount', 1
 from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
 
 insert or ignore into PolicyModifiers (PolicyType, ModifierId) select
