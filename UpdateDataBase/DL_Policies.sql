@@ -357,7 +357,7 @@ values
 	('POLICY_HD_COAT_OF_ARMS',     					'LOC_POLICY_HD_COAT_OF_ARMS_NAME',     					'LOC_POLICY_HD_COAT_OF_ARMS_DESCRIPTION',      'CIVIC_HERALDRY_HD',                  			null,                       'SLOT_GREAT_PERSON'),
 	('POLICY_HD_BARTER',     					'LOC_POLICY_HD_BARTER_NAME',     					'LOC_POLICY_HD_BARTER_DESCRIPTION',      'CIVIC_FOREIGN_TRADE',                  			null,                       'SLOT_GREAT_PERSON'),
 	('POLICY_HD_HAWKER',     					'LOC_POLICY_HD_HAWKER_NAME',     					'LOC_POLICY_HD_HAWKER_DESCRIPTION',      null,                  			'TECH_CURRENCY',                       'SLOT_GREAT_PERSON'),
-	('POLICY_HD_PERIODOS',     					'LOC_POLICY_HD_PERIODOS_NAME',     					'LOC_POLICY_HD_PERIODOS_DESCRIPTION',      'CIVIC_FOREIGN_TRADE',                  			null,                       'SLOT_GREAT_PERSON');
+	('POLICY_HD_PERIODOS',     					'LOC_POLICY_HD_PERIODOS_NAME',     					'LOC_POLICY_HD_PERIODOS_DESCRIPTION',      'CIVIC_MILITARY_TRADITION',                  			null,                       'SLOT_GREAT_PERSON');
 
 update Policies set Description = 'LOC_POLICY_HD_TRANSLATE_DESCRIPTION_DIP' where PolicyType = 'POLICY_HD_TRANSLATE' and exists (select DistrictType from Districts where DistrictType = 'DISTRICT_DIPLOMATIC_QUARTER');
 
