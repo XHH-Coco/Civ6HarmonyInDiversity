@@ -907,3 +907,28 @@ local function GetUnlockedResourceListByClass(playerId, resourceClassType)
 	return list;
 end
 Utils.GetUnlockedResourceListByClass = GetUnlockedResourceListByClass;
+
+-- 获取最近的城市
+local function GetNearestCity(playerId, x, y)
+	local player = Players[playerId];
+
+	local distance;
+	local resultCity;
+
+	if player then
+		for _, city in player:GetCities():Members() do
+			local cityLocation = city:GetLocation();
+			local d = Map.GetPlotDistance(x, y, cityLocation.x, cityLocation.y);
+			if not resultCity then
+				distance = d;
+				resultCity = city:GetID();
+			elseif d < distance then
+				distance = d;
+				resultCity = city:GetID();
+			end
+		end
+	end
+
+	return resultCity;
+end
+Utils.GetNearestCity = GetNearestCity;

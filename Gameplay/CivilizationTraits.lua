@@ -3520,7 +3520,7 @@ function BannockburnTriggerEvents(playerId, eventId, x, y)
 	local isAdjacentToWater = false;
 	for direction = 0, 5 do
 		local plot = Map.GetAdjacentPlot(x, y, direction);
-		if plot and not plot:IsImpassable() and plot:IsWater() and plot:GetTerrainType() ~= TERRAIN_OCEAN_INDEX then
+		if plot and not plot:IsImpassable() and plot:IsWater() and plot:GetTerrainType() ~= TERRAIN_OCEAN_INDEX and (plot:GetOwner() == -1 or plot:GetOwner() == playerId) then
 			local units = Units.GetUnitsInPlot(plot:GetX(), plot:GetY());
 			if units ~= nil then
 				if #units == 0 then
@@ -3575,11 +3575,18 @@ function BannockburnTriggerEvents(playerId, eventId, x, y)
 		end
 	end
 
+	-- 是否有城市
+	local player = Players[playerId];
+	local hasCity = player:GetCities():GetCount() > 0;
+
+	-- TODO 是否有空遗物槽位
+
 	print("==========================================================================")
 	print('isAdjacentToWater', isAdjacentToWater);
 	print('hasHorse', hasHorse);
 	print('hasIron', hasIron);
 	print('hasFeature', hasFeature);
+	print('hasCity', hasCity);
 
 	-- 查询可用选项列表
 	local recruitList = {};
@@ -3641,6 +3648,14 @@ function BannockburnTriggerEvents(playerId, eventId, x, y)
 				elseif (row.SelectionType == 'HD_SELECTION_GOODY_HUT_PROMOTION' or row.SelectionType == 'HD_SELECTION_BARBARIAN_PROMOTION') then
 					-- 晋升：军事单位 经验不满
 					if canPromote then
+						table.insert(supplyList, {
+							SelectionType = row.SelectionType,
+							Weight = info.Weight
+						});
+					end
+				elseif (row.SelectionType == 'HD_SELECTION_GOODY_HUT_CITIZEN' or row.SelectionType == 'HD_SELECTION_BARBARIAN_CITIZEN') then
+					-- 人口：有城市
+					if hasCity then
 						table.insert(supplyList, {
 							SelectionType = row.SelectionType,
 							Weight = info.Weight
@@ -3723,6 +3738,7 @@ function BannockburnTriggerEvents(playerId, eventId, x, y)
 		-- UnitType
 		-- Amount
 		-- ResourceType
+		-- CityId
 		-- X
 		-- Y
 	for _, selectionType in ipairs(resultList) do
@@ -3785,7 +3801,7 @@ function BannockburnTriggerEvents(playerId, eventId, x, y)
 					ScriptParam = {UnitType = 'UNIT_SAPPER', X = x, Y = y}
 				})
 			elseif (selectionType == 'HD_SELECTION_GOODY_HUT_GOLD' or selectionType == 'HD_SELECTION_BARBARIAN_GOLD') then
-				local amount = Game.GetRandNum(111, "Random gold amount for Player " .. playerId) + 10;
+				local amount = Game.GetRandNum(111, "Random gold amount for Player " .. playerId) + 40;
 				table.insert(param.SelectionList, {
 					Id = selectionType,
 					ButtonToolTip = Locale.Lookup(selectionInfo.ButtonToolTip, amount),
@@ -3816,6 +3832,18 @@ function BannockburnTriggerEvents(playerId, eventId, x, y)
 						ButtonToolTip = Locale.Lookup(selectionInfo.ButtonToolTip, amount, "[ICON_" .. resourceInfo.ResourceType .. "] " .. Locale.Lookup(resourceInfo.Name)),
 						ScriptParam = {ResourceType = resourceInfo.ResourceType, Amount = amount, X = x, Y = y}
 					})
+				end
+			elseif (selectionType == 'HD_SELECTION_GOODY_HUT_CITIZEN' or selectionType == 'HD_SELECTION_BARBARIAN_CITIZEN') then
+				local cityId = Utils.GetNearestCity(playerId, x, y);
+				if cityId then
+					local city = CityManager.GetCity(playerId, cityId);
+					if city then
+						table.insert(param.SelectionList, {
+							Id = selectionType,
+							ButtonToolTip = Locale.Lookup(selectionInfo.ButtonToolTip, city:GetName()),
+							ScriptParam = {CityId = cityId, X = x, Y = y}
+						})
+					end
 				end
 			else
 				table.insert(param.SelectionList, {
@@ -3924,7 +3952,7 @@ function Bannockburn_CustomEvent_OnChooseSelection(playerId, param)
 				local targetPlot;
 				for direction = 0, 5 do
 					local adjacentPlot = Map.GetAdjacentPlot(x, y, direction);
-					if adjacentPlot and not adjacentPlot:IsImpassable() and adjacentPlot:IsWater() and adjacentPlot:GetTerrainType() ~= TERRAIN_OCEAN_INDEX then
+					if adjacentPlot and not adjacentPlot:IsImpassable() and adjacentPlot:IsWater() and adjacentPlot:GetTerrainType() ~= TERRAIN_OCEAN_INDEX and (adjacentPlot:GetOwner() == -1 or adjacentPlot:GetOwner() == playerId) then
 						local units = Units.GetUnitsInPlot(adjacentPlot:GetX(), adjacentPlot:GetY());
 						if units ~= nil then
 							if #units == 0 then
@@ -3996,6 +4024,12 @@ function Bannockburn_CustomEvent_OnChooseSelection(playerId, param)
 				end
 			end
 			Game.AddWorldViewText(playerId, Locale.Lookup(selectionInfo.ButtonToolTip), x, y);
+		elseif (selectionType == 'HD_SELECTION_GOODY_HUT_CITIZEN' or selectionType == 'HD_SELECTION_BARBARIAN_CITIZEN') then
+			local city = CityManager.GetCity(playerId, scriptParam.CityId);
+			if city then
+				city:ChangePopulation(1);
+				Game.AddWorldViewText(playerId, Locale.Lookup(selectionInfo.ButtonToolTip, city:GetName()), x, y);
+			end
 		else
 			Game.AddWorldViewText(playerId, Locale.Lookup(selectionInfo.ButtonToolTip), x, y);
 		end

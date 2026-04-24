@@ -23,9 +23,21 @@ insert or replace into EnglishText (Tag, Text) values
   ("LOC_HD_SELECTION_GOODY_HUT_NAVAL_TOOLTIP",                "Get 1 {1_Unit}"),
   
   ("LOC_HD_SELECTION_GOODY_HUT_SAPPER_DESCRIPTION",           "The fire in the blacksmith's shop at the western end of the village has never gone out during the night for the past thirty years. An experienced blacksmith lives there. Although sparks blinded his left eye, his skills and experience are a treasure to us - he not only can forge weapons and armor for the army, but is also skilled at building roads, erecting pontoon bridges, constructing camps and watchtowers."),
-  ("LOC_HD_SELECTION_GOODY_HUT_SAPPER_TEXT",                  "Recruit Troops"),
+  ("LOC_HD_SELECTION_GOODY_HUT_SAPPER_TEXT",                  "Recruit Talents"),
   ("LOC_HD_SELECTION_GOODY_HUT_SAPPER_TOOLTIP",               "Get 1 {1_Unit}"),
   
+  ("LOC_HD_SELECTION_GOODY_HUT_ENVOY_DESCRIPTION",            "While exploring the tribal villages, we happened to discover a remarkable talent - he not only knows multiple languages but also can effortlessly navigate between different cultures. Such a person is exactly the kind of talent our nation's envoys are longing for. We should recruit him into our ranks and utilize his diplomatic skills to connect with the surrounding city-states and tribes, and win their support and trust."),
+  ("LOC_HD_SELECTION_GOODY_HUT_ENVOY_TEXT",                   "Recruit Talents"),
+  ("LOC_HD_SELECTION_GOODY_HUT_ENVOY_TOOLTIP",                "Get an [ICON_Envoy] Envoy"),
+
+  ("LOC_HD_SELECTION_GOODY_HUT_GOVERNOR_DESCRIPTION",         "The village head's son in this village is a remarkable young man - although he was born in the countryside, he naturally possesses exceptional governance skills. He is good at listening to the voices of the people, handles affairs fairly and meticulously, and has an innate acuteness in resource allocation and personnel management. With systematic training and experience, given enough time, he will surely grow into a capable governor who can defend our territory."),
+  ("LOC_HD_SELECTION_GOODY_HUT_GOVERNOR_TEXT",                "Recruit Talents"),
+  ("LOC_HD_SELECTION_GOODY_HUT_GOVERNOR_TOOLTIP",             "Get a [Icon_Governor] Governor Title"),
+
+  ("LOC_HD_SELECTION_GOODY_HUT_GENERAL_DESCRIPTION",          "Deep within the tribal village, we happened to hear about a military genius who had secluded himself for many years. This person had joined the army at a young age, fought in numerous battles, studied military strategies thoroughly, and led the troops to victory time and again. His reputation spread far and wide. Currently, the country is facing numerous difficulties, lost territories have not been recovered, and it is the right time to employ talents. If we can sincerely invite him, perhaps we can ask him to return and lead us to reorganize our troops, train the soldiers, plan strategies, and march to reclaim the territory that rightfully belongs to us."),
+  ("LOC_HD_SELECTION_GOODY_HUT_GENERAL_TEXT",                 "Recruit Talents"),
+  ("LOC_HD_SELECTION_GOODY_HUT_GENERAL_TOOLTIP",              "Recruit a [ICON_GREATGENERAL] Great General"),
+
   ("LOC_HD_SELECTION_GOODY_HUT_GOLD_DESCRIPTION",             "The villagers exchanged a lot of daily necessities and production tools with us using gold dust and silver ingots. Our fine salt enabled the villagers to make preserved meat that was easy to store, the strong horses provided them with animal power suitable for rapid transportation, the iron could be used to forge more durable farming tools or weapons, and the fragrance of cloves and nutmeg even made their eyes shine."),
   ("LOC_HD_SELECTION_GOODY_HUT_GOLD_TEXT",                    "Get Supplies"),
   ("LOC_HD_SELECTION_GOODY_HUT_GOLD_TOOLTIP",                 "Get {1_Amount} [ICON_GOLD] Gold"),
@@ -51,8 +63,16 @@ insert or replace into EnglishText (Tag, Text) values
   ("LOC_HD_SELECTION_GOODY_HUT_MOVEMENT_TOOLTIP",             "Restore all [ICON_MOVEMENT] movement"),
   
   ("LOC_HD_SELECTION_GOODY_HUT_BUILDER_DESCRIPTION",          "After we explained to the villagers of this village the legal provisions, tax system, water conservancy planning, road construction and market management of our country, a deep yearning for order and fairness gradually emerged in the eyes of these hardworking people. This aspiration eventually turned into a firm decision: In the petition, they stated that they were willing to relocate the entire community, crossing mountains and rivers, and become enthusiastic new citizens under the civilized system."),
-  ("LOC_HD_SELECTION_GOODY_HUT_BUILDER_TEXT",                 "Get Supplies"),
-  ("LOC_HD_SELECTION_GOODY_HUT_BUILDER_TOOLTIP",              "Get a Builder"),
+  ("LOC_HD_SELECTION_GOODY_HUT_BUILDER_TEXT",                 "Accept Immigrants"),
+  ("LOC_HD_SELECTION_GOODY_HUT_BUILDER_TOOLTIP",              "Get a Builder in [ICON_Capital] 首都"),
+
+  ("LOC_HD_SELECTION_GOODY_HUT_CITIZEN_DESCRIPTION",          "We reached a remote area, in a seemingly ordinary village, where a piece of exciting news was announced - a portion of the villagers expressed their willingness to join our nation. As it is said: Those who win the hearts of the people can secure the border; those who gather the strength of the people can achieve great accomplishments. For those small towns along the border that were still relatively weak, the arrival of these new residents was like a long-dry land receiving a refreshing rain."),
+  ("LOC_HD_SELECTION_GOODY_HUT_CITIZEN_TEXT",                 "Accept Immigrants"),
+  ("LOC_HD_SELECTION_GOODY_HUT_CITIZEN_TOOLTIP",              "Get a [ICON_CITIZEN] Citizen in {1_City}"),
+
+  ("LOC_HD_SELECTION_GOODY_HUT_RELIC_DESCRIPTION",            "When we passed through a tribe hidden deep in the mountains and forests, we encountered a man of extraordinary demeanor. He took out an ancient wooden box from his pocket and claimed that it contained a sacred relic, left by ancient sages, possessing mysterious power to protect a certain region and uphold the legitimate divine will. Now, he wishes to present this treasure to our king as a sign of respect. This encounter, whether by chance or as an oracle sent by the heavens, is truly enigmatic."),
+  ("LOC_HD_SELECTION_GOODY_HUT_RELIC_TEXT",                   "Accept Immigrants"),
+  ("LOC_HD_SELECTION_GOODY_HUT_RELIC_TOOLTIP",                "Get a [ICON_GREATWORK_RELIC] Relic"),
 
   -- 摧毁蛮族哨站
   ("LOC_HD_SELECTION_BARBARIAN_RECON_DESCRIPTION",            "These soldiers, who once served as ""Wolf-eyed"" scouts in the northern barbarian tribes, have their senses honed through exposure to the sandstorms of the grasslands and the miasma of the dense forests. They have become survival weapons. If they are incorporated into our army, they will not only be able to gather intelligence on enemy camp deployments, but also predict ambushes through the movements of the herds of animals. They will become excellent reconnaissance units."),
@@ -72,9 +92,21 @@ insert or replace into EnglishText (Tag, Text) values
   ("LOC_HD_SELECTION_BARBARIAN_NAVAL_TOOLTIP",                "Get 1 {1_Unit}"),
   
   ("LOC_HD_SELECTION_BARBARIAN_SAPPER_DESCRIPTION",           "The fates of these artisans were once trampled into dust by the iron hooves of war. When the barbarian cavalry descended southward like a black tide, they were forcibly taken away from their homeland workshops and forced to dedicate their entire skills to the conquerors. Now, the smoke from the old country's workshops has long dissipated into the sands of history, and even the barbarian tribes have turned into ruins in the midst of internal strife and conquests. If our country is willing to accept these rootless creators, what we will gain will not only be the skills of forging blades and building walls, but also the proof that the flame of civilization did not go out in the darkness."),
-  ("LOC_HD_SELECTION_BARBARIAN_SAPPER_TEXT",                  "Recruit Troops"),
+  ("LOC_HD_SELECTION_BARBARIAN_SAPPER_TEXT",                  "Recruit Talents"),
   ("LOC_HD_SELECTION_BARBARIAN_SAPPER_TOOLTIP",               "Get 1 {1_Unit}"),
   
+  ("LOC_HD_SELECTION_BARBARIAN_ENVOY_DESCRIPTION",            "We have just captured that long-held barbarian camp. When the soldiers searched deep into the dungeon of the camp, behind the iron door, a faint light revealed a haggard yet unyielding face - it belonged to an exiled foreigner who had been imprisoned for a long time. Despite his ragged clothes and emaciated body, he was able to respond fluently in our native language, and at the same time, he mastered several different dialects and the languages of the surrounding tribes. His tone was calm and his words were precise, as if he were a seasoned diplomat."),
+  ("LOC_HD_SELECTION_BARBARIAN_ENVOY_TEXT",                   "Recruit Talents"),
+  ("LOC_HD_SELECTION_BARBARIAN_ENVOY_TOOLTIP",                "Get an [ICON_Envoy] Envoy"),
+
+  ("LOC_HD_SELECTION_BARBARIAN_GOVERNOR_DESCRIPTION",         "When we stormed that barbarian camp, there was a solitary lamp burning deep inside the camp. Under the lamp, a young man was working diligently at his desk, his expression calm, completely out of place among the violent commotion around him. After questioning, we learned that he was not a member of the barbarian group but a poor man who had been captured here many years ago. Because he could read and write and was good at arithmetic, the barbarian leader forcibly kept him by his side to serve as a strategist, managing the supply of food and the arrangement of camp affairs. We should bring him back to the rear and let him systematically study the art of governing, and with time, he will surely become a qualified governor."),
+  ("LOC_HD_SELECTION_BARBARIAN_GOVERNOR_TEXT",                "Recruit Talents"),
+  ("LOC_HD_SELECTION_BARBARIAN_GOVERNOR_TOOLTIP",             "Get a [Icon_Governor] Governor Title"),
+
+  ("LOC_HD_SELECTION_BARBARIAN_GENERAL_DESCRIPTION",          "We engaged in a fierce battle with this barbarian tribe for several days, and finally broke into their camp and captured their commanding general. Looking back on the numerous previous confrontations, this person was highly proficient in military tactics, had a clear understanding of strategies, was strict in leading the troops, and was skilled in arranging troops and deploying forces. His decisiveness in battle and rationality in command left a deep impression on us. Now, this general has become a prisoner at the feet of the enemy, shackled with chains, but still stands upright with no trace of begging for mercy on his face. We should treat him with courtesy, reason with him, and persuade him to abandon the darkness and join our army to serve us."),
+  ("LOC_HD_SELECTION_BARBARIAN_GENERAL_TEXT",                 "Recruit Talents"),
+  ("LOC_HD_SELECTION_BARBARIAN_GENERAL_TOOLTIP",              "Recruit a [ICON_GREATGENERAL] Great General"),
+
   ("LOC_HD_SELECTION_BARBARIAN_GOLD_DESCRIPTION",             "Under the abandoned altar of the barbarian tribe, we discovered a hidden cellar covered with a whole piece of yak hide. The gold and silver piled up there were not regular currency, but bore the scars of an unknown civilization - the gold ingots cast in crude bull's head shapes were still stained with the remnants of smoldering fire, and the twisted silver bracelets still had the threads torn off by violence left on them. Now, when they were loaded onto the supply convoy of our army, the radiance of the gold and silver no longer shone on greed, but transformed into the base color supporting the righteous journey."),
   ("LOC_HD_SELECTION_BARBARIAN_GOLD_TEXT",                    "Get Supplies"),
   ("LOC_HD_SELECTION_BARBARIAN_GOLD_TOOLTIP",                 "Get {1_Amount} [ICON_GOLD] Gold"),
@@ -100,8 +132,16 @@ insert or replace into EnglishText (Tag, Text) values
   ("LOC_HD_SELECTION_BARBARIAN_MOVEMENT_TOOLTIP",             "Restore all [ICON_MOVEMENT] movement"),
   
   ("LOC_HD_SELECTION_BARBARIAN_BUILDER_DESCRIPTION",          "Deep within the newly captured barbarian camp, beside the stinking animal pens, we discovered these farmers whose ankles were chained with iron. These captives from the land of rice, after drinking the water we handed to them, gradually regained their voices. ""We are willing to submit to your glorious rule,"" said the eldest among them, crawling on the ground and gently touching the soil with his forehead, ""We do not seek wealth and power, but only hope to be on the land protected by the law, so that the seeds can enter the soil at the right time and the rice grains can rest peacefully."""),
-  ("LOC_HD_SELECTION_BARBARIAN_BUILDER_TEXT",                 "Get Supplies"),
-  ("LOC_HD_SELECTION_BARBARIAN_BUILDER_TOOLTIP",              "Get a Builder");
+  ("LOC_HD_SELECTION_BARBARIAN_BUILDER_TEXT",                 "Accept Immigrants"),
+  ("LOC_HD_SELECTION_BARBARIAN_BUILDER_TOOLTIP",              "Get a Builder in [ICON_Capital] 首都"),
+
+  ("LOC_HD_SELECTION_BARBARIAN_CITIZEN_DESCRIPTION",          "The smoke from the barbarian camp had not yet dissipated, but in the prisoner-of-war camp, an unexpected piece of news was conveyed - those captured barbarian soldiers, after witnessing our military discipline and the orderly layout of the city, all expressed their intention to submit. They were willing to accept education, reform themselves, put down their weapons, and become ordinary citizens of our country. These people who were willing to lay down their weapons were not only a boost for the development of small towns in the border areas, but also a testament to our ability to win over others through virtue and turn enemies into friends."),
+  ("LOC_HD_SELECTION_BARBARIAN_CITIZEN_TEXT",                 "Accept Immigrants"),
+  ("LOC_HD_SELECTION_BARBARIAN_CITIZEN_TOOLTIP",              "Get a [ICON_CITIZEN] Citizen in {1_City}"),
+
+  ("LOC_HD_SELECTION_BARBARIAN_RELIC_DESCRIPTION",            "When the soldiers were taking stock of the spoils of war, they discovered something astonishing at the far end of the warehouse - a sacred relic. It was carelessly piled among the odds and ends, mixed with the looted gold and silver wares and crude weapons. It was clearly a trophy seized by the barbarians on a whim, who had no idea of its sacred value and simply discarded it here as an ordinary object. This was a desecration of the heavens. We should escort it back to our country with the most solemn ceremony and return the sacred object to the church."),
+  ("LOC_HD_SELECTION_BARBARIAN_RELIC_TEXT",                   "Accept Immigrants"),
+  ("LOC_HD_SELECTION_BARBARIAN_RELIC_TOOLTIP",                "Get a [ICON_GREATWORK_RELIC] Relic");
 
 insert or replace into LocalizedText (Language, Tag, Text) values
   -- 苏格兰 LA
@@ -128,8 +168,20 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_HD_SELECTION_GOODY_HUT_NAVAL_TOOLTIP",                "获得一个{1_Unit}"),
   
   ("zh_Hans_CN", "LOC_HD_SELECTION_GOODY_HUT_SAPPER_DESCRIPTION",           "村西头铁匠铺的炉火，三十年来从未在深夜熄灭过。一位经验丰富的铁匠居住在那儿，尽管火星灼盲了他的左眼，但他的技艺与经验对我们而言是一份瑰宝——他不仅可以为军队打造武器和防具，还擅于修建道路、架设浮桥、修筑营垒和瞭望塔。"),
-  ("zh_Hans_CN", "LOC_HD_SELECTION_GOODY_HUT_SAPPER_TEXT",                  "招募部队"),
+  ("zh_Hans_CN", "LOC_HD_SELECTION_GOODY_HUT_SAPPER_TEXT",                  "招募人才"),
   ("zh_Hans_CN", "LOC_HD_SELECTION_GOODY_HUT_SAPPER_TOOLTIP",               "获得一个{1_Unit}"),
+
+  ("zh_Hans_CN", "LOC_HD_SELECTION_GOODY_HUT_ENVOY_DESCRIPTION",            "我们在部落村庄中偶然发现了一位人才——他不仅通晓多种语言，更能从容自如地在不同文化之间穿梭。这样的人物，正是我们国度使者团梦寐以求的人才。我们应当将他招入麾下，借助他的外交才能，去联络周遭的城邦与部落，争取他们的支持与信任。"),
+  ("zh_Hans_CN", "LOC_HD_SELECTION_GOODY_HUT_ENVOY_TEXT",                   "招募人才"),
+  ("zh_Hans_CN", "LOC_HD_SELECTION_GOODY_HUT_ENVOY_TOOLTIP",                "获得一个 [ICON_Envoy] 使者"),
+
+  ("zh_Hans_CN", "LOC_HD_SELECTION_GOODY_HUT_GOVERNOR_DESCRIPTION",         "这座村庄村长的儿子是一位天赋异禀的年轻人——他虽生于乡野，却天生具备难得的治理之才。他善于倾听民声，处事公正而细致，对资源的调配与人事的安排亦有天然的敏锐。若加以系统培养与历练，假以时日，他必能成长为一位堪当重任的总督，为我们镇守一方疆土。"),
+  ("zh_Hans_CN", "LOC_HD_SELECTION_GOODY_HUT_GOVERNOR_TEXT",                "招募人才"),
+  ("zh_Hans_CN", "LOC_HD_SELECTION_GOODY_HUT_GOVERNOR_TOOLTIP",             "获得一个 [Icon_Governor] 总督头衔"),
+
+  ("zh_Hans_CN", "LOC_HD_SELECTION_GOODY_HUT_GENERAL_DESCRIPTION",          "我们在部落村庄深处，偶然听闻了一位已然隐世多年的军事奇才。此人曾年少从军，久经沙场，熟读兵法，运筹帷幄之间，屡次统领军队克敌制胜，威名曾震彻四方。如今，国势多艰，失地未复，正是用人之际。若能以诚相邀，或可请他再度出山，为我们整军经武，操练士卒，谋划战略，挥师收复那本属于我们的疆土。"),
+  ("zh_Hans_CN", "LOC_HD_SELECTION_GOODY_HUT_GENERAL_TEXT",                 "招募人才"),
+  ("zh_Hans_CN", "LOC_HD_SELECTION_GOODY_HUT_GENERAL_TOOLTIP",              "招募一个 [ICON_GREATGENERAL] 大将军"),
   
   ("zh_Hans_CN", "LOC_HD_SELECTION_GOODY_HUT_GOLD_DESCRIPTION",             "村民们用金砂和银锭与我们交换了许多生活物资与生产器具。我们的细盐能让村民制作便于贮存的腌肉，健壮的马匹为他们提供了适用于快速运输的畜力，精铁可以锻造出更耐用的农具或武器，而丁香与肉豆蔻的香气更是让他们眼眸发光。"),
   ("zh_Hans_CN", "LOC_HD_SELECTION_GOODY_HUT_GOLD_TEXT",                    "获得补给"),
@@ -156,8 +208,16 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_HD_SELECTION_GOODY_HUT_MOVEMENT_TOOLTIP",             "恢复所有 [ICON_MOVEMENT] 移动力"),
   
   ("zh_Hans_CN", "LOC_HD_SELECTION_GOODY_HUT_BUILDER_DESCRIPTION",          "我们向这座村庄的村民讲述了我国的律法条文、税赋制度、水利规划、道路修筑与市集管理后，这些勤劳者的眼中逐渐燃起一种对秩序与公平的深切渴望。这种向往最终化为坚定的选择：在请愿书中，他们称愿意举族搬迁，跨越山川，成为文明制度下心怀热忱的新子民。"),
-  ("zh_Hans_CN", "LOC_HD_SELECTION_GOODY_HUT_BUILDER_TEXT",                 "获得补给"),
-  ("zh_Hans_CN", "LOC_HD_SELECTION_GOODY_HUT_BUILDER_TOOLTIP",              "获得一个建造者"),
+  ("zh_Hans_CN", "LOC_HD_SELECTION_GOODY_HUT_BUILDER_TEXT",                 "接纳移民"),
+  ("zh_Hans_CN", "LOC_HD_SELECTION_GOODY_HUT_BUILDER_TOOLTIP",              "[ICON_Capital] 首都获得一个建造者"),
+
+  ("zh_Hans_CN", "LOC_HD_SELECTION_GOODY_HUT_CITIZEN_DESCRIPTION",          "我们行至边陲之地，一座看似平凡的村庄里，传来了一桩令人振奋的消息——村中一部分村民表示他们愿意加入我们的国度。正所谓：得民心者，方能固边疆；聚民力者，方能兴大业。对于国境线上那些尚显单薄的小镇而言，这些新居民的到来，无异于一场久旱后的甘霖。"),
+  ("zh_Hans_CN", "LOC_HD_SELECTION_GOODY_HUT_CITIZEN_TEXT",                 "接纳移民"),
+  ("zh_Hans_CN", "LOC_HD_SELECTION_GOODY_HUT_CITIZEN_TOOLTIP",              "{1_City}获得一个 [ICON_CITIZEN] 市民"),
+
+  ("zh_Hans_CN", "LOC_HD_SELECTION_GOODY_HUT_RELIC_DESCRIPTION",            "我们途径一座隐匿于山林深处的部落时，遇见了一位气度不凡的僧侣。他从怀中取出一只古朴的木匣，声称匣中封存着一件神圣的遗物，乃是上古先贤所留，蕴含着庇佑一方水土、护佑正统天命的神秘力量。如今，他愿将此宝献于我们的君王，以表敬意。这一际遇，不知是巧合，还是上天降下的神谕？"),
+  ("zh_Hans_CN", "LOC_HD_SELECTION_GOODY_HUT_RELIC_TEXT",                   "获得补给"),
+  ("zh_Hans_CN", "LOC_HD_SELECTION_GOODY_HUT_RELIC_TOOLTIP",                "获得 [ICON_GREATWORK_RELIC] 遗物"),
 
   -- 摧毁蛮族哨站
   ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_RECON_DESCRIPTION",            "这几位曾在北方蛮族部落中担任“狼眼”斥候的士卒，他们的感官经草原风沙与密林瘴气的磨砺，早已淬炼成生存武器。若将其纳入我军编制，他们不仅能刺探敌营部署，更能通过兽群异动预判伏兵。他们将成为优秀的侦察部队。"),
@@ -177,8 +237,20 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_NAVAL_TOOLTIP",                "获得一个{1_Unit}"),
   
   ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_SAPPER_DESCRIPTION",           "这几位工匠的命运，曾被战争的铁蹄碾入尘土。当年蛮族骑兵如黑潮般南下时，他们从故国的作坊里被捆缚掳走，被迫将毕生技艺献于征服者。而今，故国的炊烟早已散入历史的风沙，连蛮族部落也在内乱与征伐中化为废墟。若我国愿接纳这些无根的创造者，所得的将不仅是锻造锋刃与筑起高墙的技艺，更是文明火种在黑暗中未曾熄灭的证明。"),
-  ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_SAPPER_TEXT",                  "招募部队"),
+  ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_SAPPER_TEXT",                  "招募人才"),
   ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_SAPPER_TOOLTIP",               "获得一个{1_Unit}"),
+
+  ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_ENVOY_DESCRIPTION",            "我们刚刚攻破了那座盘踞多时的蛮族营地，当士兵们搜索至营地深处的地牢时，铁门之后，一道微弱的光线映出一张憔悴却难掩清朗的面容——那是一位被囚禁已久的异乡人。他虽衣衫褴褛、形销骨立，但竟能以我们的母语流利应答，同时又掌握数种不同的方言与周边部落的语言，语调从容、辞令精准，仿佛一位久经磨砺的外交使节。"),
+  ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_ENVOY_TEXT",                   "招募人才"),
+  ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_ENVOY_TOOLTIP",                "获得一个 [ICON_Envoy] 使者"),
+
+  ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_GOVERNOR_DESCRIPTION",         "我们攻破那座蛮族营地之时，营帐深处正燃着一盏孤灯。灯下，一位年轻人伏案疾书，神色沉静，与周遭的暴戾喧嚣格格不入。经审问方知，他并非蛮族同党，而是多年前被掳掠至此的可怜人。只因识文断字、精于筹算，蛮族首领便强留他在身边充当军师，掌管粮草调配与营务安排。我们应当将他带回后方，让他系统学习治国之法，假以时日，他定能成为一位合格的总督。"),
+  ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_GOVERNOR_TEXT",                "招募人才"),
+  ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_GOVERNOR_TOOLTIP",             "获得一个 [Icon_Governor] 总督头衔"),
+
+  ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_GENERAL_DESCRIPTION",          "我们与这支蛮族部落鏖战数日，最终攻破其营寨，俘虏了他们的领军大将。回顾此前数度交锋，此人深谙兵法之道，进退有据，治军严明，排兵布阵之老辣、临阵指挥之果决，给我们留下了极为深刻的印象。如今，这位大将沦为阶下之囚，铁链加身，却依旧昂首挺立，眉宇间不见半分乞怜之色。我们应当以礼相待，晓之以理，劝其愿弃暗投明，为我军效力。"),
+  ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_GENERAL_TEXT",                 "招募人才"),
+  ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_GENERAL_TOOLTIP",              "招募一个 [ICON_GREATGENERAL] 大将军"),
   
   ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_GOLD_DESCRIPTION",             "在蛮族部落废弃的祭坛之下，我们发现了以整张牦牛皮覆盖的隐秘地窖。其中堆积的金银并非规整的货币，而是带着某个不知名文明的伤痕——熔铸成粗劣牛首形状的金锭还沾着烟燎痕迹，绞扭的银镯上残留着被暴力扯断的丝线。而今，当它们被装运上我军的辎重车队时，金银的光芒不再映照贪婪，而是化为支撑正义征途的底色。"),
   ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_GOLD_TEXT",                    "获得补给"),
@@ -205,6 +277,14 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_MOVEMENT_TOOLTIP",             "恢复所有 [ICON_MOVEMENT] 移动力"),
   
   ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_BUILDER_DESCRIPTION",          "在刚刚占领的蛮族营地深处，我们于散发着腐草气味的兽栏旁，发现了这些被铁链锁住脚踝的农民。这些来自稻米之乡的俘虏，在啜饮了我们递去的清水后，才逐渐找回声音。“我们愿投效在您的光辉统治之下”，其中最年长者匍匐在地，前额轻触泥土，“不求富贵，只求能在受律法庇护的土地上，让种子按时入土，让稻穗安心低垂。”"),
-  ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_BUILDER_TEXT",                 "获得补给"),
-  ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_BUILDER_TOOLTIP",              "获得一个建造者");
+  ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_BUILDER_TEXT",                 "接纳移民"),
+  ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_BUILDER_TOOLTIP",              "[ICON_Capital] 首都获得一个建造者"),
+
+  ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_CITIZEN_DESCRIPTION",          "蛮族营地硝烟未散，战俘营中却传来一桩令人意外的消息——那些被俘的蛮族士兵，在目睹我们军威整肃、城郭井然之后，竟纷纷表达了归顺之意。他们愿意接受教化，改过自新，放下刀剑，成为我们国度中普普通通的市民。这些愿意放下刀剑的人，不仅是边疆小城镇发展的助力，更是我们以德服人、化敌为友的见证。"),
+  ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_CITIZEN_TEXT",                 "接纳移民"),
+  ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_CITIZEN_TOOLTIP",              "{1_City}获得一个 [ICON_CITIZEN] 市民"),
+
+  ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_RELIC_DESCRIPTION",            "士兵们在清点战利品时，于仓库最深处发现了一件令人震惊之物——一尊圣遗物。它被随意堆放在杂物之间，与抢掠来的金银器皿、粗陋兵器混作一堆，显然是蛮族劫掠时顺手夺来的战利品，根本不识其神圣价值，只当作寻常器物弃置于此，这是对上天的亵渎。我们当以最庄重的仪式将其护送归国，让圣物重返教堂。"),
+  ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_RELIC_TEXT",                   "获得补给"),
+  ("zh_Hans_CN", "LOC_HD_SELECTION_BARBARIAN_RELIC_TOOLTIP",                "获得 [ICON_GREATWORK_RELIC] 遗物");
   

@@ -279,6 +279,7 @@ values
 -- =====================================================================================================================================
 -- 希腊
 -- =====================================================================================================================================
+	("LOC_TRAIT_CIVILIZATION_PLATOS_REPUBLIC_DESCRIPTION",            			 "+1 [ICON_Culture] Culture from each of your [ICON_ENVOY] Envoys at city-states. After Political Philosophy is researched, receive one extra Wildcard policy slot in any government."),
 	-- 男希腊
 	("LOC_TRAIT_LEADER_SURROUNDED_BY_GLORY_DESCRIPTION",     			           "+5% [ICON_Culture] Culture per city-state you are the Suzerain of. After building an Acropolis District, the first [ICON_Envoy] Envoy you send to each city-state counts as two [ICON_Envoy] Envoys."),
 	-- 女希腊
@@ -893,6 +894,7 @@ values
 -- =====================================================================================================================================
 -- 希腊
 -- =====================================================================================================================================
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_PLATOS_REPUBLIC_DESCRIPTION",            "您的每位城邦 [ICON_ENVOY] 使者提供+1 [ICON_Culture] 文化值。解锁“政治哲学”市政后，+1通配符槽位。"),
 	-- 男希腊
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_SURROUNDED_BY_GLORY_DESCRIPTION",              "作为宗主国时，每个下辖的城邦使您的 [ICON_Culture] 文化值+5%。建造卫城后，您向每个城邦派遣的第一个 [ICON_Envoy] 使者会被视为2个 [ICON_Envoy] 使者。"),
 	-- 女希腊
