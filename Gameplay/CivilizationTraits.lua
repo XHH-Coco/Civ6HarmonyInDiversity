@@ -3679,27 +3679,27 @@ function BannockburnTriggerEvents(playerId, eventId, x, y)
 		end
 	end
 
-	print("==========================================================================")
-	for _, data in ipairs(recruitList) do
-		print(data.SelectionType);
-	end
-	for _, data in ipairs(supplyList) do
-		print(data.SelectionType);
-	end
+	-- print("==========================================================================")
+	-- for _, data in ipairs(recruitList) do
+	-- 	print(data.SelectionType);
+	-- end
+	-- for _, data in ipairs(supplyList) do
+	-- 	print(data.SelectionType);
+	-- end
 
 	-- 随机选取选项
 	local recruitPool = Utils.GetListByWeight(recruitList, {}, 'SelectionType');
 	local supplyPool = Utils.GetListByWeight(supplyList, {}, 'SelectionType');
 
-	print("==========================================================================")
-	for _, selectionType in ipairs(recruitPool) do
-		print(selectionType);
-	end
-	for _, selectionType in ipairs(supplyPool) do
-		print(selectionType);
-	end
+	-- print("==========================================================================")
+	-- for _, selectionType in ipairs(recruitPool) do
+	-- 	print(selectionType);
+	-- end
+	-- for _, selectionType in ipairs(supplyPool) do
+	-- 	print(selectionType);
+	-- end
 
-	print("==========================================================================")
+	-- print("==========================================================================")
 	local resultList = {};
 	-- 1、招募
 	local randomIndex = Game.GetRandNum(#recruitPool, "Random recruit selection for Player " .. playerId) + 1;
@@ -3724,14 +3724,14 @@ function BannockburnTriggerEvents(playerId, eventId, x, y)
 		end
 	end
 
-	for _, selectionType in ipairs(allPool) do
-		print(selectionType);
-	end
+	-- for _, selectionType in ipairs(allPool) do
+	-- 	print(selectionType);
+	-- end
 
 	randomIndex = Game.GetRandNum(#allPool, "Random all selection for Player " .. playerId) + 1;
 	table.insert(resultList, allPool[randomIndex]);
 
-	print("==========================================================================")
+	-- print("==========================================================================")
 	-- Id
 	-- ButtonToolTip
 	-- ScriptParam
@@ -3742,7 +3742,7 @@ function BannockburnTriggerEvents(playerId, eventId, x, y)
 		-- X
 		-- Y
 	for _, selectionType in ipairs(resultList) do
-		print(selectionType)
+		-- print(selectionType)
 		local selectionInfo = GameInfo.HD_CustomEventSelections[selectionType];
 		if selectionInfo then
 			if (selectionType == 'HD_SELECTION_GOODY_HUT_RECON' or selectionType == 'HD_SELECTION_BARBARIAN_RECON') then
