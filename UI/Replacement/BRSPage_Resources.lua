@@ -362,7 +362,7 @@ function ViewResourcesPage()
 		-- 分类
 		local classificationList = ExposedMembers.DLHD.Utils.Resource_Classification_Map[kResource.ResourceType] or {};
 		if #classificationList > 0 then
-			local classificationsText = kSingleResourceData.Icon .. " " .. Locale.Lookup(kResource.Name) .. " " .. Locale.Lookup('LOC_HD_REPORTS_USAGE_TEXT');
+			local classificationsText = kSingleResourceData.Icon .. " " .. Locale.Lookup(kResource.Name) .. " " .. Locale.Lookup('LOC_HD_REPORTS_CLASSIFICATIONS_TEXT');
 			for _, classificationType in ipairs(classificationList) do
 				classificationsText = classificationsText .. '[NEWLINE][ICON_Bullet] ' .. Locale.Lookup(GameInfo.HD_ResourceClassificationTypes[classificationType].Name);
 			end

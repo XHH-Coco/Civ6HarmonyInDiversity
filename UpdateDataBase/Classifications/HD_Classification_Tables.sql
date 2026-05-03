@@ -1,10 +1,17 @@
 -- ================================================================================
 ------------------- 资源分类 -------------------
+create table if not exists HD_ResourceParentClassificationTypes(
+  ResourceParentClassificationType  TEXT    not NULL,
+  Name                              TEXT,
+  SortIndex                         Integer Default 0,
+PRIMARY KEY('ResourceParentClassificationType'));
+
 create table if not exists HD_ResourceClassificationTypes(
   ResourceClassificationType  TEXT    not NULL,
   Name                        TEXT,
   SortIndex                   Integer Default 0,
   Display                     boolean not null default 1,
+  ParentClassificationType    TEXT    Default 'THIRDPARTY',
 PRIMARY KEY('ResourceClassificationType'));
 
 create table if not exists HD_Resource_Classification(

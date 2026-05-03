@@ -18,7 +18,7 @@ insert or replace into EnglishText (Tag, Text) values
   ("LOC_TOOLTIP_HD_GENERAL_BUILDING_TEXT",          "General Building"),
   ("LOC_TOOLTIP_HD_UNIQUE_BUILDING_TEXT",           "Unique Building"),
   ("LOC_TOOLTIP_HD_REPLACE_BUILDING_TEXT",          "Unique Building (Replacing {1_Name})"),
-  ("LOC_TOOLTIP_HD_RESOURCE_CLASSIFICATIONS_TEXT",  "Usages:"),
+  ("LOC_TOOLTIP_HD_RESOURCE_CLASSIFICATIONS_TEXT",  "Usages: "),
 
   ("LOC_TOOLTIP_HD_REQUIRES_TEXT",                  "Requires:"),
   ("LOC_TOOLTIP_HD_TERRAIN_REQUIRES_TEXT",          "Terrains:"),
@@ -54,7 +54,6 @@ insert or replace into EnglishText (Tag, Text) values
 	("LOC_TOOLTIP_DISTRICT_CITIZEN_YIELDS_HEADER",		"Citizen Yields:"),
 
 	("LOC_TOOLTIP_RESOURCE_IMPROVED_BY",							"Improved by: "),
-	("LOC_TOOLTIP_RESOURCE_CORP_CATEGORY",						"Industry & Corporation: "),
   
   ("LOC_TOOLTIP_REGIONAL_EFFECT_RANGE",							"{1_num}-tile Regional Effect: The basic yields of this Wonder are extend to other cities within {1_num} tiles."),
 	("LOC_TOOLTIP_REGIONAL_EFFECT_RANGE_MODIFIER",		"{1_num}-tile Regional Effect: Cities with City Center or Neighborhood within {1_num} tiles of this building receive the following bonuses, except those cities that have already received this bonus from the same building:"),
@@ -128,7 +127,6 @@ insert or replace into LocalizedText (Language, Tag, Text) values
 	("zh_Hans_CN", "LOC_TOOLTIP_DISTRICT_CITIZEN_YIELDS_HEADER",		"专家收益："),
 
 	("zh_Hans_CN", "LOC_TOOLTIP_RESOURCE_IMPROVED_BY",							"改良设施："),
-	("zh_Hans_CN", "LOC_TOOLTIP_RESOURCE_CORP_CATEGORY",						"行业与公司："),
 
 	("zh_Hans_CN", "LOC_TOOLTIP_REGIONAL_EFFECT_RANGE",						  "{1_num}环辐射：此奇观的基础产出延伸到{1_num}个单元格内的其它城市。"),
 	("zh_Hans_CN", "LOC_TOOLTIP_REGIONAL_EFFECT_RANGE_MODIFIER",		"{1_num}环辐射：拥有在此建筑{1_num}个单元格内的市中心或社区的城市获得以下加成，但不包括已经从相同建筑获得过此加成的城市："),

@@ -228,20 +228,23 @@ function SetResourceIcon( pInstance:table, pPlot, type, state)
 			end
 			if #textList > 0 then
 				local classificationText = Locale.Lookup('LOC_TOOLTIP_HD_RESOURCE_CLASSIFICATIONS_TEXT');
-				for _, text in ipairs(textList) do
-					classificationText = classificationText .. ' ' .. text;
+				for i, text in ipairs(textList) do
+					if i > 1 then
+						classificationText = classificationText .. Locale.Lookup('LOC_TOOLTIP_HD_COMMA_TEXT')
+					end
+					classificationText = classificationText .. text;
 				end
 				table.insert(toolTipItems, classificationText);
 			end
 
 			-- 行业公司效果
-			if GameInfo.HDMonopolyResourceEffects ~= nil then
-				local corpInfo = GameInfo.HDMonopolyResourceEffects[resourceType];
-				if corpInfo ~= nil then
-					local categoryString = Locale.Lookup("LOC_HD_PEDIA_CATEGORY_" .. corpInfo.Category .. "_NAME")
-					table.insert(toolTipItems, Locale.Lookup("LOC_TOOLTIP_RESOURCE_CORP_CATEGORY") .. categoryString);
-				end
-			end
+			-- if GameInfo.HDMonopolyResourceEffects ~= nil then
+			-- 	local corpInfo = GameInfo.HDMonopolyResourceEffects[resourceType];
+			-- 	if corpInfo ~= nil then
+			-- 		local categoryString = Locale.Lookup("LOC_HD_PEDIA_CATEGORY_" .. corpInfo.Category .. "_NAME")
+			-- 		table.insert(toolTipItems, Locale.Lookup("LOC_TOOLTIP_RESOURCE_CORP_CATEGORY") .. categoryString);
+			-- 	end
+			-- end
 
 			table.insert(toolTipItems, resourceString)
 			pInstance.ResourceIcon:SetToolTipString(table.concat(toolTipItems, "[NEWLINE]"));

@@ -1797,7 +1797,7 @@
       <File>DLCSupport/DL_Babylon_Late.sql</File>
     </UpdateDatabase>
     <UpdateDatabase id="DL_Main_Late" criteria="Expansion2">
-      <Properties><LoadOrder>20000</LoadOrder></Properties>
+      <Properties><LoadOrder>20001</LoadOrder></Properties>
       <File>UpdateDataBase/DL_PostProcess.sql</File>
       <File>UpdateDataBase/DL_GreatPeople_Late.sql</File>
     </UpdateDatabase>

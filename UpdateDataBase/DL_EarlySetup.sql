@@ -23,6 +23,13 @@ create table if not exists 'HD_Binary_Compress_Keys'(
 	PRIMARY KEY('Key')
 );
 
+create table if not exists HD_GreatWork_Text(
+    GreatWorkType   TEXT NOT NULL,
+    Description     TEXT NOT NULL,
+    PRIMARY KEY(GreatWorkType)
+    FOREIGN KEY(GreatWorkType) REFERENCES GreatWorks(GreatWorkType) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 -- 着力点图标
 create table if not exists 'CommemorationIcons'(
 	'CommemorationType' TEXT    not NULL,
