@@ -1,6 +1,7 @@
 insert or replace into EnglishText (Tag, Text) values
   ("LOC_TOOLTIP_HD_COMMA_TEXT",                     ", "),
   ("LOC_TOOLTIP_HD_OR_TEXT",                        " or "),
+  ("LOC_TOOLTIP_HD_COLON_TEXT",                     ": "),
 
   ("LOC_TOOLTIP_HD_TRAITS_TEXT",                    "Traits:"),
   ("LOC_TOOLTIP_HD_APPEAL_TEXT",                    "{1_Amount: number +#,###.#;-#,###.#} Appeal to adjacent tiles"),
@@ -74,6 +75,7 @@ insert or replace into EnglishText (Tag, Text) values
 insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_TOOLTIP_HD_COMMA_TEXT",                     "、"),
   ("zh_Hans_CN", "LOC_TOOLTIP_HD_OR_TEXT",                        "或"),
+  ("zh_Hans_CN", "LOC_TOOLTIP_HD_COLON_TEXT",                     "："),
 
   ("zh_Hans_CN", "LOC_TOOLTIP_HD_TRAITS_TEXT",                    "特点："),
   ("zh_Hans_CN", "LOC_TOOLTIP_HD_APPEAL_TEXT",                    "为相邻单元格{1_Amount: number +#,###.#;-#,###.#}魅力"),

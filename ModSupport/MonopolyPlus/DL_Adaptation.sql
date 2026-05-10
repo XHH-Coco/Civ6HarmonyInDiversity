@@ -90,11 +90,6 @@ values
 -- BUG Fixing
 update ModifierArguments set Value = 'YIELD_PRODUCTION' where Value = 'YIELD_PRODUCION' and Name = 'YieldType';
 
-insert or ignore into RequirementSetRequirements
-    (RequirementSetId,		RequirementId)
-select	'LEU_IS_'||ResourceType||'_CORPORATION',		'REQUIRES_LEU_CORPORATION_PLOT'
-FROM ResourceCorporations;
-
 -- 
 insert or ignore into Unit_BuildingPrereqs
     (Unit,                      PrereqBuilding)

@@ -240,8 +240,8 @@ local BASE_GetUnitActionsTable = function ( pUnit )
 							local isDisabled		= not bCanStart;
 							local toolTipString		= Locale.Lookup(operationRow.Description) .. ": " .. Locale.Lookup(improvement.Name);
 
-							-- TODO: 增加行业公司效果说明
-							if GameInfo.HDMonopolyResourceEffects ~= nil
+							-- 增加行业公司效果说明
+							if GameInfo.HD_Monopoly_Resource_Categories ~= nil
 							and (improvement.ImprovementType == 'IMPROVEMENT_INDUSTRY' or improvement.ImprovementType == 'IMPROVEMENT_CORPORATION') then
 								local plot = Map.GetPlotByIndex(pUnit:GetPlotId());
 								if plot ~= nil then
@@ -249,13 +249,39 @@ local BASE_GetUnitActionsTable = function ( pUnit )
 									local resource = GameInfo.Resources[resourceHash];
 									local player = Players[Game.GetLocalPlayer()];
 									if resource ~= nil and player ~= nil and player:GetResources():IsResourceVisible(resourceHash) then
-										local HDMonopolyinfo = GameInfo.HDMonopolyResourceEffects[resource.ResourceType]
-										if HDMonopolyinfo ~= nil then
-											if improvement.ImprovementType == 'IMPROVEMENT_INDUSTRY' then
-												toolTipString = toolTipString .. "[NEWLINE]" .. Locale.Lookup("LOC_" .. HDMonopolyinfo.IndustryEffect .. "_DESCRIPTION")
-											elseif improvement.ImprovementType == 'IMPROVEMENT_CORPORATION' then
-												toolTipString = toolTipString .. "[NEWLINE]" .. Locale.Lookup("LOC_" .. HDMonopolyinfo.CorporationEffect .. "_DESCRIPTION")
+										local industryStr = {};
+										local corporationStr = {};
+
+										for row in GameInfo.HD_Monopoly_Resource_Categories() do
+											if row.ResourceType == resource.ResourceType then
+												local categoryInfo = GameInfo.HD_Monopoly_Categories[row.Category];
+												if categoryInfo then
+													if improvement.ImprovementType == 'IMPROVEMENT_INDUSTRY' and categoryInfo.IndustryEffect then
+														table.insert(industryStr, Locale.Lookup('LOC_RESOURCE_CLASSIFICATION_HD_' .. row.Category .. '_NAME') .. Locale.Lookup('LOC_TOOLTIP_HD_COLON_TEXT') .. Locale.Lookup("LOC_" .. categoryInfo.IndustryEffect .. "_DESCRIPTION"));
+													end
+													if improvement.ImprovementType == 'IMPROVEMENT_CORPORATION' and categoryInfo.CorporationEffect then
+														table.insert(corporationStr, Locale.Lookup('LOC_RESOURCE_CLASSIFICATION_HD_' .. row.Category .. '_NAME') .. Locale.Lookup('LOC_TOOLTIP_HD_COLON_TEXT') .. Locale.Lookup("LOC_" .. categoryInfo.CorporationEffect .. "_DESCRIPTION"));
+													end
+												end
 											end
+										end
+
+										if #industryStr > 0 then
+											local effectStr = '';
+											for i, str in ipairs(industryStr) do
+												if i > 1 then effectStr = effectStr .. "[NEWLINE]"; end
+												effectStr = effectStr .. str;
+											end
+											toolTipString = toolTipString .. '[NEWLINE][NEWLINE]' .. Locale.Lookup('LOC_HD_INDUSTRY_EFFECT_TEXT', effectStr);
+										end
+								
+										if #corporationStr > 0 then
+											local effectStr = '';
+											for i, str in ipairs(corporationStr) do
+												if i > 1 then effectStr = effectStr .. "[NEWLINE]"; end
+												effectStr = effectStr .. str;
+											end
+											toolTipString = toolTipString .. '[NEWLINE][NEWLINE]' .. Locale.Lookup('LOC_HD_CORPORATION_EFFECT_TEXT', effectStr);
 										end
 									end
 								end

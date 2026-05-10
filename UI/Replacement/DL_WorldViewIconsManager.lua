@@ -237,15 +237,6 @@ function SetResourceIcon( pInstance:table, pPlot, type, state)
 				table.insert(toolTipItems, classificationText);
 			end
 
-			-- 行业公司效果
-			-- if GameInfo.HDMonopolyResourceEffects ~= nil then
-			-- 	local corpInfo = GameInfo.HDMonopolyResourceEffects[resourceType];
-			-- 	if corpInfo ~= nil then
-			-- 		local categoryString = Locale.Lookup("LOC_HD_PEDIA_CATEGORY_" .. corpInfo.Category .. "_NAME")
-			-- 		table.insert(toolTipItems, Locale.Lookup("LOC_TOOLTIP_RESOURCE_CORP_CATEGORY") .. categoryString);
-			-- 	end
-			-- end
-
 			table.insert(toolTipItems, resourceString)
 			pInstance.ResourceIcon:SetToolTipString(table.concat(toolTipItems, "[NEWLINE]"));
 		end

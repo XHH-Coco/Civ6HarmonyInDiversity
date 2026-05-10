@@ -105,8 +105,8 @@ values
 	("LOC_PEDIA_RESOURCES_PAGEGROUP_LUXURY_NAME",	               				 				   "Special [COLOR:ResGoldLabelCS]Luxury[ENDCOLOR]"),
 	("LOC_PEDIA_RESOURCES_PAGEGROUP_WONDER_LUXURY_NAME",	               				 	 "Wonder [COLOR:ResGoldLabelCS]Luxury[ENDCOLOR]"),
 
-	("LOC_UI_PEDIA_RESOURCES_MONOPOLY_CATEGORY_TEXT",	               				 	 		 "Monopoly Category: {1_Category}"),
-	("LOC_UI_PEDIA_RESOURCES_MONOPOLY_EFFECT_TEXT",	               				 	 	 	 	 "Industry and Corporation Effects"),
+	("LOC_UI_PEDIA_RESOURCES_INDUSTRY_EFFECT_TEXT",	               				 	 	 	 	 "Industry Effects"),
+	("LOC_UI_PEDIA_RESOURCES_CORPORATION_EFFECT_TEXT",	               				 	 	 "Corporation Effects"),
 	("LOC_UI_PEDIA_RESOURCES_PRODUCT_EFFECT_TEXT",	               				 	 	 		 "Product Effects"),
 
 	("LOC_PEDIA_WONDERS_PAGEGROUP_WONDERS_NAME",	               				   				 "Wonder Wonders"),
@@ -329,8 +329,8 @@ values
 	("zh_Hans_CN",  "LOC_PEDIA_RESOURCES_PAGEGROUP_LUXURY_NAME",	               				 				 "[COLOR:ResGoldLabelCS]奢侈资源[ENDCOLOR] 特殊"),
 	("zh_Hans_CN",  "LOC_PEDIA_RESOURCES_PAGEGROUP_WONDER_LUXURY_NAME",	               				 	 "[COLOR:ResGoldLabelCS]奢侈资源[ENDCOLOR] 奇观"),
 
-	("zh_Hans_CN",  "LOC_UI_PEDIA_RESOURCES_MONOPOLY_CATEGORY_TEXT",	               				 	 	 "行业类型：{1_Category}"),
-	("zh_Hans_CN",  "LOC_UI_PEDIA_RESOURCES_MONOPOLY_EFFECT_TEXT",	               				 	 	 	 "行业与公司效果"),
+	("zh_Hans_CN",  "LOC_UI_PEDIA_RESOURCES_INDUSTRY_EFFECT_TEXT",	               				 	 	 	 "行业效果"),
+	("zh_Hans_CN",  "LOC_UI_PEDIA_RESOURCES_CORPORATION_EFFECT_TEXT",	               				 	 	 "公司效果"),
 	("zh_Hans_CN",  "LOC_UI_PEDIA_RESOURCES_PRODUCT_EFFECT_TEXT",	               				 	 	 		 "产品效果"),
 
 	("zh_Hans_CN",  "LOC_PEDIA_WONDERS_PAGEGROUP_WONDERS_NAME",	               				 					 "世界奇观"),
@@ -387,7 +387,7 @@ values
 insert or replace into EnglishText
 	(Tag,                                                                               Text)
 values
-	("LOC_PEDIA_BUILDINGS_PAGE_BUILDING_NILOMETER_HD_CHAPTER_HISTORY_PARA_1",           "The measuring device comes from the Nile gauge in the official scenario ""The Gift of the Nile"". The Nile gauge was a stepped hydraulic device that the Egyptians built along the Nile to regulate agricultural production by observing the water level of the Nile using the steps and the scales on the pillars contained within them. To this day, the remains of such structures can be found on the island of Roda in Cairo and on the island of Elephantine in Aswan. It was not until the opening of the Aswan Dam that the temple of Abu Simbel was saved, but Egyptian water relics like the Nile Instrument officially ended their mission."),
+	("LOC_PEDIA_BUILDINGS_PAGE_BUILDING_NILOMETER_HD_CHAPTER_HISTORY_PARA_1",           "The measuring device comes from the Nile gauge in the official scenario ""The Gift of the Nile"". The Nile gauge was a stepped hydraulic device that the Egyptians built along the Nile to regulate Agrarian by observing the water level of the Nile using the steps and the scales on the pillars contained within them. To this day, the remains of such structures can be found on the island of Roda in Cairo and on the island of Elephantine in Aswan. It was not until the opening of the Aswan Dam that the temple of Abu Simbel was saved, but Egyptian water relics like the Nile Instrument officially ended their mission."),
 	("LOC_PEDIA_BUILDINGS_PAGE_BUILDING_FAIR_CHAPTER_HISTORY_PARA_1",                   "From the emergence of the division of labour in material production there was an interaction of different substances, and then the exchange of goods followed. Then, because of the division of labour and the geographical nature of the production of goods, people began to form their own bazaars in places that were easily accessible. For a long time, fairs were the main source of access to things that people could not produce themselves, until the emergence of supermarkets.");
 
 --------------------------------------------------------------------------------

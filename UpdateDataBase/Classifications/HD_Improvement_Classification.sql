@@ -12,6 +12,9 @@ insert or ignore into HD_ImprovementClassificationTypes (ImprovementClassificati
   ('IMPROVEMENT_CLASSIFICATION_MILITARY_FACILITIES',        10),
   ('IMPROVEMENT_CLASSIFICATION_RELIGIOUS_FACILITIES',       11),
   ('IMPROVEMENT_CLASSIFICATION_COMMERCIAL_FACILITIES',      12),
+  ('IMPROVEMENT_CLASSIFICATION_RESEARCH_FACILITIES',        13),
+  ('IMPROVEMENT_CLASSIFICATION_ENTERTAINMENT_FACILITIES',   14),
+  ('IMPROVEMENT_CLASSIFICATION_POWER_FACILITIES',           15),
   ('IMPROVEMENT_CLASSIFICATION_COMMON',                     90);
 
 update HD_ImprovementClassificationTypes set Name = 'LOC_' || ImprovementClassificationType || '_NAME' where Name is NULL;
@@ -43,14 +46,17 @@ from Improvements where ImprovementType in (
   'IMPROVEMENT_PLANTATION',
   'IMPROVEMENT_CAMP',
   'IMPROVEMENT_FISHERY',
+
   'IMPROVEMENT_TERRACE_FARM',
   'IMPROVEMENT_POLDER',
   'IMPROVEMENT_LAND_POLDER',
   'IMPROVEMENT_HACIENDA',
-  'IMPROVEMENT_OUTBACK_STATION'
+  'IMPROVEMENT_OUTBACK_STATION',
+  'IMPROVEMENT_STEPWELL',
+  'IMPROVEMENT_CHATEAU'
 );
 
-  -- 工业生产改良
+  -- 工业开发改良
 insert or ignore into HD_Improvement_Classification (ImprovementType, ImprovementClassificationType) select
   ImprovementType, 'IMPROVEMENT_CLASSIFICATION_INDUSTRIAL_PRODUCTION'
 from Improvements where ImprovementType in (
@@ -58,17 +64,37 @@ from Improvements where ImprovementType in (
   'IMPROVEMENT_QUARRY',
   'IMPROVEMENT_LUMBER_MILL',
   'IMPROVEMENT_OIL_WELL',
-  'IMPROVEMENT_OFFSHORE_OIL_RIG'
+  'IMPROVEMENT_OFFSHORE_OIL_RIG',
+  'IMPROVEMENT_GEOTHERMAL_PLANT',
+  'IMPROVEMENT_SOLAR_FARM',
+  'IMPROVEMENT_WIND_FARM',
+  'IMPROVEMENT_OFFSHORE_WIND_FARM',
+  'IMPROVEMENT_INDUSTRY',
+  'IMPROVEMENT_CORPORATION',
+  'IMPROVEMENT_LEU_WAREHOUSE',
+  'IMPROVEMENT_LEU_CONTAINER_PORT',
+  'IMPROVEMENT_LEU_STATION',
+  'IMPROVEMENT_LEU_TRANSNATIONAL',
+  'IMPROVEMENT_LEU_TRANSNATIONAL_SEA',
+
+  'IMPROVEMENT_ZIGGURAT',
+  'IMPROVEMENT_FEITORIA'
 );
 
-  -- 水上生产改良
+  -- 水上设施改良
 insert or ignore into HD_Improvement_Classification (ImprovementType, ImprovementClassificationType) select
   ImprovementType, 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION'
 from Improvements where ImprovementType in (
   'IMPROVEMENT_FISHING_BOATS',
   'IMPROVEMENT_FISHERY',
   'IMPROVEMENT_OFFSHORE_OIL_RIG',
-  'IMPROVEMENT_POLDER'
+  'IMPROVEMENT_SEASTEAD',
+  'IMPROVEMENT_LEU_CONTAINER_PORT',
+  'IMPROVEMENT_LEU_TRANSNATIONAL_SEA',
+
+  'IMPROVEMENT_POLDER',
+  'IMPROVEMENT_FEITORIA',
+  'IMPROVEMENT_KAMPUNG'
 );
 
   -- 特色改良
@@ -110,7 +136,7 @@ from Improvements where ImprovementType in (
   'IMPROVEMENT_MOUNTAIN_ROAD'
 );
 
-  -- 住宅设施改良
+  -- 民居宅邸改良
 insert or ignore into HD_Improvement_Classification (ImprovementType, ImprovementClassificationType) select
   ImprovementType, 'IMPROVEMENT_CLASSIFICATION_RESIDENTIAL_FACILITIES'
 from Improvements where ImprovementType in (
@@ -119,10 +145,14 @@ from Improvements where ImprovementType in (
 
   'IMPROVEMENT_MOUND',
   'IMPROVEMENT_MEKEWAP',
-  'IMPROVEMENT_KAMPUNG'
+  'IMPROVEMENT_KAMPUNG',
+  'IMPROVEMENT_MAORI_PA',
+  'IMPROVEMENT_STEPWELL',
+  'IMPROVEMENT_MISSION',
+  'IMPROVEMENT_CHATEAU'
 );
 
-  -- 旅游设施改良
+  -- 旅游景观改良
 insert or ignore into HD_Improvement_Classification (ImprovementType, ImprovementClassificationType) select
   ImprovementType, 'IMPROVEMENT_CLASSIFICATION_TOURISM_FACILITIES'
 from Improvements where ImprovementType in (
@@ -130,7 +160,9 @@ from Improvements where ImprovementType in (
   'IMPROVEMENT_CITY_PARK',
   'IMPROVEMENT_SKI_RESORT',
   'IMPROVEMENT_SEASTEAD',
+  'IMPROVEMENT_ROMAN_FORT',
   'IMPROVEMENT_JNR_OASIS_FARM',
+  'IMPROVEMENT_JNR_REED_HOME',
 
   'IMPROVEMENT_COLOSSAL_HEAD',
   'IMPROVEMENT_ALCAZAR',
@@ -142,10 +174,19 @@ from Improvements where ImprovementType in (
   'IMPROVEMENT_GOLF_COURSE',
   'IMPROVEMENT_ICE_HOCKEY_RINK',
   'IMPROVEMENT_CHATEAU',
-  'IMPROVEMENT_OPEN_AIR_MUSEUM'
+  'IMPROVEMENT_OPEN_AIR_MUSEUM',
+  'IMPROVEMENT_MOUND',
+  'IMPROVEMENT_NAZCA_LINE',
+  'IMPROVEMENT_TRADING_DOME',
+  'IMPROVEMENT_MEKEWAP',
+  'IMPROVEMENT_KURGAN',
+  'IMPROVEMENT_PYRAMID',
+  'IMPROVEMENT_GREAT_WALL',
+  'IMPROVEMENT_ROCK_HEWN_CHURCH',
+  'IMPROVEMENT_KAMPUNG'
 );
 
-  -- 军事设施改良
+  -- 军事屯驻改良
 insert or ignore into HD_Improvement_Classification (ImprovementType, ImprovementClassificationType) select
   ImprovementType, 'IMPROVEMENT_CLASSIFICATION_MILITARY_FACILITIES'
 from Improvements where ImprovementType in (
@@ -160,7 +201,7 @@ from Improvements where ImprovementType in (
   'IMPROVEMENT_GREAT_WALL'
 );
 
-  -- 宗教设施改良
+  -- 宗教场所改良
 insert or ignore into HD_Improvement_Classification (ImprovementType, ImprovementClassificationType) select
   ImprovementType, 'IMPROVEMENT_CLASSIFICATION_RELIGIOUS_FACILITIES'
 from Improvements where ImprovementType in (
@@ -169,22 +210,72 @@ from Improvements where ImprovementType in (
   'IMPROVEMENT_MAHAVIHARA',
   'IMPROVEMENT_PYRAMID',
   'IMPROVEMENT_ROCK_HEWN_CHURCH',
-  'IMPROVEMENT_MISSION'
+  'IMPROVEMENT_MISSION',
+  'IMPROVEMENT_COLOSSAL_HEAD',
+  'IMPROVEMENT_MOAI',
+  'IMPROVEMENT_NAZCA_LINE',
+  'IMPROVEMENT_SPHINX',
+  'IMPROVEMENT_KURGAN',
+  'IMPROVEMENT_CHEMAMULL'
 );
 
-  -- 商业设施改良
+  -- 贸易往来改良
 insert or ignore into HD_Improvement_Classification (ImprovementType, ImprovementClassificationType) select
   ImprovementType, 'IMPROVEMENT_CLASSIFICATION_COMMERCIAL_FACILITIES'
 from Improvements where ImprovementType in (
+  'IMPROVEMENT_MOUNTAIN_TUNNEL',
   'IMPROVEMENT_INDUSTRY',
   'IMPROVEMENT_CORPORATION',
   'IMPROVEMENT_LEU_WAREHOUSE',
   'IMPROVEMENT_LEU_CONTAINER_PORT',
   'IMPROVEMENT_LEU_TRANSNATIONAL',
   'IMPROVEMENT_LEU_TRANSNATIONAL_SEA',
+  'IMPROVEMENT_LEU_STATION',
 
   'IMPROVEMENT_TRADING_DOME',
-  'IMPROVEMENT_FEITORIA'
+  'IMPROVEMENT_FEITORIA',
+  'IMPROVEMENT_MOUNTAIN_ROAD',
+  'IMPROVEMENT_POLDER',
+  'IMPROVEMENT_LAND_POLDER',
+  'IMPROVEMENT_HACIENDA',
+  'IMPROVEMENT_OUTBACK_STATION'
+);
+
+  -- 教育研究改良
+insert or ignore into HD_Improvement_Classification (ImprovementType, ImprovementClassificationType) select
+  ImprovementType, 'IMPROVEMENT_CLASSIFICATION_RESEARCH_FACILITIES'
+from Improvements where ImprovementType in (
+  'IMPROVEMENT_CITY_PARK',
+  'IMPROVEMENT_JNR_OASIS_FARM',
+
+  'IMPROVEMENT_ZIGGURAT',
+  'IMPROVEMENT_ALCAZAR',
+  'IMPROVEMENT_MONASTERY',
+  'IMPROVEMENT_MAHAVIHARA',
+  'IMPROVEMENT_PAIRIDAEZA',
+  'IMPROVEMENT_OPEN_AIR_MUSEUM'
+);
+
+  -- 娱乐活动改良
+insert or ignore into HD_Improvement_Classification (ImprovementType, ImprovementClassificationType) select
+  ImprovementType, 'IMPROVEMENT_CLASSIFICATION_ENTERTAINMENT_FACILITIES'
+from Improvements where ImprovementType in (
+  'IMPROVEMENT_BEACH_RESORT',
+  'IMPROVEMENT_SKI_RESORT',
+  
+  'IMPROVEMENT_BATEY',
+  'IMPROVEMENT_GOLF_COURSE',
+  'IMPROVEMENT_ICE_HOCKEY_RINK'
+);
+
+  -- 清洁能源改良
+insert or ignore into HD_Improvement_Classification (ImprovementType, ImprovementClassificationType) select
+  ImprovementType, 'IMPROVEMENT_CLASSIFICATION_POWER_FACILITIES'
+from Improvements where ImprovementType in (
+  'IMPROVEMENT_GEOTHERMAL_PLANT',
+  'IMPROVEMENT_SOLAR_FARM',
+  'IMPROVEMENT_WIND_FARM',
+  'IMPROVEMENT_OFFSHORE_WIND_FARM'
 );
 
   -- 其他通用改良

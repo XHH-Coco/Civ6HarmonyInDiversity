@@ -904,6 +904,7 @@
       <File>UI/Replacement/PlayerSetupLogic.lua</File>
       <File>UI/Replacement/ProductionPanel.xml</File>
       <File>UI/Replacement/UnitFlagManager_UpdateReligionIcon.lua</File>
+      <File>UI/Replacement/GreatWorksSupport.lua</File>
     </ImportFiles>
     <ReplaceUIScript id="UpdateReligionIcon_UnitFlagManager">
       <Properties>
@@ -2254,8 +2255,6 @@
     <File>GameModeSupport/MonopoliesMode/HD_Monopoly_Resource_Gold.xml</File>
     <File>GameModeSupport/MonopoliesMode/HD_Monopoly_Icons.xml</File>
     <File>GameModeSupport/MonopoliesMode/HD_Monopoly_Text.sql</File>
-    <File>GameModeSupport/MonopoliesMode/DiplomacyDealView_KublaiKhanVietnam_MODE.lua</File>
-    <File>GameModeSupport/MonopoliesMode/GreatWorksOverview_KublaiKhanVietnam_Monopolies.lua</File>
     <File>GameModeSupport/BarbarianClansMode/HD_BarbarianClans.sql</File>
     <File>GameModeSupport/BarbarianClansMode/HD_BarbarianClans_Text.sql</File>
     <File>GameModeSupport/SecretSocietiesMode/HD_SecretSocieties.sql</File>
@@ -2461,6 +2460,7 @@
     <File>UI/Replacement/Suk_CityPanelOverview_Instances.xml</File>
     <File>UI/Replacement/CityPanel.xml</File>
     <File>UI/Replacement/UnitFlagManager_UpdateReligionIcon.lua</File>
+    <File>UI/Replacement/GreatWorksSupport.lua</File>
 
     <!-- Icons -->
     <File>UI/Icons/DL_Icons_Fixing.sql</File>

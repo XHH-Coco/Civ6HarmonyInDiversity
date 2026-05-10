@@ -419,65 +419,64 @@ function ViewResourcesPage()
 			instance.AmenitiesContainer:SetHide(true);
 		end
         
-        -- 2021-05-12 Monopolies Mode
-        if bIsMonopolies and kSingleResourceData.IsLuxury and GameInfo.ResourceIndustries[kResource.ResourceType] ~= nil then -- also check if there is an industry around it!
-            local pGameEconomic:table = Game.GetEconomicManager();
-            local iControlled:number = pGameEconomic:GetNumControlledResources(localPlayerID, eResourceType);
-            local sText:string, sTT:string = "", "";
-            local sTTHead = "[ICON_".. kResource.ResourceType.."]"..LL(kResource.Name);
-            -- find industry effect and type - match [ICON_xxx]
-            local sEffectI:string = LL(GameInfo.ResourceIndustries[kResource.ResourceType].ResourceEffectTExt);
-            -- find corporation effect and type - match [ICON_xxx]
-            local sEffectC:string = LL(GameInfo.ResourceCorporations[kResource.ResourceType].ResourceEffectTExt);
-            -- logic goes top-down, i.e. from corporation to industry
-            if pGameEconomic:HasCorporationOf(localPlayerID, eResourceType) then
-                -- corpo: YES
-                sText = string.format("%d [ICON_GreatWork_Product][ICON_GreatWork_Product] %s", iControlled, LL("LOC_IMPROVEMENT_CORPORATION_NAME"));
-                sTT = sTTHead..sEffectC;
-            else
-                -- corpo: NO, check Industry
-                if pGameEconomic:HasIndustryOf(localPlayerID, eResourceType) then
-                    sText = string.format("%d [ICON_GreatWork_Product] %s", iControlled, LL("LOC_IMPROVEMENT_INDUSTRY_NAME"));
-                else
-                    sText = string.format("%d [ICON_Not]", iControlled);
-                end
-                sTT = sTTHead..sEffectI;
-            end
-            -- if we can have an industry - add the mark
-            if pGameEconomic:CanHaveIndustry(localPlayerID, eResourceType) then
-                sText = sText.." [ICON_New] "..LL("LOC_IMPROVEMENT_INDUSTRY_NAME");
-                sTT = sTT.."[NEWLINE]"..LL("LOC_NOTIFICATION_INDUSTRY_OPPORTUNITY_SUMMARY", iControlled, "[ICON_".. kResource.ResourceType.."]", LL(kResource.Name)); -- {1_num} {2_ResourceIcon} {3_Resource}
-            end
-            -- if we can have a corpo - add the mark
-            if pGameEconomic:CanHaveCorporation(localPlayerID, eResourceType) then
-                sText = sText.." [ICON_New] "..LL("LOC_IMPROVEMENT_CORPORATION_NAME");
-                sTT = sTT.."[NEWLINE]"..LL("LOC_NOTIFICATION_CORPORATION_OPPORTUNITY_SUMMARY", iControlled, "[ICON_".. kResource.ResourceType.."]", LL(kResource.Name)); -- {1_num} {2_ResourceIcon} {3_Resource}
-                sTT = sTT.."[NEWLINE][ICON_GoingTo]"..LL("LOC_IMPROVEMENT_CORPORATION_NAME")..sEffectC;
+		-- 2021-05-12 Monopolies Mode
+		if bIsMonopolies and kSingleResourceData.IsLuxury and GameInfo.ResourceIndustries[kResource.ResourceType] ~= nil then -- also check if there is an industry around it!
+			local pGameEconomic:table = Game.GetEconomicManager();
+			local iControlled:number = pGameEconomic:GetNumControlledResources(localPlayerID, eResourceType);
+			local sText:string, sTT:string = "", "";
+			local sTTHead = "[ICON_".. kResource.ResourceType.."]"..LL(kResource.Name);
+			-- find industry effect and type - match [ICON_xxx]
+			local sEffectI:string = LL(GameInfo.ResourceIndustries[kResource.ResourceType].ResourceEffectTExt);
+			-- find corporation effect and type - match [ICON_xxx]
+			local sEffectC:string = LL(GameInfo.ResourceCorporations[kResource.ResourceType].ResourceEffectTExt);
+			-- logic goes top-down, i.e. from corporation to industry
+			if pGameEconomic:HasCorporationOf(localPlayerID, eResourceType) then
+				-- corpo: YES
+				sText = string.format("%d [ICON_GreatWork_Product][ICON_GreatWork_Product] %s", iControlled, LL("LOC_IMPROVEMENT_CORPORATION_NAME"));
+				sTT = sTTHead..sEffectC;
+			else
+				-- corpo: NO, check Industry
+				if pGameEconomic:HasIndustryOf(localPlayerID, eResourceType) then
+					sText = string.format("%d [ICON_GreatWork_Product] %s", iControlled, LL("LOC_IMPROVEMENT_INDUSTRY_NAME"));
+				else
+					sText = string.format("%d [ICON_Not]", iControlled);
+				end
+				sTT = sTTHead..sEffectI;
+			end
+			-- if we can have an industry - add the mark
+			if pGameEconomic:CanHaveIndustry(localPlayerID, eResourceType) then
+				sText = sText.." [ICON_New] "..LL("LOC_IMPROVEMENT_INDUSTRY_NAME");
+				sTT = sTT.."[NEWLINE]"..LL("LOC_NOTIFICATION_INDUSTRY_OPPORTUNITY_SUMMARY", iControlled, "[ICON_".. kResource.ResourceType.."]", LL(kResource.Name)); -- {1_num} {2_ResourceIcon} {3_Resource}
+			end
+			-- if we can have a corpo - add the mark
+			if pGameEconomic:CanHaveCorporation(localPlayerID, eResourceType) then
+				sText = sText.." [ICON_New] "..LL("LOC_IMPROVEMENT_CORPORATION_NAME");
+				sTT = sTT.."[NEWLINE]"..LL("LOC_NOTIFICATION_CORPORATION_OPPORTUNITY_SUMMARY", iControlled, "[ICON_".. kResource.ResourceType.."]", LL(kResource.Name)); -- {1_num} {2_ResourceIcon} {3_Resource}
+				sTT = sTT.."[NEWLINE][ICON_GoingTo]"..LL("LOC_IMPROVEMENT_CORPORATION_NAME")..sEffectC;
+			end
+			-- show info
+			instance.Industry:SetText(sText);
+			instance.Industry:SetToolTipString(sTT);
+			instance.IndustryContainer:SetHide(false);
+		else
+			instance.IndustryContainer:SetHide(true);
+		end
 
-            end
-            -- show info
-            instance.Industry:SetText(sText);
-            instance.Industry:SetToolTipString(sTT);
-            instance.IndustryContainer:SetHide(false);
-        else
-            instance.IndustryContainer:SetHide(true);
-        end
-
-        -- 2021-05-12 Monopolies Mode
-        if bIsMonopolies and kSingleResourceData.IsLuxury and GameInfo.ResourceIndustries[kResource.ResourceType] ~= nil and bMercantailismUnlocked then
-            local pGameEconomic:table = Game.GetEconomicManager();
-            local iControlled:number = pGameEconomic:GetNumControlledResources(localPlayerID, eResourceType);
-            local kMapResources:table = pGameEconomic:GetMapResources();
-            local iTotal:number = kMapResources[eResourceType];
+		-- 2021-05-12 Monopolies Mode
+		if bIsMonopolies and kSingleResourceData.IsLuxury and GameInfo.ResourceIndustries[kResource.ResourceType] ~= nil and bMercantailismUnlocked then
+			local pGameEconomic:table = Game.GetEconomicManager();
+			local iControlled:number = pGameEconomic:GetNumControlledResources(localPlayerID, eResourceType);
+			local kMapResources:table = pGameEconomic:GetMapResources();
+			local iTotal:number = kMapResources[eResourceType];
 			local iMonopolyID:number = pGameEconomic:GetResourceMonopolyPlayer(eResourceType);
-            local sText:string = string.format("%d/%d  %d%%  %s", iControlled, iTotal, 100*iControlled/iTotal, (iMonopolyID == localPlayerID and LL("LOC_RESREPORT_MONOPOLY_NAME") or LL("LOC_RESREPORT_CONTROL")));
-            if 100*(iControlled+1)/iTotal > 60 then sText = sText.." [ICON_New]"; end
-            if iMonopolyID == localPlayerID then sText = "[COLOR_Green]"..sText.."[ENDCOLOR]"; end
-            instance.Monopoly:SetText(sText);
-            instance.MonopolyContainer:SetHide(false);
-        else
-            instance.MonopolyContainer:SetHide(true);
-        end
+			local sText:string = string.format("%d/%d  %d%%  %s", iControlled, iTotal, 100*iControlled/iTotal, (iMonopolyID == localPlayerID and LL("LOC_RESREPORT_MONOPOLY_NAME") or LL("LOC_RESREPORT_CONTROL")));
+			if 100*(iControlled+1)/iTotal > 60 then sText = sText.." [ICON_New]"; end
+			if iMonopolyID == localPlayerID then sText = "[COLOR_Green]"..sText.."[ENDCOLOR]"; end
+			instance.Monopoly:SetText(sText);
+			instance.MonopolyContainer:SetHide(false);
+		else
+			instance.MonopolyContainer:SetHide(true);
+		end
 
 		--SetGroupCollapsePadding(instance, pFooterInstance.Top:GetSizeY() ); --BRS moved into if
 		SetGroupCollapsePadding(instance, 0); --BRS no footer
