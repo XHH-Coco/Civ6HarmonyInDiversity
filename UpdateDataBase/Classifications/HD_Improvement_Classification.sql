@@ -241,7 +241,7 @@ from Improvements where ImprovementType in (
   'IMPROVEMENT_OUTBACK_STATION'
 );
 
-  -- 教育研究改良
+  -- 研究教育改良
 insert or ignore into HD_Improvement_Classification (ImprovementType, ImprovementClassificationType) select
   ImprovementType, 'IMPROVEMENT_CLASSIFICATION_RESEARCH_FACILITIES'
 from Improvements where ImprovementType in (

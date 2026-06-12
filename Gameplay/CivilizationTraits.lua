@@ -3892,10 +3892,15 @@ function Bannockburn_CustomEvent_OnChooseSelection(playerId, param)
   local player = Players[playerId];
   local selectionInfo = GameInfo.HD_CustomEventSelections[param.SelectionId];
 	local selectionType = selectionInfo.SelectionType;
+	local customEventType = selectionInfo.CustomEventType;
 	local scriptParam = param.Param;
 	local x = scriptParam.X;
 	local y = scriptParam.Y;
 	local plot = Map.GetPlot(x, y);
+
+	if not (customEventType == 'HD_CUSTOMEVENT_SCOTLAND_VISIT_GOODY_HUT' or customEventType == 'HD_CUSTOMEVENT_SCOTLAND_CLEAR_BARBARIAN') then
+		return;
+	end
 
 	print("==========================================================================")
 	print('Bannockburn_CustomEvent_OnChooseSelection', playerId, param.SelectionId, x, y);

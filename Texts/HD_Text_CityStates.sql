@@ -107,8 +107,8 @@ values
     --("LOC_CIVILIZATION_GENEVA_BONUS",                     "Your cities earn +10% [ICON_SCIENCE] Science whenever you are not at war with any civilization."),
     ("LOC_LEADER_TRAIT_JOHANNESBURG_DESCRIPTION",         "Each of your city receives +1 [ICON_PRODUCTION] Production and +3 [ICON_GOLD] Gold for each type of resource improved by Mine or Quarry in that city. Extra +1 [ICON_PRODUCTION] Production per type after researching 'Apprenticeship'."),
     --("LOC_CIVILIZATION_JOHANNESBURG_BONUS",               "Each of your city receives +1 [ICON_PRODUCTION] Production for each type of resource improved by Mine or Quarry in that city. Extra +1 [ICON_PRODUCTION] Production per type after researching 'Apprenticeship'."),
-    ("LOC_LEADER_TRAIT_BUENOS_AIRES_DESCRIPTION",         "Each district with at least +9 adjacency bonus provides +9% of the corresponding yield to the city."),
-    --("LOC_CIVILIZATION_BUENOS_AIRES_BONUS",               "Each district with at least +9 adjacency bonus provides +9% of the corresponding yield to the city."),
+    ("LOC_LEADER_TRAIT_BUENOS_AIRES_DESCRIPTION",         "Each district with at least +9 basic adjacency bonus provides +9% of the corresponding yield to the city."),
+    --("LOC_CIVILIZATION_BUENOS_AIRES_BONUS",               "Each district with at least +9 basic adjacency bonus provides +9% of the corresponding yield to the city."),
 	("LOC_LEADER_TRAIT_LAHORE_DESCRIPTION",				  "Your cities can now train Nihang units.[NEWLINE][NEWLINE]A unit with a unique Promotion tree that can be purchased with [ICON_Faith] Faith. [ICON_Strength] Combat Strength is increased when Barracks, Armory, and Military Academy buildings are first constructed.");;
 
 --------------------------------------------------------------------------------

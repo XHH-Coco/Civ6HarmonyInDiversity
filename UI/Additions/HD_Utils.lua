@@ -1089,3 +1089,37 @@ function GetHistoricalMomentData(momentId)
   return Game.GetHistoryManager():GetMomentData(momentId);
 end
 Utils.GetHistoricalMomentData = GetHistoricalMomentData;
+
+-- 城市正宜居度
+local function GetCityPositiveAmenity(playerId, cityId)
+  local city = CityManager.GetCity(playerId, cityId);
+	if not city then return 0; end
+
+	local positiveAmenity = city:GetGrowth():GetAmenities() - city:GetGrowth():GetAmenitiesNeeded();
+
+	return math.max(positiveAmenity, 0);
+end
+Utils.GetCityPositiveAmenity = GetCityPositiveAmenity;
+
+-- 城市溢出宜居度
+local topHappinessLevel = 0;
+local function GetTopHappinessLevel()
+	for row in GameInfo.Happinesses() do
+		if row.MinimumAmenityScore ~= nil then
+			topHappinessLevel = math.max(topHappinessLevel, row.MinimumAmenityScore)
+		end
+	end
+	print("最高宜居度等级：" .. topHappinessLevel);
+end
+GetTopHappinessLevel();
+
+local function GetCityExcessAmenity(playerId, cityId)
+  local city = CityManager.GetCity(playerId, cityId);
+	if not city then return 0; end
+
+	local amenity = city:GetGrowth():GetAmenities() - city:GetGrowth():GetAmenitiesNeeded();
+	local excessAmenity = amenity - topHappinessLevel;
+
+	return math.max(excessAmenity, 0);
+end
+Utils.GetCityExcessAmenity = GetCityExcessAmenity;

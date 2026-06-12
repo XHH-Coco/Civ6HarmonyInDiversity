@@ -23,6 +23,17 @@ create table if not exists 'HD_Binary_Compress_Keys'(
 	PRIMARY KEY('Key')
 );
 
+insert or replace into HD_Binary_Compress_Keys (Key, MaxExp) values
+    -- 正宜居度
+	('HD_PLOT_BINARY_COMPRESS_CITY_POSITIVE_AMENITY',   6),
+    -- 溢出宜居度
+	('HD_PLOT_BINARY_COMPRESS_CITY_EXCESS_AMENITY',     6),
+    -- 政策卡数量
+	('HD_PLOT_BINARY_COMPRESS_PLAYER_MILITARY_POLICY',  4),
+	('HD_PLOT_BINARY_COMPRESS_PLAYER_ECONOMIC_POLICY',  4),
+	('HD_PLOT_BINARY_COMPRESS_PLAYER_CULTURAL_POLICY',  4),
+	('HD_PLOT_BINARY_COMPRESS_PLAYER_WILDCARD_POLICY',  4);
+
 create table if not exists HD_GreatWork_Text(
     GreatWorkType   TEXT NOT NULL,
     Description     TEXT NOT NULL,

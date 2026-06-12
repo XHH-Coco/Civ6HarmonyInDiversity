@@ -238,7 +238,25 @@ local BASE_GetUnitActionsTable = function ( pUnit )
 
 							bCanStart, tResults = UnitManager.CanStartOperation(pUnit, actionHash, nil, tParameters, false, false);
 							local isDisabled		= not bCanStart;
-							local toolTipString		= Locale.Lookup(operationRow.Description) .. ": " .. Locale.Lookup(improvement.Name);
+							local toolTipString		= Locale.Lookup(operationRow.Description) .. Locale.Lookup('LOC_TOOLTIP_HD_COLON_TEXT') .. Locale.Lookup(improvement.Name);
+
+							-- 改良分类
+							local classificationList = {};
+							for row in GameInfo.HD_Improvement_Classification() do
+								if row.ImprovementType == improvement.ImprovementType then
+									local classificationInfo = GameInfo.HD_ImprovementClassificationTypes[row.ImprovementClassificationType];
+									if classificationInfo then
+										table.insert(classificationList, classificationInfo.Name);
+									end
+								end
+							end
+							if #classificationList > 0 then
+								toolTipString = toolTipString .. '[NEWLINE][NEWLINE]' .. Locale.Lookup('LOC_TOOLTIP_HD_IMPROVEMENT_CLASSIFICATIONS_TEXT');
+								
+								for _, nameTag in ipairs(classificationList) do
+									toolTipString = toolTipString .. '[NEWLINE][ICON_BULLET]' .. Locale.Lookup(nameTag)
+								end
+							end
 
 							-- 增加行业公司效果说明
 							if GameInfo.HD_Monopoly_Resource_Categories ~= nil
@@ -257,10 +275,10 @@ local BASE_GetUnitActionsTable = function ( pUnit )
 												local categoryInfo = GameInfo.HD_Monopoly_Categories[row.Category];
 												if categoryInfo then
 													if improvement.ImprovementType == 'IMPROVEMENT_INDUSTRY' and categoryInfo.IndustryEffect then
-														table.insert(industryStr, Locale.Lookup('LOC_RESOURCE_CLASSIFICATION_HD_' .. row.Category .. '_NAME') .. Locale.Lookup('LOC_TOOLTIP_HD_COLON_TEXT') .. Locale.Lookup("LOC_" .. categoryInfo.IndustryEffect .. "_DESCRIPTION"));
+														table.insert(industryStr, '[ICON_BULLET]' .. Locale.Lookup('LOC_RESOURCE_CLASSIFICATION_HD_' .. row.Category .. '_NAME') .. Locale.Lookup('LOC_TOOLTIP_HD_COLON_TEXT') .. Locale.Lookup("LOC_" .. categoryInfo.IndustryEffect .. "_DESCRIPTION"));
 													end
 													if improvement.ImprovementType == 'IMPROVEMENT_CORPORATION' and categoryInfo.CorporationEffect then
-														table.insert(corporationStr, Locale.Lookup('LOC_RESOURCE_CLASSIFICATION_HD_' .. row.Category .. '_NAME') .. Locale.Lookup('LOC_TOOLTIP_HD_COLON_TEXT') .. Locale.Lookup("LOC_" .. categoryInfo.CorporationEffect .. "_DESCRIPTION"));
+														table.insert(corporationStr, '[ICON_BULLET]' .. Locale.Lookup('LOC_RESOURCE_CLASSIFICATION_HD_' .. row.Category .. '_NAME') .. Locale.Lookup('LOC_TOOLTIP_HD_COLON_TEXT') .. Locale.Lookup("LOC_" .. categoryInfo.CorporationEffect .. "_DESCRIPTION"));
 													end
 												end
 											end
@@ -399,7 +417,7 @@ local BASE_GetUnitActionsTable = function ( pUnit )
 
 							if (tResults[UnitOperationResults.FEATURE_TYPE] ~= nil) then
 								local featureName = GameInfo.Features[tResults[UnitOperationResults.FEATURE_TYPE]].Name;
-								toolTipString = toolTipString .. ": " .. Locale.Lookup(featureName);
+								toolTipString = toolTipString .. Locale.Lookup('LOC_TOOLTIP_HD_COLON_TEXT') .. Locale.Lookup(featureName);
 							end
 
 							if (tResults[UnitOperationResults.ADDITIONAL_DESCRIPTION] ~= nil) then

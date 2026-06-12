@@ -73,7 +73,7 @@ function RefreshRegionalYield(playerId)
 					if (not yieldData.PrereqTech or player:GetTechs():HasTech(yieldData.PrereqTech))
 					and (not yieldData.PrereqCivic or player:GetCulture():HasCivic(yieldData.PrereqCivic))
 					and (not yieldData.RequiresPower or Utils.IsCityFullyPowered(playerId, city:GetID())) then
-						-- TODO：根据本城的Property对辐射产出进行修正
+						-- 根据本城的Property对辐射产出进行修正
 						local yieldChange = yieldData.YieldChange;
 
 						-- 加区：英国、官邸、桑弘羊、艾达等

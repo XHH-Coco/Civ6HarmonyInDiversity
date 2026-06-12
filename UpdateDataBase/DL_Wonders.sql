@@ -1557,7 +1557,7 @@ from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
 insert or replace into Modifiers
 	(ModifierId,																					ModifierType,																				SubjectRequirementSetId)
 select
-	'HD_EIFFEL_' || DistrictType || '_ADJACENCY_BONUS',		'MODIFIER_PLAYER_DISTRICTS_ADJUST_YIELD_MODIFIER',	'HD_REQUIRES_DISTRICT_IS_' || DistrictType || '_APPEAL_MORE_THAN_8'
+	'HD_EIFFEL_' || DistrictType || '_ADJACENCY_BONUS',		'MODIFIER_PLAYER_DISTRICTS_ADJUST_YIELD_MODIFIER',	'HD_DISTRICT_IS_' || DistrictType || '_APPEAL_MORE_THAN_8_REQUIREMENTS'
 from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
 
 insert or replace into ModifierArguments
@@ -1582,7 +1582,7 @@ from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
 insert or replace into Modifiers
 	(ModifierId,																					ModifierType,																													SubjectRequirementSetId)
 select
-	'HD_EIFFEL_' || DistrictType || '_ADJACENCY_TOURISM',	'MODIFIER_PLAYER_DISTRICTS_ADJUST_TOURISM_ADJACENCY_YIELD_MOFIFIER',	'HD_REQUIRES_DISTRICT_IS_' || DistrictType || '_APPEAL_MORE_THAN_8'
+	'HD_EIFFEL_' || DistrictType || '_ADJACENCY_TOURISM',	'MODIFIER_PLAYER_DISTRICTS_ADJUST_TOURISM_ADJACENCY_YIELD_MOFIFIER',	'HD_DISTRICT_IS_' || DistrictType || '_APPEAL_MORE_THAN_8_REQUIREMENTS'
 from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
 
 insert or replace into ModifierArguments
@@ -1607,7 +1607,7 @@ from DistrictCorrespondingGPP_HD;
 insert or replace into Modifiers
 	(ModifierId,																															ModifierType,																	SubjectRequirementSetId)
 select
-	'HD_EIFFEL_' || DistrictType || '_' || GreatPersonClassType || '_GPP',		'MODIFIER_PLAYER_DISTRICTS_ATTACH_MODIFIER',	'HD_REQUIRES_DISTRICT_IS_' || DistrictType || '_APPEAL_MORE_THAN_8'
+	'HD_EIFFEL_' || DistrictType || '_' || GreatPersonClassType || '_GPP',		'MODIFIER_PLAYER_DISTRICTS_ATTACH_MODIFIER',	'HD_DISTRICT_IS_' || DistrictType || '_APPEAL_MORE_THAN_8_REQUIREMENTS'
 from DistrictCorrespondingGPP_HD;
 
 insert or replace into Modifiers

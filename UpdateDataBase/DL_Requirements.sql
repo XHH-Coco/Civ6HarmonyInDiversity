@@ -199,6 +199,20 @@ insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementI
 	select 'PLOT_HAS_' || ImprovementClassificationType || '_AND_ADJACENT_TO_OWNER_REQUIREMENTS', 'ADJACENT_TO_OWNER' from HD_ImprovementClassificationTypes
 	where ImprovementClassificationType != 'IMPROVEMENT_CLASSIFICATION_COMMON';
 
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
+	select 'PLOT_ADJACENT_TO_' || ImprovementClassificationType || '_REQUIREMENTS', 'REQUIREMENTSET_TEST_ANY' from HD_ImprovementClassificationTypes
+	where ImprovementClassificationType != 'IMPROVEMENT_CLASSIFICATION_COMMON';
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'PLOT_ADJACENT_TO_' || ImprovementClassificationType || '_REQUIREMENTS', 'REQUIRES_PLOT_ADJACENT_TO_' || ImprovementType from HD_Improvement_Classification
+	where ImprovementClassificationType != 'IMPROVEMENT_CLASSIFICATION_COMMON';
+
+insert or ignore into Requirements (RequirementId, RequirementType)
+	select 'REQUIRES_PLOT_ADJACENT_TO_' || ImprovementClassificationType, 'REQUIREMENT_REQUIREMENTSET_IS_MET' from HD_ImprovementClassificationTypes
+	where ImprovementClassificationType != 'IMPROVEMENT_CLASSIFICATION_COMMON';
+insert or ignore into RequirementArguments (RequirementId, Name, Value)
+	select 'REQUIRES_PLOT_ADJACENT_TO_' || ImprovementClassificationType, 'RequirementSetId', 'PLOT_ADJACENT_TO_' || ImprovementClassificationType || '_REQUIREMENTS' from HD_ImprovementClassificationTypes
+	where ImprovementClassificationType != 'IMPROVEMENT_CLASSIFICATION_COMMON';
+
 -- District 
 insert or ignore into RequirementArguments (RequirementId, Name, Value)
 	select 'REQUIRES_DISTRICT_IS_' || DistrictType, 'DistrictType', DistrictType from Districts;
@@ -214,6 +228,39 @@ insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
 	select 'DISTRICT_IS_' || DistrictType || '_REQUIREMENTS', 'REQUIREMENTSET_TEST_ANY' from Districts;
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
 	select 'DISTRICT_IS_' || DistrictType || '_REQUIREMENTS', 'REQUIRES_DISTRICT_IS_' || DistrictType from Districts;
+
+-- 区域分类
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
+	select 'DISTRICT_IS_' || DistrictClassificationType || '_REQUIREMENTS', 'REQUIREMENTSET_TEST_ANY' from HD_DistrictClassificationTypes;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'DISTRICT_IS_' || DistrictClassificationType || '_REQUIREMENTS', 'REQUIRES_DISTRICT_IS_' || DistrictType from HD_District_Classification;
+
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
+	select 'PLOT_ADJACENT_TO_' || DistrictClassificationType || '_REQUIREMENTS', 'REQUIREMENTSET_TEST_ANY' from HD_DistrictClassificationTypes;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'PLOT_ADJACENT_TO_' || DistrictClassificationType || '_REQUIREMENTS', 'REQUIRES_PLOT_ADJACENT_TO_' || DistrictType || '_RAW' from HD_District_Classification;
+
+insert or ignore into Requirements (RequirementId, RequirementType)
+	select 'REQUIRES_PLOT_ADJACENT_TO_' || DistrictClassificationType, 'REQUIREMENT_REQUIREMENTSET_IS_MET' from HD_DistrictClassificationTypes;
+insert or ignore into RequirementArguments (RequirementId, Name, Value)
+	select 'REQUIRES_PLOT_ADJACENT_TO_' || DistrictClassificationType, 'RequirementSetId', 'PLOT_ADJACENT_TO_' || DistrictClassificationType || '_REQUIREMENTS' from HD_DistrictClassificationTypes;
+
+-- 相邻某类改良的区域
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
+	select 'DISTRICT_IS_' || DistrictType || '_ADJACENT_TO_' || ImprovementClassificationType || '_REQUIREMENTS', 'REQUIREMENTSET_TEST_ALL'
+from Districts, HD_ImprovementClassificationTypes where ImprovementClassificationType in (
+	'IMPROVEMENT_CLASSIFICATION_TOURISM_FACILITIES'
+);
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'DISTRICT_IS_' || DistrictType || '_ADJACENT_TO_' || ImprovementClassificationType || '_REQUIREMENTS', 'REQUIRES_DISTRICT_IS_' || DistrictType
+from Districts, HD_ImprovementClassificationTypes where ImprovementClassificationType in (
+	'IMPROVEMENT_CLASSIFICATION_TOURISM_FACILITIES'
+);
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'DISTRICT_IS_' || DistrictType || '_ADJACENT_TO_' || ImprovementClassificationType || '_REQUIREMENTS', 'REQUIRES_PLOT_ADJACENT_TO_' || ImprovementClassificationType
+from Districts, HD_ImprovementClassificationTypes where ImprovementClassificationType in (
+	'IMPROVEMENT_CLASSIFICATION_TOURISM_FACILITIES'
+);
 
 -- 3环内区域
 insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
@@ -360,6 +407,12 @@ insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementI
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
 	select 'HD_PLOT_HAS_' || a.BuildingType || '_REQUIREMENTS', 'PLOT_HAS_' || b.CivUniqueBuildingType
 	from Buildings a inner join BuildingReplaces b on a.BuildingType = b.ReplacesBuildingType where a.IsWonder = 0;
+
+-- 建筑分类
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType) select
+	'HD_PLOT_HAS_' || BuildingClassificationType || '_REQUIREMENTS', 'REQUIREMENTSET_TEST_ANY' from HD_BuildingClassificationTypes;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select
+	'HD_PLOT_HAS_' || BuildingClassificationType || '_REQUIREMENTS', 'PLOT_HAS_' || BuildingType from HD_Building_Classification;
 
 -- 判断单元格是否有XX奇观
 insert or ignore into RequirementSets
@@ -677,6 +730,7 @@ values
 	('REQUIRES_RESOUCE_ADJACENT_TO_LAKE',			'REQUIREMENT_REQUIREMENTSET_IS_MET'),
 	('REQUIRES_OBJECT_WITHIN_0_TILE',				'REQUIREMENT_PLOT_ADJACENT_TO_OWNER'),
 	('REQUIRES_OBJECT_WITHIN_1_TILE',				'REQUIREMENT_PLOT_ADJACENT_TO_OWNER'),
+	('REQUIRES_OBJECT_WITHIN_2_TILES',				'REQUIREMENT_PLOT_ADJACENT_TO_OWNER'),
 	('REQUIRES_OBJECT_WITHIN_3_TILES',				'REQUIREMENT_PLOT_ADJACENT_TO_OWNER'),
 	('REQUIRES_OBJECT_WITHIN_4_TILES',				'REQUIREMENT_PLOT_ADJACENT_TO_OWNER'),
 	('REQUIRES_OBJECT_WITHIN_5_TILES',				'REQUIREMENT_PLOT_ADJACENT_TO_OWNER'),
@@ -711,6 +765,7 @@ values
 	('REQUIRES_PLOT_AT_RADIUS_3',		'REQUIREMENT_PLOT_ADJACENT_TO_OWNER'),
 	('HD_CITY_IS_SAME_CONTINENT_REQUIREMENTS','REQUIREMENT_CITY_IS_OWNER_CAPITAL_CONTINENT'),
 	('HD_REQUIRES_DISTRICT_IS_SPECIALTY_DISTRICT',						'REQUIREMENT_REQUIREMENTSET_IS_MET'),
+	('HD_REQUIRES_DISTRICT_IS_NOT_SPECIALTY_DISTRICT',						'REQUIREMENT_REQUIREMENTSET_IS_MET'),
 	('REQUIRES_DISTRICT_IS_WONDER_THEATER_HOLY_SITE_COMMERCIAL_HUB',	'REQUIREMENT_REQUIREMENTSET_IS_MET'),
 	('REQUIRES_CITY_HAS_SEAPORT',				'REQUIREMENT_CITY_HAS_BUILDING'),
 	('REQUIRES_CITY_HAS_TIER_2_HARBOR_BUILDINGS_MET',				'REQUIREMENT_REQUIREMENTSET_IS_MET'),
@@ -738,7 +793,8 @@ values
 	('REQUIRES_CITY_HAS_3_TITLE_GOVERNOR',      'REQUIREMENT_CITY_HAS_GOVERNOR_WITH_X_TITLES'),
 	('REQUIRES_CITY_HAS_4_TITLE_GOVERNOR',      'REQUIREMENT_CITY_HAS_GOVERNOR_WITH_X_TITLES'),
 	('REQUIRES_CITY_HAS_5_TITLE_GOVERNOR',      'REQUIREMENT_CITY_HAS_GOVERNOR_WITH_X_TITLES'),
-	('REQUIRES_CITY_HAS_6_TITLE_GOVERNOR',      'REQUIREMENT_CITY_HAS_GOVERNOR_WITH_X_TITLES');
+	('REQUIRES_CITY_HAS_6_TITLE_GOVERNOR',      'REQUIREMENT_CITY_HAS_GOVERNOR_WITH_X_TITLES'),
+	('REQUIRES_HD_DISTRICT_IS_CITY_CENTER_OR_NEIGHBORHOOD',						'REQUIREMENT_REQUIREMENTSET_IS_MET');
 
 insert or ignore into RequirementArguments
 	(RequirementId,									Name,				Value)
@@ -782,6 +838,8 @@ values
 	('REQUIRES_OBJECT_WITHIN_0_TILE',				'MinDistance',		0),
 	('REQUIRES_OBJECT_WITHIN_1_TILE',				'MaxDistance',		1),
 	('REQUIRES_OBJECT_WITHIN_1_TILE',				'MinDistance',		0),
+	('REQUIRES_OBJECT_WITHIN_2_TILES',				'MaxDistance',		2),
+	('REQUIRES_OBJECT_WITHIN_2_TILES',				'MinDistance',		0),
 	('REQUIRES_OBJECT_WITHIN_3_TILES',				'MaxDistance',		3),
 	('REQUIRES_OBJECT_WITHIN_3_TILES',				'MinDistance',		0),
 	('REQUIRES_OBJECT_WITHIN_4_TILES',				'MaxDistance',		4),
@@ -828,6 +886,7 @@ values
 	('REQUIRES_PLOT_AT_RADIUS_3',		'MaxDistance',		3),
 	('REQUIRES_CITY_HAS_NOT_PALACE',		'BuildingType',		'BUILDING_PALACE'),
 	('HD_REQUIRES_DISTRICT_IS_SPECIALTY_DISTRICT',						'RequirementSetId',	'DISTRICT_IS_SPECIALTY_DISTRICT_REQUIREMENTS'),
+	('HD_REQUIRES_DISTRICT_IS_NOT_SPECIALTY_DISTRICT',						'RequirementSetId',	'DISTRICT_IS_NOT_SPECIALTY_DISTRICT_REQUIREMENTS'),
 	('REQUIRES_DISTRICT_IS_WONDER_THEATER_HOLY_SITE_COMMERCIAL_HUB',	'RequirementSetId',	'MINOR_3DISTRICTS_CULTURE_REQUIREMENTS'),
 	('REQUIRES_CITY_HAS_SEAPORT',				'BuildingType',	'BUILDING_SEAPORT'),
 	('REQUIRES_CITY_HAS_TIER_2_HARBOR_BUILDINGS_MET','RequirementSetId',	'REQUIRES_CITY_HAS_TIER_2_HARBOR_BUILDINGS'),
@@ -867,26 +926,24 @@ values
 	('REQUIRES_CITY_HAS_5_TITLE_GOVERNOR',      'Established',       1),
 	('REQUIRES_CITY_HAS_5_TITLE_GOVERNOR',      'Amount',            5),
 	('REQUIRES_CITY_HAS_6_TITLE_GOVERNOR',      'Established',       1),
-	('REQUIRES_CITY_HAS_6_TITLE_GOVERNOR',      'Amount',            6);
+	('REQUIRES_CITY_HAS_6_TITLE_GOVERNOR',      'Amount',            6),
+	('REQUIRES_HD_DISTRICT_IS_CITY_CENTER_OR_NEIGHBORHOOD',						'RequirementSetId',	'HD_DISTRICT_IS_CITY_CENTER_OR_NEIGHBORHOOD_REQUIREMENTS');
+
+-- 惊艳的区域
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType) select
+	'HD_DISTRICT_IS_' || DistrictType || '_BREATHTAKING_APPEAL_REQUIREMENTS', 'REQUIREMENTSET_TEST_ALL' from Districts;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select
+	'HD_DISTRICT_IS_' || DistrictType || '_BREATHTAKING_APPEAL_REQUIREMENTS', 'REQUIRES_DISTRICT_IS_' || DistrictType || '_HD' from Districts;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select
+	'HD_DISTRICT_IS_' || DistrictType || '_BREATHTAKING_APPEAL_REQUIREMENTS', 'REQUIRES_PLOT_BREATHTAKING_APPEAL' from Districts;
 
 -- 魅力超过8的区域
-insert or ignore into RequirementSets
-	(RequirementSetId,																										RequirementSetType)
-select
-	'HD_REQUIRES_DISTRICT_IS_' || DistrictType || '_APPEAL_MORE_THAN_8',	'REQUIREMENTSET_TEST_ALL'
-from Districts;
-
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,																										RequirementId)
-select
-	'HD_REQUIRES_DISTRICT_IS_' || DistrictType || '_APPEAL_MORE_THAN_8',	'REQUIRES_DISTRICT_IS_' || DistrictType || '_HD'
-from Districts;
-
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,																										RequirementId)
-select
-	'HD_REQUIRES_DISTRICT_IS_' || DistrictType || '_APPEAL_MORE_THAN_8',	'HD_PLOT_APPEAL_MORE_THAN_8'
-from Districts;
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType) select
+	'HD_DISTRICT_IS_' || DistrictType || '_APPEAL_MORE_THAN_8_REQUIREMENTS', 'REQUIREMENTSET_TEST_ALL' from Districts;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select
+	'HD_DISTRICT_IS_' || DistrictType || '_APPEAL_MORE_THAN_8_REQUIREMENTS', 'REQUIRES_DISTRICT_IS_' || DistrictType || '_HD' from Districts;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select
+	'HD_DISTRICT_IS_' || DistrictType || '_APPEAL_MORE_THAN_8_REQUIREMENTS', 'HD_PLOT_APPEAL_MORE_THAN_8' from Districts;
 
 insert or ignore into RequirementSets
 	(RequirementSetId,												RequirementSetType)
@@ -978,7 +1035,8 @@ values
 	('PLOT_IS_FRESH_WATER_REQUIREMENTS',							'REQUIREMENTSET_TEST_ANY'),
 	('PLOT_IS_FRESH_WATER_OR_AQUEDUCT_REQUIREMENTS',							'REQUIREMENTSET_TEST_ANY'),
 	('PLOT_HAS_MARSH_REQUIREMENTS',									'REQUIREMENTSET_TEST_ALL'),
-	('HD_DISTRICT_IS_CITY_CENTER_OR_NEIGHBORHOOD',					'REQUIREMENTSET_TEST_ANY'),
+	('HD_DISTRICT_IS_CITY_CENTER_OR_NEIGHBORHOOD_REQUIREMENTS',					'REQUIREMENTSET_TEST_ANY'),
+	('HD_DISTRICT_IS_CITY_CENTER_OR_NEIGHBORHOOD_WITHIN_6_TILES_REQUIREMENTS',					'REQUIREMENTSET_TEST_ALL'),
 	('CITY_HAS_VERTICAL_INTEGRATION_REQUIREMENTS',					'REQUIREMENTSET_TEST_ALL'),
 	('CITY_HAS_NO_VERTICAL_INTEGRATION_REQUIREMENTS',					'REQUIREMENTSET_TEST_ALL'),
 	('CITY_HAS_COMMERCIAL_OR_HARBOR',								'REQUIREMENTSET_TEST_ANY'),
@@ -1142,7 +1200,9 @@ values
 	('CITY_HAS_3_TITLE_GOVERNOR_REQUIREMENTS',  'REQUIREMENTSET_TEST_ALL'),
 	('CITY_HAS_4_TITLE_GOVERNOR_REQUIREMENTS',  'REQUIREMENTSET_TEST_ALL'),
 	('CITY_HAS_5_TITLE_GOVERNOR_REQUIREMENTS',  'REQUIREMENTSET_TEST_ALL'),
-	('CITY_HAS_6_TITLE_GOVERNOR_REQUIREMENTS',  'REQUIREMENTSET_TEST_ALL');
+	('CITY_HAS_6_TITLE_GOVERNOR_REQUIREMENTS',  'REQUIREMENTSET_TEST_ALL'),
+	('HD_IMPROVEMENT_ADJACENT_TO_WATER_CONSERVANCY_FACILITIES_REQUIREMENTS',  'REQUIREMENTSET_TEST_ALL'),
+	('HD_DISTRICT_ADJACENT_TO_WATER_CONSERVANCY_FACILITIES_REQUIREMENTS',  'REQUIREMENTSET_TEST_ALL');
 
 insert or ignore into RequirementSetRequirements
 	(RequirementSetId,												RequirementId)
@@ -1300,8 +1360,10 @@ values
 	('PLOT_IS_FRESH_WATER_OR_AQUEDUCT_REQUIREMENTS',							'REQUIRES_PLOT_ADJACENT_TO_LAKE'),
 	('PLOT_IS_FRESH_WATER_OR_AQUEDUCT_REQUIREMENTS',							'REQUIRES_PLOT_ADJACENT_TO_DISTRICT_AQUEDUCT'),
 	('PLOT_HAS_MARSH_REQUIREMENTS',									'REQUIRES_PLOT_HAS_MARSH'),
-	('HD_DISTRICT_IS_CITY_CENTER_OR_NEIGHBORHOOD',					'REQUIRES_DISTRICT_IS_DISTRICT_CITY_CENTER'),
-	('HD_DISTRICT_IS_CITY_CENTER_OR_NEIGHBORHOOD',					'REQUIRES_DISTRICT_IS_DISTRICT_NEIGHBORHOOD'),
+	('HD_DISTRICT_IS_CITY_CENTER_OR_NEIGHBORHOOD_REQUIREMENTS',					'REQUIRES_DISTRICT_IS_DISTRICT_CITY_CENTER'),
+	('HD_DISTRICT_IS_CITY_CENTER_OR_NEIGHBORHOOD_REQUIREMENTS',					'REQUIRES_DISTRICT_IS_DISTRICT_NEIGHBORHOOD'),
+	('HD_DISTRICT_IS_CITY_CENTER_OR_NEIGHBORHOOD_WITHIN_6_TILES_REQUIREMENTS',					'REQUIRES_HD_DISTRICT_IS_CITY_CENTER_OR_NEIGHBORHOOD'),
+	('HD_DISTRICT_IS_CITY_CENTER_OR_NEIGHBORHOOD_WITHIN_6_TILES_REQUIREMENTS',					'REQUIRES_OBJECT_WITHIN_6_TILES'),
 	('CITY_HAS_VERTICAL_INTEGRATION_REQUIREMENTS',					'REQUIRES_CITY_HAS_VERTICAL_INTEGRATION'),
 	('CITY_HAS_NO_VERTICAL_INTEGRATION_REQUIREMENTS',					'REQUIRES_CITY_HAS_NO_VERTICAL_INTEGRATION'),
 	('CITY_HAS_COMMERCIAL_OR_HARBOR',								'REQUIRES_CITY_HAS_DISTRICT_COMMERCIAL_HUB'),
@@ -1612,7 +1674,11 @@ values
 	('CITY_HAS_3_TITLE_GOVERNOR_REQUIREMENTS',  'REQUIRES_CITY_HAS_3_TITLE_GOVERNOR'),
 	('CITY_HAS_4_TITLE_GOVERNOR_REQUIREMENTS',  'REQUIRES_CITY_HAS_4_TITLE_GOVERNOR'),
 	('CITY_HAS_5_TITLE_GOVERNOR_REQUIREMENTS',  'REQUIRES_CITY_HAS_5_TITLE_GOVERNOR'),
-	('CITY_HAS_6_TITLE_GOVERNOR_REQUIREMENTS',  'REQUIRES_CITY_HAS_6_TITLE_GOVERNOR');
+	('CITY_HAS_6_TITLE_GOVERNOR_REQUIREMENTS',  'REQUIRES_CITY_HAS_6_TITLE_GOVERNOR'),
+	('HD_IMPROVEMENT_ADJACENT_TO_WATER_CONSERVANCY_FACILITIES_REQUIREMENTS',  'REQUIRES_PLOT_ADJACENT_TO_DISTRICT_CLASSIFICATION_WATER_CONSERVANCY_FACILITIES'),
+	('HD_IMPROVEMENT_ADJACENT_TO_WATER_CONSERVANCY_FACILITIES_REQUIREMENTS',  'REQUIRES_PLOT_IS_IMPROVED'),
+	('HD_DISTRICT_ADJACENT_TO_WATER_CONSERVANCY_FACILITIES_REQUIREMENTS',  'REQUIRES_PLOT_ADJACENT_TO_DISTRICT_CLASSIFICATION_WATER_CONSERVANCY_FACILITIES'),
+	('HD_DISTRICT_ADJACENT_TO_WATER_CONSERVANCY_FACILITIES_REQUIREMENTS',  'HD_REQUIRES_DISTRICT_IS_NOT_DISTRICT_WONDER');
 
 -- 机器人生产
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
@@ -1821,15 +1887,19 @@ select
 	'PLOT_IS_FRESH_WATER_OR_AQUEDUCT_REQUIREMENTS',		'HD_REQUIRES_PLOT_ADJACENT_TO_' || FeatureType
 from Features where AddsFreshWater = 1;
 
-insert or ignore into RequirementSets
-	(RequirementSetId,									RequirementSetType)
-values
-	('DISTRICT_IS_SPECIALTY_DISTRICT_REQUIREMENTS',		'REQUIREMENTSET_TEST_ANY');
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,									RequirementId)
-select 
+-- 专业化区域
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType) values
+	('DISTRICT_IS_SPECIALTY_DISTRICT_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
+	('DISTRICT_IS_NOT_SPECIALTY_DISTRICT_REQUIREMENTS',		'REQUIREMENTSET_TEST_ANY');
+
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select 
 	'DISTRICT_IS_SPECIALTY_DISTRICT_REQUIREMENTS',		'REQUIRES_DISTRICT_IS_' || DistrictType
 from Districts where RequiresPopulation = 1;
+
+-- 非专业化区域
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select 
+	'DISTRICT_IS_NOT_SPECIALTY_DISTRICT_REQUIREMENTS',		'REQUIRES_DISTRICT_IS_' || DistrictType
+from Districts where RequiresPopulation = 0 and DistrictType != 'DISTRICT_WONDER';
 
 -- New city center buildings
 insert or ignore into RequirementSets 
@@ -1904,6 +1974,7 @@ values
 	('WONDER_IS_OR_ADJACENT_TO_COAST',															'REQUIREMENTSET_TEST_ALL'),
     ('HD_DISTRICTS_IS_NOT_WONDERS_OR_CITY_CENTER_REQUIREMENTS',									'REQUIREMENTSET_TEST_ALL'),
 	('NON_CITYCENTER_PLOT_IS_OR_ADJACENT_TO_COAST',												'REQUIREMENTSET_TEST_ALL'),
+	('HD_DISTRICT_IS_OR_ADJACENT_TO_COAST_REQUIREMENTS',												'REQUIREMENTSET_TEST_ALL'),
 	('PLOT_HAS_SHALLOW_WATER_AND_STEAM_POWER_REQUIREMENTS',										'REQUIREMENTSET_TEST_ALL'),
 	('PLOT_ADJACENT_TO_MOUNTAIN_IS_IMPROVED_REQUIREMENTS',										'REQUIREMENTSET_TEST_ALL'),
 	('PLOT_ADJACENT_TO_MOUNTAIN_REQUIREMENTS',													'REQUIREMENTSET_TEST_ALL'),
@@ -1951,6 +2022,8 @@ values
 	('NON_CITYCENTER_PLOT_IS_OR_ADJACENT_TO_COAST', 										'REQUIRES_DISTRICT_IS_NOT_CITY_CENTER'),
 	('NON_CITYCENTER_PLOT_IS_OR_ADJACENT_TO_COAST',											'PLOT_IS_OR_ADJACENT_TO_COAST_REQUIREMENTS'),
 	('NON_CITYCENTER_PLOT_IS_OR_ADJACENT_TO_COAST',											'REQUIRES_PLOT_DOES_NOT_HAVE_INCOMPLETE_WONDER'),
+	('HD_DISTRICT_IS_OR_ADJACENT_TO_COAST_REQUIREMENTS',											'PLOT_IS_OR_ADJACENT_TO_COAST_REQUIREMENTS'),
+	('HD_DISTRICT_IS_OR_ADJACENT_TO_COAST_REQUIREMENTS',											'REQUIRES_PLOT_DOES_NOT_HAVE_INCOMPLETE_WONDER'),
 	('PLOT_HAS_SHALLOW_WATER_AND_STEAM_POWER_REQUIREMENTS',									'REQUIRES_PLOT_HAS_SHALLOW_WATER'),
 	('PLOT_HAS_SHALLOW_WATER_AND_STEAM_POWER_REQUIREMENTS',									'HD_REQUIRES_PLAYER_HAS_TECH_STEAM_POWER'),
 	('PLOT_ADJACENT_TO_MOUNTAIN_IS_IMPROVED_REQUIREMENTS',									'REQUIRES_PLOT_ADJACENT_TO_MOUNTAIN'),
@@ -2259,10 +2332,11 @@ insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementI
 select 'CITY_HAS_IMPROVED_LUXURY_RESOURCE', 'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType
 from Resources where ResourceClassType = 'RESOURCECLASS_LUXURY';
 
--- 单位是平民单位 不包括伟人、商队、间谍和宗教单位
+-- 单位是平民单位 不包括商队、间谍和宗教单位
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
-select 'UNIT_IS_CIVILIAN_CLASS', 'REQUIRES_UNIT_IS_' || UnitType
-from Units where UnitType in ('UNIT_SETTLER','UNIT_BUILDER','UNIT_ARCHAEOLOGIST','UNIT_NATURALIST','UNIT_ROCK_BAND','UNIT_LEU_INVESTOR','UNIT_LEU_TYCOON');
+	select 'UNIT_IS_CIVILIAN_CLASS', 'REQUIRES_UNIT_IS_' || UnitType
+from Units where FormationClass = 'FORMATION_CLASS_CIVILIAN'
+	and UnitType not in ('UNIT_TRADER','UNIT_SPY','UNIT_MISSIONARY','UNIT_APOSTLE','UNIT_INQUISITOR','UNIT_GURU', 'UNIT_PRODUCT');
 
 insert or ignore into RequirementSetRequirements
 	(RequirementSetId,											RequirementId)
@@ -2917,42 +2991,28 @@ insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementI
 	from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
 
 -- 相邻的区域Req
-insert or ignore into RequirementSets
-	(RequirementSetId,                                  RequirementSetType)
-select
-	'HD_DISTRICT_IS_' || DistrictType || '_ADJACENT',   'REQUIREMENTSET_TEST_ALL'
-from Districts;
-
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,                                  RequirementId)
-select
-	'HD_DISTRICT_IS_' || DistrictType || '_ADJACENT',   'ADJACENT_TO_OWNER'
-from Districts;
-
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,                                  RequirementId)
-select
-	'HD_DISTRICT_IS_' || DistrictType || '_ADJACENT',   'REQUIRES_DISTRICT_IS_' || DistrictType || '_HD'
-from Districts;
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType) select
+	'HD_DISTRICT_IS_' || DistrictType || '_ADJACENT', 'REQUIREMENTSET_TEST_ALL' from Districts;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select
+	'HD_DISTRICT_IS_' || DistrictType || '_ADJACENT', 'ADJACENT_TO_OWNER' from Districts;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select
+	'HD_DISTRICT_IS_' || DistrictType || '_ADJACENT', 'REQUIRES_DISTRICT_IS_' || DistrictType || '_HD' from Districts;
 
 -- 一环内的区域Req
-insert or ignore into RequirementSets
-	(RequirementSetId,                                  			RequirementSetType)
-select
-	'HD_DISTRICT_IS_' || DistrictType || '_WITHIN_1_TILE',   	'REQUIREMENTSET_TEST_ALL'
-from Districts;
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType) select
+	'HD_DISTRICT_IS_' || DistrictType || '_WITHIN_1_TILE', 'REQUIREMENTSET_TEST_ALL' from Districts;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select
+	'HD_DISTRICT_IS_' || DistrictType || '_WITHIN_1_TILE', 'REQUIRES_OBJECT_WITHIN_1_TILE' from Districts;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select
+	'HD_DISTRICT_IS_' || DistrictType || '_WITHIN_1_TILE', 'REQUIRES_DISTRICT_IS_' || DistrictType || '_HD' from Districts;
 
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,                                  			RequirementId)
-select
-	'HD_DISTRICT_IS_' || DistrictType || '_WITHIN_1_TILE',   	'REQUIRES_OBJECT_WITHIN_1_TILE'
-from Districts;
-
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,                                  RequirementId)
-select
-	'HD_DISTRICT_IS_' || DistrictType || '_WITHIN_1_TILE',   'REQUIRES_DISTRICT_IS_' || DistrictType || '_HD'
-from Districts;
+-- 二环内的区域Req
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType) select
+	'HD_DISTRICT_IS_' || DistrictType || '_WITHIN_2_TILES', 'REQUIREMENTSET_TEST_ALL' from Districts;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select
+	'HD_DISTRICT_IS_' || DistrictType || '_WITHIN_2_TILES', 'REQUIRES_OBJECT_WITHIN_2_TILES' from Districts;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select
+	'HD_DISTRICT_IS_' || DistrictType || '_WITHIN_2_TILES', 'REQUIRES_DISTRICT_IS_' || DistrictType || '_HD' from Districts;
 
 -- Ayutthaya & Nan Madol bug fix
 insert or ignore into RequirementSets

@@ -39,7 +39,7 @@ function OnEventPanelPopup(param)
 	end
 
 	if param.EventDescription then
-		Controls.HeaderLabel:SetText(param.EventDescription);
+		Controls.SubheaderLabel:SetText(param.EventDescription);
 	else
 		Controls.SubheaderLabel:SetText(Locale.Lookup(eventInfo.Description));
 	end
