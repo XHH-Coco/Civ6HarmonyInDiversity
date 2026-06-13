@@ -160,6 +160,9 @@ insert or replace into LocalizedText (Language, Tag, Text) values
 	("zh_Hans_CN",	"LOC_DISTRICT_SELF_GOLD",							"+{1_num} [ICON_GOLD] 金币"),
 	("zh_Hans_CN",	"LOC_DISTRICT_RIVER_HANSA_PRODUCTION",				"+{1_num} [ICON_PRODUCTION] 生产力来自相邻河流"),
 	("zh_Hans_CN",	"LOC_DISTRICT_MARSH_SCIENCE",						"+{1_num} [ICON_SCIENCE] 科技值来自相邻{LOC_FEATURE_MARSH_NAME}"),
+	("zh_Hans_CN",	"LOC_DISTRICT_FOREST_FAITH",									"+{1_num} [ICON_FAITH] 信仰值来自相邻森林"),
+	("zh_Hans_CN",	"LOC_DISTRICT_DISTRICT_FAITH",									"+{1_num} [ICON_Faith] 信仰值来自相邻区域"),
+	("zh_Hans_CN",	"LOC_DISTRICT_DISTRICT_1_FAITH",									"+{1_num} [ICON_Faith] 信仰值来自相邻区域"),
 	("zh_Hans_CN",	"LOC_SWAMP_FAITH",									"+{1_num} [ICON_FAITH] 信仰值来自相邻木本沼泽"),
 	("zh_Hans_CN",	"LOC_KELP_FAITH",									"+{1_num} [ICON_FAITH] 信仰值来自相邻海藻森林"),
 	("zh_Hans_CN",	"LOC_DISTRICT_RESOURCE_CULTURE",					"+{1_num} [ICON_CULTURE] 文化值来自相邻{1_Num : plural 1?资源; other?资源;}");

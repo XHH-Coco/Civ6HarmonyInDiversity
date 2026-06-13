@@ -64,11 +64,20 @@ update HD_BuildingRegionalYields set PrereqTech = 'TECH_PAPER_MAKING_HD'
 
 -- 补充 YieldChange = 0 的部分建筑，用于适配伟人加产等
   -- 如桑弘羊给铸币厂+1辐射文化 需要文化的 YieldChange = 0
-insert or ignore into HD_BuildingRegionalYields (BuildingType, YieldType, YieldChange) select
-  'BUILDING_JNR_MINT', 'YIELD_CULTURE', 0
-where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_JNR_MINT');
-
+  -- 如服装公司
   -- 爱达·勒芙蕾丝 工业区建筑+3辐射科技
+insert or ignore into HD_BuildingRegionalYields (BuildingType, YieldType, YieldChange) select
+  BuildingType, 'YIELD_CULTURE', 0
+from HD_BuildingRegionalRange where BuildingType in (select BuildingType from Buildings where PrereqDistrict = 'DISTRICT_COMMERCIAL_HUB');
+
+insert or ignore into HD_BuildingRegionalYields (BuildingType, YieldType, YieldChange) select
+  BuildingType, 'YIELD_CULTURE', 0
+from HD_BuildingRegionalRange where BuildingType in (select BuildingType from Buildings where PrereqDistrict = 'DISTRICT_NEIGHBORHOOD');
+
+insert or ignore into HD_BuildingRegionalYields (BuildingType, YieldType, YieldChange) select
+  BuildingType, 'YIELD_GOLD', 0
+from HD_BuildingRegionalRange where BuildingType in (select BuildingType from Buildings where PrereqDistrict = 'DISTRICT_NEIGHBORHOOD');
+
 insert or ignore into HD_BuildingRegionalYields (BuildingType, YieldType, YieldChange) select distinct
   BuildingType, 'YIELD_PRODUCTION', 0
 from HD_BuildingRegionalRange where BuildingType in (select BuildingType from Buildings where PrereqDistrict = 'DISTRICT_INDUSTRIAL_ZONE');

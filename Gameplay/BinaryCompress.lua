@@ -68,11 +68,6 @@ Utils.CityExcessAmenitySetProperty = CityExcessAmenitySetProperty;
 Events.CitySelectionChanged.Add(CityExcessAmenitySetProperty);
 
 -- 玩家已挂政策卡数量
-local MilitaryPolicySlotIndex = GameInfo.GovernmentSlots['SLOT_MILITARY'].Index;
-local EconomicPolicySlotIndex = GameInfo.GovernmentSlots['SLOT_ECONOMIC'].Index;
-local CulturalPolicySlotIndex = GameInfo.GovernmentSlots['SLOT_DIPLOMATIC'].Index;
-local GreatPersonPolicySlotIndex = GameInfo.GovernmentSlots['SLOT_GREAT_PERSON'].Index;
-local WildcardPolicySlotIndex = GameInfo.GovernmentSlots['SLOT_WILDCARD'].Index;
 function PlayerPolicyNumSetProperty(playerId)
   local player = Players[playerId];
   if not player then return; end
@@ -91,13 +86,17 @@ function PlayerPolicyNumSetProperty(playerId)
 
   local policySlots = player:GetCulture():GetNumPolicySlots();
   for i = 0, policySlots - 1, 1 do
-    local slotType = Utils.GetPolicySlotType(playerId, i);
+    local policyId = player:GetCulture():GetSlotPolicy(i);
+    local policyInfo = GameInfo.Policies[policyId];
+    if policyInfo then
+      local slotType = policyInfo.GovernmentSlotType;
 
-    if slotType == MilitaryPolicySlotIndex then militaryNum = militaryNum + 1; end
-    if slotType == EconomicPolicySlotIndex then economicNum = economicNum + 1; end
-    if slotType == CulturalPolicySlotIndex then culturalNum = culturalNum + 1; end
-    if slotType == GreatPersonPolicySlotIndex then wildCardNum = wildCardNum + 1; end
-    if slotType == WildcardPolicySlotIndex then wildCardNum = wildCardNum + 1; end
+      if slotType == 'SLOT_MILITARY' then militaryNum = militaryNum + 1; end
+      if slotType == 'SLOT_ECONOMIC' then economicNum = economicNum + 1; end
+      if slotType == 'SLOT_DIPLOMATIC' then culturalNum = culturalNum + 1; end
+      if slotType == 'SLOT_GREAT_PERSON' then wildCardNum = wildCardNum + 1; end
+      if slotType == 'SLOT_WILDCARD' then wildCardNum = wildCardNum + 1; end
+    end
   end
 
   print("军事政策数量：" .. militaryNum);
