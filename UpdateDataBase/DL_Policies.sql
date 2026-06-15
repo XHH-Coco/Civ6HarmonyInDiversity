@@ -358,7 +358,7 @@ values
 	('POLICY_HD_NEOCLASSICAL_PAINTING',     					'LOC_POLICY_HD_NEOCLASSICAL_PAINTING_NAME',     					'LOC_POLICY_HD_NEOCLASSICAL_PAINTING_DESCRIPTION',      'CIVIC_HISTORICAL_PHILOSOPHY_HD',                  			null,                       'SLOT_GREAT_PERSON'),
 	('POLICY_HD_RITUAL_MUSIC',     					'LOC_POLICY_HD_RITUAL_MUSIC_NAME',     					'LOC_POLICY_HD_RITUAL_MUSIC_DESCRIPTION',      'CIVIC_DRAMA_POETRY',                  			null,                       'SLOT_GREAT_PERSON'),
 	('POLICY_HD_COURT_MUSICIAN',     					'LOC_POLICY_HD_COURT_MUSICIAN_NAME',     					'LOC_POLICY_HD_COURT_MUSICIAN_DESCRIPTION',      null,                  			'TECH_EDUCATION',                       'SLOT_GREAT_PERSON'),
-	('POLICY_HD_ORATURE',     					'LOC_POLICY_HD_ORATURE_NAME',     					'LOC_POLICY_HD_ORATURE_DESCRIPTION',      null,                  			'TECH_CURRENCY',                       'SLOT_GREAT_PERSON'),
+	('POLICY_HD_ORATURE',     					'LOC_POLICY_HD_ORATURE_NAME',     					'LOC_POLICY_HD_ORATURE_DESCRIPTION',      'CIVIC_GAMES_RECREATION',                  			null,                       'SLOT_GREAT_PERSON'),
 	('POLICY_HD_COAT_OF_ARMS',     					'LOC_POLICY_HD_COAT_OF_ARMS_NAME',     					'LOC_POLICY_HD_COAT_OF_ARMS_DESCRIPTION',      'CIVIC_HERALDRY_HD',                  			null,                       'SLOT_GREAT_PERSON'),
 	('POLICY_HD_BARTER',     					'LOC_POLICY_HD_BARTER_NAME',     					'LOC_POLICY_HD_BARTER_DESCRIPTION',      'CIVIC_FOREIGN_TRADE',                  			null,                       'SLOT_GREAT_PERSON'),
 	('POLICY_HD_HAWKER',     					'LOC_POLICY_HD_HAWKER_NAME',     					'LOC_POLICY_HD_HAWKER_DESCRIPTION',      null,                  			'TECH_CURRENCY',                       'SLOT_GREAT_PERSON'),

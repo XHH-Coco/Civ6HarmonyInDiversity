@@ -967,8 +967,8 @@ values
 
 
 -- 巴米扬大佛
+update Buildings set PrereqTech = 'TECH_CONSTRUCTION' where BuildingType = 'BUILDING_BAMYAN';
 delete from Building_YieldChanges where BuildingType = 'BUILDING_BAMYAN' and YieldType = 'YIELD_CULTURE';
-
 delete from BuildingModifiers where BuildingType = 'BUILDING_BAMYAN' and ModifierId != 'BAMYAN_GRANT_RELIC';
 
 insert or replace into GlobalParameters

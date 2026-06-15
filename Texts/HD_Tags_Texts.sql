@@ -3,10 +3,11 @@
 -------------------------------------------------------------------------------- 
 -- Techs and Civics
 
-update Technologies set Description = 'LOC_TECH_ANIMAL_HUSBANDRY_HD_DESCRIPTION' where TechnologyType ='TECH_ANIMAL_HUSBANDRY';
-update Technologies set Description = 'LOC_TECH_MINING_HD_DESCRIPTION' where TechnologyType ='TECH_MINING';
+update Technologies set Description = NULL where TechnologyType ='TECH_ANIMAL_HUSBANDRY';
+update Technologies set Description = NULL where TechnologyType ='TECH_MINING';
 update Technologies set Description = 'LOC_TECH_MASONRY_HD_DESCRIPTION' where TechnologyType ='TECH_MASONRY';
-update Technologies set Description = 'LOC_TECH_SAILING_HD_DESCRIPTION' where TechnologyType ='TECH_SAILING';
+update Technologies set Description = NULL where TechnologyType ='TECH_SAILING';
+update Technologies set Description = NULL where TechnologyType ='TECH_POTTERY';
 -- 
 update Technologies set Description = 'LOC_TECH_ARCHERY_HD_DESCRIPTION' where TechnologyType ='TECH_ARCHERY';
 update Technologies set Description = 'LOC_TECH_IRRIGATION_DESCRIPTION' where TechnologyType ='TECH_IRRIGATION';
@@ -211,6 +212,8 @@ update Policies set Description = 'LOC_POLICY_LIGHTNING_WARFARE_HD_DESCRIPTION' 
 --------------------------------------------------------------------------------
 -- Units
 update Units set Description = 'LOC_UNIT_BUILDER_DL_DESCRIPTION' where UnitType = 'UNIT_BUILDER';
+update Units set Description = 'LOC_UNIT_SETTLER_DL_DESCRIPTION' where UnitType = 'UNIT_SETTLER';
+update Units set Description = 'LOC_UNIT_TRADER_DL_DESCRIPTION' where UnitType = 'UNIT_TRADER';
 /*
 -- City Names
 update CivilizationLeaders set CapitalName = 'LOC_CITY_XIANYANG' where CivilizationType = 'CIVILIZATION_CHINA' and LeaderType = 'LEADER_QIN';

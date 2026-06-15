@@ -3,7 +3,10 @@
 insert or replace into EnglishText
     (Tag,                                                 Text)
 values
-    ("LOC_UNIT_BUILDER_DL_DESCRIPTION",                   "May create tile improvements, remove features like Woods or Rainforest, or Harvest some resources. Builders can be used 4 times. This can be increased through policies or wonders like the Pyramids. After Sailing is researched, Builders are allowed to embark."),
+    ("LOC_UNIT_BUILDER_DL_DESCRIPTION",                   "Builders have 4 build charges. May consume 1 build charges to create tile improvements, remove features or harvest resources: [NEWLINE][ICON_BULLET]After Pottery is researched, allows harvesting of resources improved by Farms.[NEWLINE][ICON_BULLET]After Animal Husbandry is researched, allows harvesting of resources improved by Pastures and Camps.[NEWLINE][ICON_BULLET]After Mining is researched, allows chopping of Woods, Savannah and Rainforest, and harvesting of resources improved by Mines.[NEWLINE][ICON_BULLET]After Sailing is researched, Allows harvesting of resources improved by Fishing Boats.[NEWLINE][ICON_BULLET]After Irrigation is researched, allows clearing of Marsh and Swamp, and harvesting of resources improved by Plantations.[NEWLINE][ICON_BULLET]After Bronze Working is researched, allows harvesting of resources improved by Lumber Mills.[NEWLINE][ICON_BULLET]After Masonry is researched, allows harvesting of resources improved by Quarries.[NEWLINE]After Sailing is researched, Builders are allowed to embark."),
+    ("LOC_UNIT_SETTLER_DL_DESCRIPTION",                   "May create new cities. Reduces city's [ICON_Citizen] Population by 1 when completed. [NEWLINE]After Sailing is researched, Settlers are allowed to embark."),
+    ("LOC_UNIT_TRADER_DL_DESCRIPTION",                    "May make and maintain a single [ICON_TradeRoute] Trade Route. Automatically creates Roads as it travels. [NEWLINE]After Sailing is researched, Traders are allowed to embark."),
+
     ("LOC_UNIT_GURU_DESCRIPTION",                         "May use a charge to heal itself and all adjacent friendly religious units. May not initiate theological combat with units of other Religions (but can defend). Religious units adjacent to Gurus receive +5 [ICON_Religion] Religious Strength in Theological Combat and +1 [ICON_Movement] Movement."),
     ("LOC_UNIT_SIEGE_TOWER_EXPANSION2_DESCRIPTION",       "Medieval era support unit. When adjacent to a city, attacking melee, anti-cavalry units and Warrior Monks ignore Walls and immediately assault the city. Does not affect cities with Renaissance Walls. Ineffective against Urban Defenses."),
     ("LOC_UNIT_BATTERING_RAM_EXPANSION2_DESCRIPTION",     "Ancient era support unit. When adjacent to a city, attacking melee, anti-cavalry units and Monk Warriors do full damage to the city’s Walls. Does not affect cities with Medieval or Renaissance Walls. Ineffective against Urban Defenses."),
@@ -47,7 +50,10 @@ values
 insert or replace into LocalizedText
     (Language,      Tag,                                                 Text)
 values
-    ("zh_Hans_CN",  "LOC_UNIT_BUILDER_DL_DESCRIPTION",                   "可建造单元格改良设施、移除地貌（如森林或雨林），或收获资源。建造者可使用4次。可通过政策或奇观（如金字塔）增加使用次数。研究“航行”科技后可进入湖泊或浅海单元格。"),
+    ("zh_Hans_CN",  "LOC_UNIT_BUILDER_DL_DESCRIPTION",                   "建造者拥有4点劳动力，可消耗1点劳动力建造单元格改良设施、移除地貌或收获资源：[NEWLINE][ICON_BULLET]研究“制陶术”科技后，允许收获由农场改良的资源。[NEWLINE][ICON_BULLET]研究“畜牧业”科技后，允许收获由牧场或营地改良的资源。[NEWLINE][ICON_BULLET]研究“采矿业”科技后，允许砍伐树林、雨林和收获由矿山改良的资源。[NEWLINE][ICON_BULLET]研究“航行”科技后，允许收获由渔船改良的资源。[NEWLINE][ICON_BULLET]研究“灌溉”科技后，允许清理沼泽和收获由种植园改良的资源。[NEWLINE][ICON_BULLET]研究“铸铜术”科技后，允许收获由伐木场改良的资源。[NEWLINE][ICON_BULLET]研究“砌砖”科技后，允许收获由采石场改良的资源。[NEWLINE]研究“航行”科技后允许上船，可进入水域单元格。"),
+    ("zh_Hans_CN",  "LOC_UNIT_SETTLER_DL_DESCRIPTION",                   "开拓者可创建新城市。完成时，该城市减少1 [ICON_Citizen] 人口。[NEWLINE]研究“航行”科技后允许上船，可进入水域单元格。"),
+    ("zh_Hans_CN",  "LOC_UNIT_TRADER_DL_DESCRIPTION",                    "商人能创建和维护一条 [ICON_TradeRoute] 贸易路线。随着旅途进行，自动创建道路。[NEWLINE]研究“航行”科技后允许上船，可进入水域单元格。"),
+    
     ("zh_Hans_CN",  "LOC_UNIT_GURU_DESCRIPTION",                         "消耗次数可治疗其自身以及相邻的全部友方宗教单位。无法发起和其他宗教单位的神学战争（但可进行防御）。与上师相邻的宗教单位在神学战争中+5 [ICON_Religion] 宗教战斗力、+1 [ICON_Movement] 移动力。"),
     ("zh_Hans_CN",  "LOC_UNIT_SIEGE_TOWER_EXPANSION2_DESCRIPTION",       "中世纪支援单位。与城市相邻时，近战、抗骑兵单位和武僧可无视城墙直接对城市发起进攻。对拥有文艺复兴城墙的城市无效。对现代城市防御无效。"),
     ("zh_Hans_CN",  "LOC_UNIT_BATTERING_RAM_EXPANSION2_DESCRIPTION",     "远古时代支援单位。与城市相邻时，近战，抗骑兵单位和武僧发起进攻可对城墙输出全额伤害。对拥有中世纪或文艺复兴城墙的城市无效。对现代城市防御无效。"),
