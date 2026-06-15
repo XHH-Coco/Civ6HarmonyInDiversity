@@ -171,6 +171,16 @@ function OnEventPanelPopup(param)
 	end
 
 	-- 设置尺寸
+	-- 事件描述区域高度
+	local eventDescriptionHeight = 60;
+	if param.EventDescriptionHeight then
+		eventDescriptionHeight = param.EventDescriptionHeight;
+	end
+	Controls.SubheaderScrollPanel:SetSizeY(eventDescriptionHeight);
+	Controls.EventSelectionStack:SetOffsetY(97 + eventDescriptionHeight);
+	-- 总高度
+	local totalHeight = 720 - 60 + eventDescriptionHeight;
+
 	-- PopupFrameGrid = 376 + (260+2) * (x-1)
 	-- SubheaderGrid = 260 + (260+2) * (x-1)
 	-- SubheaderScrollPanel = SubheaderGrid - 25
@@ -181,9 +191,9 @@ function OnEventPanelPopup(param)
 	Controls.SubheaderScrollPanel:SetSizeX(235+262*(selectionAmount-1));
 	Controls.SubheaderLabel:SetWrapWidth(235+262*(selectionAmount-1));
 	if hasAnyIcon then
-		Controls.PopupFrameGrid:SetSizeY(720);
+		Controls.PopupFrameGrid:SetSizeY(totalHeight);
 	else
-		Controls.PopupFrameGrid:SetSizeY(720-256);
+		Controls.PopupFrameGrid:SetSizeY(totalHeight-256);
 		for i=1, selectionAmount, 1 do
 			local instance = eventSelectionIM:GetAllocatedInstance(i);
 			instance.EventSelection:SetSizeY(525-256-2);

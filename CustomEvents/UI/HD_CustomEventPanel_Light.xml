@@ -19,7 +19,7 @@
 					</ScrollPanel>
 				</Grid>
 				
-				<Stack ID="EventSelectionStack" Anchor="C,C" Offset="0,60" StackGrowth="Right" StackPadding="2" />
+				<Stack ID="EventSelectionStack" Anchor="C,T" Offset="0,157" StackGrowth="Right" StackPadding="2" />
 			</Grid>
 		</Image>
 	</Grid>
