@@ -105,6 +105,9 @@ values
 	("LOC_PEDIA_RESOURCES_PAGEGROUP_LUXURY_NAME",	               				 				   "Special [COLOR:ResGoldLabelCS]Luxury[ENDCOLOR]"),
 	("LOC_PEDIA_RESOURCES_PAGEGROUP_WONDER_LUXURY_NAME",	               				 	 "Wonder [COLOR:ResGoldLabelCS]Luxury[ENDCOLOR]"),
 
+	("LOC_PEDIA_RESOURCES_PAGEGROUP_RESOURCE_USAGE_NAME",	               				 	 "[ICON_BULLETGLOW][COLOR_DiplomaticLabelCS]Resource Usages[ENDCOLOR][ICON_BULLETGLOW]"),
+
+	("LOC_UI_PEDIA_RESOURCES_TEXT",	               				 	 	 	 								 	 "Resources"),
 	("LOC_UI_PEDIA_RESOURCES_INDUSTRY_EFFECT_TEXT",	               				 	 	 	 	 "Industry Effects"),
 	("LOC_UI_PEDIA_RESOURCES_CORPORATION_EFFECT_TEXT",	               				 	 	 "Corporation Effects"),
 	("LOC_UI_PEDIA_RESOURCES_PRODUCT_EFFECT_TEXT",	               				 	 	 		 "Product Effects"),
@@ -328,7 +331,10 @@ values
 	("zh_Hans_CN",  "LOC_PEDIA_RESOURCES_PAGEGROUP_LUMBER_MILL_LUXURY_NAME",	               		 "[COLOR:ResGoldLabelCS]奢侈资源[ENDCOLOR] 伐木场"),
 	("zh_Hans_CN",  "LOC_PEDIA_RESOURCES_PAGEGROUP_LUXURY_NAME",	               				 				 "[COLOR:ResGoldLabelCS]奢侈资源[ENDCOLOR] 特殊"),
 	("zh_Hans_CN",  "LOC_PEDIA_RESOURCES_PAGEGROUP_WONDER_LUXURY_NAME",	               				 	 "[COLOR:ResGoldLabelCS]奢侈资源[ENDCOLOR] 奇观"),
+	
+	("zh_Hans_CN",  "LOC_PEDIA_RESOURCES_PAGEGROUP_RESOURCE_USAGE_NAME",	               				 "[ICON_BULLETGLOW][COLOR_DiplomaticLabelCS]资源用途[ENDCOLOR][ICON_BULLETGLOW]"),
 
+	("zh_Hans_CN",  "LOC_UI_PEDIA_RESOURCES_TEXT",	               				 	 	 	 								 "资源"),
 	("zh_Hans_CN",  "LOC_UI_PEDIA_RESOURCES_INDUSTRY_EFFECT_TEXT",	               				 	 	 	 "行业效果"),
 	("zh_Hans_CN",  "LOC_UI_PEDIA_RESOURCES_CORPORATION_EFFECT_TEXT",	               				 	 	 "公司效果"),
 	("zh_Hans_CN",  "LOC_UI_PEDIA_RESOURCES_PRODUCT_EFFECT_TEXT",	               				 	 	 		 "产品效果"),

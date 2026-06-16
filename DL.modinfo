@@ -848,6 +848,7 @@
       <File>UI/Civilopedia/CivilopediaPage_Resource.lua</File>
       <File>UI/Civilopedia/CivilopediaPage_Improvement.lua</File>
       <File>UI/Civilopedia/CivilopediaPage_Route.lua</File>
+      <File>UI/Civilopedia/CivilopediaPage_ResourceUsage.lua</File>
     </ImportFiles>
     <ImportFiles id="CityStatesDiversity_BST_Import" criteria="Expansion2">
       <Properties><LoadOrder>5000</LoadOrder></Properties>
@@ -2379,6 +2380,7 @@
     <File>UI/Civilopedia/CivilopediaPage_Resource.lua</File>
     <File>UI/Civilopedia/CivilopediaPage_Improvement.lua</File>
     <File>UI/Civilopedia/CivilopediaPage_Route.lua</File>
+    <File>UI/Civilopedia/CivilopediaPage_ResourceUsage.lua</File>
 
     <!-- UI Loaders -->
     <File>UI/Loaders/ToolTipLoader_DL.lua</File>

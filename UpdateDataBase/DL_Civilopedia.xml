@@ -8,6 +8,7 @@
 		<Row PageLayoutId="HD_GAME_ERA" ScriptTemplate="Simple" />
 		<Row PageLayoutId="HD_COMMEMORATION" ScriptTemplate="Commemoration" />
 		<Row PageLayoutId="HD_CHINA_COMMEMORATION" ScriptTemplate="China_Commemoration" />
+		<Row PageLayoutId="ResourceUsage" ScriptTemplate="HD_Resource_Usage" />
 	</CivilopediaPageLayouts>
 
 	<CivilopediaPageLayoutChapters>
@@ -56,6 +57,8 @@
 			<Where SectionID="IMPROVEMENTS" PageGroupId="Improvements" />
 			<Set VisibleIfEmpty="false" SortIndex="100" />
 		</Update>
+
+		<Row SectionID="RESOURCES" PageGroupId="RESOURCE_USAGE" 																Name="LOC_PEDIA_RESOURCES_PAGEGROUP_RESOURCE_USAGE_NAME"				Tooltip="" VisibleIfEmpty="false" 	SortIndex="0" />
 
 		<Row SectionID="RESOURCES" PageGroupId="IMPROVEMENT_FARM_RESOURCECLASS_BONUS" 					Name="LOC_PEDIA_RESOURCES_PAGEGROUP_FARM_BONUS_NAME"						Tooltip="" VisibleIfEmpty="false" 	SortIndex="10" />
 		<Row SectionID="RESOURCES" PageGroupId="IMPROVEMENT_PLANTATION_RESOURCECLASS_BONUS" 		Name="LOC_PEDIA_RESOURCES_PAGEGROUP_PLANTATION_BONUS_NAME"			Tooltip="" VisibleIfEmpty="false" 	SortIndex="11" />
@@ -167,6 +170,11 @@
 		<Delete SectionId="RESOURCES" />
 		<Row SectionId="RESOURCES" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndex="10">
 			<SQL>SELECT HD_Civilopedia_Resource_Groups.ResourceType as PageId, HD_Civilopedia_Resource_Groups.PageGroupId, "Resource" as PageLayoutId, "[ICON_" || HD_Civilopedia_Resource_Groups.ResourceType || "] {" || Resources.Name || "}" as Name, null as Tooltip FROM HD_Civilopedia_Resource_Groups INNER JOIN Resources ON HD_Civilopedia_Resource_Groups.ResourceType = Resources.ResourceType</SQL>
+		</Row>
+
+		<!-- 资源用途 -->
+		<Row SectionId="RESOURCES" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndexColumn="SortIndex">
+			<SQL>SELECT ResourceClassificationType as PageId, "RESOURCE_USAGE" as PageGroupId, "ResourceUsage" as PageLayoutId, Name as Name, null as Tooltip, SortIndex as SortIndex FROM HD_ResourceClassificationTypes WHERE ParentClassificationType = "USAGE"</SQL>
 		</Row>
 
 		<!-- 奇观 -->

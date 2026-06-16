@@ -192,6 +192,11 @@ function OnEventPanelPopup(param)
 	Controls.SubheaderLabel:SetWrapWidth(235+262*(selectionAmount-1));
 	if hasAnyIcon then
 		Controls.PopupFrameGrid:SetSizeY(totalHeight);
+		for i=1, selectionAmount, 1 do
+			local instance = eventSelectionIM:GetAllocatedInstance(i);
+			instance.EventSelection:SetSizeY(525);
+			instance.EventSelectionGrid:SetOffsetY(282);
+		end
 	else
 		Controls.PopupFrameGrid:SetSizeY(totalHeight-256);
 		for i=1, selectionAmount, 1 do
