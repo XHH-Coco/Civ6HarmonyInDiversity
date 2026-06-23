@@ -6,7 +6,7 @@ values
   ("LOC_TRAIT_LEADER_MAGNIFICENCES_NAME", "Masquerade Ball"),
   ("LOC_TRAIT_LEADER_MAGNIFICENCES_DESCRIPTION", "If a city has improved luxury resources, units produced gain +1 [ICON_MOVEMENT] Movement. Each time a wonder is constructed, gain 2 copies of the corresponding luxury resource. Can undertake the 'Court Festival' project in any city with a Theater Square."),
   ("LOC_ABILITY_CITY_HAS_LUXURY_TRAIN_UNIT_MOVEMENT_DESCRIPTION", "{LOC_TRAIT_LEADER_MAGNIFICENCES_NAME}: Permanently grants +1 [ICON_MOVEMENT] Movement."),
-  ("LOC_PROJECT_COURT_FESTIVAL_HD_DESCRIPTION", "Upon completion of this project: All Château Estates gain +1 [ICON_CULTURE] Culture; this city can construct one additional Château Estate; for each surplus luxury resource, gain 10 [ICON_CULTURE] Culture and 10 [ICON_TOURISM] Tourism."),
+  ("LOC_PROJECT_COURT_FESTIVAL_HD_DESCRIPTION", "Upon completion of this project: this city can construct one additional Château Estate; for each surplus luxury resource, gain 10 [ICON_CULTURE] Culture and 10 [ICON_TOURISM] Tourism."),
 
   ("LOC_RESOURCE_HD_BUILDING_BAMYAN_NAME", "Karakul Sheep"),
   ("LOC_RESOURCE_HD_BUILDING_BURJ_KHALIFA_NAME", "Arabic Gum"),
@@ -95,7 +95,7 @@ values
   ("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNIFICENCES_NAME",                            "假面舞会"),
   ("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNIFICENCES_DESCRIPTION",                     "如果城市拥有改良的奢侈资源，生产的单位+1 [ICON_MOVEMENT] 移动力。每建造一座奇观，获得2份该奇观对应的特色奢侈资源。可在拥有剧院广场区域的任意城市中开展“宫廷盛会”项目。"),
   ("zh_Hans_CN",  "LOC_ABILITY_CITY_HAS_LUXURY_TRAIN_UNIT_MOVEMENT_DESCRIPTION",    "{LOC_TRAIT_LEADER_MAGNIFICENCES_NAME}：永久+1 [ICON_Movement] 移动力。"),
-  ("zh_Hans_CN",  "LOC_PROJECT_COURT_FESTIVAL_HD_DESCRIPTION",                      "此项目完成时：所有城堡庄园+1 [ICON_CULTURE] 文化值；本城可以额外建造一座城堡庄园；每拥有一个多余的奢侈品资源，提供10点 [ICON_CULTURE] 文化值和10点 [ICON_TOURISM] 旅游业绩。"),
+  ("zh_Hans_CN",  "LOC_PROJECT_COURT_FESTIVAL_HD_DESCRIPTION",                      "此项目完成时：本城可以额外建造一座城堡庄园；每拥有一个多余的奢侈品资源，提供10点 [ICON_CULTURE] 文化值和10点 [ICON_TOURISM] 旅游业绩。"),
 
   ("zh_Hans_CN",  "LOC_RESOURCE_HD_BUILDING_BAMYAN_NAME",                           "卡拉库尔羊"),
   ("zh_Hans_CN",  "LOC_RESOURCE_HD_BUILDING_BURJ_KHALIFA_NAME",                     "阿拉伯胶"),

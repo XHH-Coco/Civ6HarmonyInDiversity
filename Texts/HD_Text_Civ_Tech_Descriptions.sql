@@ -256,6 +256,7 @@ values
     ("LOC_BOOST_TRIGGER_LONGDESC_SHIPBUILDING",                              "Simple canoes can no longer meet the demands of navigation, so you start to think about how to build large ships."),
     ("LOC_BOOST_TRIGGER_EXPLORATION_HD",                                     "World Circumnavigated."),
     ("LOC_BOOST_TRIGGER_LONGDESC_EXPLORATION_HD",                            "The theory of a spherical Earth, established over centuries, has been proven. Now, our explorers are eager to set foot on the newly discovered lands."),
+    ("LOC_BOOST_TRIGGER_BANKING_HD",                                         "Build a Bank."),
 
     ("LOC_TECH_ALCHEMY_HD_NAME",                                             "Alchemy"),
     ("LOC_BOOST_TRIGGER_ALCHEMY_HD",                                         "Mine a resource."),
@@ -656,6 +657,7 @@ values
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_LONGDESC_SHIPBUILDING",                              "简单的独木舟已经无法满足航行的需求，你开始思考如何建造大型船只。"),
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_EXPLORATION_HD",                                     "环游世界。"),
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_LONGDESC_EXPLORATION_HD",                            "几个世纪以来关于地圆的理论得到了证明，我们的探险家正对新发现的土地跃跃欲试。"),
+    ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_BANKING_HD",                                         "建造银行。"),
 
     ("zh_Hans_CN",  "LOC_TECH_ALCHEMY_HD_NAME",                                             "炼丹术"),
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_ALCHEMY_HD",                                         "改良1种矿产资源。"),

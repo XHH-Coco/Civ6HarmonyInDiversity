@@ -669,36 +669,6 @@ end
 InitHasAdjacencyDistrictList()
 Utils.HasAdjacencyDistrictList = HasAdjacencyDistrictList;
 
--- 获取城市单元格资源列表
-local function GetCityPlotsResources(playerId, cityId, needImproved)
-	local city = CityManager.GetCity(playerId, cityId);
-	if not city then return {}; end
-
-	local resourceList = {};
-	local cityPlots = city:GetOwnedPlots();
-	for _, plot in pairs(cityPlots) do
-		if plot then
-			local resourceId = plot:GetResourceType();
-			if resourceId ~= nil and resourceId ~= -1 and Utils.IsResourceVisible(playerId, resourceId) then
-				if not needImproved then
-					resourceList[GameInfo.Resources[resourceId].ResourceType] = true;
-					print(Locale.Lookup(city:GetName()) .. ' 拥有 ' .. Locale.Lookup(GameInfo.Resources[resourceId].Name))
-				else
-					local districtId = plot:GetDistrictType();
-					local improvementId = plot:GetImprovementType();
-					if (districtId ~= nil and districtId > -1) or (improvementId ~= nil and improvementId > -1) then
-						resourceList[GameInfo.Resources[resourceId].ResourceType] = true;
-						print(Locale.Lookup(city:GetName()) .. ' 拥有改良的 ' .. Locale.Lookup(GameInfo.Resources[resourceId].Name))
-					end
-				end
-			end
-		end
-	end
-
-	return resourceList;
-end
-Utils.GetCityPlotsResources = GetCityPlotsResources;
-
 -- 记录虚拟建筑
 local DummyBuildingList = {};
 function InitDummyBuildings()
@@ -796,6 +766,81 @@ function IsImprovementHasClassification(improvementId, classificationType)
 	return false;
 end
 Utils.IsImprovementHasClassification = IsImprovementHasClassification;
+
+-- 获取城市单元格资源列表
+-- filterParam
+	-- ClassTypeList 加成/奢侈/战略
+	-- ClassificationList 资源分类列表
+	-- NeedImproved 是否需要改良
+local function GetCityPlotsResources(playerId, cityId, filterParam)
+	local city = CityManager.GetCity(playerId, cityId);
+	if not city then return {}; end
+
+	-- 筛选条件参数
+	local classTypeList = {};
+	local classificationList = {};
+	local needImproved = false;
+	if filterParam then
+		classTypeList = filterParam.ClassTypeList or {};
+		classificationList = filterParam.ClassificationList or {};
+		needImproved = filterParam.NeedImproved or false;
+	end
+
+	local resourceList = {};
+	local cityPlots = city:GetOwnedPlots();
+	for _, plot in pairs(cityPlots) do
+		if plot then
+			local resourceId = plot:GetResourceType();
+			if resourceId ~= nil and resourceId ~= -1 and Utils.IsResourceVisible(playerId, resourceId) then
+				local resourceInfo = GameInfo.Resources[resourceId];
+				if resourceInfo then
+					print("=======================================================")
+					print("开始检测：" .. Locale.Lookup(resourceInfo.Name));
+					-- 检查资源类型
+					local meetClassTypeFilter = #classTypeList == 0;
+					for _, classType in ipairs(classTypeList) do
+						meetClassTypeFilter = meetClassTypeFilter or (classType == resourceInfo.ResourceClassType);
+						if meetClassTypeFilter then
+							print('满足资源类型检测：' .. classType);
+							break;
+						end
+					end
+
+					-- 检查资源用途
+					local meetClassificationFilter = #classificationList == 0;
+					for _, classification in ipairs(classificationList) do
+						meetClassificationFilter = meetClassificationFilter or IsResourceHasClassification(resourceId, classification);
+						if meetClassificationFilter then
+							print('满足资源用途检测：' .. classification);
+							break;
+						end
+					end
+
+					-- 检查是否改良
+					local meetImprovedFilter = not needImproved;
+					if needImproved then
+						local districtId = plot:GetDistrictType();
+						local improvementId = plot:GetImprovementType();
+						meetImprovedFilter = (districtId ~= nil and districtId > -1) or (improvementId ~= nil and improvementId > -1);
+						if meetImprovedFilter then
+							print('满足资源改良检测');
+						end
+					end
+
+					-- 满足所有筛选条件
+					if meetClassTypeFilter and meetClassificationFilter and meetImprovedFilter then
+						resourceList[resourceInfo.ResourceType] = true;
+						print(Locale.Lookup(city:GetName()) .. ' 拥有 ' .. Locale.Lookup(resourceInfo.Name))
+					end
+				end
+
+			end
+		end
+	end
+
+	return resourceList;
+end
+Utils.GetCityPlotsResources = GetCityPlotsResources;
 
 -- 获取城市参数
 local function GetCityProperty(playerId, cityId, tag)

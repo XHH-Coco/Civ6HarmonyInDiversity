@@ -449,7 +449,8 @@ values
 	('DLAdjustBuildings',		'BUILDING_GROVE',						1,			400),
 	('DLAdjustDistricts',		'DISTRICT_DIPLOMATIC_QUARTER',			1,			110),	
 	('DLAdjustDistricts',		'DISTRICT_AQUEDUCT',					1,			40),	
-	('DLAdjustDistricts',		'DISTRICT_THEATER',					1,			40);
+	('DLAdjustDistricts',		'DISTRICT_THEATER',					1,			40),	
+	('DLAdjustDistricts',		'DISTRICT_CAMPUS',					1,			1);
 
 
 

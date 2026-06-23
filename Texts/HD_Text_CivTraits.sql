@@ -436,7 +436,7 @@ values
 -- =====================================================================================================================================
 -- 埃及
 -- =====================================================================================================================================
-	("LOC_TRAIT_CIVILIZATION_ITERU_EXPANSION2_DESCRIPTION",                  "Does not receive damage from Floods. +1 [ICON_FOOD] to Resources on Floodplains tiles. +20% construction speed towards Districts and Wonders if placed next to a River. Receive a free Builder every time you finish a Wonder. Campus and Theater Square districts receive major adjacency bonus from being adjacent to River."),
+	("LOC_TRAIT_CIVILIZATION_ITERU_EXPANSION2_DESCRIPTION",                  "Does not receive damage from Floods. +1 [ICON_FOOD] to Resources adjacent to rivers. +20% construction speed towards Districts and Wonders if placed next to a River. Receive a free Builder every time you finish a Wonder. Campus and Theater Square districts receive major adjacency bonus from being adjacent to River."),
 	-- 拉二
 	("LOC_TRAIT_LEADER_RAMSES_NAME",                                         "Usermaatre Setepenre"),    
 	("LOC_TRAIT_LEADER_RAMSES_DESCRIPTION",                                  "Gain [ICON_CULTURE] Culture equal to 15% of the construction cost when finishing Buildings and 30% when completing Wonders. All land units ignores [ICON_MOVEMENT] Movement and [ICON_STRENGTH] Combat Strength penalties across rivers."),
@@ -446,7 +446,7 @@ values
 	("LOC_TRAIT_LEADER_MEDITERRANEAN_EXPANSION2_DESCRIPTION",                "When you send a Delegation or Embassy, you receive a Tribal Village reward. After forming an Alliance for the first and second time, gain that ally's Leader Trait."),
 	-- 托勒密
 	("LOC_LEADER_CLEOPATRA_ALT_NAME",                                        "Cleopatra (Ptolemaic Pharaoh)"), 
-	("LOC_TRAIT_LEADER_CLEOPATRA_ALT_DESCRIPTION",                           "+10% Growth Rate from every Cistern and Dam in tiles with Breathtaking Appeal. Improvements on Floodplains tiles provide +1 [ICON_CULTURE] Culture. Owned Floodplains tiles grant +1 Appeal to adjacent tiles instead of usual -1."),
+	("LOC_TRAIT_LEADER_CLEOPATRA_ALT_DESCRIPTION",                           "+10% Growth Rate from every Cistern and Dam in tiles with Breathtaking Appeal. Improvements adjacent to rivers provide +1 [ICON_CULTURE] Culture. Owned Floodplains tiles grant +1 Appeal to adjacent tiles instead of usual -1."),
 -- =====================================================================================================================================
 -- 阿拉伯
 -- =====================================================================================================================================

@@ -123,23 +123,5 @@ update Projects set CostProgressionParam1 = 800, Cost = 50, Description = 'LOC_P
 update ModifierArguments set Value = 10 where ModifierId = 'PROJECT_COMPLETION_GRANT_CULTURE_BASED_ON_EXCESS_LUXURIES' and Name = 'Amount';
 update ModifierArguments set Value = 10 where ModifierId = 'PROJECT_COMPLETION_GRANT_TOURISM_BASED_ON_EXCESS_LUXURIES' and Name = 'Amount';
 
-insert or ignore into UniqueProjects_HD
-	(ProjectType,				            ModifierId,						          LeaderType)
-values
+insert or ignore into UniqueProjects_HD (ProjectType, ModifierId, LeaderType) values
   ('PROJECT_COURT_FESTIVAL',      'MAGNIFICENCES_ALLOW_PROJECT',  'LEADER_CATHERINE_DE_MEDICI_ALT');
-
-insert or replace into ProjectCompletionModifiers
-  (ProjectType,                   ModifierId)
-values
-  ('PROJECT_COURT_FESTIVAL',      'HD_COURT_FESTIVAL_CHATEAU_CULTURE');
-
-insert or replace into Modifiers
-  (ModifierId,                              ModifierType,                             SubjectRequirementSetId)
-values
-  ('HD_COURT_FESTIVAL_CHATEAU_CULTURE',     'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',      'PLOT_HAS_IMPROVEMENT_CHATEAU_REQUIREMENTS');
-
-insert or ignore into ModifierArguments
-  (ModifierId,                              Name,           Value)
-values
-  ('HD_COURT_FESTIVAL_CHATEAU_CULTURE',     'YieldType',    'YIELD_CULTURE'),
-  ('HD_COURT_FESTIVAL_CHATEAU_CULTURE',     'Amount',       1);

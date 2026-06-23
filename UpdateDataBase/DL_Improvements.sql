@@ -41,7 +41,7 @@ values
 	('IMPROVEMENT_MEKEWAP',				'YIELD_PRODUCTION',		0),
 	('IMPROVEMENT_GREAT_WALL',			'YIELD_FOOD',			1),
 	('IMPROVEMENT_CHATEAU',				'YIELD_FOOD',		2),
-	('IMPROVEMENT_CHATEAU',				'YIELD_CULTURE',		1),
+	('IMPROVEMENT_CHATEAU',				'YIELD_CULTURE',		0),
 	('IMPROVEMENT_CHATEAU',				'YIELD_GOLD',		0),
 	('IMPROVEMENT_LAND_POLDER',			'YIELD_FOOD',			1),
 	('IMPROVEMENT_LAND_POLDER',			'YIELD_PRODUCTION',		1),
@@ -975,6 +975,16 @@ update Improvements set
 where ImprovementType = 'IMPROVEMENT_CHATEAU';
 update Adjacency_YieldChanges set PrereqTech = null where ID = 'Chateau_WonderLate';
 insert or ignore into ImprovementsNeedCount_HD (ImprovementType) values ('IMPROVEMENT_CHATEAU');
+
+insert or replace into ImprovementModifiers (ImprovementType, ModifierId) values
+  ('IMPROVEMENT_CHATEAU', 'HD_CHATEAU_CULTURE');
+
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) values
+  ('HD_CHATEAU_CULTURE', 'MODIFIER_PLAYER_ADJUST_PLOT_YIELD', 'PLOT_HAS_IMPROVEMENT_CHATEAU_REQUIREMENTS');
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) values
+  ('HD_CHATEAU_CULTURE', 'YieldType',	'YIELD_CULTURE'),
+  ('HD_CHATEAU_CULTURE', 'Amount',		1);
 
 -- Coastal Polder (Netherlands)
 update Improvements set MovementChange = 1, ValidAdjacentTerrainAmount = 1, PrereqTech = 'TECH_SAILING', PrereqCivic = null where ImprovementType = 'IMPROVEMENT_POLDER';

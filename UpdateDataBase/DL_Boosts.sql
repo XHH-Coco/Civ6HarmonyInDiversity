@@ -108,6 +108,10 @@ update Boosts set BoostClass = 'BOOST_TRIGGER_OWN_X_UNITS_OF_TYPE', Unit1Type = 
 update Boosts set BoostClass = 'BOOST_TRIGGER_NONE_LATE_GAME_CRITICAL_TECH', NumItems = 0, Unit1Type = NULL,
     TriggerDescription = 'LOC_BOOST_TRIGGER_EXPLORATION_HD', TriggerLongDescription = 'LOC_BOOST_TRIGGER_LONGDESC_EXPLORATION_HD'
 where CivicType = 'CIVIC_EXPLORATION';
+-- 银行业
+update Boosts set BoostClass = 'BOOST_TRIGGER_CONSTRUCT_BUILDING', BuildingType = 'BUILDING_BANK', BoostingCivicType = NULL,
+    TriggerDescription = 'LOC_BOOST_TRIGGER_BANKING_HD'
+where TechnologyType = 'TECH_BANKING';
 
 -- 设定市政的鼓舞
 insert or replace into Boosts

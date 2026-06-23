@@ -15,7 +15,7 @@
 				<Grid ID="SubheaderGrid" Anchor="C,T" Style="DecoGrid" Size="784,auto" Offset="0,80" Color="40,40,40,170" AutoSizePadding="0,15">
 					<ScrollPanel ID="SubheaderScrollPanel" Anchor="C,C" Size="759,60" Vertical="1" AutoScrollBar="1">
 						<Label ID="SubheaderLabel" Anchor="C,C" Color="92,86,85,255" Offset="0,0" Style="FontFlair16" SmallCaps="20" SmallCapsType="EveryWord" WrapWidth="759" />
-						<ScrollBar Style="Slider_Light"	Color="20,20,20,200"	Anchor="R,C" AnchorSide="O,I"/>
+						<ScrollBar Style="Slider_Light"	Anchor="R,C" AnchorSide="O,I"/>
 					</ScrollPanel>
 				</Grid>
 				
@@ -31,7 +31,7 @@
 			<Grid ID="EventSelectionGrid" Anchor="C,T" Style="DecoGrid" Size="260,auto" Offset="0,282" Color="40,40,40,170" AutoSizePadding="0,15">
 				<ScrollPanel Anchor="C,C" Size="235,156" Vertical="1" AutoScrollBar="1">
 					<Label ID="EventSelectionInfo" Anchor="C,C" Color="52,45,48,230" WrapWidth="235" Style="FontNormal14"/>
-					<ScrollBar Style="Slider_Light"	Color="20,20,20,200"	Anchor="R,C" AnchorSide="O,I"/>
+					<ScrollBar Style="Slider_Light"	Anchor="R,C" AnchorSide="O,I"/>
 				</ScrollPanel>
 			</Grid>
 			<GridButton ID="EventSelectionButton" Size="210,41" Anchor="C,B" Style="MainButton" Disabled="0"/>

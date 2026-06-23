@@ -374,7 +374,7 @@ update Buildings set Maintenance = 0,	Cost = 420, CitizenSlots = 4, MaxPlayerIns
 update Buildings set Maintenance = 10,	Cost = 600	where BuildingType = 'BUILDING_RESEARCH_LAB';
 -- Commercial Hub
 update Buildings set Maintenance = 1,	Cost = 120	where BuildingType = 'BUILDING_MARKET';
-update Buildings set Maintenance = 4,	Cost = 250	where BuildingType = 'BUILDING_BANK';
+update Buildings set Maintenance = 4,	Cost = 250, PrereqCivic = 'CIVIC_GUILDS', PrereqTech = NULL	where BuildingType = 'BUILDING_BANK';
 update Buildings set Maintenance = 4,	Cost = 225	where BuildingType = 'BUILDING_GRAND_BAZAAR';
 update Buildings set Maintenance = 10,	Cost = 550	where BuildingType = 'BUILDING_STOCK_EXCHANGE';
 -- Harbor
