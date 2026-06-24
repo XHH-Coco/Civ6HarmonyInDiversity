@@ -31,7 +31,7 @@ insert or replace into ModifierArguments (ModifierId, Name, Value) select
 from HD_Binary_Compress where Exp < 5;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value) select
-  'HD_TEMPLE_OF_HEAVEN_CITY_CULTURE_' || Exp, 'Amount', Amount * 5
+  'HD_TEMPLE_OF_HEAVEN_CITY_CULTURE_' || Exp, 'Amount', Amount * 2
 from HD_Binary_Compress where Exp < 5;
 
 insert or replace into BuildingModifiers (BuildingType, ModifierId) select
@@ -47,7 +47,7 @@ insert or replace into ModifierArguments (ModifierId, Name, Value) select
 from HD_Binary_Compress where Exp < 5;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value) select
-  'HD_TEMPLE_OF_HEAVEN_CITY_FAITH_' || Exp, 'Amount', Amount * 5
+  'HD_TEMPLE_OF_HEAVEN_CITY_FAITH_' || Exp, 'Amount', Amount * 2
 from HD_Binary_Compress where Exp < 5;
 
 -- 内商
