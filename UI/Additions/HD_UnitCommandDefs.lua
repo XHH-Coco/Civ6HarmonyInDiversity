@@ -505,21 +505,20 @@ function m_HDUnitCommands.LIBERATION_LINCOLN.IsDisabled(pUnit : object)
 end
 
 -- ======================================================================================================================================================
--- 婆罗浮屠
+-- 工程单位挖火山土 （原婆罗浮屠能力）
 -- ======================================================================================================================================================
-local BOROBUDUR_INFO = GameInfo.Buildings['BUILDING_BOROBUDUR'];
 local VOLCANIC_SOIL_INDEX = GameInfo.Features['FEATURE_VOLCANIC_SOIL'].Index
-local BOROBUDUR_EXCAVATE_TIMES_TAG = 'HD_BOROBUDUR_EXCAVATE_TIMES';
-local BOROBUDUR_EXCAVATE_MAX_TIMES = GlobalParameters.HD_BOROBUDUR_EXCAVATE_MAX_TIMES or 0;
+local MILITARY_ENGINEER_EXCAVATE_TIMES_TAG = 'HD_MILITARY_ENGINEER_EXCAVATE_TIMES';
+local MILITARY_ENGINEER_EXCAVATE_MAX_TIMES = GlobalParameters.HD_MILITARY_ENGINEER_EXCAVATE_MAX_TIMES or 0;
 
-m_HDUnitCommands.BOROBUDUR = {};
-m_HDUnitCommands.BOROBUDUR.Properties = {};
+m_HDUnitCommands.MILITARY_ENGINEER_EXCAVATE = {};
+m_HDUnitCommands.MILITARY_ENGINEER_EXCAVATE.Properties = {};
 
-m_HDUnitCommands.BOROBUDUR.EventName = "HD_Borobudur_Excavate";
-m_HDUnitCommands.BOROBUDUR.CategoryInUI = "SPECIFIC";
-m_HDUnitCommands.BOROBUDUR.Icon = "ICON_UNITCOMMAND_BOROBUDUR_EXCAVATE";
-m_HDUnitCommands.BOROBUDUR.ToolTipString = Locale.Lookup("LOC_UNITCOMMAND_BOROBUDUR_EXCAVATE_NAME") .. "[NEWLINE][NEWLINE]" .. Locale.Lookup("LOC_UNITCOMMAND_BOROBUDUR_EXCAVATE_DESCRIPTION");
-m_HDUnitCommands.BOROBUDUR.GetDisabledToolTipString = function (unit)
+m_HDUnitCommands.MILITARY_ENGINEER_EXCAVATE.EventName = "HD_Military_Engineer_Excavate";
+m_HDUnitCommands.MILITARY_ENGINEER_EXCAVATE.CategoryInUI = "SPECIFIC";
+m_HDUnitCommands.MILITARY_ENGINEER_EXCAVATE.Icon = "ICON_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE";
+m_HDUnitCommands.MILITARY_ENGINEER_EXCAVATE.ToolTipString = Locale.Lookup("LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_NAME") .. "[NEWLINE][NEWLINE]" .. Locale.Lookup("LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_DESCRIPTION");
+m_HDUnitCommands.MILITARY_ENGINEER_EXCAVATE.GetDisabledToolTipString = function (unit)
 	if unit == nil then
 		return '';
 	end
@@ -529,31 +528,31 @@ m_HDUnitCommands.BOROBUDUR.GetDisabledToolTipString = function (unit)
 
 	local plotId = unit:GetPlotId();
 	local plot = Map.GetPlotByIndex(plotId);
-	local times = plot:GetProperty(BOROBUDUR_EXCAVATE_TIMES_TAG) or 0
+	local times = plot:GetProperty(MILITARY_ENGINEER_EXCAVATE_TIMES_TAG) or 0
 
 	if VOLCANIC_SOIL_INDEX ~= plot:GetFeatureType() then
-		return Locale.Lookup("LOC_UNITCOMMAND_BOROBUDUR_EXCAVATE_DISABLED")
+		return Locale.Lookup("LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_DISABLED")
 	end
 
 	if plot:GetDistrictType() ~= -1 then
-		return Locale.Lookup("LOC_UNITCOMMAND_BOROBUDUR_EXCAVATE_DISABLED")
+		return Locale.Lookup("LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_DISABLED")
 	end
 
 	-- if plot:GetImprovementType() ~= -1 then
-	-- 	return Locale.Lookup("LOC_UNITCOMMAND_BOROBUDUR_EXCAVATE_DISABLED")
+	-- 	return Locale.Lookup("LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_DISABLED")
 	-- end
 
-	if times >= BOROBUDUR_EXCAVATE_MAX_TIMES then
-		return Locale.Lookup("LOC_UNITCOMMAND_BOROBUDUR_EXCAVATE_MAX_TIMES")
+	if times >= MILITARY_ENGINEER_EXCAVATE_MAX_TIMES then
+		return Locale.Lookup("LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_MAX_TIMES")
 	end
 
 	return '';
 end
 
-m_HDUnitCommands.BOROBUDUR.VisibleInUI = true;
-m_HDUnitCommands.BOROBUDUR.DoNotDelete = true;
+m_HDUnitCommands.MILITARY_ENGINEER_EXCAVATE.VisibleInUI = true;
+m_HDUnitCommands.MILITARY_ENGINEER_EXCAVATE.DoNotDelete = true;
 
-function m_HDUnitCommands.BOROBUDUR.CanUse(unit: object)
+function m_HDUnitCommands.MILITARY_ENGINEER_EXCAVATE.CanUse(unit: object)
 	if unit == nil then
 		return false;
 	end
@@ -563,13 +562,17 @@ function m_HDUnitCommands.BOROBUDUR.CanUse(unit: object)
 			or unitInfo.UnitType == "UNIT_ENGINEER_CORP";
 end
 
-function m_HDUnitCommands.BOROBUDUR.IsVisible(unit: object)
-	local ownerId = unit:GetOwner();
-	local owner = Players[ownerId];
-	return BOROBUDUR_INFO ~= nil and Utils.PlayerHasWonder(owner, BOROBUDUR_INFO.Index);
+function m_HDUnitCommands.MILITARY_ENGINEER_EXCAVATE.IsVisible(unit: object)
+	if unit == nil then
+		return false;
+	end
+	local unitInfo = GameInfo.Units[unit:GetType()];
+	return unitInfo.UnitType == "UNIT_SAPPER"
+			or unitInfo.UnitType == "UNIT_MILITARY_ENGINEER"
+			or unitInfo.UnitType == "UNIT_ENGINEER_CORP";
 end
 
-function m_HDUnitCommands.BOROBUDUR.IsDisabled(unit: object)
+function m_HDUnitCommands.MILITARY_ENGINEER_EXCAVATE.IsDisabled(unit: object)
 	if unit == nil then
 		return true;
 	end
@@ -579,12 +582,12 @@ function m_HDUnitCommands.BOROBUDUR.IsDisabled(unit: object)
 
 	local plotId = unit:GetPlotId();
 	local plot = Map.GetPlotByIndex(plotId);
-	local times = plot:GetProperty(BOROBUDUR_EXCAVATE_TIMES_TAG) or 0
+	local times = plot:GetProperty(MILITARY_ENGINEER_EXCAVATE_TIMES_TAG) or 0
 
 	return VOLCANIC_SOIL_INDEX ~= plot:GetFeatureType()
 			or plot:GetDistrictType() ~= -1
 			-- or plot:GetImprovementType() ~= -1
-			or times >= BOROBUDUR_EXCAVATE_MAX_TIMES;
+			or times >= MILITARY_ENGINEER_EXCAVATE_MAX_TIMES;
 end
 
 -- ======================================================================================================================================================
@@ -665,90 +668,4 @@ function m_HDUnitCommands.QIN_BULDER_WONDER.IsVisible(unit: object)
 	end
 
 	return buildingInfo.Index == wonderId;
-end
-
--- ======================================================================================================================================================
--- 黄金七城
--- ======================================================================================================================================================
-m_HDUnitCommands.SPAIN_EL_DORADO_HD = {};
-m_HDUnitCommands.SPAIN_EL_DORADO_HD.Properties = {};
-
-m_HDUnitCommands.SPAIN_EL_DORADO_HD.EventName = "HD_SPAIN_EL_DORADO";
-m_HDUnitCommands.SPAIN_EL_DORADO_HD.CategoryInUI = "SPECIFIC";
-m_HDUnitCommands.SPAIN_EL_DORADO_HD.Icon = "ICON_UNITCOMMAND_SPAIN_EL_DORADO_HD";
-m_HDUnitCommands.SPAIN_EL_DORADO_HD.VisibleInUI = true;
-m_HDUnitCommands.SPAIN_EL_DORADO_HD.DoNotDelete = true;
-
-m_HDUnitCommands.SPAIN_EL_DORADO_HD.GetToolTipString = function(unit)
-	local text = Locale.Lookup("LOC_SPAIN_EL_DORADO_HD_TEXT");
-
-	local ownerId = unit:GetOwner();
-	local owner = Players[ownerId];
-	local list = owner:GetProperty(SPAIN_NATURAL_WONDER_REVEALED_LIST_TAG) or {};
-	if #list > 0 then
-		text = text .. Locale.Lookup("LOC_SPAIN_EL_DORADO_HD_LIST");
-		for i, featureId in ipairs(list) do
-			local featureInfo = GameInfo.Features[featureId];
-
-			if featureInfo then
-				if i > 1 then
-					text = text .. Locale.Lookup("LOC_TOOLTIP_HD_COMMA_TEXT");
-				end
-				text = text .. Locale.Lookup(featureInfo.Name);
-			end
-		end
-	end
-
-	return text;
-end
-
-m_HDUnitCommands.SPAIN_EL_DORADO_HD.GetDisabledToolTipString = function(unit)
-  if unit == nil then return ""; end
-  return Locale.Lookup("LOC_SPAIN_EL_DORADO_HD_DISABLED");
-end
-
-function m_HDUnitCommands.SPAIN_EL_DORADO_HD.CanUse(unit)
-  if unit == nil then return false; end
-
-	-- 判断文明特质
-	local ownerId = unit:GetOwner();
-	if not Utils.CivilizationHasTrait(ownerId, 'TRAIT_CIVILIZATION_TREASURE_FLEET') then
-		return false;
-	end
-
-	-- 判断军事单位
-	local unitInfo = GameInfo.Units[unit:GetType()];
-	if unitInfo then
-		local formationClass = unitInfo.FormationClass;
-		if (formationClass == 'FORMATION_CLASS_LAND_COMBAT' or formationClass == 'FORMATION_CLASS_NAVAL' or formationClass == 'FORMATION_CLASS_AIR') then
-			return true;
-		end
-	end
-
-	return false;
-end
-
-function m_HDUnitCommands.SPAIN_EL_DORADO_HD.IsDisabled(unit)
-	if unit == nil then return true; end
-
-	-- 判断移动力
-	if unit:GetMovesRemaining() == 0 then return true; end
-
-	-- 判断相邻或位于奇观
-	local enabled = false;
-	local ownerId = unit:GetOwner();
-	local owner = Players[ownerId];
-	local plots = Map.GetNeighborPlots(unit:GetX(), unit:GetY(), 1);
-	for _, plot in ipairs(plots) do
-		if plot and plot:IsNaturalWonder() then
-			-- 判断是否探索过
-			local featureId = plot:GetFeatureType();
-			if featureId and featureId ~= -1 and owner:GetProperty(SPAIN_NATURAL_WONDER_REVEALED_TAG .. featureId) ~= 1 then
-				enabled = true;
-      	break;
-			end
-		end
-	end
-
-	return not enabled;
 end

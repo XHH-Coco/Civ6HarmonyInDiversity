@@ -556,72 +556,34 @@ values
 	('BRANDENBURG_GATE_SCIENCE_AT_WAR_BONUS',		'Amount',		8),
 	('BRANDENBURG_GARRISON_LOYALTY',				'Amount',		3);
 
---BUILDING_BOROBUDUR
-update Buildings set PrereqCivic = 'CIVIC_THEOLOGY', RequiresReligion = 0 where BuildingType = 'BUILDING_BOROBUDUR';
+-- 婆罗浮屠（新版）
+update Buildings set PrereqCivic = NULL, PrereqTech = 'TECH_CONSTRUCTION', RequiresReligion = 0 where BuildingType = 'BUILDING_SUK_BOROBUDUR';
 
-delete from BuildingModifiers where BuildingType = 'BUILDING_BOROBUDUR';
-delete from BuildingPrereqs where Building = 'BUILDING_BOROBUDUR';-- and PrereqBuilding = 'BUILDING_TEMPLE';
+delete from BuildingModifiers where BuildingType = 'BUILDING_SUK_BOROBUDUR';
+delete from BuildingPrereqs where Building = 'BUILDING_SUK_BOROBUDUR';
+delete from Building_RequiredFeatures where BuildingType = 'BUILDING_SUK_BOROBUDUR';
+update Building_GreatWorks set NumSlots = 2 where BuildingType = 'BUILDING_SUK_BOROBUDUR';
 
-insert or replace into Building_RequiredFeatures (BuildingType,	FeatureType) select
-	'BUILDING_BOROBUDUR',	'FEATURE_VOLCANIC_SOIL'
-where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_BOROBUDUR');
-	
 insert or replace into BuildingModifiers (BuildingType,	ModifierId) select
-	'BUILDING_BOROBUDUR',	'HD_BOROBUDUR_CITY_FAITH'
-where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_BOROBUDUR');
-insert or replace into BuildingModifiers (BuildingType,	ModifierId) select
-	'BUILDING_BOROBUDUR',	'HD_BOROBUDUR_DISTRICT_CULTURE'
-where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_BOROBUDUR');
+	'BUILDING_SUK_BOROBUDUR', 'HD_BOROBUDUR_ENVOY_FAITH'
+where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_SUK_BOROBUDUR');
 
-insert or replace into Building_GreatWorks (BuildingType, GreatWorkSlotType, NumSlots)
-	select 'BUILDING_BOROBUDUR', 'GREATWORKSLOT_RELIC', 2 where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_BOROBUDUR');
+insert or replace into Modifiers (ModifierId, ModifierType) values
+	('HD_BOROBUDUR_ENVOY_FAITH', 'MODIFIER_PLAYER_ADJUST_YIELD_CHANGE_PER_USED_INFLUENCE_TOKEN');
 
-insert or replace into Modifiers 
-	(ModifierId,																					ModifierType,																				SubjectRequirementSetId) 
-values
-	('HD_BOROBUDUR_CITY_FAITH',														'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER','HD_BOROBUDUR_CITY_REQUIREMENTS'),
-	('HD_BOROBUDUR_DISTRICT_CULTURE',											'MODIFIER_PLAYER_DISTRICTS_ADJUST_YIELD_CHANGE',		'HD_BOROBUDUR_DISTRICT_REQUIREMENTS'),
-	('HD_BOROBUDUR_VOLCANIC_SOIL_YIELD',									'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',								'HD_PLOT_HAS_FEATURE_VOLCANIC_SOIL');
-
-insert or replace into Modifiers 
-	(ModifierId,											ModifierType,										RunOnce,  Permanent) 
-values
-	('HD_BOROBUDUR_GRANT_RELIC',			'MODIFIER_PLAYER_GRANT_RELIC',	1,				1);
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
+	('HD_BOROBUDUR_ENVOY_FAITH', 'YieldType', 'YIELD_FAITH'),
+	('HD_BOROBUDUR_ENVOY_FAITH', 'Amount', 		1);
 
 insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) select
-	'HD_BOROBUDUR_RELIC_TOURISM', 'MODIFIER_PLAYER_CITIES_ADJUST_TOURISM', 'CITY_HAS_BUILDING_BOROBUDUR_REQUIREMENTS'
-where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_BOROBUDUR');
-
-insert or replace into ModifierArguments 
-	(ModifierId,																					Name,									Value) 
-values
-	('HD_BOROBUDUR_CITY_FAITH',														'YieldType',					'YIELD_FAITH'),
-	('HD_BOROBUDUR_CITY_FAITH',														'Amount',							10),
-	('HD_BOROBUDUR_DISTRICT_CULTURE',											'YieldType',					'YIELD_CULTURE'),
-	('HD_BOROBUDUR_DISTRICT_CULTURE',											'Amount',							2),
-	('HD_BOROBUDUR_VOLCANIC_SOIL_YIELD',									'YieldType',					'YIELD_FOOD,YIELD_CULTURE,YIELD_FAITH'),
-	('HD_BOROBUDUR_VOLCANIC_SOIL_YIELD',									'Amount',							'1,1,1'),
-	('HD_BOROBUDUR_GRANT_RELIC',													'Amount',							1);
+	'HD_BOROBUDUR_GRANT_ENVOY_' || UnitType, 'MODIFIER_PLAYER_GRANT_INFLUENCE_TOKEN', 'PLAYER_HAS_BUILDING_SUK_BOROBUDUR_REQUIREMENTS'
+from Units where FormationClass = 'FORMATION_CLASS_NAVAL';
 
 insert or replace into ModifierArguments (ModifierId, Name, Value) select
-	'HD_BOROBUDUR_RELIC_TOURISM', 'ScalingFactor', 150
-where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_BOROBUDUR');
+	'HD_BOROBUDUR_GRANT_ENVOY_' || UnitType, 'Amount', 1
+from Units where FormationClass = 'FORMATION_CLASS_NAVAL';
 
-insert or replace into ModifierArguments (ModifierId, Name, Value) select
-	'HD_BOROBUDUR_RELIC_TOURISM', 'GreatWorkObjectType','GREATWORKOBJECT_RELIC'
-where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_BOROBUDUR');
-
-insert or replace into GlobalParameters
-	(Name,																	Value)
-values
-	('HD_BOROBUDUR_EXCAVATE_MAX_TIMES',			3),
-	('HD_BOROBUDUR_EXCAVATE_GOLD',					100),
-	('HD_BOROBUDUR_EXCAVATE_FAITH',					60),
-	('HD_BOROBUDUR_EXCAVATE_CULTURE',				50),
-	('HD_BOROBUDUR_EXCAVATE_RESOURCE_PROB',	0.5),
-	('HD_BOROBUDUR_EXCAVATE_RELIC_PROB',		0.1);
-
--- BUILDING_MOTHERLAND_CALLS
+-- 祖国母亲在召唤
 update Buildings set PrereqCivic = 'CIVIC_MOBILIZATION' where BuildingType = 'BUILDING_MOTHERLAND_CALLS';
 update Modifiers set SubjectRequirementSetId = 'JANISSARY_CITY_FOUNDED' where ModifierId = 'MOTHERLANDCALLS_IDENTITY';
 insert or replace into BuildingModifiers (BuildingType,	ModifierId) select
@@ -967,57 +929,24 @@ values
 
 
 -- 巴米扬大佛
-update Buildings set PrereqTech = 'TECH_CONSTRUCTION' where BuildingType = 'BUILDING_BAMYAN';
-delete from Building_YieldChanges where BuildingType = 'BUILDING_BAMYAN' and YieldType = 'YIELD_CULTURE';
+update Buildings set PrereqTech = 'TECH_ENGINEERING', RegionalRange = 6, AdjacentToMountain = 0 where BuildingType = 'BUILDING_BAMYAN';
 delete from BuildingModifiers where BuildingType = 'BUILDING_BAMYAN' and ModifierId != 'BAMYAN_GRANT_RELIC';
-
-insert or replace into GlobalParameters
-	(Name,														Value)
-values
-	('HD_BAMYAN_RELIGIOUS_PRESSURE',	400);
+delete from Building_YieldChanges where BuildingType = 'BUILDING_BAMYAN' and YieldType = 'YIELD_GOLD';
 
 insert or replace into BuildingModifiers (BuildingType,	ModifierId)
-select 'BUILDING_BAMYAN',	'BAMYAN_GRANT_TRADE_ROUTE'
-where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_BAMYAN');
-insert or replace into BuildingModifiers (BuildingType,	ModifierId)
-select 'BUILDING_BAMYAN',	'BAMYAN_GRANT_TRADER'
-where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_BAMYAN');
-insert or replace into BuildingModifiers (BuildingType,	ModifierId)
-select 'BUILDING_BAMYAN',	'BAMYAN_GRANT_TRADE_ROUTE_SCIENCE'
-where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_BAMYAN');
-insert or replace into BuildingModifiers (BuildingType,	ModifierId)
-select 'BUILDING_BAMYAN',	'BAMYAN_GRANT_TRADE_ROUTE_CULTURE'
-where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_BAMYAN');
-insert or replace into BuildingModifiers (BuildingType,	ModifierId)
-select 'BUILDING_BAMYAN',	'BAMYAN_GRANT_TRADE_ROUTE_DOMESTIC_FAITH'
-where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_BAMYAN');
-insert or replace into BuildingModifiers (BuildingType,	ModifierId)
-select 'BUILDING_BAMYAN',	'BAMYAN_GRANT_TRADE_ROUTE_INTERNATIONAL_FAITH'
+	select 'BUILDING_BAMYAN',	'HD_BAMYAN_MOVEMENT'
 where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_BAMYAN');
 
-insert or replace into Modifiers
-	(ModifierId,												ModifierType,															RunOnce,	Permanent,	SubjectRequirementSetId)
-values
-	('BAMYAN_GRANT_TRADE_ROUTE',						'MODIFIER_PLAYER_ADJUST_TRADE_ROUTE_CAPACITY',							1,			1,			'PLAYER_HAS_NOT_FOUNDED_A_RELIGION'),
-	('BAMYAN_GRANT_TRADER',									'MODIFIER_SINGLE_CITY_GRANT_UNIT_IN_CITY',							1,			1,			'PLAYER_HAS_NOT_FOUNDED_A_RELIGION'),
-	('BAMYAN_GRANT_TRADE_ROUTE_SCIENCE',				'MODIFIER_PLAYER_CITIES_ADJUST_TRADE_ROUTE_YIELD_FOR_INTERNATIONAL',	0,			0,			'PLAYER_HAS_NOT_FOUNDED_A_RELIGION'),
-	('BAMYAN_GRANT_TRADE_ROUTE_CULTURE',				'MODIFIER_PLAYER_CITIES_ADJUST_TRADE_ROUTE_YIELD_FOR_INTERNATIONAL',	0,			0,			'PLAYER_HAS_NOT_FOUNDED_A_RELIGION'),
-	('BAMYAN_GRANT_TRADE_ROUTE_DOMESTIC_FAITH',		'MODIFIER_PLAYER_CITIES_ADJUST_TRADE_ROUTE_YIELD_FOR_DOMESTIC',			0,			0,			'PLAYER_HAS_FOUNDED_A_RELIGION'),
-	('BAMYAN_GRANT_TRADE_ROUTE_INTERNATIONAL_FAITH',	'MODIFIER_PLAYER_CITIES_ADJUST_TRADE_ROUTE_YIELD_FOR_INTERNATIONAL',	0,			0,			'PLAYER_HAS_FOUNDED_A_RELIGION');
-insert or replace into ModifierArguments
-	(ModifierId,												Name,			Value)
-values
-	('BAMYAN_GRANT_TRADE_ROUTE',						'Amount',		1),
-	('BAMYAN_GRANT_TRADER',						'UnitType',		'UNIT_TRADER'),
-	('BAMYAN_GRANT_TRADER',						'Amount',		1),
-	('BAMYAN_GRANT_TRADE_ROUTE_SCIENCE',				'YieldType',	'YIELD_SCIENCE'),
-	('BAMYAN_GRANT_TRADE_ROUTE_SCIENCE',				'Amount',		1),
-	('BAMYAN_GRANT_TRADE_ROUTE_CULTURE',				'YieldType',	'YIELD_CULTURE'),
-	('BAMYAN_GRANT_TRADE_ROUTE_CULTURE',				'Amount',		1),
-	('BAMYAN_GRANT_TRADE_ROUTE_DOMESTIC_FAITH',		'YieldType',	'YIELD_FAITH'),
-	('BAMYAN_GRANT_TRADE_ROUTE_DOMESTIC_FAITH',		'Amount',		2),
-	('BAMYAN_GRANT_TRADE_ROUTE_INTERNATIONAL_FAITH',	'YieldType',	'YIELD_FAITH'),
-	('BAMYAN_GRANT_TRADE_ROUTE_INTERNATIONAL_FAITH',	'Amount',		2);
+delete from Building_ValidTerrains where BuildingType = 'BUILDING_BAMYAN';
+insert or ignore into Building_ValidTerrains (BuildingType,	TerrainType) select
+	'BUILDING_BAMYAN', TerrainType
+from Terrains where (TerrainType like 'TERRAIN_%_MOUNTAIN' or TerrainType like 'TERRAIN_%_HILLS') and exists (select BuildingType from Buildings where BuildingType = 'BUILDING_BAMYAN');
+
+insert or replace into Modifiers (ModifierId, ModifierType) values
+	('HD_BAMYAN_MOVEMENT', 'MODIFIER_PLAYER_UNITS_GRANT_ABILITY');
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
+	('HD_BAMYAN_MOVEMENT', 'AbilityType', 'ABILITY_HD_BAMYAN_MOVEMENT');
 
 -- 铜雀台
 update Buildings set
@@ -1071,7 +1000,7 @@ values
 -- Cost adjust
 update Buildings set Cost = 180 where BuildingType = 'P0K_BUILDING_TEMPLE_POSEIDON';
 update Buildings set Cost = 260 where BuildingType = 'BUILDING_ABU_SIMBEL';
-update Buildings set Cost = 420 where BuildingType = 'BUILDING_BOROBUDUR';
+update Buildings set Cost = 420 where BuildingType = 'BUILDING_SUK_BOROBUDUR';
 update Buildings set Cost = 420 where BuildingType = 'BUILDING_YELLOW_CRANE';
 update Buildings set Cost = 420 where BuildingType = 'BUILDING_BAMYAN';
 update Buildings set Cost = 420 where BuildingType = 'BUILDING_ITSUKUSHIMA';
@@ -1082,6 +1011,7 @@ update Buildings set Cost = 1000 where BuildingType = 'BUILDING_UFFIZI';
 update Buildings set Cost = 1000 where BuildingType = 'BUILDING_GLOBE_THEATRE';
 update Buildings set Cost = 1000 where BuildingType = 'BUILDING_PORCELAIN_TOWER';
 update Buildings set Cost = 1000 where BuildingType = 'BUILDING_LEANING_TOWER';
+update Buildings set Cost = 1000 where BuildingType = 'BUILDING_PHANTA_TEMPLE_OF_HEAVEN';
 update Buildings set Cost = 1360 where BuildingType = 'BUILDING_NEUSCHWANSTEIN';
 update Buildings set Cost = 1360 where BuildingType = 'BUILDING_BRANDENBURG_GATE';
 update Buildings set Cost = 1800 where BuildingType = 'BUILDING_THREE_GORDES_DAM';

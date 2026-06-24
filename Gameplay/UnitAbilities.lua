@@ -1,7 +1,7 @@
 -- Units with Ability ABILITY_BLOCK_FIRST_NON_LETHAL_ATTACK_EACH_TURN ignores the first non-lethal combat (as defender) damage each turn. by xiaoxiao
--- ExposedMembers.DLHD = ExposedMembers.DLHD or {};
--- ExposedMembers.DLHD.Utils = ExposedMembers.DLHD.Utils or {};
--- Utils = ExposedMembers.DLHD.Utils;
+ExposedMembers.DLHD = ExposedMembers.DLHD or {};
+ExposedMembers.DLHD.Utils = ExposedMembers.DLHD.Utils or {};
+Utils = ExposedMembers.DLHD.Utils;
 
 function OnCombat (combatResult)
     local name = "ABILITY_BLOCK_FIRST_NON_LETHAL_ATTACK_EACH_TURN"
@@ -21,6 +21,117 @@ function OnCombat (combatResult)
 end
 
 Events.Combat.Add(OnCombat)
+
+-- 工程单位勘探火山土
+local MILITARY_ENGINEER_EXCAVATE_TIMES_TAG = 'HD_MILITARY_ENGINEER_EXCAVATE_TIMES';
+local MILITARY_ENGINEER_EXCAVATE_RELIC_TAG = 'HD_MILITARY_ENGINEER_EXCAVATE_RELIC';
+
+local MILITARY_ENGINEER_EXCAVATE_GOLD = GlobalParameters.HD_MILITARY_ENGINEER_EXCAVATE_GOLD or 0;
+local MILITARY_ENGINEER_EXCAVATE_SCIENCE = GlobalParameters.HD_MILITARY_ENGINEER_EXCAVATE_SCIENCE or 0;
+
+local MILITARY_ENGINEER_EXCAVATE_GOLD_PERCENTAGE = GlobalParameters.HD_MILITARY_ENGINEER_EXCAVATE_GOLD_PERCENTAGE or 0;
+local MILITARY_ENGINEER_EXCAVATE_SCIENCE_PERCENTAGE = GlobalParameters.HD_MILITARY_ENGINEER_EXCAVATE_SCIENCE_PERCENTAGE or 0;
+local MILITARY_ENGINEER_EXCAVATE_RESOURCE_PERCENTAGE = GlobalParameters.HD_MILITARY_ENGINEER_EXCAVATE_RESOURCE_PERCENTAGE or 0;
+local MILITARY_ENGINEER_EXCAVATE_RELIC_PERCENTAGE = GlobalParameters.HD_MILITARY_ENGINEER_EXCAVATE_RELIC_PERCENTAGE or 0;
+
+-- 初始化获取火山土上可生成的资源
+local MilitaryEngineerExcavateResources = {}
+function MilitaryEngineerExcavateInit()
+  for row in GameInfo.Resource_ValidFeatures() do
+		if row.FeatureType == 'FEATURE_VOLCANIC_SOIL' then
+			table.insert(MilitaryEngineerExcavateResources, row.ResourceType)
+		end
+	end
+end
+MilitaryEngineerExcavateInit();
+
+function MilitaryEngineerExcavate(playerId, unitId)
+  local player = Players[playerId];
+	local unit = UnitManager.GetUnit(playerId, unitId);
+
+  -- 记录勘探次数
+  local x = unit:GetX()
+  local y = unit:GetY()
+	local plot = Map.GetPlot(x, y);
+  local times = plot:GetProperty(MILITARY_ENGINEER_EXCAVATE_TIMES_TAG) or 0
+  plot:SetProperty(MILITARY_ENGINEER_EXCAVATE_TIMES_TAG, times + 1)
+  print("工程单位勘探次数", times + 1)
+
+  local hasAnyBonus = false
+
+
+	-- 金币奖励
+	local goldRandomNum = Game.GetRandNum(100, "Random MilitaryEngineerExcavate Gold Bonus " .. playerId) + 1;
+	if goldRandomNum <= MILITARY_ENGINEER_EXCAVATE_GOLD_PERCENTAGE then
+		local randomFactor = Game.GetRandNum(101, "Random MilitaryEngineerExcavate Yield Factor " .. playerId) + 50;
+		local amount = math.ceil(MILITARY_ENGINEER_EXCAVATE_GOLD * randomFactor / 100);
+		player:GetTreasury():ChangeGoldBalance(amount);
+
+    local msg = "+" .. amount .. " [ICON_Gold]";
+    Game.AddWorldViewText(playerId, msg, x, y);
+    hasAnyBonus = true;
+	end
+
+	-- 科技奖励
+	local scienceRandomNum = Game.GetRandNum(100, "Random MilitaryEngineerExcavate Science Bonus " .. playerId) + 1;
+	if scienceRandomNum <= MILITARY_ENGINEER_EXCAVATE_SCIENCE_PERCENTAGE then
+		local randomFactor = Game.GetRandNum(101, "Random MilitaryEngineerExcavate Yield Factor " .. playerId) + 50;
+		local amount = math.ceil(MILITARY_ENGINEER_EXCAVATE_SCIENCE * randomFactor / 100);
+		player:GetTechs():ChangeCurrentResearchProgress(amount);
+
+		local msg = "+" .. amount .. " [ICON_Science]";
+    Game.AddWorldViewText(playerId, msg, x, y);
+    hasAnyBonus = true;
+	end
+
+	-- 勘探资源
+  if plot:GetResourceType() == -1 and plot:GetImprovementType() == -1 then
+    local resourceRandomNum = Game.GetRandNum(100, "Random MilitaryEngineerExcavate Resource " .. playerId) + 1;
+    if resourceRandomNum <= MILITARY_ENGINEER_EXCAVATE_RESOURCE_PERCENTAGE then
+      local resourceRandomIndex = Game.GetRandNum(#MilitaryEngineerExcavateResources, "Random MilitaryEngineerExcavate ResourceType " .. playerId) + 1;
+      local resourceType = MilitaryEngineerExcavateResources[resourceRandomIndex];
+      local resourceInfo = GameInfo.Resources[resourceType];
+      local resourceId = resourceInfo.Index;
+      local resourceName = resourceInfo.Name;
+      Utils.GenerateResource(plot, resourceId);
+
+      local msg = Locale.Lookup('LOC_MILITARY_ENGINEER_EXCAVATE_RESOURCE') .. '[ICON_' .. resourceType .. '] ' .. Locale.Lookup(resourceName);
+      Game.AddWorldViewText(playerId, msg, x, y);
+      hasAnyBonus = true;
+    end
+  end
+
+  -- 遗物奖励
+  if plot:GetProperty(MILITARY_ENGINEER_EXCAVATE_RELIC_TAG) ~= 1 then
+    local relicRandomNum = Game.GetRandNum(100, "Random MilitaryEngineerExcavate Relic " .. playerId) + 1
+    if relicRandomNum <= MILITARY_ENGINEER_EXCAVATE_RELIC_PERCENTAGE then
+      plot:SetProperty(MILITARY_ENGINEER_EXCAVATE_RELIC_TAG, 1);
+      player:AttachModifierByID('HD_MILITARY_ENGINEER_EXCAVATE_GRANT_RELIC');
+
+      local msg = Locale.Lookup('LOC_GOODYHUT_CULTURE_RELIC_DESCRIPTION');
+      Game.AddWorldViewText(playerId, msg, x, y);
+      hasAnyBonus = true;
+    end
+  end
+
+  -- 没有获得任何奖励
+  if not hasAnyBonus then
+    local msg = Locale.Lookup('LOC_MILITARY_ENGINEER_EXCAVATE_NOTHING');
+    Game.AddWorldViewText(playerId, msg, x, y);
+  end
+
+  -- 扣除劳动次数/删除单位
+  local movesRemaining = Utils.GetUnitMovesRemaining(playerId, unitId);
+  unit:ChangeMovesRemaining(-movesRemaining);
+  local unitAbility = unit:GetAbility()
+  for i=1, 10, 1 do
+    if unitAbility:GetAbilityCount('ABILITY_HD_MILITARY_ENGINEER_NEGA_CHARGE_' .. i) == 0 then
+      unitAbility:ChangeAbilityCount('ABILITY_HD_MILITARY_ENGINEER_NEGA_CHARGE_' .. i, 1);
+      break;
+    end
+  end
+end
+GameEvents.HD_Military_Engineer_Excavate.Add(MilitaryEngineerExcavate)
 
 -- 垃圾回收中心, by xiaoxiao
 local RECYCLING_PLANT_PRODUCTION_PERCENT = GlobalParameters.RECYCLING_PLANT_PRODUCTION_PERCENT or 0;

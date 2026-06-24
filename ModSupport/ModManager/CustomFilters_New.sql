@@ -102,7 +102,7 @@ insert or replace into EnglishText (Tag, Text) values
 	-- 世界奇观
 	("LOC_WONDERS_MODS_LIST", "
 		b8a7c566-c2ab-44d4-a52d-a97416faf690,
-		f6556753-3531-4d36-b448-5a4053064524,
+		37d1b105-f698-47df-85d5-7b39bc610a36,
 		aab33283-4b8f-46a4-83c0-784a8bfa177e,
 		fd3f13ba-3d51-442f-9435-3aeca0116b46,
 		6366039a-6cd8-48d5-99ce-d7832a617629,
@@ -119,7 +119,7 @@ insert or replace into EnglishText (Tag, Text) values
 		e3052708-b650-4f3a-8e5c-da8f2a287524,
 		1cfe2a52-233b-4d4c-8bdf-209ec10352c1,
 		e12c350d-df6a-4d21-9302-4466cab4353c,
-		943808b8-5913-4cfc-93a8-0d5d4a0bc4af,
+		32b57a0b-9e64-4409-ad83-d40235860b9b,
 		5a5601c5-090c-4172-89fe-8f1da9e2b96d,
 		ffa02d2f-e5d4-43fd-bb97-0a4868c7b3a7,
 		ecc4e31d-8c79-4e4b-98e7-d96226cb95d9,

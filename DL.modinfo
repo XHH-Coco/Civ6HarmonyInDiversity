@@ -235,7 +235,7 @@
     </Criteria>
     <Criteria id="TempleOfHeaven_Expansion2">
       <RuleSetInUse>RULESET_EXPANSION_2</RuleSetInUse>
-      <ModInUse>943808b8-5913-4cfc-93a8-0d5d4a0bc4af</ModInUse>
+      <ModInUse>4873eb62-8ccc-4574-b784-dda455e74e68</ModInUse>
     </Criteria>
     <Criteria id="WatArun_Expansion2">
       <RuleSetInUse>RULESET_EXPANSION_2</RuleSetInUse>
@@ -823,11 +823,6 @@
       <File>Assets/Commemorations/HD_Commemorations_256.dds</File>
       <File>Assets/CustomEvents/HD_SCOTLAND_SELECTIONS_256.dds</File>
     </ImportFiles>
-    <!-- Fix Icon -->
-    <UpdateIcons id="FixIcons" criteria="Expansion2">
-      <Properties><LoadOrder>2</LoadOrder></Properties>
-      <File>UI/Icons/DL_Icons_Fixing.sql</File>
-    </UpdateIcons>
     <!-- UI -->
     <ImportFiles id="DL_Overwrite_Files_Import" criteria="Expansion2">
       <Properties><LoadOrder>1</LoadOrder></Properties>
@@ -1168,6 +1163,10 @@
       <!-- After the main part -->
       <Properties><LoadOrder>17000</LoadOrder></Properties>
       <File>ModSupport/Wonders/Wonder_Temple_of_Heaven.sql</File>
+    </UpdateDatabase>
+    <UpdateDatabase id="Wonder_temple_of_heaven_support_late" criteria="TempleOfHeaven_Expansion2">
+      <Properties><LoadOrder>100001</LoadOrder></Properties>
+      <File>ModSupport/Wonders/Wonder_Temple_of_Heaven_Late.sql</File>
     </UpdateDatabase>
     <UpdateDatabase id="Wonder_wat_arun_support" criteria="WatArun_Expansion2">
       <!-- After the main part -->
@@ -2465,7 +2464,6 @@
     <File>UI/Replacement/GreatWorksSupport.lua</File>
 
     <!-- Icons -->
-    <File>UI/Icons/DL_Icons_Fixing.sql</File>
     <File>UI/Icons/DL_Icons_Beliefs.xml</File>
     <File>UI/Icons/DL_Icons_Buildings.xml</File>
     <File>UI/Icons/DL_Icons_Districts.xml</File>
@@ -2519,6 +2517,7 @@
     <File>ModSupport/Watchtower/HD_Texts.sql</File>
     <File>ModSupport/Watchtower/HD_Balance.sql</File>
     <File>ModSupport/Wonders/Wonder_Temple_of_Heaven.sql</File>
+    <File>ModSupport/Wonders/Wonder_Temple_of_Heaven_Late.sql</File>
     <File>ModSupport/Wonders/Wonder_WatArun.sql</File>
     <File>ModSupport/Wonders/Wonders_Community.sql</File>
     <File>ModSupport/Wonders/Wonders_Community_Late.sql</File>

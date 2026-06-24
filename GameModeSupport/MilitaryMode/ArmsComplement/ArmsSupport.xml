@@ -82,4 +82,18 @@
 		<Row ImprovementType="IMPROVEMENT_MISSILE_SILO" UnitType="UNIT_ENGINEER_CORP"/>
 		<Row ImprovementType="IMPROVEMENT_MOUNTAIN_TUNNEL" UnitType="UNIT_ENGINEER_CORP"/>
 	</Improvement_ValidBuildUnits>
+    <District_BuildChargeProductions>
+		<Row DistrictType="DISTRICT_CANAL" UnitType="UNIT_SAPPER" PercentProductionPerCharge="20"/>
+		<Row DistrictType="DISTRICT_DAM" UnitType="UNIT_SAPPER" PercentProductionPerCharge="20"/>
+		<Row DistrictType="DISTRICT_AQUEDUCT" UnitType="UNIT_SAPPER" PercentProductionPerCharge="20"/>
+		<Row DistrictType="DISTRICT_BATH" UnitType="UNIT_SAPPER" PercentProductionPerCharge="20"/>
+        
+		<Row DistrictType="DISTRICT_CANAL" UnitType="UNIT_ENGINEER_CORP" PercentProductionPerCharge="40"/>
+		<Row DistrictType="DISTRICT_DAM" UnitType="UNIT_ENGINEER_CORP" PercentProductionPerCharge="40"/>
+		<Row DistrictType="DISTRICT_AQUEDUCT" UnitType="UNIT_ENGINEER_CORP" PercentProductionPerCharge="40"/>
+		<Row DistrictType="DISTRICT_BATH" UnitType="UNIT_ENGINEER_CORP" PercentProductionPerCharge="40"/>
+	</District_BuildChargeProductions>
+    <Building_BuildChargeProductions>
+        <Row BuildingType="BUILDING_FLOOD_BARRIER" UnitType="UNIT_ENGINEER_CORP" PercentProductionPerCharge="40"/>
+	</Building_BuildChargeProductions>
 <GameData>

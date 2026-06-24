@@ -2627,66 +2627,53 @@ Events.GoodyHutReward.Add(HaraldGoodyHutReward);
 -- 西班牙
 -- =====================================================================================================================================
 local SPAIN_NATURAL_WONDER_REVEALED_TAG = 'HD_SpainNaturalWonderRevealed_';
-local SPAIN_NATURAL_WONDER_REVEALED_LIST_TAG = 'HD_SpainNaturalWonderRevealedList';
-function SpainNaturalWonderRevealed(playerId, unitId)
+local NOTIFICATION_DISCOVER_NATURAL_WONDER_HASH = GameInfo.Notifications['NOTIFICATION_DISCOVER_NATURAL_WONDER'].Hash;
+function SpainNotificationAdded(playerId, notificationId)
 	local player = Players[playerId];
-	local unit = UnitManager.GetUnit(playerId, unitId);
-	if not player or not unit then return; end
+  if not player then return; end
 
-	local plots = Map.GetNeighborPlots(unit:GetX(), unit:GetY(), 1);
-  for _, plot in ipairs(plots) do
-    if plot and plot:IsNaturalWonder() then
-			-- 判断是否探索过
-			local featureId = plot:GetFeatureType();
-			if featureId and featureId ~= -1 and player:GetProperty(SPAIN_NATURAL_WONDER_REVEALED_TAG .. featureId) ~= 1 then
-				local featureInfo = GameInfo.Features[featureId];
-				if featureInfo then
-					player:AttachModifierByID('TRAIT_' .. featureInfo.FeatureType .. '_ADD_GOVERNOR')
-					player:AttachModifierByID('TRAIT_' .. featureInfo.FeatureType .. '_ADD_PROPHET_POINT')
-					player:AttachModifierByID('TRAIT_' .. featureInfo.FeatureType .. '_ADD_WRITER_POINT')
-					player:AttachModifierByID('TRAIT_' .. featureInfo.FeatureType .. '_ADD_ARTIST_POINT')
+	local notificationEntry = NotificationManager.Find(playerId, notificationId)
+  if notificationEntry then
+    if notificationEntry:GetType() == NOTIFICATION_DISCOVER_NATURAL_WONDER_HASH then
+			local x, y = notificationEntry:GetLocation();
+			local plot = Map.GetPlot(x, y);
+			if plot and plot:IsNaturalWonder() then
+				local featureId = plot:GetFeatureType();
+				if featureId and featureId ~= -1 and player:GetProperty(SPAIN_NATURAL_WONDER_REVEALED_TAG .. featureId) ~= 1 then
+					local featureInfo = GameInfo.Features[featureId];
+					if featureInfo and featureInfo.NaturalWonder == true then
+						player:SetProperty(SPAIN_NATURAL_WONDER_REVEALED_TAG .. featureId, 1);
 
-					for row2 in GameInfo.Feature_YieldChanges() do
-						if row2.FeatureType == featureInfo.FeatureType then
-							player:AttachModifierByID('TRAIT_' .. featureInfo.FeatureType .. '_ON_' .. row2.YieldType)
-							player:AttachModifierByID('TRAIT_PALACE_' .. featureInfo.FeatureType .. '_ON_' .. row2.YieldType)
+						player:AttachModifierByID('TRAIT_' .. featureInfo.FeatureType .. '_ADD_GOVERNOR');
+						player:AttachModifierByID('TRAIT_' .. featureInfo.FeatureType .. '_ADD_PROPHET_POINT');
+						player:AttachModifierByID('TRAIT_' .. featureInfo.FeatureType .. '_ADD_WRITER_POINT');
+						player:AttachModifierByID('TRAIT_' .. featureInfo.FeatureType .. '_ADD_ARTIST_POINT');
+
+						for row2 in GameInfo.Feature_YieldChanges() do
+							if row2.FeatureType == featureInfo.FeatureType then
+								player:AttachModifierByID('TRAIT_' .. featureInfo.FeatureType .. '_ON_' .. row2.YieldType)
+								player:AttachModifierByID('TRAIT_PALACE_' .. featureInfo.FeatureType .. '_ON_' .. row2.YieldType)
+							end
 						end
-					end
-
-					for row3 in GameInfo.Feature_AdjacentYields() do
-						if row3.FeatureType == featureInfo.FeatureType then
-							player:AttachModifierByID('TRAIT_' .. featureInfo.FeatureType .. '_ADJACENT_' .. row3.YieldType)
-							player:AttachModifierByID('TRAIT_PALACE_' .. featureInfo.FeatureType .. '_ADJACENT_' .. row3.YieldType)
+	
+						for row3 in GameInfo.Feature_AdjacentYields() do
+							if row3.FeatureType == featureInfo.FeatureType then
+								player:AttachModifierByID('TRAIT_' .. featureInfo.FeatureType .. '_ADJACENT_' .. row3.YieldType)
+								player:AttachModifierByID('TRAIT_PALACE_' .. featureInfo.FeatureType .. '_ADJACENT_' .. row3.YieldType)
+							end
 						end
+
+						local traitName = Locale.Lookup('LOC_TRAIT_CIVILIZATION_TREASURE_FLEET_NAME')
+						local featureName = Locale.Lookup(featureInfo.Name)
+						local message = '[COLOR:Gold]' .. traitName .. ' ' .. featureName .. '[ENDCOLOR]'
+						Game.AddWorldViewText(playerId, message, plot:GetX(), plot:GetY());
 					end
-
-					player:SetProperty(SPAIN_NATURAL_WONDER_REVEALED_TAG .. featureId, 1);
-
-					local list = player:GetProperty(SPAIN_NATURAL_WONDER_REVEALED_LIST_TAG) or {};
-					table.insert(list, featureId);
-					player:SetProperty(SPAIN_NATURAL_WONDER_REVEALED_LIST_TAG, list);
-
-					local traitName = Locale.Lookup('LOC_TRAIT_CIVILIZATION_TREASURE_FLEET_NAME')
-					local featureName = Locale.Lookup(featureInfo.Name)
-					local message = '[COLOR:Gold]' .. traitName .. ' ' .. featureName .. '[ENDCOLOR]'
-					Game.AddWorldViewText(playerId, message, plot:GetX(), plot:GetY());
 				end
 			end
-    end
-  end
-
-	-- 升级
-	local nextExp = unit:GetExperience():GetExperienceForNextLevel();
-	local nowExp = unit:GetExperience():GetExperiencePoints();
-	if nextExp > nowExp and nowExp >= 0 then
-		unit:GetExperience():ChangeExperience(nextExp - nowExp);
+		end
 	end
-
-	-- 消耗移动力
-	local movesRemaining = Utils.GetUnitMovesRemaining(playerId, unitId)
-  unit:ChangeMovesRemaining(-movesRemaining)
 end
-GameEvents.HD_SPAIN_EL_DORADO.Add(SpainNaturalWonderRevealed);
+Events.NotificationAdded.Add(SpainNotificationAdded);
 
 local SPAIN_INTERCONTINENTAL_CITY_TRADE_TAG = 'HD_SpainIntercontinentalCityAdded_';
 function SpainCityAddedToMap(playerId, cityId, x, y)

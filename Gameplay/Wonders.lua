@@ -482,53 +482,63 @@ end
 
 Events.UnitGreatPersonCreated.Add(OnhemitageArtistCreated);
 
---巴米扬大佛:建立贸易路线时获得宗教压力
-local BamyanInfo = GameInfo.Buildings["BUILDING_BAMYAN"];
-local Bamyan_TAG = 'HD_BamyanTradeRouteAddedToMap';
-local BAMYAN_RELIGIOUS_PRESSURE = GlobalParameters.HD_BAMYAN_RELIGIOUS_PRESSURE or 0;
-function BamyanTradeRouteAddedToMap(playerId, x, y)
-  if BamyanInfo == nil then
-    return;
-  end
+-- 巴米扬大佛
+local BAMYAN_INFO = GameInfo.Buildings['BUILDING_BAMYAN']
+local NOTIFICATION_TRADING_POST_CREATED_HASH = GameInfo.Notifications['NOTIFICATION_TRADING_POST_CREATED'].Hash;
+local BAMYAN_RELIC_TAG = 'HD_BAMYAN_RELIC_';
+local BAMYAN_RELIC_NUM_TAG = 'HD_BAMYAN_RELIC_NUM';
+function BamyanNotificationAdded(playerId, notificationId)
+  if not BAMYAN_INFO then return; end
+
   local player = Players[playerId];
-  if PlayerHasWonder(player, BamyanInfo.Index) then
-    local city = Cities.GetCityInPlot(x, y)
-    city:SetProperty(Bamyan_TAG, 1)
-  end
-end
+  if not player then return; end
 
-function BamyanTradeRouteActivityChanged(playerId, originPlayerId, originCityId, targetPlayerId, targetCityId)
-  local originCity = CityManager.GetCity(originPlayerId, originCityId)
-  if originCity and originCity:GetProperty(Bamyan_TAG) == 1 then
-    -- 判断是否是创建贸易路线
-    originCity:SetProperty(Bamyan_TAG, 0)
+  local notificationEntry = NotificationManager.Find(playerId, notificationId)
+  if notificationEntry then
+    if notificationEntry:GetType() == NOTIFICATION_TRADING_POST_CREATED_HASH then
+      local x, y = notificationEntry:GetLocation();
+      local city = CityManager.GetCityAt(x, y);
+      if not city then return; end
 
-    -- 判断目的地是否是圣城
-    local isHolyCity = Utils.IsHolyCity(targetPlayerId, targetCityId);
-    if isHolyCity then
-      -- 获取城市当前宗教
-      local targetCity = CityManager.GetCity(targetPlayerId, targetCityId);
-      local cityReligion = targetCity:GetReligion():GetMajorityReligion();
-      -- 获取该圣城原本的宗教
-      local targetPlayer = Players[targetPlayerId];
-      local playerReligion = targetPlayer:GetReligion():GetReligionTypeCreated();
-      -- 如果圣城的宗教未改变
-      if cityReligion == playerReligion then
-        originCity:GetReligion():AddReligiousPressure(playerId, playerReligion, BAMYAN_RELIGIOUS_PRESSURE, playerId);
-        for row in GameInfo.Religions() do
-          if row.Index == playerReligion then
-            local religionName = Locale.Lookup(row.Name)
-            local message = '[COLOR:White]+' .. tostring(BAMYAN_RELIGIOUS_PRESSURE) .. ' ' .. religionName .. '[ENDCOLOR]'
-            local cityLocation = originCity:GetLocation();
-            Game.AddWorldViewText(playerId, message, cityLocation.x, cityLocation.y)
-          end
+      local ownerId = city:GetOwner();
+      local owner = Players[ownerId];
+      if ownerId == playerId or not owner or not owner:IsMajor() then return; end
+
+      local religionId = owner:GetReligion():GetReligionTypeCreated();
+      if religionId and religionId ~= -1 and player:GetProperty(BAMYAN_RELIC_TAG .. ownerId) ~= 1 then
+        player:SetProperty(BAMYAN_RELIC_TAG .. ownerId, 1);
+
+        -- 判断是否有巴米扬大佛
+        if PlayerHasWonder(player, BAMYAN_INFO.Index) then
+          -- 直接获得遗物
+          player:AttachModifierByID('BAMYAN_GRANT_RELIC');
+          print("巴米扬大佛送遗物 建立贸易站：" .. Locale.Lookup(city:GetName()));
+        else
+          -- 计数 等建成后追溯
+          local amount = player:GetProperty(BAMYAN_RELIC_NUM_TAG) or 0;
+          player:SetProperty(BAMYAN_RELIC_NUM_TAG, amount + 1);
+          print("巴米扬大佛未建成 遗物计数：" .. amount + 1 .. " 建立贸易站：" .. Locale.Lookup(city:GetName()));
         end
       end
     end
   end
-  
 end
-Events.TradeRouteActivityChanged.Add(BamyanTradeRouteActivityChanged)
+Events.NotificationAdded.Add(BamyanNotificationAdded);
+
+-- 建成巴米扬大佛后追溯遗物
+function BamyanWonderCompleted(x, y, buildingId, playerId, cityId, percentComplete, unknown)
+  if BAMYAN_INFO and buildingId == BAMYAN_INFO.Index then
+    local player = Players[playerId];
+    if not player then return; end
+
+    local amount = player:GetProperty(BAMYAN_RELIC_NUM_TAG) or 0;
+    for i=1, amount, 1 do
+      player:AttachModifierByID('BAMYAN_GRANT_RELIC');
+      print("建成巴米扬大佛后追溯遗物", i);
+    end
+  end
+end
+Events.WonderCompleted.Add(BamyanWonderCompleted);
 
 -- 铜雀台
 local BronzeBirdInfo = GameInfo.Buildings["BUILDING_PHANTA_BRONZE_BIRD_TERRACE"];
@@ -719,122 +729,6 @@ function KhalifaGreatWorkCreated(playerId, unitId, x, y, buildingId, greatWorkIn
 end
 Events.GreatWorkCreated.Add(KhalifaGreatWorkCreated);
 
--- 婆罗浮屠
-local BOROBUDUR_INFO = GameInfo.Buildings['BUILDING_BOROBUDUR'];
-local BOROBUDUR_EXCAVATE_TIMES_TAG = 'HD_BOROBUDUR_EXCAVATE_TIMES';
-local BOROBUDUR_EXCAVATE_GOLD = GlobalParameters.HD_BOROBUDUR_EXCAVATE_GOLD or 0;
-local BOROBUDUR_EXCAVATE_FAITH = GlobalParameters.HD_BOROBUDUR_EXCAVATE_FAITH or 0;
-local BOROBUDUR_EXCAVATE_CULTURE = GlobalParameters.HD_BOROBUDUR_EXCAVATE_CULTURE or 0;
-local BOROBUDUR_EXCAVATE_RELIC_TAG = 'HD_BOROBUDUR_EXCAVATE_RELIC';
-local BOROBUDUR_EXCAVATE_RELIC_PROB = GlobalParameters.HD_BOROBUDUR_EXCAVATE_RELIC_PROB or 0;
-local BOROBUDUR_EXCAVATE_RESOURCE_PROB = GlobalParameters.HD_BOROBUDUR_EXCAVATE_RESOURCE_PROB or 0;
-local BorobudurResources = {}
-function BorobudurInit()
-  for row in GameInfo.Resource_ValidFeatures() do
-		if row.FeatureType == 'FEATURE_VOLCANIC_SOIL' then
-			table.insert(BorobudurResources, row.ResourceType)
-		end
-	end
-end
-BorobudurInit()
-
-function BorobudurUnitExcavate(playerId, unitId)
-  local player = Players[playerId];
-	local unit = UnitManager.GetUnit(playerId, unitId);
-
-  -- 记录勘探次数
-  local x = unit:GetX()
-  local y = unit:GetY()
-	local plot = Map.GetPlot(x, y);
-  local times = plot:GetProperty(BOROBUDUR_EXCAVATE_TIMES_TAG) or 0
-  plot:SetProperty(BOROBUDUR_EXCAVATE_TIMES_TAG, times + 1)
-  print("BorobudurUnitExcavate", times + 1)
-
-  local hasAnyBonus = false
-
-  local randomIndex = Game.GetRandNum(4, "Random Borobudur Yield Bonus " .. playerId)
-  print("婆罗浮屠 产出", randomIndex)
-  local randomFactor = Game.GetRandNum(101, "Random Borobudur Yield Factor " .. playerId) + 50
-  if randomIndex == 0 then
-    -- 金币奖励
-    local amount = BOROBUDUR_EXCAVATE_GOLD * randomFactor / 100
-    player:GetTreasury():ChangeGoldBalance(amount)
-
-    local msg = "+" .. amount .. " [ICON_Gold]"
-    Game.AddWorldViewText(playerId, msg, x, y)
-    hasAnyBonus = true
-  elseif randomIndex == 1 then
-    -- 信仰奖励
-    local amount = BOROBUDUR_EXCAVATE_FAITH * randomFactor / 100
-    player:GetReligion():ChangeFaithBalance(amount)
-
-    local msg = "+" .. amount .. " [ICON_Faith]"
-    Game.AddWorldViewText(playerId, msg, x, y)
-    hasAnyBonus = true
-  elseif randomIndex == 2 then
-    -- 文化奖励
-    local amount = BOROBUDUR_EXCAVATE_CULTURE * randomFactor / 100
-    player:GetCulture():ChangeCurrentCulturalProgress(amount)
-
-    local msg = "+" .. amount .. " [ICON_Culture]"
-    Game.AddWorldViewText(playerId, msg, x, y)
-    hasAnyBonus = true
-  end
-
-  -- 遗物奖励
-  if plot:GetProperty(BOROBUDUR_EXCAVATE_RELIC_TAG) ~= 1 then
-    randomIndex = Game.GetRandNum(100, "Random Borobudur Relic " .. playerId) + 1
-    print("婆罗浮屠 遗物", randomIndex)
-    if randomIndex / 100 <= BOROBUDUR_EXCAVATE_RELIC_PROB then
-      plot:SetProperty(BOROBUDUR_EXCAVATE_RELIC_TAG, 1)
-      player:AttachModifierByID('HD_BOROBUDUR_GRANT_RELIC')
-      player:AttachModifierByID('HD_BOROBUDUR_RELIC_TOURISM')
-
-      local msg = Locale.Lookup('LOC_GOODYHUT_CULTURE_RELIC_DESCRIPTION')
-      Game.AddWorldViewText(playerId, msg, x, y)
-      hasAnyBonus = true
-    end
-  end
-
-  -- 勘探资源
-  if plot:GetResourceType() == -1 and plot:GetImprovementType() == -1 then
-    randomIndex = Game.GetRandNum(100, "Random Borobudur Resource " .. playerId) + 1
-    print("婆罗浮屠 资源", randomIndex)
-    if randomIndex / 100 <= BOROBUDUR_EXCAVATE_RESOURCE_PROB then
-      randomIndex = Game.GetRandNum(#BorobudurResources, "Random Borobudur ResourceType " .. playerId) + 1
-      local resourceType = BorobudurResources[randomIndex]
-      local resourceInfo = GameInfo.Resources[resourceType]
-      local resourceId = resourceInfo.Index
-      local resourceName = resourceInfo.Name
-      Utils.GenerateResource(plot, resourceId)
-
-      player:AttachModifierByID('HD_BOROBUDUR_VOLCANIC_SOIL_YIELD')
-
-      local msg = Locale.Lookup('LOC_BOROBUDUR_EXCAVATE_RESOURCE') .. '[ICON_' .. resourceType .. '] ' .. Locale.Lookup(resourceName)
-      Game.AddWorldViewText(playerId, msg, x, y)
-      hasAnyBonus = true
-    end
-  end
-
-  -- 没有获得任何奖励
-  if not hasAnyBonus then
-    local msg = Locale.Lookup('LOC_BOROBUDUR_EXCAVATE_NOTHING')
-    Game.AddWorldViewText(playerId, msg, x, y)
-  end
-
-  -- 扣除劳动次数/删除单位
-  local movesRemaining = Utils.GetUnitMovesRemaining(playerId, unitId)
-  unit:ChangeMovesRemaining(-movesRemaining)
-  local unitAbility = unit:GetAbility()
-  for i=1, 10, 1 do
-    if unitAbility:GetAbilityCount('ABILITY_HD_BOROBUDUR_MILITARY_ENGINEER_NEGA_CHARGE_' .. i) == 0 then
-      unitAbility:ChangeAbilityCount('ABILITY_HD_BOROBUDUR_MILITARY_ENGINEER_NEGA_CHARGE_' .. i, 1);
-      break;
-    end
-  end
-end
-GameEvents.HD_Borobudur_Excavate.Add(BorobudurUnitExcavate)
-
 -- 圣彼得大教堂
 local BUILDING_AL_STPETERSBASILICA_INFO = GameInfo.Buildings['BUILDING_AL_STPETERSBASILICA'];
 local AL_STPETERSBASILICA_PLAYER_TAG = 'HD_AL_STPETERSBASILICA_PLAYER';
@@ -924,7 +818,7 @@ function AlStpetersbasilicaCityReligionFollowersChanged(playerId, cityId, eVisib
 
               -- 查询区域对应产出
               local correspondingYieldInfo = GameInfo.DistrictCorrespondingYieldType_HD[districtType];
-              if correspondingYieldInfo then
+              if correspondingYieldInfo and correspondingYieldInfo.RequiresPopulation == true then
                 local popNum = city:GetPopulation();
                 local yieldType = correspondingYieldInfo.YieldType;
                 if yieldType == 'YIELD_FOOD' or yieldType == 'YIELD_FAITH' then
@@ -1077,9 +971,40 @@ Events.CityReligionFollowersChanged.Add(function()
 end)
 GameEvents.OnGameTurnEnded.Add(RefreshStBasilsIfPending)
 Events.CitySelectionChanged.Add(RefreshStBasilsIfPending)
+
+-- 婆罗浮屠
+local BOROBUDUR_UNIT_TAG = 'HD_BOROBUDUR_UNIT_';
+function BorobudurTrainOrPurchaseUnit(playerId, objectId)
+  local player = Players[playerId];
+  if not player then return; end
+
+  local unit = GameInfo.Units[objectId];
+  if not unit then return; end
+
+  if unit.FormationClass == 'FORMATION_CLASS_NAVAL' and player:GetProperty(BOROBUDUR_UNIT_TAG .. unit.UnitType) ~= 1 then
+    player:SetProperty(BOROBUDUR_UNIT_TAG .. unit.UnitType, 1);
+    player:AttachModifierByID('HD_BOROBUDUR_GRANT_ENVOY_' .. unit.UnitType);
+    print('婆罗浮屠建造或购买海军获得使者：' .. Locale.Lookup(unit.Name));
+  end
+end
+
+function BorobudurTrainUnit(playerId, cityId, type, objectId, cancelled)
+  if type == 0 then
+    BorobudurTrainOrPurchaseUnit(playerId, objectId);
+  end
+end
+Events.CityProductionCompleted.Add(BorobudurTrainUnit);
+
+function BorobudurPurchaseUnit(playerId, cityId, x, y, type, objectId)
+  if type == EventSubTypes.UNIT then
+    BorobudurTrainOrPurchaseUnit(playerId, objectId);
+  end
+end
+Events.CityMadePurchase.Add(BorobudurPurchaseUnit);
+
 --------------------------------------------------------------
 -- Initialize
-function initialize()
-  Events.TradeRouteAddedToMap.Add(BamyanTradeRouteAddedToMap)
-end
-Events.LoadGameViewStateDone.Add(initialize);
+-- function initialize()
+  
+-- end
+-- Events.LoadGameViewStateDone.Add(initialize);

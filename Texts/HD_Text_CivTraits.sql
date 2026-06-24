@@ -512,10 +512,7 @@ values
 -- 西班牙
 -- =====================================================================================================================================
 	("LOC_TRAIT_CIVILIZATION_TREASURE_FLEET_NAME",                           "El Dorado"),
-	("LOC_TRAIT_CIVILIZATION_TREASURE_FLEET_EXPANSION2_DESCRIPTION",         "Your military units can act ""Explore City of Gold"" if on or adjacent to Natural Wonder and gain 1 promotion level and +1 [ICON_GOVERNOR] Governor Title (each natural wonder can only be explored once). Every city with a [ICON_GOVERNOR] Governor provide +1 [ICON_PRODUCTION] Production and +2 [ICON_GOLD] Gold to all your [ICON_TRADEROUTE] Trade Routes; these bonuses are doubled for [ICON_TRADEROUTE] Trade Routes across multiple continents. +1 [ICON_TRADEROUTE] Trade Route capacity for the first city on each continent which is not your original [ICON_CAPITAL] Capital’s continent."),
-	("LOC_SPAIN_EL_DORADO_HD_TEXT",                                    			 "Explore City of Gold[NEWLINE][NEWLINE]Gain 1 promotion level and +1 [ICON_GOVERNOR] Governor Title"),
-	("LOC_SPAIN_EL_DORADO_HD_LIST",                                   			 "[NEWLINE][NEWLINE]Explored Cities of Gold: "),
-	("LOC_SPAIN_EL_DORADO_HD_DISABLED",                               			 "[COLOR:Red]Must be on or adjacent to unexplored Natural Wonder, and have [ICON_MOVEMENT] Movement left.[ENDCOLOR]"),
+	("LOC_TRAIT_CIVILIZATION_TREASURE_FLEET_EXPANSION2_DESCRIPTION",         "Each time you discover a Natural Wonde, gain +1 [ICON_GOVERNOR] Governor Title. Every city with a [ICON_GOVERNOR] Governor provide +1 [ICON_PRODUCTION] Production and +2 [ICON_GOLD] Gold to all your [ICON_TRADEROUTE] Trade Routes; these bonuses are doubled for [ICON_TRADEROUTE] Trade Routes across multiple continents. +1 [ICON_TRADEROUTE] Trade Route capacity for the first city on each continent which is not your original [ICON_CAPITAL] Capital’s continent."),
 	("LOC_TRAIT_LEADER_EL_ESCORIAL_NAME",                                    "Treasure Fleet"),
 	("LOC_TRAIT_LEADER_EL_ESCORIAL_EXPANSION2_DESCRIPTION",                  "May construct the El Escorial Palace in the Government Plaza. May form Fleets with Naval Tradition. May form Armadas with Exploration. Conquering a city with a naval unit will upgrade it into a Fleets or Armadas, if the proper Civics are unlocked. +50% accumulation rate for [ICON_GREATADMIRAL] Great Admiral Points."),
 -- =====================================================================================================================================
@@ -1127,10 +1124,7 @@ values
 -- 西班牙
 -- =====================================================================================================================================
 	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_TREASURE_FLEET_NAME",                    "黄金七城"),
-	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_TREASURE_FLEET_EXPANSION2_DESCRIPTION",  "你的军事单位可以在相邻或位于自然奇观的单元格进行“探索黄金城”，获得一次晋升并奖励1个 [ICON_GOVERNOR] 总督头衔，每个自然奇观限一次。每个有 [ICON_GOVERNOR] 总督就职的城市为所有 [ICON_TRADEROUTE] 贸易路线+1 [ICON_PRODUCTION] 生产力、+2 [ICON_GOLD] 金币；如 [ICON_TRADEROUTE] 贸易路线横跨多个大陆则该收益翻倍。在每个异大陆上建立首座城市时+1 [ICON_TRADEROUTE] 贸易路线容量。"),
-	("zh_Hans_CN",  "LOC_SPAIN_EL_DORADO_HD_TEXT",                                   "探索黄金城[NEWLINE][NEWLINE]获得一次晋升并奖励1个 [ICON_GOVERNOR] 总督头衔。"),
-	("zh_Hans_CN",  "LOC_SPAIN_EL_DORADO_HD_LIST",                                   "[NEWLINE][NEWLINE]已经探索的“黄金城”："),
-	("zh_Hans_CN",  "LOC_SPAIN_EL_DORADO_HD_DISABLED",                               "[COLOR:Red]必须位于或相邻没有探索过的自然奇观单元格，且有剩余 [ICON_Movement] 移动力。[ENDCOLOR]"),
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_TREASURE_FLEET_EXPANSION2_DESCRIPTION",  "每次发现自然奇观时奖励1个 [ICON_GOVERNOR] 总督头衔。每个有 [ICON_GOVERNOR] 总督就职的城市为所有 [ICON_TRADEROUTE] 贸易路线+1 [ICON_PRODUCTION] 生产力、+2 [ICON_GOLD] 金币；如 [ICON_TRADEROUTE] 贸易路线横跨多个大陆则该收益翻倍。在每个异大陆上建立首座城市时+1 [ICON_TRADEROUTE] 贸易路线容量。"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_EL_ESCORIAL_NAME",                             "宝藏舰队"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_EL_ESCORIAL_EXPANSION2_DESCRIPTION",           "解锁“海军传统”市政后即可组建舰队，解锁“探索”市政后即可组建无敌舰队；如已解锁相关市政，用海军单位占领城市则可将其升级为舰队或无敌舰队。[ICON_GREATADMIRAL] 海军统帅点数积累速度+50%。可在市政广场中建造埃斯科里亚尔王宫。"),
 -- =====================================================================================================================================

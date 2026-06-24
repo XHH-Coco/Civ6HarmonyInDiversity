@@ -46,21 +46,67 @@ update Modifiers set ModifierType = 'MODIFIER_CITY_DISTRICTS_ADJUST_YIELD_CHANGE
 
 -- 铜雀台 Buff非自己建立的城市
 insert or ignore into TraitModifiers (TraitType, ModifierId)
-	select distinct TraitType, TraitType || '_' || Level || '_NOT_FOUNDED' from HD_CityStateBuffedObjects
-where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_PHANTA_BRONZE_BIRD_TERRACE');
+	select distinct TraitType, TraitType || '_' || Level || '_NOT_FOUNDED'
+from HD_CityStateBuffedObjects where IsYieldChange = 1
+ 	and exists (select BuildingType from Buildings where BuildingType = 'BUILDING_PHANTA_BRONZE_BIRD_TERRACE');
+
 insert or ignore into Modifiers (ModifierId,	ModifierType, SubjectRequirementSetId)
-	select distinct TraitType || '_' || Level || '_NOT_FOUNDED', 'MODIFIER_ALL_CITIES_ATTACH_MODIFIER', 'PLAYER_HAS_' || Level || '_INFLUENCE' from HD_CityStateBuffedObjects
-where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_PHANTA_BRONZE_BIRD_TERRACE');
-insert or ignore into ModifierArguments (ModifierId, Name, Value)
-	select distinct TraitType || '_' || Level || '_NOT_FOUNDED', 'ModifierId', TraitType || '_' || Level || '_NOT_FOUNDED_MODIFIER' from HD_CityStateBuffedObjects
-where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_PHANTA_BRONZE_BIRD_TERRACE');
-insert or ignore into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId, SubjectRequirementSetId)
-	select distinct TraitType || '_' || Level || '_NOT_FOUNDED_MODIFIER', 'MODIFIER_SINGLE_CITY_ADJUST_YIELD_CHANGE', 'PLAYER_HAS_BUILDING_PHANTA_BRONZE_BIRD_TERRACE_REQUIREMENTS', 'CITY_WAS_NOT_FOUNDED' from HD_CityStateBuffedObjects
-where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_PHANTA_BRONZE_BIRD_TERRACE');
+	select distinct TraitType || '_' || Level || '_NOT_FOUNDED', 'MODIFIER_ALL_CITIES_ATTACH_MODIFIER', 'PLAYER_HAS_' || Level || '_INFLUENCE'
+from HD_CityStateBuffedObjects where IsYieldChange = 1
+ 	and exists (select BuildingType from Buildings where BuildingType = 'BUILDING_PHANTA_BRONZE_BIRD_TERRACE');
 
 insert or ignore into ModifierArguments (ModifierId, Name, Value)
-	select distinct TraitType || '_' || Level || '_NOT_FOUNDED_MODIFIER', 'YieldType', YieldType from HD_CityStateBuffedObjects where IsYieldChange = 1
-and exists (select BuildingType from Buildings where BuildingType = 'BUILDING_PHANTA_BRONZE_BIRD_TERRACE');
+	select distinct TraitType || '_' || Level || '_NOT_FOUNDED', 'ModifierId', TraitType || '_' || Level || '_NOT_FOUNDED_MODIFIER'
+from HD_CityStateBuffedObjects where IsYieldChange = 1
+ 	and exists (select BuildingType from Buildings where BuildingType = 'BUILDING_PHANTA_BRONZE_BIRD_TERRACE');
+
+insert or ignore into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId, SubjectRequirementSetId)
+	select distinct TraitType || '_' || Level || '_NOT_FOUNDED_MODIFIER', 'MODIFIER_SINGLE_CITY_ADJUST_YIELD_CHANGE', 'PLAYER_HAS_BUILDING_PHANTA_BRONZE_BIRD_TERRACE_REQUIREMENTS', 'CITY_WAS_NOT_FOUNDED'
+from HD_CityStateBuffedObjects where IsYieldChange = 1
+ 	and exists (select BuildingType from Buildings where BuildingType = 'BUILDING_PHANTA_BRONZE_BIRD_TERRACE');
+
 insert or ignore into ModifierArguments (ModifierId, Name, Value)
-	select distinct TraitType || '_' || Level || '_NOT_FOUNDED_MODIFIER', 'Amount', Amount from HD_CityStateBuffedObjects
-where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_PHANTA_BRONZE_BIRD_TERRACE');
+	select distinct TraitType || '_' || Level || '_NOT_FOUNDED_MODIFIER', 'YieldType', YieldType
+from HD_CityStateBuffedObjects where IsYieldChange = 1
+ 	and exists (select BuildingType from Buildings where BuildingType = 'BUILDING_PHANTA_BRONZE_BIRD_TERRACE');
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value)
+	select distinct TraitType || '_' || Level || '_NOT_FOUNDED_MODIFIER', 'Amount', Amount
+from HD_CityStateBuffedObjects where IsYieldChange = 1
+ 	and exists (select BuildingType from Buildings where BuildingType = 'BUILDING_PHANTA_BRONZE_BIRD_TERRACE');
+
+-- 婆罗浮屠 1使者特效翻倍
+insert or ignore into TraitModifiers (TraitType, ModifierId)
+	select distinct TraitType, TraitType || '_BOROBUDUR_DOUBLE_' || ObjectType || '_' || Level from HD_CityStateBuffedObjects
+where IsYieldChange = 1 and Level = 'SMALL' and ModifierType = 'MODIFIER_BUILDING_YIELD_CHANGE'
+	and exists (select BuildingType from Buildings where BuildingType = 'BUILDING_SUK_BOROBUDUR');
+
+insert or ignore into Modifiers (ModifierId,	ModifierType, SubjectRequirementSetId)
+	select distinct TraitType || '_BOROBUDUR_DOUBLE_' || ObjectType || '_'  || Level, 'MODIFIER_ALL_CITIES_ATTACH_MODIFIER', 'PLAYER_HAS_' || Level || '_INFLUENCE' from HD_CityStateBuffedObjects
+where IsYieldChange = 1 and Level = 'SMALL' and ModifierType = 'MODIFIER_BUILDING_YIELD_CHANGE'
+	and exists (select BuildingType from Buildings where BuildingType = 'BUILDING_SUK_BOROBUDUR');
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value)
+	select distinct TraitType || '_BOROBUDUR_DOUBLE_' || ObjectType || '_'  || Level, 'ModifierId', TraitType || '_BOROBUDUR_DOUBLE_' || ObjectType || '_'  || Level || '_MODIFIER' from HD_CityStateBuffedObjects
+where IsYieldChange = 1 and Level = 'SMALL' and ModifierType = 'MODIFIER_BUILDING_YIELD_CHANGE'
+	and exists (select BuildingType from Buildings where BuildingType = 'BUILDING_SUK_BOROBUDUR');
+
+insert or ignore into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId, SubjectRequirementSetId)
+	select distinct TraitType || '_BOROBUDUR_DOUBLE_' || ObjectType || '_'  || Level || '_MODIFIER', 'MODIFIER_BUILDING_YIELD_CHANGE', 'CITY_WAS_FOUNDED', 'PLAYER_HAS_BUILDING_SUK_BOROBUDUR_REQUIREMENTS' from HD_CityStateBuffedObjects
+where IsYieldChange = 1 and Level = 'SMALL' and ModifierType = 'MODIFIER_BUILDING_YIELD_CHANGE'
+	and exists (select BuildingType from Buildings where BuildingType = 'BUILDING_SUK_BOROBUDUR');
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value)
+	select distinct TraitType || '_BOROBUDUR_DOUBLE_' || ObjectType || '_'  || Level || '_MODIFIER', 'YieldType', YieldType from HD_CityStateBuffedObjects
+where IsYieldChange = 1 and Level = 'SMALL' and ModifierType = 'MODIFIER_BUILDING_YIELD_CHANGE'
+	and exists (select BuildingType from Buildings where BuildingType = 'BUILDING_SUK_BOROBUDUR');
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value)
+	select distinct TraitType || '_BOROBUDUR_DOUBLE_' || ObjectType || '_'  || Level || '_MODIFIER', 'Amount', Amount from HD_CityStateBuffedObjects
+where IsYieldChange = 1 and Level = 'SMALL' and ModifierType = 'MODIFIER_BUILDING_YIELD_CHANGE'
+	and exists (select BuildingType from Buildings where BuildingType = 'BUILDING_SUK_BOROBUDUR');
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value)
+	select distinct TraitType || '_BOROBUDUR_DOUBLE_' || ObjectType || '_'  || Level || '_MODIFIER', 'BuildingType', ObjectType from HD_CityStateBuffedObjects
+where IsYieldChange = 1 and Level = 'SMALL' and ModifierType = 'MODIFIER_BUILDING_YIELD_CHANGE'
+	and exists (select BuildingType from Buildings where BuildingType = 'BUILDING_SUK_BOROBUDUR');
