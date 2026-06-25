@@ -2632,6 +2632,8 @@ function SpainNotificationAdded(playerId, notificationId)
 	local player = Players[playerId];
   if not player then return; end
 
+	if not CivilizationHasTrait(playerId, 'TRAIT_CIVILIZATION_TREASURE_FLEET') then return; end
+
 	local notificationEntry = NotificationManager.Find(playerId, notificationId)
   if notificationEntry then
     if notificationEntry:GetType() == NOTIFICATION_DISCOVER_NATURAL_WONDER_HASH then
