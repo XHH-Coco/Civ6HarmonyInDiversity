@@ -70,9 +70,9 @@ values
 	('CIVIC_ETHICS_HD',												'LOC_CIVIC_ETHICS_HD_NAME',													NULL,																											1050,	'ERA_RENAISSANCE',	2,					'ADVISOR_RELIGIOUS'),
 	('CIVIC_SOCIAL_SCIENCE_HD',								'LOC_CIVIC_SOCIAL_SCIENCE_HD_NAME',									NULL,																											1450,	'ERA_INDUSTRIAL',		0,					'ADVISOR_CULTURE'),
 	-- 原始军事
-	('CIVIC_EARLY_WARFARE_HD',								'LOC_CIVIC_EARLY_WARFARE_HD_NAME',									NULL,																											30,		'ERA_ANCIENT',			-2,					'ADVISOR_CONQUEST'),
+	('CIVIC_EARLY_WARFARE_HD',								'LOC_CIVIC_EARLY_WARFARE_HD_NAME',									NULL,																											40,		'ERA_ANCIENT',			-2,					'ADVISOR_CONQUEST'),
 	-- 丧仪
-	('CIVIC_FUNERAL_HD',											'LOC_CIVIC_FUNERAL_HD_NAME',												NULL,																											30,		'ERA_ANCIENT',			2,					'ADVISOR_RELIGIOUS'),
+	('CIVIC_FUNERAL_HD',											'LOC_CIVIC_FUNERAL_HD_NAME',												NULL,																											40,		'ERA_ANCIENT',			2,					'ADVISOR_RELIGIOUS'),
 	-- 户籍管理
 	('CIVIC_HOUSEHOLD_REGISTRATION_HD',				'LOC_CIVIC_HOUSEHOLD_REGISTRATION_HD_NAME',					'LOC_CIVIC_HOUSEHOLD_REGISTRATION_HD_DESCRIPTION',				240,	'ERA_CLASSICAL',		0,					'ADVISOR_GENERIC'),
 	-- 纹章学
@@ -507,12 +507,12 @@ update Civics set UITreeRow = -3 where CivicType = 'CIVIC_CULTURAL_HEGEMONY';
 
 -- Civic Tree v3
 -- 远古
-update Civics set Cost = 30 where CivicType = 'CIVIC_CODE_OF_LAWS';
-update Civics set Cost = 30 where CivicType = 'CIVIC_CRAFTSMANSHIP';
-update Civics set Cost = 30 where CivicType = 'CIVIC_FOREIGN_TRADE';
+update Civics set Cost = 40 where CivicType = 'CIVIC_CODE_OF_LAWS';
+update Civics set Cost = 40 where CivicType = 'CIVIC_CRAFTSMANSHIP';
+update Civics set Cost = 40 where CivicType = 'CIVIC_FOREIGN_TRADE';
 update Civics set Cost = 50 where CivicType = 'CIVIC_MILITARY_TRADITION';
-update Civics set Cost = 70 where CivicType = 'CIVIC_STATE_WORKFORCE';
-update Civics set Cost = 70 where CivicType = 'CIVIC_EARLY_EMPIRE';
+update Civics set Cost = 80 where CivicType = 'CIVIC_STATE_WORKFORCE';
+update Civics set Cost = 80 where CivicType = 'CIVIC_EARLY_EMPIRE';
 update Civics set Cost = 50 where CivicType = 'CIVIC_MYSTICISM';
 
 update Civics set Cost = 150 where CivicType = 'CIVIC_GAMES_RECREATION';
