@@ -133,6 +133,86 @@ function MilitaryEngineerExcavate(playerId, unitId)
 end
 GameEvents.HD_Military_Engineer_Excavate.Add(MilitaryEngineerExcavate)
 
+-- 巴西UU 旗手
+local FEATURE_JUNGLE_INDEX = GameInfo.Features['FEATURE_JUNGLE'].Index;
+local FEATURE_FOREST_INDEX = GameInfo.Features['FEATURE_FOREST'].Index;
+local FEATURE_MARSH_INDEX = GameInfo.Features['FEATURE_MARSH'].Index;
+local FEATURE_HD_SWAMP_INFO = GameInfo.Features['FEATURE_HD_SWAMP'];
+function BandeirantesAutoRoad(playerId, unitId, x, y, locallyVisible, stateChange)
+	local player = Players[playerId];
+	local unit = UnitManager.GetUnit(playerId, unitId);
+	local plot = Map.GetPlot(x, y);
+	if not player or not unit or not plot then return; end
+
+	if GameInfo.Units[unit:GetType()].UnitType == "UNIT_HD_BANDEIRANTES" then
+		local featureId = plot:GetFeatureType();
+		if featureId == FEATURE_JUNGLE_INDEX
+			or featureId == FEATURE_FOREST_INDEX
+			or featureId == FEATURE_MARSH_INDEX
+			or (FEATURE_HD_SWAMP_INFO and featureId == FEATURE_HD_SWAMP_INFO.Index)
+		then
+			local currentRouteType = plot:GetRouteType();
+			local playerRouteType = Utils.GetRouteTypeForPlayer(player);
+			if currentRouteType == RouteTypes.NONE or Utils.CompareRoutes(playerRouteType,currentRouteType) then
+				RouteBuilder.SetRouteType(plot, playerRouteType);
+			end
+		end
+	end
+end
+Events.UnitMoved.Add(BandeirantesAutoRoad);
+
+local BANDEIRANTES_PLOT_TAG = 'HD_BANDEIRANTES_PLOT';
+local BANDEIRANTES_RESOURCE_TAG = 'HD_BANDEIRANTES_RESOURCE';
+local BANDEIRANTES_FIRST_COLLECT_TAG = 'HD_BANDEIRANTES_FIRST_COLLECT';
+local BANDEIRANTES_RESOURCES_TIMES = GlobalParameters.HD_BANDEIRANTES_RESOURCES_TIMES or 0;
+function Bandeirantes_Collect_Resource(playerId, unitId)
+	if BANDEIRANTES_RESOURCES_TIMES <= 0 then return; end
+
+	local player = Players[playerId];
+	local unit = UnitManager.GetUnit(playerId, unitId);
+	if not player or not unit then return; end
+
+	local x = unit:GetX()
+  local y = unit:GetY()
+	local plot = Map.GetPlot(x, y);
+	local resourceId = plot:GetResourceType();
+	local resourceInfo = GameInfo.Resources[resourceId];
+
+	if resourceInfo then
+		-- 单元格已经收集
+		plot:SetProperty(BANDEIRANTES_PLOT_TAG, 1);
+
+		-- 记录次数
+		local resourceMap = player:GetProperty(BANDEIRANTES_RESOURCE_TAG) or {};
+		local times = resourceMap[resourceInfo.ResourceType] or 0;
+		resourceMap[resourceInfo.ResourceType] = times + 1;
+		player:SetProperty(BANDEIRANTES_RESOURCE_TAG, resourceMap);
+		print("旗手收集资源：" .. Locale.Lookup(resourceInfo.Name) .. " 次数：" .. (times + 1));
+
+		-- 判断是否满足加产的收集次数
+		if times > 0 and (times + 1) % BANDEIRANTES_RESOURCES_TIMES == 0 then
+			-- 若为首次 则+1琴
+			if player:GetProperty(BANDEIRANTES_FIRST_COLLECT_TAG) ~= 1 then
+				player:SetProperty(BANDEIRANTES_FIRST_COLLECT_TAG, 1);
+				player:AttachModifierByID('HD_BANDEIRANTES_JUNGLE_YIELD_CULTURE');
+			end
+
+			-- 获得资源本体的产出
+			for row in GameInfo.Resource_YieldChanges() do
+				if row.ResourceType == resourceInfo.ResourceType then
+					for i=1, row.YieldChange, 1 do
+						player:AttachModifierByID('HD_BANDEIRANTES_JUNGLE_' .. row.YieldType);
+					end
+				end
+			end
+		end
+		
+		local movesRemaining = Utils.GetUnitMovesRemaining(playerId, unitId);
+		unit:ChangeMovesRemaining(-movesRemaining);
+	end
+end
+GameEvents.HD_Bandeirantes_Collect_Resource.Add(Bandeirantes_Collect_Resource);
+
 -- 垃圾回收中心, by xiaoxiao
 local RECYCLING_PLANT_PRODUCTION_PERCENT = GlobalParameters.RECYCLING_PLANT_PRODUCTION_PERCENT or 0;
 function HDRecyclingPlantRecycle (playerId, unitId)

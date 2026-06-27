@@ -151,3 +151,8 @@ insert or ignore into PlayerItems
 select
     "Players:Expansion2_Players",   "CIVILIZATION_CHINA",   "LEADER_WU_ZETIAN",     "UNIT_PLUM_INTERNAL_SECURITY_HD",   "ICON_UNIT_PLUM_INTERNAL_SECURITY_HD",  "LOC_UNIT_PLUM_INTERNAL_SECURITY_HD_NAME",  "LOC_UNIT_PLUM_INTERNAL_SECURITY_HD_DESCRIPTION",   50
 where exists (select LeaderType from Players where LeaderType = 'LEADER_WU_ZETIAN');
+
+-- 巴西 旗手
+insert or ignore into PlayerItems (Domain, CivilizationType, LeaderType, Type, Icon, Name, Description, SortIndex) select
+    "Players:Expansion2_Players", "CIVILIZATION_BRAZIL", LeaderType, "UNIT_HD_BANDEIRANTES", "ICON_UNIT_HD_BANDEIRANTES", "LOC_UNIT_HD_BANDEIRANTES_NAME", "LOC_UNIT_HD_BANDEIRANTES_DESCRIPTION", 1
+from Players where CivilizationType = "CIVILIZATION_BRAZIL";

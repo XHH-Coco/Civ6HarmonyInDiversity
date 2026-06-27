@@ -10,6 +10,7 @@ values
   ('UNIT_HD_BARBARIAN_GALLEY',          'KIND_UNIT'),
   ('UNIT_HD_BARBARIAN_QUADRIREME',      'KIND_UNIT'),
   ('UNIT_HD_CANOE',                     'KIND_UNIT'),
+  ('UNIT_HD_BANDEIRANTES',              'KIND_UNIT'),
 
 	('GREAT_PERSON_CLASS_ENKIDU_HD',		  'KIND_GREAT_PERSON_CLASS'),
 
@@ -17,6 +18,7 @@ values
 
 	('TRAIT_ENKIDU_HD',	                  'KIND_TRAIT'),
 	('TRAIT_QIN_ELITE_SOLDIER_HD',	      'KIND_TRAIT'),
+	('TRAIT_BANDEIRANTES_HD',	            'KIND_TRAIT'),
 
 	('PROMOTION_CLASS_ENKIDU_HD',	        'KIND_PROMOTION_CLASS'),
 
@@ -57,7 +59,10 @@ values
   2, 2, 15, 25, 1, 50, 0, 1, 'YIELD_GOLD', 'DOMAIN_SEA', 'FORMATION_CLASS_NAVAL', 'PROMOTION_CLASS_NAVAL_RANGED', 'PSEUDOYIELD_UNIT_NAVAL_COMBAT', 'ADVISOR_CONQUEST', NULL),
   -- 独木舟
   ('UNIT_HD_CANOE', 'LOC_UNIT_HD_CANOE_NAME', 'LOC_UNIT_HD_CANOE_DESCRIPTION', NULL, 'TECH_SAILING', 'TECH_CARTOGRAPHY',
-  2, 3, 20, 0, 0, 35, 0, 1, 'YIELD_GOLD', 'DOMAIN_SEA', 'FORMATION_CLASS_NAVAL', 'PROMOTION_CLASS_NAVAL_MELEE', 'PSEUDOYIELD_UNIT_NAVAL_COMBAT', 'ADVISOR_CONQUEST', NULL);
+  2, 3, 20, 0, 0, 35, 0, 1, 'YIELD_GOLD', 'DOMAIN_SEA', 'FORMATION_CLASS_NAVAL', 'PROMOTION_CLASS_NAVAL_MELEE', 'PSEUDOYIELD_UNIT_NAVAL_COMBAT', 'ADVISOR_CONQUEST', NULL),
+  -- 旗手
+  ('UNIT_HD_BANDEIRANTES', 'LOC_UNIT_HD_BANDEIRANTES_NAME', 'LOC_UNIT_HD_BANDEIRANTES_DESCRIPTION', 'TRAIT_BANDEIRANTES_HD', NULL, NULL,
+  2, 3, 10, 10, 1, 25, 0, 0, 'YIELD_GOLD', 'DOMAIN_LAND', 'FORMATION_CLASS_LAND_COMBAT', 'PROMOTION_CLASS_RECON', 'PSEUDOYIELD_UNIT_EXPLORER', 'ADVISOR_GENERIC', NULL);
 
 update Units set Bombard = 25 where UnitType = 'UNIT_ANCIENT_SIEGE';
 update Units set CanTrain = 0, InitialLevel = 2 where UnitType = 'UNIT_ENKIDU_HD';
@@ -70,7 +75,8 @@ insert or replace into Units_XP2 (UnitType, ResourceCost, ResourceMaintenanceTyp
 -- UnitReplaces
 insert or replace into UnitReplaces (CivUniqueUnitType, ReplacesUnitType) values
   ('UNIT_QIN_ELITE_SOLDIER_HD',       'UNIT_SWORDSMAN'),
-  ('UNIT_HD_BARBARIAN_GALLEY',        'UNIT_ANCIENT_SEADOG');
+  ('UNIT_HD_BARBARIAN_GALLEY',        'UNIT_ANCIENT_SEADOG'),
+  ('UNIT_HD_BANDEIRANTES',            'UNIT_SCOUT');
 
 -- UnitUpgrades
 insert or replace into UnitUpgrades (Unit, UpgradeUnit) values
@@ -116,6 +122,10 @@ insert or replace into UnitAiInfos (UnitType, AiType)
   select 'UNIT_HD_CANOE', AiType
 from UnitAiInfos where UnitType = 'UNIT_GALLEY';
 
+insert or replace into UnitAiInfos (UnitType, AiType)
+  select 'UNIT_HD_BANDEIRANTES', AiType
+from UnitAiInfos where UnitType = 'UNIT_SCOUT';
+
 -- GreatPersonClasses
 insert or replace into GreatPersonClasses
 	(GreatPersonClassType, Name, UnitType, DistrictType, AvailableInTimeline, GenerateDuplicateIndividuals, PseudoYieldType, IconString, ActionIcon)
@@ -130,7 +140,8 @@ values
 -- Traits
 insert or ignore into Traits (TraitType, Name) values
 	('TRAIT_ENKIDU_HD',	            'LOC_TRAIT_ENKIDU_HD_NAME'),
-	('TRAIT_QIN_ELITE_SOLDIER_HD',	'LOC_TRAIT_QIN_ELITE_SOLDIER_HD_NAME');
+	('TRAIT_QIN_ELITE_SOLDIER_HD',	'LOC_TRAIT_QIN_ELITE_SOLDIER_HD_NAME'),
+	('TRAIT_BANDEIRANTES_HD',	      'LOC_TRAIT_BANDEIRANTES_HD_NAME');
 
 -- UnitPromotionClasses
 insert or ignore into UnitPromotionClasses (PromotionClassType, Name) values
@@ -167,7 +178,8 @@ values
 	('CLASS_QIN_ELITE_SOLDIER_HD',	'ABILITY_CLASS'),
   ('CLASS_UNIT_CITADEL_OF_GOD',		'ABILITY_CLASS'),
   ('CLASS_SEADOG',				        'ABILITY_CLASS'),
-  ('CLASS_LAND_MILITARY',		      'ABILITY_CLASS');
+  ('CLASS_LAND_MILITARY',		      'ABILITY_CLASS'),
+  ('CLASS_HD_BANDEIRANTES',		    'ABILITY_CLASS');
 
 insert or ignore into TypeTags
   (Type,                          Tag)
@@ -194,10 +206,13 @@ values
   ('UNIT_HD_BARBARIAN_GALLEY',    'CLASS_NAVAL_RAIDER'),
   ('UNIT_HD_BARBARIAN_GALLEY',    'CLASS_REVEAL_STEALTH'),
   ('UNIT_HD_BARBARIAN_QUADRIREME','CLASS_NAVAL_RANGED'),
-  ('UNIT_HD_CANOE',               'CLASS_NAVAL_MELEE');
+  ('UNIT_HD_CANOE',               'CLASS_NAVAL_MELEE'),
+  ('UNIT_HD_BANDEIRANTES',        'CLASS_HD_BANDEIRANTES'),
+  ('UNIT_HD_BANDEIRANTES',        'CLASS_RECON');
 
 insert or replace into MomentIllustrations
 	(MomentIllustrationType, 								MomentDataType,					GameDataType,				            Texture)
 values
 	('MOMENT_ILLUSTRATION_UNIQUE_UNIT', 		'MOMENT_DATA_UNIT',			'UNIT_ENKIDU_HD',	              'UNIT_ENKIDU_HD_MONMENT.dds'),
-	('MOMENT_ILLUSTRATION_UNIQUE_UNIT', 		'MOMENT_DATA_UNIT',			'UNIT_QIN_ELITE_SOLDIER_HD',	  'UNIT_QIN_ELITE_SOLDIER_HD_MONMENT.dds');
+	('MOMENT_ILLUSTRATION_UNIQUE_UNIT', 		'MOMENT_DATA_UNIT',			'UNIT_QIN_ELITE_SOLDIER_HD',	  'UNIT_QIN_ELITE_SOLDIER_HD_MONMENT.dds'),
+	('MOMENT_ILLUSTRATION_UNIQUE_UNIT', 		'MOMENT_DATA_UNIT',			'UNIT_HD_BANDEIRANTES',	        'Moment_UniqueUnit_Cree.dds');

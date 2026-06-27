@@ -44,7 +44,7 @@ function EngineerAutoRoad(iPlayerID,iUnitID,iX,iY,locallyVisible,stateChange)
         return
     end
 
-    local currentRouteType = plot:GetRouteType(plot);
+    local currentRouteType = plot:GetRouteType();
     local playerRouteType = Utils.GetRouteTypeForPlayer(pPlayer);
     if currentRouteType == RouteTypes.NONE or Utils.CompareRoutes(playerRouteType,currentRouteType) then
         RouteBuilder.SetRouteType(plot, playerRouteType);

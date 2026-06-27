@@ -54,6 +54,8 @@ function ResourceClassificationButtonReset()
       Controls.ResourceClassification_Button_Stack:SetHide(true)
       Controls.ResourceClassification_Button:SetToolTipString("")
     end
+  else
+    Controls.ResourceClassification_Button_Stack:SetHide(true)
   end
 end
 

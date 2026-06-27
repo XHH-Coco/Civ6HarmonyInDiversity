@@ -76,6 +76,8 @@ function RegionalYieldsButtonReset()
       Controls.RegionalYields_Button_Stack:SetHide(false)
       Controls.RegionalYields_Button:SetToolTipString(Locale.Lookup('LOC_CITY_REGIONAL_YIELD_NON_TEXT'))
     end
+  else
+    Controls.RegionalYields_Button_Stack:SetHide(true)
   end
 end
 

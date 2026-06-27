@@ -1641,7 +1641,7 @@ end
 Events.GreatWorkCreated.Add(SumeriaGreatWorkCreated);
 
 -- 建造国家公园
-function SumeriaNationalParkAdded(plyerId, x, y)
+function SumeriaNationalParkAdded(playerId, x, y)
 	SumeriaCompleteSpecialQuest(playerId, 'HD_SPECIAL_QUEST_BUILD_NATIONAL_PARK')
 end
 
@@ -1918,29 +1918,246 @@ Events.ReligionFounded.Add(SumeriaZigguratReligionFounded)
 -- =====================================================================================================================================
 -- 巴西
 -- =====================================================================================================================================
-function PedroGreatPersonFaith(playerID, unitID, greatPersonClassID, greatPersonIndividualID)
-	local player = Players[playerID]
-	local sMagnanimous = 'TRAIT_LEADER_MAGNANIMOUS'
-	local sModifierID = 'TRAIT_GREAT_PEOPLE_JUNGLE_FAITH'
-	local PROP_KEY_NUMBER_GREAT_PEOPLE = 'NumberofGreatPeople'
-	if LeaderHasTrait(playerID, sMagnanimous) then
-		local amount = player:GetProperty(PROP_KEY_NUMBER_GREAT_PEOPLE)
-		if amount == nil then
-			amount = 0
+local NOTIFICATION_PRIDE_MOMENT_RECORDED_HASH = GameInfo.Notifications['NOTIFICATION_PRIDE_MOMENT_RECORDED'].Hash;
+
+local MAGNANIMOUS_COMPLETE_DISTRICT_BUILDING_TAG = 'HD_MAGNANIMOUS_COMPLETE_DISTRICT_BUILDING';
+local MAGNANIMOUS_INTRODUCE_POPULATION_TAG = 'HD_MAGNANIMOUS_INTRODUCE_POPULATION';
+local MAGNANIMOUS_MOMENT_TAG = 'HD_MAGNANIMOUS_MOMENT_';
+
+local MAGNANIMOUS_INTRODUCE_GREAT_PERSON_PERCENTAGE = GlobalParameters.HD_MAGNANIMOUS_INTRODUCE_GREAT_PERSON_PERCENTAGE or 0;
+local MAGNANIMOUS_INTRODUCE_TYCOON_PERCENTAGE = GlobalParameters.HD_MAGNANIMOUS_INTRODUCE_TYCOON_PERCENTAGE or 0;
+local MAGNANIMOUS_INTRODUCE_INVESTOR_PERCENTAGE = GlobalParameters.HD_MAGNANIMOUS_INTRODUCE_INVESTOR_PERCENTAGE or 0;
+
+-- 记录历史时刻
+function MagnanimousNotificationAdded(playerId, notificationId)
+	local player = Players[playerId];
+  if not player then return; end
+
+	if LeaderHasTrait(playerId, 'TRAIT_LEADER_MAGNANIMOUS') then
+		local notificationEntry = NotificationManager.Find(playerId, notificationId)
+  	if notificationEntry and notificationEntry:GetType() == NOTIFICATION_PRIDE_MOMENT_RECORDED_HASH then
+			local momentId = notificationEntry:GetValue("MomentID");
+			if momentId then
+				print('momentId', momentId)
+				local momentData = Utils.GetHistoricalMomentData(momentId);
+				local momentInfo = momentData and GameInfo.Moments[momentData.Type] or nil;
+				if momentInfo then
+					local firstMomentInfo = GameInfo.HD_FIRST_MOMENTS[momentInfo.MomentType];
+					if firstMomentInfo and player:GetProperty(MAGNANIMOUS_MOMENT_TAG .. momentId) ~= 1 then
+						player:SetProperty(MAGNANIMOUS_MOMENT_TAG .. momentId, 1);
+
+						-- 文明首次
+						if firstMomentInfo.FirstType == 'CIVILIZATION' or firstMomentInfo.FirstType == 'WORLD' then
+							local amount = player:GetProperty(MAGNANIMOUS_COMPLETE_DISTRICT_BUILDING_TAG) or 0;
+							player:SetProperty(MAGNANIMOUS_COMPLETE_DISTRICT_BUILDING_TAG, amount + 1);
+							print("佩德罗二世 可免费建造次数：" .. amount + 1);
+						end
+
+						-- 世界首次
+						if firstMomentInfo.FirstType == 'WORLD' then
+							local amount = player:GetProperty(MAGNANIMOUS_INTRODUCE_POPULATION_TAG) or 0;
+							player:SetProperty(MAGNANIMOUS_INTRODUCE_POPULATION_TAG, amount + 1);
+							print("佩德罗二世 可引进移民次数：" .. amount + 1);
+						end
+					end
+				end
+			end
 		end
-		amount = amount + 1
-		-- Every two greatperson add 1 faith to jungle.
-		if amount == 2 then
-			amount = 0
-			player:AttachModifierByID(sModifierID)
-		end
-		player:SetProperty(PROP_KEY_NUMBER_GREAT_PEOPLE, amount)
 	end
 end
+Events.NotificationAdded.Add(MagnanimousNotificationAdded);
 
-Events.UnitGreatPersonCreated.Add(PedroGreatPersonFaith)
+-- 完成区域建筑
+function MagnanimousCompleteDistrictBuilding(playerId, cityId, productionId, objectId)
+	local player = Players[playerId];
+  if not player then return; end
 
---Mali EraScore +15 Gold
+	if LeaderHasTrait(playerId, 'TRAIT_LEADER_MAGNANIMOUS') then
+		local amount = player:GetProperty(MAGNANIMOUS_COMPLETE_DISTRICT_BUILDING_TAG) or 0;
+		if amount <= 0 then return; end
+
+		local city = CityManager.GetCity(playerId, cityId);
+		if city ~= nil then
+			local current = city:GetBuildQueue():CurrentlyBuilding();
+			if current then
+				-- local buildingInfo = GameInfo.Buildings[current];
+				local districtInfo = GameInfo.Districts[current];
+
+				-- if buildingInfo ~= nil then
+				-- 	if buildingInfo.IsWonder == false then
+				-- 		city:GetBuildQueue():FinishProgress();
+				-- 		print("佩德罗二世 建造" .. Locale.Lookup(buildingInfo.Name));
+				-- 		Game.AddWorldViewText(playerId, Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_BUILD_VIEWTEXT', buildingInfo.Name), city:GetX(), city:GetY());
+				-- 		player:SetProperty(MAGNANIMOUS_COMPLETE_DISTRICT_BUILDING_TAG, amount - 1);
+				-- 		print("佩德罗二世 可免费建造次数：" .. amount - 1);
+				-- 	end
+				-- end
+
+				if districtInfo ~= nil then
+					if districtInfo.DistrictType ~= 'DISTRICT_CITY_CENTER' and districtInfo.DistrictType ~= 'DISTRICT_WONDER' then
+						city:GetBuildQueue():FinishProgress();
+						print("佩德罗二世 建造" .. Locale.Lookup(districtInfo.Name));
+						Game.AddWorldViewText(playerId, Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_BUILD_VIEWTEXT', districtInfo.Name), city:GetX(), city:GetY());
+						player:SetProperty(MAGNANIMOUS_COMPLETE_DISTRICT_BUILDING_TAG, amount - 1);
+						print("佩德罗二世 可免费建造次数：" .. amount - 1);
+					end
+				end
+			end
+		end
+	end
+end
+Events.CityProductionChanged.Add(MagnanimousCompleteDistrictBuilding)
+
+-- 引进移民人才
+local TYCOON_INFO = GameInfo.Units['UNIT_LEU_TYCOON'];
+local INVESTOR_INFO = GameInfo.Units['UNIT_LEU_INVESTOR'];
+function MagnanimousIntroducePopulation(playerId, param)
+	local player = Players[playerId];
+  if not player then return; end
+
+	local cityId = param.CityId;
+	local city = CityManager.GetCity(playerId, cityId);
+	if not city then return; end
+
+	local amount = player:GetProperty(MAGNANIMOUS_INTRODUCE_POPULATION_TAG) or 0;
+	if amount <= 0 then return; end
+	player:SetProperty(MAGNANIMOUS_INTRODUCE_POPULATION_TAG, amount - 1);
+
+	-- 从附近的外国城市吸引1人口
+	city:ChangePopulation(1);
+
+	-- 统计外国城市列表
+	local cityList = {};
+	for _, otherPlayer in ipairs(Players) do
+		if otherPlayer:GetID() ~= playerId and otherPlayer:GetCities() ~= nil then
+			for _, otherCity in otherPlayer:GetCities():Members() do
+				if otherCity:GetPopulation() > 1 then
+					local distance = Map.GetPlotDistance(city:GetX(), city:GetY(), otherCity:GetX(), otherCity:GetY());
+					table.insert(cityList, {
+						city = otherCity,
+						distance = distance
+					})
+				end
+			end
+		end
+	end
+
+	-- 根据距离升序排列
+	table.sort(cityList, function(a, b)
+		return a.distance < b.distance;
+	end)
+
+	-- 从最近的6座城市中随机选择
+	if #cityList > 0 then
+		local length = math.min(#cityList, 6);
+		local randomIndex = Game.GetRandNum(length, "Random City for Player " .. playerId) + 1;
+		local targetCity = cityList[randomIndex].city;
+
+		if targetCity:GetPopulation() > 1 then
+			targetCity:ChangePopulation(-1);
+		end
+
+		Game.AddWorldViewText(playerId, Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_POPULATION_VIEWTEXT', targetCity:GetName()), city:GetX(), city:GetY());
+		print(Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_POPULATION_VIEWTEXT', targetCity:GetName()));
+	else
+		local randomIndex = Game.GetRandNum(1, "Random City for Player " .. playerId);
+		if randomIndex == 0 then
+			Game.AddWorldViewText(playerId, Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_POPULATION_VIEWTEXT', 'LOC_IMPROVEMENT_GOODY_HUT_NAME'), city:GetX(), city:GetY());
+			print(Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_POPULATION_VIEWTEXT', 'LOC_IMPROVEMENT_GOODY_HUT_NAME'));
+		else
+			Game.AddWorldViewText(playerId, Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_POPULATION_VIEWTEXT', 'LOC_IMPROVEMENT_BARBARIAN_CAMP_NAME'), city:GetX(), city:GetY());
+			print(Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_POPULATION_VIEWTEXT', 'LOC_IMPROVEMENT_BARBARIAN_CAMP_NAME'));
+		end
+	end
+
+	-- 伟人
+	local gpRandomIndex = Game.GetRandNum(100, "Random Magnanimous GP " .. playerId) + 1;
+	local gpPercentage = param.GpPercentage or 0;
+	local gpData = param.GpData;
+	print("佩德罗二世 引进伟人：", gpRandomIndex, gpPercentage);
+	if gpRandomIndex <= gpPercentage and gpData then
+		local IndividualInfo = GameInfo.GreatPersonIndividuals[gpData.IndividualId];
+		local classInfo = GameInfo.GreatPersonClasses[gpData.ClassId];
+		if IndividualInfo and classInfo then
+			local era = Game.GetEras():GetCurrentEra();
+			Game.GetGreatPeople():GrantPerson(gpData.IndividualId, gpData.ClassId, era, 0, playerId, false);
+			Game.AddWorldViewText(playerId, Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_TALENTS_VIEWTEXT', gpData.CivName, classInfo.IconString .. ' ' .. Locale.Lookup(classInfo.Name) .. ' ' .. Locale.Lookup(IndividualInfo.Name)), city:GetX(), city:GetY());
+			print("佩德罗二世 " .. Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_TALENTS_VIEWTEXT', gpData.CivName, classInfo.IconString .. ' ' .. Locale.Lookup(classInfo.Name) .. ' ' .. Locale.Lookup(IndividualInfo.Name)));
+		end
+	end
+
+	local aliveMajorList = {}
+	for _, alivePlayerId in ipairs(PlayerManager.GetAliveMajorIDs()) do
+		if alivePlayerId ~= playerId then
+			table.insert(aliveMajorList, PlayerConfigurations[alivePlayerId]:GetCivilizationShortDescription());
+		end
+	end
+	if #aliveMajorList == 0 then
+		table.insert(aliveMajorList, 'LOC_IMPROVEMENT_GOODY_HUT_NAME');
+		table.insert(aliveMajorList, 'LOC_IMPROVEMENT_BARBARIAN_CAMP_NAME');
+	end
+
+	-- 大亨
+	if TYCOON_INFO then
+		local tycoonRandomIndex = Game.GetRandNum(100, "Random Magnanimous Tycoon " .. playerId) + 1;
+		local tycoonPercentage = param.TycoonPercentage or 0;
+		print("佩德罗二世 引进大亨：", tycoonRandomIndex, tycoonPercentage);
+		if tycoonRandomIndex <= tycoonPercentage then
+			city:AttachModifierByID('HD_MAGNANIMOUS_GRANT_UNIT_LEU_TYCOON');
+
+			local randomCivIndex = Game.GetRandNum(#aliveMajorList, "Random Magnanimous Alive Civ Name " .. playerId) + 1;
+			Game.AddWorldViewText(playerId, Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_TALENTS_VIEWTEXT', aliveMajorList[randomCivIndex], TYCOON_INFO.Name), city:GetX(), city:GetY());
+			print("佩德罗二世 " .. Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_TALENTS_VIEWTEXT', aliveMajorList[randomCivIndex], TYCOON_INFO.Name));
+		end
+	end
+
+	-- 投资人
+	if INVESTOR_INFO then
+		local investorRandomIndex = Game.GetRandNum(100, "Random Magnanimous Investor " .. playerId) + 1;
+		local investorPercentage = param.InvestorPercentage or 0;
+		print("佩德罗二世 引进投资人：", investorRandomIndex, investorPercentage);
+		if investorRandomIndex <= investorPercentage then
+			city:AttachModifierByID('HD_MAGNANIMOUS_GRANT_UNIT_LEU_INVESTOR');
+
+			local randomCivIndex = Game.GetRandNum(#aliveMajorList, "Random Magnanimous Alive Civ Name " .. playerId) + 1;
+			Game.AddWorldViewText(playerId, Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_TALENTS_VIEWTEXT', aliveMajorList[randomCivIndex], INVESTOR_INFO.Name), city:GetX(), city:GetY());
+			print("佩德罗二世 " .. Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_TALENTS_VIEWTEXT', aliveMajorList[randomCivIndex], INVESTOR_INFO.Name));
+		end
+	end
+end
+GameEvents.HD_Magnanimous_Introduce_Population.Add(MagnanimousIntroducePopulation);
+
+-- UD获得虚拟建筑
+local DISTRICT_STREET_CARNIVAL_INDEX = GameInfo.Districts["DISTRICT_STREET_CARNIVAL"].Index;
+local DISTRICT_WATER_STREET_CARNIVAL_INDEX = GameInfo.Districts["DISTRICT_WATER_STREET_CARNIVAL"].Index;
+local BUILDING_HD_STREET_CARNIVAL_INTERNAL_INDEX = GameInfo.Buildings["BUILDING_HD_STREET_CARNIVAL_INTERNAL"].Index;
+local BUILDING_HD_WATER_STREET_CARNIVAL_INTERNAL_INDEX = GameInfo.Buildings["BUILDING_HD_WATER_STREET_CARNIVAL_INTERNAL"].Index;
+function CarnivalDistrictConstructed(playerId, districtType, x, y)
+	if districtType == DISTRICT_STREET_CARNIVAL_INDEX then
+		local plot = Map.GetPlot(x, y);
+		if plot then
+			local city = Cities.GetPlotPurchaseCity(plot);
+			if city then
+				city:GetBuildQueue():CreateBuilding(BUILDING_HD_STREET_CARNIVAL_INTERNAL_INDEX)
+			end
+		end
+	end
+	
+	if districtType == DISTRICT_WATER_STREET_CARNIVAL_INDEX then
+		local plot = Map.GetPlot(x, y);
+		if plot then
+			local city = Cities.GetPlotPurchaseCity(plot);
+			if city then
+				city:GetBuildQueue():CreateBuilding(BUILDING_HD_WATER_STREET_CARNIVAL_INTERNAL_INDEX)
+			end
+		end
+	end
+end
+GameEvents.OnDistrictConstructed.Add(CarnivalDistrictConstructed);
+
+-- =====================================================================================================================================
+-- 马里
+-- =====================================================================================================================================
 function MaliPlayerEraScoreChanged(playerID, amountAwarded)
 	local player = Players[playerID]
 	local sMaliGoldDesert = 'TRAIT_LEADER_SAHEL_MERCHANTS'
@@ -2197,21 +2414,6 @@ function OnUnitGreatPersonCreated(playerID, unitID, greatPersonClassID, greatPer
 end
 
 Events.UnitGreatPersonCreated.Add(OnUnitGreatPersonCreated)
-
--- 巴西UD改动, by xiaoxiao
-function OnUnitGreatPersonCreatedBrazil(playerID, unitID, greatPersonClassID, greatPersonIndividualID)
-	local player = Players[playerID]
-	if not CivilizationHasTrait(playerID, 'TRAIT_CIVILIZATION_STREET_CARNIVAL') then
-		return;
-	end
-	for row in GameInfo.GreatPersonClasses() do
-		if row.Index == greatPersonClassID then
-			local classType = row.GreatPersonClassType
-			player:AttachModifierByID('HD_BRAZIL_UD_' .. classType)
-		end
-	end
-end
-Events.UnitGreatPersonCreated.Add(OnUnitGreatPersonCreatedBrazil)
 
 -- 法国UA改动
 function FranceWonderGreatPeoplePoint (x, y, buildingId, playerId, cityId, percentComplete, unknown)
@@ -2792,6 +2994,9 @@ function TokugawaDistrictConstructed(playerID, districtID, iX, iY)
 end
 GameEvents.OnDistrictConstructed.Add(TokugawaDistrictConstructed);
 
+-- =====================================================================================================================================
+-- 瑞典
+-- =====================================================================================================================================
 -- 瑞典LB跳歌剧与芭蕾
 local OPERA_BALLET_INDEX = GameInfo.Civics['CIVIC_OPERA_BALLET'].Index;
 function QueenBibliothequeBuildingAddedToMap (playerID, cityID, buildingID, plotID, bOriginalConstruction)
@@ -2831,6 +3036,9 @@ end
 Events.CivicBoostTriggered.Add(KristinaBoostTriggered)
 Events.TechBoostTriggered.Add(KristinaBoostTriggered)
 
+-- =====================================================================================================================================
+-- 朝鲜
+-- =====================================================================================================================================
 -- 编撰官招募
 local CodifierListTag = "HD_CodifierList";
 local CodifierPersonClass = GameInfo.GreatPersonClasses["GREAT_PERSON_CLASS_HD_CODIFIER"];
@@ -2927,10 +3135,14 @@ function SeJongGreatPersonCreated(playerId, unitId, greatPersonClassId, greatPer
 								print('SeJongGreatPersonCreated', row2.ModifierId, row2.AttachmentTargetType)
 								if row2.AttachmentTargetType == 'GREAT_PERSON_ACTION_ATTACHMENT_TARGET_CITY' then
 									local capital = player:GetCities():GetCapitalCity();
-									capital:AttachModifierByID(row2.ModifierId)
+									if capital then
+										capital:AttachModifierByID(row2.ModifierId)
+									end
 								elseif row2.AttachmentTargetType == 'GREAT_PERSON_ACTION_ATTACHMENT_TARGET_DISTRICT_IN_TILE' then
 									local capital = player:GetCities():GetCapitalCity();
-									capital:AttachModifierByID(row2.GreatPersonIndividualType .. '_' .. row2.ModifierId .. '_ATTACH')
+									if capital then
+										capital:AttachModifierByID(row2.GreatPersonIndividualType .. '_' .. row2.ModifierId .. '_ATTACH')
+									end
 								elseif row2.AttachmentTargetType == 'GREAT_PERSON_ACTION_ATTACHMENT_TARGET_PLAYER' then
 									player:AttachModifierByID(row2.ModifierId)
 								end
@@ -2944,6 +3156,9 @@ function SeJongGreatPersonCreated(playerId, unitId, greatPersonClassId, greatPer
 end
 Events.UnitGreatPersonCreated.Add(SeJongGreatPersonCreated);
 
+-- =====================================================================================================================================
+-- 罗马
+-- =====================================================================================================================================
 -- 图拉真
 function TrajanCityProductionChanged(playerId, cityId, productionId, objectId)
 	local player = Players[playerId];
@@ -2973,6 +3188,9 @@ function TrajanCityProductionChanged(playerId, cityId, productionId, objectId)
 end
 Events.CityProductionChanged.Add(TrajanCityProductionChanged)
 
+-- =====================================================================================================================================
+-- 埃及
+-- =====================================================================================================================================
 -- 埃及女王
 local Cleopatra_Trait = 'TRAIT_LEADER_MEDITERRANEAN'
 local Cleopatra_Tag = 'CleopatraAlliance_times'

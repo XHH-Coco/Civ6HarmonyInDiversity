@@ -23,21 +23,23 @@ values
 	('BUILDING_NILOMETER_HD',											'KIND_BUILDING'),
 	('BUILDING_HD_YUNSHAO_MANSION',								'KIND_BUILDING'),
 	('BUILDING_HD_YUNSHAO_MANSION_INTERNAL_ONLY',	'KIND_BUILDING'),
+	-- 巴西UD虚拟建筑
+	('BUILDING_HD_STREET_CARNIVAL_INTERNAL',			'KIND_BUILDING'),
+	('BUILDING_HD_WATER_STREET_CARNIVAL_INTERNAL','KIND_BUILDING'),
 	-- 新商业中心建筑
 	('BUILDING_FAIR',															'KIND_BUILDING');
 
-insert or replace into Buildings
-	(BuildingType, 						Name, 										Cost, 		Description,										
-		PrereqTech,						PrereqCivic,								PrereqDistrict,			PurchaseYield,			Housing) 
-values
+insert or replace into Buildings (BuildingType, Name, Cost, Description, PrereqTech, PrereqCivic, PrereqDistrict, PurchaseYield, Housing) values
 	-- 测量仪
-	('BUILDING_NILOMETER_HD',			'LOC_BUILDING_NILOMETER_HD_NAME', 			60,			'LOC_BUILDING_NILOMETER_HD_DESCRIPTION',				
-	'TECH_IRRIGATION',					null,										'DISTRICT_CITY_CENTER',	'YIELD_GOLD',			null),
+	('BUILDING_NILOMETER_HD', 'LOC_BUILDING_NILOMETER_HD_NAME', 60, 'LOC_BUILDING_NILOMETER_HD_DESCRIPTION', 'TECH_IRRIGATION', null, 'DISTRICT_CITY_CENTER', 'YIELD_GOLD', null),
 	-- 云韶府
-	('BUILDING_HD_YUNSHAO_MANSION',					'LOC_BUILDING_HD_YUNSHAO_MANSION_NAME', 				0,			'LOC_BUILDING_HD_YUNSHAO_MANSION_DESCRIPTION',
-	NULL,					NULL,										'DISTRICT_CITY_CENTER',	NULL,			0),
-	('BUILDING_HD_YUNSHAO_MANSION_INTERNAL_ONLY',					'LOC_BUILDING_HD_YUNSHAO_MANSION_INTERNAL_ONLY_NAME', 				0,			NULL,
-	NULL,					NULL,										NULL,	NULL,			0);
+	('BUILDING_HD_YUNSHAO_MANSION', 'LOC_BUILDING_HD_YUNSHAO_MANSION_NAME', 0, 'LOC_BUILDING_HD_YUNSHAO_MANSION_DESCRIPTION', NULL, NULL, 'DISTRICT_CITY_CENTER',	NULL, 0),
+	('BUILDING_HD_YUNSHAO_MANSION_INTERNAL_ONLY', 'LOC_BUILDING_HD_YUNSHAO_MANSION_INTERNAL_ONLY_NAME', 0, NULL, NULL, NULL, NULL, NULL, 0);
+
+insert or ignore into Buildings (BuildingType, Name, PrereqDistrict, Cost, Maintenance, AdvisorType, MustPurchase, InternalOnly) values
+	-- 巴西UD虚拟建筑
+	('BUILDING_HD_STREET_CARNIVAL_INTERNAL', 'LOC_DISTRICT_STREET_CARNIVAL_NAME', 'DISTRICT_STREET_CARNIVAL', 0, 0, 'ADVISOR_GENERIC', 1, 1),
+	('BUILDING_HD_WATER_STREET_CARNIVAL_INTERNAL', 'LOC_DISTRICT_WATER_STREET_CARNIVAL_NAME', 'DISTRICT_WATER_STREET_CARNIVAL', 0, 0, 'ADVISOR_GENERIC', 1, 1);
 
 insert or replace into Buildings
 	(BuildingType, Name, Cost, Description, PrereqTech, PrereqCivic, PrereqDistrict, PurchaseYield, CitizenSlots) 
@@ -76,9 +78,16 @@ insert or replace into Building_GreatWorks
 values
 	('BUILDING_HD_YUNSHAO_MANSION', 'GREATWORKSLOT_MUSIC', 	6,				1,										 100,										 100,											'LOC_BUILDING_THEMINGBONUS_HD_YUNSHAO_MANSION');
 
-insert or replace into Buildings_XP2 (BuildingType, Pillage) values ('BUILDING_HD_YUNSHAO_MANSION',	0);
+insert or replace into Buildings_XP2 (BuildingType, Pillage) values
+	('BUILDING_HD_YUNSHAO_MANSION',	0),
+	('BUILDING_HD_STREET_CARNIVAL_INTERNAL',	0),
+	('BUILDING_HD_WATER_STREET_CARNIVAL_INTERNAL',	0);
 
-insert or replace into HD_DUMMY_BUILDINGS (BuildingType) values ('BUILDING_HD_YUNSHAO_MANSION'), ('BUILDING_HD_YUNSHAO_MANSION_INTERNAL_ONLY');
+insert or replace into HD_DUMMY_BUILDINGS (BuildingType) values
+	('BUILDING_HD_YUNSHAO_MANSION'),
+	('BUILDING_HD_YUNSHAO_MANSION_INTERNAL_ONLY'),
+	('BUILDING_HD_STREET_CARNIVAL_INTERNAL'),
+	('BUILDING_HD_WATER_STREET_CARNIVAL_INTERNAL');
 
 -- 新社区建筑
 insert or ignore into Types

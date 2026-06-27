@@ -251,7 +251,7 @@ values
 	("LOC_PROMOTION_BATTLE_CHEER_HD_NAME", 																	 "Battle Chant"),
 	("LOC_PROMOTION_BATTLE_CHEER_HD_DESCRIPTION", 													 "All military units within 3 tiles gain +5 [ICON_STRENGTH] Strength."),
 	("LOC_PROMOTION_FIR_EXPEDITION_HD_NAME", 																 "Fir Forest March"),
-	("LOC_PROMOTION_FIR_EXPEDITION_HD_DESCRIPTION", 												 "All military units within 3 tiles in or adjacent to Forest, Jungle{LOC_OR_SWAMP_NAME} gain +1 [ICON_MOVEMENT] Movement and +20 HP/turn."),
+	("LOC_PROMOTION_FIR_EXPEDITION_HD_DESCRIPTION", 												 "All military units within 3 tiles in or adjacent to Forest, Jungle, Marsh{LOC_OR_SWAMP_NAME} gain +1 [ICON_MOVEMENT] Movement and +20 HP/turn."),
 	("LOC_PROMOTION_LONGOX_TRIAL_HD_NAME", 																	 "Longox trial"),
 	("LOC_PROMOTION_LONGOX_TRIAL_HD_DESCRIPTION", 													 "Double Flanking and Support bonus. All military units within 3 tiles ignore [ICON_STRENGTH] Strength penalties after injury."),
 	("LOC_PROMOTION_EPIC_EPILOGUE_HD_NAME", 																 "Epic Epilogue"),
@@ -506,8 +506,19 @@ values
 -- =====================================================================================================================================
 -- 巴西
 -- =====================================================================================================================================
-	("LOC_TRAIT_CIVILIZATION_AMAZON_DESCRIPTION",                            "Rainforest tiles provide a standard adjacency bonus for specialty districts, and grant +1 Appeal to adjacent tiles, instead of the usual -1. Improvements on Rainforest +1 [ICON_CULTURE] Culture. Luxury Resource on Rainforest +1 [ICON_FOOD] Food. All districts (except city centers) will not remove Rainforest. Unlock the Carnival project in city with Street Carnival or Copacabana district."),
-	("LOC_TRAIT_LEADER_MAGNANIMOUS_DESCRIPTION",                             "After recruiting or patronizing a [ICON_GreatPerson] Great Person, 20% of its [ICON_GreatPerson] Great Person point cost is refunded. +1 [Icon_Faith] Faith in all Rainforest Tiles across your country for every two [ICON_GreatPerson] Great Person you have recruited."),
+	("LOC_TRAIT_CIVILIZATION_AMAZON_DESCRIPTION",                            "All districts (except city centers) will not remove Rainforest. Rainforest tiles provide a standard adjacency bonus for specialty districts, and grant +1 Appeal to adjacent tiles."),
+	("LOC_TRAIT_LEADER_MAGNANIMOUS_NAME",                      			 				 "O Magnânimo"),
+	("LOC_TRAIT_LEADER_MAGNANIMOUS_DESCRIPTION",                             "After recruiting or patronizing a [ICON_GreatPerson] Great Person, 20% of its [ICON_GreatPerson] Great Person point cost is refunded. After completing a civilization's first Historic Moment, the next area or building constructed can be instantly completed. If it is a world's first Historic Moment, you may additionally choose a city to introduce immigrants or talents from other civilizations."),
+	("LOC_TRAIT_LEADER_MAGNANIMOUS_BUILD_VIEWTEXT",          		 		 				 "Built {1_Name} for free"),
+	("LOC_TRAIT_LEADER_MAGNANIMOUS_POPULATION_VIEWTEXT",          			 		 "Introduce one [ICON_CITIZEN] immigrant from {1_Name}"),
+	("LOC_TRAIT_LEADER_MAGNANIMOUS_TALENTS_VIEWTEXT",          			 				 "Introduce {2_Name} from {1_Name}"),
+	("LOC_TRAIT_LEADER_MAGNANIMOUS_INTRODUCE_TEXT",        					 				 "Introduce [ICON_CITIZEN] immigrants from other civilizations"),
+	("LOC_TRAIT_LEADER_MAGNANIMOUS_INTRODUCE_PERCENTAGE_TEXT",        			 "[ICON_BULLET]{1_Percentage}% chance of introducing a {2_Name}."),
+	("LOC_TRAIT_LEADER_MAGNANIMOUS_INTRODUCE_TIMES_TEXT",        		 				 "Remaining times of introductions: {1_Num} {1_Num : plural 1?time; other?times;}."),
+	("LOC_BANDEIRANTES_COLLECT_RESOURCE_TEXT",        		 						 			 "Collect Rainforest Resources"),
+	("LOC_BANDEIRANTES_COLLECT_RESOURCE_DISABLED_TEXT",        		 	 				 "[COLOR:Red]The resources in this tile have already been collected.[ENDCOLOR]"),
+	("LOC_BANDEIRANTES_COLLECT_RESOURCE_DISABLED_TEXT2",        		 	 			 "[COLOR:Red]Must on the unowned Rainforest Resources.[ENDCOLOR]"),
+	("LOC_BANDEIRANTES_COLLECT_RESOURCE_COLLECTED_TEXT",        		 	 			 "Collected:[NEWLINE]{1_Detail}"),
 -- =====================================================================================================================================
 -- 西班牙
 -- =====================================================================================================================================
@@ -863,7 +874,7 @@ values
 	("zh_Hans_CN",  "LOC_PROMOTION_BATTLE_CHEER_HD_NAME", 																	"战斗鼓舞"),
 	("zh_Hans_CN",  "LOC_PROMOTION_BATTLE_CHEER_HD_DESCRIPTION", 														"在三个单元格以内，所有军事单位+5 [ICON_STRENGTH] 战斗力。"),
 	("zh_Hans_CN",  "LOC_PROMOTION_FIR_EXPEDITION_HD_NAME", 																"杉林远征"),
-	("zh_Hans_CN",  "LOC_PROMOTION_FIR_EXPEDITION_HD_DESCRIPTION", 													"在三个单元格以内，所有相邻或位于森林、雨林{LOC_OR_SWAMP_NAME}的军事单位+1 [ICON_MOVEMENT] 移动力，每回合额外回复20 [ICON_Damaged] 生命值。"),
+	("zh_Hans_CN",  "LOC_PROMOTION_FIR_EXPEDITION_HD_DESCRIPTION", 													"在三个单元格以内，所有相邻或位于森林、雨林或沼泽的军事单位+1 [ICON_MOVEMENT] 移动力，每回合额外回复20 [ICON_Damaged] 生命值。"),
 	("zh_Hans_CN",  "LOC_PROMOTION_LONGOX_TRIAL_HD_NAME", 																	"天牛试炼"),
 	("zh_Hans_CN",  "LOC_PROMOTION_LONGOX_TRIAL_HD_DESCRIPTION", 														"获得两倍夹击加成和支援加成。在三个单元格以内，所有军事单位无视受到伤害后的 [ICON_STRENGTH] 战斗力减益。"),
 	("zh_Hans_CN",  "LOC_PROMOTION_EPIC_EPILOGUE_HD_NAME", 																	"史诗终章"),
@@ -1076,7 +1087,7 @@ values
 -- =====================================================================================================================================
 -- 越南
 -- =====================================================================================================================================
-	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_VIETNAM_DESCRIPTION",                    "所有区域（除市中心外）不移除树林、雨林、沼泽地貌。建在这些区域中的建筑以及区域本体和奇观将获得以下收益：建在树林上提供+2 [ICON_Production] 生产力、建在雨林上提供+2 [ICON_Food] 食物、建在沼泽上提供+2 [ICON_Science] 科技值。拥有“神秘主义”后即可栽种树林。"),
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_VIETNAM_DESCRIPTION",                    "除市中心外的区域不移除树林、雨林、沼泽地貌。建在这些区域中的建筑以及区域本体和奇观将获得以下收益：建在树林上提供+2 [ICON_Production] 生产力、建在雨林上提供+2 [ICON_Food] 食物、建在沼泽上提供+2 [ICON_Science] 科技值。拥有“神秘主义”后即可栽种树林。"),
 -- =====================================================================================================================================
 -- 高卢
 -- =====================================================================================================================================
@@ -1118,8 +1129,19 @@ values
 -- =====================================================================================================================================
 -- 巴西
 -- =====================================================================================================================================
-	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_AMAZON_DESCRIPTION",                     "雨林单元格为专业化区域提供标准相邻加成，并为相邻的单元格提供+1魅力（而非通常的-1。）位于雨林的改良设施+1 [ICON_CULTURE] 文化值，位于雨林的奢侈资源+1 [ICON_FOOD] 食物。所有区域（除市中心外）不移除雨林。建有街头狂欢节或科帕卡瓦纳的城市可解锁“狂欢节”项目。"),
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_DESCRIPTION",                      "招募或赞助一位 [ICON_GreatPerson] 伟人后，将返还所消耗 [ICON_GreatPerson] 伟人点数的20%。每招募2名伟人，您国境内的所有雨林单元格+1 [Icon_Faith] 信仰值。"),
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_AMAZON_DESCRIPTION",                     "除市中心外的区域不移除雨林。雨林单元格为专业化区域提供标准相邻加成，并为相邻的单元格提供+1魅力。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_NAME",                      			 "高尚者"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_DESCRIPTION",                      "招募或赞助一位 [ICON_GreatPerson] 伟人后返还20%消耗的点数。每次完成“文明首次”的历史时刻后，下一个建造的区域或建筑可以立刻完成；若为“世界首次”则可以选择一座城市引进其他文明的移民或人才。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_BUILD_VIEWTEXT",          		 		 "免费建造了{1_Name}"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_POPULATION_VIEWTEXT",          		 "从{1_Name}引进了一个 [ICON_CITIZEN] 移民"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_TALENTS_VIEWTEXT",          			 "从{1_Civ}引进了：{2_Name}"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_INTRODUCE_TEXT",        					 "从其他文明引进 [ICON_CITIZEN] 移民"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_INTRODUCE_PERCENTAGE_TEXT",        "[ICON_BULLET]有{1_Percentage}%的概率引进一位{2_Name}。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_INTRODUCE_TIMES_TEXT",        		 "剩余引进次数：{1_Num}次。"),
+	("zh_Hans_CN",  "LOC_BANDEIRANTES_COLLECT_RESOURCE_TEXT",        		 						 "收集雨林资源"),
+	("zh_Hans_CN",  "LOC_BANDEIRANTES_COLLECT_RESOURCE_DISABLED_TEXT",        		 	 "[COLOR:Red]该单元格的资源已经被收集过了。[ENDCOLOR]"),
+	("zh_Hans_CN",  "LOC_BANDEIRANTES_COLLECT_RESOURCE_DISABLED_TEXT2",        		 	 "[COLOR:Red]必须位于境外的雨林资源上。[ENDCOLOR]"),
+	("zh_Hans_CN",  "LOC_BANDEIRANTES_COLLECT_RESOURCE_COLLECTED_TEXT",        		 	 "已收集：[NEWLINE]{1_Detail}"),
 -- =====================================================================================================================================
 -- 西班牙
 -- =====================================================================================================================================

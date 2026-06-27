@@ -42,7 +42,9 @@ values
     ("LOC_UNIT_POLISH_HUSSAR_EXPANSION2_DESCRIPTION",     "Polish unique Renaissance era unit. Pushes defending enemy units back from their hex in any battle where they score more damage. Defenders that cannot retreat suffer additional damage. 50% less [ICON_Strength] Combat Strength reduction from being injured."),
 	("LOC_UNIT_BRAZILIAN_MINAS_GERAES_DESCRIPTION",		  "Brazilian unique Industrial era unit that replaces the Battleship. Stronger than the Battleship."),
     ("LOC_UNIT_NORWEGIAN_BERSERKER_DESCRIPTION",          "Harald Hardrada (Heimskringla)'s unique Medieval era melee unit that replaces the Man-At-Arms. 4 [ICON_MOVEMENT] Movement if this unit starts in enemy territory. +10 [ICON_STRENGTH] Combat Strength when attacking and -5 [ICON_STRENGTH] Combat Strength when defending against melee attacks."),
-    ("LOC_UNIT_INCA_WARAKAQ_DESCRIPTION",                 "Incan unique Classical Era unit. +1 additional attack per turn.");
+    ("LOC_UNIT_INCA_WARAKAQ_DESCRIPTION",                 "Incan unique Classical Era unit. +1 additional attack per turn."),
+    ("LOC_UNIT_HD_BANDEIRANTES_NAME",                     "Bandeirantes"),
+    ("LOC_UNIT_HD_BANDEIRANTES_DESCRIPTION",              "Brazilian unique unit that replaces the Scout, but is unable to be upgraded to a more advanced unit. It has a higher [ICON_Movement] Movement and its [ICON_STRENGTH] Combat Strength increases according to your era. It automatically creates roads when passing through Woods, Rainforest, Marsh{LOC_OR_SWAMP_NAME}. It can collect resources on unowned rainforest tiles. For every two of the same resource collected, the improvement on rainforest tiles within the territory gain the yields of that resource. After the player collects two of the same resource for the first time, additionally gain +1 [ICON_CULTURE] Cultural.");
 
 --------------------------------------------------------------------------------
 -- Language: zh_Hans_CN
@@ -94,7 +96,9 @@ values
     ("zh_Hans_CN",  "LOC_UNIT_KOREAN_HWACHA_NAME",                       "火厢车"),
     ("zh_Hans_CN",  "LOC_UNIT_MONGOLIAN_KESHIG_NAME",                    "怯薛军"),
     ("zh_Hans_CN",  "LOC_UNIT_INCA_WARAKAQ_NAME",                        "精锐投石者"),
-    ("zh_Hans_CN",  "LOC_UNIT_INCA_WARAKAQ_DESCRIPTION",                 "印加古典时代特色单位，取代斥候。每回合+1额外攻击。");
+    ("zh_Hans_CN",  "LOC_UNIT_INCA_WARAKAQ_DESCRIPTION",                 "印加古典时代特色单位，取代斥候。每回合+1额外攻击。"),
+    ("zh_Hans_CN",  "LOC_UNIT_HD_BANDEIRANTES_NAME",                     "旗手"),
+    ("zh_Hans_CN",  "LOC_UNIT_HD_BANDEIRANTES_DESCRIPTION",              "巴西特色单位，取代侦察兵，但无法升级成高级单位。[ICON_Movement] 移动力更高且 [ICON_STRENGTH] 战斗力随你所处的时代提升。经过森林、雨林或沼泽时自动创建道路。可以收集无主的雨林单元格上的资源，每收集两个同种资源，境内雨林单元格上的改良获得该资源的产出。玩家首次收集两个同种资源后，额外获得+1 [ICON_CULTURE] 文化值。");
 
 -- Units information updates
 --------------------------------------------------------------------------------
@@ -103,7 +107,7 @@ insert or replace into EnglishText
     (Tag,                                                                       Text)
 values
     -- 军事工程单位
-    ("LOC_UNIT_MILITARY_ENGINEER_ALT_DESCRIPTION",                              "Medieval era support unit. [NEWLINE]Can spend a build charges to complete 30% of a Canal, Dam or Aqueduct district or a Seawall building. Can spend a build charges on the Volcanic Soil tiles for “exploration”, having a probability of obtaining [ICON_Gold] Gold or [ICON_Science] Science; there is also the possibility of discovering new resources or [ICON_GREATWORK_RELIC] Relics. Units within 1 tile recover +10 additional HP per turn when healing. [NEWLINE]Ignore [ICON_MOVEMENT] movement penalty from all Terrians, Features and Rivers."),
+    ("LOC_UNIT_MILITARY_ENGINEER_ALT_DESCRIPTION",                              "Medieval era support unit. [NEWLINE]Automatically creates Roads as it moves. Can spend a build charges to complete 30% of a Canal, Dam or Aqueduct district or a Seawall building. Can spend a build charges on the Volcanic Soil tiles for “exploration”, having a probability of obtaining [ICON_Gold] Gold or [ICON_Science] Science; there is also the possibility of discovering new resources or [ICON_GREATWORK_RELIC] Relics. Units within 1 tile recover +10 additional HP per turn when healing. [NEWLINE]Ignore [ICON_MOVEMENT] movement penalty from all Terrians, Features and Rivers."),
     ("LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_NAME",                         "Explore Volcanic Soil"),
     ("LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_DESCRIPTION",                  "Having a probability of obtaining [ICON_Gold] Gold or [ICON_Science] Science. There is also the possibility of discovering new resources or [ICON_GREATWORK_RELIC] Relics."),
     ("LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_DISABLED",                     "[COLOR_RED]Must on a Volcanic Soil tile without Districts.[ENDCOLOR]"),
@@ -140,7 +144,7 @@ insert or replace into LocalizedText
     (Language,      Tag,                                                                    Text)
 values
     -- 军事工程单位
-    ("zh_Hans_CN",  "LOC_UNIT_MILITARY_ENGINEER_ALT_DESCRIPTION",                           "中世纪支援单位。[NEWLINE]可消耗1次劳动力加快运河、堤坝、水渠区域或拦海堤30%的建造进度。可以在火山土上消耗1次劳动力进行“勘探”，有概率获得 [ICON_Gold] 金币或 [ICON_Science] 科技值，也有概率发现新资源或发掘出 [ICON_GREATWORK_RELIC] 遗物。一个单元格内单位回复生命值时+10每回合回复量。[NEWLINE]无视地形、地貌和河流的移动力消耗。"),
+    ("zh_Hans_CN",  "LOC_UNIT_MILITARY_ENGINEER_ALT_DESCRIPTION",                           "中世纪支援单位。[NEWLINE]移动时自动创建道路。可消耗1次劳动力加快运河、堤坝、水渠区域或拦海堤30%的建造进度。可以在火山土上消耗1次劳动力进行“勘探”，有概率获得 [ICON_Gold] 金币或 [ICON_Science] 科技值，也有概率发现新资源或发掘出 [ICON_GREATWORK_RELIC] 遗物。一个单元格内单位回复生命值时+10每回合回复量。[NEWLINE]无视地形、地貌和河流的移动力消耗。"),
     ("zh_Hans_CN",  "LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_NAME",                      "勘探火山土"),
     ("zh_Hans_CN",  "LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_DESCRIPTION",               "有概率获得 [ICON_Gold] 金币或 [ICON_Science] 科技值，也有概率发现新资源或发掘出 [ICON_GREATWORK_RELIC] 遗物。"),
     ("zh_Hans_CN",  "LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_DISABLED",                  "[COLOR_RED]必须位于未建有区域的火山土单元格。[ENDCOLOR]"),

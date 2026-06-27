@@ -1130,6 +1130,89 @@ insert or replace into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_AQUARIUM_SCIENCE_' || Exp, 'Amount', Amount
 	from HD_Binary_Compress where Exp < 7;
 
+-- 巴西UD虚拟建筑
+insert or replace into HD_Building_Base_On_ResourceClassification (BuildingType, ResourceClassificationType, DetectRange, PropertyKey) values
+	('BUILDING_HD_STREET_CARNIVAL_INTERNAL', 				'RESOURCE_CLASSIFICATION_HD_CLOTH',							'PLAYER', 'HD_PLOT_BINARY_COMPRESS_STREET_CARNIVAL_CULTURE'),
+	('BUILDING_HD_STREET_CARNIVAL_INTERNAL', 				'RESOURCE_CLASSIFICATION_HD_DECORATION',				'PLAYER', 'HD_PLOT_BINARY_COMPRESS_STREET_CARNIVAL_CULTURE'),
+	('BUILDING_HD_STREET_CARNIVAL_INTERNAL', 				'RESOURCE_CLASSIFICATION_HD_BEVERAGE',					'PLAYER', 'HD_PLOT_BINARY_COMPRESS_STREET_CARNIVAL_FAITH'),
+	('BUILDING_HD_STREET_CARNIVAL_INTERNAL', 				'RESOURCE_CLASSIFICATION_HD_CELEBRATION',				'PLAYER', 'HD_PLOT_BINARY_COMPRESS_STREET_CARNIVAL_FAITH'),
+	('BUILDING_HD_WATER_STREET_CARNIVAL_INTERNAL', 	'RESOURCE_CLASSIFICATION_HD_MARINE_PRODUCTS',		'PLAYER',	'HD_PLOT_BINARY_COMPRESS_WATER_STREET_CARNIVAL_SCIENCE'),
+	('BUILDING_HD_WATER_STREET_CARNIVAL_INTERNAL', 	'RESOURCE_CLASSIFICATION_HD_SEA_BEAST',					'PLAYER',	'HD_PLOT_BINARY_COMPRESS_WATER_STREET_CARNIVAL_SCIENCE'),
+	('BUILDING_HD_WATER_STREET_CARNIVAL_INTERNAL', 	'RESOURCE_CLASSIFICATION_HD_FRUIT',							'PLAYER',	'HD_PLOT_BINARY_COMPRESS_WATER_STREET_CARNIVAL_GOLD'),
+	('BUILDING_HD_WATER_STREET_CARNIVAL_INTERNAL', 	'RESOURCE_CLASSIFICATION_HD_SEAFOOD',						'PLAYER',	'HD_PLOT_BINARY_COMPRESS_WATER_STREET_CARNIVAL_GOLD');
+
+insert or replace into HD_Binary_Compress_Keys (Key, MaxExp) values
+	('HD_PLOT_BINARY_COMPRESS_STREET_CARNIVAL_CULTURE', 				4),
+	('HD_PLOT_BINARY_COMPRESS_STREET_CARNIVAL_FAITH', 					4),
+	('HD_PLOT_BINARY_COMPRESS_WATER_STREET_CARNIVAL_SCIENCE', 	4),
+	('HD_PLOT_BINARY_COMPRESS_WATER_STREET_CARNIVAL_GOLD', 			5);
+
+-- 狂欢街区
+insert or replace into BuildingModifiers (BuildingType, ModifierId)
+	select 'BUILDING_HD_STREET_CARNIVAL_INTERNAL', 'HD_STREET_CARNIVAL_CULTURE_' || Exp
+	from HD_Binary_Compress where Exp < 5;
+
+insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId, SubjectRequirementSetId)
+	select  'HD_STREET_CARNIVAL_CULTURE_' || Exp, 'MODIFIER_PLAYER_DISTRICT_ADJUST_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_STREET_CARNIVAL_CULTURE_' || Exp || '_REQUIREMENTS', 'DISTRICT_IS_DISTRICT_STREET_CARNIVAL_REQUIREMENTS'
+	from HD_Binary_Compress where Exp < 5;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select  'HD_STREET_CARNIVAL_CULTURE_' || Exp, 'YieldType', 'YIELD_CULTURE'
+	from HD_Binary_Compress where Exp < 5;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select  'HD_STREET_CARNIVAL_CULTURE_' || Exp, 'Amount', Amount
+	from HD_Binary_Compress where Exp < 5;
+
+insert or replace into BuildingModifiers (BuildingType, ModifierId)
+	select 'BUILDING_HD_STREET_CARNIVAL_INTERNAL', 'HD_STREET_CARNIVAL_FAITH_' || Exp
+	from HD_Binary_Compress where Exp < 5;
+
+insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId, SubjectRequirementSetId)
+	select  'HD_STREET_CARNIVAL_FAITH_' || Exp, 'MODIFIER_PLAYER_DISTRICT_ADJUST_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_STREET_CARNIVAL_FAITH_' || Exp || '_REQUIREMENTS', 'DISTRICT_IS_DISTRICT_STREET_CARNIVAL_REQUIREMENTS'
+	from HD_Binary_Compress where Exp < 5;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select  'HD_STREET_CARNIVAL_FAITH_' || Exp, 'YieldType', 'YIELD_FAITH'
+	from HD_Binary_Compress where Exp < 5;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select  'HD_STREET_CARNIVAL_FAITH_' || Exp, 'Amount', Amount
+	from HD_Binary_Compress where Exp < 5;
+
+-- 狂欢海滨
+insert or replace into BuildingModifiers (BuildingType, ModifierId)
+	select 'BUILDING_HD_WATER_STREET_CARNIVAL_INTERNAL', 'HD_WATER_STREET_CARNIVAL_SCIENCE_' || Exp
+	from HD_Binary_Compress where Exp < 5;
+
+insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId, SubjectRequirementSetId)
+	select  'HD_WATER_STREET_CARNIVAL_SCIENCE_' || Exp, 'MODIFIER_PLAYER_DISTRICT_ADJUST_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_WATER_STREET_CARNIVAL_SCIENCE_' || Exp || '_REQUIREMENTS', 'DISTRICT_IS_DISTRICT_WATER_STREET_CARNIVAL_REQUIREMENTS'
+	from HD_Binary_Compress where Exp < 5;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select  'HD_WATER_STREET_CARNIVAL_SCIENCE_' || Exp, 'YieldType', 'YIELD_SCIENCE'
+	from HD_Binary_Compress where Exp < 5;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select  'HD_WATER_STREET_CARNIVAL_SCIENCE_' || Exp, 'Amount', Amount
+	from HD_Binary_Compress where Exp < 5;
+
+insert or replace into BuildingModifiers (BuildingType, ModifierId)
+	select 'BUILDING_HD_WATER_STREET_CARNIVAL_INTERNAL', 'HD_WATER_STREET_CARNIVAL_GOLD_' || Exp
+	from HD_Binary_Compress where Exp < 6;
+
+insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId, SubjectRequirementSetId)
+	select  'HD_WATER_STREET_CARNIVAL_GOLD_' || Exp, 'MODIFIER_PLAYER_DISTRICT_ADJUST_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_WATER_STREET_CARNIVAL_GOLD_' || Exp || '_REQUIREMENTS', 'DISTRICT_IS_DISTRICT_WATER_STREET_CARNIVAL_REQUIREMENTS'
+	from HD_Binary_Compress where Exp < 6;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select  'HD_WATER_STREET_CARNIVAL_GOLD_' || Exp, 'YieldType', 'YIELD_GOLD'
+	from HD_Binary_Compress where Exp < 6;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select  'HD_WATER_STREET_CARNIVAL_GOLD_' || Exp, 'Amount', Amount * 3
+	from HD_Binary_Compress where Exp < 6;
+
 -- 温泉浴场 by xhh
 delete from BuildingModifiers where ModifierId = 'THERMALBATH_ADDTOURISM' and BuildingType = 'BUILDING_THERMAL_BATH';
 delete from BuildingModifiers where ModifierId = 'THERMALBATH_ADDAMENITIES' and BuildingType = 'BUILDING_THERMAL_BATH';

@@ -4,29 +4,25 @@
 
 -- Projects
 update Projects set CostProgressionParam1 = 1100
- where ProjectType = 'PROJECT_CARNIVAL'
-	or ProjectType = 'PROJECT_ENHANCE_DISTRICT_ENCAMPMENT'
+ where ProjectType = 'PROJECT_ENHANCE_DISTRICT_ENCAMPMENT'
 	or ProjectType = 'PROJECT_ENHANCE_DISTRICT_HARBOR'
 	or ProjectType = 'PROJECT_ENHANCE_DISTRICT_INDUSTRIAL_ZONE'
 	or ProjectType = 'PROJECT_ENHANCE_DISTRICT_COMMERCIAL_HUB'
 	or ProjectType = 'PROJECT_ENHANCE_DISTRICT_HOLY_SITE'
 	or ProjectType = 'PROJECT_ENHANCE_DISTRICT_CAMPUS'
 	or ProjectType = 'PROJECT_ENHANCE_DISTRICT_THEATER'
-	or ProjectType = 'PROJECT_WATER_CARNIVAL'
 	or ProjectType = 'PROJECT_BREAD_AND_CIRCUSES'
 	or ProjectType = 'PROJECT_WATER_BREAD_AND_CIRCUSES'
 ;
 
 update Projects set Cost = 40
- where ProjectType = 'PROJECT_CARNIVAL'
-	or ProjectType = 'PROJECT_ENHANCE_DISTRICT_ENCAMPMENT'
+ where ProjectType = 'PROJECT_ENHANCE_DISTRICT_ENCAMPMENT'
 	or ProjectType = 'PROJECT_ENHANCE_DISTRICT_HARBOR'
 	or ProjectType = 'PROJECT_ENHANCE_DISTRICT_INDUSTRIAL_ZONE'
 	or ProjectType = 'PROJECT_ENHANCE_DISTRICT_COMMERCIAL_HUB'
 	or ProjectType = 'PROJECT_ENHANCE_DISTRICT_HOLY_SITE'
 	or ProjectType = 'PROJECT_ENHANCE_DISTRICT_CAMPUS'
 	or ProjectType = 'PROJECT_ENHANCE_DISTRICT_THEATER'
-	or ProjectType = 'PROJECT_WATER_CARNIVAL'
 	or ProjectType = 'PROJECT_BREAD_AND_CIRCUSES'
 	or ProjectType = 'PROJECT_WATER_BREAD_AND_CIRCUSES'
 ;
@@ -35,39 +31,31 @@ update Projects set CostProgressionParam1 = 200, Cost = 50	where ProjectType = '
 
 -- Project Great Points
 update Project_GreatPersonPoints set PointProgressionParam1 = 900
- where ProjectType = 'PROJECT_CARNIVAL'
-	or ProjectType = 'PROJECT_ENHANCE_DISTRICT_ENCAMPMENT'
+ where ProjectType = 'PROJECT_ENHANCE_DISTRICT_ENCAMPMENT'
 	or ProjectType = 'PROJECT_ENHANCE_DISTRICT_HARBOR'
 	or ProjectType = 'PROJECT_ENHANCE_DISTRICT_INDUSTRIAL_ZONE'
 	or ProjectType = 'PROJECT_ENHANCE_DISTRICT_COMMERCIAL_HUB'
 	or ProjectType = 'PROJECT_ENHANCE_DISTRICT_HOLY_SITE'
 	or ProjectType = 'PROJECT_ENHANCE_DISTRICT_CAMPUS'
 	or ProjectType = 'PROJECT_ENHANCE_DISTRICT_THEATER'
-	or ProjectType = 'PROJECT_WATER_CARNIVAL'
 ;
 
---update Projects set PrereqCivic = 'CIVIC_HISTORICAL_PHILOSOPHY_HD' where ProjectType like 'PROJECT_ENHANCE_DISTRICT_%';
+-- 巴西UD项目
+update Projects set Cost = 9999, CostProgressionModel = 'NO_PROGRESSION_MODEL', CostProgressionParam1 = 0 where ProjectType in ('PROJECT_CARNIVAL', 'PROJECT_WATER_CARNIVAL');
+delete from Project_GreatPersonPoints where ProjectType in ('PROJECT_CARNIVAL', 'PROJECT_WATER_CARNIVAL');
+
+insert or replace into GlobalParameters (Name, Value) values
+	('HD_PROJECT_CARNIVAL_SCIENCE_PERCENTAGE', 				2),
+	('HD_PROJECT_CARNIVAL_CULTURE_PERCENTAGE', 				2),
+	('HD_PROJECT_CARNIVAL_FAITH_PERCENTAGE', 					3),
+	('HD_PROJECT_CARNIVAL_GOLD_PERCENTAGE', 					6),
+	('HD_PROJECT_CARNIVAL_GPP_PERCENTAGE', 						5),
+	('HD_PROJECT_CARNIVAL_RESOURCE_BOOST_PERCENTAGE', 100),
+	('HD_PROJECT_CARNIVAL_CITY_BOOST_PERCENTAGE', 		10);
+
 update Project_YieldConversions set PercentOfProductionRate = PercentOfProductionRate * 2 where ProjectType like 'PROJECT_ENHANCE_DISTRICT_%';
 
--- update Project_GreatPersonPoints set Points = 10
---  where ProjectType = 'PROJECT_ENHANCE_DISTRICT_ENCAMPMENT'
--- 	or ProjectType = 'PROJECT_ENHANCE_DISTRICT_HARBOR'
--- 	or ProjectType = 'PROJECT_ENHANCE_DISTRICT_INDUSTRIAL_ZONE'
--- 	or ProjectType = 'PROJECT_ENHANCE_DISTRICT_COMMERCIAL_HUB'
--- 	or ProjectType = 'PROJECT_ENHANCE_DISTRICT_HOLY_SITE'
--- 	or ProjectType = 'PROJECT_ENHANCE_DISTRICT_CAMPUS'
--- ;
-
--- update Project_GreatPersonPoints set Points = 5
---  where ProjectType = 'PROJECT_CARNIVAL'
--- 	or ProjectType = 'PROJECT_ENHANCE_DISTRICT_THEATER'
--- 	or ProjectType = 'PROJECT_WATER_CARNIVAL'
--- ;
-
--- TODO OCCULT project in Secret Societies MODE
-
 -- strategic projects
-
 insert or replace into Types	(Type,	Kind)
 select 'PROJECT_GRANT_' || ResourceType,	'KIND_PROJECT' from Resources where ResourceClassType = 'RESOURCECLASS_STRATEGIC';
 

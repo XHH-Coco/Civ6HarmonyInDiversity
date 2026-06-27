@@ -1604,80 +1604,123 @@ values
 	('TRAIT_TUNDRA_DISTRICT_FOOD',				'YieldType',		'YIELD_FOOD'),
 	('TRAIT_TUNDRA_DISTRICT_FOOD',				'Amount',			1);
 
------------------------------------------------------------------------------------------------------------------
-
--- Brazil 
--- lumber mill +1 adjacency bonus to IZ
--- IZ +1 production to adjacent rainforest
--- + 2 culture if lumber mill is built on rainforest +100% tourism = culture if flight is researched
--- districts do not remove rainforest
--- + 1 faith in each rainforest tiles after recruit a great person
--- + 1 faith if city is near rainforest999
+-- =====================================================================================================================================
+-- 巴西
+-- =====================================================================================================================================
 delete from ExcludedAdjacencies where TraitType = 'TRAIT_CIVILIZATION_AMAZON';
-insert or replace into Modifiers
-	(ModifierId,							ModifierType,							SubjectRequirementSetId)
-values
-	('TRAIT_GREAT_PEOPLE_JUNGLE_FAITH',		'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',	'PLOT_HAS_JUNGLE_REQUIREMENTS');
+delete from TraitModifiers where TraitType = 'TRAIT_CIVILIZATION_AMAZON' and ModifierId != 'TRAIT_AMAZON_RAINFOREST_EXTRA_APPEAL';
 
-insert or replace into ModifierArguments
-	(ModifierId,							Name,			Value)
-values
-	('TRAIT_GREAT_PEOPLE_JUNGLE_FAITH',		'YieldType',	'YIELD_FAITH'),
-	('TRAIT_GREAT_PEOPLE_JUNGLE_FAITH',		'Amount',		1);
+-- 巴西UU
+insert or replace into CivilizationTraits (CivilizationType, TraitType) values
+	('CIVILIZATION_BRAZIL',	'TRAIT_BANDEIRANTES_HD');
 
-insert or replace into TraitModifiers
-	(TraitType,						ModifierId)
-values
-	('TRAIT_CIVILIZATION_AMAZON',	'BRAZIL_RAINFOREST_CULTURE'),
-	('TRAIT_CIVILIZATION_AMAZON',	'BRAZIL_RAINFOREST_LUXURY_FOOD'),
-	('TRAIT_CIVILIZATION_AMAZON',	'TRAIT_AMAZON_RAINFOREST_INDUSTRIAL_ZONE_ADJACENCY'),
-	('TRAIT_CIVILIZATION_AMAZON',	'TRAIT_AMAZON_RAINFOREST_ENCAMPMENT_ADJACENCY'),
-	('TRAIT_CIVILIZATION_AMAZON',	'TRAIT_AMAZON_RAINFOREST_HARBOR_ADJACENCY');
+insert or ignore into TraitModifiers (TraitType, ModifierId) select
+	'TRAIT_LEADER_MAJOR_CIV', 'HD_BANDEIRANTES_STRENGTH_' || EraType
+from Eras where EraType != 'ERA_ANCIENT';
 
-insert or replace into Modifiers
-	(ModifierId,											ModifierType,									SubjectRequirementSetId)
-values
-	('BRAZIL_RAINFOREST_CULTURE',							'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',			'PLOT_HAS_IMPROVED_AND_RAINFOREST_REQUIREMENTS'),
-	('BRAZIL_RAINFOREST_LUXURY_FOOD',							'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',			'PLOT_HAS_LUXURY_AND_RAINFOREST_REQUIREMENTS'),
-	('TRAIT_AMAZON_RAINFOREST_INDUSTRIAL_ZONE_ADJACENCY',	'MODIFIER_PLAYER_CITIES_FEATURE_ADJACENCY',		NULL),
-	('TRAIT_AMAZON_RAINFOREST_ENCAMPMENT_ADJACENCY',		'MODIFIER_PLAYER_CITIES_FEATURE_ADJACENCY',		NULL),
-	('TRAIT_AMAZON_RAINFOREST_HARBOR_ADJACENCY',			'MODIFIER_PLAYER_CITIES_FEATURE_ADJACENCY',		NULL);
+insert or ignore into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId, SubjectRequirementSetId) select
+	'HD_BANDEIRANTES_STRENGTH_' || EraType, 'MODIFIER_PLAYER_UNITS_ADJUST_PROPERTY', 'HD_PLAYER_IS_' || EraType, 'UNIT_IS_UNIT_HD_BANDEIRANTES_REQUIREMENTS'
+from Eras where EraType != 'ERA_ANCIENT';
 
-insert or replace into ModifierArguments
-	(ModifierId,											Name,			Value)
-values
-	('BRAZIL_RAINFOREST_CULTURE',							'YieldType',	'YIELD_CULTURE'),
-	('BRAZIL_RAINFOREST_CULTURE',							'Amount',		1),
-	('BRAZIL_RAINFOREST_LUXURY_FOOD',							'YieldType',	'YIELD_FOOD'),
-	('BRAZIL_RAINFOREST_LUXURY_FOOD',							'Amount',		1),
-	('TRAIT_AMAZON_RAINFOREST_INDUSTRIAL_ZONE_ADJACENCY',	'Amount',		1),
-	('TRAIT_AMAZON_RAINFOREST_INDUSTRIAL_ZONE_ADJACENCY',	'Description',	'LOC_DISTRICT_JUNGLE_2_PRODUCTION'),
-	('TRAIT_AMAZON_RAINFOREST_INDUSTRIAL_ZONE_ADJACENCY',	'DistrictType',	'DISTRICT_INDUSTRIAL_ZONE'),
-	('TRAIT_AMAZON_RAINFOREST_INDUSTRIAL_ZONE_ADJACENCY',	'FeatureType',	'FEATURE_JUNGLE'),
-	('TRAIT_AMAZON_RAINFOREST_INDUSTRIAL_ZONE_ADJACENCY',	'YieldType',	'YIELD_PRODUCTION'),
-	('TRAIT_AMAZON_RAINFOREST_ENCAMPMENT_ADJACENCY',		'Amount',		1),
-	('TRAIT_AMAZON_RAINFOREST_ENCAMPMENT_ADJACENCY',		'Description',	'LOC_DISTRICT_JUNGLE_2_PRODUCTION'),
-	('TRAIT_AMAZON_RAINFOREST_ENCAMPMENT_ADJACENCY',		'DistrictType',	'DISTRICT_ENCAMPMENT'),
-	('TRAIT_AMAZON_RAINFOREST_ENCAMPMENT_ADJACENCY',		'FeatureType',	'FEATURE_JUNGLE'),
-	('TRAIT_AMAZON_RAINFOREST_ENCAMPMENT_ADJACENCY',		'YieldType',	'YIELD_PRODUCTION'),
-	('TRAIT_AMAZON_RAINFOREST_HARBOR_ADJACENCY',			'Amount',		1),
-	('TRAIT_AMAZON_RAINFOREST_HARBOR_ADJACENCY',			'Description',	'LOC_DISTRICT_JUNGLE_2_GOLD'),
-	('TRAIT_AMAZON_RAINFOREST_HARBOR_ADJACENCY',			'DistrictType',	'DISTRICT_HARBOR'),
-	('TRAIT_AMAZON_RAINFOREST_HARBOR_ADJACENCY',			'FeatureType',	'FEATURE_JUNGLE'),
-	('TRAIT_AMAZON_RAINFOREST_HARBOR_ADJACENCY',			'YieldType',	'YIELD_GOLD');
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select
+	'HD_BANDEIRANTES_STRENGTH_' || EraType, 'Key', 'HD_BANDEIRANTES_ERA_STRENGTH'
+from Eras where EraType != 'ERA_ANCIENT';
 
-insert or replace into TraitModifiers (TraitType,	ModifierId) 
-	select 'TRAIT_CIVILIZATION_AMAZON', 'TRAIT_JUNGLE_VALID_' || DistrictType from Districts where DistrictType != 'DISTRICT_CITY_CENTER';
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select
+	'HD_BANDEIRANTES_STRENGTH_' || EraType, 'Amount', 7
+from Eras where EraType != 'ERA_ANCIENT';
 
-insert or replace into Modifiers    (ModifierId, ModifierType)
-	select 'TRAIT_JUNGLE_VALID_' || DistrictType, 'MODIFIER_PLAYER_CITIES_ADJUST_VALID_FEATURES_DISTRICTS' 
-	from Districts where DistrictType != 'DISTRICT_CITY_CENTER';
-insert or replace into ModifierArguments    (ModifierId,    Name,        Value) 
-	select 'TRAIT_JUNGLE_VALID_' || DistrictType, 'DistrictType', DistrictType
-	from Districts where DistrictType != 'DISTRICT_CITY_CENTER';
-insert or replace into ModifierArguments    (ModifierId,    Name,        Value) 
-	select 'TRAIT_JUNGLE_VALID_' || DistrictType, 'FeatureType', 'FEATURE_JUNGLE'
-	from Districts where DistrictType != 'DISTRICT_CITY_CENTER';
+-- UU 雨林加产能力
+insert or ignore into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) select
+	'HD_BANDEIRANTES_JUNGLE_' || YieldType, 'MODIFIER_PLAYER_ADJUST_PLOT_YIELD', 'PLOT_HAS_IMPROVED_AND_RAINFOREST_REQUIREMENTS'
+from Yields;
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select
+	'HD_BANDEIRANTES_JUNGLE_' || YieldType, 'YieldType', YieldType
+from Yields;
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select
+	'HD_BANDEIRANTES_JUNGLE_' || YieldType, 'Amount', 1
+from Yields;
+
+-- 雨林行业公司直接获得2种效果
+insert or ignore into TraitModifiers (TraitType, ModifierId) values
+	('TRAIT_CIVILIZATION_AMAZON', 'HD_AMAZON_JUNGLE_INDUSTRY_CORPORATION_ALL_CATEGORY');
+
+insert or ignore into Modifiers (ModifierId, ModifierType) values
+	('HD_AMAZON_JUNGLE_INDUSTRY_CORPORATION_ALL_CATEGORY', 'MODIFIER_PLAYER_ADJUST_PROPERTY');
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) values
+	('HD_AMAZON_JUNGLE_INDUSTRY_CORPORATION_ALL_CATEGORY', 'Key', 		'HD_JUNGLE_INDUSTRY_CORPORATION_ALL_CATEGORY'),
+	('HD_AMAZON_JUNGLE_INDUSTRY_CORPORATION_ALL_CATEGORY', 'Amount', 1);
+
+-- 雨林提供相邻加成
+insert or ignore into TraitModifiers (TraitType, ModifierId) select
+	'TRAIT_CIVILIZATION_AMAZON', 'HD_AMAZON_RAINFOREST_ADJACENCY_' || DistrictType
+from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+
+insert or ignore into Modifiers (ModifierId, ModifierType) select
+	'HD_AMAZON_RAINFOREST_ADJACENCY_' || DistrictType, 'MODIFIER_PLAYER_CITIES_FEATURE_ADJACENCY'
+from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select
+	'HD_AMAZON_RAINFOREST_ADJACENCY_' || DistrictType, 'DistrictType', DistrictType
+from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select
+	'HD_AMAZON_RAINFOREST_ADJACENCY_' || DistrictType, 'FeatureType', 'FEATURE_JUNGLE'
+from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select
+	'HD_AMAZON_RAINFOREST_ADJACENCY_' || DistrictType, 'YieldType', YieldType
+from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select
+	'HD_AMAZON_RAINFOREST_ADJACENCY_' || DistrictType, 'Amount', 1
+from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select
+	'HD_AMAZON_RAINFOREST_ADJACENCY_' || DistrictType, 'Description', 'LOC_DISTRICT_JUNGLE_' || YieldType
+from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+
+-- 区域不移除雨林
+insert or ignore into TraitModifiers (TraitType, ModifierId) select
+	'TRAIT_CIVILIZATION_AMAZON', 'TRAIT_JUNGLE_VALID_' || DistrictType
+from Districts where DistrictType not in ('DISTRICT_CITY_CENTER', 'DISTRICT_WONDER');
+
+insert or ignore into Modifiers (ModifierId, ModifierType) select
+	'TRAIT_JUNGLE_VALID_' || DistrictType, 'MODIFIER_PLAYER_CITIES_ADJUST_VALID_FEATURES_DISTRICTS' 
+from Districts where DistrictType not in ('DISTRICT_CITY_CENTER', 'DISTRICT_WONDER');
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select
+	'TRAIT_JUNGLE_VALID_' || DistrictType, 'DistrictType', DistrictType
+from Districts where DistrictType not in ('DISTRICT_CITY_CENTER', 'DISTRICT_WONDER');
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select
+	'TRAIT_JUNGLE_VALID_' || DistrictType, 'FeatureType', 'FEATURE_JUNGLE'
+from Districts where DistrictType not in ('DISTRICT_CITY_CENTER', 'DISTRICT_WONDER');
+
+-- 佩德罗二世
+-- 赠送大亨/投资人
+insert or ignore into Modifiers (ModifierId, ModifierType) select
+	'HD_MAGNANIMOUS_GRANT_' || UnitType, 'MODIFIER_SINGLE_CITY_GRANT_UNIT_IN_CITY'
+from Units where UnitType in ('UNIT_LEU_INVESTOR', 'UNIT_LEU_TYCOON');
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select
+	'HD_MAGNANIMOUS_GRANT_' || UnitType, 'UnitType', UnitType
+from Units where UnitType in ('UNIT_LEU_INVESTOR', 'UNIT_LEU_TYCOON');
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select
+	'HD_MAGNANIMOUS_GRANT_' || UnitType, 'Amount', 1
+from Units where UnitType in ('UNIT_LEU_INVESTOR', 'UNIT_LEU_TYCOON');
+
+insert or replace into GlobalParameters (Name, Value) values
+	-- 旗手收集资源加产需要的个数
+	('HD_BANDEIRANTES_RESOURCES_TIMES', 								 2),
+	-- 吸引人才概率
+  ('HD_MAGNANIMOUS_INTRODUCE_GREAT_PERSON_PERCENTAGE', 50),
+  ('HD_MAGNANIMOUS_INTRODUCE_TYCOON_PERCENTAGE', 			 50),
+  ('HD_MAGNANIMOUS_INTRODUCE_INVESTOR_PERCENTAGE', 		 50);
 
 -- =====================================================================================================================================
 -- 苏格兰
@@ -1777,8 +1820,8 @@ insert or ignore into HD_CustomEventSelections (SelectionType, CustomEventType, 
 	('HD_SELECTION_GOODY_HUT_NAVAL', 		'HD_CUSTOMEVENT_SCOTLAND_VISIT_GOODY_HUT', 'ICON_HD_SELECTION_GOODY_HUT_NAVAL', 		'LOC_HD_SELECTION_GOODY_HUT_NAVAL_DESCRIPTION', 		'LOC_HD_SELECTION_GOODY_HUT_NAVAL_TEXT', 			'LOC_HD_SELECTION_GOODY_HUT_NAVAL_TOOLTIP', 		'UI_Levy_Military'),
 	('HD_SELECTION_GOODY_HUT_SAPPER', 	'HD_CUSTOMEVENT_SCOTLAND_VISIT_GOODY_HUT', 'ICON_HD_SELECTION_GOODY_HUT_SAPPER', 		'LOC_HD_SELECTION_GOODY_HUT_SAPPER_DESCRIPTION', 		'LOC_HD_SELECTION_GOODY_HUT_SAPPER_TEXT', 		'LOC_HD_SELECTION_GOODY_HUT_SAPPER_TOOLTIP', 		'UI_Levy_Military'),
 	('HD_SELECTION_GOODY_HUT_ENVOY', 		'HD_CUSTOMEVENT_SCOTLAND_VISIT_GOODY_HUT', 'ICON_HD_SELECTION_GOODY_HUT_ENVOY', 		'LOC_HD_SELECTION_GOODY_HUT_ENVOY_DESCRIPTION', 		'LOC_HD_SELECTION_GOODY_HUT_ENVOY_TEXT', 			'LOC_HD_SELECTION_GOODY_HUT_ENVOY_TOOLTIP', 		'Receive_Envoy_Bonus'),
-	('HD_SELECTION_GOODY_HUT_GOVERNOR', 'HD_CUSTOMEVENT_SCOTLAND_VISIT_GOODY_HUT', 'ICON_HD_SELECTION_GOODY_HUT_GOVERNOR', 	'LOC_HD_SELECTION_GOODY_HUT_GOVERNOR_DESCRIPTION', 	'LOC_HD_SELECTION_GOODY_HUT_GOVERNOR_TEXT', 	'LOC_HD_SELECTION_GOODY_HUT_GOVERNOR_TOOLTIP', 	'Claim_Great_Person'),
-	('HD_SELECTION_GOODY_HUT_GENERAL',  'HD_CUSTOMEVENT_SCOTLAND_VISIT_GOODY_HUT', 'ICON_HD_SELECTION_GOODY_HUT_GENERAL', 	'LOC_HD_SELECTION_GOODY_HUT_GENERAL_DESCRIPTION', 	'LOC_HD_SELECTION_GOODY_HUT_GENERAL_TEXT', 	  'LOC_HD_SELECTION_GOODY_HUT_GENERAL_TOOLTIP', 	'Claim_Great_Person'),
+	('HD_SELECTION_GOODY_HUT_GOVERNOR', 'HD_CUSTOMEVENT_SCOTLAND_VISIT_GOODY_HUT', 'ICON_HD_SELECTION_GOODY_HUT_GOVERNOR', 	'LOC_HD_SELECTION_GOODY_HUT_GOVERNOR_DESCRIPTION', 	'LOC_HD_SELECTION_GOODY_HUT_GOVERNOR_TEXT', 	'LOC_HD_SELECTION_GOODY_HUT_GOVERNOR_TOOLTIP', 	'ALERT_POSITIVE'),
+	('HD_SELECTION_GOODY_HUT_GENERAL',  'HD_CUSTOMEVENT_SCOTLAND_VISIT_GOODY_HUT', 'ICON_HD_SELECTION_GOODY_HUT_GENERAL', 	'LOC_HD_SELECTION_GOODY_HUT_GENERAL_DESCRIPTION', 	'LOC_HD_SELECTION_GOODY_HUT_GENERAL_TEXT', 	  'LOC_HD_SELECTION_GOODY_HUT_GENERAL_TOOLTIP', 	'ALERT_POSITIVE'),
 	('HD_SELECTION_GOODY_HUT_GOLD', 		'HD_CUSTOMEVENT_SCOTLAND_VISIT_GOODY_HUT', 'ICON_HD_SELECTION_GOODY_HUT_GOLD', 			'LOC_HD_SELECTION_GOODY_HUT_GOLD_DESCRIPTION', 			'LOC_HD_SELECTION_GOODY_HUT_GOLD_TEXT', 			'LOC_HD_SELECTION_GOODY_HUT_GOLD_TOOLTIP', 			'Purchase_With_Gold'),
 	('HD_SELECTION_GOODY_HUT_LUXURY', 	'HD_CUSTOMEVENT_SCOTLAND_VISIT_GOODY_HUT', 'ICON_HD_SELECTION_GOODY_HUT_LUXURY', 		'LOC_HD_SELECTION_GOODY_HUT_LUXURY_DESCRIPTION', 		'LOC_HD_SELECTION_GOODY_HUT_LUXURY_TEXT', 		'LOC_HD_SELECTION_GOODY_HUT_LUXURY_TOOLTIP', 		'Purchase_With_Gold'),
 	('HD_SELECTION_GOODY_HUT_STRATEGIC','HD_CUSTOMEVENT_SCOTLAND_VISIT_GOODY_HUT', 'ICON_HD_SELECTION_GOODY_HUT_STRATEGIC', 'LOC_HD_SELECTION_GOODY_HUT_STRATEGIC_DESCRIPTION', 'LOC_HD_SELECTION_GOODY_HUT_STRATEGIC_TEXT', 	'LOC_HD_SELECTION_GOODY_HUT_STRATEGIC_TOOLTIP', 'Purchase_With_Gold'),
@@ -1795,8 +1838,8 @@ insert or ignore into HD_CustomEventSelections (SelectionType, CustomEventType, 
 	('HD_SELECTION_BARBARIAN_NAVAL', 		'HD_CUSTOMEVENT_SCOTLAND_CLEAR_BARBARIAN', 'ICON_HD_SELECTION_BARBARIAN_NAVAL', 		'LOC_HD_SELECTION_BARBARIAN_NAVAL_DESCRIPTION', 		'LOC_HD_SELECTION_BARBARIAN_NAVAL_TEXT', 			'LOC_HD_SELECTION_BARBARIAN_NAVAL_TOOLTIP', 		'UI_Levy_Military'),
 	('HD_SELECTION_BARBARIAN_SAPPER', 	'HD_CUSTOMEVENT_SCOTLAND_CLEAR_BARBARIAN', 'ICON_HD_SELECTION_BARBARIAN_SAPPER', 		'LOC_HD_SELECTION_BARBARIAN_SAPPER_DESCRIPTION', 		'LOC_HD_SELECTION_BARBARIAN_SAPPER_TEXT', 		'LOC_HD_SELECTION_BARBARIAN_SAPPER_TOOLTIP', 		'UI_Levy_Military'),
 	('HD_SELECTION_BARBARIAN_ENVOY', 		'HD_CUSTOMEVENT_SCOTLAND_CLEAR_BARBARIAN', 'ICON_HD_SELECTION_BARBARIAN_ENVOY', 		'LOC_HD_SELECTION_BARBARIAN_ENVOY_DESCRIPTION', 		'LOC_HD_SELECTION_BARBARIAN_ENVOY_TEXT', 			'LOC_HD_SELECTION_BARBARIAN_ENVOY_TOOLTIP', 		'Receive_Envoy_Bonus'),
-	('HD_SELECTION_BARBARIAN_GOVERNOR', 'HD_CUSTOMEVENT_SCOTLAND_CLEAR_BARBARIAN', 'ICON_HD_SELECTION_BARBARIAN_GOVERNOR', 	'LOC_HD_SELECTION_BARBARIAN_GOVERNOR_DESCRIPTION', 	'LOC_HD_SELECTION_BARBARIAN_GOVERNOR_TEXT', 	'LOC_HD_SELECTION_BARBARIAN_GOVERNOR_TOOLTIP', 	'Claim_Great_Person'),
-	('HD_SELECTION_BARBARIAN_GENERAL',  'HD_CUSTOMEVENT_SCOTLAND_CLEAR_BARBARIAN', 'ICON_HD_SELECTION_BARBARIAN_GENERAL', 	'LOC_HD_SELECTION_BARBARIAN_GENERAL_DESCRIPTION', 	'LOC_HD_SELECTION_BARBARIAN_GENERAL_TEXT', 	  'LOC_HD_SELECTION_BARBARIAN_GENERAL_TOOLTIP', 	'Claim_Great_Person'),
+	('HD_SELECTION_BARBARIAN_GOVERNOR', 'HD_CUSTOMEVENT_SCOTLAND_CLEAR_BARBARIAN', 'ICON_HD_SELECTION_BARBARIAN_GOVERNOR', 	'LOC_HD_SELECTION_BARBARIAN_GOVERNOR_DESCRIPTION', 	'LOC_HD_SELECTION_BARBARIAN_GOVERNOR_TEXT', 	'LOC_HD_SELECTION_BARBARIAN_GOVERNOR_TOOLTIP', 	'ALERT_POSITIVE'),
+	('HD_SELECTION_BARBARIAN_GENERAL',  'HD_CUSTOMEVENT_SCOTLAND_CLEAR_BARBARIAN', 'ICON_HD_SELECTION_BARBARIAN_GENERAL', 	'LOC_HD_SELECTION_BARBARIAN_GENERAL_DESCRIPTION', 	'LOC_HD_SELECTION_BARBARIAN_GENERAL_TEXT', 	  'LOC_HD_SELECTION_BARBARIAN_GENERAL_TOOLTIP', 	'ALERT_POSITIVE'),
 	('HD_SELECTION_BARBARIAN_GOLD', 		'HD_CUSTOMEVENT_SCOTLAND_CLEAR_BARBARIAN', 'ICON_HD_SELECTION_BARBARIAN_GOLD', 			'LOC_HD_SELECTION_BARBARIAN_GOLD_DESCRIPTION', 			'LOC_HD_SELECTION_BARBARIAN_GOLD_TEXT', 			'LOC_HD_SELECTION_BARBARIAN_GOLD_TOOLTIP', 			'Purchase_With_Gold'),
 	('HD_SELECTION_BARBARIAN_LUXURY', 	'HD_CUSTOMEVENT_SCOTLAND_CLEAR_BARBARIAN', 'ICON_HD_SELECTION_BARBARIAN_LUXURY', 		'LOC_HD_SELECTION_BARBARIAN_LUXURY_DESCRIPTION', 		'LOC_HD_SELECTION_BARBARIAN_LUXURY_TEXT', 		'LOC_HD_SELECTION_BARBARIAN_LUXURY_TOOLTIP', 		'Purchase_With_Gold'),
 	('HD_SELECTION_BARBARIAN_STRATEGIC','HD_CUSTOMEVENT_SCOTLAND_CLEAR_BARBARIAN', 'ICON_HD_SELECTION_BARBARIAN_STRATEGIC', 'LOC_HD_SELECTION_BARBARIAN_STRATEGIC_DESCRIPTION', 'LOC_HD_SELECTION_BARBARIAN_STRATEGIC_TEXT', 	'LOC_HD_SELECTION_BARBARIAN_STRATEGIC_TOOLTIP', 'Purchase_With_Gold'),

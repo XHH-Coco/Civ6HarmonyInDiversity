@@ -939,6 +939,7 @@
       <File>UI/Custom/China_Panel.xml</File>
       <File>UI/Custom/CityButton_ResourceClassification.xml</File>
       <File>UI/Custom/CityButton_RegionalYields.xml</File>
+      <File>UI/Custom/CityButton_Magnanimous.xml</File>
     </AddUserInterfaces>
     <ReplaceUIScript id="DL_CityPanelOverview" criteria="Expansion2">
       <Properties>
@@ -1845,6 +1846,7 @@
       <File>Gameplay/Boosts.lua</File>
       <File>Gameplay/Commemorations.lua</File>
       <File>Gameplay/Policies.lua</File>
+      <File>Gameplay/Projects.lua</File>
       <File>Gameplay/Religions.lua</File>
       <File>Gameplay/ResourceCost.lua</File>
       <File>Gameplay/Temp_Gameplay.lua</File>
@@ -2356,6 +2358,7 @@
     <File>Gameplay/Boosts.lua</File>
     <File>Gameplay/Commemorations.lua</File>
     <File>Gameplay/Policies.lua</File>
+    <File>Gameplay/Projects.lua</File>
     <File>Gameplay/Religions.lua</File>
 	  <File>Gameplay/ResourceCost.lua</File>
     <File>Gameplay/Temp_Gameplay.lua</File>
@@ -2414,6 +2417,8 @@
     <File>UI/Custom/CityButton_ResourceClassification.xml</File>
     <File>UI/Custom/CityButton_RegionalYields.lua</File>
     <File>UI/Custom/CityButton_RegionalYields.xml</File>
+    <File>UI/Custom/CityButton_Magnanimous.lua</File>
+    <File>UI/Custom/CityButton_Magnanimous.xml</File>
 
     <!-- UI replacements -->
     <File>UI/Replacement/CitySupport.lua</File>

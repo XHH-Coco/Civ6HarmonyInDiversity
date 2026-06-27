@@ -37,40 +37,40 @@ delete from TraitModifiers where ModifierId = 'TRAIT_DISTRICTS_MARSH_ONLY';
 delete from TraitModifiers where ModifierId = 'TRAIT_DISTRICTS_JUNGLE_ONLY';
 
 insert or replace into TraitModifiers (TraitType,   ModifierId) 
-    select 'TRAIT_CIVILIZATION_VIETNAM', 'TRAIT_JUNGLE_VALID_' || DistrictType from Districts where DistrictType != 'DISTRICT_CITY_CENTER';
+    select 'TRAIT_CIVILIZATION_VIETNAM', 'TRAIT_JUNGLE_VALID_' || DistrictType from Districts where DistrictType not in ('DISTRICT_CITY_CENTER', 'DISTRICT_WONDER');
 insert or replace into TraitModifiers (TraitType,   ModifierId) 
-    select 'TRAIT_CIVILIZATION_VIETNAM', 'TRAIT_MARSH_VALID_' || DistrictType from Districts where DistrictType != 'DISTRICT_CITY_CENTER';
+    select 'TRAIT_CIVILIZATION_VIETNAM', 'TRAIT_MARSH_VALID_' || DistrictType from Districts where DistrictType not in ('DISTRICT_CITY_CENTER', 'DISTRICT_WONDER');
 insert or replace into TraitModifiers (TraitType,   ModifierId) 
-    select 'TRAIT_CIVILIZATION_VIETNAM', 'TRAIT_FOREST_VALID_' || DistrictType from Districts where DistrictType != 'DISTRICT_CITY_CENTER';
+    select 'TRAIT_CIVILIZATION_VIETNAM', 'TRAIT_FOREST_VALID_' || DistrictType from Districts where DistrictType not in ('DISTRICT_CITY_CENTER', 'DISTRICT_WONDER');
 
 -- insert or replace into Modifiers    (ModifierId, ModifierType)
 --     select 'TRAIT_JUNGLE_VALID_' || DistrictType, 'MODIFIER_PLAYER_CITIES_ADJUST_VALID_FEATURES_DISTRICTS' 
---     from Districts where DistrictType != 'DISTRICT_CITY_CENTER';
+--     from Districts where DistrictType not in ('DISTRICT_CITY_CENTER', 'DISTRICT_WONDER');
 insert or replace into Modifiers    (ModifierId, ModifierType)
     select 'TRAIT_MARSH_VALID_' || DistrictType, 'MODIFIER_PLAYER_CITIES_ADJUST_VALID_FEATURES_DISTRICTS' 
-    from Districts where DistrictType != 'DISTRICT_CITY_CENTER';
+    from Districts where DistrictType not in ('DISTRICT_CITY_CENTER', 'DISTRICT_WONDER');
 insert or replace into Modifiers    (ModifierId, ModifierType)
     select 'TRAIT_FOREST_VALID_' || DistrictType, 'MODIFIER_PLAYER_CITIES_ADJUST_VALID_FEATURES_DISTRICTS' 
-    from Districts where DistrictType != 'DISTRICT_CITY_CENTER';    
+    from Districts where DistrictType not in ('DISTRICT_CITY_CENTER', 'DISTRICT_WONDER');    
 
 -- insert or replace into ModifierArguments    (ModifierId,    Name,        Value) 
 --     select 'TRAIT_JUNGLE_VALID_' || DistrictType, 'DistrictType', DistrictType
---     from Districts where DistrictType != 'DISTRICT_CITY_CENTER';
+--     from Districts where DistrictType not in ('DISTRICT_CITY_CENTER', 'DISTRICT_WONDER');
 insert or replace into ModifierArguments    (ModifierId,    Name,        Value) 
     select 'TRAIT_MARSH_VALID_' || DistrictType, 'DistrictType', DistrictType
-    from Districts where DistrictType != 'DISTRICT_CITY_CENTER';
+    from Districts where DistrictType not in ('DISTRICT_CITY_CENTER', 'DISTRICT_WONDER');
 insert or replace into ModifierArguments    (ModifierId,    Name,        Value) 
     select 'TRAIT_FOREST_VALID_' || DistrictType, 'DistrictType', DistrictType
-    from Districts where DistrictType != 'DISTRICT_CITY_CENTER';
+    from Districts where DistrictType not in ('DISTRICT_CITY_CENTER', 'DISTRICT_WONDER');
 -- insert or replace into ModifierArguments    (ModifierId,    Name,        Value) 
 --     select 'TRAIT_JUNGLE_VALID_' || DistrictType, 'FeatureType', 'FEATURE_JUNGLE'
---     from Districts where DistrictType != 'DISTRICT_CITY_CENTER';
+--     from Districts where DistrictType not in ('DISTRICT_CITY_CENTER', 'DISTRICT_WONDER');
 insert or replace into ModifierArguments    (ModifierId,    Name,        Value) 
     select 'TRAIT_MARSH_VALID_' || DistrictType, 'FeatureType', 'FEATURE_MARSH'
-    from Districts where DistrictType != 'DISTRICT_CITY_CENTER';
+    from Districts where DistrictType not in ('DISTRICT_CITY_CENTER', 'DISTRICT_WONDER');
 insert or replace into ModifierArguments    (ModifierId,    Name,        Value) 
     select 'TRAIT_FOREST_VALID_' || DistrictType, 'FeatureType', 'FEATURE_FOREST'
-    from Districts where DistrictType != 'DISTRICT_CITY_CENTER';
+    from Districts where DistrictType not in ('DISTRICT_CITY_CENTER', 'DISTRICT_WONDER');
 
 update ModifierArguments set Value = 'YIELD_PRODUCTION' where ModifierId = 'TRAIT_FOREST_BUILDINGS_CULTURE' and Name = 'YieldType';
 update ModifierArguments set Value = 'YIELD_FOOD' where ModifierId = 'TRAIT_JUNGLE_BUILDINGS_SCIENCE' and Name = 'YieldType';

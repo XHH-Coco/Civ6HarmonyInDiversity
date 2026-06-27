@@ -106,6 +106,9 @@
     <Row Name="ICON_UNIT_QIN_ELITE_SOLDIER_HD_FOW"                 Atlas="ATLAS_HD_NEW_UNITS" Index="8"/>
     <Row Name="ICON_UNIT_KEQING"                    Atlas="ATLAS_HD_NEW_UNITS" Index="9"/>
 		<Row Name="ICON_UNIT_KEQING_FOW"                Atlas="ATLAS_HD_NEW_UNITS"   Index="9"/>
+    
+    <Row Name="ICON_UNIT_HD_BANDEIRANTES"                    Atlas="ICON_ATLAS_UNITS"          Index="46"/>
+		<Row Name="ICON_UNIT_HD_BANDEIRANTES_FOW"                Atlas="ICON_ATLAS_UNITS"          Index="46"/>
   </IconDefinitions>
 
   <IconAliases>
@@ -121,6 +124,7 @@
     
 		<Row Name="ICON_UNIT_HD_CODIFIER_PORTRAIT"       OtherName="ICON_UNIT_GREAT_WRITER_PORTRAIT"/>
 		<Row Name="ICON_UNIT_ENKIDU_HD_PORTRAIT"         OtherName="ICON_UNIT_WARRIOR_PORTRAIT"/>
+    <Row Name="ICON_UNIT_HD_BANDEIRANTES_PORTRAIT"   OtherName="ICON_UNIT_RANGER_PORTRAIT"/>
 
 		<Row Name="ICON_UNIT_HD_YUAN_WAN_QING"           OtherName="ICON_UNIT_GREAT_MUSICIAN"/>
 		<Row Name="ICON_UNIT_HD_YUAN_WAN_QING_FOW"       OtherName="ICON_UNIT_GREAT_MUSICIAN_FOW"/>

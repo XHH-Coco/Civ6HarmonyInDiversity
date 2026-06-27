@@ -68,7 +68,9 @@ values
   ("LOC_TERRAIN_CLASS_WATER_NAME",         			"Water Area"),
 	("LOC_RESOURCE_STONE_NAME",                                   "Andesite"),
 	("LOC_RESOURCE_FISH_NAME",                                    "Threadfin"),
-	("LOC_RESOURCE_SPICES_NAME",                                  "Cardamom");
+	("LOC_RESOURCE_SPICES_NAME",                                  "Cardamom"),
+	("LOC_MOMENT_CITY_BUILT_NEAR_FLOODABLE_RIVER_DESCRIPTION",    "The first city in the civilization built within two tiles of a river that could flood."),
+	("LOC_MOMENT_CITY_BUILT_NEAR_VOLCANO_DESCRIPTION",            "The first city in the civilization built within two tiles of a volcano that could erupt.");
 
 --------------------------------------------------------------------------------
 -- Language: zh_Hans_CN
@@ -166,7 +168,9 @@ values
 	("zh_Hans_CN",  "LOC_RESOURCE_COPPER_NAME",                                  "铜矿"),
 	("zh_Hans_CN",  "LOC_RESOURCE_CATTLE_NAME",                                  "奶牛"),
 	("zh_Hans_CN",  "LOC_RESOURCE_SHEEP_NAME",                                   "绵羊"),
-	("zh_Hans_CN",  "LOC_RESOURCE_SPICES_NAME",                                  "豆蔻");
+	("zh_Hans_CN",  "LOC_RESOURCE_SPICES_NAME",                                  "豆蔻"),
+	("zh_Hans_CN",  "LOC_MOMENT_CITY_BUILT_NEAR_FLOODABLE_RIVER_DESCRIPTION",    "文明中首座建造在可能泛滥的江河2个单元格内的城市。"),
+	("zh_Hans_CN",  "LOC_MOMENT_CITY_BUILT_NEAR_VOLCANO_DESCRIPTION",            "文明中首座建造在可能喷发的火山2个单元格内的城市。");
 
 -- 外交区DLC文本
 update LocalizedText set Text = "and {LOC_DISTRICT_DIPLOMATIC_QUARTER_NAME} " where Tag = 'LOC_AND_DIPLOMATIC_QUARTER'

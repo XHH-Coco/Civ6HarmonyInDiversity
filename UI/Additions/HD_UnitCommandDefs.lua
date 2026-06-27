@@ -25,6 +25,10 @@ local SPAIN_NATURAL_WONDER_REVEALED_LIST_TAG = 'HD_SpainNaturalWonderRevealedLis
 
 local COAST_INDEX = GameInfo.Terrains['TERRAIN_COAST'].Index;
 local OCEAN_INDEX = GameInfo.Terrains['TERRAIN_OCEAN'].Index;
+
+local JUNGLE_INDEX = GameInfo.Features['FEATURE_JUNGLE'].Index;
+
+local ANTIQUITY_SITE_INDEX = GameInfo.Resources['RESOURCE_ANTIQUITY_SITE'].Index;
 -- ======================================================================================================================================================
 -- 砍二献祭
 -- ======================================================================================================================================================
@@ -668,4 +672,109 @@ function m_HDUnitCommands.QIN_BULDER_WONDER.IsVisible(unit: object)
 	end
 
 	return buildingInfo.Index == wonderId;
+end
+
+-- ======================================================================================================================================================
+-- 巴西UU
+-- ======================================================================================================================================================
+local BANDEIRANTES_PLOT_TAG = 'HD_BANDEIRANTES_PLOT';
+local BANDEIRANTES_RESOURCE_TAG = 'HD_BANDEIRANTES_RESOURCE';
+
+m_HDUnitCommands.BANDEIRANTES = {};
+m_HDUnitCommands.BANDEIRANTES.Properties = {};
+
+m_HDUnitCommands.BANDEIRANTES.EventName = "HD_Bandeirantes_Collect_Resource";
+m_HDUnitCommands.BANDEIRANTES.CategoryInUI = "SPECIFIC";
+m_HDUnitCommands.BANDEIRANTES.Icon = "ICON_UNITCOMMAND_BANDEIRANTES";
+m_HDUnitCommands.BANDEIRANTES.GetToolTipString = function (unit) 
+	local s = Locale.Lookup("LOC_BANDEIRANTES_COLLECT_RESOURCE_TEXT");
+	if unit == nil then
+		return s;
+	end
+
+	local ownerId = unit:GetOwner();
+	local map = Utils.GetPlayerProperty(ownerId, BANDEIRANTES_RESOURCE_TAG) or {};
+	local strList = {};
+
+	for resourceType, num in pairs(map) do
+		table.insert(strList, '[ICON_' .. resourceType .. '] ' .. num);
+	end
+
+	if #strList > 0 then
+		local detail = '';
+		for i, detailStr in ipairs(strList) do
+			if i > 1 then detail = detail .. ' '; end
+			detail = detail .. detailStr;
+		end
+
+		s = s .. '[NEWLINE][NEWLINE]' .. Locale.Lookup('LOC_BANDEIRANTES_COLLECT_RESOURCE_COLLECTED_TEXT', detail);
+	end
+
+	return s;
+end
+m_HDUnitCommands.BANDEIRANTES.GetDisabledToolTipString = function(unit)
+	if unit == nil then
+		return "";
+	end
+
+	local plotId = unit:GetPlotId();
+	local plot = Map.GetPlotByIndex(plotId);
+	if plot == nil then
+		return "";
+	end
+
+	if plot:GetProperty(BANDEIRANTES_PLOT_TAG) == 1 then
+		return Locale.Lookup("LOC_BANDEIRANTES_COLLECT_RESOURCE_DISABLED_TEXT");
+	end
+
+	if unit:GetMovesRemaining() == 0 then
+		return '[COLOR_RED]' .. Locale.Lookup("LOC_HUD_UNIT_ACTION_PILLAGE_REQUIRES_MOVEMENT") .. '[ENDCOLOR]';
+	end
+
+	return Locale.Lookup("LOC_BANDEIRANTES_COLLECT_RESOURCE_DISABLED_TEXT2");
+end
+m_HDUnitCommands.BANDEIRANTES.VisibleInUI = true;
+m_HDUnitCommands.BANDEIRANTES.DoNotDelete = true;
+
+function m_HDUnitCommands.BANDEIRANTES.CanUse(unit: object)
+	if unit == nil then
+		return false;
+	end
+	local unitInfo = GameInfo.Units[unit:GetType()];
+	return unitInfo.UnitType == "UNIT_HD_BANDEIRANTES";
+end
+
+function m_HDUnitCommands.BANDEIRANTES.IsDisabled(unit: object)
+	if unit == nil then
+		return true;
+	end
+
+	local plotId = unit:GetPlotId();
+	local plot = Map.GetPlotByIndex(plotId);
+
+	local ownerId = unit:GetOwner();
+	local player = Players[ownerId];
+
+	if not plot or not player then
+		return true;
+	end
+
+	if plot:GetOwner() ~= -1 then
+		return true;
+	end
+
+	if plot:GetFeatureType() ~= JUNGLE_INDEX then
+		return true;
+	end
+
+	if unit:GetMovesRemaining() == 0 then
+		return true;
+	end
+
+	local resourceId = plot:GetResourceType();
+	if resourceId == -1 or resourceId == ANTIQUITY_SITE_INDEX or not player:GetResources():IsResourceVisible(plot:GetResourceTypeHash()) then
+		return true;
+	end
+
+	return plot:GetProperty(BANDEIRANTES_PLOT_TAG) == 1;
 end

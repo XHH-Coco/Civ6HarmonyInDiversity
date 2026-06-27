@@ -298,7 +298,7 @@ end
 Utils.GetBuildingEra = GetBuildingEra
 
 -- 获取城市正在建造
-function GetCityCurrentlyBuilding(plyerId, cityId)
+function GetCityCurrentlyBuilding(playerId, cityId)
 	local city = CityManager.GetCity(playerId, cityId);
 	return city:GetBuildQueue():CurrentlyBuilding();
 end
@@ -511,8 +511,8 @@ Utils.IsRowValid = IsRowValid;
 -- 苏美尔 获得特殊任务描述
 local Sumeria_Special_Quest_Tag = 'HD_Sumeria_Special_Quest';
 local m_Sumeria_SpecialQuestList = {};
-function GetSumeriaSpecialQuestDescription(plyerId, citystateId)
-	local player = Players[plyerId]
+function GetSumeriaSpecialQuestDescription(playerId, citystateId)
+	local player = Players[playerId]
 	m_Sumeria_SpecialQuestList = player:GetProperty(Sumeria_Special_Quest_Tag) or {}
 	local specialQuest = m_Sumeria_SpecialQuestList[citystateId]
 	if specialQuest then
@@ -860,6 +860,25 @@ local function GetUnitProperty(playerId, unitId, tag)
 end
 Utils.GetUnitProperty = GetUnitProperty;
 
+-- 获得玩家参数
+local function GetPlayerProperty(playerId, tag)
+	local player = Players[playerId];
+	if not player then return nil; end
+
+	return player:GetProperty(tag);
+end
+Utils.GetPlayerProperty = GetPlayerProperty;
+
+
+-- 设置玩家property
+local function SetPlayerProperty(playerId, tag, value)
+	local player = Players[playerId];
+	if not player then return; end
+
+	return player:SetProperty(tag, value);
+end
+Utils.SetPlayerProperty = SetPlayerProperty;
+
 -- 宣战
 local function DeclareWarBetweenPlayers(player1Id, player2Id, warId)
 	local player1 = Players[player1Id];
@@ -977,3 +996,36 @@ local function GetNearestCity(playerId, x, y)
 	return resultCity;
 end
 Utils.GetNearestCity = GetNearestCity;
+
+-- 记录创作巨作的伟人
+local GreatWorkGreatPersonList = {}
+local function InitGreatWorkGreatPersonList()
+	for row in GameInfo.GreatWorks() do
+		if row.GreatPersonIndividualType ~= nil then
+			GreatWorkGreatPersonList[GameInfo.GreatPersonIndividuals[row.GreatPersonIndividualType].Index] = true;
+		end
+	end
+end
+InitGreatWorkGreatPersonList()
+Utils.GreatWorkGreatPersonList = GreatWorkGreatPersonList;
+
+-- 区域对应伟人点Map 包括特色区域
+local DistrictCorrespondingGPPMap = {};
+local function InitDistrictCorrespondingGPPMap()
+	for row in GameInfo.DistrictCorrespondingGPP_HD() do
+		local data = DistrictCorrespondingGPPMap[row.DistrictType] or {};
+		table.insert(data, row.GreatPersonClassType);
+		DistrictCorrespondingGPPMap[row.DistrictType] = data;
+
+		-- 处理UD
+		for rr in GameInfo.DistrictReplaces() do
+			if rr.ReplacesDistrictType == row.DistrictType then
+				local udData = DistrictCorrespondingGPPMap[rr.CivUniqueDistrictType] or {};
+				table.insert(udData, row.GreatPersonClassType);
+				DistrictCorrespondingGPPMap[rr.CivUniqueDistrictType] = udData;
+			end
+		end
+	end
+end
+InitDistrictCorrespondingGPPMap();
+Utils.DistrictCorrespondingGPPMap = DistrictCorrespondingGPPMap;

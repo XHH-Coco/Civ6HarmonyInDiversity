@@ -13,7 +13,7 @@ function OnImprovementAddedToMap(locationX, locationY, improvementType, eImprove
 		-- enable the improvements roads after researching TECH_THE_WHEEL
 		if playerTechs:HasTech(m_Tech_Wheel) or (city_roads_require_wheel == 0) then
 			local era = GameInfo.Eras[player:GetEra()];
-			local currentRouteType = plot:GetRouteType(plot);
+			local currentRouteType = plot:GetRouteType();
 			local playerRouteType = Utils.GetRouteTypeForPlayer(player);
 			if currentRouteType == RouteTypes.NONE or Utils.CompareRoutes(playerRouteType,currentRouteType) then
 				RouteBuilder.SetRouteType(plot, playerRouteType);

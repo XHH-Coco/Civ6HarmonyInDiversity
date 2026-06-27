@@ -105,8 +105,9 @@ update Districts set PrereqTech = NULL, PrereqCivic = 'CIVIC_FOREIGN_TRADE' wher
 update Districts set PrereqTech = 'TECH_IRON_WORKING' where DistrictType = 'DISTRICT_INDUSTRIAL_ZONE'
 	or DistrictType in (select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType = 'DISTRICT_INDUSTRIAL_ZONE');
 -- WATER_ENTERTAINMENT_COMPLEX
-update Districts set PrereqTech = NULL, PrereqCivic = 'CIVIC_CIVIL_ENGINEERING' where DistrictType = 'DISTRICT_WATER_ENTERTAINMENT_COMPLEX'
+update Districts set PrereqTech = 'TECH_CARTOGRAPHY', PrereqCivic = NULL where DistrictType = 'DISTRICT_WATER_ENTERTAINMENT_COMPLEX'
 	or DistrictType in (select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType = 'DISTRICT_WATER_ENTERTAINMENT_COMPLEX');
+update Districts set PrereqTech = 'TECH_SHIPBUILDING' where DistrictType = 'DISTRICT_WATER_STREET_CARNIVAL';
 update Districts set PrereqTech = NULL, PrereqCivic = 'CIVIC_HOUSEHOLD_REGISTRATION_HD' where DistrictType = 'DISTRICT_NEIGHBORHOOD'
 	or DistrictType in (select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType = 'DISTRICT_NEIGHBORHOOD');
 -- UD
@@ -142,17 +143,14 @@ values
 	('DISTRICT_ENTERTAINMENT_COMPLEX',				'HD_DISTRICT_ENTERTAINMENT_EXTRA_AMENITY'),
 	('DISTRICT_WATER_ENTERTAINMENT_COMPLEX',	'HD_DISTRICT_ENTERTAINMENT_EXTRA_AMENITY'),
 	('DISTRICT_STREET_CARNIVAL',							'HD_DISTRICT_ENTERTAINMENT_EXTRA_AMENITY'),
-	('DISTRICT_STREET_CARNIVAL',							'HD_DISTRICT_STREET_CARNIVAL_DISTRICT_FOOD'),
 	('DISTRICT_STREET_CARNIVAL',							'HD_DISTRICT_STREET_CARNIVAL_FAITH_PURCHASE'),
 	('DISTRICT_WATER_STREET_CARNIVAL',				'HD_DISTRICT_ENTERTAINMENT_EXTRA_AMENITY'),
-	('DISTRICT_WATER_STREET_CARNIVAL',				'HD_DISTRICT_STREET_CARNIVAL_DISTRICT_FOOD'),
 	('DISTRICT_WATER_STREET_CARNIVAL',				'HD_DISTRICT_WATER_STREET_CARNIVAL_FAITH_PURCHASE');
 
 insert or replace into Modifiers
 	(ModifierId,																					ModifierType,																			OwnerRequirementSetId,																	SubjectRequirementSetId)
 values
 	('HD_DISTRICT_ENTERTAINMENT_EXTRA_AMENITY',						'MODIFIER_ADJUST_AMENITIES_IN_DISTRICT',					'PLOT_ADJACENT_TO_WONDER_OR_NEIGHBORHOOD_REQUIREMENTS', null),
-	('HD_DISTRICT_STREET_CARNIVAL_DISTRICT_FOOD',					'MODIFIER_PLAYER_DISTRICTS_ADJUST_YIELD_CHANGE',	null,																										'REQUIRE_PLOT_ADJACENT_TO_OWNER_AND_NOT_WONDER'),
 	('HD_DISTRICT_STREET_CARNIVAL_FAITH_PURCHASE',				'MODIFIER_CITY_ENABLE_BUILDING_FAITH_PURCHASE',		null,																										null),
 	('HD_DISTRICT_WATER_STREET_CARNIVAL_FAITH_PURCHASE',	'MODIFIER_CITY_ENABLE_BUILDING_FAITH_PURCHASE',		null,																										null);
 
@@ -160,11 +158,10 @@ insert or replace into ModifierArguments
 	(ModifierId,																					Name,						Value)
 values
 	('HD_DISTRICT_ENTERTAINMENT_EXTRA_AMENITY',						'Amount',				1),
-	('HD_DISTRICT_STREET_CARNIVAL_DISTRICT_FOOD',					'YieldType',		'YIELD_FOOD'),
-	('HD_DISTRICT_STREET_CARNIVAL_DISTRICT_FOOD',					'Amount',				1),
 	('HD_DISTRICT_STREET_CARNIVAL_FAITH_PURCHASE',				'DistrictType',	'DISTRICT_ENTERTAINMENT_COMPLEX'),
 	('HD_DISTRICT_WATER_STREET_CARNIVAL_FAITH_PURCHASE',	'DistrictType',	'DISTRICT_WATER_ENTERTAINMENT_COMPLEX');
 
+-- 宇航中心
 update Districts set Maintenance = 50 where DistrictType = 'DISTRICT_SPACEPORT';
 
 -------------------------------------------------------------------------------
@@ -383,25 +380,6 @@ insert or replace into RequirementSetRequirements
 	(RequirementSetId,							RequirementId)
 values
 	('MBANZA_ADJACENCY_FOOD_REQUIREMENTS',		'ADJACENT_TO_OWNER');
-
--- 巴西UD改动
-insert or replace into Modifiers
-	(ModifierId,															ModifierType,																			SubjectRequirementSetId,	OwnerStackLimit)
-select
-	'HD_BRAZIL_UD_' || GreatPersonClassType,	'MODIFIER_PLAYER_DISTRICTS_ADJUST_YIELD_CHANGE',	'DISTRICT_IS_BRAZIL_UD',	1
-from GreatPersonCorrespondingYieldType_HD;
-
-insert or replace into ModifierArguments
-	(ModifierId,																Name,						Value)
-select
-	'HD_BRAZIL_UD_' || GreatPersonClassType,		'YieldType',		YieldType
-from GreatPersonCorrespondingYieldType_HD;
-
-insert or replace into ModifierArguments
-	(ModifierId,																Name,				Value)
-select
-	'HD_BRAZIL_UD_' || GreatPersonClassType,		'Amount',		Amount
-from GreatPersonCorrespondingYieldType_HD;
 
 -- 堤坝
 update Districts set Entertainment = 0 where DistrictType = 'DISTRICT_DAM';

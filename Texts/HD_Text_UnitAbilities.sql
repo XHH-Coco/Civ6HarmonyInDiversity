@@ -78,7 +78,9 @@ values
     ("LOC_TRAIT_LEADER_ARTHASHASTRA_EXTRA_STRENGTH_PREVIEW_TEXT",             "from Arthashastra"),
     ('LOC_WAR_CART_COUNTER_ANTI_CAVALRY',                                     "against anti-cavalry units"),
     ("LOC_ABILITY_NAVAL_RAIDER_IGNORE_SEA_FEATURE_DESCRIPTION",               "Ignore the extra [ICON_Movement] Movement cost from Features."),
-    ("LOC_ABILITY_COUNTER_ANTI_CAVALRY_DESCRIPTION",                          "No penalties against anti-cavalry units.");
+    ("LOC_ABILITY_COUNTER_ANTI_CAVALRY_DESCRIPTION",                          "No penalties against anti-cavalry units."),
+    ("LOC_ABILITY_HD_BANDEIRANTES_ERA_STRENGTH_DESCRIPTION",                  "Gain +7 [ICON_STRENGTH] Combat Strength each time you enter a new era."),
+    ("LOC_ABILITY_HD_BANDEIRANTES_ERA_STRENGTH_TEXT",                         "+{Property} from your era");
 
 --------------------------------------------------------------------------------
 -- Language: zh_Hans_CN
@@ -163,7 +165,9 @@ values
     ("zh_Hans_CN",  "LOC_TRAIT_LEADER_ARTHASHASTRA_EXTRA_STRENGTH_PREVIEW_TEXT",             "来自政事论"),
     ("zh_Hans_CN",  "LOC_WAR_CART_COUNTER_ANTI_CAVALRY",                                     "对战抗骑兵单位"),
     ("zh_Hans_CN",  "LOC_ABILITY_NAVAL_RAIDER_IGNORE_SEA_FEATURE_DESCRIPTION",               "忽略地貌带来的额外 [ICON_Movement] 移动力消耗。"),
-    ("zh_Hans_CN",  "LOC_ABILITY_COUNTER_ANTI_CAVALRY_DESCRIPTION",                          "对战抗骑兵单位时无 [ICON_STRENGTH] 战斗力减益。");
+    ("zh_Hans_CN",  "LOC_ABILITY_COUNTER_ANTI_CAVALRY_DESCRIPTION",                          "对战抗骑兵单位时无 [ICON_STRENGTH] 战斗力减益。"),
+    ("zh_Hans_CN",  "LOC_ABILITY_HD_BANDEIRANTES_ERA_STRENGTH_DESCRIPTION",                  "你每进入一个新时代，获得+7 [ICON_STRENGTH] 战斗力。"),
+    ("zh_Hans_CN",  "LOC_ABILITY_HD_BANDEIRANTES_ERA_STRENGTH_TEXT",                         "+{Property} 来自你所处的时代");
 
 -- UU Abilities
 --------------------------------------------------------------------------------
