@@ -1632,7 +1632,7 @@ from Eras where EraType != 'ERA_ANCIENT';
 
 -- UU 雨林加产能力
 insert or ignore into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) select
-	'HD_BANDEIRANTES_JUNGLE_' || YieldType, 'MODIFIER_PLAYER_ADJUST_PLOT_YIELD', 'PLOT_HAS_IMPROVED_AND_RAINFOREST_REQUIREMENTS'
+	'HD_BANDEIRANTES_JUNGLE_' || YieldType, 'MODIFIER_PLAYER_ADJUST_PLOT_YIELD', 'PLOT_HAS_IMPROVED_RESOURCE_AND_RAINFOREST_REQUIREMENTS'
 from Yields;
 
 insert or ignore into ModifierArguments (ModifierId, Name, Value) select
