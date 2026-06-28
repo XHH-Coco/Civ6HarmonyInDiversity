@@ -940,6 +940,7 @@
       <File>UI/Custom/CityButton_ResourceClassification.xml</File>
       <File>UI/Custom/CityButton_RegionalYields.xml</File>
       <File>UI/Custom/CityButton_Magnanimous.xml</File>
+      <File>UI/Custom/CityButton_Misc.xml</File>
     </AddUserInterfaces>
     <ReplaceUIScript id="DL_CityPanelOverview" criteria="Expansion2">
       <Properties>
@@ -2419,6 +2420,8 @@
     <File>UI/Custom/CityButton_RegionalYields.xml</File>
     <File>UI/Custom/CityButton_Magnanimous.lua</File>
     <File>UI/Custom/CityButton_Magnanimous.xml</File>
+    <File>UI/Custom/CityButton_Misc.lua</File>
+    <File>UI/Custom/CityButton_Misc.xml</File>
 
     <!-- UI replacements -->
     <File>UI/Replacement/CitySupport.lua</File>
