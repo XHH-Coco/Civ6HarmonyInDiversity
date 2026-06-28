@@ -516,8 +516,10 @@ values
 	("LOC_TRAIT_LEADER_MAGNANIMOUS_INTRODUCE_PERCENTAGE_TEXT",        			 "[ICON_BULLET]{1_Percentage}% chance of introducing a {2_Name}."),
 	("LOC_TRAIT_LEADER_MAGNANIMOUS_INTRODUCE_TIMES_TEXT",        		 				 "Remaining times of introductions: {1_Num} {1_Num : plural 1?time; other?times;}."),
 	("LOC_BANDEIRANTES_COLLECT_RESOURCE_TEXT",        		 						 			 "Collect Rainforest Resources"),
+	("LOC_BANDEIRANTES_COLLECT_RESOURCE_TIMES_TEXT",        		 			 			 "Remaining times of collection: {1_Num} {1_Num : plural 1?time; other?times;}."),
 	("LOC_BANDEIRANTES_COLLECT_RESOURCE_DISABLED_TEXT",        		 	 				 "[COLOR:Red]The resources in this tile have already been collected.[ENDCOLOR]"),
 	("LOC_BANDEIRANTES_COLLECT_RESOURCE_DISABLED_TEXT2",        		 	 			 "[COLOR:Red]Must on the unowned Rainforest Resources.[ENDCOLOR]"),
+	("LOC_BANDEIRANTES_COLLECT_RESOURCE_DISABLED_TEXT3",        		 	 			 "[COLOR:Red]Collection limit reached.[ENDCOLOR]"),
 	("LOC_BANDEIRANTES_COLLECT_RESOURCE_COLLECTED_TEXT",        		 	 			 "Collected:[NEWLINE]{1_Detail}"),
 -- =====================================================================================================================================
 -- 西班牙
@@ -1139,8 +1141,10 @@ values
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_INTRODUCE_PERCENTAGE_TEXT",        "[ICON_BULLET]有{1_Percentage}%的概率引进一位{2_Name}。"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_INTRODUCE_TIMES_TEXT",        		 "剩余引进次数：{1_Num}次。"),
 	("zh_Hans_CN",  "LOC_BANDEIRANTES_COLLECT_RESOURCE_TEXT",        		 						 "收集雨林资源"),
+	("zh_Hans_CN",  "LOC_BANDEIRANTES_COLLECT_RESOURCE_TIMES_TEXT",        		 			 "剩余收集次数：{1_Num}次。"),
 	("zh_Hans_CN",  "LOC_BANDEIRANTES_COLLECT_RESOURCE_DISABLED_TEXT",        		 	 "[COLOR:Red]该单元格的资源已经被收集过了。[ENDCOLOR]"),
 	("zh_Hans_CN",  "LOC_BANDEIRANTES_COLLECT_RESOURCE_DISABLED_TEXT2",        		 	 "[COLOR:Red]必须位于境外的雨林资源上。[ENDCOLOR]"),
+	("zh_Hans_CN",  "LOC_BANDEIRANTES_COLLECT_RESOURCE_DISABLED_TEXT3",        		 	 "[COLOR:Red]收集次数耗尽。[ENDCOLOR]"),
 	("zh_Hans_CN",  "LOC_BANDEIRANTES_COLLECT_RESOURCE_COLLECTED_TEXT",        		 	 "已收集：[NEWLINE]{1_Detail}"),
 -- =====================================================================================================================================
 -- 西班牙

@@ -163,7 +163,8 @@ Events.UnitMoved.Add(BandeirantesAutoRoad);
 
 local BANDEIRANTES_PLOT_TAG = 'HD_BANDEIRANTES_PLOT';
 local BANDEIRANTES_RESOURCE_TAG = 'HD_BANDEIRANTES_RESOURCE';
-local BANDEIRANTES_FIRST_COLLECT_TAG = 'HD_BANDEIRANTES_FIRST_COLLECT';
+-- local BANDEIRANTES_FIRST_COLLECT_TAG = 'HD_BANDEIRANTES_FIRST_COLLECT';
+local BANDEIRANTES_TIMES_TAG = 'HD_BANDEIRANTES_TIMES';
 local BANDEIRANTES_RESOURCES_TIMES = GlobalParameters.HD_BANDEIRANTES_RESOURCES_TIMES or 0;
 function Bandeirantes_Collect_Resource(playerId, unitId)
 	if BANDEIRANTES_RESOURCES_TIMES <= 0 then return; end
@@ -192,10 +193,10 @@ function Bandeirantes_Collect_Resource(playerId, unitId)
 		-- 判断是否满足加产的收集次数
 		if times > 0 and (times + 1) % BANDEIRANTES_RESOURCES_TIMES == 0 then
 			-- 若为首次 则+1琴
-			if player:GetProperty(BANDEIRANTES_FIRST_COLLECT_TAG) ~= 1 then
-				player:SetProperty(BANDEIRANTES_FIRST_COLLECT_TAG, 1);
-				player:AttachModifierByID('HD_BANDEIRANTES_JUNGLE_YIELD_CULTURE');
-			end
+			-- if player:GetProperty(BANDEIRANTES_FIRST_COLLECT_TAG) ~= 1 then
+			-- 	player:SetProperty(BANDEIRANTES_FIRST_COLLECT_TAG, 1);
+			-- 	player:AttachModifierByID('HD_BANDEIRANTES_JUNGLE_YIELD_CULTURE');
+			-- end
 
 			-- 获得资源本体的产出
 			for row in GameInfo.Resource_YieldChanges() do
@@ -207,6 +208,9 @@ function Bandeirantes_Collect_Resource(playerId, unitId)
 			end
 		end
 		
+        local timesRemaining = unit:GetProperty(BANDEIRANTES_TIMES_TAG) or 0;
+        unit:SetProperty(BANDEIRANTES_TIMES_TAG, timesRemaining - 1);
+
 		local movesRemaining = Utils.GetUnitMovesRemaining(playerId, unitId);
 		unit:ChangeMovesRemaining(-movesRemaining);
 	end

@@ -527,7 +527,7 @@ m_HDUnitCommands.MILITARY_ENGINEER_EXCAVATE.GetDisabledToolTipString = function 
 		return '';
 	end
 	if unit:GetMovesRemaining() == 0 then
-		return '[COLOR_RED]' .. Locale.Lookup("LOC_HUD_UNIT_ACTION_PILLAGE_REQUIRES_MOVEMENT") .. '[ENDCOLOR]';
+		return '[COLOR:Red]' .. Locale.Lookup("LOC_HUD_UNIT_ACTION_PILLAGE_REQUIRES_MOVEMENT") .. '[ENDCOLOR]';
 	end
 
 	local plotId = unit:GetPlotId();
@@ -679,6 +679,7 @@ end
 -- ======================================================================================================================================================
 local BANDEIRANTES_PLOT_TAG = 'HD_BANDEIRANTES_PLOT';
 local BANDEIRANTES_RESOURCE_TAG = 'HD_BANDEIRANTES_RESOURCE';
+local BANDEIRANTES_TIMES_TAG = 'HD_BANDEIRANTES_TIMES';
 
 m_HDUnitCommands.BANDEIRANTES = {};
 m_HDUnitCommands.BANDEIRANTES.Properties = {};
@@ -710,6 +711,11 @@ m_HDUnitCommands.BANDEIRANTES.GetToolTipString = function (unit)
 		s = s .. '[NEWLINE][NEWLINE]' .. Locale.Lookup('LOC_BANDEIRANTES_COLLECT_RESOURCE_COLLECTED_TEXT', detail);
 	end
 
+	local times = Utils.GetUnitProperty(playerId, unit:GetID(), BANDEIRANTES_TIMES_TAG) or 0;
+	if times > 0 then
+		s = s .. '[NEWLINE][NEWLINE]' .. Locale.Lookup('LOC_BANDEIRANTES_COLLECT_RESOURCE_TIMES_TEXT', times);
+	end
+
 	return s;
 end
 m_HDUnitCommands.BANDEIRANTES.GetDisabledToolTipString = function(unit)
@@ -727,8 +733,13 @@ m_HDUnitCommands.BANDEIRANTES.GetDisabledToolTipString = function(unit)
 		return Locale.Lookup("LOC_BANDEIRANTES_COLLECT_RESOURCE_DISABLED_TEXT");
 	end
 
+	local times = Utils.GetUnitProperty(playerId, unit:GetID(), BANDEIRANTES_TIMES_TAG) or 0;
+	if times <= 0 then
+		return Locale.Lookup("LOC_BANDEIRANTES_COLLECT_RESOURCE_DISABLED_TEXT3");
+	end
+
 	if unit:GetMovesRemaining() == 0 then
-		return '[COLOR_RED]' .. Locale.Lookup("LOC_HUD_UNIT_ACTION_PILLAGE_REQUIRES_MOVEMENT") .. '[ENDCOLOR]';
+		return '[COLOR:Red]' .. Locale.Lookup("LOC_HUD_UNIT_ACTION_PILLAGE_REQUIRES_MOVEMENT") .. '[ENDCOLOR]';
 	end
 
 	return Locale.Lookup("LOC_BANDEIRANTES_COLLECT_RESOURCE_DISABLED_TEXT2");
@@ -768,6 +779,11 @@ function m_HDUnitCommands.BANDEIRANTES.IsDisabled(unit: object)
 	end
 
 	if unit:GetMovesRemaining() == 0 then
+		return true;
+	end
+
+	local times = Utils.GetUnitProperty(playerId, unit:GetID(), BANDEIRANTES_TIMES_TAG) or 0;
+	if times <= 0 then
 		return true;
 	end
 
