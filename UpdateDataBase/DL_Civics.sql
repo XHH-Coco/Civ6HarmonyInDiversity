@@ -510,13 +510,13 @@ update Civics set UITreeRow = -3 where CivicType = 'CIVIC_CULTURAL_HEGEMONY';
 update Civics set Cost = 40 where CivicType = 'CIVIC_CODE_OF_LAWS';
 update Civics set Cost = 40 where CivicType = 'CIVIC_CRAFTSMANSHIP';
 update Civics set Cost = 40 where CivicType = 'CIVIC_FOREIGN_TRADE';
-update Civics set Cost = 50 where CivicType = 'CIVIC_MILITARY_TRADITION';
-update Civics set Cost = 80 where CivicType = 'CIVIC_STATE_WORKFORCE';
-update Civics set Cost = 80 where CivicType = 'CIVIC_EARLY_EMPIRE';
-update Civics set Cost = 50 where CivicType = 'CIVIC_MYSTICISM';
+update Civics set Cost = 60 where CivicType = 'CIVIC_MILITARY_TRADITION';
+update Civics set Cost = 90 where CivicType = 'CIVIC_STATE_WORKFORCE';
+update Civics set Cost = 90 where CivicType = 'CIVIC_EARLY_EMPIRE';
+update Civics set Cost = 60 where CivicType = 'CIVIC_MYSTICISM';
 
 update Civics set Cost = 150 where CivicType = 'CIVIC_GAMES_RECREATION';
-update Civics set Cost = 150 where CivicType = 'CIVIC_POLITICAL_PHILOSOPHY';
+update Civics set Cost = 180 where CivicType = 'CIVIC_POLITICAL_PHILOSOPHY';
 update Civics set Cost = 150 where CivicType = 'CIVIC_DRAMA_POETRY';
 update Civics set Cost = 240 where CivicType = 'CIVIC_MILITARY_TRAINING';
 update Civics set Cost = 240 where CivicType = 'CIVIC_DEFENSIVE_TACTICS';

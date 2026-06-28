@@ -39,6 +39,7 @@ Utils.RegionalBuildingList = RegionalBuildingList;
 
 local CITY_CENTER_INDEX = GameInfo.Districts['DISTRICT_CITY_CENTER'].Index;
 
+local SINGLE_BUILDING_EXTRA_REGIONAL_RANGE_TAG = 'HD_SINGLE_BUILDING_EXTRA_REGIONAL_RANGE_';
 local SINGLE_DISTRICT_EXTRA_REGIONAL_RANGE_TAG = 'HD_SINGLE_DISTRICT_EXTRA_REGIONAL_RANGE_';
 
 local SINGLE_BUILDING_PROVIDE_REGIONAL_YIELD_BONUS_TAG = 'HD_SINGLE_BUILDING_PROVIDE_REGIONAL_YIELD_BONUS_';
@@ -63,9 +64,14 @@ function RefreshRegionalYield(playerId)
 			if city:GetBuildings():HasBuilding(data.Index) and not city:GetBuildings():IsPillaged(data.Index) then
 				local plot = Map.GetPlotByIndex(city:GetBuildings():GetBuildingLocation(data.Index));
 				local regionalRange = data.RegionalRange;
+
+				-- 辐射范围
+				local rangeAdd1 = city:GetProperty(SINGLE_BUILDING_EXTRA_REGIONAL_RANGE_TAG .. buildingType) or 0;
+				local rangeAdd2 = 0;
 				if data.PrereqDistrict then
-					regionalRange = regionalRange + (city:GetProperty(SINGLE_DISTRICT_EXTRA_REGIONAL_RANGE_TAG .. data.PrereqDistrict) or 0)
+					rangeAdd2 = city:GetProperty(SINGLE_DISTRICT_EXTRA_REGIONAL_RANGE_TAG .. data.PrereqDistrict) or 0;
 				end
+				regionalRange = regionalRange + rangeAdd1 + rangeAdd2;
 
 				local yieldList = {};
 				-- 判断科技、市政、供电前置
@@ -98,10 +104,13 @@ function RefreshRegionalYield(playerId)
 
 						print("----------------------------------")
 						print(Locale.Lookup(city:GetName()) .. " " .. Locale.Lookup(GameInfo.Buildings[buildingType].Name))
-						if add1 ~= 0 then print("建筑加区 " .. add1); end
-						if add2 ~= 0 then print("区域加区 " .. add2); end
-						if factor1 ~= 1 then print("玩家乘区 " .. factor1); end
-						if factor2 ~= 1 then print("单城乘区 " .. factor2); end
+						if rangeAdd1 ~= 0 then print("范围区域加区：" .. rangeAdd1); end
+						if rangeAdd2 ~= 0 then print("范围建筑加区：" .. rangeAdd2); end
+						print("总范围：" .. regionalRange);
+						if add1 ~= 0 then print("产出建筑加区：" .. add1); end
+						if add2 ~= 0 then print("产出区域加区：" .. add2); end
+						if factor1 ~= 1 then print("产出玩家乘区：" .. factor1); end
+						if factor2 ~= 1 then print("产出单城乘区：" .. factor2); end
 						print(yieldChange .. Locale.Lookup('LOC_' .. yieldData.YieldType .. '_NAME'))
 
 						if yieldChange > 0 then
@@ -275,6 +284,23 @@ function Initialize ()
 		pendingRefresh[playerId] = 1;
 	end);
 	Events.InfluenceGiven.Add(function (citystateId, playerId)
+		pendingRefresh[playerId] = 1;
+	end);
+	Events.PlayerResourceChanged.Add(function (playerId, resourceId)
+		pendingRefresh[playerId] = 1;
+	end);
+	Events.ImprovementAddedToMap.Add(function (x, y, improvementId, playerId)
+		pendingRefresh[playerId] = 1;
+	end);
+	Events.ImprovementRemovedFromMap.Add(function (x, y, playerId)
+		if playerId ~= nil and playerId ~= -1 then
+			pendingRefresh[playerId] = 1;
+		end
+	end);
+	Events.ResearchCompleted.Add(function (playerId, techId)
+		pendingRefresh[playerId] = 1;
+	end);
+	Events.CivicCompleted.Add(function (playerId, civicId)
 		pendingRefresh[playerId] = 1;
 	end);
 end

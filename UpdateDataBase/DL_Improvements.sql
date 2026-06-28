@@ -50,6 +50,12 @@ values
 	('IMPROVEMENT_MISSION',				'YIELD_PRODUCTION',		0),
 	('IMPROVEMENT_ICE_HOCKEY_RINK',		'YIELD_FOOD',			2);
 
+update Improvements set Housing = 1, TilesRequired = 2 where ImprovementType in (
+	'IMPROVEMENT_QUARRY',
+	'IMPROVEMENT_MINE',
+	'IMPROVEMENT_LUMBER_MILL'
+);
+
 -- Bonus Yield
 delete from Improvement_BonusYieldChanges where ImprovementType in (
 	'IMPROVEMENT_FARM',

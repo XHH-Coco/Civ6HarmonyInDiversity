@@ -1856,6 +1856,9 @@
       <File>Gameplay/BinaryCompress.lua</File>
       <File>Gameplay/UnitAbilities.lua</File>
       <File>Gameplay/ResourceClassification.lua</File>
+    </AddGameplayScripts>
+    <AddGameplayScripts id="DL_Scripts_Gameplay_Late" criteria="Expansion2">
+      <Properties><LoadOrder>16018</LoadOrder></Properties>
       <File>Gameplay/RegionalYields.lua</File>
     </AddGameplayScripts>
     <!-- UI scripts for gameplay -->

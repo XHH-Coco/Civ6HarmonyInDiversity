@@ -58,14 +58,20 @@ select
 from Buildings_XP2 where EntertainmentBonusWithPower > 0 and BuildingType in (select BuildingType from HD_BuildingRegionalRange);
 update Buildings_XP2 set EntertainmentBonusWithPower = 0 where BuildingType in (select BuildingType from HD_BuildingRegionalRange);
 
--- 科技/市政前置
-update HD_BuildingRegionalYields set PrereqTech = 'TECH_PAPER_MAKING_HD'
-  where (BuildingType = 'BUILDING_JNR_ACADEMY' or BuildingType = 'BUILDING_MER_LITERARY_SCHOOL_HD') and YieldType = 'YIELD_CULTURE';
+-- 科技/市政前置 暂无
 
 -- 补充 YieldChange = 0 的部分建筑，用于适配伟人加产等
   -- 如桑弘羊给铸币厂+1辐射文化 需要文化的 YieldChange = 0
   -- 如服装公司
   -- 爱达·勒芙蕾丝 工业区建筑+3辐射科技
+insert or ignore into HD_BuildingRegionalYields (BuildingType, YieldType, YieldChange) select
+  BuildingType, 'YIELD_CULTURE', 0
+from Buildings where BuildingType in ('BUILDING_JNR_ACADEMY');
+
+insert or ignore into HD_BuildingRegionalYields (BuildingType, YieldType, YieldChange) select
+  BuildingType, 'YIELD_SCIENCE', 0
+from Buildings where BuildingType in ('BUILDING_JNR_ALTAR');
+
 insert or ignore into HD_BuildingRegionalYields (BuildingType, YieldType, YieldChange) select
   BuildingType, 'YIELD_CULTURE', 0
 from HD_BuildingRegionalRange where BuildingType in (select BuildingType from Buildings where PrereqDistrict = 'DISTRICT_COMMERCIAL_HUB');
