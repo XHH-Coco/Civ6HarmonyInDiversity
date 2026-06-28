@@ -266,7 +266,7 @@ update Units set Cost = 220, Maintenance = 4, BaseMoves = 4, Range = 2, Combat =
 update Units_XP2 set ResourceCost = 0, ResourceMaintenanceType = 'RESOURCE_NITER', ResourceMaintenanceAmount = 1 where UnitType = 'UNIT_DE_ZEVEN_PROVINCIEN';
 ------ UNIT_DUTCH_SCHUTTERIJ
 -- 克里
-update Units set Cost = 30, Combat = 17, BaseMoves = BaseMoves + 1 where UnitType = 'UNIT_CREE_OKIHTCITAW';
+update Units set Cost = 30, Combat = 17 where UnitType = 'UNIT_CREE_OKIHTCITAW';
 delete from TypeTags where Type = 'ABILITY_CREE_OKIHTCITAW' and Tag = 'CLASS_CREE_OKIHTCITAW';
 ------ UNIT_CREE_OTEHTAPIW
 -- 印尼
@@ -283,7 +283,7 @@ update Units set Cost = 205, Maintenance = 5, BaseMoves = 5, Range = 0, Combat =
 update Units_XP2 set ResourceCost = 5, ResourceMaintenanceType = 'RESOURCE_HORSES', ResourceMaintenanceAmount = 1 where UnitType = 'UNIT_HUNGARY_HUSZAR';
 ------ UNIT_HUNGARY_KALANDOZO
 -- 印加
-update Units set Cost = 60, Maintenance = 2, BaseMoves = BaseMoves + 1, Range = 1, Combat = 36, RangedCombat = 26, StrategicResource = NULL,
+update Units set Cost = 60, Maintenance = 2, Range = 1, Combat = 36, RangedCombat = 26, StrategicResource = NULL,
     PrereqTech = null, PrereqCivic = 'CIVIC_MILITARY_TRAINING'
     where UnitType = 'UNIT_INCA_WARAKAQ';
 update Units_XP2 set ResourceCost = 0, ResourceMaintenanceType = NULL, ResourceMaintenanceAmount = 0 where UnitType = 'UNIT_INCA_WARAKAQ';
