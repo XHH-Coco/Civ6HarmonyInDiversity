@@ -166,7 +166,7 @@ values
     ("zh_Hans_CN",  "LOC_WAR_CART_COUNTER_ANTI_CAVALRY",                                     "对战抗骑兵单位"),
     ("zh_Hans_CN",  "LOC_ABILITY_NAVAL_RAIDER_IGNORE_SEA_FEATURE_DESCRIPTION",               "忽略地貌带来的额外 [ICON_Movement] 移动力消耗。"),
     ("zh_Hans_CN",  "LOC_ABILITY_COUNTER_ANTI_CAVALRY_DESCRIPTION",                          "对战抗骑兵单位时无 [ICON_STRENGTH] 战斗力减益。"),
-    ("zh_Hans_CN",  "LOC_ABILITY_HD_BANDEIRANTES_ERA_STRENGTH_DESCRIPTION",                  "你每进入一个新时代，获得+7 [ICON_STRENGTH] 战斗力。"),
+    ("zh_Hans_CN",  "LOC_ABILITY_HD_BANDEIRANTES_ERA_STRENGTH_DESCRIPTION",                  "你每进入一个新时代，获得+10 [ICON_STRENGTH] 战斗力。"),
     ("zh_Hans_CN",  "LOC_ABILITY_HD_BANDEIRANTES_ERA_STRENGTH_TEXT",                         "+{Property} 来自你所处的时代");
 
 -- UU Abilities

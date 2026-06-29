@@ -518,43 +518,66 @@ update Buildings set PrereqCivic = 'CIVIC_URBAN_DESIGN_HD', PrereqTech = Null wh
 delete from BuildingModifiers where BuildingType = 'BUILDING_TOWER_BRIDGE'
 	and (ModifierId = 'TOWER_BRIDGE_GRANT_COAL_PER_TURN' or ModifierId = 'TOWER_BRIDGE_CITIES_PRODUCTION' or ModifierId = 'TOWER_BRIDGE_CITIES_GOLD');
 
---BUILDING_BRANDENBURG_GATE
+-- 勃兰登堡门
 update Buildings set PrereqCivic = 'CIVIC_NATIONALISM', PrereqTech = null where BuildingType = 'BUILDING_BRANDENBURG_GATE';
+delete from Building_YieldChanges where BuildingType = 'BUILDING_BRANDENBURG_GATE';
 insert or replace into Building_YieldChanges (BuildingType, YieldType, YieldChange)
-select 'BUILDING_BRANDENBURG_GATE', 'YIELD_SCIENCE', 2 from Buildings where BuildingType = 'BUILDING_BRANDENBURG_GATE';
+select 'BUILDING_BRANDENBURG_GATE', 'YIELD_SCIENCE', 3 from Buildings where BuildingType = 'BUILDING_BRANDENBURG_GATE';
 insert or replace into Building_YieldChanges (BuildingType, YieldType, YieldChange)
-select 'BUILDING_BRANDENBURG_GATE', 'YIELD_PRODUCTION', 2 from Buildings where BuildingType = 'BUILDING_BRANDENBURG_GATE';
+select 'BUILDING_BRANDENBURG_GATE', 'YIELD_PRODUCTION', 3 from Buildings where BuildingType = 'BUILDING_BRANDENBURG_GATE';
 
 insert or ignore into Building_ValidTerrains (BuildingType, TerrainType)
 select 'BUILDING_BRANDENBURG_GATE', 'TERRAIN_SNOW' where exists (SELECT BuildingType FROM Buildings WHERE BuildingType = 'BUILDING_BRANDENBURG_GATE');
 
 delete from BuildingModifiers where BuildingType = 'BUILDING_BRANDENBURG_GATE' and ModifierId = 'BRANDENBURG_GATE_TRAINED_UNIT_XP_MODIFIER';
 delete from BuildingModifiers where BuildingType = 'BUILDING_BRANDENBURG_GATE' and ModifierId = 'BRANDENBURG_GRANT_GENERAL';
-insert or replace into BuildingModifiers (BuildingType,	ModifierId) select
-	'BUILDING_BRANDENBURG_GATE',	'BRANDENBURG_GATE_PRODUCTION_AT_PEACE_BONUS'
-where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_BRANDENBURG_GATE');
-insert or replace into BuildingModifiers (BuildingType,	ModifierId) select
-	'BUILDING_BRANDENBURG_GATE',	'BRANDENBURG_GATE_SCIENCE_AT_WAR_BONUS'
-where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_BRANDENBURG_GATE');
-insert or replace into BuildingModifiers (BuildingType,	ModifierId) select
-	'BUILDING_BRANDENBURG_GATE',	'BRANDENBURG_GARRISON_LOYALTY'
+
+insert or replace into Modifiers (ModifierId, ModifierType) select
+	'HD_BRANDENBURG_GATE_SCIENCE', 'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE'
 where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_BRANDENBURG_GATE');
 
-insert or replace into Modifiers 
-	(ModifierId,									ModifierType,											SubjectRequirementSetId) 
-values
-	('BRANDENBURG_GATE_PRODUCTION_AT_PEACE_BONUS',	'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER',	'PLAYER_IS_AT_PEACE_WITH_ALL_MAJORS'),
-	('BRANDENBURG_GATE_SCIENCE_AT_WAR_BONUS',		'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER',	'PLAYER_IS_AT_WAR_WITH_ANY_MAJOR'),
-	('BRANDENBURG_GARRISON_LOYALTY',				'MODIFIER_PLAYER_CITIES_ADJUST_IDENTITY_PER_TURN',		'CITY_HAS_GARRISON_UNIT_REQUIERMENT');
+insert or replace into Modifiers (ModifierId, ModifierType) select
+	'HD_BRANDENBURG_GATE_PRODUCTION', 'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE'
+where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_BRANDENBURG_GATE');
 
-insert or replace into ModifierArguments 
-	(ModifierId,								Name,			Value) 
-values
-	('BRANDENBURG_GATE_PRODUCTION_AT_PEACE_BONUS', 	'YieldType',	'YIELD_PRODUCTION'),
-	('BRANDENBURG_GATE_PRODUCTION_AT_PEACE_BONUS',	'Amount',		8),
-	('BRANDENBURG_GATE_SCIENCE_AT_WAR_BONUS', 		'YieldType',	'YIELD_SCIENCE'),
-	('BRANDENBURG_GATE_SCIENCE_AT_WAR_BONUS',		'Amount',		8),
-	('BRANDENBURG_GARRISON_LOYALTY',				'Amount',		3);
+insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId) select
+	'HD_BRANDENBURG_GATE_YIELD_BOOST', 'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER', 'PLAYER_HAS_BUILDING_BRANDENBURG_GATE_REQUIREMENTS'
+where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_BRANDENBURG_GATE');
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) select
+	'HD_BRANDENBURG_GATE_SCIENCE', 'YieldType', 'YIELD_SCIENCE'
+where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_BRANDENBURG_GATE');
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) select
+	'HD_BRANDENBURG_GATE_SCIENCE', 'Amount', 2
+where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_BRANDENBURG_GATE');
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) select
+	'HD_BRANDENBURG_GATE_SCIENCE', 'BuildingType', 'BUILDING_BRANDENBURG_GATE'
+where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_BRANDENBURG_GATE');
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) select
+	'HD_BRANDENBURG_GATE_PRODUCTION', 'YieldType', 'YIELD_PRODUCTION'
+where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_BRANDENBURG_GATE');
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) select
+	'HD_BRANDENBURG_GATE_PRODUCTION', 'Amount', 2
+where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_BRANDENBURG_GATE');
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) select
+	'HD_BRANDENBURG_GATE_PRODUCTION', 'BuildingType', 'BUILDING_BRANDENBURG_GATE'
+where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_BRANDENBURG_GATE');
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) select
+	'HD_BRANDENBURG_GATE_YIELD_BOOST', 'YieldType', 'YIELD_SCIENCE'
+where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_BRANDENBURG_GATE');
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) select
+	'HD_BRANDENBURG_GATE_YIELD_BOOST', 'Amount', 10
+where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_BRANDENBURG_GATE');
+
+insert or replace into GlobalParameters (Name, Value) values
+	('HD_BRANDENBURG_GATE_MILITARY_MOMENT_COUNT', 20);
 
 -- 婆罗浮屠（新版）
 update Buildings set PrereqCivic = NULL, PrereqTech = 'TECH_CONSTRUCTION', RequiresReligion = 0 where BuildingType = 'BUILDING_SUK_BOROBUDUR';

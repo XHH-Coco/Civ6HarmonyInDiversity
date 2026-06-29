@@ -146,10 +146,38 @@ local STEEL_INDEX = GameInfo.Technologies['TECH_STEEL'].Index;
 local STEEL_BOOST_TAG_FACTORY = 'HD_SteelBoost_Factory'
 local STEEL_BOOST_TAG_COAL = 'HD_SteelBoost_Coal'
 local TEXTILE_HD_INDEX = GameInfo.Technologies['TECH_TEXTILE_HD'].Index;
+local RECORDED_HISTORY_INDEX = GameInfo.Civics['CIVIC_RECORDED_HISTORY'].Index;
+local ASTRONOMY_INDEX = GameInfo.Technologies['TECH_ASTRONOMY'].Index;
 function BuildingConstructedBoost(playerId, cityId, buildingId, plotId, bOriginalConstruction)
 	local player = Players[playerId];
 	local building = GameInfo.Buildings[buildingId];
   
+  -- 历史记录
+  if (building.BuildingType == 'BUILDING_JNR_ACADEMY') then
+    if not player:GetCulture():HasBoostBeenTriggered(RECORDED_HISTORY_INDEX) then
+      player:GetCulture():TriggerBoost(RECORDED_HISTORY_INDEX);
+    end
+  end
+
+  -- 天文学
+  if (building.BuildingType == 'BUILDING_JNR_SCHOOL' or building.BuildingType == 'BUILDING_NAVIGATION_SCHOOL') then
+    local isAdjacentToMountain = false;
+    local plot = Map.GetPlotByIndex(plotId);
+    if plot then
+      local plots = Map.GetNeighborPlots(plot:GetX(), plot:GetY(), 1);
+      -- 遍历一环内的区域
+      for _, adjacentPlot in ipairs(plots) do
+        if adjacentPlot and adjacentPlot:IsMountain() then
+          isAdjacentToMountain = true;
+          break;
+        end
+      end
+    end
+    if isAdjacentToMountain and not player:GetTechs():HasBoostBeenTriggered(ASTRONOMY_INDEX) then
+      player:GetTechs():TriggerBoost(ASTRONOMY_INDEX);
+    end
+  end
+
   -- 纺织
   if (building.BuildingType == 'BUILDING_JNR_WAYSTATION') then
     if not player:GetTechs():HasBoostBeenTriggered(TEXTILE_HD_INDEX) then

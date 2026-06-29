@@ -62,10 +62,11 @@ values
   2, 3, 20, 0, 0, 35, 0, 1, 'YIELD_GOLD', 'DOMAIN_SEA', 'FORMATION_CLASS_NAVAL', 'PROMOTION_CLASS_NAVAL_MELEE', 'PSEUDOYIELD_UNIT_NAVAL_COMBAT', 'ADVISOR_CONQUEST', NULL),
   -- 旗手
   ('UNIT_HD_BANDEIRANTES', 'LOC_UNIT_HD_BANDEIRANTES_NAME', 'LOC_UNIT_HD_BANDEIRANTES_DESCRIPTION', 'TRAIT_BANDEIRANTES_HD', NULL, NULL,
-  2, 3, 10, 10, 1, 25, 0, 0, 'YIELD_GOLD', 'DOMAIN_LAND', 'FORMATION_CLASS_LAND_COMBAT', 'PROMOTION_CLASS_RECON', 'PSEUDOYIELD_UNIT_EXPLORER', 'ADVISOR_GENERIC', NULL);
+  2, 3, 20, 15, 1, 0, 0, 0, NULL, 'DOMAIN_LAND', 'FORMATION_CLASS_LAND_COMBAT', 'PROMOTION_CLASS_RECON', 'PSEUDOYIELD_UNIT_EXPLORER', 'ADVISOR_GENERIC', NULL);
 
 update Units set Bombard = 25 where UnitType = 'UNIT_ANCIENT_SIEGE';
 update Units set CanTrain = 0, InitialLevel = 2 where UnitType = 'UNIT_ENKIDU_HD';
+update Units set CanTrain = 0 where UnitType = 'UNIT_HD_BANDEIRANTES';
 update Units set Stackable = 1, MustPurchase = 1, CostProgressionParam1 = 10, CostProgressionModel = 'NO_COST_PROGRESSION', CanRetreatWhenCaptured = 1 where UnitType = 'UNIT_CITADEL_OF_GOD';
 
 -- Units_XP2
@@ -75,8 +76,7 @@ insert or replace into Units_XP2 (UnitType, ResourceCost, ResourceMaintenanceTyp
 -- UnitReplaces
 insert or replace into UnitReplaces (CivUniqueUnitType, ReplacesUnitType) values
   ('UNIT_QIN_ELITE_SOLDIER_HD',       'UNIT_SWORDSMAN'),
-  ('UNIT_HD_BARBARIAN_GALLEY',        'UNIT_ANCIENT_SEADOG'),
-  ('UNIT_HD_BANDEIRANTES',            'UNIT_SCOUT');
+  ('UNIT_HD_BARBARIAN_GALLEY',        'UNIT_ANCIENT_SEADOG');
 
 -- UnitUpgrades
 insert or replace into UnitUpgrades (Unit, UpgradeUnit) values

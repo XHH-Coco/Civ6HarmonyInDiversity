@@ -1942,22 +1942,28 @@ function MagnanimousNotificationAdded(playerId, notificationId)
 				local momentData = Utils.GetHistoricalMomentData(momentId);
 				local momentInfo = momentData and GameInfo.Moments[momentData.Type] or nil;
 				if momentInfo then
-					local firstMomentInfo = GameInfo.HD_FIRST_MOMENTS[momentInfo.MomentType];
-					if firstMomentInfo and player:GetProperty(MAGNANIMOUS_MOMENT_TAG .. momentId) ~= 1 then
+					-- 判断是否是发展类
+					if (Utils.MomentClassificationMap['MOMENT_CLASSIFICATION_DEVELOPMENT'][momentInfo.MomentType] == true
+						or Utils.MomentClassificationMap['MOMENT_CLASSIFICATION_MILITARY'][momentInfo.MomentType] == true)
+						and player:GetProperty(MAGNANIMOUS_MOMENT_TAG .. momentId) ~= 1
+					then
 						player:SetProperty(MAGNANIMOUS_MOMENT_TAG .. momentId, 1);
 
+						local isCivFirst = Utils.MomentClassificationMap['MOMENT_CLASSIFICATION_CIVILIZATION_FIRST'][momentInfo.MomentType] == true;
+						local isWorldFirst = Utils.MomentClassificationMap['MOMENT_CLASSIFICATION_WORLD_FIRST'][momentInfo.MomentType] == true;
 						-- 文明首次
-						if firstMomentInfo.FirstType == 'CIVILIZATION' or firstMomentInfo.FirstType == 'WORLD' then
+						if isCivFirst or isWorldFirst then
 							local amount = player:GetProperty(MAGNANIMOUS_COMPLETE_DISTRICT_BUILDING_TAG) or 0;
 							player:SetProperty(MAGNANIMOUS_COMPLETE_DISTRICT_BUILDING_TAG, amount + 1);
 							print("佩德罗二世 可免费建造次数：" .. amount + 1);
 						end
 
 						-- 世界首次
-						if firstMomentInfo.FirstType == 'WORLD' then
+						if isWorldFirst then
 							local amount = player:GetProperty(MAGNANIMOUS_INTRODUCE_POPULATION_TAG) or 0;
 							player:SetProperty(MAGNANIMOUS_INTRODUCE_POPULATION_TAG, amount + 1);
 							print("佩德罗二世 可引进移民次数：" .. amount + 1);
+							player:AttachModifierByID('HD_AMAZON_GRANT_BANDEIRANTES');
 						end
 					end
 				end

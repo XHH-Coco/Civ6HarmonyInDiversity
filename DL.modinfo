@@ -1501,6 +1501,7 @@
       <File>UpdateDataBase/Classifications/HD_Building_Classification.sql</File>
       <File>UpdateDataBase/Classifications/HD_District_Classification.sql</File>
       <File>UpdateDataBase/Classifications/HD_Improvement_Classification.sql</File>
+      <File>UpdateDataBase/Classifications/HD_Moment_Classification.sql</File>
     </UpdateDatabase>
     <UpdateDatabase id="HD_Resource_Classification" criteria="Expansion2">
       <Properties><LoadOrder>15001</LoadOrder></Properties>
@@ -2782,6 +2783,7 @@
     <File>UpdateDataBase/Classifications/HD_Building_Classification.sql</File>
     <File>UpdateDataBase/Classifications/HD_District_Classification.sql</File>
     <File>UpdateDataBase/Classifications/HD_Improvement_Classification.sql</File>
+    <File>UpdateDataBase/Classifications/HD_Moment_Classification.sql</File>
     <File>UpdateDataBase/Classifications/HD_Resource_Classification.sql</File>
     <File>UpdateDataBase/Classifications/HD_Classification_Adjacency.sql</File>
 

@@ -27,6 +27,15 @@ insert or replace into EnglishText (Tag, Text) values
   ("LOC_IMPROVEMENT_CLASSIFICATION_POWER_FACILITIES_NAME",          "Electric Power Improvements"),
   ("LOC_IMPROVEMENT_CLASSIFICATION_COMMON_NAME",                    "Common Improvements"),
 
+  ("LOC_MOMENT_CLASSIFICATION_EXPLORATION_NAME",                    "Exploration Moments"),
+  ("LOC_MOMENT_CLASSIFICATION_MILITARY_NAME",                       "Military Moments"),
+  ("LOC_MOMENT_CLASSIFICATION_DEVELOPMENT_NAME",                    "Development Moments"),
+  ("LOC_MOMENT_CLASSIFICATION_DIPLOMACY_NAME",                      "Diplomacy Moments"),
+  ("LOC_MOMENT_CLASSIFICATION_RELIGION_NAME",                       "Religion Moments"),
+  ("LOC_MOMENT_CLASSIFICATION_CIVILIZATION_FIRST_NAME",             "Civilization's First Moments"),
+  ("LOC_MOMENT_CLASSIFICATION_WORLD_FIRST_NAME",                    "World's First Moments"),
+  ("LOC_MOMENT_CLASSIFICATION_OTHER_NAME",                          "Other Moments"),
+
   ("LOC_RESOURCE_PARENT_CLASSIFICATION_HD_USAGE_NAME",              "Usage"),
   ("LOC_RESOURCE_PARENT_CLASSIFICATION_HD_IMPROVEMENT_NAME",        "Improvement"),
   ("LOC_RESOURCE_PARENT_CLASSIFICATION_HD_OTHER_NAME",              "Others"),
@@ -91,6 +100,15 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_IMPROVEMENT_CLASSIFICATION_ENTERTAINMENT_FACILITIES_NAME",  "娱乐活动改良"),
   ("zh_Hans_CN", "LOC_IMPROVEMENT_CLASSIFICATION_POWER_FACILITIES_NAME",          "清洁能源改良"),
   ("zh_Hans_CN", "LOC_IMPROVEMENT_CLASSIFICATION_COMMON_NAME",                    "通用改良"),
+
+  ("zh_Hans_CN", "LOC_MOMENT_CLASSIFICATION_EXPLORATION_NAME",                    "探索类历史时刻"),
+  ("zh_Hans_CN", "LOC_MOMENT_CLASSIFICATION_MILITARY_NAME",                       "军事类历史时刻"),
+  ("zh_Hans_CN", "LOC_MOMENT_CLASSIFICATION_DEVELOPMENT_NAME",                    "发展类历史时刻"),
+  ("zh_Hans_CN", "LOC_MOMENT_CLASSIFICATION_DIPLOMACY_NAME",                      "外交类历史时刻"),
+  ("zh_Hans_CN", "LOC_MOMENT_CLASSIFICATION_RELIGION_NAME",                       "宗教类历史时刻"),
+  ("zh_Hans_CN", "LOC_MOMENT_CLASSIFICATION_CIVILIZATION_FIRST_NAME",             "文明首次历史时刻"),
+  ("zh_Hans_CN", "LOC_MOMENT_CLASSIFICATION_WORLD_FIRST_NAME",                    "世界首次历史时刻"),
+  ("zh_Hans_CN", "LOC_MOMENT_CLASSIFICATION_OTHER_NAME",                          "其他历史时刻"),
 
   ("zh_Hans_CN", "LOC_RESOURCE_PARENT_CLASSIFICATION_HD_USAGE_NAME",              "用途"),
   ("zh_Hans_CN", "LOC_RESOURCE_PARENT_CLASSIFICATION_HD_IMPROVEMENT_NAME",        "按改良分类"),

@@ -1029,3 +1029,32 @@ local function InitDistrictCorrespondingGPPMap()
 end
 InitDistrictCorrespondingGPPMap();
 Utils.DistrictCorrespondingGPPMap = DistrictCorrespondingGPPMap;
+
+-- 历史时刻分类
+local MomentClassificationMap = {};
+function InitMomentClassificationMap()
+	for row in GameInfo.HD_Moment_Classification() do
+		local map = MomentClassificationMap[row.MomentClassificationType] or {};
+		map[row.MomentType] = true;
+		MomentClassificationMap[row.MomentClassificationType] = map;
+	end
+
+	-- Debug
+	print('=======================================================================')
+	print('文明首次发展类历史记录：')
+	for momentType, _ in pairs(MomentClassificationMap['MOMENT_CLASSIFICATION_CIVILIZATION_FIRST']) do
+		if MomentClassificationMap['MOMENT_CLASSIFICATION_DEVELOPMENT'][momentType] == true then
+			print(Locale.Lookup(GameInfo.Moments[momentType].Name));
+		end
+	end
+	print('=======================================================================')
+	print('文明首次发展类历史记录：')
+	for momentType, _ in pairs(MomentClassificationMap['MOMENT_CLASSIFICATION_WORLD_FIRST']) do
+		if MomentClassificationMap['MOMENT_CLASSIFICATION_DEVELOPMENT'][momentType] == true then
+			print(Locale.Lookup(GameInfo.Moments[momentType].Name));
+		end
+	end
+	print('=======================================================================')
+end
+InitMomentClassificationMap();
+Utils.MomentClassificationMap = MomentClassificationMap;

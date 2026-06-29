@@ -162,7 +162,7 @@ values
     ("LOC_BOOST_TRIGGER_NAVAL_TRADITION",                                    "Own 1 Quadrireme."),
     ("LOC_BOOST_TRIGGER_LONGDESC_NAVAL_TRADITION",                           "The advent of new types of ships inspires your people to strive to make the country a maritime power."),
     ("LOC_BOOST_TRIGGER_MEDIEVAL_FAIRES",                                    "Maintain 3 Trade Routes."),
-    ("LOC_BOOST_TRIGGER_RECORDED_HISTORY",                                   "Build 1 Library."),
+    ("LOC_BOOST_TRIGGER_RECORDED_HISTORY",                                   "Build a Tier 1 Campus building."),
     ("LOC_BOOST_TRIGGER_HUMANISM",                                           "Build 2 Amphitheaters."),
     ("LOC_BOOST_TRIGGER_LONGDESC_HUMANISM",                                  "Frequent theatrical performances led to a new wave of thinking among the people."),
     -- ("LOC_BOOST_TRIGGER_MILITARY_TACTICS",                                   "Have the Defensive Tactics civic."),
@@ -257,6 +257,7 @@ values
     ("LOC_BOOST_TRIGGER_EXPLORATION_HD",                                     "World Circumnavigated."),
     ("LOC_BOOST_TRIGGER_LONGDESC_EXPLORATION_HD",                            "The theory of a spherical Earth, established over centuries, has been proven. Now, our explorers are eager to set foot on the newly discovered lands."),
     ("LOC_BOOST_TRIGGER_BANKING_HD",                                         "Build a Bank."),
+    ("LOC_BOOST_TRIGGER_ASTRONOMY",                                          "Build one Tier 2 Campus building adjacent to Mountains."),
 
     ("LOC_TECH_ALCHEMY_HD_NAME",                                             "Alchemy"),
     ("LOC_BOOST_TRIGGER_ALCHEMY_HD",                                         "Mine a resource."),
@@ -557,7 +558,7 @@ values
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_LONGDESC_NAVAL_TRADITION",                           "新式船只的出现激励您的人民努力让国家成为海上强国。"), -- 您在海上取得的胜利激励您的人民努力让国家成为海上强国。
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_MEDIEVAL_FAIRES",                                    "经营3条贸易线。"),
     -- ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_LONGDESC_MEDIEVAL_FAIRES",    ""), -- 您领土上的贸易正在蓬勃发展，这将很快促使商品交易会的产生。
-    ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_RECORDED_HISTORY",                                   "建造1座图书馆"),
+    ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_RECORDED_HISTORY",                                   "建造1座学院一级建筑。"),
     -- ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_LONGDESC_RECORDED_HISTORY",   ""), -- 您的国民打算把更多卷轴放在您的学院图书馆里，他们开始记录文明的历史了。
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_HUMANISM",                                           "建造2座古罗马剧场。"),
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_LONGDESC_HUMANISM",                                  "频繁戏剧的演出引领了人民的新思潮。"), -- 您新获得的大艺术家带来的启示使我们的人民意识到了个体的力量。
@@ -658,6 +659,7 @@ values
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_EXPLORATION_HD",                                     "环游世界。"),
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_LONGDESC_EXPLORATION_HD",                            "几个世纪以来关于地圆的理论得到了证明，我们的探险家正对新发现的土地跃跃欲试。"),
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_BANKING_HD",                                         "建造银行。"),
+    ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_ASTRONOMY",                                          "相邻山脉建造学院二级建筑。"),
 
     ("zh_Hans_CN",  "LOC_TECH_ALCHEMY_HD_NAME",                                             "炼丹术"),
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_ALCHEMY_HD",                                         "改良1种矿产资源。"),

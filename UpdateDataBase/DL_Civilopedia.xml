@@ -106,6 +106,16 @@
 			<Where SectionID="CIVILIZATIONS" />
 			<Set VisibleIfEmpty="false" />
 		</Update>
+
+		<!-- 历史时刻 -->
+		<Update>
+			<Where SectionID="MOMENTS" PageGroupId="MAJOR" />
+			<Set VisibleIfEmpty="false" SortIndex="100" />
+		</Update>
+		<Update>
+			<Where SectionID="MOMENTS" PageGroupId="MINOR" />
+			<Set VisibleIfEmpty="false" SortIndex="100" />
+		</Update>
 	</CivilopediaPageGroups>
 
 	<CivilopediaPages>
@@ -120,6 +130,11 @@
 	
 	<!-- 排序 -->
 	<CivilopediaPageQueries>
+		<Delete SectionId="MOMENTS" />
+		<!-- 历史时刻分类 -->
+		<Row SectionId="MOMENTS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndexColumn="SortIndex">
+			<SQL>SELECT HD_Moment_Classification.MomentType as PageId, HD_Moment_Classification.MomentClassificationType as PageGroupId, "HistoricMoment" as PageLayoutId, Moments.Name, null as Tooltip, Moments.EraScore as SortIndex FROM HD_Moment_Classification INNER JOIN Moments ON HD_Moment_Classification.MomentType = Moments.MomentType ORDER BY Moments.EraScore</SQL>
+		</Row>
 		<!-- 着力点 -->
 		<Row SectionId="MOMENTS" PageGroupIdColumn="PageGroupId" NameColumn="CategoryDescription" TooltipColumn="Tooltip" SortIndexColumn="SortIndex">
 			<SQL>SELECT CommemorationTypes.CommemorationType as PageId, "COMMEMORATIONS" as PageGroupId, "HD_COMMEMORATION" as PageLayoutId, CommemorationTypes.CategoryDescription, null as Tooltip, Eras.ChronologyIndex as SortIndex FROM CommemorationTypes INNER JOIN Eras ON CommemorationTypes.MinimumGameEra = Eras.EraType ORDER BY Eras.ChronologyIndex</SQL>
@@ -251,6 +266,11 @@
 		<!-- 改良分类 -->
 		<Row SectionId="IMPROVEMENTS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndexColumn="SortIndex">
 			<SQL>SELECT ImprovementClassificationType as PageGroupId, Name, null as Tooltip, SortIndex FROM HD_ImprovementClassificationTypes</SQL>
+		</Row>
+
+		<!-- 历史时刻分类 -->
+		<Row SectionId="MOMENTS" PageGroupIdColumn="PageGroupId" TooltipColumn="Tooltip" SortIndexColumn="SortIndex">
+			<SQL>SELECT MomentClassificationType as PageGroupId, Name, null as Tooltip, SortIndex FROM HD_MomentClassificationTypes</SQL>
 		</Row>
 	</CivilopediaPageGroupQueries>
 

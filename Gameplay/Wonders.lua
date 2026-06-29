@@ -16,6 +16,9 @@ function PlayerHasWonder(player, wonderId)
 end
 Utils.PlayerHasWonder = PlayerHasWonder;
 
+-- 通知
+local NOTIFICATION_PRIDE_MOMENT_RECORDED_HASH = GameInfo.Notifications['NOTIFICATION_PRIDE_MOMENT_RECORDED'].Hash;
+
 -- 伟人
 local WRITER_INDEX = GameInfo.GreatPersonClasses['GREAT_PERSON_CLASS_WRITER'].Index;
 local ARTIST_INDEX = GameInfo.GreatPersonClasses['GREAT_PERSON_CLASS_ARTIST'].Index;
@@ -1001,6 +1004,46 @@ function BorobudurPurchaseUnit(playerId, cityId, x, y, type, objectId)
   end
 end
 Events.CityMadePurchase.Add(BorobudurPurchaseUnit);
+
+-- 勃兰登堡门
+local BRANDENBURG_GATE_INFO = GameInfo.Buildings['BUILDING_BRANDENBURG_GATE'];
+local BRANDENBURG_GATE_MOMENT_TAG = 'HD_BRANDENBURG_GATE_MOMENT_';
+local BRANDENBURG_GATE_MOMENT_NUM_TAG = 'HD_BRANDENBURG_GATE_MOMENT_NUM';
+local BRANDENBURG_GATE_MILITARY_MOMENT_COUNT = GlobalParameters.HD_BRANDENBURG_GATE_MILITARY_MOMENT_COUNT or 0;
+function BrandenburgGateNotificationAdded(playerId, notificationId)
+  if not BRANDENBURG_GATE_INFO then return; end
+
+  local player = Players[playerId];
+  if not player then return; end
+
+  local notificationEntry = NotificationManager.Find(playerId, notificationId)
+  if notificationEntry and notificationEntry:GetType() == NOTIFICATION_PRIDE_MOMENT_RECORDED_HASH then
+    local momentId = notificationEntry:GetValue("MomentID");
+    if momentId then
+      print('momentId', momentId)
+      local momentData = Utils.GetHistoricalMomentData(momentId);
+      local momentInfo = momentData and GameInfo.Moments[momentData.Type] or nil;
+      if momentInfo then
+        if Utils.MomentClassificationMap['MOMENT_CLASSIFICATION_MILITARY'][momentInfo.MomentType] == true
+          and player:GetProperty(BRANDENBURG_GATE_MOMENT_TAG .. momentId) ~= 1
+        then
+          player:SetProperty(BRANDENBURG_GATE_MOMENT_TAG .. momentId, 1);
+          player:AttachModifierByID('HD_BRANDENBURG_GATE_SCIENCE');
+          player:AttachModifierByID('HD_BRANDENBURG_GATE_PRODUCTION');
+
+          local amount = player:GetProperty('BRANDENBURG_GATE_MOMENT_NUM_TAG') or 0;
+          player:SetProperty('BRANDENBURG_GATE_MOMENT_NUM_TAG', amount + 1);
+          print("勃兰登堡门 军事类历史时刻次数：" .. (amount + 1));
+          if BRANDENBURG_GATE_MILITARY_MOMENT_COUNT > 0 and amount == BRANDENBURG_GATE_MILITARY_MOMENT_COUNT - 1 then
+            player:AttachModifierByID('HD_BRANDENBURG_GATE_YIELD_BOOST');
+            print("勃兰登堡门 获得全国百分比");
+          end
+        end
+      end
+    end
+  end
+end
+Events.NotificationAdded.Add(BrandenburgGateNotificationAdded);
 
 --------------------------------------------------------------
 -- Initialize

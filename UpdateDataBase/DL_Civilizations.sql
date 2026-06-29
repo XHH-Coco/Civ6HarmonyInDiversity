@@ -1627,7 +1627,7 @@ insert or ignore into ModifierArguments (ModifierId, Name, Value) select
 from Eras where EraType != 'ERA_ANCIENT';
 
 insert or ignore into ModifierArguments (ModifierId, Name, Value) select
-	'HD_BANDEIRANTES_STRENGTH_' || EraType, 'Amount', 7
+	'HD_BANDEIRANTES_STRENGTH_' || EraType, 'Amount', 10
 from Eras where EraType != 'ERA_ANCIENT';
 
 -- UU 雨林加产能力
@@ -1645,14 +1645,19 @@ from Yields;
 
 -- 雨林行业公司直接获得2种效果
 insert or ignore into TraitModifiers (TraitType, ModifierId) values
+	('TRAIT_CIVILIZATION_AMAZON', 'HD_AMAZON_GRANT_BANDEIRANTES'),
 	('TRAIT_CIVILIZATION_AMAZON', 'HD_AMAZON_JUNGLE_INDUSTRY_CORPORATION_ALL_CATEGORY');
 
 insert or ignore into Modifiers (ModifierId, ModifierType) values
+	('HD_AMAZON_GRANT_BANDEIRANTES', 											 'MODIFIER_PLAYER_GRANT_UNIT_IN_CAPITAL'),
 	('HD_AMAZON_JUNGLE_INDUSTRY_CORPORATION_ALL_CATEGORY', 'MODIFIER_PLAYER_ADJUST_PROPERTY');
 
 insert or ignore into ModifierArguments (ModifierId, Name, Value) values
-	('HD_AMAZON_JUNGLE_INDUSTRY_CORPORATION_ALL_CATEGORY', 'Key', 		'HD_JUNGLE_INDUSTRY_CORPORATION_ALL_CATEGORY'),
-	('HD_AMAZON_JUNGLE_INDUSTRY_CORPORATION_ALL_CATEGORY', 'Amount', 1);
+	('HD_AMAZON_GRANT_BANDEIRANTES', 												'UnitType', 						'UNIT_HD_BANDEIRANTES'),
+	('HD_AMAZON_GRANT_BANDEIRANTES', 												'AllowUniqueOverride', 	0),
+	('HD_AMAZON_GRANT_BANDEIRANTES', 												'Amount', 							1),
+	('HD_AMAZON_JUNGLE_INDUSTRY_CORPORATION_ALL_CATEGORY', 	'Key', 									'HD_JUNGLE_INDUSTRY_CORPORATION_ALL_CATEGORY'),
+	('HD_AMAZON_JUNGLE_INDUSTRY_CORPORATION_ALL_CATEGORY', 	'Amount', 							1);
 
 -- 雨林提供相邻加成
 insert or ignore into TraitModifiers (TraitType, ModifierId) select

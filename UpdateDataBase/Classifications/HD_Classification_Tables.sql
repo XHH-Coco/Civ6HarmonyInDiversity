@@ -55,6 +55,18 @@ create table if not exists HD_Building_Classification(
   BuildingClassificationType  TEXT    not NULL,
 PRIMARY KEY('BuildingType', 'BuildingClassificationType'));
 
+------------------- 历史时刻分类 -------------------
+create table if not exists HD_MomentClassificationTypes(
+  MomentClassificationType    TEXT    not NULL,
+  Name                        TEXT,
+  SortIndex                   Integer Default 0,
+PRIMARY KEY('MomentClassificationType'));
+
+create table if not exists HD_Moment_Classification(
+  MomentType                TEXT    not NULL,
+  MomentClassificationType  TEXT    not NULL,
+PRIMARY KEY('MomentType', 'MomentClassificationType'));
+
 -- ================================================================================
 ------------------- 奇观对应资源 -------------------
 create table if not exists Wonder_Resources_HD(
