@@ -92,6 +92,11 @@ insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
 	select 'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIRMENTS', 'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType from Resources;
 
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
+	select 'HD_CITY_HAS_IMPROVED_' || ResourceClassificationType || '_REQUIRMENTS', 'REQUIREMENTSET_TEST_ANY' from HD_ResourceClassificationTypes;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'HD_CITY_HAS_IMPROVED_' || ResourceClassificationType || '_REQUIRMENTS', 'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType from HD_Resource_Classification;
+
 -- Techs
 insert or ignore into RequirementArguments (RequirementId, Name, Value)
 	select 'HD_REQUIRES_PLAYER_HAS_' || TechnologyType, 'TechnologyType', TechnologyType from Technologies;
@@ -1200,7 +1205,8 @@ values
 	('HD_IMPROVEMENT_ADJACENT_TO_WATER_CONSERVANCY_FACILITIES_REQUIREMENTS',  'REQUIREMENTSET_TEST_ALL'),
 	('HD_DISTRICT_ADJACENT_TO_WATER_CONSERVANCY_FACILITIES_REQUIREMENTS',  'REQUIREMENTSET_TEST_ALL'),
 	('HD_CHARMING_DISTRICT_REQUIREMENTS',  'REQUIREMENTSET_TEST_ALL'),
-	('HD_BREATHTAKING_DISTRICT_REQUIREMENTS',  'REQUIREMENTSET_TEST_ALL');
+	('HD_BREATHTAKING_DISTRICT_REQUIREMENTS',  'REQUIREMENTSET_TEST_ALL'),
+	('HD_ALCHEMY_ROOM_RESOURCES_REQUIREMENTS',  'REQUIREMENTSET_TEST_ANY');
 
 insert or ignore into RequirementSetRequirements
 	(RequirementSetId,												RequirementId)
@@ -1675,6 +1681,11 @@ values
 	('HD_BREATHTAKING_DISTRICT_REQUIREMENTS',  'REQUIRES_PLOT_BREATHTAKING_APPEAL'),
 	('HD_BREATHTAKING_DISTRICT_REQUIREMENTS',  'HD_REQUIRES_DISTRICT_IS_NOT_DISTRICT_WONDER');
 
+-- 丹房
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'HD_ALCHEMY_ROOM_RESOURCES_REQUIREMENTS', 'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType
+from HD_Resource_Classification where ResourceClassificationType in ('RESOURCE_CLASSIFICATION_HD_METALLURGY', 'RESOURCE_CLASSIFICATION_HD_MEDICINE');
+
 -- 机器人生产
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
 	select 'PLOT_HAS_ROBOT_PRODUCTION_IMPROVEMENT_REQUIREMENTS', 'REQUIRES_PLOT_HAS_' || ImprovementType from HD_Improvement_Classification
@@ -2010,8 +2021,8 @@ values
 	('WONDER_IS_OR_ADJACENT_TO_COAST',														'PLOT_IS_OR_ADJACENT_TO_COAST_REQUIREMENTS'),
 	('WONDER_IS_OR_ADJACENT_TO_COAST',														'REQUIRES_DISTRICT_IS_DISTRICT_WONDER'),
 	('WONDER_IS_OR_ADJACENT_TO_COAST',														'REQUIRES_PLOT_HAS_COMPLETE_WONDER'),
-    ('HD_DISTRICTS_IS_NOT_WONDERS_OR_CITY_CENTER_REQUIREMENTS',								'HD_REQUIRES_DISTRICT_IS_NOT_DISTRICT_WONDER'),
-    ('HD_DISTRICTS_IS_NOT_WONDERS_OR_CITY_CENTER_REQUIREMENTS',								'HD_REQUIRES_DISTRICT_IS_NOT_DISTRICT_CITY_CENTER'),
+	('HD_DISTRICTS_IS_NOT_WONDERS_OR_CITY_CENTER_REQUIREMENTS',								'HD_REQUIRES_DISTRICT_IS_NOT_DISTRICT_WONDER'),
+	('HD_DISTRICTS_IS_NOT_WONDERS_OR_CITY_CENTER_REQUIREMENTS',								'HD_REQUIRES_DISTRICT_IS_NOT_DISTRICT_CITY_CENTER'),
 	('NON_CITYCENTER_PLOT_IS_OR_ADJACENT_TO_COAST', 										'REQUIRES_DISTRICT_IS_NOT_CITY_CENTER'),
 	('NON_CITYCENTER_PLOT_IS_OR_ADJACENT_TO_COAST',											'PLOT_IS_OR_ADJACENT_TO_COAST_REQUIREMENTS'),
 	('NON_CITYCENTER_PLOT_IS_OR_ADJACENT_TO_COAST',											'REQUIRES_PLOT_DOES_NOT_HAVE_INCOMPLETE_WONDER'),

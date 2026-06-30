@@ -737,7 +737,7 @@ values
 	('HD_BAMYAN_MOVEMENT_MODIFIER',					'Amount',						1),
 	('HD_BANDEIRANTES_ERA_STRENGTH', 			'Key',				'HD_BANDEIRANTES_ERA_STRENGTH'),
 	('HD_BANDEIRANTES_ORIGINAL_TIMES', 			'Key',				'HD_BANDEIRANTES_TIMES'),
-	('HD_BANDEIRANTES_ORIGINAL_TIMES',					'Amount',						2);
+	('HD_BANDEIRANTES_ORIGINAL_TIMES',					'Amount',						4);
 
 insert or replace into ModifierArguments (ModifierId, Name, Value) select
 	'ABILITY_HD_MILITARY_ENGINEER_NEGA_CHARGE_' || Count || '_MODIFIER', 'Amount', -1 from HDCounter where Count < 11;

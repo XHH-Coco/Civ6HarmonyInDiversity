@@ -106,7 +106,8 @@ values
 	('RESOURCE_GYPSUM',       	'FEATURE_MARSH'),
 	('RESOURCE_COAL',       	'FEATURE_MARSH'),
 	('RESOURCE_AMBER',       	'FEATURE_MARSH'),
-	('RESOURCE_MARBLE',       	'FEATURE_FOREST');
+	('RESOURCE_MARBLE',       	'FEATURE_FOREST'),
+	('RESOURCE_SILVER',       	'FEATURE_JUNGLE');
 
 insert or replace into Resource_ValidFeatures
 	(ResourceType,				FeatureType)

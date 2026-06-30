@@ -34,6 +34,12 @@ insert or replace into HD_Binary_Compress_Keys (Key, MaxExp) values
 	('HD_PLOT_BINARY_COMPRESS_PLAYER_CULTURAL_POLICY',  4),
 	('HD_PLOT_BINARY_COMPRESS_PLAYER_WILDCARD_POLICY',  4);
 
+create table if not exists 'HD_Binary_Compress_AtLeast'(
+	'Key' TEXT NOT NULL,
+	'AtLeast' INT NOT NULL,
+	PRIMARY KEY('Key')
+);
+
 create table if not exists HD_GreatWork_Text(
     GreatWorkType   TEXT NOT NULL,
     Description     TEXT NOT NULL,

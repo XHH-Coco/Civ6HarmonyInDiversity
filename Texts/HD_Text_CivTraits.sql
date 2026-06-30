@@ -506,9 +506,9 @@ values
 -- =====================================================================================================================================
 -- 巴西
 -- =====================================================================================================================================
-	("LOC_TRAIT_CIVILIZATION_AMAZON_DESCRIPTION",                            "Grant a Bandeirantes after establishing [ICON_CAPITAL] Capital city. All districts (except city centers) will not remove Rainforest. Rainforest tiles provide a standard adjacency bonus for specialty districts, and grant +1 Appeal to adjacent tiles."),
+	("LOC_TRAIT_CIVILIZATION_AMAZON_DESCRIPTION",                            "Grant a Bandeirante after establishing [ICON_CAPITAL] Capital city. All districts (except city centers) will not remove Rainforest. Rainforest tiles provide a standard adjacency bonus for specialty districts, and grant +1 Appeal to adjacent tiles."),
 	("LOC_TRAIT_LEADER_MAGNANIMOUS_NAME",                      			 				 "O Magnânimo"),
-	("LOC_TRAIT_LEADER_MAGNANIMOUS_DESCRIPTION",                             "After recruiting or patronizing a [ICON_GreatPerson] Great Person, 20% of its [ICON_GreatPerson] Great Person point cost is refunded. After completing a civilization's first Development or Military Historic Moment, you can instantly complete the next district. If it is a world's first Historic Moment, you additionally grant a Bandeirantes and may choose a city to introduce immigrants or talents from other civilizations."),
+	("LOC_TRAIT_LEADER_MAGNANIMOUS_DESCRIPTION",                             "After recruiting or patronizing a [ICON_GreatPerson] Great Person, 20% of its [ICON_GreatPerson] Great Person point cost is refunded. After completing a civilization's first Development or Military Historic Moment, you can instantly complete the next district. If it is a world's first Historic Moment, you may additionally choose a city to introduce immigrants or talents from other civilizations."),
 	("LOC_TRAIT_LEADER_MAGNANIMOUS_BUILD_VIEWTEXT",          		 		 				 "Built {1_Name} for free"),
 	("LOC_TRAIT_LEADER_MAGNANIMOUS_BUILD_TIMES_TEXT",        		 		 				 "Remaining times of district construction: {1_Num} {1_Num : plural 1?time; other?times;}."),
 	("LOC_TRAIT_LEADER_MAGNANIMOUS_POPULATION_VIEWTEXT",          			 		 "Introduce one [ICON_CITIZEN] immigrant from {1_Name}"),
@@ -1020,7 +1020,7 @@ values
 	-- 蒸英
 	("zh_Hans_CN",  "LOC_LEADER_VICTORIA_ALT_NAME",                                  "维多利亚（滚滚蒸汽）"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_VICTORIA_ALT_NAME",                            "工业革命"),
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_VICTORIA_ALT_DESCRIPTION",                     "每次完成工作坊后，触发工业化 [ICON_TECHBOOSTED] 尤里卡，若工业化 [ICON_TECHBOOSTED] 尤里卡已触发，则直接完成工业化科技。拥有工业区的城市可无视 [ICON_CITIZEN] 人口数量限制再建造一个区域。如城市拥有皇家海军船坞，则每回合+2  [ICON_GREATENGINEER] 大工程师点数。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_VICTORIA_ALT_DESCRIPTION",                     "每次完成建造工坊后，触发工业化 [ICON_TECHBOOSTED] 尤里卡，若工业化 [ICON_TECHBOOSTED] 尤里卡已触发，则直接完成工业化科技。拥有工业区的城市可无视 [ICON_CITIZEN] 人口数量限制再建造一个区域。如城市拥有皇家海军船坞，则每回合+2  [ICON_GREATENGINEER] 大工程师点数。"),
 	-- 海袭英
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_ELIZABETH_NAME",                               "荣光女王"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_ELIZABETH_DESCRIPTION",                        "海军袭击者单位+1 [ICON_RANGE] 射程。[ICON_GREATADMIRAL] 海军统帅拥有额外1点使用次数。"),
@@ -1134,7 +1134,7 @@ values
 -- =====================================================================================================================================
 	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_AMAZON_DESCRIPTION",                     "建立 [ICON_CAPITAL] 首都后获得一位旗手。除市中心外的区域不移除雨林。雨林单元格为专业化区域提供标准相邻加成，并为相邻的单元格提供+1魅力。"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_NAME",                      			 "高尚者"),
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_DESCRIPTION",                      "招募或赞助一位 [ICON_GreatPerson] 伟人后返还20%消耗的点数。每次完成“文明首次”军事类或发展类历史时刻后，下一个建造的区域可以立刻完成；若为“世界首次”则额外获得一名旗手，且还可以选择一座城市引进其他文明的移民或人才。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_DESCRIPTION",                      "招募或赞助一位 [ICON_GreatPerson] 伟人后返还20%消耗的点数。每次完成“文明首次”军事类或发展类历史时刻后，下一个建造的区域可以立刻完成；若为“世界首次”则还可以选择一座城市引进其他文明的移民或人才。"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_BUILD_VIEWTEXT",          		 		 "免费建造了{1_Name}"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_BUILD_TIMES_TEXT",        		 		 "剩余免费区域建造次数：{1_Num}次。"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_POPULATION_VIEWTEXT",          		 "从{1_Name}引进了一个 [ICON_CITIZEN] 移民"),

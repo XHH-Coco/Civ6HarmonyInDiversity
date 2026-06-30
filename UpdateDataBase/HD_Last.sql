@@ -29,12 +29,12 @@ insert into HD_Civilopedia_Resource_Groups (ResourceType, PageGroupId)
   and ResourceType != "RESOURCE_C_ALCOHOL_GENERAL";
 
 -- 按改良类型给资源分类
-insert or ignore into HD_Resource_Classification (ResourceType, ResourceClassificationType) select
-  ResourceType, 'RESOURCE_CLASSIFICATION_' || ImprovementType
-from Improvement_ValidResources where ImprovementType in (
-  select ImprovementType from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_BASIC'
-    and ImprovementType not in ('IMPROVEMENT_OFFSHORE_OIL_RIG')
-);
+-- insert or ignore into HD_Resource_Classification (ResourceType, ResourceClassificationType) select
+--   ResourceType, 'RESOURCE_CLASSIFICATION_' || ImprovementType
+-- from Improvement_ValidResources where ImprovementType in (
+--   select ImprovementType from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_BASIC'
+--     and ImprovementType not in ('IMPROVEMENT_OFFSHORE_OIL_RIG')
+-- );
 
 -- 删除没有任何对应资源的分类
 delete from HD_ResourceClassificationTypes where ResourceClassificationType not in (select distinct ResourceClassificationType from HD_Resource_Classification);
@@ -67,6 +67,27 @@ insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
 	select Key || '_' || Exp || '_REQUIREMENTS', 'REQUIRES_' || Key || '_' || Exp
 	from HD_Binary_Compress, HD_Binary_Compress_Keys where Exp <= MaxExp;
+
+  -- 至少有XX个
+insert or ignore into Requirements (RequirementId, RequirementType)
+	select 'REQUIRES_' || Key || '_AT_LEAST_' || AtLeast, 'REQUIREMENT_PLOT_PROPERTY_MATCHES'
+	from HD_Binary_Compress_AtLeast;
+
+insert or ignore into RequirementArguments (RequirementId, Name, Value)
+	select 'REQUIRES_' || Key || '_AT_LEAST_' || AtLeast, 'PropertyName', 'TOTAL_' || Key
+	from HD_Binary_Compress_AtLeast;
+
+insert or ignore into RequirementArguments (RequirementId, Name, Value)
+	select 'REQUIRES_' || Key || '_AT_LEAST_' || AtLeast, 'PropertyMinimum', AtLeast
+	from HD_Binary_Compress_AtLeast;
+
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
+	select Key || '_AT_LEAST_' || AtLeast || '_REQUIREMENTS', 'REQUIREMENTSET_TEST_ANY'
+	from HD_Binary_Compress_AtLeast;
+
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select Key || '_AT_LEAST_' || AtLeast || '_REQUIREMENTS', 'REQUIRES_' || Key || '_AT_LEAST_' || AtLeast
+	from HD_Binary_Compress_AtLeast;
 
 --------------------------------------------------------------------------------------------------------------------
 -- 西班牙自然奇观能力

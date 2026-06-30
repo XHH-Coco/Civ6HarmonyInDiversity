@@ -1040,21 +1040,35 @@ function InitMomentClassificationMap()
 	end
 
 	-- Debug
-	print('=======================================================================')
-	print('文明首次发展类历史记录：')
-	for momentType, _ in pairs(MomentClassificationMap['MOMENT_CLASSIFICATION_CIVILIZATION_FIRST']) do
-		if MomentClassificationMap['MOMENT_CLASSIFICATION_DEVELOPMENT'][momentType] == true then
-			print(Locale.Lookup(GameInfo.Moments[momentType].Name));
-		end
-	end
-	print('=======================================================================')
-	print('文明首次发展类历史记录：')
-	for momentType, _ in pairs(MomentClassificationMap['MOMENT_CLASSIFICATION_WORLD_FIRST']) do
-		if MomentClassificationMap['MOMENT_CLASSIFICATION_DEVELOPMENT'][momentType] == true then
-			print(Locale.Lookup(GameInfo.Moments[momentType].Name));
-		end
-	end
-	print('=======================================================================')
+	-- print('=======================================================================')
+	-- print('文明首次发展类历史记录：')
+	-- for momentType, _ in pairs(MomentClassificationMap['MOMENT_CLASSIFICATION_CIVILIZATION_FIRST']) do
+	-- 	if MomentClassificationMap['MOMENT_CLASSIFICATION_DEVELOPMENT'][momentType] == true then
+	-- 		print(Locale.Lookup(GameInfo.Moments[momentType].Name));
+	-- 	end
+	-- end
+	-- print('=======================================================================')
+	-- print('文明首次发展类历史记录：')
+	-- for momentType, _ in pairs(MomentClassificationMap['MOMENT_CLASSIFICATION_WORLD_FIRST']) do
+	-- 	if MomentClassificationMap['MOMENT_CLASSIFICATION_DEVELOPMENT'][momentType] == true then
+	-- 		print(Locale.Lookup(GameInfo.Moments[momentType].Name));
+	-- 	end
+	-- end
+	-- print('=======================================================================')
+	-- print('文明首次军事类历史记录：')
+	-- for momentType, _ in pairs(MomentClassificationMap['MOMENT_CLASSIFICATION_CIVILIZATION_FIRST']) do
+	-- 	if MomentClassificationMap['MOMENT_CLASSIFICATION_MILITARY'][momentType] == true then
+	-- 		print(Locale.Lookup(GameInfo.Moments[momentType].Name));
+	-- 	end
+	-- end
+	-- print('=======================================================================')
+	-- print('文明首次军事类历史记录：')
+	-- for momentType, _ in pairs(MomentClassificationMap['MOMENT_CLASSIFICATION_WORLD_FIRST']) do
+	-- 	if MomentClassificationMap['MOMENT_CLASSIFICATION_MILITARY'][momentType] == true then
+	-- 		print(Locale.Lookup(GameInfo.Moments[momentType].Name));
+	-- 	end
+	-- end
+	-- print('=======================================================================')
 end
 InitMomentClassificationMap();
 Utils.MomentClassificationMap = MomentClassificationMap;

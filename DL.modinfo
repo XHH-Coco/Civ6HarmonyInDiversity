@@ -235,7 +235,7 @@
     </Criteria>
     <Criteria id="TempleOfHeaven_Expansion2">
       <RuleSetInUse>RULESET_EXPANSION_2</RuleSetInUse>
-      <ModInUse>4873eb62-8ccc-4574-b784-dda455e74e68</ModInUse>
+      <ModInUse>32b57a0b-9e64-4409-ad83-d40235860b9b</ModInUse>
     </Criteria>
     <Criteria id="WatArun_Expansion2">
       <RuleSetInUse>RULESET_EXPANSION_2</RuleSetInUse>
@@ -774,6 +774,7 @@
       <File>Assets/Moments/UNIT_ENKIDU_HD_MONMENT.dds</File>
       <File>Assets/Moments/UNIT_QIN_ELITE_SOLDIER_HD_MONMENT.dds</File>
       <File>Assets/Moments/UNIT_PLUM_INTERNAL_SECURITY_HD_MONMENT.dds</File>
+      <File>Assets/Moments/UNIT_HD_BANDEIRANTES_MONMENT.dds</File>
       <File>Assets/Moments/BUILDING_EL_ESCORIAL_PALACE_MOMENT.dds</File>
       <File>Assets/Moments/BUILDING_HD_WORLD_PARLIAMENT_HEADQUARTERS_MONMENT.dds</File>
       <File>Assets/GreatPeople/GREAT_PERSON_INDIVIDUAL_ABDUS_SALAM.dds</File>
@@ -2970,6 +2971,7 @@
     <File>Assets/Moments/UNIT_ENKIDU_HD_MONMENT.dds</File>
     <File>Assets/Moments/UNIT_QIN_ELITE_SOLDIER_HD_MONMENT.dds</File>
     <File>Assets/Moments/UNIT_PLUM_INTERNAL_SECURITY_HD_MONMENT.dds</File>
+    <File>Assets/Moments/UNIT_HD_BANDEIRANTES_MONMENT.dds</File>
     <File>Assets/Moments/BUILDING_EL_ESCORIAL_PALACE_MOMENT.dds</File>
     <File>Assets/Moments/BUILDING_HD_WORLD_PARLIAMENT_HEADQUARTERS_MONMENT.dds</File>
     <File>Assets/GreatPeople/GREAT_PERSON_INDIVIDUAL_ABDUS_SALAM.dds</File>

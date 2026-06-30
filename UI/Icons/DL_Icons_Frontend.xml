@@ -34,8 +34,7 @@
     <Row Name="ICON_UNIT_QIN_ELITE_SOLDIER_HD_FOW"                 					Atlas="ATLAS_HD_NEW_UNITS" Index="8"/>
     <Row Name="ICON_UNIT_KEQING"                    												Atlas="ATLAS_HD_NEW_UNITS" Index="9"/>
 		<Row Name="ICON_UNIT_KEQING_FOW"                												Atlas="ATLAS_HD_NEW_UNITS" Index="9"/>
-
-		<Row Name="ICON_UNIT_HD_BANDEIRANTES"                    Atlas="ICON_ATLAS_UNITS"          Index="46"/>
-		<Row Name="ICON_UNIT_HD_BANDEIRANTES_FOW"                Atlas="ICON_ATLAS_UNITS"          Index="46"/>
+		<Row Name="ICON_UNIT_HD_BANDEIRANTES"                    								Atlas="ATLAS_HD_NEW_UNITS" Index="10"/>
+		<Row Name="ICON_UNIT_HD_BANDEIRANTES_FOW"                								Atlas="ATLAS_HD_NEW_UNITS" Index="10"/>
 	</IconDefinitions>
 </GameData>

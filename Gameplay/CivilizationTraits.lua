@@ -1963,7 +1963,6 @@ function MagnanimousNotificationAdded(playerId, notificationId)
 							local amount = player:GetProperty(MAGNANIMOUS_INTRODUCE_POPULATION_TAG) or 0;
 							player:SetProperty(MAGNANIMOUS_INTRODUCE_POPULATION_TAG, amount + 1);
 							print("佩德罗二世 可引进移民次数：" .. amount + 1);
-							player:AttachModifierByID('HD_AMAZON_GRANT_BANDEIRANTES');
 						end
 					end
 				end

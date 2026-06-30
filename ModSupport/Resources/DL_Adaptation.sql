@@ -7,6 +7,8 @@ update Resource_YieldChanges set YieldChange = 4 where ResourceType = 'RESOURCE_
 insert or ignore into Resource_ValidTerrains (ResourceType, TerrainType) values
     ('RESOURCE_GOLD',   'TERRAIN_PLAINS'),
     ('RESOURCE_GOLD',   'TERRAIN_PLAINS_HILLS');
+insert or replace into Resource_ValidFeatures (ResourceType, FeatureType) values
+    ('RESOURCE_GOLD', 'FEATURE_JUNGLE');
 
 insert or ignore into Resource_ValidTerrains (ResourceType, TerrainType)
 select 'RESOURCE_SUK_CHEESE',   'TERRAIN_GRASS'

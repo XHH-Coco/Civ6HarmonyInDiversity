@@ -725,7 +725,7 @@ values
   ("zh_Hans_CN", "LOC_POLICY_MAGGIOR_CONSIGLIO_DESCRIPTION",                                     "所有港口每回合提供+1影响力点数。通往宗主城邦的 [ICON_TradeRoute] 贸易路线+3 [ICON_GOLD] 金币。"),
   ("zh_Hans_CN", "LOC_POLICY_AESTHETICS_DESCRIPTION",                                            "+50%剧院广场相邻加成。"),
   ("zh_Hans_CN", "LOC_POLICY_ECOMMERCE_EXPANSION1_DESCRIPTION",                                  "所有 [ICON_TradeRoute] 贸易路线+4 [ICON_Production] 生产力、+15 [ICON_Gold] 金币。"),
-  ("zh_Hans_CN", "LOC_POLICY_INVENTION_DESCRIPTION_XP2",                                         "+4 [ICON_GreatEngineer] 大工程师点数。每座工作坊提供+4 [ICON_GreatEngineer] 大工程师点数。"),
+  ("zh_Hans_CN", "LOC_POLICY_INVENTION_DESCRIPTION_XP2",                                         "+4 [ICON_GreatEngineer] 大工程师点数。每座建造工坊提供+4 [ICON_GreatEngineer] 大工程师点数。"),
   ("zh_Hans_CN", "LOC_POLICY_SCIENCE_FOUNDATIONS_DL_DESCRIPTION",                                "{LOC_POLICY_HD_ACADEMIC_MEETING_DESCRIPTION}{LOC_POLICY_HD_TECH_REVOLUTION_DESCRIPTION}"),
   ("zh_Hans_CN", "LOC_POLICY_FRESCOES_DESCRIPTION_XP2",                                          "+12 [ICON_GreatArtist] 大艺术家点数。"),
   ("zh_Hans_CN", "LOC_POLICY_SYMPHONIES_DESCRIPTION_XP2",                                        "每一级剧院广场建筑提供+6 [ICON_GreatMusician] 大音乐家点数。"),

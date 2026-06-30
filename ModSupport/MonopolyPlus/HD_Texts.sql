@@ -14,7 +14,7 @@ insert or replace into LocalizedText
     (Language,      Tag,                                               Text)
 values
     ("zh_Hans_CN",  "LOC_UNIT_LEU_TYCOON_NAME",                        "大亨"),
-    ("zh_Hans_CN",  "LOC_UNIT_LEU_TYCOON_NOMONOPOLY_DESCRIPTION",      "需要“工作坊”方可建造或购买的高价平民单位。[NEWLINE][NEWLINE]可以创建铁路和火车站来改善你的领土上的区域产出、贸易和 [ICON_PRODUCTION] 生产力。"),
+    ("zh_Hans_CN",  "LOC_UNIT_LEU_TYCOON_NOMONOPOLY_DESCRIPTION",      "需要“建造工坊”方可建造或购买的高价平民单位。[NEWLINE][NEWLINE]可以创建铁路和火车站来改善你的领土上的区域产出、贸易和 [ICON_PRODUCTION] 生产力。"),
     ("zh_Hans_CN",  "LOC_STATION_ADJ_PRODUCTION",                      "+{1_num} [ICON_PRODUCTION] 生产力来自相邻火车站。"),
     ("zh_Hans_CN",  "LOC_IMPROVEMENT_LEU_STATION_NAME",                "火车站"),
     ("zh_Hans_CN",  "LOC_IMPROVEMENT_LEU_STATION_DESCRIPTION",         "由大亨或军事工程师建造，不能建在沼泽或地热裂缝上，一座城市只能拥有一个火车站，火车站不能与另一个火车站相邻。在所在单元格和所有相邻的可通行陆地单元格上自动创建铁路。[NEWLINE][NEWLINE]本城改良提供的 [ICON_TOURISM] 旅游业绩+50%。[NEWLINE][NEWLINE]相邻的每种专业化区域或水渠为本城出发的国际 [ICON_TradeRoute] 贸易路线提供对应产出；此城 [ICON_POWER] 供电充足时效果翻倍。");

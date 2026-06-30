@@ -160,6 +160,8 @@ delete from BuildingPrereqs where Building = 'BUILDING_AIRPORT' and PrereqBuildi
 delete from Building_YieldChanges where BuildingType = 'BUILDING_WATER_MILL';
 delete from Building_YieldChanges where BuildingType = 'BUILDING_ZOO';
 delete from Building_YieldChanges where BuildingType = 'BUILDING_AQUARIUM';
+delete from Building_YieldChanges where BuildingType = 'BUILDING_FOOD_MARKET';
+delete from Building_YieldChangesBonusWithPower where BuildingType = 'BUILDING_FOOD_MARKET';
 insert or replace into Building_YieldChanges
 	(BuildingType,					YieldType,			YieldChange)
 values
@@ -183,14 +185,14 @@ values
 	('BUILDING_WAT',				'YIELD_FAITH',		8),
 	('BUILDING_STUPA',				'YIELD_FAITH',		8),
 	('BUILDING_DAR_E_MEHR',			'YIELD_FAITH',		8),
-	('BUILDING_HD_ALCHEMY_ROOM',			'YIELD_FAITH',		7),
+	('BUILDING_HD_ALCHEMY_ROOM',			'YIELD_FAITH',		6),
 	-- Commercial Hub
 	('BUILDING_MARKET',				'YIELD_GOLD',		5),
 	('BUILDING_BANK',				'YIELD_GOLD',		8),
 	('BUILDING_GRAND_BAZAAR',		'YIELD_GOLD',		8),
 	('BUILDING_STOCK_EXCHANGE',		'YIELD_GOLD',		10),
 	-- Industrial Zone
-	('BUILDING_WORKSHOP',			'YIELD_PRODUCTION',	5),
+	('BUILDING_WORKSHOP',			'YIELD_PRODUCTION',	2),
 	('BUILDING_FACTORY',			'YIELD_PRODUCTION',	8),
 	('BUILDING_COAL_POWER_PLANT',			'YIELD_PRODUCTION',	1),
 	-- Campus
@@ -212,8 +214,8 @@ values
 	-- Airport
 	('BUILDING_HANGAR',				'YIELD_PRODUCTION',	5),
 	-- Neighborhood
-	('BUILDING_SHOPPING_MALL',		'YIELD_GOLD',		6),
-	('BUILDING_FOOD_MARKET',		'YIELD_FOOD',		2),
+	('BUILDING_SHOPPING_MALL',		'YIELD_GOLD',		12),
+	('BUILDING_FOOD_MARKET',		'YIELD_GOLD',		12),
 	-- Entertainment
 	('BUILDING_ZOO',		'YIELD_CULTURE',		2),
 	('BUILDING_ZOO',		'YIELD_GOLD',		6),
@@ -226,8 +228,8 @@ values
 	('BUILDING_RESEARCH_LAB',		'YIELD_SCIENCE',	4),
 	('BUILDING_BROADCAST_CENTER',	'YIELD_CULTURE',	3),
 	('BUILDING_FILM_STUDIO',		'YIELD_CULTURE',	3),
-	('BUILDING_SHOPPING_MALL',		'YIELD_GOLD',		6),
-	('BUILDING_FOOD_MARKET',		'YIELD_FOOD',		2),
+	('BUILDING_SHOPPING_MALL',		'YIELD_GOLD',		12),
+	('BUILDING_FOOD_MARKET',		'YIELD_GOLD',		12),
 	('BUILDING_HD_DATA_CENTER',		'YIELD_SCIENCE',	10);
 
 -- Yield Percentage
@@ -435,8 +437,8 @@ update Buildings set Maintenance = 6,	Cost = 360	where BuildingType = 'BUILDING_
 update Buildings set Maintenance = 1,	Cost = 150	where BuildingType = 'BUILDING_CONSULATE';
 update Buildings set Maintenance = 4,	Cost = 300	where BuildingType = 'BUILDING_CHANCERY';
 -- Neighborhood
-update Buildings set Maintenance = 7,	Cost = 400, MaxPlayerInstances = 1, RegionalRange = 6 where BuildingType = 'BUILDING_FOOD_MARKET';
-update Buildings set Maintenance = 7,	Cost = 400, MaxPlayerInstances = 1, RegionalRange = 6 where BuildingType = 'BUILDING_SHOPPING_MALL';
+update Buildings set Maintenance = 0,	Cost = 200 where BuildingType = 'BUILDING_FOOD_MARKET';
+update Buildings set Maintenance = 0,	Cost = 200 where BuildingType = 'BUILDING_SHOPPING_MALL';
 -- Government Plaza
 update Buildings set Maintenance = 1,	Cost = 150	where BuildingType = 'BUILDING_GOV_TALL';
 update Buildings set Maintenance = 1,	Cost = 150	where BuildingType = 'BUILDING_GOV_WIDE';
@@ -499,17 +501,12 @@ values
 	('BUILDING_TEMPLE',				'TEMPLE_SETTLER_PURCHASE'),
 	('BUILDING_STAVE_CHURCH',		'TEMPLE_SETTLER_PURCHASE'),
 	('BUILDING_HD_ALCHEMY_ROOM',		'TEMPLE_SETTLER_PURCHASE'),
-	('BUILDING_HD_ALCHEMY_ROOM',		'HD_ALCHEMY_ROOM_POP_SCIENCE'),
+	('BUILDING_HD_ALCHEMY_ROOM',		'HD_ALCHEMY_ROOM_SCIENCE'),
+	('BUILDING_HD_ALCHEMY_ROOM',		'HD_ALCHEMY_ROOM_FAITH'),
 	-- Campus
 	('BUILDING_LIBRARY',			'LIBRARY_POP_SCIENCE_MODIFIER'),
 	-- Industrial Zone
-	('BUILDING_WORKSHOP',           'WORKSHOP_IMPROVEMENT_PRODUCTION'),
-	-- ('BUILDING_FACTORY',			'FACTORY_POP_PRODUCTION_MODIFIER'),
-	-- ('BUILDING_ELECTRONICS_FACTORY','FACTORY_POP_PRODUCTION_MODIFIER'),
-	-- ('BUILDING_FACTORY',			'FACTORY_ADD_RESOURCE_PRODUCTION'),
-	-- ('BUILDING_ELECTRONICS_FACTORY','FACTORY_ADD_RESOURCE_PRODUCTION'),
 	-- Harbor
-	-- ('BUILDING_LIGHTHOUSE',			'LIGHTHOUSE_ADD_FISHERY_GOLD'),
 	('BUILDING_SHIPYARD',			'SHIPYARD_NAVAL_UNIT_PRODUCTION'),
 	('BUILDING_SEAPORT',			'SEAPORT_EXTRA_GREAT_ADMIRAL_POINTS'),
 	('BUILDING_SEAPORT',			'SEAPORT_TRAINED_STRENGTH_MODIFIER'),
@@ -536,7 +533,6 @@ insert or replace into Modifiers
 values
 	('SHRINE_BUILDER_PURCHASE',								'MODIFIER_CITY_ENABLE_UNIT_FAITH_PURCHASE'),
 	('TEMPLE_SETTLER_PURCHASE',								'MODIFIER_CITY_ENABLE_UNIT_FAITH_PURCHASE'),
-	('HD_ALCHEMY_ROOM_POP_SCIENCE',								'MODIFIER_SINGLE_CITY_ADJUST_CITY_YIELD_PER_POPULATION'),
 	('FACTORY_POP_PRODUCTION_MODIFIER',						'MODIFIER_SINGLE_CITY_ADJUST_CITY_YIELD_PER_POPULATION'),
 	('SEAPORT_EXTRA_GREAT_ADMIRAL_POINTS',					'MODIFIER_PLAYER_ADJUST_GREAT_PERSON_POINTS_PERCENT'),
 	('MILITARY_ACADEMY_EXTRA_GREAT_GENERAL_POINTS',			'MODIFIER_PLAYER_ADJUST_GREAT_PERSON_POINTS_PERCENT'),
@@ -547,6 +543,8 @@ values
 insert or replace into Modifiers
 	(ModifierId,									ModifierType,													SubjectRequirementSetId)
 values
+	('HD_ALCHEMY_ROOM_SCIENCE',				'MODIFIER_BUILDING_YIELD_CHANGE',					'HD_ALCHEMY_ROOM_RESOURCES_REQUIREMENTS'),
+	('HD_ALCHEMY_ROOM_FAITH',				'MODIFIER_BUILDING_YIELD_CHANGE',					'HD_ALCHEMY_ROOM_RESOURCES_REQUIREMENTS'),
 	('GRANARY_BONUS_LUMBER_MILL_FOOD',				'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'HD_PLOT_HAS_LUMBER_MILL_OVER_BONUS_RESOURCES'),
 	('GRANARY_BONUS_PASTURE_FOOD',					'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'HD_PLOT_HAS_PASTURE_OVER_BONUS_RESOURCES'),
 	('GRANARY_BONUS_CAMP_FOOD',							'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'HD_PLOT_HAS_CAMP_OVER_BONUS_RESOURCES'),
@@ -568,7 +566,6 @@ values
 	('ARMORY_ADD_RESOURCE_PRODUCTION',				'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'HAS_ARMORY_RESOURCE'),
 	('FACTORY_ADD_RESOURCE_PRODUCTION',				'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'HAS_FACTORY_RESOURCE'),
 	('MILITARY_ACADEMY_ADD_RESOURCE_PRODUCTION',	'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'HAS_MILITARY_ACADEMY_RESOURCE'),
-	('WORKSHOP_IMPROVEMENT_PRODUCTION',          	'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',          		'PLOT_IS_IMPROVED'),
 	('HYDROELECTRIC_DAM_ADD_RIVER_PRODUCTION',		'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'PLOT_ADJACENT_TO_RIVER_REQUIREMENTS'),
 	('LIBRARY_POP_SCIENCE_MODIFIER',				'MODIFIER_SINGLE_CITY_ADJUST_CITY_YIELD_PER_POPULATION',		'PLAYER_HAS_TECH_PAPER_MAKING_HD_REQUIREMENTS');
 
@@ -600,8 +597,12 @@ insert or replace into ModifierArguments
 values
 	('SHRINE_BUILDER_PURCHASE',						'Tag',						'CLASS_BUILDER'),
 	('TEMPLE_SETTLER_PURCHASE',						'Tag',						'CLASS_SETTLER'),
-	('HD_ALCHEMY_ROOM_POP_SCIENCE',					'YieldType',				'YIELD_SCIENCE'),
-	('HD_ALCHEMY_ROOM_POP_SCIENCE',					'Amount',					0.3),
+	('HD_ALCHEMY_ROOM_SCIENCE',					'YieldType',				'YIELD_SCIENCE'),
+	('HD_ALCHEMY_ROOM_SCIENCE',					'Amount',					3),
+	('HD_ALCHEMY_ROOM_SCIENCE',					'BuildingType',					'BUILDING_HD_ALCHEMY_ROOM'),
+	('HD_ALCHEMY_ROOM_FAITH',					'YieldType',				'YIELD_FAITH'),
+	('HD_ALCHEMY_ROOM_FAITH',					'Amount',					6),
+	('HD_ALCHEMY_ROOM_FAITH',					'BuildingType',					'BUILDING_HD_ALCHEMY_ROOM'),
 	('LIBRARY_POP_SCIENCE_MODIFIER',				'YieldType',				'YIELD_SCIENCE'),
 	('LIBRARY_POP_SCIENCE_MODIFIER',				'Amount',					'0.3'),
 	('FACTORY_POP_PRODUCTION_MODIFIER',				'YieldType',				'YIELD_PRODUCTION'),
@@ -659,14 +660,39 @@ values
 	('MILITARY_ACADEMY_ADD_RESOURCE_PRODUCTION',	'Amount',					1),
 	('HYDROELECTRIC_DAM_ADD_RIVER_PRODUCTION',		'YieldType',				'YIELD_PRODUCTION'),
 	('HYDROELECTRIC_DAM_ADD_RIVER_PRODUCTION',		'Amount',					1),
-    ('WORKSHOP_IMPROVEMENT_PRODUCTION',      		'YieldType',    			'YIELD_PRODUCTION'),
-    ('WORKSHOP_IMPROVEMENT_PRODUCTION',         	'Amount',       			1),
 	('BARRACKS_TRAINED_STRENGTH_MODIFIER',			'AbilityType',				'ABILITY_BARRACKS_TRAINED_UNIT_STRENGTH'),
 	('BASILIKOI_TRAINED_STRENGTH_MODIFIER',			'AbilityType',				'ABILITY_BASILIKOI_TRAINED_UNIT_STRENGTH'),
 	('STABLE_TRAINED_STRENGTH_MODIFIER',			'AbilityType',				'ABILITY_STABLE_TRAINED_UNIT_STRENGTH'),
 	('MILITARY_ACADEMY_TRAINED_STRENGTH_MODIFIER',	'AbilityType',				'ABILITY_MILITARY_ACADEMY_TRAINED_UNIT_STRENGTH'),
 	('SEAPORT_TRAINED_STRENGTH_MODIFIER',			'AbilityType',				'ABILITY_SEAPORT_TRAINED_UNIT_STRENGTH'),
 	('ORDU_TRAINED_STRENGTH_MODIFIER',				'AbilityType',				'ABILITY_ORDU_TRAINED_UNIT_STRENGTH');
+
+-- 工作坊
+insert or replace into HD_Building_Base_On_ResourceClassification (BuildingType, ResourceClassificationType, DetectRange, PropertyKey) values
+	('BUILDING_WORKSHOP', 'RESOURCE_CLASSIFICATION_HD_CONSTRUCTION', 'PLAYER', 'HD_PLOT_BINARY_COMPRESS_WORKSHOP');
+
+insert or replace into HD_Binary_Compress_Keys (Key, MaxExp) values
+	('HD_PLOT_BINARY_COMPRESS_WORKSHOP', 4);
+
+insert or replace into BuildingModifiers (BuildingType, ModifierId) select
+ 'BUILDING_WORKSHOP', 'HD_WORKSHOP_PRODUCTION_' || Exp
+from HD_Binary_Compress where Exp < 5;
+
+insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId) select
+	'HD_WORKSHOP_PRODUCTION_' || Exp, 'MODIFIER_BUILDING_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_WORKSHOP_' || Exp || '_REQUIREMENTS'
+from HD_Binary_Compress where Exp < 5;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) select
+	'HD_WORKSHOP_PRODUCTION_' || Exp, 'BuildingType', 'BUILDING_WORKSHOP'
+from HD_Binary_Compress where Exp < 5;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) select
+	'HD_WORKSHOP_PRODUCTION_' || Exp, 'YieldType', 'YIELD_PRODUCTION'
+from HD_Binary_Compress where Exp < 5;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) select
+	'HD_WORKSHOP_PRODUCTION_' || Exp, 'Amount', Amount * 2
+from HD_Binary_Compress where Exp < 5;
 
 ---University buff adjacent rainforest and gain science from rainforest
 insert or replace into BuildingModifiers
@@ -1041,95 +1067,100 @@ delete from BuildingModifiers where ModifierId = 'AQUARIUM_REEF_SCIENCE';
 
 -- 资源分类产出
 insert or replace into HD_Building_Base_On_ResourceClassification (BuildingType, ResourceClassificationType, DetectRange, PropertyKey) values
-	('BUILDING_ZOO', 			'RESOURCE_CLASSIFICATION_IMPROVEMENT_PASTURE',				'PLAYER', 'HD_PLOT_BINARY_COMPRESS_ZOO'),
-	('BUILDING_ZOO', 			'RESOURCE_CLASSIFICATION_IMPROVEMENT_CAMP',						'PLAYER',	'HD_PLOT_BINARY_COMPRESS_ZOO'),
-	('BUILDING_AQUARIUM', 'RESOURCE_CLASSIFICATION_IMPROVEMENT_FISHING_BOATS',	'PLAYER', 'HD_PLOT_BINARY_COMPRESS_AQUARIUM');
+	('BUILDING_ZOO', 			'RESOURCE_CLASSIFICATION_HD_LEATHER',					'PLAYER', 'HD_PLOT_BINARY_COMPRESS_ZOO'),
+	('BUILDING_ZOO', 			'RESOURCE_CLASSIFICATION_HD_TRANSIT',					'PLAYER',	'HD_PLOT_BINARY_COMPRESS_ZOO'),
+	('BUILDING_ZOO', 			'RESOURCE_CLASSIFICATION_HD_BEAST',						'PLAYER',	'HD_PLOT_BINARY_COMPRESS_ZOO'),
+	('BUILDING_AQUARIUM', 'RESOURCE_CLASSIFICATION_HD_SEAFOOD',					'PLAYER', 'HD_PLOT_BINARY_COMPRESS_AQUARIUM_SCIENCE'),
+	('BUILDING_AQUARIUM', 'RESOURCE_CLASSIFICATION_HD_MARINE_PRODUCTS',	'PLAYER', 'HD_PLOT_BINARY_COMPRESS_AQUARIUM_SCIENCE'),
+	('BUILDING_AQUARIUM', 'RESOURCE_CLASSIFICATION_HD_SEA_BEAST',				'PLAYER', 'HD_PLOT_BINARY_COMPRESS_AQUARIUM_CULTURE');
 
 insert or replace into HD_Binary_Compress_Keys (Key, MaxExp) values
-	('HD_PLOT_BINARY_COMPRESS_ZOO', 			6),
-	('HD_PLOT_BINARY_COMPRESS_AQUARIUM', 	6);
+	('HD_PLOT_BINARY_COMPRESS_ZOO', 							4),
+	('HD_PLOT_BINARY_COMPRESS_AQUARIUM_SCIENCE', 	4),
+	('HD_PLOT_BINARY_COMPRESS_AQUARIUM_CULTURE', 	2);
 
 	-- 动物园
 insert or replace into BuildingModifiers (BuildingType, ModifierId)
 	select 'BUILDING_ZOO', 'HD_ZOO_CULTURE_' || Exp
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 5;
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId)
 	select 'HD_ZOO_CULTURE_' || Exp, 'MODIFIER_BUILDING_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_ZOO_' || Exp || '_REQUIREMENTS'
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 5;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_ZOO_CULTURE_' || Exp, 'BuildingType', 'BUILDING_ZOO'
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 5;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_ZOO_CULTURE_' || Exp, 'YieldType', 'YIELD_CULTURE'
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 5;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
-	select 'HD_ZOO_CULTURE_' || Exp, 'Amount', Amount
-	from HD_Binary_Compress where Exp < 7;
+	select 'HD_ZOO_CULTURE_' || Exp, 'Amount', Amount * 2
+	from HD_Binary_Compress where Exp < 5;
 
 insert or replace into BuildingModifiers (BuildingType, ModifierId)
 	select 'BUILDING_ZOO', 'HD_ZOO_GOLD_' || Exp
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 5;
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId)
 	select 'HD_ZOO_GOLD_' || Exp, 'MODIFIER_BUILDING_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_ZOO_' || Exp || '_REQUIREMENTS'
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 5;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_ZOO_GOLD_' || Exp, 'BuildingType', 'BUILDING_ZOO'
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 5;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_ZOO_GOLD_' || Exp, 'YieldType', 'YIELD_GOLD'
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 5;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
-	select 'HD_ZOO_GOLD_' || Exp, 'Amount', Amount * 3
-	from HD_Binary_Compress where Exp < 7;
+	select 'HD_ZOO_GOLD_' || Exp, 'Amount', Amount * 6
+	from HD_Binary_Compress where Exp < 5;
 
 	-- 水族馆
 insert or replace into BuildingModifiers (BuildingType, ModifierId)
-	select 'BUILDING_AQUARIUM', 'HD_AQUARIUM_CULTURE_' || Exp
-	from HD_Binary_Compress where Exp < 7;
-
-insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId)
-	select 'HD_AQUARIUM_CULTURE_' || Exp, 'MODIFIER_BUILDING_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_AQUARIUM_' || Exp || '_REQUIREMENTS'
-	from HD_Binary_Compress where Exp < 7;
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-	select 'HD_AQUARIUM_CULTURE_' || Exp, 'BuildingType', 'BUILDING_AQUARIUM'
-	from HD_Binary_Compress where Exp < 7;
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-	select 'HD_AQUARIUM_CULTURE_' || Exp, 'YieldType', 'YIELD_CULTURE'
-	from HD_Binary_Compress where Exp < 7;
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-	select 'HD_AQUARIUM_CULTURE_' || Exp, 'Amount', Amount
-	from HD_Binary_Compress where Exp < 7;
-
-insert or replace into BuildingModifiers (BuildingType, ModifierId)
 	select 'BUILDING_AQUARIUM', 'HD_AQUARIUM_SCIENCE_' || Exp
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 5;
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId)
-	select 'HD_AQUARIUM_SCIENCE_' || Exp, 'MODIFIER_BUILDING_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_AQUARIUM_' || Exp || '_REQUIREMENTS'
-	from HD_Binary_Compress where Exp < 7;
+	select 'HD_AQUARIUM_SCIENCE_' || Exp, 'MODIFIER_BUILDING_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_AQUARIUM_SCIENCE_' || Exp || '_REQUIREMENTS'
+	from HD_Binary_Compress where Exp < 5;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_AQUARIUM_SCIENCE_' || Exp, 'BuildingType', 'BUILDING_AQUARIUM'
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 5;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_AQUARIUM_SCIENCE_' || Exp, 'YieldType', 'YIELD_SCIENCE'
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 5;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
-	select 'HD_AQUARIUM_SCIENCE_' || Exp, 'Amount', Amount
-	from HD_Binary_Compress where Exp < 7;
+	select 'HD_AQUARIUM_SCIENCE_' || Exp, 'Amount', Amount * 2
+	from HD_Binary_Compress where Exp < 5;
+
+insert or replace into BuildingModifiers (BuildingType, ModifierId)
+	select 'BUILDING_AQUARIUM', 'HD_AQUARIUM_CULTURE_' || Exp
+	from HD_Binary_Compress where Exp < 3;
+
+insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId)
+	select 'HD_AQUARIUM_CULTURE_' || Exp, 'MODIFIER_BUILDING_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_AQUARIUM_CULTURE_' || Exp || '_REQUIREMENTS'
+	from HD_Binary_Compress where Exp < 3;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select 'HD_AQUARIUM_CULTURE_' || Exp, 'BuildingType', 'BUILDING_AQUARIUM'
+	from HD_Binary_Compress where Exp < 3;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select 'HD_AQUARIUM_CULTURE_' || Exp, 'YieldType', 'YIELD_CULTURE'
+	from HD_Binary_Compress where Exp < 3;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select 'HD_AQUARIUM_CULTURE_' || Exp, 'Amount', Amount * 6
+	from HD_Binary_Compress where Exp < 3;
+
 
 -- 巴西UD虚拟建筑
 insert or replace into HD_Building_Base_On_ResourceClassification (BuildingType, ResourceClassificationType, DetectRange, PropertyKey) values
@@ -1422,14 +1453,22 @@ and exists (select DistrictType from Districts where DistrictType = 'DISTRICT_C_
 
 -- 资源分类产出
 insert or replace into HD_Building_Base_On_ResourceClassification (BuildingType, ResourceClassificationType, DetectRange, PropertyKey) values
-	('BUILDING_FOOD_MARKET', 		'RESOURCE_CLASSIFICATION_IMPROVEMENT_FARM',						'PLAYER', 'HD_PLOT_BINARY_COMPRESS_FOOD_MARKET'),
-	('BUILDING_FOOD_MARKET', 		'RESOURCE_CLASSIFICATION_IMPROVEMENT_PLANTATION',			'PLAYER', 'HD_PLOT_BINARY_COMPRESS_FOOD_MARKET'),
-	('BUILDING_FOOD_MARKET', 		'RESOURCE_CLASSIFICATION_IMPROVEMENT_PASTURE',				'PLAYER', 'HD_PLOT_BINARY_COMPRESS_FOOD_MARKET'),
-	('BUILDING_FOOD_MARKET', 		'RESOURCE_CLASSIFICATION_IMPROVEMENT_FISHING_BOATS',	'PLAYER', 'HD_PLOT_BINARY_COMPRESS_FOOD_MARKET'),
-	('BUILDING_SHOPPING_MALL', 	'RESOURCE_CLASSIFICATION_IMPROVEMENT_MINE',						'PLAYER',	'HD_PLOT_BINARY_COMPRESS_SHOPPING_MALL'),
-	('BUILDING_SHOPPING_MALL', 	'RESOURCE_CLASSIFICATION_IMPROVEMENT_QUARRY',					'PLAYER',	'HD_PLOT_BINARY_COMPRESS_SHOPPING_MALL'),
-	('BUILDING_SHOPPING_MALL', 	'RESOURCE_CLASSIFICATION_IMPROVEMENT_CAMP',						'PLAYER',	'HD_PLOT_BINARY_COMPRESS_SHOPPING_MALL'),
-	('BUILDING_SHOPPING_MALL', 	'RESOURCE_CLASSIFICATION_IMPROVEMENT_LUMBER_MILL',		'PLAYER',	'HD_PLOT_BINARY_COMPRESS_SHOPPING_MALL');
+	('BUILDING_FOOD_MARKET', 		'RESOURCE_CLASSIFICATION_HD_CROPS',						'PLAYER', 'HD_PLOT_BINARY_COMPRESS_FOOD_MARKET'),
+	('BUILDING_FOOD_MARKET', 		'RESOURCE_CLASSIFICATION_HD_CUISINE',					'PLAYER', 'HD_PLOT_BINARY_COMPRESS_FOOD_MARKET'),
+	('BUILDING_FOOD_MARKET', 		'RESOURCE_CLASSIFICATION_HD_FRUIT',						'PLAYER', 'HD_PLOT_BINARY_COMPRESS_FOOD_MARKET'),
+	('BUILDING_FOOD_MARKET', 		'RESOURCE_CLASSIFICATION_HD_BREWING',					'PLAYER', 'HD_PLOT_BINARY_COMPRESS_FOOD_MARKET'),
+	('BUILDING_FOOD_MARKET', 		'RESOURCE_CLASSIFICATION_HD_BEVERAGE',				'PLAYER', 'HD_PLOT_BINARY_COMPRESS_FOOD_MARKET'),
+	('BUILDING_FOOD_MARKET', 		'RESOURCE_CLASSIFICATION_HD_OIL',							'PLAYER', 'HD_PLOT_BINARY_COMPRESS_FOOD_MARKET'),
+	('BUILDING_FOOD_MARKET', 		'RESOURCE_CLASSIFICATION_HD_SEASONING',				'PLAYER', 'HD_PLOT_BINARY_COMPRESS_FOOD_MARKET'),
+	('BUILDING_FOOD_MARKET', 		'RESOURCE_CLASSIFICATION_HD_SEAFOOD',					'PLAYER', 'HD_PLOT_BINARY_COMPRESS_FOOD_MARKET'),
+	('BUILDING_SHOPPING_MALL', 	'RESOURCE_CLASSIFICATION_HD_LEATHER',					'PLAYER',	'HD_PLOT_BINARY_COMPRESS_SHOPPING_MALL'),
+	('BUILDING_SHOPPING_MALL', 	'RESOURCE_CLASSIFICATION_HD_CLOTH',						'PLAYER',	'HD_PLOT_BINARY_COMPRESS_SHOPPING_MALL'),
+	('BUILDING_SHOPPING_MALL', 	'RESOURCE_CLASSIFICATION_HD_MARINE_PRODUCTS',	'PLAYER',	'HD_PLOT_BINARY_COMPRESS_SHOPPING_MALL'),
+	('BUILDING_SHOPPING_MALL', 	'RESOURCE_CLASSIFICATION_HD_MEDICINE',				'PLAYER',	'HD_PLOT_BINARY_COMPRESS_SHOPPING_MALL'),
+	('BUILDING_SHOPPING_MALL', 	'RESOURCE_CLASSIFICATION_HD_STATIONERY',			'PLAYER',	'HD_PLOT_BINARY_COMPRESS_SHOPPING_MALL'),
+	('BUILDING_SHOPPING_MALL', 	'RESOURCE_CLASSIFICATION_HD_ART',							'PLAYER',	'HD_PLOT_BINARY_COMPRESS_SHOPPING_MALL'),
+	('BUILDING_SHOPPING_MALL', 	'RESOURCE_CLASSIFICATION_HD_DECORATION',			'PLAYER',	'HD_PLOT_BINARY_COMPRESS_SHOPPING_MALL'),
+	('BUILDING_SHOPPING_MALL', 	'RESOURCE_CLASSIFICATION_HD_HOUSEHOLD',				'PLAYER',	'HD_PLOT_BINARY_COMPRESS_SHOPPING_MALL');
 
 insert or replace into HD_Binary_Compress_Keys (Key, MaxExp) values
 	('HD_PLOT_BINARY_COMPRESS_FOOD_MARKET', 	6),
@@ -1441,15 +1480,19 @@ insert or replace into BuildingModifiers (BuildingType, ModifierId)
 	from HD_Binary_Compress where Exp < 7;
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId)
-	select 'HD_FOOD_MARKET_GOLD_' || Exp, 'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_FOOD_MARKET_' || Exp || '_REQUIREMENTS'
+	select 'HD_FOOD_MARKET_GOLD_' || Exp, 'MODIFIER_BUILDING_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_FOOD_MARKET_' || Exp || '_REQUIREMENTS'
 	from HD_Binary_Compress where Exp < 7;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
-	select 'HD_FOOD_MARKET_GOLD_' || Exp, 'Amount', Amount * 1
+	select 'HD_FOOD_MARKET_GOLD_' || Exp, 'Amount', Amount * 3
 	from HD_Binary_Compress where Exp < 7;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_FOOD_MARKET_GOLD_' || Exp, 'YieldType', 'YIELD_GOLD'
+	from HD_Binary_Compress where Exp < 7;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select 'HD_FOOD_MARKET_GOLD_' || Exp, 'BuildingType', 'BUILDING_FOOD_MARKET'
 	from HD_Binary_Compress where Exp < 7;
 
 	-- 购物商城
@@ -1458,15 +1501,19 @@ insert or replace into BuildingModifiers (BuildingType, ModifierId)
 	from HD_Binary_Compress where Exp < 7;
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId)
-	select 'HD_SHOPPING_MALL_GOLD_' || Exp, 'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_SHOPPING_MALL_' || Exp || '_REQUIREMENTS'
+	select 'HD_SHOPPING_MALL_GOLD_' || Exp, 'MODIFIER_BUILDING_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_SHOPPING_MALL_' || Exp || '_REQUIREMENTS'
 	from HD_Binary_Compress where Exp < 7;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
-	select 'HD_SHOPPING_MALL_GOLD_' || Exp, 'Amount', Amount * 1
+	select 'HD_SHOPPING_MALL_GOLD_' || Exp, 'Amount', Amount * 3
 	from HD_Binary_Compress where Exp < 7;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_SHOPPING_MALL_GOLD_' || Exp, 'YieldType', 'YIELD_GOLD'
+	from HD_Binary_Compress where Exp < 7;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select 'HD_SHOPPING_MALL_GOLD_' || Exp, 'BuildingType', 'BUILDING_SHOPPING_MALL'
 	from HD_Binary_Compress where Exp < 7;
 
 -- 产品业绩
@@ -1479,7 +1526,7 @@ insert or replace into BuildingModifiers (BuildingType, ModifierId) select
 where exists (select GreatWorkSlotType from GreatWorkSlotTypes where GreatWorkSlotType = 'GREATWORKSLOT_PRODUCT');
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId) select
-	'HD_MARKET_PRODUCT_TOURISM_BOOST', 'MODIFIER_PLAYER_CITIES_ADJUST_TOURISM', 'CITY_IS_POWERED'
+	'HD_MARKET_PRODUCT_TOURISM_BOOST', 'MODIFIER_SINGLE_CITY_ADJUST_TOURISM', 'CITY_IS_POWERED'
 where exists (select GreatWorkSlotType from GreatWorkSlotTypes where GreatWorkSlotType = 'GREATWORKSLOT_PRODUCT');
 
 insert or replace into ModifierArguments (ModifierId, Name, Value) select
@@ -1501,11 +1548,11 @@ insert or replace into BuildingModifiers (BuildingType, ModifierId) select
 where exists (select GreatWorkSlotType from GreatWorkSlotTypes where GreatWorkSlotType = 'GREATWORKSLOT_PRODUCT');
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId) select
-	'HD_FOOD_MARKET_PRODUCT_FOOD_BOOST', 'MODIFIER_PLAYER_CITIES_ADJUST_GREATWORK_YIELD', 'CITY_IS_POWERED'
+	'HD_FOOD_MARKET_PRODUCT_FOOD_BOOST', 'MODIFIER_SINGLE_CITY_ADJUST_GREATWORK_YIELD', 'CITY_IS_POWERED'
 where exists (select GreatWorkSlotType from GreatWorkSlotTypes where GreatWorkSlotType = 'GREATWORKSLOT_PRODUCT');
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId) select
-	'HD_FOOD_MARKET_PRODUCT_PRODUCTION_BOOST', 'MODIFIER_PLAYER_CITIES_ADJUST_GREATWORK_YIELD', 'CITY_IS_POWERED'
+	'HD_FOOD_MARKET_PRODUCT_PRODUCTION_BOOST', 'MODIFIER_SINGLE_CITY_ADJUST_GREATWORK_YIELD', 'CITY_IS_POWERED'
 where exists (select GreatWorkSlotType from GreatWorkSlotTypes where GreatWorkSlotType = 'GREATWORKSLOT_PRODUCT');
 
 insert or replace into ModifierArguments (ModifierId, Name, Value) select
@@ -1542,11 +1589,11 @@ insert or replace into BuildingModifiers (BuildingType, ModifierId) select
 where exists (select GreatWorkSlotType from GreatWorkSlotTypes where GreatWorkSlotType = 'GREATWORKSLOT_PRODUCT');
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId) select
-	'HD_SHOPPING_MALL_PRODUCT_GOLD_BOOST', 'MODIFIER_PLAYER_CITIES_ADJUST_GREATWORK_YIELD', 'CITY_IS_POWERED'
+	'HD_SHOPPING_MALL_PRODUCT_GOLD_BOOST', 'MODIFIER_SINGLE_CITY_ADJUST_GREATWORK_YIELD', 'CITY_IS_POWERED'
 where exists (select GreatWorkSlotType from GreatWorkSlotTypes where GreatWorkSlotType = 'GREATWORKSLOT_PRODUCT');
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId) select
-	'HD_SHOPPING_MALL_PRODUCT_FAITH_BOOST', 'MODIFIER_PLAYER_CITIES_ADJUST_GREATWORK_YIELD', 'CITY_IS_POWERED'
+	'HD_SHOPPING_MALL_PRODUCT_FAITH_BOOST', 'MODIFIER_SINGLE_CITY_ADJUST_GREATWORK_YIELD', 'CITY_IS_POWERED'
 where exists (select GreatWorkSlotType from GreatWorkSlotTypes where GreatWorkSlotType = 'GREATWORKSLOT_PRODUCT');
 
 insert or replace into ModifierArguments (ModifierId, Name, Value) select

@@ -413,7 +413,7 @@ values
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_LONGDESC_PHYSICS_HD",                                "科学家的伟大理论让我们形成了对这个世界基本认知。"),
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_BIOLOGY_HD",                                         "建造1座动物园。"),
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_LONGDESC_BIOLOGY_HD",                                "搜集世界各地的动物不仅是为了供人观赏，科学家们开始为这些生物分门别类，研究物种的进化过程和基因的奥秘。"),
-    ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_CIVIL_ENGINEERING_HD",                               "建造2座工作坊。"),
+    ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_CIVIL_ENGINEERING_HD",                               "建造2座建造工坊。"),
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_LONGDESC_CIVIL_ENGINEERING_HD",                      "工坊的工匠为我们总结了土木工程的基本原理。"),
     -- Techs
     -- ("zh_Hans_CN",  "LOC_TECH_MINING_HD_DESCRIPTION",                                       "允许砍伐树林、雨林和收获由矿山改良的资源。"),
