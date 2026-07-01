@@ -1044,3 +1044,16 @@ update Buildings set Cost = 1800 where BuildingType = 'WON_CL_EMPIRE_STATES';
 update Buildings set Cost = 1800 where BuildingType = 'BUILDING_MOTHERLAND_CALLS';
 update Buildings set Cost = 2000 where BuildingType = 'WON_CL_BUILDING_ARECIBO';
 update Buildings set Cost = 2000 where BuildingType = 'CL_BUILDING_CN_TOWER';
+
+--============================================================================================================================
+-- [HD DEBUG] Borobudur 本体依赖显式检查 (added by debug pass)
+-- BUILDING_SUK_BOROBUDUR 由 Sukritact 婆罗浮屠本体 Mod 定义；本文件仅为兼容补丁。
+-- 若本体未同步/未安装，下方 CHECK 会失败并向 Database.log 写入可读约束名，
+-- 明确提示依赖缺失（不做静默跳过）。Borobudur 是必要依赖。
+--============================================================================================================================
+CREATE TEMP TABLE IF NOT EXISTS HD_Borobudur_Dependency_Check (
+	ok INTEGER,
+	CONSTRAINT HD_ERROR_BOROBUDUR_SOURCE_MOD_NOT_INSTALLED_RESUBSCRIBE_SUKRITACT_BOROBUDUR CHECK (ok = 1)
+);
+INSERT INTO HD_Borobudur_Dependency_Check (ok)
+SELECT CASE WHEN EXISTS (SELECT 1 FROM Buildings WHERE BuildingType = 'BUILDING_SUK_BOROBUDUR') THEN 1 ELSE 0 END;
