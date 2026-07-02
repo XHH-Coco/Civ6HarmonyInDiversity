@@ -1494,6 +1494,7 @@
       <File>UpdateDataBase/DL_UnitDefinations.sql</File>
       <File>UpdateDataBase/DL_ImprovementDefinations.sql</File>
       <File>UpdateDataBase/DL_ProjectDefinations.sql</File>
+      <File>UpdateDataBase/HD_GovernorDefinations.sql</File>
       <File>UpdateDataBase/Classifications/HD_Classification_Tables.sql</File>
     </UpdateDatabase>
 
@@ -1786,6 +1787,7 @@
       <File>UpdateDataBase/DL_Wonders.sql</File>
       <File>UpdateDataBase/DL_WonderTheming.sql</File>
       <File>UpdateDataBase/DL_ModifierString.sql</File>
+      <File>UpdateDataBase/HD_Governors.sql</File>
     </UpdateDatabase>
     <UpdateDatabase id="DL_Late_Temp" criteria="Expansion2">
       <Properties><LoadOrder>16012</LoadOrder></Properties>
@@ -1805,6 +1807,7 @@
       <Properties><LoadOrder>20001</LoadOrder></Properties>
       <File>UpdateDataBase/DL_PostProcess.sql</File>
       <File>UpdateDataBase/DL_GreatPeople_Late.sql</File>
+      <File>UpdateDataBase/HD_Governors_Late.sql</File>
     </UpdateDatabase>
     <UpdateDatabase id="DL_Main_GreatWorks_YieldChanges" criteria="Expansion2">
       <Properties><LoadOrder>25000</LoadOrder></Properties>
@@ -1927,6 +1930,7 @@
       <File>Texts/HD_Text_ToolTip.sql</File>
       <File>Texts/HD_Text_Report_Screen.sql</File>
       <File>Texts/HD_Text_CustomEvents.sql</File>
+      <File>Texts/HD_Text_Governors.sql</File>
     </UpdateText>
     <UpdateText id="DL_Text_Late" criteria="Expansion2">
       <Properties><LoadOrder>20000</LoadOrder></Properties>
@@ -2780,6 +2784,9 @@
     <File>UpdateDataBase/DL_WonderTheming.sql</File>
     <File>UpdateDataBase/DL_ModifierString.sql</File>
     <File>UpdateDataBase/HD_Regional_Yields.sql</File>
+    <File>UpdateDataBase/HD_Governors.sql</File>
+    <File>UpdateDataBase/HD_GovernorDefinations.sql</File>
+    <File>UpdateDataBase/HD_Governors_Late.sql</File>
     <File>UpdateDataBase/Classifications/HD_Classification_Tables.sql</File>
     <File>UpdateDataBase/Classifications/HD_Building_Classification.sql</File>
     <File>UpdateDataBase/Classifications/HD_District_Classification.sql</File>
@@ -2831,6 +2838,7 @@
     <File>Texts/HD_Text_ToolTip.sql</File>
     <File>Texts/HD_Text_Report_Screen.sql</File>
     <File>Texts/HD_Text_CustomEvents.sql</File>
+    <File>Texts/HD_Text_Governors.sql</File>
     
     <!-- CustomEvents -->
     <File>CustomEvents/Database/TableDefinations.sql</File>

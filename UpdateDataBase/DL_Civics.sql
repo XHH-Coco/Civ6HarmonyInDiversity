@@ -613,7 +613,7 @@ from Projects where ProjectType like 'PROJECT_ENHANCE_DISTRICT_%';
 insert or replace into Modifiers
 	(ModifierId,							ModifierType)
 select
-	ProjectType || '_MODIFIER',				'MODIFIER_PLAYER_ALLOW_PROJECT_CATHERINE'
+	ProjectType || '_MODIFIER',				'MODIFIER_PLAYER_ALLOW_PROJECT'
 from Projects where ProjectType like 'PROJECT_ENHANCE_DISTRICT_%';
 insert or replace into ModifierArguments
 	(ModifierId,							Name,					Value)
