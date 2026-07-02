@@ -600,11 +600,13 @@ insert or replace into ModifierArguments (ModifierId, Name, Value) values
 
 insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) select
 	'HD_BOROBUDUR_GRANT_ENVOY_' || UnitType, 'MODIFIER_PLAYER_GRANT_INFLUENCE_TOKEN', 'PLAYER_HAS_BUILDING_SUK_BOROBUDUR_REQUIREMENTS'
-from Units where FormationClass = 'FORMATION_CLASS_NAVAL';
+from Units where FormationClass = 'FORMATION_CLASS_NAVAL'
+	and exists (select 1 from RequirementSets where RequirementSetId = 'PLAYER_HAS_BUILDING_SUK_BOROBUDUR_REQUIREMENTS');
 
 insert or replace into ModifierArguments (ModifierId, Name, Value) select
 	'HD_BOROBUDUR_GRANT_ENVOY_' || UnitType, 'Amount', 1
-from Units where FormationClass = 'FORMATION_CLASS_NAVAL';
+from Units where FormationClass = 'FORMATION_CLASS_NAVAL'
+	and exists (select 1 from RequirementSets where RequirementSetId = 'PLAYER_HAS_BUILDING_SUK_BOROBUDUR_REQUIREMENTS');
 
 -- 祖国母亲在召唤
 update Buildings set PrereqCivic = 'CIVIC_MOBILIZATION' where BuildingType = 'BUILDING_MOTHERLAND_CALLS';
@@ -1044,3 +1046,17 @@ update Buildings set Cost = 1800 where BuildingType = 'WON_CL_EMPIRE_STATES';
 update Buildings set Cost = 1800 where BuildingType = 'BUILDING_MOTHERLAND_CALLS';
 update Buildings set Cost = 2000 where BuildingType = 'WON_CL_BUILDING_ARECIBO';
 update Buildings set Cost = 2000 where BuildingType = 'CL_BUILDING_CN_TOWER';
+
+--============================================================================================================================
+-- [HD] Borobudur 本体依赖「非阻断」可读提示
+-- BUILDING_SUK_BOROBUDUR 由 Sukritact 婆罗浮屠本体 Mod 定义；本文件仅为兼容补丁。
+-- 婆罗浮屠为可选依赖：上方引用其 RequirementSet 的插入已加 exists 护栏，缺失时静默跳过，游戏可正常进入。
+-- 下方仅在 TEMP 表上做一次 CHECK：本体缺失时向 Database.log 写入一行可读约束名，
+-- 便于想补全内容的玩家 grep 定位缺的是哪个本体 Mod。CHECK 只在临时表上失败、不提交任何行，不参与外键校验，故不阻断进游戏。
+--============================================================================================================================
+CREATE TEMP TABLE IF NOT EXISTS HD_Borobudur_Dependency_Check (
+	ok INTEGER,
+	CONSTRAINT HD_ERROR_BOROBUDUR_SOURCE_MOD_NOT_INSTALLED_RESUBSCRIBE_SUKRITACT_BOROBUDUR CHECK (ok = 1)
+);
+INSERT INTO HD_Borobudur_Dependency_Check (ok)
+SELECT CASE WHEN EXISTS (SELECT 1 FROM Buildings WHERE BuildingType = 'BUILDING_SUK_BOROBUDUR') THEN 1 ELSE 0 END;
