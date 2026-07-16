@@ -26,7 +26,7 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   -- ==============================================================================
   -- 基础升级
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_DEFENDER_BASE_NAME",                        "部落兵制"),
-  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_DEFENDER_BASE_DESCRIPTION",                 "本城的每位 [ICON_Citizen] 公民+1 [ICON_PRODUCTION] 生产力，建造单位时+30% [ICON_PRODUCTION] 生产力。提供+4 [ICON_GREATGENERAL] 大将军点数。"),
+  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_DEFENDER_BASE_DESCRIPTION",                 "本城的每位 [ICON_Citizen] 公民+0.8 [ICON_PRODUCTION] 生产力，建造单位时+30% [ICON_PRODUCTION] 生产力。提供+4 [ICON_GREATGENERAL] 大将军点数。"),
   -- 左线升级
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_DEFENDER_LEFT_1_NAME",                      "后勤保障部"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_DEFENDER_LEFT_1_DESCRIPTION",               "本城无法被围攻。军事单位相邻或位于本城市中心驻扎一回合可完全恢复。本城生产的军事单位+3 [ICON_STRENGTH] 战斗力，且生产所需的战略资源减少80%。"),
@@ -56,7 +56,7 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_LEFT_3_DESCRIPTION",                "本城可以多建造一座市立公园。4个单元格内的市立公园为其2个单元格内的区域+50%相邻加成。"),
   -- 右线升级
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_1_NAME",                      "建筑大师"),
-  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_1_DESCRIPTION" ,              "本城建造奇观时+15%建造速度，建造远古和古典奇观时额外+10%建造速度。"),
+  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_1_DESCRIPTION" ,              "本城建造奇观时+15%建造速度，建造远古和古典奇观时额外+15%建造速度。"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_2_NAME",                      "宏伟工程"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_2_DESCRIPTION" ,              "本城的奇观基础产出+100%，辐射产出+50%，+1辐射范围。"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_3_NAME",                      "国家工程院"),

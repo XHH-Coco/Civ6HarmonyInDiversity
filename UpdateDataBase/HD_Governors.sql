@@ -202,7 +202,7 @@ insert or ignore into Modifiers (ModifierId, ModifierType, Permanent, SubjectReq
 
 insert or ignore into ModifierArguments (ModifierId, Name, Value) values
 	('HD_GOVERNOR_DEFENDER_BASE_POP_PRODUCTION',                          'YieldType',              'YIELD_PRODUCTION'),
-	('HD_GOVERNOR_DEFENDER_BASE_POP_PRODUCTION',                          'Amount',                 1),
+	('HD_GOVERNOR_DEFENDER_BASE_POP_PRODUCTION',                          'Amount',                 0.8),
 	('HD_GOVERNOR_DEFENDER_BASE_UNIT_PRODUCTION',                         'Amount',                 30),
 	('HD_GOVERNOR_DEFENDER_BASE_GENERAL_POINTS',                          'GreatPersonClassType',   'GREAT_PERSON_CLASS_GENERAL'),
 	('HD_GOVERNOR_DEFENDER_BASE_GENERAL_POINTS',                          'Amount',                 4),
@@ -270,7 +270,7 @@ insert or ignore into ModifierArguments (ModifierId, Name, Value) values
 	('HD_GOVERNOR_BUILDER_LEFT_3_ALLOW_EXTRA_CITY_PARK',                  'Key',                    'HD_CITY_ALLOW_EXTRA_IMPROVEMENT_CITY_PARK'),
 	('HD_GOVERNOR_BUILDER_LEFT_3_ALLOW_EXTRA_CITY_PARK',                  'Amount',                 1),
 	('HD_GOVERNOR_BUILDER_RIGHT_1_WONDER_BOOST',                          'Amount',                 15),
-	('HD_GOVERNOR_BUILDER_RIGHT_1_WONDER_BOOST_EARLY',                    'Amount',                 10),
+	('HD_GOVERNOR_BUILDER_RIGHT_1_WONDER_BOOST_EARLY',                    'Amount',                 15),
 	('HD_GOVERNOR_BUILDER_RIGHT_1_WONDER_BOOST_EARLY',                    'IsWonder',               1),
 	('HD_GOVERNOR_BUILDER_RIGHT_1_WONDER_BOOST_EARLY',                    'StartEra',               'ERA_ANCIENT'),
 	('HD_GOVERNOR_BUILDER_RIGHT_1_WONDER_BOOST_EARLY',                    'EndEra',                 'ERA_CLASSICAL'),

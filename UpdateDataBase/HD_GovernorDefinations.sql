@@ -82,9 +82,9 @@ insert or ignore into GovernorPromotionPrereqs (GovernorPromotionType, PrereqGov
 from HD_Governors_Need_Reset, HD_GovernorPromotion_ColumnNames, HDCounter where Count <= 2;
 
 insert or ignore into GovernorPromotionPrereqs (GovernorPromotionType, PrereqGovernorPromotion) select
-  'GOVERNOR_PROMOTION_HD_' || Tag || '_LEFT_2', 'GOVERNOR_PROMOTION_HD_' || Tag || '_RIGHT_1'
-from HD_Governors_Need_Reset;
+  'GOVERNOR_PROMOTION_HD_' || Tag || '_LEFT_' || (Count + 1), 'GOVERNOR_PROMOTION_HD_' || Tag || '_RIGHT_' || Count
+from HD_Governors_Need_Reset, HDCounter where Count <= 2;
 
 insert or ignore into GovernorPromotionPrereqs (GovernorPromotionType, PrereqGovernorPromotion) select
-  'GOVERNOR_PROMOTION_HD_' || Tag || '_RIGHT_2', 'GOVERNOR_PROMOTION_HD_' || Tag || '_LEFT_1'
-from HD_Governors_Need_Reset;
+  'GOVERNOR_PROMOTION_HD_' || Tag || '_RIGHT_' || (Count + 1), 'GOVERNOR_PROMOTION_HD_' || Tag || '_LEFT_' || Count
+from HD_Governors_Need_Reset, HDCounter where Count <= 2;
