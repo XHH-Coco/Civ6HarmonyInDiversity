@@ -17,6 +17,7 @@ values
 	("LOC_IMPROVEMENT_BEACH_RESORT_HD_DESCRIPTION",							"Provides [ICON_GOLD] Gold equal to 400% of the tile's Appeal. +3 [ICON_GOLD] Gold from each building of Harbor or Water Park district in this city. [NEWLINE][NEWLINE]Can only be built on flat Desert, Plains, or Grassland tiles adjacent to Shallow Sea. Minimum Appeal of Breathtaking."),
 	("LOC_IMPROVEMENT_SKI_RESORT_HD_DESCRIPTION",								"+1 [ICON_AMENITIES] Amenity.[NEWLINE][NEWLINE]If adjacent to any Improvement which provide [ICON_TOURISM] Tourism, +50% [ICON_TOURISM] Tourism to Improvements in all cities.[NEWLINE]If adjacent to any Wonder, +50% [ICON_TOURISM] Tourism to Wonders in all cities.[NEWLINE][NEWLINE]Can only be built on a Mountain. Cannot be built adjacent to another Ski Resort. Cannot be pillaged, worked or removed. One per City."),
 	("LOC_IMPROVEMENT_SKI_RESORT_HD_MONOPOLY_DESCRIPTION",			"+1 [ICON_AMENITIES] Amenity.[NEWLINE][NEWLINE]If adjacent to any Improvement which provide [ICON_TOURISM] Tourism, +50% [ICON_TOURISM] Tourism to Improvements in all cities.[NEWLINE]If adjacent to any Wonder, +50% [ICON_TOURISM] Tourism to Wonders in all cities.[NEWLINE]If adjacent to Entertainment Complex or Water Park districs, +50% [ICON_TOURISM] Tourism to [ICON_GreatWork_Product] Products in all cities.[NEWLINE][NEWLINE]Can only be built on a Mountain. Cannot be built adjacent to another Ski Resort. Cannot be pillaged, worked or removed. One per City."),
+	("LOC_IMPROVEMENT_CITY_PARK_DESCRIPTION",										"+1 [ICON_FOOD] Food, +2 [ICON_Culture] Culture and +3 [ICON_GOLD]. Adjacent tiles receive +1 Appeal. Cannot be placed adjacent to another City Park. One per City; for each Specialized district, city can build an additional City Park."),
 	-- UI of Majors	
 	("LOC_IMPROVEMENT_OUTBACK_STATION_DESCRIPTION",							"+1 [ICON_PRODUCTION] Production and +0.5 [ICON_HOUSING] Housing. +1 [ICON_FOOD] Food from every adjacent Pasture, +1 [ICON_PRODUCTION] from every adjacent Outback Station. Provide additional yields to adjacent Pasture and Outback Station as you advance through the Civics and Technology Tree. [NEWLINE]Trigger a Culture Bomb. When built on a tile for the first time, randomly import a copy of the adjacent {LOC_OUTBACK_STATION_BREED_IMPORT}Pasture Resource on an adjacent {LOC_SAVANNAH_AND}Desert, Desert Hill, Grassland, Grassland Hill, Plain or Plain Hill tile. [NEWLINE][NEWLINE]Can only be built on {LOC_SAVANNAH_AND}Desert, Desert Hill, Grassland, Grassland Hill, Plain and Plain Hill tiles."),
 	("LOC_OUTBACK_STATION_BREED_IMPORT",       									""),
@@ -63,9 +64,7 @@ values
 	("LOC_NAZCA_LINE_HOLY_SITE_ADJACENCY_DESCRIPTION",					"+{1_num} [ICON_FAITH] Faith from adjacent Nazca Line {1_Num : plural 2?Tiles; other?Tile;}."),
 	("LOC_NAZCA_LINE_CAMPUS_ADJACENCY_DESCRIPTION",							"+{1_num} [ICON_SCIENCE] Science from adjacent Nazca Line {1_Num : plural 2?Tiles; other?Tile;}."),
 	("LOC_NAZCA_LINE_THEATER_ADJACENCY_DESCRIPTION",						"+{1_num} [ICON_CULTURE] Culture from adjacent Nazca Line {1_Num : plural 2?Tiles; other?Tile;}."),
-	("LOC_IMPROVEMENT_MOAI_DESCRIPTION",												"+2 [ICON_Culture] Culture. +2 [ICON_Culture] Culture if on or adjacent to a Volcanic Soil. +1 [ICON_Culture] Culture if adjacent to Shallow Sea and Lake. +1 [ICON_Culture] Culture from every 2 adjacent Moai or from every adjacent Moai after progress 'Medieval Faires' Civic. Can be built on Plains, Plains Hills, Grassland, Grassland Hills, or Volcanic Soil."),
-	-- UI of Governor
-	("LOC_IMPROVEMENT_CITY_PARK_DESCRIPTION",										"Provides +2 [ICON_FOOD] Food, +1 [ICON_PRODUCTION] Production, +1 [ICON_Culture] Culture and +3 [ICON_GOLD]. Adjacent tiles receive +2 Appeal. Receives corresponding yield from different Specialized districts in its city and buildings in these districts. Cannot be placed adjacent to another City Park.");
+	("LOC_IMPROVEMENT_MOAI_DESCRIPTION",												"+2 [ICON_Culture] Culture. +2 [ICON_Culture] Culture if on or adjacent to a Volcanic Soil. +1 [ICON_Culture] Culture if adjacent to Shallow Sea and Lake. +1 [ICON_Culture] Culture from every 2 adjacent Moai or from every adjacent Moai after progress 'Medieval Faires' Civic. Can be built on Plains, Plains Hills, Grassland, Grassland Hills, or Volcanic Soil.");
 
 --------------------------------------------------------------------------------
 -- Language: zh_Hans_CN
@@ -86,6 +85,7 @@ values
 	("zh_Hans_CN",	"LOC_IMPROVEMENT_BEACH_RESORT_HD_DESCRIPTION",							"城市中每个港口和水上乐园建筑为海滨度假区+3 [ICON_GOLD] 金币。[NEWLINE][NEWLINE]只能建造在惊艳魅力的与浅海相邻的平原、草原、沙漠或火山土上。"),
 	("zh_Hans_CN",	"LOC_IMPROVEMENT_SKI_RESORT_HD_DESCRIPTION",								"+1 [ICON_AMENITIES] 宜居度。[NEWLINE][NEWLINE]若相邻任何提供 [ICON_TOURISM] 旅游业绩的改良设施，则所有城市提供 [ICON_TOURISM] 旅游业绩的改良设施的 [ICON_TOURISM] 旅游业绩+50%。[NEWLINE]若相邻奇观，则所有城市奇观提供的 [ICON_TOURISM] 旅游业绩+50%。[NEWLINE][NEWLINE]只能建造在山脉单元格上。不能建造在与其他滑雪场相邻的单元格上。每个城市仅限建造一座。"),
 	("zh_Hans_CN",	"LOC_IMPROVEMENT_SKI_RESORT_HD_MONOPOLY_DESCRIPTION",				"+1 [ICON_AMENITIES] 宜居度。[NEWLINE][NEWLINE]若相邻任何提供 [ICON_TOURISM] 旅游业绩的改良设施，则所有城市提供 [ICON_TOURISM] 旅游业绩的改良设施的 [ICON_TOURISM] 旅游业绩+50%。[NEWLINE]若相邻奇观，则所有城市奇观提供的 [ICON_TOURISM] 旅游业绩+50%。[NEWLINE]若相邻娱乐中心或水上乐园，则分别为所有城市 [ICON_GreatWork_Product] 产品提供的 [ICON_TOURISM] 旅游业绩+50%。[NEWLINE][NEWLINE]只能建造在山脉单元格上。不能建造在与其他滑雪场相邻的单元格上。每个城市仅限建造一座。"),
+	("zh_Hans_CN",	"LOC_IMPROVEMENT_CITY_PARK_DESCRIPTION",										"+1 [ICON_FOOD] 食物、+2 [ICON_Culture] 文化值和+3 [ICON_GOLD] 金币。为相邻单元格+1魅力。无法建在另一个市立公园旁。每个城市仅限建造一座；城市每拥有1座专业化区域，可以额外建造一座市立公园。"),
 	-- 文明特色改良
 	("zh_Hans_CN",	"LOC_IMPROVEMENT_OUTBACK_STATION_DESCRIPTION",							"+1 [ICON_PRODUCTION] 生产力、+0.5 [ICON_HOUSING] 住房。每相邻1个牧场+1 [ICON_FOOD] 食物，每相邻1个内陆牧场+1 [ICON_PRODUCTION] 生产力。随着科技与市政的研究将为相邻的牧场和内陆牧场提供更多产出。[NEWLINE]建造后触发文化炸弹。在每个单元格上首次建成内陆牧场后，随机在一个相邻的{LOC_SAVANNAH_AND}沙漠、草原或平原或对应丘陵的单元格上引进一份相邻的{LOC_OUTBACK_STATION_BREED_IMPORT}牧场资源。[NEWLINE][NEWLINE]只能建造在{LOC_SAVANNAH_AND}沙漠、草原或平原以及对应的丘陵单元格上。"),
 	("zh_Hans_CN",  "LOC_OUTBACK_STATION_BREED_IMPORT",       									""),
@@ -132,9 +132,7 @@ values
 	("zh_Hans_CN",	"LOC_NAZCA_LINE_HOLY_SITE_ADJACENCY_DESCRIPTION",						"+{1_num} [ICON_FAITH] 信仰值来自相邻的纳斯卡巨画。"),
 	("zh_Hans_CN",	"LOC_NAZCA_LINE_CAMPUS_ADJACENCY_DESCRIPTION",							"+{1_num} [ICON_SCIENCE] 科技值来自相邻的纳斯卡巨画。"),
 	("zh_Hans_CN",	"LOC_NAZCA_LINE_THEATER_ADJACENCY_DESCRIPTION",							"+{1_num} [ICON_CULTURE] 文化值来自相邻的纳斯卡巨画。"),
-	("zh_Hans_CN",	"LOC_IMPROVEMENT_MOAI_DESCRIPTION",													"+2 [ICON_Culture] 文化值。在火山土上或与其相邻时+2 [ICON_Culture] 文化值。相邻浅海与湖泊时+1 [ICON_Culture] 文化值。每相邻2个摩艾石像+1 [ICON_Culture] 文化值，解锁“中世纪集市”后变为每相邻1个摩艾石像。获得等同于 [ICON_Culture] 文化值产出的 [ICON_Tourism] 旅游业绩。只可建在平原、平原丘陵、草原、草原丘陵或火山土单元格之上。"),
-	-- 总督改良
-	("zh_Hans_CN",	"LOC_IMPROVEMENT_CITY_PARK_DESCRIPTION",										"+2 [ICON_FOOD] 食物、+1 [ICON_PRODUCTION] 生产力、+1 [ICON_Culture] 文化值和+3 [ICON_GOLD] 金币。为相邻单元格+2魅力。市立公园从所在城市的专业化区域和其中的建筑获得对应产出。无法建在另一个市立公园旁。"); 
+	("zh_Hans_CN",	"LOC_IMPROVEMENT_MOAI_DESCRIPTION",													"+2 [ICON_Culture] 文化值。在火山土上或与其相邻时+2 [ICON_Culture] 文化值。相邻浅海与湖泊时+1 [ICON_Culture] 文化值。每相邻2个摩艾石像+1 [ICON_Culture] 文化值，解锁“中世纪集市”后变为每相邻1个摩艾石像。获得等同于 [ICON_Culture] 文化值产出的 [ICON_Tourism] 旅游业绩。只可建在平原、平原丘陵、草原、草原丘陵或火山土单元格之上。"); 
 
 -- Ethiopia DLC support
 insert or replace into EnglishText

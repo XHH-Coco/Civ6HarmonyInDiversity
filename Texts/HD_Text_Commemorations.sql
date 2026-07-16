@@ -148,10 +148,10 @@ values
 
   -- Mega Corporation
   ("LOC_MOMENT_CATEGORY_MEGA_CORPORATION",                                        "Mega Corporation"),
-  ("LOC_MOMENT_CATEGORY_MEGA_CORPORATION_BONUS_GOLDEN_AGE",                       "Grant 2 free [ICON_GREATMERCHANT] Great Merchants. Cities with a Commercial Hub Tier 4 building can build one more district than the [ICON_CITIZEN] Population limit allows, receive +20% [ICON_PRODUCTION] Production and purchase districts, buildings, or units at -20% cost."),
+  ("LOC_MOMENT_CATEGORY_MEGA_CORPORATION_BONUS_GOLDEN_AGE",                       "Grant 2 free [ICON_GREATMERCHANT] Great Merchants. Cities with a Commercial Hub Tier 4 building can build one more district than the [ICON_CITIZEN] Population limit allows, receive +20% [ICON_PRODUCTION] Production and purchase districts, buildings, or units at -10% cost."),
   ("LOC_MOMENT_CATEGORY_MEGA_CORPORATION_BONUS_NORMAL_AGE",                       "Each construction of buildings in Commercial Hub districts provides +1 [ICON_GLORY_NORMAL_AGE] Era Scores."),
   ("LOC_MOMENT_CATEGORY_MEGA_CORPORATION_BONUS_DARK_AGE",                         "Each construction of buildings in Commercial Hub districts provides +1 [ICON_GLORY_NORMAL_AGE] Era Scores."),
-  ("LOC_MOMENT_CATEGORY_MEGA_CORPORATION_BONUS_GOLDEN_AGE_CORP",                  "Grant 2 free [ICON_GREATMERCHANT] Great Merchants. Cities with a Corporation can build one more district than the [ICON_CITIZEN] Population limit allows, receive +20% [ICON_PRODUCTION] Production and purchase districts, buildings, or units at -20% cost."),
+  ("LOC_MOMENT_CATEGORY_MEGA_CORPORATION_BONUS_GOLDEN_AGE_CORP",                  "Grant 2 free [ICON_GREATMERCHANT] Great Merchants. Cities with a Corporation can build one more district than the [ICON_CITIZEN] Population limit allows, receive +20% [ICON_PRODUCTION] Production and purchase districts, buildings, or units at -10% cost."),
   ("LOC_MOMENT_CATEGORY_MEGA_CORPORATION_BONUS_NORMAL_AGE_CORP",                  "Each construction of Industry or Corporation provides +3 [ICON_GLORY_NORMAL_AGE] Era Scores."),
   ("LOC_MOMENT_CATEGORY_MEGA_CORPORATION_BONUS_DARK_AGE_CORP",                    "Each construction of Industry or Corporation provides +3 [ICON_GLORY_NORMAL_AGE] Era Scores."),
 
@@ -349,10 +349,10 @@ values
   ("zh_Hans_CN",  "LOC_MOMENT_CATEGORY_IDEOLOGY_STORM_BONUS_DARK_AGE",                            "每招募1位 [ICON_GREATPERSON] 伟人+1 [ICON_GLORY_NORMAL_AGE] 时代得分。"),
   -- 巨型企业
   ("zh_Hans_CN",  "LOC_MOMENT_CATEGORY_MEGA_CORPORATION",                                         "巨型企业"),
-  ("zh_Hans_CN",  "LOC_MOMENT_CATEGORY_MEGA_CORPORATION_BONUS_GOLDEN_AGE",                        "获得2个 [ICON_GREATMERCHANT] 大商人。拥有商业中心四级建筑的城市+1区域位，+20% [ICON_PRODUCTION] 生产力，且购买区域、建筑或单位时费用-20%。"),
+  ("zh_Hans_CN",  "LOC_MOMENT_CATEGORY_MEGA_CORPORATION_BONUS_GOLDEN_AGE",                        "获得2个 [ICON_GREATMERCHANT] 大商人。拥有商业中心四级建筑的城市+1区域位，+20% [ICON_PRODUCTION] 生产力，且购买区域、建筑或单位时费用-10%。"),
   ("zh_Hans_CN",  "LOC_MOMENT_CATEGORY_MEGA_CORPORATION_BONUS_NORMAL_AGE",                        "每建造1座商业中心建筑+1 [ICON_GLORY_NORMAL_AGE] 时代得分。"),
   ("zh_Hans_CN",  "LOC_MOMENT_CATEGORY_MEGA_CORPORATION_BONUS_DARK_AGE",                          "每建造1座商业中心建筑+1 [ICON_GLORY_NORMAL_AGE] 时代得分。"),
-  ("zh_Hans_CN",  "LOC_MOMENT_CATEGORY_MEGA_CORPORATION_BONUS_GOLDEN_AGE_CORP",                   "获得2个 [ICON_GREATMERCHANT] 大商人。拥有公司的城市+1区域位，+20% [ICON_PRODUCTION] 生产力，且购买区域、建筑或单位时费用-20%。"),
+  ("zh_Hans_CN",  "LOC_MOMENT_CATEGORY_MEGA_CORPORATION_BONUS_GOLDEN_AGE_CORP",                   "获得2个 [ICON_GREATMERCHANT] 大商人。拥有公司的城市+1区域位，+20% [ICON_PRODUCTION] 生产力，且购买区域、建筑或单位时费用-10%。"),
   ("zh_Hans_CN",  "LOC_MOMENT_CATEGORY_MEGA_CORPORATION_BONUS_NORMAL_AGE_CORP",                   "每建造1座行业或公司+3 [ICON_GLORY_NORMAL_AGE] 时代得分。"),
   ("zh_Hans_CN",  "LOC_MOMENT_CATEGORY_MEGA_CORPORATION_BONUS_DARK_AGE_CORP",                     "每建造1座行业或公司+3 [ICON_GLORY_NORMAL_AGE] 时代得分。"),
   -- 全民皆兵

@@ -23,7 +23,7 @@ values
     ("LOC_RESOURCE_ALGAE_NAME",                                   "Sea Mustard"),
     ("LOC_RESOURCE_CORAL_NAME",                                   "Red Coral"),
     ("LOC_RESOURCE_POTATO_NAME",                                  "Sweet Potato"),
-    ("LOC_RESOURCE_MUSHROOMS_NAME",                               "Agaricus Bisporus"),
+    ("LOC_RESOURCE_MUSHROOMS_NAME",                               "St. George's Mushroom"),
     ("LOC_IMPROVEMENT_LUMBER_MILL_HD_DESCRIPTION",                "+1 [ICON_Production] Production if adjacent to river after researching Wheel Technology (obsolete with Machinery Technology). [NEWLINE][NEWLINE]Can be built on Woods or valid Resources. Once Guilds is unlocked it can also be built on Rainforest."),
     ("LOC_BUILDING_STONEHENGE_DESCRIPTION",                       "Grants a free [ICON_GreatProphet] Great Prophet. [ICON_GreatProphet] Great Prophets may found a Religion on Stonehenge instead of a Holy Site. Must be adjacent to [ICON_RESOURCE_STONE] Andesite and on flat land."),
     ("LOC_BELIEF_PAN_NAME",                                       "Pan"),

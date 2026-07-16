@@ -902,6 +902,10 @@
       <File>UI/Replacement/ProductionPanel.xml</File>
       <File>UI/Replacement/UnitFlagManager_UpdateReligionIcon.lua</File>
       <File>UI/Replacement/GreatWorksSupport.lua</File>
+      <File>UI/Replacement/GovernorPanel.xml</File>
+      <File>UI/Replacement/GovernorPanel.lua</File>
+      <File>UI/Replacement/GovernorDetailsPanel.xml</File>
+      <File>UI/Replacement/GovernorDetailsPanel.lua</File>
     </ImportFiles>
     <ReplaceUIScript id="UpdateReligionIcon_UnitFlagManager">
       <Properties>
@@ -1380,24 +1384,9 @@
       <File>SubMods/CityPolicies/UI/ToolTipLoader_CityPolicies.lua</File>
     </ImportFiles>
     <!-- Governors Diversity -->
-    <AddUserInterfaces id="GovernorsDiversity_lua" criteria="Expansion2">
-      <Properties>
-        <Context>InGame</Context>
-        <LoadOrder>15606</LoadOrder>
-      </Properties>
-      <File>SubMods/GovernorsDiversity/Governors_Interface.xml</File>
-    </AddUserInterfaces>
-    <ImportFiles id="GovernorsDiversity_import" criteria="Expansion2">
-      <Properties><LoadOrder>15606</LoadOrder></Properties>
-      <File>SubMods/GovernorsDiversity/Governors_Interface.lua</File>
-    </ImportFiles>
     <UpdateDatabase id="HD_Governors" criteria="Expansion2">
       <Properties><LoadOrder>15606</LoadOrder></Properties>
       <File>SubMods/GovernorsDiversity/HD_Governors.sql</File>
-    </UpdateDatabase>
-    <UpdateDatabase id="HD_Governors" criteria="Expansion2">
-      <Properties><LoadOrder>20000</LoadOrder></Properties>
-      <File>SubMods/GovernorsDiversity/HD_Governors_Late.sql</File>
     </UpdateDatabase>
     <UpdateText id="HD_Governors_text" criteria="Expansion2">
       <Properties><LoadOrder>15606</LoadOrder></Properties>
@@ -1485,17 +1474,22 @@
       <File>ThirdParty/GoldResource/Gold_Text.xml</File>
     </UpdateText>
     
-    <UpdateDatabase id="BuildingDefinations" criteria="Expansion2">
+    <UpdateDatabase id="HD_TableDefinations" criteria="Expansion2">
+      <Properties><LoadOrder>11000</LoadOrder></Properties>
+      <File>UpdateDataBase/HD_TableDefinations.sql</File>
+      <File>UpdateDataBase/Classifications/HD_Classification_Tables.sql</File>
+    </UpdateDatabase>
+
+    <UpdateDatabase id="HD_Definations" criteria="Expansion2">
       <Properties><LoadOrder>12000</LoadOrder></Properties>
       <File>UpdateDataBase/HD_CulturalUnits.xml</File>
       <File>UpdateDataBase/DL_BuildingDefinations.sql</File>
-      <File>UpdateDataBase/HD_TableDefinations.sql</File>
       <File>UpdateDataBase/HD_NotificationDefinations.sql</File>
       <File>UpdateDataBase/DL_UnitDefinations.sql</File>
       <File>UpdateDataBase/DL_ImprovementDefinations.sql</File>
       <File>UpdateDataBase/DL_ProjectDefinations.sql</File>
       <File>UpdateDataBase/HD_GovernorDefinations.sql</File>
-      <File>UpdateDataBase/Classifications/HD_Classification_Tables.sql</File>
+      <File>UpdateDataBase/HD_Binary_Compress.sql</File>
     </UpdateDatabase>
 
     <UpdateDatabase id="HD_Classifications" criteria="Expansion2">
@@ -1595,8 +1589,8 @@
     <UpdateDatabase id="DL_EarlySetup" criteria="Expansion2">
       <Properties><LoadOrder>16001</LoadOrder></Properties>
       <File>UpdateDataBase/HD_BuildingTiers.sql</File>
-      <File>UpdateDataBase/DL_EarlySetup.sql</File>
       <File>UpdateDataBase/HD_ResourceLimit.sql</File>
+      <File>UpdateDataBase/HD_CorrespondingYields.sql</File>
     </UpdateDatabase>
     <UpdateDatabase id="DL_CityStateBuffs" criteria="Expansion2">
       <Properties><LoadOrder>16003</LoadOrder></Properties>
@@ -1807,12 +1801,15 @@
       <Properties><LoadOrder>20001</LoadOrder></Properties>
       <File>UpdateDataBase/DL_PostProcess.sql</File>
       <File>UpdateDataBase/DL_GreatPeople_Late.sql</File>
-      <File>UpdateDataBase/HD_Governors_Late.sql</File>
     </UpdateDatabase>
-    <UpdateDatabase id="DL_Main_GreatWorks_YieldChanges" criteria="Expansion2">
+    <UpdateDatabase id="DL_Main_Late2" criteria="Expansion2">
       <Properties><LoadOrder>25000</LoadOrder></Properties>
       <File>UpdateDataBase/DL_GreatWorks_YieldChanges.sql</File>
       <File>UpdateDataBase/HD_Regional_Yields.sql</File>
+    </UpdateDatabase>
+    <UpdateDatabase id="DL_Main_Late3" criteria="Expansion2">
+      <Properties><LoadOrder>25001</LoadOrder></Properties>
+      <File>UpdateDataBase/HD_Governors_Late.sql</File>
     </UpdateDatabase>
     <UpdateDatabase id="DL_Main_Last" criteria="Expansion2">
       <Properties><LoadOrder>30000</LoadOrder></Properties>
@@ -1861,6 +1858,7 @@
       <File>Gameplay/BinaryCompress.lua</File>
       <File>Gameplay/UnitAbilities.lua</File>
       <File>Gameplay/ResourceClassification.lua</File>
+      <File>Gameplay/Governors.lua</File>
     </AddGameplayScripts>
     <AddGameplayScripts id="DL_Scripts_Gameplay_Late" criteria="Expansion2">
       <Properties><LoadOrder>16018</LoadOrder></Properties>
@@ -2196,20 +2194,6 @@
       <File>UI/Replacement/America_UI.lua</File>
       <File>UI/Replacement/America_UI.xml</File>
     </ImportFiles>
-    <AddUserInterfaces id="CITADEL_OF_GOD_UI">
-      <Properties>
-        <Context>InGame</Context>
-        <LoadOrder>1</LoadOrder>
-      </Properties>
-      <File>SubMods/GovernorsDiversity/bishop2-2/Temp_Interface2.xml</File>
-    </AddUserInterfaces>
-    <AddGameplayScripts id="NewAction">
-      <File>SubMods/GovernorsDiversity/bishop2-2/HD_Common2.lua</File>
-    </AddGameplayScripts>
-    <ImportFiles id="CITADEL_OF_GOD_UI_import">
-      <Properties><LoadOrder>1</LoadOrder></Properties>
-      <File>SubMods/GovernorsDiversity/bishop2-2/Temp_Interface2.lua</File>
-    </ImportFiles>
 
     <!-- 自定义事件框架 -->
     <UpdateDatabase id="HD_CustomEvents_Database" criteria="Expansion2">
@@ -2380,6 +2364,7 @@
     <File>Gameplay/Temp_Interface.xml</File>
     <File>Gameplay/RegionalYields.lua</File>
     <File>Gameplay/ResourceClassification.lua</File>
+    <File>Gameplay/Governors.lua</File>
 
     <!-- UI Overwrites -->
     <File>UI/Civilopedia/CivilopediaPage_Building.lua</File>
@@ -2479,6 +2464,10 @@
     <File>UI/Replacement/CityPanel.xml</File>
     <File>UI/Replacement/UnitFlagManager_UpdateReligionIcon.lua</File>
     <File>UI/Replacement/GreatWorksSupport.lua</File>
+    <File>UI/Replacement/GovernorPanel.xml</File>
+    <File>UI/Replacement/GovernorPanel.lua</File>
+    <File>UI/Replacement/GovernorDetailsPanel.xml</File>
+    <File>UI/Replacement/GovernorDetailsPanel.lua</File>
 
     <!-- Icons -->
     <File>UI/Icons/DL_Icons_Beliefs.xml</File>
@@ -2601,14 +2590,8 @@
     <File>SubMods/CityPolicies/UI/CityPanelOverview_CityPolicies_Instances.xml</File>
     <File>SubMods/CityPolicies/UI/ToolTipLoader_CityPolicies.lua</File>
     <File>SubMods/FarmsOnFreshHills/FarmsOnFreshHills.sql</File>
-    <File>SubMods/GovernorsDiversity/Governors_Interface.xml</File>
-    <File>SubMods/GovernorsDiversity/Governors_Interface.lua</File>
     <File>SubMods/GovernorsDiversity/HD_Governors.sql</File>
-    <File>SubMods/GovernorsDiversity/HD_Governors_Late.sql</File>
     <File>SubMods/GovernorsDiversity/HD_Text_Governors.sql</File>
-    <File>SubMods/GovernorsDiversity/bishop2-2/Temp_Interface2.xml</File>
-    <File>SubMods/GovernorsDiversity/bishop2-2/HD_Common2.lua</File>
-    <File>SubMods/GovernorsDiversity/bishop2-2/Temp_Interface2.lua</File>
     <File>SubMods/MedievalPirate/DL_Database.sql</File>
     <File>SubMods/MedievalPirate/DL_Icons.xml</File>
     <File>SubMods/MedievalPirate/DL_Texts.sql</File>
@@ -2723,7 +2706,6 @@
     <!-- Update database -->
     <File>UpdateDataBase/HD_BuildingTiers.sql</File>
     <File>UpdateDataBase/HD_CityStateBuffs.sql</File>
-    <File>UpdateDataBase/DL_EarlySetup.sql</File>
     <File>UpdateDataBase/HD_CulturalUnits.xml</File>
     <File>UpdateDataBase/HD_CulturalUnits.sql</File>
     <File>UpdateDataBase/HD_AdjustYields.sql</File>
@@ -2734,6 +2716,8 @@
     <File>UpdateDataBase/DL_Buildings.sql</File>
     <File>UpdateDataBase/DL_BuildingDefinations.sql</File>
     <File>UpdateDataBase/HD_TableDefinations.sql</File>
+    <File>UpdateDataBase/HD_CorrespondingYields.sql</File>
+    <File>UpdateDataBase/HD_Binary_Compress.sql</File>
     <File>UpdateDataBase/HD_NotificationDefinations.sql</File>
     <File>UpdateDataBase/DL_ImprovementDefinations.sql</File>
     <File>UpdateDataBase/DL_ProjectDefinations.sql</File>

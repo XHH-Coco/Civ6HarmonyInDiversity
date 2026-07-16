@@ -93,7 +93,7 @@ function PlayerHasCommemoration(playerId, CommemorationId)
   end
   
   -- 从 Player Property 读取
-  if player:GetProperty(COMMEMORATION_HAS_TAG .. CommemorationId) == 1 then
+  if Utils.GetPlayerProperty(playerId, COMMEMORATION_HAS_TAG .. CommemorationId) == 1 then
     print('PlayerHasCommemoration 从 Player Property 读取', playerId, CommemorationId)
     return true;
   end
@@ -233,6 +233,7 @@ function GetCityPlots(playerId, cityId)
   if city then
     return Map.GetCityPlots():GetPurchasedPlots(city)
   end
+  return {};
 end
 Utils.GetCityPlots = GetCityPlots
 
@@ -1123,3 +1124,174 @@ local function GetCityExcessAmenity(playerId, cityId)
 	return math.max(excessAmenity, 0);
 end
 Utils.GetCityExcessAmenity = GetCityExcessAmenity;
+
+-- 城市拥有总督
+local function CityHasAssignedGovernorPromotion(playerId, cityId, promotion)
+  local city = CityManager.GetCity(playerId, cityId);
+  if city then
+    local governor = city:GetAssignedGovernor();
+    local promotionInfo = GameInfo.GovernorPromotions[promotion];
+    if governor and promotionInfo and governor:IsEstablished() and governor:HasPromotion(promotionInfo.Hash) then
+      return true;
+    end
+  end
+
+  return false;
+end
+Utils.CityHasAssignedGovernorPromotion = CityHasAssignedGovernorPromotion;
+
+-- 获取单元格巨作
+local function GetGreatWorksAtLocation(playerId, cityId, plotId, typeFilter)
+  local city = CityManager.GetCity(playerId, cityId);
+  local greatWorkList = {};
+
+  if city then
+    local cityBuildings = city:GetBuildings();
+    local buildingTypes = cityBuildings:GetBuildingsAtLocation(plotId);
+    for _, buildingType in ipairs(buildingTypes) do
+      local slotNum = cityBuildings:GetNumGreatWorkSlots(buildingType);
+      for j = 0, slotNum - 1, 1 do
+        local greatWorkIndex = cityBuildings:GetGreatWorkInSlot(buildingType, j);
+        if greatWorkIndex ~= -1 then
+          local greatWorkType = cityBuildings:GetGreatWorkTypeFromIndex(greatWorkIndex);
+          local greatWorkInfo = GameInfo.GreatWorks[greatWorkType];
+          if greatWorkInfo and (not typeFilter or typeFilter[greatWorkInfo.GreatWorkObjectType] == true) then
+            table.insert(greatWorkList, greatWorkType);
+          end
+        end
+      end
+    end
+  end
+
+  return greatWorkList;
+end
+Utils.GetGreatWorksAtLocation = GetGreatWorksAtLocation;
+
+-- 获取城市巨作
+local function GetCityGreatWorks(playerId, cityId, typeFilter)
+  local city = CityManager.GetCity(playerId, cityId);
+  local greatWorkList = {};
+
+  if city then
+    local cityBuildings = city:GetBuildings();
+    local cityPlots = Map.GetCityPlots():GetPurchasedPlots(city);
+    if cityPlots then
+      for _, plotId in pairs(cityPlots) do
+        local buildingTypes = cityBuildings:GetBuildingsAtLocation(plotId);
+        for _, buildingType in ipairs(buildingTypes) do
+          local slotNum = cityBuildings:GetNumGreatWorkSlots(buildingType);
+          for j = 0, slotNum - 1, 1 do
+            local greatWorkIndex = cityBuildings:GetGreatWorkInSlot(buildingType, j);
+            if greatWorkIndex ~= -1 then
+              local greatWorkType = cityBuildings:GetGreatWorkTypeFromIndex(greatWorkIndex);
+              local greatWorkInfo = GameInfo.GreatWorks[greatWorkType];
+              if greatWorkInfo and (not typeFilter or typeFilter[greatWorkInfo.GreatWorkObjectType] == true) then
+                table.insert(greatWorkList, greatWorkType);
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+
+  return greatWorkList;
+end
+Utils.GetCityGreatWorks = GetCityGreatWorks;
+
+-- 获得总督部署城市
+local function GetGovernorAssignedCityId(playerId, governorId)
+  local player = Players[playerId];
+  if not player then return; end
+
+  local governor = player:GetGovernors():GetGovernor(governorId);
+  if not governor then return; end
+
+  return governor:GetAssignedCity():GetID();
+end
+Utils.GetGovernorAssignedCityId = GetGovernorAssignedCityId;
+
+-- 总督是否部署完成
+local function IsGovernorEstablished(playerId, governorId)
+  local player = Players[playerId];
+  if player then
+    local governor = player:GetGovernors():GetGovernor(governorId);
+    if governor then
+      return governor:IsEstablished();
+    end
+  end
+
+  return false;
+end
+Utils.IsGovernorEstablished = IsGovernorEstablished;
+
+-- 获得城市出发的商路列表
+local function GetCityOutgoingRoutes(playerId, cityId)
+  local city = CityManager.GetCity(playerId, cityId);
+  if city then
+    return city:GetTrade():GetOutgoingRoutes();
+  end
+
+  return {};
+end
+Utils.GetCityOutgoingRoutes = GetCityOutgoingRoutes;
+
+-- 获得到达城市的商路列表
+local function GetCityIncomingRoutes(playerId, cityId)
+  local city = CityManager.GetCity(playerId, cityId);
+  if city then
+    return city:GetTrade():GetIncomingRoutes();
+  end
+
+  return {};
+end
+Utils.GetCityIncomingRoutes = GetCityIncomingRoutes;
+
+-- 获得单元格上区域的建造情况
+local function GetPlotDistrictDetails(x, y)
+  local detail = {};
+
+  local plot = Map.GetPlot(x, y);
+  local districtId = plot:GetDistrictID();
+  local city = Cities.GetPlotPurchaseCity(plot:GetIndex());
+  if city and districtId > 0 then
+    local district = city:GetDistricts():FindID(districtId);
+    if district then
+      detail.IsCompleted = district:IsComplete();
+    
+      local districtType = district:GetType();
+      local districtInfo = GameInfo.Districts[districtType];
+      detail.IsUnderConstruction = districtInfo ~= nil and districtInfo.DistrictType == Utils.GetCityCurrentlyBuilding(plot:GetOwner(), city:GetID());
+      detail.DistrictName = districtInfo.Name;
+
+      detail.RemainingProduction = city:GetBuildQueue():GetDistrictCost(districtType) - city:GetBuildQueue():GetDistrictProgress(districtType);
+
+      return detail;
+    end
+  end
+
+  return nil;
+end
+Utils.GetPlotDistrictDetails = GetPlotDistrictDetails;
+
+-- 获得已经见面的玩家Id
+local function GetPlayersMetIds(playerId)
+  local player = Players[playerId];
+  if player then
+    return player:GetDiplomacy():GetPlayersMetIDs();
+  end
+
+  return {};
+end
+Utils.GetPlayersMetIds = GetPlayersMetIds;
+
+-- 能否派遣使者
+local function CanGiveTokensToPlayer(playerId, citystateId)
+  local player = Players[playerId];
+  if player then
+    return player:GetInfluence():CanGiveTokensToPlayer(citystateId);
+  end
+
+  return false;
+end
+Utils.CanGiveTokensToPlayer = CanGiveTokensToPlayer;

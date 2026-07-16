@@ -2991,7 +2991,7 @@ values
 	('HD_DEINDUSTRIALIZATION_BUILDING_DEBUFF',					'Amount',								-25),
 	('HD_DEINDUSTRIALIZATION_GOLD_ATTACH',							'ModifierId',						'HD_DEINDUSTRIALIZATION_GOLD'),
 	('HD_DEINDUSTRIALIZATION_GOLD',											'YieldType',					  'YIELD_GOLD'),
-	('HD_DEINDUSTRIALIZATION_GOLD',											'Amount',					  		10),
+	('HD_DEINDUSTRIALIZATION_GOLD',											'Amount',					  		5),
 	('HD_TRADE_PROTECTIONISM_INTER_TRADE_DEBUFF',				'YieldType',						'YIELD_PRODUCTION, YIELD_FOOD, YIELD_SCIENCE, YIELD_CULTURE, YIELD_GOLD, YIELD_FAITH'),
 	('HD_TRADE_PROTECTIONISM_INTER_TRADE_DEBUFF',				'Amount',								'-50, -50, -50, -50, -50, -50'),
 	('HD_TRADE_PROTECTIONISM_COMMERCIAL_HUB_BONUS',							'YieldType',				'YIELD_GOLD'),
@@ -4324,7 +4324,7 @@ insert or replace into Modifiers
 select distinct
 	'HD_PATTERN_' || ResourceType || '_FAITH',
 	'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',
-	'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIRMENTS'
+	'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIREMENTS'
 from Improvement_ValidResources where ImprovementType in ('IMPROVEMENT_MINE', 'IMPROVEMENT_QUARRY', 'IMPROVEMENT_LUMBER_MILL');
 
 insert or replace into ModifierArguments
@@ -4350,7 +4350,7 @@ insert or replace into Modifiers
 select distinct
 	'HD_PATTERN_' || ResourceType || '_GOLD',
 	'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',
-	'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIRMENTS'
+	'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIREMENTS'
 from Improvement_ValidResources where ImprovementType in ('IMPROVEMENT_MINE', 'IMPROVEMENT_QUARRY', 'IMPROVEMENT_LUMBER_MILL');
 
 insert or replace into ModifierArguments

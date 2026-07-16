@@ -107,7 +107,8 @@ values
 	('RESOURCE_COAL',       	'FEATURE_MARSH'),
 	('RESOURCE_AMBER',       	'FEATURE_MARSH'),
 	('RESOURCE_MARBLE',       	'FEATURE_FOREST'),
-	('RESOURCE_SILVER',       	'FEATURE_JUNGLE');
+	('RESOURCE_SILVER',       	'FEATURE_JUNGLE'),
+	('RESOURCE_DEER',       	'FEATURE_JUNGLE');
 
 insert or replace into Resource_ValidFeatures
 	(ResourceType,				FeatureType)
@@ -136,6 +137,7 @@ update Resource_Consumption set ImprovedExtractionRate = ImprovedExtractionRate 
 
 -- 泛滥螃蟹
 update Resources set Frequency = 4 where ResourceType = 'RESOURCE_CRABS';
+update Resources set Frequency = 6 where ResourceType = 'RESOURCE_DEER';
 
 insert or replace into Resource_ValidFeatures
 	(ResourceType,				FeatureType)

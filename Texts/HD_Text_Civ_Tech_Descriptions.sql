@@ -174,7 +174,9 @@ values
     ("LOC_BOOST_TRIGGER_ELECTRICITY_HD",                                     "Build a industrial era or later wonder"),
     ("LOC_BOOST_TRIGGER_LONGDESC_ELECTRICITY_HD",                            "Engineers and scientists began to think about how to make these modern buildings shine."),
     ("LOC_BOOST_TRIGGER_FEUDALISM",                                          "Bulid 4 Farms."),
-
+    ("LOC_BOOST_TRIGGER_CAPITALISM_HD_CORP",                                 "Create a Corporation."),
+    ("LOC_BOOST_TRIGGER_LONGDESC_CAPITALISM_HD_CORP",                        "The savvy capitalist will do anything for 100% profit, which is providing a model for the study of how the economy works."),
+  
     -- 
     ("LOC_BOOST_TRIGGER_METAL_CASTING",                                      "Have the Military Training Civic."),
     ("LOC_BOOST_TRIGGER_LONGDESC_METAL_CASTING",                             "Weapons evolve along with Military training, more advanced ways of making weapons are emerging."),
@@ -660,7 +662,9 @@ values
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_LONGDESC_EXPLORATION_HD",                            "几个世纪以来关于地圆的理论得到了证明，我们的探险家正对新发现的土地跃跃欲试。"),
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_BANKING_HD",                                         "建造银行。"),
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_ASTRONOMY",                                          "相邻山脉建造学院二级建筑。"),
-
+    ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_CAPITALISM_HD_CORP",                                 "建造1座公司。"),
+    ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_LONGDESC_CAPITALISM_HD_CORP",                        "精明的资本家为了100%的利润可以做任何事，这正在为发掘经济运行规律的研究提供典型。"),
+  
     ("zh_Hans_CN",  "LOC_TECH_ALCHEMY_HD_NAME",                                             "炼丹术"),
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_ALCHEMY_HD",                                         "改良1种矿产资源。"),
     ("zh_Hans_CN",  "LOC_BOOST_TRIGGER_LONGDESC_ALCHEMY_HD",                                "神秘学家总是相信，只要具备适当的条件和执着追求的精神，这些稀奇古怪的矿石通过烧炼就有可能变成珍贵的仙丹和黄金。"),

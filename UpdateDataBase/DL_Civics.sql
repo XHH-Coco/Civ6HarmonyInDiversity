@@ -507,9 +507,9 @@ update Civics set UITreeRow = -3 where CivicType = 'CIVIC_CULTURAL_HEGEMONY';
 
 -- Civic Tree v3
 -- 远古
-update Civics set Cost = 40 where CivicType = 'CIVIC_CODE_OF_LAWS';
-update Civics set Cost = 40 where CivicType = 'CIVIC_CRAFTSMANSHIP';
-update Civics set Cost = 40 where CivicType = 'CIVIC_FOREIGN_TRADE';
+update Civics set Cost = 30 where CivicType = 'CIVIC_CODE_OF_LAWS';
+update Civics set Cost = 30 where CivicType = 'CIVIC_CRAFTSMANSHIP';
+update Civics set Cost = 30 where CivicType = 'CIVIC_FOREIGN_TRADE';
 update Civics set Cost = 60 where CivicType = 'CIVIC_MILITARY_TRADITION';
 update Civics set Cost = 90 where CivicType = 'CIVIC_STATE_WORKFORCE';
 update Civics set Cost = 90 where CivicType = 'CIVIC_EARLY_EMPIRE';

@@ -336,10 +336,36 @@ local COAL_INDEX = GameInfo.Resources['RESOURCE_COAL'].Index;
 local HORSEBACK_RIDING_INDEX = GameInfo.Technologies['TECH_HORSEBACK_RIDING'].Index;
 local PASTURE_INDEX = GameInfo.Improvements['IMPROVEMENT_PASTURE'].Index;
 local HEAVENLY_HORSE_INDEX = GameInfo.Resources['RESOURCE_C_HEAVENLY_HORSE'].Index;
+local IMPROVEMENT_INDUSTRY_BONUS_INFO = GameInfo.Improvements['IMPROVEMENT_INDUSTRY_BONUS'];
+local IMPROVEMENT_INDUSTRY_STRATEGIC_INFO = GameInfo.Improvements['IMPROVEMENT_INDUSTRY_STRATEGIC'];
+local COMMERCIAL_CAPITALISM_HD_INDEX = GameInfo.Civics['CIVIC_COMMERCIAL_CAPITALISM_HD'].Index;
+local IMPROVEMENT_CORPORATION_BONUS_INFO = GameInfo.Improvements['IMPROVEMENT_CORPORATION_BONUS'];
+local IMPROVEMENT_CORPORATION_STRATEGIC_INFO = GameInfo.Improvements['IMPROVEMENT_CORPORATION_STRATEGIC'];
+local CAPITALISM_INDEX = GameInfo.Civics['CIVIC_CAPITALISM'].Index;
 function ImprovementAddedToMapBoost(x, y, improvementId, playerId, resourceId, isPillaged, isWorked)
+  local player = Players[playerId];
+  if not player then return; end
+
+  -- 商业资本主义
+  if (IMPROVEMENT_INDUSTRY_BONUS_INFO and improvementId == IMPROVEMENT_INDUSTRY_BONUS_INFO.Index)
+    or (IMPROVEMENT_INDUSTRY_STRATEGIC_INFO and improvementId == IMPROVEMENT_INDUSTRY_STRATEGIC_INFO.Index)
+  then
+    if not player:GetCulture():HasBoostBeenTriggered(COMMERCIAL_CAPITALISM_HD_INDEX) then
+      player:GetCulture():TriggerBoost(COMMERCIAL_CAPITALISM_HD_INDEX);
+    end
+  end
+
+  -- 宏观调控
+  if (IMPROVEMENT_CORPORATION_BONUS_INFO and improvementId == IMPROVEMENT_CORPORATION_BONUS_INFO.Index)
+    or (IMPROVEMENT_CORPORATION_STRATEGIC_INFO and improvementId == IMPROVEMENT_CORPORATION_STRATEGIC_INFO.Index)
+  then
+    if not player:GetCulture():HasBoostBeenTriggered(CAPITALISM_INDEX) then
+      player:GetCulture():TriggerBoost(CAPITALISM_INDEX);
+    end
+  end
+
   -- 海洋学
   if improvementId == FISHERY_INDEX then
-    local player = Players[playerId]
     if not player:GetTechs():HasBoostBeenTriggered(OCEANOGRAPHY_INDEX) then
       local plot = Map.GetPlot(x, y)
       local ownerId = plot:GetOwner()
@@ -354,7 +380,6 @@ function ImprovementAddedToMapBoost(x, y, improvementId, playerId, resourceId, i
 
   -- 钢铁
   if improvementId == MINE_INDEX and resourceId == COAL_INDEX then
-    local player = Players[playerId]
     if player:GetProperty(STEEL_BOOST_TAG_FACTORY) == 1 then
       if not player:GetTechs():HasBoostBeenTriggered(STEEL_INDEX) then
         player:GetTechs():TriggerBoost(STEEL_INDEX);
@@ -366,7 +391,6 @@ function ImprovementAddedToMapBoost(x, y, improvementId, playerId, resourceId, i
 
   -- 骑马
   if improvementId == PASTURE_INDEX and resourceId == HEAVENLY_HORSE_INDEX then
-    local player = Players[playerId]
     if not player:GetTechs():HasBoostBeenTriggered(HORSEBACK_RIDING_INDEX) then
       player:GetTechs():TriggerBoost(HORSEBACK_RIDING_INDEX);
     end

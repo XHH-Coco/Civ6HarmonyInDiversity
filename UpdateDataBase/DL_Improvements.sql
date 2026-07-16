@@ -34,6 +34,10 @@ values
 	('IMPROVEMENT_GOLF_COURSE',		'YIELD_CULTURE',		2),
 	('IMPROVEMENT_GOLF_COURSE',		'YIELD_GOLD',				3),
 	('IMPROVEMENT_GOLF_COURSE',		'YIELD_PRODUCTION',	0),
+
+	('IMPROVEMENT_CITY_PARK',		'YIELD_FOOD',				1),
+	('IMPROVEMENT_CITY_PARK',		'YIELD_CULTURE',		2),
+	('IMPROVEMENT_CITY_PARK',		'YIELD_GOLD',				3),
 	
 	('IMPROVEMENT_ZIGGURAT',			'YIELD_SCIENCE',		1),
 	('IMPROVEMENT_ZIGGURAT',			'YIELD_FAITH',		0),
@@ -161,10 +165,17 @@ values
 	(719,	'IMPROVEMENT_FISHERY',		'YIELD_PRODUCTION',	1,								'CIVIC_NEOCOLONIALISM_HD',	null),
 	(720,	'IMPROVEMENT_FISHERY',		'YIELD_FOOD',				1,								null,												'TECH_NANOTECHNOLOGY'),
 
-	(800,	'IMPROVEMENT_OIL_WELL',					'YIELD_PRODUCTION',		2,					null,							'TECH_REFINING'),
-	(801,	'IMPROVEMENT_OIL_WELL',					'YIELD_SCIENCE',		2,					null,							'TECH_REFINING'),
+	(800,	'IMPROVEMENT_OIL_WELL',							'YIELD_PRODUCTION',		2,					null,							'TECH_REFINING'),
+	(801,	'IMPROVEMENT_OIL_WELL',							'YIELD_SCIENCE',			2,					null,							'TECH_REFINING'),
 	(802,	'IMPROVEMENT_OFFSHORE_OIL_RIG',			'YIELD_PRODUCTION',		2,					null,							'TECH_REFINING'),
-	(803,	'IMPROVEMENT_OFFSHORE_OIL_RIG',			'YIELD_SCIENCE',		2,					null,							'TECH_REFINING');
+	(803,	'IMPROVEMENT_OFFSHORE_OIL_RIG',			'YIELD_SCIENCE',			2,					null,							'TECH_REFINING'),
+
+	(810,	'IMPROVEMENT_CITY_PARK',						'YIELD_GOLD',					3,					'CIVIC_COMMERCIAL_CAPITALISM_HD',		null),
+	(811,	'IMPROVEMENT_CITY_PARK',						'YIELD_CULTURE',			1,					'CIVIC_URBANIZATION',								null),
+	(812,	'IMPROVEMENT_CITY_PARK',						'YIELD_CULTURE',			1,					'CIVIC_URBAN_DESIGN_HD',						null),
+	(813,	'IMPROVEMENT_CITY_PARK',						'YIELD_FOOD',					1,					'CIVIC_CONSERVATION',							  null),
+	(814,	'IMPROVEMENT_CITY_PARK',						'YIELD_GOLD',					3,					null,																'TECH_ADVANCED_FLIGHT'),
+	(815,	'IMPROVEMENT_CITY_PARK',						'YIELD_FOOD',					1,					'CIVIC_ENVIRONMENTALISM',						null);
 
 -- Adjacency Yield
 delete from Improvement_Adjacencies where
@@ -306,7 +317,11 @@ values
 	('IMPROVEMENT_COLOSSAL_HEAD',	'FEATURE_FOREST',				null,				null),
 	('IMPROVEMENT_COLOSSAL_HEAD',	'FEATURE_JUNGLE',				null,				null),
 
-	('IMPROVEMENT_MEKEWAP',			'FEATURE_FOREST',				'TECH_MINING',		null);
+	('IMPROVEMENT_MEKEWAP',			'FEATURE_FOREST',				'TECH_MINING',		null),
+
+	('IMPROVEMENT_CITY_PARK',		'FEATURE_FLOODPLAINS',				null,				null),
+	('IMPROVEMENT_CITY_PARK',		'FEATURE_FLOODPLAINS_GRASSLAND',				null,				null),
+	('IMPROVEMENT_CITY_PARK',		'FEATURE_FLOODPLAINS_PLAINS',				null,				null);
 
 with I(ImprovementType) as (select ImprovementType from Improvements where ImprovementType in (
 	'IMPROVEMENT_GREAT_WALL',
@@ -1137,7 +1152,7 @@ insert or replace into ImprovementModifiers (ImprovementType, ModifierId) select
 from DistrictCorrespondingGPP_HD;
 
 insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) select
-	'HD_GOLF_COURSE_' || DistrictType || '_' || GreatPersonClassType, 'MODIFIER_PLAYER_DISTRICTS_ADJUST_GREAT_PERSON_POINTS', 'HD_DISTRICT_IS_' || DistrictType || '_WITHIN_1_TILE'
+	'HD_GOLF_COURSE_' || DistrictType || '_' || GreatPersonClassType, 'MODIFIER_PLAYER_DISTRICTS_ADJUST_GREAT_PERSON_POINTS', 'HD_DISTRICT_IS_' || DistrictType || '_WITHIN_1_TILE_REQUIREMENTS'
 from DistrictCorrespondingGPP_HD;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value) select
@@ -1542,3 +1557,67 @@ where exists (select GreatWorkSlotType from GreatWorkSlotTypes where GreatWorkSl
 -- 发电厂
 update Improvements set PrereqTech = 'TECH_INTEGRATED_CIRCUIT_HD' where ImprovementType = 'IMPROVEMENT_SOLAR_FARM';
 update Improvements set PrereqTech = 'TECH_INTEGRATED_CIRCUIT_HD' where ImprovementType = 'IMPROVEMENT_WIND_FARM';
+
+-- =====================================================================================================================================
+-- 市立公园
+-- =====================================================================================================================================
+update Improvements set
+	PrereqCivic = null,
+	PrereqTech = 'TECH_ENGINEERING',
+	TraitType = null,
+	YieldFromAppeal = 'YIELD_GOLD',
+	SameAdjacentValid = 0,
+	Appeal = 1
+where ImprovementType = 'IMPROVEMENT_CITY_PARK';
+
+delete from ImprovementModifiers where ImprovementType = 'IMPROVEMENT_CITY_PARK';
+
+insert or replace into Improvement_Adjacencies (ImprovementType, YieldChangeId) values
+	('IMPROVEMENT_CITY_PARK', 'HD_CITY_PARK_WONDER_CULTURE');
+
+insert or replace into Adjacency_YieldChanges (ID, Description, YieldType, YieldChange, TilesRequired, AdjacentWonder) values
+	('HD_CITY_PARK_WONDER_CULTURE', 'Placeholder', 'YIELD_CULTURE', 1, 1, 1);
+
+insert or replace into Improvement_Adjacencies (ImprovementType, YieldChangeId) select
+	'IMPROVEMENT_CITY_PARK', 'HD_CITY_PARK_' || DistrictType || '_GOLD'
+from Districts where DistrictType in ('DISTRICT_CITY_CENTER', 'DISTRICT_NEIGHBORHOOD')
+	or DistrictType in (select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType in ('DISTRICT_CITY_CENTER', 'DISTRICT_NEIGHBORHOOD'));
+
+insert or replace into Adjacency_YieldChanges (ID, Description, YieldType, YieldChange, TilesRequired, AdjacentDistrict) select
+	'HD_CITY_PARK_' || DistrictType || '_GOLD', 'Placeholder', 'YIELD_GOLD', 3, 1, DistrictType
+from Districts where DistrictType in ('DISTRICT_CITY_CENTER', 'DISTRICT_NEIGHBORHOOD')
+	or DistrictType in (select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType in ('DISTRICT_CITY_CENTER', 'DISTRICT_NEIGHBORHOOD'));
+
+insert or replace into Improvement_Adjacencies (ImprovementType, YieldChangeId) select
+	'IMPROVEMENT_CITY_PARK', 'HD_CITY_PARK_' || DistrictType || '_CULTURE'
+from Districts where DistrictType in ('DISTRICT_ENTERTAINMENT_COMPLEX')
+	or DistrictType in (select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType in ('DISTRICT_ENTERTAINMENT_COMPLEX'));
+
+insert or replace into Adjacency_YieldChanges (ID, Description, YieldType, YieldChange, TilesRequired, AdjacentDistrict) select
+	'HD_CITY_PARK_' || DistrictType || '_CULTURE', 'Placeholder', 'YIELD_CULTURE', 1, 1, DistrictType
+from Districts where DistrictType in ('DISTRICT_ENTERTAINMENT_COMPLEX')
+	or DistrictType in (select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType in ('DISTRICT_ENTERTAINMENT_COMPLEX'));
+
+insert or replace into Improvement_Adjacencies (ImprovementType, YieldChangeId) select
+	'IMPROVEMENT_CITY_PARK', 'HD_CITY_PARK_' || DistrictType || '_FOOD'
+from Districts where DistrictType in ('DISTRICT_PRESERVE')
+	or DistrictType in (select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType in ('DISTRICT_PRESERVE'));
+
+insert or replace into Adjacency_YieldChanges (ID, Description, YieldType, YieldChange, TilesRequired, AdjacentDistrict) select
+	'HD_CITY_PARK_' || DistrictType || '_FOOD', 'Placeholder', 'YIELD_FOOD', 1, 1, DistrictType
+from Districts where DistrictType in ('DISTRICT_PRESERVE')
+	or DistrictType in (select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType in ('DISTRICT_PRESERVE'));
+
+	-- 建造数量限制
+insert or ignore into ImprovementsNeedCount_HD (ImprovementType) values ('IMPROVEMENT_CITY_PARK');
+
+insert or ignore into DistrictModifiers (DistrictType, ModifierId) select
+	DistrictType, 'HD_CITY_ALLOW_EXTRA_CITY_PARK'
+from Districts where RequiresPopulation = 1;
+
+insert or ignore into Modifiers (ModifierId, ModifierType) values
+	('HD_CITY_ALLOW_EXTRA_CITY_PARK', 'MODIFIER_SINGLE_CITY_ADJUST_PROPERTY');
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) values
+	('HD_CITY_ALLOW_EXTRA_CITY_PARK', 'Key',		'HD_CITY_ALLOW_EXTRA_IMPROVEMENT_CITY_PARK'),
+	('HD_CITY_ALLOW_EXTRA_CITY_PARK', 'Amount',	1);

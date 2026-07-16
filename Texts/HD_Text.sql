@@ -70,7 +70,8 @@ values
 	("LOC_RESOURCE_FISH_NAME",                                    "Threadfin"),
 	("LOC_RESOURCE_SPICES_NAME",                                  "Cardamom"),
 	("LOC_MOMENT_CITY_BUILT_NEAR_FLOODABLE_RIVER_DESCRIPTION",    "The first city in the civilization built within two tiles of a river that could flood."),
-	("LOC_MOMENT_CITY_BUILT_NEAR_VOLCANO_DESCRIPTION",            "The first city in the civilization built within two tiles of a volcano that could erupt.");
+	("LOC_MOMENT_CITY_BUILT_NEAR_VOLCANO_DESCRIPTION",            "The first city in the civilization built within two tiles of a volcano that could erupt."),
+  ("LOC_NO_ENOUGH_CHARGE_DISABLED",     												"[COLOR:Red]The remaining [ICON_CHARGES] building charges are insufficient.[ENDCOLOR]");
 
 --------------------------------------------------------------------------------
 -- Language: zh_Hans_CN
@@ -170,7 +171,8 @@ values
 	("zh_Hans_CN",  "LOC_RESOURCE_SHEEP_NAME",                                   "绵羊"),
 	("zh_Hans_CN",  "LOC_RESOURCE_SPICES_NAME",                                  "豆蔻"),
 	("zh_Hans_CN",  "LOC_MOMENT_CITY_BUILT_NEAR_FLOODABLE_RIVER_DESCRIPTION",    "文明中首座建造在可能泛滥的江河2个单元格内的城市。"),
-	("zh_Hans_CN",  "LOC_MOMENT_CITY_BUILT_NEAR_VOLCANO_DESCRIPTION",            "文明中首座建造在可能喷发的火山2个单元格内的城市。");
+	("zh_Hans_CN",  "LOC_MOMENT_CITY_BUILT_NEAR_VOLCANO_DESCRIPTION",            "文明中首座建造在可能喷发的火山2个单元格内的城市。"),
+  ("zh_Hans_CN",  "LOC_NO_ENOUGH_CHARGE_DISABLED",     												"[COLOR:Red]剩余 [ICON_CHARGES] 建造次数不足。[ENDCOLOR]");
 
 -- 外交区DLC文本
 update LocalizedText set Text = "and {LOC_DISTRICT_DIPLOMATIC_QUARTER_NAME} " where Tag = 'LOC_AND_DIPLOMATIC_QUARTER'

@@ -502,7 +502,7 @@ from DistrictCorrespondingYieldType_HD a inner join District_TradeRouteYields b 
 -- 	from Resources where ResourceClassType = 'RESOURCECLASS_LUXURY' and (Frequency != 0 or SeaFrequency != 0);
 
 -- insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId, SubjectStackLimit) select
--- 	'HD_RECORD_CITY_HAS_' || ResourceType, 'MODIFIER_ALL_CITIES_ADJUST_PROPERTY', 'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIRMENTS', 1
+-- 	'HD_RECORD_CITY_HAS_' || ResourceType, 'MODIFIER_ALL_CITIES_ADJUST_PROPERTY', 'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIREMENTS', 1
 -- 	from Resources where ResourceClassType = 'RESOURCECLASS_LUXURY' and (Frequency != 0 or SeaFrequency != 0);
 
 -- insert or replace into ModifierArguments (ModifierId, Name, Value) select
@@ -716,16 +716,24 @@ insert or ignore into Sumeria_CityState_Special_SubQuests_HD (SpecialQuestType, 
   PrereqTech,
   PrereqCivic
 from Improvements where ImprovementType in (
-  'IMPROVEMENT_INDUSTRY', 'IMPROVEMENT_CORPORATION',
+  'IMPROVEMENT_INDUSTRY', 'IMPROVEMENT_CORPORATION', 'IMPROVEMENT_INDUSTRY_BONUS', 'IMPROVEMENT_INDUSTRY_STRATEGIC', 'IMPROVEMENT_CORPORATION_BONUS', 'IMPROVEMENT_CORPORATION_STRATEGIC',
   'IMPROVEMENT_LEU_STATION', 'IMPROVEMENT_LEU_WAREHOUSE','IMPROVEMENT_LEU_CONTAINER_PORT',
   'IMPROVEMENT_MOUNTAIN_TUNNEL', 'IMPROVEMENT_BEACH_RESORT', 'IMPROVEMENT_SKI_RESORT', 'IMPROVEMENT_SEASTEAD',
   'IMPROVEMENT_SAILOR_WATCHTOWER', 'IMPROVEMENT_FORT', 'IMPROVEMENT_AIRSTRIP', 'IMPROVEMENT_MISSILE_SILO',
   'IMPROVEMENT_SOLAR_FARM', 'IMPROVEMENT_WIND_FARM', 'IMPROVEMENT_GEOTHERMAL_PLANT', 'IMPROVEMENT_OFFSHORE_WIND_FARM'
 );
-update Sumeria_CityState_Special_SubQuests_HD set PrereqTech = 'TECH_APPRENTICESHIP' where SpecialSubQuestType = 'HD_SPECIAL_SUBQUEST_BUILD_IMPROVEMENT_INDUSTRY';
-update Sumeria_CityState_Special_SubQuests_HD set PrereqTech = 'TECH_ECONOMICS' where SpecialSubQuestType = 'HD_SPECIAL_SUBQUEST_BUILD_IMPROVEMENT_CORPORATION';
+update Sumeria_CityState_Special_SubQuests_HD set PrereqTech = 'TECH_CURRENCY' where SpecialSubQuestType in (
+  'HD_SPECIAL_SUBQUEST_BUILD_IMPROVEMENT_INDUSTRY',
+  'HD_SPECIAL_SUBQUEST_BUILD_IMPROVEMENT_INDUSTRY_BONUS',
+  'HD_SPECIAL_SUBQUEST_BUILD_IMPROVEMENT_INDUSTRY_STRATEGIC'
+);
+update Sumeria_CityState_Special_SubQuests_HD set PrereqTech = 'TECH_ECONOMICS' where SpecialSubQuestType in (
+  'HD_SPECIAL_SUBQUEST_BUILD_IMPROVEMENT_CORPORATION',
+  'HD_SPECIAL_SUBQUEST_BUILD_IMPROVEMENT_CORPORATION_BONUS',
+  'HD_SPECIAL_SUBQUEST_BUILD_IMPROVEMENT_CORPORATION_STRATEGIC'
+);
 update Sumeria_CityState_Special_Quests_HD set PrereqTech = 'TECH_MILITARY_ENGINEERING' where SpecialQuestType = 'HD_SPECIAL_QUEST_BUILD_SPECIAL_IMPROVEMENT';
-update Sumeria_CityState_Special_Quests_HD set PrereqTech = 'TECH_MILITARY_ENGINEERING' where SpecialQuestType = 'HD_SPECIAL_QUEST_BUILD_SPECIAL_IMPROVEMENT'
+update Sumeria_CityState_Special_Quests_HD set PrereqTech = 'TECH_CURRENCY' where SpecialQuestType = 'HD_SPECIAL_QUEST_BUILD_SPECIAL_IMPROVEMENT'
   and exists (select ImprovementType from Improvements where ImprovementType = 'IMPROVEMENT_INDUSTRY');
 update Sumeria_CityState_Special_Quests_HD set PrereqTech = Null where SpecialQuestType = 'HD_SPECIAL_QUEST_BUILD_SPECIAL_IMPROVEMENT'
   and exists (select ImprovementType from Improvements where ImprovementType = 'IMPROVEMENT_SAILOR_WATCHTOWER');

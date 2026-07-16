@@ -107,14 +107,20 @@ insert or replace into EnglishText
     (Tag,                                                                       Text)
 values
     -- 军事工程单位
-    ("LOC_UNIT_MILITARY_ENGINEER_ALT_DESCRIPTION",                              "Medieval era support unit. [NEWLINE]Automatically creates Roads as it moves. Can spend a build charges to complete 30% of a Canal, Dam or Aqueduct district or a Seawall building. Can spend a build charges on the Volcanic Soil tiles for “exploration”, having a probability of obtaining [ICON_Gold] Gold or [ICON_Science] Science; there is also the possibility of discovering new resources or [ICON_GREATWORK_RELIC] Relics. Units within 1 tile recover +10 additional HP per turn when healing. [NEWLINE]Ignore [ICON_MOVEMENT] movement penalty from all Terrians, Features and Rivers."),
+    ("LOC_UNIT_MILITARY_ENGINEER_ALT_DESCRIPTION",                              "Medieval era Military Engineering unit. [NEWLINE]Automatically creates Roads as it moves. Can spend a build charges to complete 30% of a Canal, Dam or Aqueduct district or a Seawall building. Can spend a build charges on the Volcanic Soil tiles for “exploration”, having a probability of obtaining [ICON_Gold] Gold or [ICON_Science] Science; there is also the possibility of discovering new resources or [ICON_GREATWORK_RELIC] Relics. Units within 1 tile recover +10 additional HP per turn when healing. [NEWLINE]Ignore [ICON_MOVEMENT] movement penalty from all Terrians, Features and Rivers."),
     ("LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_NAME",                         "Explore Volcanic Soil"),
     ("LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_DESCRIPTION",                  "Having a probability of obtaining [ICON_Gold] Gold or [ICON_Science] Science. There is also the possibility of discovering new resources or [ICON_GREATWORK_RELIC] Relics."),
-    ("LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_DISABLED",                     "[COLOR_RED]Must on a Volcanic Soil tile without Districts.[ENDCOLOR]"),
-    ("LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_MAX_TIMES",                    "[COLOR_RED]Each Volcanic Soil tile can be explored up to 3 times.[ENDCOLOR]"),
+    ("LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_DISABLED",                     "[COLOR:Red]Must on a Volcanic Soil tile without Districts.[ENDCOLOR]"),
+    ("LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_MAX_TIMES",                    "[COLOR:Red]Each Volcanic Soil tile can be explored up to 3 times.[ENDCOLOR]"),
     ("LOC_MILITARY_ENGINEER_EXCAVATE_RESOURCE",                                 "[COLOR_LIGHTBLUE]New resource discovered: [ENDCOLOR]"),
-    ("LOC_MILITARY_ENGINEER_EXCAVATE_NOTHING",                                  "[COLOR_RED]Discover nothing...[ENDCOLOR]"),
+    ("LOC_MILITARY_ENGINEER_EXCAVATE_NOTHING",                                  "[COLOR:Red]Discover nothing...[ENDCOLOR]"),
 
+    ("LOC_UNIT_CITADEL_OF_GOD_NAME",                                            "Holy Architect"),
+    ("LOC_UNIT_CITADEL_OF_GOD_DESCRIPTION",                                     "Allowed to complete the construction of district by consuming [ICON_Faith] Faith equivalent to twice the [ICON_Production] Production."),
+    ("LOC_CITADEL_OF_GOD_DETAIL",                                               "Consume {1_Num} [ICON_Faith] Faith to complete the construction of {2_DistrictName}."),
+    ("LOC_CITADEL_OF_GOD_NO_DISTRICTS",                                         "[COLOR:Red]Needs to be located on District that is currently under construction.[ENDCOLOR]"),
+    ("LOC_CITADEL_OF_GOD_NO_FAITH",                                             "[COLOR:Red]Insufficient [ICON_Faith] Faith.[ENDCOLOR]"),
+    
     ("LOC_UNIT_HD_BARBARIAN_GALLEY_NAME",                                       "Barbarian Dinghy"),
     ("LOC_UNIT_HD_BARBARIAN_GALLEY_DESCRIPTION",                                "Ancient era naval raider unit, unique to Barbarians."),
     ("LOC_ESPIONAGE_LEVEL_5_NAME",                                              "Legendary Spy"), 
@@ -144,17 +150,23 @@ insert or replace into LocalizedText
     (Language,      Tag,                                                                    Text)
 values
     -- 军事工程单位
-    ("zh_Hans_CN",  "LOC_UNIT_MILITARY_ENGINEER_ALT_DESCRIPTION",                           "中世纪支援单位。[NEWLINE]移动时自动创建道路。可消耗1次劳动力加快运河、堤坝、水渠区域或拦海堤30%的建造进度。可以在火山土上消耗1次劳动力进行“勘探”，有概率获得 [ICON_Gold] 金币或 [ICON_Science] 科技值，也有概率发现新资源或发掘出 [ICON_GREATWORK_RELIC] 遗物。一个单元格内单位回复生命值时+10每回合回复量。[NEWLINE]无视地形、地貌和河流的移动力消耗。"),
+    ("zh_Hans_CN",  "LOC_UNIT_MILITARY_ENGINEER_ALT_DESCRIPTION",                           "中世纪军事工程单位。[NEWLINE]移动时自动创建道路。可消耗1次劳动力加快运河、堤坝、水渠区域或拦海堤30%的建造进度。可以在火山土上消耗1次劳动力进行“勘探”，有概率获得 [ICON_Gold] 金币或 [ICON_Science] 科技值，也有概率发现新资源或发掘出 [ICON_GREATWORK_RELIC] 遗物。一个单元格内单位回复生命值时+10每回合回复量。[NEWLINE]无视地形、地貌和河流的移动力消耗。"),
     ("zh_Hans_CN",  "LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_NAME",                      "勘探火山土"),
     ("zh_Hans_CN",  "LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_DESCRIPTION",               "有概率获得 [ICON_Gold] 金币或 [ICON_Science] 科技值，也有概率发现新资源或发掘出 [ICON_GREATWORK_RELIC] 遗物。"),
-    ("zh_Hans_CN",  "LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_DISABLED",                  "[COLOR_RED]必须位于未建有区域的火山土单元格。[ENDCOLOR]"),
-    ("zh_Hans_CN",  "LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_MAX_TIMES",                 "[COLOR_RED]每个火山土单元格最多勘探3次。[ENDCOLOR]"),
+    ("zh_Hans_CN",  "LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_DISABLED",                  "[COLOR:Red]必须位于未建有区域的火山土单元格。[ENDCOLOR]"),
+    ("zh_Hans_CN",  "LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_MAX_TIMES",                 "[COLOR:Red]每个火山土单元格最多勘探3次。[ENDCOLOR]"),
     ("zh_Hans_CN",  "LOC_MILITARY_ENGINEER_EXCAVATE_RESOURCE",                              "[COLOR_LIGHTBLUE]发现新资源：[ENDCOLOR]"),
-    ("zh_Hans_CN",  "LOC_MILITARY_ENGINEER_EXCAVATE_NOTHING",                               "[COLOR_RED]什么都没发现……[ENDCOLOR]"),
+    ("zh_Hans_CN",  "LOC_MILITARY_ENGINEER_EXCAVATE_NOTHING",                               "[COLOR:Red]什么都没发现……[ENDCOLOR]"),
 
     ("zh_Hans_CN",  "LOC_UNIT_HD_BARBARIAN_GALLEY_NAME",                                    "蛮族小艇"),
     ("zh_Hans_CN",  "LOC_UNIT_HD_BARBARIAN_GALLEY_DESCRIPTION",                             "远古时代蛮族部落的海上侦察单位。"),
     ("zh_Hans_CN",  "LOC_ESPIONAGE_LEVEL_5_NAME",                                           "传奇间谍"),
+
+    ("zh_Hans_CN",  "LOC_UNIT_CITADEL_OF_GOD_NAME",                                         "神圣建筑师"),
+    ("zh_Hans_CN",  "LOC_UNIT_CITADEL_OF_GOD_DESCRIPTION",                                  "允许消耗等同于 [ICON_Production] 生产力两倍的 [ICON_Faith] 信仰值完成区域的建造。"),
+    ("zh_Hans_CN",  "LOC_CITADEL_OF_GOD_DETAIL",                                            "消耗{1_Num} [ICON_Faith] 信仰值，完成{2_DistrictName}的建造。"),
+    ("zh_Hans_CN",  "LOC_CITADEL_OF_GOD_NO_DISTRICTS",                                      "[COLOR:Red]需要位于境内正在建造的区域上。[ENDCOLOR]"),
+    ("zh_Hans_CN",  "LOC_CITADEL_OF_GOD_NO_FAITH",                                          "[COLOR:Red][ICON_Faith] 信仰值不足。[ENDCOLOR]"),
 
     ("zh_Hans_CN",  "LOC_UNIT_HD_BARBARIAN_QUADRIREME_NAME",                                "蛮族帆船"),
     ("zh_Hans_CN",  "LOC_UNIT_HD_BARBARIAN_QUADRIREME_DESCRIPTION",                         "远古时代蛮族部落的海上远程单位。"),

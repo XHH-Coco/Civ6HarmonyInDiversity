@@ -150,7 +150,8 @@ insert or replace into EnglishText (Tag, Text) values
 	("LOC_MECHANISM_FIX_LIST", "
 		967e466f-28e0-42a0-8f21-0e7bed5d7552,
 		850b838e-bb79-49ee-b61e-e71ee75296f9,
-		05003a81-c381-411c-8aec-4759bd0c0ec4
+		05003a81-c381-411c-8aec-4759bd0c0ec4,
+		2789f86d-acae-4972-94c5-e365f117eacb
 	"),
 	-- 文明拓展
 	("LOC_CIV_EXTENSION_LIST", "

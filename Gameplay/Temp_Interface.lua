@@ -467,6 +467,34 @@ function ChinaSelectCommemoration(playerId, operationId)
 end
 Events.PlayerOperationComplete.Add(ChinaSelectCommemoration)
 
+-- ===================================================================================================================================== 
+-- 莫右二 上师
+-- ===================================================================================================================================== 
+local GOVERNOR_CARDINAL_RIGHT_2_RELIGIOUS_DISTANCE = GlobalParameters.HD_GOVERNOR_CARDINAL_RIGHT_2_RELIGIOUS_DISTANCE or 0;
+local GOVERNOR_CARDINAL_RIGHT_2_RELIGIOUS_PRESSURE = GlobalParameters.HD_GOVERNOR_CARDINAL_RIGHT_2_RELIGIOUS_PRESSURE or 0;
+local GOVERNOR_CARDINAL_RIGHT_2_GURU_AOE_PRESSURE_TAG = 'HD_GOVERNOR_CARDINAL_RIGHT_2_GURU_AOE_PRESSURE';
+function GuruSpreadReligiousPressure(playerId, unitId)
+	if GOVERNOR_CARDINAL_RIGHT_2_RELIGIOUS_DISTANCE <= 0 then return; end
+	if GOVERNOR_CARDINAL_RIGHT_2_RELIGIOUS_PRESSURE <= 0 then return; end
+
+	local unit = UnitManager.GetUnit(playerId, unitId);
+	if not unit then return; end
+	local hasAbility = unit:GetProperty(GOVERNOR_CARDINAL_RIGHT_2_GURU_AOE_PRESSURE_TAG) or 0;
+	if hasAbility == 0 then return; end
+
+	print("上师消耗使用次数");
+
+	local param = {};
+  param['OnStart'] = 'HD_SpreadAoeReligiousPressure';
+  param['X'] = unit:GetX();
+  param['Y'] = unit:GetY();
+  param['Amount'] = GOVERNOR_CARDINAL_RIGHT_2_RELIGIOUS_PRESSURE;
+  param['Distance'] = GOVERNOR_CARDINAL_RIGHT_2_RELIGIOUS_DISTANCE;
+  param['ReligionId'] = unit:GetReligionType();
+  UI.RequestPlayerOperation(playerId, PlayerOperations.EXECUTE_SCRIPT, param);
+end
+Events.UnitChargesChanged.Add(GuruSpreadReligiousPressure);
+
 --------------------------------------------------------------
 -- Initialize
 function initialize()

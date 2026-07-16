@@ -1495,9 +1495,13 @@ function SumeriaBuildImprovement(x, y, improvementId, playerId, resourceId, isPi
 		if improvementType == 'IMPROVEMENT_AIRSTRIP'
 		or improvementType == 'IMPROVEMENT_BEACH_RESORT'
 		or improvementType == 'IMPROVEMENT_CORPORATION'
+		or improvementType == 'IMPROVEMENT_CORPORATION_BONUS'
+		or improvementType == 'IMPROVEMENT_CORPORATION_STRATEGIC'
 		or improvementType == 'IMPROVEMENT_FORT'
 		or improvementType == 'IMPROVEMENT_GEOTHERMAL_PLANT'
 		or improvementType == 'IMPROVEMENT_INDUSTRY'
+		or improvementType == 'IMPROVEMENT_INDUSTRY_BONUS'
+		or improvementType == 'IMPROVEMENT_INDUSTRY_STRATEGIC'
 		or improvementType == 'IMPROVEMENT_LEU_CONTAINER_PORT'
 		or improvementType == 'IMPROVEMENT_LEU_STATION'
 		or improvementType == 'IMPROVEMENT_LEU_WAREHOUSE'
@@ -1924,6 +1928,7 @@ local MAGNANIMOUS_COMPLETE_DISTRICT_BUILDING_TAG = 'HD_MAGNANIMOUS_COMPLETE_DIST
 local MAGNANIMOUS_INTRODUCE_POPULATION_TAG = 'HD_MAGNANIMOUS_INTRODUCE_POPULATION';
 local MAGNANIMOUS_MOMENT_TAG = 'HD_MAGNANIMOUS_MOMENT_';
 
+local MAGNANIMOUS_DISTRICT_PUSH_PERCENTAGE = GlobalParameters.HD_MAGNANIMOUS_DISTRICT_PUSH_PERCENTAGE or 0;
 local MAGNANIMOUS_INTRODUCE_GREAT_PERSON_PERCENTAGE = GlobalParameters.HD_MAGNANIMOUS_INTRODUCE_GREAT_PERSON_PERCENTAGE or 0;
 local MAGNANIMOUS_INTRODUCE_TYCOON_PERCENTAGE = GlobalParameters.HD_MAGNANIMOUS_INTRODUCE_TYCOON_PERCENTAGE or 0;
 local MAGNANIMOUS_INTRODUCE_INVESTOR_PERCENTAGE = GlobalParameters.HD_MAGNANIMOUS_INTRODUCE_INVESTOR_PERCENTAGE or 0;
@@ -2000,9 +2005,14 @@ function MagnanimousCompleteDistrictBuilding(playerId, cityId, productionId, obj
 
 				if districtInfo ~= nil then
 					if districtInfo.DistrictType ~= 'DISTRICT_CITY_CENTER' and districtInfo.DistrictType ~= 'DISTRICT_WONDER' then
-						city:GetBuildQueue():FinishProgress();
-						print("佩德罗二世 建造" .. Locale.Lookup(districtInfo.Name));
-						Game.AddWorldViewText(playerId, Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_BUILD_VIEWTEXT', districtInfo.Name), city:GetX(), city:GetY());
+						if MAGNANIMOUS_DISTRICT_PUSH_PERCENTAGE >= 100 then
+							city:GetBuildQueue():FinishProgress();
+							print("佩德罗二世 建造" .. Locale.Lookup(districtInfo.Name));
+							Game.AddWorldViewText(playerId, Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_BUILD_VIEWTEXT', districtInfo.Name), city:GetX(), city:GetY());
+						elseif MAGNANIMOUS_DISTRICT_PUSH_PERCENTAGE > 0 then
+							Utils.CityAddProgressPercentage(playerId, cityId, MAGNANIMOUS_DISTRICT_PUSH_PERCENTAGE, {AddViewText = true});
+						end
+						
 						player:SetProperty(MAGNANIMOUS_COMPLETE_DISTRICT_BUILDING_TAG, amount - 1);
 						print("佩德罗二世 可免费建造次数：" .. amount - 1);
 					end
@@ -2913,7 +2923,11 @@ function MissionAddedToMap (x, y, improvementId, playerId, resourceId, isPillage
 	if improvementId == MISSION_INDEX then
 		local plot = Map.GetPlot(x, y)
 		local player = Players[playerId]
-		local religionID = player:GetReligion():GetReligionTypeCreated()
+		local religionID = player:GetReligion():GetReligionTypeCreated();
+		local religionInfo = GameInfo.Religions[religionID];
+		if not religionInfo then return; end
+		local message = '[COLOR:White]+' .. tostring(150) .. ' ' .. Locale.Lookup(religionInfo.Name) .. '[ENDCOLOR]'
+
 		if plot ~= nil and player ~= nil and religionID >= 0 then
 			for _, cityOwner in ipairs(Players) do
 				if cityOwner:GetCities() ~= nil then
@@ -2921,13 +2935,7 @@ function MissionAddedToMap (x, y, improvementId, playerId, resourceId, isPillage
 						local cityLocation = city:GetLocation();
 						if Map.GetPlotDistance(x, y, cityLocation.x, cityLocation.y) <= 3 then
 							city:GetReligion():AddReligiousPressure(playerId, religionID, 150, playerId);
-							for row in GameInfo.Religions() do
-								if row.Index == religionID then
-									local religionName = Locale.Lookup(row.Name)
-									local message = '[COLOR:White]+' .. tostring(150) .. ' ' .. religionName .. '[ENDCOLOR]'
-									Game.AddWorldViewText(playerId, message, cityLocation.x, cityLocation.y)
-								end
-							end
+							Game.AddWorldViewText(playerId, message, cityLocation.x, cityLocation.y);
 						end
 					end
 				end

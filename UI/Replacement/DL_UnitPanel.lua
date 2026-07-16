@@ -260,7 +260,13 @@ local BASE_GetUnitActionsTable = function ( pUnit )
 
 							-- 增加行业公司效果说明
 							if GameInfo.HD_Monopoly_Resource_Categories ~= nil
-							and (improvement.ImprovementType == 'IMPROVEMENT_INDUSTRY' or improvement.ImprovementType == 'IMPROVEMENT_CORPORATION') then
+								and (improvement.ImprovementType == 'IMPROVEMENT_INDUSTRY'
+								or improvement.ImprovementType == 'IMPROVEMENT_INDUSTRY_BONUS'
+								or improvement.ImprovementType == 'IMPROVEMENT_INDUSTRY_STRATEGIC'
+								or improvement.ImprovementType == 'IMPROVEMENT_CORPORATION'
+								or improvement.ImprovementType == 'IMPROVEMENT_CORPORATION_BONUS'
+								or improvement.ImprovementType == 'IMPROVEMENT_CORPORATION_STRATEGIC')
+							then
 								local plot = Map.GetPlotByIndex(pUnit:GetPlotId());
 								if plot ~= nil then
 									local resourceHash = plot:GetResourceTypeHash();
@@ -274,10 +280,18 @@ local BASE_GetUnitActionsTable = function ( pUnit )
 											if row.ResourceType == resource.ResourceType then
 												local categoryInfo = GameInfo.HD_Monopoly_Categories[row.Category];
 												if categoryInfo then
-													if improvement.ImprovementType == 'IMPROVEMENT_INDUSTRY' and categoryInfo.IndustryEffect then
+													if (improvement.ImprovementType == 'IMPROVEMENT_INDUSTRY'
+														or improvement.ImprovementType == 'IMPROVEMENT_INDUSTRY_BONUS'
+														or improvement.ImprovementType == 'IMPROVEMENT_INDUSTRY_STRATEGIC')
+														and categoryInfo.IndustryEffect
+													then
 														table.insert(industryStr, '[ICON_BULLET]' .. Locale.Lookup('LOC_RESOURCE_CLASSIFICATION_HD_' .. row.Category .. '_NAME') .. Locale.Lookup('LOC_TOOLTIP_HD_COLON_TEXT') .. Locale.Lookup("LOC_" .. categoryInfo.IndustryEffect .. "_DESCRIPTION"));
 													end
-													if improvement.ImprovementType == 'IMPROVEMENT_CORPORATION' and categoryInfo.CorporationEffect then
+													if (improvement.ImprovementType == 'IMPROVEMENT_CORPORATION'		
+														or improvement.ImprovementType == 'IMPROVEMENT_CORPORATION_BONUS'
+														or improvement.ImprovementType == 'IMPROVEMENT_CORPORATION_STRATEGIC')
+														and categoryInfo.CorporationEffect
+													then
 														table.insert(corporationStr, '[ICON_BULLET]' .. Locale.Lookup('LOC_RESOURCE_CLASSIFICATION_HD_' .. row.Category .. '_NAME') .. Locale.Lookup('LOC_TOOLTIP_HD_COLON_TEXT') .. Locale.Lookup("LOC_" .. categoryInfo.CorporationEffect .. "_DESCRIPTION"));
 													end
 												end

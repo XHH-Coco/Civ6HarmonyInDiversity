@@ -1214,7 +1214,7 @@ values
 -- where ImprovementType = 'IMPROVEMENT_MINE' and ResourceType not in (select ResourceType from Resources where ResourceClassType = 'RESOURCECLASS_STRATEGIC' or ResourceClassType = 'RESOURCECLASS_BONUS');
 
 -- insert or replace into Modifiers (ModifierId,  		ModifierType,											SubjectRequirementSetId)
--- select 'BONUS_LUXURY_GOLD_PERCENTAGE' || ResourceType,	'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER',	'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIRMENTS' from Improvement_ValidResources 
+-- select 'BONUS_LUXURY_GOLD_PERCENTAGE' || ResourceType,	'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER',	'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIREMENTS' from Improvement_ValidResources 
 -- where ImprovementType = 'IMPROVEMENT_MINE' and ResourceType not in (select ResourceType from Resources where ResourceClassType = 'RESOURCECLASS_STRATEGIC' or ResourceClassType = 'RESOURCECLASS_BONUS');
 
 -- insert or replace into ModifierArguments	(ModifierId,	Name,			Value)
@@ -1643,6 +1643,18 @@ insert or ignore into ModifierArguments (ModifierId, Name, Value) select
 	'HD_BANDEIRANTES_JUNGLE_' || YieldType, 'Amount', 1
 from Yields;
 
+insert or ignore into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) select
+	'HD_BANDEIRANTES_JUNGLE_NEGATIVE_' || YieldType, 'MODIFIER_PLAYER_ADJUST_PLOT_YIELD', 'PLOT_HAS_IMPROVED_RESOURCE_AND_RAINFOREST_REQUIREMENTS'
+from Yields;
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select
+	'HD_BANDEIRANTES_JUNGLE_NEGATIVE_' || YieldType, 'YieldType', YieldType
+from Yields;
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select
+	'HD_BANDEIRANTES_JUNGLE_NEGATIVE_' || YieldType, 'Amount', -1
+from Yields;
+
 -- 雨林行业公司直接获得2种效果
 insert or ignore into TraitModifiers (TraitType, ModifierId) values
 	('TRAIT_CIVILIZATION_AMAZON', 'HD_AMAZON_GRANT_BANDEIRANTES'),
@@ -1722,10 +1734,12 @@ from Units where UnitType in ('UNIT_LEU_INVESTOR', 'UNIT_LEU_TYCOON');
 insert or replace into GlobalParameters (Name, Value) values
 	-- 旗手收集资源加产需要的个数
 	('HD_BANDEIRANTES_RESOURCES_TIMES', 								 2),
+	-- 区域推进进度
+	('HD_MAGNANIMOUS_DISTRICT_PUSH_PERCENTAGE', 				 50),
 	-- 吸引人才概率
   ('HD_MAGNANIMOUS_INTRODUCE_GREAT_PERSON_PERCENTAGE', 50),
-  ('HD_MAGNANIMOUS_INTRODUCE_TYCOON_PERCENTAGE', 			 50),
-  ('HD_MAGNANIMOUS_INTRODUCE_INVESTOR_PERCENTAGE', 		 50);
+  ('HD_MAGNANIMOUS_INTRODUCE_TYCOON_PERCENTAGE', 			 40),
+  ('HD_MAGNANIMOUS_INTRODUCE_INVESTOR_PERCENTAGE', 		 30);
 
 -- =====================================================================================================================================
 -- 苏格兰
@@ -2484,7 +2498,7 @@ values
 	('HWARANG_ALL_YIELD_DEBUFF',            'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER',                'CITY_HAS_NOT_ASSIGNED_GOVERNOR_AND_NON_CAPITAL'),
 	-- 书院 Buff
 	('HWARANG_TIER_0_DISTRICT_PRODUCTION',  'MODIFIER_PLAYER_CITIES_ADJUST_ALL_DISTRICTS_PRODUCTION',           'CITY_HAS_DISTRICT_SEOWON'),
-	('HWARANG_TIER_0_BUILDING_PRODUCTION',  'MODIFIER_PLAYER_CITIES_ADJUST_ALLBUILDING_PRODUCTION_MODIFIER',    'CITY_HAS_DISTRICT_SEOWON'),
+	('HWARANG_TIER_0_BUILDING_PRODUCTION',  'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_PRODUCTION_MODIFIER',    		'CITY_HAS_DISTRICT_SEOWON'),
 	-- 一级建筑 Buff
 	('HWARANG_TIER_1_FOOD_BONUS',           'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER',                'CITY_HAS_DISTRICT_CAMPUS_TIER_1_BUILDING_REQUIREMENTS'),
 	('HWARANG_TIER_1_PRODUCTION_BONUS',     'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER',                'CITY_HAS_DISTRICT_CAMPUS_TIER_1_BUILDING_REQUIREMENTS'),

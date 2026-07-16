@@ -381,7 +381,7 @@ from JohannesburgResources;
 insert or replace into Modifiers
 	(ModifierId,														ModifierType,										 SubjectRequirementSetId)
 select
-	'MINOR_CIV_JOHANNESBURG_' || ResourceType || '_PRODUCTION_TIRE1',	'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',	 'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIRMENTS'
+	'MINOR_CIV_JOHANNESBURG_' || ResourceType || '_PRODUCTION_TIRE1',	'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',	 'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIREMENTS'
 from JohannesburgResources;
 insert or replace into ModifierArguments
 	(ModifierId,														Name,			Value)
@@ -401,7 +401,7 @@ from JohannesburgResources;
 insert or replace into Modifiers
 	(ModifierId,														ModifierType,											OwnerRequirementSetId,							SubjectRequirementSetId)
 select
-	'MINOR_CIV_JOHANNESBURG_' || ResourceType || '_PRODUCTION_TIRE2',	'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',		'PLAYER_HAS_TECH_APPRENTICESHIP_REQUIREMENTS',	'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIRMENTS'
+	'MINOR_CIV_JOHANNESBURG_' || ResourceType || '_PRODUCTION_TIRE2',	'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',		'PLAYER_HAS_TECH_APPRENTICESHIP_REQUIREMENTS',	'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIREMENTS'
 from JohannesburgResources;
 insert or replace into ModifierArguments
 	(ModifierId,														Name,			Value)
@@ -422,7 +422,7 @@ from JohannesburgResources;
 insert or replace into Modifiers
 	(ModifierId,														ModifierType,											SubjectRequirementSetId)
 select
-	'MINOR_CIV_JOHANNESBURG_' || ResourceType || '_GOLD',	'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',	'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIRMENTS'
+	'MINOR_CIV_JOHANNESBURG_' || ResourceType || '_GOLD',	'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',	'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIREMENTS'
 from JohannesburgResources;
 insert or replace into ModifierArguments
 	(ModifierId,														Name,			Value)

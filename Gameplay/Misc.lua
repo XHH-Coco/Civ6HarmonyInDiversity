@@ -133,22 +133,6 @@ GameEvents.ChangeUnitExperience.Add(function(playerID, unitID, amount)
     end
 end)
 
-GameEvents.SendEnvoytoCityState.Add(function(playerID, citystateID)
-    -- Need to make sure the second is citystate
-    local player = Players[playerID]
-    if player ~= nil then
-        player:GetInfluence():GiveFreeTokenToPlayer(citystateID)
-    end
-end)
-
-GameEvents.AddGreatPeoplePoints.Add(function(playerID, gppID, amount)
-    local player = Players[playerID]
-    if player ~= nil then
-        print('HD DEBUG add great people point', playerID, gppID, amount)
-        player:GetGreatPeoplePoints():ChangePointsTotal(gppID, amount)
-    end
-end)
-
 -- Archer for City State
 local CITY_STATE_ARCHER_TURN_KEY = 'CITY_STATE_ARCHER_TURN';
 function ArcherForCityState ()
@@ -797,7 +781,115 @@ function HDDestroyUnit(playerId, unitId)
 end
 GameEvents.HDDestroyUnit.Add(HDDestroyUnit)
 
+-- 向X环内城市施加宗教压力
+function SpreadAoeReligiousPressure(playerId, param)
+	print("向X环内城市施加宗教压力");
+
+	local x = param.X;
+	local y = param.Y;
+	local amount = param.Amount;
+	if amount == 0 then return; end
+	local distance = param.Distance;
+	local religionId = param.ReligionId;
+	if not religionId or religionId == -1 then return; end
+
+	local religionInfo = GameInfo.Religions[religionId];
+	if not religionInfo then return; end
+	local message = '[COLOR:White]+' .. tostring(amount) .. ' ' .. Locale.Lookup(religionInfo.Name) .. '[ENDCOLOR]'
+
+	for _, cityOwner in ipairs(Players) do
+		if cityOwner:GetCities() ~= nil then
+			for _, city in cityOwner:GetCities():Members() do
+				if Map.GetPlotDistance(x, y, city:GetX(), city:GetY()) <= distance then
+					city:GetReligion():AddReligiousPressure(playerId, religionId, amount, playerId);
+					Game.AddWorldViewText(playerId, message, city:GetX(), city:GetY());
+				end
+			end
+		end
+	end
+end
+GameEvents.HD_SpreadAoeReligiousPressure.Add(SpreadAoeReligiousPressure);
+
+local CITY_IS_CITY_STATE_TAG = 'HD_CITY_IS_CITY_STATE';
+local CITY_IS_CITY_STATE_TYPE_TAG = 'HD_CITY_IS_';
+function CityStateSetProperty(playerId, cityId, x, y)
+	local plot = Map.GetPlot(x, y);
+	if not plot then return; end
+
+	if Utils.PlayerIsMinor(playerId) then
+		local citystateConfig = PlayerConfigurations[playerId];
+		local citystateLeader = citystateConfig:GetLeaderTypeName();
+		local citystateType = GameInfo.Leaders[citystateLeader].InheritFrom;
+		if citystateType and #citystateType > 18 then
+			plot:SetProperty(CITY_IS_CITY_STATE_TAG, 1);
+			plot:SetProperty(CITY_IS_CITY_STATE_TYPE_TAG .. string.sub(citystateType, 18), 1);
+			print("城邦城市设置参数：" .. string.sub(citystateType, 18));
+		end
+	elseif plot:GetProperty(CITY_IS_CITY_STATE_TAG) == 1 then
+		print("城市重置城邦参数")
+		plot:SetProperty(CITY_IS_CITY_STATE_TAG, 0);
+		for row in GameInfo.CityStateCorrespondingYieldType_HD() do
+			if plot:GetProperty(CITY_IS_CITY_STATE_TYPE_TAG .. row.CityStateType) == 1 then
+				plot:SetProperty(CITY_IS_CITY_STATE_TYPE_TAG .. row.CityStateType, 0);
+			end
+		end
+	end
+end
+GameEvents.CityBuilt.Add(CityStateSetProperty);
+
+function ConqueredCityStateSetProperty(newPlayerId, oldPlayerId, newCityId, x, y)
+	CityStateSetProperty(newPlayerId, newCityId, x, y);
+end
+GameEvents.CityConquered.Add(ConqueredCityStateSetProperty);
+
+-- 城市判断是否拥有XX类型的巨作
+local HD_CITY_NEED_DETECT_GREATWORK_TAG = 'HD_CITY_NEED_DETECT_';
+local HD_CITY_HAS_GREATWORK_TAG = 'HD_CITY_HAS_';
+function DetectCityHasGreatWork(playerId, cityId)
+	local city = CityManager.GetCity(playerId, cityId);
+	if not city then return; end
+
+	for row in GameInfo.GreatWorkObjectTypes() do
+		local needDetect = city:GetProperty(HD_CITY_NEED_DETECT_GREATWORK_TAG .. row.GreatWorkObjectType) or 0;
+		if needDetect > 0 then
+			local greatWorkTypeFilter = {};
+			greatWorkTypeFilter[row.GreatWorkObjectType] = true;
+			local greatWorkList = Utils.GetCityGreatWorks(playerId, cityId, greatWorkTypeFilter);
+
+			if #greatWorkList > 0 then
+				print(Locale.Lookup(city:GetName()) .. " 拥有 " .. Locale.Lookup(row.Name));
+			else
+				print(Locale.Lookup(city:GetName()) .. " 未拥有 " .. Locale.Lookup(row.Name));
+			end
+			
+			local plot = Map.GetPlot(city:GetX(), city:GetY());
+			if plot then
+				plot:SetProperty(HD_CITY_HAS_GREATWORK_TAG .. row.GreatWorkObjectType, #greatWorkList);
+			end
+		end
+	end
+end
+
 --------------------------------------------------------------
+function DetectCityOnCitySelectionChanged(playerId, cityId)
+	-- 城市判断是否拥有XX类型的巨作
+	DetectCityHasGreatWork(playerId, cityId)
+end
+Events.CitySelectionChanged.Add(DetectCityOnCitySelectionChanged);
+
+function DetectCityOnGameTurnEnded()
+  for _, playerId in ipairs(PlayerManager.GetAliveMajorIDs()) do
+    local player = Players[playerId];
+    if player then
+      for _, city in player:GetCities():Members() do
+				-- 城市判断是否拥有XX类型的巨作
+        DetectCityHasGreatWork(playerId, city:GetID());
+      end
+    end
+	end
+end
+GameEvents.OnGameTurnEnded.Add(DetectCityOnGameTurnEnded);
+
 -- Initialize
 function initialize()
 	Events.CityAddedToMap.Add(StrategicCityAddedToMap);

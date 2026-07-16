@@ -11,7 +11,7 @@ values
 insert or replace into TypeTags
     (Type,                                              Tag)
 values
-    ("ABILITY_ENGINEER_HEAL_HD",                        "CLASS_MILITARY_ENGINEER");
+    ("ABILITY_ENGINEER_HEAL_HD",                        "CLASS_MILITARY_ENGINEERING_UNITS");
 
 insert or replace into UnitAbilityModifiers
     (UnitAbilityType,                                   ModifierId)

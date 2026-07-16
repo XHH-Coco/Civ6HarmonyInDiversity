@@ -37,6 +37,8 @@
 		<Row Name="ICON_BUILDING_NILOMETER_HD_FOW" 															Atlas="ATLAS_HD_Buildings" Index="0"/>
 		<Row Name="ICON_BUILDING_HD_POLICE_STATION" 														Atlas="ATLAS_HD_Buildings" Index="1"/>
 		<Row Name="ICON_BUILDING_HD_POLICE_STATION_FOW"													Atlas="ATLAS_HD_Buildings" Index="1"/>
+		<Row Name="ICON_BUILDING_HD_ROYAL_COURT" 																Atlas="ATLAS_HD_Buildings" Index="43"/>
+		<Row Name="ICON_BUILDING_HD_ROYAL_COURT_FOW"														Atlas="ATLAS_HD_Buildings" Index="43"/>
 
 		<Row Name="ICON_BUILDING_HD_ALCHEMY_ROOM" 															Atlas="ATLAS_HD_Buildings" Index="2"/>
 		<Row Name="ICON_BUILDING_HD_ALCHEMY_ROOM_FOW" 													Atlas="ATLAS_HD_Buildings" Index="2"/>

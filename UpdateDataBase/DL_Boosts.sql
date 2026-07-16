@@ -274,10 +274,15 @@ where TechnologyType = 'TECH_SQUARE_RIGGING';
 --by 先驱
 update Boosts set BoostClass = "BOOST_TRIGGER_OWN_X_UNITS_OF_TYPE", NumItems = 2, Unit1Type = "UNIT_BOMBARD",
     ImprovementType = NULL, ResourceType = NULL where TechnologyType ="TECH_RIFLING";
+
 -- 公司模式 商业资本主义
 update Boosts set BoostClass = "BOOST_TRIGGER_HAVE_X_IMPROVEMENTS", NumItems = 1, ImprovementType = "IMPROVEMENT_INDUSTRY",
     BoostingTechType = NULL, TriggerDescription = 'LOC_BOOST_TRIGGER_COMMERCIAL_CAPITALISM_HD_CORP' where CivicType ="CIVIC_COMMERCIAL_CAPITALISM_HD"
     and exists (select ImprovementType from Improvements where ImprovementType = 'IMPROVEMENT_INDUSTRY');
+-- 宏观调控
+update Boosts set BoostClass = 'BOOST_TRIGGER_HAVE_X_IMPROVEMENTS', BuildingType = null, TriggerDescription = 'LOC_BOOST_TRIGGER_CAPITALISM_HD_CORP', NumItems = 1,
+	TriggerLongDescription = 'LOC_BOOST_TRIGGER_LONGDESC_CAPITALISM_HD_CORP', ImprovementType = 'IMPROVEMENT_CORPORATION' where CivicType = 'CIVIC_CAPITALISM'
+    and exists (select ImprovementType from Improvements where ImprovementType = 'IMPROVEMENT_CORPORATION');
 
 -- update boost ratio at last
 update Boosts set Boost = 34 where Boost = 40;

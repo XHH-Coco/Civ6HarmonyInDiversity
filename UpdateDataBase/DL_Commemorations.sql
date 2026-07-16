@@ -512,7 +512,7 @@ insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetI
   ('COMMEMORATION_ECONOMIC_GOLD_PURCHASE_DISTRICT',		                    'MODIFIER_PLAYER_CITIES_ADJUST_ALL_DISTRICTS_PURCHASE_COST',	      'PLAYER_HAS_GOLDEN_AGE',	  Null),
   ('COMMEMORATION_ECONOMIC_GOLD_PURCHASE_UNIT',		                        'MODIFIER_PLAYER_CITIES_ADJUST_UNITS_PURCHASE_COST',		            'PLAYER_HAS_GOLDEN_AGE',	  Null),
   -- 宗教改革
-  ('COMMEMORATION_HD_RELIGIOUS_REFORM_SCIENCE_CULTURE_FAITH',		          'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER',		            'PLAYER_HAS_GOLDEN_AGE',	  'HD_CITY_HAS_RELIGIOUS_TIER_3_BUILDING_REQUIREMENTS'),
+  ('COMMEMORATION_HD_RELIGIOUS_REFORM_SCIENCE_CULTURE_FAITH',		          'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER',		            'PLAYER_HAS_GOLDEN_AGE',	  'CITY_HAS_DISTRICT_HOLY_SITE_TIER_3_BUILDING_REQUIREMENTS'),
   ('COMMEMORATION_HD_RELIGIOUS_REFORM_HOLY_SITE_BONUS',		                'MODIFIER_PLAYER_DISTRICTS_ADJUST_YIELD_MODIFIER',		              'PLAYER_HAS_GOLDEN_AGE',	  'DISTRICT_IS_HOLY_SITE'),
   -- 此处有龙
   ('COMMEMORATION_EXPLORATION_CIVILIAN_SPEED',		                        'MODIFIER_PLAYER_UNITS_GRANT_ABILITY',						                  'PLAYER_HAS_GOLDEN_AGE',	  Null),
@@ -876,9 +876,9 @@ insert or replace into ModifierArguments (ModifierId, Name, Value) values
   ('COMMEMORATION_HD_MEGA_CORPORATION_EXTRA_DISTRICT',                    'Amount',                 1),
   ('COMMEMORATION_HD_MEGA_CORPORATION_PRODUCTION',                        'YieldType',              'YIELD_PRODUCTION'),
   ('COMMEMORATION_HD_MEGA_CORPORATION_PRODUCTION',                        'Amount',                 20),
-  ('COMMEMORATION_HD_MEGA_CORPORATION_PURCHASE_BUILDING',                 'Amount',                 20),
-  ('COMMEMORATION_HD_MEGA_CORPORATION_PURCHASE_DISTRICT',                 'Amount',                 20),
-  ('COMMEMORATION_HD_MEGA_CORPORATION_PURCHASE_UNIT',                     'Amount',                 20),
+  ('COMMEMORATION_HD_MEGA_CORPORATION_PURCHASE_BUILDING',                 'Amount',                 10),
+  ('COMMEMORATION_HD_MEGA_CORPORATION_PURCHASE_DISTRICT',                 'Amount',                 10),
+  ('COMMEMORATION_HD_MEGA_CORPORATION_PURCHASE_UNIT',                     'Amount',                 10),
   ('COMMEMORATION_HD_MEGA_CORPORATION_PURCHASE_UNIT',                     'IncludeCivilian',        1),
   -- 全民皆兵
   ('COMMEMORATION_MILITARY_STRENGTH',		                                  'AbilityType',	          'ABILITY_COMMEMORATION_MILITARY_STRENGTH'),

@@ -12,7 +12,7 @@ insert or ignore into HD_ResourceClassificationTypes (ResourceClassificationType
   -- ===================================================================================================================================
   -- 庄稼
   ('RESOURCE_CLASSIFICATION_HD_CROPS',              0,  1, 'USAGE'),
-  -- 农具
+  -- 农用
   ('RESOURCE_CLASSIFICATION_HD_AGRICULTURE',        1,  1, 'USAGE'),
   -- 美食
   ('RESOURCE_CLASSIFICATION_HD_CUISINE',            2,  1, 'USAGE'),
@@ -203,7 +203,7 @@ insert or ignore into HD_Resource_Classification_Tmp (ResourceType, ResourceClas
   ('RESOURCE_DIAMONDS', 'RESOURCE_CLASSIFICATION_HD_DECORATION'),
   ('RESOURCE_JADE', 'RESOURCE_CLASSIFICATION_HD_ART'),
   ('RESOURCE_JADE', 'RESOURCE_CLASSIFICATION_HD_DECORATION'),
-  ('RESOURCE_MERCURY', 'RESOURCE_CLASSIFICATION_HD_CONSTRUCTION'),
+  ('RESOURCE_MERCURY', 'RESOURCE_CLASSIFICATION_HD_METALLURGY'),
   ('RESOURCE_MERCURY', 'RESOURCE_CLASSIFICATION_HD_ART'),
   ('RESOURCE_SALT', 'RESOURCE_CLASSIFICATION_HD_CHEMISTRY'),
   ('RESOURCE_SALT', 'RESOURCE_CLASSIFICATION_HD_SEASONING'),

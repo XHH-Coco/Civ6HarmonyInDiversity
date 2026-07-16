@@ -31,7 +31,7 @@ insert or replace into BuildingModifiers (BuildingType, ModifierId)
 	select 'NAT_WONDER_CL_IRONWORKS', 'HD_NAT_IRONWORKS_CITIES_SCIENCE_' || ResourceType
 	from Resources where ResourceClassType = 'RESOURCECLASS_STRATEGIC';
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId, SubjectRequirementSetId)
-	select 'HD_NAT_IRONWORKS_CITIES_SCIENCE_' || ResourceType, 'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE', 'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIRMENTS',	'HD_OBJECT_WITHIN_9_TILES'
+	select 'HD_NAT_IRONWORKS_CITIES_SCIENCE_' || ResourceType, 'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE', 'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIREMENTS',	'HD_OBJECT_WITHIN_9_TILES'
 	from Resources where ResourceClassType = 'RESOURCECLASS_STRATEGIC';
 insert or replace into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_NAT_IRONWORKS_CITIES_SCIENCE_' || ResourceType, 'YieldType', 'YIELD_SCIENCE'
@@ -44,7 +44,7 @@ insert or replace into BuildingModifiers (BuildingType, ModifierId)
 	select 'NAT_WONDER_CL_IRONWORKS', 'HD_NAT_IRONWORKS_CITIES_SCIENTIST_' || ResourceType
 	from Resources where ResourceClassType = 'RESOURCECLASS_STRATEGIC';
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId, SubjectRequirementSetId)
-	select 'HD_NAT_IRONWORKS_CITIES_SCIENTIST_' || ResourceType, 'MODIFIER_PLAYER_DISTRICTS_ADJUST_GREAT_PERSON_POINTS', 'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIRMENTS',	'HD_CITY_CENTER_WITHIN_9_TILES'
+	select 'HD_NAT_IRONWORKS_CITIES_SCIENTIST_' || ResourceType, 'MODIFIER_PLAYER_DISTRICTS_ADJUST_GREAT_PERSON_POINTS', 'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIREMENTS',	'HD_CITY_CENTER_WITHIN_9_TILES'
 	from Resources where ResourceClassType = 'RESOURCECLASS_STRATEGIC';
 insert or replace into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_NAT_IRONWORKS_CITIES_SCIENTIST_' || ResourceType, 'GreatPersonClassType', 'GREAT_PERSON_CLASS_SCIENTIST'
@@ -59,7 +59,7 @@ insert or replace into BuildingModifiers (BuildingType, ModifierId)
 	from Resources a inner join Improvement_ValidResources b on a.ResourceType = b.ResourceType
 	where a.ResourceClassType = 'RESOURCECLASS_BONUS' and b.ImprovementType in ('IMPROVEMENT_MINE','IMPROVEMENT_QUARRY');
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId, SubjectRequirementSetId)
-	select 'HD_NAT_IRONWORKS_CITIES_PRODUCTION_' || a.ResourceType, 'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE', 'HD_CITY_HAS_IMPROVED_' || a.ResourceType || '_REQUIRMENTS',	'HD_OBJECT_WITHIN_9_TILES'
+	select 'HD_NAT_IRONWORKS_CITIES_PRODUCTION_' || a.ResourceType, 'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE', 'HD_CITY_HAS_IMPROVED_' || a.ResourceType || '_REQUIREMENTS',	'HD_OBJECT_WITHIN_9_TILES'
 	from Resources a inner join Improvement_ValidResources b on a.ResourceType = b.ResourceType
 	where a.ResourceClassType = 'RESOURCECLASS_BONUS' and b.ImprovementType in ('IMPROVEMENT_MINE','IMPROVEMENT_QUARRY');
 insert or replace into ModifierArguments (ModifierId, Name, Value)
@@ -76,7 +76,7 @@ insert or replace into BuildingModifiers (BuildingType, ModifierId)
 	from Resources a inner join Improvement_ValidResources b on a.ResourceType = b.ResourceType
 	where a.ResourceClassType = 'RESOURCECLASS_BONUS' and b.ImprovementType in ('IMPROVEMENT_MINE','IMPROVEMENT_QUARRY');
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId, SubjectRequirementSetId)
-	select 'HD_NAT_IRONWORKS_CITIES_ENGINEER_' || a.ResourceType, 'MODIFIER_PLAYER_DISTRICTS_ADJUST_GREAT_PERSON_POINTS', 'HD_CITY_HAS_IMPROVED_' || a.ResourceType || '_REQUIRMENTS',	'HD_CITY_CENTER_WITHIN_9_TILES'
+	select 'HD_NAT_IRONWORKS_CITIES_ENGINEER_' || a.ResourceType, 'MODIFIER_PLAYER_DISTRICTS_ADJUST_GREAT_PERSON_POINTS', 'HD_CITY_HAS_IMPROVED_' || a.ResourceType || '_REQUIREMENTS',	'HD_CITY_CENTER_WITHIN_9_TILES'
 	from Resources a inner join Improvement_ValidResources b on a.ResourceType = b.ResourceType
 	where a.ResourceClassType = 'RESOURCECLASS_BONUS' and b.ImprovementType in ('IMPROVEMENT_MINE','IMPROVEMENT_QUARRY');
 insert or replace into ModifierArguments (ModifierId, Name, Value)
@@ -137,65 +137,22 @@ update Buildings set Description = 'LOC_NAT_WON_CL_FINANCE_CORP_DESCRIPTION_INTE
 	where BuildingType = 'NAT_WON_CL_FINANCE_INTERNAL' and exists (select GreatWorkSlotType from GreatWorkSlotTypes where GreatWorkSlotType = 'GREATWORKSLOT_PRODUCT');
 
 ------------- 公司业绩
-insert or replace into BuildingModifiers
-	(BuildingType,					ModifierId)
-select
-	'NAT_WON_CL_FINANCE',			'HD_NAT_FINANCE_CORP_TOURISM'
-where exists (select GreatWorkSlotType from GreatWorkSlotTypes where GreatWorkSlotType = 'GREATWORKSLOT_PRODUCT');
+insert or replace into BuildingModifiers (BuildingType, ModifierId) select
+	'NAT_WON_CL_FINANCE', 'HD_NAT_FINANCE_TOURISM_' || ImprovementType
+from Improvements where ImprovementType in ('IMPROVEMENT_CORPORATION', 'IMPROVEMENT_CORPORATION_BONUS', 'IMPROVEMENT_CORPORATION_STRATEGIC');
 
-insert or replace into Modifiers
-	(ModifierId,					ModifierType)
-select
-	'HD_NAT_FINANCE_CORP_TOURISM',	'MODIFIER_PLAYER_CITIES_ADJUST_TOURISM'
-where exists (select GreatWorkSlotType from GreatWorkSlotTypes where GreatWorkSlotType = 'GREATWORKSLOT_PRODUCT');
+insert or replace into Modifiers (ModifierId, ModifierType) select
+	'HD_NAT_FINANCE_TOURISM_' || ImprovementType, 'MODIFIER_PLAYER_CITIES_ADJUST_TOURISM'
+from Improvements where ImprovementType in ('IMPROVEMENT_CORPORATION', 'IMPROVEMENT_CORPORATION_BONUS', 'IMPROVEMENT_CORPORATION_STRATEGIC');
 
-insert or replace into ModifierArguments
-	(ModifierId,					Name,				Value)
-select
-	'HD_NAT_FINANCE_CORP_TOURISM',	'ImprovementType',	'IMPROVEMENT_CORPORATION'
-where exists (select GreatWorkSlotType from GreatWorkSlotTypes where GreatWorkSlotType = 'GREATWORKSLOT_PRODUCT');
+insert or replace into ModifierArguments (ModifierId, Name, Value) select
+	'HD_NAT_FINANCE_TOURISM_' || ImprovementType, 'ImprovementType', ImprovementType
+from Improvements where ImprovementType in ('IMPROVEMENT_CORPORATION', 'IMPROVEMENT_CORPORATION_BONUS', 'IMPROVEMENT_CORPORATION_STRATEGIC');
 
-insert or replace into ModifierArguments
-	(ModifierId,					Name,				Value)
-select
-	'HD_NAT_FINANCE_CORP_TOURISM',	'ScalingFactor',	300
-where exists (select GreatWorkSlotType from GreatWorkSlotTypes where GreatWorkSlotType = 'GREATWORKSLOT_PRODUCT');
-------------- 公司金币百分比
-insert or replace into BuildingModifiers
-	(BuildingType,					ModifierId)
-select
-	'NAT_WON_CL_FINANCE',			'HD_NAT_FINANCE_CORP_GOLD_BONUS'
-where exists (select GreatWorkSlotType from GreatWorkSlotTypes where GreatWorkSlotType = 'GREATWORKSLOT_PRODUCT');
+insert or replace into ModifierArguments (ModifierId, Name, Value) select
+	'HD_NAT_FINANCE_TOURISM_' || ImprovementType, 'ScalingFactor', 300
+from Improvements where ImprovementType in ('IMPROVEMENT_CORPORATION', 'IMPROVEMENT_CORPORATION_BONUS', 'IMPROVEMENT_CORPORATION_STRATEGIC');
 
-insert or replace into Modifiers
-	(ModifierId,					ModifierType,				SubjectRequirementSetId)
-select
-	'HD_NAT_FINANCE_CORP_GOLD_BONUS',	'MODIFIER_PLAYER_IMPROVEMENTS_ATTACH_MODIFIER',	'PLOT_HAS_IMPROVEMENT_CORPORATION_REQUIREMENTS'
-where exists (select GreatWorkSlotType from GreatWorkSlotTypes where GreatWorkSlotType = 'GREATWORKSLOT_PRODUCT');
-
-insert or replace into Modifiers
-	(ModifierId,					ModifierType)
-select
-	'HD_NAT_FINANCE_CORP_GOLD_BONUS_MODIFIER',	'MODIFIER_SINGLE_CITY_ADJUST_CITY_YIELD_MODIFIER'
-where exists (select GreatWorkSlotType from GreatWorkSlotTypes where GreatWorkSlotType = 'GREATWORKSLOT_PRODUCT');
-
-insert or replace into ModifierArguments
-	(ModifierId,					Name,				Value)
-select
-	'HD_NAT_FINANCE_CORP_GOLD_BONUS',	'ModifierId',	'HD_NAT_FINANCE_CORP_GOLD_BONUS_MODIFIER'
-where exists (select GreatWorkSlotType from GreatWorkSlotTypes where GreatWorkSlotType = 'GREATWORKSLOT_PRODUCT');
-
-insert or replace into ModifierArguments
-	(ModifierId,					Name,				Value)
-select
-	'HD_NAT_FINANCE_CORP_GOLD_BONUS_MODIFIER',	'YieldType',	'YIELD_GOLD'
-where exists (select GreatWorkSlotType from GreatWorkSlotTypes where GreatWorkSlotType = 'GREATWORKSLOT_PRODUCT');
-
-insert or replace into ModifierArguments
-	(ModifierId,					Name,				Value)
-select
-	'HD_NAT_FINANCE_CORP_GOLD_BONUS_MODIFIER',	'Amount',	20
-where exists (select GreatWorkSlotType from GreatWorkSlotTypes where GreatWorkSlotType = 'GREATWORKSLOT_PRODUCT');
 ------------- 产品产出
 insert or replace into BuildingModifiers
 	(BuildingType,					ModifierId)

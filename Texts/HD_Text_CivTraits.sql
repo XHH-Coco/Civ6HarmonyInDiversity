@@ -371,7 +371,7 @@ values
 -- 德国
 -- =====================================================================================================================================
 	("LOC_TRAIT_CIVILIZATION_IMPERIAL_FREE_CITIES_DESCRIPTION",              "Each city can build one more district than usual. +1 [ICON_Science] Science and [ICON_Culture] Culture for cities that have Specialty Districts."),
-	("LOC_TRAIT_LEADER_HOLY_ROMAN_EMPEROR_DESCRIPTION",                      "After Early Warfare civic is researched, receive an additional Military policy slot. After Encampment district is first built, receive an additional Military policy slot. Encampment district receives an additional standard adjacency bonus for being adjacent to another district, and [ICON_FAITH] Faith equal to its adjacency bonus. Encampment district provides +1 [ICON_PRODUCTION] Production, +1 [ICON_FAITH] Faith to resource plots in the city. Districts and land units can be purchased with [ICON_FAITH] Faith in cities with a [ICON_GOVERNOR] Governor."),
+	("LOC_TRAIT_LEADER_HOLY_ROMAN_EMPEROR_DESCRIPTION",                      "After Early Warfare civic is researched, receive an additional Military policy slot. After Encampment district is first built, receive an additional Military policy slot. Encampment district receives an additional standard adjacency bonus for being adjacent to another district, and [ICON_FAITH] Faith equal to its adjacency bonus. Encampment district provides +1 [ICON_PRODUCTION] Production, +1 [ICON_FAITH] Faith to resource plots in the city. Land units can be purchased with [ICON_FAITH] Faith in cities with a [ICON_GOVERNOR] Governor."),
 -- =====================================================================================================================================
 -- 印度尼西亚
 -- =====================================================================================================================================
@@ -508,9 +508,9 @@ values
 -- =====================================================================================================================================
 	("LOC_TRAIT_CIVILIZATION_AMAZON_DESCRIPTION",                            "Grant a Bandeirante after establishing [ICON_CAPITAL] Capital city. All districts (except city centers) will not remove Rainforest. Rainforest tiles provide a standard adjacency bonus for specialty districts, and grant +1 Appeal to adjacent tiles."),
 	("LOC_TRAIT_LEADER_MAGNANIMOUS_NAME",                      			 				 "O Magnânimo"),
-	("LOC_TRAIT_LEADER_MAGNANIMOUS_DESCRIPTION",                             "After recruiting or patronizing a [ICON_GreatPerson] Great Person, 20% of its [ICON_GreatPerson] Great Person point cost is refunded. After completing a civilization's first Development or Military Historic Moment, you can instantly complete the next district. If it is a world's first Historic Moment, you may additionally choose a city to introduce immigrants or talents from other civilizations."),
+	("LOC_TRAIT_LEADER_MAGNANIMOUS_DESCRIPTION",                             "After recruiting or patronizing a [ICON_GreatPerson] Great Person, 20% of its [ICON_GreatPerson] Great Person point cost is refunded. After completing a civilization's first Development or Military Historic Moment, you can instantly complete 50% of the cost for the next district. If it is a world's first Historic Moment, you may additionally choose a city to introduce immigrants or talents from other civilizations."),
 	("LOC_TRAIT_LEADER_MAGNANIMOUS_BUILD_VIEWTEXT",          		 		 				 "Built {1_Name} for free"),
-	("LOC_TRAIT_LEADER_MAGNANIMOUS_BUILD_TIMES_TEXT",        		 		 				 "Remaining times of district construction: {1_Num} {1_Num : plural 1?time; other?times;}."),
+	("LOC_TRAIT_LEADER_MAGNANIMOUS_BUILD_TIMES_TEXT",        		 		 				 "Remaining times of advancing district construction: {1_Num} {1_Num : plural 1?time; other?times;}."),
 	("LOC_TRAIT_LEADER_MAGNANIMOUS_POPULATION_VIEWTEXT",          			 		 "Introduce one [ICON_CITIZEN] immigrant from {1_Name}"),
 	("LOC_TRAIT_LEADER_MAGNANIMOUS_TALENTS_VIEWTEXT",          			 				 "Introduce {2_Name} from {1_Name}"),
 	("LOC_TRAIT_LEADER_MAGNANIMOUS_INTRODUCE_TEXT",        					 				 "Introduce [ICON_CITIZEN] immigrants from other civilizations"),
@@ -997,7 +997,7 @@ values
 -- 德国
 -- =====================================================================================================================================
 	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_IMPERIAL_FREE_CITIES_DESCRIPTION",       "每座城市都能建造比平常多一个区域。拥有专业化区域的城市+1 [ICON_Science] 科技值和 [ICON_Culture] 文化值。"),
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_HOLY_ROMAN_EMPEROR_DESCRIPTION",               "解锁“原始军事”市政后，和首次建成军营后，分别获得一个军事政策槽位。军营与区域相邻时额外获得标准相邻加成，相邻加成也提供 [ICON_Faith] 信仰值。有军营的城市所有资源+1 [ICON_Production] 生产力和 [ICON_Faith] 信仰值。有 [ICON_GOVERNOR] 总督就职的城市可用 [ICON_FAITH] 信仰值购买区域和陆军单位。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_HOLY_ROMAN_EMPEROR_DESCRIPTION",               "解锁“原始军事”市政后，和首次建成军营后，分别获得一个军事政策槽位。军营与区域相邻时额外获得标准相邻加成，相邻加成也提供 [ICON_Faith] 信仰值。有军营的城市所有资源+1 [ICON_Production] 生产力和 [ICON_Faith] 信仰值。有 [ICON_GOVERNOR] 总督就职的城市可用 [ICON_FAITH] 信仰值购买陆军单位。"),
 -- =====================================================================================================================================
 -- 印度尼西亚
 -- =====================================================================================================================================
@@ -1134,9 +1134,9 @@ values
 -- =====================================================================================================================================
 	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_AMAZON_DESCRIPTION",                     "建立 [ICON_CAPITAL] 首都后获得一位旗手。除市中心外的区域不移除雨林。雨林单元格为专业化区域提供标准相邻加成，并为相邻的单元格提供+1魅力。"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_NAME",                      			 "高尚者"),
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_DESCRIPTION",                      "招募或赞助一位 [ICON_GreatPerson] 伟人后返还20%消耗的点数。每次完成“文明首次”军事类或发展类历史时刻后，下一个建造的区域可以立刻完成；若为“世界首次”则还可以选择一座城市引进其他文明的移民或人才。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_DESCRIPTION",                      "招募或赞助一位 [ICON_GreatPerson] 伟人后返还20%消耗的点数。每次完成“文明首次”军事类或发展类历史时刻后，下一个建造的区域立刻推进50%的建造进程；若为“世界首次”则还可以选择一座城市引进其他文明的移民或人才。"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_BUILD_VIEWTEXT",          		 		 "免费建造了{1_Name}"),
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_BUILD_TIMES_TEXT",        		 		 "剩余免费区域建造次数：{1_Num}次。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_BUILD_TIMES_TEXT",        		 		 "剩余区域建造进程推进次数：{1_Num}次。"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_POPULATION_VIEWTEXT",          		 "从{1_Name}引进了一个 [ICON_CITIZEN] 移民"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_TALENTS_VIEWTEXT",          			 "从{1_Civ}引进了：{2_Name}"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_INTRODUCE_TEXT",        					 "从其他文明引进 [ICON_CITIZEN] 移民"),

@@ -101,13 +101,6 @@ Utils.SetImprovementType = function(plotID, ImprovementID, OwnerID)
 	ImprovementBuilder.SetImprovementType(plot, ImprovementID, OwnerID)
 end
 
-Utils.AddGreatPeoplePoints = function(playerID, gppID, amount)
-	local player = Players[playerID]
-	if player ~= nil then
-		player:GetGreatPeoplePoints():ChangePointsTotal(gppID, amount)
-	end
-end
-
 Utils.SetUnitExperience = function(playerID, unitID, amount)
 	local unit = UnitManager.GetUnit(playerID, unitID)
 	if unit ~= nil then

@@ -116,7 +116,7 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_RESOURCE_PARENT_CLASSIFICATION_HD_THIRDPARTY_NAME",         "第三方分类"),
 
   ("zh_Hans_CN", "LOC_RESOURCE_CLASSIFICATION_HD_CROPS_NAME",                     "庄稼"),
-  ("zh_Hans_CN", "LOC_RESOURCE_CLASSIFICATION_HD_AGRICULTURE_NAME",               "农具"),
+  ("zh_Hans_CN", "LOC_RESOURCE_CLASSIFICATION_HD_AGRICULTURE_NAME",               "农用"),
   ("zh_Hans_CN", "LOC_RESOURCE_CLASSIFICATION_HD_CUISINE_NAME",                   "美食"),
   ("zh_Hans_CN", "LOC_RESOURCE_CLASSIFICATION_HD_FRUIT_NAME",                     "水果"),
   ("zh_Hans_CN", "LOC_RESOURCE_CLASSIFICATION_HD_BREWING_NAME",                   "酿造"),

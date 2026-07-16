@@ -16,6 +16,8 @@ values
     ("LOC_BUILDING_WATER_MILL_DESCRIPTION",                       "Farms, Plantations, Mines and Quarries over bonus resources in this City provide +1 [ICON_PRODUCTION] Production, doubled after Engineering is researched."),
     ("LOC_BUILDING_FLOOD_BARRIER_NAME",                           "Seawall"),
     ("LOC_BUILDING_PALGUM_DESCRIPTION",                           "A building unique to Babylon. Replaces Mill. Freshwater tiles receive +1 [ICON_FOOD] Food; then receive [ICON_PRODUCTION] Production after Engineering is researched. [NEWLINE][NEWLINE]City must be adjacent to a River. "),
+    ("LOC_BUILDING_HD_ROYAL_COURT_NAME",                          "Royal Court"),
+    ("LOC_BUILDING_HD_ROYAL_COURT_DESCRIPTION",                   "+0.3 [ICON_CULTURE] Culture per [ICON_CITIZEN] Citizen in the [ICON_CAPITAL] Capital. +0.3 [ICON_PRODUCTION] Production per [ICON_CITIZEN] Citizen in city with Government Plaza.[NEWLINE][NEWLINE]Must be built in [ICON_CAPITAL] Capital."),
     ("LOC_BUILDING_HD_POLICE_STATION_NAME",                       "Police Station"),
     ("LOC_BUILDING_HD_POLICE_STATION_DESCRIPTION",                "Receive corresponding yield of two copies from each type of districts in this city."),
     -- Campus
@@ -148,7 +150,7 @@ values
     ("LOC_BUILDING_HD_VILLA_NAME",                                "Villa"),
     ("LOC_BUILDING_HD_VILLA_DESCRIPTION",                         "+1 [ICON_Food] Food and +3 [ICON_GOLD] Gold to Neighborhood and Residential Improvements in this city."),
     ("LOC_BUILDING_HD_MANSION_NAME",                              "Official Mansion"),
-    ("LOC_BUILDING_HD_MANSION_DESCRIPTION",                       "Cities with a [ICON_GOVERNOR] Governor and Neighborhood distirct can receive 1.5 times of regional yield from Buildings and Wonders. [NEWLINE]Awards +1 [ICON_Governor] Governor Title. [NEWLINE][NEWLINE]Must be built in [ICON_CAPITAL] Capital. Can only be built once in a civilization."),
+    ("LOC_BUILDING_HD_MANSION_DESCRIPTION",                       "Cities with a [ICON_GOVERNOR] Governor and Neighborhood distirct can receive +50% regional yield from Buildings and Wonders. [NEWLINE]Awards +1 [ICON_Governor] Governor Title. [NEWLINE][NEWLINE]Must be built in [ICON_CAPITAL] Capital. Can only be built once in a civilization."),
     ("LOC_BUILDING_HD_BUS_STOP_NAME",                             "Bus Stop"),
     ("LOC_BUILDING_HD_BUS_STOP_DESCRIPTION",                      "Provide corresponding yield to districts within 3 tiles. +3 [ICON_GOLD] Gold to improvements within 3 tiles. +100% Commercial Hub and Harbor district adjacency bonuses in this city."),
     -- Dam
@@ -188,6 +190,8 @@ values
     ("zh_Hans_CN",  "LOC_BUILDING_WATER_MILL_DESCRIPTION",                       "本城改良加成资源的农场、种植园、矿山和采石场+1 [ICON_Production] 生产力，解锁“工程”科技后该效果翻倍。"),
     ("zh_Hans_CN",  "LOC_BUILDING_FLOOD_BARRIER_NAME",                           "拦海堤"),
     ("zh_Hans_CN",  "LOC_BUILDING_PALGUM_DESCRIPTION",                           "巴比伦特色建筑。取代磨坊。本城淡水单元格+1 [ICON_FOOD] 食物。解锁“工程”科技后，本城淡水单元格+1 [ICON_Production] 生产力。[NEWLINE][NEWLINE]城市必须建在河流旁。"),
+    ("zh_Hans_CN",  "LOC_BUILDING_HD_ROYAL_COURT_NAME",                          "王廷"),
+    ("zh_Hans_CN",  "LOC_BUILDING_HD_ROYAL_COURT_DESCRIPTION",                   "[ICON_CAPITAL] 首都每位 [ICON_CITIZEN] 公民+0.3 [ICON_CULTURE] 文化值。市政广场所在城市每位 [ICON_CITIZEN] 公民+0.3 [ICON_PRODUCTION] 生产力。[NEWLINE][NEWLINE]必须建造在 [ICON_CAPITAL] 首都。"),
     ("zh_Hans_CN",  "LOC_BUILDING_HD_POLICE_STATION_NAME",                       "警署"),
     ("zh_Hans_CN",  "LOC_BUILDING_HD_POLICE_STATION_DESCRIPTION",                "从本城的每个区域获得2份对应产出。"),
     -- 学院
@@ -321,7 +325,7 @@ values
     ("zh_Hans_CN",  "LOC_BUILDING_HD_VILLA_NAME",                                "别墅"),
     ("zh_Hans_CN",  "LOC_BUILDING_HD_VILLA_DESCRIPTION",                         "本城的社区和民居宅邸改良+1 [ICON_FOOD] 食物和+3 [ICON_GOLD] 金币。"),
     ("zh_Hans_CN",  "LOC_BUILDING_HD_MANSION_NAME",                              "官邸"),
-    ("zh_Hans_CN",  "LOC_BUILDING_HD_MANSION_DESCRIPTION",                       "有 [ICON_GOVERNOR] 总督就职且有社区的城市从建筑和奇观获得1.5倍的辐射产出。[NEWLINE]奖励1个 [ICON_GOVERNOR] 总督头衔。[NEWLINE][NEWLINE]必须建造在 [ICON_CAPITAL] 首都。文明中一次仅限建造一座该建筑。"),
+    ("zh_Hans_CN",  "LOC_BUILDING_HD_MANSION_DESCRIPTION",                       "有 [ICON_GOVERNOR] 总督就职且有社区的城市从建筑和奇观获得的辐射产出+50%。[NEWLINE]奖励1个 [ICON_GOVERNOR] 总督头衔。[NEWLINE][NEWLINE]必须建造在 [ICON_CAPITAL] 首都。文明中一次仅限建造一座该建筑。"),
     ("zh_Hans_CN",  "LOC_BUILDING_HD_BUS_STOP_NAME",                             "公交站"),
     ("zh_Hans_CN",  "LOC_BUILDING_HD_BUS_STOP_DESCRIPTION",                      "3个单元格内的区域获得一份对应产出。3个单元格内的改良+3 [ICON_GOLD] 金币。本城的商业中心和港口+100%相邻加成。"),
     -- 堤坝

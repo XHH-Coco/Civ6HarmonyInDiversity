@@ -23,6 +23,12 @@ local RECYCLING_PLANT_PRODUCTION_PERCENT = GlobalParameters.RECYCLING_PLANT_PROD
 local SPAIN_NATURAL_WONDER_REVEALED_TAG = 'HD_SpainNaturalWonderRevealed_';
 local SPAIN_NATURAL_WONDER_REVEALED_LIST_TAG = 'HD_SpainNaturalWonderRevealedList';
 
+local PLAYER_HAS_INDUSTRY_TAG = 'HD_PLAYER_HAS_INDUSTRY_';
+local PLAYER_HAS_CORPORATION_TAG = 'HD_PLAYER_HAS_CORPORATION_';
+local GAME_HAS_CORPORATION_TAG = 'HD_GAME_HAS_CORPORATION_';
+local CITY_IMPROVEMENT_NUM_TAG = 'HD_CITY_IMPROVEMENT_NUM_';
+local CITY_ALLOW_EXTRA_TAG = 'HD_CITY_ALLOW_EXTRA_';
+
 local COAST_INDEX = GameInfo.Terrains['TERRAIN_COAST'].Index;
 local OCEAN_INDEX = GameInfo.Terrains['TERRAIN_OCEAN'].Index;
 
@@ -793,4 +799,487 @@ function m_HDUnitCommands.BANDEIRANTES.IsDisabled(unit: object)
 	end
 
 	return plot:GetProperty(BANDEIRANTES_PLOT_TAG) == 1;
+end
+
+-- ======================================================================================================================================================
+-- 神圣建筑师
+-- ======================================================================================================================================================
+local GOVERNOR_CARDINAL_RIGHT_3_FAITH_PERCENTAGE = GlobalParameters.HD_GOVERNOR_CARDINAL_RIGHT_3_FAITH_PERCENTAGE or 0;
+
+m_HDUnitCommands.CITADEL_OF_GOD = {};
+m_HDUnitCommands.CITADEL_OF_GOD.Properties = {};
+
+m_HDUnitCommands.CITADEL_OF_GOD.EventName = "HD_CitadelOfGodCompleteDistrict";
+m_HDUnitCommands.CITADEL_OF_GOD.CategoryInUI = "SPECIFIC";
+m_HDUnitCommands.CITADEL_OF_GOD.Icon = "ICON_UNITCOMMAND_CITADEL_OF_GOD";
+m_HDUnitCommands.CITADEL_OF_GOD.GetToolTipString = function (unit) 
+	if not unit then return Locale.Lookup('LOC_UNIT_CITADEL_OF_GOD_DESCRIPTION'); end
+
+	local playerId = unit:GetOwner();
+	local plot = Map.GetPlot(unit:GetX(), unit:GetY());
+	if plot and plot:GetOwner() == playerId then
+		local detail = Utils.GetPlotDistrictDetails(unit:GetX(), unit:GetY());
+		if detail and not detail.IsCompleted and detail.IsUnderConstruction and GOVERNOR_CARDINAL_RIGHT_3_FAITH_PERCENTAGE > 0 then
+			return Locale.Lookup('LOC_CITADEL_OF_GOD_DETAIL', math.ceil(detail.RemainingProduction * GOVERNOR_CARDINAL_RIGHT_3_FAITH_PERCENTAGE / 100), detail.DistrictName);
+		end
+	end
+
+	return Locale.Lookup('LOC_UNIT_CITADEL_OF_GOD_DESCRIPTION');
+end
+m_HDUnitCommands.CITADEL_OF_GOD.GetDisabledToolTipString = function(unit)
+	if not unit then return ""; end
+	local playerId = unit:GetOwner();
+	local player = Players[playerId];
+	if not player then return ""; end
+
+	if unit:GetMovesRemaining() == 0 then
+		return '[COLOR:Red]' .. Locale.Lookup("LOC_HUD_UNIT_ACTION_PILLAGE_REQUIRES_MOVEMENT") .. '[ENDCOLOR]';
+	end
+
+	local plot = Map.GetPlot(unit:GetX(), unit:GetY());
+	if plot and plot:GetOwner() == playerId then
+		local detail = Utils.GetPlotDistrictDetails(unit:GetX(), unit:GetY());
+		if detail and GOVERNOR_CARDINAL_RIGHT_3_FAITH_PERCENTAGE > 0 then
+			if detail.IsCompleted or not detail.IsUnderConstruction then
+				return Locale.Lookup("LOC_CITADEL_OF_GOD_NO_DISTRICTS");
+			elseif math.ceil(detail.RemainingProduction * GOVERNOR_CARDINAL_RIGHT_3_FAITH_PERCENTAGE / 100) > player:GetReligion():GetFaithBalance() then
+				return Locale.Lookup("LOC_CITADEL_OF_GOD_NO_FAITH");
+			end
+		end
+	end
+
+	return Locale.Lookup("LOC_CITADEL_OF_GOD_NO_DISTRICTS");
+end
+m_HDUnitCommands.CITADEL_OF_GOD.VisibleInUI = true;
+
+function m_HDUnitCommands.CITADEL_OF_GOD.CanUse(unit)
+	if not unit then return false; end
+	if GOVERNOR_CARDINAL_RIGHT_3_FAITH_PERCENTAGE <= 0 then return false; end
+	local unitInfo = GameInfo.Units[unit:GetType()];
+	return unitInfo.UnitType == "UNIT_CITADEL_OF_GOD";
+end
+
+function m_HDUnitCommands.CITADEL_OF_GOD.IsDisabled(unit)
+	if not unit then return true; end
+	local playerId = unit:GetOwner();
+	local player = Players[playerId];
+	if not player then return true; end
+
+	if unit:GetMovesRemaining() == 0 then return true; end
+
+	local plot = Map.GetPlot(unit:GetX(), unit:GetY());
+	if not plot then return true; end
+	if plot:GetOwner() ~= playerId then return true; end
+
+	local detail = Utils.GetPlotDistrictDetails(unit:GetX(), unit:GetY());
+	if not detail then return true; end
+
+	-- local city = Cities.GetPlotPurchaseCity(plot:GetIndex());
+	-- print(Locale.Lookup(city:GetName()), Locale.Lookup(detail.DistrictName), detail.IsCompleted, detail.IsUnderConstruction, detail.RemainingProduction);
+
+	if detail.IsCompleted or not detail.IsUnderConstruction then return true; end
+	return math.ceil(detail.RemainingProduction * GOVERNOR_CARDINAL_RIGHT_3_FAITH_PERCENTAGE / 100) > player:GetReligion():GetFaithBalance();
+end
+
+-- ======================================================================================================================================================
+-- 具德上师
+-- ======================================================================================================================================================
+local GOVERNOR_CARDINAL_RIGHT_2_RELIGIOUS_DISTANCE = GlobalParameters.HD_GOVERNOR_CARDINAL_RIGHT_2_RELIGIOUS_DISTANCE or 0;
+local GOVERNOR_CARDINAL_RIGHT_2_RELIGIOUS_PRESSURE = GlobalParameters.HD_GOVERNOR_CARDINAL_RIGHT_2_RELIGIOUS_PRESSURE or 0;
+local GOVERNOR_CARDINAL_RIGHT_2_GURU_AOE_PRESSURE_TAG = 'HD_GOVERNOR_CARDINAL_RIGHT_2_GURU_AOE_PRESSURE';
+
+m_HDUnitCommands.GURU_AOE_PRESSURE = {};
+m_HDUnitCommands.GURU_AOE_PRESSURE.Properties = {};
+
+m_HDUnitCommands.GURU_AOE_PRESSURE.EventName = "HD_GuruSpreadAoeReligiousPressureConsumeCharges";
+m_HDUnitCommands.GURU_AOE_PRESSURE.CategoryInUI = "SPECIFIC";
+m_HDUnitCommands.GURU_AOE_PRESSURE.Icon = "ICON_UNITOPERATION_SPREAD_RELIGION";
+m_HDUnitCommands.GURU_AOE_PRESSURE.ToolTipString = Locale.Lookup('LOC_ABILITY_HD_GOVERNOR_CARDINAL_RIGHT_2_GURU_TEXT');
+m_HDUnitCommands.GURU_AOE_PRESSURE.DisabledToolTipString = '[COLOR:Red]' .. Locale.Lookup("LOC_HUD_UNIT_ACTION_PILLAGE_REQUIRES_MOVEMENT") .. '[ENDCOLOR]';
+m_HDUnitCommands.GURU_AOE_PRESSURE.VisibleInUI = true;
+m_HDUnitCommands.GURU_AOE_PRESSURE.DoNotDelete = true;
+
+function m_HDUnitCommands.GURU_AOE_PRESSURE.CanUse(unit)
+	if not unit then return false; end
+	local hasAbility = unit:GetProperty(GOVERNOR_CARDINAL_RIGHT_2_GURU_AOE_PRESSURE_TAG) or 0;
+	return hasAbility > 0;
+end
+
+function m_HDUnitCommands.GURU_AOE_PRESSURE.IsDisabled(unit)
+	if not unit then return true; end
+	return unit:GetMovesRemaining() == 0;
+end
+
+-- ======================================================================================================================================================
+-- 维克多 工程单位建造战略行业
+-- ======================================================================================================================================================
+local UNIT_CAN_BUILD_STRATEGIC_INDUSTRY_TAG = 'HD_UNIT_CAN_BUILD_STRATEGIC_INDUSTRY';
+local BUILD_STRATEGIC_INDUSTRY_CONSUME_RESOURCE_AMOUNT = GlobalParameters.HD_BUILD_STRATEGIC_INDUSTRY_CONSUME_RESOURCE_AMOUNT or 0;
+local MILITARY_ENGINEERING_BUILD_STRATEGIC_INDUSTRY_CONSUME_CHARGE_NUM = GlobalParameters.HD_MILITARY_ENGINEERING_BUILD_STRATEGIC_INDUSTRY_CONSUME_CHARGE_NUM or 0;
+
+m_HDUnitCommands.BUILD_STRATEGIC_INDUSTRY = {};
+m_HDUnitCommands.BUILD_STRATEGIC_INDUSTRY.Properties = {};
+
+m_HDUnitCommands.BUILD_STRATEGIC_INDUSTRY.EventName = "HD_BuildStrategicIndustry";
+m_HDUnitCommands.BUILD_STRATEGIC_INDUSTRY.CategoryInUI = "SPECIFIC";
+m_HDUnitCommands.BUILD_STRATEGIC_INDUSTRY.Icon = "ICON_IMPROVEMENT_INDUSTRY";
+m_HDUnitCommands.BUILD_STRATEGIC_INDUSTRY.GetToolTipString = function(unit)
+	if not unit then return ""; end
+
+	local toolTipString = Locale.Lookup('LOC_UNITOPERATION_BUILD_IMPROVEMENT_DESCRIPTION')
+		.. Locale.Lookup('LOC_TOOLTIP_HD_COLON_TEXT')
+		.. Locale.Lookup('LOC_IMPROVEMENT_INDUSTRY_STRATEGIC_NAME');
+
+	-- 改良分类
+	local classificationList = {};
+	for row in GameInfo.HD_Improvement_Classification() do
+		if row.ImprovementType == 'IMPROVEMENT_INDUSTRY_STRATEGIC' then
+			local classificationInfo = GameInfo.HD_ImprovementClassificationTypes[row.ImprovementClassificationType];
+			if classificationInfo then
+				table.insert(classificationList, classificationInfo.Name);
+			end
+		end
+	end
+	if #classificationList > 0 then
+		toolTipString = toolTipString .. '[NEWLINE][NEWLINE]' .. Locale.Lookup('LOC_TOOLTIP_HD_IMPROVEMENT_CLASSIFICATIONS_TEXT');
+		
+		for _, nameTag in ipairs(classificationList) do
+			toolTipString = toolTipString .. '[NEWLINE][ICON_BULLET]' .. Locale.Lookup(nameTag)
+		end
+	end
+
+	-- 增加行业公司效果说明
+	if GameInfo.HD_Monopoly_Resource_Categories ~= nil then
+		local plot = Map.GetPlotByIndex(unit:GetPlotId());
+		if plot ~= nil then
+			local resourceHash = plot:GetResourceTypeHash();
+			local resource = GameInfo.Resources[resourceHash];
+			local player = Players[Game.GetLocalPlayer()];
+			if resource ~= nil and player ~= nil and player:GetResources():IsResourceVisible(resourceHash) then
+				local industryStr = {};
+
+				for row in GameInfo.HD_Monopoly_Resource_Categories() do
+					if row.ResourceType == resource.ResourceType then
+						local categoryInfo = GameInfo.HD_Monopoly_Categories[row.Category];
+						if categoryInfo then
+							if categoryInfo.IndustryEffect then
+								table.insert(industryStr, '[ICON_BULLET]' .. Locale.Lookup('LOC_RESOURCE_CLASSIFICATION_HD_' .. row.Category .. '_NAME') .. Locale.Lookup('LOC_TOOLTIP_HD_COLON_TEXT') .. Locale.Lookup("LOC_" .. categoryInfo.IndustryEffect .. "_DESCRIPTION"));
+							end
+						end
+					end
+				end
+
+				if #industryStr > 0 then
+					local effectStr = '';
+					for i, str in ipairs(industryStr) do
+						if i > 1 then effectStr = effectStr .. "[NEWLINE]"; end
+						effectStr = effectStr .. str;
+					end
+					toolTipString = toolTipString .. '[NEWLINE][NEWLINE]' .. Locale.Lookup('LOC_HD_INDUSTRY_EFFECT_TEXT', effectStr);
+				end
+			end
+		end
+	end
+
+	return toolTipString;
+end
+m_HDUnitCommands.BUILD_STRATEGIC_INDUSTRY.GetDisabledToolTipString = function(unit)
+	if not unit then return ""; end
+	local unitInfo = GameInfo.Units[unit:GetType()];
+	if not unitInfo then return ""; end
+	local playerId = unit:GetOwner();
+	local player = Players[playerId];
+	if not player then return ""; end
+	local plot = Map.GetPlot(unit:GetX(), unit:GetY());
+	if not plot then return ""; end
+	local city = Cities.GetPlotPurchaseCity(plot);
+	if not city then return ""; end
+	local resourceId = plot:GetResourceType();
+	if resourceId == -1 then return ""; end
+	local resourceInfo = GameInfo.Resources[resourceId];
+	if not resourceInfo then return ""; end
+
+	-- 玩家是否已经建造该行业
+	local alreadyBuilt = (Utils.GetPlayerProperty(playerId, PLAYER_HAS_INDUSTRY_TAG .. resourceInfo.ResourceType) or 0)
+		+ (Utils.GetPlayerProperty(playerId, PLAYER_HAS_CORPORATION_TAG .. resourceInfo.ResourceType) or 0);
+	if alreadyBuilt > 0 then return Locale.Lookup('LOC_IMPROVEMENT_INDUSTRY_PLAYER_DISABLED', "[ICON_" .. resourceInfo.ResourceType .. "]", resourceInfo.Name); end
+	-- 本城行业个数限制
+	local builtNum = (city:GetProperty(CITY_IMPROVEMENT_NUM_TAG .. 'IMPROVEMENT_INDUSTRY_STRATEGIC') or 0) + (city:GetProperty(CITY_IMPROVEMENT_NUM_TAG .. 'IMPROVEMENT_CORPORATION_STRATEGIC') or 0);
+	local extraNum = city:GetProperty(CITY_ALLOW_EXTRA_TAG .. 'IMPROVEMENT_INDUSTRY_STRATEGIC') or 0;
+	if extraNum < builtNum then return Locale.Lookup('LOC_IMPROVEMENT_IC_STRATEGIC_CITY_DISABLED', extraNum + 1); end
+	-- 控制资源数量
+	local resourceAmount = player:GetResources():GetResourceAmount(resourceId);
+	if resourceAmount < BUILD_STRATEGIC_INDUSTRY_CONSUME_RESOURCE_AMOUNT then return Locale.Lookup('LOC_IMPROVEMENT_IC_STRATEGIC_RESOURCE_DISABLED', BUILD_STRATEGIC_INDUSTRY_CONSUME_RESOURCE_AMOUNT, "[ICON_" .. resourceInfo.ResourceType .. "]", resourceInfo.Name); end
+	-- 单位剩余建造次数
+	local needCharges = 1;
+	if unitInfo.UnitType == 'UNIT_SAPPER' or unitInfo.UnitType == 'UNIT_MILITARY_ENGINEER' or unitInfo.UnitType == 'UNIT_ENGINEER_CORP' then
+		needCharges = MILITARY_ENGINEERING_BUILD_STRATEGIC_INDUSTRY_CONSUME_CHARGE_NUM;
+	end
+	if unit:GetBuildCharges() < needCharges then return Locale.Lookup('LOC_NO_ENOUGH_CHARGE_DISABLED'); end
+	-- 移动力
+	if unit:GetMovesRemaining() == 0 then return '[COLOR:Red]' .. Locale.Lookup("LOC_HUD_UNIT_ACTION_PILLAGE_REQUIRES_MOVEMENT") .. '[ENDCOLOR]'; end
+	
+	return ""
+end
+m_HDUnitCommands.BUILD_STRATEGIC_INDUSTRY.VisibleInUI = true;
+m_HDUnitCommands.BUILD_STRATEGIC_INDUSTRY.DoNotDelete = true;
+
+function m_HDUnitCommands.BUILD_STRATEGIC_INDUSTRY.CanUse(unit)
+	if not unit then return false; end
+	local canBuild = unit:GetProperty(UNIT_CAN_BUILD_STRATEGIC_INDUSTRY_TAG) or 0;
+	return canBuild > 0;
+end
+
+function m_HDUnitCommands.BUILD_STRATEGIC_INDUSTRY.IsVisible(unit)
+	if not unit then return false; end
+
+	local plot = Map.GetPlot(unit:GetX(), unit:GetY());
+	if not plot then return false; end
+	if plot:GetOwner() ~= unit:GetOwner() then return false; end
+	if plot:GetDistrictType() ~= -1 then return false; end
+	if plot:IsNationalPark() then return false; end
+	if plot:IsNaturalWonder() then return false; end
+
+	local improvementId = plot:GetImprovementType();
+	local improvementInfo = GameInfo.Improvements[improvementId];
+	if improvementInfo
+		and (improvementInfo.ImprovementType == 'IMPROVEMENT_CORPORATION'
+		or improvementInfo.ImprovementType == 'IMPROVEMENT_CORPORATION_BONUS'
+		or improvementInfo.ImprovementType == 'IMPROVEMENT_CORPORATION_STRATEGIC'
+		or improvementInfo.ImprovementType == 'IMPROVEMENT_LEU_TRANSNATIONAL'
+		or improvementInfo.ImprovementType == 'IMPROVEMENT_LEU_TRANSNATIONAL_SEA')
+	then
+		return false;
+	end
+
+	local resourceId = plot:GetResourceType();
+	if resourceId == -1 then return false; end
+	local resourceInfo = GameInfo.Resources[resourceId];
+	if not resourceInfo then return false; end
+
+	return resourceInfo.ResourceClassType == 'RESOURCECLASS_STRATEGIC';
+end
+
+function m_HDUnitCommands.BUILD_STRATEGIC_INDUSTRY.IsDisabled(unit)
+	if not unit then return true; end
+	local unitInfo = GameInfo.Units[unit:GetType()];
+	if not unitInfo then return true; end
+	local playerId = unit:GetOwner();
+	local player = Players[playerId];
+	if not player then return true; end
+	local plot = Map.GetPlot(unit:GetX(), unit:GetY());
+	if not plot then return true; end
+	local city = Cities.GetPlotPurchaseCity(plot);
+	if not city then return true; end
+	local resourceId = plot:GetResourceType();
+	if resourceId == -1 then return true; end
+	local resourceInfo = GameInfo.Resources[resourceId];
+	if not resourceInfo then return true; end
+
+	-- 玩家是否已经建造该行业
+	local alreadyBuilt = (Utils.GetPlayerProperty(playerId, PLAYER_HAS_INDUSTRY_TAG .. resourceInfo.ResourceType) or 0)
+		+ (Utils.GetPlayerProperty(playerId, PLAYER_HAS_CORPORATION_TAG .. resourceInfo.ResourceType) or 0);
+	if alreadyBuilt > 0 then return true; end
+	-- 本城行业个数限制
+	local builtNum = (city:GetProperty(CITY_IMPROVEMENT_NUM_TAG .. 'IMPROVEMENT_INDUSTRY_STRATEGIC') or 0) + (city:GetProperty(CITY_IMPROVEMENT_NUM_TAG .. 'IMPROVEMENT_CORPORATION_STRATEGIC') or 0);
+	local extraNum = city:GetProperty(CITY_ALLOW_EXTRA_TAG .. 'IMPROVEMENT_INDUSTRY_STRATEGIC') or 0;
+	if extraNum < builtNum then return true; end
+	-- 控制资源数量
+	local resourceAmount = player:GetResources():GetResourceAmount(resourceId);
+	if resourceAmount < BUILD_STRATEGIC_INDUSTRY_CONSUME_RESOURCE_AMOUNT then return true; end
+	-- 单位剩余建造次数
+	local needCharges = 1;
+	if unitInfo.UnitType == 'UNIT_SAPPER' or unitInfo.UnitType == 'UNIT_MILITARY_ENGINEER' or unitInfo.UnitType == 'UNIT_ENGINEER_CORP' then
+		needCharges = MILITARY_ENGINEERING_BUILD_STRATEGIC_INDUSTRY_CONSUME_CHARGE_NUM;
+	end
+	if unit:GetBuildCharges() < needCharges then return true; end
+	-- 移动力
+	return unit:GetMovesRemaining() == 0;
+end
+
+-- ======================================================================================================================================================
+-- 马格努斯 建造者建造加成行业
+-- ======================================================================================================================================================
+local UNIT_CAN_BUILD_BONUS_INDUSTRY_TAG = 'HD_UNIT_CAN_BUILD_BONUS_INDUSTRY';
+local BUILD_BONUS_INDUSTRY_NEED_RESOURCE_NUM = GlobalParameters.HD_BUILD_BONUS_INDUSTRY_NEED_RESOURCE_NUM or 0;
+local BUILDER_BUILD_BONUS_INDUSTRY_CONSUME_CHARGE_NUM = GlobalParameters.HD_BUILDER_BUILD_BONUS_INDUSTRY_CONSUME_CHARGE_NUM or 0;
+
+m_HDUnitCommands.BUILD_BONUS_INDUSTRY = {};
+m_HDUnitCommands.BUILD_BONUS_INDUSTRY.Properties = {};
+
+m_HDUnitCommands.BUILD_BONUS_INDUSTRY.EventName = "HD_BuildBonusIndustry";
+m_HDUnitCommands.BUILD_BONUS_INDUSTRY.CategoryInUI = "SPECIFIC";
+m_HDUnitCommands.BUILD_BONUS_INDUSTRY.Icon = "ICON_IMPROVEMENT_INDUSTRY";
+m_HDUnitCommands.BUILD_BONUS_INDUSTRY.GetToolTipString = function(unit)
+	if not unit then return ""; end
+
+	local toolTipString = Locale.Lookup('LOC_UNITOPERATION_BUILD_IMPROVEMENT_DESCRIPTION')
+		.. Locale.Lookup('LOC_TOOLTIP_HD_COLON_TEXT')
+		.. Locale.Lookup('LOC_IMPROVEMENT_INDUSTRY_BONUS_NAME');
+
+	-- 改良分类
+	local classificationList = {};
+	for row in GameInfo.HD_Improvement_Classification() do
+		if row.ImprovementType == 'IMPROVEMENT_INDUSTRY_BONUS' then
+			local classificationInfo = GameInfo.HD_ImprovementClassificationTypes[row.ImprovementClassificationType];
+			if classificationInfo then
+				table.insert(classificationList, classificationInfo.Name);
+			end
+		end
+	end
+	if #classificationList > 0 then
+		toolTipString = toolTipString .. '[NEWLINE][NEWLINE]' .. Locale.Lookup('LOC_TOOLTIP_HD_IMPROVEMENT_CLASSIFICATIONS_TEXT');
+		
+		for _, nameTag in ipairs(classificationList) do
+			toolTipString = toolTipString .. '[NEWLINE][ICON_BULLET]' .. Locale.Lookup(nameTag)
+		end
+	end
+
+	-- 增加行业公司效果说明
+	if GameInfo.HD_Monopoly_Resource_Categories ~= nil then
+		local plot = Map.GetPlotByIndex(unit:GetPlotId());
+		if plot ~= nil then
+			local resourceHash = plot:GetResourceTypeHash();
+			local resource = GameInfo.Resources[resourceHash];
+			local player = Players[Game.GetLocalPlayer()];
+			if resource ~= nil and player ~= nil and player:GetResources():IsResourceVisible(resourceHash) then
+				local industryStr = {};
+
+				for row in GameInfo.HD_Monopoly_Resource_Categories() do
+					if row.ResourceType == resource.ResourceType then
+						local categoryInfo = GameInfo.HD_Monopoly_Categories[row.Category];
+						if categoryInfo then
+							if categoryInfo.IndustryEffect then
+								table.insert(industryStr, '[ICON_BULLET]' .. Locale.Lookup('LOC_RESOURCE_CLASSIFICATION_HD_' .. row.Category .. '_NAME') .. Locale.Lookup('LOC_TOOLTIP_HD_COLON_TEXT') .. Locale.Lookup("LOC_" .. categoryInfo.IndustryEffect .. "_DESCRIPTION"));
+							end
+						end
+					end
+				end
+
+				if #industryStr > 0 then
+					local effectStr = '';
+					for i, str in ipairs(industryStr) do
+						if i > 1 then effectStr = effectStr .. "[NEWLINE]"; end
+						effectStr = effectStr .. str;
+					end
+					toolTipString = toolTipString .. '[NEWLINE][NEWLINE]' .. Locale.Lookup('LOC_HD_INDUSTRY_EFFECT_TEXT', effectStr);
+				end
+			end
+		end
+	end
+
+	return toolTipString;
+end
+m_HDUnitCommands.BUILD_BONUS_INDUSTRY.GetDisabledToolTipString = function(unit)
+	if not unit then return ""; end
+	local unitInfo = GameInfo.Units[unit:GetType()];
+	if not unitInfo then return ""; end
+	local playerId = unit:GetOwner();
+	local player = Players[playerId];
+	if not player then return ""; end
+	local plot = Map.GetPlot(unit:GetX(), unit:GetY());
+	if not plot then return ""; end
+	local city = Cities.GetPlotPurchaseCity(plot);
+	if not city then return ""; end
+	local resourceId = plot:GetResourceType();
+	if resourceId == -1 then return ""; end
+	local resourceInfo = GameInfo.Resources[resourceId];
+	if not resourceInfo then return ""; end
+
+	-- 玩家是否已经建造该行业
+	local alreadyBuilt = (Utils.GetPlayerProperty(playerId, PLAYER_HAS_INDUSTRY_TAG .. resourceInfo.ResourceType) or 0)
+		+ (Utils.GetPlayerProperty(playerId, PLAYER_HAS_CORPORATION_TAG .. resourceInfo.ResourceType) or 0);
+	if alreadyBuilt > 0 then return Locale.Lookup('LOC_IMPROVEMENT_INDUSTRY_PLAYER_DISABLED', "[ICON_" .. resourceInfo.ResourceType .. "]", resourceInfo.Name); end
+	-- 本城行业个数限制
+	local builtNum = (city:GetProperty(CITY_IMPROVEMENT_NUM_TAG .. 'IMPROVEMENT_INDUSTRY_BONUS') or 0) + (city:GetProperty(CITY_IMPROVEMENT_NUM_TAG .. 'IMPROVEMENT_CORPORATION_BONUS') or 0);
+	local extraNum = city:GetProperty(CITY_ALLOW_EXTRA_TAG .. 'IMPROVEMENT_INDUSTRY_BONUS') or 0;
+	if extraNum < builtNum then return Locale.Lookup('LOC_IMPROVEMENT_IC_BONUS_CITY_DISABLED', extraNum + 1); end
+	-- 控制资源数量
+	local resourceAmount = player:GetResources():GetResourceAmount(resourceId);
+	if resourceAmount < BUILD_BONUS_INDUSTRY_NEED_RESOURCE_NUM then return Locale.Lookup('LOC_IMPROVEMENT_IC_BONUS_RESOURCE_DISABLED', BUILD_BONUS_INDUSTRY_NEED_RESOURCE_NUM, "[ICON_" .. resourceInfo.ResourceType .. "]", resourceInfo.Name); end
+	-- 单位剩余建造次数
+	local needCharges = 1;
+	if unitInfo.UnitType == 'UNIT_BUILDER' then
+		needCharges = BUILDER_BUILD_BONUS_INDUSTRY_CONSUME_CHARGE_NUM;
+	end
+	if unit:GetBuildCharges() < needCharges then return Locale.Lookup('LOC_NO_ENOUGH_CHARGE_DISABLED'); end
+	-- 移动力
+	if unit:GetMovesRemaining() == 0 then return '[COLOR:Red]' .. Locale.Lookup("LOC_HUD_UNIT_ACTION_PILLAGE_REQUIRES_MOVEMENT") .. '[ENDCOLOR]'; end
+	
+	return ""
+end
+m_HDUnitCommands.BUILD_BONUS_INDUSTRY.VisibleInUI = true;
+m_HDUnitCommands.BUILD_BONUS_INDUSTRY.DoNotDelete = true;
+
+function m_HDUnitCommands.BUILD_BONUS_INDUSTRY.CanUse(unit)
+	if not unit then return false; end
+	local canBuild = unit:GetProperty(UNIT_CAN_BUILD_BONUS_INDUSTRY_TAG) or 0;
+	return canBuild > 0;
+end
+
+function m_HDUnitCommands.BUILD_BONUS_INDUSTRY.IsVisible(unit)
+	if not unit then return false; end
+
+	local plot = Map.GetPlot(unit:GetX(), unit:GetY());
+	if not plot then return false; end
+	if plot:GetOwner() ~= unit:GetOwner() then return false; end
+	if plot:GetDistrictType() ~= -1 then return false; end
+	if plot:IsNationalPark() then return false; end
+	if plot:IsNaturalWonder() then return false; end
+
+	local improvementId = plot:GetImprovementType();
+	local improvementInfo = GameInfo.Improvements[improvementId];
+	if improvementInfo
+		and (improvementInfo.ImprovementType == 'IMPROVEMENT_CORPORATION'
+		or improvementInfo.ImprovementType == 'IMPROVEMENT_CORPORATION_BONUS'
+		or improvementInfo.ImprovementType == 'IMPROVEMENT_CORPORATION_STRATEGIC'
+		or improvementInfo.ImprovementType == 'IMPROVEMENT_LEU_TRANSNATIONAL'
+		or improvementInfo.ImprovementType == 'IMPROVEMENT_LEU_TRANSNATIONAL_SEA')
+	then
+		return false;
+	end
+
+	local resourceId = plot:GetResourceType();
+	if resourceId == -1 then return false; end
+	local resourceInfo = GameInfo.Resources[resourceId];
+	if not resourceInfo then return false; end
+
+	return resourceInfo.ResourceClassType == 'RESOURCECLASS_BONUS';
+end
+
+function m_HDUnitCommands.BUILD_BONUS_INDUSTRY.IsDisabled(unit)
+	if not unit then return true; end
+	local unitInfo = GameInfo.Units[unit:GetType()];
+	if not unitInfo then return true; end
+	local playerId = unit:GetOwner();
+	local player = Players[playerId];
+	if not player then return true; end
+	local plot = Map.GetPlot(unit:GetX(), unit:GetY());
+	if not plot then return true; end
+	local city = Cities.GetPlotPurchaseCity(plot);
+	if not city then return true; end
+	local resourceId = plot:GetResourceType();
+	if resourceId == -1 then return true; end
+	local resourceInfo = GameInfo.Resources[resourceId];
+	if not resourceInfo then return true; end
+
+	-- 玩家是否已经建造该行业
+	local alreadyBuilt = (Utils.GetPlayerProperty(playerId, PLAYER_HAS_INDUSTRY_TAG .. resourceInfo.ResourceType) or 0)
+		+ (Utils.GetPlayerProperty(playerId, PLAYER_HAS_CORPORATION_TAG .. resourceInfo.ResourceType) or 0);
+	if alreadyBuilt > 0 then return true; end
+	-- 本城行业个数限制
+	local builtNum = (city:GetProperty(CITY_IMPROVEMENT_NUM_TAG .. 'IMPROVEMENT_INDUSTRY_BONUS') or 0) + (city:GetProperty(CITY_IMPROVEMENT_NUM_TAG .. 'IMPROVEMENT_CORPORATION_BONUS') or 0);
+	local extraNum = city:GetProperty(CITY_ALLOW_EXTRA_TAG .. 'IMPROVEMENT_INDUSTRY_BONUS') or 0;
+	if extraNum < builtNum then return true; end
+	-- 控制资源数量
+	local resourceAmount = player:GetResources():GetResourceAmount(resourceId);
+	if resourceAmount < BUILD_BONUS_INDUSTRY_NEED_RESOURCE_NUM then return true; end
+	-- 单位剩余建造次数
+	local needCharges = 1;
+	if unitInfo.UnitType == 'UNIT_BUILDER' then
+		needCharges = BUILDER_BUILD_BONUS_INDUSTRY_CONSUME_CHARGE_NUM;
+	end
+	if unit:GetBuildCharges() < needCharges then return true; end
+	-- 移动力
+	return unit:GetMovesRemaining() == 0;
 end
