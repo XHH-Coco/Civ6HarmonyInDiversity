@@ -335,7 +335,7 @@ local MINE_INDEX = GameInfo.Improvements['IMPROVEMENT_MINE'].Index;
 local COAL_INDEX = GameInfo.Resources['RESOURCE_COAL'].Index;
 local HORSEBACK_RIDING_INDEX = GameInfo.Technologies['TECH_HORSEBACK_RIDING'].Index;
 local PASTURE_INDEX = GameInfo.Improvements['IMPROVEMENT_PASTURE'].Index;
-local HEAVENLY_HORSE_INDEX = GameInfo.Resources['RESOURCE_C_HEAVENLY_HORSE'].Index;
+local HEAVENLY_HORSE_INFO = GameInfo.Resources['RESOURCE_C_HEAVENLY_HORSE'];
 local IMPROVEMENT_INDUSTRY_BONUS_INFO = GameInfo.Improvements['IMPROVEMENT_INDUSTRY_BONUS'];
 local IMPROVEMENT_INDUSTRY_STRATEGIC_INFO = GameInfo.Improvements['IMPROVEMENT_INDUSTRY_STRATEGIC'];
 local COMMERCIAL_CAPITALISM_HD_INDEX = GameInfo.Civics['CIVIC_COMMERCIAL_CAPITALISM_HD'].Index;
@@ -390,7 +390,7 @@ function ImprovementAddedToMapBoost(x, y, improvementId, playerId, resourceId, i
   end
 
   -- 骑马
-  if improvementId == PASTURE_INDEX and resourceId == HEAVENLY_HORSE_INDEX then
+  if HEAVENLY_HORSE_INFO and improvementId == PASTURE_INDEX and resourceId == HEAVENLY_HORSE_INFO.Index then
     if not player:GetTechs():HasBoostBeenTriggered(HORSEBACK_RIDING_INDEX) then
       player:GetTechs():TriggerBoost(HORSEBACK_RIDING_INDEX);
     end
