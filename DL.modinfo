@@ -1405,36 +1405,6 @@
       <Properties><LoadOrder>15610</LoadOrder></Properties>
       <File>SubMods/MedievalPirate/DL_Texts.sql</File>
     </UpdateText>
-    <!-- HDRESOURCE -->
-    <ImportFiles>
-      <File>SubMods/HDRESOURCE/ArtDefs/Improvements.artdef</File>
-      <File>SubMods/HDRESOURCE/ArtDefs/Landmarks.artdef</File>
-      <File>SubMods/HDRESOURCE/ArtDefs/Resources.artdef</File>
-      <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE.sql</File>
-      <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Localisation.xml</File>
-      <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly.sql</File>
-      <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly_Localisation.xml</File>
-      <File>SubMods/HDRESOURCE/HDRESOURCE.dep</File>
-      <File>SubMods/HDRESOURCE/Platforms/MacOS/BLPs/HDResources.blp</File>
-      <File>SubMods/HDRESOURCE/Platforms/MacOS/BLPs/Improvements.blp</File>
-      <File>SubMods/HDRESOURCE/Platforms/Windows/BLPs/HDResources.blp</File>
-      <File>SubMods/HDRESOURCE/Platforms/Windows/BLPs/Improvements.blp</File>
-    </ImportFiles>
-    <UpdateArt id="HDRESOURCEArt"  criteria="Expansion2">
-      <File>SubMods/HDRESOURCE/HDRESOURCE.dep</File>
-    </UpdateArt>
-    <UpdateDatabase id="HDRESOURCEDatabase"  criteria="Expansion2">
-      <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE.sql</File>
-    </UpdateDatabase>
-    <UpdateText id="HDRESOURCEText"  criteria="Expansion2">
-      <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Localisation.xml</File>
-    </UpdateText>
-    <UpdateText id="HDRESOURCEText"  criteria="Expansion2">
-      <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly_Localisation.xml</File>
-    </UpdateText>
-    <UpdateDatabase id="HDRESOURCEMonopoly" criteria="Monopolies_Mode_Expansion2">
-      <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly.sql</File>
-    </UpdateDatabase>
     <!-- Third Party -->
     <UpdateText id="CNforMods_Texts" criteria="MonopoliesMode">
       <Properties><LoadOrder>10000</LoadOrder></Properties>
@@ -2595,18 +2565,6 @@
     <File>SubMods/MedievalPirate/DL_Database.sql</File>
     <File>SubMods/MedievalPirate/DL_Icons.xml</File>
     <File>SubMods/MedievalPirate/DL_Texts.sql</File>
-    <File>SubMods/HDRESOURCE/ArtDefs/Improvements.artdef</File>
-    <File>SubMods/HDRESOURCE/ArtDefs/Landmarks.artdef</File>
-    <File>SubMods/HDRESOURCE/ArtDefs/Resources.artdef</File>
-    <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE.sql</File>
-    <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Localisation.xml</File>
-    <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly.sql</File>
-    <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly_Localisation.xml</File>
-    <File>SubMods/HDRESOURCE/HDRESOURCE.dep</File>
-    <File>SubMods/HDRESOURCE/Platforms/MacOS/BLPs/HDResources.blp</File>
-    <File>SubMods/HDRESOURCE/Platforms/MacOS/BLPs/Improvements.blp</File>
-    <File>SubMods/HDRESOURCE/Platforms/Windows/BLPs/HDResources.blp</File>
-    <File>SubMods/HDRESOURCE/Platforms/Windows/BLPs/Improvements.blp</File>
 
     <!-- Map Utility -->
     <File>Maps/Utility/AssignStartingPlots.lua</File>

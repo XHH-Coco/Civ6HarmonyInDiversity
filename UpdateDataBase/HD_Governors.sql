@@ -30,6 +30,7 @@ insert or replace into GlobalParameters (Name, Value) values
 insert or ignore into GovernorPromotionModifiers (GovernorPromotionType, ModifierId) select
   'GOVERNOR_PROMOTION_HD_' || Tag || '_BASE', 'REINFORCED_INFRASTRUCTURE_PREVENET_STRUCTURAL_DAMAGE'
 from HD_Governors_Need_Reset;
+update Modifiers set OwnerRequirementSetId = 'PLAYER_HAS_TECH_ENGINEERING_REQUIREMENTS' where ModifierId = 'REINFORCED_INFRASTRUCTURE_PREVENET_STRUCTURAL_DAMAGE';
 
 -- ============================================================================================================================================================
 -- 平伽拉
