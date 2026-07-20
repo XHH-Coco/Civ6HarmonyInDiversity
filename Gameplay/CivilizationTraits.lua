@@ -1926,7 +1926,6 @@ local NOTIFICATION_PRIDE_MOMENT_RECORDED_HASH = GameInfo.Notifications['NOTIFICA
 
 local MAGNANIMOUS_COMPLETE_DISTRICT_BUILDING_TAG = 'HD_MAGNANIMOUS_COMPLETE_DISTRICT_BUILDING';
 local MAGNANIMOUS_INTRODUCE_POPULATION_TAG = 'HD_MAGNANIMOUS_INTRODUCE_POPULATION';
-local MAGNANIMOUS_MOMENT_TAG = 'HD_MAGNANIMOUS_MOMENT_';
 
 local MAGNANIMOUS_DISTRICT_PUSH_PERCENTAGE = GlobalParameters.HD_MAGNANIMOUS_DISTRICT_PUSH_PERCENTAGE or 0;
 local MAGNANIMOUS_INTRODUCE_GREAT_PERSON_PERCENTAGE = GlobalParameters.HD_MAGNANIMOUS_INTRODUCE_GREAT_PERSON_PERCENTAGE or 0;
@@ -1934,48 +1933,34 @@ local MAGNANIMOUS_INTRODUCE_TYCOON_PERCENTAGE = GlobalParameters.HD_MAGNANIMOUS_
 local MAGNANIMOUS_INTRODUCE_INVESTOR_PERCENTAGE = GlobalParameters.HD_MAGNANIMOUS_INTRODUCE_INVESTOR_PERCENTAGE or 0;
 
 -- 记录历史时刻
-function MagnanimousNotificationAdded(playerId, notificationId)
+function MagnanimousPlayerCompleteMoment(playerId, momentId, classificationMap)
 	local player = Players[playerId];
   if not player then return; end
 
 	if LeaderHasTrait(playerId, 'TRAIT_LEADER_MAGNANIMOUS') then
-		local notificationEntry = NotificationManager.Find(playerId, notificationId)
-  	if notificationEntry and notificationEntry:GetType() == NOTIFICATION_PRIDE_MOMENT_RECORDED_HASH then
-			local momentId = notificationEntry:GetValue("MomentID");
-			if momentId then
-				print('momentId', momentId)
-				local momentData = Utils.GetHistoricalMomentData(momentId);
-				local momentInfo = momentData and GameInfo.Moments[momentData.Type] or nil;
-				if momentInfo then
-					-- 判断是否是发展类
-					if (Utils.MomentClassificationMap['MOMENT_CLASSIFICATION_DEVELOPMENT'][momentInfo.MomentType] == true
-						or Utils.MomentClassificationMap['MOMENT_CLASSIFICATION_MILITARY'][momentInfo.MomentType] == true)
-						and player:GetProperty(MAGNANIMOUS_MOMENT_TAG .. momentId) ~= 1
-					then
-						player:SetProperty(MAGNANIMOUS_MOMENT_TAG .. momentId, 1);
+		-- 判断是否是发展类
+		local isDevelop = classificationMap['MOMENT_CLASSIFICATION_DEVELOPMENT'] or 0;
+		local isMilitary = classificationMap['MOMENT_CLASSIFICATION_MILITARY'] or 0;
+		if isDevelop > 0 or isMilitary > 0 then
+			local isCivFirst = classificationMap['MOMENT_CLASSIFICATION_CIVILIZATION_FIRST'] or 0;
+			local isWorldFirst = classificationMap['MOMENT_CLASSIFICATION_WORLD_FIRST'] or 0;
+			-- 文明首次
+			if isCivFirst > 0 or isWorldFirst > 0 then
+				local amount = player:GetProperty(MAGNANIMOUS_COMPLETE_DISTRICT_BUILDING_TAG) or 0;
+				player:SetProperty(MAGNANIMOUS_COMPLETE_DISTRICT_BUILDING_TAG, amount + 1);
+				print("佩德罗二世 可免费建造次数：" .. amount + 1);
+			end
 
-						local isCivFirst = Utils.MomentClassificationMap['MOMENT_CLASSIFICATION_CIVILIZATION_FIRST'][momentInfo.MomentType] == true;
-						local isWorldFirst = Utils.MomentClassificationMap['MOMENT_CLASSIFICATION_WORLD_FIRST'][momentInfo.MomentType] == true;
-						-- 文明首次
-						if isCivFirst or isWorldFirst then
-							local amount = player:GetProperty(MAGNANIMOUS_COMPLETE_DISTRICT_BUILDING_TAG) or 0;
-							player:SetProperty(MAGNANIMOUS_COMPLETE_DISTRICT_BUILDING_TAG, amount + 1);
-							print("佩德罗二世 可免费建造次数：" .. amount + 1);
-						end
-
-						-- 世界首次
-						if isWorldFirst then
-							local amount = player:GetProperty(MAGNANIMOUS_INTRODUCE_POPULATION_TAG) or 0;
-							player:SetProperty(MAGNANIMOUS_INTRODUCE_POPULATION_TAG, amount + 1);
-							print("佩德罗二世 可引进移民次数：" .. amount + 1);
-						end
-					end
-				end
+			-- 世界首次
+			if isWorldFirst > 0 then
+				local amount = player:GetProperty(MAGNANIMOUS_INTRODUCE_POPULATION_TAG) or 0;
+				player:SetProperty(MAGNANIMOUS_INTRODUCE_POPULATION_TAG, amount + 1);
+				print("佩德罗二世 可引进移民次数：" .. amount + 1);
 			end
 		end
 	end
 end
-Events.NotificationAdded.Add(MagnanimousNotificationAdded);
+GameEvents.HDPlayerCompleteMoment.Add(MagnanimousPlayerCompleteMoment);
 
 -- 完成区域建筑
 function MagnanimousCompleteDistrictBuilding(playerId, cityId, productionId, objectId)
@@ -4261,6 +4246,20 @@ function Bannockburn_CustomEvent_OnChooseSelection(playerId, param)
   end
 end
 GameEvents.HD_CustomEvent_OnChooseSelection.Add(Bannockburn_CustomEvent_OnChooseSelection);
+
+-- =====================================================================================================================================
+-- 德国
+-- =====================================================================================================================================
+-- 红胡子
+local HOLY_ROMAN_EMPEROR_GOVERNOR_TAG = 'HD_HOLY_ROMAN_EMPEROR_GOVERNOR_';
+function HolyRomanEmperorGovernorAppointed(playerId, governorId)
+	local player = Players[playerId];
+	if player and LeaderHasTrait(playerId, 'TRAIT_LEADER_HOLY_ROMAN_EMPEROR') and player:GetProperty(HOLY_ROMAN_EMPEROR_GOVERNOR_TAG .. governorId) ~= 1 then
+		player:SetProperty(HOLY_ROMAN_EMPEROR_GOVERNOR_TAG .. governorId, 1);
+		player:AttachModifierByID('HD_HOLY_ROMAN_MILITARY_GOVERNMENT_SLOT');
+	end
+end
+Events.GovernorAppointed.Add(HolyRomanEmperorGovernorAppointed);
 
 --------------------------------------------------------------
 -- Initialize

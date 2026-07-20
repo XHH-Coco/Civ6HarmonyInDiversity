@@ -307,7 +307,7 @@ values
 	-- 武老美
 	("LOC_TRAIT_LEADER_ROOSEVELT_COROLLARY_ROUGH_RIDER_DESCRIPTION",         "Units receive +5 [ICON_Strength] Combat Strength on their home continent. When you start a [ICON_TRADEROUTE] Trade Route to a City-State, send an [ICON_ENVOY] Envoy to this City-State. Every specialty district in the origin city provide +1 [ICON_SCIENCE] Science and +2 [ICON_GOLD] Gold for your [ICON_TRADEROUTE] Trade Routes to any city-state. Upon conquering another Civilization's Original [ICON_CAPITAL] Capital city, if this Civilization is still in the game, take over immediately all the City-States it is the Suzerain of. Gain the Rough Rider unique unit with Rifling."),
 	-- 文老美
-	("LOC_TRAIT_LEADER_ANTIQUES_AND_PARKS_DESCRIPTION",                      "Breathtaking tiles receive +1 [ICON_SCIENCE] Science and +1 [ICON_CULTURE] Culture. All tiles in a city with a National Park are +1 Appeal."),
+	("LOC_TRAIT_LEADER_ANTIQUES_AND_PARKS_DESCRIPTION",                      "Breathtaking tiles receive +1 [ICON_SCIENCE] Science and [ICON_CULTURE] Culture. All tiles in a city with a National Park are +1 Appeal."),
 	-- 林肯
 	("LOC_TRAIT_LEADER_LINCOLN_EXPANSION_DESCRIPTION",                       "Industrial Zones give +2 [ICON_Amenities] Amenities. Receive a free Builder every time you finish a Industrial Zone. Enable Liberating the builders, which removes the unit and gives +1 [ICON_PRODUCTION] Production adjacency bonus to this Industrial Zone for each builder charge the unit has, and gains 1 [ICON_CITIZEN] Citizen if you first do it in a city."),
 	("LOC_UNITCOMMAND_LIBERATION_LINCOLN_NAME",                              "Liberate"),
@@ -371,7 +371,7 @@ values
 -- 德国
 -- =====================================================================================================================================
 	("LOC_TRAIT_CIVILIZATION_IMPERIAL_FREE_CITIES_DESCRIPTION",              "Each city can build one more district than usual. +1 [ICON_Science] Science and [ICON_Culture] Culture for cities that have Specialty Districts."),
-	("LOC_TRAIT_LEADER_HOLY_ROMAN_EMPEROR_DESCRIPTION",                      "After Early Warfare civic is researched, receive an additional Military policy slot. After Encampment district is first built, receive an additional Military policy slot. Encampment district receives an additional standard adjacency bonus for being adjacent to another district, and [ICON_FAITH] Faith equal to its adjacency bonus. Encampment district provides +1 [ICON_PRODUCTION] Production, +1 [ICON_FAITH] Faith to resource plots in the city. Land units can be purchased with [ICON_FAITH] Faith in cities with a [ICON_GOVERNOR] Governor."),
+	("LOC_TRAIT_LEADER_HOLY_ROMAN_EMPEROR_DESCRIPTION",                      "Receive a Military policy slot for each appointed [ICON_GOVERNOR] Governor. Encampment district receives an additional standard adjacency bonus for being adjacent to another district, and [ICON_FAITH] Faith equal to its adjacency bonus. Encampment district provides +1 [ICON_PRODUCTION] Production, +1 [ICON_FAITH] Faith to resource plots in the city. Land units can be purchased with [ICON_FAITH] Faith in cities with a [ICON_GOVERNOR] Governor."),
 -- =====================================================================================================================================
 -- 印度尼西亚
 -- =====================================================================================================================================
@@ -933,7 +933,7 @@ values
 	-- 武老美
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_ROOSEVELT_COROLLARY_ROUGH_RIDER_DESCRIPTION",  "在首都所在大陆上时单位+5 [ICON_Strength] 战斗力。通往城邦的 [ICON_TRADEROUTE] 贸易路线将向该城邦派遣1位 [ICON_ENVOY] 使者。起源城市的每个专业化区域为通往城邦的 [ICON_TRADEROUTE] 贸易路线+1 [ICON_SCIENCE] 科技值和+2 [ICON_GOLD] 金币。攻占一个主要文明的原始首都后，如果该文明仍然存在，对其宗主的城邦派遣足够数量的 [ICON_ENVOY] 使者，直至成为这些城邦的宗主国。解锁“膛线”科技后获得特色单位“莽骑兵”。"),
 	-- 文老美
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_ANTIQUES_AND_PARKS_DESCRIPTION",               "魅力值为“惊艳”的单元格+1 [ICON_SCIENCE] 科技值和+1 [ICON_CULTURE] 文化值。在拥有国家公园的城市中，所有单元格+1魅力。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_ANTIQUES_AND_PARKS_DESCRIPTION",               "惊艳单元格+1 [ICON_SCIENCE] 科技值和 [ICON_CULTURE] 文化值。在拥有国家公园的城市中，所有单元格+1魅力。"),
 	-- 林肯
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_LINCOLN_EXPANSION_DESCRIPTION",                "工业区+2 [ICON_Amenities] 宜居度。建造工业区后获得一个免费的建造者。允许在工业区解放建造者，其每有一次剩余劳动力该工业区+1 [ICON_PRODUCTION] 生产力相邻加成，如果在本城第一次进行解放，+1 [ICON_CITIZEN] 人口。"),
 	("zh_Hans_CN",  "LOC_UNITCOMMAND_LIBERATION_LINCOLN_NAME",                       "解放"),
@@ -997,7 +997,7 @@ values
 -- 德国
 -- =====================================================================================================================================
 	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_IMPERIAL_FREE_CITIES_DESCRIPTION",       "每座城市都能建造比平常多一个区域。拥有专业化区域的城市+1 [ICON_Science] 科技值和 [ICON_Culture] 文化值。"),
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_HOLY_ROMAN_EMPEROR_DESCRIPTION",               "解锁“原始军事”市政后，和首次建成军营后，分别获得一个军事政策槽位。军营与区域相邻时额外获得标准相邻加成，相邻加成也提供 [ICON_Faith] 信仰值。有军营的城市所有资源+1 [ICON_Production] 生产力和 [ICON_Faith] 信仰值。有 [ICON_GOVERNOR] 总督就职的城市可用 [ICON_FAITH] 信仰值购买陆军单位。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_HOLY_ROMAN_EMPEROR_DESCRIPTION",               "每任命一位 [ICON_GOVERNOR] 总督，获得一个军事政策槽位。军营与区域相邻时额外获得标准相邻加成，相邻加成也提供 [ICON_Faith] 信仰值。有军营的城市所有资源+1 [ICON_Production] 生产力和 [ICON_Faith] 信仰值。有 [ICON_GOVERNOR] 总督就职的城市可用 [ICON_FAITH] 信仰值购买陆军单位。"),
 -- =====================================================================================================================================
 -- 印度尼西亚
 -- =====================================================================================================================================
@@ -1264,11 +1264,11 @@ where exists (select Tag from LocalizedText where Tag = 'LOC_CIVILIZATION_ETHIOP
 -- 美国文本更改
 -- =====================================================================================================================================
 insert or replace into EnglishText (Tag, Text) select
-	"LOC_TRAIT_LEADER_ANTIQUES_AND_PARKS_DESCRIPTION", "Breathtaking tiles receive +1 [ICON_SCIENCE] Science and +1 [ICON_CULTURE] Culture, and receive extra +1 [ICON_SCIENCE] Science and +1 [ICON_CULTURE] Culture from Preserve or Preserve Buildings in the city. All tiles in a city with a National Park are +1 Appeal."
+	"LOC_TRAIT_LEADER_ANTIQUES_AND_PARKS_DESCRIPTION", "Breathtaking tiles receive +1 [ICON_SCIENCE] Science and [ICON_CULTURE] Culture. Preserve and each Tier of Preserve Buildings provide +1 Appeal to all city tiles and extra +1 [ICON_SCIENCE] Science and [ICON_CULTURE] Culture to Breathtaking tiles in the city."
 where exists (select Tag from LocalizedText where Tag = 'LOC_DISTRICT_PRESERVE_NAME');
 
 insert or replace into LocalizedText (Language, Tag, Text) select
-	"zh_Hans_CN", "LOC_TRAIT_LEADER_ANTIQUES_AND_PARKS_DESCRIPTION", "魅力值为“惊艳”的单元格+1 [ICON_SCIENCE] 科技值和+1 [ICON_CULTURE] 文化值，城市中每拥有一个保护区或保护区建筑，则额外+1 [ICON_SCIENCE] 科技值和+1 [ICON_CULTURE] 文化值。在拥有国家公园的城市中，所有单元格+1魅力。"
+	"zh_Hans_CN", "LOC_TRAIT_LEADER_ANTIQUES_AND_PARKS_DESCRIPTION", "惊艳单元格+1 [ICON_SCIENCE] 科技值和 [ICON_CULTURE] 文化值。保护区和其中的每级建筑为所在城市的单元格+1魅力，为惊艳单元格额外+1 [ICON_SCIENCE] 科技值和 [ICON_CULTURE] 文化值。"
 where exists (select Tag from LocalizedText where Tag = 'LOC_DISTRICT_PRESERVE_NAME');
 
 -- 文本修正

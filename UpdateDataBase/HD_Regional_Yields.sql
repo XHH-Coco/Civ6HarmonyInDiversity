@@ -132,33 +132,6 @@ insert or ignore into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_CITY_RECEIVE_REGIONAL_AMENITY_' || Exp, 'Amount', Amount
 	from HD_Binary_Compress, Yields where Exp < 6;
 
--- 墨西哥城：所有辐射产出×1.5倍
-delete from TraitModifiers where TraitType = 'MINOR_CIV_MEXICO_CITY_TRAIT' and ModifierId = 'MINOR_CIV_MEXICO_CITY_UNIQUE_INFLUENCE_BONUS';
-
-insert or ignore into TraitModifiers (TraitType, ModifierId) select
-  'MINOR_CIV_MEXICO_CITY_TRAIT', 'HD_MEXICO_CITY_REGIONAL_YIELDS_BONUS_ATTACH_' || YieldType
-from HD_BuildingRegionalYieldTypes where YieldType in ('YIELD_FOOD', 'YIELD_PRODUCTION', 'YIELD_SCIENCE', 'YIELD_CULTURE', 'YIELD_GOLD', 'YIELD_FAITH');
-
-insert or ignore into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) select
-  'HD_MEXICO_CITY_REGIONAL_YIELDS_BONUS_ATTACH_' || YieldType, 'MODIFIER_ALL_PLAYERS_ATTACH_MODIFIER', 'PLAYER_IS_SUZERAIN'
-from HD_BuildingRegionalYieldTypes where YieldType in ('YIELD_FOOD', 'YIELD_PRODUCTION', 'YIELD_SCIENCE', 'YIELD_CULTURE', 'YIELD_GOLD', 'YIELD_FAITH');
-
-insert or ignore into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) select
-  'HD_MEXICO_CITY_REGIONAL_YIELDS_BONUS_' || YieldType, 'MODIFIER_PLAYER_CITIES_ADJUST_PROPERTY', NULL
-from HD_BuildingRegionalYieldTypes where YieldType in ('YIELD_FOOD', 'YIELD_PRODUCTION', 'YIELD_SCIENCE', 'YIELD_CULTURE', 'YIELD_GOLD', 'YIELD_FAITH');
-
-insert or ignore into ModifierArguments (ModifierId, Name, Value) select
-  'HD_MEXICO_CITY_REGIONAL_YIELDS_BONUS_ATTACH_' || YieldType, 'ModifierId', 'HD_MEXICO_CITY_REGIONAL_YIELDS_BONUS_' || YieldType
-from HD_BuildingRegionalYieldTypes where YieldType in ('YIELD_FOOD', 'YIELD_PRODUCTION', 'YIELD_SCIENCE', 'YIELD_CULTURE', 'YIELD_GOLD', 'YIELD_FAITH');
-
-insert or ignore into ModifierArguments (ModifierId, Name, Value) select
-  'HD_MEXICO_CITY_REGIONAL_YIELDS_BONUS_' || YieldType, 'Key', 'HD_ALL_DISTRICTS_PROVIDE_REGIONAL_YIELD_SCALING_FACTOR_' || YieldType
-from HD_BuildingRegionalYieldTypes where YieldType in ('YIELD_FOOD', 'YIELD_PRODUCTION', 'YIELD_SCIENCE', 'YIELD_CULTURE', 'YIELD_GOLD', 'YIELD_FAITH');
-
-insert or ignore into ModifierArguments (ModifierId, Name, Value) select
-  'HD_MEXICO_CITY_REGIONAL_YIELDS_BONUS_' || YieldType, 'Amount', 50
-from HD_BuildingRegionalYieldTypes where YieldType in ('YIELD_FOOD', 'YIELD_PRODUCTION', 'YIELD_SCIENCE', 'YIELD_CULTURE', 'YIELD_GOLD', 'YIELD_FAITH');
-
 -- 官邸
 insert or replace into BuildingModifiers (BuildingType, ModifierId) select
   'BUILDING_HD_MANSION', 'HD_MANSION_CITY_RECEIVE_REGIONAL_YIELDS_BONUS_' || YieldType

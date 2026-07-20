@@ -780,8 +780,9 @@ local function GetCityPlotsResources(playerId, cityId, filterParam)
 	end
 
 	local resourceList = {};
-	local cityPlots = city:GetOwnedPlots();
-	for _, plot in pairs(cityPlots) do
+	local cityPlots = Utils.GetCityPlots(playerId, cityId);
+	for _, plotId in pairs(cityPlots) do
+		local plot = Map.GetPlotByIndex(plotId);
 		if plot then
 			local resourceId = plot:GetResourceType();
 			if resourceId ~= nil and resourceId ~= -1 and Utils.IsResourceVisible(playerId, resourceId) then

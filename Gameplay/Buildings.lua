@@ -294,12 +294,10 @@ local BUILDING_SANCTUARY = GameInfo.Buildings['BUILDING_SANCTUARY'];
 
 function SanctuaryConstructed(playerId, cityId, buildingId, plotId, bOriginalConstruction)
 	if BUILDING_SANCTUARY and buildingId == BUILDING_SANCTUARY.Index then
-		local city = CityManager.GetCity(playerId, cityId);
-		if not city then return; end
-
 		local validResourceList = {};
-		local cityPlots = city:GetOwnedPlots();
-		for _, plot in pairs(cityPlots) do
+		local cityPlots = Utils.GetCityPlots(playerId, cityId);
+		for _, plotId in pairs(cityPlots) do
+			local plot = Map.GetPlotByIndex(plotId);
 			if plot then
 				local resourceId = plot:GetResourceType();
 				-- 判断是否为生物类资源
@@ -345,7 +343,7 @@ function SanctuaryConstructed(playerId, cityId, buildingId, plotId, bOriginalCon
 			local resourceInfo = GameInfo.Resources[resourceId];
 			if resourceInfo then
 				Utils.GenerateResource(targetPlot, resourceId);
-				local msg = '[ICON_' .. resourceInfo.ResourceType .. ']' .. Locale.Lookup(resourceInfo.Name);
+				local msg = '[ICON_' .. resourceInfo.ResourceType .. '] ' .. Locale.Lookup(resourceInfo.Name);
 				Game.AddWorldViewText(playerId, Locale.Lookup('LOC_BUILDING_SANCTUARY_TEXT', msg), targetPlot:GetX(), targetPlot:GetY());
 			end
 		end

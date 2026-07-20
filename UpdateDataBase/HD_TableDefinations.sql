@@ -60,3 +60,9 @@ PRIMARY KEY('ImprovementType'));
 create table if not exists ImprovementsRules_HD(
 	ImprovementType TEXT not NULL,
 PRIMARY KEY('ImprovementType'));
+
+------------------- 依赖Plot Property的政策 -------------------
+create table if not exists HD_PolicyNeedDetect(
+	PolicyType 		TEXT not NULL,
+	PropertyRange TEXT not NULL,
+PRIMARY KEY('PolicyType'));

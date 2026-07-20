@@ -35,9 +35,9 @@ values
 	('IMPROVEMENT_GOLF_COURSE',		'YIELD_GOLD',				3),
 	('IMPROVEMENT_GOLF_COURSE',		'YIELD_PRODUCTION',	0),
 
-	('IMPROVEMENT_CITY_PARK',		'YIELD_FOOD',				1),
+	('IMPROVEMENT_CITY_PARK',		'YIELD_FOOD',				0),
 	('IMPROVEMENT_CITY_PARK',		'YIELD_CULTURE',		2),
-	('IMPROVEMENT_CITY_PARK',		'YIELD_GOLD',				3),
+	('IMPROVEMENT_CITY_PARK',		'YIELD_GOLD',				0),
 	
 	('IMPROVEMENT_ZIGGURAT',			'YIELD_SCIENCE',		1),
 	('IMPROVEMENT_ZIGGURAT',			'YIELD_FAITH',		0),
@@ -170,12 +170,14 @@ values
 	(802,	'IMPROVEMENT_OFFSHORE_OIL_RIG',			'YIELD_PRODUCTION',		2,					null,							'TECH_REFINING'),
 	(803,	'IMPROVEMENT_OFFSHORE_OIL_RIG',			'YIELD_SCIENCE',			2,					null,							'TECH_REFINING'),
 
-	(810,	'IMPROVEMENT_CITY_PARK',						'YIELD_GOLD',					3,					'CIVIC_COMMERCIAL_CAPITALISM_HD',		null),
-	(811,	'IMPROVEMENT_CITY_PARK',						'YIELD_CULTURE',			1,					'CIVIC_URBANIZATION',								null),
-	(812,	'IMPROVEMENT_CITY_PARK',						'YIELD_CULTURE',			1,					'CIVIC_URBAN_DESIGN_HD',						null),
-	(813,	'IMPROVEMENT_CITY_PARK',						'YIELD_FOOD',					1,					'CIVIC_CONSERVATION',							  null),
-	(814,	'IMPROVEMENT_CITY_PARK',						'YIELD_GOLD',					3,					null,																'TECH_ADVANCED_FLIGHT'),
-	(815,	'IMPROVEMENT_CITY_PARK',						'YIELD_FOOD',					1,					'CIVIC_ENVIRONMENTALISM',						null);
+	(810,	'IMPROVEMENT_CITY_PARK',						'YIELD_FOOD',					1,					null,																'TECH_CONSTRUCTION'),
+	(811,	'IMPROVEMENT_CITY_PARK',						'YIELD_GOLD',					3,					'CIVIC_GAMES_RECREATION',						null),
+	(812,	'IMPROVEMENT_CITY_PARK',						'YIELD_GOLD',					3,					'CIVIC_COMMERCIAL_CAPITALISM_HD',		null),
+	(813,	'IMPROVEMENT_CITY_PARK',						'YIELD_CULTURE',			1,					'CIVIC_URBANIZATION',								null),
+	(814,	'IMPROVEMENT_CITY_PARK',						'YIELD_CULTURE',			1,					'CIVIC_URBAN_DESIGN_HD',						null),
+	(815,	'IMPROVEMENT_CITY_PARK',						'YIELD_FOOD',					1,					'CIVIC_CONSERVATION',							  null),
+	(816,	'IMPROVEMENT_CITY_PARK',						'YIELD_GOLD',					3,					null,																'TECH_ADVANCED_FLIGHT'),
+	(817,	'IMPROVEMENT_CITY_PARK',						'YIELD_FOOD',					1,					'CIVIC_ENVIRONMENTALISM',						null);
 
 -- Adjacency Yield
 delete from Improvement_Adjacencies where
@@ -1563,7 +1565,7 @@ update Improvements set PrereqTech = 'TECH_INTEGRATED_CIRCUIT_HD' where Improvem
 -- =====================================================================================================================================
 update Improvements set
 	PrereqCivic = null,
-	PrereqTech = 'TECH_ENGINEERING',
+	PrereqTech = 'TECH_IRRIGATION',
 	TraitType = null,
 	YieldFromAppeal = 'YIELD_GOLD',
 	SameAdjacentValid = 0,

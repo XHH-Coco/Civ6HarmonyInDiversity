@@ -6,6 +6,12 @@ Utils = ExposedMembers.DLHD.Utils;
 function PlayerHasPolicy(playerId, policyId)
   local player = Players[playerId]
   if player and player:IsMajor() then
+    local policyInfo = GameInfo.Policies[policyId];
+    if not policyInfo then return; end
+
+    local propertyHas = player:GetProperty('HD_PLAYER_HAS_' .. policyInfo.PolicyType) or 0;
+    if propertyHas > 0 then return true; end
+
     local playerCulture = player:GetCulture()
     local numSlots = playerCulture:GetNumPolicySlots();
     for i = 0, numSlots-1, 1 do
@@ -17,6 +23,41 @@ function PlayerHasPolicy(playerId, policyId)
   return false;
 end
 Utils.PlayerHasPolicy = PlayerHasPolicy;
+
+-- 依赖Plot Property的政策
+function HDGovernmentPolicyChanged(playerId, policyId, enacted)
+  local player = Players[playerId];
+  if not player then return; end
+
+  local policyInfo = GameInfo.Policies[policyId];
+  if not policyInfo then return; end
+
+  local needDetectInfo = GameInfo.HD_PolicyNeedDetect[policyInfo.PolicyType];
+  if not needDetectInfo then return; end
+
+  if enacted then
+    print("依赖Plot Property的政策 " .. Locale.Lookup(policyInfo.Name) .. ' 激活');
+  else
+    print("依赖Plot Property的政策 " .. Locale.Lookup(policyInfo.Name) .. ' 取消');
+  end
+
+  local property = enacted and 1 or 0;
+  if needDetectInfo.PropertyRange == 'CAPITAL' then
+    local capital = player:GetCities():GetCapitalCity();
+    if not capital then return; end
+    local plot = Map.GetPlot(capital:GetX(), capital:GetY());
+    plot:SetProperty('HD_PLAYER_HAS_' .. policyInfo.PolicyType, property);
+  elseif needDetectInfo.PropertyRange == 'CITIES' then
+    for _, city in player:GetCities():Members() do
+      local plot = Map.GetPlot(city:GetX(), city:GetY());
+      plot:SetProperty('HD_PLAYER_HAS_' .. policyInfo.PolicyType, property);
+    end
+  else
+    print("依赖Plot Property的政策 为实现的PropertyRange" .. needDetectInfo.PropertyRange);
+  end
+end
+-- Events.GovernmentPolicyChanged.Add(HDGovernmentPolicyChanged);
+GameEvents.PolicyChanged.Add(HDGovernmentPolicyChanged);
 
 -- 福音本土化
 local POLICY_HD_GOSPEL_LOCALISATION_INDEX = GameInfo.Policies['POLICY_HD_GOSPEL_LOCALISATION'].Index;
@@ -185,142 +226,19 @@ end
 -- GameEvents.OnDistrictConstructed.Add(OnDistrictConstructedPolicy)
 
 -- 开路先锋
-local PATHFINDER_FAITH_MAJOR_CIV_KEY = 'HD_PATHFINDER_FAITH_MAJOR_CIV';
-local PATHFINDER_FAITH_CITYSTATE_KEY = 'HD_PATHFINDER_FAITH_CITYSTATE';
-local PATHFINDER_FAITH_NEW_CONTINENT_KEY = 'HD_PATHFINDER_FAITH_NEW_CONTINENT';
-local PATHFINDER_FAITH_NATURAL_WONDER_KEY = 'HD_PATHFINDER_FAITH_NATURAL_WONDER';
--- 发现文明、城邦
-function PathFinderDiplomacyMeet(player1Id, player2Id)
-  local player1 = Players[player1Id];
-  local player2 = Players[player2Id];
-
-  if player1 and player2 then
-    if player1:IsMajor() and (player2:IsMajor() or Utils.PlayerIsMinor(player2Id)) then
-      local capital = player1:GetCities():GetCapitalCity();
-
-      if capital then
-        local plot = Map.GetPlot(capital:GetX(), capital:GetY());
-        if plot then
-          if player2:IsMajor() and plot:GetProperty(PATHFINDER_FAITH_MAJOR_CIV_KEY) ~= 1 then
-            plot:SetProperty(PATHFINDER_FAITH_MAJOR_CIV_KEY, 1);
-            -- print('plot', player1Id, PATHFINDER_FAITH_MAJOR_CIV_KEY);
-          elseif Utils.PlayerIsMinor(player2Id) and plot:GetProperty(PATHFINDER_FAITH_CITYSTATE_KEY) ~= 1 then
-            plot:SetProperty(PATHFINDER_FAITH_CITYSTATE_KEY, 1);
-            -- print('plot', player1Id, PATHFINDER_FAITH_CITYSTATE_KEY);
-          end
-        end
-      else
-        if player2:IsMajor() and player1:GetProperty(PATHFINDER_FAITH_MAJOR_CIV_KEY) ~= 1 then
-          player1:SetProperty(PATHFINDER_FAITH_MAJOR_CIV_KEY, 1);
-          -- print('play', player1Id, PATHFINDER_FAITH_MAJOR_CIV_KEY);
-        elseif Utils.PlayerIsMinor(player2Id) and player1:GetProperty(PATHFINDER_FAITH_CITYSTATE_KEY) ~= 1 then
-          player1:SetProperty(PATHFINDER_FAITH_CITYSTATE_KEY, 1);
-          -- print('play', player1Id, PATHFINDER_FAITH_CITYSTATE_KEY);
-        end
-      end
-    end
-
-    if player2:IsMajor() and (player1:IsMajor() or Utils.PlayerIsMinor(player1Id)) then
-      local capital = player2:GetCities():GetCapitalCity();
-
-      if capital then
-        local plot = Map.GetPlot(capital:GetX(), capital:GetY());
-        if plot then
-          if player1:IsMajor() and plot:GetProperty(PATHFINDER_FAITH_MAJOR_CIV_KEY) ~= 1 then
-            plot:SetProperty(PATHFINDER_FAITH_MAJOR_CIV_KEY, 1);
-            -- print('plot', player2Id, PATHFINDER_FAITH_MAJOR_CIV_KEY);
-          elseif Utils.PlayerIsMinor(player1Id) and plot:GetProperty(PATHFINDER_FAITH_CITYSTATE_KEY) ~= 1 then
-            plot:SetProperty(PATHFINDER_FAITH_CITYSTATE_KEY, 1);
-            -- print('plot', player2Id, PATHFINDER_FAITH_CITYSTATE_KEY);
-          end
-        end
-      else
-        if player1:IsMajor() and player2:GetProperty(PATHFINDER_FAITH_MAJOR_CIV_KEY) ~= 1 then
-          player2:SetProperty(PATHFINDER_FAITH_MAJOR_CIV_KEY, 1);
-          -- print('play', player2Id, PATHFINDER_FAITH_MAJOR_CIV_KEY);
-        elseif Utils.PlayerIsMinor(player1Id) and player2:GetProperty(PATHFINDER_FAITH_CITYSTATE_KEY) ~= 1 then
-          player2:SetProperty(PATHFINDER_FAITH_CITYSTATE_KEY, 1);
-          -- print('play', player2Id, PATHFINDER_FAITH_CITYSTATE_KEY);
-        end
-      end
-    end
-
-  end
-end
-Events.DiplomacyMeet.Add(PathFinderDiplomacyMeet);
-
--- 发现新大陆、自然奇观
-local NOTIFICATION_DISCOVER_CONTINENT_HASH = GameInfo.Notifications['NOTIFICATION_DISCOVER_CONTINENT'].Hash
-local NOTIFICATION_DISCOVER_NATURAL_WONDER_HASH = GameInfo.Notifications['NOTIFICATION_DISCOVER_NATURAL_WONDER'].Hash
-local IsNewContinentKey = 'HD_IsNewContinent';
-function PathFinderNotificationAdded(playerId, notificationId)
-  local player = Players[playerId];
-  if not player then return; end
-
-  local notificationEntry = NotificationManager.Find(playerId, notificationId)
-  if notificationEntry then
-    local key;
-    if notificationEntry:GetType() == NOTIFICATION_DISCOVER_CONTINENT_HASH then
-      if player:GetProperty(IsNewContinentKey) ~= 1 then
-        player:SetProperty(IsNewContinentKey, 1);
-      else
-        key = PATHFINDER_FAITH_NEW_CONTINENT_KEY;
-      end
-    elseif notificationEntry:GetType() == NOTIFICATION_DISCOVER_NATURAL_WONDER_HASH then
-      key = PATHFINDER_FAITH_NATURAL_WONDER_KEY;
-    end
-
-    if key then
-      local capital = player:GetCities():GetCapitalCity();
-
-      if capital then
-        local plot = Map.GetPlot(capital:GetX(), capital:GetY());
-        if plot and plot:GetProperty(key) ~= 1 then
-          plot:SetProperty(key, 1);
-          -- print('plot', key);
-        end
-      elseif player:GetProperty(key) ~= 1 then
-        player:SetProperty(key, 1);
-        -- print('player', key);
-      end
+function PathFinderPlayerCompleteMoment(playerId, momentId, classificationMap)
+  local amount = classificationMap['MOMENT_CLASSIFICATION_EXPLORATION'] or 0;
+  if amount > 0 and amount % 2 == 0 then
+    local player = Players[playerId];
+    if player then
+      player:AttachModifierByID('HD_PATHFINDER_FAITH');
+      print("开路先锋 获得+1信仰值");
     end
   end
 end
-Events.NotificationAdded.Add(PathFinderNotificationAdded);
-
--- 建造首都
-function PathFinderBuildCapital(playerId, cityId, x, y)
-  local player = Players[playerId]
-	local city = CityManager.GetCity(playerId, cityId)
-
-  if player:IsMajor() then
-    local capital = player:GetCities():GetCapitalCity();
-    if capital and cityId == capital:GetID() then
-      -- print(playerId, "建造首都");
-      local plot = Map.GetPlot(capital:GetX(), capital:GetY());
-
-      if player:GetProperty(PATHFINDER_FAITH_MAJOR_CIV_KEY) == 1 then
-        plot:SetProperty(PATHFINDER_FAITH_MAJOR_CIV_KEY, 1);
-        -- print('capital', PATHFINDER_FAITH_MAJOR_CIV_KEY);
-      end
-      if player:GetProperty(PATHFINDER_FAITH_CITYSTATE_KEY) == 1 then
-        plot:SetProperty(PATHFINDER_FAITH_CITYSTATE_KEY, 1);
-        -- print('capital', PATHFINDER_FAITH_CITYSTATE_KEY);
-      end
-      if player:GetProperty(PATHFINDER_FAITH_NEW_CONTINENT_KEY) == 1 then
-        plot:SetProperty(PATHFINDER_FAITH_NEW_CONTINENT_KEY, 1);
-        -- print('capital', PATHFINDER_FAITH_NEW_CONTINENT_KEY);
-      end
-      if player:GetProperty(PATHFINDER_FAITH_NATURAL_WONDER_KEY) == 1 then
-        plot:SetProperty(PATHFINDER_FAITH_NATURAL_WONDER_KEY, 1);
-        -- print('capital', PATHFINDER_FAITH_NATURAL_WONDER_KEY);
-      end
-    end
-  end
-end
+GameEvents.HDPlayerCompleteMoment.Add(PathFinderPlayerCompleteMoment)
 
 function initialize()
   Events.UnitDamageChanged.Add(UnitDamageChanged);
-  Events.CityAddedToMap.Add(PathFinderBuildCapital)
 end
 Events.LoadGameViewStateDone.Add(initialize);

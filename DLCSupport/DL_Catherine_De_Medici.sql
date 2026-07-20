@@ -108,10 +108,10 @@ values
   ('TRAIT_LEADER_MAGNIFICENCES',  'HD_MAGNIFICENCES_CITY_HAS_LUXURY_TRAIN_UNIT_MOVEMENT');
 
 insert or replace into Modifiers
-  (ModifierId,                                                      ModifierType,                                           SubjectRequirementSetId,              Permanent)
+  (ModifierId,                                                      ModifierType,                                           Permanent,  SubjectRequirementSetId)
 values
-  ('HD_MAGNIFICENCES_CITY_HAS_LUXURY_TRAIN_UNIT_MOVEMENT',          'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER',               'CITY_HAS_IMPROVED_LUXURY_RESOURCE',  0),
-  ('HD_MAGNIFICENCES_CITY_HAS_LUXURY_TRAIN_UNIT_MOVEMENT_MODIFIER', 'MODIFIER_SINGLE_CITY_GRANT_ABILITY_FOR_TRAINED_UNITS', NULL,                                 1);
+  ('HD_MAGNIFICENCES_CITY_HAS_LUXURY_TRAIN_UNIT_MOVEMENT',          'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER',               0,          'HD_CITY_HAS_OR_ON_IMPROVED_LUXURY_RESOURCE_REQUIREMENTS'),
+  ('HD_MAGNIFICENCES_CITY_HAS_LUXURY_TRAIN_UNIT_MOVEMENT_MODIFIER', 'MODIFIER_SINGLE_CITY_GRANT_ABILITY_FOR_TRAINED_UNITS', 1,          NULL);
 
 insert or ignore into ModifierArguments
   (ModifierId,                                                      Name,             Value)

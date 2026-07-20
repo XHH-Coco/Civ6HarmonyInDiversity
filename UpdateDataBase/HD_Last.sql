@@ -90,6 +90,28 @@ insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementI
 	from HD_Binary_Compress_AtLeast;
 
 --------------------------------------------------------------------------------------------------------------------
+-- 依赖Plot Property的政策
+insert or ignore into Requirements (RequirementId, RequirementType)
+	select 'REQUIRES_HD_PLAYER_HAS_' || PolicyType, 'REQUIREMENT_PLOT_PROPERTY_MATCHES'
+	from HD_PolicyNeedDetect;
+
+insert or ignore into RequirementArguments (RequirementId, Name, Value)
+	select 'REQUIRES_HD_PLAYER_HAS_' || PolicyType, 'PropertyName', 'HD_PLAYER_HAS_' || PolicyType
+	from HD_PolicyNeedDetect;
+
+insert or ignore into RequirementArguments (RequirementId, Name, Value)
+	select 'REQUIRES_HD_PLAYER_HAS_' || PolicyType, 'PropertyMinimum', 1
+	from HD_PolicyNeedDetect;
+
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
+  select 'HD_PLAYER_HAS_' || PolicyType || '_REQUIREMENTS', 'REQUIREMENTSET_TEST_ANY'
+	from HD_PolicyNeedDetect;
+
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+  select 'HD_PLAYER_HAS_' || PolicyType || '_REQUIREMENTS', 'REQUIRES_HD_PLAYER_HAS_' || PolicyType
+	from HD_PolicyNeedDetect;
+
+--------------------------------------------------------------------------------------------------------------------
 -- 西班牙自然奇观能力
 	-- LB 自然奇观产出
 insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId, RunOnce, Permanent, SubjectStackLimit)

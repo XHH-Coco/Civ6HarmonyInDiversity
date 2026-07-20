@@ -870,6 +870,89 @@ function DetectCityHasGreatWork(playerId, cityId)
 	end
 end
 
+local m_Tech_Wheel = GameInfo.Technologies['TECH_THE_WHEEL'].Index;
+local city_roads_require_wheel = GlobalParameters.HD_CITY_ROADS_REQUIRE_WHEEL;
+function OnImprovementAddedToMap(locationX, locationY, improvementType, eImprovementOwner, resource, isPillaged, isWorked)
+	local plot = Map.GetPlot(locationX,locationY);
+	local owner = plot:GetOwner();
+	if owner >= 0 and owner == eImprovementOwner and not plot:IsWater() then 
+		local player = Players[owner];
+		local playerTechs = player:GetTechs();
+		-- enable the improvements roads after researching TECH_THE_WHEEL
+		if playerTechs:HasTech(m_Tech_Wheel) or (city_roads_require_wheel == 0) then
+			local era = GameInfo.Eras[player:GetEra()];
+			local currentRouteType = plot:GetRouteType();
+			local playerRouteType = Utils.GetRouteTypeForPlayer(player);
+			if currentRouteType == RouteTypes.NONE or Utils.CompareRoutes(playerRouteType,currentRouteType) then
+				RouteBuilder.SetRouteType(plot, playerRouteType);
+			end
+		end
+	end
+end
+
+function OnResearchCompleted(ePlayer, eTech)
+	if ePlayer >= 0 and (eTech == m_Tech_Wheel) and (city_roads_require_wheel ~= 0) then
+		-- place roads on the improvements roads after researching TECH_THE_WHEEL
+		local player = Players[ePlayer];
+		if not player:IsBarbarian() then
+			local pCities = player:GetCities();
+			local pCity;
+			for i, pCity in pCities:Members() do
+				local playerRouteType = Utils.GetRouteTypeForPlayer(player);
+				local cityPlots = Utils.GetCityPlots(ePlayer, pCity:GetID());
+				for _, plotId in pairs(cityPlots) do
+					local plot = Map.GetPlotByIndex(plotId);
+					if plot and not plot:IsWater() and plot:GetImprovementType() >= 0 then
+						local currentRouteType = plot:GetRouteType(plot);
+						if currentRouteType == RouteTypes.NONE or Utils.CompareRoutes(playerRouteType,currentRouteType) then
+							RouteBuilder.SetRouteType(plot, playerRouteType);
+						end
+					end
+				end
+			end
+		end
+	end
+end
+
+-- 记录历史时刻分类
+local NOTIFICATION_PRIDE_MOMENT_RECORDED_HASH = GameInfo.Notifications['NOTIFICATION_PRIDE_MOMENT_RECORDED'].Hash;
+local PLAYER_MOMENT_TAG = 'HD_PLAYER_MOMENT_';
+local PLAYER_MOMENT_NUM_TAG = 'HD_PLAYER_MOMENT_NUM_';
+function RecordMoment(playerId, notificationId)
+	local player = Players[playerId];
+  if not player then return; end
+
+	local notificationEntry = NotificationManager.Find(playerId, notificationId)
+  if notificationEntry and notificationEntry:GetType() == NOTIFICATION_PRIDE_MOMENT_RECORDED_HASH then
+    local momentId = notificationEntry:GetValue("MomentID");
+    if momentId then
+      local momentData = Utils.GetHistoricalMomentData(momentId);
+      local momentInfo = momentData and GameInfo.Moments[momentData.Type] or nil;
+      if momentInfo and player:GetProperty(PLAYER_MOMENT_TAG .. momentId) ~= 1 then
+				player:SetProperty(PLAYER_MOMENT_TAG .. momentId, 1);
+				local classificationMap = {};
+
+				for row in GameInfo.HD_MomentClassificationTypes() do
+					local map = Utils.MomentClassificationMap[row.MomentClassificationType] or {};
+					if map[momentInfo.MomentType] == true then
+						local num = player:GetProperty(PLAYER_MOMENT_NUM_TAG .. row.MomentClassificationType) or 0;
+						classificationMap[row.MomentClassificationType] = num + 1;
+						player:SetProperty(PLAYER_MOMENT_NUM_TAG .. row.MomentClassificationType, num + 1);
+						print(Locale.Lookup(momentInfo.Name) , Locale.Lookup(row.Name) , num + 1);
+					end
+				end
+
+				GameEvents.HDPlayerCompleteMoment.Call(
+					playerId,
+					momentInfo.Index,
+					classificationMap
+				);
+			end
+		end
+	end
+end
+Events.NotificationAdded.Add(RecordMoment);
+
 --------------------------------------------------------------
 function DetectCityOnCitySelectionChanged(playerId, cityId)
 	-- 城市判断是否拥有XX类型的巨作
@@ -896,5 +979,7 @@ function initialize()
 	-- Events.ImprovementAddedToMap.Add(CityImprovementAddedToMap);
 	-- Events.ImprovementRemovedFromMap.Add(CityImprovementRemovedFromMap);
 	Events.ImprovementRemovedFromMap.Add(ClearBarbarianCamp);
+	Events.ImprovementAddedToMap.Add(OnImprovementAddedToMap);
+	Events.ResearchCompleted.Add(OnResearchCompleted);
 end
 Events.LoadGameViewStateDone.Add(initialize);

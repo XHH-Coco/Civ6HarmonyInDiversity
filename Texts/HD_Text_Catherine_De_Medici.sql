@@ -4,7 +4,7 @@ insert or replace into EnglishText
 values
   ("LOC_LEADER_CATHERINE_DE_MEDICI_ALT_NAME", "Catherine de Medici (Magnificences)"),
   ("LOC_TRAIT_LEADER_MAGNIFICENCES_NAME", "Masquerade Ball"),
-  ("LOC_TRAIT_LEADER_MAGNIFICENCES_DESCRIPTION", "If a city has improved luxury resources, units produced gain +1 [ICON_MOVEMENT] Movement. Each time a wonder is constructed, gain 2 copies of the corresponding luxury resource. Can undertake the 'Court Festival' project in any city with a Theater Square."),
+  ("LOC_TRAIT_LEADER_MAGNIFICENCES_DESCRIPTION", "If city has luxury resources, units produced gain +1 [ICON_MOVEMENT] Movement. Each time a wonder is constructed, gain 2 copies of the corresponding luxury resource. Can undertake the 'Court Festival' project in any city with a Theater Square."),
   ("LOC_ABILITY_CITY_HAS_LUXURY_TRAIN_UNIT_MOVEMENT_DESCRIPTION", "{LOC_TRAIT_LEADER_MAGNIFICENCES_NAME}: Permanently grants +1 [ICON_MOVEMENT] Movement."),
   ("LOC_PROJECT_COURT_FESTIVAL_HD_DESCRIPTION", "Upon completion of this project: this city can construct one additional Château Estate; for each surplus luxury resource, gain 10 [ICON_CULTURE] Culture and 10 [ICON_TOURISM] Tourism."),
 
@@ -93,7 +93,7 @@ insert or replace into LocalizedText
 values
   ("zh_Hans_CN",  "LOC_LEADER_CATHERINE_DE_MEDICI_ALT_NAME",                        "凯瑟琳·德·美第奇（金碧辉煌）"),
   ("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNIFICENCES_NAME",                            "假面舞会"),
-  ("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNIFICENCES_DESCRIPTION",                     "如果城市拥有改良的奢侈资源，生产的单位+1 [ICON_MOVEMENT] 移动力。每建造一座奇观，获得2份该奇观对应的特色奢侈资源。可在拥有剧院广场区域的任意城市中开展“宫廷盛会”项目。"),
+  ("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNIFICENCES_DESCRIPTION",                     "如果城市拥有奢侈资源，生产的单位+1 [ICON_MOVEMENT] 移动力。每建造一座奇观，获得2份该奇观对应的特色奢侈资源。可在拥有剧院广场区域的任意城市中开展“宫廷盛会”项目。"),
   ("zh_Hans_CN",  "LOC_ABILITY_CITY_HAS_LUXURY_TRAIN_UNIT_MOVEMENT_DESCRIPTION",    "{LOC_TRAIT_LEADER_MAGNIFICENCES_NAME}：永久+1 [ICON_Movement] 移动力。"),
   ("zh_Hans_CN",  "LOC_PROJECT_COURT_FESTIVAL_HD_DESCRIPTION",                      "此项目完成时：本城可以额外建造一座城堡庄园；每拥有一个多余的奢侈品资源，提供10点 [ICON_CULTURE] 文化值和10点 [ICON_TOURISM] 旅游业绩。"),
 

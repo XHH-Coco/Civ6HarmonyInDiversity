@@ -178,34 +178,26 @@ function MilitaryEngineerExcavate(playerId, unitId)
 end
 GameEvents.HD_Military_Engineer_Excavate.Add(MilitaryEngineerExcavate)
 
--- 巴西UU 旗手
-local FEATURE_JUNGLE_INDEX = GameInfo.Features['FEATURE_JUNGLE'].Index;
-local FEATURE_FOREST_INDEX = GameInfo.Features['FEATURE_FOREST'].Index;
-local FEATURE_MARSH_INDEX = GameInfo.Features['FEATURE_MARSH'].Index;
-local FEATURE_HD_SWAMP_INFO = GameInfo.Features['FEATURE_HD_SWAMP'];
+-- 自动修路
+local UNIT_AUTOMATICALLY_CREATE_ROADS_TAG = 'HD_UNIT_AUTOMATICALLY_CREATE_ROADS';
 function BandeirantesAutoRoad(playerId, unitId, x, y, locallyVisible, stateChange)
 	local player = Players[playerId];
 	local unit = UnitManager.GetUnit(playerId, unitId);
 	local plot = Map.GetPlot(x, y);
 	if not player or not unit or not plot then return; end
 
-	if GameInfo.Units[unit:GetType()].UnitType == "UNIT_HD_BANDEIRANTES" then
-		local featureId = plot:GetFeatureType();
-		if featureId == FEATURE_JUNGLE_INDEX
-			or featureId == FEATURE_FOREST_INDEX
-			or featureId == FEATURE_MARSH_INDEX
-			or (FEATURE_HD_SWAMP_INFO and featureId == FEATURE_HD_SWAMP_INFO.Index)
-		then
-			local currentRouteType = plot:GetRouteType();
-			local playerRouteType = Utils.GetRouteTypeForPlayer(player);
-			if currentRouteType == RouteTypes.NONE or Utils.CompareRoutes(playerRouteType,currentRouteType) then
-				RouteBuilder.SetRouteType(plot, playerRouteType);
-			end
+	local canCreateRoad = unit:GetProperty(UNIT_AUTOMATICALLY_CREATE_ROADS_TAG) or 0;
+	if canCreateRoad > 0 then
+		local currentRouteType = plot:GetRouteType();
+		local playerRouteType = Utils.GetRouteTypeForPlayer(player);
+		if currentRouteType == RouteTypes.NONE or Utils.CompareRoutes(playerRouteType,currentRouteType) then
+			RouteBuilder.SetRouteType(plot, playerRouteType);
 		end
 	end
 end
 Events.UnitMoved.Add(BandeirantesAutoRoad);
 
+-- 巴西UU 旗手
 local BANDEIRANTES_PLOT_TAG = 'HD_BANDEIRANTES_PLOT';
 local BANDEIRANTES_RESOURCE_TAG = 'HD_BANDEIRANTES_RESOURCE';
 -- local BANDEIRANTES_FIRST_COLLECT_TAG = 'HD_BANDEIRANTES_FIRST_COLLECT';

@@ -1486,10 +1486,6 @@
       <Properties><LoadOrder>15855</LoadOrder></Properties>
       <File>ThirdParty/ExpandedInitialVision/ExpandedInitialVision_Modified.lua</File>
     </AddGameplayScripts>
-    <AddGameplayScripts id="Modified_CityRoads" criteria="Expansion2">
-      <Properties><LoadOrder>15905</LoadOrder></Properties>
-      <File>ThirdParty/CityRoads/Modified_CityRoads.lua</File>
-    </AddGameplayScripts>
 
     <!-- Artdef -->
     <UpdateArt id="HD_Art" criteria="Expansion2">
@@ -2056,11 +2052,14 @@
       <Properties><LoadOrder>28101</LoadOrder></Properties>
       <File>GameModeSupport/MilitaryMode/ArmsComplement/ArmsComplement.dep</File>
     </UpdateArt>
+    <UpdateDatabase id="BSK_gameplay_Defination" criteria="Military_Mode_Expansion2">
+      <Properties><LoadOrder>12000</LoadOrder></Properties>
+      <File>GameModeSupport/MilitaryMode/ArmsComplement/ArmsSupport.xml</File>
+    </UpdateDatabase>
     <UpdateDatabase id="BSK_gameplay" criteria="Military_Mode_Expansion2">
       <Properties><LoadOrder>28102</LoadOrder></Properties>
       <File>GameModeSupport/MilitaryMode/ArmsComplement/ArmsComplement_Gameplay.xml</File>
       <File>GameModeSupport/MilitaryMode/ArmsComplement/ArmsSupport.sql</File>
-      <File>GameModeSupport/MilitaryMode/ArmsComplement/ArmsSupport.xml</File>
       <File>GameModeSupport/MilitaryMode/ArmsComplement/UlkChange.sql</File>
     </UpdateDatabase>
     <UpdateIcons id="BSK_Icons" criteria="Military_Mode_Expansion2">
@@ -2608,7 +2607,6 @@
     <File>Maps/Rivers_And_Lakes.lua</File><!--太湖，众川赴海--> 
 
     <!-- Third Party -->
-    <File>ThirdParty/CityRoads/Modified_CityRoads.lua</File>
     <File>ThirdParty/CNforMods/Resources.sql</File>
     <File>ThirdParty/CNforMods/VNL'CIVITAS Resources'CN_Add_IG2.sql</File>
     <File>ThirdParty/CNforMods/VNL'Latin American Resources'CN_Add_IG2.sql</File>
