@@ -44,7 +44,7 @@ values
     ("LOC_UNIT_NORWEGIAN_BERSERKER_DESCRIPTION",          "Harald Hardrada (Heimskringla)'s unique Medieval era melee unit that replaces the Man-At-Arms. 4 [ICON_MOVEMENT] Movement if this unit starts in enemy territory. +10 [ICON_STRENGTH] Combat Strength when attacking and -5 [ICON_STRENGTH] Combat Strength when defending against melee attacks."),
     ("LOC_UNIT_INCA_WARAKAQ_DESCRIPTION",                 "Incan unique Classical Era unit. +1 additional attack per turn."),
     ("LOC_UNIT_HD_BANDEIRANTES_NAME",                     "Bandeirante"),
-    ("LOC_UNIT_HD_BANDEIRANTES_DESCRIPTION",              "Brazilian unique Recon unit, but cannot be trained, purchased or upgraded to a more advanced unit. Its [ICON_STRENGTH] Combat Strength increases according to your era. Automatically creates Roads as it moves. It can collect resources on unowned rainforest tiles for 4 times. For every two of the same resource collected, the improved Resources on rainforest tiles in your cities gain the yields of that resource. Each Carnival Street or Carnival Beach district within the territory will increase the collection count by +1.");
+    ("LOC_UNIT_HD_BANDEIRANTES_DESCRIPTION",              "Brazilian unique Recon unit, but cannot be trained, purchased or upgraded to a more advanced unit. Its [ICON_STRENGTH] Combat Strength increases according to your era. Automatically creates Roads as it moves. It can collect resources on unowned rainforest tiles twice. For every two of the same resource collected, the improved Resources on rainforest tiles in your cities gain the yields of that resource. Each Carnival Street or Carnival Beach district within the territory will increase the collection count by +1.");
 
 --------------------------------------------------------------------------------
 -- Language: zh_Hans_CN
@@ -98,7 +98,7 @@ values
     ("zh_Hans_CN",  "LOC_UNIT_INCA_WARAKAQ_NAME",                        "精锐投石者"),
     ("zh_Hans_CN",  "LOC_UNIT_INCA_WARAKAQ_DESCRIPTION",                 "印加古典时代特色单位，取代斥候。每回合+1额外攻击。"),
     ("zh_Hans_CN",  "LOC_UNIT_HD_BANDEIRANTES_NAME",                     "旗手"),
-    ("zh_Hans_CN",  "LOC_UNIT_HD_BANDEIRANTES_DESCRIPTION",              "巴西特色侦察单位，无法升级成高级单位，无法在城市中建造或购买该单位。[ICON_STRENGTH] 战斗力随你所处的时代提升。移动时自动创建道路。可以收集4次无主雨林单元格上的资源，每收集两个同种资源，境内改良的雨林资源获得该资源的产出。境内的每座狂欢街区或狂欢海滨提供+1收集次数。");
+    ("zh_Hans_CN",  "LOC_UNIT_HD_BANDEIRANTES_DESCRIPTION",              "巴西特色侦察单位，无法升级成高级单位，无法在城市中建造或购买该单位。[ICON_STRENGTH] 战斗力随你所处的时代提升。移动时自动创建道路。可以收集2次无主雨林单元格上的资源，每收集两个同种资源，境内改良的雨林资源获得该资源的产出。境内的每座狂欢街区或狂欢海滨提供+1收集次数。");
 
 -- Units information updates
 --------------------------------------------------------------------------------
