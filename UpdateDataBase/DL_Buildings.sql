@@ -1465,6 +1465,7 @@ insert or replace into HD_Building_Base_On_ResourceClassification (BuildingType,
 	('BUILDING_FOOD_MARKET', 		'RESOURCE_CLASSIFICATION_HD_CROPS',						'PLAYER', 'HD_PLOT_BINARY_COMPRESS_FOOD_MARKET'),
 	('BUILDING_FOOD_MARKET', 		'RESOURCE_CLASSIFICATION_HD_CUISINE',					'PLAYER', 'HD_PLOT_BINARY_COMPRESS_FOOD_MARKET'),
 	('BUILDING_FOOD_MARKET', 		'RESOURCE_CLASSIFICATION_HD_FRUIT',						'PLAYER', 'HD_PLOT_BINARY_COMPRESS_FOOD_MARKET'),
+	('BUILDING_FOOD_MARKET', 		'RESOURCE_CLASSIFICATION_HD_VEGETABLE',				'PLAYER', 'HD_PLOT_BINARY_COMPRESS_FOOD_MARKET'),
 	('BUILDING_FOOD_MARKET', 		'RESOURCE_CLASSIFICATION_HD_BREWING',					'PLAYER', 'HD_PLOT_BINARY_COMPRESS_FOOD_MARKET'),
 	('BUILDING_FOOD_MARKET', 		'RESOURCE_CLASSIFICATION_HD_BEVERAGE',				'PLAYER', 'HD_PLOT_BINARY_COMPRESS_FOOD_MARKET'),
 	('BUILDING_FOOD_MARKET', 		'RESOURCE_CLASSIFICATION_HD_OIL',							'PLAYER', 'HD_PLOT_BINARY_COMPRESS_FOOD_MARKET'),
@@ -1477,53 +1478,54 @@ insert or replace into HD_Building_Base_On_ResourceClassification (BuildingType,
 	('BUILDING_SHOPPING_MALL', 	'RESOURCE_CLASSIFICATION_HD_STATIONERY',			'PLAYER',	'HD_PLOT_BINARY_COMPRESS_SHOPPING_MALL'),
 	('BUILDING_SHOPPING_MALL', 	'RESOURCE_CLASSIFICATION_HD_ART',							'PLAYER',	'HD_PLOT_BINARY_COMPRESS_SHOPPING_MALL'),
 	('BUILDING_SHOPPING_MALL', 	'RESOURCE_CLASSIFICATION_HD_DECORATION',			'PLAYER',	'HD_PLOT_BINARY_COMPRESS_SHOPPING_MALL'),
+	('BUILDING_SHOPPING_MALL', 	'RESOURCE_CLASSIFICATION_HD_ORNAMENTAL',			'PLAYER',	'HD_PLOT_BINARY_COMPRESS_SHOPPING_MALL'),
 	('BUILDING_SHOPPING_MALL', 	'RESOURCE_CLASSIFICATION_HD_HOUSEHOLD',				'PLAYER',	'HD_PLOT_BINARY_COMPRESS_SHOPPING_MALL');
 
 insert or replace into HD_Binary_Compress_Keys (Key, MaxExp) values
-	('HD_PLOT_BINARY_COMPRESS_FOOD_MARKET', 	6),
-	('HD_PLOT_BINARY_COMPRESS_SHOPPING_MALL', 6);
+	('HD_PLOT_BINARY_COMPRESS_FOOD_MARKET', 	7),
+	('HD_PLOT_BINARY_COMPRESS_SHOPPING_MALL', 7);
 
 	-- 食品市场
 insert or replace into BuildingModifiers (BuildingType, ModifierId)
 	select 'BUILDING_FOOD_MARKET', 'HD_FOOD_MARKET_GOLD_' || Exp
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 8;
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId)
 	select 'HD_FOOD_MARKET_GOLD_' || Exp, 'MODIFIER_BUILDING_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_FOOD_MARKET_' || Exp || '_REQUIREMENTS'
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 8;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_FOOD_MARKET_GOLD_' || Exp, 'Amount', Amount * 3
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 8;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_FOOD_MARKET_GOLD_' || Exp, 'YieldType', 'YIELD_GOLD'
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 8;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_FOOD_MARKET_GOLD_' || Exp, 'BuildingType', 'BUILDING_FOOD_MARKET'
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 8;
 
 	-- 购物商城
 insert or replace into BuildingModifiers (BuildingType, ModifierId)
 	select 'BUILDING_SHOPPING_MALL', 'HD_SHOPPING_MALL_GOLD_' || Exp
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 8;
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId)
 	select 'HD_SHOPPING_MALL_GOLD_' || Exp, 'MODIFIER_BUILDING_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_SHOPPING_MALL_' || Exp || '_REQUIREMENTS'
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 8;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_SHOPPING_MALL_GOLD_' || Exp, 'Amount', Amount * 3
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 8;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_SHOPPING_MALL_GOLD_' || Exp, 'YieldType', 'YIELD_GOLD'
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 8;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_SHOPPING_MALL_GOLD_' || Exp, 'BuildingType', 'BUILDING_SHOPPING_MALL'
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 8;
 
 -- 产品业绩
 insert or replace into BuildingModifiers (BuildingType, ModifierId) select

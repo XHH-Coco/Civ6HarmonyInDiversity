@@ -66,3 +66,8 @@ create table if not exists HD_PolicyNeedDetect(
 	PolicyType 		TEXT not NULL,
 	PropertyRange TEXT not NULL,
 PRIMARY KEY('PolicyType'));
+
+------------------- 提供总督点的科技 -------------------
+create table if not exists HD_TechnologyGovernorPoints(
+	TechnologyType TEXT not NULL,
+PRIMARY KEY('TechnologyType'));

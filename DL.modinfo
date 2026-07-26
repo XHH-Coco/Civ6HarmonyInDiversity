@@ -823,6 +823,7 @@
       <File>Assets/Commemorations/HD_Commemorations_86.dds</File>
       <File>Assets/Commemorations/HD_Commemorations_256.dds</File>
       <File>Assets/CustomEvents/HD_SCOTLAND_SELECTIONS_256.dds</File>
+      <File>Assets/HD_BLANK_38.dds</File>
     </ImportFiles>
     <!-- UI -->
     <ImportFiles id="DL_Overwrite_Files_Import" criteria="Expansion2">
@@ -878,10 +879,14 @@
       <File>UI/Replacement/DL_WorldViewIconsManager.lua</File>
       <File>UI/Replacement/DL_UnitPanel.lua</File>
       <File>UI/Replacement/HD_WorldInput.lua</File>
-      <File>UI/Replacement/DL_TechCivicCompletedPopup.lua</File>
+      <File>UI/Replacement/TechCivicCompletedPopup.lua</File>
       <File>UI/Replacement/TechTreeNode.xml</File>
       <File>UI/Replacement/DL_TechTree.lua</File>
       <File>UI/Replacement/CivicsTree.xml</File>
+      <File>UI/Replacement/TechTree.xml</File>
+      <File>UI/Replacement/ResearchChooser.xml</File>
+      <File>UI/Replacement/WorldTrackerResearch.xml</File>
+      <File>UI/Replacement/CivicUnlockIcon.xml</File>
       <File>UI/Replacement/DL_CivicsTree.lua</File>
       <File>UI/Additions/HD_UnitCommandDefs.lua</File>
       <File>UI/Additions/HD_Utils.lua</File>
@@ -906,6 +911,8 @@
       <File>UI/Replacement/GovernorPanel.lua</File>
       <File>UI/Replacement/GovernorDetailsPanel.xml</File>
       <File>UI/Replacement/GovernorDetailsPanel.lua</File>
+      <File>UI/Replacement/TechAndCivicSupport.lua</File>
+      <File>UI/Replacement/TechAndCivicUnlockables_HD.lua</File>
     </ImportFiles>
     <ReplaceUIScript id="UpdateReligionIcon_UnitFlagManager">
       <Properties>
@@ -1027,7 +1034,7 @@
       <Properties>
         <LoadOrder>150000</LoadOrder>
         <LuaContext>TechCivicCompletedPopup</LuaContext>
-        <LuaReplace>UI/Replacement/DL_TechCivicCompletedPopup.lua</LuaReplace>
+        <LuaReplace>UI/Replacement/TechCivicCompletedPopup.lua</LuaReplace>
       </Properties>
     </ReplaceUIScript>
     <ReplaceUIScript id="DL_TechTree" criteria="Expansion2">
@@ -2406,10 +2413,14 @@
     <File>UI/Replacement/DL_PlotToolTip.lua</File>
     <File>UI/Replacement/DL_ProductionPanel.lua</File>
     <File>UI/Replacement/DL_SelectedUnit.lua</File>
-    <File>UI/Replacement/DL_TechCivicCompletedPopup.lua</File>
+    <File>UI/Replacement/TechCivicCompletedPopup.lua</File>
 	  <File>UI/Replacement/TechTreeNode.xml</File>
     <File>UI/Replacement/DL_TechTree.lua</File>
 	  <File>UI/Replacement/CivicsTree.xml</File>
+    <File>UI/Replacement/TechTree.xml</File>
+    <File>UI/Replacement/ResearchChooser.xml</File>
+    <File>UI/Replacement/WorldTrackerResearch.xml</File>
+    <File>UI/Replacement/CivicUnlockIcon.xml</File>
     <File>UI/Replacement/DL_CivicsTree.lua</File>
     <File>UI/Replacement/TestingOption_WithoutPopup.lua</File>
     <File>UI/Replacement/HD_PKSpyUnitPromotionPopup.lua</File>
@@ -2437,6 +2448,8 @@
     <File>UI/Replacement/GovernorPanel.lua</File>
     <File>UI/Replacement/GovernorDetailsPanel.xml</File>
     <File>UI/Replacement/GovernorDetailsPanel.lua</File>
+    <File>UI/Replacement/TechAndCivicSupport.lua</File>
+    <File>UI/Replacement/TechAndCivicUnlockables_HD.lua</File>
 
     <!-- Icons -->
     <File>UI/Icons/DL_Icons_Beliefs.xml</File>
@@ -2968,6 +2981,7 @@
     <File>Assets/Commemorations/HD_Commemorations_86.dds</File>
     <File>Assets/Commemorations/HD_Commemorations_256.dds</File>
     <File>Assets/CustomEvents/HD_SCOTLAND_SELECTIONS_256.dds</File>
+    <File>Assets/HD_BLANK_38.dds</File>
 
     <!-- Platforms -->
     <File>Platforms/Windows/audio/HD_CHINA.ini</File>

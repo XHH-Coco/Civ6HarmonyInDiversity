@@ -1928,9 +1928,6 @@ local MAGNANIMOUS_COMPLETE_DISTRICT_BUILDING_TAG = 'HD_MAGNANIMOUS_COMPLETE_DIST
 local MAGNANIMOUS_INTRODUCE_POPULATION_TAG = 'HD_MAGNANIMOUS_INTRODUCE_POPULATION';
 
 local MAGNANIMOUS_DISTRICT_PUSH_PERCENTAGE = GlobalParameters.HD_MAGNANIMOUS_DISTRICT_PUSH_PERCENTAGE or 0;
-local MAGNANIMOUS_INTRODUCE_GREAT_PERSON_PERCENTAGE = GlobalParameters.HD_MAGNANIMOUS_INTRODUCE_GREAT_PERSON_PERCENTAGE or 0;
-local MAGNANIMOUS_INTRODUCE_TYCOON_PERCENTAGE = GlobalParameters.HD_MAGNANIMOUS_INTRODUCE_TYCOON_PERCENTAGE or 0;
-local MAGNANIMOUS_INTRODUCE_INVESTOR_PERCENTAGE = GlobalParameters.HD_MAGNANIMOUS_INTRODUCE_INVESTOR_PERCENTAGE or 0;
 
 -- 记录历史时刻
 function MagnanimousPlayerCompleteMoment(playerId, momentId, classificationMap)
@@ -2071,11 +2068,8 @@ function MagnanimousIntroducePopulation(playerId, param)
 	end
 
 	-- 伟人
-	local gpRandomIndex = Game.GetRandNum(100, "Random Magnanimous GP " .. playerId) + 1;
-	local gpPercentage = param.GpPercentage or 0;
 	local gpData = param.GpData;
-	print("佩德罗二世 引进伟人：", gpRandomIndex, gpPercentage);
-	if gpRandomIndex <= gpPercentage and gpData then
+	if gpData then
 		local IndividualInfo = GameInfo.GreatPersonIndividuals[gpData.IndividualId];
 		local classInfo = GameInfo.GreatPersonClasses[gpData.ClassId];
 		if IndividualInfo and classInfo then
@@ -2098,31 +2092,21 @@ function MagnanimousIntroducePopulation(playerId, param)
 	end
 
 	-- 大亨
-	if TYCOON_INFO then
-		local tycoonRandomIndex = Game.GetRandNum(100, "Random Magnanimous Tycoon " .. playerId) + 1;
-		local tycoonPercentage = param.TycoonPercentage or 0;
-		print("佩德罗二世 引进大亨：", tycoonRandomIndex, tycoonPercentage);
-		if tycoonRandomIndex <= tycoonPercentage then
-			city:AttachModifierByID('HD_MAGNANIMOUS_GRANT_UNIT_LEU_TYCOON');
+	if TYCOON_INFO and param.GrantTycoon == true then
+		city:AttachModifierByID('HD_MAGNANIMOUS_GRANT_UNIT_LEU_TYCOON');
 
-			local randomCivIndex = Game.GetRandNum(#aliveMajorList, "Random Magnanimous Alive Civ Name " .. playerId) + 1;
-			Game.AddWorldViewText(playerId, Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_TALENTS_VIEWTEXT', aliveMajorList[randomCivIndex], TYCOON_INFO.Name), city:GetX(), city:GetY());
-			print("佩德罗二世 " .. Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_TALENTS_VIEWTEXT', aliveMajorList[randomCivIndex], TYCOON_INFO.Name));
-		end
+		local randomCivIndex = Game.GetRandNum(#aliveMajorList, "Random Magnanimous Alive Civ Name " .. playerId) + 1;
+		Game.AddWorldViewText(playerId, Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_TALENTS_VIEWTEXT', aliveMajorList[randomCivIndex], TYCOON_INFO.Name), city:GetX(), city:GetY());
+		print("佩德罗二世 " .. Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_TALENTS_VIEWTEXT', aliveMajorList[randomCivIndex], TYCOON_INFO.Name));
 	end
 
 	-- 投资人
-	if INVESTOR_INFO then
-		local investorRandomIndex = Game.GetRandNum(100, "Random Magnanimous Investor " .. playerId) + 1;
-		local investorPercentage = param.InvestorPercentage or 0;
-		print("佩德罗二世 引进投资人：", investorRandomIndex, investorPercentage);
-		if investorRandomIndex <= investorPercentage then
-			city:AttachModifierByID('HD_MAGNANIMOUS_GRANT_UNIT_LEU_INVESTOR');
+	if INVESTOR_INFO and param.GrantInvestor == true then
+		city:AttachModifierByID('HD_MAGNANIMOUS_GRANT_UNIT_LEU_INVESTOR');
 
-			local randomCivIndex = Game.GetRandNum(#aliveMajorList, "Random Magnanimous Alive Civ Name " .. playerId) + 1;
-			Game.AddWorldViewText(playerId, Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_TALENTS_VIEWTEXT', aliveMajorList[randomCivIndex], INVESTOR_INFO.Name), city:GetX(), city:GetY());
-			print("佩德罗二世 " .. Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_TALENTS_VIEWTEXT', aliveMajorList[randomCivIndex], INVESTOR_INFO.Name));
-		end
+		local randomCivIndex = Game.GetRandNum(#aliveMajorList, "Random Magnanimous Alive Civ Name " .. playerId) + 1;
+		Game.AddWorldViewText(playerId, Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_TALENTS_VIEWTEXT', aliveMajorList[randomCivIndex], INVESTOR_INFO.Name), city:GetX(), city:GetY());
+		print("佩德罗二世 " .. Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_TALENTS_VIEWTEXT', aliveMajorList[randomCivIndex], INVESTOR_INFO.Name));
 	end
 end
 GameEvents.HD_Magnanimous_Introduce_Population.Add(MagnanimousIntroducePopulation);

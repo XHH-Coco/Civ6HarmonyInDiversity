@@ -1041,14 +1041,13 @@ insert or replace into GreatPersonIndividualActionModifiers
 	(GreatPersonIndividualType,						ModifierId,								AttachmentTargetType)
 values
 	('GREAT_PERSON_INDIVIDUAL_GRACE_HOPPER',		'GREATPERSON_GRACE_HOPPER_ACTIVE_HD',	'GREAT_PERSON_ACTION_ATTACHMENT_TARGET_PLAYER');
-insert or replace into Modifiers
-	(ModifierId,									ModifierType)
-values
-	('GREATPERSON_GRACE_HOPPER_ACTIVE_HD',			'MODIFIER_DO_NOTHING');
-insert or replace into ModifierStrings
-	(ModifierId,												Context,				Text)
-values
-	('GREATPERSON_GRACE_HOPPER_ACTIVE_HD',						'Summary',				'LOC_GREAT_PERSON_INDIVIDUAL_HOPPER');
+insert or replace into Modifiers (ModifierId, ModifierType, RunOnce, Permanent) values
+	('GREATPERSON_GRACE_HOPPER_ACTIVE_HD',	'MODIFIER_PLAYER_ADJUST_PROPERTY', 1, 1);
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
+	('GREATPERSON_GRACE_HOPPER_ACTIVE_HD',	'Key',		'HD_FREE_TECH'),
+  ('GREATPERSON_GRACE_HOPPER_ACTIVE_HD',	'Amount',	2);
+insert or replace into ModifierStrings (ModifierId, Context, Text) values
+	('GREATPERSON_GRACE_HOPPER_ACTIVE_HD',	'Summary','LOC_GREAT_PERSON_INDIVIDUAL_HOPPER');
 --删除LEU附带的部分伟人	
 delete from GreatPersonIndividuals where GreatPersonIndividualType = 'GREAT_PERSON_INDIVIDUAL_LEU_BRIAN_EPSTEIN' or GreatPersonIndividualType = 'GREAT_PERSON_INDIVIDUAL_LEU_JACK_MA';
 --阿基米德变大科，次数变1次，给3%+1ULK

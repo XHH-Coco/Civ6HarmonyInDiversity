@@ -7,6 +7,8 @@ Utils = ExposedMembers.DLHD.Utils;
 
 local MAGNANIMOUS_INTRODUCE_POPULATION_TAG = 'HD_MAGNANIMOUS_INTRODUCE_POPULATION';
 local MAGNANIMOUS_INTRODUCE_PARAM_TAG = 'HD_MAGNANIMOUS_INTRODUCE_PARAM';
+local MAGNANIMOUS_FIRST_INTRODUCE_TYCOON_TAG = 'HD_MAGNANIMOUS_FIRST_INTRODUCE_TYCOON';
+local MAGNANIMOUS_INTRODUCE_GP_RECORD_TAG = 'HD_MAGNANIMOUS_INTRODUCE_GP_RECORD_';
 
 
 local MAGNANIMOUS_INTRODUCE_GREAT_PERSON_PERCENTAGE = GlobalParameters.HD_MAGNANIMOUS_INTRODUCE_GREAT_PERSON_PERCENTAGE or 0;
@@ -42,7 +44,9 @@ function MagnanimousButtonReset()
           for i, entry in ipairs(pastTimeLine) do
             if entry.Claimant and entry.Claimant ~= playerId and entry.Individual then
               local gpInfo = GameInfo.GreatPersonIndividuals[entry.Individual];
-              if gpInfo and gpInfo.GreatPersonClassType ~= 'GREAT_PERSON_CLASS_PROPHET' and not Utils.GreatWorkGreatPersonList[gpInfo.Index] then
+              if gpInfo and gpInfo.GreatPersonClassType ~= 'GREAT_PERSON_CLASS_PROPHET' and not Utils.GreatWorkGreatPersonList[gpInfo.Index]
+                and Utils.GetPlayerProperty(playerId, MAGNANIMOUS_INTRODUCE_GP_RECORD_TAG .. gpInfo.Index) ~= 1
+              then
                 local classInfo = GameInfo.GreatPersonClasses[gpInfo.GreatPersonClassType];
                 if classInfo and classInfo.AvailableInTimeline == true then
                   table.insert(greatPersonList, {
@@ -59,10 +63,13 @@ function MagnanimousButtonReset()
           if #greatPersonList > 0 then
             local randomFactor = Utils.GetRandNum(101, "Random Magnanimous GpPercentage Factor " .. playerId) + 50;
             local gpPercentage = MAGNANIMOUS_INTRODUCE_GREAT_PERSON_PERCENTAGE * randomFactor / 100;
-
-            local randomIndex = Utils.GetRandNum(#greatPersonList, "Random Magnanimous Gp " .. playerId) + 1;
-            param.GpData = greatPersonList[randomIndex];
-            param.GpPercentage = math.min(gpPercentage, 100);
+            local gpRandomIndex = Utils.GetRandNum(100, "Random Magnanimous GP " .. playerId) + 1;
+            -- print("伟人概率", gpRandomIndex, gpPercentage);
+            if gpRandomIndex <= gpPercentage then
+              local randomIndex = Utils.GetRandNum(#greatPersonList, "Random Magnanimous Gp " .. playerId) + 1;
+              param.GpData = greatPersonList[randomIndex];
+              Utils.SetPlayerProperty(playerId, MAGNANIMOUS_INTRODUCE_GP_RECORD_TAG .. param.GpData.IndividualId, 1);
+            end
           end
 
           -- 大亨引进概率
@@ -73,8 +80,19 @@ function MagnanimousButtonReset()
             if (not prereqTechInfo or player:GetTechs():HasTech(prereqTechInfo.Index)) and (not prereqCivicInfo or player:GetCulture():HasCivic(prereqCivicInfo.Index)) then
               local randomFactor = Utils.GetRandNum(101, "Random Magnanimous TycoonPercentage Factor " .. playerId) + 50;
               local tycoonPercentage = MAGNANIMOUS_INTRODUCE_TYCOON_PERCENTAGE * randomFactor / 100;
+              local tycoonRandomIndex = Utils.GetRandNum(100, "Random Magnanimous Tycoon " .. playerId) + 1;
 
-              param.TycoonPercentage = math.min(tycoonPercentage, 100);
+              -- 第一次引进一定能获得大亨
+              if Utils.GetPlayerProperty(playerId, MAGNANIMOUS_FIRST_INTRODUCE_TYCOON_TAG) ~= 1 then
+                print("巴西首次尝试引进大亨");
+                Utils.SetPlayerProperty(playerId, MAGNANIMOUS_FIRST_INTRODUCE_TYCOON_TAG, 1);
+                tycoonRandomIndex = 1;
+              end
+
+              -- print("大亨概率", tycoonRandomIndex, tycoonPercentage);
+              if tycoonRandomIndex <= tycoonPercentage then
+                param.GrantTycoon = true;
+              end
             end
           end
 
@@ -86,8 +104,10 @@ function MagnanimousButtonReset()
             if (not prereqTechInfo or player:GetTechs():HasTech(prereqTechInfo.Index)) and (not prereqCivicInfo or player:GetCulture():HasCivic(prereqCivicInfo.Index)) then
               local randomFactor = Utils.GetRandNum(101, "Random Magnanimous InvestorPercentage Factor " .. playerId) + 50;
               local investorPercentage = MAGNANIMOUS_INTRODUCE_INVESTOR_PERCENTAGE * randomFactor / 100;
-
-              param.InvestorPercentage = math.min(investorPercentage, 100);
+              local investorRandomIndex = Utils.GetRandNum(100, "Random Magnanimous Investor " .. playerId) + 1;
+              if investorRandomIndex <= investorPercentage then
+                param.GrantInvestor = true;
+              end
             end
           end
 
@@ -97,16 +117,15 @@ function MagnanimousButtonReset()
 
         -- 参数文本
         local paramToolTipList = {};
-        if param.GpPercentage and param.GpPercentage > 0 then
-          local data = param.GpData or {};
-          local classInfo = GameInfo.GreatPersonClasses[data.ClassId];
-          table.insert(paramToolTipList, Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_INTRODUCE_PERCENTAGE_TEXT', param.GpPercentage, classInfo.Name));
+        if param.GpData then
+          local classInfo = GameInfo.GreatPersonClasses[param.GpData.ClassId];
+          table.insert(paramToolTipList, Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_INTRODUCE_PERCENTAGE_TEXT', classInfo.Name));
         end
-        if TYCOON_INFO and param.TycoonPercentage and param.TycoonPercentage > 0 then
-          table.insert(paramToolTipList, Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_INTRODUCE_PERCENTAGE_TEXT', param.TycoonPercentage, TYCOON_INFO.Name));
+        if TYCOON_INFO and param.GrantTycoon == true then
+          table.insert(paramToolTipList, Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_INTRODUCE_PERCENTAGE_TEXT', TYCOON_INFO.Name));
         end
-        if INVESTOR_INFO and param.InvestorPercentage and param.InvestorPercentage > 0 then
-          table.insert(paramToolTipList, Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_INTRODUCE_PERCENTAGE_TEXT', param.InvestorPercentage, INVESTOR_INFO.Name));
+        if INVESTOR_INFO and param.GrantInvestor == true then
+          table.insert(paramToolTipList, Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_INTRODUCE_PERCENTAGE_TEXT', INVESTOR_INFO.Name));
         end
 
         if #paramToolTipList > 0 then
@@ -147,9 +166,8 @@ function MagnanimousButtonClick()
         {
           CityId = city:GetID(),
           GpData = param.GpData,
-          GpPercentage = param.GpPercentage,
-          TycoonPercentage = param.TycoonPercentage,
-          InvestorPercentage = param.InvestorPercentage,
+          GrantTycoon = param.GrantTycoon,
+          GrantInvestor = param.GrantInvestor,
           OnStart = 'HD_Magnanimous_Introduce_Population'
         }
       );

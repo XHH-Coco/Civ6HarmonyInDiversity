@@ -1737,9 +1737,9 @@ insert or replace into GlobalParameters (Name, Value) values
 	-- 区域推进进度
 	('HD_MAGNANIMOUS_DISTRICT_PUSH_PERCENTAGE', 				 50),
 	-- 吸引人才概率
-  ('HD_MAGNANIMOUS_INTRODUCE_GREAT_PERSON_PERCENTAGE', 50),
-  ('HD_MAGNANIMOUS_INTRODUCE_TYCOON_PERCENTAGE', 			 40),
-  ('HD_MAGNANIMOUS_INTRODUCE_INVESTOR_PERCENTAGE', 		 30);
+  ('HD_MAGNANIMOUS_INTRODUCE_GREAT_PERSON_PERCENTAGE', 40),
+  ('HD_MAGNANIMOUS_INTRODUCE_TYCOON_PERCENTAGE', 			 30),
+  ('HD_MAGNANIMOUS_INTRODUCE_INVESTOR_PERCENTAGE', 		 20);
 
 -- =====================================================================================================================================
 -- 苏格兰

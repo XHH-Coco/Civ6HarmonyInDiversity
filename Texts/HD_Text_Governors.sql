@@ -86,7 +86,7 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   -- ==============================================================================
   -- 基础升级
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MERCHANT_BASE_NAME",                        "商务局长"),
-  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MERCHANT_BASE_DESCRIPTION",                 "本城的商业中心和港口+100%相邻加成。若本城有商业中心或港口则+1区域位。"),
+  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MERCHANT_BASE_DESCRIPTION",                 "本城建造商业中心、港口和其中的建筑时+30%建造速度。若本城有商业中心或港口则+1区域位。"),
   -- 左线升级
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MERCHANT_LEFT_1_NAME",                      "包税制度"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MERCHANT_LEFT_1_DESCRIPTION",               "本城购买单位-15%花费，购买商人额外-15%花费。"),
@@ -96,9 +96,9 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MERCHANT_LEFT_3_DESCRIPTION",               "本城每有一座商业中心建筑，玩家的 [ICON_GREATMERCHANT] 大商人点数积累速度+25%；每有一座港口建筑，玩家的 [ICON_GREATADMIRAL] 海军统帅点数积累速度+25%。"),
   -- 右线升级
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MERCHANT_RIGHT_1_NAME",                     "币制改革"),
-  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MERCHANT_RIGHT_1_DESCRIPTION",              "+1 [ICON_TRADEROUTE] 贸易路线容量。本城每有一座商业中心建筑，本城出发的国际 [ICON_TRADEROUTE] 贸易路线+3 [ICON_GOLD] 金币。"),
+  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MERCHANT_RIGHT_1_DESCRIPTION",              "+2 [ICON_TRADEROUTE] 贸易路线容量。本城的商业中心和港口+100%相邻加成。"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MERCHANT_RIGHT_2_NAME",                     "市舶榷务"),
-  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MERCHANT_RIGHT_2_DESCRIPTION",              "+1 [ICON_TRADEROUTE] 贸易路线容量。本城每有一座港口建筑，本城出发的国际 [ICON_TRADEROUTE] 贸易路线+4 [ICON_GOLD] 金币。"),
+  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MERCHANT_RIGHT_2_DESCRIPTION",              "本城每有一座商业中心建筑，本城出发的国际 [ICON_TRADEROUTE] 贸易路线+3 [ICON_GOLD] 金币。本城每有一座港口建筑，本城出发的国际 [ICON_TRADEROUTE] 贸易路线+4 [ICON_GOLD] 金币。"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MERCHANT_RIGHT_3_NAME",                     "国际贸易"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MERCHANT_RIGHT_3_DESCRIPTION",              "本城从国际 [ICON_TRADEROUTE] 贸易路线获得的产出+25%；每次在其他主要文明的城市中建成首个 [ICON_TRADINGPOST] 贸易站后，额外+5%。"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MERCHANT_RIGHT_3_BUTTON_TEXT",              "{LOC_GOVERNOR_PROMOTION_HD_MERCHANT_RIGHT_3_NAME}：{1_Amount}%"),

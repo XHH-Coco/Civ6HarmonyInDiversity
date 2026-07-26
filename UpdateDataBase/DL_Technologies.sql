@@ -486,6 +486,16 @@ update Technologies set Cost = 160 where Cost = 120;
 update Technologies set Cost = 80 where Cost = 80;
 update Technologies set Cost = 50 where Cost = 50;
 
+-- 总督点
+insert or replace into HD_TechnologyGovernorPoints (TechnologyType) values
+    ('TECH_EDUCATION'),
+    ('TECH_CASTLES'),
+    ('TECH_BANKING'),
+    ('TECH_MILITARY_SCIENCE'),
+    ('TECH_FLIGHT'),
+    ('TECH_COMPUTERS'),
+    ('TECH_TELECOMMUNICATIONS');
+
 -- 删除电脑全境业绩
 delete from TechnologyModifiers where TechnologyType = 'TECH_COMPUTERS' and ModifierId = 'COMPUTERS_BOOST_ALL_TOURISM';
 

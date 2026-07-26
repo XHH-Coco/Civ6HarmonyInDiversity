@@ -3,9 +3,24 @@ create table if not exists 'HD_Binary_Compress'(
 	'Amount' INT NOT NULL,
 	PRIMARY KEY('Exp')
 );
-insert or ignore into HD_Binary_Compress ('Exp', 'Amount') values (0,1),(1,2),(2,4),(3,8),(4,16),(5,32),(6,64),(7,128),(8,256),(9,512),(10,1024);
+insert or ignore into HD_Binary_Compress ('Exp', 'Amount') values
+	(0,1),
+	(1,2),
+	(2,4),
+	(3,8),
+	(4,16),
+	(5,32),
+	(6,64),
+	(7,128),
+	(8,256),
+	(9,512),
+	(10,1024),
+	(11,2048),
+	(12,4096),
+	(13,8192),
+	(14,16384);
 
-insert or replace into GlobalParameters (Name, Value) values ('HD_BINARY_COMPRESS_MAX_EXP', 10);
+insert or replace into GlobalParameters (Name, Value) values ('HD_BINARY_COMPRESS_MAX_EXP', 14);
 
 create table if not exists 'HD_Binary_Compress_Keys'(
 	'Key' TEXT NOT NULL,

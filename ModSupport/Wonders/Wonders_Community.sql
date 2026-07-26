@@ -1022,6 +1022,18 @@ insert or replace into GlobalParameters
 values
 	('HD_BURJ_KHALIFA_MERCHANT_PERCENTAGE',	15);
 
+-- 阿雷西博天文台
+insert or replace into BuildingModifiers (BuildingType, ModifierId) select
+	'WON_CL_BUILDING_ARECIBO',	'HD_ARECIBO_FREE_TECH'
+where exists (select BuildingType from Buildings where BuildingType = 'WON_CL_BUILDING_ARECIBO');
+
+insert or replace into Modifiers (ModifierId, ModifierType, RunOnce, Permanent) values
+	('HD_ARECIBO_FREE_TECH','MODIFIER_PLAYER_ADJUST_PROPERTY', 1, 1);
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
+	('HD_ARECIBO_FREE_TECH','Key',		'HD_FREE_TECH'),
+  ('HD_ARECIBO_FREE_TECH','Amount',	1);
+
 -- Cost adjust
 update Buildings set Cost = 180 where BuildingType = 'P0K_BUILDING_TEMPLE_POSEIDON';
 update Buildings set Cost = 260 where BuildingType = 'BUILDING_ABU_SIMBEL';

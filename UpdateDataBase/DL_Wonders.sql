@@ -1396,9 +1396,21 @@ select
 	'MARACANA_' || DistrictType || '_EXPERT_YIELD', 	'BuildingType',		'BUILDING_MARACANA_DUMMY_' || DistrictType
 from HD_Maracana_DistrictBonus;
 
--- Free tech / civic Wonder
--- Player can choose awarded tech manually
+-- 牛津大学/莫斯科大剧院
 update Modifiers set OwnerRequirementSetId = 'PLAYER_IS_AI' where ModifierId in ('OXFORD_UNIVERSITY_FREE_TECHS', 'BOLSHOI_THEATRE_FREE_CIVICS', 'ARECIBO_FREE_TECHS');
+insert or replace into BuildingModifiers (BuildingType, ModifierId) values
+	('BUILDING_OXFORD_UNIVERSITY',	'HD_OXFORD_UNIVERSITY_FREE_TECH'),
+	('BUILDING_BOLSHOI_THEATRE',		'HD_BOLSHOI_THEATRE_FREE_CIVIC');
+
+insert or replace into Modifiers (ModifierId, ModifierType, RunOnce, Permanent) values
+	('HD_OXFORD_UNIVERSITY_FREE_TECH','MODIFIER_PLAYER_ADJUST_PROPERTY', 1, 1),
+	('HD_BOLSHOI_THEATRE_FREE_CIVIC',	'MODIFIER_PLAYER_ADJUST_PROPERTY', 1, 1);
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
+	('HD_OXFORD_UNIVERSITY_FREE_TECH','Key',		'HD_FREE_TECH'),
+  ('HD_OXFORD_UNIVERSITY_FREE_TECH','Amount',	2),
+	('HD_BOLSHOI_THEATRE_FREE_CIVIC',	'Key',		'HD_FREE_CIVIC'),
+  ('HD_BOLSHOI_THEATRE_FREE_CIVIC',	'Amount',	2);
 
 --圣瓦西里主教座堂
 update Building_GreatWorks set

@@ -969,3 +969,9 @@ from ImprovementsNeedCount_HD;
 insert or replace into ModifierArguments (ModifierId, Name, Value)
   select 'HD_CITY_' || ImprovementType || '_COUNT_RECORD', 'Amount', 1
 from ImprovementsNeedCount_HD;
+
+-------------------------------------------------------------------
+-- 科技提供总督点
+insert or replace into TechnologyModifiers (TechnologyType, ModifierId) select
+  TechnologyType, 'CIVIC_GRANT_PLAYER_GOVERNOR_POINTS'
+from HD_TechnologyGovernorPoints;
