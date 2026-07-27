@@ -245,13 +245,13 @@ function initGoodyHutReward()
 			ModifierId = row.ModifierId,
 			Turn = row.Turn
     })
-		print(
-			"initGoodyHutReward",
-			row.GoodyHut,
-			row.SubTypeGoodyHut,
-			row.ModifierId,
-			row.Turn
-		)
+		-- print(
+		-- 	"initGoodyHutReward",
+		-- 	row.GoodyHut,
+		-- 	row.SubTypeGoodyHut,
+		-- 	row.ModifierId,
+		-- 	row.Turn
+		-- )
 	end
 end
 initGoodyHutReward();

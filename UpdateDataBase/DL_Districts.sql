@@ -363,34 +363,34 @@ update Districts set TravelTime = 1 where DistrictType = 'DISTRICT_CANAL';
 update Districts set PrereqCivic = 'CIVIC_STATE_WORKFORCE', Appeal = 1, Housing = 3 where DistrictType = 'DISTRICT_MBANZA';
 
 delete from DistrictModifiers where ModifierId in ('MBANZA_FOOD','MBANZA_GOLD') and DistrictType = 'DISTRICT_MBANZA';
+delete from District_RequiredFeatures where DistrictType = 'DISTRICT_MBANZA';
 
-insert or replace into DistrictModifiers
-	(DistrictType,						ModifierId)
-values
+insert or ignore into TraitModifiers (TraitType, ModifierId) values
+	('TRAIT_CIVILIZATION_MBANZA',	'TRAIT_FOREST_VALID_DISTRICT_MBANZA'),
+	('TRAIT_CIVILIZATION_MBANZA',	'TRAIT_JUNGLE_VALID_DISTRICT_MBANZA');
+
+insert or replace into DistrictModifiers (DistrictType, ModifierId) values
 	('DISTRICT_MBANZA',					'MBANZA_ADD_ADJACENT_FOOD'),
 	('DISTRICT_MBANZA',					'SHRINE_BUILDER_PURCHASE'),
 	('DISTRICT_MBANZA',					'TEMPLE_SETTLER_PURCHASE');
 
-insert or replace into Modifiers
-	(ModifierId,							ModifierType,											SubjectRequirementSetId)
-values
-	('MBANZA_ADD_ADJACENT_FOOD',			'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',					'MBANZA_ADJACENCY_FOOD_REQUIREMENTS');
+insert or ignore into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) values
+	('MBANZA_ADD_ADJACENT_FOOD',						'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',											'REQUIRE_PLOT_ADJACENT_TO_OWNER'),
+	('TRAIT_FOREST_VALID_DISTRICT_MBANZA',	'MODIFIER_PLAYER_CITIES_ADJUST_VALID_FEATURES_DISTRICTS',	NULL),
+	('TRAIT_JUNGLE_VALID_DISTRICT_MBANZA',	'MODIFIER_PLAYER_CITIES_ADJUST_VALID_FEATURES_DISTRICTS',	NULL);
 
-insert or replace into ModifierArguments
-	(ModifierId,							Name,			Value)
-values
-	('MBANZA_ADD_ADJACENT_FOOD',			'YieldType',	'YIELD_FOOD'),
-	('MBANZA_ADD_ADJACENT_FOOD',			'Amount',		1);
+insert or ignore into ModifierArguments (ModifierId, Name, Value) values
+	('MBANZA_ADD_ADJACENT_FOOD',						'YieldType',		'YIELD_FOOD'),
+	('MBANZA_ADD_ADJACENT_FOOD',						'Amount',				1),
+	('TRAIT_FOREST_VALID_DISTRICT_MBANZA',	'DistrictType',	'DISTRICT_MBANZA'),
+	('TRAIT_FOREST_VALID_DISTRICT_MBANZA',	'FeatureType',	'FEATURE_FOREST'),
+	('TRAIT_JUNGLE_VALID_DISTRICT_MBANZA',	'DistrictType',	'DISTRICT_MBANZA'),
+	('TRAIT_JUNGLE_VALID_DISTRICT_MBANZA',	'FeatureType',	'FEATURE_JUNGLE');
 
-insert or replace into RequirementSets
-	(RequirementSetId,							RequirementSetType)
-values
-	('MBANZA_ADJACENCY_FOOD_REQUIREMENTS',		'REQUIREMENTSET_TEST_ALL');
-
-insert or replace into RequirementSetRequirements
-	(RequirementSetId,							RequirementId)
-values
-	('MBANZA_ADJACENCY_FOOD_REQUIREMENTS',		'ADJACENT_TO_OWNER');
+insert or replace into District_CitizenGreatPersonPoints (DistrictType, GreatPersonClassType, PointsPerTurn) values
+	("DISTRICT_MBANZA",	"GREAT_PERSON_CLASS_WRITER",		2),
+	("DISTRICT_MBANZA",	"GREAT_PERSON_CLASS_ARTIST",		2),
+	("DISTRICT_MBANZA",	"GREAT_PERSON_CLASS_MUSICIAN",	2);
 
 -- 堤坝
 update Districts set Entertainment = 0 where DistrictType = 'DISTRICT_DAM';

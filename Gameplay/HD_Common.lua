@@ -863,6 +863,11 @@ local function GetPlayerProperty(playerId, tag)
 end
 Utils.GetPlayerProperty = GetPlayerProperty;
 
+-- 获得游戏参数
+local function GetGameProperty(tag)
+	return Game:GetProperty(tag);
+end
+Utils.GetGameProperty = GetGameProperty;
 
 -- 设置玩家property
 local function SetPlayerProperty(playerId, tag, value)
@@ -1066,3 +1071,20 @@ function InitMomentClassificationMap()
 end
 InitMomentClassificationMap();
 Utils.MomentClassificationMap = MomentClassificationMap;
+
+function ConsumeUnitBuildCharges(playerId, unitId, num)
+	local unit = UnitManager.GetUnit(playerId, unitId);
+	if not unit then return; end
+
+	local unitAbility = unit:GetAbility();
+
+	for j=1, num, 1 do
+		for i=1, 15, 1 do
+			if unitAbility:GetAbilityCount('ABILITY_HD_NEGA_BUILD_CHARGE_' .. i) == 0 then
+				unitAbility:ChangeAbilityCount('ABILITY_HD_NEGA_BUILD_CHARGE_' .. i, 1);
+				break;
+			end
+		end
+	end
+end
+Utils.ConsumeUnitBuildCharges = ConsumeUnitBuildCharges;

@@ -89,37 +89,37 @@ function getCityCenterPlotIndex(city)
 	return Map.GetPlotIndex(x, y)
 end
 
-function UpdateCityHasGovernor(playerID)
-	local player = Players[playerID]
-	local pCities = player:GetCities()
+-- function UpdateCityHasGovernor(playerID)
+-- 	local player = Players[playerID]
+-- 	local pCities = player:GetCities()
 
-	for _, city in pCities:Members() do
-		local plotID = getCityCenterPlotIndex(city)
-		local value = 0
-		if city:GetAssignedGovernor() == nil then
-			value = 0
-		else
-			value = 1
-		end
-		local plot = Map.GetPlotByIndex(plotID)
-		-- print(plotID, value)
-		SetObjectState(plot, g_PropertyKeys_HD.CityFlags.HasAssignedGovernor, value)
-	end
-end
+-- 	for _, city in pCities:Members() do
+-- 		local plotID = getCityCenterPlotIndex(city)
+-- 		local value = 0
+-- 		if city:GetAssignedGovernor() == nil then
+-- 			value = 0
+-- 		else
+-- 			value = 1
+-- 		end
+-- 		local plot = Map.GetPlotByIndex(plotID)
+-- 		-- print(plotID, value)
+-- 		SetObjectState(plot, g_PropertyKeys_HD.CityFlags.HasAssignedGovernor, value)
+-- 	end
+-- end
 
-function OnGovernorChanged(playerID, governorID)
-	-- print('OnGovernorChanged', playerID, governorID)
-	UpdateCityHasGovernor(playerID)
-end
+-- function OnGovernorChanged(playerID, governorID)
+-- 	-- print('OnGovernorChanged', playerID, governorID)
+-- 	UpdateCityHasGovernor(playerID)
+-- end
 
-function OnGovernorAssigned(cityOwner, cityID, governorOwner, governorType)
-	-- print('OnGovernorAssigned', cityOwner, cityID, governorOwner, governorType)
-	UpdateCityHasGovernor(governorOwner)
-end
+-- function OnGovernorAssigned(cityOwner, cityID, governorOwner, governorType)
+-- 	-- print('OnGovernorAssigned', cityOwner, cityID, governorOwner, governorType)
+-- 	UpdateCityHasGovernor(governorOwner)
+-- end
 
-Events.GovernorChanged.Add(OnGovernorChanged)
-Events.GovernorAppointed.Add(OnGovernorChanged)
-Events.GovernorAssigned.Add(OnGovernorAssigned)
+-- Events.GovernorChanged.Add(OnGovernorChanged)
+-- Events.GovernorAppointed.Add(OnGovernorChanged)
+-- Events.GovernorAssigned.Add(OnGovernorAssigned)
 
 function cityHasDistrict(city, districtID)
 	local districts = city:GetDistricts();

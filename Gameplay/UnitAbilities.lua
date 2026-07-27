@@ -168,13 +168,7 @@ function MilitaryEngineerExcavate(playerId, unitId)
   -- 扣除劳动次数/删除单位
   local movesRemaining = Utils.GetUnitMovesRemaining(playerId, unitId);
   unit:ChangeMovesRemaining(-movesRemaining);
-  local unitAbility = unit:GetAbility()
-  for i=1, 10, 1 do
-    if unitAbility:GetAbilityCount('ABILITY_HD_MILITARY_ENGINEER_NEGA_CHARGE_' .. i) == 0 then
-      unitAbility:ChangeAbilityCount('ABILITY_HD_MILITARY_ENGINEER_NEGA_CHARGE_' .. i, 1);
-      break;
-    end
-  end
+  Utils.ConsumeUnitBuildCharges(playerId, unitId, 1);
 end
 GameEvents.HD_Military_Engineer_Excavate.Add(MilitaryEngineerExcavate)
 

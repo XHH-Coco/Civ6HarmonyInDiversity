@@ -270,7 +270,7 @@ values
 -- =====================================================================================================================================
 -- 法国
 -- =====================================================================================================================================
-	("LOC_TRAIT_CIVILIZATION_WONDER_TOURISM_DESCRIPTION",             			 "+20% [ICON_Production] Production toward Medieval, Renaissance, and Industrial era wonders. [ICON_Tourism] Tourism from wonders of any era is +200%. Each time you complete a Wonder, gain [ICON_GREATWRITER] Great Writer, [ICON_GREATARTIST] Great Artist and [ICON_GREATMUSICIAN] Great Musician Points each equals to 20% of its production cost. Each time you active a [ICON_GREATWORK_WRITING] Writing, [ICON_GREATWORK_LANDSCAPE] Art or [ICON_GREATWORK_MUSIC] Music Great Work in a city, complete 10% of the original Wonder cost towards the Wonder that is currently building."),
+	("LOC_TRAIT_CIVILIZATION_WONDER_TOURISM_DESCRIPTION",             			 "+20% [ICON_Production] Production toward Medieval, Renaissance, and Industrial era wonders. [ICON_Tourism] Tourism from wonders of any era is +200%. Each time you complete a Wonder, gain Cultural [ICON_GREATPERSON] Great Person points each equals to 20% of its production cost. Each time you active a Cultural Great Work in a city, complete 10% of the original Wonder cost towards the Wonder that is currently building."),
 	-- 黑法国
 	("LOC_TRAIT_LEADER_FLYING_SQUADRON_NAME",                         			 "Château de Chenonceau"),
 	("LOC_TRAIT_LEADER_FLYING_SQUADRON_DESCRIPTION",                  			 "Receives a free Spy (and extra spy capacity) upon unlocking the Castles technology, Political Philosophy civic, or Supply civic. +1 sight range for Trader, Settler, Builder units and Recon units, +3 sight range for spies. All spies start with a free promotion. Gain 1 level of [ICON_VISLIMITED] Diplomatic Visibility greater than normal with every civilization that they've met."),
@@ -324,7 +324,7 @@ values
 	("LOC_TRAIT_CIVILIZATION_THREE_KINGDOMS_DESCRIPTION",                    "Receive +1 [Icon_Governor] Governor Title each time a Seowon district or buildings inside a Seowon District is constructed in your [ICON_Capital] Capital."),
 	-- 女朝鲜
 	("LOC_LEADER_SEONDEOK_NAME",                                             "Kim Deokman"),
-	("LOC_TRAIT_LEADER_HWARANG_DESCRIPTION",                                 "+5 [Icon_Housing] Housing and +20 Loyalty per turn for your Capital and cities with an assigned Governor. -20 Loyalty per turn and -50% to all yields for cities that are not your Capital and do not have an assigned Governors. [NEWLINE]+25% [ICON_PRODUCTION] Production towards Districts and Buildings for cities that have a Seowon district. [NEWLINE]+15% [ICON_Production] Production and +15% [ICON_FOOD] Food for Cities with a Tier 1 building of Campus district. [NEWLINE]+100% districts adjacency bonuses to all Districts for Cities with a Tier 2 building of Campus district. [NEWLINE]Each [ICON_CITIZEN] citizen provieds +1 all yields for Cities with a Tier 3 building of Campus district. [NEWLINE]+10% to all yields for Cities with a Tier 4 building of Campus district."),
+	("LOC_TRAIT_LEADER_HWARANG_DESCRIPTION",                                 "+25% [ICON_PRODUCTION] Production towards Districts and Buildings for cities that have a Seowon district. [NEWLINE]+15% [ICON_Production] Production and +15% [ICON_FOOD] Food for Cities with a Tier 1 building of Campus district. [NEWLINE]+100% districts adjacency bonuses to all Districts for Cities with a Tier 2 building of Campus district. [NEWLINE]Each [ICON_CITIZEN] citizen provieds +1 all yields for Cities with a Tier 3 building of Campus district. [NEWLINE]+10% to all yields for Cities with a Tier 4 building of Campus district."),
 	-- 男朝鲜
 	("LOC_LEADER_SEJONG_NAME",                                               "Yi Do"),
 	("LOC_TRAIT_LEADER_SEJONG_NAME",                                         "Hunminjeongeum"),
@@ -403,9 +403,9 @@ values
 -- =====================================================================================================================================
 	("LOC_TRAIT_CIVILIZATION_NKISI_DESCRIPTION",                             "All land units ignore [ICON_MOVEMENT] movement penalty from Forest and Jungle. +4 [ICON_Food] Food, +4 [ICON_Production] Production from each Great Work. Palace has slots for 6 Great Works."),
 	-- 男刚果
-	("LOC_TRAIT_LEADER_RELIGIOUS_CONVERT_DESCRIPTION",                       "May not gain Great Prophets, or found Religions. Receive Theology [ICON_CivicBoosted] Inspiration, Divine Right [ICON_CivicBoosted] Inspiration and Reformed Church [ICON_CivicBoosted] Inspiration when Mbanza is first built. Receive 50% more [ICON_GREATWRITER] Great Writer, [ICON_GREATARTIST] Great Artist, [ICON_GREATMUSICIAN] Great Musician, and [ICON_GREATMERCHANT] Great Merchant points. Palace has slots for 5 Great Works."),
+	("LOC_TRAIT_LEADER_RELIGIOUS_CONVERT_DESCRIPTION",                       "Receive 50% more Cultural [ICON_GREATPERSON] Great Person points."),
 	-- 女刚果
-	("LOC_TRAIT_LEADER_NZINGA_MBANDE_DESCRIPTION",                           "Cities receive +10% Yields if on the same continent as your [ICON_CAPITAL] Capital, -15% if on another continent."),
+	("LOC_TRAIT_LEADER_NZINGA_MBANDE_DESCRIPTION",                           "Cities receive +10% Yields if on the same continent as your [ICON_CAPITAL] Capital, -2 [ICON_AMENITIES] Amenities if on another continent."),
 -- =====================================================================================================================================
 -- 巴比伦
 -- =====================================================================================================================================
@@ -896,7 +896,7 @@ values
 -- =====================================================================================================================================
 -- 法国
 -- =====================================================================================================================================
-	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_WONDER_TOURISM_DESCRIPTION",             "为中世纪、文艺复兴时期和工业时代的奇观+20%建造速度。所有奇观的 [ICON_Tourism] 旅游业绩+200%。完成奇观时，获得各等同于其 [ICON_PRODUCTION] 生产力花费20%的 [ICON_GREATWRITER] 大作家、[ICON_GREATARTIST] 大艺术家和 [ICON_GREATMUSICIAN] 大音乐家点数。在城市中创作 [ICON_GREATWORK_WRITING] 著作、[ICON_GREATWORK_LANDSCAPE] 艺术或 [ICON_GREATWORK_MUSIC] 音乐巨作时，可为该城市正在建造的奇观推进10%的建造进程。"),
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_WONDER_TOURISM_DESCRIPTION",             "为中世纪、文艺复兴时期和工业时代的奇观+20%建造速度。所有奇观的 [ICON_Tourism] 旅游业绩+200%。完成奇观时，获得各等同于其 [ICON_PRODUCTION] 生产力花费20%的文化类 [ICON_GREATPERSON] 伟人点。在城市中创作文化类巨作时，可为该城市正在建造的奇观推进10%的建造进程。"),
 	-- 黑法国
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_FLYING_SQUADRON_NAME",                         "舍农索城堡"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_FLYING_SQUADRON_DESCRIPTION",                  "解锁“城堡”科技、“政治哲学”和“后勤补给”市政各获得1个免费间谍容量和1个免费间谍。所有间谍初始便拥有1次免费升级。平民单位和侦察单位+1视野范围，间谍+3视野范围。[ICON_VISLIMITED] 外交能见度比遇到的其他文明高1级。"),
@@ -950,7 +950,7 @@ values
 	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_THREE_KINGDOMS_DESCRIPTION",             "[ICON_CAPITAL] 首都每次建成书院区域和书院区域建筑时获得一个 [ICON_GOVERNOR] 总督头衔。"),
 	-- 女朝鲜
 	("zh_Hans_CN",  "LOC_LEADER_SEONDEOK_NAME",                                      "金德曼"),
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_HWARANG_DESCRIPTION",                          "[ICON_CAPITAL] 首都或派遣了总督的城市获得+5 [Icon_Housing] 住房和+20忠诚度。非首都且未派遣总督的城市-8忠诚度和-50%全部产出。[NEWLINE]有书院的城市建造区域和建筑时+25%建造速度。[NEWLINE]有学院一级建筑的城市+15% [ICON_Food] 食物和 [Icon_production] 生产力。[NEWLINE]有学院二级建筑的城市，所有区域的相邻加成+100%。[NEWLINE]有学院三级建筑的城市每位 [ICON_CITIZEN] 公民额外+1点全部产出。[NEWLINE]有学院四级建筑的城市+10%全部产出。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_HWARANG_DESCRIPTION",                          "有书院的城市建造区域和建筑时+25%建造速度。[NEWLINE]有学院一级建筑的城市+15% [ICON_Food] 食物和 [Icon_production] 生产力。[NEWLINE]有学院二级建筑的城市，所有区域的相邻加成+100%。[NEWLINE]有学院三级建筑的城市每位 [ICON_CITIZEN] 公民额外+1全部产出。[NEWLINE]有学院四级建筑的城市+10%全部产出。"),
 	-- 男朝鲜
 	("zh_Hans_CN",  "LOC_LEADER_SEJONG_NAME",                                        "李裪"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_SEJONG_NAME",                                  "训民正音"),
@@ -1029,9 +1029,9 @@ values
 -- =====================================================================================================================================
 	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_NKISI_DESCRIPTION",                      "所有陆地单位无视森林和雨林对 [ICON_MOVEMENT] 移动力的减益。每个巨作+4 [ICON_Food] 食物和 [ICON_Production] 生产力。宫殿有6个巨作槽位。"),
 	-- 男刚果
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_RELIGIOUS_CONVERT_DESCRIPTION",                "无法获得 [ICON_GreatPROPHET] 大预言家，或创建宗教。首次建成姆班赞后，激活“神学”、“王权神授”和“归正会”市政 [ICON_CivicBoosted] 鼓舞。获得额外50% [ICON_GREATWRITER] 大作家、[ICON_GREATARTIST] 大艺术家、[ICON_GREATMUSICIAN] 大音乐家和 [ICON_GREATMERCHANT] 大商人点数。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_RELIGIOUS_CONVERT_DESCRIPTION",                "获得+50%文化类 [ICON_GREATPERSON] 伟人点。"),
 	-- 女刚果
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_NZINGA_MBANDE_DESCRIPTION",                    "除了 [ICON_Capital] 首都以外的同大陆的城市+10%产出；异大陆的城市-15%产出。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_NZINGA_MBANDE_DESCRIPTION",                    "同大陆的城市+10%所有产出；异大陆的城市-2 [ICON_AMENITIES] 宜居度。"),
 -- =====================================================================================================================================
 -- 巴比伦
 -- =====================================================================================================================================

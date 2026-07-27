@@ -253,23 +253,6 @@ PageLayouts["District"] = function(page)
 		end
 	end
 
-	-- KLUDGY KLUDGY 
-	if(district.DistrictType == "DISTRICT_MBANZA") then
-		for row in GameInfo.ModifierArguments() do
-			if(row.ModifierId == "MBANZA_FOOD" and row.Name == "Amount") then
-				local food = GameInfo.Yields["YIELD_FOOD"];
-				if(food) then
-					table.insert(stats, Locale.Lookup("LOC_TYPE_TRAIT_YIELD", tonumber(row.Value), food.IconString, food.Name)); 
-				end
-			elseif(row.ModifierId== "MBANZA_GOLD" and row.Name == "Amount") then
-				local gold = GameInfo.Yields["YIELD_GOLD"];
-				if(gold) then
-					table.insert(stats, Locale.Lookup("LOC_TYPE_TRAIT_YIELD", tonumber(row.Value), gold.IconString, gold.Name)); 
-				end
-			end
-		end
-	end
-
 	if(district.Housing ~= 0) then
 		table.insert(stats, Locale.Lookup("LOC_TYPE_TRAIT_HOUSING", district.Housing));
 	end

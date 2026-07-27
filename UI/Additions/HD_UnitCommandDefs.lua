@@ -1283,3 +1283,329 @@ function m_HDUnitCommands.BUILD_BONUS_INDUSTRY.IsDisabled(unit)
 	-- 移动力
 	return unit:GetMovesRemaining() == 0;
 end
+
+-- ======================================================================================================================================================
+-- 鲁尔山谷 投资人建造战略公司
+-- ======================================================================================================================================================
+local UNIT_CAN_BUILD_STRATEGIC_CORPORATION_TAG = 'HD_UNIT_CAN_BUILD_STRATEGIC_CORPORATION';
+local BUILD_STRATEGIC_CORPORATION_CONSUME_RESOURCE_AMOUNT = GlobalParameters.HD_BUILD_STRATEGIC_CORPORATION_CONSUME_RESOURCE_AMOUNT or 0;
+
+m_HDUnitCommands.BUILD_STRATEGIC_CORPORATION = {};
+m_HDUnitCommands.BUILD_STRATEGIC_CORPORATION.Properties = {};
+
+m_HDUnitCommands.BUILD_STRATEGIC_CORPORATION.EventName = "HD_BuildStrategicCorporation";
+m_HDUnitCommands.BUILD_STRATEGIC_CORPORATION.CategoryInUI = "SPECIFIC";
+m_HDUnitCommands.BUILD_STRATEGIC_CORPORATION.Icon = "ICON_IMPROVEMENT_CORPORATION";
+m_HDUnitCommands.BUILD_STRATEGIC_CORPORATION.GetToolTipString = function(unit)
+	if not unit then return ""; end
+
+	local toolTipString = Locale.Lookup('LOC_UNITOPERATION_BUILD_IMPROVEMENT_DESCRIPTION')
+		.. Locale.Lookup('LOC_TOOLTIP_HD_COLON_TEXT')
+		.. Locale.Lookup('LOC_IMPROVEMENT_CORPORATION_STRATEGIC_NAME');
+
+	-- 改良分类
+	local classificationList = {};
+	for row in GameInfo.HD_Improvement_Classification() do
+		if row.ImprovementType == 'IMPROVEMENT_CORPORATION_STRATEGIC' then
+			local classificationInfo = GameInfo.HD_ImprovementClassificationTypes[row.ImprovementClassificationType];
+			if classificationInfo then
+				table.insert(classificationList, classificationInfo.Name);
+			end
+		end
+	end
+	if #classificationList > 0 then
+		toolTipString = toolTipString .. '[NEWLINE][NEWLINE]' .. Locale.Lookup('LOC_TOOLTIP_HD_IMPROVEMENT_CLASSIFICATIONS_TEXT');
+		
+		for _, nameTag in ipairs(classificationList) do
+			toolTipString = toolTipString .. '[NEWLINE][ICON_BULLET]' .. Locale.Lookup(nameTag)
+		end
+	end
+
+	-- 增加行业公司效果说明
+	if GameInfo.HD_Monopoly_Resource_Categories ~= nil then
+		local plot = Map.GetPlotByIndex(unit:GetPlotId());
+		if plot ~= nil then
+			local resourceHash = plot:GetResourceTypeHash();
+			local resource = GameInfo.Resources[resourceHash];
+			local player = Players[Game.GetLocalPlayer()];
+			if resource ~= nil and player ~= nil and player:GetResources():IsResourceVisible(resourceHash) then
+				local corporationStr = {};
+
+				for row in GameInfo.HD_Monopoly_Resource_Categories() do
+					if row.ResourceType == resource.ResourceType then
+						local categoryInfo = GameInfo.HD_Monopoly_Categories[row.Category];
+						if categoryInfo then
+							if categoryInfo.CorporationEffect then
+								table.insert(corporationStr, '[ICON_BULLET]' .. Locale.Lookup('LOC_RESOURCE_CLASSIFICATION_HD_' .. row.Category .. '_NAME') .. Locale.Lookup('LOC_TOOLTIP_HD_COLON_TEXT') .. Locale.Lookup("LOC_" .. categoryInfo.CorporationEffect .. "_DESCRIPTION"));
+							end
+						end
+					end
+				end
+
+				if #corporationStr > 0 then
+					local effectStr = '';
+					for i, str in ipairs(corporationStr) do
+						if i > 1 then effectStr = effectStr .. "[NEWLINE]"; end
+						effectStr = effectStr .. str;
+					end
+					toolTipString = toolTipString .. '[NEWLINE][NEWLINE]' .. Locale.Lookup('LOC_HD_CORPORATION_EFFECT_TEXT', effectStr);
+				end
+			end
+		end
+	end
+
+	return toolTipString;
+end
+m_HDUnitCommands.BUILD_STRATEGIC_CORPORATION.GetDisabledToolTipString = function(unit)
+	if not unit then return ""; end
+	local unitInfo = GameInfo.Units[unit:GetType()];
+	if not unitInfo then return ""; end
+	local playerId = unit:GetOwner();
+	local player = Players[playerId];
+	if not player then return ""; end
+	local plot = Map.GetPlot(unit:GetX(), unit:GetY());
+	if not plot then return ""; end
+	local city = Cities.GetPlotPurchaseCity(plot);
+	if not city then return ""; end
+	local resourceId = plot:GetResourceType();
+	if resourceId == -1 then return ""; end
+	local resourceInfo = GameInfo.Resources[resourceId];
+	if not resourceInfo then return ""; end
+
+	-- 世界上是否已经建造该公司
+	local alreadyBuilt = (Utils.GetGameProperty(GAME_HAS_CORPORATION_TAG .. resourceInfo.ResourceType) or 0);
+	if alreadyBuilt > 0 then return Locale.Lookup('LOC_IMPROVEMENT_CORPORATION_GAME_DISABLED', "[ICON_" .. resourceInfo.ResourceType .. "]", resourceInfo.Name); end
+	-- 控制资源数量
+	local resourceAmount = player:GetResources():GetResourceAmount(resourceId);
+	if resourceAmount < BUILD_STRATEGIC_CORPORATION_CONSUME_RESOURCE_AMOUNT then return Locale.Lookup('LOC_IMPROVEMENT_IC_STRATEGIC_RESOURCE_DISABLED', BUILD_STRATEGIC_CORPORATION_CONSUME_RESOURCE_AMOUNT, "[ICON_" .. resourceInfo.ResourceType .. "]", resourceInfo.Name); end
+	-- 单位剩余建造次数
+	local needCharges = 1;
+	if unit:GetBuildCharges() < needCharges then return Locale.Lookup('LOC_NO_ENOUGH_CHARGE_DISABLED'); end
+	-- 移动力
+	if unit:GetMovesRemaining() == 0 then return '[COLOR:Red]' .. Locale.Lookup("LOC_HUD_UNIT_ACTION_PILLAGE_REQUIRES_MOVEMENT") .. '[ENDCOLOR]'; end
+	
+	return ""
+end
+m_HDUnitCommands.BUILD_STRATEGIC_CORPORATION.VisibleInUI = true;
+m_HDUnitCommands.BUILD_STRATEGIC_CORPORATION.DoNotDelete = true;
+
+function m_HDUnitCommands.BUILD_STRATEGIC_CORPORATION.CanUse(unit)
+	if not unit then return false; end
+	local canBuild = unit:GetProperty(UNIT_CAN_BUILD_STRATEGIC_CORPORATION_TAG) or 0;
+	return canBuild > 0;
+end
+
+function m_HDUnitCommands.BUILD_STRATEGIC_CORPORATION.IsVisible(unit)
+	if not unit then return false; end
+
+	local plot = Map.GetPlot(unit:GetX(), unit:GetY());
+	if not plot then return false; end
+	if plot:GetOwner() ~= unit:GetOwner() then return false; end
+	if plot:GetDistrictType() ~= -1 then return false; end
+	if plot:IsNationalPark() then return false; end
+	if plot:IsNaturalWonder() then return false; end
+
+	local improvementId = plot:GetImprovementType();
+	local improvementInfo = GameInfo.Improvements[improvementId];
+	if not improvementInfo then return false; end
+	if improvementInfo.ImprovementType ~= 'IMPROVEMENT_INDUSTRY_STRATEGIC' then return false; end
+
+	local resourceId = plot:GetResourceType();
+	if resourceId == -1 then return false; end
+	local resourceInfo = GameInfo.Resources[resourceId];
+	if not resourceInfo then return false; end
+
+	return resourceInfo.ResourceClassType == 'RESOURCECLASS_STRATEGIC';
+end
+
+function m_HDUnitCommands.BUILD_STRATEGIC_CORPORATION.IsDisabled(unit)
+	if not unit then return true; end
+	local unitInfo = GameInfo.Units[unit:GetType()];
+	if not unitInfo then return true; end
+	local playerId = unit:GetOwner();
+	local player = Players[playerId];
+	if not player then return true; end
+	local plot = Map.GetPlot(unit:GetX(), unit:GetY());
+	if not plot then return true; end
+	local city = Cities.GetPlotPurchaseCity(plot);
+	if not city then return true; end
+	local resourceId = plot:GetResourceType();
+	if resourceId == -1 then return true; end
+	local resourceInfo = GameInfo.Resources[resourceId];
+	if not resourceInfo then return true; end
+
+	-- 世界上是否已经建造该公司
+	local alreadyBuilt = (Utils.GetGameProperty(GAME_HAS_CORPORATION_TAG .. resourceInfo.ResourceType) or 0);
+	if alreadyBuilt > 0 then return true; end
+	-- 控制资源数量
+	local resourceAmount = player:GetResources():GetResourceAmount(resourceId);
+	if resourceAmount < BUILD_STRATEGIC_CORPORATION_CONSUME_RESOURCE_AMOUNT then return true; end
+	-- 单位剩余建造次数
+	local needCharges = 1;
+	if unit:GetBuildCharges() < needCharges then return true; end
+	-- 移动力
+	return unit:GetMovesRemaining() == 0;
+end
+
+-- ======================================================================================================================================================
+-- 鲁尔山谷 投资人建造加成公司
+-- ======================================================================================================================================================
+local UNIT_CAN_BUILD_BONUS_CORPORATION_TAG = 'HD_UNIT_CAN_BUILD_BONUS_CORPORATION';
+local BUILD_BONUS_CORPORATION_NEED_RESOURCE_NUM = GlobalParameters.HD_BUILD_BONUS_CORPORATION_NEED_RESOURCE_NUM or 0;
+
+m_HDUnitCommands.BUILD_BONUS_CORPORATION = {};
+m_HDUnitCommands.BUILD_BONUS_CORPORATION.Properties = {};
+
+m_HDUnitCommands.BUILD_BONUS_CORPORATION.EventName = "HD_BuildBonusCorporation";
+m_HDUnitCommands.BUILD_BONUS_CORPORATION.CategoryInUI = "SPECIFIC";
+m_HDUnitCommands.BUILD_BONUS_CORPORATION.Icon = "ICON_IMPROVEMENT_CORPORATION";
+m_HDUnitCommands.BUILD_BONUS_CORPORATION.GetToolTipString = function(unit)
+	if not unit then return ""; end
+
+	local toolTipString = Locale.Lookup('LOC_UNITOPERATION_BUILD_IMPROVEMENT_DESCRIPTION')
+		.. Locale.Lookup('LOC_TOOLTIP_HD_COLON_TEXT')
+		.. Locale.Lookup('LOC_IMPROVEMENT_CORPORATION_BONUS_NAME');
+
+	-- 改良分类
+	local classificationList = {};
+	for row in GameInfo.HD_Improvement_Classification() do
+		if row.ImprovementType == 'IMPROVEMENT_CORPORATION_BONUS' then
+			local classificationInfo = GameInfo.HD_ImprovementClassificationTypes[row.ImprovementClassificationType];
+			if classificationInfo then
+				table.insert(classificationList, classificationInfo.Name);
+			end
+		end
+	end
+	if #classificationList > 0 then
+		toolTipString = toolTipString .. '[NEWLINE][NEWLINE]' .. Locale.Lookup('LOC_TOOLTIP_HD_IMPROVEMENT_CLASSIFICATIONS_TEXT');
+		
+		for _, nameTag in ipairs(classificationList) do
+			toolTipString = toolTipString .. '[NEWLINE][ICON_BULLET]' .. Locale.Lookup(nameTag)
+		end
+	end
+
+	-- 增加行业公司效果说明
+	if GameInfo.HD_Monopoly_Resource_Categories ~= nil then
+		local plot = Map.GetPlotByIndex(unit:GetPlotId());
+		if plot ~= nil then
+			local resourceHash = plot:GetResourceTypeHash();
+			local resource = GameInfo.Resources[resourceHash];
+			local player = Players[Game.GetLocalPlayer()];
+			if resource ~= nil and player ~= nil and player:GetResources():IsResourceVisible(resourceHash) then
+				local corporationStr = {};
+
+				for row in GameInfo.HD_Monopoly_Resource_Categories() do
+					if row.ResourceType == resource.ResourceType then
+						local categoryInfo = GameInfo.HD_Monopoly_Categories[row.Category];
+						if categoryInfo then
+							if categoryInfo.CorporationEffect then
+								table.insert(corporationStr, '[ICON_BULLET]' .. Locale.Lookup('LOC_RESOURCE_CLASSIFICATION_HD_' .. row.Category .. '_NAME') .. Locale.Lookup('LOC_TOOLTIP_HD_COLON_TEXT') .. Locale.Lookup("LOC_" .. categoryInfo.CorporationEffect .. "_DESCRIPTION"));
+							end
+						end
+					end
+				end
+
+				if #corporationStr > 0 then
+					local effectStr = '';
+					for i, str in ipairs(corporationStr) do
+						if i > 1 then effectStr = effectStr .. "[NEWLINE]"; end
+						effectStr = effectStr .. str;
+					end
+					toolTipString = toolTipString .. '[NEWLINE][NEWLINE]' .. Locale.Lookup('LOC_HD_CORPORATION_EFFECT_TEXT', effectStr);
+				end
+			end
+		end
+	end
+
+	return toolTipString;
+end
+m_HDUnitCommands.BUILD_BONUS_CORPORATION.GetDisabledToolTipString = function(unit)
+	if not unit then return ""; end
+	local unitInfo = GameInfo.Units[unit:GetType()];
+	if not unitInfo then return ""; end
+	local playerId = unit:GetOwner();
+	local player = Players[playerId];
+	if not player then return ""; end
+	local plot = Map.GetPlot(unit:GetX(), unit:GetY());
+	if not plot then return ""; end
+	local city = Cities.GetPlotPurchaseCity(plot);
+	if not city then return ""; end
+	local resourceId = plot:GetResourceType();
+	if resourceId == -1 then return ""; end
+	local resourceInfo = GameInfo.Resources[resourceId];
+	if not resourceInfo then return ""; end
+
+	-- 世界上是否已经建造该公司
+	local alreadyBuilt = (Utils.GetGameProperty(GAME_HAS_CORPORATION_TAG .. resourceInfo.ResourceType) or 0);
+	if alreadyBuilt > 0 then return Locale.Lookup('LOC_IMPROVEMENT_CORPORATION_GAME_DISABLED', "[ICON_" .. resourceInfo.ResourceType .. "]", resourceInfo.Name); end
+	-- 控制资源数量
+	local resourceAmount = player:GetResources():GetResourceAmount(resourceId);
+	if resourceAmount < BUILD_BONUS_CORPORATION_NEED_RESOURCE_NUM then return Locale.Lookup('LOC_IMPROVEMENT_IC_BONUS_RESOURCE_DISABLED', BUILD_BONUS_CORPORATION_NEED_RESOURCE_NUM, "[ICON_" .. resourceInfo.ResourceType .. "]", resourceInfo.Name); end
+	-- 单位剩余建造次数
+	local needCharges = 1;
+	if unit:GetBuildCharges() < needCharges then return Locale.Lookup('LOC_NO_ENOUGH_CHARGE_DISABLED'); end
+	-- 移动力
+	if unit:GetMovesRemaining() == 0 then return '[COLOR:Red]' .. Locale.Lookup("LOC_HUD_UNIT_ACTION_PILLAGE_REQUIRES_MOVEMENT") .. '[ENDCOLOR]'; end
+	
+	return ""
+end
+m_HDUnitCommands.BUILD_BONUS_CORPORATION.VisibleInUI = true;
+m_HDUnitCommands.BUILD_BONUS_CORPORATION.DoNotDelete = true;
+
+function m_HDUnitCommands.BUILD_BONUS_CORPORATION.CanUse(unit)
+	if not unit then return false; end
+	local canBuild = unit:GetProperty(UNIT_CAN_BUILD_BONUS_CORPORATION_TAG) or 0;
+	return canBuild > 0;
+end
+
+function m_HDUnitCommands.BUILD_BONUS_CORPORATION.IsVisible(unit)
+	if not unit then return false; end
+
+	local plot = Map.GetPlot(unit:GetX(), unit:GetY());
+	if not plot then return false; end
+	if plot:GetOwner() ~= unit:GetOwner() then return false; end
+	if plot:GetDistrictType() ~= -1 then return false; end
+	if plot:IsNationalPark() then return false; end
+	if plot:IsNaturalWonder() then return false; end
+
+	local improvementId = plot:GetImprovementType();
+	local improvementInfo = GameInfo.Improvements[improvementId];
+	if not improvementInfo then return false; end
+	if improvementInfo.ImprovementType ~= 'IMPROVEMENT_INDUSTRY_BONUS' then return false; end
+
+	local resourceId = plot:GetResourceType();
+	if resourceId == -1 then return false; end
+	local resourceInfo = GameInfo.Resources[resourceId];
+	if not resourceInfo then return false; end
+
+	return resourceInfo.ResourceClassType == 'RESOURCECLASS_BONUS';
+end
+
+function m_HDUnitCommands.BUILD_BONUS_CORPORATION.IsDisabled(unit)
+	if not unit then return true; end
+	local unitInfo = GameInfo.Units[unit:GetType()];
+	if not unitInfo then return true; end
+	local playerId = unit:GetOwner();
+	local player = Players[playerId];
+	if not player then return true; end
+	local plot = Map.GetPlot(unit:GetX(), unit:GetY());
+	if not plot then return true; end
+	local city = Cities.GetPlotPurchaseCity(plot);
+	if not city then return true; end
+	local resourceId = plot:GetResourceType();
+	if resourceId == -1 then return true; end
+	local resourceInfo = GameInfo.Resources[resourceId];
+	if not resourceInfo then return true; end
+
+	-- 世界上是否已经建造该公司
+	local alreadyBuilt = (Utils.GetGameProperty(GAME_HAS_CORPORATION_TAG .. resourceInfo.ResourceType) or 0);
+	if alreadyBuilt > 0 then return true; end
+	-- 控制资源数量
+	local resourceAmount = player:GetResources():GetResourceAmount(resourceId);
+	if resourceAmount < BUILD_BONUS_CORPORATION_NEED_RESOURCE_NUM then return true; end
+	-- 单位剩余建造次数
+	local needCharges = 1;
+	if unit:GetBuildCharges() < needCharges then return true; end
+	-- 移动力
+	return unit:GetMovesRemaining() == 0;
+end

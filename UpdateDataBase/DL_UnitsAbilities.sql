@@ -78,14 +78,7 @@ values
 	('ABILITY_HD_GOVERNOR_CARDINAL_RIGHT_2_GURU',	    'KIND_ABILITY'),
 	('ABILITY_HD_GOVERNOR_CARDINAL_RIGHT_2_GURU_AOE_ABILITY',	    'KIND_ABILITY'),
 	('ABILITY_HD_GOVERNOR_AMBASSADOR_RIGHT_1_LEVY_STRENGTH',	    'KIND_ABILITY'),
-	('ABILITY_HD_GOVERNOR_DEFENDER_RIGHT_3_MILITARY_ENGINEERING_ABILITY',	    'KIND_ABILITY'),
-	('ABILITY_HD_GOVERNOR_MANAGER_LEFT_2_BUILDER_ABILITY',	    'KIND_ABILITY'),
 	('ABILITY_HD_UNIT_AUTOMATICALLY_CREATE_ROADS',	    'KIND_ABILITY');
-
-insert or ignore into Types (Type, Kind) select
-	'ABILITY_HD_MILITARY_ENGINEER_NEGA_CHARGE_' || Count, 'KIND_ABILITY' from HDCounter where Count < 11;
-insert or ignore into Types (Type, Kind) select
-	'ABILITY_HD_BUILDER_NEGA_CHARGE_' || Count, 'KIND_ABILITY' from HDCounter where Count < 16;
 
 insert or replace into TypeTags
 	(Type,																Tag)
@@ -179,15 +172,8 @@ values
 	('ABILITY_HD_GOVERNOR_CARDINAL_RIGHT_2_GURU',					'CLASS_GURU'),
 	('ABILITY_HD_GOVERNOR_CARDINAL_RIGHT_2_GURU_AOE_ABILITY',					'CLASS_RELIGIOUS_ALL'),
 	('ABILITY_HD_GOVERNOR_AMBASSADOR_RIGHT_1_LEVY_STRENGTH',					'CLASS_MILITARY'),
-  ('ABILITY_HD_GOVERNOR_DEFENDER_RIGHT_3_MILITARY_ENGINEERING_ABILITY',			'CLASS_MILITARY_ENGINEERING_UNITS'),
-  ('ABILITY_HD_GOVERNOR_MANAGER_LEFT_2_BUILDER_ABILITY',			'CLASS_BUILDER'),
   ('ABILITY_HD_UNIT_AUTOMATICALLY_CREATE_ROADS',			'CLASS_HD_BANDEIRANTES'),
   ('ABILITY_HD_UNIT_AUTOMATICALLY_CREATE_ROADS',			'CLASS_MILITARY_ENGINEERING_UNITS');
-
-insert or ignore into TypeTags (Type, Tag) select
-	'ABILITY_HD_MILITARY_ENGINEER_NEGA_CHARGE_' || Count, 'CLASS_MILITARY_ENGINEERING_UNITS' from HDCounter where Count < 11;
-insert or ignore into TypeTags (Type, Tag) select
-	'ABILITY_HD_BUILDER_NEGA_CHARGE_' || Count, 'CLASS_BUILDER' from HDCounter where Count < 16;
 
 insert or replace into TypeTags	
 	(Type,							Tag)
@@ -485,23 +471,10 @@ values
 	'LOC_ABILITY_HD_GOVERNOR_AMBASSADOR_RIGHT_1_LEVY_STRENGTH_NAME',
 	'LOC_ABILITY_HD_GOVERNOR_AMBASSADOR_RIGHT_1_LEVY_STRENGTH_DESCRIPTION',
 	1),
-	('ABILITY_HD_GOVERNOR_DEFENDER_RIGHT_3_MILITARY_ENGINEERING_ABILITY',
-	'LOC_ABILITY_HD_GOVERNOR_DEFENDER_RIGHT_3_MILITARY_ENGINEERING_ABILITY_NAME',
-	'LOC_ABILITY_HD_GOVERNOR_DEFENDER_RIGHT_3_MILITARY_ENGINEERING_ABILITY_DESCRIPTION',
-	1),
-	('ABILITY_HD_GOVERNOR_MANAGER_LEFT_2_BUILDER_ABILITY',
-	'LOC_ABILITY_HD_GOVERNOR_MANAGER_LEFT_2_BUILDER_ABILITY_NAME',
-	'LOC_ABILITY_HD_GOVERNOR_MANAGER_LEFT_2_BUILDER_ABILITY_DESCRIPTION',
-	1),
 	('ABILITY_HD_UNIT_AUTOMATICALLY_CREATE_ROADS',
 	'LOC_ABILITY_HD_UNIT_AUTOMATICALLY_CREATE_ROADS_NAME',
 	'LOC_ABILITY_HD_UNIT_AUTOMATICALLY_CREATE_ROADS_DESCRIPTION',
 	0);
-
-insert or ignore into UnitAbilities (UnitAbilityType, Inactive) select
-	'ABILITY_HD_MILITARY_ENGINEER_NEGA_CHARGE_' || Count, 1 from HDCounter where Count < 11;
-insert or ignore into UnitAbilities (UnitAbilityType, Inactive) select
-	'ABILITY_HD_BUILDER_NEGA_CHARGE_' || Count, 1 from HDCounter where Count < 16;
 
 update UnitAbilities set Name = NULL, Description = NULL where UnitAbilityType in ('ABILITY_GUIDE_MOVEMENT_AOE_RELIGIOUS', 'ABILITY_GURU_MOVEMENT');
 update UnitAbilities set Description = 'LOC_ABILITY_HD_GOVERNOR_CARDINAL_RIGHT_2_GURU_AOE_ABILITY_DESCRIPTION' where UnitAbilityType = 'ABILITY_GURU_STRENGTH';
@@ -614,14 +587,7 @@ values
 	('ABILITY_HD_GOVERNOR_CARDINAL_RIGHT_2_GURU_AOE_ABILITY',						'HD_GOVERNOR_CARDINAL_RIGHT_2_GURU_AOE_MOVEMENT'),
 	('ABILITY_HD_GOVERNOR_CARDINAL_RIGHT_2_GURU_AOE_ABILITY',						'HD_GOVERNOR_CARDINAL_RIGHT_2_GURU_AOE_STRENGTH'),
 	('ABILITY_HD_GOVERNOR_AMBASSADOR_RIGHT_1_LEVY_STRENGTH',						'HD_GOVERNOR_AMBASSADOR_RIGHT_1_LEVY_STRENGTH_MODIFIER'),
-	('ABILITY_HD_GOVERNOR_DEFENDER_RIGHT_3_MILITARY_ENGINEERING_ABILITY',						'HD_GOVERNOR_DEFENDER_RIGHT_3_ALLOW_BUILD_STRATEGIC_INDUSTRY'),
-	('ABILITY_HD_GOVERNOR_MANAGER_LEFT_2_BUILDER_ABILITY',						'HD_GOVERNOR_MANAGER_LEFT_2_ALLOW_BUILD_BONUS_INDUSTRY'),
 	('ABILITY_HD_UNIT_AUTOMATICALLY_CREATE_ROADS',						'HD_UNIT_AUTOMATICALLY_CREATE_ROADS_PROPERTY');
-
-insert or replace into UnitAbilityModifiers (UnitAbilityType, ModifierId) select
-	'ABILITY_HD_MILITARY_ENGINEER_NEGA_CHARGE_' || Count, 'ABILITY_HD_MILITARY_ENGINEER_NEGA_CHARGE_' || Count || '_MODIFIER' from HDCounter where Count < 11;
-insert or replace into UnitAbilityModifiers (UnitAbilityType, ModifierId) select
-	'ABILITY_HD_BUILDER_NEGA_CHARGE_' || Count, 'ABILITY_HD_BUILDER_NEGA_CHARGE_' || Count || '_MODIFIER' from HDCounter where Count < 16;
 
 insert or replace into Modifiers
 	(ModifierId,																					ModifierType,																SubjectRequirementSetId)
@@ -712,14 +678,7 @@ values
 	('HD_GOVERNOR_CARDINAL_RIGHT_2_GURU_AOE_MOVEMENT',									'MODIFIER_PLAYER_UNIT_ADJUST_MOVEMENT', 0),
 	('HD_GOVERNOR_CARDINAL_RIGHT_2_GURU_AOE_STRENGTH',									'MODIFIER_UNIT_ADJUST_COMBAT_STRENGTH', 0),
 	('HD_GOVERNOR_AMBASSADOR_RIGHT_1_LEVY_STRENGTH_MODIFIER',									'MODIFIER_UNIT_ADJUST_COMBAT_STRENGTH', 0),
-	('HD_GOVERNOR_DEFENDER_RIGHT_3_ALLOW_BUILD_STRATEGIC_INDUSTRY',									'MODIFIER_UNIT_ADJUST_PROPERTY', 0),
-	('HD_GOVERNOR_MANAGER_LEFT_2_ALLOW_BUILD_BONUS_INDUSTRY',									'MODIFIER_UNIT_ADJUST_PROPERTY', 0),
 	('HD_UNIT_AUTOMATICALLY_CREATE_ROADS_PROPERTY',									'MODIFIER_UNIT_ADJUST_PROPERTY', 0);
-
-insert or replace into Modifiers (ModifierId, ModifierType) select
-	'ABILITY_HD_MILITARY_ENGINEER_NEGA_CHARGE_' || Count || '_MODIFIER', 'MODIFIER_UNIT_ADJUST_BUILDER_CHARGES' from HDCounter where Count < 11;
-insert or replace into Modifiers (ModifierId, ModifierType) select
-	'ABILITY_HD_BUILDER_NEGA_CHARGE_' || Count || '_MODIFIER', 'MODIFIER_UNIT_ADJUST_BUILDER_CHARGES' from HDCounter where Count < 16;
 
 insert or replace into ModifierArguments
 	(ModifierId,									Name,		Value)
@@ -814,17 +773,8 @@ values
 	('HD_GOVERNOR_CARDINAL_RIGHT_2_GURU_AOE_MOVEMENT',					'Amount',						1),
 	('HD_GOVERNOR_CARDINAL_RIGHT_2_GURU_AOE_STRENGTH',					'Amount',						5),
 	('HD_GOVERNOR_AMBASSADOR_RIGHT_1_LEVY_STRENGTH_MODIFIER',					'Amount',						4),
-	('HD_GOVERNOR_DEFENDER_RIGHT_3_ALLOW_BUILD_STRATEGIC_INDUSTRY',					'Key',						'HD_UNIT_CAN_BUILD_STRATEGIC_INDUSTRY'),
-	('HD_GOVERNOR_DEFENDER_RIGHT_3_ALLOW_BUILD_STRATEGIC_INDUSTRY',					'Amount',					1),
-	('HD_GOVERNOR_MANAGER_LEFT_2_ALLOW_BUILD_BONUS_INDUSTRY',					'Key',						'HD_UNIT_CAN_BUILD_BONUS_INDUSTRY'),
-	('HD_GOVERNOR_MANAGER_LEFT_2_ALLOW_BUILD_BONUS_INDUSTRY',					'Amount',					1),
 	('HD_UNIT_AUTOMATICALLY_CREATE_ROADS_PROPERTY',					'Key',						'HD_UNIT_AUTOMATICALLY_CREATE_ROADS'),
 	('HD_UNIT_AUTOMATICALLY_CREATE_ROADS_PROPERTY',					'Amount',					1);
-
-insert or replace into ModifierArguments (ModifierId, Name, Value) select
-	'ABILITY_HD_MILITARY_ENGINEER_NEGA_CHARGE_' || Count || '_MODIFIER', 'Amount', -1 from HDCounter where Count < 11;
-insert or replace into ModifierArguments (ModifierId, Name, Value) select
-	'ABILITY_HD_BUILDER_NEGA_CHARGE_' || Count || '_MODIFIER', 'Amount', -1 from HDCounter where Count < 16;
 
 insert or replace into ModifierStrings
 	(ModifierId,										Context,	Text)
@@ -888,3 +838,25 @@ insert or replace into ModifierStrings
 	(ModifierId,										Context,	Text)
 values
 	('HD_BATTLECRY_BONUS',								'Preview',	'+{1_Amount} {LOC_HD_BATTLECRY_BONUS_PREVIEW_TEXT}');
+
+-- 单位建造次数 负次数
+-- 用于lua扣除建造次数
+-- 可用于建造者、军工单位、大亨、投资人
+insert or ignore into Types (Type, Kind) select
+	'ABILITY_HD_NEGA_BUILD_CHARGE_' || Count, 'KIND_ABILITY' from HDCounter where Count < 16;
+insert or ignore into UnitAbilities (UnitAbilityType, Inactive) select
+	'ABILITY_HD_NEGA_BUILD_CHARGE_' || Count, 1 from HDCounter where Count < 16;
+
+insert or ignore into TypeTags (Type, Tag) select
+	'ABILITY_HD_NEGA_BUILD_CHARGE_' || Count, 'CLASS_MILITARY_ENGINEERING_UNITS' from HDCounter where Count < 16;
+insert or ignore into TypeTags (Type, Tag) select
+	'ABILITY_HD_NEGA_BUILD_CHARGE_' || Count, 'CLASS_BUILDER' from HDCounter where Count < 16;
+insert or ignore into TypeTags (Type, Tag) select
+	'ABILITY_HD_NEGA_BUILD_CHARGE_' || Count, 'CLASS_MONOPOLY_UNIT' from HDCounter where Count < 16 and exists (select Tag from Tags where Tag = 'CLASS_MONOPOLY_UNIT');
+
+insert or replace into UnitAbilityModifiers (UnitAbilityType, ModifierId) select
+	'ABILITY_HD_NEGA_BUILD_CHARGE_' || Count, 'ABILITY_HD_NEGA_BUILD_CHARGE_' || Count || '_MODIFIER' from HDCounter where Count < 16;
+insert or replace into Modifiers (ModifierId, ModifierType) select
+	'ABILITY_HD_NEGA_BUILD_CHARGE_' || Count || '_MODIFIER', 'MODIFIER_UNIT_ADJUST_BUILDER_CHARGES' from HDCounter where Count < 16;
+insert or replace into ModifierArguments (ModifierId, Name, Value) select
+	'ABILITY_HD_NEGA_BUILD_CHARGE_' || Count || '_MODIFIER', 'Amount', -1 from HDCounter where Count < 16;

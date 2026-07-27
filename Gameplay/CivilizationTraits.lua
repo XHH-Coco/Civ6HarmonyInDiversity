@@ -264,15 +264,8 @@ function QinBuilderLaterWonder(playerId, unitId)
 
 	-- 消耗次数
 	local movesRemaining = Utils.GetUnitMovesRemaining(playerId, unitId)
-	-- print('QinBuilderLaterWonder', movesRemaining)
   unit:ChangeMovesRemaining(-movesRemaining)
-  local unitAbility = unit:GetAbility()
-  for i=1, 15, 1 do
-    if unitAbility:GetAbilityCount('ABILITY_HD_BUILDER_NEGA_CHARGE_' .. i) == 0 then
-      unitAbility:ChangeAbilityCount('ABILITY_HD_BUILDER_NEGA_CHARGE_' .. i, 1);
-      break;
-    end
-  end
+  Utils.ConsumeUnitBuildCharges(playerId, unitId, 1);
 end
 GameEvents.HD_Qin_Builder_Later_Wonder.Add(QinBuilderLaterWonder)
 
@@ -2341,42 +2334,6 @@ function ProjectJudgementOfLove(iX, iY, dX, dY)
 	end
 end
 GameEvents.ProjectEnemyCitiesChangeLoyaltySwitch.Add(ProjectJudgementOfLove)
-
--- Hungary Conquer Envoy
---function ConquerEnvoy(newPlayerID, oldPlayerID, newCityID, iCityX, iCityY)
---    local pPlayer = Players[newPlayerID]
---    if pPlayer ~= nil then
---        local pPlayerConfig = PlayerConfigurations[newPlayerID]
---        local sLeader = pPlayerConfig:GetLeaderTypeName()
---        local sConquerEnvoy = 'TRAIT_LEADER_RAVEN_KING'
---        if LeaderHasTrait(sLeader, sConquerEnvoy) then
---            pPlayer:GetInfluence():ChangeTokensToGive(1)
---        end
---    end
---end
---GameEvents.CityConquered.Add(ConquerEnvoy)
-
--- 刚果
-function MBANZABoost(playerID, districtID, iX, iY)
-	local pPlayer = Players[playerID]
-	if pPlayer ~= nil then
-		local plot = Map.GetPlot(iX, iY)
-		local districtType = plot:GetDistrictType()
-		if ExposedMembers.DLHD.Utils.IsDistrictType(districtType, 'DISTRICT_MBANZA') then
-			local m_THEOLOGY = GameInfo.Civics['CIVIC_THEOLOGY'].Index;
-			local m_DIVINE_RIGHT = GameInfo.Civics['CIVIC_DIVINE_RIGHT'].Index;
-			local m_REFORMED_CHURCH = GameInfo.Civics['CIVIC_REFORMED_CHURCH'].Index;
-
-			if LeaderHasTrait(playerID, 'TRAIT_LEADER_RELIGIOUS_CONVERT') then
-				pPlayer:GetCulture():TriggerBoost(m_THEOLOGY);
-				pPlayer:GetCulture():TriggerBoost(m_DIVINE_RIGHT);
-				pPlayer:GetCulture():TriggerBoost(m_REFORMED_CHURCH);
-			end
-		end
-	end
-end
-
-GameEvents.OnDistrictConstructed.Add(MBANZABoost)
 
 -- 维多利亚: 招提督送使者 by 先驱
 function OnUnitGreatPersonCreated(playerID, unitID, greatPersonClassID, greatPersonIndividualID)

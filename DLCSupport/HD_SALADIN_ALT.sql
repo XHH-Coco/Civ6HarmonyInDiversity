@@ -44,27 +44,24 @@ insert or ignore into RequirementArguments
 values
 	('REQUIRES_UNIT_NEAR_RELIGIOUS_CITY1',	'FriendlyCity',		1),
 	('REQUIRES_UNIT_NEAR_RELIGIOUS_CITY2',	'FriendlyCity',		0);
+
 --女刚果
-update Modifiers set SubjectRequirementSetId = 'HD_CITY_IS_SAME_CONTINENT_NOT_CAPITAL_REQUIREMENTS' where ModifierID = 'TRAIT_SAME_CONTINENT_YIELD';
+delete from TraitModifiers where ModifierId = 'TRAIT_FOREIGN_CONTINENT_YIELD';
+insert or replace into TraitModifiers (TraitType, ModifierId) values
+	('TRAIT_LEADER_NZINGA_MBANDE', 'HD_NZINGA_MBANDE_FOREIGN_CONTINENT_AMENITY');
+
 --林肯
 delete from TraitModifiers where ModifierId = 'TRAIT_LINCOLN_INDUSTRIAL_ZONE_FREE_MELEE_UNIT' or ModifierId = 'TRAIT_LINCOLN_INDUSTRIAL_ZONE_LOYALTY';
--- insert or replace into TraitModifiers
--- 	(TraitType,						ModifierId)
--- values
--- 	('TRAIT_LEADER_LINCOLN',		'TRAIT_LINCOLN_INDUSTRIAL_ZONE_FREE_BUILDER');
-insert or replace into Modifiers
-	(ModifierId,									ModifierType,											SubjectRequirementSetId,				SubjectStackLimit)
-values
-	-- ('TRAIT_LINCOLN_INDUSTRIAL_ZONE_FREE_BUILDER',	'MODIFIER_PLAYER_DISTRICT_CREATE_UNIT',					NULL,									NULL),
-	('HD_LIBERATION_LINCOLN',						'MODIFIER_CITY_DISTRICTS_ATTACH_MODIFIER',				'DISTRICT_IS_INDUSTRIAL_ZONE',			NULL),
-	('HD_LIBERATION_LINCOLN_MODIFIER',				'MODIFIER_PLAYER_DISTRICT_ADJUST_BASE_YIELD_CHANGE',	NULL,									NULL),
-	('HD_LIBERATION_LINCOLN_POPULATION',			'MODIFIER_SINGLE_CITY_ADD_POPULATION',					NULL,									1);
-insert or replace into ModifierArguments
-	(ModifierId,									Name,				Value)
-values
-	-- ('TRAIT_LINCOLN_INDUSTRIAL_ZONE_FREE_BUILDER',	'DistrictType',		'DISTRICT_INDUSTRIAL_ZONE'),
-	-- ('TRAIT_LINCOLN_INDUSTRIAL_ZONE_FREE_BUILDER',	'UnitType',			'UNIT_BUILDER'),
-	('HD_LIBERATION_LINCOLN',						'ModifierId',		'HD_LIBERATION_LINCOLN_MODIFIER'),
-	('HD_LIBERATION_LINCOLN_MODIFIER',				'Amount',			1),
-	('HD_LIBERATION_LINCOLN_MODIFIER',				'YieldType',		'YIELD_PRODUCTION'),
-	('HD_LIBERATION_LINCOLN_POPULATION',			'Amount',			1);
+
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId, SubjectStackLimit) values
+	('HD_NZINGA_MBANDE_FOREIGN_CONTINENT_AMENITY',	'MODIFIER_PLAYER_CITIES_ADJUST_TRAIT_AMENITY',				'REQUIRES_CITY_IS_OTHER_CONTINENT',	NULL),
+	('HD_LIBERATION_LINCOLN',												'MODIFIER_CITY_DISTRICTS_ATTACH_MODIFIER',						'DISTRICT_IS_INDUSTRIAL_ZONE',			NULL),
+	('HD_LIBERATION_LINCOLN_MODIFIER',							'MODIFIER_PLAYER_DISTRICT_ADJUST_BASE_YIELD_CHANGE',	NULL,																NULL),
+	('HD_LIBERATION_LINCOLN_POPULATION',						'MODIFIER_SINGLE_CITY_ADD_POPULATION',								NULL,																1);
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
+	('HD_NZINGA_MBANDE_FOREIGN_CONTINENT_AMENITY',	'Amount',				-2),
+	('HD_LIBERATION_LINCOLN',												'ModifierId',		'HD_LIBERATION_LINCOLN_MODIFIER'),
+	('HD_LIBERATION_LINCOLN_MODIFIER',							'Amount',				1),
+	('HD_LIBERATION_LINCOLN_MODIFIER',							'YieldType',		'YIELD_PRODUCTION'),
+	('HD_LIBERATION_LINCOLN_POPULATION',						'Amount',				1);
