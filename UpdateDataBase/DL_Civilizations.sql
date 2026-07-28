@@ -1378,29 +1378,11 @@ insert or replace into TraitModifiers (TraitType, ModifierId) values
 update ModifierArguments set Value = 100 where ModifierId = 'TRAIT_LEADER_FAITH_KILLS' and Name = 'PercentDefeatedStrength';
 
 --UB ajustment for BUILDING_TSIKHE
---adjust Ub base tourism to 5
-insert or replace into CivicModifiers (CivicType, ModifierId) values
-	('CIVIC_CONSERVATION', 'CONSERVATION_TSIKHE_TOURISM');
-
-insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) values
-	('CONSERVATION_TSIKHE_TOURISM', 'MODIFIER_PLAYER_DISTRICTS_ADJUST_TOURISM_CHANGE',	'DISTRICT_IS_CITY_CENTER_TSIKHE');
-
-insert or replace into ModifierArguments 	(ModifierId, Name, Value) values
-	('CONSERVATION_TSIKHE_TOURISM', 'Amount', 2);
-
-insert or replace into RequirementSetRequirements(RequirementSetId, RequirementId) values
-	('DISTRICT_IS_CITY_CENTER_TSIKHE', 'REQUIRES_DISTRICT_IS_CITY_CENTER'),
-	('DISTRICT_IS_CITY_CENTER_TSIKHE', 'REQUIRES_CITY_HAS_TSIKHE');
-
-insert or replace into RequirementSets (RequirementSetId, RequirementSetType) values
-	('DISTRICT_IS_CITY_CENTER_TSIKHE', 'REQUIREMENTSET_TEST_ALL');
-
 update BuildingReplaces set ReplacesBuildingType = 'BUILDING_CASTLE' where CivUniqueBuildingType = 'BUILDING_TSIKHE';
 update BuildingPrereqs set PrereqBuilding = 'BUILDING_WALLS' where Building = 'BUILDING_TSIKHE';
 
 ---GOLDEN AGE TOURISM AND FAITH +300%
 update ModifierArguments set Value = 12 where ModifierId = 'TSIKHE_FAITH_GOLDEN_AGE' and Name = 'Amount';
-update ModifierArguments set Value = 15 where ModifierId = 'CONSERVATION_TSIKHE_TOURISM_GOLDEN_AGE' and Name = 'Amount';
 
 -- LA : each level of walls +1 culture and +1 faith
 insert or replace into TraitModifiers	(TraitType,	ModifierId)

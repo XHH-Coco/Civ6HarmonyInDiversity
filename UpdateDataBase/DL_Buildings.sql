@@ -105,8 +105,9 @@ update Buildings set PrereqTech = 'TECH_SADDLE_HD' where PrereqTech = 'TECH_HORS
 -- Regional Range
 update Buildings set RegionalRange = 4
 where BuildingType = 'BUILDING_AMPHITHEATER'
-	or BuildingType = 'BUILDING_ARENA'
-	or BuildingType = 'BUILDING_TLACHTLI';
+	or BuildingType = 'BUILDING_ARENA';
+update Buildings set RegionalRange = 5
+where BuildingType = 'BUILDING_TLACHTLI';
 update Buildings set RegionalRange = 6
 where BuildingType = 'BUILDING_UNIVERSITY'
 	or BuildingType = 'BUILDING_MADRASA';
@@ -429,8 +430,8 @@ update Buildings set Maintenance = 4,	Cost = 300  where BuildingType = 'BUILDING
 update Buildings set Maintenance = 10,	Cost = 550	where BuildingType = 'BUILDING_BROADCAST_CENTER';
 update Buildings set Maintenance = 10,	Cost = 480	where BuildingType = 'BUILDING_FILM_STUDIO';
 -- Entertainment & Water Park
-update Buildings set Maintenance = 1,	Cost = 150	where BuildingType = 'BUILDING_ARENA';
-update Buildings set Maintenance = 1,	Cost = 120	where BuildingType = 'BUILDING_TLACHTLI';
+update Buildings set Maintenance = 1,	Cost = 160	where BuildingType = 'BUILDING_ARENA';
+update Buildings set Maintenance = 1,	Cost = 160	where BuildingType = 'BUILDING_TLACHTLI';
 update Buildings set Maintenance = 4,	Cost = 300	where BuildingType = 'BUILDING_ZOO';
 update Buildings set Maintenance = 4,	Cost = 300	where BuildingType = 'BUILDING_THERMAL_BATH';
 update Buildings set Maintenance = 10,	Cost = 550	where BuildingType = 'BUILDING_STADIUM';
@@ -675,6 +676,31 @@ values
 	('MILITARY_ACADEMY_TRAINED_STRENGTH_MODIFIER',	'AbilityType',				'ABILITY_MILITARY_ACADEMY_TRAINED_UNIT_STRENGTH'),
 	('SEAPORT_TRAINED_STRENGTH_MODIFIER',			'AbilityType',				'ABILITY_SEAPORT_TRAINED_UNIT_STRENGTH'),
 	('ORDU_TRAINED_STRENGTH_MODIFIER',				'AbilityType',				'ABILITY_ORDU_TRAINED_UNIT_STRENGTH');
+
+-- 竞技场
+delete from CivicModifiers where ModifierId = 'CONSERVATION_ARENA_TOURISM';
+update Building_YieldChanges set YieldChange = 2 where BuildingType = 'BUILDING_ARENA';
+
+insert or replace into HD_Building_Base_On_ResourceClassification (BuildingType, ResourceClassificationType, DetectRange, PropertyKey) values
+	('BUILDING_ARENA', 'RESOURCE_CLASSIFICATION_HD_LEATHER', 			'PLAYER', 'HD_PLOT_BINARY_COMPRESS_ARENA'),
+	('BUILDING_ARENA', 'RESOURCE_CLASSIFICATION_HD_BEAST', 				'PLAYER', 'HD_PLOT_BINARY_COMPRESS_ARENA');
+
+insert or replace into HD_Binary_Compress_AtLeast (Key, AtLeast) values
+	('HD_PLOT_BINARY_COMPRESS_ARENA', 3);
+
+insert or replace into BuildingModifiers (BuildingType, ModifierId) values
+	('BUILDING_ARENA',	'HD_ARENA_REGIONAL_CULTURE'),
+	('BUILDING_ARENA',	'HD_ARENA_REGIONAL_RANGE');
+
+insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId) values
+	('HD_ARENA_REGIONAL_CULTURE',	'MODIFIER_SINGLE_CITY_ADJUST_PROPERTY',	'HD_PLOT_BINARY_COMPRESS_ARENA_AT_LEAST_3_REQUIREMENTS'),
+	('HD_ARENA_REGIONAL_RANGE',		'MODIFIER_SINGLE_CITY_ADJUST_PROPERTY',	'HD_PLOT_BINARY_COMPRESS_ARENA_AT_LEAST_3_REQUIREMENTS');
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
+	('HD_ARENA_REGIONAL_CULTURE',	'Key',		'HD_SINGLE_BUILDING_PROVIDE_REGIONAL_YIELD_BONUS_BUILDING_ARENA_YIELD_CULTURE'),
+	('HD_ARENA_REGIONAL_CULTURE',	'Amount',	1),
+	('HD_ARENA_REGIONAL_RANGE',		'Key',		'HD_SINGLE_BUILDING_EXTRA_REGIONAL_RANGE_BUILDING_ARENA'),
+	('HD_ARENA_REGIONAL_RANGE',		'Amount',	1);
 
 -- 工作坊
 insert or replace into HD_Building_Base_On_ResourceClassification (BuildingType, ResourceClassificationType, DetectRange, PropertyKey) values

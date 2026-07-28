@@ -76,6 +76,11 @@ update Civics set Description = 'LOC_POLICY_FUTURE_VICTORY_CULTURE_DESCRIPTION' 
 
 --------------------------------------------------------------------------------
 -- Buildings
+update Buildings set Description = 'LOC_BUILDING_WALLS_HD_DESCRIPTION' where BuildingType = 'BUILDING_WALLS';
+update Buildings set Description = 'LOC_BUILDING_CASTLE_HD_DESCRIPTION' where BuildingType = 'BUILDING_CASTLE';
+update Buildings set Description = 'LOC_BUILDING_STAR_FORT_HD_DESCRIPTION' where BuildingType = 'BUILDING_STAR_FORT';
+update Buildings set Description = 'LOC_BUILDING_ARENA_HD_DESCRIPTION' where BuildingType = 'BUILDING_ARENA';
+update Buildings set Description = 'LOC_BUILDING_TLACHTLI_HD_DESCRIPTION' where BuildingType = 'BUILDING_TLACHTLI';
 update Buildings set Description = 'LOC_BUILDING_GRANARY_DESCRIPTION' where BuildingType = 'BUILDING_GRANARY';
 update Buildings set Description = 'LOC_BUILDING_UNIVERSITY_DESCRIPTION' where BuildingType = 'BUILDING_UNIVERSITY';
 update Buildings set Description = 'LOC_BUILDING_RESEARCH_LAB_DESCRIPTION' where BuildingType = 'BUILDING_RESEARCH_LAB';

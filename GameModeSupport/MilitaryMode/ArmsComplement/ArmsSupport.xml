@@ -77,6 +77,8 @@
 		<Row ImprovementType="IMPROVEMENT_AIRSTRIP" UnitType="UNIT_ENGINEER_CORP"/>
 		<Row ImprovementType="IMPROVEMENT_MISSILE_SILO" UnitType="UNIT_ENGINEER_CORP"/>
 		<Row ImprovementType="IMPROVEMENT_MOUNTAIN_TUNNEL" UnitType="UNIT_ENGINEER_CORP"/>
+		<Delete ImprovementType="IMPROVEMENT_AIRSTRIP" UnitType="UNIT_MILITARY_ENGINEER"/>
+		<Delete ImprovementType="IMPROVEMENT_MISSILE_SILO" UnitType="UNIT_MILITARY_ENGINEER"/>
 	</Improvement_ValidBuildUnits>
     <District_BuildChargeProductions>
 		<Row DistrictType="DISTRICT_CANAL" UnitType="UNIT_SAPPER" PercentProductionPerCharge="20"/>

@@ -164,7 +164,7 @@ where exists (select GreatWorkSlotType from GreatWorkSlotTypes where GreatWorkSl
 insert or replace into Modifiers
 	(ModifierId,							ModifierType,										SubjectRequirementSetId)
 select
-	'HD_NAT_FINANCE_PRODUCT_' || YieldType,	'MODIFIER_PLAYER_CITIES_ADJUST_GREATWORK_YIELD',	'HD_CITY_HAS_COMMERCIAL_TIER_3_BUILDING_REQUIREMENTS'
+	'HD_NAT_FINANCE_PRODUCT_' || YieldType,	'MODIFIER_PLAYER_CITIES_ADJUST_GREATWORK_YIELD',	'CITY_HAS_DISTRICT_COMMERCIAL_HUB_TIER_4_BUILDING_REQUIREMENTS'
 from Yields
 where exists (select GreatWorkSlotType from GreatWorkSlotTypes where GreatWorkSlotType = 'GREATWORKSLOT_PRODUCT');
 
@@ -185,19 +185,9 @@ where exists (select GreatWorkSlotType from GreatWorkSlotTypes where GreatWorkSl
 insert or replace into ModifierArguments
 	(ModifierId,							Name,					Value)
 select
-	'HD_NAT_FINANCE_PRODUCT_' || YieldType,	'ScalingFactor',		200
+	'HD_NAT_FINANCE_PRODUCT_' || YieldType,	'ScalingFactor',		150
 from Yields
 where exists (select GreatWorkSlotType from GreatWorkSlotTypes where GreatWorkSlotType = 'GREATWORKSLOT_PRODUCT');
-
-insert or ignore into RequirementSets
-	(RequirementSetId,												RequirementSetType)
-values
-	('HD_CITY_HAS_COMMERCIAL_TIER_3_BUILDING_REQUIREMENTS',		    'REQUIREMENTSET_TEST_ANY');
-
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,												RequirementId)
-values
-	('HD_CITY_HAS_COMMERCIAL_TIER_3_BUILDING_REQUIREMENTS',		    'REQUIRES_CITY_HAS_BUILDING_STOCK_EXCHANGE');
 
 -- 国际机场 ----------------------------------------------------------------------------------------------------------------------------------------------------
 	-- 修改解锁条件和造价

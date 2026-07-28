@@ -688,22 +688,30 @@ insert or replace into ModifierArguments (ModifierId, Name, Value) values
 	('HD_KOTOKU_IN_WONDER_TOURISM_MODIFIER',			'BoostsWonders',	1),
 	('HD_KOTOKU_IN_WONDER_TOURISM_MODIFIER',			'ScalingFactor',	150);
 
--- Hanging Gardens
+-- 空中花园
 update Buildings set Housing = 1, PrereqTech = 'TECH_CALENDAR_HD' where BuildingType = 'BUILDING_HANGING_GARDENS';
 delete from BuildingModifiers where BuildingType = 'BUILDING_HANGING_GARDENS';
-insert or replace into BuildingModifiers
-	(BuildingType,					ModifierId)
-values
-	('BUILDING_HANGING_GARDENS',	'HANGING_GARDEN_ADDFOOD');
-insert or replace into Modifiers	
-	(ModifierId,					ModifierType)
-values
-	('HANGING_GARDEN_ADDFOOD',		'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER');
-insert or replace into ModifierArguments 
-	(ModifierId,					Name,			Value) 
-values
-	('HANGING_GARDEN_ADDFOOD',		'YieldType',	'YIELD_FOOD'),
-	('HANGING_GARDEN_ADDFOOD',		'Amount',		10);
+
+insert or replace into HD_Building_Base_On_ResourceClassification (BuildingType, ResourceClassificationType, DetectRange, PropertyKey) values
+	('BUILDING_HANGING_GARDENS', 'RESOURCE_CLASSIFICATION_HD_ORNAMENTAL',	'PLAYER', 'HD_PLOT_BINARY_COMPRESS_HANGING_GARDENS');
+
+insert or replace into HD_Binary_Compress_AtLeast (Key, AtLeast) values
+	('HD_PLOT_BINARY_COMPRESS_HANGING_GARDENS', 2);
+
+insert or replace into BuildingModifiers (BuildingType, ModifierId) values
+	('BUILDING_HANGING_GARDENS',	'HANGING_GARDEN_ADDFOOD'),
+	('BUILDING_HANGING_GARDENS',	'HD_HANGING_GARDEN_CULTURE');
+
+insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId) values
+	('HANGING_GARDEN_ADDFOOD',		'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER', 	NULL),
+	('HD_HANGING_GARDEN_CULTURE',	'MODIFIER_BUILDING_YIELD_CHANGE', 										'HD_PLOT_BINARY_COMPRESS_HANGING_GARDENS_AT_LEAST_2_REQUIREMENTS');
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
+	('HANGING_GARDEN_ADDFOOD',			'YieldType',		'YIELD_FOOD'),
+	('HANGING_GARDEN_ADDFOOD',			'Amount',				10),
+	('HD_HANGING_GARDEN_CULTURE',		'BuildingType',	'BUILDING_HANGING_GARDENS'),
+	('HD_HANGING_GARDEN_CULTURE',		'YieldType',		'YIELD_CULTURE'),
+	('HD_HANGING_GARDEN_CULTURE',		'Amount',				2);
 
 -- Cristo Redentor
 insert or replace into BuildingModifiers
@@ -1746,3 +1754,27 @@ from DistrictCorrespondingGPP_HD;
 insert or replace into ModifierArguments (ModifierId, name, value)
 	select 'HD_ORACLE_' || GreatPersonClassType || '_POINTS', 'Amount', 6
 from DistrictCorrespondingGPP_HD;
+
+-- 罗马斗兽场
+delete from BuildingModifiers where ModifierId = 'COLOSSEUM_IDENTITY';
+
+insert or replace into HD_Building_Base_On_ResourceClassification (BuildingType, ResourceClassificationType, DetectRange, PropertyKey) values
+	('BUILDING_COLOSSEUM', 'RESOURCE_CLASSIFICATION_HD_LEATHER',	'PLAYER', 'HD_PLOT_BINARY_COMPRESS_COLOSSEUM'),
+	('BUILDING_COLOSSEUM', 'RESOURCE_CLASSIFICATION_HD_BEAST',		'PLAYER', 'HD_PLOT_BINARY_COMPRESS_COLOSSEUM');
+
+insert or replace into HD_Binary_Compress_AtLeast (Key, AtLeast) values
+	('HD_PLOT_BINARY_COMPRESS_COLOSSEUM', 5);
+
+insert or replace into BuildingModifiers (BuildingType, ModifierId) values
+	('BUILDING_COLOSSEUM',	'HD_COLOSSEUM_REGIONAL_CULTURE'),
+	('BUILDING_COLOSSEUM',	'HD_COLOSSEUM_REGIONAL_AMENITY');
+
+insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId) values
+	('HD_COLOSSEUM_REGIONAL_CULTURE',	'MODIFIER_SINGLE_CITY_ADJUST_PROPERTY',	'HD_PLOT_BINARY_COMPRESS_COLOSSEUM_AT_LEAST_5_REQUIREMENTS'),
+	('HD_COLOSSEUM_REGIONAL_AMENITY',	'MODIFIER_SINGLE_CITY_ADJUST_PROPERTY',	'HD_PLOT_BINARY_COMPRESS_COLOSSEUM_AT_LEAST_5_REQUIREMENTS');
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
+	('HD_COLOSSEUM_REGIONAL_CULTURE',	'Key',		'HD_SINGLE_BUILDING_PROVIDE_REGIONAL_YIELD_BONUS_BUILDING_COLOSSEUM_YIELD_CULTURE'),
+	('HD_COLOSSEUM_REGIONAL_CULTURE',	'Amount',	1),
+	('HD_COLOSSEUM_REGIONAL_AMENITY',	'Key',		'HD_SINGLE_BUILDING_PROVIDE_REGIONAL_YIELD_BONUS_BUILDING_COLOSSEUM_AMENITY'),
+	('HD_COLOSSEUM_REGIONAL_AMENITY',	'Amount',	1);

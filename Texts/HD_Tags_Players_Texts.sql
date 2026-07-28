@@ -34,6 +34,8 @@ update PlayerItems set Description = 'LOC_DISTRICT_OBSERVATORY_HD_DESCRIPTION'
     where Type = 'DISTRICT_OBSERVATORY' and Domain = 'Players:Expansion2_Players';
 update PlayerItems set Description = 'LOC_DISTRICT_THANH_HD_DESCRIPTION'
     where Type = 'DISTRICT_THANH' and Domain = 'Players:Expansion2_Players';
+update PlayerItems set Description = 'LOC_BUILDING_TLACHTLI_HD_DESCRIPTION'
+    where Type = 'BUILDING_TLACHTLI' and Domain = 'Players:Expansion2_Players';
 
 insert or ignore into PlayerItems
     (Domain,                        CivilizationType,              LeaderType,              Type,                       Icon,                               Name,                                   Description,                                    SortIndex)

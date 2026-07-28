@@ -1065,7 +1065,6 @@ values
 	('PLOT_ADJACENT_TO_DISTRICT_CITY_CENTER_ON_FOREIGN_CONTINENT',					'REQUIREMENTSET_TEST_ALL'),
 	('HD_RIVER_IMPROVEMENT_APPEAL_LESS_THAN_0',					'REQUIREMENTSET_TEST_ALL'),
 	('HD_RIVER_PLOT_APPEAL_LESS_THAN_0',								'REQUIREMENTSET_TEST_ALL'),
-	('HD_ARENA_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
 	('HD_NILOMETER_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
 	('UNIT_IS_SCIENTIST',				'REQUIREMENTSET_TEST_ANY'),
 	('HD_CHARCOAL_KILN_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
@@ -1219,7 +1218,11 @@ values
 	('PALACE_AND_HARBOR_TIER_1_REQUIREMENTS',			'REQUIREMENTSET_TEST_ALL'),
 	('PALACE_AND_HARBOR_TIER_2_REQUIREMENTS',			'REQUIREMENTSET_TEST_ALL'),
 	('PALACE_AND_HARBOR_TIER_3_REQUIREMENTS',			'REQUIREMENTSET_TEST_ALL'),
-	('CITY_HAS_DISTRICT_SEOWON',                        'REQUIREMENTSET_TEST_ALL');
+	('CITY_HAS_DISTRICT_SEOWON',                        'REQUIREMENTSET_TEST_ALL'),
+	('HD_ORCHARD_REQUIREMENTS',  'REQUIREMENTSET_TEST_ANY'),
+	('HD_HAMMER_WORKS_REQUIREMENTS',  'REQUIREMENTSET_TEST_ANY'),
+	('HD_HYDRAULIC_SPINNING_WHEEL_REQUIREMENTS',  'REQUIREMENTSET_TEST_ANY'),
+	('HD_BATHHOUSE_REQUIREMENTS',  'REQUIREMENTSET_TEST_ANY');
 
 insert or ignore into RequirementSetRequirements
 	(RequirementSetId,												RequirementId)
@@ -1695,6 +1698,20 @@ values
 	('PALACE_AND_HARBOR_TIER_3_REQUIREMENTS',			'REQUIRES_CITY_HAS_BUILDING_PALACE'),
 	('CITY_HAS_DISTRICT_SEOWON',                        'REQUIRES_CITY_HAS_DISTRICT_SEOWON');
 
+-- 蓄水池一级建筑
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'HD_ORCHARD_REQUIREMENTS', 'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType from HD_Resource_Classification
+	where ResourceClassificationType in ('RESOURCE_CLASSIFICATION_HD_FRUIT', 'RESOURCE_CLASSIFICATION_HD_VEGETABLE');
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'HD_HAMMER_WORKS_REQUIREMENTS', 'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType from HD_Resource_Classification
+	where ResourceClassificationType in ('RESOURCE_CLASSIFICATION_HD_CONSTRUCTION', 'RESOURCE_CLASSIFICATION_HD_METALLURGY');
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'HD_HYDRAULIC_SPINNING_WHEEL_REQUIREMENTS', 'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType from HD_Resource_Classification
+	where ResourceClassificationType in ('RESOURCE_CLASSIFICATION_HD_LEATHER', 'RESOURCE_CLASSIFICATION_HD_CLOTH');
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'HD_BATHHOUSE_REQUIREMENTS', 'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType from HD_Resource_Classification
+	where ResourceClassificationType in ('RESOURCE_CLASSIFICATION_HD_MEDICINE', 'RESOURCE_CLASSIFICATION_HD_HOUSEHOLD');
+
 -- 城市有商业或港口 HD_CITY_HAS_COMMERCIAL_HUB_OR_HARBOR_REQUIREMENTS
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select
 	'HD_CITY_HAS_COMMERCIAL_HUB_OR_HARBOR_REQUIREMENTS', 'REQUIRES_CITY_HAS_' || DistrictType || '_RAW'
@@ -1870,14 +1887,6 @@ insert or ignore into RequirementSetRequirements
 	(RequirementSetId,								RequirementId)
 select
 	'HD_WRITING_ON_HIDE_REQUIREMENTS',	'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType
-from Improvement_ValidResources
-where ImprovementType = 'IMPROVEMENT_PASTURE' or ImprovementType = 'IMPROVEMENT_CAMP';
-
--- 竞技场
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,								RequirementId)
-select
-	'HD_ARENA_REQUIREMENTS',					'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType
 from Improvement_ValidResources
 where ImprovementType = 'IMPROVEMENT_PASTURE' or ImprovementType = 'IMPROVEMENT_CAMP';
 

@@ -180,10 +180,17 @@ values
 	('CIVIC_CAPITALISM',   			 							'LOC_CIVIC_MACRO_ECONOMICS_HD_QUOTE_2',     				'PLAY_CIVIC_MACRO_ECONOMICS_HD_QUOTE_2');
 
 -- 设定市政的总督头衔、使者等效果
-delete from CivicModifiers where ModifierId = 'CIVIC_AWARD_ONE_INFLUENCE_TOKEN';
-delete from CivicModifiers where ModifierId = 'CIVIC_AWARD_TWO_INFLUENCE_TOKENS';
-delete from CivicModifiers where ModifierId = 'CIVIC_AWARD_THREE_INFLUENCE_TOKENS';
-delete from CivicModifiers where ModifierId = 'CIVIC_GRANT_PLAYER_GOVERNOR_POINTS';
+delete from CivicModifiers where ModifierId in (
+	'CIVIC_AWARD_ONE_INFLUENCE_TOKEN',
+	'CIVIC_AWARD_TWO_INFLUENCE_TOKENS',
+	'CIVIC_AWARD_THREE_INFLUENCE_TOKENS',
+	'CIVIC_GRANT_PLAYER_GOVERNOR_POINTS',
+	'CONSERVATION_ANCIENT_WALL_TOURISM',
+	'CONSERVATION_MEDIEVAL_WALL_TOURISM',
+	'CONSERVATION_RENAISSANCE_WALL_TOURISM',
+	'CONSERVATION_TSIKHE_TOURISM_GOLDEN_AGE',
+	'CONSERVATION_TSIKHE_TOURISM'
+);
 
 insert or replace into CivicModifiers
 	(CivicType,										ModifierId) 
