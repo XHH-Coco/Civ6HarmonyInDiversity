@@ -692,7 +692,45 @@ ToolTipHelper.GetImprovementToolTip = function(improvementType)
   -----------------------------------------------------------------------------------
   -- 名字
 	table.insert(toolTipLines, Locale.ToUpper(name));
-	table.insert(toolTipLines, Locale.Lookup("LOC_IMPROVEMENT_NAME"));
+
+  -----------------------------------------------------------------------------------
+  -- 改良分类
+  local names = {}
+  local nameStr = '';
+  local classifications = {};
+
+  for row in GameInfo.HD_Improvement_Classification() do
+    if row.ImprovementType == improvementType then
+      if row.ImprovementClassificationType == 'IMPROVEMENT_CLASSIFICATION_BASIC'
+        or row.ImprovementClassificationType == 'IMPROVEMENT_CLASSIFICATION_WATER'
+        or row.ImprovementClassificationType == 'IMPROVEMENT_CLASSIFICATION_UNIQUE'
+        or row.ImprovementClassificationType == 'IMPROVEMENT_CLASSIFICATION_CITYSTATE'
+      then
+        names[row.ImprovementClassificationType] = true;
+      elseif row.ImprovementClassificationType ~= 'IMPROVEMENT_CLASSIFICATION_OTHER' then
+        table.insert(classifications, row.ImprovementClassificationType);
+      end
+    end
+  end
+
+  -- 通用/特色/城邦改良
+  if names.IMPROVEMENT_CLASSIFICATION_UNIQUE == true then
+    nameStr = nameStr .. Locale.Lookup("LOC_IMPROVEMENT_CLASSIFICATION_UNIQUE_NAME");
+  elseif names.IMPROVEMENT_CLASSIFICATION_CITYSTATE == true then
+    nameStr = nameStr .. Locale.Lookup("LOC_IMPROVEMENT_CLASSIFICATION_CITYSTATE_NAME");
+  else
+    nameStr = nameStr .. Locale.Lookup("LOC_IMPROVEMENT_CLASSIFICATION_COMMON_NAME");
+  end
+  -- 基础改良
+  if names.IMPROVEMENT_CLASSIFICATION_BASIC == true then
+    nameStr = nameStr .. " " .. Locale.Lookup("LOC_IMPROVEMENT_CLASSIFICATION_BASIC_NAME");
+  end
+  -- 水上改良
+  if names.IMPROVEMENT_CLASSIFICATION_WATER == true then
+    nameStr = nameStr .. " " .. Locale.Lookup("LOC_IMPROVEMENT_CLASSIFICATION_WATER_NAME");
+  end
+
+  table.insert(toolTipLines, nameStr);
 
   -----------------------------------------------------------------------------------
   -- 描述
@@ -700,16 +738,7 @@ ToolTipHelper.GetImprovementToolTip = function(improvementType)
 		table.insert(toolTipLines, "[NEWLINE]" .. Locale.Lookup(description));
 	end
 
-  -----------------------------------------------------------------------------------
-  -- 改良分类
-  local classifications = {};
-
-  for row in GameInfo.HD_Improvement_Classification() do
-    if row.ImprovementType == improvementType then
-      table.insert(classifications, row.ImprovementClassificationType);
-    end
-  end
-
+  -- 分类
   if #classifications > 0 then
     table.insert(toolTipLines, "[NEWLINE]" .. Locale.Lookup('LOC_TOOLTIP_HD_CLASSIFICATIONS_TEXT'));
     

@@ -304,32 +304,32 @@ update ModifierArguments set Value = 50 where ModifierId = 'COTHON_NAVAL_UNIT_PR
 -- 工业改良为有工业区的城市+5%奇观加速
 insert or replace into ImprovementModifiers (ImprovementType, ModifierId) select
 	ImprovementType, 'HD_INDUSTRIAL_ZONE_WONDER_BOOST_' || ImprovementType
-from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_INDUSTRIAL_PRODUCTION'
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_EXPLOITATIVE'
 	and ImprovementType not in ('IMPROVEMENT_INDUSTRY_BONUS', 'IMPROVEMENT_INDUSTRY_STRATEGIC', 'IMPROVEMENT_CORPORATION_BONUS', 'IMPROVEMENT_CORPORATION_STRATEGIC');
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId, SubjectStackLimit) select
 	'HD_INDUSTRIAL_ZONE_WONDER_BOOST_' || ImprovementType, 'MODIFIER_SINGLE_CITY_ADJUST_WONDER_ERA_PRODUCTION', 'REQUIRES_CITY_HAS_DISTRICT_INDUSTRIAL_ZONE_UDMET', 1
-from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_INDUSTRIAL_PRODUCTION'
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_EXPLOITATIVE'
 	and ImprovementType not in ('IMPROVEMENT_INDUSTRY_BONUS', 'IMPROVEMENT_INDUSTRY_STRATEGIC', 'IMPROVEMENT_CORPORATION_BONUS', 'IMPROVEMENT_CORPORATION_STRATEGIC');
 
 insert or replace into ModifierArguments (ModifierId, Name, Value) select
 	'HD_INDUSTRIAL_ZONE_WONDER_BOOST_' || ImprovementType, 'Amount', 5
-from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_INDUSTRIAL_PRODUCTION'
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_EXPLOITATIVE'
 	and ImprovementType not in ('IMPROVEMENT_INDUSTRY_BONUS', 'IMPROVEMENT_INDUSTRY_STRATEGIC', 'IMPROVEMENT_CORPORATION_BONUS', 'IMPROVEMENT_CORPORATION_STRATEGIC');
 
 insert or replace into ModifierArguments (ModifierId, Name, Value) select
 	'HD_INDUSTRIAL_ZONE_WONDER_BOOST_' || ImprovementType, 'IsWonder', 1
-from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_INDUSTRIAL_PRODUCTION'
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_EXPLOITATIVE'
 	and ImprovementType not in ('IMPROVEMENT_INDUSTRY_BONUS', 'IMPROVEMENT_INDUSTRY_STRATEGIC', 'IMPROVEMENT_CORPORATION_BONUS', 'IMPROVEMENT_CORPORATION_STRATEGIC');
 
 insert or replace into ModifierArguments (ModifierId, Name, Value) select
 	'HD_INDUSTRIAL_ZONE_WONDER_BOOST_' || ImprovementType, 'StartEra', 'ERA_ANCIENT'
-from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_INDUSTRIAL_PRODUCTION'
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_EXPLOITATIVE'
 	and ImprovementType not in ('IMPROVEMENT_INDUSTRY_BONUS', 'IMPROVEMENT_INDUSTRY_STRATEGIC', 'IMPROVEMENT_CORPORATION_BONUS', 'IMPROVEMENT_CORPORATION_STRATEGIC');
 
 insert or replace into ModifierArguments (ModifierId, Name, Value) select
 	'HD_INDUSTRIAL_ZONE_WONDER_BOOST_' || ImprovementType, 'EndEra', 'ERA_RENAISSANCE'
-from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_INDUSTRIAL_PRODUCTION'
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_EXPLOITATIVE'
 	and ImprovementType not in ('IMPROVEMENT_INDUSTRY_BONUS', 'IMPROVEMENT_INDUSTRY_STRATEGIC', 'IMPROVEMENT_CORPORATION_BONUS', 'IMPROVEMENT_CORPORATION_STRATEGIC');
 -------------------------------------------------------------------
 

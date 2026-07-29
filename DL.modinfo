@@ -1766,10 +1766,6 @@
 		<!-- Requirements need to update in the end -->
 		<File>UpdateDataBase/DL_Requirements.sql</File>
     </UpdateDatabase>
-    <UpdateDatabase id="DL_Babylon_Late" criteria="DLC_Babylon">
-      <Properties><LoadOrder>17010</LoadOrder></Properties>
-      <File>DLCSupport/DL_Babylon_Late.sql</File>
-    </UpdateDatabase>
     <UpdateDatabase id="DL_Main_Late" criteria="Expansion2">
       <Properties><LoadOrder>20001</LoadOrder></Properties>
       <File>UpdateDataBase/DL_PostProcess.sql</File>
@@ -1813,6 +1809,7 @@
     <!-- Gameplay-->
     <AddGameplayScripts id="DL_Scripts_Gameplay" criteria="Expansion2">
       <Properties><LoadOrder>16017</LoadOrder></Properties>
+      <File>Gameplay/HD_CityStates.lua</File>
       <File>Gameplay/CityYield.lua</File>
       <File>Gameplay/CivilizationTraits.lua</File>
       <File>Gameplay/HD_Common.lua</File>
@@ -2319,6 +2316,7 @@
     <File>GameModeSupport/MultiPlayerMode/DL_GameCapabilities.sql</File>
 
     <!-- Gameplay -->
+    <File>Gameplay/HD_CityStates.lua</File>
     <File>Gameplay/CityYield.lua</File>
     <File>Gameplay/CivilizationTraits.lua</File>
     <File>Gameplay/HD_Common.lua</File>
@@ -2649,7 +2647,6 @@
     <File>DLCSupport/DL_Poland.sql</File>
     <File>DLCSupport/DL_Vikings.sql</File>
     <File>DLCSupport/DL_Babylon.sql</File>
-	  <File>DLCSupport/DL_Babylon_Late.sql</File>
     <File>DLCSupport/DL_Byzantium.sql</File>
     <File>DLCSupport/DL_Ethiopia.sql</File>
     <File>DLCSupport/DL_GranColombia.sql</File>

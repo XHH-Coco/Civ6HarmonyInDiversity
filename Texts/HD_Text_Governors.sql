@@ -53,14 +53,14 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_LEFT_2_NAME",                       "卫星城区"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_LEFT_2_DESCRIPTION",                "4个单元格内的区域+50%相邻加成；解锁“拱券”科技后收益翻倍。"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_LEFT_3_NAME",                       "公园与休憩"),
-  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_LEFT_3_DESCRIPTION",                "本城可以多建造一座市立公园。4个单元格内的市立公园为其2个单元格内的区域+50%相邻加成。"),
+  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_LEFT_3_DESCRIPTION",                "本城可以多建造一座市立公园。5个单元格内的市立公园为其2个单元格内的区域+50%相邻加成。"),
   -- 右线升级
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_1_NAME",                      "建筑大师"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_1_DESCRIPTION" ,              "本城建造奇观时+15%建造速度，建造远古和古典奇观时额外+15%建造速度。"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_2_NAME",                      "宏伟工程"),
-  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_2_DESCRIPTION" ,              "本城的奇观基础产出+100%，辐射产出+50%，+1辐射范围。"),
+  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_2_DESCRIPTION" ,              "获得等同于就职后在本城中建成的奇观 [ICON_PRODUCTION] 生产力25%的 [ICON_GREATENGINEER] 大工程师点数。"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_3_NAME",                      "国家工程院"),
-  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_3_DESCRIPTION" ,              "获得等同于就职后在本城中建成的奇观 [ICON_PRODUCTION] 生产力25%的 [ICON_GREATENGINEER] 大工程师点数。每招募一名 [ICON_GREATENGINEER] 大工程师，本城的区域+20%相邻加成。"),
+  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_3_DESCRIPTION" ,              "本城的奇观基础产出和辐射产出+100%，+1辐射范围。每招募一名 [ICON_GREATENGINEER] 大工程师，本城的区域+25%相邻加成。"),
   -- ==============================================================================
   -- 马格努斯
   -- ==============================================================================

@@ -5,17 +5,17 @@ insert or replace into Building_GreatPersonPoints (BuildingType, GreatPersonClas
   ('BUILDING_PHANTA_TEMPLE_OF_HEAVEN', 'GREAT_PERSON_CLASS_ENGINEER', 2);
 
 insert or ignore into HD_Building_Base_On_ResourceClassification (BuildingType, ResourceClassificationType, DetectRange, PropertyKey) values
-  ('BUILDING_PHANTA_TEMPLE_OF_HEAVEN', 'RESOURCE_CLASSIFICATION_HD_CROPS',        'PLAYER', 'HD_PLOT_BINARY_COMPRESS_CITY_YIELDS'),
-  ('BUILDING_PHANTA_TEMPLE_OF_HEAVEN', 'RESOURCE_CLASSIFICATION_HD_CUISINE',      'PLAYER', 'HD_PLOT_BINARY_COMPRESS_CITY_YIELDS'),
-  ('BUILDING_PHANTA_TEMPLE_OF_HEAVEN', 'RESOURCE_CLASSIFICATION_HD_AGRICULTURE',  'PLAYER', 'HD_PLOT_BINARY_COMPRESS_DOMESTIC_TRADE'),
-  ('BUILDING_PHANTA_TEMPLE_OF_HEAVEN', 'RESOURCE_CLASSIFICATION_HD_TRANSIT',      'PLAYER', 'HD_PLOT_BINARY_COMPRESS_DOMESTIC_TRADE'),
-  ('BUILDING_PHANTA_TEMPLE_OF_HEAVEN', 'RESOURCE_CLASSIFICATION_HD_BEVERAGE',     'PLAYER', 'HD_PLOT_BINARY_COMPRESS_INTERNATIONAL_TRADE'),
-  ('BUILDING_PHANTA_TEMPLE_OF_HEAVEN', 'RESOURCE_CLASSIFICATION_HD_SEASONING',    'PLAYER', 'HD_PLOT_BINARY_COMPRESS_INTERNATIONAL_TRADE');
+  ('BUILDING_PHANTA_TEMPLE_OF_HEAVEN', 'RESOURCE_CLASSIFICATION_HD_CROPS',        'PLAYER', 'HD_PLOT_BINARY_COMPRESS_TEMPLE_OF_HEAVEN_CITY_YIELDS'),
+  ('BUILDING_PHANTA_TEMPLE_OF_HEAVEN', 'RESOURCE_CLASSIFICATION_HD_CUISINE',      'PLAYER', 'HD_PLOT_BINARY_COMPRESS_TEMPLE_OF_HEAVEN_CITY_YIELDS'),
+  ('BUILDING_PHANTA_TEMPLE_OF_HEAVEN', 'RESOURCE_CLASSIFICATION_HD_AGRICULTURE',  'PLAYER', 'HD_PLOT_BINARY_COMPRESS_TEMPLE_OF_HEAVEN_DOMESTIC_TRADE'),
+  ('BUILDING_PHANTA_TEMPLE_OF_HEAVEN', 'RESOURCE_CLASSIFICATION_HD_TRANSIT',      'PLAYER', 'HD_PLOT_BINARY_COMPRESS_TEMPLE_OF_HEAVEN_DOMESTIC_TRADE'),
+  ('BUILDING_PHANTA_TEMPLE_OF_HEAVEN', 'RESOURCE_CLASSIFICATION_HD_BEVERAGE',     'PLAYER', 'HD_PLOT_BINARY_COMPRESS_TEMPLE_OF_HEAVEN_INTERNATIONAL_TRADE'),
+  ('BUILDING_PHANTA_TEMPLE_OF_HEAVEN', 'RESOURCE_CLASSIFICATION_HD_SEASONING',    'PLAYER', 'HD_PLOT_BINARY_COMPRESS_TEMPLE_OF_HEAVEN_INTERNATIONAL_TRADE');
 
 insert or replace into HD_Binary_Compress_Keys (Key, MaxExp) values
-	('HD_PLOT_BINARY_COMPRESS_CITY_YIELDS',         4),
-	('HD_PLOT_BINARY_COMPRESS_DOMESTIC_TRADE',      3),
-	('HD_PLOT_BINARY_COMPRESS_INTERNATIONAL_TRADE', 4);
+	('HD_PLOT_BINARY_COMPRESS_TEMPLE_OF_HEAVEN_CITY_YIELDS',         4),
+	('HD_PLOT_BINARY_COMPRESS_TEMPLE_OF_HEAVEN_DOMESTIC_TRADE',      3),
+	('HD_PLOT_BINARY_COMPRESS_TEMPLE_OF_HEAVEN_INTERNATIONAL_TRADE', 4);
 
 -- 城市产出
 insert or replace into BuildingModifiers (BuildingType, ModifierId) select
@@ -23,7 +23,7 @@ insert or replace into BuildingModifiers (BuildingType, ModifierId) select
 from HD_Binary_Compress where Exp < 5;
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId) select
-  'HD_TEMPLE_OF_HEAVEN_CITY_CULTURE_' || Exp, 'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_CITY_YIELDS_' || Exp || '_REQUIREMENTS'
+  'HD_TEMPLE_OF_HEAVEN_CITY_CULTURE_' || Exp, 'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_TEMPLE_OF_HEAVEN_CITY_YIELDS_' || Exp || '_REQUIREMENTS'
 from HD_Binary_Compress where Exp < 5;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value) select
@@ -31,7 +31,7 @@ insert or replace into ModifierArguments (ModifierId, Name, Value) select
 from HD_Binary_Compress where Exp < 5;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value) select
-  'HD_TEMPLE_OF_HEAVEN_CITY_CULTURE_' || Exp, 'Amount', Amount * 2
+  'HD_TEMPLE_OF_HEAVEN_CITY_CULTURE_' || Exp, 'Amount', Amount
 from HD_Binary_Compress where Exp < 5;
 
 insert or replace into BuildingModifiers (BuildingType, ModifierId) select
@@ -39,7 +39,7 @@ insert or replace into BuildingModifiers (BuildingType, ModifierId) select
 from HD_Binary_Compress where Exp < 5;
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId) select
-  'HD_TEMPLE_OF_HEAVEN_CITY_FAITH_' || Exp, 'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_CITY_YIELDS_' || Exp || '_REQUIREMENTS'
+  'HD_TEMPLE_OF_HEAVEN_CITY_FAITH_' || Exp, 'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_TEMPLE_OF_HEAVEN_CITY_YIELDS_' || Exp || '_REQUIREMENTS'
 from HD_Binary_Compress where Exp < 5;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value) select
@@ -47,7 +47,7 @@ insert or replace into ModifierArguments (ModifierId, Name, Value) select
 from HD_Binary_Compress where Exp < 5;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value) select
-  'HD_TEMPLE_OF_HEAVEN_CITY_FAITH_' || Exp, 'Amount', Amount * 2
+  'HD_TEMPLE_OF_HEAVEN_CITY_FAITH_' || Exp, 'Amount', Amount
 from HD_Binary_Compress where Exp < 5;
 
 -- 内商
@@ -56,7 +56,7 @@ insert or replace into BuildingModifiers (BuildingType, ModifierId) select
 from HD_Binary_Compress where Exp < 4;
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId) select
-  'HD_TEMPLE_OF_HEAVEN_DOMESTIC_TRADE_FOOD_' || Exp, 'MODIFIER_PLAYER_ADJUST_TRADE_ROUTE_YIELD_FOR_DOMESTIC', 'HD_PLOT_BINARY_COMPRESS_DOMESTIC_TRADE_' || Exp || '_REQUIREMENTS'
+  'HD_TEMPLE_OF_HEAVEN_DOMESTIC_TRADE_FOOD_' || Exp, 'MODIFIER_PLAYER_ADJUST_TRADE_ROUTE_YIELD_FOR_DOMESTIC', 'HD_PLOT_BINARY_COMPRESS_TEMPLE_OF_HEAVEN_DOMESTIC_TRADE_' || Exp || '_REQUIREMENTS'
 from HD_Binary_Compress where Exp < 4;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value) select
@@ -72,7 +72,7 @@ insert or replace into BuildingModifiers (BuildingType, ModifierId) select
 from HD_Binary_Compress where Exp < 4;
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId) select
-  'HD_TEMPLE_OF_HEAVEN_DOMESTIC_TRADE_PRODUCTION_' || Exp, 'MODIFIER_PLAYER_ADJUST_TRADE_ROUTE_YIELD_FOR_DOMESTIC', 'HD_PLOT_BINARY_COMPRESS_DOMESTIC_TRADE_' || Exp || '_REQUIREMENTS'
+  'HD_TEMPLE_OF_HEAVEN_DOMESTIC_TRADE_PRODUCTION_' || Exp, 'MODIFIER_PLAYER_ADJUST_TRADE_ROUTE_YIELD_FOR_DOMESTIC', 'HD_PLOT_BINARY_COMPRESS_TEMPLE_OF_HEAVEN_DOMESTIC_TRADE_' || Exp || '_REQUIREMENTS'
 from HD_Binary_Compress where Exp < 4;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value) select
@@ -89,7 +89,7 @@ insert or replace into BuildingModifiers (BuildingType, ModifierId) select
 from HD_Binary_Compress where Exp < 5;
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId) select
-  'HD_TEMPLE_OF_HEAVEN_INTERNATIONAL_TRADE_GOLD_' || Exp, 'MODIFIER_PLAYER_ADJUST_TRADE_ROUTE_YIELD_FOR_INTERNATIONAL', 'HD_PLOT_BINARY_COMPRESS_INTERNATIONAL_TRADE_' || Exp || '_REQUIREMENTS'
+  'HD_TEMPLE_OF_HEAVEN_INTERNATIONAL_TRADE_GOLD_' || Exp, 'MODIFIER_PLAYER_ADJUST_TRADE_ROUTE_YIELD_FOR_INTERNATIONAL', 'HD_PLOT_BINARY_COMPRESS_TEMPLE_OF_HEAVEN_INTERNATIONAL_TRADE_' || Exp || '_REQUIREMENTS'
 from HD_Binary_Compress where Exp < 5;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value) select

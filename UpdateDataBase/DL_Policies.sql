@@ -2327,8 +2327,8 @@ values
 	('HD_DRY_STONE_GREAT_ENGINEER_POINTS',				'MODIFIER_PLAYER_DISTRICTS_ADJUST_GREAT_PERSON_POINTS',			'HD_DRY_STONE_REQUIREMENTS'),
 	('HD_CHARCOAL_KILN_PRODUCTION',								'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',			'HD_CHARCOAL_KILN_REQUIREMENTS'),
 	('HD_CHARCOAL_KILN_AMENITY',									'MODIFIER_PLAYER_CITIES_ADJUST_POLICY_AMENITY',					'HD_CHARCOAL_KILN_REQUIREMENTS'),
-	('HD_AGRICULTURAL_MECHANIZATION_ATTACH',			'MODIFIER_PLAYER_IMPROVEMENTS_ATTACH_MODIFIER',					'PLOT_HAS_IMPROVEMENT_CLASSIFICATION_AGRICULTURAL_PRODUCTION_REQUIREMENTS'),
-	('HD_AGRICULTURAL_MECHANIZATION_MODIFIER',		'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',										'PLOT_HAS_IMPROVEMENT_CLASSIFICATION_AGRICULTURAL_PRODUCTION_AND_ADJACENT_TO_OWNER_REQUIREMENTS'),
+	('HD_AGRICULTURAL_MECHANIZATION_ATTACH',			'MODIFIER_PLAYER_IMPROVEMENTS_ATTACH_MODIFIER',					'PLOT_HAS_IMPROVEMENT_CLASSIFICATION_AGRARIAN_REQUIREMENTS'),
+	('HD_AGRICULTURAL_MECHANIZATION_MODIFIER',		'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',										'PLOT_HAS_IMPROVEMENT_CLASSIFICATION_AGRARIAN_AND_ADJACENT_TO_OWNER_REQUIREMENTS'),
 	('HD_UNMANNED_FACTORY_EXTRA_GOLD_CONSUME_1',	'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',			'CITY_HAS_DISTRICT_INDUSTRIAL_ZONE_TIER_2_BUILDING_REQUIREMENTS'),
 	('HD_UNMANNED_FACTORY_EXTRA_GOLD_CONSUME_2',	'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',			'CITY_HAS_DISTRICT_INDUSTRIAL_ZONE_TIER_3_BUILDING_REQUIREMENTS'),
 	('HD_UNMANNED_FACTORY_PLOT_YIELD_ATTACH_1',		'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER',								'CITY_HAS_DISTRICT_INDUSTRIAL_ZONE_TIER_2_BUILDING_REQUIREMENTS'),
@@ -2408,8 +2408,8 @@ values
 	('HD_HERBAL_MEDICINE_POP_SCIENCE_MODIFIER',   	'MODIFIER_SINGLE_CITY_ADJUST_CITY_YIELD_PER_POPULATION',	  'HD_PLOT_HAS_RESOURCE_REQUIREMENTS',	null),
 	('HD_HERBAL_MEDICINE_POP_GOLD_MODIFIER',   			'MODIFIER_SINGLE_CITY_ADJUST_CITY_YIELD_PER_POPULATION',	  'HD_PLOT_HAS_RESOURCE_REQUIREMENTS',	null),
 	('HD_HERBAL_MEDICINE_SCIENTIST_POINTS_MODIFIER','MODIFIER_SINGLE_CITY_DISTRICTS_ADJUST_GREAT_PERSON_POINTS','HD_PLOT_HAS_RESOURCE_REQUIREMENTS',	'REQUIRES_DISTRICT_IS_DISTRICT_CITY_CENTER_UDMET'),
-	('HD_UNMANNED_FACTORY_PLOT_YIELD_1',						'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',							'CITY_IS_POWERED',										'PLOT_HAS_IMPROVEMENT_CLASSIFICATION_INDUSTRIAL_PRODUCTION_REQUIREMENTS'),
-	('HD_UNMANNED_FACTORY_PLOT_YIELD_2',						'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',							'CITY_IS_POWERED',										'PLOT_HAS_IMPROVEMENT_CLASSIFICATION_INDUSTRIAL_PRODUCTION_REQUIREMENTS');
+	('HD_UNMANNED_FACTORY_PLOT_YIELD_1',						'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',							'CITY_IS_POWERED',										'PLOT_HAS_IMPROVEMENT_CLASSIFICATION_EXPLOITATIVE_REQUIREMENTS'),
+	('HD_UNMANNED_FACTORY_PLOT_YIELD_2',						'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',							'CITY_IS_POWERED',										'PLOT_HAS_IMPROVEMENT_CLASSIFICATION_EXPLOITATIVE_REQUIREMENTS');
 
 insert or replace into Modifiers
 	(ModifierId,																			ModifierType,																					SubjectRequirementSetId,								SubjectStackLimit)
@@ -4439,48 +4439,48 @@ from Buildings where BuildingType in (
 -- 贝冢 POLICY_HD_MIDDEN
 insert or ignore into PolicyModifiers (PolicyType, ModifierId) select
 	'POLICY_HD_MIDDEN', 'HD_MIDDEN_' || ImprovementType || '_CULTURE_ATTACH'
-from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER';
 
 insert or ignore into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) select
 	'HD_MIDDEN_' || ImprovementType || '_CULTURE_ATTACH', 'MODIFIER_PLAYER_IMPROVEMENTS_ATTACH_MODIFIER', 'PLOT_HAS_' || ImprovementType || '_REQUIREMENTS'
-from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER';
 
 insert or ignore into ModifierArguments (ModifierId, Name, Value) select
 	'HD_MIDDEN_' || ImprovementType || '_CULTURE_ATTACH', 'ModifierId', 'HD_MIDDEN_' || ImprovementType || '_CULTURE'
-from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER';
 
 insert or ignore into Modifiers (ModifierId, ModifierType, SubjectStackLimit) select
 	'HD_MIDDEN_' || ImprovementType || '_CULTURE', 'MODIFIER_SINGLE_CITY_ADJUST_CITY_YIELD_CHANGE', 1
-from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER';
 
 insert or ignore into ModifierArguments (ModifierId, Name, Value) select
 	'HD_MIDDEN_' || ImprovementType || '_CULTURE', 'YieldType', 'YIELD_CULTURE'
-from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER';
 
 insert or ignore into ModifierArguments (ModifierId, Name, Value) select
 	'HD_MIDDEN_' || ImprovementType || '_CULTURE', 'Amount', 1
-from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER';
 
 insert or ignore into PolicyModifiers (PolicyType, ModifierId) select
 	'POLICY_HD_MIDDEN', 'HD_MIDDEN_' || ImprovementType || '_FAITH_ATTACH'
-from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER';
 
 insert or ignore into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) select
 	'HD_MIDDEN_' || ImprovementType || '_FAITH_ATTACH', 'MODIFIER_PLAYER_IMPROVEMENTS_ATTACH_MODIFIER', 'PLOT_HAS_' || ImprovementType || '_REQUIREMENTS'
-from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER';
 
 insert or ignore into ModifierArguments (ModifierId, Name, Value) select
 	'HD_MIDDEN_' || ImprovementType || '_FAITH_ATTACH', 'ModifierId', 'HD_MIDDEN_' || ImprovementType || '_FAITH'
-from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER';
 
 insert or ignore into Modifiers (ModifierId, ModifierType, SubjectStackLimit) select
 	'HD_MIDDEN_' || ImprovementType || '_FAITH', 'MODIFIER_SINGLE_CITY_ADJUST_CITY_YIELD_CHANGE', 1
-from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER';
 
 insert or ignore into ModifierArguments (ModifierId, Name, Value) select
 	'HD_MIDDEN_' || ImprovementType || '_FAITH', 'YieldType', 'YIELD_FAITH'
-from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER';
 
 insert or ignore into ModifierArguments (ModifierId, Name, Value) select
 	'HD_MIDDEN_' || ImprovementType || '_FAITH', 'Amount', 1
-from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER_PRODUCTION';
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_WATER';

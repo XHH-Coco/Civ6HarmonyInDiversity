@@ -401,7 +401,7 @@ values
 insert or replace into LocalizedText
 	(Language,      Tag,                                                                                Text)
 values
-	("zh_Hans_CN",  "LOC_PEDIA_BUILDINGS_PAGE_BUILDING_NILOMETER_HD_CHAPTER_HISTORY_PARA_1",            "测量仪来自官方情景“尼罗河的赠礼”中的尼罗河仪。尼罗河仪是一种阶梯型的水利设施，埃及人在尼罗河边建立这些设施，用阶梯和其中包含的柱子上的刻度观测尼罗河的水位，调节农业生产。到现在，开罗的罗达岛、阿斯旺的埃勒芬蒂尼岛都有这种建筑的遗迹。直到阿斯旺大坝的启用，阿布辛拜勒神庙虽然被拯救，但是像尼罗河仪这些埃及水利遗迹却正式终结了使命。"),
+	("zh_Hans_CN",  "LOC_PEDIA_BUILDINGS_PAGE_BUILDING_NILOMETER_HD_CHAPTER_HISTORY_PARA_1",            "测量仪来自官方情景“尼罗河的赠礼”中的尼罗河仪。尼罗河仪是一种阶梯型的水利工程，埃及人在尼罗河边建立这些设施，用阶梯和其中包含的柱子上的刻度观测尼罗河的水位，调节农业生产。到现在，开罗的罗达岛、阿斯旺的埃勒芬蒂尼岛都有这种建筑的遗迹。直到阿斯旺大坝的启用，阿布辛拜勒神庙虽然被拯救，但是像尼罗河仪这些埃及水利遗迹却正式终结了使命。"),
 	("zh_Hans_CN",  "LOC_PEDIA_BUILDINGS_PAGE_BUILDING_FAIR_CHAPTER_HISTORY_PARA_1",                    "从物质生产出现分工开始就有了不同物质的交互，然后商品交换随之产生。然后，因为商品生产的分工和地域性，人们开始在交通便利的地方自发的形成集市。在很长一段时间内，集市都是人们获得自己无法生产的东西的主要来源，直到超级市场出现。");
 
 insert or replace into EnglishText

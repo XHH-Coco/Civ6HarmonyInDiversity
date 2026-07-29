@@ -1,11 +1,11 @@
 insert or ignore into HD_BuildingClassificationTypes (BuildingClassificationType, SortIndex) values
-  ('BUILDING_CLASSIFICATION_TRANSPORTATION_FACILITIES', 0);
+  ('BUILDING_CLASSIFICATION_TRANSPORTATION', 0);
 
 update HD_BuildingClassificationTypes set Name = 'LOC_' || BuildingClassificationType || '_NAME' where Name is NULL;
 
 -- 交通设施
 insert or ignore into HD_Building_Classification (BuildingType, BuildingClassificationType) select
-  BuildingType, 'BUILDING_CLASSIFICATION_TRANSPORTATION_FACILITIES'
+  BuildingType, 'BUILDING_CLASSIFICATION_TRANSPORTATION'
 from Buildings where BuildingType in (
   'BUILDING_HD_BUS_STOP',
   'BUILDING_JNR_TRANSIT_HUB',
@@ -15,5 +15,5 @@ from Buildings where BuildingType in (
 );
 
 insert or ignore into HD_Building_Classification (BuildingType, BuildingClassificationType) select
-  BuildingType, 'BUILDING_CLASSIFICATION_TRANSPORTATION_FACILITIES'
+  BuildingType, 'BUILDING_CLASSIFICATION_TRANSPORTATION'
 from Buildings_XP2 where Bridge = 1 or CanalWonder = 1;

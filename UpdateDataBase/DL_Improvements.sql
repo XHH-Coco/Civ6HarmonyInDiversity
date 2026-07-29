@@ -334,7 +334,8 @@ with I(ImprovementType) as (select ImprovementType from Improvements where Impro
 	'IMPROVEMENT_MEKEWAP',
 	'IMPROVEMENT_MOAI',
 	'IMPROVEMENT_OPEN_AIR_MUSEUM',
-	'IMPROVEMENT_MAHAVIHARA', 
+	'IMPROVEMENT_MAHAVIHARA',
+	'IMPROVEMENT_TRADING_DOME',
 	'IMPROVEMENT_BATEY',
 	'IMPROVEMENT_HACIENDA',
 	'IMPROVEMENT_PAIRIDAEZA',
@@ -360,6 +361,7 @@ update Improvements set Description = '{' || Description || '}{LOC_IMPROVEMENT_B
 	'IMPROVEMENT_MOAI',
 	'IMPROVEMENT_OPEN_AIR_MUSEUM',
 	'IMPROVEMENT_MAHAVIHARA',
+	'IMPROVEMENT_TRADING_DOME',
 	'IMPROVEMENT_BATEY',
 	'IMPROVEMENT_HACIENDA',
 	'IMPROVEMENT_PAIRIDAEZA',
@@ -370,6 +372,7 @@ update Improvements set Description = '{' || Description || '}{LOC_IMPROVEMENT_B
 with I(ImprovementType) as (select ImprovementType from Improvements where ImprovementType in (
 	'IMPROVEMENT_BATEY',
 	'IMPROVEMENT_MAHAVIHARA',
+	'IMPROVEMENT_TRADING_DOME',
 	'IMPROVEMENT_CITY_PARK',
 	'IMPROVEMENT_MEKEWAP',
 	'IMPROVEMENT_ALCAZAR',
@@ -467,7 +470,6 @@ from Improvements where ImprovementType in (
 update Adjacency_YieldChanges set PrereqTech = 'TECH_MODERN_AGRICULTURE_HD' where ID = 'Farms_MechanizedAdjacency' or ID = 'Terrace_MechanizedAdjacency';
 update Adjacency_YieldChanges set ObsoleteTech = 'TECH_MODERN_AGRICULTURE_HD' where ID = 'Farms_MedievalAdjacency' or ID = 'Terrace_MedievalAdjacency';
 
-delete from ImprovementModifiers where ImprovementType = 'IMPROVEMENT_FISHERY';
 insert or replace into ImprovementModifiers (ImprovementType, ModifierID) values
 	-- Plantation
 	('IMPROVEMENT_PLANTATION',	'PLANTATION_FRESH_WATER_NO_AQUEDUCT_FEUDALISM_GOLD'),
@@ -512,21 +514,6 @@ insert or replace into ModifierArguments (ModifierId, Name, Value) values
 	('LUMBER_MILL_NO_MACHINERY_PRODUCTION',								'Amount',		1),
 	('FISHING_BOATS_NO_COMPASS_FOOD',											'YieldType',	'YIELD_FOOD'),
 	('FISHING_BOATS_NO_COMPASS_FOOD',											'Amount',		1);
-
--- 渔场
--- insert or ignore into ImprovementModifiers
--- 	(ImprovementType,			ModifierId)
--- values
--- 	('IMPROVEMENT_FISHERY',		'FISHERY_EXTRA_PRODUCTION_ON_FEATURE');
--- insert or ignore into Modifiers
--- 	(ModifierID,									ModifierType,											SubjectRequirementSetId)
--- values
--- 	('FISHERY_EXTRA_PRODUCTION_ON_FEATURE',				'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',				'HD_PLOT_HAS_FEATURE_REQUIREMENTS');
--- insert or ignore into ModifierArguments
--- 	(ModifierID,									Name,				Value)
--- values
--- 	('FISHERY_EXTRA_PRODUCTION_ON_FEATURE',				'YieldType',	'YIELD_PRODUCTION'),
--- 	('FISHERY_EXTRA_PRODUCTION_ON_FEATURE',				'Amount',		1);
 
 -- City State UI
 -- Cahokia Mounds
@@ -622,13 +609,6 @@ values
 	('PLOT_ADJACENT_TO_OWNER_AND_PLAYER_HAS_ENGINEERING',		'HD_REQUIRES_PLAYER_HAS_TECH_ENGINEERING'),
 	('PLOT_ADJACENT_TO_OWNER_AND_PLAYER_HAS_MASS_PRODUCTION',	'ADJACENT_TO_OWNER'),
 	('PLOT_ADJACENT_TO_OWNER_AND_PLAYER_HAS_MASS_PRODUCTION',	'HD_REQUIRES_PLAYER_HAS_TECH_MASS_PRODUCTION');
-
--- Mahavihara
-delete from TraitModifiers where TraitType = 'MINOR_CIV_NALANDA_TRAIT' and ModifierId = 'MINOR_CIV_NALANDA_FREE_TECHNOLOGY';
-update Adjacency_YieldChanges set PrereqTech = null, PrereqCivic = 'CIVIC_DIVINE_RIGHT' where ID = 'Mahavihara_Campus_Science_Late' or ID = 'Mahavihara_Observatory_Science_Late';
-update Adjacency_YieldChanges set ObsoleteTech = null, ObsoleteCivic = 'CIVIC_DIVINE_RIGHT' where ID = 'Mahavihara_Campus_Science_Early' or ID = 'Mahavihara_Observatory_Science_Early';
-update Adjacency_YieldChanges set YieldType = 'YIELD_SCIENCE', ObsoleteCivic = 'CIVIC_DIVINE_RIGHT' where ID = 'Mahavihara_Holy_Site_Faith';
-update Adjacency_YieldChanges set YieldType = 'YIELD_SCIENCE', ObsoleteCivic = 'CIVIC_DIVINE_RIGHT' where ID = 'Mahavihara_Lavra_Faith';
 
 -- Civilization UI
 -- Mekewap (Cree)
@@ -823,15 +803,15 @@ values
 
 insert or replace into ImprovementModifiers (ImprovementType, ModifierId)
 	select ImprovementType, 'HD_MOUNTAIN_ROAD_YIELD'
-from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_TRANSPORTATION_FACILITIES' and ImprovementType != 'IMPROVEMENT_MOUNTAIN_ROAD';
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_TRANSPOTATION' and ImprovementType != 'IMPROVEMENT_MOUNTAIN_ROAD';
 
 insert or replace into BuildingModifiers (BuildingType, ModifierId)
 	select BuildingType, 'HD_MOUNTAIN_ROAD_YIELD'
-from HD_Building_Classification where BuildingClassificationType = 'BUILDING_CLASSIFICATION_TRANSPORTATION_FACILITIES';
+from HD_Building_Classification where BuildingClassificationType = 'BUILDING_CLASSIFICATION_TRANSPORTATION';
 
 insert or replace into DistrictModifiers (DistrictType, ModifierId)
 	select DistrictType, 'HD_MOUNTAIN_ROAD_YIELD'
-from HD_District_Classification where DistrictClassificationType = 'DISTRICT_CLASSIFICATION_TRANSPORTATION_FACILITIES';
+from HD_District_Classification where DistrictClassificationType = 'DISTRICT_CLASSIFICATION_TRANSPORTATION';
 
 -- Sphinx (Egypt)
 -- In order to adapt the wonder yield change made in UpdateDatabse/DL_Wonders.sql at LoadOrder 16010, Modifiers about adjacent wonders are written in UpdateDatabse/DL_PostProcess.sql, which is at LoadOrder 20000
@@ -1623,3 +1603,9 @@ insert or ignore into Modifiers (ModifierId, ModifierType) values
 insert or ignore into ModifierArguments (ModifierId, Name, Value) values
 	('HD_CITY_ALLOW_EXTRA_CITY_PARK', 'Key',		'HD_CITY_ALLOW_EXTRA_IMPROVEMENT_CITY_PARK'),
 	('HD_CITY_ALLOW_EXTRA_CITY_PARK', 'Amount',	1);
+
+-- =====================================================================================================================================
+-- 渔场
+-- =====================================================================================================================================
+update Improvements set PrereqTech = 'TECH_SAILING', Housing = 1, TilesRequired = 2, SameAdjacentValid = 1, AdjacentSeaResource = 1, Workable = 1 where ImprovementType = 'IMPROVEMENT_FISHERY';
+delete from ImprovementModifiers where ImprovementType = 'IMPROVEMENT_FISHERY';

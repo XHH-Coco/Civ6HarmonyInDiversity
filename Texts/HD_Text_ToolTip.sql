@@ -108,7 +108,7 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_TOOLTIP_HD_MUST_SEA_TEXT",                      "必须建在浅海上"),
   ("zh_Hans_CN", "LOC_TOOLTIP_HD_MUST_LAKE_TEXT",                     "必须建在湖泊上"),
 
-  ("zh_Hans_CN", "LOC_TOOLTIP_HD_YIELD_CHANGES_TEXT",                 "加产节点："),
+  ("zh_Hans_CN", "LOC_TOOLTIP_HD_YIELD_CHANGES_TEXT",                 "产出节点："),
   ("zh_Hans_CN", "LOC_TOOLTIP_HD_BASIC_YIELDS_TEXT",                  "{1_Amount: number +#,###.#;-#,###.#} {2_YieldIcon} {3_YieldName}"),
   ("zh_Hans_CN", "LOC_TOOLTIP_HD_YIELD_CHANGES_REQUIRES_TEXT",        "{1_Amount: number +#,###.#;-#,###.#} {2_YieldIcon} {3_YieldName}；需要{4_Name}"),
   ("zh_Hans_CN", "LOC_TOOLTIP_HD_YIELD_FROM_APPEAL_TEXT",             "提供等同于单元格魅力{1_ScalingFactor}%的 {2_Icon} {3_Name}"),

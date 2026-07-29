@@ -3,8 +3,12 @@
 insert or replace into EnglishText
 	(Tag,														Text)
 values
+	("LOC_MARSH_AND_SWAMP",																			"Marsh"),
+	("LOC_MARSH_OR_SWAMP",																			"Marsh"),
+	("LOC_AND_KELP",																						""),
+	("LOC_SAVANNAH_AND",                                    		""),
 	("LOC_IMPROVEMENT_BUTTRESS_ON_FLOODLANDS",									"[NEWLINE][NEWLINE]Once Buttress is unlocked it can also be built on Floodplains."),
-	-- Base Improvements
+	-- Common Improvements
 	("LOC_IMPROVEMENT_FARM_HD_DESCRIPTION",											"Can only be built on Grassland or Plains. After Civil Engineering is unlocked, it can also be built on Grassland Hills or Plains Hills."),
 	("LOC_IMPROVEMENT_MINE_HD_DESCRIPTION",											"Can be built on Hills or valid Resources. Once Engineering is unlocked it can also be built on Geothermal Fissures. Extra +1 [ICON_Production] Production if built adjacent to Mountains after researching Bronze Working Technology (obsolete with Apprenticeship Tech)."),
 	("LOC_IMPROVEMENT_QUARRY_HD_DESCRIPTION",										"Can only be built on valid resources. Extra +1 [ICON_Production] Production if built on Hills after researching Masonry Technology (obsolete with Metal Casting Tech)."),
@@ -18,6 +22,10 @@ values
 	("LOC_IMPROVEMENT_SKI_RESORT_HD_DESCRIPTION",								"+1 [ICON_AMENITIES] Amenity.[NEWLINE][NEWLINE]If adjacent to any Improvement which provide [ICON_TOURISM] Tourism, +50% [ICON_TOURISM] Tourism to Improvements in all cities.[NEWLINE]If adjacent to any Wonder, +50% [ICON_TOURISM] Tourism to Wonders in all cities.[NEWLINE][NEWLINE]Can only be built on a Mountain. Cannot be built adjacent to another Ski Resort. Cannot be pillaged, worked or removed. One per City."),
 	("LOC_IMPROVEMENT_SKI_RESORT_HD_MONOPOLY_DESCRIPTION",			"+1 [ICON_AMENITIES] Amenity.[NEWLINE][NEWLINE]If adjacent to any Improvement which provide [ICON_TOURISM] Tourism, +50% [ICON_TOURISM] Tourism to Improvements in all cities.[NEWLINE]If adjacent to any Wonder, +50% [ICON_TOURISM] Tourism to Wonders in all cities.[NEWLINE]If adjacent to Entertainment Complex or Water Park districs, +50% [ICON_TOURISM] Tourism to [ICON_GreatWork_Product] Products in all cities.[NEWLINE][NEWLINE]Can only be built on a Mountain. Cannot be built adjacent to another Ski Resort. Cannot be pillaged, worked or removed. One per City."),
 	("LOC_IMPROVEMENT_CITY_PARK_DESCRIPTION",										"+2 [ICON_Culture] Culture. Adjacent tiles receive +1 Appeal. Cannot be placed adjacent to another City Park. One per City; for each Specialized district, city can build an additional City Park."),
+	("LOC_IMPROVEMENT_MONASTERY_HD_DESCRIPTION",								"+1 [ICON_Culture] Culture, [ICON_Faith] Faith and [ICON_HOUSING] Housing. +1 [ICON_PRODUCTION] Production and [ICON_Faith] Faith from each type of improved Brewing Resource in your empire. +1 [ICON_Culture] Culture and [ICON_Faith] Faith from each type of improved Stationery Resource in your empire. +15 HP healing for friendly religious unit on this tile that has not attacked this turn. May purchase Builders with [ICON_FAITH] Faith in this city. One per city; for every building of Holy Site district, city can build an additional Monastery."),
+	("LOC_IMPROVEMENT_MAHAVIHARA_HD_DESCRIPTION",								"+2 [ICON_SCIENCE] Science and [ICON_FAITH] Faith, +1 [Icon_Housing] Housing. +1 [ICON_FAITH] Faith from each Tier of Campus buildings in this city. +1 [ICON_SCIENCE] Science from each Tier of Holy Site buildings in this city. +2 [ICON_GREATSCIENTIST] Great Scientist points from each specialized districts in this city. Must be built on flat terrain. One per city."),
+	("LOC_IMPROVEMENT_TRADING_DOME_HD_NAME",       							"Market Town"),
+	("LOC_IMPROVEMENT_TRADING_DOME_HD_DESCRIPTION",							"+1 [ICON_FOOD] Food, [ICON_Production] Production and [ICON_Housing] Housing. [ICON_TRADEROUTE] Trade routes originating from or destined for this city receive yields: +1 [ICON_FOOD] Food if adjacent to Bonus Resource; +3 [ICON_GOLD] Gold if adjacent to Luxury Resource. One per city."),
 	-- UI of Majors	
 	("LOC_IMPROVEMENT_OUTBACK_STATION_DESCRIPTION",							"+1 [ICON_PRODUCTION] Production and +0.5 [ICON_HOUSING] Housing. +1 [ICON_FOOD] Food from every adjacent Pasture, +1 [ICON_PRODUCTION] from every adjacent Outback Station. Provide additional yields to adjacent Pasture and Outback Station as you advance through the Civics and Technology Tree. [NEWLINE]Trigger a Culture Bomb. When built on a tile for the first time, randomly import a copy of the adjacent {LOC_OUTBACK_STATION_BREED_IMPORT}Pasture Resource on an adjacent {LOC_SAVANNAH_AND}Desert, Desert Hill, Grassland, Grassland Hill, Plain or Plain Hill tile. [NEWLINE][NEWLINE]Can only be built on {LOC_SAVANNAH_AND}Desert, Desert Hill, Grassland, Grassland Hill, Plain and Plain Hill tiles."),
 	("LOC_OUTBACK_STATION_BREED_IMPORT",       									""),
@@ -46,15 +54,8 @@ values
 	("LOC_IMPROVEMENT_LAND_POLDER_NAME",												"Floodplain Polder"),
 	("LOC_IMPROVEMENT_LAND_POLDER_DESCRIPTION",									"+1 [ICON_FOOD] Food, +1 [ICON_PRODUCTION] Production and +0.5 [ICON_HOUSING] Housing. +1 [ICON_FOOD] Food from every 2 adjacent Coastal Polder or Floodplain Polder tiles. Additional [ICON_FOOD] Food and [ICON_PRODUCTION] Production as you advance through the Civics and Technology Tree. Must be placed on a Floodplain or Marsh tile. Can be built on farm and plantation resources on Floodplain or Marsh tiles. Increases [ICON_MOVEMENT] Movement Cost by 1."),
 	("LOC_IMPROVEMENT_OPEN_AIR_MUSEUM_DESCRIPTION",							"+1 [ICON_CULTURE] Culture from every type of Terrain in your territory. +1 [ICON_SCIENCE] Science from every type of Feature or Natural Wonder in your territory. One per city."),
-	("LOC_MARSH_AND_SWAMP",																			"Marsh"),
-	("LOC_MARSH_OR_SWAMP",																			"Marsh"),
-	("LOC_AND_KELP",																						""),
-	("LOC_SAVANNAH_AND",                                    		""),
 	("LOC_IMPROVEMENT_FEITORIA_DESCRIPTION",									  "Provides +4 [ICON_GOLD] Gold and +1 [ICON_PRODUCTION] Production. Trade routes sent to this city from Portugal gain +4 [ICON_GOLD] Gold and +1 [ICON_PRODUCTION] Production. Can only be built adjacent to Luxury or Bonus resources in territory belonging to other Civilizations or City-States that you have Open Borders with. Must be built on a Shallow Sea and Lake tile adjacent to land and not adjacent to another Feitoria. Feitorias cannot be removed."),
 	-- UI of Minors	
-	("LOC_IMPROVEMENT_MAHAVIHARA_DESCRIPTION",									"+2 [ICON_SCIENCE] Science, +1 [Icon_Housing] Housing. +1 [ICON_Science] Science from every adjacent Campus or Holy Site district, which becomes +2 [ICON_Science] Science after progressing 'Divine Right' Civic. +1 [ICON_Science] Science from every adjacent Neighborhood. Must be built on flat terrain. Cannot be built adjacent to another Mahavihara."),
-	("LOC_IMPROVEMENT_TRADING_DOME_DESCRIPTION",								"Provides the basic yield of all Luxury resource types improved by your Trading Dome. After researching 'Currency' Technology, your [ICON_TradeRoute] Trade Routes start from this city provide the basic yields of the Luxury resource improved by this Trading Dome, which is doubled after researching 'Economics' Technology. +2 [ICON_FOOD] Food, +1 [ICON_PRODUCTION] if built on non-Floodplains Desert tile. Can only be built on land Luxury resource. One per city."),
-	("LOC_IMPROVEMENT_MONASTERY_EXPANSION2_DESCRIPTION",				"+2 [ICON_Faith] Faith, +1 [ICON_HOUSING] Housing. +15 HP healing for friendly religious unit on this tile that has not attacked this turn. +2 [ICON_FAITH] Faith from every adjacent District, which becomes +3 [ICON_FAITH] Faith after progressing 'Reformed Church' Civic. Extra +1 [ICON_HOUSING] Housing after progressing 'Colonialism' Civic. Cannot be built adjacenct to another Monastery. One per city."),
 	("LOC_IMPROVEMENT_ALCAZAR_EXPANSION2_DESCRIPTION",					"+2 [ICON_Culture] Culture. Provides [ICON_SCIENCE] Science equal to the tile's Appeal. Occupying unit receives +4 [ICON_Strength] Defense Strength, and automatically gains 2 turns of fortification. Cannot be built next to another Alcázar."),
 	("LOC_IMPROVEMENT_BATEY_DESCRIPTION",												"+1 [ICON_Culture] Culture. +1 [ICON_Culture] Culture from every adjacent Bonus Resource, Luxury Resource, Entertainment Complex or Neighborhood, which becomes +2 after progressing 'Humanism' Civic. Cannot be built on Hills or adjacent to another Batey."),
 	("LOC_IMPROVEMENT_COLOSSAL_HEAD_EXPANSION2_DESCRIPTION",		"+2 [ICON_Faith] Faith. +1 [ICON_Faith] Faith from every adjacent Rainforest or Woods tile. Can be built on Rainforest , Woods and Swamp tiles."),
@@ -71,8 +72,12 @@ values
 insert or replace into LocalizedText
 	(Language,		Tag,														Text)
 values
+	("zh_Hans_CN",	"LOC_MARSH_AND_SWAMP",																			"沼泽"),
+	("zh_Hans_CN",	"LOC_MARSH_OR_SWAMP",																				"沼泽"),
+	("zh_Hans_CN",	"LOC_AND_KELP",																							""),
+	("zh_Hans_CN",  "LOC_SAVANNAH_AND",                                    			""),
 	("zh_Hans_CN",	"LOC_IMPROVEMENT_BUTTRESS_ON_FLOODLANDS",										"[NEWLINE][NEWLINE]解锁“扶壁”科技后，可以建造在泛滥平原上。"),
-	-- 基础改良
+	-- 通用改良
 	("zh_Hans_CN",	"LOC_IMPROVEMENT_FARM_HD_DESCRIPTION",											"只能建在草原或平原上。解锁“灌溉”科技后，允许建造在相邻淡水或水渠的平原和草原丘陵。解锁“土木工程”市政后，允许建造在所有草原丘陵或平原丘陵上。"),
 	("zh_Hans_CN",	"LOC_IMPROVEMENT_MINE_HD_DESCRIPTION",											"解锁“铸铜术”科技后，若靠近山脉单元格，额外+1 [ICON_Production] 生产力；解锁“学徒”科技后失效。[NEWLINE][NEWLINE]只能在丘陵或有效资源上建造，研究“工程”科技后也可以建造在地热裂缝上。"),
 	("zh_Hans_CN",	"LOC_IMPROVEMENT_QUARRY_HD_DESCRIPTION",										"解锁“砌砖”科技后，若建造在丘陵上，额外+1 [ICON_Production] 生产力；解锁“金属铸造”科技后失效。[NEWLINE][NEWLINE]只能在有效资源上建造。"),
@@ -86,6 +91,10 @@ values
 	("zh_Hans_CN",	"LOC_IMPROVEMENT_SKI_RESORT_HD_DESCRIPTION",								"+1 [ICON_AMENITIES] 宜居度。[NEWLINE][NEWLINE]若相邻任何提供 [ICON_TOURISM] 旅游业绩的改良设施，则所有城市提供 [ICON_TOURISM] 旅游业绩的改良设施的 [ICON_TOURISM] 旅游业绩+50%。[NEWLINE]若相邻奇观，则所有城市奇观提供的 [ICON_TOURISM] 旅游业绩+50%。[NEWLINE][NEWLINE]只能建造在山脉单元格上。不能建造在与其他滑雪场相邻的单元格上。每个城市仅限建造一座。"),
 	("zh_Hans_CN",	"LOC_IMPROVEMENT_SKI_RESORT_HD_MONOPOLY_DESCRIPTION",				"+1 [ICON_AMENITIES] 宜居度。[NEWLINE][NEWLINE]若相邻任何提供 [ICON_TOURISM] 旅游业绩的改良设施，则所有城市提供 [ICON_TOURISM] 旅游业绩的改良设施的 [ICON_TOURISM] 旅游业绩+50%。[NEWLINE]若相邻奇观，则所有城市奇观提供的 [ICON_TOURISM] 旅游业绩+50%。[NEWLINE]若相邻娱乐中心或水上乐园，则分别为所有城市 [ICON_GreatWork_Product] 产品提供的 [ICON_TOURISM] 旅游业绩+50%。[NEWLINE][NEWLINE]只能建造在山脉单元格上。不能建造在与其他滑雪场相邻的单元格上。每个城市仅限建造一座。"),
 	("zh_Hans_CN",	"LOC_IMPROVEMENT_CITY_PARK_DESCRIPTION",										"+2 [ICON_Culture] 文化值。为相邻单元格+1魅力。无法建在另一个市立公园旁。每个城市仅限建造一座；城市每拥有1座专业化区域，可以额外建造一座市立公园。"),
+	("zh_Hans_CN",	"LOC_IMPROVEMENT_MONASTERY_HD_DESCRIPTION",									"+1 [ICON_Culture] 文化值、[ICON_FAITH] 信仰值和 [ICON_Housing] 住房。境内每拥有一种改良的酿酒资源，+1 [ICON_PRODUCTION] 生产力；每拥有一种改良的文具资源，+1 [ICON_Culture] 文化值和 [ICON_FAITH] 信仰值。可以在此城市中用 [ICON_FAITH] 信仰值购买建造者。此单元格上未发动攻击的友方宗教单位+15生命值恢复。每个城市仅限建造一座；城市中每拥有一座圣地建筑，可以额外建造一座修道院。"),
+	("zh_Hans_CN",	"LOC_IMPROVEMENT_MAHAVIHARA_HD_DESCRIPTION",								"+2 [ICON_SCIENCE] 科技值和 [ICON_FAITH] 信仰值、+1 [Icon_Housing] 住房。本城每有一级学院建筑+1 [ICON_FAITH] 信仰值，每有一级圣地建筑+1 [ICON_SCIENCE] 科技值。本城的专业化区域提供+2 [ICON_GREATSCIENTIST] 大科学家点数。必须建在平坦的单元格上。每个城市仅限建造一座。"),
+	("zh_Hans_CN",	"LOC_IMPROVEMENT_TRADING_DOME_HD_NAME",       							"集镇"),
+	("zh_Hans_CN",	"LOC_IMPROVEMENT_TRADING_DOME_HD_DESCRIPTION",							"+1 [ICON_FOOD] 食物、[ICON_Production] 生产力和 [ICON_Housing] 住房。本城出发的和以本城为目的地的 [ICON_TRADEROUTE] 贸易路线获得产出：若相邻加成资源+1 [ICON_FOOD] 食物；若相邻奢侈资源+3 [ICON_GOLD] 金币。每个城市仅限建造一座。"),
 	-- 文明特色改良
 	("zh_Hans_CN",	"LOC_IMPROVEMENT_OUTBACK_STATION_DESCRIPTION",							"+1 [ICON_PRODUCTION] 生产力、+0.5 [ICON_HOUSING] 住房。每相邻1个牧场+1 [ICON_FOOD] 食物，每相邻1个内陆牧场+1 [ICON_PRODUCTION] 生产力。随着科技与市政的研究将为相邻的牧场和内陆牧场提供更多产出。[NEWLINE]建造后触发文化炸弹。在每个单元格上首次建成内陆牧场后，随机在一个相邻的{LOC_SAVANNAH_AND}沙漠、草原或平原或对应丘陵的单元格上引进一份相邻的{LOC_OUTBACK_STATION_BREED_IMPORT}牧场资源。[NEWLINE][NEWLINE]只能建造在{LOC_SAVANNAH_AND}沙漠、草原或平原以及对应的丘陵单元格上。"),
 	("zh_Hans_CN",  "LOC_OUTBACK_STATION_BREED_IMPORT",       									""),
@@ -114,15 +123,8 @@ values
 	("zh_Hans_CN",	"LOC_IMPROVEMENT_LAND_POLDER_NAME",													"淤滩圩田"),
 	("zh_Hans_CN",	"LOC_IMPROVEMENT_LAND_POLDER_DESCRIPTION",									"+1 [ICON_FOOD] 食物、+1 [ICON_Production] 生产力、+0.5 [ICON_Housing] 住房。每相邻2个滨海圩田或淤滩圩田+1 [ICON_FOOD] 食物。随着科技与市政的研究将提供更多产出。必须建在泛滥平原或沼泽单元格上。可以改良泛滥平原或沼泽单元格上的农场或种植园资源。[ICON_Movement] 移动力消耗增加1点。"),
 	("zh_Hans_CN",	"LOC_IMPROVEMENT_OPEN_AIR_MUSEUM_DESCRIPTION",							"您的领土中每有一种地形便+1 [ICON_CULTURE] 文化值，解锁“博物馆学”市政后翻倍。您的领土中每有一种地貌或自然奇观便+1 [ICON_SCIENCE] 科技值，解锁“生物”科技后翻倍。每个城市仅限建造一座。"),
-	("zh_Hans_CN",	"LOC_MARSH_AND_SWAMP",																			"沼泽"),
-	("zh_Hans_CN",	"LOC_MARSH_OR_SWAMP",																				"沼泽"),
-	("zh_Hans_CN",	"LOC_AND_KELP",																							""),
-	("zh_Hans_CN",  "LOC_SAVANNAH_AND",                                    			""),
 	("zh_Hans_CN",	"LOC_IMPROVEMENT_FEITORIA_DESCRIPTION",											"提供+4 [ICON_GOLD] 金币、+1 [ICON_PRODUCTION] 生产力。从葡萄牙通往此城的贸易路线+4 [ICON_GOLD] 金币，+1 [ICON_PRODUCTION] 生产力。仅能建造在其他文明或城邦领土（已与其开放边境）上的奢侈品或加成资源旁。必须建造在与陆地相邻的浅海与湖泊单元格上，且无法与另一个商站相邻。无法移除商站。"),
 	-- 城邦改良	
-	("zh_Hans_CN",	"LOC_IMPROVEMENT_MAHAVIHARA_DESCRIPTION",										"+2 [ICON_SCIENCE] 科技值、+1 [Icon_Housing] 住房。每相邻1个学院或圣地区域+1 [ICON_Science] 科技值，解锁“王权神授”市政后变为+2 [ICON_Science] 科技值。每相邻1个社区+1 [ICON_SCIENCE] 科技值。必须建在平坦地貌上。无法建在另一个大寺旁。"),
-	("zh_Hans_CN",	"LOC_IMPROVEMENT_TRADING_DOME_DESCRIPTION",									"获得等同于您的圆顶集市改良的每一种奢侈资源基础产出相同的产出。研究“货币”科技后，此城出发的 [ICON_TRADEROUTE] 贸易路线获得此圆顶集市所改良奢侈资源的基础产出，研究“经济”科技后翻倍。若建造在沙漠单元格（非泛滥平原），则+2 [ICON_FOOD] 食物，+1 [ICON_PRODUCTION] 生产力。只能建造在陆地奢侈品资源上。每个城市仅限建造一座。"),
-	("zh_Hans_CN",	"LOC_IMPROVEMENT_MONASTERY_EXPANSION2_DESCRIPTION",					"+2 [ICON_Faith] 信仰值，+1 [ICON_HOUSING] 住房。此单元格上的友方宗教单位生命值恢复+15（前提是其当前回合未发动攻击）。每相邻1个区域+2 [ICON_FAITH] 信仰值，解锁“归正会”市政后变为+3 [ICON_FAITH] 信仰值。解锁“殖民主义”市政后额外 +1 [ICON_HOUSING] 住房。不能建在另一个修道院旁。每个城市仅限建造一座。"),
 	("zh_Hans_CN",	"LOC_IMPROVEMENT_ALCAZAR_EXPANSION2_DESCRIPTION",						"+2 [ICON_Culture] 文化值。提供等同于单元格魅力的 [ICON_SCIENCE] 科技值。占领单位 [ICON_Strength] 防御力+4，并自动获得2回合驻扎加成。无法建在另一座阿卡萨城堡旁。"),
 	("zh_Hans_CN",	"LOC_IMPROVEMENT_BATEY_DESCRIPTION",												"+1 [ICON_Culture] 文化值。每相邻1个加成资源、奢侈资源、娱乐中心或社区+1 [ICON_Culture] 文化值，完成“人文主义”市政后变为+2 [ICON_Culture] 文化值。不能建造在丘陵上或建造在另一座巴特依旁。"),
 	("zh_Hans_CN",	"LOC_IMPROVEMENT_COLOSSAL_HEAD_EXPANSION2_DESCRIPTION", 		"+2 [ICON_Faith] 信仰值。每相邻1个森林或雨林+1 [ICON_Faith] 信仰值。可以建造在雨林、森林或木本沼泽上。"),
