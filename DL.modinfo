@@ -598,6 +598,20 @@
     </ImportFiles>
     <ImportFiles id="HD_Assets">
       <Properties><LoadOrder>1</LoadOrder></Properties>
+      <File>Assets/Maps/HD_ContinentsAndIslands.dds</File>
+      <File>Assets/Maps/HD_Forest_Highlands.dds</File>
+      <File>Assets/Maps/HD_Frozen_Continents.dds</File>
+      <File>Assets/Maps/HD_Great_Sand_Sea.dds</File>
+      <File>Assets/Maps/HD_Great_Steppe.dds</File>
+      <File>Assets/Maps/HD_New_Highlands.dds</File>
+      <File>Assets/Maps/HD_Northern_Mountains.dds</File>
+      <File>Assets/Maps/HD_Regular_Pangaea.dds</File>
+      <File>Assets/Maps/HD_Rivers.dds</File>
+      <File>Assets/Maps/HD_Rivers_And_Lakes.dds</File>
+      <File>Assets/Maps/HD_Tiny_Islands.dds</File>
+      <File>Assets/Maps/HD_Tiny_Lakes.dds</File>
+      <File>Assets/Maps/HD_Wet_Lakes.dds</File>
+      <File>Assets/Maps/HD_Wet_Lakes2.dds</File>
       <File>Assets/CityStates/CivBaikonur_22.dds</File>
       <File>Assets/CityStates/CivBaikonur_30.dds</File>
       <File>Assets/CityStates/CivBaikonur_32.dds</File>
@@ -652,6 +666,20 @@
     </UpdateAudio>
     <ImportFiles id="HD_Assets" criteria="Expansion2">
       <Properties><LoadOrder>1</LoadOrder></Properties>
+      <File>Assets/Maps/HD_ContinentsAndIslands.dds</File>
+      <File>Assets/Maps/HD_Forest_Highlands.dds</File>
+      <File>Assets/Maps/HD_Frozen_Continents.dds</File>
+      <File>Assets/Maps/HD_Great_Sand_Sea.dds</File>
+      <File>Assets/Maps/HD_Great_Steppe.dds</File>
+      <File>Assets/Maps/HD_New_Highlands.dds</File>
+      <File>Assets/Maps/HD_Northern_Mountains.dds</File>
+      <File>Assets/Maps/HD_Regular_Pangaea.dds</File>
+      <File>Assets/Maps/HD_Rivers.dds</File>
+      <File>Assets/Maps/HD_Rivers_And_Lakes.dds</File>
+      <File>Assets/Maps/HD_Tiny_Islands.dds</File>
+      <File>Assets/Maps/HD_Tiny_Lakes.dds</File>
+      <File>Assets/Maps/HD_Wet_Lakes.dds</File>
+      <File>Assets/Maps/HD_Wet_Lakes2.dds</File>
       <File>Assets/TechCivics/HDCivicIcons_38.dds</File>
       <File>Assets/TechCivics/HDCivicIcons_42.dds</File>
       <File>Assets/TechCivics/HDCivicIcons_128.dds</File>
@@ -2801,6 +2829,20 @@
     <File>CustomEvents/UI/HD_CustomEventPanel_Light.xml</File>
 
     <!-- Assets -->
+    <File>Assets/Maps/HD_ContinentsAndIslands.dds</File>
+    <File>Assets/Maps/HD_Forest_Highlands.dds</File>
+    <File>Assets/Maps/HD_Frozen_Continents.dds</File>
+    <File>Assets/Maps/HD_Great_Sand_Sea.dds</File>
+    <File>Assets/Maps/HD_Great_Steppe.dds</File>
+    <File>Assets/Maps/HD_New_Highlands.dds</File>
+    <File>Assets/Maps/HD_Northern_Mountains.dds</File>
+    <File>Assets/Maps/HD_Regular_Pangaea.dds</File>
+    <File>Assets/Maps/HD_Rivers.dds</File>
+    <File>Assets/Maps/HD_Rivers_And_Lakes.dds</File>
+    <File>Assets/Maps/HD_Tiny_Islands.dds</File>
+    <File>Assets/Maps/HD_Tiny_Lakes.dds</File>
+    <File>Assets/Maps/HD_Wet_Lakes.dds</File>
+    <File>Assets/Maps/HD_Wet_Lakes2.dds</File>
     <File>Assets/TechCivics/HDCivicIcons_38.dds</File>
     <File>Assets/TechCivics/HDCivicIcons_42.dds</File>
     <File>Assets/TechCivics/HDCivicIcons_128.dds</File>

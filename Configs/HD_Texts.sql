@@ -53,7 +53,6 @@ values
     ("LOC_MAP_RIVERS_DESCRIPTION",                          "Many Rivers"),
     ("LOC_MAP_GREAT_SAND_SEA_NAME",                         "Great Sand Sea"),  
     ("LOC_MAP_GREAT_SAND_SEA_DESCRIPTION",                  "Tropical regions with higher temperatures are characterized by the prevalence of grasslands and deserts."),
-
     ("LOC_MAP_CONTINENTS_ISLANDS_NAME",                     "Lagoons and Atolls"),
     ("LOC_MAP_CONTINENTS_ISLANDS_DESCRIPTION",              "The islands within the atoll, along with the calm lagoons one after another."),
     ("LOC_MAP_WET_LAKES2_NAME",                             "Tanbopata Jungle"),
@@ -70,7 +69,7 @@ values
     ("LOC_MAP_FROZEN_CONTINENTS_DESCRIPTION",               "Frozen continents and icy oceans."),
     ("LOC_MAP_GREAT_STEPPE_NAME",                           "Prairie"),
     ("LOC_MAP_GREAT_STEPPE_DESCRIPTION",                    "The vast plain has a changeable climate. In general, the forest coverage is sparse."),
-    ("LOC_MAP_RIVERS_AND_LAKES_NAME",                       "Huge Lake"),
+    ("LOC_MAP_RIVERS_AND_LAKES_NAME",                       "Alluvial Plain"),
     ("LOC_MAP_RIVERS_AND_LAKES_DESCRIPTION",                "A very dense network of rivers all flow into lakes and oceans.");
 
 --------------------------------------------------------------------------------
@@ -120,18 +119,17 @@ values
     ("zh_Hans_CN",  "LOC_CSE_WALLS_DESC",                                   "[COLOR_Magenta]城邦多样化：和而不同本体已增加该选项，请勿启用，将于后续移除该模式。[ENDCOLOR][NEWLINE]启用时，城邦生成伊始便拥有城墙。"),
     -- Maps
     ("zh_Hans_CN",  "LOC_MAP_REGULAR_PANGAEA_NAME",                         "规则的盘古大陆"),
-    ("zh_Hans_CN",  "LOC_MAP_REGULAR_PANGAEA_DESCRIPTION",                  "椭圆状的较为规则的盘古大陆，丘陵较多，地大物博。"),
+    ("zh_Hans_CN",  "LOC_MAP_REGULAR_PANGAEA_DESCRIPTION",                  "椭圆状的较为规则的盘古大陆，植被稀疏，战略资源丰富。"),
     ("zh_Hans_CN",  "LOC_MAP_TINY_ISLANDS_NAME",                            "米粒岛屿"),
-    ("zh_Hans_CN",  "LOC_MAP_TINY_ISLANDS_DESCRIPTION",                     "众多细碎如米粒的小岛，几乎没有大陆。"),
+    ("zh_Hans_CN",  "LOC_MAP_TINY_ISLANDS_DESCRIPTION",                     "众多细碎如米粒的小岛，海洋资源丰富。"),
     ("zh_Hans_CN",  "LOC_MAP_TINY_LAKES_NAME",                              "星罗棋布"),
-    ("zh_Hans_CN",  "LOC_MAP_TINY_LAKES_DESCRIPTION",                       "星罗棋布的湖泊，还有一些浅海。"),
+    ("zh_Hans_CN",  "LOC_MAP_TINY_LAKES_DESCRIPTION",                       "星罗棋布的湖泊和浅海，地势平坦，缺乏山地。"),
     ("zh_Hans_CN",  "LOC_MAP_WET_LAKES_NAME",                               "红树林大陆"),
     ("zh_Hans_CN",  "LOC_MAP_WET_LAKES_DESCRIPTION",                        "湿地和海滨交织的地区。森林、沼泽和海滨组成独特的生态景观。"),
     ("zh_Hans_CN",  "LOC_MAP_RIVERS_NAME",                              	"千河"),
     ("zh_Hans_CN",  "LOC_MAP_RIVERS_DESCRIPTION",                           "密集的河流。"),
     ("zh_Hans_CN",  "LOC_MAP_GREAT_SAND_SEA_NAME",                          "大沙海"),
     ("zh_Hans_CN",  "LOC_MAP_GREAT_SAND_SEA_DESCRIPTION",                   "气温较高的热带地区，草原、荒漠和沙漠为主。"),
-
     ("zh_Hans_CN",  "LOC_MAP_CONTINENTS_ISLANDS_NAME",                      "潟湖和环礁"),
     ("zh_Hans_CN",  "LOC_MAP_CONTINENTS_ISLANDS_DESCRIPTION",               "环礁内的岛屿，一处处风平浪静的潟湖。"),
     ("zh_Hans_CN",  "LOC_MAP_WET_LAKES2_NAME",                              "坦博帕塔丛林"),
@@ -139,7 +137,7 @@ values
     ("zh_Hans_CN",  "LOC_MAP_HIGHLANDS_NAME",                               "高加索山地"),
     ("zh_Hans_CN",  "LOC_MAP_HIGHLANDS_DESCRIPTION",                        "海拔较高的地区，丘陵和山脉将谷地和平原分割。"),
     ("zh_Hans_CN",  "LOC_MAP_FOREST_HIGHLANDS_NAME",                        "圭亚那高原"),
-    ("zh_Hans_CN",  "LOC_MAP_FOREST_HIGHLANDS_DESCRIPTION",                 "海拔较高的地区，被雨林和森林覆盖。"),
+    ("zh_Hans_CN",  "LOC_MAP_FOREST_HIGHLANDS_DESCRIPTION",                 "被成片的雨林和森林覆盖，热带资源丰富。"),
     ("zh_Hans_CN",  "LOC_MAP_NEW_HIGHLANDS_NAME",                           "德干高原"),
     ("zh_Hans_CN",  "LOC_MAP_NEW_HIGHLANDS_DESCRIPTION",                    "海拔较高的地区，有蜿蜒起伏的山脉，林木稀疏。"),
     ("zh_Hans_CN",  "LOC_MAP_NORTHERN_MOUNTAINS_NAME",                      "北风苔原"),
@@ -147,9 +145,9 @@ values
     ("zh_Hans_CN",  "LOC_MAP_FROZEN_CONTINENTS_NAME",                       "冰封大陆"),
     ("zh_Hans_CN",  "LOC_MAP_FROZEN_CONTINENTS_DESCRIPTION",                "冻结的大陆和冰冷的海洋。"),
     ("zh_Hans_CN",  "LOC_MAP_GREAT_STEPPE_NAME",                            "大草原"),
-    ("zh_Hans_CN",  "LOC_MAP_GREAT_STEPPE_DESCRIPTION",                     "宽阔的原野，气候多变。整体而言林木稀疏。"),
-    ("zh_Hans_CN",  "LOC_MAP_RIVERS_AND_LAKES_NAME",                        "太湖"),
-    ("zh_Hans_CN",  "LOC_MAP_RIVERS_AND_LAKES_DESCRIPTION",                 "非常密集的河流一同汇入湖泊和海洋。"),
+    ("zh_Hans_CN",  "LOC_MAP_GREAT_STEPPE_DESCRIPTION",                     "宽阔的原野，林木稀疏，适合放牧与打猎。"),
+    ("zh_Hans_CN",  "LOC_MAP_RIVERS_AND_LAKES_NAME",                        "恒河平原"),
+    ("zh_Hans_CN",  "LOC_MAP_RIVERS_AND_LAKES_DESCRIPTION",                 "降水丰沛的气候养育了成片的泛滥平原，适合发展农业。"),
 
     ("zh_Hans_CN",  "LOC_MAP_SEVEN_SEAS_DESCRIPTION",                       "广袤的陆地，包含许多形状各异的海湾和岛屿。"),
     ("zh_Hans_CN",  "LOC_MAP_LAKES_DESCRIPTION",                            "一些内海和众多湖泊点缀着的广阔土地。"),
