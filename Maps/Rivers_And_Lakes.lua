@@ -116,26 +116,34 @@ function GenerateMap()
         table.insert(Features, row.FeatureType);
     end
 
-	local Map_ExtraLuxuries = {}
+	local Map_ExtraLuxuries = {};
 
 	-- 第一步：建立资源类型到资源类的映射索引
-	local resourceClassMap = {}
+	local resourceClassMap = {};
 	for row in GameInfo.Resources() do
-		resourceClassMap[row.ResourceType] = row.ResourceClassType
+		resourceClassMap[row.ResourceType] = row.ResourceClassType;
 	end
 
+	local improvementTypeMap = {};
+	for row in GameInfo.Improvement_ValidResources() do
+		if row.ImprovementType == "IMPROVEMENT_FARM" or 
+		row.ImprovementType == "IMPROVEMENT_PLANTATION" then
+			improvementTypeMap[row.ResourceType] = row.ImprovementType;
+		end
+	end
 	-- 第二步：遍历有效资源-特征组合
 	for row in GameInfo.Resource_ValidFeatures() do
-		local resourceType = row.ResourceType
-		local featureType = row.FeatureType
+		local resourceType = row.ResourceType;
+		local featureType = row.FeatureType;
 		
-		-- 检查是否为奢侈品
-		if resourceClassMap[resourceType] == "RESOURCECLASS_LUXURY" then
+		-- 检查是否为奢侈品或者是否是种植园或者农场
+		if resourceClassMap[resourceType] == "RESOURCECLASS_LUXURY" and 
+		improvementTypeMap[resourceType] ~= nil then
 			-- 检查是否为洪泛平原
 			if featureType == "FEATURE_FLOODPLAINS" or 
 			featureType == "FEATURE_FLOODPLAINS_PLAINS" or 
 			featureType == "FEATURE_FLOODPLAINS_GRASSLAND" then
-				table.insert(Map_ExtraLuxuries, resourceType)
+				table.insert(Map_ExtraLuxuries, resourceType);
 			end
 		end
 	end
