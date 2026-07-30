@@ -1025,13 +1025,13 @@ function AddFloodPlain()
 						end
 					end
 					if iAdjFloodPlainCount > 1 then
-						print("id: " .. index .. " iAdjFloodPlainCount: " .. iAdjFloodPlainCount);
+						-- print("id: " .. index .. " iAdjFloodPlainCount: " .. iAdjFloodPlainCount);
 						if (plot:GetTerrainType() == g_TERRAIN_TYPE_GRASS and plot:GetFeatureType() == -1)then
 							TerrainBuilder.SetFeatureType(plot, g_FEATURE_FLOODPLAINS_GRASSLAND)
-							print("Set feature to FLOODPLAINS_GRASSLAND for plot: " .. index)
+							-- print("Set feature to FLOODPLAINS_GRASSLAND for plot: " .. index)
 						elseif (plot:GetTerrainType() == g_TERRAIN_TYPE_PLAINS and plot:GetFeatureType() == -1)then
 							TerrainBuilder.SetFeatureType(plot, g_FEATURE_FLOODPLAINS_PLAINS)
-							print("Set feature to FLOODPLAINS_PLAINS for plot: " .. index)
+							-- print("Set feature to FLOODPLAINS_PLAINS for plot: " .. index)
 						end
 					end	
 				end
