@@ -41,7 +41,7 @@ local function unique(t)
 end
 -------------------------------------------------------------------------------
 function GenerateMap()
-	print("Generating Rivers Map");
+	print("Generating River And Lakes Map");
 	local pPlot;
 
 	-- Set globals
