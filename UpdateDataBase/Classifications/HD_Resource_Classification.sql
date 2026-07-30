@@ -73,14 +73,6 @@ insert or ignore into HD_ResourceClassificationTypes (ResourceClassificationType
   ('RESOURCE_CLASSIFICATION_MINERAL',               101,0, 'OTHER');
 
 -- =====================================================================================================================================
--- 按改良分类
--- =====================================================================================================================================
--- insert or ignore into HD_ResourceClassificationTypes (ResourceClassificationType, Name, SortIndex, Display, ParentClassificationType) select
---   'RESOURCE_CLASSIFICATION_' || ImprovementType, 'LOC_' || ImprovementType || '_NAME', 500, 0, 'IMPROVEMENT'
--- from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_BASIC'
---   and ImprovementType not in ('IMPROVEMENT_OFFSHORE_OIL_RIG');
-
--- =====================================================================================================================================
 -- 自动填充 Name 字段
 -- =====================================================================================================================================
 update HD_ResourceClassificationTypes set Name = 'LOC_' || ResourceClassificationType || '_NAME' where Name is NULL;

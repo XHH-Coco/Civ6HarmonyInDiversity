@@ -279,7 +279,11 @@ PageLayouts["Improvement" ] = function(page)
     -- 改良分类
     local classificationList = {};
     for row in GameInfo.HD_Improvement_Classification() do
-      if row.ImprovementType == improvementType then
+      if row.ImprovementType == improvementType
+        and row.ImprovementClassificationType ~= 'IMPROVEMENT_CLASSIFICATION_BASIC'
+        and row.ImprovementClassificationType ~= 'IMPROVEMENT_CLASSIFICATION_WATER'
+        and row.ImprovementClassificationType ~= 'IMPROVEMENT_CLASSIFICATION_OTHER'
+      then
         table.insert(classificationList, '[ICON_BULLET]' .. Locale.Lookup(GameInfo.HD_ImprovementClassificationTypes[row.ImprovementClassificationType].Name));
       end
     end

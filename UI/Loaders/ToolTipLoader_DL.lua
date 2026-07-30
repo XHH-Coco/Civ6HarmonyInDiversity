@@ -26,7 +26,18 @@ ToolTipHelper.GetDistrictToolTip = function(districtType)
   -----------------------------------------------------------------------------------
   -- 名字
   table.insert(toolTipLines, Locale.ToUpper(name));
-  table.insert(toolTipLines, Locale.Lookup("LOC_DISTRICT_NAME"));
+
+  -- 通用/特色区域
+  local replaces = GameInfo.DistrictReplaces[districtType];
+  if replaces then
+    table.insert(toolTipLines, Locale.Lookup("LOC_TOOLTIP_HD_REPLACE_DISTRICT_TEXT", GameInfo.Districts[replaces.ReplacesDistrictType].Name));
+  else
+    if district.TraitType then
+      table.insert(toolTipLines, Locale.Lookup("LOC_TOOLTIP_HD_UNIQUE_DISTRICT_TEXT"));
+    else
+      table.insert(toolTipLines, Locale.Lookup("LOC_TOOLTIP_HD_GENERAL_DISTRICT_TEXT"));
+    end
+  end
 
   -----------------------------------------------------------------------------------
   -- 描述
@@ -38,18 +49,6 @@ ToolTipHelper.GetDistrictToolTip = function(districtType)
   -- 分类
   table.insert(toolTipLines, "[NEWLINE]" .. Locale.Lookup('LOC_TOOLTIP_HD_CLASSIFICATIONS_TEXT'));
   -----------------------------------------------------------------------------------
-  -- 通用/特色区域
-  local replaces = GameInfo.DistrictReplaces[districtType];
-  if replaces then
-    table.insert(toolTipLines, '[ICON_BULLET]' .. Locale.Lookup("LOC_TOOLTIP_HD_REPLACE_BUILDING_TEXT", GameInfo.Districts[replaces.ReplacesDistrictType].Name));
-  else
-    if district.TraitType then
-      table.insert(toolTipLines, '[ICON_BULLET]' .. Locale.Lookup("LOC_TOOLTIP_HD_UNIQUE_BUILDING_TEXT"));
-    else
-      table.insert(toolTipLines, '[ICON_BULLET]' .. Locale.Lookup("LOC_TOOLTIP_HD_GENERAL_DISTRICT_TEXT"));
-    end
-  end
-
   -----------------------------------------------------------------------------------
   -- 专业化/非专业化区域
   if (district.RequiresPopulation) then
@@ -258,7 +257,28 @@ ToolTipHelper.GetBuildingToolTip = function(buildingHash, playerId, city)
       table.insert(toolTipLines, Locale.Lookup("LOC_TOOLTIP_HD_NATIONAL_WONDER_TEXT"));
     end
   else
-    table.insert(toolTipLines, Locale.Lookup("LOC_BUILDING_NAME"));
+    -- 通用/特色建筑
+    local replaces = {};
+    for row in GameInfo.BuildingReplaces() do
+      if row.CivUniqueBuildingType == buildingType then
+        table.insert(replaces, row.ReplacesBuildingType);
+      end
+    end
+
+    if #replaces > 0 then
+      local str = "";
+      for i, bld in ipairs(replaces) do
+        if i > 1 then str = str .. Locale.Lookup('LOC_COMMA'); end
+        str = str .. Locale.Lookup(GameInfo.Buildings[bld].Name);
+      end
+      table.insert(toolTipLines, Locale.Lookup('LOC_TOOLTIP_HD_REPLACE_BUILDING_TEXT', str))
+    else
+      if building.TraitType then
+        table.insert(toolTipLines, Locale.Lookup('LOC_TOOLTIP_HD_UNIQUE_BUILDING_TEXT'))
+      else
+        table.insert(toolTipLines, Locale.Lookup('LOC_TOOLTIP_HD_GENERAL_BUILDING_TEXT'))
+      end
+    end
   end
 
   -----------------------------------------------------------------------------------
@@ -270,21 +290,7 @@ ToolTipHelper.GetBuildingToolTip = function(buildingHash, playerId, city)
   -----------------------------------------------------------------------------------
   -- 分类
   local classificationList = {};
-  -----------------------------------------------------------------------------------
-  -- 通用/特色建筑
-  local replaces = GameInfo.BuildingReplaces[buildingType];
-  if replaces then
-    table.insert(classificationList, '[ICON_BULLET]' .. Locale.Lookup('LOC_TOOLTIP_HD_REPLACE_BUILDING_TEXT', GameInfo.Buildings[replaces.ReplacesBuildingType].Name))
-  elseif not building.IsWonder then
-    if building.TraitType then
-      table.insert(classificationList, '[ICON_BULLET]' .. Locale.Lookup('LOC_TOOLTIP_HD_UNIQUE_BUILDING_TEXT'))
-    else
-      table.insert(classificationList, '[ICON_BULLET]' .. Locale.Lookup('LOC_TOOLTIP_HD_GENERAL_BUILDING_TEXT'))
-    end
-  end
 
-  -----------------------------------------------------------------------------------
-  -- 建筑分类
   for row in GameInfo.HD_Building_Classification() do
     if row.BuildingType == buildingType then
       table.insert(classificationList, '[ICON_BULLET]' .. Locale.Lookup(GameInfo.HD_BuildingClassificationTypes[row.BuildingClassificationType].Name));
@@ -701,13 +707,14 @@ ToolTipHelper.GetImprovementToolTip = function(improvementType)
 
   for row in GameInfo.HD_Improvement_Classification() do
     if row.ImprovementType == improvementType then
-      if row.ImprovementClassificationType == 'IMPROVEMENT_CLASSIFICATION_BASIC'
-        or row.ImprovementClassificationType == 'IMPROVEMENT_CLASSIFICATION_WATER'
-        or row.ImprovementClassificationType == 'IMPROVEMENT_CLASSIFICATION_UNIQUE'
+      if row.ImprovementClassificationType == 'IMPROVEMENT_CLASSIFICATION_UNIQUE'
         or row.ImprovementClassificationType == 'IMPROVEMENT_CLASSIFICATION_CITYSTATE'
       then
         names[row.ImprovementClassificationType] = true;
-      elseif row.ImprovementClassificationType ~= 'IMPROVEMENT_CLASSIFICATION_OTHER' then
+      elseif row.ImprovementClassificationType ~= 'IMPROVEMENT_CLASSIFICATION_BASIC'
+        and row.ImprovementClassificationType ~= 'IMPROVEMENT_CLASSIFICATION_WATER'
+        and row.ImprovementClassificationType ~= 'IMPROVEMENT_CLASSIFICATION_OTHER'
+      then
         table.insert(classifications, row.ImprovementClassificationType);
       end
     end
@@ -720,14 +727,6 @@ ToolTipHelper.GetImprovementToolTip = function(improvementType)
     nameStr = nameStr .. Locale.Lookup("LOC_IMPROVEMENT_CLASSIFICATION_CITYSTATE_NAME");
   else
     nameStr = nameStr .. Locale.Lookup("LOC_IMPROVEMENT_CLASSIFICATION_COMMON_NAME");
-  end
-  -- 基础改良
-  if names.IMPROVEMENT_CLASSIFICATION_BASIC == true then
-    nameStr = nameStr .. " " .. Locale.Lookup("LOC_IMPROVEMENT_CLASSIFICATION_BASIC_NAME");
-  end
-  -- 水上改良
-  if names.IMPROVEMENT_CLASSIFICATION_WATER == true then
-    nameStr = nameStr .. " " .. Locale.Lookup("LOC_IMPROVEMENT_CLASSIFICATION_WATER_NAME");
   end
 
   table.insert(toolTipLines, nameStr);

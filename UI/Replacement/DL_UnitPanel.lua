@@ -243,7 +243,11 @@ local BASE_GetUnitActionsTable = function ( pUnit )
 							-- 改良分类
 							local classificationList = {};
 							for row in GameInfo.HD_Improvement_Classification() do
-								if row.ImprovementType == improvement.ImprovementType then
+								if row.ImprovementType == improvement.ImprovementType
+									and row.ImprovementClassificationType ~= 'IMPROVEMENT_CLASSIFICATION_BASIC'
+									and row.ImprovementClassificationType ~= 'IMPROVEMENT_CLASSIFICATION_WATER'
+									and row.ImprovementClassificationType ~= 'IMPROVEMENT_CLASSIFICATION_OTHER'
+								then
 									local classificationInfo = GameInfo.HD_ImprovementClassificationTypes[row.ImprovementClassificationType];
 									if classificationInfo then
 										table.insert(classificationList, classificationInfo.Name);

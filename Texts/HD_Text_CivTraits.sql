@@ -349,7 +349,7 @@ values
 -- 加拿大
 -- =====================================================================================================================================
 	("LOC_TRAIT_CIVILIZATION_FACES_OF_PEACE_NAME",             			 				 "The Last Best West"),
-	("LOC_TRAIT_CIVILIZATION_FACES_OF_PEACE_DESCRIPTION",                    "Allows Farms to be built on Tundra terrain. After Civil Engineering is unlocked Farms can be built on Tundra Hills. Basic Improvements on Tundra, Snow and these Hills provide +1 [ICON_FOOD] Food and [ICON_PRODUCTION] Production. Reduces the purchase cost of tiles in these terrain types by 50%."),
+	("LOC_TRAIT_CIVILIZATION_FACES_OF_PEACE_DESCRIPTION",                    "Allows Farms to be built on Tundra terrain. After Civil Engineering is unlocked Farms can be built on Tundra Hills. Improvements on Tundra, Snow and these Hills provide +1 [ICON_FOOD] Food and [ICON_PRODUCTION] Production. Reduces the purchase cost of tiles in these terrain types by 50%."),
 	("LOC_TRAIT_LEADER_LAST_BEST_WEST_NAME",             			 			 				 "Four Faces of Peace"),
 	("LOC_TRAIT_LEADER_LAST_BEST_WEST_DESCRIPTION",                          "Cannot declare war on City-States or surprise wars. Surprise wars cannot be declared on you. Your cities earn +15% [ICON_Culture] Culture and +25% [ICON_Tourism] Tourism across your empire whenever you are not at war with any major civilization. When you dispersed a [ICON_Barbarian] Barbarian Outpost, receive a builder reward in addition."),
 -- =====================================================================================================================================
@@ -975,7 +975,7 @@ values
 -- 加拿大
 -- =====================================================================================================================================
 	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_FACES_OF_PEACE_NAME",             			 "西部净土"),
-	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_FACES_OF_PEACE_DESCRIPTION",             "允许在冻土上建造农场。解锁“土木工程”后，即可在冻土丘陵上建造农场。在冻土、雪地和对应丘陵上的基础改良+1 [ICON_FOOD] 食物和 [ICON_PRODUCTION] 生产力。这些地形上的单元格购买费用降低50%。"),
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_FACES_OF_PEACE_DESCRIPTION",             "允许在冻土上建造农场。解锁“土木工程”后，即可在冻土丘陵上建造农场。在冻土、雪地和对应丘陵上的改良+1 [ICON_FOOD] 食物和 [ICON_PRODUCTION] 生产力。这些地形上的单元格购买费用降低50%。"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_LAST_BEST_WEST_NAME",             			 			 "和平四颜"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_LAST_BEST_WEST_DESCRIPTION",                   "无法对城邦宣战，发动突袭战争或被突袭。与主要文明处于和平时所有城市+15% [ICON_Culture] 文化值，且全境内+25% [ICON_Tourism] 旅游业绩。每次摧毁 [ICON_Barbarian] 蛮族哨站时，获得一个建造者。"),
 -- =====================================================================================================================================
