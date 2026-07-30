@@ -17,12 +17,12 @@ insert or ignore into Buildings (BuildingType, PrereqDistrict, PrereqCivic, Prer
 
 update Buildings set MaxPlayerInstances = 1 where BuildingType in ('BUILDING_HD_LANDFORM_EPO','BUILDING_HD_RESOURCE_EPO','BUILDING_HD_SPECIES_EPO','BUILDING_HD_SCENIC_EPO');
 update Buildings set Maintenance = 1,	Cost = 75, AdvisorType = 'ADVISOR_GENERIC' where BuildingType = 'BUILDING_GROVE';
-update Buildings set Maintenance = 4,	Cost = 240, AdvisorType = 'ADVISOR_GENERIC', PrereqCivic = NULL, PrereqTech = 'TECH_BUTTRESS' where BuildingType = 'BUILDING_SANCTUARY';
+update Buildings set Maintenance = 4,	Cost = 160, AdvisorType = 'ADVISOR_GENERIC', PrereqCivic = 'CIVIC_GAMES_RECREATION', PrereqTech = NULL where BuildingType = 'BUILDING_SANCTUARY';
 
 insert or replace into Building_YieldChanges (BuildingType, YieldType, YieldChange) values
 	('BUILDING_GROVE',                        'YIELD_FAITH',    2),
 	('BUILDING_SANCTUARY',                    'YIELD_FOOD',     2),
-	('BUILDING_SANCTUARY',                    'YIELD_GOLD',     6),
+	('BUILDING_SANCTUARY',                    'YIELD_GOLD',     3),
 	('BUILDING_HD_CULTURE_HERITAGE_PRESERVE', 'YIELD_CULTURE',  2),
 	('BUILDING_HD_CULTURE_HERITAGE_PRESERVE', 'YIELD_GOLD',     6);
 

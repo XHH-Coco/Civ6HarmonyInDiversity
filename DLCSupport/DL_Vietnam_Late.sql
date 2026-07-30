@@ -28,10 +28,10 @@ insert or replace into BuildingModifiers (BuildingType, ModifierId) values
 	('BUILDING_SANCTUARY',                      'HD_PRESERVE_FEATURE_FLOODPLAINS_PLAINS_APPEAL'),
 
 	('BUILDING_SANCTUARY',                      'HD_SANCTUARY_BASIC_PLOT_YIELD_BONUS'),
-	('BUILDING_SANCTUARY',                      'HD_SANCTUARY_RESOURCE_PLOT_YIELD_BONUS'),
+	-- ('BUILDING_SANCTUARY',                      'HD_SANCTUARY_RESOURCE_PLOT_YIELD_BONUS'),
 	('BUILDING_SANCTUARY',                      'HD_SANCTUARY_CHARMING_PLOT_YIELD_BONUS'),
 	('BUILDING_SANCTUARY',                      'HD_SANCTUARY_BREATHTAKING_PLOT_YIELD_BONUS'),
-	('BUILDING_SANCTUARY',                      'HD_SANCTUARY_NATURAL_WONDER_PLOT_YIELD_BONUS'),
+	-- ('BUILDING_SANCTUARY',                      'HD_SANCTUARY_NATURAL_WONDER_PLOT_YIELD_BONUS'),
 
 	('BUILDING_HD_CULTURE_HERITAGE_PRESERVE',   'HD_HERITAGE_PRESERVE_IMPROVEMENT_CHARMING_BONUS'),
 	('BUILDING_HD_CULTURE_HERITAGE_PRESERVE',   'HD_HERITAGE_PRESERVE_IMPROVEMENT_BREATHTAKING_BONUS'),
@@ -99,9 +99,9 @@ insert or replace into ModifierArguments (ModifierId, Name, Value) values
 	('HD_SANCTUARY_RESOURCE_PLOT_YIELD_BONUS',                      'YieldType',    'YIELD_PRODUCTION'),
 	('HD_SANCTUARY_RESOURCE_PLOT_YIELD_BONUS',                      'Amount',       '1'),
 	('HD_SANCTUARY_CHARMING_PLOT_YIELD_BONUS',                      'YieldType',    'YIELD_GOLD'),
-	('HD_SANCTUARY_CHARMING_PLOT_YIELD_BONUS',                      'Amount',       '3'),
-	('HD_SANCTUARY_BREATHTAKING_PLOT_YIELD_BONUS',                  'YieldType',    'YIELD_CULTURE'),
-	('HD_SANCTUARY_BREATHTAKING_PLOT_YIELD_BONUS',                  'Amount',       '1'),
+	('HD_SANCTUARY_CHARMING_PLOT_YIELD_BONUS',                      'Amount',       '2'),
+	('HD_SANCTUARY_BREATHTAKING_PLOT_YIELD_BONUS',                  'YieldType',    'YIELD_GOLD'),
+	('HD_SANCTUARY_BREATHTAKING_PLOT_YIELD_BONUS',                  'Amount',       '2'),
 	('HD_SANCTUARY_NATURAL_WONDER_PLOT_YIELD_BONUS',                'YieldType',    'YIELD_FOOD,YIELD_GOLD,YIELD_CULTURE'),
 	('HD_SANCTUARY_NATURAL_WONDER_PLOT_YIELD_BONUS',                'Amount',       '1,3,1'),
 

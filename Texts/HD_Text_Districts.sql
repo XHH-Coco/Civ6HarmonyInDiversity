@@ -99,7 +99,7 @@ values
 	-- 堤坝
 	("zh_Hans_CN",	"LOC_DISTRICT_DAM_HD_DESCRIPTION",													"城市中专注于改善江河流域旁民生质量的区域。[NEWLINE]为相邻的改良设施+1 [ICON_Food] 食物和+1 [ICON_PRODUCTION] 生产力。其可防止江河泛滥带来的损害，但来自洪水的产出减半。还可在干旱时防止 [ICON_Food] 食物损失。[NEWLINE]只能建造在沿河的泛滥平原上，且江河必须至少穿过堤坝格位的两个面。每条江河的泛滥平原中仅能建造1个（有文明建成便视为已建造）。[NEWLINE]军事工程师可消耗1次使用次数来完成堤坝30%的修建进度。"),
 	-- 保护区
-	("zh_Hans_CN",	"LOC_DISTRICT_PRESERVE_HD_DESCRIPTION",											"城市中专注于环境与生态保护的区域。[NEWLINE]+1 [ICON_FOOD] 食物。[NEWLINE]对相邻的中立单元格施放文化炸弹。可以建造在森林、雨林或沼泽上。本城的地貌不再降低魅力。[NEWLINE][NEWLINE]文明中首次建成4种不同的专局建筑后，+1通配符政策槽位。"),
+	("zh_Hans_CN",	"LOC_DISTRICT_PRESERVE_HD_DESCRIPTION",											"城市中专注于环境与生态保护的区域。[NEWLINE]+1 [ICON_FOOD] 食物。对相邻的中立单元格施放文化炸弹。可以建造在森林、雨林或沼泽上。本城的地貌不再降低魅力。[NEWLINE][NEWLINE]文明中首次建成4种不同的专局建筑后，+1通配符政策槽位。"),
 	-- 娱乐中心
 	("zh_Hans_CN",	"LOC_DISTRICT_ENTERTAINMENT_COMPLEX_HD_DESCRIPTION",			 	"城市中专注于宜居性与娱乐活动的区域。[NEWLINE]+2 [ICON_Amenities] 宜居度。相邻奇观或社区时额外+1 [ICON_Amenities] 宜居度。"),
 	("zh_Hans_CN",	"LOC_DISTRICT_WATER_ENTERTAINMENT_COMPLEX_HD_DESCRIPTION",	"城市中专注于宜居性与娱乐活动的区域。[NEWLINE]必须修建在和陆地相邻的浅海与湖泊单元格上。+2 [ICON_Amenities] 宜居度。相邻奇观或社区时额外+1 [ICON_Amenities] 宜居度。"),
