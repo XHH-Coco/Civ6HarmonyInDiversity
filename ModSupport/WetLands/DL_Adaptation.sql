@@ -94,12 +94,6 @@ insert or replace into Improvement_Adjacencies (ImprovementType, YieldChangeId) 
 insert or replace into Improvement_Adjacencies (ImprovementType, YieldChangeId) select
 	'IMPROVEMENT_JNR_OASIS_FARM', 'HD_OASIS_FARM_FOOD_' || CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType = 'DISTRICT_NEIGHBORHOOD';
 
--- 旅游业绩
-delete from Improvement_Tourism where ImprovementType in ('IMPROVEMENT_JNR_REED_HOME', 'IMPROVEMENT_JNR_OASIS_FARM');
-insert or replace into Improvement_Tourism (ImprovementType, TourismSource) values
-	('IMPROVEMENT_JNR_OASIS_FARM',	'TOURISMSOURCE_CULTURE'),
-	('IMPROVEMENT_JNR_REED_HOME',		'TOURISMSOURCE_SCIENCE');
-
 -- 改良特效
 insert or replace into ImprovementModifiers (ImprovementType, ModifierID) values
 	-- ('IMPROVEMENT_JNR_REED_HOME',  'JNR_REED_HOME_AQUEDUCT_PRODUCTION'),

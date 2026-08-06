@@ -71,3 +71,16 @@ PRIMARY KEY('PolicyType'));
 create table if not exists HD_TechnologyGovernorPoints(
 	TechnologyType TEXT not NULL,
 PRIMARY KEY('TechnologyType'));
+
+------------------- 改良产出转业绩 -------------------
+create table if not exists HD_Improvement_Yield_To_Tourism(
+	ImprovementType TEXT not NULL,
+	TourismSource 	TEXT not NULL,
+	PrereqCivic 		TEXT,
+	PrereqTech 			TEXT,
+	ScalingFactor		INT not null Default 100,
+	PRIMARY KEY(ImprovementType),
+	FOREIGN KEY(ImprovementType) REFERENCES Improvements(ImprovementType) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(PrereqCivic) REFERENCES Civics(CivicType) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(PrereqTech) REFERENCES Technologies(TechnologyType) ON DELETE CASCADE ON UPDATE CASCADE
+);

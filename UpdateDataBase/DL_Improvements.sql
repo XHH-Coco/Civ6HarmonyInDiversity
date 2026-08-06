@@ -398,74 +398,54 @@ update Improvements set PlunderType = 'PLUNDER_GOLD', PlunderAmount = 50 where I
 update Improvements set PlunderType = 'PLUNDER_GOLD', PlunderAmount = 50 where ImprovementType = 'IMPROVEMENT_QUARRY';
 update Improvements set PlunderType = 'PLUNDER_HEAL' where ImprovementType = 'IMPROVEMENT_PASTURE';
 
--- Improvement Tourism
-delete from Improvement_Tourism where ImprovementType in (
-	'IMPROVEMENT_MINE',
-	'IMPROVEMENT_ZIGGURAT',
-	'IMPROVEMENT_SEASTEAD',
-	'IMPROVEMENT_PASTURE',
-	'IMPROVEMENT_PLANTATION',
-	'IMPROVEMENT_CITY_PARK',
-	'IMPROVEMENT_BEACH_RESORT'
-);
+-- =====================================================================================================================================
+-- 旅游业绩
+-- =====================================================================================================================================
+insert or ignore into HD_Improvement_Yield_To_Tourism (ImprovementType, TourismSource, PrereqCivic, PrereqTech, ScalingFactor) values
+	('IMPROVEMENT_CHATEAU', 							'TOURISMSOURCE_CULTURE', 	'CIVIC_HUMANISM', 			NULL, 100),
+	('IMPROVEMENT_GREAT_WALL', 						'TOURISMSOURCE_CULTURE', 	'CIVIC_HUMANISM', 			NULL, 100),
+	('IMPROVEMENT_SPHINX', 								'TOURISMSOURCE_CULTURE', 	'CIVIC_HUMANISM', 			NULL, 100),
+	('IMPROVEMENT_PAIRIDAEZA', 						'TOURISMSOURCE_CULTURE', 	'CIVIC_HUMANISM', 			NULL, 100),
+	('IMPROVEMENT_CHEMAMULL', 						'TOURISMSOURCE_CULTURE', 	'CIVIC_HUMANISM', 			NULL, 100),
+	('IMPROVEMENT_GOLF_COURSE', 					'TOURISMSOURCE_CULTURE', 	NULL, 						 			NULL, 100),
+	('IMPROVEMENT_MOAI', 									'TOURISMSOURCE_CULTURE', 	'CIVIC_HUMANISM', 			NULL, 100),
+	('IMPROVEMENT_OPEN_AIR_MUSEUM', 			'TOURISMSOURCE_CULTURE', 	'CIVIC_HUMANISM', 			NULL, 100),
+	('IMPROVEMENT_ICE_HOCKEY_RINK', 			'TOURISMSOURCE_CULTURE', 	NULL, 						 			NULL, 100),
+	('IMPROVEMENT_BATEY', 								'TOURISMSOURCE_CULTURE', 	'CIVIC_HUMANISM', 			NULL, 100),
+	('IMPROVEMENT_JNR_OASIS_FARM', 				'TOURISMSOURCE_CULTURE', 	NULL, 						 			NULL, 100),
 
-insert or replace into Improvement_Tourism
-	(ImprovementType,			TourismSource,						PrereqTech)
-select
-	ImprovementType,			'TOURISMSOURCE_CULTURE',	'TECH_FLIGHT'
-from Improvements where ImprovementType in (
-	'IMPROVEMENT_FORT'
-);
+	('IMPROVEMENT_MISSION', 							'TOURISMSOURCE_SCIENCE', 	'CIVIC_DIVINE_RIGHT', 	NULL, 100),
+	('IMPROVEMENT_ZIGGURAT', 							'TOURISMSOURCE_SCIENCE', 	'CIVIC_HUMANISM', 		 	NULL, 100),
+	('IMPROVEMENT_ALCAZAR', 							'TOURISMSOURCE_SCIENCE', 	'CIVIC_HUMANISM', 		 	NULL, 100),
+	('IMPROVEMENT_MAHAVIHARA', 						'TOURISMSOURCE_SCIENCE', 	'CIVIC_DIVINE_RIGHT', 	NULL, 100),
+	('IMPROVEMENT_JNR_REED_HOME', 				'TOURISMSOURCE_SCIENCE', 	NULL, 									NULL, 100),
 
-insert or replace into Improvement_Tourism
-	(ImprovementType,			TourismSource,					PrereqCivic)
-select
-	ImprovementType, 			'TOURISMSOURCE_GOLD',		'CIVIC_CAPITALISM'
-from Improvements where ImprovementType in (
-	'IMPROVEMENT_PLANTATION',
-	'IMPROVEMENT_CAMP',
-	'IMPROVEMENT_PASTURE',
-	'IMPROVEMENT_LUMBER_MILL',
-	'IMPROVEMENT_MEKEWAP',
-	'IMPROVEMENT_POLDER',
-	'IMPROVEMENT_LAND_POLDER',
-	'IMPROVEMENT_TRADING_DOME',
-	'IMPROVEMENT_CITY_PARK',
-	'IMPROVEMENT_BEACH_RESORT',
-	'IMPROVEMENT_MOUNTAIN_ROAD'
-);
+	('IMPROVEMENT_BEACH_RESORT', 					'TOURISMSOURCE_GOLD', 		NULL, 									NULL, 100),
+	('IMPROVEMENT_CITY_PARK', 						'TOURISMSOURCE_GOLD', 		NULL, 									NULL, 100),
+	('IMPROVEMENT_SEASTEAD', 							'TOURISMSOURCE_GOLD', 		NULL, 									NULL, 100),
+	('IMPROVEMENT_SKI_RESORT', 						'TOURISMSOURCE_GOLD', 		NULL, 									NULL, 100),
+	('IMPROVEMENT_CORPORATION', 					'TOURISMSOURCE_GOLD', 		NULL, 									NULL, 100),
+	('IMPROVEMENT_LEU_TRANSNATIONAL', 		'TOURISMSOURCE_GOLD', 		NULL, 									NULL, 100),
+	('IMPROVEMENT_LEU_TRANSNATIONAL_SEA', 'TOURISMSOURCE_GOLD', 		NULL, 									NULL, 100),
+	('IMPROVEMENT_TRADING_DOME', 					'TOURISMSOURCE_GOLD', 		NULL, 									NULL, 100),
+	('IMPROVEMENT_CORPORATION_BONUS', 		'TOURISMSOURCE_GOLD', 		NULL, 									NULL, 100),
+	('IMPROVEMENT_CORPORATION_STRATEGIC', 'TOURISMSOURCE_GOLD', 		NULL, 									NULL, 100),
 
-insert or replace into Improvement_Tourism
-	(ImprovementType,			TourismSource,						PrereqTech)
-select
-	ImprovementType, 			'TOURISMSOURCE_SCIENCE',	'TECH_FLIGHT'
-from Improvements where ImprovementType in (
-	'IMPROVEMENT_MAHAVIHARA',
-	'IMPROVEMENT_ALCAZAR',
-	'IMPROVEMENT_MISSION',
-	'IMPROVEMENT_ZIGGURAT'
-);
+	('IMPROVEMENT_COLOSSAL_HEAD', 				'TOURISMSOURCE_FAITH', 		'CIVIC_DIVINE_RIGHT', 	NULL, 100),
+	('IMPROVEMENT_KURGAN', 								'TOURISMSOURCE_FAITH', 		'CIVIC_DIVINE_RIGHT', 	NULL, 100),
+	('IMPROVEMENT_MONASTERY', 						'TOURISMSOURCE_FAITH', 		'CIVIC_DIVINE_RIGHT', 	NULL, 100),
+	('IMPROVEMENT_PYRAMID', 							'TOURISMSOURCE_FAITH', 		'CIVIC_DIVINE_RIGHT', 	NULL, 100),
+	('IMPROVEMENT_NAZCA_LINE', 						'TOURISMSOURCE_FAITH', 		'CIVIC_DIVINE_RIGHT', 	NULL, 100),
+	('IMPROVEMENT_ROCK_HEWN_CHURCH', 			'TOURISMSOURCE_FAITH', 		'CIVIC_DIVINE_RIGHT', 	NULL, 100);
 
-insert or replace into Improvement_Tourism
-	(ImprovementType,			TourismSource,						PrereqTech)
-select
-	ImprovementType, 			'TOURISMSOURCE_FAITH',		'TECH_FLIGHT'
-from Improvements where ImprovementType in (
-	'IMPROVEMENT_PYRAMID',
-	'IMPROVEMENT_MONASTERY'
-);
+delete from Improvement_Tourism;
+insert or replace into Improvement_Tourism (ImprovementType, TourismSource, PrereqCivic, PrereqTech, ScalingFactor) select
+	ImprovementType, TourismSource, PrereqCivic, PrereqTech, ScalingFactor
+from HD_Improvement_Yield_To_Tourism where ImprovementType in (select ImprovementType from Improvements);
 
-insert or replace into Improvement_Tourism
-	(ImprovementType,			TourismSource,							PrereqTech)
-select
-	ImprovementType, 			'TOURISMSOURCE_PRODUCTION',	'TECH_FLIGHT'
-from Improvements where ImprovementType in (
-	'IMPROVEMENT_OUTBACK_STATION',
-	'IMPROVEMENT_HACIENDA',
-	'IMPROVEMENT_SEASTEAD'
-);
-
--- 基础改良提前产
+-- =====================================================================================================================================
+-- 改良特效
+-- =====================================================================================================================================
 -- Farm
 update Adjacency_YieldChanges set PrereqTech = 'TECH_MODERN_AGRICULTURE_HD' where ID = 'Farms_MechanizedAdjacency' or ID = 'Terrace_MechanizedAdjacency';
 update Adjacency_YieldChanges set ObsoleteTech = 'TECH_MODERN_AGRICULTURE_HD' where ID = 'Farms_MedievalAdjacency' or ID = 'Terrace_MedievalAdjacency';
@@ -1004,11 +984,6 @@ insert or replace into CivilizationTraits
 values
 	('CIVILIZATION_NETHERLANDS',					'TRAIT_CIVILIZATION_IMPROVEMENT_LAND_POLDER');
 
-insert or replace into Improvement_Tourism
-	(ImprovementType,			TourismSource,			PrereqCivic,		PrereqTech,	ScalingFactor)
-values
-	('IMPROVEMENT_LAND_POLDER',	'TOURISMSOURCE_GOLD',	'CIVIC_CAPITALISM',	null,		100	);
-
 insert or replace into Improvement_ValidFeatures
 	(ImprovementType,			FeatureType)
 values
@@ -1466,25 +1441,25 @@ insert or replace into ImprovementModifiers
 	(ImprovementType,						ModifierId)
 select
 	'IMPROVEMENT_SKI_RESORT',			'IMPROVEMENT_SKI_RESORT_' || ImprovementType || '_TOURISM'
-from Improvement_Tourism where ImprovementType != 'IMPROVEMENT_SKI_RESORT';
+from Improvement_Tourism;
 
 insert or replace into Modifiers
 	(ModifierId,									                ModifierType,								OwnerRequirementSetId)
 select
   'IMPROVEMENT_SKI_RESORT_' || ImprovementType || '_TOURISM',    'MODIFIER_PLAYER_CITIES_ADJUST_TOURISM',    'PLOT_ADJACENT_TO_TOURISM_IMPROVEMENT'
-from Improvement_Tourism where ImprovementType != 'IMPROVEMENT_SKI_RESORT';
+from Improvement_Tourism;
 
 insert or replace into ModifierArguments
 	(ModifierId,					                                Name,				Value)
 select
 	'IMPROVEMENT_SKI_RESORT_' || ImprovementType || '_TOURISM',	'ImprovementType',	ImprovementType
-from Improvement_Tourism where ImprovementType != 'IMPROVEMENT_SKI_RESORT';
+from Improvement_Tourism;
 
 insert or replace into ModifierArguments
 	(ModifierId,					                                Name,				Value)
 select
 	'IMPROVEMENT_SKI_RESORT_' || ImprovementType || '_TOURISM',	'ScalingFactor',	150
-from Improvement_Tourism where ImprovementType != 'IMPROVEMENT_SKI_RESORT';
+from Improvement_Tourism;
 
 -- 产品业绩1
 insert or replace into ImprovementModifiers

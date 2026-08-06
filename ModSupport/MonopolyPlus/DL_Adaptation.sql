@@ -38,7 +38,6 @@ update Adjacency_YieldChanges set YieldChange = 1 where ID = 'Station_Production
 delete from District_Adjacencies where YieldChangeId = 'Station_Production';
 update Improvement_YieldChanges set YieldChange = 2 where ImprovementType = 'IMPROVEMENT_LEU_STATION' and YieldType = 'YIELD_PRODUCTION';
 
-update Improvement_Tourism set PrereqTech = 'TECH_FLIGHT' where ImprovementType = 'IMPROVEMENT_LEU_STATION';
 insert or ignore into Adjacency_YieldChanges
     (ID,                                        Description,   YieldType,               YieldChange,    TilesRequired,  AdjacentDistrict)
 values

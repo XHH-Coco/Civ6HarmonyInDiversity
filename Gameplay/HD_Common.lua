@@ -1120,6 +1120,18 @@ Utils.ConsumeUnitBuildCharges = ConsumeUnitBuildCharges;
 -- end
 -- PrintResourceData()
 
+-- function PrintImprovementData()
+-- 	for row in GameInfo.Improvements() do
+-- 		local msg = row.ImprovementType .. ' ' .. Locale.Lookup(row.Name);
+-- 		local tourismInfo = GameInfo.Improvement_Tourism[row.ImprovementType];
+-- 		if tourismInfo then
+-- 			msg = msg .. ' ' .. tourismInfo.TourismSource;
+-- 		end
+-- 		print(msg);
+-- 	end
+-- end
+-- PrintImprovementData()
+
 -- 缓存城邦资源
 local CityStateResourceMap = {};
 function InitCityStateResourceMap()

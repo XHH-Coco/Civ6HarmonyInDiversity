@@ -948,6 +948,7 @@
       <File>UI/Replacement/GovernorDetailsPanel.lua</File>
       <File>UI/Replacement/TechAndCivicSupport.lua</File>
       <File>UI/Replacement/TechAndCivicUnlockables_HD.lua</File>
+      <File>UI/Replacement/InGameTopOptionsMenu.lua</File>
     </ImportFiles>
     <ReplaceUIScript id="UpdateReligionIcon_UnitFlagManager">
       <Properties>
@@ -1937,6 +1938,7 @@
       <File>Texts/HD_Text_CustomEvents.sql</File>
       <File>Texts/HD_Text_Governors.sql</File>
       <File>Texts/HD_Text_Resources.sql</File>
+      <File>Texts/HD_Text_Mod_Titles.sql</File>
     </UpdateText>
     <UpdateText id="DL_Text_Late" criteria="Expansion2">
       <Properties><LoadOrder>20000</LoadOrder></Properties>
@@ -2486,6 +2488,7 @@
     <File>UI/Replacement/GovernorDetailsPanel.lua</File>
     <File>UI/Replacement/TechAndCivicSupport.lua</File>
     <File>UI/Replacement/TechAndCivicUnlockables_HD.lua</File>
+    <File>UI/Replacement/InGameTopOptionsMenu.lua</File>
 
     <!-- Icons -->
     <File>UI/Icons/DL_Icons_Beliefs.xml</File>

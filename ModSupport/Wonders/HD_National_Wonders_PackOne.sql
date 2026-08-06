@@ -212,33 +212,15 @@ insert or replace into BuildingModifiers
 	(BuildingType,					ModifierId)
 values
 	('NAT_WON_CL_AIRPORT',			'HD_NAT_AIRPORT_3_TRADE'),
-	('NAT_WON_CL_AIRPORT',			'HD_NAT_AIRPORT_DIPLO');
-	-- ('NAT_WON_CL_AIRPORT',			'HD_NAT_AIRPORT_LUMBERMILL_TOURISM'),
-	-- ('NAT_WON_CL_AIRPORT',			'HD_NAT_AIRPORT_PLANTATION_TOURISM');
-
-insert or replace into BuildingModifiers(BuildingType,	ModifierId)
-select 'NAT_WON_CL_AIRPORT', 'HD_NAT_AIRPORT_' || ImprovementType || '_TOURISM'
-from Improvement_Tourism where PrereqTech = 'TECH_FLIGHT';
-
-insert or replace into Modifiers(ModifierId,	ModifierType,	SubjectRequirementSetId)
-select 'HD_NAT_AIRPORT_' || ImprovementType || '_TOURISM', 'MODIFIER_PLAYER_CITIES_ADJUST_TOURISM', 'HD_CITY_HAS_AIRPORT_OR_NATAIRPORT'
-from Improvement_Tourism where PrereqTech = 'TECH_FLIGHT';
-
-insert or replace into ModifierArguments(ModifierId,	Name,	Value)
-select 'HD_NAT_AIRPORT_' || ImprovementType || '_TOURISM', 'ImprovementType', ImprovementType
-from Improvement_Tourism where PrereqTech = 'TECH_FLIGHT';
-
-insert or replace into ModifierArguments(ModifierId,	Name,	Value)
-select 'HD_NAT_AIRPORT_' || ImprovementType || '_TOURISM', 'ScalingFactor', 200
-from Improvement_Tourism where PrereqTech = 'TECH_FLIGHT';
+	('NAT_WON_CL_AIRPORT',			'HD_NAT_AIRPORT_DIPLO'),
+	('NAT_WON_CL_AIRPORT',			'HD_NAT_AIRPORT_IMPROVEMENT_TOURISM');
 
 insert or replace into Modifiers
 	(ModifierId,							ModifierType,									SubjectRequirementSetId)
 values
 	('HD_NAT_AIRPORT_3_TRADE',				'MODIFIER_PLAYER_ADJUST_TRADE_ROUTE_CAPACITY',	NULL),
 	('HD_NAT_AIRPORT_DIPLO',				'MODIFIER_PLAYER_ADD_DIPLO_VISIBILITY',			NULL),
-	('HD_NAT_AIRPORT_LUMBERMILL_TOURISM',	'MODIFIER_PLAYER_CITIES_ADJUST_TOURISM',		'HD_CITY_HAS_AIRPORT_OR_NATAIRPORT'),
-	('HD_NAT_AIRPORT_PLANTATION_TOURISM',	'MODIFIER_PLAYER_CITIES_ADJUST_TOURISM',		'HD_CITY_HAS_AIRPORT_OR_NATAIRPORT');
+	('HD_NAT_AIRPORT_IMPROVEMENT_TOURISM',	'MODIFIER_PLAYER_CITIES_ADJUST_IMPROVEMENT_TOURISM',		'HD_CITY_HAS_AIRPORT_OR_NATAIRPORT');
 
 insert or replace into ModifierArguments
 	(ModifierId,							Name,				Value)
@@ -247,10 +229,7 @@ values
 	('HD_NAT_AIRPORT_DIPLO',				'Amount',			1),
 	('HD_NAT_AIRPORT_DIPLO',				'Source',			'SOURCE_NAT_AIRPORT'),
 	('HD_NAT_AIRPORT_DIPLO',				'SourceType',		'DIPLO_SOURCE_ALL_NAMES'),
-	('HD_NAT_AIRPORT_LUMBERMILL_TOURISM',	'ImprovementType',	'IMPROVEMENT_LUMBER_MILL'),
-	('HD_NAT_AIRPORT_LUMBERMILL_TOURISM',	'ScalingFactor',	150),
-	('HD_NAT_AIRPORT_PLANTATION_TOURISM',	'ImprovementType',	'IMPROVEMENT_PLANTATION'),
-	('HD_NAT_AIRPORT_PLANTATION_TOURISM',	'ScalingFactor',	150);
+	('HD_NAT_AIRPORT_IMPROVEMENT_TOURISM',				'Amount',			200);
 
 insert or replace into DiplomaticVisibilitySources
     (VisibilitySourceType,		Description,                	ActionDescription,                  	GossipString,                  	   PrereqTech)
