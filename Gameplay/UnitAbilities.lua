@@ -179,6 +179,7 @@ function BandeirantesAutoRoad(playerId, unitId, x, y, locallyVisible, stateChang
 	local unit = UnitManager.GetUnit(playerId, unitId);
 	local plot = Map.GetPlot(x, y);
 	if not player or not unit or not plot then return; end
+	if plot:IsWater() then return; end
 
 	local canCreateRoad = unit:GetProperty(UNIT_AUTOMATICALLY_CREATE_ROADS_TAG) or 0;
 	if canCreateRoad > 0 then

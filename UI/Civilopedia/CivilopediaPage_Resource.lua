@@ -345,7 +345,11 @@ PageLayouts["Resource" ] = function(page)
 			end
 		end
 
-		if hasAnyProduct then
+		-- TEMPORARY CODE：
+		-- 文明资源 城邦资源 暂时不显示产品
+		-- 等待2.3版本后再显示
+		local displayProducts = not ExposedMembers.DLHD.Utils.IsResourceHasClassification(resourceType, 'RESOURCE_CLASSIFICATION_CITYSTATE');
+		if displayProducts and hasAnyProduct then
 			local productStr = '';
 			for _, productInfo in pairs(productList) do
 				if productStr ~= '' then productStr = productStr .. "[NEWLINE][NEWLINE]"; end

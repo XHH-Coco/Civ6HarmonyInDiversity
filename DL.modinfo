@@ -847,6 +847,13 @@
       <File>Assets/Resources/HD_Resources_Monopoly_64.dds</File>
       <File>Assets/Resources/HD_Resources_Monopoly_256.dds</File>
       <File>Assets/Resources/HD_Resources_Monopoly_FOW_256.dds</File>
+      <File>Assets/Resources/HD_CityState_Resources_22.dds</File>
+      <File>Assets/Resources/HD_CityState_Resources_32.dds</File>
+      <File>Assets/Resources/HD_CityState_Resources_38.dds</File>
+      <File>Assets/Resources/HD_CityState_Resources_50.dds</File>
+      <File>Assets/Resources/HD_CityState_Resources_64.dds</File>
+      <File>Assets/Resources/HD_CityState_Resources_256.dds</File>
+      <File>Assets/Resources/HD_CityState_Resources_FOW_256.dds</File>
       <File>Assets/CityButtons/CityButtons_32.dds</File>
       <File>Assets/Commemorations/HD_Commemorations_86.dds</File>
       <File>Assets/Commemorations/HD_Commemorations_256.dds</File>
@@ -1491,6 +1498,7 @@
       <File>UpdateDataBase/DL_BuildingDefinations.sql</File>
       <File>UpdateDataBase/HD_NotificationDefinations.sql</File>
       <File>UpdateDataBase/DL_UnitDefinations.sql</File>
+      <File>UpdateDataBase/HD_ResourceDefinations.sql</File>
       <File>UpdateDataBase/DL_ImprovementDefinations.sql</File>
       <File>UpdateDataBase/DL_ProjectDefinations.sql</File>
       <File>UpdateDataBase/HD_GovernorDefinations.sql</File>
@@ -1831,6 +1839,7 @@
       <File>UI/Icons/HD_Icons_Units.xml</File>
       <File>UI/Icons/HD_Icons_STUUexpansion.xml</File>
       <File>UI/Icons/HD_Icons_Resources.sql</File>
+      <File>UI/Icons/HD_Icons_CityState_Resources.sql</File>
       <File>UI/Icons/HD_Icons_CityButtons.xml</File>
       <File>UI/Icons/HD_Icons_CustomEvents.sql</File>
     </UpdateIcons>
@@ -1927,6 +1936,7 @@
       <File>Texts/HD_Text_Report_Screen.sql</File>
       <File>Texts/HD_Text_CustomEvents.sql</File>
       <File>Texts/HD_Text_Governors.sql</File>
+      <File>Texts/HD_Text_Resources.sql</File>
     </UpdateText>
     <UpdateText id="DL_Text_Late" criteria="Expansion2">
       <Properties><LoadOrder>20000</LoadOrder></Properties>
@@ -2497,6 +2507,7 @@
     <File>UI/Icons/HD_Icons_STUUexpansion.xml</File>
     <File>UI/Icons/HD_Icons_Wonder_Resources.sql</File>
     <File>UI/Icons/HD_Icons_Resources.sql</File>
+    <File>UI/Icons/HD_Icons_CityState_Resources.sql</File>
     <File>UI/Icons/HD_Icons_Monopoply.sql</File>
     <File>UI/Icons/HD_Icons_CityButtons.xml</File>
     <File>UI/Icons/HD_Icons_CustomEvents.sql</File>
@@ -2716,6 +2727,7 @@
     <File>UpdateDataBase/DL_ImprovementDefinations.sql</File>
     <File>UpdateDataBase/DL_ProjectDefinations.sql</File>
     <File>UpdateDataBase/DL_UnitDefinations.sql</File>
+    <File>UpdateDataBase/HD_ResourceDefinations.sql</File>
     <File>UpdateDataBase/DL_City_Yield.sql</File>
 	  <File>UpdateDataBase/DL_CityPolicies.sql</File>
     <File>UpdateDataBase/DL_CityStates.sql</File>
@@ -2817,6 +2829,7 @@
     <File>Texts/HD_Text_Report_Screen.sql</File>
     <File>Texts/HD_Text_CustomEvents.sql</File>
     <File>Texts/HD_Text_Governors.sql</File>
+    <File>Texts/HD_Text_Resources.sql</File>
     
     <!-- CustomEvents -->
     <File>CustomEvents/Database/TableDefinations.sql</File>
@@ -3016,6 +3029,13 @@
     <File>Assets/Resources/HD_Resources_Monopoly_64.dds</File>
     <File>Assets/Resources/HD_Resources_Monopoly_256.dds</File>
     <File>Assets/Resources/HD_Resources_Monopoly_FOW_256.dds</File>
+    <File>Assets/Resources/HD_CityState_Resources_22.dds</File>
+    <File>Assets/Resources/HD_CityState_Resources_32.dds</File>
+    <File>Assets/Resources/HD_CityState_Resources_38.dds</File>
+    <File>Assets/Resources/HD_CityState_Resources_50.dds</File>
+    <File>Assets/Resources/HD_CityState_Resources_64.dds</File>
+    <File>Assets/Resources/HD_CityState_Resources_256.dds</File>
+    <File>Assets/Resources/HD_CityState_Resources_FOW_256.dds</File>
     <File>Assets/CityButtons/CityButtons_32.dds</File>
     <File>Assets/Commemorations/HD_Commemorations_86.dds</File>
     <File>Assets/Commemorations/HD_Commemorations_256.dds</File>

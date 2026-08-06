@@ -225,50 +225,6 @@ function m_HDUnitCommands.SACRIFICE_CHICHEN_ITZA.IsDisabled(pUnit : object)
 end
 
 -- ======================================================================================================================================================
--- 高德院出家
--- ======================================================================================================================================================
--- m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN = {};
--- m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.Properties = {};
-
--- -- UI Data
--- m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.EventName = "HDKotokuInPravrajya";
--- m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.CategoryInUI = "SPECIFIC";
--- m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.Icon = "ICON_UNITCOMMAND_PRAVRAJYA_KOTOKU_IN";
--- m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.ToolTipString = Locale.Lookup("LOC_UNITCOMMAND_PRAVRAJYA_KOTOKU_IN_NAME") .. "[NEWLINE][NEWLINE]" .. 
--- 										Locale.Lookup("LOC_UNITCOMMAND_PRAVRAJYA_KOTOKU_IN_DESCRIPTION");
--- m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.DisabledToolTipString = Locale.Lookup("LOC_UNITCOMMAND_PRAVRAJYA_KOTOKU_IN_DISABLED_TT");
--- m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.VisibleInUI = true;
--- function m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.CanUse(pUnit : object)
--- 	if pUnit == nil then
--- 		return false;
--- 	end
--- 	local unitInfo = GameInfo.Units[pUnit:GetType()];
--- 	return (unitInfo.FormationClass == "FORMATION_CLASS_CIVILIAN") and (unitInfo.ReligiousStrength == 0);
--- end
-
--- local KOTOKU_IN_INDEX = GameInfo.Buildings['BUILDING_KOTOKU_IN'].Index;
--- function m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.IsVisible(pUnit : object)
--- 	local ownerId = pUnit:GetOwner();
--- 	local owner = Players[ownerId];
--- 	return Utils.PlayerHasWonder(owner, KOTOKU_IN_INDEX);
--- end
-
--- -- ===========================================================================
--- function m_HDUnitCommands.PRAVRAJYA_KOTOKU_IN.IsDisabled(pUnit : object)
--- 	if pUnit == nil then
--- 		return true;
--- 	end
--- 	if pUnit:GetMovesRemaining() == 0 then
--- 		return true;
--- 	end
--- 	local location = pUnit:GetLocation();
--- 	local x = location.x;
--- 	local y = location.y;
--- 	local plot = Map.GetPlot(x, y);
--- 	return plot:GetWonderType() ~= KOTOKU_IN_INDEX;
--- end
-
--- ======================================================================================================================================================
 -- 津巴布韦种植奢侈
 -- ======================================================================================================================================================
 -- 津巴布韦津巴布韦探路者 记录奢侈按钮, by xiaoxiao
@@ -1603,6 +1559,139 @@ function m_HDUnitCommands.BUILD_BONUS_CORPORATION.IsDisabled(unit)
 	-- 控制资源数量
 	local resourceAmount = player:GetResources():GetResourceAmount(resourceId);
 	if resourceAmount < BUILD_BONUS_CORPORATION_NEED_RESOURCE_NUM then return true; end
+	-- 单位剩余建造次数
+	local needCharges = 1;
+	if unit:GetBuildCharges() < needCharges then return true; end
+	-- 移动力
+	return unit:GetMovesRemaining() == 0;
+end
+
+-- ======================================================================================================================================================
+-- 海外投资人 选择城邦
+-- ======================================================================================================================================================
+m_HDUnitCommands.OVERSEAS_INVESTOR_CHOOSE_CITYSTATE = {};
+m_HDUnitCommands.OVERSEAS_INVESTOR_CHOOSE_CITYSTATE.Properties = {};
+
+m_HDUnitCommands.OVERSEAS_INVESTOR_CHOOSE_CITYSTATE.EventName = "HD_OverseasInvestorChooseCityState";
+m_HDUnitCommands.OVERSEAS_INVESTOR_CHOOSE_CITYSTATE.CategoryInUI = "SPECIFIC";
+m_HDUnitCommands.OVERSEAS_INVESTOR_CHOOSE_CITYSTATE.GetIcon = function(unit)
+	if not unit then return; end
+	local plot = Map.GetPlot(unit:GetX(), unit:GetY());
+	if not plot then return; end
+
+	if not plot:IsWater() then
+		return "ICON_IMPROVEMENT_LEU_TRANSNATIONAL";
+	else
+		return "ICON_IMPROVEMENT_LEU_TRANSNATIONAL_SEA";
+	end
+end
+m_HDUnitCommands.OVERSEAS_INVESTOR_CHOOSE_CITYSTATE.GetToolTipString = function(unit)
+	if not unit then return ""; end
+	local plot = Map.GetPlot(unit:GetX(), unit:GetY());
+	if not plot then return ""; end
+
+	local improvementType = "";
+	if not plot:IsWater() then
+		improvementType = "IMPROVEMENT_LEU_TRANSNATIONAL";
+	else
+		improvementType = "IMPROVEMENT_LEU_TRANSNATIONAL_SEA";
+	end
+
+	local toolTipString = Locale.Lookup('LOC_UNITOPERATION_BUILD_IMPROVEMENT_DESCRIPTION')
+		.. Locale.Lookup('LOC_TOOLTIP_HD_COLON_TEXT')
+		.. Locale.Lookup('LOC_' .. improvementType .. '_NAME');
+
+	-- 改良分类
+	local classificationList = {};
+	for row in GameInfo.HD_Improvement_Classification() do
+		if row.ImprovementType == improvementType then
+			local classificationInfo = GameInfo.HD_ImprovementClassificationTypes[row.ImprovementClassificationType];
+			if classificationInfo then
+				table.insert(classificationList, classificationInfo.Name);
+			end
+		end
+	end
+	if #classificationList > 0 then
+		toolTipString = toolTipString .. '[NEWLINE][NEWLINE]' .. Locale.Lookup('LOC_TOOLTIP_HD_IMPROVEMENT_CLASSIFICATIONS_TEXT');
+		
+		for _, nameTag in ipairs(classificationList) do
+			toolTipString = toolTipString .. '[NEWLINE][ICON_BULLET]' .. Locale.Lookup(nameTag)
+		end
+	end
+
+	return toolTipString .. '[NEWLINE][NEWLINE]' .. Locale.Lookup('LOC_' .. improvementType .. '_TEXT');	
+end
+m_HDUnitCommands.OVERSEAS_INVESTOR_CHOOSE_CITYSTATE.GetDisabledToolTipString = function(unit)
+	if not unit then return ""; end
+	local plot = Map.GetPlot(unit:GetX(), unit:GetY());
+	if not plot then return ""; end
+	local city = Cities.GetPlotPurchaseCity(plot);
+	if not city then return ""; end
+
+	-- 判断城市可建造数量
+	local builtNum = (city:GetProperty(CITY_IMPROVEMENT_NUM_TAG .. 'IMPROVEMENT_LEU_TRANSNATIONAL') or 0) + (city:GetProperty(CITY_IMPROVEMENT_NUM_TAG .. 'IMPROVEMENT_LEU_TRANSNATIONAL_SEA') or 0);
+	local extraNum = city:GetProperty(CITY_ALLOW_EXTRA_TAG .. 'IMPROVEMENT_LEU_TRANSNATIONAL') or 0;
+	if extraNum < builtNum then return Locale.Lookup('LOC_IMPROVEMENT_TRANSNATIONAL_CITY_DISABLED', extraNum + 1); end
+
+	-- 判断可选城邦数量
+	local list = Utils.GetOverSeasInvestorCityStateResources(unit:GetOwner());
+	if #list <= 0 then return Locale.Lookup('LOC_IMPROVEMENT_TRANSNATIONAL_DISABLED'); end 
+
+	-- 单位剩余建造次数
+	local needCharges = 1;
+	if unit:GetBuildCharges() < needCharges then return Locale.Lookup('LOC_NO_ENOUGH_CHARGE_DISABLED'); end
+	-- 移动力
+	if unit:GetMovesRemaining() == 0 then return '[COLOR:Red]' .. Locale.Lookup("LOC_HUD_UNIT_ACTION_PILLAGE_REQUIRES_MOVEMENT") .. '[ENDCOLOR]'; end
+	
+	return ""
+end
+m_HDUnitCommands.OVERSEAS_INVESTOR_CHOOSE_CITYSTATE.VisibleInUI = true;
+m_HDUnitCommands.OVERSEAS_INVESTOR_CHOOSE_CITYSTATE.DoNotDelete = true;
+
+function m_HDUnitCommands.OVERSEAS_INVESTOR_CHOOSE_CITYSTATE.CanUse(unit)
+	if not unit then return false; end
+
+	local unitInfo = GameInfo.Units[unit:GetType()];
+	return unitInfo.UnitType == "UNIT_HD_OVERSEAS_INVESTOR";
+end
+
+function m_HDUnitCommands.OVERSEAS_INVESTOR_CHOOSE_CITYSTATE.IsVisible(unit)
+	if not unit then return false; end
+
+	local player = Players[unit:GetOwner()];
+	if not player then return false; end
+
+	local plot = Map.GetPlot(unit:GetX(), unit:GetY());
+	if not plot then return false; end
+	if plot:GetOwner() ~= unit:GetOwner() then return false; end
+	if plot:GetDistrictType() ~= -1 then return false; end
+	if plot:IsNationalPark() then return false; end
+	if plot:IsNaturalWonder() then return false; end
+	if plot:GetImprovementType() ~= -1 then return false; end
+
+	if plot:GetResourceType() == -1 then
+		return true;
+	end
+
+	return not player:GetResources():IsResourceVisible(plot:GetResourceTypeHash());
+end
+
+function m_HDUnitCommands.OVERSEAS_INVESTOR_CHOOSE_CITYSTATE.IsDisabled(unit)
+	if not unit then return true; end
+	local plot = Map.GetPlot(unit:GetX(), unit:GetY());
+	if not plot then return true; end
+	local city = Cities.GetPlotPurchaseCity(plot);
+	if not city then return true; end
+
+	-- 判断城市可建造数量
+	local builtNum = (city:GetProperty(CITY_IMPROVEMENT_NUM_TAG .. 'IMPROVEMENT_LEU_TRANSNATIONAL') or 0) + (city:GetProperty(CITY_IMPROVEMENT_NUM_TAG .. 'IMPROVEMENT_LEU_TRANSNATIONAL_SEA') or 0);
+	local extraNum = city:GetProperty(CITY_ALLOW_EXTRA_TAG .. 'IMPROVEMENT_LEU_TRANSNATIONAL') or 0;
+	if extraNum < builtNum then return true; end
+
+	-- 判断可选城邦数量
+	local list = Utils.GetOverSeasInvestorCityStateResources(unit:GetOwner());
+	if #list <= 0 then return true; end 
+
 	-- 单位剩余建造次数
 	local needCharges = 1;
 	if unit:GetBuildCharges() < needCharges then return true; end

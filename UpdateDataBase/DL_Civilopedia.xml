@@ -68,9 +68,10 @@
 		<Row SectionID="RESOURCES" PageGroupId="IMPROVEMENT_QUARRY_RESOURCECLASS_BONUS" 				Name="LOC_PEDIA_RESOURCES_PAGEGROUP_QUARRY_BONUS_NAME"					Tooltip="" VisibleIfEmpty="false" 	SortIndex="15" />
 		<Row SectionID="RESOURCES" PageGroupId="IMPROVEMENT_LUMBER_MILL_RESOURCECLASS_BONUS" 		Name="LOC_PEDIA_RESOURCES_PAGEGROUP_LUMBER_MILL_BONUS_NAME"			Tooltip="" VisibleIfEmpty="false" 	SortIndex="16" />
 		<Row SectionID="RESOURCES" PageGroupId="IMPROVEMENT_FISHING_BOATS_RESOURCECLASS_BONUS" 	Name="LOC_PEDIA_RESOURCES_PAGEGROUP_FISHING_BOATS_BONUS_NAME"		Tooltip="" VisibleIfEmpty="false" 	SortIndex="17" />
+		<!-- TODO：采掘船加成 -->
 		<Update>
 			<Where SectionID="RESOURCES" PageGroupId="RESOURCECLASS_BONUS" />
-			<Set VisibleIfEmpty="false" SortIndex="18" />
+			<Set VisibleIfEmpty="false" SortIndex="19" />
 		</Update>
 		
 		<Row SectionID="RESOURCES" PageGroupId="IMPROVEMENT_FARM_RESOURCECLASS_LUXURY" 					Name="LOC_PEDIA_RESOURCES_PAGEGROUP_FARM_LUXURY_NAME"						Tooltip="" VisibleIfEmpty="false" 	SortIndex="20" />
@@ -81,12 +82,18 @@
 		<Row SectionID="RESOURCES" PageGroupId="IMPROVEMENT_QUARRY_RESOURCECLASS_LUXURY" 				Name="LOC_PEDIA_RESOURCES_PAGEGROUP_QUARRY_LUXURY_NAME"					Tooltip="" VisibleIfEmpty="false" 	SortIndex="25" />
 		<Row SectionID="RESOURCES" PageGroupId="IMPROVEMENT_LUMBER_MILL_RESOURCECLASS_LUXURY" 	Name="LOC_PEDIA_RESOURCES_PAGEGROUP_LUMBER_MILL_LUXURY_NAME"		Tooltip="" VisibleIfEmpty="false" 	SortIndex="26" />
 		<Row SectionID="RESOURCES" PageGroupId="IMPROVEMENT_FISHING_BOATS_RESOURCECLASS_LUXURY" Name="LOC_PEDIA_RESOURCES_PAGEGROUP_FISHING_BOATS_LUXURY_NAME"	Tooltip="" VisibleIfEmpty="false" 	SortIndex="27" />
+		<!-- TODO：采掘船奢侈 -->
+		<Row SectionID="RESOURCES" PageGroupId="CIVILIZATION_LUXURY" 														Name="LOC_PEDIA_RESOURCES_PAGEGROUP_CIVILIZATION_LUXURY_NAME"		Tooltip="" VisibleIfEmpty="false" 	SortIndex="29" />
+		<Row SectionID="RESOURCES" PageGroupId="CITYSTATE_LUXURY" 															Name="LOC_PEDIA_RESOURCES_PAGEGROUP_CITYSTATE_LUXURY_NAME"			Tooltip="" VisibleIfEmpty="false" 	SortIndex="30" />
 		<Update>
 			<Where SectionID="RESOURCES" PageGroupId="RESOURCECLASS_LUXURY" />
-			<Set VisibleIfEmpty="false" SortIndex="28" />
+			<Set VisibleIfEmpty="false" SortIndex="31" />
 		</Update>
-		<Row SectionID="RESOURCES" PageGroupId="WONDER_LUXURY" 																	Name="LOC_PEDIA_RESOURCES_PAGEGROUP_WONDER_LUXURY_NAME"					Tooltip="" VisibleIfEmpty="false" 	SortIndex="29" />
-		
+		<Update>
+			<Where SectionID="RESOURCES" PageGroupId="RESOURCECLASS_STRATEGIC" />
+			<Set VisibleIfEmpty="false" SortIndex="35" />
+		</Update>
+
 		<Row SectionID="WONDERS" 	 PageGroupId="NATIONAL_WONDERS" 															Name="LOC_PEDIA_WONDERS_PAGEGROUP_NATIONAL_WONDERS_NAME"				Tooltip="" VisibleIfEmpty="false" 	SortIndex="40" />
 		<Update>
 			<Where SectionID="WONDERS" PageGroupId="Wonders" />

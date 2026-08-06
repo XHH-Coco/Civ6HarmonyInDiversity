@@ -15,10 +15,9 @@ insert into HD_Civilopedia_Resource_Groups (ResourceType, PageGroupId)
   where ResourceClassType in ("RESOURCECLASS_BONUS", "RESOURCECLASS_LUXURY")
   and b.ImprovementType in (select ImprovementType from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_BASIC');
 
-  -- 奇观 奢侈资源
-insert into HD_Civilopedia_Resource_Groups (ResourceType, PageGroupId)
-  select a.ResourceType, 'WONDER_LUXURY' from Resources a inner join Wonder_Resources_HD b on a.ResourceType = b.ResourceType
-  where ResourceClassType = 'RESOURCECLASS_LUXURY';
+  -- 文明 城邦 奢侈资源
+insert into HD_Civilopedia_Resource_Groups (ResourceType, PageGroupId) select ResourceType, 'CIVILIZATION_LUXURY' from Wonder_Resources_HD;
+insert into HD_Civilopedia_Resource_Groups (ResourceType, PageGroupId) select ResourceType, 'CITYSTATE_LUXURY' from HD_CityState_Resources;
 
   -- 特殊 资源
 insert into HD_Civilopedia_Resource_Groups (ResourceType, PageGroupId)

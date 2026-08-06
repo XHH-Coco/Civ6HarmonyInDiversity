@@ -560,7 +560,17 @@ function GetUnitActionsTable(pUnit : object)
           sToolTipString = sToolTipString .. "[NEWLINE][NEWLINE]" .. sDisabledToolTipString;
         end
 
-        AddActionToTable(pBaseActionsTable, pCommandTable, bIsDisabled, sToolTipString, UnitCommandTypes.EXECUTE_SCRIPT, pCallback);
+				local sIcon = pCommandTable.Icon or "ICON_UNITOPERATION_ROUTE_TO";
+				if pCommandTable.GetIcon ~= nil then
+					local noErr, ttp = pcall(pCommandTable.GetIcon, pUnit);
+          if noErr then
+            sIcon = ttp;
+          else
+            print(ttp);
+          end
+				end
+
+        AddActionToTable(pBaseActionsTable, pCommandTable, bIsDisabled, sToolTipString, UnitCommandTypes.EXECUTE_SCRIPT, pCallback, nil, nil, sIcon);
       end
     end
   end
@@ -625,8 +635,18 @@ function GetUnitActionsTable(pUnit : object)
 					if (bIsDisabled and sDisabledToolTipString ~= nil) then
 						sToolTipString = sToolTipString .. "[NEWLINE][NEWLINE]" .. sDisabledToolTipString;
 					end
+
+					local sIcon = pCommandTable.Icon or "ICON_UNITOPERATION_ROUTE_TO";
+					if pCommandTable.GetIcon ~= nil then
+						local noErr, ttp = pcall(pCommandTable.GetIcon, pUnit);
+						if noErr then
+							sIcon = ttp;
+						else
+							print(ttp);
+						end
+					end
 	
-					AddActionToTable(pBaseActionsTable, pCommandTable, bIsDisabled, sToolTipString, UnitCommandTypes.EXECUTE_SCRIPT, pCallback);
+					AddActionToTable(pBaseActionsTable, pCommandTable, bIsDisabled, sToolTipString, UnitCommandTypes.EXECUTE_SCRIPT, pCallback, nil, nil, sIcon);
 				end
 			end
 		end
@@ -692,8 +712,18 @@ function GetUnitActionsTable(pUnit : object)
 					if (bIsDisabled and sDisabledToolTipString ~= nil) then
 						sToolTipString = sToolTipString .. "[NEWLINE][NEWLINE]" .. sDisabledToolTipString;
 					end
+
+					local sIcon = pCommandTable.Icon or "ICON_UNITOPERATION_ROUTE_TO";
+					if pCommandTable.GetIcon ~= nil then
+						local noErr, ttp = pcall(pCommandTable.GetIcon, pUnit);
+						if noErr then
+							sIcon = ttp;
+						else
+							print(ttp);
+						end
+					end
 	
-					AddActionToTable(pBaseActionsTable, pCommandTable, bIsDisabled, sToolTipString, UnitCommandTypes.EXECUTE_SCRIPT, pCallback);
+					AddActionToTable(pBaseActionsTable, pCommandTable, bIsDisabled, sToolTipString, UnitCommandTypes.EXECUTE_SCRIPT, pCallback, nil, nil, sIcon);
 				end
 			end
 		end

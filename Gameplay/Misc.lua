@@ -709,22 +709,50 @@ function SpreadAoeReligiousPressure(playerId, param)
 end
 GameEvents.HD_SpreadAoeReligiousPressure.Add(SpreadAoeReligiousPressure);
 
+-- 记录城邦类型 专属资源
 local CITY_IS_CITY_STATE_TAG = 'HD_CITY_IS_CITY_STATE';
 local CITY_IS_CITY_STATE_TYPE_TAG = 'HD_CITY_IS_';
+local CITY_STATE_TYPE_TAG = 'HD_CITY_STATE_TYPE';
+local CITY_STATE_RESOURCE_TAG = 'HD_CITY_STATE_RESOURCE';
 function CityStateSetProperty(playerId, cityId, x, y)
 	local plot = Map.GetPlot(x, y);
 	if not plot then return; end
+
+	local player = Players[playerId];
+	if not player then return; end
 
 	if Utils.PlayerIsMinor(playerId) then
 		local citystateConfig = PlayerConfigurations[playerId];
 		local citystateLeader = citystateConfig:GetLeaderTypeName();
 		local citystateType = GameInfo.Leaders[citystateLeader].InheritFrom;
 		if citystateType and #citystateType > 18 then
+			local typeStr = string.sub(citystateType, 18);
+
+			-- 记录城邦类型
 			plot:SetProperty(CITY_IS_CITY_STATE_TAG, 1);
-			plot:SetProperty(CITY_IS_CITY_STATE_TYPE_TAG .. string.sub(citystateType, 18), 1);
-			print("城邦城市设置参数：" .. string.sub(citystateType, 18));
+			plot:SetProperty(CITY_IS_CITY_STATE_TYPE_TAG .. typeStr, 1);
+			player:SetProperty(CITY_STATE_TYPE_TAG, typeStr);
+
+			-- 记录专属资源
+			if player:GetProperty(CITY_STATE_RESOURCE_TAG) == nil then
+				local list = Utils.CityStateResourceMap[typeStr] or {};
+				if #list > 0 then
+					local randomIndex = Game.GetRandNum(#list, "Random CityStateResource for Player " .. playerId) + 1;
+					local resourceType = list[randomIndex];
+					if resourceType then
+						player:SetProperty(CITY_STATE_RESOURCE_TAG, resourceType);
+						print(
+							"城邦城市设置参数：",
+							Locale.Lookup(citystateConfig:GetCivilizationShortDescription()),
+							typeStr,
+							Locale.Lookup(GameInfo.Resources[resourceType].Name)
+						);
+					end
+				end
+			end
 		end
 	elseif plot:GetProperty(CITY_IS_CITY_STATE_TAG) == 1 then
+		-- 被占领 重置参数
 		print("城市重置城邦参数")
 		plot:SetProperty(CITY_IS_CITY_STATE_TAG, 0);
 		for row in GameInfo.CityStateCorrespondingYieldType_HD() do

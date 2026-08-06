@@ -102,8 +102,9 @@ values
 	("LOC_PEDIA_RESOURCES_PAGEGROUP_PLANTATION_LUXURY_NAME",	               			 "Plantation [COLOR:ResGoldLabelCS]Luxury[ENDCOLOR]"),
 	("LOC_PEDIA_RESOURCES_PAGEGROUP_CAMP_LUXURY_NAME",	               				 		 "Camp [COLOR:ResGoldLabelCS]Luxury[ENDCOLOR]"),
 	("LOC_PEDIA_RESOURCES_PAGEGROUP_LUMBER_MILL_LUXURY_NAME",	               		   "Lumber Mill [COLOR:ResGoldLabelCS]Luxury[ENDCOLOR]"),
+	("LOC_PEDIA_RESOURCES_PAGEGROUP_CIVILIZATION_LUXURY_NAME",	               		 "Civilization Unique [COLOR:ResGoldLabelCS]Luxury[ENDCOLOR]"),
+	("LOC_PEDIA_RESOURCES_PAGEGROUP_CITYSTATE_LUXURY_NAME",	               			 	 "City-state Exclusive [COLOR:ResGoldLabelCS]Luxury[ENDCOLOR]"),
 	("LOC_PEDIA_RESOURCES_PAGEGROUP_LUXURY_NAME",	               				 				   "Special [COLOR:ResGoldLabelCS]Luxury[ENDCOLOR]"),
-	("LOC_PEDIA_RESOURCES_PAGEGROUP_WONDER_LUXURY_NAME",	               				 	 "Wonder [COLOR:ResGoldLabelCS]Luxury[ENDCOLOR]"),
 
 	("LOC_PEDIA_RESOURCES_PAGEGROUP_RESOURCE_USAGE_NAME",	               				 	 "[ICON_BULLETGLOW][COLOR_DiplomaticLabelCS]Resource Usages[ENDCOLOR][ICON_BULLETGLOW]"),
 
@@ -329,8 +330,9 @@ values
 	("zh_Hans_CN",  "LOC_PEDIA_RESOURCES_PAGEGROUP_PLANTATION_LUXURY_NAME",	               			 "[COLOR:ResGoldLabelCS]奢侈资源[ENDCOLOR] 种植园"),
 	("zh_Hans_CN",  "LOC_PEDIA_RESOURCES_PAGEGROUP_CAMP_LUXURY_NAME",	               				 		 "[COLOR:ResGoldLabelCS]奢侈资源[ENDCOLOR] 营地"),
 	("zh_Hans_CN",  "LOC_PEDIA_RESOURCES_PAGEGROUP_LUMBER_MILL_LUXURY_NAME",	               		 "[COLOR:ResGoldLabelCS]奢侈资源[ENDCOLOR] 伐木场"),
+	("zh_Hans_CN",  "LOC_PEDIA_RESOURCES_PAGEGROUP_CIVILIZATION_LUXURY_NAME",	               		 "[COLOR:ResGoldLabelCS]奢侈资源[ENDCOLOR] 文明特色"),
+	("zh_Hans_CN",  "LOC_PEDIA_RESOURCES_PAGEGROUP_CITYSTATE_LUXURY_NAME",	               			 "[COLOR:ResGoldLabelCS]奢侈资源[ENDCOLOR] 城邦专属"),
 	("zh_Hans_CN",  "LOC_PEDIA_RESOURCES_PAGEGROUP_LUXURY_NAME",	               				 				 "[COLOR:ResGoldLabelCS]奢侈资源[ENDCOLOR] 特殊"),
-	("zh_Hans_CN",  "LOC_PEDIA_RESOURCES_PAGEGROUP_WONDER_LUXURY_NAME",	               				 	 "[COLOR:ResGoldLabelCS]奢侈资源[ENDCOLOR] 奇观"),
 	
 	("zh_Hans_CN",  "LOC_PEDIA_RESOURCES_PAGEGROUP_RESOURCE_USAGE_NAME",	               				 "[ICON_BULLETGLOW][COLOR_DiplomaticLabelCS]资源用途[ENDCOLOR][ICON_BULLETGLOW]"),
 

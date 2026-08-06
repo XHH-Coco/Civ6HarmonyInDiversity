@@ -5,9 +5,6 @@
 update GlobalParameters set Value = 100 where Name = 'GAME_COST_ESCALATION';
 
 -- Harvest & chopping
-update Resource_Harvests set Amount = 40 where YieldType = 'YIELD_FOOD';
-update Resource_Harvests set Amount = 40 where YieldType = 'YIELD_PRODUCTION';
-update Resource_Harvests set Amount = 80 where YieldType = 'YIELD_GOLD';
 update Feature_Removes set Yield = 30 where FeatureType = 'FEATURE_FOREST';
 update Feature_Removes set Yield = 30 where FeatureType = 'FEATURE_MARSH';
 update Feature_Removes set Yield = 15 where FeatureType = 'FEATURE_JUNGLE' and YieldType = 'YIELD_FOOD';

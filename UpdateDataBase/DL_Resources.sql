@@ -20,7 +20,6 @@ update Resources set Frequency = 8 where ResourceType = 'RESOURCE_SHEEP';
 update Resources set Frequency = 8 where ResourceType = 'RESOURCE_COPPER';
 
 -- 
-update Resource_Harvests set YieldType = 'YIELD_PRODUCTION', Amount = 40 where ResourceType = 'RESOURCE_COPPER';
 delete from Resource_ValidTerrains where ResourceType = 'RESOURCE_COPPER' and TerrainType = 'TERRAIN_SNOW_HILLS';
 update Resource_YieldChanges set YieldType = 'YIELD_PRODUCTION', YieldChange = 1 where ResourceType = 'RESOURCE_COPPER';
 delete from Resource_YieldChanges where YieldType = 'YIELD_FOOD' and ResourceType = 'RESOURCE_NITER';
@@ -31,14 +30,14 @@ update Resource_YieldChanges set YieldChange = 3 where ResourceType = 'RESOURCE_
 delete from Resource_ValidTerrains where ResourceType = 'RESOURCE_OIL' and TerrainType = 'TERRAIN_SNOW';
 
 insert or replace into Resource_Harvests (ResourceType, YieldType, Amount, PrereqTech) select
-	ResourceType, 'YIELD_PRODUCTION', 40, PrereqTech from Resources where ResourceClassType = 'RESOURCECLASS_STRATEGIC';
+	ResourceType, 'YIELD_PRODUCTION', 24, PrereqTech from Resources where ResourceClassType = 'RESOURCECLASS_STRATEGIC';
 
 insert or replace into Resource_Harvests (ResourceType, YieldType, Amount, PrereqTech) select
-	ResourceType, 'YIELD_GOLD', 80, NULL from Resources where ResourceClassType = 'RESOURCECLASS_LUXURY';
+	ResourceType, 'YIELD_GOLD', 72, NULL from Resources where ResourceClassType = 'RESOURCECLASS_LUXURY' and (Frequency != 0 or SeaFrequency != 0);
 
 insert or replace into Resource_Harvests (ResourceType, YieldType, Amount, PrereqTech) values
-	('RESOURCE_ANTIQUITY_SITE',	'YIELD_CULTURE',	40,		NULL),
-	('RESOURCE_SHIPWRECK',		'YIELD_CULTURE',	40,		NULL);
+	('RESOURCE_ANTIQUITY_SITE',	'YIELD_CULTURE',	72,		NULL),
+	('RESOURCE_SHIPWRECK',			'YIELD_CULTURE',	72,		NULL);
 
 update Resource_Harvests set PrereqTech = 'TECH_SAILING' where ResourceType in
 	(select ResourceType from Improvement_ValidResources where ImprovementType = 'IMPROVEMENT_FISHING_BOATS');
@@ -65,14 +64,18 @@ delete from Resource_Harvests where
 	or ResourceType = 'RESOURCE_PERFUME'
 	or ResourceType = 'RESOURCE_JEANS';
 
+update Resource_Harvests set YieldType = 'YIELD_PRODUCTION' where ResourceType = 'RESOURCE_COPPER';
+update Resource_Harvests set YieldType = 'YIELD_FOOD' where ResourceType = 'RESOURCE_MAIZE';
+update Resource_Harvests set YieldType = 'YIELD_FOOD' where ResourceType = 'RESOURCE_CRABS';
+
 -- Monopoly Resource Gold
 update RequirementArguments set Value = 'RESOURCE_DIAMONDS, RESOURCE_GOLD, RESOURCE_JADE, RESOURCE_SILVER, RESOURCE_TRUFFLES'
 	where Name = 'ResourceType' and RequirementId = 'REQUIREMENT_GOLD_BONUS_RESOURCE';
 
 -- Harvest & chopping
-update Resource_Harvests set Amount = 32 where YieldType = 'YIELD_FOOD';
-update Resource_Harvests set Amount = 32 where YieldType = 'YIELD_PRODUCTION';
-update Resource_Harvests set Amount = 64 where YieldType = 'YIELD_GOLD';
+update Resource_Harvests set Amount = 24 where YieldType = 'YIELD_FOOD';
+update Resource_Harvests set Amount = 24 where YieldType = 'YIELD_PRODUCTION';
+update Resource_Harvests set Amount = 72 where YieldType = 'YIELD_GOLD';
 update Feature_Removes set Yield = 24 where FeatureType = 'FEATURE_FOREST';
 update Feature_Removes set Yield = 24 where FeatureType = 'FEATURE_MARSH';
 update Feature_Removes set Yield = 12 where FeatureType = 'FEATURE_JUNGLE' and YieldType = 'YIELD_FOOD';

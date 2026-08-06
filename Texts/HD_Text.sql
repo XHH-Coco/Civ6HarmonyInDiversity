@@ -66,9 +66,6 @@ values
   ("LOC_TERRAIN_SNOW_MOUNTAIN_NAME",         		"Snow Mountain"),
   ("LOC_TERRAIN_CLASS_MOUNTAIN_NAME",         	"Mountain"),
   ("LOC_TERRAIN_CLASS_WATER_NAME",         			"Water Area"),
-	("LOC_RESOURCE_STONE_NAME",                                   "Andesite"),
-	("LOC_RESOURCE_FISH_NAME",                                    "Threadfin"),
-	("LOC_RESOURCE_SPICES_NAME",                                  "Cardamom"),
 	("LOC_MOMENT_CITY_BUILT_NEAR_FLOODABLE_RIVER_DESCRIPTION",    "The first city in the civilization built within two tiles of a river that could flood."),
 	("LOC_MOMENT_CITY_BUILT_NEAR_VOLCANO_DESCRIPTION",            "The first city in the civilization built within two tiles of a volcano that could erupt."),
   ("LOC_NO_ENOUGH_CHARGE_DISABLED",     												"[COLOR:Red]The remaining [ICON_CHARGES] building charges are insufficient.[ENDCOLOR]");
@@ -164,12 +161,6 @@ values
   ("zh_Hans_CN",  "LOC_TERRAIN_SNOW_MOUNTAIN_NAME",         		"雪地山脉"),
   ("zh_Hans_CN",  "LOC_TERRAIN_CLASS_MOUNTAIN_NAME",         		"山脉"),
   ("zh_Hans_CN",  "LOC_TERRAIN_CLASS_WATER_NAME",         		"水域"),
-	("zh_Hans_CN",  "LOC_RESOURCE_STONE_NAME",                                   "安山岩"),
-	("zh_Hans_CN",  "LOC_RESOURCE_FISH_NAME",                                    "鲅鱼"),
-	("zh_Hans_CN",  "LOC_RESOURCE_COPPER_NAME",                                  "铜矿"),
-	("zh_Hans_CN",  "LOC_RESOURCE_CATTLE_NAME",                                  "奶牛"),
-	("zh_Hans_CN",  "LOC_RESOURCE_SHEEP_NAME",                                   "绵羊"),
-	("zh_Hans_CN",  "LOC_RESOURCE_SPICES_NAME",                                  "豆蔻"),
 	("zh_Hans_CN",  "LOC_MOMENT_CITY_BUILT_NEAR_FLOODABLE_RIVER_DESCRIPTION",    "文明中首座建造在可能泛滥的江河2个单元格内的城市。"),
 	("zh_Hans_CN",  "LOC_MOMENT_CITY_BUILT_NEAR_VOLCANO_DESCRIPTION",            "文明中首座建造在可能喷发的火山2个单元格内的城市。"),
   ("zh_Hans_CN",  "LOC_NO_ENOUGH_CHARGE_DISABLED",     												"[COLOR:Red]剩余 [ICON_CHARGES] 建造次数不足。[ENDCOLOR]");
@@ -184,14 +175,6 @@ update LocalizedText set Text = "or {LOC_DISTRICT_DIPLOMATIC_QUARTER_NAME} " whe
 	and exists (select Tag from LocalizedText where Tag = 'LOC_DISTRICT_DIPLOMATIC_QUARTER_NAME');
 update LocalizedText set Text = "或{LOC_DISTRICT_DIPLOMATIC_QUARTER_NAME}" where Language = 'zh_Hans_CN' and Tag = 'LOC_OR_DIPLOMATIC_QUARTER'
 	and exists (select Tag from LocalizedText where Tag = 'LOC_DISTRICT_DIPLOMATIC_QUARTER_NAME');
-
---------------------------------------------------------------------------------
--- Language: zh_Hans_CN
-insert or replace into LocalizedText
-	(Language,	  Tag,																 Text)
-values
-	("zh_Hans_CN",  "LOC_RESOURCE_GOLD_NAME",											"黄金"),
-	("zh_Hans_CN",  "LOC_PEDIA_RESOURCES_PAGE_RESOURCE_GOLD_CHAPTER_HISTORY_PARA_1",	 "黄金是一种柔软、有光泽和延展性的金属，在历史上一直受到人们的珍视。这是一种稀有金属，它的稀有性大大增加了它的价值。尽管黄金有一些工业和医疗用途，但它主要用作铸币或装饰用途，装饰珠宝、杯子、器皿以及超级富豪和权贵的马桶。 ");
 
 --------------------------------------------------------------------------------
 -- projects
@@ -325,33 +308,3 @@ values
 	("zh_Hans_CN",  "LOC_CITY_YIELD_MODIFIER_PER_GOVERNOR_TITLE_TOOLTIP",				"{Value : number +#;-#}%（{ActualValue : number +#.#;-#.#}）来自拥有{1}次{1 : plural 1?升级; other?升级;}的 [ICON_Governor] 总督"),
 --	("zh_Hans_CN",	"LOC_WORLD_RANKINGS_CULTURE_TOURIST_TOOLTIP_GOVERNMENT",			"{1_Tooltip}[NEWLINE]总的 [ICON_Tourism] 旅游业绩因不同政体而提升{2_Percent}%");
 	("zh_Hans_CN",	"LOC_WORLD_RANKINGS_CULTURE_TOURIST_TOOLTIP_GOVERNMENT",			"{1_Tooltip}");
-
--- 糖改名甘蔗
-update  LocalizedText set Text = REPLACE(Text, '糖', '甘蔗')
-where Language = 'zh_Hans_CN' and (Tag in (
-  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUGAR_DESCRIPTION',
-  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUGAR_SHORT_NAME',
-  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUGAR_NAME'
-));
-
-update  LocalizedText set Text = REPLACE(Text, 'Sugar', 'Sugarcane')
-where Tag in (
-  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUGAR_DESCRIPTION',
-  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUGAR_SHORT_NAME',
-  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUGAR_NAME'
-);
-
--- 香料改名豆蔻
-update  LocalizedText set Text = REPLACE(Text, '香料', '豆蔻')
-where Language = 'zh_Hans_CN' and (Tag in (
-  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SPICES_DESCRIPTION',
-  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SPICES_SHORT_NAME',
-  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SPICES_NAME'
-));
-
-update  LocalizedText set Text = REPLACE(Text, 'Spice', 'Cardamom')
-where Tag in (
-  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SPICES_DESCRIPTION',
-  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SPICES_SHORT_NAME',
-  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SPICES_NAME'
-);

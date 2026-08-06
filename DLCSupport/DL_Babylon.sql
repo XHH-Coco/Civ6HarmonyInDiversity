@@ -401,12 +401,12 @@ insert or replace into Improvement_YieldChanges (ImprovementType, YieldType, Yie
 insert or ignore into ImprovementModifiers (ImprovementType, ModifierId) values
 	('IMPROVEMENT_MAHAVIHARA', 'HD_MAHAVIHARA_GPP');
 
-insert or ignore into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) values
-	('HD_MAHAVIHARA_GPP',	'MODIFIER_SINGLE_CITY_DISTRICTS_ADJUST_GREAT_PERSON_POINTS', 'DISTRICT_IS_SPECIALTY_DISTRICT_REQUIREMENTS');
+insert or ignore into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId, SubjectRequirementSetId) values
+	('HD_MAHAVIHARA_GPP',	'MODIFIER_SINGLE_CITY_DISTRICTS_ADJUST_GREAT_PERSON_POINTS', 'PLAYER_IS_HUMAN', 'DISTRICT_IS_SPECIALTY_DISTRICT_REQUIREMENTS');
 
 insert or ignore into ModifierArguments (ModifierId, Name, Value) values
 	('HD_MAHAVIHARA_GPP', 'GreatPersonClassType',	'GREAT_PERSON_CLASS_SCIENTIST'),
-	('HD_MAHAVIHARA_GPP', 'Amount',								2);
+	('HD_MAHAVIHARA_GPP', 'Amount',								1);
 
 -- 信仰值产出
 insert or ignore into ImprovementModifiers (ImprovementType, ModifierId) select

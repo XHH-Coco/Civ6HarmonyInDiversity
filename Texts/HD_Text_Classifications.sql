@@ -72,7 +72,10 @@ insert or replace into EnglishText (Tag, Text) values
   ("LOC_RESOURCE_CLASSIFICATION_HD_HOUSEHOLD_NAME",                 "Household"),
 
   ("LOC_RESOURCE_CLASSIFICATION_BIOLOGICAL_NAME",                   "Biological"),
-  ("LOC_RESOURCE_CLASSIFICATION_MINERAL_NAME",                      "Mineral");
+  ("LOC_RESOURCE_CLASSIFICATION_MINERAL_NAME",                      "Mineral"),
+
+  ("LOC_RESOURCE_CLASSIFICATION_CIVILIZATION_NAME",                 "Civilization Unique"),
+  ("LOC_RESOURCE_CLASSIFICATION_CITYSTATE_NAME",                    "City-state Exclusive");
 
 insert or replace into LocalizedText (Language, Tag, Text) values
   -- ToolTip
@@ -153,4 +156,7 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_RESOURCE_CLASSIFICATION_HD_PERFUME_NAME",                   "香水"),
 
   ("zh_Hans_CN", "LOC_RESOURCE_CLASSIFICATION_BIOLOGICAL_NAME",                   "生物类"),
-  ("zh_Hans_CN", "LOC_RESOURCE_CLASSIFICATION_MINERAL_NAME",                      "矿产类");
+  ("zh_Hans_CN", "LOC_RESOURCE_CLASSIFICATION_MINERAL_NAME",                      "矿产类"),
+
+  ("zh_Hans_CN", "LOC_RESOURCE_CLASSIFICATION_CIVILIZATION_NAME",                 "文明特色"),
+  ("zh_Hans_CN", "LOC_RESOURCE_CLASSIFICATION_CITYSTATE_NAME",                    "城邦专属");

@@ -94,11 +94,11 @@ update Resources set ResourceClassType = 'RESOURCECLASS_LUXURY', Happiness = 4
 insert or replace into Resource_Harvests
 	(ResourceType,				YieldType,			Amount)
 select
-	ResourceType,				Harvests,			80
+	ResourceType,				Harvests,			72
 from HDResourceful2_Basic where Harvests = 'YIELD_GOLD';
 
 insert or replace into Resource_Harvests
 	(ResourceType,				YieldType,			Amount)
 select
-	ResourceType,				Harvests,			40
+	ResourceType,				Harvests,			24
 from HDResourceful2_Basic where Harvests = 'YIELD_FOOD' or Harvests = 'YIELD_PRODUCTION';

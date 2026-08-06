@@ -1088,3 +1088,46 @@ function ConsumeUnitBuildCharges(playerId, unitId, num)
 	end
 end
 Utils.ConsumeUnitBuildCharges = ConsumeUnitBuildCharges;
+
+-- function PrintResourceData()
+-- 	for row in GameInfo.HD_CityState_Resources() do
+-- 		-- 资源图标
+-- 		-- print("('ICON_" .. row.ResourceType .. "',      'ICON_ATLAS_CITYSTATE_RESOURCES_HD',      " .. row.Index .. "),");
+-- 		-- print("('ICON_" .. row.ResourceType .. "_FOW',  'ICON_ATLAS_CITYSTATE_RESOURCES_HD_FOW',  " .. row.Index .. "),");
+-- 		-- print("('" .. row.ResourceType .. "',           'ICON_ATLAS_CITYSTATE_RESOURCES_HD',      " .. row.Index .. "),");
+-- 		-- print("");
+
+-- 		-- 资源名字
+-- 		-- print('("zh_Hans_CN", "LOC_' .. row.ResourceType .. '_NAME", ""),');
+
+-- 		-- 产品 图标
+-- 		-- print('<Row Name="ICON_MONOPOLIES_AND_CORPS_' .. row.ResourceType .. '"        Atlas="ICON_ATLAS_CITYSTATE_RESOURCES_MONOPOLY_HD" Index="' .. row.Index .. '"/>');
+-- 		-- print('<Row Name="MONOPOLIES_AND_CORPS_' .. row.ResourceType .. '"             Atlas="ICON_ATLAS_CITYSTATE_RESOURCES_MONOPOLY_HD" Index="' .. row.Index .. '"/>');
+-- 		-- print('<Row Name="ICON_PROJECT_CREATE_CORPORATION_PRODUCT_' .. string.gsub(row.ResourceType, "RESOURCE_", "") .. '"   Atlas="ICON_ATLAS_CITYSTATE_RESOURCES_MONOPOLY_HD" Index="' .. row.Index .. '"/>');
+-- 		-- print('<Row Name="ICON_MONOPOLIES_AND_CORPS_' .. row.ResourceType .. '_FOW"    Atlas="ICON_ATLAS_CITYSTATE_RESOURCES_MONOPOLY_HD_FOW" Index="' .. row.Index .. '"/>');
+-- 		-- print('');
+
+-- 		-- 产品项目 名字 描述
+-- 		-- print('("' .. row.ResourceType .. '"),');
+
+-- 		-- 产品 名字
+-- 		-- local num = 6;
+-- 		-- for i=1, num, 1 do
+-- 		-- 	print('("zh_Hans_CN",  "LOC_GREATWORK_PRODUCT_' .. string.gsub(row.ResourceType, "RESOURCE_", "") .. '_' .. i .. '_NAME",                         ""),');
+-- 		-- end
+-- 		-- print('');
+-- 	end
+-- end
+-- PrintResourceData()
+
+-- 缓存城邦资源
+local CityStateResourceMap = {};
+function InitCityStateResourceMap()
+	for row in GameInfo.HD_CityState_Resources() do
+		local map = CityStateResourceMap[row.CityStateType] or {};
+		table.insert(map, row.ResourceType);
+		CityStateResourceMap[row.CityStateType] = map;
+	end
+end
+InitCityStateResourceMap();
+Utils.CityStateResourceMap = CityStateResourceMap;

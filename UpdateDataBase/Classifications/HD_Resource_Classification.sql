@@ -70,7 +70,12 @@ insert or ignore into HD_ResourceClassificationTypes (ResourceClassificationType
   -- 生物资源
   ('RESOURCE_CLASSIFICATION_BIOLOGICAL',            100,0, 'OTHER'),
   -- 矿产资源
-  ('RESOURCE_CLASSIFICATION_MINERAL',               101,0, 'OTHER');
+  ('RESOURCE_CLASSIFICATION_MINERAL',               101,0, 'OTHER'),
+  -- ===================================================================================================================================
+  -- 文明特色资源
+  ('RESOURCE_CLASSIFICATION_CIVILIZATION',          300,0, 'OTHER'),
+  -- 城邦特色资源
+  ('RESOURCE_CLASSIFICATION_CITYSTATE',             301,0, 'OTHER');
 
 -- =====================================================================================================================================
 -- 自动填充 Name 字段
@@ -347,6 +352,15 @@ insert or ignore into HD_Resource_Classification (ResourceType, ResourceClassifi
   ResourceType, ResourceClassificationType
 from HD_Resource_Classification_Tmp where ResourceType in (select ResourceType from Resources);
 
+-- 城邦资源
+insert or ignore into HD_Resource_Classification (ResourceType, ResourceClassificationType) select
+  ResourceType, ResourceClassificationType
+from HD_CityState_Resources;
+
+insert or ignore into HD_Resource_Classification (ResourceType, ResourceClassificationType) select
+  ResourceType, 'RESOURCE_CLASSIFICATION_CITYSTATE'
+from HD_CityState_Resources;
+
 -- =====================================================================================================================================
 -- 生物资源
 -- =====================================================================================================================================
@@ -444,11 +458,7 @@ from Resources where ResourceType in (
   'RESOURCE_OXEN',
   'RESOURCE_MACKEREL',
   'RESOURCE_ALGAE',
-  'RESOURCE_POTATO',
-
-  -- 城邦奢侈
-  'RESOURCE_CINNAMON',
-  'RESOURCE_CLOVES'
+  'RESOURCE_POTATO'
 );
 
 -- =====================================================================================================================================

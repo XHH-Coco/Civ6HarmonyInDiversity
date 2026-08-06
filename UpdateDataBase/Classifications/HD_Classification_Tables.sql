@@ -74,6 +74,16 @@ create table if not exists Wonder_Resources_HD(
   ResourceType TEXT,
 PRIMARY KEY('BuildingType'));
 
+------------------- 城邦对应资源 -------------------
+create table if not exists HD_CityState_Resources(
+  ResourceType  TEXT not NULL,
+  CityStateType TEXT not NULL,
+  ResourceClassificationType TEXT not NULL,
+  PRIMARY KEY('ResourceType'),
+  FOREIGN KEY('ResourceType') REFERENCES Resources('ResourceType') ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY('ResourceClassificationType') REFERENCES HD_ResourceClassificationTypes('ResourceClassificationType') ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 ------------------- 百科资源分类 -------------------
 create table if not exists HD_Civilopedia_Resource_Groups(
   ResourceType 	TEXT not NULL,

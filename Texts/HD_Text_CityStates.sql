@@ -3,6 +3,7 @@
 insert or replace into EnglishText
     (Tag,                                                 Text)
 values
+    ("LOC_MINOR_CIV_EXCLUSIVE_RESOURCE",                  "Exclusive Resource: {1_Icon} {2_Name}"),
     ("LOC_MINOR_CIV_SMALL_INFLUENCE_ENVOYS",              "1 [ICON_ENVOY] Envoy:"),
     ("LOC_MINOR_CIV_MEDIUM_INFLUENCE_ENVOYS",             "3 [ICON_ENVOY] Envoys:"),
     ("LOC_MINOR_CIV_LARGE_INFLUENCE_ENVOYS",              "6 [ICON_ENVOY] Envoys:"),
@@ -63,6 +64,7 @@ values
 insert or replace into LocalizedText
     (Language,      Tag,                                                 Text)
 values
+    ("zh_Hans_CN",  "LOC_MINOR_CIV_EXCLUSIVE_RESOURCE",                  "专属资源：{1_Icon} {2_Name}"),
     ("zh_Hans_CN",  "LOC_MINOR_CIV_SMALL_INFLUENCE_ENVOYS",              "派遣1位 [ICON_Envoy] 使者："),
     ("zh_Hans_CN",  "LOC_MINOR_CIV_MEDIUM_INFLUENCE_ENVOYS",             "派遣3位 [ICON_Envoy] 使者："),
     ("zh_Hans_CN",  "LOC_MINOR_CIV_LARGE_INFLUENCE_ENVOYS",              "派遣6位 [ICON_Envoy] 使者："),

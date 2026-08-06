@@ -407,7 +407,7 @@ insert or ignore into ModifierArguments (ModifierId, Name, Value) values
 	('HD_GOVERNOR_MANAGER_BASE_IMPROVEMENT_YIELDS',                       'YieldType',              'YIELD_FOOD'),
 	('HD_GOVERNOR_MANAGER_BASE_IMPROVEMENT_YIELDS',                       'Amount',                 1),
 	('HD_GOVERNOR_MANAGER_LEFT_1_REGIONAL_FOOD',                          'YieldType',              'YIELD_FOOD'),
-	('HD_GOVERNOR_MANAGER_LEFT_1_REGIONAL_FOOD',                          'Amount',                 2),
+	('HD_GOVERNOR_MANAGER_LEFT_1_REGIONAL_FOOD',                          'Amount',                 3),
 	('HD_GOVERNOR_MANAGER_LEFT_1_REGIONAL_PRODUCTION',                    'YieldType',              'YIELD_PRODUCTION'),
 	('HD_GOVERNOR_MANAGER_LEFT_1_REGIONAL_PRODUCTION',                    'Amount',                 2),
 	('HD_GOVERNOR_MANAGER_LEFT_1_REGIONAL_AMENITY',                       'Amount',                 1),

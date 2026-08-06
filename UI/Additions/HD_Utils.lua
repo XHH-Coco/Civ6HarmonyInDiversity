@@ -218,15 +218,6 @@ function GetPlayerActiveTradeRoutesNum(playerId)
 end
 Utils.GetPlayerActiveTradeRoutesNum = GetPlayerActiveTradeRoutesNum
 
--- 获取城市商路信息
-function GetCityIncomingRoutes(playerId, cityId)
-  local city = CityManager.GetCity(playerId, cityId)
-  if city then
-    return city:GetTrade():GetIncomingRoutes();
-  end
-end
-Utils.GetCityIncomingRoutes = GetCityIncomingRoutes
-
 -- 获取城市单元格列表
 function GetCityPlots(playerId, cityId)
   local city = CityManager.GetCity(playerId, cityId)
@@ -1246,6 +1237,97 @@ local function GetCityIncomingRoutes(playerId, cityId)
   return {};
 end
 Utils.GetCityIncomingRoutes = GetCityIncomingRoutes;
+
+-- 获取玩家出发的商路列表
+  -- filter 筛选器
+    -- Domestic 内商
+    -- International 外商
+    -- ToCityState 通往城邦
+    -- ToMajor 通往其他玩家
+local function GetPlayerOutgoingRoutes(playerId, filter, debug)
+  local player = Players[playerId];
+  if not player then return {}; end
+
+  local routeList = {};
+  for _, city in player:GetCities():Members() do
+    local cityRouteList = city:GetTrade():GetOutgoingRoutes();
+    for _, routeInfo in ipairs(cityRouteList) do
+      local destinationCityPlayer = Players[routeInfo.DestinationCityPlayer];
+      
+      if filter then
+        local isMetFilter = true;
+        if filter.Domestic == true and not routeInfo.OriginCityPlayer == routeInfo.DestinationCityPlayer then isMetFilter = false; end
+        if filter.International == true and not routeInfo.OriginCityPlayer ~= routeInfo.DestinationCityPlayer then isMetFilter = false; end
+        if filter.ToCityState == true and not destinationCityPlayer:IsMinor() then isMetFilter = false; end
+        if filter.ToMajor == true and not destinationCityPlayer:IsMajor() then isMetFilter = false; end
+
+        if isMetFilter then table.insert(routeList, routeInfo); end
+      else
+        table.insert(routeList, routeInfo);
+      end
+    end
+  end
+
+  if debug == true then
+    for _, routeInfo in ipairs(routeList) do
+      local originCity = CityManager.GetCity(routeInfo.OriginCityPlayer, routeInfo.OriginCityID);
+      local destinationCity = CityManager.GetCity(routeInfo.DestinationCityPlayer, routeInfo.DestinationCityID);
+
+      print(
+        Locale.Lookup(originCity:GetName()),
+        "-->",
+        Locale.Lookup(destinationCity:GetName())
+      );
+    end
+  end
+
+  return routeList;
+end
+Utils.GetPlayerOutgoingRoutes = GetPlayerOutgoingRoutes;
+
+-- 获取海外投资人建造跨国公司可用的城邦和资源
+local CITY_STATE_RESOURCE_TAG = 'HD_CITY_STATE_RESOURCE';
+local GAME_HAS_TRANSNATIONAL_TAG = 'HD_GAME_HAS_TRANSNATIONAL_';
+local function GetOverSeasInvestorCityStateResources(playerId, param)
+  local list = {};
+  local includeAlreadyBuilt = param and param.IncludeAlreadyBuilt or false;
+
+  local routeList = GetPlayerOutgoingRoutes(playerId, {ToCityState = true}, true);
+  for _, routeInfo in ipairs(routeList) do
+    local destinationCityPlayer = Players[routeInfo.DestinationCityPlayer];
+    if destinationCityPlayer then
+      local resourceType = destinationCityPlayer:GetProperty(CITY_STATE_RESOURCE_TAG);
+      if resourceType then
+        local alreadyBuilt = Utils.GetGameProperty(GAME_HAS_TRANSNATIONAL_TAG .. resourceType) or 0;
+        if alreadyBuilt == 0 then
+          table.insert(list, {
+            CityStatePlayerId = routeInfo.DestinationCityPlayer,
+            CityStateCityId = routeInfo.DestinationCityID,
+            DetailParam = {
+              CityStateResource = resourceType,
+              CorporationEffect = true
+            },
+            Disabled = false
+          })
+        elseif includeAlreadyBuilt == true then
+          table.insert(list, {
+            CityStatePlayerId = routeInfo.DestinationCityPlayer,
+            CityStateCityId = routeInfo.DestinationCityID,
+            DetailParam = {
+              CityStateResource = resourceType,
+              CorporationEffect = true
+            },
+            Disabled = true,
+            DisabledReason = 'LOC_IMPROVEMENT_TRANSNATIONAL_SELECTION_DISABLED_REASON',
+          })
+        end
+      end
+    end
+  end
+
+  return list;
+end
+Utils.GetOverSeasInvestorCityStateResources = GetOverSeasInvestorCityStateResources;
 
 -- 获得单元格上区域的建造情况
 local function GetPlotDistrictDetails(x, y)
