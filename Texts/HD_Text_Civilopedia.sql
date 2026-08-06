@@ -71,6 +71,7 @@ values
 	("LOC_PEDIA_HD_IMPROVEMENT_UNIT_TEXT",                         							 	 "Built By"),
 	("LOC_PEDIA_HD_CLASSIFICATION_TEXT",                         						 			 "Classifications"),
 	("LOC_PEDIA_HD_RESOURCE_CLASSIFICATIONS_TEXT",                         				 "Usages"),
+	("LOC_PEDIA_HD_RESOURCE_IMPROVE_HARVEST_TEXT",                         			 	 "Improve and Harvest"),
 	("LOC_PEDIA_HD_GREATWORKS_TEXT",                         			 							 	 "Great Works"),
 
 	-- 百科分类
@@ -297,6 +298,8 @@ values
 	("zh_Hans_CN",  "LOC_PEDIA_HD_IMPROVEMENT_UNIT_TEXT",                         						 	 "改良单位"),
 	("zh_Hans_CN",  "LOC_PEDIA_HD_CLASSIFICATION_TEXT",                         						     "分类"),
 	("zh_Hans_CN",  "LOC_PEDIA_HD_RESOURCE_CLASSIFICATIONS_TEXT",                         			 "用途"),
+	("zh_Hans_CN",  "LOC_PEDIA_HD_RESOURCE_IMPROVE_HARVEST_TEXT",                         			 "改良与收获"),
+	("zh_Hans_CN",  "LOC_UI_PEDIA_IMPROVED_BY",                         			 									 "改良"),
 	("zh_Hans_CN",  "LOC_PEDIA_HD_GREATWORKS_TEXT",                         			 							 "巨作"),
 
 	-- 百科分类

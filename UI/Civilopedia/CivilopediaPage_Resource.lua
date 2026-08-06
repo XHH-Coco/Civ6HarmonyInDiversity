@@ -1,6 +1,13 @@
 -- ===========================================================================
 --	Civilopedia - Resource Page Layout
 -- ===========================================================================
+local cityStateTypes = {}
+for row in GameInfo.CSE_ClassTypes() do
+	cityStateTypes[row.Type] = {
+		row.TypeIcon,
+		Locale.Lookup(row.TypeName)
+	}
+end
 
 PageLayouts["Resource" ] = function(page)
 	local sectionId = page.SectionId;
@@ -220,6 +227,14 @@ PageLayouts["Resource" ] = function(page)
 				s:AddSeparator();
 			end
 		end
+
+		if(#creators > 0) then
+			s:AddHeader("LOC_UI_PEDIA_CREATED_BY");
+			for i,v in ipairs(creators) do
+				s:AddIconLabel(v[1], v[2]);
+			end
+			s:AddSeparator();
+		end
 		
 		if(#placement_requirements > 0) then
 			s:AddHeader("LOC_UI_PEDIA_PLACEMENT");
@@ -240,16 +255,25 @@ PageLayouts["Resource" ] = function(page)
 		end
 	end);
 
-	AddRightColumnStatBox("LOC_UI_PEDIA_USAGE", function(s)
-		s:AddSeparator();
+	local isCivilizationResource = ExposedMembers.DLHD.Utils.IsResourceHasClassification(resourceType, 'RESOURCE_CLASSIFICATION_CIVILIZATION');
+	local isCityStateResource = ExposedMembers.DLHD.Utils.IsResourceHasClassification(resourceType, 'RESOURCE_CLASSIFICATION_CITYSTATE');
 
-		if(#creators > 0) then
-			s:AddHeader("LOC_UI_PEDIA_CREATED_BY");
-			for i,v in ipairs(creators) do
-				s:AddIconLabel(v[1], v[2]);
-			end
+	if isCityStateResource then
+		AddRightColumnStatBox("LOC_UI_PEDIA_CITY_STATE_TYPE", function(s)
 			s:AddSeparator();
-		end
+
+			local cityStateResourceInfo = GameInfo.HD_CityState_Resources[resourceType];
+			if cityStateResourceInfo then
+				local cityStateTypeInfo = cityStateTypes[cityStateResourceInfo.CityStateType];
+				if cityStateTypeInfo then
+					s:AddIconLabel({cityStateTypeInfo[1], cityStateTypeInfo[2]}, cityStateTypeInfo[2]);
+				end
+			end
+		end);
+	end
+
+	AddRightColumnStatBox("LOC_PEDIA_HD_RESOURCE_IMPROVE_HARVEST_TEXT", function(s)
+		s:AddSeparator();
 
 		if(#improvements > 0) then
 			s:AddHeader("LOC_UI_PEDIA_IMPROVED_BY");
@@ -348,8 +372,7 @@ PageLayouts["Resource" ] = function(page)
 		-- TEMPORARY CODE：
 		-- 文明资源 城邦资源 暂时不显示产品
 		-- 等待2.3版本后再显示
-		local displayProducts = not ExposedMembers.DLHD.Utils.IsResourceHasClassification(resourceType, 'RESOURCE_CLASSIFICATION_CITYSTATE');
-		if displayProducts and hasAnyProduct then
+		if hasAnyProduct and not (isCivilizationResource or isCityStateResource) then
 			local productStr = '';
 			for _, productInfo in pairs(productList) do
 				if productStr ~= '' then productStr = productStr .. "[NEWLINE][NEWLINE]"; end
