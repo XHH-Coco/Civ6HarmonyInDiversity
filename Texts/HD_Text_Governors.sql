@@ -92,7 +92,7 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MERCHANT_LEFT_1_DESCRIPTION",               "本城购买单位-15%花费，购买商人额外-15%花费。"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MERCHANT_LEFT_2_NAME",                      "股权投资"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MERCHANT_LEFT_2_DESCRIPTION",               "本城的商业中心和港口建筑的 [ICON_GOLD] 金币本体产出和辐射产出+100%，+1辐射范围。"),
-  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MERCHANT_LEFT_3_NAME",                      "跨国巨头"),
+  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MERCHANT_LEFT_3_NAME",                      "跨国公司"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MERCHANT_LEFT_3_DESCRIPTION",               "本城每有一座商业中心建筑，玩家的 [ICON_GREATMERCHANT] 大商人点数积累速度+25%；每有一座港口建筑，玩家的 [ICON_GREATADMIRAL] 海军统帅点数积累速度+25%。"),
   -- 右线升级
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MERCHANT_RIGHT_1_NAME",                     "币制改革"),

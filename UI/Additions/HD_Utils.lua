@@ -1285,7 +1285,7 @@ local function GetPlayerOutgoingRoutes(playerId, filter, debug)
 end
 Utils.GetPlayerOutgoingRoutes = GetPlayerOutgoingRoutes;
 
--- 获取海外投资人建造跨国公司可用的城邦和资源
+-- 获取海外投资人建造特产商行可用的城邦和资源
 local CITY_STATE_RESOURCE_TAG = 'HD_CITY_STATE_RESOURCE';
 local GAME_HAS_TRANSNATIONAL_TAG = 'HD_GAME_HAS_TRANSNATIONAL_';
 local function GetOverSeasInvestorCityStateResources(playerId, param)
