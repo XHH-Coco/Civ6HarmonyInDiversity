@@ -1305,6 +1305,7 @@ local function GetOverSeasInvestorCityStateResources(playerId, param)
             CityStateCityId = routeInfo.DestinationCityID,
             DetailParam = {
               CityStateResource = resourceType,
+              IndustryEffect = true,
               CorporationEffect = true
             },
             Disabled = false
@@ -1315,6 +1316,7 @@ local function GetOverSeasInvestorCityStateResources(playerId, param)
             CityStateCityId = routeInfo.DestinationCityID,
             DetailParam = {
               CityStateResource = resourceType,
+              IndustryEffect = true,
               CorporationEffect = true
             },
             Disabled = true,
