@@ -85,6 +85,8 @@ from DistrictCorrespondingYieldType_HD where HasAdjacency = 1 and exists (select
 -- =====================================================================================================================================
 -- 红胡子
 -- =====================================================================================================================================
+update Traits set Description = 'LOC_TRAIT_LEADER_HOLY_ROMAN_EMPEROR_DESCRIPTION_MAB' where TraitType = 'TRAIT_LEADER_HOLY_ROMAN_EMPEROR';
+
 delete from TraitModifiers where TraitType = 'TRAIT_LEADER_HOLY_ROMAN_EMPEROR' and ModifierId in (
   'HD_HOLY_ROMAN_ENCAMPMENT_DISTRICT_ADJACENCY',
   'HD_HOLY_ROMAN_ENCAMPMENT_RESOURCE_BONUS_ATTACH'

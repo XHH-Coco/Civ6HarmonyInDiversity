@@ -132,7 +132,6 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN",  "LOC_HD_WAT_ARUN_YIELD_FAITH",					      "+{1_num} [ICON_FAITH] 信仰值来自相邻泛滥平原"),
   ("zh_Hans_CN",  "LOC_HD_WAT_ARUN_YIELD_GOLD",					        "+{1_num} [ICON_GOLD] 金币来自相邻泛滥平原"),
 		-- Adjacent to district
-	("zh_Hans_CN",	"LOC_DISTRICT_INDUSTRIAL_GOLD",						"+{1_num} [ICON_GOLD] 金币来自相邻工业区"),
 	("zh_Hans_CN",	"LOC_DISTRICT_HANSA_GOLD",							"+{1_num} [ICON_GOLD] 金币来自相邻商业同业工会"),
 	("zh_Hans_CN",	"LOC_DISTRICT_CANAL_GOLD",							"+{1_num} [ICON_GOLD] 金币来自相邻运河"),
 	("zh_Hans_CN",	"LOC_DISTRICT_CITY_CENTER_CULTURE",					"+{1_num} [ICON_CULTURE] 文化值来自相邻市中心"),

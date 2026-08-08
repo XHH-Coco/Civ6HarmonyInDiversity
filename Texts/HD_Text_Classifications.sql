@@ -71,6 +71,11 @@ insert or replace into EnglishText (Tag, Text) values
   ("LOC_RESOURCE_CLASSIFICATION_HD_BEAST_NAME",                     "Beast"),
   ("LOC_RESOURCE_CLASSIFICATION_HD_HOUSEHOLD_NAME",                 "Household"),
 
+  ("LOC_RESOURCE_CLASSIFICATION_HD_TOYS_NAME",                      "Toys"),
+  ("LOC_RESOURCE_CLASSIFICATION_HD_COSMETICS_NAME",                 "Cosmetics"),
+  ("LOC_RESOURCE_CLASSIFICATION_HD_JEANS_NAME",                     "Jeans"),
+  ("LOC_RESOURCE_CLASSIFICATION_HD_PERFUME_NAME",                   "Perfume"),
+
   ("LOC_RESOURCE_CLASSIFICATION_BIOLOGICAL_NAME",                   "Biological"),
   ("LOC_RESOURCE_CLASSIFICATION_MINERAL_NAME",                      "Mineral"),
 
