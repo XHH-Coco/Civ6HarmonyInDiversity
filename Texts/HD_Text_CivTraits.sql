@@ -370,7 +370,7 @@ values
 -- =====================================================================================================================================
 -- 德国
 -- =====================================================================================================================================
-	("LOC_TRAIT_CIVILIZATION_IMPERIAL_FREE_CITIES_DESCRIPTION",              "Each city can build one more district than usual. +1 [ICON_Science] Science and [ICON_Culture] Culture for cities that have Specialty Districts."),
+	("LOC_TRAIT_CIVILIZATION_IMPERIAL_FREE_CITIES_DESCRIPTION",              "Each city +1 Specialty district capacity, +1 [ICON_Science] Science and [ICON_Culture] Culture."),
 	("LOC_TRAIT_LEADER_HOLY_ROMAN_EMPEROR_DESCRIPTION",                      "Receive a Military policy slot for each appointed [ICON_GOVERNOR] Governor. Encampment district receives an additional standard adjacency bonus for being adjacent to another district, and [ICON_FAITH] Faith equal to its adjacency bonus. Encampment district provides +1 [ICON_PRODUCTION] Production, +1 [ICON_FAITH] Faith to resource plots in the city. Land units can be purchased with [ICON_FAITH] Faith in cities with a [ICON_GOVERNOR] Governor."),
 -- =====================================================================================================================================
 -- 印度尼西亚
@@ -996,7 +996,7 @@ values
 -- =====================================================================================================================================
 -- 德国
 -- =====================================================================================================================================
-	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_IMPERIAL_FREE_CITIES_DESCRIPTION",       "每座城市都能建造比平常多一个区域。拥有专业化区域的城市+1 [ICON_Science] 科技值和 [ICON_Culture] 文化值。"),
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_IMPERIAL_FREE_CITIES_DESCRIPTION",       "每座城市+1区域位、 [ICON_Science] 科技值和 [ICON_Culture] 文化值。"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_HOLY_ROMAN_EMPEROR_DESCRIPTION",               "每任命一位 [ICON_GOVERNOR] 总督，获得一个军事政策槽位。军营与区域相邻时额外获得标准相邻加成，相邻加成也提供 [ICON_Faith] 信仰值。有军营的城市所有资源+1 [ICON_Production] 生产力和 [ICON_Faith] 信仰值。有 [ICON_GOVERNOR] 总督就职的城市可用 [ICON_FAITH] 信仰值购买陆军单位。"),
 -- =====================================================================================================================================
 -- 印度尼西亚

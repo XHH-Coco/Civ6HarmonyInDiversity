@@ -38,6 +38,19 @@ insert or ignore into HD_Adjacency_Base_On_Classification (ID, Description, Yiel
   ('HD_TRADING_DOME_COMMERCIAL_IMPROVEMENTS_GOLD', 'Placeholder', 'YIELD_GOLD', 2, 'IMPROVEMENT_CLASSIFICATION_COMMERCIAL');
 
 -- ================================================================================
+-- 区域包括特色区域
+-- ================================================================================
+-- 汉萨同盟：商业中心、军营
+
+insert or ignore into HD_District_Adjacencies_Base_On_Classification (DistrictType, YieldChangeId) values
+  ('DISTRICT_HANSA',                'HD_HANSA_COMMERCIAL_HUB_INCLUDING_UD_PRODUCTION'),
+  ('DISTRICT_HANSA',                'HD_HANSA_ENCAMPMENT_INCLUDING_UD_PRODUCTION');
+
+insert or ignore into HD_Adjacency_Base_On_Classification (ID, Description, YieldType, YieldChange, DistrictTypeIncludingUD) values
+  ('HD_HANSA_COMMERCIAL_HUB_INCLUDING_UD_PRODUCTION', 'LOC_HD_COMMERCIAL_HUB_INCLUDING_UD_PRODUCTION_TEXT', 'YIELD_PRODUCTION', 2, 'DISTRICT_COMMERCIAL_HUB'),
+  ('HD_HANSA_ENCAMPMENT_INCLUDING_UD_PRODUCTION',     'LOC_HD_ENCAMPMENT_INCLUDING_UD_PRODUCTION_TEXT',     'YIELD_PRODUCTION', 2, 'DISTRICT_ENCAMPMENT');
+
+-- ================================================================================
 -- 区域分类
 -- ================================================================================
 -- 工业：水利工程、交通设施
@@ -80,6 +93,7 @@ insert or ignore into HD_Adjacency_Base_On_Classification (ID, Description, Yiel
 -- 港口：贸易往来
 -- 工业：工业开发
 -- 军营：交通设施、军事屯驻
+-- 汉萨同盟：贸易往来
 delete from District_Adjacencies where DistrictType in ('DISTRICT_INDUSTRIAL_ZONE', 'DISTRICT_HANSA', 'DISTRICT_OPPIDUM') and YieldChangeId in (
   'Warehouse_Production', 'ContainerPort_Production'
 );
@@ -97,7 +111,9 @@ insert or ignore into HD_District_Adjacencies_Base_On_Classification (DistrictTy
   ('DISTRICT_INDUSTRIAL_ZONE',      'HD_INDUSTRIAL_ZONE_EXPLOITATIVE_IMPROVEMENTS_PRODUCTION_LATE'),
   ('DISTRICT_ENCAMPMENT',           'HD_ENCAMPMENT_MILITARISTIC_IMPROVEMENTS_PRODUCTION'),
   ('DISTRICT_ENCAMPMENT',           'HD_ENCAMPMENT_MILITARISTIC_IMPROVEMENTS_PRODUCTION_LATE'),
-  ('DISTRICT_ENCAMPMENT',           'HD_ENCAMPMENT_TRANSPOTATION_IMPROVEMENT_PRODUCTION');
+  ('DISTRICT_ENCAMPMENT',           'HD_ENCAMPMENT_TRANSPOTATION_IMPROVEMENTS_PRODUCTION'),
+
+  ('DISTRICT_HANSA',                'HD_HANSA_COMMERCIAL_IMPROVEMENTS_PRODUCTION');
 
 insert or ignore into HD_Adjacency_Base_On_Classification (ID, Description, YieldType, YieldChange, ImprovementClassificationType, PrereqTech, ObsoleteTech) values
   ('HD_HOLY_SITE_RELIGIOUS_IMPROVEMENTS_FAITH',                             'LOC_HD_RELIGIOUS_IMPROVEMENTS_FAITH_TEXT',                       'YIELD_FAITH',      1, 'IMPROVEMENT_CLASSIFICATION_RELIGIOUS',                  NULL,                       NULL),
@@ -108,7 +124,9 @@ insert or ignore into HD_Adjacency_Base_On_Classification (ID, Description, Yiel
   ('HD_INDUSTRIAL_ZONE_EXPLOITATIVE_IMPROVEMENTS_PRODUCTION_LATE',          'LOC_HD_EXPLOITATIVE_IMPROVEMENTS_PRODUCTION_TEXT',               'YIELD_PRODUCTION', 2, 'IMPROVEMENT_CLASSIFICATION_EXPLOITATIVE',               'TECH_INDUSTRIALIZATION',   NULL),
   ('HD_ENCAMPMENT_MILITARISTIC_IMPROVEMENTS_PRODUCTION',                    'LOC_HD_MILITARISTIC_IMPROVEMENTS_PRODUCTION_TEXT',               'YIELD_PRODUCTION', 1, 'IMPROVEMENT_CLASSIFICATION_MILITARISTIC',               NULL,                       'TECH_MILITARY_SCIENCE'),
   ('HD_ENCAMPMENT_MILITARISTIC_IMPROVEMENTS_PRODUCTION_LATE',               'LOC_HD_MILITARISTIC_IMPROVEMENTS_PRODUCTION_TEXT',               'YIELD_PRODUCTION', 2, 'IMPROVEMENT_CLASSIFICATION_MILITARISTIC',               'TECH_MILITARY_SCIENCE',    NULL),
-  ('HD_ENCAMPMENT_TRANSPOTATION_IMPROVEMENT_PRODUCTION',                    'LOC_HD_TRANSPOTATION_IMPROVEMENT_PRODUCTION_TEXT',               'YIELD_PRODUCTION', 2, 'IMPROVEMENT_CLASSIFICATION_TRANSPOTATION',              NULL,                       NULL);
+  ('HD_ENCAMPMENT_TRANSPOTATION_IMPROVEMENTS_PRODUCTION',                   'LOC_HD_TRANSPOTATION_IMPROVEMENTS_PRODUCTION_TEXT',              'YIELD_PRODUCTION', 2, 'IMPROVEMENT_CLASSIFICATION_TRANSPOTATION',              NULL,                       NULL),
+
+  ('HD_HANSA_COMMERCIAL_IMPROVEMENTS_PRODUCTION',                           'LOC_HD_COMMERCIAL_IMPROVEMENTS_PRODUCTION_TEXT',                 'YIELD_PRODUCTION', 2, 'IMPROVEMENT_CLASSIFICATION_COMMERCIAL',                 NULL,                       NULL);
   
 -- ================================================================================
 -- 适配 UD
@@ -134,6 +152,23 @@ from HD_Adjacency_Base_On_Classification a inner join TerrainClass_Terrains b on
 insert or ignore into Adjacency_YieldChanges (ID, Description, YieldType, YieldChange, TilesRequired, AdjacentTerrain, PrereqCivic, PrereqTech, ObsoleteCivic, ObsoleteTech) select
   ID || '_' || TerrainType, Description, YieldType, YieldChange, TilesRequired, TerrainType, PrereqCivic, PrereqTech, ObsoleteCivic, ObsoleteTech
 from HD_Adjacency_Base_On_Classification a inner join TerrainClass_Terrains b on a.TerrainClassType = b.TerrainClassType where a.TerrainClassType is not NULL;
+
+-- 区域包括特色区域
+insert or ignore into HD_Adjacencies_YieldChangeId_ParentId (YieldChangeId, ParentId) select
+  ID || '_' || DistrictTypeIncludingUD, ID
+from HD_Adjacency_Base_On_Classification where DistrictTypeIncludingUD is not NULL; 
+
+insert or ignore into Adjacency_YieldChanges (ID, Description, YieldType, YieldChange, TilesRequired, AdjacentDistrict, PrereqCivic, PrereqTech, ObsoleteCivic, ObsoleteTech) select
+  ID || '_' || DistrictTypeIncludingUD, Description, YieldType, YieldChange, TilesRequired, DistrictTypeIncludingUD, PrereqCivic, PrereqTech, ObsoleteCivic, ObsoleteTech
+from HD_Adjacency_Base_On_Classification where DistrictTypeIncludingUD is not NULL;
+
+insert or ignore into HD_Adjacencies_YieldChangeId_ParentId (YieldChangeId, ParentId) select
+  ID || '_' || CivUniqueDistrictType, ID
+from HD_Adjacency_Base_On_Classification a inner join DistrictReplaces b on a.DistrictTypeIncludingUD = b.ReplacesDistrictType where a.DistrictTypeIncludingUD is not NULL; 
+
+insert or ignore into Adjacency_YieldChanges (ID, Description, YieldType, YieldChange, TilesRequired, AdjacentDistrict, PrereqCivic, PrereqTech, ObsoleteCivic, ObsoleteTech) select
+  ID || '_' || CivUniqueDistrictType, Description, YieldType, YieldChange, TilesRequired, CivUniqueDistrictType, PrereqCivic, PrereqTech, ObsoleteCivic, ObsoleteTech
+from HD_Adjacency_Base_On_Classification a inner join DistrictReplaces b on a.DistrictTypeIncludingUD = b.ReplacesDistrictType where a.DistrictTypeIncludingUD is not NULL;
 
 -- 区域分类
 insert or ignore into HD_Adjacencies_YieldChangeId_ParentId (YieldChangeId, ParentId) select
