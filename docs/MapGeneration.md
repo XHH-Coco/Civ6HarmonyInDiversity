@@ -229,13 +229,22 @@ Continents 的注释写明了设计意图：植被茂盛 ⇒ 出生点锤子多 
 local function CanTakeVolcanicSoil(pPlot)
     if (pPlot:IsWater() or pPlot:IsMountain()) then return false; end
     local eFeature = pPlot:GetFeatureType();
-    if (eFeature ~= -1 and GameInfo.Features[eFeature].NaturalWonder) then return false; end
+    if (eFeature == -1) then return true; end
+    if (eFeature == g_FEATURE_FLOODPLAINS
+    or  eFeature == g_FEATURE_FLOODPLAINS_GRASSLAND
+    or  eFeature == g_FEATURE_FLOODPLAINS_PLAINS) then return false; end
+    if (GameInfo.Features[eFeature].NaturalWonder) then return false; end
     return true;
 end
 ```
 
-也就是：**水域、山地、以及任何自然奇观都不铺**。用 `Features.NaturalWonder` 标志位而不是
-硬编码名单，新增的自然奇观（含第三方 mod 的）自动受保护。
+也就是：**水域、山地、三种泛滥平原、以及任何自然奇观都不铺**。自然奇观用
+`Features.NaturalWonder` 标志位而不是硬编码名单，新增的自然奇观（含第三方 mod 的）自动受保护。
+
+> **为什么泛滥平原要单独排除。** 洪水判定看的是河流，不是地貌 ——
+> 把泛滥平原盖成火山土，那一格照样会发洪水，只是不再有泛滥平原了。
+> 这种"会发洪水但没有泛滥平原"的地块是给下游逻辑埋雷，不值得为几格火山土换。
+> 代价是火山紧邻泛滥时一环会少铺几格，这是刻意接受的。
 
 > **二环的实际概率不是 1/3。** 二环循环嵌在一环循环内部
 > （[Continents.lua:398](../Maps/Continents.lua)），所以一个二环格子每邻接一个一环格子就被摇一次。
@@ -356,13 +365,99 @@ HD 覆盖了全部原版地图脚本（在 `DL.modinfo` 的 `ImportFiles` 里列
 
 要启用的话按 0..6 标定，参考 Lakes.lua，并注意这会显著改变那 10 张图的海岸线。
 
+### 5.3 十张图的世界纪元被局部变量屏蔽（未修，需要重新配平）
+
+`GenerateMap()` 读设置、映射成数值、传给 `GeneratePlotTypes(world_age)`。
+但这 10 张图在函数体开头又写了一遍 `local world_age = 1;`（Highlands_XP2 是 2），
+**把入参遮住了**，于是世界纪元设置对陆海轮廓完全无效：
+
+| 地图 | 硬编码值 | 真实取值（老/正常/新） | mountainRatio 公式 | 现在 | 放开后 |
+|---|---|---|---|---|---|
+| Archipelago_XP2 | 1 | 1 / 2 / 3 | `4 + age*6` | 10 | 10 / 16 / 22 |
+| Continents_Islands | 1 | 1 / 2 / 3 | `4 + age*6` | 10 | 10 / 16 / 22 |
+| Great_Steppe | 1 | 1 / 2 / 4 | `10 + age*12` | 22 | 22 / 34 / 58 |
+| Wet_Lakes2 | 1 | 1 / 2 / 4 | `6 + age*12` | 18 | 18 / 30 / 54 |
+| Tiny_Islands | 1 | 1 / 2 / 3 | `4 + age*5` | 9 | 9 / 14 / 19 |
+| Great_Sand_Sea | 1 | 2 / 3 / 4 | `5 + age*7` | 12 | 19 / 26 / 33 |
+| Lakes | 1 | 2 / 3 / 5 | `8 + age*6` | 14 | 20 / 26 / 38 |
+| Tiny_Lakes | 1 | 2 / 3 / 5 | `15 + age*6` | 21 | 27 / 33 / 45 |
+| Forest_Highlands | 1 | 3 / 5 / 7 | `16 + age*5` | 21 | 31 / 41 / 51 |
+| Highlands_XP2 | 2 | 3 / 5 / 7 | `5 + age*4` | 13 | 17 / 25 / 33 |
+
+`Archipelago_XP2` 的这一行**原版 Firaxis 就有**，其余 9 张是 HD 侧引入的
+（原版 Lakes.lua 的 `GeneratePlotTypes()` 不带入参，函数体内自己读一遍设置，所以是好的）。
+
+**不能直接删这一行。** 硬编码值普遍比"老世界"还小，删掉等于给 10 张图统一加 1.5～2.4 倍山脉，
+而且 `args.world_age` 还要喂给板块/分形生成。Wet_Lakes2 那行注释
+（"further lower the mountainRation in order to generate less lonely mountains"）说明作者当时
+是在**主动压低**山脉密度的，这个 `local world_age = 1` 未必全是失手。
+
+要修的话建议按"正常纪元 = 今天的观感"重新配平：把 `world_age_normal` 设成现在的硬编码值，
+old/new 往两边各挪一格，而不是直接放开。这是手感活，需要 xhh 定。
+
+### 5.4 河流可能停在陆地上，没有入海口（原版缺陷）
+
+`DoRiver` 是递归的，正常出口是"下一格是水或出了地图边界"（[RiversLakes.lua:212](../Maps/Utility/RiversLakes.lua)）。
+但有两条路会让它停在内陆：
+
+1. **找不到下一个流向**。候选流向只有"左转 60°"和"右转 60°"两个（不能直行、不能回头），
+   两个都拿不到相邻格时就断了。南北不环绕，所以这主要发生在贴近极地边缘的地方。
+   原版只给**一种**情况打了补丁 —— `originalFlowDirection == FLOWDIRECTION_NORTHEAST`
+   时补一条边把河送出北边界，就是那句 `*** NORTH EDGE OF MAP RIVER REPAIR ***`。
+   南边界和其它原始流向都没补。
+2. **撞上已有河流的分支提前 `return`**。六个方向分支里各有一组
+   `riverPlot:IsNEOfRiver()` / `IsNWOfRiver()` / `adjacentPlot:IsWOfRiver()` 判断，
+   命中就直接返回。本意是"汇入已有河流"，但两条河的边未必真的接得上。
+
+这两种情况都会留下一段**逻辑上存在、但没有入海口**的河：`IsRiver()` 为真、给淡水、
+参与河流相邻加成，而河道模型可能画不出来 —— 与外部 modder 的说法一致。
+另外注意 `AddRivers` 排在 `AddCliffs` 和自然奇观**之前**，所以
+`GetRiverValueAtPlot` 里那段 `IsNWOfCliff()/IsNaturalWonder() → return -1`
+在标准流程里**是死代码**（那时地图上还没有峭壁和自然奇观）。
+顺带一提，它写成 `-1` 而分数是**越小越优**，真要是活的，效果会是让河流优先冲向峭壁和奇观。
+
+**能修，但要先定行为**。两条路线：
+
+- **回滚**：`DoRiver` 已经在记 `_rivers[plot] = riverID`，再记一份"这条河设过哪些边"，
+  递归结束时若没碰到水/边界就用 `SetWOfRiver(plot, false, ...)` 之类撤掉整条。
+  结果一定可渲染，代价是河变少。
+- **补边界**：把北边界那个补丁推广到南边界和其它原始流向，让断头河真的流出地图。
+  河不减少，但每种情况补哪条边要逐个推，且只能靠肉眼验收。
+
+两条都会改动全部 25 张图的河网，且让老种子失效。没动。
+
+### 5.5 开 Sukritact's Oceans 时海洋奢侈品可能一个都不放（第三方 mod 崩溃）
+
+现象：`Suk_ResourceGenerator.lua:354` 报
+`operator < is not supported for number < nil`，地图照样生成，看着像无害。
+其实不然 —— 那句是海洋奢侈品放置主循环里的排序，报错会把整个
+`Suk_OceansMapGen.lua` 打断。而**原版海洋奢侈品在这之前已经被清空了**
+（该文件先把所有水域奢侈遍历删掉，再按大洲重放），所以崩在第一个资源上
+就等于**整张图没有任何海洋奢侈品**。
+
+已证实的一环（拿真实的 `Suk_MapConvolution.lua` 跑出来的）：热力图全零时
+`DoNormalise` 的 `iRange = iMax - iMin` 为 0，`(v - iMin)/iRange` 让**全部**格子
+变成 `NaN`。全零正是日志里 `Removed luxuries from 0 tiles` 的情形 ——
+图上一格水域奢侈都没有（湖多海少的图很常见）。NaN 之后 `iMaxWeight` 保持 0、
+`iScore` 是 NaN、`GetRandomNumber(100) <= NaN` 恒假，于是**整个加权放置段完全失效**，
+所有资源都掉进 `iOccurences == 0` 的兜底分支无视权重乱放。
+
+崩溃本身还需要权重表里出现真正的 `nil`。用真实源码搭桩跑过一张
+44×26 / 单大洲 / 18 个湖 / 无海岸的图（照日志那局建的），跑得通、不报错，
+所以**具体触发条件还没复现出来**。两处该加的护栏与触发条件无关：
+`DoNormalise` 在 `iRange == 0` 时应当整体置零而不是除零，
+权重表应当按地图尺寸铺满而不是靠 `#tPlotsData.Plots`。
+
+要修得把该文件 vendor 进 HD 用 `ImportFiles` + `Suk_Oceans_Rework` 条件覆盖
+（HD 已经这么覆盖过 `Suk_YieldTT.lua` 等）。代价是 HD 从此维护一份第三方文件的分叉。
+
 ---
 
 ## 6. 怎么验证改动
 
 1. **跑差分测试**——[tools/maptest](../tools/maptest/)。它把地图函数从游戏里摘出来、
-   桩掉引擎接口，逐格对比改动前后的行为。目前只覆盖 `AddVolcanicSoil`，
-   要测别的函数照着 `stub.lua` 补接口即可。
+   桩掉引擎接口，逐格对比改动前后的行为。目前覆盖 `AddVolcanicSoil`
+   （含泛滥平原守卫）和 `Adjacent` / `AdjacentCount`，要测别的函数照着 `stub.lua` 补接口即可。
    **这是唯一能给出确定性结论的办法**，比开很多局强。
 2. **看日志**。`GenerateMap()` 里的 `print` 会进 Civ6 用户目录的 `Logs/Lua.log`。
    `GetRandomNumber` 的第二个参数也会出现在随机数日志里，可以用来核对抽取顺序。

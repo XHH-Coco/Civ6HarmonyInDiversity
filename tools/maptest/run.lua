@@ -127,6 +127,33 @@ case("奇数宽度", function(oor)
     return w
 end)
 
+-- 泛滥平原贴着火山和火山系奇观：普通火山的一环、奇观的一环和二环各覆盖一遍
+case("火山旁的泛滥平原", function(oor)
+    local w = blank(20, 14, oor)
+
+    S.at(w, 5, 5).feature = S.F_VOLCANO
+    for i, c in ipairs(S.neighborCoords(5, 5)) do
+        local p = S.at(w, c[1], c[2])
+        if p then p.feature = 19 + (i % 3) + 1 end     -- 20 / 21 / 22 轮着来
+    end
+
+    S.at(w, 13, 7).feature = S.F_VESUVIUS
+    for i, c in ipairs(S.neighborCoords(13, 7)) do
+        local p = S.at(w, c[1], c[2])
+        if p and i % 2 == 0 then p.feature = S.F_FLOODPLAINS end
+        -- 二环也铺一圈泛滥
+        if p then
+            for j, d in ipairs(S.neighborCoords(c[1] % w.w, c[2])) do
+                local q = S.at(w, d[1] % w.w, d[2])
+                if q and q.feature == S.F_FOREST and j % 3 == 0 then
+                    q.feature = S.F_FLOODPLAINS_PLAINS
+                end
+            end
+        end
+    end
+    return w
+end)
+
 for i = 1, 40 do
     case("随机地图 #" .. i, function(oor)
         local rnd = lcg(1000 + i * 7919)
@@ -144,6 +171,8 @@ for i = 1, 40 do
                     p.feature = S.F_VOLCANO
                 elseif r < 46 then
                     p.feature = 4 + rnd(7)      -- 任一自然奇观，含不在旧名单里的
+                elseif r < 52 then
+                    p.feature = 20 + rnd(3)     -- 三种泛滥平原
                 elseif r < 60 then
                     p.feature = -1
                 else
@@ -370,6 +399,78 @@ do
 end
 
 --------------------------------------------------------------------------------
+-- v4：火山土不再覆盖三种泛滥平原
+--
+-- 二环的随机抽取写在 CanTakeVolcanicSoil 里面，所以多排除一类地貌会减少抽取
+-- 次数、平移整条随机流。因此分两种模式断言：
+--   place  模式（抽取恒为 0，与流无关）：v4 与 v3 的差异**只**出现在泛滥格上，
+--          且方向只能是"v3 铺成火山土、v4 保留原地貌"。
+--   stream 模式：只断言强不变式——v4 跑完后没有任何泛滥格变成火山土。
+--------------------------------------------------------------------------------
+
+print("\n-- v4：泛滥平原不再被火山土覆盖 --")
+do
+    local V4 = { label = "v4 泛滥守卫", path = here .. "/versions/v4_floodplain_guard.lua" }
+    local saved, touchedCases = 0, 0
+
+    for _, c in ipairs(CASES) do
+        -- place 模式：逐格解释差异
+        local r3 = runOne(V.v3, c.build, "place", 4242)
+        local r4 = runOne(V4,   c.build, "place", 4242)
+        if not r4.ok then fail("%s：v4 运行报错 %s", c.name, tostring(r4.err)) end
+
+        if r3.ok and r4.ok then
+            local diffs, hit = 0, 0
+            for i = 0, r4.world.w * r4.world.h - 1 do
+                if r3.after[i] ~= r4.after[i] then
+                    diffs = diffs + 1
+                    local orig = r4.before[i]
+                    if S.FLOODPLAINS[orig]
+                       and r3.after[i] == S.VOLCANIC_SOIL
+                       and r4.after[i] == orig then
+                        hit = hit + 1
+                    else
+                        fail("%s：(%d,%d) 的差异不是保住泛滥——原=%s v3=%s v4=%s",
+                             c.name, i % r4.world.w, math.floor(i / r4.world.w),
+                             tostring(orig), tostring(r3.after[i]), tostring(r4.after[i]))
+                    end
+                end
+            end
+            if diffs ~= hit then
+                fail("%s：差异 %d 格，其中只有 %d 格解释得通", c.name, diffs, hit)
+            end
+            saved = saved + hit
+            if hit > 0 then touchedCases = touchedCases + 1 end
+
+            -- 其余非泛滥格必须与 v3 完全一致，顺带确认奇观守卫没被改坏
+            for i = 0, r4.world.w * r4.world.h - 1 do
+                local orig = r4.before[i]
+                if orig ~= -1 and S.FEATURES[orig] and S.FEATURES[orig].NaturalWonder
+                   and r4.after[i] == S.VOLCANIC_SOIL then
+                    fail("%s：v4 把自然奇观铺掉了", c.name)
+                end
+            end
+        end
+
+        -- stream 模式：强不变式
+        local s4 = runOne(V4, c.build, "stream", 4242)
+        if not s4.ok then fail("%s：v4 在 stream 模式报错 %s", c.name, tostring(s4.err)) end
+        if s4.ok then
+            for i = 0, s4.world.w * s4.world.h - 1 do
+                if S.FLOODPLAINS[s4.before[i]] and s4.after[i] == S.VOLCANIC_SOIL then
+                    fail("%s：stream 模式下泛滥格 (%d,%d) 仍被铺成火山土",
+                         c.name, i % s4.world.w, math.floor(i / s4.world.w));
+                end
+            end
+        end
+    end
+
+    print(string.format("  被 v3 铺掉、被 v4 保住的泛滥格：%d（涉及 %d/%d 个用例）",
+                        saved, touchedCases, #CASES))
+    if saved == 0 then fail("用例里一格泛滥都没被保住，没能触发这次改动") end
+end
+
+--------------------------------------------------------------------------------
 -- Adjacent / AdjacentCount：22 份 / 11 份合并进 MapUtilities
 --
 -- 这两个函数本身逐字相同，风险全在跨文件之后 `local islands` 这个 upvalue
@@ -428,6 +529,7 @@ if failures == 0 then
     print("  v0 ≡ v1：math.random→GetRandomNumber 与 feature id→枚举 是纯重构")
     print("  v1b ≡ v2：发布版恰好等于 v1 + 缺陷① + 缺陷②，无第三种行为变化")
     print("  v2  ≡ v3：合并进 MapUtilities 的共享版本行为不变（默认入参与 Primordial 入参各测一遍）")
+    print("  v3 → v4：差异恰好是被保住的泛滥平原格，其它一格没动")
     print("  Adjacent / AdjacentCount 搬迁前后逐格同结果")
     os.exit(0)
 else

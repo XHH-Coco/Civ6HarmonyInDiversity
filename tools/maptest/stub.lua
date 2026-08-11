@@ -29,6 +29,10 @@ M.FEATURES = {
     -- 不在旧名单里的平地自然奇观，用来暴露缺陷 ②
     [9]  = { FeatureType = "FEATURE_EYE_OF_THE_SAHARA",     NaturalWonder = true },
     [10] = { FeatureType = "FEATURE_IK_KIL_CENOTE",         NaturalWonder = true },
+    -- 三种泛滥平原：不是自然奇观，所以旧守卫会把它们盖掉
+    [20] = { FeatureType = "FEATURE_FLOODPLAINS",           NaturalWonder = false },
+    [21] = { FeatureType = "FEATURE_FLOODPLAINS_GRASSLAND", NaturalWonder = false },
+    [22] = { FeatureType = "FEATURE_FLOODPLAINS_PLAINS",    NaturalWonder = false },
     [35] = { FeatureType = "FEATURE_VOLCANIC_SOIL",         NaturalWonder = false },
 }
 
@@ -43,6 +47,16 @@ M.F_FUJI        = 7
 M.F_NGORONGORO  = 8
 M.F_SAHARA_EYE  = 9
 M.F_IK_KIL      = 10
+M.F_FLOODPLAINS           = 20
+M.F_FLOODPLAINS_GRASSLAND = 21
+M.F_FLOODPLAINS_PLAINS    = 22
+
+-- 三种泛滥平原的集合，测试里判断"这格是不是泛滥"用
+M.FLOODPLAINS = {
+    [M.F_FLOODPLAINS]           = true,
+    [M.F_FLOODPLAINS_GRASSLAND] = true,
+    [M.F_FLOODPLAINS_PLAINS]    = true,
+}
 
 --------------------------------------------------------------------------------
 -- 地块
@@ -221,6 +235,9 @@ function M.makeEnv(world, rng)
     env.TerrainBuilder = TerrainBuilder
     env.GameInfo = { Features = M.FEATURES }
     env.g_FEATURE_VOLCANIC_SOIL = M.VOLCANIC_SOIL
+    env.g_FEATURE_FLOODPLAINS            = M.F_FLOODPLAINS
+    env.g_FEATURE_FLOODPLAINS_GRASSLAND  = M.F_FLOODPLAINS_GRASSLAND
+    env.g_FEATURE_FLOODPLAINS_PLAINS     = M.F_FLOODPLAINS_PLAINS
     env.DirectionTypes = { NUM_DIRECTION_TYPES = 6 }
     env.g_PLOT_TYPE_MOUNTAIN = 0
     env.g_PLOT_TYPE_HILLS = 1

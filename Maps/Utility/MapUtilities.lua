@@ -974,15 +974,27 @@ function AddVolcanicSoil(iSecondRingChance)
 
     local mWidth, mHeight = Map.GetGridSize();
 
-    -- 能不能在这一格铺火山土：水域、山地和任何自然奇观都不铺。
+    -- 能不能在这一格铺火山土：水域、山地、泛滥平原和任何自然奇观都不铺。
     -- 原先这里是三份互不一致的硬编码奇观名单，普通火山那一支甚至一份都没有，
     -- 会把平地上的自然奇观（如恩戈罗恩戈罗火山口、撒哈拉之眼）直接覆盖掉。
+    --
+    -- 泛滥平原也要跳过：覆盖掉地貌并不会让洪水停下（洪水看的是河流，不是地貌），
+    -- 结果是一格"会发洪水但没有泛滥平原"的地，容易触发别处的意外行为。
+    -- 火山旁边有泛滥就让一环少铺几格，这是刻意的。
     local function CanTakeVolcanicSoil(pPlot)
         if (pPlot:IsWater() or pPlot:IsMountain()) then
             return false;
         end
         local eFeature = pPlot:GetFeatureType();
-        if (eFeature ~= -1 and GameInfo.Features[eFeature].NaturalWonder) then
+        if (eFeature == -1) then
+            return true;
+        end
+        if (eFeature == g_FEATURE_FLOODPLAINS
+        or eFeature == g_FEATURE_FLOODPLAINS_GRASSLAND
+        or eFeature == g_FEATURE_FLOODPLAINS_PLAINS) then
+            return false;
+        end
+        if (GameInfo.Features[eFeature].NaturalWonder) then
             return false;
         end
         return true;
