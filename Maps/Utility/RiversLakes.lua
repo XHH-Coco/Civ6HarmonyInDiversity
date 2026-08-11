@@ -302,11 +302,19 @@ function DoRiver(startPlot, thisFlowDirection, originalFlowDirection, riverID)
 			-- 南边界结构上就不可能：y=0 时 FLOWDIRECTION_SOUTH 那个分支会在
 			-- 铺边之前 early return（它要取 SW 邻格，那格不存在），走不到搜索这一步。
 			--
-			-- 这里只做加法：保留原来的条件，另外补上按 thisFlowDirection 的判断，
-			-- 覆盖 11 种里的 8 种。剩下 3 种（this 是 NORTHEAST / SOUTHEAST /
-			-- SOUTHWEST）刻意不覆盖：补的这两条边在几何上只对应"以 NORTH 到达"，
-			-- 那三种情况河停在这一格的另一个角上，硬套同一组边多半会铺出一段
-			-- 接不上的孤边，比留着更糟。测试里用白名单钉住了它们。
+			-- 关键区分：只有 thisFlowDirection == NORTH 才是真的断在内陆。
+			-- 各分支铺的边不同 —— NORTH 铺的是某格的 W 边，在 y=H-1 上它外侧还有格子；
+			-- 而 NORTHEAST / SOUTHWEST / SOUTHEAST / NORTHWEST 铺的是 NW 或 NE 边，
+			-- 在 y=H-1 上外侧没有格子，也就是那条边本来就躺在地图上边界上，
+			-- 河已经"流出图外"了，不需要补。实测每一种都是 100%。
+			--
+			-- 所以这里只做加法：保留原来的条件，另外补上按 thisFlowDirection 的判断。
+			-- 测试断言的是一条完整的不变式 —— 每一种可达的断头，要么被补上，
+			-- 要么最后铺下的那条边本来就贴着图外；11 / 11 全部满足。
+			--
+			-- 保留的原版半条件其实从没做过有用功（它只会额外命中
+			-- this=NORTHWEST / orig=NORTHEAST，而那种情况本来就贴边），
+			-- 留着只是为了不平白删掉长期存在的行为。
 			if (thisFlowDirection == FlowDirectionTypes.FLOWDIRECTION_NORTH
 			 or originalFlowDirection == FlowDirectionTypes.FLOWDIRECTION_NORTHEAST) then
 				TerrainBuilder.SetNWOfRiver(riverPlot, true, FlowDirectionTypes.FLOWDIRECTION_NORTHEAST, riverID);

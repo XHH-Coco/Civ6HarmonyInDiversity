@@ -371,7 +371,7 @@ local function probeAll(w, h)
                         local py, t, o = logs[i]:match(
                             "RIVER DEAD END: %(%d+,(%d+)%) this=(%-?%d+) orig=(%-?%d+)")
                         if py then
-                            dead = { y = tonumber(py), this = tonumber(t), orig = tonumber(o) }
+                            dead = { y = tonumber(py), this = tonumber(t), orig = tonumber(o), at = i - 1 }
                         elseif logs[i]:find("NORTH EDGE OF MAP RIVER REPAIR") then
                             repaired = true
                         end
@@ -381,9 +381,23 @@ local function probeAll(w, h)
                                    or (dead.y == h - 1 and "北边界") or ("内陆 y=" .. dead.y)
                         local key = string.format("%-6s this=%-10s orig=%s",
                             where, FLOW_NAME[dead.this], FLOW_NAME[dead.orig])
-                        reach[key] = reach[key] or { count = 0, repaired = 0 }
+                        reach[key] = reach[key] or { count = 0, repaired = 0, onEdge = 0 }
                         reach[key].count = reach[key].count + 1
                         if repaired then reach[key].repaired = reach[key].repaired + 1 end
+                        -- 断头时最后铺下的那条边，外侧是不是图外？
+                        -- 是的话这条河其实已经贴着地图边界了，"续一格"没有意义。
+                        -- 只用 Map.GetAdjacentPlot 判断，不需要任何顶点/角的几何知识。
+                        for i = dead.at, n0 + 1, -1 do
+                            local side, ex, ey = logs[i]:match("^EDGE (%a+) (%d+),(%d+)$")
+                            if side then
+                                local d = (side == "W" and 4) or (side == "NW" and 5) or 0
+                                local dx, dy = neighborOffset(tonumber(ey), d)
+                                if at(world, tonumber(ex) + dx, tonumber(ey) + dy) == nil then
+                                    reach[key].onEdge = reach[key].onEdge + 1
+                                end
+                                break
+                            end
+                        end
                     end
                 end
             end
@@ -403,45 +417,48 @@ print("  early return，根本走不到搜索那一步。所以南边界压根�
 print("  注：orig=起点 那一行是本节直接构造出来的，真实递归里 original 一定已被赋值。")
 for _, k in ipairs(keys) do
     local r = reach[k]
-    print(string.format("    %-42s 命中 %-5d 补上 %-5d %s",
-        k, r.count, r.repaired, r.repaired == r.count and "" or "  ← 有漏网"))
+    print(string.format("    %-42s 命中 %-5d 补上 %-5d 末边贴图外 %-5d %s",
+        k, r.count, r.repaired, r.onEdge,
+        (r.repaired == r.count or r.onEdge == r.count) and "" or "  ← 既没补也不贴边"))
 end
 
--- 已知补不了的三种。补丁铺的那两条边（NW 走 NORTHEAST、W 走 NORTH）在几何上
--- 只对应"以 NORTH 流向到达这一格"；对下面这三种，河停在这一格的另一个角上，
--- 硬套同一组边多半会铺出一段接不上的孤边，比留着更糟。所以刻意不覆盖。
+-- 完整的不变式（不需要白名单）：
 --
--- 它们在 4 个场景、89742 次起河、232634 条河流边的随机采样里**一次都没出现**，
--- 只有在全陆地图上直接指定 (this, orig) 去调 DoRiver 才构造得出来。
--- 这里用白名单钉住：新出现没覆盖的组合会失败，白名单里的组合被覆盖了也会失败
--- （说明白名单过期了）。
-local KNOWN_UNCOVERED = {
-    ["this=NORTHEAST  orig=NORTHWEST"] = true,
-    ["this=SOUTHEAST  orig=NORTH"]     = true,
-    ["this=SOUTHWEST  orig=NORTH"]     = true,
-}
-
-local uncovered = 0
+--   每一种可达的断头，要么被补丁补上，要么它最后铺下的那条边本来就贴着图外。
+--
+-- 后半句是实测出来的：`thisFlowDirection` 是 NORTHEAST / SOUTHEAST / SOUTHWEST /
+-- NORTHWEST 时，分支铺的是 riverPlot 自己的 NW 或 NE 边；在 y=H-1 上这两条边
+-- 的外侧没有格子，也就是说这条河已经躺在地图上边界上了 —— 河本来就"流出图外"，
+-- 再补边纯属画蛇添足。只有 thisFlowDirection == NORTH 时铺的是某格的 W 边，
+-- 外侧有格子，河才是真的断在内陆，才需要补。
+--
+-- 判定只用 Map.GetAdjacentPlot，不需要任何六边形顶点/角的几何知识。
+local ok, needRepair, alreadyOnEdge = 0, 0, 0
 for _, k in ipairs(keys) do
+    local r = reach[k]
     if k:find("内陆") then
         fail("定向覆盖在内陆发现死胡同（%s）——和穷举结论矛盾", k)
     end
-    local combo = k:gsub("^%S+%s+", "")
-    local r = reach[k]
-    if r.repaired < r.count then
-        uncovered = uncovered + 1
-        if not KNOWN_UNCOVERED[combo] then
-            fail("新出现一种补不上的组合：%s（%d 次）", k, r.count - r.repaired)
-        end
-    elseif KNOWN_UNCOVERED[combo] then
-        fail("白名单过期：%s 现在已经补得上了，请把它从 KNOWN_UNCOVERED 去掉", k)
+    if r.repaired == r.count then
+        needRepair = needRepair + 1; ok = ok + 1
+    elseif r.onEdge == r.count then
+        alreadyOnEdge = alreadyOnEdge + 1; ok = ok + 1
+    else
+        fail("组合 %s：%d 次里补上 %d 次、贴边 %d 次，有既没补也不贴边的",
+             k, r.count, r.repaired, r.onEdge)
     end
 end
+print(string.format("  %d / %d 种满足不变式：%d 种靠补丁补上，%d 种本来就贴着图外",
+    ok, #keys, needRepair, alreadyOnEdge))
 
-local known = 0
-for _ in pairs(KNOWN_UNCOVERED) do known = known + 1 end
-print(string.format("  覆盖 %d / %d 种，已知不覆盖 %d 种（见 KNOWN_UNCOVERED 的说明）",
-    #keys - uncovered, #keys, known))
+-- 另一个方向的检查：补丁不该补那些本来就贴边的
+for _, k in ipairs(keys) do
+    local r = reach[k]
+    if r.repaired > 0 and r.onEdge == r.count then
+        print(string.format("  注：%s 本来就贴着图外，补丁仍然补了 %d 次（多铺两条边，无害但多余）",
+            k, r.repaired))
+    end
+end
 
 -- 穷举结论的实测校验：绝不该出现在内陆
 for k, v in pairs(stats.rows) do
