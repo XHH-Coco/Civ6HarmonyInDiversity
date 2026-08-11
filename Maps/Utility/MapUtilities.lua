@@ -588,9 +588,9 @@ function GenerateNextToCoastalLandDataTables()
 	return plotDataIsCoastal, plotDataIsNextToCoast
 end
 ------------------------------------------------------------------------------
-function TestMembership(table, value)
+function TestMembership(incoming_table, value)
 	local testResult = false;
-	for index, data in pairs(table) do
+	for index, data in pairs(incoming_table) do
 		if data == value then
 			testResult = true;
 			break
@@ -620,7 +620,7 @@ function GetShuffledCopyOfTable(incoming_table)
 	return shuffledVersion
 end
 --]]
--- DeepLogic version: implementation of Fisher¨CYates shuffle
+-- DeepLogic version: implementation of Fisherâ€“Yates shuffle
 function GetShuffledCopyOfTable(incoming_table)
 	-- Designed to operate on tables with no gaps. Does not affect original table.
 	local len = table.maxn(incoming_table);
@@ -629,8 +629,7 @@ function GetShuffledCopyOfTable(incoming_table)
 	for loop = 1, len do
 		copy[loop] = incoming_table[loop];
 	end
-	-- Fisher¨CYates shuffle
-	local left_to_do = table.maxn(copy);
+	-- Fisherâ€“Yates shuffle
 	for i = len, 1, -1 do
 		local random_index = 1 + TerrainBuilder.GetRandomNumber(i, "Shuffling table entry - Lua");
 		copy[random_index], copy[i] = copy[i], copy[random_index]

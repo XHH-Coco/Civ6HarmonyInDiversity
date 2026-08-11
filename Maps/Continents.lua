@@ -20,7 +20,7 @@ include "AssignStartingPlots"
 local g_iW, g_iH;
 local g_iFlags = {};
 local g_continentsFrac = nil;
-local featureGen = nil;
+local featuregen = nil;
 local world_age_new = 5;
 local world_age_normal = 3;
 local world_age_old = 2;
@@ -157,7 +157,6 @@ function GeneratePlotTypes(world_age)
 	end
 
 	-- Set values for hills and mountains according to World Age chosen by user.
-	local adjustment = world_age;
 	if world_age <= world_age_old  then -- 5 Billion Years
 		adjust_plates = adjust_plates * 0.75;
 	elseif world_age >= world_age_new then -- 3 Billion Years

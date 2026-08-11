@@ -24,8 +24,7 @@ local g_riverPlots = {};
 local g_riverStartPlots = {};
 local g_iRiverID = 0;
 local islands = {};
-local g_riverPlots = {};
-local g_riverStartPlots = {};
+local featuregen = nil;
 local g_iRiverID = 0;
 
 -------------------------------------------------------------------------------

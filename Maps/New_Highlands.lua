@@ -21,7 +21,7 @@ local g_iW, g_iH;
 local g_iFlags = {};
 local g_continentsFrac = nil;
 local islands = {};
-local featureGen = nil;
+local featuregen = nil;
 local world_age_old = 2;
 local world_age_normal = 6;
 local world_age_new = 7;
