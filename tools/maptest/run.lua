@@ -27,6 +27,9 @@ local V = {
     v1a = { label = "v1a 只修接缝",       path = here .. "/versions/v1a_seam_fixed.lua"    },
     v1b = { label = "v1b 再修奇观守卫",   path = here .. "/versions/v1b_wonder_guarded.lua"},
     v2  = { label = "v2  实际发布版",     path = here .. "/versions/v2_rewritten.lua"      },
+    -- 5.1 去重：25 份合并成 MapUtilities 里的一份，二环概率提成入参
+    v3  = { label = "v3  合并到 Utility",  path = here .. "/versions/v3_shared.lua"         },
+    v2p = { label = "v2  Primordial 版",   path = here .. "/versions/v2_primordial.lua"     },
 }
 
 --------------------------------------------------------------------------------
@@ -154,12 +157,12 @@ end
 
 --------------------------------------------------------------------------------
 
-local function runOne(v, build, mode, seed, oor)
+local function runOne(v, build, mode, seed, oor, arg1)
     local world = build(oor or "wrap")
     local before = S.snapshot(world)
     local env = S.makeEnv(world, MODES[mode].rng(seed))
     local fn = S.loadVersion(v.path, env)
-    local ok, err = pcall(fn)
+    local ok, err = pcall(fn, arg1)
     return { ok = ok, err = err, world = world, before = before,
              after = S.snapshot(world), scan = world.scan,
              sets = world.sets, rngCalls = world.rngCalls }
@@ -247,8 +250,13 @@ for _, mode in ipairs({ "place", "skip", "stream" }) do
         local r1a = runOne(V.v1a, c.build, mode, 4242)
         local r1b = runOne(V.v1b, c.build, mode, 4242)
         local r2  = runOne(V.v2,  c.build, mode, 4242)
+        -- 5.1 去重后的共享版本：默认入参走 24 张图的路径，传 2 走 Primordial 的路径
+        local r3  = runOne(V.v3,  c.build, mode, 4242)
+        local r2p = runOne(V.v2p, c.build, mode, 4242)
+        local r3p = runOne(V.v3,  c.build, mode, 4242, nil, 2)
 
-        for name, r in pairs({ v0 = r0, v1 = r1, v1a = r1a, v1b = r1b, v2 = r2 }) do
+        for name, r in pairs({ v0 = r0, v1 = r1, v1a = r1a, v1b = r1b, v2 = r2,
+                               v3 = r3, v2p = r2p, v3p = r3p }) do
             if not r.ok then fail("%s / %s：运行报错 %s", c.name, name, tostring(r.err)) end
         end
 
@@ -270,6 +278,21 @@ for _, mode in ipairs({ "place", "skip", "stream" }) do
             if r1b.rngCalls ~= r2.rngCalls then
                 fail("%s：v1b/v2 抽取次数 %d vs %d", c.name, r1b.rngCalls, r2.rngCalls)
             end
+
+            -- 断言 3：合并到 Utility 的版本与合并前逐格一致（默认入参）
+            ok, why = gridEq(r2, r3, r3.world)
+            if not ok then fail("%s：v2 ≠ v3 网格 —— %s", c.name, why) end
+            ok, why = listEq(r2.sets, r3.sets)
+            if not ok then fail("%s：v2 ≠ v3 的 SetFeatureType 序列 —— %s", c.name, why) end
+            if r2.rngCalls ~= r3.rngCalls then
+                fail("%s：v2/v3 抽取次数 %d vs %d", c.name, r2.rngCalls, r3.rngCalls)
+            end
+
+            -- 断言 4：传 2 时与 Primordial 合并前的版本一致
+            ok, why = gridEq(r2p, r3p, r3p.world)
+            if not ok then fail("%s：Primordial 版 ≠ v3(2) 网格 —— %s", c.name, why) end
+            ok, why = listEq(r2p.sets, r3p.sets)
+            if not ok then fail("%s：Primordial 版 ≠ v3(2) 的调用序列 —— %s", c.name, why) end
 
             -- 描述性统计（不作断言）
             d1a = d1a + gridDiffCount(r1, r1a, r1.world)
@@ -353,6 +376,7 @@ if failures == 0 then
     print("  通过")
     print("  v0 ≡ v1：math.random→GetRandomNumber 与 feature id→枚举 是纯重构")
     print("  v1b ≡ v2：发布版恰好等于 v1 + 缺陷① + 缺陷②，无第三种行为变化")
+    print("  v2  ≡ v3：合并进 MapUtilities 的共享版本行为不变（默认入参与 Primordial 入参各测一遍）")
     os.exit(0)
 else
     print(string.format("  失败 %d 项", failures))
