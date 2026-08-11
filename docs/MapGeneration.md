@@ -365,35 +365,158 @@ HD 覆盖了全部原版地图脚本（在 `DL.modinfo` 的 `ImportFiles` 里列
 
 要启用的话按 0..6 标定，参考 Lakes.lua，并注意这会显著改变那 10 张图的海岸线。
 
-### 5.3 十张图的世界纪元被局部变量屏蔽（未修，需要重新配平）
+### 5.3 十张图的世界纪元被局部变量屏蔽（未修，有可落地的方案）
 
 `GenerateMap()` 读设置、映射成数值、传给 `GeneratePlotTypes(world_age)`。
 但这 10 张图在函数体开头又写了一遍 `local world_age = 1;`（Highlands_XP2 是 2），
-**把入参遮住了**，于是世界纪元设置对陆海轮廓完全无效：
-
-| 地图 | 硬编码值 | 真实取值（老/正常/新） | mountainRatio 公式 | 现在 | 放开后 |
-|---|---|---|---|---|---|
-| Archipelago_XP2 | 1 | 1 / 2 / 3 | `4 + age*6` | 10 | 10 / 16 / 22 |
-| Continents_Islands | 1 | 1 / 2 / 3 | `4 + age*6` | 10 | 10 / 16 / 22 |
-| Great_Steppe | 1 | 1 / 2 / 4 | `10 + age*12` | 22 | 22 / 34 / 58 |
-| Wet_Lakes2 | 1 | 1 / 2 / 4 | `6 + age*12` | 18 | 18 / 30 / 54 |
-| Tiny_Islands | 1 | 1 / 2 / 3 | `4 + age*5` | 9 | 9 / 14 / 19 |
-| Great_Sand_Sea | 1 | 2 / 3 / 4 | `5 + age*7` | 12 | 19 / 26 / 33 |
-| Lakes | 1 | 2 / 3 / 5 | `8 + age*6` | 14 | 20 / 26 / 38 |
-| Tiny_Lakes | 1 | 2 / 3 / 5 | `15 + age*6` | 21 | 27 / 33 / 45 |
-| Forest_Highlands | 1 | 3 / 5 / 7 | `16 + age*5` | 21 | 31 / 41 / 51 |
-| Highlands_XP2 | 2 | 3 / 5 / 7 | `5 + age*4` | 13 | 17 / 25 / 33 |
+**把入参遮住了**。
 
 `Archipelago_XP2` 的这一行**原版 Firaxis 就有**，其余 9 张是 HD 侧引入的
-（原版 Lakes.lua 的 `GeneratePlotTypes()` 不带入参，函数体内自己读一遍设置，所以是好的）。
+（原版 `Lakes.lua` 的 `GeneratePlotTypes()` 不带入参，函数体内自己读一遍设置，所以是好的）。
 
-**不能直接删这一行。** 硬编码值普遍比"老世界"还小，删掉等于给 10 张图统一加 1.5～2.4 倍山脉，
-而且 `args.world_age` 还要喂给板块/分形生成。Wet_Lakes2 那行注释
-（"further lower the mountainRation in order to generate less lonely mountains"）说明作者当时
-是在**主动压低**山脉密度的，这个 `local world_age = 1` 未必全是失手。
+#### 先厘清"不生效"到底指什么
 
-要修的话建议按"正常纪元 = 今天的观感"重新配平：把 `world_age_normal` 设成现在的硬编码值，
-old/new 往两边各挪一格，而不是直接放开。这是手感活，需要 xhh 定。
+世界纪元有**三个**下游消费者，被遮住的只有其中两个：
+
+| 消费者 | 拿到的是 | 现状 |
+|---|---|---|
+| `AddTerrainFromContinents(..., world_age, ...)` | **外层的、活的** world_age | **一直在生效** |
+| `args.world_age` → `ApplyTectonics` | 被遮住的硬编码值 | 失效 |
+| `mountainRatio` → `AddLonelyMountains` | 被遮住的硬编码值 | 失效 |
+
+所以准确说法是：**火山数量一直在响应世界纪元设置，丘陵/山脉/板块不响应。**
+`AddTerrainFromContinents` 里是 `iDesiredVolcanoes = 陆地数 / ((8 - world_age) * 50)`。
+
+#### 两个失效消费者的量纲完全不同
+
+**`ApplyTectonics` 里 `adjustment` 的每一处用法都是加减法**，单位是**分形百分位点**：
+
+```lua
+adjust_plates  : <3 → ×0.75 ; ==3 → ×1.0 ; >3 → ×1.5     ← 阶跃，不连续
+hillsBottom1   = 28 - adj   ;  hillsTop1 = 28 + adj
+hillsBottom2   = 72 - adj   ;  hillsTop2 = 72 + adj
+hillsClumps    = 1 + adj
+hillsNearMountains = 91 - 2*adj - extra_mountains
+mountains      = 97 - adj - extra_mountains
+```
+
+这些值最后都喂给 `frac:GetHeight(百分位)`，所以**小数是合法的**。
+
+**`mountainRatio` 是"每几格陆地一座山"，越大山越少**：
+
+```lua
+iNewMountains = math.floor(iTotalLandPlots / mountainRatio) - iTotalMountains;
+if (iNewMountains < 0) then iNewMountains = 0; end       -- 只加不减
+```
+
+日志可以对上：Great Steppe 的 `mountainRatio = 10 + 1*12 = 22`，
+`New Mountains 50`，`Mountain Set 51`，反推陆地约 1100 格 —— 证实硬编码值确实在生效。
+
+> **更正一处早先的说法**：我之前写"删掉这一行等于统一加 1.5～2.4 倍山脉"，方向错了。
+> 放开之后 `mountainRatio` **变大**，孤峰**变少**；同时 `ApplyTectonics` 的
+> `mountains = 97 - adj` 阈值下降，造山带**变多**。原版是刻意让两者反向的 ——
+> 年轻世界山脉集中成脉，古老世界山脉被侵蚀但孤峰更散。所以那是一次**再分配**，
+> 不是单向增加。
+
+| 地图 | 硬编码 C | 真实取值（老/正常/新）| `args.world_age` | `mountainRatio` 公式 | 现在 | 直接放开后 |
+|---|---|---|---|---|---|---|
+| Archipelago_XP2 | 1 | 1 / 2 / 3 | `age + 0.25` | `4 + age*6` | 10 | 10 / 16 / 22 |
+| Continents_Islands | 1 | 1 / 2 / 3 | `age + 0.25` | `4 + age*6` | 10 | 10 / 16 / 22 |
+| Tiny_Islands | 1 | 1 / 2 / 3 | `age + 0.25` | `4 + age*5` | 9 | 9 / 14 / 19 |
+| Great_Steppe | 1 | 1 / 2 / 4 | `age` | `10 + age*12` | 22 | 22 / 34 / 58 |
+| Wet_Lakes2 | 1 | 1 / 2 / 4 | `age` | `6 + age*12` | 18 | 18 / 30 / 54 |
+| Great_Sand_Sea | 1 | 2 / 3 / 4 | `age` | `5 + age*7` | 12 | 19 / 26 / 33 |
+| Lakes | 1 | 2 / 3 / 5 | `age` | `8 + age*6` | 14 | 20 / 26 / 38 |
+| Tiny_Lakes | 1 | 2 / 3 / 5 | `age` | `15 + age*6` | 21 | 27 / 33 / 45 |
+| Forest_Highlands | 1 | 3 / 5 / 7 | `age` | `16 + age*5` | 21 | 31 / 41 / 51 |
+| Highlands_XP2 | 2 | 3 / 5 / 7 | `age` | `5 + age*4` | 13 | 17 / 25 / 33 |
+
+直接放开的问题很清楚：**"正常"档也会大幅偏离今天的观感**
+（Forest_Highlands 的 21 变 41，孤峰直接减半），而硬编码值是长期调出来的。
+
+#### 建议方案：把设置当"步长"作用上去，而不是替换
+
+保留硬编码值作为**"标准纪元"的基准**，全局设置只提供一个 `-1 / 0 / +1` 的步长。
+关键在于**两个消费者要用不同的作用方式**，因为量纲不同：
+
+**① `ApplyTectonics` 那边用加法。** 它的每一处用法都是加减、单位是百分位点，
+关心的是**绝对差**。用乘法的话，同一个"新世界"设置在 C=1 的图上是 +0.5 个百分点、
+在 C=2 的图上是 +1.0 个百分点 —— 同一个设置在不同图上含义不同，没有道理。
+
+**② `mountainRatio` 那边用乘法。** 公式是 `A + C*B`，其中 `B` 在 10 张图上
+从 4 变到 12。加法步长 δ 会让 `mountainRatio` 变化 `B*δ`，在不同图上是
++18% ~ +55% 不等；乘在最终值上才是统一的 ±20%。
+
+**③ 步长取 0.5，不取 1。** 两个必须躲开的点：
+
+- `adj == 0` 会让 `hillsBottom1 == hillsTop1 == 28`，**丘陵带宽度归零**。
+  9 张图的 C 是 1，减 1 就踩上。
+- `adj == 3` 是 `adjust_plates` 的阶跃点（`<3` ×0.75、`>3` ×1.5，正好等于 3 时
+  两个分支都不进、等于 ×1.0）。Highlands_XP2 的 C 是 2，加 1 就踩上，
+  板块数会突跳 33%。
+
+取 0.5 之后：C=1 的图 adj ∈ {0.5, 1, 1.5}，C=1.25 的三张岛图 ∈ {0.75, 1.25, 1.75}，
+Highlands_XP2 ∈ {1.5, 2, 2.5}。全部连续、非退化、不跨阶跃。
+
+**④ `mountainRatio` 的方向跟随原版**：年轻世界孤峰**更少**（造山带更多），
+所以 `新 → ×1.2`、`老 → ×0.8`。
+
+落地形态（以 Great_Steppe 为例）：
+
+```lua
+-- GenerateMap() 里，紧跟现有的 world_age 映射之后，多算一个步长。
+-- 不动 world_age 本身，所以火山那条路径（AddTerrainFromContinents）行为不变。
+local cfg = MapConfiguration.GetValue("world_age");
+if     cfg == 1 then g_iWorldAgeStep =  1;      -- 30 亿年（新）
+elseif cfg == 2 then g_iWorldAgeStep =  0;      -- 40 亿年（标准）
+elseif cfg == 3 then g_iWorldAgeStep = -1;      -- 50 亿年（老）
+else   g_iWorldAgeStep = TerrainBuilder.GetRandomNumber(3, "Random World Age - Lua") - 1;
+end
+```
+
+```lua
+function GeneratePlotTypes(world_age)
+    ...
+-   local world_age = 1;                          -- 遮住了入参
++   -- 硬编码值是长期调出来的基准，当作"标准纪元"；设置只提供 ±0.5 的步长。
++   -- 用加法：ApplyTectonics 里 world_age 的每一处都是加减，单位是分形百分位点。
++   -- 步长 0.5 是为了躲开 adj==0（丘陵带宽度归零）和 adj==3（adjust_plates 阶跃）。
++   local world_age = 1 + g_iWorldAgeStep * 0.5;
+    ...
+-   mountainRatio = 10 + world_age * 12;
++   -- 孤峰密度单独用乘法：mountainRatio 是"每几格陆地一座山"，越大山越少，
++   -- 而 A + C*B 里的 B 在 10 张图上从 4 变到 12，加法在各图上不等价。
++   -- 方向跟随原版：年轻世界造山带多、孤峰少。
++   mountainRatio = (10 + 1 * 12) * (1 + g_iWorldAgeStep * 0.2);
+```
+
+**"标准"档与今天逐位一致**（步长 0，两处都退化成原值），这是这个方案最重要的性质。
+
+顺带修掉一个不一致：现有的随机档是 `1 + GetRandomNumber(3)`，取 1..3，
+而映射常量可能是 3/5/7 —— 随机档和三个固定档根本不在一个量纲上。
+新写法的随机档是 `GetRandomNumber(3) - 1`，取 −1..+1，天然一致，
+而且随机数抽取次数不变。
+
+放开后的数值（步长 ±1、系数 0.5 / 0.2）：
+
+| 地图 | `adj` 老/标准/新 | `mountainRatio` 老/标准/新 |
+|---|---|---|
+| Archipelago_XP2 | 0.75 / 1.25 / 1.75 | 8 / 10 / 12 |
+| Continents_Islands | 0.75 / 1.25 / 1.75 | 8 / 10 / 12 |
+| Tiny_Islands | 0.75 / 1.25 / 1.75 | 7.2 / 9 / 10.8 |
+| Great_Steppe | 0.5 / 1 / 1.5 | 17.6 / 22 / 26.4 |
+| Wet_Lakes2 | 0.5 / 1 / 1.5 | 14.4 / 18 / 21.6 |
+| Great_Sand_Sea | 0.5 / 1 / 1.5 | 9.6 / 12 / 14.4 |
+| Lakes | 0.5 / 1 / 1.5 | 11.2 / 14 / 16.8 |
+| Tiny_Lakes | 0.5 / 1 / 1.5 | 16.8 / 21 / 25.2 |
+| Forest_Highlands | 0.5 / 1 / 1.5 | 16.8 / 21 / 25.2 |
+| Highlands_XP2 | 1.5 / 2 / 2.5 | 10.4 / 13 / 15.6 |
+
+以 Great_Steppe（陆地约 1100 格）为例，孤峰数从 62（老）/ 50（标准）/ 42（新）；
+同时 `mountains = 97 - adj` 阈值从 96.5 / 96 / 95.5，造山带反向变化。
+
+**两个系数（0.5 和 0.2）是可调的旋钮，不是推导出来的定值。**
+先按这个落地，觉得纪元"手感太弱"就同比放大，需要 xhh 拍板。
 
 ### 5.4 河流可能停在陆地上，没有入海口（原版缺陷）
 
@@ -401,88 +524,98 @@ old/new 往两边各挪一格，而不是直接放开。这是手感活，需要
 但有两条路会让它停在内陆：
 
 1. **找不到下一个流向**。候选流向只有"左转 60°"和"右转 60°"两个（不能直行、不能回头），
-   两个都拿不到相邻格时就断了。南北不环绕，所以这主要发生在贴近极地边缘的地方。
-   原版只给**一种**情况打了补丁 —— `originalFlowDirection == FLOWDIRECTION_NORTHEAST`
-   时补一条边把河送出北边界，就是那句 `*** NORTH EDGE OF MAP RIVER REPAIR ***`。
-   南边界和其它原始流向都没补。
+   还要能拿到一个用来打分的相邻格。
 2. **撞上已有河流的分支提前 `return`**。六个方向分支里各有一组
    `riverPlot:IsNEOfRiver()` / `IsNWOfRiver()` / `adjacentPlot:IsWOfRiver()` 判断，
    命中就直接返回。本意是"汇入已有河流"，但两条河的边未必真的接得上。
 
 这两种情况都会留下一段**逻辑上存在、但没有入海口**的河：`IsRiver()` 为真、给淡水、
 参与河流相邻加成，而河道模型可能画不出来 —— 与外部 modder 的说法一致。
-另外注意 `AddRivers` 排在 `AddCliffs` 和自然奇观**之前**，所以
+
+#### 第 1 条只可能发生在首末行（已穷举验证）
+
+把三个约束穷举了一遍（`GetOppositeFlowDirection(f) ~= original`、
+`f` 必须是 `this` 的左转或右转、打分用的相邻格不能是 nil）。
+`adjacentPlotFunctions` 里六个流向的打分方向是：
+
+| 流向 | 打分方向 | y=0 拿不到 | y=H−1 拿不到 |
+|---|---|---|---|
+| NORTH | `DIRECTION_NORTHWEST` | | ✔ |
+| NORTHEAST | `DIRECTION_NORTHEAST` | | ✔ |
+| SOUTHEAST | `DIRECTION_EAST` | | |
+| SOUTH | `DIRECTION_SOUTHWEST` | ✔ | |
+| SOUTHWEST | `DIRECTION_WEST` | | |
+| NORTHWEST | `DIRECTION_NORTHWEST` | | ✔ |
+
+东西向环绕，所以 `DIRECTION_EAST` / `DIRECTION_WEST` 永远拿得到。
+结论：**只有南北边界那两行会出现死胡同，内陆不可能。**
+
+穷举出 13 种 `(边界, thisFlowDirection, originalFlowDirection)` 组合，
+其中一种（`this=NORTH, original=起点`）在递归里不可达（进递归前 `original`
+一定已经被赋值），所以**实际可达 12 种：北边界 10 种、南边界 2 种**。
+原版那句 `*** NORTH EDGE OF MAP RIVER REPAIR ***` 只覆盖了
+`original == NORTHEAST` 的 2 种。
+
+顺带确认：`AddRivers` 排在 `AddCliffs` 和自然奇观**之前**，所以
 `GetRiverValueAtPlot` 里那段 `IsNWOfCliff()/IsNaturalWonder() → return -1`
 在标准流程里**是死代码**（那时地图上还没有峭壁和自然奇观）。
-顺带一提，它写成 `-1` 而分数是**越小越优**，真要是活的，效果会是让河流优先冲向峭壁和奇观。
+它写成 `-1` 而分数是**越小越优**，真要是活的，效果会是让河流优先冲向峭壁和奇观。
 
-**能修，但要先定行为**。两条路线：
+#### 补边界怎么落地
 
-- **回滚**：`DoRiver` 已经在记 `_rivers[plot] = riverID`，再记一份"这条河设过哪些边"，
-  递归结束时若没碰到水/边界就用 `SetWOfRiver(plot, false, ...)` 之类撤掉整条。
-  结果一定可渲染，代价是河变少。
-- **补边界**：把北边界那个补丁推广到南边界和其它原始流向，让断头河真的流出地图。
-  河不减少，但每种情况补哪条边要逐个推，且只能靠肉眼验收。
+已定方向：**不回滚，补边界**。分三步做，顺序不能反。
 
-两条都会改动全部 25 张图的河网，且让老种子失效。没动。
+**第一步：先量，别先改。** 在死胡同那个分支加一句诊断输出：
+
+```lua
+if (bestFlowDirection == FlowDirectionTypes.NO_FLOWDIRECTION) then
+    print(string.format("RIVER DEAD END: (%d,%d) this=%s orig=%s id=%d",
+        riverPlot:GetX(), riverPlot:GetY(),
+        tostring(thisFlowDirection), tostring(originalFlowDirection), riverID));
+    ...
+```
+
+跑一批图，看 12 种组合里**实际出现哪几种、每张图几条**。
+如果每张图只有 0～2 条，这件事的优先级要重新评估；
+如果北边界那 10 种里只有两三种真的出现，补丁的工作量会小很多。
+**在拿到这个数字之前写补丁是在猜。**
+
+**第二步：按"这一格自己拥有哪些边"来推出口。** Civ6 里每个格子只拥有
+**W、NW、NE** 三条边（另外三条属于邻格），河流边就存在这三个标志位上。
+
+- **北边界（y = H−1）**：格子的 NW 和 NE 边共用它的**北顶点**，
+  而北顶点正在地图上边界上。原版补丁走的是西侧：
+  `SetNWOfRiver(flow=NORTHEAST)` + `SetWOfRiver(flow=NORTH)`，
+  即沿西边往上爬到北顶点。东侧的对称走法是走 NE 边。
+- **南边界（y = 0）**：格子的 SW 和 SE 边**属于图外的邻格，根本没法设**。
+  唯一能碰到下边界的是 W 边的下端（西南顶点）。
+  所以南边界只有一种补法：`SetWOfRiver(flow=SOUTH)`。
+
+**第三步：offline 验收。** `DoRiver` 的依赖很少 —— `Map.GetAdjacentPlot`、
+`TerrainBuilder.Set{W,NW,NE}OfRiver`、几个 `plot:Is*` 谓词、`GetRandomNumber`，
+全部可以桩掉，塞进 [tools/maptest](../tools/maptest/)。
+然后断言一条**不需要看图就能验的性质**：
+
+> 每条河的边集合是连通的，且它的终点顶点要么落在水域格上，要么落在地图上下边界上。
+
+这正是"有有效入海口"的组合学表述。有了它就能给出补丁前后的
+"断头河条数"对比，而不是靠肉眼在游戏里找。
+
+**代价**：会改动全部 25 张图的河网，并让老种子失效。第 2 条（撞上已有河流）
+这次不处理 —— 它不在边界上，补边界解决不了，需要单独判断两条河是否真的接上。
 
 ### 5.5 开 Sukritact's Oceans 时海洋奢侈品可能一个都不放（第三方 mod 崩溃）
 
-现象：`Suk_ResourceGenerator.lua:354` 报
-`operator < is not supported for number < nil`，地图照样生成，看着像无害。
-其实不然。
+`Suk_ResourceGenerator.lua:354` 报 `operator < is not supported for number < nil`，
+地图照样生成，看着像无害，其实那一局的海洋奢侈品会全没。
 
-**后果**：那句是海洋奢侈品放置主循环里的排序，报错一路抛到
-`Suk_OceansMapGen.lua:14` 的 `include`，把整个脚本打断（日志里紧跟着
-`Error loading file`）。剩下的资源条目一个都不会走。日志那局崩在**第一条**
-（AMBER），所以那张图**一个海洋奢侈品都没有**。更糟的情况是：该文件在放置之前
-会先遍历所有水域把已有的奢侈品**删掉**再按大洲重放
-（`ResourceBuilder.SetResourceType(pPlot, -1)`），如果那一步删掉了 N 个然后崩在早期条目，
-原版放的那 N 个也一起没了。日志那局删了 0 个，所以只是"没有新增"。
+完整分析（Suk 那 7 个 Lua 文件各自在干什么、在主流程的哪个阶段生效、
+已证实的除零缺陷、崩溃的排查过程与修改方案）单独写在
+**[SukOceans.md](SukOceans.md)** 里。
 
-另外脚本开头就 `Game:SetProperty("Suk_Oceans_Resources_Spawned", true)`，
-读档不会重试。
-
-**已证实的一环**（拿真实的 `Suk_MapConvolution.lua` 跑出来的）：热力图全零时
-`DoNormalise` 的 `iRange = iMax - iMin` 为 0，`(v - iMin)/iRange` 让 1144/1144 格
-全部变成 `NaN`。全零正是日志里 `Removed luxuries from 0 tiles` 的情形 ——
-图上一格水域奢侈都没有（湖多海少的图很常见）。NaN 之后 `iMaxWeight` 保持 0、
-`iScore` 是 NaN、`GetRandomNumber(100) <= NaN` 恒假，于是**整个加权放置段完全失效**，
-所有资源都掉进 `iOccurences == 0` 的兜底分支无视权重乱放。这是一个独立的、
-不崩也在生效的缺陷。
-
-**但 NaN 不是崩溃的原因**。把 Lua 5.1 `ltablib.c` 的 `auxsort` 照抄一份插桩测过：
-比较函数恒假（全 NaN 就是这种）时，长度 1..259 全部**零次**越界读取 ——
-全 NaN 在"严格弱序"的意义下是合法的"全部相等"，排序不会走出数组。
-只有比较函数恒真时才会在 n=4 就把 `nil` 喂给比较函数。
-所以 `LuxuryWeight` 里必须存在**真正的 nil**；而报错形态是
-`number < nil`（恰好一个操作数是 nil）说明那张表是**部分填充**，不是空表。
-
-**唯一的写入点**是
-`for iPlot = 0, #tPlotsData.Plots do LuxuryWeight[iPlot] = tLuxuryMap.m_MapGrid[iPlot] end`。
-两个可疑处：
-
-1. `#tPlotsData.Plots`。该表键是 0..N-1，`#` 返回 N-1（唯一的 border），循环
-   `0..N-1` 刚好覆盖全图 —— 实测确实是 1143 / 1144 格。**所以它不是那个洞**，
-   但它是个雷：权重表的覆盖范围挂在另一张表的 `#` 上，而 `#` 是 border 不是计数。
-2. `tLuxuryMap.m_MapGrid` 本身短了。这张表被 `DoConvolution` 整体重建，
-   循环上界是 `self.m_MapWidth` / `self.m_MapHeight` —— 这两个是
-   `Suk_MapConvolution.lua` **首次加载时**抓的类级常量，其中
-   `m_MapHeight = Select(2, Map.GetGridSize())` 还要经过 `Select` 里的
-   Lua 5.0 时代 `arg` 表。这两个常量一旦和当前地图尺寸不符，网格尾部就没人写，
-   高位格子的权重就是 nil，正是这个报错。而 `DoNormalise` 用 `pairs` 遍历，
-   只改已存在的键，**填不了洞**。
-
-**没复现出来**：用真实源码搭桩跑过一张 44×26 / 单大洲 / 18 个湖 / 无海岸的图
-（照日志那局建的），跑得通、把 CAVIAR 和 AMBER 都放了（走的正是 NaN 兜底分支）。
-所以触发条件还差一块。下一步最省力的取证是找报告者要同一局的
-`Database.log` / `modding.log` 和确切的地图与设置。
-
-**修法**见下面的取舍；关键的好消息是：这个脚本是 `AddGameplayScripts`，
-在 `GenerateMap()` **之后**才跑，所以改它**不会影响 HD 自己的地形、河流、出生点**，
-也不会让老地图种子失效 —— 只会改同一种子下海洋资源的分布。
-
----
+一句话结论：**Suk 是 `AddGameplayScripts`，在 `GenerateMap()` 之后才跑**，
+所以修它不会动地形、河流、出生点，也不会让老地图种子失效 ——
+比 5.3 和 5.4 安全得多。
 
 ## 6. 怎么验证改动
 
