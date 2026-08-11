@@ -39,7 +39,7 @@ Map Script: Map Generation Fixing -- DeepLogic version ← HD 的收尾
 Map Script: -------------------------------
 YellowCraneGreatPeople: Load YellowCrane Lua Override  ← 开始加载 gameplay 脚本
 WorldCongress: Initializing World Congress Lua
-Suk_OceansMapGen: Number of Kelp Forests: 	0          ← Suk 在这里才开始
+Suk_OceansMapGen: Number of Kelp Forests:     0          ← Suk 在这里才开始
 ```
 
 接到 [MapGeneration.md 第 2 节](MapGeneration.md#2-主流程)那张流程图后面：
@@ -82,15 +82,15 @@ GenerateMap()
 
 ## 2. 文件职责一览
 
-| 文件 | 行数 | 角色 | 加载 |
-|---|---|---|---|
-| `Suk_OceansMapGen.lua` | 15 | 编排：按固定顺序 include 其余文件 | AddGameplayScripts |
-| `Suk_MapConvolution.lua` | 169 | 通用二维网格类：高斯模糊 + 归一化 | include（第 1 个） |
-| `Suk_ContinentJumpFlood.lua` | 190 | 把**每一格**（含水域）判给最近的大洲 | include（第 2 个） |
-| `PlotIterators.lua` | 209 | 六边形环形/面状迭代器（协程实现） | include（ResourceGenerator 内） |
-| `Suk_KelpGenerator.lua` | 175 | 铺海藻森林 | include（第 5 个） |
-| `Suk_ResourceGenerator.lua` | 418 | 按大洲重新投放海洋奢侈品 | include（第 6 个） |
-| `Suk_TemperatureLens.lua` + `.xml` | 107 | 温度透镜 UI —— **死代码，从未加载** | 无 |
+| 文件                                 | 行数  | 角色                      | 加载                           |
+| ---------------------------------- | --- | ----------------------- | ---------------------------- |
+| `Suk_OceansMapGen.lua`             | 15  | 编排：按固定顺序 include 其余文件   | AddGameplayScripts           |
+| `Suk_MapConvolution.lua`           | 169 | 通用二维网格类：高斯模糊 + 归一化      | include（第 1 个）               |
+| `Suk_ContinentJumpFlood.lua`       | 190 | 把**每一格**（含水域）判给最近的大洲    | include（第 2 个）               |
+| `PlotIterators.lua`                | 209 | 六边形环形/面状迭代器（协程实现）       | include（ResourceGenerator 内） |
+| `Suk_KelpGenerator.lua`            | 175 | 铺海藻森林                   | include（第 5 个）               |
+| `Suk_ResourceGenerator.lua`        | 418 | 按大洲重新投放海洋奢侈品            | include（第 6 个）               |
+| `Suk_TemperatureLens.lua` + `.xml` | 107 | 温度透镜 UI —— **死代码，从未加载** | 无                            |
 
 `Suk_OceansMapGen.lua` 的 include 列表还有两个不属于 Suk 的：
 
@@ -206,15 +206,15 @@ Suk 只用到 `PlotRingIterator(pPlot, 1..3)`，用来给刚放下的奢侈品�
 
 **第一步：建"温度场"。** 名字叫温度，实际是拿地形和地貌打分再抹开：
 
-| 来源 | 权重 |
-|---|---|
-| 丛林 | **+375** |
-| 沙漠 / 沙漠丘陵 / 沙漠山 | +150 |
-| 苔原 / 苔原丘陵 / 苔原山 | −100 |
-| 雪地 / 雪地丘陵 / 雪地山 | −50 |
-| 冰 | −50 |
-| 森林 | **−450** |
-| 其它 | 0 |
+| 来源              | 权重       |
+| --------------- | -------- |
+| 丛林              | **+375** |
+| 沙漠 / 沙漠丘陵 / 沙漠山 | +150     |
+| 苔原 / 苔原丘陵 / 苔原山 | −100     |
+| 雪地 / 雪地丘陵 / 雪地山 | −50      |
+| 冰               | −50      |
+| 森林              | **−450** |
+| 其它              | 0        |
 
 地貌优先于地形（先查 `tFeatureMap` 再查 `tTerrainMap`）。然后**模糊三次**
 （5×5、5×5、7×7）再归一化到 `[0,1]`。
@@ -272,7 +272,7 @@ AS LakeOnly FROM Resources WHERE SeaFrequency > 0
 
 > **关于"只能生成在湖里"**（群里问到的）：靠的是 `TypeTags` 上的
 > `CLASS_SUK_LAKE_ONLY` 标签，加上 Lua 里这一句：
->
+> 
 > ```lua
 > function CanHaveResource(pPlot, iResource)
 >     if tLakeOnly[iResource] then
@@ -280,7 +280,7 @@ AS LakeOnly FROM Resources WHERE SeaFrequency > 0
 >            and pPlot:IsLake() and (pPlot:GetResourceType() == -1)
 >     ...
 > ```
->
+> 
 > **不是 `LakeEligible` 列**。`LakeEligible` 只表示"允许出现在湖里"，做不到"只能在湖里"。
 > 原版 Suk 只给**鱼子酱**（`RESOURCE_SUK_CAVIAR`）打了这个标签。
 > HD 在 `ModSupport/SukOceans/DL_Adaptation.sql` 里给龙虾和海豹开了 `LakeEligible = 1`，
@@ -374,11 +374,11 @@ HD 往 `Resource_ValidFeatures` 里加东西（比如给鱼子酱开礁石）会
 
 `ModSupport/SukOceans/`，条件 `Suk_Oceans_Rework_Expansion2`：
 
-| 文件 | 内容 |
-|---|---|
-| `DL_Adaptation.sql` | 龙虾/海豹开 `LakeEligible`；调整产出；渔场可建在海藻上；鱼子酱可在礁石上；水族馆改造 |
-| `HD_Texts.sql` | 文本 |
-| `HD_Monopoly_Texts.sql` | 与"垄断与公司"模式叠加时的文本 |
+| 文件                      | 内容                                                 |
+| ----------------------- | -------------------------------------------------- |
+| `DL_Adaptation.sql`     | 龙虾/海豹开 `LakeEligible`；调整产出；渔场可建在海藻上；鱼子酱可在礁石上；水族馆改造 |
+| `HD_Texts.sql`          | 文本                                                 |
+| `HD_Monopoly_Texts.sql` | 与"垄断与公司"模式叠加时的文本                                   |
 
 另外 `ModSupport/Resourceful2/HD_Resourceful2.sql` 也会碰 `SeaFrequency`
 （虎鲸、鱼子酱），所以同时开 Resourceful 时海洋资源池会变。

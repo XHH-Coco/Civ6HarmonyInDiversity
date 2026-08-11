@@ -276,9 +276,32 @@ function DoRiver(startPlot, thisFlowDirection, originalFlowDirection, riverID)
 		end
 		
 		if(bestFlowDirection == FlowDirectionTypes.NO_FLOWDIRECTION) then
-		
+
+			-- 诊断：河流在这里断在陆地上了，没有入海口。
+			-- 穷举过方向搜索的三个约束：六个流向里只有指向南北的那几个会拿不到
+			-- 打分用的相邻格（东西向环绕），所以走到这里一定是在首行或末行，
+			-- 内陆不可能。打出来是为了统计"补边界"到底能收回多少条河。
+			print(string.format("RIVER DEAD END: (%d,%d) this=%d orig=%d id=%d",
+				riverPlot:GetX(), riverPlot:GetY(),
+				thisFlowDirection, originalFlowDirection, riverID));
+
 			-- Patch river to north edge of map if can't flow off their normally
-			if (originalFlowDirection == FlowDirectionTypes.FLOWDIRECTION_NORTHEAST) then
+			--
+			-- 原版只在 originalFlowDirection == NORTHEAST 时补。但决定"河现在停在这一格的
+			-- 哪个角上"的是 thisFlowDirection，不是 originalFlowDirection —— 补的那两条边
+			-- （NW 边走 NORTHEAST、W 边走 NORTH）只和"以 NORTH 流向到达这里"有关，
+			-- 跟这条河最初往哪流没关系。原版按 original 判，属于判错了变量，
+			-- 只是绝大多数时候两者恰好同时成立。
+			--
+			-- 离线统计（tools/maptest/river.lua，72 张图、43171 次起河、91596 条河流边）：
+			-- 走到这里 29 次，全部在北边界 y=H-1，内陆一次都没有，南边界也一次都没有。
+			-- 其中 24 次 orig 是 NORTHEAST（原版救得回），剩下 5 次是
+			-- this=NORTH / orig=NORTHWEST，原版救不回，就是那些没有入海口的河。
+			--
+			-- 这里只做加法：保留原来的条件，另外补上按 thisFlowDirection 的判断。
+			-- 南边界没有实测样本，不写没有依据的代码。
+			if (thisFlowDirection == FlowDirectionTypes.FLOWDIRECTION_NORTH
+			 or originalFlowDirection == FlowDirectionTypes.FLOWDIRECTION_NORTHEAST) then
 				TerrainBuilder.SetNWOfRiver(riverPlot, true, FlowDirectionTypes.FLOWDIRECTION_NORTHEAST, riverID);
 				TerrainBuilder.SetWOfRiver(riverPlot, true, FlowDirectionTypes.FLOWDIRECTION_NORTH, riverID);
 				print ("*** NORTH EDGE OF MAP RIVER REPAIR ***");

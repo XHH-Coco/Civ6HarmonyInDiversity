@@ -24,6 +24,7 @@ local featuregen = nil;
 local world_age_old = 2;
 local world_age_normal = 3;
 local world_age_new = 5;
+local g_iWorldAgeStep = 0;			-- 世界纪元步长：老 -1 / 标准 0 / 新 +1
 
 -------------------------------------------------------------------------------
 function GenerateMap()
@@ -40,14 +41,25 @@ function GenerateMap()
 	
 	--	local world_age
 	local world_age = MapConfiguration.GetValue("world_age");
+	-- 先算纪元步长，GeneratePlotTypes 用它去调那些原本被硬编码遮住的量。
+	-- 随机档改成直接抽步长：抽取次数和范围都没变，顺带修掉原先
+	-- `1 + rand(3)` 取 1..3、和 old/normal/new 常量不在一个量纲上的问题。
 	if (world_age == 1) then
-		world_age = world_age_new;
+		g_iWorldAgeStep = 1;		-- 30 亿年（新）
 	elseif (world_age == 2) then
-		world_age = world_age_normal;
+		g_iWorldAgeStep = 0;		-- 40 亿年（标准）
 	elseif (world_age == 3) then
+		g_iWorldAgeStep = -1;		-- 50 亿年（老）
+	else
+		g_iWorldAgeStep = TerrainBuilder.GetRandomNumber(3, "Random World Age - Lua") - 1;
+	end
+
+	if (g_iWorldAgeStep > 0) then
+		world_age = world_age_new;
+	elseif (g_iWorldAgeStep < 0) then
 		world_age = world_age_old;
 	else
-		world_age = 1 + TerrainBuilder.GetRandomNumber(3, "Random World Age - Lua");
+		world_age = world_age_normal;
 	end
 
 	plotTypes = GeneratePlotTypes(world_age);
@@ -135,7 +147,13 @@ function GeneratePlotTypes(world_age)
 	local peaks_ridge_flags = g_iFlags;
 	local has_center_rift = false;
 	local sea_level = 1;
-	local world_age = 1;
+	-- 硬编码值是长期调出来的，当作"标准纪元"的基准；全局设置只提供 ±0.5 的步长。
+	-- 用加法不用乘法：world_age 在下游全是加减用法（28±age、97-age、91-2*age…），
+	-- 单位是分形百分位点，关心的是绝对差；乘法会让同一个设置在不同图上含义不同。
+	-- 步长取 0.5 是为了躲开两个点：adj==0 会让丘陵带宽度归零，
+	-- adj==3 是 adjust_plates 的阶跃点（<3 ×0.75、>3 ×1.5，等于 3 时两边都不进）。
+	local world_age_base = 1;
+	local world_age = world_age_base + g_iWorldAgeStep * 0.5;
 
 	local water_percent_modifier = 0; 
 
@@ -238,7 +256,10 @@ function GeneratePlotTypes(world_age)
 	-- args.extra_mountains = 5; -- original setting
 	args.extra_mountains = -1;
 	-- mountainRatio = 8 + world_age * 3; -- original setting
-	mountainRatio = 8 + world_age * 6;
+	-- 孤峰密度单独用乘法：mountainRatio 是"每几格陆地一座山"，越大山越少，
+	-- 而 A + C*B 里的 B 在 10 张图上从 4 变到 12，加法在各图上不等价。
+	-- 方向跟随原版：年轻世界造山带多、孤峰少。
+	mountainRatio = (8 + world_age_base * 6) * (1 + g_iWorldAgeStep * 0.2);
 
 	plotTypes = ApplyTectonics(args, plotTypes);
 	plotTypes = AddLonelyMountains(plotTypes, mountainRatio);
