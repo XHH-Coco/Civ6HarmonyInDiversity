@@ -104,10 +104,15 @@ end
 
 ### 地图生成流程文档
 
-新增 [Maps/MapGeneration.md](../Maps/MapGeneration.md)，讲清 `GenerateMap()` 的 15 个步骤、
-随机数模型、以及 HD 相对原版改了什么。末尾列出审计中发现但**尚未修**的 6 个问题：
-25 份复制粘贴、`local featureGen` 死变量、`AddGoodies` 多放一个村庄、
-`MapUtilities.lua` 混入 GBK 字节、随机海平面取不到最低档，以及若干零碎。
+新增 [docs/MapGeneration.md](../docs/MapGeneration.md)，讲清 `GenerateMap()` 的 15 个步骤、
+随机数模型、以及 HD 相对原版改了什么。
+
+文档放在新建的 `docs/` 下，专门存放说明文档；`tools/maptest/README.md` 留在工具目录里
+不动，它是那个工具的使用说明。
+
+末尾列出审计中发现但**仍未修**的问题：25 份复制粘贴、`AddGoodies` 多放一个村庄、
+随机海平面取不到最低档、出生点肥沃度里字符串键表的浮点求和顺序，以及浮点 RNG 上界。
+（原先列的 `local featureGen` 死变量和 GBK 字节已在本次一并修掉，不再列出。）
 
 ### 地图种子失效修复
 

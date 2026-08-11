@@ -40,7 +40,7 @@ TerrainBuilder.GetRandomNumber(range, "描述字符串")   -- 返回 0 .. range-
 无法靠种子复现。
 
 而且它连"每次开图都一样"都做不到。Civ6 内嵌的是 Lua 5.1/5.2 系
-（判据：[MapUtilities.lua:626](Utility/MapUtilities.lua) 在用 5.3 已移除的 `table.maxn` 且能正常工作，
+（判据：[MapUtilities.lua:626](../Maps/Utility/MapUtilities.lua) 在用 5.3 已移除的 `table.maxn` 且能正常工作，
 至少可以确定不是 5.3+），这一代的 `math.random` 直接包 C 运行库的 `rand()`，
 状态跟**进程**走而不是跟 Lua 状态机走。代码里也从没调用过 `math.randomseed`。
 于是同一次启动内连续开图，随机流会一直往前推，第二次开图和第一次结果不同；重启游戏又回到起点。
@@ -65,13 +65,13 @@ TerrainBuilder.GetRandomNumber(range, "描述字符串")   -- 返回 0 .. range-
 |---|---|
 | 1/n 概率 | `GetRandomNumber(n, "...") == 0` |
 | 均匀取 `a..b` | `a + GetRandomNumber(b - a + 1, "...")` |
-| 洗牌 | `GetShuffledCopyOfTable(t)`（Fisher–Yates，[MapUtilities.lua:624](Utility/MapUtilities.lua)） |
+| 洗牌 | `GetShuffledCopyOfTable(t)`（Fisher–Yates，[MapUtilities.lua:624](../Maps/Utility/MapUtilities.lua)） |
 
 ---
 
 ## 2. 主流程
 
-以 [Continents.lua](Continents.lua) 的 `GenerateMap()` 为准。25 个地图脚本骨架相同，
+以 [Continents.lua](../Maps/Continents.lua) 的 `GenerateMap()` 为准。25 个地图脚本骨架相同，
 差别在参数和少数几步是否启用。
 
 ```
@@ -141,7 +141,7 @@ end
 
 分形噪声决定哪里是陆地。核心是一个**海平面百分比**：噪声高度低于阈值的格子是海。
 
-HD 改了海平面常量（[Continents.lua:125](Continents.lua)）：
+HD 改了海平面常量（[Continents.lua:125](../Maps/Continents.lua)）：
 
 | | 原版 | HD |
 |---|---|---|
@@ -185,7 +185,7 @@ HD 改了海平面常量（[Continents.lua:125](Continents.lua)）：
 ### 步骤 5–6：河流与湖泊
 
 `AddRivers()` 从高地找源头，沿"河流值"最低的方向逐格推进入海。方向选择在
-[RiversLakes.lua:252](Utility/RiversLakes.lua) 的 `DoRiver` 里，本身不抽随机数，
+[RiversLakes.lua:252](../Maps/Utility/RiversLakes.lua) 的 `DoRiver` 里，本身不抽随机数，
 完全由地形高度决定 —— 所以河流是地形的确定性函数。
 
 `AddLakes(n)` 的 `n` 由地图脚本给：Continents 用
@@ -238,7 +238,7 @@ end
 硬编码名单，新增的自然奇观（含第三方 mod 的）自动受保护。
 
 > **二环的实际概率不是 1/3。** 二环循环嵌在一环循环内部
-> （[Continents.lua:398](Continents.lua)），所以一个二环格子每邻接一个一环格子就被摇一次。
+> （[Continents.lua:398](../Maps/Continents.lua)），所以一个二环格子每邻接一个一环格子就被摇一次。
 > 六边形网格上，二环的"角"格只邻接 1 个一环格，"边"格邻接 2 个 ——
 > 于是角格 33%、边格 55.6%。如果你想调整火山土密度，改的是这个复合概率，不是字面的 1/3。
 > 这个行为是**刻意保留**的（原实现如此，改掉会显著改变火山土观感），代码里有注释说明。
@@ -289,10 +289,10 @@ MIN_BARBARIAN_FERTILITY = 50,
 
 ### 步骤 15：AddGoodies —— 部落村庄
 
-HD 重写了这一步（[MapUtilities.lua:800](Utility/MapUtilities.lua)）。
+HD 重写了这一步（[MapUtilities.lua:800](../Maps/Utility/MapUtilities.lua)）。
 原版是按扫描顺序逐格 50% 掷骰，密度靠"已放数/已扫描数"动态控制，结果偏少且有扫描顺序偏置。
 HD 版改为：把全图格子索引洗牌，然后按洗牌顺序放满 `floor(总格数 / TilesPerGoody)` 个。
-另外把雪地排除在外（[MapUtilities.lua:698](Utility/MapUtilities.lua)）。
+另外把雪地排除在外（[MapUtilities.lua:698](../Maps/Utility/MapUtilities.lua)）。
 
 ---
 
@@ -328,39 +328,31 @@ HD 覆盖了全部原版地图脚本（在 `DL.modinfo` 的 `ImportFiles` 里列
 
 ## 5. 已知工程问题
 
-按影响排序。这些是**当前代码里存在的**，记录在此以免重复发现。
+按影响排序。这些是**当前代码里仍然存在的**，记录在此以免重复发现。
 
 > 已修复的不再列在这里，见 [changelog_cloud.md](../Changelog/changelog_cloud.md)：
 > 61 处 `math.random`、125 处硬编码 feature id、`AddVolcanicSoil` 的 X 循环越界、
-> 三处不一致的奇观排除名单。
+> 三处不一致的奇观排除名单、`local featureGen` 死变量、`MapUtilities.lua` 的 GBK 字节，
+> 以及几个未被读取的局部变量。
 
 ### 5.1 大规模复制粘贴
 
-| 函数 | 重复份数 |
-|---|---|
-| `AddVolcanicSoil` | 25（逐字相同） |
-| `GenerateFractalLayerWithoutHills` | 22 |
-| `Adjacent` | 22 |
-| `AdjacentCount` | 11 |
+| 函数 | 重复份数 | 备注 |
+|---|---|---|
+| `AddVolcanicSoil` | 25 | 逐字相同，最好合并 |
+| `GenerateFractalLayerWithoutHills` | 22 | **不相同**，`(a,b)` 参数和分形指数逐图调过，合并要参数化 |
+| `Adjacent` | 22 | 读文件级全局 `islands`，搬走要连状态一起搬 |
+| `AdjacentCount` | 11 | 同上 |
 
 后果是具体的：修 `math.random` 那个 bug 要改 61 处、去掉火山土硬编码要改 125 处，
-而且上面 5.1 和 5.2 两个问题也是一次写错、复制 25 份。
-这些函数不依赖单张地图的参数，完全可以提到 `Utility/` 里。
+而且 X 循环越界和奇观名单不一致这两个缺陷也都是一次写错、复制 25 份。
 
-### 5.2 `local featureGen` 是死变量（25 个文件）
+动手前建议先扩展 [tools/maptest](../tools/maptest/) 的桩来覆盖目标函数——
+后两个的合并风险明显高于第一个。
 
-```lua
-local featureGen = nil;             -- 声明了，从没用过
-...
-featuregen = FeatureGenerator.Create(args);   -- 小写 g，是个全局变量
-```
+### 5.2 `AddGoodies` 多放一个村庄
 
-现在能跑，因为每次生成只加载一个地图脚本，全局不会撞车。但这是个陷阱：
-读代码的人会以为 `featureGen` 是那个变量。
-
-### 5.3 `AddGoodies` 多放一个村庄
-
-[MapUtilities.lua:833](Utility/MapUtilities.lua)：
+[MapUtilities.lua:833](../Maps/Utility/MapUtilities.lua)：
 
 ```lua
 if (iNeedtoPlace >= 0) then          -- ← 应为 > 0
@@ -370,15 +362,9 @@ if (iNeedtoPlace >= 0) then          -- ← 应为 > 0
 
 计数从 N 递减到 0 都会放置，实际放了 N+1 个。影响微小，但是个确凿的 off-by-one。
 
-### 5.4 `MapUtilities.lua` 混入 GBK 字节
+### 5.3 随机海平面取不到最低档
 
-第 623 行注释里的 `Fisher–Yates` 破折号是 GBK 编码的 `A8 43`，
-使这个文件成为 `Maps/` 下唯一不是合法 UTF-8 的文件。目前只在注释里不影响运行，
-但往这个文件加中文注释时要小心编码被二次破坏。
-
-### 5.5 随机海平面取不到最低档
-
-[Continents.lua:156](Continents.lua)：
+[Continents.lua:155](../Maps/Continents.lua)：
 
 ```lua
 water_percent = GetRandomNumber(sea_level_high - sea_level_low, "...") + sea_level_low + 1;
@@ -388,24 +374,49 @@ water_percent = GetRandomNumber(sea_level_high - sea_level_low, "...") + sea_lev
 固定档位是 40 / 45 / 50，随机档的范围却是 41–50，取不到 40。
 沿用自原版的写法，HD 只改了常量。差一档，影响很小。
 
-### 5.6 其它零碎
+### 5.4 出生点肥沃度里的浮点求和顺序
+
+[AssignStartingPlots.lua:490](../Maps/Utility/AssignStartingPlots.lua)：
+
+```lua
+for k, v in pairs(RingOnePlotYields) do          -- 字符串键
+    totalFertility = totalFertility + yieldWeight[k] * v * innerRingWeight;
+```
+
+这是地图生成里**唯一**一处对字符串键表的 `pairs()` 遍历，而循环体是浮点求和。
+浮点加法不满足结合律，遍历顺序不同会让结果差 ULP 级；权重里有 `1/3`、`2/3`
+这类无限二进制小数，所以差异真实存在。
+
+Lua 5.1 的字符串哈希不随机化，顺序固定，无影响；5.2+ 才逐进程随机。
+现有证据只能把 Civ6 缩到 ≤5.2。即便在 5.2 下影响也接近零——同一次运行内所有候选点
+用同一个顺序，是整体同向偏移，相对排序基本不变。
+
+想彻底消掉是一行：改成 `for row in GameInfo.Yields() do` 再索引。
+
+### 5.5 其它零碎
 
 - `GetRandomNumber(iBoundaryPlotsPerVolcano * .7, ...)` 传的是浮点数（18 处）。
   能跑（底层截断），但依赖未声明的行为。而且当这个值小于 1 时，`== 0` 恒真，火山会连片。
-- `Continents.lua:160` 的 `local adjustment = world_age` 从未被使用。
-- `MapUtilities.lua:591` 的 `TestMembership(table, value)` 把参数命名为 `table`，
-  遮蔽了标准库。函数内部没用到 `table.*` 所以现在没事。
-- `GetShuffledCopyOfTable` 新版里 `local left_to_do` 是旧版残留，未使用。
 
 ---
 
 ## 6. 怎么验证改动
 
-1. **看日志**。`GenerateMap()` 里的 `print` 会进 Civ6 用户目录的 `Logs/Lua.log`。
+1. **跑差分测试**——[tools/maptest](../tools/maptest/)。它把地图函数从游戏里摘出来、
+   桩掉引擎接口，逐格对比改动前后的行为。目前只覆盖 `AddVolcanicSoil`，
+   要测别的函数照着 `stub.lua` 补接口即可。
+   **这是唯一能给出确定性结论的办法**，比开很多局强。
+2. **看日志**。`GenerateMap()` 里的 `print` 会进 Civ6 用户目录的 `Logs/Lua.log`。
    `GetRandomNumber` 的第二个参数也会出现在随机数日志里，可以用来核对抽取顺序。
-2. **测种子复现**。在高级设置里手填地图种子，开两局对比。注意要**重启游戏**再测第二次 ——
+3. **实机冒烟测试**。1～2 局，确认不报错、地貌正常生成。不需要资深玩家。
+4. **测种子复现**。在高级设置里手填地图种子，开两局对比。注意要**重启游戏**再测第二次 ——
    如果哪天又有人引入 `math.random`，同一次进程内连开两局才能暴露问题。
-3. **改了任何抽取次数，老种子就失效**。这是预期行为，在 changelog 里写明即可。
+
+> **改了任何抽取次数，老种子就失效**。随机流是共享有序的，增删一次抽取会让之后所有结果
+> 整体位移。这是预期行为，不是 bug，在 changelog 里写明即可。
+>
+> 同理，**同种子同图的前提是配置完全一致**：地图参数、文明与城邦数量、启用的 mod 集合
+> 与加载顺序、游戏模式。差一个资源包，出来就是完全不同的图。
 
 ---
 
