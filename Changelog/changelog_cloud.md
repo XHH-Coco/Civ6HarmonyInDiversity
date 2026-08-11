@@ -31,12 +31,23 @@ Civ6 只有 `TerrainBuilder.GetRandomNumber` 走地图 RNG，由 `MapConfigurati
 注意：新增的 `GetRandomNumber` 调用会消耗地图 RNG 流，因此**同一种子在本次修改前后生成的
 地图不同**。这是一次性的，此后同种子可复现。
 
-### 未处理，待定
+### 游戏侧 `math.random` 一并修掉
 
-- `Gameplay/Misc.lua:145` 城邦弓箭手回合数仍用 `math.random(min, max)`。它在游戏侧不在地图侧，
-  不影响地图种子，但同样有 desync 风险。
-- `AddVolcanicSoil()` 里火山土 feature id 硬编码为 `35`，未用 `MapEnums.lua` 已有的
-  `g_FEATURE_VOLCANIC_SOIL`。当前工作正常，属健壮性问题。
+`Gameplay/Misc.lua:145` 城邦弓箭手回合数原用 `math.random(min, max)`，改为
+`min + TerrainBuilder.GetRandomNumber(max - min + 1, "City State Archer Turn")`。
+它在游戏侧不在地图侧，不影响地图种子，但同样有多人游戏 desync 风险；同文件 217 行的保底
+战略资源本来就用的 `GetRandomNumber`，现在两处一致了。
+
+至此除 `Gameplay/Religions.lua:23` 一行已注释的死代码外，仓库内无 `math.random`。
+
+### 火山土 feature id 去硬编码
+
+`AddVolcanicSoil()` 里 `SetFeatureType(plot, 35)` 共 125 处（每图 5 处，其中 2 处走随机、
+3 处无条件），全部改为 `g_FEATURE_VOLCANIC_SOIL`（[MapEnums.lua:67](../Maps/Utility/MapEnums.lua) 已定义）。
+
+原来同一个函数**读**特征用名字（`FeatureType ~= "FEATURE_SUK_FUJI"`）、**写**用数字，不一致；
+周围代码本来也都在用 `g_FEATURE_VOLCANO` / `g_FEATURE_ICE`，现在统一了。行为等价——mod 自身
+不往 `Features` 表插行，35 是基础游戏索引；此改动防的是第三方 mod 插行导致索引漂移。
 
 ## 2026-08-08
 

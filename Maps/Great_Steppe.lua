@@ -855,7 +855,7 @@ function AddVolcanicSoil()
                     local tNeighborPlots = Map.GetAdjacentPlots(CoordinateX,CoordinateY);
                     for _, pNeighborPlot in ipairs(tNeighborPlots) do
                         if (not pNeighborPlot:IsWater() and not pNeighborPlot:IsMountain()) then
-                            TerrainBuilder.SetFeatureType(pNeighborPlot,35);
+                            TerrainBuilder.SetFeatureType(pNeighborPlot, g_FEATURE_VOLCANIC_SOIL);
                         end
                     end
                 end
@@ -870,10 +870,10 @@ function AddVolcanicSoil()
                             if (pNeighborPlot:GetFeatureType() ~= -1) then
                                 if (GameInfo.Features[pNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_EYJAFJALLAJOKULL"
                                 and GameInfo.Features[pNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_SUK_NGORONGORO_CRATER") then
-                                    TerrainBuilder.SetFeatureType(pNeighborPlot,35);
+                                    TerrainBuilder.SetFeatureType(pNeighborPlot, g_FEATURE_VOLCANIC_SOIL);
                                 end
                             else
-                                TerrainBuilder.SetFeatureType(pNeighborPlot,35);
+                                TerrainBuilder.SetFeatureType(pNeighborPlot, g_FEATURE_VOLCANIC_SOIL);
                             end
                         end
                         --二环随机生成
@@ -887,12 +887,12 @@ function AddVolcanicSoil()
                                     and GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_SUK_FUJI"
                                     and GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_SUK_NGORONGORO_CRATER") then
                                         if (TerrainBuilder.GetRandomNumber(3, "Volcanic Soil - Lua") == 0) then
-                                            TerrainBuilder.SetFeatureType(rNeighborPlot,35);
+                                            TerrainBuilder.SetFeatureType(rNeighborPlot, g_FEATURE_VOLCANIC_SOIL);
                                         end
                                     end
                                 else
                                     if (TerrainBuilder.GetRandomNumber(3, "Volcanic Soil - Lua") == 0) then
-                                        TerrainBuilder.SetFeatureType(rNeighborPlot,35);
+                                        TerrainBuilder.SetFeatureType(rNeighborPlot, g_FEATURE_VOLCANIC_SOIL);
                                     end
                                 end
                             end
