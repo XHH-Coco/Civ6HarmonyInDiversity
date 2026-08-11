@@ -487,12 +487,17 @@ function AssignStartingPlots:__DLPreparePlotFertilities()
 		yieldWeight['YIELD_GOLD'] = 1 / 3;
 		yieldWeight['YIELD_FAITH'] = 2 / 3;
 		-- xiaoxiaocat: end
-        for k, v in pairs(RingOnePlotYields) do
-            totalFertility = totalFertility + yieldWeight[k] * v * innerRingWeight;
+        -- 按数据库行序累加，而不是 pairs 的哈希序。浮点加法不满足结合律，
+        -- 而权重里有 1/3、2/3 这类无限二进制小数，所以遍历顺序会影响末位。
+        -- 这原本是地图生成里唯一一处对字符串键表的 pairs 遍历。
+        for row in GameInfo.Yields() do
+            local k = row.YieldType;
+            totalFertility = totalFertility + yieldWeight[k] * RingOnePlotYields[k] * innerRingWeight;
         end
         -- Sum of fertility for range-2 ring.
-        for k, v in pairs(RingTwoPlotYields) do
-            totalFertility = totalFertility + yieldWeight[k] * v;
+        for row in GameInfo.Yields() do
+            local k = row.YieldType;
+            totalFertility = totalFertility + yieldWeight[k] * RingTwoPlotYields[k];
         end
         -- Shortage of food of inner ring decreases score.
         if RingOnePlotYields['YIELD_FOOD'] <= popConsumFood * 3 then

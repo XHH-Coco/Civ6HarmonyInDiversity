@@ -6,6 +6,58 @@ bingyang1132 的长期分支。本文件按时间倒序记录本分支的改动�
 
 ## 2026-08-10
 
+### 清掉剩下四个地图缺陷（5.2–5.5）
+
+趁人工测试还没铺开，把文档里列的四个小缺陷一次做完——每个都会让种子位移，
+分四次提交就是让群里的人四次作废种子。合进 xhh_reborn 的三个提交之后一起发布。
+
+**① `AddGoodies` 多放一个村庄**（[MapUtilities.lua:833](../Maps/Utility/MapUtilities.lua)）
+
+```lua
+-if (iNeedtoPlace >= 0) then      ...      if (iNeedtoPlace < 0) then break; end
++if (iNeedtoPlace > 0) then       ...      if (iNeedtoPlace <= 0) then break; end
+```
+
+计数从 N 递减到 0 都会放置，实际放了 N+1 个。**不消耗随机数**——洗牌在循环之前，
+循环本身不抽——所以这一处不影响种子，只是村庄少一个。
+
+**② 随机海平面取不到最低档**（15 个地图脚本）
+
+```lua
+-GetRandomNumber(sea_level_high - sea_level_low, "...") + sea_level_low + 1;   -- 41..50
++GetRandomNumber(sea_level_high - sea_level_low + 1, "...") + sea_level_low;   -- 40..50
+```
+
+固定档位是 40 / 45 / 50，随机档却取不到 40。只在海平面设为「随机」时生效；
+抽取次数不变，但取值分布变了。
+
+**③ 出生点肥沃度的浮点求和顺序**（[AssignStartingPlots.lua:490](../Maps/Utility/AssignStartingPlots.lua)）
+
+原来用 `pairs(RingOnePlotYields)` 累加，而这个表是**字符串键**——是地图生成里唯一一处。
+浮点加法不满足结合律，权重里又有 `1/3`、`2/3` 这类无限二进制小数，所以遍历顺序会影响末位。
+Lua 5.1 的字符串哈希不随机化、顺序固定；5.2+ 才逐进程随机，而现有证据只能把 Civ6 缩到 ≤5.2。
+
+改成按 `GameInfo.Yields()` 的行序累加。至此**地图生成的随机性完全收敛到地图种子**。
+
+**④ 浮点 RNG 上界**（8 个脚本 × 3 处 = 24 处）
+
+```lua
+-GetRandomNumber(iBoundaryPlotsPerVolcano * 1.5, "Volcano 2 from boundary")
++GetRandomNumber(math.max(1, math.floor(iBoundaryPlotsPerVolcano * 1.5)), "Volcano 2 from boundary")
+```
+
+`iBoundaryPlotsPerVolcano` 来自除法，恒为浮点；不带乘数的那 8 处同样是浮点，
+之前漏数了。除了依赖未声明的截断行为，更实际的问题是**值小于 1 时上界变 0，
+`== 0` 恒真会让板块边界火山连片**。取整并夹到至少 1，保留「想要的火山数超过可用地块时
+就铺满」这个意图。
+
+差分测试仍然全绿（这四处都不在 `AddVolcanicSoil` 里）。
+
+### 合入 xhh_reborn
+
+`77ea7af 德国重做`、`feee1b1 宗教社区修改`、`840f58c 海外投资人修改`。
+未触及 `Maps/`，无冲突。
+
 ### 差分测试：证明上面那批改动没有夹带私货
 
 新增 [tools/maptest](../tools/maptest/)。起因是 leader 要求验证重写和原写法等价，

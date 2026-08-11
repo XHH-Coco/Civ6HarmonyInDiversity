@@ -328,75 +328,30 @@ HD 覆盖了全部原版地图脚本（在 `DL.modinfo` 的 `ImportFiles` 里列
 
 ## 5. 已知工程问题
 
-按影响排序。这些是**当前代码里仍然存在的**，记录在此以免重复发现。
+> 已修复的见 [changelog_cloud.md](../Changelog/changelog_cloud.md)：61 处 `math.random`、
+> 125 处硬编码 feature id、`AddVolcanicSoil` 的 X 循环越界与三处不一致的奇观排除名单、
+> 死声明与 GBK 字节、`AddGoodies` 的 off-by-one、随机海平面取不到最低档、
+> 出生点肥沃度的浮点求和顺序、浮点 RNG 上界。
 
-> 已修复的不再列在这里，见 [changelog_cloud.md](../Changelog/changelog_cloud.md)：
-> 61 处 `math.random`、125 处硬编码 feature id、`AddVolcanicSoil` 的 X 循环越界、
-> 三处不一致的奇观排除名单、`local featureGen` 死变量、`MapUtilities.lua` 的 GBK 字节，
-> 以及几个未被读取的局部变量。
+只剩一个，而且是最大的一个。
 
 ### 5.1 大规模复制粘贴
 
-| 函数 | 重复份数 | 备注 |
+| 函数 | 重复份数 | 合并难度 |
 |---|---|---|
-| `AddVolcanicSoil` | 25 | 逐字相同，最好合并 |
-| `GenerateFractalLayerWithoutHills` | 22 | **不相同**，`(a,b)` 参数和分形指数逐图调过，合并要参数化 |
-| `Adjacent` | 22 | 读文件级全局 `islands`，搬走要连状态一起搬 |
+| `AddVolcanicSoil` | 25 | **低** —— 逐字相同，直接搬进 `Utility/` |
+| `GenerateFractalLayerWithoutHills` | 22 | **高** —— 22 份**不相同**，`(a,b)` 参数与分形指数逐图调过，合并要参数化 |
+| `Adjacent` | 22 | **中** —— 读文件级全局 `islands`，搬走要连状态一起搬 |
 | `AdjacentCount` | 11 | 同上 |
 
-后果是具体的：修 `math.random` 那个 bug 要改 61 处、去掉火山土硬编码要改 125 处，
-而且 X 循环越界和奇观名单不一致这两个缺陷也都是一次写错、复制 25 份。
+后果是具体的：修 `math.random` 要改 61 处、去掉火山土硬编码要改 125 处、修海平面要改 15 个
+文件、修火山上界要改 8 个文件。而 X 循环越界和奇观名单不一致这两个缺陷本身，
+也都是一次写错、复制 25 份。
 
-动手前建议先扩展 [tools/maptest](../tools/maptest/) 的桩来覆盖目标函数——
-后两个的合并风险明显高于第一个。
-
-### 5.2 `AddGoodies` 多放一个村庄
-
-[MapUtilities.lua:833](../Maps/Utility/MapUtilities.lua)：
-
-```lua
-if (iNeedtoPlace >= 0) then          -- ← 应为 > 0
-    ...放置...
-    iNeedtoPlace = iNeedtoPlace - 1;
-```
-
-计数从 N 递减到 0 都会放置，实际放了 N+1 个。影响微小，但是个确凿的 off-by-one。
-
-### 5.3 随机海平面取不到最低档
-
-[Continents.lua:155](../Maps/Continents.lua)：
-
-```lua
-water_percent = GetRandomNumber(sea_level_high - sea_level_low, "...") + sea_level_low + 1;
--- = GetRandomNumber(10) + 40 + 1  →  41..50
-```
-
-固定档位是 40 / 45 / 50，随机档的范围却是 41–50，取不到 40。
-沿用自原版的写法，HD 只改了常量。差一档，影响很小。
-
-### 5.4 出生点肥沃度里的浮点求和顺序
-
-[AssignStartingPlots.lua:490](../Maps/Utility/AssignStartingPlots.lua)：
-
-```lua
-for k, v in pairs(RingOnePlotYields) do          -- 字符串键
-    totalFertility = totalFertility + yieldWeight[k] * v * innerRingWeight;
-```
-
-这是地图生成里**唯一**一处对字符串键表的 `pairs()` 遍历，而循环体是浮点求和。
-浮点加法不满足结合律，遍历顺序不同会让结果差 ULP 级；权重里有 `1/3`、`2/3`
-这类无限二进制小数，所以差异真实存在。
-
-Lua 5.1 的字符串哈希不随机化，顺序固定，无影响；5.2+ 才逐进程随机。
-现有证据只能把 Civ6 缩到 ≤5.2。即便在 5.2 下影响也接近零——同一次运行内所有候选点
-用同一个顺序，是整体同向偏移，相对排序基本不变。
-
-想彻底消掉是一行：改成 `for row in GameInfo.Yields() do` 再索引。
-
-### 5.5 其它零碎
-
-- `GetRandomNumber(iBoundaryPlotsPerVolcano * .7, ...)` 传的是浮点数（18 处）。
-  能跑（底层截断），但依赖未声明的行为。而且当这个值小于 1 时，`== 0` 恒真，火山会连片。
+**动手前先扩展 [tools/maptest](../tools/maptest/) 的桩覆盖目标函数。**
+`AddVolcanicSoil` 已经有覆盖，可以先做它；后三个需要额外桩掉 `Fractal.*`、
+`ShiftPlotTypes`、`Map.GetAdjacentPlot`（`Fractal` 是黑盒，塞确定性伪噪声即可——
+差分只要求两个版本吃到同一份输入）。
 
 ---
 

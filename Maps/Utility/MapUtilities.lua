@@ -829,11 +829,11 @@ function AddGoodies(iW, iH)
 				local pPlot = Map.GetPlotByIndex(pos);
 				local bGoody = CanPlaceGoodyAt(improvement, pPlot);
 				if (bGoody) then
-					if (iNeedtoPlace >= 0) then
+					if (iNeedtoPlace > 0) then
 						ImprovementBuilder.SetImprovementType(pPlot, improvementID, NO_PLAYER);
 						iNeedtoPlace = iNeedtoPlace - 1;
 						-- print('goody', iNeedtoPlace, 'x', x, 'y', y);
-						if (iNeedtoPlace < 0) then
+						if (iNeedtoPlace <= 0) then
 							break;
 						end
 					end

@@ -178,7 +178,7 @@ function GeneratePlotTypes(world_age)
 		hd_water_limit = 12
 		hd_water_threshold = 8
 	else
-		water_percent = TerrainBuilder.GetRandomNumber(sea_level_high - sea_level_low, "Random Sea Level - Lua") + sea_level_low + 1; 
+		water_percent = TerrainBuilder.GetRandomNumber(sea_level_high - sea_level_low + 1, "Random Sea Level - Lua") + sea_level_low; 
 		hd_water_threshold = TerrainBuilder.GetRandomNumber(5, "HD: Random Sea Level - Lua") + 8;
 		hd_water_limit = math.floor(hd_water_threshold * 1.5);
 	end

@@ -161,7 +161,7 @@ function GeneratePlotTypes(world_age)
 		water_percent = sea_level_high
 		water_percent_modifier = 4;
 	else
-		water_percent = TerrainBuilder.GetRandomNumber(sea_level_high - sea_level_low, "Random Sea Level - Lua") + sea_level_low  + 1;
+		water_percent = TerrainBuilder.GetRandomNumber(sea_level_high - sea_level_low + 1, "Random Sea Level - Lua") + sea_level_low;
 		water_percent_modifier = TerrainBuilder.GetRandomNumber(4, "Random Sea Level - Lua") - 4;
 	end
 

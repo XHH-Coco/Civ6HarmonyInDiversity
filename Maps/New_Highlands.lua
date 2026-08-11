@@ -200,7 +200,7 @@ function GeneratePlotTypes(world_age)
 	elseif sea_level == 3 then -- High Sea Level
 		water_percent = sea_level_high
 	else
-		water_percent = TerrainBuilder.GetRandomNumber(sea_level_high- sea_level_low, "Random Sea Level - Lua") + sea_level_low  + 1 ;
+		water_percent = TerrainBuilder.GetRandomNumber(sea_level_high - sea_level_low + 1, "Random Sea Level - Lua") + sea_level_low;
 		water_percent_modifier = TerrainBuilder.GetRandomNumber(9, "Random Sea Level - Lua") - 4;
 	end
 
@@ -690,17 +690,17 @@ function AddTerrainFromContinents(plotTypes, terrainTypes, world_age, iW, iH, iC
 					if (iNumAdjacentMountains ~= 6 and GetNumberNearbyVolcanoes(iX, iY, 3, aPlacedVolcanoes) == 0) then
 						if not(bNoCoastalMountains and IsAdjacentToShallowWater(terrainTypes, iX, iY)) then --get rid of coastal volcano.
 							if (Map.FindSecondContinent(pPlot, 1)) then
-								if (TerrainBuilder.GetRandomNumber(iBoundaryPlotsPerVolcano *.7, "Volcano on boundary") == 0) then
+								if (TerrainBuilder.GetRandomNumber(math.max(1, math.floor(iBoundaryPlotsPerVolcano * 0.7)), "Volcano on boundary") == 0) then
 									bVolcanoHere = true;
 								end
 								iPlotsFromBoundary = 1;
 							elseif(Map.FindSecondContinent(pPlot, 2)) then
-								if (TerrainBuilder.GetRandomNumber(iBoundaryPlotsPerVolcano, "Volcano 1 from boundary") == 0) then
+								if (TerrainBuilder.GetRandomNumber(math.max(1, math.floor(iBoundaryPlotsPerVolcano)), "Volcano 1 from boundary") == 0) then
 									bVolcanoHere = true;
 								end
 								iPlotsFromBoundary = 2;
 							elseif(Map.FindSecondContinent(pPlot, 3)) then
-								if (TerrainBuilder.GetRandomNumber(iBoundaryPlotsPerVolcano * 1.5, "Volcano 2 from boundary") == 0) then
+								if (TerrainBuilder.GetRandomNumber(math.max(1, math.floor(iBoundaryPlotsPerVolcano * 1.5)), "Volcano 2 from boundary") == 0) then
 									bVolcanoHere = true;
 								end
 								iPlotsFromBoundary = 3;
