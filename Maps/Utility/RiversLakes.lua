@@ -293,13 +293,20 @@ function DoRiver(startPlot, thisFlowDirection, originalFlowDirection, riverID)
 			-- 跟这条河最初往哪流没关系。原版按 original 判，属于判错了变量，
 			-- 只是绝大多数时候两者恰好同时成立。
 			--
-			-- 离线统计（tools/maptest/river.lua，72 张图、43171 次起河、91596 条河流边）：
-			-- 走到这里 29 次，全部在北边界 y=H-1，内陆一次都没有，南边界也一次都没有。
-			-- 其中 24 次 orig 是 NORTHEAST（原版救得回），剩下 5 次是
-			-- this=NORTH / orig=NORTHWEST，原版救不回，就是那些没有入海口的河。
+			-- 离线测量（tools/maptest/river.lua）：
+			--   随机采样 4 个场景、144 张图、89742 次起河、232634 条河流边 ——
+			--   走到这里 80 次，全部在北边界 y=H-1，thisFlowDirection 全是 NORTH。
+			--   定向穷举（全陆地图上逐格 × 逐组 this/orig 直接调 DoRiver）——
+			--   真正可达的组合有 11 种，全在北边界。
 			--
-			-- 这里只做加法：保留原来的条件，另外补上按 thisFlowDirection 的判断。
-			-- 南边界没有实测样本，不写没有依据的代码。
+			-- 南边界结构上就不可能：y=0 时 FLOWDIRECTION_SOUTH 那个分支会在
+			-- 铺边之前 early return（它要取 SW 邻格，那格不存在），走不到搜索这一步。
+			--
+			-- 这里只做加法：保留原来的条件，另外补上按 thisFlowDirection 的判断，
+			-- 覆盖 11 种里的 8 种。剩下 3 种（this 是 NORTHEAST / SOUTHEAST /
+			-- SOUTHWEST）刻意不覆盖：补的这两条边在几何上只对应"以 NORTH 到达"，
+			-- 那三种情况河停在这一格的另一个角上，硬套同一组边多半会铺出一段
+			-- 接不上的孤边，比留着更糟。测试里用白名单钉住了它们。
 			if (thisFlowDirection == FlowDirectionTypes.FLOWDIRECTION_NORTH
 			 or originalFlowDirection == FlowDirectionTypes.FLOWDIRECTION_NORTHEAST) then
 				TerrainBuilder.SetNWOfRiver(riverPlot, true, FlowDirectionTypes.FLOWDIRECTION_NORTHEAST, riverID);

@@ -121,6 +121,28 @@ local function at(world, x, y)
     return world.plots[y * world.w + (x % world.w)]      -- 东西环绕
 end
 
+-- 白噪声地形和真实地图差得远：真实地图是连片大陆，河流能走很远才碰到水。
+-- 这里做几轮"多数邻格是水就变水"的平滑，把噪声揉成大块陆地和大块海。
+local function smooth(world, passes)
+    for _ = 1, passes do
+        local next_ = {}
+        for y = 0, world.h - 1 do
+            for x = 0, world.w - 1 do
+                local wet = 0
+                for d = 0, 5 do
+                    local dx, dy = neighborOffset(y, d)
+                    local q = at(world, x + dx, y + dy)
+                    if q == nil or q.water then wet = wet + 1 end
+                end
+                local p = at(world, x, y)
+                next_[y * world.w + x] = (wet > 3) or (wet == 3 and p.water)
+            end
+        end
+        for i, wet in pairs(next_) do world.plots[i].water = wet end
+    end
+    return world
+end
+
 --------------------------------------------------------------------------------
 -- 环境
 --------------------------------------------------------------------------------
@@ -204,9 +226,10 @@ local FLOW_NAME = { [-1] = "起点", [0] = "NORTH", [1] = "NORTHEAST", [2] = "SO
 
 local stats = { starts = 0, edges = 0, dead = 0, repaired = 0, combos = {}, rows = {} }
 
-local function runMap(w, h, seed, waterPercent, poleFocus)
+local function runMap(w, h, seed, waterPercent, poleFocus, passes)
     local rng = lcg(seed)
     local world = newWorld(w, h, rng, waterPercent)
+    if passes and passes > 0 then smooth(world, passes) end
 
     local logs = {}
     local env = makeEnv(world, rng, function(...)
@@ -264,15 +287,19 @@ end
 print("\n-- DoRiver 断头河统计 --")
 
 local SCENARIOS = {
-    { label = "常规水量 32%",   water = 32, pole = false, maps = 12 },
-    { label = "少水 8%（河更容易走到极地）", water = 8, pole = true, maps = 12 },
+    { label = "白噪声 32%",              water = 32, pole = false, smooth = 0, maps = 12 },
+    { label = "白噪声 8%（河更易到极地）", water = 8,  pole = true,  smooth = 0, maps = 12 },
+    -- 连片陆地更接近真实地图：河能走很远，也更容易走到极地那两行
+    { label = "连片陆地 40%",            water = 40, pole = false, smooth = 3, maps = 12 },
+    { label = "连片陆地 15%",            water = 15, pole = true,  smooth = 3, maps = 12 },
 }
 local SIZES = { { 44, 26 }, { 60, 38 }, { 74, 46 } }
 
 for _, sc in ipairs(SCENARIOS) do
     for _, size in ipairs(SIZES) do
         for i = 1, sc.maps do
-            runMap(size[1], size[2], i * 7919 + size[1] + sc.water, sc.water, sc.pole)
+            runMap(size[1], size[2], i * 7919 + size[1] + sc.water + sc.smooth * 101,
+                   sc.water, sc.pole, sc.smooth)
         end
     end
 end
@@ -299,6 +326,122 @@ end
 if stats.dead > stats.repaired then
     fail("还有 %d 次断头没有被补边界救回", stats.dead - stats.repaired)
 end
+
+--------------------------------------------------------------------------------
+-- 定向覆盖：随机采样只能告诉我们"实际碰到了哪几种"，回答不了"还有哪几种到得了"。
+-- 这里换成穷举：在一张全陆地的图上，用每一个格子 × 每一组
+-- (thisFlowDirection, originalFlowDirection) 直接调 DoRiver，把真正能走到
+-- NO_FLOWDIRECTION 的组合全部找出来。
+--
+-- 这比穷举"方向搜索的三个约束"更强：那个只看了搜索本身，没算上六个方向分支
+-- 开头那些 early return —— 有些组合根本走不到搜索那一步。
+--------------------------------------------------------------------------------
+
+print("\n-- 定向覆盖：哪些 (this, original) 组合真的到得了 --")
+
+local reach = {}     -- key -> { count, repaired }
+
+local function probeAll(w, h)
+    local rng = lcg(20260811)
+    local world = newWorld(w, h, rng, 0)          -- 全陆地：不会中途碰到水而结束
+    local logs = {}
+    local env = makeEnv(world, rng, function(...)
+        local parts = {}
+        for i = 1, select("#", ...) do parts[#parts + 1] = tostring((select(i, ...))) end
+        logs[#logs + 1] = table.concat(parts, "\t")
+    end)
+    loadInto(RIVERS_LAKES, env)
+
+    local DIRS = { -1, 0, 1, 2, 3, 4, 5 }
+    for _, this in ipairs(DIRS) do
+        for _, orig in ipairs(DIRS) do
+            for y = 0, h - 1 do
+                for x = 0, w - 1 do
+                    -- 每次都清干净：河流边和 _rivers 都要重置
+                    for _, q in pairs(world.plots) do
+                        q.riverW, q.riverNW, q.riverNE = nil, nil, nil
+                    end
+                    env._rivers = {}
+                    env.nextRiverID = 0
+                    local n0 = #logs
+                    env.DoRiver(at(world, x, y), this, orig, 1)
+                    -- 只看这一次调用新产生的日志
+                    local dead, repaired = nil, false
+                    for i = n0 + 1, #logs do
+                        local py, t, o = logs[i]:match(
+                            "RIVER DEAD END: %(%d+,(%d+)%) this=(%-?%d+) orig=(%-?%d+)")
+                        if py then
+                            dead = { y = tonumber(py), this = tonumber(t), orig = tonumber(o) }
+                        elseif logs[i]:find("NORTH EDGE OF MAP RIVER REPAIR") then
+                            repaired = true
+                        end
+                    end
+                    if dead then
+                        local where = (dead.y == 0 and "南边界")
+                                   or (dead.y == h - 1 and "北边界") or ("内陆 y=" .. dead.y)
+                        local key = string.format("%-6s this=%-10s orig=%s",
+                            where, FLOW_NAME[dead.this], FLOW_NAME[dead.orig])
+                        reach[key] = reach[key] or { count = 0, repaired = 0 }
+                        reach[key].count = reach[key].count + 1
+                        if repaired then reach[key].repaired = reach[key].repaired + 1 end
+                    end
+                end
+            end
+        end
+    end
+end
+
+probeAll(14, 9)      -- 奇数高
+probeAll(14, 10)     -- 偶数高（odd-r 的行奇偶会影响邻接）
+
+local keys = {}
+for k in pairs(reach) do keys[#keys + 1] = k end
+table.sort(keys)
+print(string.format("  可达组合 %d 种（只按方向搜索的三个约束穷举会算出 13 种）", #keys))
+print("  少掉的两种都在南边界：FLOWDIRECTION_SOUTH 那个分支在 y=0 时会在铺边之前就")
+print("  early return，根本走不到搜索那一步。所以南边界压根不会产生断头河。")
+print("  注：orig=起点 那一行是本节直接构造出来的，真实递归里 original 一定已被赋值。")
+for _, k in ipairs(keys) do
+    local r = reach[k]
+    print(string.format("    %-42s 命中 %-5d 补上 %-5d %s",
+        k, r.count, r.repaired, r.repaired == r.count and "" or "  ← 有漏网"))
+end
+
+-- 已知补不了的三种。补丁铺的那两条边（NW 走 NORTHEAST、W 走 NORTH）在几何上
+-- 只对应"以 NORTH 流向到达这一格"；对下面这三种，河停在这一格的另一个角上，
+-- 硬套同一组边多半会铺出一段接不上的孤边，比留着更糟。所以刻意不覆盖。
+--
+-- 它们在 4 个场景、89742 次起河、232634 条河流边的随机采样里**一次都没出现**，
+-- 只有在全陆地图上直接指定 (this, orig) 去调 DoRiver 才构造得出来。
+-- 这里用白名单钉住：新出现没覆盖的组合会失败，白名单里的组合被覆盖了也会失败
+-- （说明白名单过期了）。
+local KNOWN_UNCOVERED = {
+    ["this=NORTHEAST  orig=NORTHWEST"] = true,
+    ["this=SOUTHEAST  orig=NORTH"]     = true,
+    ["this=SOUTHWEST  orig=NORTH"]     = true,
+}
+
+local uncovered = 0
+for _, k in ipairs(keys) do
+    if k:find("内陆") then
+        fail("定向覆盖在内陆发现死胡同（%s）——和穷举结论矛盾", k)
+    end
+    local combo = k:gsub("^%S+%s+", "")
+    local r = reach[k]
+    if r.repaired < r.count then
+        uncovered = uncovered + 1
+        if not KNOWN_UNCOVERED[combo] then
+            fail("新出现一种补不上的组合：%s（%d 次）", k, r.count - r.repaired)
+        end
+    elseif KNOWN_UNCOVERED[combo] then
+        fail("白名单过期：%s 现在已经补得上了，请把它从 KNOWN_UNCOVERED 去掉", k)
+    end
+end
+
+local known = 0
+for _ in pairs(KNOWN_UNCOVERED) do known = known + 1 end
+print(string.format("  覆盖 %d / %d 种，已知不覆盖 %d 种（见 KNOWN_UNCOVERED 的说明）",
+    #keys - uncovered, #keys, known))
 
 -- 穷举结论的实测校验：绝不该出现在内陆
 for k, v in pairs(stats.rows) do

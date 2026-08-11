@@ -550,28 +550,66 @@ Forest_Highlands / Great_Sand_Sea / Highlands_XP2 三张**会变** ——
 理论上共 13 种 `(边界, this, original)` 组合，其中一种在递归里不可达，
 **可达 12 种：北边界 10、南边界 2**，内陆不可能。
 
-#### 实测：绝大多数原版已经救了，漏的只有一种
+#### 测什么、没测什么（先说清楚）
 
 [tools/maptest/river.lua](../tools/maptest/river.lua) 直接加载真实的 `RiversLakes.lua`，
-桩掉十来个引擎接口，在 72 张随机图上起河：
+桩掉十来个引擎接口。但要注意：
+
+> **它跑的不是任何一张真实地图脚本。** 地形是合成的（白噪声，以及做过几轮平滑的
+> 连片陆地），不是 `GeneratePlotTypes` 生成的分形大陆；起河也是直接调 `DoRiver`，
+> 没走 `AddRivers` 的选源逻辑（`passConditions` + `Map.FindWater` + 引擎侧的
+> `GetInlandCorner`）。**分形生成器和 `GetInlandCorner` 都在引擎里，游戏外没法复现。**
+
+所以"每张图会出现几条断头河"这个问题，离线测不出来，**而且各图一定不一样** ——
+断头要求首行/末行是**陆地**，那么极地是海还是雪原、河源密度高不高，
+每张图差别很大（高地系几乎全陆地、群岛系几乎没有内陆河源）。
+
+离线能回答的是另一个更重要的问题：**哪些情况会发生、补丁覆盖了几种。**
+这个只取决于 `DoRiver` 自身的控制流，与地形无关。
+
+#### 随机采样：实际碰到的只有一类
+
+4 个场景（白噪声 32% / 8%、连片陆地 40% / 15%）× 3 种尺寸 × 12 张：
 
 ```
-起河 43171 次，铺下 91596 条河流边
-走到 NO_FLOWDIRECTION（断在陆地上）：29 次
-  按位置：  北边界 y=H-1  29      ← 内陆 0，南边界 0，与穷举一致
-  按组合：  this=NORTH orig=NORTHEAST  24      ← 原版补丁救得回
-            this=NORTH orig=NORTHWEST   5      ← 原版救不回
+起河 89742 次，铺下 232634 条河流边
+走到 NO_FLOWDIRECTION（断在陆地上）：80 次
+  按位置：北边界 y=H-1  80        ← 内陆 0、南边界 0
+  按组合：this=NORTH orig=NORTHEAST  62      ← 原版补丁救得回
+          this=NORTH orig=NORTHWEST  16      ← 原版救不回
+          this=NORTH orig=NORTH       2      ← 原版救不回
 ```
 
-12 种理论组合里**实际只出现 2 种**，而且 `thisFlowDirection` 都是 `NORTH`。
+`thisFlowDirection` **全部**是 `NORTH`。
+
+#### 定向穷举：可达的是 11 种，不是 12 种
+
+随机采样只能说"实际碰到了哪几种"，回答不了"还有哪几种到得了"。所以另外做了一遍
+穷举：在一张全陆地的图上，用每个格子 × 每一组 `(this, original)` 直接调 `DoRiver`。
+
+结果**11 种可达，全部在北边界**：
+
+| 组合 | 补丁覆盖 |
+|---|---|
+| `this=NORTH` × `orig` 的六种 + 起点 | ✔ |
+| `this=NORTHWEST, orig=NORTHEAST` | ✔（靠保留的原版条件） |
+| `this=NORTHEAST, orig=NORTHWEST` | ✘ |
+| `this=SOUTHEAST, orig=NORTH` | ✘ |
+| `this=SOUTHWEST, orig=NORTH` | ✘ |
+
+（`orig=起点` 那一行是直接构造出来的，真实递归里 `original` 一定已被赋值。）
+
+比只看方向搜索约束的理论值（13 种）少两种，**少的正是南边界那两种**：
+`FLOWDIRECTION_SOUTH` 分支在 `y=0` 时要取 SW 邻格，那格不存在，
+**会在铺边之前就 early return**，根本走不到搜索那一步。
+所以南边界**结构上就不会产生断头河** —— 这比之前"没有实测样本"的说法强得多。
 
 #### 修法：原版判错了变量
 
 原版的条件是 `originalFlowDirection == FLOWDIRECTION_NORTHEAST`。但决定"河现在
-停在这一格的哪个角上"的是 **`thisFlowDirection`**，不是 `originalFlowDirection` ——
-补的那两条边（NW 边走 NORTHEAST、W 边走 NORTH）只和"以 NORTH 流向到达这里"有关，
-跟这条河最初往哪流没关系。原版按 `original` 判属于判错了变量，只是绝大多数时候
-两者恰好同时成立（24/29）。
+停在这一格的哪个角上"的是 **`thisFlowDirection`** —— 补的那两条边（NW 边走
+NORTHEAST、W 边走 NORTH）只和"以 NORTH 流向到达这里"有关，跟这条河最初往哪流
+没关系。原版按 `original` 判属于判错了变量，只是绝大多数时候两者恰好同时成立。
 
 改成只做加法，保留原条件、另外补上按 `thisFlowDirection` 的判断：
 
@@ -581,33 +619,44 @@ Forest_Highlands / Great_Sand_Sea / Highlands_XP2 三张**会变** ——
 + or originalFlowDirection == FlowDirectionTypes.FLOWDIRECTION_NORTHEAST) then
 ```
 
-改后：**29 次断头全部被补上，未补 0 次**，河流边数 91596 → 91606（5 次修复 × 2 条边）。
+改后：随机采样里 **80 次断头全部被补上，未补 0 次**；定向穷举里覆盖 **8 / 11 种**。
 
-同时在断头处加了一句诊断 `print("RIVER DEAD END: ...")`，在游戏里也能用，
-用来核对实机上的分布是不是和离线一致。
+#### 剩下 3 种为什么刻意不补
+
+补的那两条边在几何上只对应"以 NORTH 流向到达"。剩下 3 种里河停在这一格的**另一个
+角**上，硬套同一组边多半会铺出一段接不上的孤边，**比留着更糟**。要正确处理得逐种
+推出口，而这需要一套六边形顶点模型 —— `W/NW/NE-of-river` 标志位和 `DoRiver` 里
+"startPlot 的某个角"这个约定之间的对应关系，在游戏外验证不了。
+
+它们在 89742 次随机起河里**一次都没出现**，只有直接指定 `(this, orig)` 才构造得出来。
+测试里用**白名单**钉住：新出现补不上的组合会失败，白名单里的组合变成能补也会失败
+（说明白名单过期）。
+
+#### 想要真实的每图数字，只能进游戏
+
+断头处已经加了一句诊断：
+
+```lua
+print(string.format("RIVER DEAD END: (%d,%d) this=%d orig=%d id=%d", ...))
+```
+
+它会进 `Logs/Lua.log`。想知道 25 张图各自的实际分布，就是每张图开几局、
+`grep RIVER DEAD END` 数一下。这是唯一的办法。
 
 #### 没做的部分
 
-- **南边界没有实测样本**，不写没有依据的代码。真要补也只有一种可能：
-  Civ6 里每个格子只拥有 **W、NW、NE** 三条边（另外三条属于邻格），
-  y=0 时 SW/SE 边属于图外的格子**根本设不了**，能碰到下边界的只有 W 边的下端。
-- **第 2 条（撞上已有河流）不在边界上**，补边界解决不了，需要单独判断两条河
-  是否真的接上。
+- **第 2 条（撞上已有河流提前 `return`）**不在边界上，补边界解决不了，
+  需要单独判断两条河是否真的接上。
 - 顺带确认：`AddRivers` 排在 `AddCliffs` 和自然奇观**之前**，所以
   `GetRiverValueAtPlot` 里那段 `IsNWOfCliff()/IsNaturalWonder() → return -1`
   在标准流程里**是死代码**。它写成 `-1` 而分数是**越小越优**，真要是活的，
   效果会是让河流优先冲向峭壁和奇观。
 
-#### 测试覆盖到哪一步
+#### 变异测试
 
-`river.lua` **不做**"河道是否连通到水/边界"的几何校验：那需要一套六边形顶点模型，
-而 Civ6 的 `W/NW/NE-of-river` 标志位和 `DoRiver` 里"startPlot 的某个角"这个约定
-之间的对应关系，在游戏外没法验证。与其给出一个自己都不敢信的数字，不如只量
-`NO_FLOWDIRECTION` 这条能明确识别的路。
-
-它另外钉住了补丁的**形状**：每次修复必须恰好铺同一格的 NW + W 两条边
-（靠铺边事件的先后顺序判断，不需要几何知识）。四种人为变异
-（退回原版条件、把 NORTH 写成 SOUTH、少铺一条边、把 NW 写成 NE）全部被抓到。
+五种人为破坏全部被抓到：退回原版条件、只留 `this` 那半条件（会让
+`this=NORTHWEST, orig=NORTHEAST` 失去覆盖，触发白名单过期检查）、
+把 `NORTH` 写成 `SOUTH`、少铺一条边、把 `NW` 写成 `NE`。
 
 **这次改动会改全部 25 张图的河网，老种子作废。**
 
