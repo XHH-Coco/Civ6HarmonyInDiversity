@@ -218,17 +218,30 @@ Continents 的注释写明了设计意图：植被茂盛 ⇒ 出生点锤子多 
 
 扫全图找火山，在周围铺火山土。分两类：
 
-**普通火山 `FEATURE_VOLCANO`**：一环内所有非水、非山的格子 → 火山土。无随机。
+**普通火山 `FEATURE_VOLCANO`**：一环铺满。无随机。
 
 **火山系自然奇观**（埃亚菲亚德拉冰盖、乞力马扎罗、维苏威、富士山、恩戈罗恩戈罗火山口）：
+一环铺满，二环按 1/3 概率（Primordial 是 1/2）。
 
-- 一环：非水非山 → 火山土（排除名单里的 2 个奇观特征跳过）
-- 二环：非水非山 → **1/3 概率**铺火山土（排除名单里的 5 个奇观特征跳过）
+三处共用同一个准入判断：
+
+```lua
+local function CanTakeVolcanicSoil(pPlot)
+    if (pPlot:IsWater() or pPlot:IsMountain()) then return false; end
+    local eFeature = pPlot:GetFeatureType();
+    if (eFeature ~= -1 and GameInfo.Features[eFeature].NaturalWonder) then return false; end
+    return true;
+end
+```
+
+也就是：**水域、山地、以及任何自然奇观都不铺**。用 `Features.NaturalWonder` 标志位而不是
+硬编码名单，新增的自然奇观（含第三方 mod 的）自动受保护。
 
 > **二环的实际概率不是 1/3。** 二环循环嵌在一环循环内部
-> （[Continents.lua:387](Continents.lua)），所以一个二环格子每邻接一个一环格子就被摇一次。
+> （[Continents.lua:398](Continents.lua)），所以一个二环格子每邻接一个一环格子就被摇一次。
 > 六边形网格上，二环的"角"格只邻接 1 个一环格，"边"格邻接 2 个 ——
 > 于是角格 33%、边格 55.6%。如果你想调整火山土密度，改的是这个复合概率，不是字面的 1/3。
+> 这个行为是**刻意保留**的（原实现如此，改掉会显著改变火山土观感），代码里有注释说明。
 
 火山土会**覆盖**原有地貌（森林等），并改变地块产出，所以它排在资源和出生点之前。
 
@@ -317,30 +330,11 @@ HD 覆盖了全部原版地图脚本（在 `DL.modinfo` 的 `ImportFiles` 里列
 
 按影响排序。这些是**当前代码里存在的**，记录在此以免重复发现。
 
-### 5.1 `AddVolcanicSoil` 的 X 循环越界一格（25 个文件）
+> 已修复的不再列在这里，见 [changelog_cloud.md](../Changelog/changelog_cloud.md)：
+> 61 处 `math.random`、125 处硬编码 feature id、`AddVolcanicSoil` 的 X 循环越界、
+> 三处不一致的奇观排除名单。
 
-```lua
-for CoordinateX = 0, mWidth, 1 do        -- ← 应为 mWidth - 1
-    for CoordinateY = 0, mHeight-1, 1 do -- ← Y 是对的
-```
-
-同一个函数里 X 和 Y 的写法不一致，基本可以确定是笔误。
-地图东西向环绕，`Map.GetPlot(mWidth, y)` 会绕回第 0 列，于是**第 0 列被处理两次** ——
-该列的火山，其二环随机会多摇一轮，火山土覆盖率从 33%/56% 升到约 55%/80%，
-而且白白消耗一批随机数。影响仅限地图接缝那一列，但确实是不对称的。
-
-### 5.2 一环与二环的奇观排除名单不一致（25 个文件）
-
-一环只排除 2 个奇观特征，二环排除 5 个；而普通火山那一支
-（[Continents.lua:362](Continents.lua)）**完全没有排除检查**。
-
-三处逻辑本该一致。`IsMountain()` 判定挡住了大部分火山系奇观（它们都在山地上），
-但恩戈罗恩戈罗火山口不是山地（HD 只把它设成了 `Impassable = 1`，
-见 [HD_Suk_Wonders.sql:5](../ModSupport/SukWonders/HD_Suk_Wonders.sql)）——
-所以一座普通火山如果正好生成在它旁边，火山土会**覆盖掉这个自然奇观**。
-概率很低但不为零。
-
-### 5.3 大规模复制粘贴
+### 5.1 大规模复制粘贴
 
 | 函数 | 重复份数 |
 |---|---|
@@ -353,7 +347,7 @@ for CoordinateX = 0, mWidth, 1 do        -- ← 应为 mWidth - 1
 而且上面 5.1 和 5.2 两个问题也是一次写错、复制 25 份。
 这些函数不依赖单张地图的参数，完全可以提到 `Utility/` 里。
 
-### 5.4 `local featureGen` 是死变量（25 个文件）
+### 5.2 `local featureGen` 是死变量（25 个文件）
 
 ```lua
 local featureGen = nil;             -- 声明了，从没用过
@@ -364,7 +358,7 @@ featuregen = FeatureGenerator.Create(args);   -- 小写 g，是个全局变量
 现在能跑，因为每次生成只加载一个地图脚本，全局不会撞车。但这是个陷阱：
 读代码的人会以为 `featureGen` 是那个变量。
 
-### 5.5 `AddGoodies` 多放一个村庄
+### 5.3 `AddGoodies` 多放一个村庄
 
 [MapUtilities.lua:833](Utility/MapUtilities.lua)：
 
@@ -376,13 +370,13 @@ if (iNeedtoPlace >= 0) then          -- ← 应为 > 0
 
 计数从 N 递减到 0 都会放置，实际放了 N+1 个。影响微小，但是个确凿的 off-by-one。
 
-### 5.6 `MapUtilities.lua` 混入 GBK 字节
+### 5.4 `MapUtilities.lua` 混入 GBK 字节
 
 第 623 行注释里的 `Fisher–Yates` 破折号是 GBK 编码的 `A8 43`，
 使这个文件成为 `Maps/` 下唯一不是合法 UTF-8 的文件。目前只在注释里不影响运行，
 但往这个文件加中文注释时要小心编码被二次破坏。
 
-### 5.7 随机海平面取不到最低档
+### 5.5 随机海平面取不到最低档
 
 [Continents.lua:156](Continents.lua)：
 
@@ -394,7 +388,7 @@ water_percent = GetRandomNumber(sea_level_high - sea_level_low, "...") + sea_lev
 固定档位是 40 / 45 / 50，随机档的范围却是 41–50，取不到 40。
 沿用自原版的写法，HD 只改了常量。差一档，影响很小。
 
-### 5.8 其它零碎
+### 5.6 其它零碎
 
 - `GetRandomNumber(iBoundaryPlotsPerVolcano * .7, ...)` 传的是浮点数（18 处）。
   能跑（底层截断），但依赖未声明的行为。而且当这个值小于 1 时，`== 0` 恒真，火山会连片。

@@ -6,6 +6,56 @@ bingyang1132 的长期分支。本文件按时间倒序记录本分支的改动�
 
 ## 2026-08-10
 
+### `AddVolcanicSoil` 重写：修两个复制了 25 份的缺陷
+
+审计地图代码时发现的，两个都在同一个函数里，于是一起重写。25 个地图脚本的这个函数
+此前逐字相同，现在仍然逐字相同（只有 Primordial 的概率参数是 1/2，其余是 1/3）。
+
+**① X 循环越界一格。**
+
+```lua
+for CoordinateX = 0, mWidth, 1 do        -- 改为 mWidth - 1
+    for CoordinateY = 0, mHeight-1, 1 do -- Y 本来就是对的
+```
+
+同一个函数里 X 和 Y 写法不一致，是笔误。地图东西向环绕，`Map.GetPlot(mWidth, y)` 绕回
+第 0 列，于是第 0 列被处理两次：该列火山的二环随机多摇一轮，覆盖率从 33%/56% 升到
+约 55%/80%，还白耗一批随机数。只影响接缝那一列，但确实不对称。
+
+**② 三处奇观排除名单互不一致。**
+
+一环排除 2 个奇观特征，二环排除 5 个，而普通火山那一支一个都不排除。三处合并为一个
+局部函数：
+
+```lua
+local function CanTakeVolcanicSoil(pPlot)
+    if (pPlot:IsWater() or pPlot:IsMountain()) then return false; end
+    local eFeature = pPlot:GetFeatureType();
+    if (eFeature ~= -1 and GameInfo.Features[eFeature].NaturalWonder) then return false; end
+    return true;
+end
+```
+
+改用 `Features.NaturalWonder` 标志位，不再维护硬编码名单——和上面去掉 feature id 硬编码
+是同一个思路。这比原来的名单**保护范围更大**：原先只有名单里那 5 个奇观受保护，
+`IsMountain()` 又挡掉了其中 4 个（它们都在山地上），实际上只有恩戈罗恩戈罗火山口
+（HD 把它设为 `Impassable = 1`，但不是山地）以及基础游戏里其它平地奇观
+（撒哈拉之眼、伊克-基尔天然井等）会被火山土覆盖掉。现在一律不覆盖。
+
+二环那个"每个一环邻格都向外摇一圈、所以角格 33%、边格 55.6%"的行为**刻意保留**——
+改掉会显著改变火山土观感。代码里补了注释说明，免得下次被当成 bug 修掉。
+
+顺带把 6 次重复的 `GameInfo.Features[...]` 查询提成一个局部变量 `sFeatureType`，无行为变化。
+
+种子影响：两处改动都减少了随机抽取次数，所以老种子再次失效。
+
+### 地图生成流程文档
+
+新增 [Maps/MapGeneration.md](../Maps/MapGeneration.md)，讲清 `GenerateMap()` 的 15 个步骤、
+随机数模型、以及 HD 相对原版改了什么。末尾列出审计中发现但**尚未修**的 6 个问题：
+25 份复制粘贴、`local featureGen` 死变量、`AddGoodies` 多放一个村庄、
+`MapUtilities.lua` 混入 GBK 字节、随机海平面取不到最低档，以及若干零碎。
+
 ### 地图种子失效修复
 
 `Maps/` 下 25 个地图脚本共 61 处用了标准 Lua 的 `math.random`，全部改为
