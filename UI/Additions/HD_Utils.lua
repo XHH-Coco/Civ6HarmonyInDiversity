@@ -624,6 +624,20 @@ function GetSortedAdjacencyBonuses(objectKind, objectType)
           TextTemplate = (data.TilesRequired > 1) and "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_PER_TEXT" or "LOC_TOOLTIP_HD_ADJACENCIES_OBJECT_TEXT",
           Score = score
         })
+      elseif data.DistrictTypeIncludingUD then
+        table.insert(bonuseDataList[9], {
+          YieldName = yield.Name,
+          YieldIcon = yield.IconString,
+          YieldChange = data.YieldChange,
+          ObjectName = GameInfo.Districts[data.DistrictTypeIncludingUD].Name,
+          TilesRequired = data.TilesRequired,
+          PrereqCivic = (data.PrereqCivic) and GameInfo.Civics[data.PrereqCivic].Name or nil,
+          PrereqTech = (data.PrereqTech) and GameInfo.Technologies[data.PrereqTech].Name or nil,
+          ObsoleteCivic = (data.ObsoleteCivic) and GameInfo.Civics[data.ObsoleteCivic].Name or nil,
+          ObsoleteTech = (data.ObsoleteTech) and GameInfo.Technologies[data.ObsoleteTech].Name or nil,
+          TextTemplate = (data.TilesRequired > 1) and "LOC_TOOLTIP_HD_ADJACENCIES_DISTRICT_INCLUDING_UD_PER_TEXT" or "LOC_TOOLTIP_HD_ADJACENCIES_DISTRICT_INCLUDING_UD_TEXT",
+          Score = score
+        })
       elseif data.ResourceClassificationType then
         table.insert(bonuseDataList[17], {
           YieldName = yield.Name,
@@ -1305,6 +1319,7 @@ local function GetOverSeasInvestorCityStateResources(playerId, param)
             CityStateCityId = routeInfo.DestinationCityID,
             DetailParam = {
               CityStateResource = resourceType,
+              IndustryEffect = true,
               CorporationEffect = true
             },
             Disabled = false
@@ -1315,6 +1330,7 @@ local function GetOverSeasInvestorCityStateResources(playerId, param)
             CityStateCityId = routeInfo.DestinationCityID,
             DetailParam = {
               CityStateResource = resourceType,
+              IndustryEffect = true,
               CorporationEffect = true
             },
             Disabled = true,

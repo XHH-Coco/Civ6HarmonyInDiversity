@@ -1,17 +1,19 @@
--- Remove Adjacencies
--- Remove some adjacencies that will be added back right after, to make them better ordered in the game text.
-delete from District_Adjacencies where (DistrictType = 'DISTRICT_INDUSTRIAL_ZONE' or DistrictType in
-	(select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType = 'DISTRICT_INDUSTRIAL_ZONE')) and
-	(YieldChangeId = 'LumberMill_HalfProduction' or YieldChangeId = 'Minel_HalfProduction' or YieldChangeId = 'Quarry_Production');
-delete from District_Adjacencies where DistrictType = 'DISTRICT_HANSA' and
-	(YieldChangeId = 'Resource_Production' or YieldChangeId = 'Commerical_Hub_Production');
--- Remove a non-repetition UD support, which will be added back with the UD support sql afterwards
+-- =====================================================================================================================================
+-- 删除原有相邻加成
+-- =====================================================================================================================================
+delete from District_Adjacencies where
+	(DistrictType = 'DISTRICT_INDUSTRIAL_ZONE'
+	or DistrictType in (select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType = 'DISTRICT_INDUSTRIAL_ZONE'))
+	and YieldChangeId in ('LumberMill_HalfProduction', 'Minel_HalfProduction', 'Quarry_Production', 'Resource_Production', 'Commerical_Hub_Production');
+
 delete from District_Adjacencies where DistrictType = 'DISTRICT_ROYAL_NAVY_DOCKYARD' and YieldChangeId = 'RoyalDock_City_Gold';
--- Real remove
 delete from District_Adjacencies where DistrictType = 'DISTRICT_THANH' and YieldChangeId = 'District_Culture_Major';
 delete from District_Adjacencies where DistrictType = 'DISTRICT_SEOWON' and YieldChangeId = 'NegativeDistrict_Science';
-delete from District_Adjacencies where DistrictType = 'DISTRICT_OBSERVATORY' and YieldChangeId = 'Farm_Science';
-delete from District_Adjacencies where DistrictType = 'DISTRICT_OBSERVATORY' and YieldChangeId = 'Plantation_Science';
+delete from District_Adjacencies where DistrictType = 'DISTRICT_OBSERVATORY' and YieldChangeId in ('Farm_Science', 'Plantation_Science');
+
+-- =====================================================================================================================================
+-- 新相邻加成
+-- =====================================================================================================================================
 -- Add new Adjacencies
 with District_Adjacencies_Pre
 	(DistrictType,						YieldChangeId)
@@ -22,10 +24,12 @@ as (values
 	('DISTRICT_COMMERCIAL_HUB',			'Luxury_Gold'),
 	('DISTRICT_COMMERCIAL_HUB',			'Bonus_Gold'),
 	('DISTRICT_COMMERCIAL_HUB',			'Hansa_Gold'),
+	('DISTRICT_HARBOR',							'Hansa_Gold'),
 	('DISTRICT_THEATER',				'District_Culture_City_Center'),
 	('DISTRICT_AQUEDUCT',				'Aqueduct_Self_Food'),
 	('DISTRICT_ENCAMPMENT',				'HD_Strategic_Production'),
 	('DISTRICT_ENCAMPMENT',				'Government_Production'),
+	('DISTRICT_ENCAMPMENT',				'Hansa_Production'),
 	('DISTRICT_HOLY_SITE',				'Neighborhood_Faith'),
 	('DISTRICT_HOLY_SITE',				'Mbanza_Faith'),
 	('DISTRICT_CAMPUS',					'City_Center_Science'),
@@ -36,10 +40,6 @@ as (values
 	('DISTRICT_ROYAL_NAVY_DOCKYARD',	'Industrial_Zone_Gold'),
 	('DISTRICT_ACROPOLIS',				'City_Center_Culture'),
 	('DISTRICT_HANSA',					'River_Hansa_Production'),
-	('DISTRICT_HANSA',					'HD_Commerical_Hub_Production'),
-	('DISTRICT_HANSA',					'HD_Suguba_Production'),
-	('DISTRICT_HANSA',					'HD_Commerical_Hub_Production_Late'),
-	('DISTRICT_HANSA',					'HD_Suguba_Production_Late'),
 	('DISTRICT_HANSA',					'HD_Resource_Production'),
 	('DISTRICT_HANSA',					'HD_Resource_Production_Late'),
 	('DISTRICT_HANSA',					'City_center_Production'),
@@ -114,6 +114,7 @@ insert or replace into Adjacency_YieldChanges
 values
 	('Industrial_Zone_Gold',				'LOC_DISTRICT_INDUSTRIAL_ZONE_GOLD',			'YIELD_GOLD',		2,				'DISTRICT_INDUSTRIAL_ZONE'),
 	('Hansa_Gold',							'LOC_DISTRICT_HANSA_GOLD',						'YIELD_GOLD',		2,				'DISTRICT_HANSA'),
+	('Hansa_Production',							'LOC_DISTRICT_HANSA_PRODUCTION',						'YIELD_PRODUCTION',		2,				'DISTRICT_HANSA'),
 	('Canal_Gold',							'LOC_DISTRICT_CANAL_GOLD',						'YIELD_GOLD',		3,				'DISTRICT_CANAL'),
 	('City_Center_Culture',					'LOC_DISTRICT_CITY_CENTER_CULTURE',				'YIELD_CULTURE',	2,				'DISTRICT_CITY_CENTER'),
 	('City_Center_Science',					'LOC_DISTRICT_CITY_CENTER_SCIENCE',				'YIELD_SCIENCE',	1,				'DISTRICT_CITY_CENTER'),
@@ -148,13 +149,6 @@ values
 	('Mbanza_Self_Gold',				'LOC_DISTRICT_SELF_GOLD',		'YIELD_GOLD',		3,				1);
 -- With Prereq/Obsolete Tech/Civic
 
-insert or replace into Adjacency_YieldChanges
-	(ID,									Description,								YieldType,				YieldChange,	AdjacentDistrict, 			PrereqTech,				ObsoleteTech)
-values
-	('HD_Commerical_Hub_Production',		'LOC_DISTRICT_COMMERCIAL_HUB_PRODUCTION',	'YIELD_PRODUCTION',		1,				'DISTRICT_COMMERCIAL_HUB',	null,					'TECH_APPRENTICESHIP'),
-	('HD_Commerical_Hub_Production_Late',	'LOC_DISTRICT_COMMERCIAL_HUB_PRODUCTION',	'YIELD_PRODUCTION',		2,				'DISTRICT_COMMERCIAL_HUB',	'TECH_APPRENTICESHIP',	null),
-	('HD_Suguba_Production',				'LOC_DISTRICT_SUGUBA_PRODUCTION',			'YIELD_PRODUCTION',		1,				'DISTRICT_SUGUBA',			null,					'TECH_APPRENTICESHIP'),
-	('HD_Suguba_Production_Late', 			'LOC_DISTRICT_SUGUBA_PRODUCTION',			'YIELD_PRODUCTION',		2,				'DISTRICT_SUGUBA',			'TECH_APPRENTICESHIP',	null);
 insert or replace into Adjacency_YieldChanges
 	(ID,									Description,								YieldType,				YieldChange,	AdjacentResource,	PrereqTech,				ObsoleteTech)
 values

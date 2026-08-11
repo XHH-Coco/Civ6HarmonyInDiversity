@@ -111,6 +111,7 @@ create table if not exists HD_Adjacency_Base_On_Classification(
   ResourceClassificationType      TEXT,
   ImprovementClassificationType   TEXT,
   DistrictClassificationType      TEXT,
+  DistrictTypeIncludingUD         TEXT,
   PrereqCivic                     TEXT,
   PrereqTech                      TEXT,
   ObsoleteCivic                   TEXT,

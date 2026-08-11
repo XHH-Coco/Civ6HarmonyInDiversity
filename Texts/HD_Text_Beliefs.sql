@@ -41,7 +41,7 @@ values
     ("LOC_BELIEF_FEED_THE_WORLD_DL_DESCRIPTION",              "All Holy Site buildings provide +4 [ICON_FOOD] Food and +2 [ICON_HOUSING] Housing. +1% [ICON_FOOD] Food for every follower of this Religion."),
     ("LOC_BELIEF_CHORAL_MUSIC_DL_DESCRIPTION",                "All Holy Site buildings provide +4 [ICON_CULTURE] Culture.  +1% [ICON_CULTURE] Culture for every follower of this Religion. "),
     ("LOC_BELIEF_JESUIT_EDUCATION_DL_DESCRIPTION",            "All Holy Site buildings provide +0.5 [ICON_SCIENCE] Science for each [ICON_CITIZEN] citizen in this city. Campus district buildings are 20% cheaper to purchase. May purchase Campus district buildings with [ICON_FAITH] Faith. "),
-    ("LOC_BELIEF_RELIGIOUS_COMMUNITY_DL_DESCRIPTION",         "All Holy Site buildings provide +1 [ICON_SCIENCE] Science for international [ICON_TradeRoute] Trade Routes, and +1 [ICON_SCIENCE] Science for both sides of international [ICON_TradeRoute] Trade Routes to this city. May purchase trader units with [ICON_Faith] Faith. Traders are 20% cheaper to purchase. "),
+    ("LOC_BELIEF_RELIGIOUS_COMMUNITY_DL_DESCRIPTION",         "All Holy Site buildings provide +1 [ICON_SCIENCE] Science for international [ICON_TradeRoute] Trade Routes, and +1 [ICON_SCIENCE] Science for both sides of international [ICON_TradeRoute] Trade Routes to this city. May purchase trader units with [ICON_Faith] Faith. Traders are 15% cheaper to purchase. "),
     ("LOC_BELIEF_MESSIAH_DL_DESCRIPTION",                     "Holy Site and all Holy Site buildings provide +4 [ICON_Faith] Faith. City Center buildings are 20% cheaper to purchase. May purchase City Center buildings with [ICON_Faith] Faith.May purchase Holy Site district buildings with [ICON_FAITH] Faith."),
     ("LOC_BELIEF_ABBOT_DL_DESCRIPTION",                       "Holy Site district and buildings in it provide +1 [ICON_Production] Production to all adjacent tiles. +1% [ICON_Production] Production for every follower of this Religion."), -- 
 
@@ -127,7 +127,7 @@ values
     ("zh_Hans_CN",  "LOC_BELIEF_FEED_THE_WORLD_DL_DESCRIPTION",              "所有圣地建筑提供+4 [ICON_FOOD] 食物，+2 [ICON_HOUSING] 住房。每名信仰此宗教的居民将使 [ICON_Food] 食物+1%。"),
     ("zh_Hans_CN",  "LOC_BELIEF_CHORAL_MUSIC_DL_DESCRIPTION",                "所有圣地建筑提供+4 [ICON_CULTURE] 文化值。每名信仰此宗教的居民将使 [ICON_Culture] 文化值+1%。"),
     ("zh_Hans_CN",  "LOC_BELIEF_JESUIT_EDUCATION_DL_DESCRIPTION",            "所有圣地建筑为每人口提供0.5 [ICON_SCIENCE] 科技值。购买学院区域内建筑的费用降低20%且可以用 [ICON_FAITH] 信仰值购买。"),
-    ("zh_Hans_CN",  "LOC_BELIEF_RELIGIOUS_COMMUNITY_DL_DESCRIPTION",         "所有圣地建筑为此城出发的国际 [ICON_TradeRoute] 贸易路线+1 [ICON_Science] 科技值，使每条通往此城的国际 [ICON_TradeRoute] 贸易路线为双方+1 [ICON_Science] 科技值。可用 [ICON_Faith] 信仰值购买商人，购买商人的费用降低20%。"),
+    ("zh_Hans_CN",  "LOC_BELIEF_RELIGIOUS_COMMUNITY_DL_DESCRIPTION",         "所有圣地建筑为此城出发的国际 [ICON_TradeRoute] 贸易路线+1 [ICON_Science] 科技值，使每条通往此城的国际 [ICON_TradeRoute] 贸易路线为双方+1 [ICON_Science] 科技值。可用 [ICON_Faith] 信仰值购买商人，购买商人-15%花费。"),
     ("zh_Hans_CN",  "LOC_BELIEF_ABBOT_DL_DESCRIPTION",                       "圣地和其中的每一级建筑为相邻的单元格+1 [ICON_Production] 生产力。每名信仰此宗教的居民将使 [ICON_Production] 生产力+1%。"),
     ("zh_Hans_CN",  "LOC_BELIEF_MESSIAH_DL_DESCRIPTION",                     "圣地和所有圣地建筑提供+4 [ICON_Faith] 信仰值。购买市中心内建筑的费用降低20%且可以用 [ICON_Faith] 信仰值购买。圣地区域内建筑可以用 [ICON_FAITH] 信仰值购买。"),
     
