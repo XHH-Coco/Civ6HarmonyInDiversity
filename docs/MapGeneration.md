@@ -430,26 +430,57 @@ old/new 往两边各挪一格，而不是直接放开。这是手感活，需要
 
 现象：`Suk_ResourceGenerator.lua:354` 报
 `operator < is not supported for number < nil`，地图照样生成，看着像无害。
-其实不然 —— 那句是海洋奢侈品放置主循环里的排序，报错会把整个
-`Suk_OceansMapGen.lua` 打断。而**原版海洋奢侈品在这之前已经被清空了**
-（该文件先把所有水域奢侈遍历删掉，再按大洲重放），所以崩在第一个资源上
-就等于**整张图没有任何海洋奢侈品**。
+其实不然。
 
-已证实的一环（拿真实的 `Suk_MapConvolution.lua` 跑出来的）：热力图全零时
-`DoNormalise` 的 `iRange = iMax - iMin` 为 0，`(v - iMin)/iRange` 让**全部**格子
-变成 `NaN`。全零正是日志里 `Removed luxuries from 0 tiles` 的情形 ——
+**后果**：那句是海洋奢侈品放置主循环里的排序，报错一路抛到
+`Suk_OceansMapGen.lua:14` 的 `include`，把整个脚本打断（日志里紧跟着
+`Error loading file`）。剩下的资源条目一个都不会走。日志那局崩在**第一条**
+（AMBER），所以那张图**一个海洋奢侈品都没有**。更糟的情况是：该文件在放置之前
+会先遍历所有水域把已有的奢侈品**删掉**再按大洲重放
+（`ResourceBuilder.SetResourceType(pPlot, -1)`），如果那一步删掉了 N 个然后崩在早期条目，
+原版放的那 N 个也一起没了。日志那局删了 0 个，所以只是"没有新增"。
+
+另外脚本开头就 `Game:SetProperty("Suk_Oceans_Resources_Spawned", true)`，
+读档不会重试。
+
+**已证实的一环**（拿真实的 `Suk_MapConvolution.lua` 跑出来的）：热力图全零时
+`DoNormalise` 的 `iRange = iMax - iMin` 为 0，`(v - iMin)/iRange` 让 1144/1144 格
+全部变成 `NaN`。全零正是日志里 `Removed luxuries from 0 tiles` 的情形 ——
 图上一格水域奢侈都没有（湖多海少的图很常见）。NaN 之后 `iMaxWeight` 保持 0、
 `iScore` 是 NaN、`GetRandomNumber(100) <= NaN` 恒假，于是**整个加权放置段完全失效**，
-所有资源都掉进 `iOccurences == 0` 的兜底分支无视权重乱放。
+所有资源都掉进 `iOccurences == 0` 的兜底分支无视权重乱放。这是一个独立的、
+不崩也在生效的缺陷。
 
-崩溃本身还需要权重表里出现真正的 `nil`。用真实源码搭桩跑过一张
-44×26 / 单大洲 / 18 个湖 / 无海岸的图（照日志那局建的），跑得通、不报错，
-所以**具体触发条件还没复现出来**。两处该加的护栏与触发条件无关：
-`DoNormalise` 在 `iRange == 0` 时应当整体置零而不是除零，
-权重表应当按地图尺寸铺满而不是靠 `#tPlotsData.Plots`。
+**但 NaN 不是崩溃的原因**。把 Lua 5.1 `ltablib.c` 的 `auxsort` 照抄一份插桩测过：
+比较函数恒假（全 NaN 就是这种）时，长度 1..259 全部**零次**越界读取 ——
+全 NaN 在"严格弱序"的意义下是合法的"全部相等"，排序不会走出数组。
+只有比较函数恒真时才会在 n=4 就把 `nil` 喂给比较函数。
+所以 `LuxuryWeight` 里必须存在**真正的 nil**；而报错形态是
+`number < nil`（恰好一个操作数是 nil）说明那张表是**部分填充**，不是空表。
 
-要修得把该文件 vendor 进 HD 用 `ImportFiles` + `Suk_Oceans_Rework` 条件覆盖
-（HD 已经这么覆盖过 `Suk_YieldTT.lua` 等）。代价是 HD 从此维护一份第三方文件的分叉。
+**唯一的写入点**是
+`for iPlot = 0, #tPlotsData.Plots do LuxuryWeight[iPlot] = tLuxuryMap.m_MapGrid[iPlot] end`。
+两个可疑处：
+
+1. `#tPlotsData.Plots`。该表键是 0..N-1，`#` 返回 N-1（唯一的 border），循环
+   `0..N-1` 刚好覆盖全图 —— 实测确实是 1143 / 1144 格。**所以它不是那个洞**，
+   但它是个雷：权重表的覆盖范围挂在另一张表的 `#` 上，而 `#` 是 border 不是计数。
+2. `tLuxuryMap.m_MapGrid` 本身短了。这张表被 `DoConvolution` 整体重建，
+   循环上界是 `self.m_MapWidth` / `self.m_MapHeight` —— 这两个是
+   `Suk_MapConvolution.lua` **首次加载时**抓的类级常量，其中
+   `m_MapHeight = Select(2, Map.GetGridSize())` 还要经过 `Select` 里的
+   Lua 5.0 时代 `arg` 表。这两个常量一旦和当前地图尺寸不符，网格尾部就没人写，
+   高位格子的权重就是 nil，正是这个报错。而 `DoNormalise` 用 `pairs` 遍历，
+   只改已存在的键，**填不了洞**。
+
+**没复现出来**：用真实源码搭桩跑过一张 44×26 / 单大洲 / 18 个湖 / 无海岸的图
+（照日志那局建的），跑得通、把 CAVIAR 和 AMBER 都放了（走的正是 NaN 兜底分支）。
+所以触发条件还差一块。下一步最省力的取证是找报告者要同一局的
+`Database.log` / `modding.log` 和确切的地图与设置。
+
+**修法**见下面的取舍；关键的好消息是：这个脚本是 `AddGameplayScripts`，
+在 `GenerateMap()` **之后**才跑，所以改它**不会影响 HD 自己的地形、河流、出生点**，
+也不会让老地图种子失效 —— 只会改同一种子下海洋资源的分布。
 
 ---
 

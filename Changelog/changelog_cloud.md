@@ -37,11 +37,18 @@ bingyang1132 的长期分支。本文件按时间倒序记录本分支的改动�
   `FLOWDIRECTION_NORTHEAST` 一种情况打了补丁。给出了两条修法（回滚整条 / 推广边界补丁）
   及各自代价。顺带确认 `GetRiverValueAtPlot` 里那段 cliff/自然奇观 `return -1`
   在标准流程里是死代码（`AddRivers` 排在 `AddCliffs` 和自然奇观之前）。
-- **5.5 Suk's Oceans 崩溃**：`Suk_ResourceGenerator.lua:354`。已证实
-  `Suk_MapConvolution.DoNormalise` 在热力图全零时除零，把全部权重变成 NaN，
-  加权放置段因此完全失效；崩溃打断整个脚本，而原版海洋奢侈品在那之前已被清空，
-  所以那一局**一个海洋奢侈品都不会有**。用真实源码搭桩没能复现出 nil 本身，
-  触发条件仍未确定。
+- **5.5 Suk's Oceans 崩溃**：`Suk_ResourceGenerator.lua:354`。报错一路抛到
+  `Suk_OceansMapGen.lua:14` 的 include，把整个脚本打断；日志那局崩在第一条资源上，
+  所以那张图**一个海洋奢侈品都没有**。
+  已证实 `Suk_MapConvolution.DoNormalise` 在热力图全零时除零，把 1144/1144 格权重
+  变成 NaN，加权放置段因此完全失效 —— 这是个不崩也在生效的独立缺陷。
+  但**照抄 Lua 5.1 的 auxsort 插桩测过，恒假的比较函数在长度 1..259 上零次越界读**，
+  所以 NaN 不是崩因：`LuxuryWeight` 里必须有真 nil，且 `number < nil` 的形态说明
+  那张表是**部分填充**。嫌疑落在 `Suk_MapConvolution` 的类级
+  `m_MapWidth` / `m_MapHeight` 上——`DoConvolution` 拿它们当上界重建网格，
+  而 `DoNormalise` 用 pairs 遍历，填不了洞。用真实源码搭桩仍未复现，触发条件未定。
+  一个好消息：该脚本是 AddGameplayScripts，在 `GenerateMap()` **之后**才跑，
+  改它不影响 HD 的地形/河流/出生点，也不会让老地图种子失效。
 
 ---
 
