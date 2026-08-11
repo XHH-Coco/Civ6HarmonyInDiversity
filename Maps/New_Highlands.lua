@@ -498,11 +498,9 @@ function GenerateFractalLayerWithoutHills (args, plotTypes)
 				--do nothing
 			elseif (adjCount == 7) then
 				--do nothing
-			-- by changing oceans adjacent to lots of land into land, might be able to relieve the stripe ocean problem.
-			elseif (adjCount > 8 and adjCount < 15) then
-				if (5 + TerrainBuilder.GetRandomNumber(3, "Fractal Layer Land - Lua") <= adjCount) then
-					plotTypes2[i] = g_PLOT_TYPE_LAND;
-				end
+			-- 注：AdjacentCount 的值域是 0..6（相邻陆地数），或哨兵 7（自己已是陆地，上一分支已拦截）。
+			-- 原先这里有一个概率填海分支，阈值写成 >8 ~ >16，永不成立、从未执行过，已删除。
+			-- 若要重新启用，请按 0..6 的量级标定，参考 Lakes.lua。
 			elseif (adjCount == 0) then
 				plotTypes2[i] = g_PLOT_TYPE_LAND;
 			end
