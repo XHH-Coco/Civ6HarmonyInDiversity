@@ -24,7 +24,6 @@ local featuregen = nil;
 local world_age_new = 5;
 local world_age_normal = 3;
 local world_age_old = 2;
-local islands = {};
 -------------------------------------------------------------------------------
 function GenerateMap()
 	print("Generating Seven_Seas Map");
@@ -264,7 +263,7 @@ function GeneratePlotTypes(world_age)
 
 	-- Generate Large Islands   大岛、中型陆地
     local args = {};    
-    islands = plotTypes;
+    SetIslandLayer(plotTypes);
     args.iWaterPercent = 65 + water_percent_modifier;
     args.iRegionWidth = math.ceil(g_iW);
     args.iRegionHeight = math.ceil(g_iH);
@@ -293,7 +292,7 @@ function GeneratePlotTypes(world_age)
     args.iRegionFracXExp = 5;
     args.iRegionFracYExp = 3;
     plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
-    islands = plotTypes;
+    SetIslandLayer(plotTypes);
 
 
 
@@ -310,7 +309,7 @@ function GeneratePlotTypes(world_age)
     args.iRegionFracXExp = 5;
     args.iRegionFracYExp = 5;
     plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
-    islands = plotTypes;
+    SetIslandLayer(plotTypes);
 
 
 
@@ -327,7 +326,7 @@ function GeneratePlotTypes(world_age)
     args.iRegionFracXExp = 6;
     args.iRegionFracYExp = 4;
     plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
-    islands = plotTypes;
+    SetIslandLayer(plotTypes);
 
 
 
@@ -344,7 +343,7 @@ function GeneratePlotTypes(world_age)
     args.iRegionFracXExp = 5;
     args.iRegionFracYExp = 6;
     plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
-    islands = plotTypes;
+    SetIslandLayer(plotTypes);
 
 
     -- Generate Tiny Fishing Islands  内海岛屿1
@@ -360,7 +359,7 @@ function GeneratePlotTypes(world_age)
     args.iRegionFracXExp = 5;
     args.iRegionFracYExp = 5;
     plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
-    islands = plotTypes;
+    SetIslandLayer(plotTypes);
 
       -- Generate Tiny Fishing Islands  内海岛屿2
     local args = {};
@@ -375,7 +374,7 @@ function GeneratePlotTypes(world_age)
     args.iRegionFracXExp = 3;
     args.iRegionFracYExp = 2;
     plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
-    islands = plotTypes;
+    SetIslandLayer(plotTypes);
 
      -- Generate Tiny Fishing Islands  内海岛屿3
     local args = {};
@@ -390,7 +389,7 @@ function GeneratePlotTypes(world_age)
     args.iRegionFracXExp = 3;
     args.iRegionFracYExp = 4;
     plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
-    islands = plotTypes;
+    SetIslandLayer(plotTypes);
 
     -- 峡湾，纵向乱切型 陆地切割者，可产生随机的内海岛屿4
     local args = {};
@@ -718,33 +717,4 @@ end
 	end
 -------------------------------------------------------------------------------------------
 
-function Adjacent(index)
-	aIslands = islands;
-	index = index -1;
-
-	if(aIslands == nil) then
-		return false;
-	end
-	
-	if(index < 0) then
-		return false
-	end
-
-	local plot = Map.GetPlotByIndex(index);
-	if(aIslands[index] ~= nil and aIslands[index] == g_PLOT_TYPE_LAND) then
-		return true;
-	end
-
-	for direction = 0, DirectionTypes.NUM_DIRECTION_TYPES - 1, 1 do
-		local adjacentPlot = Map.GetAdjacentPlot(plot:GetX(), plot:GetY(), direction);
-		if(adjacentPlot ~= nil) then
-			local newIndex = adjacentPlot:GetIndex();
-			if(aIslands  ~= nil and aIslands[newIndex] == g_PLOT_TYPE_LAND) then
-				return true;
-			end
-		end
-	end
-
-	return false;
-end
 -------------------------------------------------------------------------------

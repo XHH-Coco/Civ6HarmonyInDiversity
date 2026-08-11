@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
--- AddVolcanicSoil 差分测试
+-- 地图函数差分测试（AddVolcanicSoil、Adjacent / AdjacentCount）
 --
 --   lua run.lua
 --
@@ -370,6 +370,57 @@ do
 end
 
 --------------------------------------------------------------------------------
+-- Adjacent / AdjacentCount：22 份 / 11 份合并进 MapUtilities
+--
+-- 这两个函数本身逐字相同，风险全在跨文件之后 `local islands` 这个 upvalue
+-- 拿不到，所以状态跟着搬走、改用 setter 写入。这里验证搬迁前后逐格同结果。
+--------------------------------------------------------------------------------
+
+print("\n-- Adjacent / AdjacentCount 合并前后对比 --")
+do
+    local BEFORE = here .. "/versions/islands_before.lua"
+    local AFTER  = here .. "/versions/islands_after.lua"
+    local checked, mism = 0, 0
+
+    for _, c in ipairs(CASES) do
+        local world = c.build("wrap")
+
+        -- 拿地块的水陆状态当参考层（1 基下标，与地图脚本一致）
+        local layer = {}
+        for y = 0, world.h - 1 do
+            for x = 0, world.w - 1 do
+                layer[y * world.w + x + 1] =
+                    S.at(world, x, y).water and 3 or 2      -- OCEAN / LAND
+            end
+        end
+
+        local function boot(path)
+            local env = S.makeEnv(world, function() return 0 end)
+            S.loadVersion(path, env, true)
+            env.SetIslandLayer(layer)
+            return env
+        end
+        local e1, e2 = boot(BEFORE), boot(AFTER)
+
+        for i = 1, world.w * world.h do
+            local a1, a2 = e1.Adjacent(i), e2.Adjacent(i)
+            local n1, n2 = e1.AdjacentCount(i), e2.AdjacentCount(i)
+            checked = checked + 1
+            if a1 ~= a2 or n1 ~= n2 then
+                mism = mism + 1
+                if mism <= 3 then
+                    fail("%s：index %d 上 Adjacent=%s/%s AdjacentCount=%s/%s",
+                         c.name, i, tostring(a1), tostring(a2),
+                         tostring(n1), tostring(n2))
+                end
+            end
+        end
+    end
+    print(string.format("  比对 %d 个格子，不一致 %d 个", checked, mism))
+    if checked == 0 then fail("Adjacent 对比一个格子都没跑到") end
+end
+
+--------------------------------------------------------------------------------
 
 print("\n================================================================")
 if failures == 0 then
@@ -377,6 +428,7 @@ if failures == 0 then
     print("  v0 ≡ v1：math.random→GetRandomNumber 与 feature id→枚举 是纯重构")
     print("  v1b ≡ v2：发布版恰好等于 v1 + 缺陷① + 缺陷②，无第三种行为变化")
     print("  v2  ≡ v3：合并进 MapUtilities 的共享版本行为不变（默认入参与 Primordial 入参各测一遍）")
+    print("  Adjacent / AdjacentCount 搬迁前后逐格同结果")
     os.exit(0)
 else
     print(string.format("  失败 %d 项", failures))

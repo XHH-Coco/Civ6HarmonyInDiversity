@@ -173,6 +173,13 @@ function M.makeEnv(world, rng)
         return world.plots[i]
     end
 
+    -- Adjacent / AdjacentCount 用；方向序与 neighborCoords 一致
+    function Map.GetAdjacentPlot(x, y, direction)
+        local c = neighborCoords(x, y)[direction + 1]
+        if not c then return nil end
+        return fetch(c[1], c[2], false)
+    end
+
     -- Civ6 在极点会给出 nil 项；这里返回稠密数组（跳过不存在的邻居），
     -- 因为被测代码用的是 ipairs，遇到 nil 会提前中断。对所有版本一致即可。
     function Map.GetAdjacentPlots(x, y)
@@ -214,6 +221,11 @@ function M.makeEnv(world, rng)
     env.TerrainBuilder = TerrainBuilder
     env.GameInfo = { Features = M.FEATURES }
     env.g_FEATURE_VOLCANIC_SOIL = M.VOLCANIC_SOIL
+    env.DirectionTypes = { NUM_DIRECTION_TYPES = 6 }
+    env.g_PLOT_TYPE_MOUNTAIN = 0
+    env.g_PLOT_TYPE_HILLS = 1
+    env.g_PLOT_TYPE_LAND = 2
+    env.g_PLOT_TYPE_OCEAN = 3
     env.math = mathProxy
     env.ipairs = ipairs
     env.pairs = pairs
@@ -228,7 +240,9 @@ end
 -- 加载一个版本的 AddVolcanicSoil 到指定环境（兼容 Lua 5.1 / 5.2+ / LuaJIT）
 --------------------------------------------------------------------------------
 
-function M.loadVersion(path, env)
+-- anyName = true 时只加载、不取单个函数，用于一次定义多个函数的版本文件
+-- （Adjacent / AdjacentCount / SetIslandLayer 就是这种）
+function M.loadVersion(path, env, anyName)
     local fh = assert(io.open(path, "r"), "打不开 " .. path)
     local src = fh:read("*a")
     fh:close()
@@ -242,6 +256,9 @@ function M.loadVersion(path, env)
     end
     chunk()
 
+    if anyName then
+        return env
+    end
     return assert(env.AddVolcanicSoil, path .. " 里没有定义 AddVolcanicSoil")
 end
 

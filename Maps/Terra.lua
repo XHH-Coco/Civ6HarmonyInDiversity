@@ -19,7 +19,6 @@ include "AssignStartingPlots"
 local g_iW, g_iH;
 local g_iFlags = {};
 local g_continentsFrac = nil;
-local islands = {};
 ------------------------
 ------------------------------------------------------
 -- The application side will call GetMapScriptInfo directly to request
@@ -292,7 +291,7 @@ function GeneratePlotTypes(world_age)
 	end
 
 	-- Generate West Large Islands	
-	islands = plotTypes;
+	SetIslandLayer(plotTypes);
 	local args = {};
 	args.iWaterPercent = 77 + water_percent_modifier;
     args.iRegionWidth = math.ceil(g_iW);
@@ -306,11 +305,11 @@ function GeneratePlotTypes(world_age)
 	args.iRegionFracYExp = 5;
 	args.adjustment = adjustment;
 	plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
-	islands = plotTypes;
+	SetIslandLayer(plotTypes);
 
 	-- Generate West Medium Islands
 	local args = {};	
-	islands = plotTypes;
+	SetIslandLayer(plotTypes);
 	args.iWaterPercent = 80 + water_percent_modifier;
 	args.iRegionWidth = math.ceil(g_iW / 2 - iMediumIslandValue * 2);
 	args.iRegionHeight = math.ceil(g_iH);
@@ -325,7 +324,7 @@ function GeneratePlotTypes(world_age)
     plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
 
 	-- Generate West Tiny Islands
-	islands = plotTypes;
+	SetIslandLayer(plotTypes);
 	local args = {};	
 	args.iWaterPercent = 88 + water_percent_modifier;
 	args.iRegionWidth = math.ceil(g_iW / 2 - iTinyIslandValue * 2);
@@ -340,7 +339,7 @@ function GeneratePlotTypes(world_age)
     plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
 	
 	-- Generate East Large Islands	
-	islands = plotTypes;
+	SetIslandLayer(plotTypes);
 	local args = {};
 	args.iWaterPercent = 79 + water_percent_modifier;
 	args.iRegionWidth = math.ceil(g_iW / 2 - iLargeIslandValue * 2);
@@ -354,11 +353,11 @@ function GeneratePlotTypes(world_age)
 	args.iRegionFracYExp = 5;
 	args.adjustment = adjustment;
 	plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
-	islands = plotTypes;
+	SetIslandLayer(plotTypes);
 
 	-- Generate East Medium Islands
 	local args = {};	
-	islands = plotTypes;
+	SetIslandLayer(plotTypes);
 	args.iWaterPercent = 83 + water_percent_modifier;
 	args.iRegionWidth = math.ceil(g_iW);
 	args.iRegionHeight = math.ceil(g_iH);
@@ -371,10 +370,10 @@ function GeneratePlotTypes(world_age)
 	args.iRegionFracYExp = 4;
 	args.adjustment = world;
     plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
-	islands = plotTypes;
+	SetIslandLayer(plotTypes);
 
 	-- Generate East Tiny Islands
-	islands = plotTypes;
+	SetIslandLayer(plotTypes);
 	local args = {};	
 	args.iWaterPercent = 88 + water_percent_modifier;
 	args.iRegionWidth = math.ceil(g_iW / 2 - iTinyIslandValue * 2);
@@ -871,35 +870,6 @@ function GenerateFractalLayerWithoutHills (args, plotTypes)
 end
 
 -------------------------------------------------------------------------------------------
-function Adjacent(index)
-	aIslands = islands;
-	index = index -1;
-
-	if(aIslands == nil) then
-		return false;
-	end
-	
-	if(index < 0) then
-		return false
-	end
-
-	local plot = Map.GetPlotByIndex(index);
-	if(aIslands[index] ~= nil and aIslands[index] == g_PLOT_TYPE_LAND) then
-		return true;
-	end
-
-	for direction = 0, DirectionTypes.NUM_DIRECTION_TYPES - 1, 1 do
-		local adjacentPlot = Map.GetAdjacentPlot(plot:GetX(), plot:GetY(), direction);
-		if(adjacentPlot ~= nil) then
-			local newIndex = adjacentPlot:GetIndex();
-			if(aIslands  ~= nil and aIslands[newIndex] == g_PLOT_TYPE_LAND) then
-				return true;
-			end
-		end
-	end
-
-	return false;
-end
 -------------------------------------------------------------------------------
 
 function AddFeatures()

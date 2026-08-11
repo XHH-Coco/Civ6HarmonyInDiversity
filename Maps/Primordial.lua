@@ -24,7 +24,6 @@ local featuregen = nil;
 local world_age_new = 8;
 local world_age_normal = 6;
 local world_age_old = 4;
-local islands = {};
 
 -------------------------------------------------------------------------------
 function GenerateMap()
@@ -268,7 +267,7 @@ function GeneratePlotTypes(world_age)
 
 	-- Generate Large Islands	
 	local args = {};	
-	islands = plotTypes;
+	SetIslandLayer(plotTypes);
 	args.iWaterPercent = 64 + water_percent_modifier;
 	args.iRegionWidth = math.ceil(g_iW);
 	args.iRegionHeight = math.ceil(g_iH);
@@ -283,7 +282,7 @@ function GeneratePlotTypes(world_age)
 	
 	-- Generate Medium Islands	
 	local args = {};	
-	islands = plotTypes;
+	SetIslandLayer(plotTypes);
 	args.iWaterPercent = 72 + water_percent_modifier;
 	args.iRegionWidth = math.ceil(g_iW);
 	args.iRegionHeight = math.ceil(g_iH);
@@ -298,7 +297,7 @@ function GeneratePlotTypes(world_age)
 
 	-- Generate Small Islands
 	local args = {};	
-	islands = plotTypes;
+	SetIslandLayer(plotTypes);
 	args.iWaterPercent = 86 + water_percent_modifier;
 	args.iRegionWidth = math.ceil(g_iW);
 	args.iRegionHeight = math.ceil(g_iH);
@@ -313,7 +312,7 @@ function GeneratePlotTypes(world_age)
 
 	-- Generate Tiny Islands
 	local args = {};	
-	islands = plotTypes;
+	SetIslandLayer(plotTypes);
 	args.iWaterPercent = 95+ water_percent_modifier;
 	args.iRegionWidth = math.ceil(g_iW);
 	args.iRegionHeight = math.ceil(g_iH);
@@ -447,35 +446,6 @@ function GenerateFractalLayerWithoutHills (args, plotTypes)
 end
 
 -------------------------------------------------------------------------------------------
-function Adjacent(index)
-	aIslands = islands;
-	index = index -1;
-
-	if(aIslands == nil) then
-		return false;
-	end
-	
-	if(index < 0) then
-		return false
-	end
-
-	local plot = Map.GetPlotByIndex(index);
-	if(aIslands[index] ~= nil and aIslands[index] == g_PLOT_TYPE_LAND) then
-		return true;
-	end
-
-	for direction = 0, DirectionTypes.NUM_DIRECTION_TYPES - 1, 1 do
-		local adjacentPlot = Map.GetAdjacentPlot(plot:GetX(), plot:GetY(), direction);
-		if(adjacentPlot ~= nil) then
-			local newIndex = adjacentPlot:GetIndex();
-			if(aIslands  ~= nil and aIslands[newIndex] == g_PLOT_TYPE_LAND) then
-				return true;
-			end
-		end
-	end
-
-	return false;
-end
 
 -------------------------------------------------------------------------------------------
 function MarkCoastalLowlands()

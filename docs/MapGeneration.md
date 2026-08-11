@@ -328,30 +328,33 @@ HD 覆盖了全部原版地图脚本（在 `DL.modinfo` 的 `ImportFiles` 里列
 
 ## 5. 已知工程问题
 
-> 已修复的见 [changelog_cloud.md](../Changelog/changelog_cloud.md)：61 处 `math.random`、
-> 125 处硬编码 feature id、`AddVolcanicSoil` 的 X 循环越界与三处不一致的奇观排除名单、
-> 死声明与 GBK 字节、`AddGoodies` 的 off-by-one、随机海平面取不到最低档、
-> 出生点肥沃度的浮点求和顺序、浮点 RNG 上界。
+> 已修复的见 [changelog_cloud.md](../Changelog/changelog_cloud.md)。
 
-只剩一个，而且是最大的一个。
+### 5.1 GenerateFractalLayerWithoutHills 的 22 份副本
 
-### 5.1 大规模复制粘贴
+其余重复已合并（`AddVolcanicSoil` 25→1、`Adjacent` 22→1、`AdjacentCount` 11→1，
+都在 `Utility/MapUtilities.lua`，净减约 2500 行）。剩这一个**不建议合并**。
 
-| 函数 | 重复份数 | 合并难度 |
-|---|---|---|
-| `AddVolcanicSoil` | 25 | **低** —— 逐字相同，直接搬进 `Utility/` |
-| `GenerateFractalLayerWithoutHills` | 22 | **高** —— 22 份**不相同**，`(a,b)` 参数与分形指数逐图调过，合并要参数化 |
-| `Adjacent` | 22 | **中** —— 读文件级全局 `islands`，搬走要连状态一起搬 |
-| `AdjacentCount` | 11 | 同上 |
+22 份里有 **18 个不同变体**，不是复制粘贴：Lakes 与 Rivers 只差 4 行默认值，
+但 Lakes 与 Tiny_Islands 差 59 行 / 共 117 行，Tiny_Islands 只有 80 行——是结构性差异。
+合并意味着把 18 种配置塞进一个参数化函数，拿"22 个简单函数"换"1 个参数汤"，
+不见得更好。
 
-后果是具体的：修 `math.random` 要改 61 处、去掉火山土硬编码要改 125 处、修海平面要改 15 个
-文件、修火山上界要改 8 个文件。而 X 循环越界和奇观名单不一致这两个缺陷本身，
-也都是一次写错、复制 25 份。
+真要动，先给 [tools/maptest](../tools/maptest/) 补 `Fractal.*` 和 `ShiftPlotTypes`
+的桩（`Fractal` 是黑盒，塞确定性伪噪声即可——差分只要求两版吃到同一份输入）。
 
-**动手前先扩展 [tools/maptest](../tools/maptest/) 的桩覆盖目标函数。**
-`AddVolcanicSoil` 已经有覆盖，可以先做它；后三个需要额外桩掉 `Fractal.*`、
-`ShiftPlotTypes`、`Map.GetAdjacentPlot`（`Fractal` 是黑盒，塞确定性伪噪声即可——
-差分只要求两个版本吃到同一份输入）。
+### 5.2 十张图的填海分支已删除，但"要不要填海"仍未定
+
+`AdjacentCount` 的值域是 0..6（相邻陆地数）加哨兵 7（自己已是陆地）。
+11 张用它的图里，只有 Lakes 的阈值 `> 1` 可达；其余 10 张写的是 `> 8`、`> 9`、
+`> 12`、`> 13`、`> 16`，**从来没执行过**。数值形态像是作者想让填海更保守，
+一路往上调、超过 7 之后分支静默失效而不自知。
+
+死分支已删（行为不变，它本来就不执行）。但**这 10 张图到底该不该填海**是手感问题，
+需要 xhh 判断：现在它们只在"周围完全没有已有陆地"时铺陆，即只投放孤立新岛，
+永远不会填海湾或连接已有陆地——而代码注释描述的恰恰相反。
+
+要启用的话按 0..6 标定，参考 Lakes.lua，并注意这会显著改变那 10 张图的海岸线。
 
 ---
 

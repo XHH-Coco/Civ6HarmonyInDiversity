@@ -1032,3 +1032,77 @@ function AddVolcanicSoil(iSecondRingChance)
         end
     end
 end
+
+--分形叠层的"已有陆地"参考层--------------------------------------------------
+-- GenerateFractalLayerWithoutHills 逐层叠加时，靠上一层的结果判断相邻陆地。
+-- 这份状态原本是每个地图脚本各自的 `local islands`，配一对逐字相同的
+-- Adjacent / AdjacentCount（22 份 / 11 份）。合并后状态搬到这里，
+-- 地图脚本改用 SetIslandLayer() 写入。
+-- 初值是空表而不是 nil，与原来的 `local islands = {}` 行为一致。
+local g_IslandLayer = {};
+
+function SetIslandLayer(plotTypes)
+	g_IslandLayer = plotTypes;
+end
+
+function Adjacent(index)
+	local aIslands = g_IslandLayer;
+	index = index -1;
+
+	if(aIslands == nil) then
+		return false;
+	end
+	
+	if(index < 0) then
+		return false
+	end
+
+	local plot = Map.GetPlotByIndex(index);
+	if(aIslands[index] ~= nil and aIslands[index] == g_PLOT_TYPE_LAND) then
+		return true;
+	end
+
+	for direction = 0, DirectionTypes.NUM_DIRECTION_TYPES - 1, 1 do
+		local adjacentPlot = Map.GetAdjacentPlot(plot:GetX(), plot:GetY(), direction);
+		if(adjacentPlot ~= nil) then
+			local newIndex = adjacentPlot:GetIndex();
+			if(aIslands  ~= nil and aIslands[newIndex] == g_PLOT_TYPE_LAND) then
+				return true;
+			end
+		end
+	end
+
+	return false;
+end
+
+function AdjacentCount(index)
+	local aIslands = g_IslandLayer;
+	index = index -1;
+
+	if(aIslands == nil) then
+		return 0;
+	end
+	
+	if(index < 0) then
+		return 0;
+	end
+
+	local plot = Map.GetPlotByIndex(index);
+	if(aIslands[index] ~= nil and aIslands[index] == g_PLOT_TYPE_LAND) then
+		return 7;
+	end
+
+	local adjCount = 0;
+	for direction = 0, DirectionTypes.NUM_DIRECTION_TYPES - 1, 1 do
+		local adjacentPlot = Map.GetAdjacentPlot(plot:GetX(), plot:GetY(), direction);
+		if(adjacentPlot ~= nil) then
+			local newIndex = adjacentPlot:GetIndex();
+			if(aIslands  ~= nil and aIslands[newIndex] == g_PLOT_TYPE_LAND) then
+				adjCount = adjCount+1;
+			end
+		end
+	end
+
+	return adjCount;
+end
+

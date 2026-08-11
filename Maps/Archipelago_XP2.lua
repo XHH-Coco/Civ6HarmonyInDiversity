@@ -20,7 +20,6 @@ include "AssignStartingPlots"
 local g_iW, g_iH;
 local g_iFlags = {};
 local g_continentsFrac = nil;
-local islands = {};
 local featuregen = nil;
 local world_age_old = 1;
 local world_age_normal = 2;
@@ -215,7 +214,7 @@ function GeneratePlotTypes(world_age)
     args.iRegionFracXExp = 6;
     args.iRegionFracYExp = 5;
     plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
-    islands = plotTypes;
+    SetIslandLayer(plotTypes);
 
 
     -- Generate Tiny Islands   
@@ -231,7 +230,7 @@ function GeneratePlotTypes(world_age)
     args.iRegionFracXExp = 5;
     args.iRegionFracYExp = 5;
     plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
-    islands = plotTypes;
+    SetIslandLayer(plotTypes);
 
     -- Generate Tiny Fishing Islands 
     local args = {};
@@ -246,7 +245,7 @@ function GeneratePlotTypes(world_age)
     args.iRegionFracXExp = 4;
     args.iRegionFracYExp = 5;
     plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
-    islands = plotTypes;
+    SetIslandLayer(plotTypes);
 
     -- Generate small Islands  
     local args = {};
@@ -261,7 +260,7 @@ function GeneratePlotTypes(world_age)
     args.iRegionFracXExp = 5;
     args.iRegionFracYExp = 6;
     plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
-    islands = plotTypes;
+    SetIslandLayer(plotTypes);
 
     -- 峡湾，Cut into this by adding some bays and other water cutouts
     local args = {};
@@ -647,35 +646,6 @@ function FeatureGenerator:AddIceToMap()
 end
 
 ----------------------------------------------------------------------------------------------------
-function Adjacent(index)
-    aIslands = islands;
-    index = index -1;
-
-    if(aIslands == nil) then
-        return false;
-    end
-    
-    if(index < 0) then
-        return false
-    end
-
-    local plot = Map.GetPlotByIndex(index);
-    if(aIslands[index] ~= nil and aIslands[index] == g_PLOT_TYPE_LAND) then
-        return true;
-    end
-
-    for direction = 0, DirectionTypes.NUM_DIRECTION_TYPES - 1, 1 do
-        local adjacentPlot = Map.GetAdjacentPlot(plot:GetX(), plot:GetY(), direction);
-        if(adjacentPlot ~= nil) then
-            local newIndex = adjacentPlot:GetIndex();
-            if(aIslands  ~= nil and aIslands[newIndex] == g_PLOT_TYPE_LAND) then
-                return true;
-            end
-        end
-    end
-
-    return false;
-end
 
 -------------------------------------------------------------------------------------------
 

@@ -23,7 +23,6 @@ local g_continentsFrac = nil;
 local g_riverPlots = {};
 local g_riverStartPlots = {};
 local g_iRiverID = 0;
-local islands = {};
 local featuregen = nil;
 local g_iRiverID = 0;
 
@@ -282,7 +281,7 @@ function GeneratePlotTypes(world_age)
 
 	-- Generate Medium Islands
 	local args = {};	
-	islands = plotTypes;
+	SetIslandLayer(plotTypes);
 	args.iWaterPercent = 87 + water_percent_modifier;
 	args.iRegionWidth = math.ceil(g_iW);
 	args.iRegionHeight = math.ceil(g_iH);
@@ -782,35 +781,6 @@ function GenerateFractalLayerWithoutHills (args, plotTypes)
 end
 
 -------------------------------------------------------------------------------------------
-function Adjacent(index)
-	aIslands = islands;
-	index = index -1;
-
-	if(aIslands == nil) then
-		return false;
-	end
-	
-	if(index < 0) then
-		return false
-	end
-
-	local plot = Map.GetPlotByIndex(index);
-	if(aIslands[index] ~= nil and aIslands[index] == g_PLOT_TYPE_LAND) then
-		return true;
-	end
-
-	for direction = 0, DirectionTypes.NUM_DIRECTION_TYPES - 1, 1 do
-		local adjacentPlot = Map.GetAdjacentPlot(plot:GetX(), plot:GetY(), direction);
-		if(adjacentPlot ~= nil) then
-			local newIndex = adjacentPlot:GetIndex();
-			if(aIslands  ~= nil and aIslands[newIndex] == g_PLOT_TYPE_LAND) then
-				return true;
-			end
-		end
-	end
-
-	return false;
-end
 
 ----------------------------------------------------------------------------------
 function AddFeatures()
