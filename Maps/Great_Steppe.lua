@@ -517,7 +517,7 @@ function GenerateFractalLayerWithoutHills (args, plotTypes)
 				--do nothing
 			-- by changing oceans adjacent to lots of land into land, might be able to relieve the stripe ocean problem.
 			elseif (adjCount > 9 and adjCount < 30) then
-				if (math.random(4,6) <= adjCount) then
+				if (4 + TerrainBuilder.GetRandomNumber(3, "Fractal Layer Land - Lua") <= adjCount) then
 					plotTypes2[i] = g_PLOT_TYPE_LAND;
 				end
 			elseif (adjCount == 0) then
@@ -886,12 +886,12 @@ function AddVolcanicSoil()
                                     and GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_VESUVIUS"
                                     and GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_SUK_FUJI"
                                     and GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_SUK_NGORONGORO_CRATER") then
-                                        if (math.random(3) == 1) then
+                                        if (TerrainBuilder.GetRandomNumber(3, "Volcanic Soil - Lua") == 0) then
                                             TerrainBuilder.SetFeatureType(rNeighborPlot,35);
                                         end
                                     end
                                 else
-                                    if (math.random(3) == 1) then
+                                    if (TerrainBuilder.GetRandomNumber(3, "Volcanic Soil - Lua") == 0) then
                                         TerrainBuilder.SetFeatureType(rNeighborPlot,35);
                                     end
                                 end

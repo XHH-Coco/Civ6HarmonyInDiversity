@@ -805,12 +805,12 @@ function AddVolcanicSoil()
                                     and GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_VESUVIUS"
                                     and GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_SUK_FUJI"
                                     and GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_SUK_NGORONGORO_CRATER") then
-                                        if (math.random(2) == 1) then
+                                        if (TerrainBuilder.GetRandomNumber(2, "Volcanic Soil - Lua") == 0) then
                                             TerrainBuilder.SetFeatureType(rNeighborPlot,35);
                                         end
                                     end
                                 else
-                                    if (math.random(2) == 1) then
+                                    if (TerrainBuilder.GetRandomNumber(2, "Volcanic Soil - Lua") == 0) then
                                         TerrainBuilder.SetFeatureType(rNeighborPlot,35);
                                     end
                                 end

@@ -4,6 +4,40 @@ bingyang1132 的长期分支。本文件按时间倒序记录本分支的改动�
 
 ---
 
+## 2026-08-10
+
+### 地图种子失效修复
+
+`Maps/` 下 25 个地图脚本共 61 处用了标准 Lua 的 `math.random`，全部改为
+`TerrainBuilder.GetRandomNumber`。
+
+Civ6 只有 `TerrainBuilder.GetRandomNumber` 走地图 RNG，由 `MapConfiguration RANDOM_SEED`
+（暂停菜单显示的地图种子）播种；`math.random` 是另一条独立的流，不接种子，也从未调用过
+`math.randomseed`。因为 mod 覆盖了全部原版地图脚本，所有图都受影响：
+
+- **`AddVolcanicSoil()`（25 张图，50 处）**：以 1/3（Primordial 为 1/2）概率给火山二环铺
+  火山土。它跑在 `ResourceGenerator` 和 `AssignStartingPlots` 之前，改动的地块产出会连锁
+  改掉资源评分和出生点 fertility，所以海陆轮廓相同时资源和出生点仍然全变。
+- **`GenerateFractalLayerWithoutHills()`（11 张图，11 处）**：`math.random(a,b) <= adjCount`
+  决定海洋格是否变陆地，直接改海陆轮廓。涉及 Lakes、Rivers、Rivers_And_Lakes、Wet_Lakes、
+  Wet_Lakes2、Forest_Highlands、New_Highlands、Highlands_XP2、Northern_Mountains、
+  Great_Sand_Sea、Great_Steppe。
+
+概率按 `GetRandomNumber(n)` 返回 `0..n-1` 对齐：`math.random(n) == 1` → `GetRandomNumber(n) == 0`，
+`math.random(a, b)` → `a + GetRandomNumber(b - a + 1)`。分布不变。
+
+顺带修掉了多人游戏 desync 隐患——`math.random` 在各客户端的 Lua 状态不同步。
+
+注意：新增的 `GetRandomNumber` 调用会消耗地图 RNG 流，因此**同一种子在本次修改前后生成的
+地图不同**。这是一次性的，此后同种子可复现。
+
+### 未处理，待定
+
+- `Gameplay/Misc.lua:145` 城邦弓箭手回合数仍用 `math.random(min, max)`。它在游戏侧不在地图侧，
+  不影响地图种子，但同样有 desync 风险。
+- `AddVolcanicSoil()` 里火山土 feature id 硬编码为 `35`，未用 `MapEnums.lua` 已有的
+  `g_FEATURE_VOLCANIC_SOIL`。当前工作正常，属健壮性问题。
+
 ## 2026-08-08
 
 ### 英文本地化补全（已由 xhh 合入 xhh_reborn）
