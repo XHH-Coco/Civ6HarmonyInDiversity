@@ -4,6 +4,46 @@ bingyang1132 的长期分支。本文件按时间倒序记录本分支的改动�
 
 ---
 
+## 2026-08-11（五）
+
+### 修掉 Suk's Oceans 的崩溃（leader 交办，只修崩溃不碰玩法）
+
+`Suk_ResourceGenerator.lua:354` 那个 `operator < is not supported for number < nil`。
+崩了会打断整个脚本，那一局的海洋奢侈品一个都不放。
+
+做法：把上游两个文件 vendor 进 `ModSupport/SukOceans/`，靠 `ImportFiles` +
+`criteria="Suk_Oceans_Rework_Expansion2"` 顶掉创意工坊那份（`include` 按文件名解析）。
+生成脚本 `tools/vendor_suk_oceans.py`，上游原文件存在
+`tools/maptest/versions/suk_upstream/` 作为合并基准。
+
+四处补丁，全部防御性：
+
+- `Suk_MapConvolution.lua`：尺寸每个实例现取（不吃类级常量，那是首次加载抓的一次，
+  其中 `m_MapHeight` 还要过 `Select()` 里 Lua 5.0 时代的 `arg` 表）；
+  `DoNormalise` 在 `iRange == 0` 时整体置零而不是除零
+- `Suk_ResourceGenerator.lua`：权重表按地图尺寸铺满而不是挂在 `#tPlotsData.Plots` 上；
+  比较函数对缺失权重兜底
+
+**零行为改动，有证明**：新增 `tools/maptest/suk.lua`，8 种合成地图上分别跑上游版和
+覆盖版，比对**每一格的最终资源**和 **`GetRandomNumber` 的调用次数**，8/8 完全相同
+（含会走除零路径的"只有湖、无预置奢侈"用例）。三种变异（给 iMaxWeight 兜底、
+置零改成置 1、比较函数反向）全部被抓到，不是空转。
+
+**一处值得记下来的发现**：`DoNormalise` 那个守卫**在下游是 no-op**。把 NaN 换成 0
+之后，`iMaxWeight` 从 0 起算、`0 > 0` 仍为假，`iWeight = 0/0` 又变回 NaN，
+加权投放段照样整段失效。要真正启用加权投放还得给 `iMaxWeight` 兜底 ——
+那**是**行为改动（差分里 8 个用例有 1 个结果不同），**故意没做**，
+因为不在"只修崩溃"的范围内。
+
+**唯一没法在游戏外验证的**：`ImportFiles` 到底有没有顶掉上游那份，取决于 VFS 解析
+和 mod 加载顺序。所以覆盖版开头各加了一句 `HD: overriding <文件名>`，
+开一局海洋模式在 `Logs/Lua.log` 里 grep 一下就知道。**没有这两句就说明覆盖没生效。**
+
+不在范围内：湖里没有水域奢侈那件事是 HD 自己 `ResourceGenerator` 的问题
+（Duel 图只试 1 种，而 Suk 给自己的海洋资源大多写死 `LakeEligible = 0`），另说。
+
+---
+
 ## 2026-08-11（四）
 
 Suk 那条交给 leader 了，这次把剩下两条做掉。**两条都会改地图、让老种子作废。**

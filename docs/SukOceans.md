@@ -455,70 +455,110 @@ end
 **没复现出来**：用真实源码搭桩跑过 44×26 / 单大洲 / 18 个湖 / 无海岸的图
 （照日志那局建的），跑得通，CAVIAR 和 AMBER 都放了（走的正是 6.1 的兜底分支）。
 
-### 6.3 修改方案
+### 6.3 已实施：HD 覆盖上游两个文件
 
-交付方式都一样：把文件 vendor 进 HD，用 `ImportFiles` + `criteria="Suk_Oceans_Rework"`
-覆盖 —— `include` 按文件名解析，HD 的副本会赢。HD 已经这么盖过
-`Suk_YieldTT.lua`、`YellowCraneGreatPeople.lua`、`TradeSupport.lua`。
+**只修崩溃，不碰玩法。**
 
-**方案 B —— 只 fork `Suk_MapConvolution.lua`（169 行）**
+`include` 按**文件名**在 VFS 里解析，所以 HD 只要提供同名文件、`LoadOrder` 压过
+创意工坊那份，就能顶掉上游的。HD 已经这么盖过 `Suk_YieldTT.lua`、
+`YellowCraneGreatPeople.lua`、`TradeSupport.lua`。
+
+| | |
+|---|---|
+| 覆盖的文件 | `ModSupport/SukOceans/Suk_MapConvolution.lua`、`Suk_ResourceGenerator.lua` |
+| 生效条件 | `criteria="Suk_Oceans_Rework_Expansion2"`（风云变幻 + 海洋模式开启） |
+| 生成方式 | `python tools/vendor_suk_oceans.py <创意工坊 2542898147 目录>` |
+| 上游基准 | `tools/maptest/versions/suk_upstream/` |
+| 等价性证明 | `tools/maptest/suk.lua` |
+
+#### 四处补丁
+
+**`Suk_MapConvolution.lua`**
 
 ```lua
--- ① 归一化：全图同值时整体置零，而不是除零
-DoNormalise = function(self)
-    local iMin, iMax = 0, 0
-    for _, v in pairs(self.m_MapGrid) do
-        iMin = math.min(iMin, v); iMax = math.max(iMax, v)
-    end
-    local iRange = iMax - iMin
-    if iRange == 0 then
-        for i in pairs(self.m_MapGrid) do self.m_MapGrid[i] = 0 end
-        return
-    end
-    for i, v in pairs(self.m_MapGrid) do
-        self.m_MapGrid[i] = (v - iMin)/iRange
-    end
-end
+-- [HD] 尺寸每个实例现取，不吃类级常量（那是首次加载时抓的一次）
+o.m_MapWidth, o.m_MapHeight = Map.GetGridSize()
+o.m_WrapX = Map:IsWrapX()
+o.m_WrapY = Map:IsWrapY()
+```
 
--- ② 尺寸每个实例现取，彻底摆脱类级常量和 Select/arg
-new = function(self, padding, limiter)
-    local o = {}
-    setmetatable(o, self); self.__index = self
-    o.m_MapWidth, o.m_MapHeight = Map.GetGridSize()
-    o.m_WrapX, o.m_WrapY = Map.IsWrapX(), Map.IsWrapY()
-    o.m_Padding, o.m_Limiter = padding, limiter
-    o.m_MapGrid = {}
-    return o
+```lua
+-- [HD] 全图同值时整体置零，而不是除以 0 让每格变成 NaN
+if iRange == 0 then
+    for i in pairs(self.m_MapGrid) do self.m_MapGrid[i] = 0 end
+    return
 end
 ```
 
-修掉 6.1（已证实的缺陷）并干掉 6.2 的主嫌疑，顺带也保护了海藻。
-**代价**：①会改变行为 —— 它把目前形同死码的加权投放段激活了，
-湖多海少的图上海洋资源分布会变（我认为是变好，但确实是改动）。
-
-**方案 A —— 再 fork `Suk_ResourceGenerator.lua`（418 行，diff 只有 3 行）**
+**`Suk_ResourceGenerator.lua`**
 
 ```lua
--  for iPlot = 0, #tPlotsData.Plots do
--      tPlotsData.LuxuryWeight[iPlot] = tLuxuryMap.m_MapGrid[iPlot]
--      tPlotsData.BonusWeight[iPlot]  = tBonusMap.m_MapGrid[iPlot]
-+  for iPlot = 0, iWidth * iHeight - 1 do
-+      tPlotsData.LuxuryWeight[iPlot] = tLuxuryMap.m_MapGrid[iPlot] or 0
-+      tPlotsData.BonusWeight[iPlot]  = tBonusMap.m_MapGrid[iPlot]  or 0
-   end
-
--      return tPlotsData.LuxuryWeight[a] > tPlotsData.LuxuryWeight[b]
-+      return (tPlotsData.LuxuryWeight[a] or 0) > (tPlotsData.LuxuryWeight[b] or 0)
+-- [HD] 按地图尺寸铺满，别挂在 #tPlotsData.Plots 上；缺失的补 0
+for iPlot = 0, iWidth * iHeight - 1 do
+    tPlotsData.LuxuryWeight[iPlot] = tLuxuryMap.m_MapGrid[iPlot] or 0
+    tPlotsData.BonusWeight[iPlot]  = tBonusMap.m_MapGrid[iPlot] or 0
+end
 ```
 
-按地图尺寸铺满、缺失补 0、比较函数兜底。**数据正常时这三行完全不改变行为**，
-对未知崩因免疫。
+```lua
+-- [HD] 兜底：权重缺失时当 0，别让整个脚本因为一个 nil 被打断
+return (tPlotsData.LuxuryWeight[a] or 0) > (tPlotsData.LuxuryWeight[b] or 0)
+```
 
-**建议**：A + B 一起做。fork 的**行数**（587）不等于**维护成本** ——
-我们的 diff 只有十几行，Suk 哪天更新了 `git diff` 一眼就能重新贴上。
-不修的代价是玩家在某类图上静默丢掉全部海洋奢侈品，不报错、不提示、读档不重试。
+#### 为什么这四处是零行为改动
 
-动手之前有两件很便宜的事值得先做：
+`tools/maptest/suk.lua` 在 8 种合成地图上分别跑上游版和覆盖版，比对两件事：
+**跑完之后每一格的资源**，以及 **`GetRandomNumber` 的调用次数**。8 / 8 完全相同，
+包括那个会走除零路径的"只有湖、无预置奢侈"用例。
 
-1. 找报告者要同一局的 `Database.log` / `modding.log` 和确切的地图与设置
-2. 问他有没有见过**海藻**相关的报错（见 6.2 的验伪思路）
+逐条看：
+
+- **`or 0` 两处**：数据正常时 `m_MapGrid[iPlot]` 非 nil，`or` 短路，不生效。
+- **循环上界**：`tPlotsData.Plots` 的键是 `0..N-1`，`#` 返回 `N-1`（唯一的 border），
+  原来的 `for iPlot = 0, #Plots` 恰好也覆盖 `0..N-1`。实测 1143 / 1144 格。等价。
+- **尺寸现取**：类级常量正确时两者相等。它只在类级常量**出错**时才起作用，
+  而那正是崩溃的主要嫌疑。
+- **除零守卫**：这一处需要特别说明 ——
+
+> **`DoNormalise` 的守卫在下游是个 no-op。** 把 NaN 换成 0 之后，
+> `iMaxWeight` 从 0 起算、`0 > 0` 仍然为假，于是 `iWeight = 0/0` 又变回 NaN，
+> 加权投放段照样整段失效、照样掉进兜底分支。**可观察行为完全没变。**
+>
+> 要让加权投放真正生效，还得给 `iMaxWeight` 也兜底。那**是**行为改动 ——
+> 差分测试里把它作为变异加进去，8 个用例里有 1 个（正是全零那个）结果不同。
+> **故意没做**：那属于改玩法，不在"只修崩溃"的范围内。
+
+变异测试（给 iMaxWeight 兜底、把置零改成置 1、比较函数反向）全部被差分抓到，
+所以"8/8 一致"不是空转。
+
+#### 唯一没法在游戏外验证的环节
+
+**HD 的 `ImportFiles` 到底有没有顶掉上游那份**，取决于游戏的 VFS 解析和 mod 加载顺序，
+只能进游戏看。所以覆盖版开头各加了一句标记：
+
+```
+HD: overriding Suk_MapConvolution.lua
+HD: overriding Suk_ResourceGenerator.lua
+```
+
+开一局海洋模式，在 `Logs/Lua.log` 里 grep 这两句。**没有就说明覆盖没生效**，
+需要调 `LoadOrder` 或者换别的挂载方式。
+
+#### 上游更新之后怎么办
+
+重新跑一遍 vendor 脚本即可：
+
+```
+python tools/vendor_suk_oceans.py "<创意工坊 2542898147 目录>"
+```
+
+补丁锚点对不上会**直接报错**，不会静默生成一个半新半旧的文件。
+`tools/maptest/versions/suk_upstream/` 里存的是上一次的上游原文件，
+和新版 diff 一下就知道上游改了什么。
+
+#### 不在这次范围内的
+
+- **湖里没有水域奢侈**：那是 HD 自己 `ResourceGenerator` 的问题（Duel 图只试 1 种
+  水域奢侈，而 Suk 给自己的海洋资源大多写死了 `LakeEligible = 0`），
+  和这个崩溃是两件事。见 [MapGeneration.md](MapGeneration.md) 的相关记录。
+- **让加权投放真正生效**：见上，那是行为改动。

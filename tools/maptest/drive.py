@@ -4,7 +4,7 @@
     pip install lupa
     python drive.py
 
-等价于依次跑 `lua run.lua` 和 `lua river.lua`。注意 lupa 内嵌的是 Lua 5.5，
+等价于依次跑 `lua run.lua`、`lua river.lua`、`lua suk.lua`。注意 lupa 内嵌的是 Lua 5.5，
 比游戏内嵌的 5.1 新；这个测试本身不依赖版本差异，但如果将来把桩扩展到用了
 table.maxn 之类 5.1 专有 API 的代码，就得换回真正的 5.1 解释器。
 """
@@ -18,7 +18,7 @@ except ImportError:
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-SCRIPTS = ("run.lua", "river.lua")
+SCRIPTS = ("run.lua", "river.lua", "suk.lua")
 
 PRELUDE = """
     -- os.exit 会把 Python 进程一起带走，换成抛错并把码存下来

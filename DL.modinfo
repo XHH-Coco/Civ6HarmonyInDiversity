@@ -570,6 +570,8 @@
     <UpdateText id="SukOceans_mod_support_text">
       <Properties><LoadOrder>17000</LoadOrder></Properties>
       <File>ModSupport/SukOceans/HD_Texts.sql</File>
+    <File>ModSupport/SukOceans/Suk_MapConvolution.lua</File>
+    <File>ModSupport/SukOceans/Suk_ResourceGenerator.lua</File>
     </UpdateText>
     <UpdateText id="Savannah_mod_support_text">
       <Properties><LoadOrder>30000</LoadOrder></Properties>
@@ -1162,6 +1164,14 @@
       <Properties><LoadOrder>17000</LoadOrder></Properties>
       <File>ModSupport/SukOceans/HD_Texts.sql</File>
     </UpdateText>
+    <!-- 顶掉上游两个会崩的 Lua。include 按文件名解析，同名文件后加载的赢，
+         所以 LoadOrder 要压过创意工坊那份。生成方式见 tools/vendor_suk_oceans.py，
+         等价性由 tools/maptest/suk.lua 逐格证明。 -->
+    <ImportFiles id="SukOceans_lua_override" criteria="Suk_Oceans_Rework_Expansion2">
+      <Properties><LoadOrder>10000000</LoadOrder></Properties>
+      <File>ModSupport/SukOceans/Suk_MapConvolution.lua</File>
+      <File>ModSupport/SukOceans/Suk_ResourceGenerator.lua</File>
+    </ImportFiles>
     <!-- JNR Savannah -->
     <UpdateDatabase id="Savannah_mod_support" criteria="JNR_Savannah_Expansion2">
       <Properties><LoadOrder>17000</LoadOrder></Properties>
