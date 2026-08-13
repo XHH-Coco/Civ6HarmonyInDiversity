@@ -22,15 +22,20 @@
 1. 它反映的是**上次启动时的整套 mod**，不只是本模组。凡是与本仓库 SQL 冲突的值，都要先确认是哪个 mod 改的（下面「非本模组导致」一节有例子）。
 2. 同目录的 `DebugLocalization.sqlite` 存文本，但可能不完整；不过它保留的**原版文案**很适合当基线交叉验证。
 
-流程：
+流程（全自动，不要凭记忆或 wiki）：
 
-1. 从 `UpdateDataBase/DL_Wonders.sql` 的费用调整段取出全部本体 + DLC 世界奇观。
-2. 从 `DebugGameplay.sqlite` 逐个 dump 每个奇观的 `Buildings` 建造条件列 + `Building_ValidTerrains` / `Building_ValidFeatures` / `Building_RequiredFeatures` / `BuildingPrereqs`。
+1. 取 `select * from Buildings where IsWonder = 1 and InternalOnly = 0`——世界奇观和国家奇观一起，共 82 个由本模组提供描述文本的奇观。
+2. 每个奇观 dump 全部建造条件：`Buildings` 的 `RequiresRiver` / `RequiresAdjacentRiver` / `AdjacentDistrict` / `AdjacentImprovement` / `AdjacentResource` / `AdjacentToMountain` / `AdjacentCapital` / `Coast` / `MustBeLake` / `MustNotBeLake` / `MustBeAdjacentLand` / `RequiresReligion`，加上 `Building_ValidTerrains` / `Building_ValidFeatures` / `Building_RequiredFeatures` / `BuildingPrereqs`。
    - **`BuildingPrereqs` 是「或」关系**（见 `ToolTipLoader_DL.lua` 里 `Required Buildings is an OR relationship` 一段），一个奇观列了多行代表任意一个都行。
-3. 全库 grep 出本仓库所有会改动建造条件的语句，确认哪些差异是我们自己造成的。
-4. 与描述文本逐条比对。
+3. 从本仓库全部 `.sql` 里抽出我们自己写的 `*_DESCRIPTION` 文本（中英各一份），按 `Buildings.Description` 以及 `LOC_<BuildingType>_DESCRIPTION` / `_EXPANSION1/2_DESCRIPTION` 几个候选 tag 对上。
+4. 逐条要求做关键词匹配，中英分别跑一遍，输出「DB 有要求但文本没提」的清单，再人工过一遍。
 
-## 结论：需要修的 8 处
+**关键词匹配会误报，必须人工复核**，已知的两类误报：
+
+- 地形集合不是「全部平坦 / 全部丘陵 / 全部山脉 / COAST」这类规范集合时，脚本没有对应关键词，会一律标未提及（佩特拉、兵马俑、桑科雷、乌菲兹、哈利法塔、环球剧院、杰贝尔巴尔卡尔、阿蒙森-斯科特都属于这种，文本其实逐个地形都写全了）。
+- `DebugLocalization.sqlite` 是**不完整**的，取不到名字时脚本会拿 tag 去匹配，必然失败（民族史诗的两个博物馆、金融中心的「公司」改良都属于这种，文本其实都写了，只是写在描述开头而不是末尾）。
+
+## 结论：需要修的 10 处
 
 | 奇观 | 实际条件（DebugGameplay 实测） | 原文本问题 | 处理 |
 | --- | --- | --- | --- |
@@ -39,6 +44,8 @@
 | 马拉卡纳体育场 | 平坦地形；相邻娱乐中心；`BuildingPrereqs` 只有体育场 | 中文有，英文没有 | 补英文（点名体育场，因为三级的 JNR 主题公园并不满足） |
 | 贝伦塔 | 浅海；`MustBeAdjacentLand = 1`；相邻港口 | 中文有「邻近陆地」，英文漏了 | 补英文 |
 | 威尼斯军械库 | 浅海；`MustBeAdjacentLand = 1`；相邻工业区 | 中英文都漏了「相邻陆地」（原版文案也漏，属沿袭） | 中英文补上 |
+| 严岛神社（Suk 奇观） | 浅海；`MustBeAdjacentLand = 1`；相邻圣地 | 同上，中英文都漏了「相邻陆地」 | 中英文补上 |
+| 巨石阵 | `AdjacentResource = RESOURCE_STONE` + 全部平坦地形 | 本模组把「石材」改名成「安山岩」（`Texts/HD_Text_Resources.sql`），但只在 Resourceful2 适配文本里改了描述，基础配置下描述仍写「石材」——玩家会去找一个已经不存在的资源名 | 把 Resourceful2 那份同样的文案提到常驻文本里 |
 | 佩特拉卡兹尼神殿 | 沙漠 / 沙漠丘陵 / 沙漠山脉 + 泛滥平原地貌 | 本模组加了 `TERRAIN_DESERT_HILLS`（原版明确「没有丘陵的沙漠」），文本只写了「包括山脉和泛滥平原」 | 中英文补「丘陵」（含 Savannah 适配版） |
 | 阿蒙森-斯科特考察站 | 雪地 / 雪地丘陵；相邻学院；`BuildingPrereqs` = 研究实验室 / JNR 教育建筑（**学院四级建筑**；数据中心以研究实验室为前置，所以「任意四级建筑」与实际接受集合等价） | 英文写的是 "Institute of Technology or Community College"，这两个建筑在本模组中并不存在；中文沿用原版只写了研究实验室 | 英文改为「四级建筑」，并新增中文覆盖 |
 

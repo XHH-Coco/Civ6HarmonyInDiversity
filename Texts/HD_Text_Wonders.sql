@@ -4,6 +4,8 @@ insert or replace into EnglishText
     (Tag,                                                     Text)
 values
     ("LOC_BUILDING_COLOSSEUM_DESCRIPTION",                    "If you have at least 5 Leather or Beast Resources, +1 [ICON_Culture] Culture and [ICON_AMENITIES] Amenity for regional yield.[NEWLINE][NEWLINE]Must be built on flat land adjacent to an Entertainment Complex district with a Tier 1 building."),
+    -- HD renames Resource Stone to Andesite, so the vanilla description named a resource that no longer exists.
+    ("LOC_BUILDING_STONEHENGE_DESCRIPTION",                   "Grants a free [ICON_GreatProphet] Great Prophet. [ICON_GreatProphet] Great Prophets may found a Religion on Stonehenge instead of a Holy Site. Must be adjacent to [ICON_RESOURCE_STONE] Andesite and on flat land."),
     ("LOC_BUILDING_PETRA_NAME",                               "Al-Khazneh"),
     ("LOC_BUILDING_GREAT_BATH_DESCRIPTION",                   "Aqueduct district buildings can be purchased with [ICON_Faith] Faith. +50% Yields from Aqueduct district buildings.[NEWLINE][NEWLINE]The Floodplains tiles along the river containing the Great Bath are now immune to Flood damage (though [ICON_FOOD] Food and [ICON_PRODUCTION] Production bonuses from flooding drop by 50%). Floodplains tiles belonging to this city gain +1 [ICON_FAITH] Faith for each time Flood damage is mitigated.[NEWLINE][NEWLINE]Must be built on Floodplains tiles."),
     ("LOC_BUILDING_MEENAKSHI_TEMPLE_DESCRIPTION",             "Grants 2 Gurus. Districts with Citizen Slot in the city which has Holy Site receive +1 Citizen Slot, citizens in these districts provide +1 [ICON_FOOD] Food, +1 [ICON_CULTURE] Culture, +1 [ICON_FAITH] Faith and -2 [ICON_GOLD] Gold. The city which has Holy Site gain +2 [ICON_HOUSING] Housing. [ICON_GreatWork_SCULPTURE] Art Great Works provide +50% [ICON_TOURISM] Tourism in the City which has Holy Site. [NEWLINE][NEWLINE]Must be built adjacent to a Holy Site and you must have founded a Religion."), --Holy Site provides +1 [ICON_Food] Food 
@@ -102,6 +104,7 @@ insert or replace into LocalizedText
     (Language,      Tag,                                                                                            Text)
 values
     ("zh_Hans_CN",  "LOC_BUILDING_COLOSSEUM_DESCRIPTION",                    "若你拥有至少5种皮革或珍兽资源，辐射产出+1 [ICON_Culture] 文化值和 [ICON_AMENITIES] 宜居度。[NEWLINE][NEWLINE]必须建在与建有一级建筑的娱乐中心区域相邻的平坦地形上。"),
+    ("zh_Hans_CN",  "LOC_BUILDING_STONEHENGE_DESCRIPTION",                   "免费获得1个 [ICON_GreatProphet] 大预言家。 [ICON_GreatProphet] 大预言家可在巨石阵（代替圣地）创立一个宗教。必须建在靠近 [ICON_RESOURCE_STONE] 安山岩的平坦地形上。"),
     ("zh_Hans_CN",  "LOC_BUILDING_PETRA_NAME",                               "佩特拉卡兹尼神殿"),
     ("zh_Hans_CN",  "LOC_BUILDING_GREAT_BATH_DESCRIPTION",                   "可以使用 [ICON_FAITH] 信仰值购买水渠建筑。水渠建筑的产出+50%。[NEWLINE][NEWLINE]所在河流的泛滥平原单元格免受洪水侵袭带来的损害（但从洪水获得 [ICON_FOOD] 食物和 [ICON_PRODUCTION] 生产力加成的概率减半）。每次缓解洪水破坏后，属于此城市的泛滥平原单元格产出+1 [ICON_FAITH] 信仰值。[NEWLINE][NEWLINE]必须建在泛滥平原单元格中。"),
     ("zh_Hans_CN",  "LOC_BUILDING_MEENAKSHI_TEMPLE_DESCRIPTION",             "获得2名上师。拥有圣地的城市中，有专家槽位的区域+1专家槽位，且专家额外提供+1 [ICON_FOOD] 食物、+1 [ICON_CULTURE] 文化值、+1 [ICON_FAITH] 信仰值、-2 [ICON_GOLD] 金币。拥有圣地的城市+2 [ICON_HOUSING] 住房。拥有圣地的城市所有来自 [ICON_GreatWork_SCULPTURE] 艺术巨作的 [Icon_Tourism] 旅游业绩+50%。[NEWLINE][NEWLINE]必须建在圣地旁，同时必须已创立宗教。"), --圣地区域+2 [ICON_Food] 食物。
