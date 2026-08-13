@@ -250,8 +250,8 @@ values
     ("zh_Hans_CN",  "LOC_PEDIA_NAT_WONDER_CL_COLLEGE_2",                     "部分国立学府承载着民族文化或政治愿景，如爱尔兰国立大学；另一些则专为推进高等教育与学术研究而创立，如中国旨在建设世界一流大学的战略性联盟——九校联盟（C9联盟）。"),
 
     ("zh_Hans_CN",  "LOC_NAT_WONDER_CL_NATIONALEPIC_NAME",                   "民族史诗"),
-    ("zh_Hans_CN",  "LOC_NAT_WONDER_CL_NATIONALEPIC_DESCRIPTION",            "国家境内只能建造一座。必须建在与剧院区域（其中须建有艺术博物馆或考古博物馆）相邻的陆地上。[NEWLINE][NEWLINE]此城+50% [ICON_GreatPerson] 伟人点。您的文明每获得1位 [ICON_GreatPerson] 伟人，民族史诗获得3份此 [ICON_GreatPerson] 伟人类型的对应产出（若是大作家 [ICON_GreatWriter] 、大艺术家 [ICON_GreatArtist] 、大音乐家 [ICON_GreatMusician] 则获得1份）。"),
-    ("zh_Hans_CN",  "LOC_NAT_WONDER_CL_NATIONALEPIC_DESCRIPTION_INTERNAL",   "国家境内只能建造一座。必须建在与剧院区域（其中须建有艺术博物馆或考古博物馆）相邻的陆地上。[NEWLINE][NEWLINE]此城+50% [ICON_GreatPerson] 伟人点。您的文明每获得1位 [ICON_GreatPerson] 伟人，民族史诗获得3份此 [ICON_GreatPerson] 伟人类型的对应产出（若是大作家 [ICON_GreatWriter] 、大艺术家 [ICON_GreatArtist] 、大音乐家 [ICON_GreatMusician] 则获得1份）。"),
+    ("zh_Hans_CN",  "LOC_NAT_WONDER_CL_NATIONALEPIC_DESCRIPTION",            "国家境内只能建造一座。必须建在与剧院广场区域（其中须建有艺术博物馆或考古博物馆）相邻的陆地上。[NEWLINE][NEWLINE]此城+50% [ICON_GreatPerson] 伟人点。您的文明每获得1位 [ICON_GreatPerson] 伟人，民族史诗获得3份此 [ICON_GreatPerson] 伟人类型的对应产出（若是大作家 [ICON_GreatWriter] 、大艺术家 [ICON_GreatArtist] 、大音乐家 [ICON_GreatMusician] 则获得1份）。"),
+    ("zh_Hans_CN",  "LOC_NAT_WONDER_CL_NATIONALEPIC_DESCRIPTION_INTERNAL",   "国家境内只能建造一座。必须建在与剧院广场区域（其中须建有艺术博物馆或考古博物馆）相邻的陆地上。[NEWLINE][NEWLINE]此城+50% [ICON_GreatPerson] 伟人点。您的文明每获得1位 [ICON_GreatPerson] 伟人，民族史诗获得3份此 [ICON_GreatPerson] 伟人类型的对应产出（若是大作家 [ICON_GreatWriter] 、大艺术家 [ICON_GreatArtist] 、大音乐家 [ICON_GreatMusician] 则获得1份）。"),
     ("zh_Hans_CN",  "LOC_NAT_WONDER_CL_NATIONALEPIC_QUOTE",                  "建筑艺术最伟大的作品，与其说是个人才华的产物，毋宁说是社会精神的凝结；与其说是天才灵光乍现，毋宁说是民族集体意志的结晶。[NEWLINE]——维克多·雨果"),
     ("zh_Hans_CN",  "LOC_PEDIA_NAT_WONDER_CL_NATIONALEPIC_1",                "自古以来，“民族史诗”是一种旨在捕捉与展现某个民族或国家精神内核的史诗体裁。这类史诗常以民族起源、重大历史事件或身份认同形成的关键节点为叙事核心。广义而言，民族史诗亦可指代使用民族语言创作、被该国人民或政府视为文化瑰宝的史诗作品。古希腊的《奥德赛》、美索不达米亚的《吉尔伽美什史诗》、古罗马的《埃涅阿斯纪》、印度的《摩诃婆罗多》、葡萄牙的《卢济塔尼亚人之歌》以及盎格鲁-撒克逊的《贝奥武夫》等，皆为民族史诗的典范之作。"),
 

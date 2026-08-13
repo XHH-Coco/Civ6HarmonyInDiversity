@@ -74,14 +74,37 @@
 
 本模组把「伊斯兰学院」改成与大学互斥而非替代，并在所有以大学为前置的地方补了伊斯兰学院。因此牛津大学、桑科雷大学的文本写「大学」时，对阿拉伯而言不完整。这里没有改成「二级建筑」，因为同为二级的航海学校并不被接受，等级表述反而更不准。大本钟（银行 / 大集市）同理，且本模组没有覆盖它的描述文本。
 
-## 非本模组导致的差异（排查时遇到，留作记录）
+## 全 HD 模组配置下的复查
 
-在本人上次启动的 mod 组合下，`DebugGameplay.sqlite` 里有两处与原版和本仓库都不符，确认不是我们改的：
+目标配置 = 本模组 + `Mods/` 下全部 `HD_*` 子模组。子模组会覆盖部分奇观描述，所以文本必须**合并**后再核对：主模组的文本先收，`HD_*` 后收覆盖（子模组加载在后）。合并后 94 个奇观全部有中英文本，逐条比对结果：
 
-- **大浴场**：`AdjacentDistrict = DISTRICT_AQUEDUCT` 且地形为全部平坦地形、没有泛滥平原地貌要求（原版是「必须建在泛滥平原上」）。本仓库全库 grep 没有任何相关语句。
-- **鲁尔山谷**：`BuildingPrereqs` 为空、没有相邻工业区要求，且 `Description` 被换成了 `LOC_BUILDING_RUHR_VALLEY_CORP_DESCRIPTION`——这是「行业多样化 / 公司模式」那套的改动，此时本模组写的 `LOC_BUILDING_RUHR_VALLEY_DESCRIPTION` 根本不会被显示。
+- **大浴场**和**鲁尔山谷**的差异不是漏写，是子模组自带了配套文本，而且都是对的：
+  - `HD_DistrictsDiversity/Database/aqueduct.sql:163-172` 改数据 + `Text/aqueduct_texts_Late.sql:6,13` 改文本 →「必须建造在相邻蓄水池的平坦单元格中」，连洪水那段都改成了条件句「若建造在泛滥平原上……」。
+  - `HD_CorporationsDiversity/Database/Wonders.sql:102-103` 改数据 + `Text/Text_Wonders.sql:5` 改文本 →「Must be built adjacent to River.」。
+  - 因此**主仓库这两条文本不要动**：关掉子模组时数据会退回原版（大浴场泛滥平原、鲁尔相邻工业区 + `BUILDING_HD_ELECTRONICS_FACTORY` 前置），主仓库文本正是给那种配置用的。
+- **威尼斯军械库**在公司模式下描述换成 `LOC_BUILDING_VENETIAN_ARSENAL_CORP_DESCRIPTION`，内容是 `获得1个大亨。{LOC_BUILDING_VENETIAN_ARSENAL_DESCRIPTION}`——用 `{}` 内插了主仓库的描述，所以主仓库补的「相邻陆地」会自动带过去。
+- 本轮另修 2 处中文用词（要求本身没写错，但字面会误导）：
+  - 帝国大厦（`HD_CorporationsDiversity/Text/Text_Wonders.sql:22`）：「靠近市中心的**平原**上」→「平坦地形上」。地形限制是 5 种平坦地形，写「平原」会被读成只能建在平原。英文本来就写的 flat land。
+  - 民族史诗（本仓库）：「**剧院区域**」→「剧院广场区域」，对齐区域正式名。
 
-要确认这两处，需要用**只开本模组**的配置重新启动一次再读 cache。
+复查后剩下 13 条标记全部是匹配脚本的固有误报，逐条确认过：
+
+- `LOC_CL_NAT_WONDER_INTERNAL_NAME`（即 `NAT_WONDER_CL_DISABLE_BUILDING_INTERNAL`）：国家奇观 mod 用来让预览条目不可建造的空建筑，不是真实条件。
+- 博物馆、公司改良、水渠等名字在 `DebugLocalization.sqlite` 里取不到，脚本退化成拿 tag 匹配。
+- 巨石阵的 `RESOURCE_STONE`：本模组已改名安山岩，缓存里还是「石头」。
+- 威尼斯军械库公司版的 `{}` 内插，脚本不展开。
+
+**注意脚本的 tag 过滤要用 `'_DESCRIPTION' in tag` 而不是 `endswith`**，否则国家奇观的 `LOC_..._DESCRIPTION_INTERNAL` 预览条目会被整批漏掉。
+
+## 定位「这个值是谁改的」
+
+`DebugGameplay.sqlite` 是整套 mod 合并后的结果，出现与本仓库 SQL 冲突的值时，按这个顺序查：
+
+1. 本仓库全库 grep 该 `BuildingType`。
+2. `Mods/HD_*` 几个兄弟仓库 grep——它们就在本机，大浴场和鲁尔山谷就是这样查到的。
+3. 还找不到，才是创意工坊的第三方 mod；这时最快的办法是用**只开本模组**的配置重启一次再读 cache 对比。
+
+另外 `Buildings.Description` 本身会被换 tag（鲁尔山谷 → `..._CORP_DESCRIPTION`、金融中心 → `..._CORP_DESCRIPTION`），所以核对时要以 `Buildings.Description` 的当前值为准，不能假定就是 `LOC_<BuildingType>_DESCRIPTION`。
 
 ## 后续可选改进
 
