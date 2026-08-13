@@ -8,33 +8,41 @@
 
 奇观的建造条件分散在三处，只有前两处会显示：
 
-| 条件来源 | 战斗界面/生产面板提示（`UI/Loaders/ToolTipLoader_DL.lua` 的「建造条件」） | 文明百科（`UI/Civilopedia/CivilopediaPage_Building.lua`） | 描述文本 `LOC_BUILDING_*_DESCRIPTION` |
+| 条件来源 | 生产面板提示（`UI/Loaders/ToolTipLoader_DL.lua` 的「建造条件」） | 文明百科（`UI/Civilopedia/CivilopediaPage_Building.lua`） | 描述文本 `LOC_BUILDING_*_DESCRIPTION` |
 | --- | --- | --- | --- |
 | `Buildings.RequiresRiver` / `AdjacentDistrict` / `AdjacentImprovement` / `AdjacentResource` / `AdjacentToMountain` / `Coast` / `MustBeLake` / `MustNotBeLake` / `MustBeAdjacentLand` / `RequiresReligion` / `BuildingPrereqs` | ✅ 自动生成 | ✅ | 需手写 |
 | `Building_ValidTerrains` / `Building_ValidFeatures` / `Building_RequiredFeatures`（地形、地貌限制） | ❌ **不生成** | ✅ | 需手写 |
 
-也就是说，**地形限制在生产面板里完全不显示**，只能靠描述文本告诉玩家。原版描述文本本来写了（斗兽场原文："必须建在靠近娱乐中心的平坦地形上"），我们重写描述时把这句丢了，于是这条限制在游戏里就彻底看不见了。
+也就是说，**地形限制在生产面板里完全不显示**，只能靠描述文本告诉玩家。原版描述文本本来写了（斗兽场原文："必须建在靠近娱乐中心的平原上"），我们重写描述时把这句丢了，于是这条限制在游戏里就彻底看不见了。
 
 ## 排查方法
 
-1. 从 `UpdateDataBase/DL_Wonders.sql` 的费用调整段取出全部 56 个本体 + DLC 世界奇观。
-2. 全库 grep 出所有会改动建造条件的语句，作为「本模组相对原版的改动」：
-   - `Building_ValidTerrains` / `Building_ValidFeatures` / `Building_RequiredFeatures`
-   - `update Buildings set ... RequiresRiver/AdjacentDistrict/AdjacentImprovement/AdjacentResource/AdjacentToMountain/Coast/MustBeAdjacentLand/RequiresReligion ...`
-   - `BuildingPrereqs`
-3. 原版基线取自 Civilization Wiki 的 [List of wonders in Civ6](https://civilization.fandom.com/wiki/List_of_wonders_in_Civ6)（风云变幻规则集一栏），另用 `SubMods/BetterChinese/Text/*.xml` 里保留的原版中文文本交叉验证。
-4. 逐个比对「原版基线 + 本模组改动」与描述文本。
+**真值来源：`C:\Users\<用户名>\AppData\Local\Firaxis Games\Sid Meier's Civilization VI\Cache\DebugGameplay.sqlite`**——这是游戏上次启动后落盘的完整数据库，可以直接用 sqlite 读。注意两点：
 
-## 结论：需要修的 6 处
+1. 它反映的是**上次启动时的整套 mod**，不只是本模组。凡是与本仓库 SQL 冲突的值，都要先确认是哪个 mod 改的（下面「非本模组导致」一节有例子）。
+2. 同目录的 `DebugLocalization.sqlite` 存文本，但可能不完整；不过它保留的**原版文案**很适合当基线交叉验证。
 
-| 奇观 | 实际条件 | 原文本问题 | 处理 |
+流程：
+
+1. 从 `UpdateDataBase/DL_Wonders.sql` 的费用调整段取出全部本体 + DLC 世界奇观。
+2. 从 `DebugGameplay.sqlite` 逐个 dump 每个奇观的 `Buildings` 建造条件列 + `Building_ValidTerrains` / `Building_ValidFeatures` / `Building_RequiredFeatures` / `BuildingPrereqs`。
+   - **`BuildingPrereqs` 是「或」关系**（见 `ToolTipLoader_DL.lua` 里 `Required Buildings is an OR relationship` 一段），一个奇观列了多行代表任意一个都行。
+3. 全库 grep 出本仓库所有会改动建造条件的语句，确认哪些差异是我们自己造成的。
+4. 与描述文本逐条比对。
+
+## 结论：需要修的 8 处
+
+| 奇观 | 实际条件（DebugGameplay 实测） | 原文本问题 | 处理 |
 | --- | --- | --- | --- |
-| 罗马斗兽场 | 平坦地形，相邻建有竞技场的娱乐中心 | 中英文都完全没有建造条件 | 补全 |
-| 艾尔米塔什博物馆 | 河流旁，且非沙漠、非冻土单元格 | 中英文都完全没有建造条件 | 补全 |
-| 马拉卡纳体育场 | 平坦地形，相邻娱乐中心，本城建有体育场 | 中文有，英文没有 | 补英文 |
-| 贝伦塔 | 浅海，相邻陆地与港口 | 中文有「邻近陆地」，英文漏了（`MustBeAdjacentLand` 仍为 1） | 补英文 |
-| 佩特拉卡兹尼神殿 | 沙漠 / 沙漠丘陵 / 沙漠山脉 / 沙漠泛滥平原 | 本模组加了 `TERRAIN_DESERT_HILLS`，文本只写了「包括山脉和泛滥平原」 | 中英文补「丘陵」（含 Savannah 适配版） |
-| 阿蒙森-斯科特考察站 | 雪原 / 雪原丘陵，相邻建有研究实验室的学院 | `HD_Text_BetterEnglish.sql` 里写的是 "Institute of Technology or Community College"，这两个建筑在本模组中并不存在 | 英文改为 Research Lab |
+| 罗马斗兽场 | 平坦地形；相邻娱乐中心；`BuildingPrereqs` = 竞技场 / JNR 竞技场（娱乐中心一级建筑，特色建筑「蹴球场」经 `BuildingReplaces` 同样满足） | 中英文都完全没有建造条件 | 补全，用「一级建筑」表述 |
+| 艾尔米塔什博物馆 | **只有 `RequiresRiver`，没有任何地形限制** | 中英文都完全没有建造条件 | 补「必须建在河流旁」 |
+| 马拉卡纳体育场 | 平坦地形；相邻娱乐中心；`BuildingPrereqs` 只有体育场 | 中文有，英文没有 | 补英文（点名体育场，因为三级的 JNR 主题公园并不满足） |
+| 贝伦塔 | 浅海；`MustBeAdjacentLand = 1`；相邻港口 | 中文有「邻近陆地」，英文漏了 | 补英文 |
+| 威尼斯军械库 | 浅海；`MustBeAdjacentLand = 1`；相邻工业区 | 中英文都漏了「相邻陆地」（原版文案也漏，属沿袭） | 中英文补上 |
+| 佩特拉卡兹尼神殿 | 沙漠 / 沙漠丘陵 / 沙漠山脉 + 泛滥平原地貌 | 本模组加了 `TERRAIN_DESERT_HILLS`（原版明确「没有丘陵的沙漠」），文本只写了「包括山脉和泛滥平原」 | 中英文补「丘陵」（含 Savannah 适配版） |
+| 阿蒙森-斯科特考察站 | 雪地 / 雪地丘陵；相邻学院；`BuildingPrereqs` = 研究实验室 / JNR 教育建筑（**学院四级建筑**；数据中心以研究实验室为前置，所以「任意四级建筑」与实际接受集合等价） | 英文写的是 "Institute of Technology or Community College"，这两个建筑在本模组中并不存在；中文沿用原版只写了研究实验室 | 英文改为「四级建筑」，并新增中文覆盖 |
+
+用「N 级建筑」而不是点名建筑的判断标准：**只有当「该区域第 N 级的全部建筑」与 `BuildingPrereqs` 实际接受的集合等价时才用等级表述**。斗兽场、阿蒙森-斯科特满足；马拉卡纳不满足（同为三级的 JNR 主题公园不被接受），所以点名体育场。
 
 ## 结论：已一致，无需改动（重点核对项）
 
@@ -49,12 +57,24 @@
 - 大津巴布韦（相邻牛资源 → 相邻牧场）
 - 西印度贸易总署（相邻政府广场 → 相邻港口）
 - 百老汇（相邻剧院广场 → 相邻商业中心 + 证券交易所）
-- 高德院（新增「必须相邻海洋」）
+- 高德院（新增 `Coast = 1`，即必须相邻海洋）
 - 瓦西里升天教堂（新增「必须已创立宗教」）
 - 罗德斯巨像、自由女神像（`MustBeAdjacentLand` 改为 0，文本已去掉「相邻陆地」）
 - 杰贝尔巴尔卡尔（新增沙漠山脉）
+- 兵马俑、大灯塔、摩诃菩提寺、高德院、自由女神像等已经在用「N 级建筑」表述，与本模组新增的替代建筑吻合
 
-没有改动建造条件、也没有覆盖描述文本因而沿用原版文案的奇观（金字塔、摩索拉斯陵墓、吴哥窟、大本钟等）不在问题范围内。
+## 已知的轻微不精确（暂不处理）
+
+本模组把「伊斯兰学院」改成与大学互斥而非替代，并在所有以大学为前置的地方补了伊斯兰学院。因此牛津大学、桑科雷大学的文本写「大学」时，对阿拉伯而言不完整。这里没有改成「二级建筑」，因为同为二级的航海学校并不被接受，等级表述反而更不准。大本钟（银行 / 大集市）同理，且本模组没有覆盖它的描述文本。
+
+## 非本模组导致的差异（排查时遇到，留作记录）
+
+在本人上次启动的 mod 组合下，`DebugGameplay.sqlite` 里有两处与原版和本仓库都不符，确认不是我们改的：
+
+- **大浴场**：`AdjacentDistrict = DISTRICT_AQUEDUCT` 且地形为全部平坦地形、没有泛滥平原地貌要求（原版是「必须建在泛滥平原上」）。本仓库全库 grep 没有任何相关语句。
+- **鲁尔山谷**：`BuildingPrereqs` 为空、没有相邻工业区要求，且 `Description` 被换成了 `LOC_BUILDING_RUHR_VALLEY_CORP_DESCRIPTION`——这是「行业多样化 / 公司模式」那套的改动，此时本模组写的 `LOC_BUILDING_RUHR_VALLEY_DESCRIPTION` 根本不会被显示。
+
+要确认这两处，需要用**只开本模组**的配置重新启动一次再读 cache。
 
 ## 后续可选改进
 
