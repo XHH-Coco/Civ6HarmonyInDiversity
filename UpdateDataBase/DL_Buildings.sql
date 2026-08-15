@@ -704,7 +704,8 @@ insert or replace into ModifierArguments (ModifierId, Name, Value) values
 
 -- 工作坊
 insert or replace into HD_Building_Base_On_ResourceClassification (BuildingType, ResourceClassificationType, DetectRange, PropertyKey) values
-	('BUILDING_WORKSHOP', 'RESOURCE_CLASSIFICATION_HD_CONSTRUCTION', 'PLAYER', 'HD_PLOT_BINARY_COMPRESS_WORKSHOP');
+	('BUILDING_WORKSHOP', 'RESOURCE_CLASSIFICATION_HD_CONSTRUCTION', 	'PLAYER', 'HD_PLOT_BINARY_COMPRESS_WORKSHOP'),
+	('BUILDING_WORKSHOP', 'RESOURCE_CLASSIFICATION_HD_METALLURGY', 		'PLAYER', 'HD_PLOT_BINARY_COMPRESS_WORKSHOP');
 
 insert or replace into HD_Binary_Compress_Keys (Key, MaxExp) values
 	('HD_PLOT_BINARY_COMPRESS_WORKSHOP', 4);

@@ -31,7 +31,7 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_DEFENDER_LEFT_1_NAME",                      "后勤保障部"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_DEFENDER_LEFT_1_DESCRIPTION",               "本城无法被围攻。军事单位相邻或位于本城市中心驻扎一回合可完全恢复。本城生产的军事单位+3 [ICON_STRENGTH] 战斗力，且生产所需的战略资源减少80%。"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_DEFENDER_LEFT_2_NAME",                      "前线指挥部"),
-  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_DEFENDER_LEFT_2_DESCRIPTION",               "9个单元格内的军事单位+5 [ICON_STRENGTH] 战斗力和+1 [ICON_MOVEMENT] 移动力。"),
+  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_DEFENDER_LEFT_2_DESCRIPTION",               "9环内的军事单位+5 [ICON_STRENGTH] 战斗力和+1 [ICON_MOVEMENT] 移动力。"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_DEFENDER_LEFT_3_NAME",                      "国防动员部"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_DEFENDER_LEFT_3_DESCRIPTION",               "本城生产的军事单位初始可获得免费晋升，且额外获得一个相同的单位。"),
   -- 右线升级
@@ -51,14 +51,14 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_LEFT_1_NAME",                       "乡村规划"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_LEFT_1_DESCRIPTION",                "本城的改良设施+1 [ICON_PRODUCTION] 生产力，农业生产改良额外+1 [ICON_PRODUCTION] 生产力。"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_LEFT_2_NAME",                       "卫星城区"),
-  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_LEFT_2_DESCRIPTION",                "4个单元格内的区域+50%相邻加成；解锁“拱券”科技后收益翻倍。"),
+  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_LEFT_2_DESCRIPTION",                "6环内的区域+100%相邻加成。"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_LEFT_3_NAME",                       "公园与休憩"),
-  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_LEFT_3_DESCRIPTION",                "本城可以多建造一座市立公园。5个单元格内的市立公园为其2个单元格内的区域+50%相邻加成。"),
+  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_LEFT_3_DESCRIPTION",                "本城可以多建造一座市立公园。6环内的市立公园为其2环内的区域+50%相邻加成。"),
   -- 右线升级
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_1_NAME",                      "建筑大师"),
-  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_1_DESCRIPTION" ,              "本城建造奇观时+15%建造速度，建造远古和古典奇观时额外+15%建造速度。"),
+  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_1_DESCRIPTION" ,              "本城建造奇观时+20%建造速度。获得等同于就职后在本城中建成的奇观 [ICON_PRODUCTION] 生产力25%的 [ICON_GREATENGINEER] 大工程师点数。"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_2_NAME",                      "宏伟工程"),
-  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_2_DESCRIPTION" ,              "获得等同于就职后在本城中建成的奇观 [ICON_PRODUCTION] 生产力25%的 [ICON_GREATENGINEER] 大工程师点数。"),
+  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_2_DESCRIPTION" ,              "本城的区域和奇观+1 [ICON_PRODUCTION] 生产力，奇观额外+1 [ICON_CULTURE] 文化值。"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_3_NAME",                      "国家工程院"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_3_DESCRIPTION" ,              "本城的奇观基础产出和辐射产出+100%，+1辐射范围。每招募一名 [ICON_GREATENGINEER] 大工程师，本城的区域+25%相邻加成。"),
   -- ==============================================================================
@@ -69,11 +69,11 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MANAGER_BASE_DESCRIPTION",                  "本城生产的开拓者不消耗 [ICON_CITIZEN] 人口，购买单元格-25%花费，工业生产改良+1 [ICON_FOOD] 食物。"),
   -- 左线升级
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MANAGER_LEFT_1_NAME",                       "盈余物流"),
-  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MANAGER_LEFT_1_DESCRIPTION",                "6个单元格内的城市+3 [ICON_FOOD] 食物、+2 [ICON_PRODUCTION] 生产力和+1 [ICON_AMENITIES] 宜居度。"),
+  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MANAGER_LEFT_1_DESCRIPTION",                "通往本城的国内 [ICON_TRADEROUTE] 贸易路线+2 [ICON_FOOD] 食物、[ICON_PRODUCTION] 生产力和+1 [ICON_Amenities] 宜居度。"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MANAGER_LEFT_2_NAME",                       "实体产业"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MANAGER_LEFT_2_DESCRIPTION",                "本城每种改良的资源为城市+2 [ICON_FOOD] 食物和 [ICON_PRODUCTION] 生产力。"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MANAGER_LEFT_3_NAME",                       "横向一体化"),
-  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MANAGER_LEFT_3_DESCRIPTION",                "本城的区域为国内 [ICON_TRADEROUTE] 贸易路线提供的产出翻倍。"),
+  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MANAGER_LEFT_3_DESCRIPTION",                "9环内的城市+5 [ICON_FOOD] 食物和 [ICON_PRODUCTION] 生产力，解锁“行政部门”后翻倍。"),
   -- 右线升级
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MANAGER_RIGHT_1_NAME",                      "基础建设"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MANAGER_RIGHT_1_DESCRIPTION",               "本城+1区域位，建造区域和建筑时+30%建造速度。"),
@@ -110,16 +110,16 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_CARDINAL_BASE_DESCRIPTION",                 "本城释放的宗教压力翻倍，本城的每位 [ICON_Citizen] 公民+1.5 [ICON_FAITH] 信仰值。提供+4 [ICON_GREATPROPHET] 大预言家点数。"),
   -- 左线升级
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_CARDINAL_LEFT_1_NAME",                      "因信称义"),
-  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_CARDINAL_LEFT_1_DESCRIPTION",               "6个单元格内的圣地+100%相邻加成。"),
+  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_CARDINAL_LEFT_1_DESCRIPTION",               "6环内的圣地+100%相邻加成。"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_CARDINAL_LEFT_2_NAME",                      "先知遗产"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_CARDINAL_LEFT_2_DESCRIPTION",               "本城+20% [ICON_FAITH] 信仰值；若本城有展示的 [ICON_GREATWORK_RELIC] 遗物，则额外+10% [ICON_FAITH] 信仰值。"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_CARDINAL_LEFT_3_NAME",                      "普世牧首"),
-  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_CARDINAL_LEFT_3_DESCRIPTION",               "6个单元格内的区域提供等同于相邻加成的 [ICON_FAITH] 信仰值。"),
+  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_CARDINAL_LEFT_3_DESCRIPTION",               "6环内的区域提供等同于相邻加成的 [ICON_FAITH] 信仰值。"),
   -- 右线升级
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_CARDINAL_RIGHT_1_NAME",                     "主保圣人"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_CARDINAL_RIGHT_1_DESCRIPTION",              "本城购买宗教单位-20%花费。本城训练的传教士、使徒和审判官+1传教次数。本城训练的使徒和武僧额外获得1次升级。"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_CARDINAL_RIGHT_2_NAME",                     "具德上师"),
-  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_CARDINAL_RIGHT_2_DESCRIPTION",              "本城训练的上师+1治疗次数，且为1个单元格内的宗教单位提供的增益翻倍；可以主动消耗治疗次数，消耗治疗次数时向6个单元格内的城市施加150点宗教压力。"),
+  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_CARDINAL_RIGHT_2_DESCRIPTION",              "本城训练的上师+1治疗次数，且为1环内的宗教单位提供的增益翻倍；可以主动消耗治疗次数，消耗治疗次数时向6环内的城市施加150点宗教压力。"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_CARDINAL_RIGHT_3_NAME",                     "神圣建造"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_CARDINAL_RIGHT_3_DESCRIPTION",              "可以用 [ICON_FAITH] 信仰值购买神圣建筑师，{LOC_UNIT_CITADEL_OF_GOD_DESCRIPTION}"),
   -- ==============================================================================

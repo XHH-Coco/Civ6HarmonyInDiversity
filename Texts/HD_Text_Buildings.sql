@@ -42,7 +42,7 @@ values
     ("LOC_BUILDING_JNR_DOJO_HD_DESCRIPTION",                      "A building unique to the Japan. +25% combat experience for all military units trained in this city. +2 [ICON_Production] Production, +50% [ICON_CULTURE] Culture and [ICON_Tourism] Tourism to Great Works in this city."),
     ("LOC_ABILITY_JNR_DOJO_TRAINED_UNIT_XP_DESCRIPTION",          "+25% Earned experience from Dojo"),
     -- Industrial Zone
-    ("LOC_BUILDING_WORKSHOP_DESCRIPTION",                         "+2 [ICON_Production] Production from every type of Construction Resource you controlled."),
+    ("LOC_BUILDING_WORKSHOP_DESCRIPTION",                         "+2 [ICON_Production] Production from every type of Construction or Metallurgy Resource you controlled."),
     ("LOC_BUILDING_FACTORY_DL_DESCRIPTION",                       "Provide [ICON_Production] Production to cities within 6 tiles."),
     ("LOC_BUILDING_HD_ELECTRONICS_FACTORY_NAME",                  "Electronics Factory"),
     ("LOC_BUILDING_HD_ELECTRONICS_FACTORY_DESCRIPTION",           "+1 [ICON_PRODUCTION] Production for all District in this city, [ICON_CITIZEN] Citizens in this city provide +0.5 [ICON_PRODUCTION] Production. The bonuses are doubled after Integrated Circuit is researched."),
@@ -221,7 +221,7 @@ values
     ("zh_Hans_CN",  "LOC_ABILITY_JNR_DOJO_TRAINED_UNIT_XP_DESCRIPTION",          "从道场获得的经验值+25%"),
     -- 工业
     ("zh_Hans_CN",  "LOC_BUILDING_WORKSHOP_NAME",                                "建造工坊"),
-    ("zh_Hans_CN",  "LOC_BUILDING_WORKSHOP_DESCRIPTION",                         "你每拥有一种建造资源，+2 [ICON_Production] 生产力。"),
+    ("zh_Hans_CN",  "LOC_BUILDING_WORKSHOP_DESCRIPTION",                         "你每拥有一种建造或冶金资源，+2 [ICON_Production] 生产力。"),
     ("zh_Hans_CN",  "LOC_BUILDING_FACTORY_DL_DESCRIPTION",                       "为6个单元格内的城市或社区提供 [ICON_Production] 生产力。"),
     ("zh_Hans_CN",  "LOC_BUILDING_HD_ELECTRONICS_FACTORY_NAME",                  "电子厂"),
     ("zh_Hans_CN",  "LOC_BUILDING_HD_ELECTRONICS_FACTORY_DESCRIPTION",           "本城每个区域 +1 [ICON_PRODUCTION] 生产力，每位 [ICON_CITIZEN] 市民+0.5 [ICON_PRODUCTION] 生产力；解锁“集成电路”科技后收益翻倍。"),

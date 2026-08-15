@@ -1167,10 +1167,6 @@
       <Properties><LoadOrder>17000</LoadOrder></Properties>
       <File>ModSupport/Savannah/DL_Adaptation.sql</File>
     </UpdateDatabase>
-    <UpdateDatabase id="Savannah_mod_support" criteria="JNR_Savannah_Expansion2">
-      <Properties><LoadOrder>16011</LoadOrder></Properties>
-      <File>ModSupport/Savannah/Belief.sql</File>
-    </UpdateDatabase>
     <UpdateDatabase id="Savannah_Vietnam_mod_support" criteria="Savannah_And_Vietnam_Expansion2">
       <Properties><LoadOrder>17000</LoadOrder></Properties>
       <File>ModSupport/Savannah/vietnam.sql</File>
@@ -1751,6 +1747,7 @@
       <File>UpdateDataBase/HD_AdjustYields.sql</File>
       <File>UpdateDataBase/HD_AI.sql</File>
       <File>UpdateDataBase/DL_Beliefs.sql</File>
+      <File>UpdateDataBase/HD_Pantheons.sql</File>
       <File>UpdateDataBase/HD_Belief_Worships.sql</File>
       <File>UpdateDataBase/DL_Boosts.sql</File>
       <File>UpdateDataBase/DL_Buildings.sql</File>
@@ -1921,7 +1918,7 @@
       <File>Texts/HD_Text_Greatworks_Types.sql</File>
       <File>Texts/HD_Text_Improvements.sql</File>
       <File>Texts/HD_Text_NaturalWonders.sql</File>
-      <File>Texts/HD_Text_Pantheon.sql</File>
+      <File>Texts/HD_Text_Pantheons.sql</File>
       <File>Texts/HD_Text_Policies.sql</File>
       <File>Texts/HD_Text_Commemorations.sql</File>
       <File>Texts/HD_Text_Governments.sql</File>
@@ -2534,7 +2531,6 @@
     <File>ModSupport/SukOceans/HD_Monopoly_Texts.sql</File>
     <File>ModSupport/SukOceans/HD_Texts.sql</File>
     <File>ModSupport/Savannah/DL_Adaptation.sql</File>
-    <File>ModSupport/Savannah/Belief.sql</File>
     <File>ModSupport/Savannah/vietnam.sql</File>
     <File>ModSupport/Savannah/HD_Texts.sql</File>
     <File>ModSupport/MonopolyPlus/DL_Adaptation.sql</File>
@@ -2719,6 +2715,7 @@
     <File>UpdateDataBase/HD_AdjustYields.sql</File>
     <File>UpdateDataBase/HD_AI.sql</File>
     <File>UpdateDataBase/DL_Beliefs.sql</File>
+    <File>UpdateDataBase/HD_Pantheons.sql</File>
     <File>UpdateDataBase/HD_Belief_Worships.sql</File>
     <File>UpdateDataBase/DL_Boosts.sql</File>
     <File>UpdateDataBase/DL_Buildings.sql</File>
@@ -2813,7 +2810,7 @@
     <File>Texts/HD_Text_Greatworks_Types.sql</File>
     <File>Texts/HD_Text_Improvements.sql</File>
     <File>Texts/HD_Text_NaturalWonders.sql</File>
-    <File>Texts/HD_Text_Pantheon.sql</File>
+    <File>Texts/HD_Text_Pantheons.sql</File>
     <File>Texts/HD_Text_Policies.sql</File>
     <File>Texts/HD_Text_Commemorations.sql</File>
     <File>Texts/HD_Text_Governments.sql</File>

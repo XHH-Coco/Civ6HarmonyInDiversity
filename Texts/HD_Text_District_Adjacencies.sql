@@ -1,17 +1,22 @@
 insert or replace into EnglishText (Tag, Text) values
   ("LOC_HD_ALL_MOUNTAINS_SCIENCE_TEXT",         											"+{1_num} [ICON_SCIENCE] Science from adjacent {1_Num : plural 1?Mountain; other?Mountains;}"),
   ("LOC_HD_ALL_MOUNTAINS_FAITH_TEXT",           											"+{1_num} [ICON_FAITH] Faith from adjacent {1_Num : plural 1?Mountain; other?Mountains;}"),
-  ("LOC_HD_TRANSPORTATION_DISTRICTS_PRODUCTION_TEXT",     						"+{1_num} [ICON_Production] Production from adjacent Transportation {1_Num : plural 1?District; other?Districts;}"),
+  
+	("LOC_HD_TRANSPORTATION_DISTRICTS_PRODUCTION_TEXT",     						"+{1_num} [ICON_Production] Production from adjacent Transportation {1_Num : plural 1?District; other?Districts;}"),
   ("LOC_HD_HYDRAULIC_DISTRICTS_PRODUCTION_TEXT",  										"+{1_num} [ICON_Production] Production from adjacent Hydraulic {1_Num : plural 1?District; other?Districts;}"),
 	("LOC_HD_TRANSPORTATION_DISTRICTS_GOLD_TEXT",     									"+{1_num} [ICON_Gold] Gold from adjacent Transportation {1_Num : plural 1?District; other?Districts;}"),
-	("LOC_HD_ENTERTAINING_DISTRICTS_CULTURE_TEXT",     									"+{1_num} [ICON_Culture] Culture from adjacent Entertaining {1_Num : plural 1?District; other?Districts;}"),
+  
+	("LOC_HD_ENTERTAINMENT_COMPLEX_INCLUDING_UD_CULTURE_TEXT",					"+{1_num} [ICON_Culture] Culture from adjacent Entertainment Complex {1_Num : plural 2?district; other?districts;} or corresponding unique {1_Num : plural 2?district; other?districts;}"),
+  ("LOC_HD_WATER_ENTERTAINMENT_COMPLEX_INCLUDING_UD_CULTURE_TEXT",		"+{1_num} [ICON_Culture] Culture from adjacent Water Park {1_Num : plural 2?district; other?districts;} or corresponding unique {1_Num : plural 2?district; other?districts;}"),
   ("LOC_HD_COMMERCIAL_HUB_INCLUDING_UD_PRODUCTION_TEXT",							"+{1_num} [ICON_PRODUCTION] Production from adjacent Commercial Hub {1_Num : plural 2?district; other?districts;} or corresponding unique {1_Num : plural 2?district; other?districts;}"),
   ("LOC_HD_ENCAMPMENT_INCLUDING_UD_PRODUCTION_TEXT",									"+{1_num} [ICON_PRODUCTION] Production from adjacent Commercial Hub {1_Num : plural 2?district; other?districts;} or corresponding unique {1_Num : plural 2?district; other?districts;}"),
+	
 	("LOC_HD_EXPLOITATIVE_IMPROVEMENTS_PRODUCTION_TEXT",     						"+{1_num} [ICON_Production] Production from adjacent Exploitative {1_Num : plural 1?Improvement; other?Improvements;}"),
 	("LOC_HD_COMMERCIAL_IMPROVEMENTS_GOLD_TEXT",     										"+{1_num} [ICON_Gold] Gold from adjacent Commercial {1_Num : plural 1?Improvement; other?Improvements;}"),
 	("LOC_HD_MILITARISTIC_IMPROVEMENTS_PRODUCTION_TEXT",     						"+{1_num} [ICON_Production] Production from adjacent Militaristic {1_Num : plural 1?Improvement; other?Improvements;}"),
 	("LOC_HD_TRANSPOTATION_IMPROVEMENTS_PRODUCTION_TEXT",   						"+{1_num} [ICON_Production] Production from adjacent Transportation {1_Num : plural 1?Improvement; other?Improvements;}"),
 	("LOC_HD_COMMERCIAL_IMPROVEMENTS_PRODUCTION_TEXT",   								"+{1_num} [ICON_Production] Production from adjacent Commercial {1_Num : plural 1?Improvement; other?Improvements;}"),
+  ("LOC_HD_HUMANITIES_IMPROVEMENTS_CULTURE_TEXT",   									"+{1_num} [ICON_Culture] Culture from adjacent Humanities {1_Num : plural 1?Improvement; other?Improvements;}"),
   ("LOC_HD_ENTERTAINING_IMPROVEMENTS_CULTURE_TEXT",   								"+{1_num} [ICON_Culture] Culture from adjacent Entertaining {1_Num : plural 1?Improvement; other?Improvements;}"),
   ("LOC_HD_RELIGIOUS_IMPROVEMENTS_FAITH_TEXT",  											"+{1_num} [ICON_FAITH] Faith from adjacent Religious {1_Num : plural 1?Improvement; other?Improvements;}"),
 	("LOC_HD_EDUCATIONAL_IMPROVEMENTS_SCIENCE_TEXT",  									"+{1_num} [ICON_SCIENCE] Science from adjacent Educational {1_Num : plural 1?Improvement; other?Improvements;}"),
@@ -100,17 +105,22 @@ insert or replace into LocalizedText (Language, Tag, Text) values
 	-- 基于分类的相邻加成
   ("zh_Hans_CN",  "LOC_HD_ALL_MOUNTAINS_SCIENCE_TEXT",          										"+{1_num} [ICON_SCIENCE] 科技值来自相邻山脉"),
   ("zh_Hans_CN",  "LOC_HD_ALL_MOUNTAINS_FAITH_TEXT",            										"+{1_num} [ICON_FAITH] 信仰值来自相邻山脉"),
+
   ("zh_Hans_CN",  "LOC_HD_TRANSPORTATION_DISTRICTS_PRODUCTION_TEXT",     						"+{1_num} [ICON_Production] 生产力来自相邻交通设施区域"),
   ("zh_Hans_CN",  "LOC_HD_HYDRAULIC_DISTRICTS_PRODUCTION_TEXT",  										"+{1_num} [ICON_Production] 生产力来自相邻水利工程区域"),
   ("zh_Hans_CN",  "LOC_HD_TRANSPORTATION_DISTRICTS_GOLD_TEXT",     									"+{1_num} [ICON_Gold] 金币来自相邻交通设施区域"),
-  ("zh_Hans_CN",  "LOC_HD_ENTERTAINING_DISTRICTS_CULTURE_TEXT",     								"+{1_num} [ICON_CULTURE] 文化值来自相邻娱乐活动区域"),
+
+  ("zh_Hans_CN",  "LOC_HD_ENTERTAINMENT_COMPLEX_INCLUDING_UD_CULTURE_TEXT",					"+{1_num} [ICON_CULTURE] 文化值来自相邻娱乐中心，或对应特色区域"),
+  ("zh_Hans_CN",  "LOC_HD_WATER_ENTERTAINMENT_COMPLEX_INCLUDING_UD_CULTURE_TEXT",		"+{1_num} [ICON_CULTURE] 文化值来自相邻水上乐园，或对应特色区域"),
   ("zh_Hans_CN",  "LOC_HD_COMMERCIAL_HUB_INCLUDING_UD_PRODUCTION_TEXT",							"+{1_num} [ICON_PRODUCTION] 生产力来自相邻商业中心，或对应特色区域"),
   ("zh_Hans_CN",  "LOC_HD_ENCAMPMENT_INCLUDING_UD_PRODUCTION_TEXT",									"+{1_num} [ICON_PRODUCTION] 生产力来自相邻商业中心，或对应特色区域"),
+
   ("zh_Hans_CN",  "LOC_HD_EXPLOITATIVE_IMPROVEMENTS_PRODUCTION_TEXT",     					"+{1_num} [ICON_Production] 生产力来自相邻工业开发改良"),
   ("zh_Hans_CN",  "LOC_HD_COMMERCIAL_IMPROVEMENTS_GOLD_TEXT",     									"+{1_num} [ICON_Gold] 金币来自相邻贸易往来改良"),
   ("zh_Hans_CN",  "LOC_HD_MILITARISTIC_IMPROVEMENTS_PRODUCTION_TEXT",     					"+{1_num} [ICON_Production] 生产力来自相邻军事屯驻改良"),
   ("zh_Hans_CN",  "LOC_HD_TRANSPOTATION_IMPROVEMENTS_PRODUCTION_TEXT",  						"+{1_num} [ICON_Production] 生产力来自相邻交通设施改良"),
   ("zh_Hans_CN",  "LOC_HD_COMMERCIAL_IMPROVEMENTS_PRODUCTION_TEXT",  								"+{1_num} [ICON_Production] 生产力来自相邻贸易往来改良"),
+  ("zh_Hans_CN",  "LOC_HD_HUMANITIES_IMPROVEMENTS_CULTURE_TEXT",  									"+{1_num} [ICON_CULTURE] 文化值来自相邻人文社科改良"),
   ("zh_Hans_CN",  "LOC_HD_ENTERTAINING_IMPROVEMENTS_CULTURE_TEXT",  								"+{1_num} [ICON_CULTURE] 文化值来自相邻娱乐活动改良"),
   ("zh_Hans_CN",  "LOC_HD_RELIGIOUS_IMPROVEMENTS_FAITH_TEXT",  											"+{1_num} [ICON_FAITH] 信仰值来自相邻宗教场所改良"),
   ("zh_Hans_CN",  "LOC_HD_EDUCATIONAL_IMPROVEMENTS_SCIENCE_TEXT",  									"+{1_num} [ICON_SCIENCE] 科技值来自相邻研究教育改良"),
