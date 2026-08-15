@@ -65,10 +65,9 @@ insert or ignore into HD_Adjacency_Base_On_Classification (ID, Description, Yiel
 -- ================================================================================
 -- 区域分类
 -- ================================================================================
--- 工业：水利工程、交通设施
 -- 商业：交通设施
 -- 港口：交通设施
--- 剧院：娱乐活动
+-- 工业：水利工程、交通设施
 -- 军营：交通设施
 delete from District_Adjacencies where DistrictType in ('DISTRICT_INDUSTRIAL_ZONE', 'DISTRICT_HANSA', 'DISTRICT_OPPIDUM') and YieldChangeId in (
   'Aqueduct_Production', 'Bath_Production', 'Canal_Production', 'Dam_Production'
