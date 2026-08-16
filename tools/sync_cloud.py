@@ -23,9 +23,11 @@ import re
 import subprocess
 import sys
 
-for _s in (sys.stdout, sys.stderr):  # 提交信息是中文，别让 Windows 控制台默认编码毁掉日志
+for _s in (sys.stdout, sys.stderr):
     try:
-        _s.reconfigure(encoding="utf-8")
+        # encoding：提交信息是中文，别让 Windows 控制台默认编码毁掉日志。
+        # line_buffering：输出走管道时 stdout 默认块缓冲，会让 stderr 抢跑到前面。
+        _s.reconfigure(encoding="utf-8", line_buffering=True)
     except (AttributeError, ValueError):
         pass
 
