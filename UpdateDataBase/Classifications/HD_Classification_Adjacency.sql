@@ -40,23 +40,34 @@ insert or ignore into HD_Adjacency_Base_On_Classification (ID, Description, Yiel
 -- ================================================================================
 -- 区域包括特色区域
 -- ================================================================================
+-- 剧院：娱乐中心、水上乐园
+
 -- 汉萨同盟：商业中心、军营
 
+delete from District_Adjacencies where DistrictType in ('DISTRICT_THEATER', 'DISTRICT_ACROPOLIS', 'DISTRICT_XHH_FESTIVAL_THEATER') and YieldChangeId in (
+  'EntertainmentComplex_Culture', 'WaterPark_Culture', 'StreetCarnival_Culture', 'Copacabana_Culture', 'Hippodrome_Culture'
+);
+
 insert or ignore into HD_District_Adjacencies_Base_On_Classification (DistrictType, YieldChangeId) values
+  ('DISTRICT_THEATER',              'HD_THEATER_ENTERTAINMENT_COMPLEX_INCLUDING_UD_CULTURE'),
+  ('DISTRICT_THEATER',              'HD_THEATER_WATER_ENTERTAINMENT_COMPLEX_INCLUDING_UD_CULTURE'),
+
   ('DISTRICT_HANSA',                'HD_HANSA_COMMERCIAL_HUB_INCLUDING_UD_PRODUCTION'),
   ('DISTRICT_HANSA',                'HD_HANSA_ENCAMPMENT_INCLUDING_UD_PRODUCTION');
 
 insert or ignore into HD_Adjacency_Base_On_Classification (ID, Description, YieldType, YieldChange, DistrictTypeIncludingUD) values
-  ('HD_HANSA_COMMERCIAL_HUB_INCLUDING_UD_PRODUCTION', 'LOC_HD_COMMERCIAL_HUB_INCLUDING_UD_PRODUCTION_TEXT', 'YIELD_PRODUCTION', 2, 'DISTRICT_COMMERCIAL_HUB'),
-  ('HD_HANSA_ENCAMPMENT_INCLUDING_UD_PRODUCTION',     'LOC_HD_ENCAMPMENT_INCLUDING_UD_PRODUCTION_TEXT',     'YIELD_PRODUCTION', 2, 'DISTRICT_ENCAMPMENT');
+  ('HD_THEATER_ENTERTAINMENT_COMPLEX_INCLUDING_UD_CULTURE',       'LOC_HD_ENTERTAINMENT_COMPLEX_INCLUDING_UD_CULTURE_TEXT',       'YIELD_CULTURE',    1, 'DISTRICT_ENTERTAINMENT_COMPLEX'),
+  ('HD_THEATER_WATER_ENTERTAINMENT_COMPLEX_INCLUDING_UD_CULTURE', 'LOC_HD_WATER_ENTERTAINMENT_COMPLEX_INCLUDING_UD_CULTURE_TEXT', 'YIELD_CULTURE',    1, 'DISTRICT_WATER_ENTERTAINMENT_COMPLEX'),
+
+  ('HD_HANSA_COMMERCIAL_HUB_INCLUDING_UD_PRODUCTION',             'LOC_HD_COMMERCIAL_HUB_INCLUDING_UD_PRODUCTION_TEXT',           'YIELD_PRODUCTION', 2, 'DISTRICT_COMMERCIAL_HUB'),
+  ('HD_HANSA_ENCAMPMENT_INCLUDING_UD_PRODUCTION',                 'LOC_HD_ENCAMPMENT_INCLUDING_UD_PRODUCTION_TEXT',               'YIELD_PRODUCTION', 2, 'DISTRICT_ENCAMPMENT');
 
 -- ================================================================================
 -- 区域分类
 -- ================================================================================
--- 工业：水利工程、交通设施
 -- 商业：交通设施
 -- 港口：交通设施
--- 剧院：娱乐活动
+-- 工业：水利工程、交通设施
 -- 军营：交通设施
 delete from District_Adjacencies where DistrictType in ('DISTRICT_INDUSTRIAL_ZONE', 'DISTRICT_HANSA', 'DISTRICT_OPPIDUM') and YieldChangeId in (
   'Aqueduct_Production', 'Bath_Production', 'Canal_Production', 'Dam_Production'
@@ -64,12 +75,8 @@ delete from District_Adjacencies where DistrictType in ('DISTRICT_INDUSTRIAL_ZON
 delete from District_Adjacencies where DistrictType in ('DISTRICT_COMMERCIAL_HUB', 'DISTRICT_SUGUBA', 'DISTRICT_SUK_FLOATINGMARKET') and YieldChangeId in (
   'Harbor_Gold', 'RoyalDock_Gold', 'Cothon_Gold', 'Canal_Gold'
 );
-delete from District_Adjacencies where DistrictType in ('DISTRICT_THEATER', 'DISTRICT_ACROPOLIS', 'DISTRICT_XHH_FESTIVAL_THEATER') and YieldChangeId in (
-  'EntertainmentComplex_Culture', 'WaterPark_Culture', 'StreetCarnival_Culture', 'Copacabana_Culture', 'Hippodrome_Culture'
-);
 
 insert or ignore into HD_District_Adjacencies_Base_On_Classification (DistrictType, YieldChangeId) values
-  ('DISTRICT_THEATER',              'HD_THEATER_ENTERTAINING_DISTRICTS_CULTURE'),
   ('DISTRICT_COMMERCIAL_HUB',       'HD_COMMERCIAL_HUB_TRANSPORTATION_DISTRICTS_GOLD'),
   ('DISTRICT_HARBOR',               'HD_COMMERCIAL_HUB_TRANSPORTATION_DISTRICTS_GOLD'),
   ('DISTRICT_INDUSTRIAL_ZONE',      'HD_INDUSTRIAL_ZONE_TRANSPORTATION_DISTRICTS_PRODUCTION'),
@@ -77,7 +84,6 @@ insert or ignore into HD_District_Adjacencies_Base_On_Classification (DistrictTy
   ('DISTRICT_ENCAMPMENT',           'HD_ENCAMPMENT_TRANSPORTATION_DISTRICTS_PRODUCTION');
 
 insert or ignore into HD_Adjacency_Base_On_Classification (ID, Description, YieldType, YieldChange, DistrictClassificationType) values
-  ('HD_THEATER_ENTERTAINING_DISTRICTS_CULTURE',               'LOC_HD_ENTERTAINING_DISTRICTS_CULTURE_TEXT',       'YIELD_CULTURE',    1, 'DISTRICT_CLASSIFICATION_ENTERTAINING'),
   ('HD_COMMERCIAL_HUB_TRANSPORTATION_DISTRICTS_GOLD',         'LOC_HD_TRANSPORTATION_DISTRICTS_GOLD_TEXT',        'YIELD_GOLD',       2, 'DISTRICT_CLASSIFICATION_TRANSPORTATION'),
   ('HD_INDUSTRIAL_ZONE_TRANSPORTATION_DISTRICTS_PRODUCTION',  'LOC_HD_TRANSPORTATION_DISTRICTS_PRODUCTION_TEXT',  'YIELD_PRODUCTION', 2, 'DISTRICT_CLASSIFICATION_TRANSPORTATION'),
   ('HD_INDUSTRIAL_ZONE_HYDRAULIC_DISTRICTS_PRODUCTION',       'LOC_HD_HYDRAULIC_DISTRICTS_PRODUCTION_TEXT',       'YIELD_PRODUCTION', 2, 'DISTRICT_CLASSIFICATION_HYDRAULIC'),
@@ -88,11 +94,11 @@ insert or ignore into HD_Adjacency_Base_On_Classification (ID, Description, Yiel
 -- ================================================================================
 -- 圣地：宗教场所
 -- 学院：教育研究
--- 剧院：娱乐活动
+-- 剧院：人文社科、娱乐活动
 -- 商业：贸易往来
 -- 港口：贸易往来
--- 工业：工业开发
--- 军营：交通设施、军事屯驻
+-- 工业：工业开发、交通设施
+-- 军营：军事屯驻、交通设施
 -- 汉萨同盟：贸易往来
 delete from District_Adjacencies where DistrictType in ('DISTRICT_INDUSTRIAL_ZONE', 'DISTRICT_HANSA', 'DISTRICT_OPPIDUM') and YieldChangeId in (
   'Warehouse_Production', 'ContainerPort_Production'
@@ -104,11 +110,13 @@ delete from District_Adjacencies where DistrictType in ('DISTRICT_COMMERCIAL_HUB
 insert or ignore into HD_District_Adjacencies_Base_On_Classification (DistrictType, YieldChangeId) values
   ('DISTRICT_HOLY_SITE',            'HD_HOLY_SITE_RELIGIOUS_IMPROVEMENTS_FAITH'),
   ('DISTRICT_CAMPUS',               'HD_CAMPUS_EDUCATIONAL_IMPROVEMENTS_SCIENCE'),
+  ('DISTRICT_THEATER',              'HD_THEATER_HUMANITIES_IMPROVEMENTS_CULTURE'),
   ('DISTRICT_THEATER',              'HD_THEATER_ENTERTAINING_IMPROVEMENTS_CULTURE'),
   ('DISTRICT_COMMERCIAL_HUB',       'HD_COMMERCIAL_HUB_COMMERCIAL_IMPROVEMENTS_GOLD'),
   ('DISTRICT_HARBOR',               'HD_COMMERCIAL_HUB_COMMERCIAL_IMPROVEMENTS_GOLD'),
   ('DISTRICT_INDUSTRIAL_ZONE',      'HD_INDUSTRIAL_ZONE_EXPLOITATIVE_IMPROVEMENTS_PRODUCTION'),
   ('DISTRICT_INDUSTRIAL_ZONE',      'HD_INDUSTRIAL_ZONE_EXPLOITATIVE_IMPROVEMENTS_PRODUCTION_LATE'),
+  ('DISTRICT_INDUSTRIAL_ZONE',      'HD_INDUSTRIAL_ZONE_TRANSPOTATION_IMPROVEMENTS_PRODUCTION'),
   ('DISTRICT_ENCAMPMENT',           'HD_ENCAMPMENT_MILITARISTIC_IMPROVEMENTS_PRODUCTION'),
   ('DISTRICT_ENCAMPMENT',           'HD_ENCAMPMENT_MILITARISTIC_IMPROVEMENTS_PRODUCTION_LATE'),
   ('DISTRICT_ENCAMPMENT',           'HD_ENCAMPMENT_TRANSPOTATION_IMPROVEMENTS_PRODUCTION'),
@@ -118,10 +126,12 @@ insert or ignore into HD_District_Adjacencies_Base_On_Classification (DistrictTy
 insert or ignore into HD_Adjacency_Base_On_Classification (ID, Description, YieldType, YieldChange, ImprovementClassificationType, PrereqTech, ObsoleteTech) values
   ('HD_HOLY_SITE_RELIGIOUS_IMPROVEMENTS_FAITH',                             'LOC_HD_RELIGIOUS_IMPROVEMENTS_FAITH_TEXT',                       'YIELD_FAITH',      1, 'IMPROVEMENT_CLASSIFICATION_RELIGIOUS',                  NULL,                       NULL),
   ('HD_CAMPUS_EDUCATIONAL_IMPROVEMENTS_SCIENCE',                            'LOC_HD_EDUCATIONAL_IMPROVEMENTS_SCIENCE_TEXT',                   'YIELD_SCIENCE',    1, 'IMPROVEMENT_CLASSIFICATION_EDUCATIONAL',                NULL,                       NULL),
+  ('HD_THEATER_HUMANITIES_IMPROVEMENTS_CULTURE',                            'LOC_HD_HUMANITIES_IMPROVEMENTS_CULTURE_TEXT',                    'YIELD_CULTURE',    1, 'IMPROVEMENT_CLASSIFICATION_HUMANITIES',                 NULL,                       NULL),
   ('HD_THEATER_ENTERTAINING_IMPROVEMENTS_CULTURE',                          'LOC_HD_ENTERTAINING_IMPROVEMENTS_CULTURE_TEXT',                  'YIELD_CULTURE',    1, 'IMPROVEMENT_CLASSIFICATION_ENTERTAINING',               NULL,                       NULL),
   ('HD_COMMERCIAL_HUB_COMMERCIAL_IMPROVEMENTS_GOLD',                        'LOC_HD_COMMERCIAL_IMPROVEMENTS_GOLD_TEXT',                       'YIELD_GOLD',       2, 'IMPROVEMENT_CLASSIFICATION_COMMERCIAL',                 NULL,                       NULL),
   ('HD_INDUSTRIAL_ZONE_EXPLOITATIVE_IMPROVEMENTS_PRODUCTION',               'LOC_HD_EXPLOITATIVE_IMPROVEMENTS_PRODUCTION_TEXT',               'YIELD_PRODUCTION', 1, 'IMPROVEMENT_CLASSIFICATION_EXPLOITATIVE',               NULL,                       'TECH_INDUSTRIALIZATION'),
   ('HD_INDUSTRIAL_ZONE_EXPLOITATIVE_IMPROVEMENTS_PRODUCTION_LATE',          'LOC_HD_EXPLOITATIVE_IMPROVEMENTS_PRODUCTION_TEXT',               'YIELD_PRODUCTION', 2, 'IMPROVEMENT_CLASSIFICATION_EXPLOITATIVE',               'TECH_INDUSTRIALIZATION',   NULL),
+  ('HD_INDUSTRIAL_ZONE_TRANSPOTATION_IMPROVEMENTS_PRODUCTION',              'LOC_HD_TRANSPOTATION_IMPROVEMENTS_PRODUCTION_TEXT',              'YIELD_PRODUCTION', 2, 'IMPROVEMENT_CLASSIFICATION_TRANSPOTATION',              NULL,                       NULL),
   ('HD_ENCAMPMENT_MILITARISTIC_IMPROVEMENTS_PRODUCTION',                    'LOC_HD_MILITARISTIC_IMPROVEMENTS_PRODUCTION_TEXT',               'YIELD_PRODUCTION', 1, 'IMPROVEMENT_CLASSIFICATION_MILITARISTIC',               NULL,                       'TECH_MILITARY_SCIENCE'),
   ('HD_ENCAMPMENT_MILITARISTIC_IMPROVEMENTS_PRODUCTION_LATE',               'LOC_HD_MILITARISTIC_IMPROVEMENTS_PRODUCTION_TEXT',               'YIELD_PRODUCTION', 2, 'IMPROVEMENT_CLASSIFICATION_MILITARISTIC',               'TECH_MILITARY_SCIENCE',    NULL),
   ('HD_ENCAMPMENT_TRANSPOTATION_IMPROVEMENTS_PRODUCTION',                   'LOC_HD_TRANSPOTATION_IMPROVEMENTS_PRODUCTION_TEXT',              'YIELD_PRODUCTION', 2, 'IMPROVEMENT_CLASSIFICATION_TRANSPOTATION',              NULL,                       NULL),

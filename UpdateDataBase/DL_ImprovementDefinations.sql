@@ -1,17 +1,16 @@
 -- 改良下放通用
 update Improvements set TraitType = NULL where ImprovementType in ('IMPROVEMENT_FISHERY', 'IMPROVEMENT_CITY_PARK', 'IMPROVEMENT_MONASTERY', 'IMPROVEMENT_MAHAVIHARA', 'IMPROVEMENT_TRADING_DOME');
 
--- 陆地圩田
-insert or ignore into Types
-	(Type,											Kind)
-values
+insert or ignore into Types (Type, Kind) values
+	('TRAIT_CIVILIZATION_IMPROVEMENT_ROMAN_FORT',		'KIND_TRAIT'),
 	('TRAIT_CIVILIZATION_IMPROVEMENT_LAND_POLDER',	'KIND_TRAIT'),
-	('IMPROVEMENT_LAND_POLDER',						'KIND_IMPROVEMENT');
+	('IMPROVEMENT_LAND_POLDER',											'KIND_IMPROVEMENT');
 	
-insert or replace into Traits
-	(TraitType,										Name)
-values
+insert or replace into Traits (TraitType, Name) values
+	('TRAIT_CIVILIZATION_IMPROVEMENT_ROMAN_FORT',		'LOC_IMPROVEMENT_ROMAN_FORT_NAME'),
 	('TRAIT_CIVILIZATION_IMPROVEMENT_LAND_POLDER',	'LOC_IMPROVEMENT_LAND_POLDER_NAME');
 
 insert or replace into Improvements (ImprovementType, Name, PrereqTech, Buildable, Description, PlunderType, PlunderAmount, Icon, TraitType, Housing, TilesRequired, MovementChange) values
 	('IMPROVEMENT_LAND_POLDER', 'LOC_IMPROVEMENT_LAND_POLDER_NAME', 'TECH_IRRIGATION', 1, 'LOC_IMPROVEMENT_LAND_POLDER_DESCRIPTION', 'PLUNDER_FAITH', 25, 'ICON_IMPROVEMENT_LAND_POLDER', 'TRAIT_CIVILIZATION_IMPROVEMENT_LAND_POLDER', 1, 2, 1);
+
+update Improvements set TraitType = 'TRAIT_CIVILIZATION_IMPROVEMENT_ROMAN_FORT' where ImprovementType = 'IMPROVEMENT_ROMAN_FORT';

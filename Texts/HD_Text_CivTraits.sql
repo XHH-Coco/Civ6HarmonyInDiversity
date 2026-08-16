@@ -403,7 +403,7 @@ values
 -- =====================================================================================================================================
 	("LOC_TRAIT_CIVILIZATION_NKISI_DESCRIPTION",                             "All land units ignore [ICON_MOVEMENT] movement penalty from Forest and Jungle. +4 [ICON_Food] Food, +4 [ICON_Production] Production from each Great Work. Palace has slots for 6 Great Works."),
 	-- 男刚果
-	("LOC_TRAIT_LEADER_RELIGIOUS_CONVERT_DESCRIPTION",                       "Receive 50% more Cultural [ICON_GREATPERSON] Great Person points."),
+	("LOC_TRAIT_LEADER_RELIGIOUS_CONVERT_DESCRIPTION",                       "Receive 50% more Cultural [ICON_GREATPERSON] Great Person and [ICON_GREATMERCHANT] Great Merchant points."),
 	-- 女刚果
 	("LOC_TRAIT_LEADER_NZINGA_MBANDE_DESCRIPTION",                           "Cities receive +10% Yields if on the same continent as your [ICON_CAPITAL] Capital, -2 [ICON_AMENITIES] Amenities if on another continent."),
 -- =====================================================================================================================================
@@ -1029,7 +1029,7 @@ values
 -- =====================================================================================================================================
 	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_NKISI_DESCRIPTION",                      "所有陆地单位无视森林和雨林对 [ICON_MOVEMENT] 移动力的减益。每个巨作+4 [ICON_Food] 食物和 [ICON_Production] 生产力。宫殿有6个巨作槽位。"),
 	-- 男刚果
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_RELIGIOUS_CONVERT_DESCRIPTION",                "获得+50%文化类 [ICON_GREATPERSON] 伟人点。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_RELIGIOUS_CONVERT_DESCRIPTION",                "获得+50%文化类 [ICON_GREATPERSON] 伟人和 [ICON_GREATMERCHANT] 大商人点。"),
 	-- 女刚果
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_NZINGA_MBANDE_DESCRIPTION",                    "同大陆的城市+10%所有产出；异大陆的城市-2 [ICON_AMENITIES] 宜居度。"),
 -- =====================================================================================================================================

@@ -16,7 +16,7 @@ insert or replace into HD_Binary_Compress_Keys (Key, MaxExp) values
 -- 全局参数
 -- ============================================================================================================================================================
 insert or replace into GlobalParameters (Name, Value) values
-  ('HD_GOVERNOR_BUILDER_RIGHT_2_WONDER_ENGINEER_PERCENTAGE',              25),
+  ('HD_GOVERNOR_BUILDER_RIGHT_1_WONDER_ENGINEER_PERCENTAGE',              25),
   ('HD_GOVERNOR_MERCHANT_RIGHT_3_TRADE_YIELD_PERCENTAGE_BASE',            25),
   ('HD_GOVERNOR_MERCHANT_RIGHT_3_TRADE_YIELD_PERCENTAGE_PER_TRADINGPOST', 5),
   ('HD_GOVERNOR_CARDINAL_RIGHT_2_RELIGIOUS_PRESSURE',                     150),
@@ -250,7 +250,9 @@ insert or ignore into GovernorPromotionModifiers (GovernorPromotionType, Modifie
   ('GOVERNOR_PROMOTION_HD_BUILDER_LEFT_1',   'HD_GOVERNOR_BUILDER_LEFT_1_AGRICULTURAL_IMPROVEMENT_YIELDS'),
   ('GOVERNOR_PROMOTION_HD_BUILDER_LEFT_3',   'HD_GOVERNOR_BUILDER_LEFT_3_ALLOW_EXTRA_CITY_PARK'),
   ('GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_1',  'HD_GOVERNOR_BUILDER_RIGHT_1_WONDER_BOOST'),
-  ('GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_1',  'HD_GOVERNOR_BUILDER_RIGHT_1_WONDER_BOOST_EARLY'),
+  ('GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_2',  'HD_GOVERNOR_BUILDER_RIGHT_2_DISTRICT_PRODUCTION'),
+  ('GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_2',  'HD_GOVERNOR_BUILDER_RIGHT_2_WONDER_PRODUCTION'),
+  ('GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_2',  'HD_GOVERNOR_BUILDER_RIGHT_2_WONDER_CULTURE'),
   ('GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_3',  'HD_GOVERNOR_BUILDER_RIGHT_3_WONDER_REGIONAL_RANGE');
 
 insert or ignore into Modifiers (ModifierId, ModifierType, Permanent, SubjectRequirementSetId) values
@@ -259,7 +261,9 @@ insert or ignore into Modifiers (ModifierId, ModifierType, Permanent, SubjectReq
   ('HD_GOVERNOR_BUILDER_LEFT_1_AGRICULTURAL_IMPROVEMENT_YIELDS',        'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',                          0,  'PLOT_HAS_IMPROVEMENT_CLASSIFICATION_AGRARIAN_REQUIREMENTS'),
   ('HD_GOVERNOR_BUILDER_LEFT_3_ALLOW_EXTRA_CITY_PARK',                  'MODIFIER_SINGLE_CITY_ADJUST_PROPERTY',                                 0,  NULL),
   ('HD_GOVERNOR_BUILDER_RIGHT_1_WONDER_BOOST',                          'MODIFIER_SINGLE_CITY_ADJUST_WONDER_PRODUCTION',                        0,  NULL),
-  ('HD_GOVERNOR_BUILDER_RIGHT_1_WONDER_BOOST_EARLY',                    'MODIFIER_SINGLE_CITY_ADJUST_WONDER_ERA_PRODUCTION',                    0,  NULL),
+  ('HD_GOVERNOR_BUILDER_RIGHT_2_DISTRICT_PRODUCTION',                   'MODIFIER_CITY_DISTRICTS_ADJUST_YIELD_CHANGE',                          0,  'DISTRICT_IS_NOT_WONDER_REQUIREMENTS'),
+  ('HD_GOVERNOR_BUILDER_RIGHT_2_WONDER_PRODUCTION',                     'MODIFIER_SINGLE_CITY_ADJUST_WONDER_YIELD_CHANGE',                      0,  NULL),
+  ('HD_GOVERNOR_BUILDER_RIGHT_2_WONDER_CULTURE',                        'MODIFIER_SINGLE_CITY_ADJUST_WONDER_YIELD_CHANGE',                      0,  NULL),
   ('HD_GOVERNOR_BUILDER_RIGHT_3_WONDER_REGIONAL_RANGE',                 'MODIFIER_SINGLE_CITY_ADJUST_PROPERTY',                                 0,  NULL);
 
 insert or ignore into ModifierArguments (ModifierId, Name, Value) values
@@ -270,11 +274,13 @@ insert or ignore into ModifierArguments (ModifierId, Name, Value) values
 	('HD_GOVERNOR_BUILDER_LEFT_1_AGRICULTURAL_IMPROVEMENT_YIELDS',        'Amount',                 1),
 	('HD_GOVERNOR_BUILDER_LEFT_3_ALLOW_EXTRA_CITY_PARK',                  'Key',                    'HD_CITY_ALLOW_EXTRA_IMPROVEMENT_CITY_PARK'),
 	('HD_GOVERNOR_BUILDER_LEFT_3_ALLOW_EXTRA_CITY_PARK',                  'Amount',                 1),
-	('HD_GOVERNOR_BUILDER_RIGHT_1_WONDER_BOOST',                          'Amount',                 15),
-	('HD_GOVERNOR_BUILDER_RIGHT_1_WONDER_BOOST_EARLY',                    'Amount',                 15),
-	('HD_GOVERNOR_BUILDER_RIGHT_1_WONDER_BOOST_EARLY',                    'IsWonder',               1),
-	('HD_GOVERNOR_BUILDER_RIGHT_1_WONDER_BOOST_EARLY',                    'StartEra',               'ERA_ANCIENT'),
-	('HD_GOVERNOR_BUILDER_RIGHT_1_WONDER_BOOST_EARLY',                    'EndEra',                 'ERA_CLASSICAL'),
+	('HD_GOVERNOR_BUILDER_RIGHT_1_WONDER_BOOST',                          'Amount',                 20),
+	('HD_GOVERNOR_BUILDER_RIGHT_2_DISTRICT_PRODUCTION',                   'YieldType',              'YIELD_PRODUCTION'),
+	('HD_GOVERNOR_BUILDER_RIGHT_2_DISTRICT_PRODUCTION',                   'Amount',                 1),
+	('HD_GOVERNOR_BUILDER_RIGHT_2_WONDER_PRODUCTION',                     'YieldType',              'YIELD_PRODUCTION'),
+	('HD_GOVERNOR_BUILDER_RIGHT_2_WONDER_PRODUCTION',                     'Amount',                 1),
+	('HD_GOVERNOR_BUILDER_RIGHT_2_WONDER_CULTURE',                        'YieldType',              'YIELD_CULTURE'),
+	('HD_GOVERNOR_BUILDER_RIGHT_2_WONDER_CULTURE',                        'Amount',                 1),
 	('HD_GOVERNOR_BUILDER_RIGHT_3_WONDER_REGIONAL_RANGE',		              'Key',			              'HD_SINGLE_DISTRICT_EXTRA_REGIONAL_RANGE_DISTRICT_WONDER'),
 	('HD_GOVERNOR_BUILDER_RIGHT_3_WONDER_REGIONAL_RANGE',		              'Amount',					        1);
 
@@ -284,7 +290,7 @@ insert or ignore into GovernorPromotionModifiers (GovernorPromotionType, Modifie
 from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
 
 insert or ignore into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) select
-  'HD_GOVERNOR_BUILDER_LEFT_2_' || DistrictType, 'MODIFIER_PLAYER_DISTRICTS_ADJUST_YIELD_MODIFIER', 'HD_DISTRICT_IS_' || DistrictType || '_WITHIN_4_TILES_REQUIREMENTS'
+  'HD_GOVERNOR_BUILDER_LEFT_2_' || DistrictType, 'MODIFIER_PLAYER_DISTRICTS_ADJUST_YIELD_MODIFIER', 'DISTRICT_IS_' || DistrictType || '_WITHIN_6_TILES_REQUIREMENTS'
 from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
 
 insert or ignore into ModifierArguments (ModifierId, Name, Value) select
@@ -292,23 +298,7 @@ insert or ignore into ModifierArguments (ModifierId, Name, Value) select
 from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
 
 insert or ignore into ModifierArguments (ModifierId, Name, Value) select
-  'HD_GOVERNOR_BUILDER_LEFT_2_' || DistrictType, 'Amount', 50
-from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
-
-insert or ignore into GovernorPromotionModifiers (GovernorPromotionType, ModifierId) select
-  'GOVERNOR_PROMOTION_HD_BUILDER_LEFT_2', 'HD_GOVERNOR_BUILDER_LEFT_2_' || DistrictType || '_LATE'
-from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
-
-insert or ignore into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId, SubjectRequirementSetId) select
-  'HD_GOVERNOR_BUILDER_LEFT_2_' || DistrictType || '_LATE', 'MODIFIER_PLAYER_DISTRICTS_ADJUST_YIELD_MODIFIER', 'PLAYER_HAS_TECH_ARCH_HD_REQUIREMENTS', 'HD_DISTRICT_IS_' || DistrictType || '_WITHIN_4_TILES_REQUIREMENTS'
-from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
-
-insert or ignore into ModifierArguments (ModifierId, Name, Value) select
-  'HD_GOVERNOR_BUILDER_LEFT_2_' || DistrictType || '_LATE', 'YieldType', YieldType
-from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
-
-insert or ignore into ModifierArguments (ModifierId, Name, Value) select
-  'HD_GOVERNOR_BUILDER_LEFT_2_' || DistrictType || '_LATE', 'Amount', 50
+  'HD_GOVERNOR_BUILDER_LEFT_2_' || DistrictType, 'Amount', 100
 from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
 
 -- 公园与休憩
@@ -317,7 +307,7 @@ insert or ignore into GovernorPromotionModifiers (GovernorPromotionType, Modifie
 from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
 
 insert or ignore into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) select
-  'HD_GOVERNOR_BUILDER_LEFT_3_' || DistrictType || '_ATTACH', 'MODIFIER_PLAYER_IMPROVEMENTS_ATTACH_MODIFIER', 'HD_PLOT_HAS_CITY_OR_WATER_PARK_IMPROVEMENT_WITHIN_5_TILES_REQUIREMENTS'
+  'HD_GOVERNOR_BUILDER_LEFT_3_' || DistrictType || '_ATTACH', 'MODIFIER_PLAYER_IMPROVEMENTS_ATTACH_MODIFIER', 'HD_PLOT_HAS_CITY_OR_WATER_PARK_IMPROVEMENT_WITHIN_6_TILES_REQUIREMENTS'
 from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
 
 insert or ignore into ModifierArguments (ModifierId, Name, Value) select
@@ -377,11 +367,15 @@ insert or ignore into GovernorPromotionModifiers (GovernorPromotionType, Modifie
   ('GOVERNOR_PROMOTION_HD_MANAGER_BASE',     'HD_GOVERNOR_MANAGER_BASE_SETTLER_CONSUME_NO_POP'),
   ('GOVERNOR_PROMOTION_HD_MANAGER_BASE',     'HD_GOVERNOR_MANAGER_BASE_PLOT_PURCHASE_DISCOUNT'),
   ('GOVERNOR_PROMOTION_HD_MANAGER_BASE',     'HD_GOVERNOR_MANAGER_BASE_IMPROVEMENT_YIELDS'),
-  ('GOVERNOR_PROMOTION_HD_MANAGER_LEFT_1',   'HD_GOVERNOR_MANAGER_LEFT_1_REGIONAL_FOOD'),
-  ('GOVERNOR_PROMOTION_HD_MANAGER_LEFT_1',   'HD_GOVERNOR_MANAGER_LEFT_1_REGIONAL_PRODUCTION'),
-  ('GOVERNOR_PROMOTION_HD_MANAGER_LEFT_1',   'HD_GOVERNOR_MANAGER_LEFT_1_REGIONAL_AMENITY'),
+  ('GOVERNOR_PROMOTION_HD_MANAGER_LEFT_1',   'HD_GOVERNOR_MANAGER_LEFT_1_TRADE_FOOD'),
+  ('GOVERNOR_PROMOTION_HD_MANAGER_LEFT_1',   'HD_GOVERNOR_MANAGER_LEFT_1_TRADE_PRODUCTION'),
+  ('GOVERNOR_PROMOTION_HD_MANAGER_LEFT_1',   'HD_GOVERNOR_MANAGER_LEFT_1_TRADE_AMENITY'),
   ('GOVERNOR_PROMOTION_HD_MANAGER_LEFT_2',   'HD_GOVERNOR_MANAGER_LEFT_2_RESOURCE_FOOD'),
   ('GOVERNOR_PROMOTION_HD_MANAGER_LEFT_2',   'HD_GOVERNOR_MANAGER_LEFT_2_RESOURCE_PRODUCTION'),
+  ('GOVERNOR_PROMOTION_HD_MANAGER_LEFT_3',   'HD_GOVERNOR_MANAGER_LEFT_3_CITY_FOOD'),
+  ('GOVERNOR_PROMOTION_HD_MANAGER_LEFT_3',   'HD_GOVERNOR_MANAGER_LEFT_3_CITY_PRODUCTION'),
+  ('GOVERNOR_PROMOTION_HD_MANAGER_LEFT_3',   'HD_GOVERNOR_MANAGER_LEFT_3_CITY_FOOD_LATE'),
+  ('GOVERNOR_PROMOTION_HD_MANAGER_LEFT_3',   'HD_GOVERNOR_MANAGER_LEFT_3_CITY_PRODUCTION_LATE'),
   ('GOVERNOR_PROMOTION_HD_MANAGER_RIGHT_1',  'HD_GOVERNOR_MANAGER_RIGHT_1_EXTRA_DISTRICT'),
   ('GOVERNOR_PROMOTION_HD_MANAGER_RIGHT_1',  'HD_GOVERNOR_MANAGER_RIGHT_1_DISTRICT_BOOST'),
   ('GOVERNOR_PROMOTION_HD_MANAGER_RIGHT_1',  'HD_GOVERNOR_MANAGER_RIGHT_1_BUILDING_BOOST'),
@@ -391,9 +385,9 @@ insert or ignore into Modifiers (ModifierId, ModifierType, SubjectRequirementSet
   ('HD_GOVERNOR_MANAGER_BASE_SETTLER_CONSUME_NO_POP',                   'MODIFIER_CITY_ADJUST_SETTLER_CONSUME_POPULATION',                      NULL),
   ('HD_GOVERNOR_MANAGER_BASE_PLOT_PURCHASE_DISCOUNT',                   'MODIFIER_SINGLE_CITY_ADJUST_PLOT_PURCHASE_COST',                       NULL),
   ('HD_GOVERNOR_MANAGER_BASE_IMPROVEMENT_YIELDS',                       'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',                          'PLOT_HAS_IMPROVEMENT_CLASSIFICATION_EXPLOITATIVE_REQUIREMENTS'),
-  ('HD_GOVERNOR_MANAGER_LEFT_1_REGIONAL_FOOD',                          'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',                      'HD_OBJECT_WITHIN_6_TILES'),
-  ('HD_GOVERNOR_MANAGER_LEFT_1_REGIONAL_PRODUCTION',                    'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',                      'HD_OBJECT_WITHIN_6_TILES'),
-  ('HD_GOVERNOR_MANAGER_LEFT_1_REGIONAL_AMENITY',                       'MODIFIER_PLAYER_CITIES_ADJUST_AMENITIES_FROM_GOVERNORS',               'HD_OBJECT_WITHIN_6_TILES'),
+  ('HD_GOVERNOR_MANAGER_LEFT_1_TRADE_FOOD',                             'MODIFIER_SINGLE_CITY_ADJUST_TRADE_ROUTE_YIELD_TO_OTHERS',              NULL),
+  ('HD_GOVERNOR_MANAGER_LEFT_1_TRADE_PRODUCTION',                       'MODIFIER_SINGLE_CITY_ADJUST_TRADE_ROUTE_YIELD_TO_OTHERS',              NULL),
+  ('HD_GOVERNOR_MANAGER_LEFT_1_TRADE_AMENITY',                          'MODIFIER_PLAYER_CITIES_ADJUST_AMENITIES_FROM_GOVERNORS',               'HD_GOVERNOR_MANAGER_LEFT_1_TRADE_REQUIREMENTS'),
   ('HD_GOVERNOR_MANAGER_LEFT_2_RESOURCE_FOOD',                          'MODIFIER_SINGLE_CITY_ADJUST_YIELD_BY_NUMBER_RESOURCES',                NULL),
   ('HD_GOVERNOR_MANAGER_LEFT_2_RESOURCE_PRODUCTION',                    'MODIFIER_SINGLE_CITY_ADJUST_YIELD_BY_NUMBER_RESOURCES',                NULL),
   ('HD_GOVERNOR_MANAGER_RIGHT_1_EXTRA_DISTRICT',                        'MODIFIER_SINGLE_CITY_EXTRA_DISTRICT',                                  NULL),
@@ -401,55 +395,42 @@ insert or ignore into Modifiers (ModifierId, ModifierType, SubjectRequirementSet
   ('HD_GOVERNOR_MANAGER_RIGHT_1_BUILDING_BOOST',                        'MODIFIER_SINGLE_CITY_ADJUST_BUILDING_PRODUCTION_MODIFIER',             NULL),
   ('HD_GOVERNOR_MANAGER_RIGHT_2_CITY_YIELDS',                           'MODIFIER_SINGLE_CITY_ADJUST_CITY_YIELD_MODIFIER',                      NULL);
 
+insert or ignore into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId, SubjectRequirementSetId) values
+  ('HD_GOVERNOR_MANAGER_LEFT_3_CITY_FOOD',                              'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',  NULL,                                           'HD_OBJECT_WITHIN_9_TILES'),
+  ('HD_GOVERNOR_MANAGER_LEFT_3_CITY_PRODUCTION',                        'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',  NULL,                                           'HD_OBJECT_WITHIN_9_TILES'),
+  ('HD_GOVERNOR_MANAGER_LEFT_3_CITY_FOOD_LATE',                         'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',  'PLAYER_HAS_CIVIC_CIVIL_SERVICE_REQUIREMENTS',  'HD_OBJECT_WITHIN_9_TILES'),
+  ('HD_GOVERNOR_MANAGER_LEFT_3_CITY_PRODUCTION_LATE',                   'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',  'PLAYER_HAS_CIVIC_CIVIL_SERVICE_REQUIREMENTS',  'HD_OBJECT_WITHIN_9_TILES');
+
 insert or ignore into ModifierArguments (ModifierId, Name, Value) values
 	('HD_GOVERNOR_MANAGER_BASE_SETTLER_CONSUME_NO_POP',                   'Enabled',                0),
 	('HD_GOVERNOR_MANAGER_BASE_PLOT_PURCHASE_DISCOUNT',                   'Amount',                 -25),
 	('HD_GOVERNOR_MANAGER_BASE_IMPROVEMENT_YIELDS',                       'YieldType',              'YIELD_FOOD'),
 	('HD_GOVERNOR_MANAGER_BASE_IMPROVEMENT_YIELDS',                       'Amount',                 1),
-	('HD_GOVERNOR_MANAGER_LEFT_1_REGIONAL_FOOD',                          'YieldType',              'YIELD_FOOD'),
-	('HD_GOVERNOR_MANAGER_LEFT_1_REGIONAL_FOOD',                          'Amount',                 3),
-	('HD_GOVERNOR_MANAGER_LEFT_1_REGIONAL_PRODUCTION',                    'YieldType',              'YIELD_PRODUCTION'),
-	('HD_GOVERNOR_MANAGER_LEFT_1_REGIONAL_PRODUCTION',                    'Amount',                 2),
-	('HD_GOVERNOR_MANAGER_LEFT_1_REGIONAL_AMENITY',                       'Amount',                 1),
+	('HD_GOVERNOR_MANAGER_LEFT_1_TRADE_FOOD',                             'YieldType',              'YIELD_FOOD'),
+	('HD_GOVERNOR_MANAGER_LEFT_1_TRADE_FOOD',                             'Amount',                 2),
+	('HD_GOVERNOR_MANAGER_LEFT_1_TRADE_FOOD',                             'Domestic',               1),
+	('HD_GOVERNOR_MANAGER_LEFT_1_TRADE_PRODUCTION',                       'YieldType',              'YIELD_PRODUCTION'),
+	('HD_GOVERNOR_MANAGER_LEFT_1_TRADE_PRODUCTION',                       'Amount',                 2),
+	('HD_GOVERNOR_MANAGER_LEFT_1_TRADE_PRODUCTION',                       'Domestic',               1),
+	('HD_GOVERNOR_MANAGER_LEFT_1_TRADE_AMENITY',                          'Amount',                 1),
 	('HD_GOVERNOR_MANAGER_LEFT_2_RESOURCE_FOOD',                          'YieldType',              'YIELD_FOOD'),
 	('HD_GOVERNOR_MANAGER_LEFT_2_RESOURCE_FOOD',                          'Amount',                 2),
 	('HD_GOVERNOR_MANAGER_LEFT_2_RESOURCE_PRODUCTION',                    'YieldType',              'YIELD_PRODUCTION'),
 	('HD_GOVERNOR_MANAGER_LEFT_2_RESOURCE_PRODUCTION',                    'Amount',                 2),
+	('HD_GOVERNOR_MANAGER_LEFT_3_CITY_FOOD',                              'YieldType',              'YIELD_FOOD'),
+	('HD_GOVERNOR_MANAGER_LEFT_3_CITY_FOOD',                              'Amount',                 5),
+	('HD_GOVERNOR_MANAGER_LEFT_3_CITY_PRODUCTION',                        'YieldType',              'YIELD_PRODUCTION'),
+	('HD_GOVERNOR_MANAGER_LEFT_3_CITY_PRODUCTION',                        'Amount',                 5),
+	('HD_GOVERNOR_MANAGER_LEFT_3_CITY_FOOD_LATE',                         'YieldType',              'YIELD_FOOD'),
+	('HD_GOVERNOR_MANAGER_LEFT_3_CITY_FOOD_LATE',                         'Amount',                 5),
+	('HD_GOVERNOR_MANAGER_LEFT_3_CITY_PRODUCTION_LATE',                   'YieldType',              'YIELD_PRODUCTION'),
+	('HD_GOVERNOR_MANAGER_LEFT_3_CITY_PRODUCTION_LATE',                   'Amount',                 5),
 	('HD_GOVERNOR_MANAGER_RIGHT_1_EXTRA_DISTRICT',                        'Amount',                 1),
 	('HD_GOVERNOR_MANAGER_RIGHT_1_DISTRICT_BOOST',                        'Amount',                 30),
 	('HD_GOVERNOR_MANAGER_RIGHT_1_BUILDING_BOOST',                        'Amount',                 30),
 	('HD_GOVERNOR_MANAGER_RIGHT_1_BUILDING_BOOST',                        'IsWonder',               0),
 	('HD_GOVERNOR_MANAGER_RIGHT_2_CITY_YIELDS',                           'YieldType',              'YIELD_FOOD, YIELD_PRODUCTION'),
 	('HD_GOVERNOR_MANAGER_RIGHT_2_CITY_YIELDS',                           'Amount',                 '20, 20');
-
--- 横向一体化
-insert or ignore into GovernorPromotionModifiers (GovernorPromotionType, ModifierId) select
-  'GOVERNOR_PROMOTION_HD_MANAGER_LEFT_3', 'HD_GOVERNOR_MANAGER_LEFT_3_TRADE_' || DistrictType || '_' || YieldType || '_ATTACH'
-from District_TradeRouteYields where YieldChangeAsDomesticDestination != 0 and DistrictType not in (select CivUniqueDistrictType from DistrictReplaces);
-
-insert or ignore into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) select
-  'HD_GOVERNOR_MANAGER_LEFT_3_TRADE_' || DistrictType || '_' || YieldType || '_ATTACH', 'MODIFIER_CITY_DISTRICTS_ATTACH_MODIFIER', 'REQUIRES_DISTRICT_IS_' || DistrictType || '_UDMET'
-from District_TradeRouteYields where YieldChangeAsDomesticDestination != 0 and DistrictType not in (select CivUniqueDistrictType from DistrictReplaces);
-
-insert or ignore into ModifierArguments (ModifierId, Name, Value) select
-  'HD_GOVERNOR_MANAGER_LEFT_3_TRADE_' || DistrictType || '_' || YieldType || '_ATTACH', 'ModifierId', 'HD_GOVERNOR_MANAGER_LEFT_3_TRADE_' || DistrictType || '_' || YieldType
-from District_TradeRouteYields where YieldChangeAsDomesticDestination != 0 and DistrictType not in (select CivUniqueDistrictType from DistrictReplaces);
-
-insert or ignore into Modifiers (ModifierId, ModifierType) select
-  'HD_GOVERNOR_MANAGER_LEFT_3_TRADE_' || DistrictType || '_' || YieldType, 'MODIFIER_SINGLE_CITY_ADJUST_TRADE_ROUTE_YIELD_TO_OTHERS'
-from District_TradeRouteYields where YieldChangeAsDomesticDestination != 0 and DistrictType not in (select CivUniqueDistrictType from DistrictReplaces);
-
-insert or ignore into ModifierArguments (ModifierId, Name, Value) select
-  'HD_GOVERNOR_MANAGER_LEFT_3_TRADE_' || DistrictType || '_' || YieldType, 'YieldType', YieldType
-from District_TradeRouteYields where YieldChangeAsDomesticDestination != 0 and DistrictType not in (select CivUniqueDistrictType from DistrictReplaces);
-
-insert or ignore into ModifierArguments (ModifierId, Name, Value) select
-  'HD_GOVERNOR_MANAGER_LEFT_3_TRADE_' || DistrictType || '_' || YieldType, 'Amount', YieldChangeAsDomesticDestination
-from District_TradeRouteYields where YieldChangeAsDomesticDestination != 0 and DistrictType not in (select CivUniqueDistrictType from DistrictReplaces);
-
-insert or ignore into ModifierArguments (ModifierId, Name, Value) select
-  'HD_GOVERNOR_MANAGER_LEFT_3_TRADE_' || DistrictType || '_' || YieldType, 'Domestic', 1
-from District_TradeRouteYields where YieldChangeAsDomesticDestination != 0 and DistrictType not in (select CivUniqueDistrictType from DistrictReplaces);
 
 -- 纵向一体化
 insert or ignore into GovernorPromotionModifiers (GovernorPromotionType, ModifierId) select

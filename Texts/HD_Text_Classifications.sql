@@ -7,7 +7,6 @@ insert or replace into EnglishText (Tag, Text) values
 
   ("LOC_DISTRICT_CLASSIFICATION_TRANSPORTATION_NAME",               "Transportation District"),
   ("LOC_DISTRICT_CLASSIFICATION_HYDRAULIC_NAME",                    "Hydraulic District"),
-  ("LOC_DISTRICT_CLASSIFICATION_ENTERTAINING_NAME",                 "Entertaining District"),
 
   ("LOC_IMPROVEMENT_CLASSIFICATION_BASIC_NAME",                     "Basic Improvement"),
   ("LOC_IMPROVEMENT_CLASSIFICATION_WATER_NAME",                     "Water-based Improvement"),
@@ -17,6 +16,7 @@ insert or replace into EnglishText (Tag, Text) values
   ("LOC_IMPROVEMENT_CLASSIFICATION_AGRARIAN_NAME",                  "Agrarian Improvement"),
   ("LOC_IMPROVEMENT_CLASSIFICATION_EXPLOITATIVE_NAME",              "Exploitative Improvement"),
   ("LOC_IMPROVEMENT_CLASSIFICATION_EDUCATIONAL_NAME",               "Educational Improvement"),
+  ("LOC_IMPROVEMENT_CLASSIFICATION_HUMANITIES_NAME",                "Humanities Improvement"),
   ("LOC_IMPROVEMENT_CLASSIFICATION_MILITARISTIC_NAME",              "Militaristic Improvement"),
   ("LOC_IMPROVEMENT_CLASSIFICATION_COMMERCIAL_NAME",                "Commercial Improvement"),
   ("LOC_IMPROVEMENT_CLASSIFICATION_RESIDENTIAL_NAME",               "Residential Improvement"),
@@ -91,7 +91,6 @@ insert or replace into LocalizedText (Language, Tag, Text) values
 
   ("zh_Hans_CN", "LOC_DISTRICT_CLASSIFICATION_TRANSPORTATION_NAME",               "交通设施区域"),
   ("zh_Hans_CN", "LOC_DISTRICT_CLASSIFICATION_HYDRAULIC_NAME",                    "水利工程区域"),
-  ("zh_Hans_CN", "LOC_DISTRICT_CLASSIFICATION_ENTERTAINING_NAME",                 "娱乐活动区域"),
 
   ("zh_Hans_CN", "LOC_IMPROVEMENT_CLASSIFICATION_BASIC_NAME",                     "基础改良"),
   ("zh_Hans_CN", "LOC_IMPROVEMENT_CLASSIFICATION_WATER_NAME",                     "水上改良"),
@@ -101,6 +100,7 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_IMPROVEMENT_CLASSIFICATION_AGRARIAN_NAME",                  "农业生产改良"),
   ("zh_Hans_CN", "LOC_IMPROVEMENT_CLASSIFICATION_EXPLOITATIVE_NAME",              "工业开发改良"),
   ("zh_Hans_CN", "LOC_IMPROVEMENT_CLASSIFICATION_EDUCATIONAL_NAME",               "研究教育改良"),
+  ("zh_Hans_CN", "LOC_IMPROVEMENT_CLASSIFICATION_HUMANITIES_NAME",                "人文社科改良"),
   ("zh_Hans_CN", "LOC_IMPROVEMENT_CLASSIFICATION_MILITARISTIC_NAME",              "军事屯驻改良"),
   ("zh_Hans_CN", "LOC_IMPROVEMENT_CLASSIFICATION_COMMERCIAL_NAME",                "贸易往来改良"),
   ("zh_Hans_CN", "LOC_IMPROVEMENT_CLASSIFICATION_RESIDENTIAL_NAME",               "民居宅邸改良"),

@@ -11,17 +11,18 @@ local ENGINEER_INDEX = GameInfo.GreatPersonClasses['GREAT_PERSON_CLASS_ENGINEER'
 local GOVERNOR_THE_BUILDER_INDEX = GameInfo.Governors['GOVERNOR_THE_BUILDER'].Index;
 local GOVERNOR_THE_AMBASSADOR_INDEX = GameInfo.Governors['GOVERNOR_THE_AMBASSADOR'].Index;
 
-local GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_2_INDEX = GameInfo.GovernorPromotions['GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_2'].Index;
+local GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_1_INDEX = GameInfo.GovernorPromotions['GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_1'].Index;
 local GOVERNOR_PROMOTION_HD_AMBASSADOR_RIGHT_2_INDEX = GameInfo.GovernorPromotions['GOVERNOR_PROMOTION_HD_AMBASSADOR_RIGHT_2'].Index;
 
 local NOTIFICATION_TRADING_POST_CREATED_HASH = GameInfo.Notifications['NOTIFICATION_TRADING_POST_CREATED'].Hash;
 
-local GOVERNOR_BUILDER_RIGHT_2_WONDER_ENGINEER_PERCENTAGE = GlobalParameters.HD_GOVERNOR_BUILDER_RIGHT_2_WONDER_ENGINEER_PERCENTAGE or 0;
+local GOVERNOR_BUILDER_RIGHT_1_WONDER_ENGINEER_PERCENTAGE = GlobalParameters.HD_GOVERNOR_BUILDER_RIGHT_1_WONDER_ENGINEER_PERCENTAGE or 0;
 local GOVERNOR_MERCHANT_RIGHT_3_TRADE_YIELD_PERCENTAGE_BASE = GlobalParameters.HD_GOVERNOR_MERCHANT_RIGHT_3_TRADE_YIELD_PERCENTAGE_BASE or 0;
 local GOVERNOR_MERCHANT_RIGHT_3_TRADE_YIELD_PERCENTAGE_PER_TRADINGPOST = GlobalParameters.HD_GOVERNOR_MERCHANT_RIGHT_3_TRADE_YIELD_PERCENTAGE_PER_TRADINGPOST or 0;
 local GOVERNOR_AMBASSADOR_RIGHT_2_ENVOY_NUM = GlobalParameters.HD_GOVERNOR_AMBASSADOR_RIGHT_2_ENVOY_NUM or 0;
 
-local GOVERNOR_BUILDER_RIGHT_2_WONDER_RECORD_TAG = 'HD_GOVERNOR_BUILDER_RIGHT_2_WONDER_RECORD';
+local GOVERNOR_BUILDER_RIGHT_1_WONDER_RECORD_TAG = 'HD_GOVERNOR_BUILDER_RIGHT_1_WONDER_RECORD';
+local GOVERNOR_MANAGER_LEFT_1_TRADE_TAG = 'HD_GOVERNOR_MANAGER_LEFT_1_TRADE';
 local GOVERNOR_MERCHANT_RIGHT_3_TRADINGPOST_RECORD_TAG = 'HD_GOVERNOR_MERCHANT_RIGHT_3_TRADINGPOST_RECORD_';
 local GOVERNOR_MERCHANT_RIGHT_3_TRADINGPOST_NUM_TAG = 'HD_GOVERNOR_MERCHANT_RIGHT_3_TRADINGPOST_NUM';
 local GOVERNOR_MERCHANT_RIGHT_3_TRADE_ROUTE_YIELD_LIST_TAG = 'HD_GOVERNOR_MERCHANT_RIGHT_3_TRADE_ROUTE_YIELD_LIST';
@@ -109,7 +110,7 @@ end
 -- 宏伟工程
   -- 完成奇观获得大工点
 function BuilderWonderAddGPP(x, y, buildingId, playerId, cityId, percentComplete)
-  if Utils.CityHasAssignedGovernorPromotion(playerId, cityId, 'GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_2') then
+  if Utils.CityHasAssignedGovernorPromotion(playerId, cityId, 'GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_1') then
     local player = Players[playerId];
     if not player then return; end
 
@@ -118,12 +119,12 @@ function BuilderWonderAddGPP(x, y, buildingId, playerId, cityId, percentComplete
 
     local isNotDummy = GameInfo.HD_DUMMY_BUILDINGS[buildingInfo.BuildingType] == nil;
     if buildingInfo.IsWonder == true and isNotDummy then
-      local amount = math.ceil(buildingInfo.Cost * GOVERNOR_BUILDER_RIGHT_2_WONDER_ENGINEER_PERCENTAGE / 100);
+      local amount = math.ceil(buildingInfo.Cost * GOVERNOR_BUILDER_RIGHT_1_WONDER_ENGINEER_PERCENTAGE / 100);
       player:GetGreatPeoplePoints():ChangePointsTotal(ENGINEER_INDEX, amount);
       Game.AddWorldViewText(playerId, '+' .. amount .. ' [ICON_GreatEngineer]', x, y);
     end
   elseif Utils.CityHasAssignedGovernorPromotion(playerId, cityId, 'GOVERNOR_PROMOTION_HD_BUILDER_BASE') then
-    -- 记录就职后建造的奇观（还未有右三升级）
+    -- 记录就职后建造的奇观（还未有右一升级）
     local city = CityManager.GetCity(playerId, cityId);
     if not city then return; end
 
@@ -132,15 +133,15 @@ function BuilderWonderAddGPP(x, y, buildingId, playerId, cityId, percentComplete
 
     local isNotDummy = GameInfo.HD_DUMMY_BUILDINGS[buildingInfo.BuildingType] == nil;
     if buildingInfo.IsWonder == true and isNotDummy then
-      local amount = math.ceil(buildingInfo.Cost * GOVERNOR_BUILDER_RIGHT_2_WONDER_ENGINEER_PERCENTAGE / 100);
+      local amount = math.ceil(buildingInfo.Cost * GOVERNOR_BUILDER_RIGHT_1_WONDER_ENGINEER_PERCENTAGE / 100);
 
-      local list = city:GetProperty(GOVERNOR_BUILDER_RIGHT_2_WONDER_RECORD_TAG) or {};
+      local list = city:GetProperty(GOVERNOR_BUILDER_RIGHT_1_WONDER_RECORD_TAG) or {};
       table.insert(list, {
         Amount = amount,
         X = x,
         Y = y
       })
-      city:SetProperty(GOVERNOR_BUILDER_RIGHT_2_WONDER_RECORD_TAG, list);
+      city:SetProperty(GOVERNOR_BUILDER_RIGHT_1_WONDER_RECORD_TAG, list);
     end
   end
 end
@@ -148,7 +149,7 @@ Events.WonderCompleted.Add(BuilderWonderAddGPP);
 
   -- 追溯奇观获得大工点
 function BuilderWonderRetrospectGPP(playerId, governorId, promotionId)
-  if governorId == GOVERNOR_THE_BUILDER_INDEX and promotionId == GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_2_INDEX then
+  if governorId == GOVERNOR_THE_BUILDER_INDEX and promotionId == GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_1_INDEX then
     local player = Players[playerId];
     if not player then return; end
 
@@ -157,7 +158,7 @@ function BuilderWonderRetrospectGPP(playerId, governorId, promotionId)
     local city = CityManager.GetCity(playerId, cityId);
     if not city then return; end
 
-    local list = city:GetProperty(GOVERNOR_BUILDER_RIGHT_2_WONDER_RECORD_TAG) or {};
+    local list = city:GetProperty(GOVERNOR_BUILDER_RIGHT_1_WONDER_RECORD_TAG) or {};
     local totalAmount = 0;
     for _, data in ipairs(list) do
       totalAmount = totalAmount + data.Amount;
@@ -167,7 +168,42 @@ function BuilderWonderRetrospectGPP(playerId, governorId, promotionId)
     if totalAmount > 0 then
       player:GetGreatPeoplePoints():ChangePointsTotal(ENGINEER_INDEX, totalAmount);
     end
-    city:SetProperty(GOVERNOR_BUILDER_RIGHT_2_WONDER_RECORD_TAG, {});
+    city:SetProperty(GOVERNOR_BUILDER_RIGHT_1_WONDER_RECORD_TAG, {});
+  end
+end
+
+-- ============================================================================================================================================================
+-- 马格努斯
+-- ============================================================================================================================================================
+-- 盈余物流
+function ManagerRefreshTradeProperty(playerId, cityId)
+  local city = CityManager.GetCity(playerId, cityId);
+  if not city then return; end
+
+  local plot = Map.GetPlot(city:GetX(), city:GetY());
+  if not plot then return; end
+
+  local outgoingRoutes = Utils.GetCityOutgoingRoutes(playerId, cityId);
+  if not outgoingRoutes then return; end
+
+  for _, route in ipairs(outgoingRoutes) do
+    if route.DestinationCityPlayer == playerId then
+      local destinationCity = CityManager.GetCity(route.DestinationCityPlayer, route.DestinationCityID);
+      if Utils.CityHasAssignedGovernorPromotion(route.DestinationCityPlayer, route.DestinationCityID, 'GOVERNOR_PROMOTION_HD_MANAGER_LEFT_1') then
+        -- 获得宜居度
+        if plot:GetProperty(GOVERNOR_MANAGER_LEFT_1_TRADE_TAG) ~= 1 then
+          plot:SetProperty(GOVERNOR_MANAGER_LEFT_1_TRADE_TAG, 1);
+          print(Locale.Lookup(city:GetName()) .. " 马格努斯 盈余物流 获得宜居度");
+          return;
+        end
+      end
+    end
+  end
+
+  -- 重置参数
+  if plot:GetProperty(GOVERNOR_MANAGER_LEFT_1_TRADE_TAG) == 1 then
+    plot:SetProperty(GOVERNOR_MANAGER_LEFT_1_TRADE_TAG, 0);
+    print(Locale.Lookup(city:GetName()) .. " 马格努斯 盈余物流 重置宜居度");
   end
 end
 
@@ -287,6 +323,8 @@ function GovernorRefreshCitySelectionChanged(playerId, cityId)
   EducatorRefreshScientistProperty(playerId, cityId);
   -- 梁右三
   BuilderRefreshEngineerProperty(playerId, cityId);
+  -- 马左一
+  ManagerRefreshTradeProperty(playerId, cityId);
   -- 瑞右三
   MerchantRefreshTradeYieldProperty(playerId, cityId);
 end
@@ -304,6 +342,8 @@ function GovernorRefreshOnGameTurnEnded()
         EducatorRefreshScientistProperty(playerId, city:GetID());
         -- 梁右三
         BuilderRefreshEngineerProperty(playerId, city:GetID());
+        -- 马左一
+        ManagerRefreshTradeProperty(playerId, city:GetID());
         -- 瑞右三
         MerchantRefreshTradeYieldProperty(playerId, city:GetID());
       end
