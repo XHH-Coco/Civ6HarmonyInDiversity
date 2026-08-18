@@ -1778,3 +1778,14 @@ insert or replace into ModifierArguments (ModifierId, Name, Value) values
 	('HD_COLOSSEUM_REGIONAL_CULTURE',	'Amount',	1),
 	('HD_COLOSSEUM_REGIONAL_AMENITY',	'Key',		'HD_SINGLE_BUILDING_PROVIDE_REGIONAL_YIELD_BONUS_BUILDING_COLOSSEUM_AMENITY'),
 	('HD_COLOSSEUM_REGIONAL_AMENITY',	'Amount',	1);
+
+-- 大金字塔
+insert or replace into BuildingModifiers (BuildingType, ModifierId) values
+	('BUILDING_PYRAMIDS',	'HD_PYRAMIDS_PLOT_YIELDS');
+
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) values
+	('HD_PYRAMIDS_PLOT_YIELDS',	'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',	'PLOT_HAS_IMPROVEMENT_CLASSIFICATION_RELIGIOUS_REQUIREMENTS');
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
+	('HD_PYRAMIDS_PLOT_YIELDS',	'YieldType',	'YIELD_CULTURE,YIELD_FAITH'),
+	('HD_PYRAMIDS_PLOT_YIELDS',	'Amount',			'1,1');
