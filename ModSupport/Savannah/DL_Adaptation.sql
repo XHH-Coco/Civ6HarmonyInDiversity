@@ -61,10 +61,7 @@ values
 update Feature_Removes set Yield = 12 where FeatureType = 'FEATURE_JNR_SAVANNAH';
 
 --Movement
-update Features set MovementChange = 0 where FeatureType = 'FEATURE_JNR_SAVANNAH';
-
---SightThroughModifier
-update Features set SightThroughModifier = 0 where FeatureType = 'FEATURE_JNR_SAVANNAH';
+update Features set MovementChange = 0, SightThroughModifier = 0, AddCivic = NULL where FeatureType = 'FEATURE_JNR_SAVANNAH';
 
 --ui
 insert or replace into Improvement_ValidFeatures

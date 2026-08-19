@@ -4,37 +4,76 @@ create table if not exists HD_DUMMY_BUILDINGS (
 	primary key (BuildingType)
 );
 
--- 首都初始城墙
-insert or ignore into Types
-	(Type,									Kind)
-values
-	-- Buildings
-	('BUILDING_WALLS_EARLY',				'KIND_BUILDING');
+insert or ignore into Types (Type, Kind) values
+	-- 首都初始城墙
+	('BUILDING_WALLS_EARLY',																					'KIND_BUILDING'),
+	-- 新市中心建筑
+	('BUILDING_NILOMETER_HD',																					'KIND_BUILDING'),
+	('BUILDING_HD_YUNSHAO_MANSION',																		'KIND_BUILDING'),
+	('BUILDING_HD_YUNSHAO_MANSION_INTERNAL_ONLY',											'KIND_BUILDING'),
+	('BUILDING_HD_TABLES_OF_LAW',																			'KIND_BUILDING'),
+	-- 新圣地建筑
+	('BUILDING_HD_ALCHEMY_ROOM',	        														'KIND_BUILDING'),
+	-- 新学院建筑
+	('BUILDING_HD_DATA_CENTER',																				'KIND_BUILDING'),
+	-- 新商业中心建筑
+	('BUILDING_FAIR',																									'KIND_BUILDING'),
+	-- 新工业区建筑
+	('BUILDING_HD_ELECTRONICS_FACTORY',																'KIND_BUILDING'),
+	('BUILDING_HD_INTERNET_COMPANY',																	'KIND_BUILDING'),
+	-- 新娱乐中心建筑
+	('BUILDING_HD_SALON',																							'KIND_BUILDING'),
+	-- 新社区建筑
+	('BUILDING_HD_VILLA',	        																		'KIND_BUILDING'),
+	('BUILDING_HD_POLICE_STATION',																		'KIND_BUILDING'),
+	('BUILDING_HD_MANSION',																						'KIND_BUILDING'),
+	('BUILDING_HD_BUS_STOP',																					'KIND_BUILDING'),
+	-- 新政府区/外交区建筑
+	('BUILDING_HD_REGIONAL_COUNCIL_CENTER',		          							'KIND_BUILDING'),
+	('BUILDING_HD_HUMAN_RIGHTS_COUNCIL',		            							'KIND_BUILDING'),
+	('BUILDING_HD_MINISTRY_OF_NATIONAL_DEFENSE',	      							'KIND_BUILDING'),
 
+	-- 巴西虚拟建筑
+	('BUILDING_HD_STREET_CARNIVAL_INTERNAL',													'KIND_BUILDING'),
+	('BUILDING_HD_WATER_STREET_CARNIVAL_INTERNAL',										'KIND_BUILDING'),
+	-- 西班牙特色建筑
+	('BUILDING_EL_ESCORIAL_PALACE',																		'KIND_BUILDING'),
+	('TRAIT_LEADER_BUILDING_EL_ESCORIAL_PALACE',											'KIND_TRAIT'),
+	-- 美国特色建筑
+	('BUILDING_HD_WORLD_PARLIAMENT_HEADQUARTERS',	      							'KIND_BUILDING'),
+	('TRAIT_CIVILIZATION_BUILDING_HD_WORLD_PARLIAMENT_HEADQUARTERS',	'KIND_TRAIT');
+
+insert or ignore into Buildings (BuildingType, Name, Description, TraitType, PrereqTech, PrereqCivic, PrereqDistrict,
+	Cost, Housing, Entertainment, Maintenance, OuterDefenseHitPoints, CitizenSlots, RegionalRange, InternalOnly, PurchaseYield, AdvisorType, GovernmentTierRequirement)
+values
+	('BUILDING_HD_SALON', 'LOC_BUILDING_HD_SALON_NAME', 'LOC_BUILDING_HD_SALON_DESCRIPTION', NULL, NULL, 'CIVIC_HUMANISM', 'DISTRICT_ENTERTAINMENT_COMPLEX',
+		300, 0, 2, 4, 0, 0, 6, 0, 'YIELD_GOLD', 'ADVISOR_GENERIC', NULL);
+
+insert or ignore into BuildingPrereqs (Building, PrereqBuilding) values
+	('BUILDING_HD_SALON', 'BUILDING_ARENA'),
+	('BUILDING_STADIUM', 	'BUILDING_HD_SALON');
+
+insert or ignore into MutuallyExclusiveBuildings (Building, MutuallyExclusiveBuilding) values
+	('BUILDING_HD_SALON',	'BUILDING_ZOO'),
+	('BUILDING_ZOO',			'BUILDING_HD_SALON');
+
+update BuildingReplaces set ReplacesBuildingType = 'BUILDING_HD_SALON' where CivUniqueBuildingType = 'BUILDING_THERMAL_BATH';
+
+insert or ignore into Building_GreatWorks (BuildingType, GreatWorkSlotType, NumSlots) values
+	('BUILDING_HD_SALON', 		'GREATWORKSLOT_PALACE', 2),
+	('BUILDING_THERMAL_BATH', 'GREATWORKSLOT_PALACE', 2);
+
+-- ==============================================================================================================================================
 insert or replace into Buildings 
 	(BuildingType, 						Name, 									Cost, 	Description,								InternalOnly,	OuterDefenseHitPoints) 
 values
 	('BUILDING_WALLS_EARLY', 			'LOC_BUILDING_WALLS_EARLY_NAME', 		1, 		'LOC_BUILDING_WALLS_EARLY_DESCRIPTION',		1,				25);
 
-insert or ignore into Types
-	(Type,										Kind)
-values
-	-- 新市中心建筑
-	('BUILDING_NILOMETER_HD',											'KIND_BUILDING'),
-	('BUILDING_HD_YUNSHAO_MANSION',								'KIND_BUILDING'),
-	('BUILDING_HD_YUNSHAO_MANSION_INTERNAL_ONLY',	'KIND_BUILDING'),
-	('BUILDING_HD_ROYAL_COURT',										'KIND_BUILDING'),
-	-- 巴西UD虚拟建筑
-	('BUILDING_HD_STREET_CARNIVAL_INTERNAL',			'KIND_BUILDING'),
-	('BUILDING_HD_WATER_STREET_CARNIVAL_INTERNAL','KIND_BUILDING'),
-	-- 新商业中心建筑
-	('BUILDING_FAIR',															'KIND_BUILDING');
-
 insert or replace into Buildings (BuildingType, Name, Cost, Description, PrereqTech, PrereqCivic, PrereqDistrict, PurchaseYield, Housing) values
 	-- 测量仪
 	('BUILDING_NILOMETER_HD', 'LOC_BUILDING_NILOMETER_HD_NAME', 60, 'LOC_BUILDING_NILOMETER_HD_DESCRIPTION', 'TECH_IRRIGATION', null, 'DISTRICT_CITY_CENTER', 'YIELD_GOLD', null),
 	-- 王廷
-	('BUILDING_HD_ROYAL_COURT', 'LOC_BUILDING_HD_ROYAL_COURT_NAME', 50, 'LOC_BUILDING_HD_ROYAL_COURT_DESCRIPTION', null, 'CIVIC_CODE_OF_LAWS', 'DISTRICT_CITY_CENTER', 'YIELD_GOLD', null),
+	('BUILDING_HD_TABLES_OF_LAW', 'LOC_BUILDING_HD_TABLES_OF_LAW_NAME', 50, 'LOC_BUILDING_HD_TABLES_OF_LAW_DESCRIPTION', null, 'CIVIC_CODE_OF_LAWS', 'DISTRICT_CITY_CENTER', 'YIELD_GOLD', null),
 	-- 云韶府
 	('BUILDING_HD_YUNSHAO_MANSION', 'LOC_BUILDING_HD_YUNSHAO_MANSION_NAME', 0, 'LOC_BUILDING_HD_YUNSHAO_MANSION_DESCRIPTION', NULL, NULL, 'DISTRICT_CITY_CENTER',	NULL, 0),
 	('BUILDING_HD_YUNSHAO_MANSION_INTERNAL_ONLY', 'LOC_BUILDING_HD_YUNSHAO_MANSION_INTERNAL_ONLY_NAME', 0, NULL, NULL, NULL, NULL, NULL, 0);
@@ -55,12 +94,12 @@ update Buildings set Maintenance = 1 where BuildingType in (
 );
 update Buildings set MaxPlayerInstances = 1, MustPurchase = 1 where BuildingType = 'BUILDING_HD_YUNSHAO_MANSION';
 update Buildings set InternalOnly = 1 where BuildingType = 'BUILDING_HD_YUNSHAO_MANSION_INTERNAL_ONLY';
-update Buildings set MaxPlayerInstances = 1 where BuildingType = 'BUILDING_HD_ROYAL_COURT';
+update Buildings set MaxPlayerInstances = 1 where BuildingType = 'BUILDING_HD_TABLES_OF_LAW';
 
 insert or ignore into BuildingPrereqs
 	(Building,												PrereqBuilding)
 values
-	('BUILDING_HD_ROYAL_COURT',				'BUILDING_PALACE'),
+	('BUILDING_HD_TABLES_OF_LAW',			'BUILDING_PALACE'),
 	('BUILDING_HD_YUNSHAO_MANSION',		'BUILDING_HD_YUNSHAO_MANSION_INTERNAL_ONLY'),
 	('BUILDING_MARKET',								'BUILDING_FAIR');
 
@@ -84,7 +123,7 @@ values
 	('BUILDING_HD_YUNSHAO_MANSION', 'GREATWORKSLOT_MUSIC', 	6,				1,										 100,										 100,											'LOC_BUILDING_THEMINGBONUS_HD_YUNSHAO_MANSION');
 
 insert or replace into Buildings_XP2 (BuildingType, Pillage) values
-	('BUILDING_HD_ROYAL_COURT',	0),
+	('BUILDING_HD_TABLES_OF_LAW',	0),
 	('BUILDING_HD_YUNSHAO_MANSION',	0),
 	('BUILDING_HD_STREET_CARNIVAL_INTERNAL',	0),
 	('BUILDING_HD_WATER_STREET_CARNIVAL_INTERNAL',	0);
@@ -95,22 +134,13 @@ insert or replace into HD_DUMMY_BUILDINGS (BuildingType) values
 	('BUILDING_HD_STREET_CARNIVAL_INTERNAL'),
 	('BUILDING_HD_WATER_STREET_CARNIVAL_INTERNAL');
 
--- 新社区建筑
-insert or ignore into Types
-	(Type,																		Kind)
-values
-	('BUILDING_HD_VILLA',	        						'KIND_BUILDING'),
-	('BUILDING_HD_POLICE_STATION',						'KIND_BUILDING'),
-	('BUILDING_HD_MANSION',										'KIND_BUILDING'),
-	('BUILDING_HD_BUS_STOP',									'KIND_BUILDING');
-
 insert or ignore into Buildings
-	(BuildingType,														PrereqDistrict,						PrereqCivic,															Cost,	Maintenance,	CitizenSlots,	Housing,		PurchaseYield,		AdvisorType,					Name,																						Description)
+	(BuildingType,														PrereqDistrict,										PrereqCivic,															Cost,	Maintenance,	CitizenSlots,	Housing,		PurchaseYield,		AdvisorType,					Name,																						Description)
 values
-	('BUILDING_HD_VILLA',											'DISTRICT_NEIGHBORHOOD',	'CIVIC_HOUSEHOLD_REGISTRATION_HD',				140,	1,						1,						1,					'YIELD_GOLD',			'ADVISOR_RELIGIOUS',	'LOC_BUILDING_HD_VILLA_NAME',				'LOC_BUILDING_HD_VILLA_DESCRIPTION'),
-	('BUILDING_HD_POLICE_STATION',						'DISTRICT_CITY_CENTER',		'CIVIC_POLICE_SYSTEM_HD',									220,	4,						0,						1,					'YIELD_GOLD',			'ADVISOR_GENERIC',		'LOC_BUILDING_HD_POLICE_STATION_NAME',					'LOC_BUILDING_HD_POLICE_STATION_DESCRIPTION'),
-	('BUILDING_HD_MANSION',										'DISTRICT_NEIGHBORHOOD',	'CIVIC_COMMERCIAL_CAPITALISM_HD',					400,	7,						2,						2,					null,							'ADVISOR_GENERIC',		'LOC_BUILDING_HD_MANSION_NAME',									'LOC_BUILDING_HD_MANSION_DESCRIPTION'),
-	('BUILDING_HD_BUS_STOP',									'DISTRICT_NEIGHBORHOOD',	'CIVIC_SOCIAL_SCIENCE_HD',								220,	4,						1,						0,					'YIELD_GOLD',			'ADVISOR_GENERIC',		'LOC_BUILDING_HD_BUS_STOP_NAME',								'LOC_BUILDING_HD_BUS_STOP_DESCRIPTION');
+	('BUILDING_HD_VILLA',											'DISTRICT_NEIGHBORHOOD',					'CIVIC_HOUSEHOLD_REGISTRATION_HD',				140,	1,						1,						1,					'YIELD_GOLD',			'ADVISOR_RELIGIOUS',	'LOC_BUILDING_HD_VILLA_NAME',				'LOC_BUILDING_HD_VILLA_DESCRIPTION'),
+	('BUILDING_HD_POLICE_STATION',						'DISTRICT_CITY_CENTER',						'CIVIC_POLICE_SYSTEM_HD',									220,	4,						0,						1,					'YIELD_GOLD',			'ADVISOR_GENERIC',		'LOC_BUILDING_HD_POLICE_STATION_NAME',					'LOC_BUILDING_HD_POLICE_STATION_DESCRIPTION'),
+	('BUILDING_HD_MANSION',										'DISTRICT_NEIGHBORHOOD',					'CIVIC_COMMERCIAL_CAPITALISM_HD',					400,	7,						2,						2,					null,							'ADVISOR_GENERIC',		'LOC_BUILDING_HD_MANSION_NAME',									'LOC_BUILDING_HD_MANSION_DESCRIPTION'),
+	('BUILDING_HD_BUS_STOP',									'DISTRICT_NEIGHBORHOOD',					'CIVIC_SOCIAL_SCIENCE_HD',								220,	4,						1,						0,					'YIELD_GOLD',			'ADVISOR_GENERIC',		'LOC_BUILDING_HD_BUS_STOP_NAME',								'LOC_BUILDING_HD_BUS_STOP_DESCRIPTION');
 update Buildings set MaxPlayerInstances = 1 where BuildingType = 'BUILDING_HD_MANSION';
 
 insert or ignore into BuildingPrereqs
@@ -127,12 +157,6 @@ insert or replace into Building_GreatWorks
 values
 	('BUILDING_HD_VILLA',										'GREATWORKSLOT_PALACE',				2),
 	('BUILDING_HD_MANSION',									'GREATWORKSLOT_PALACE',				3);
-
--- 新学院建筑
-insert or ignore into Types
-	(Type,																		Kind)
-values
-	('BUILDING_HD_DATA_CENTER',								'KIND_BUILDING');
 
 insert or ignore into Buildings
 	(BuildingType,														PrereqDistrict,			PrereqTech,											PrereqCivic,				  Cost,	Maintenance,	CitizenSlots,	PurchaseYield,		AdvisorType,						Name,																						Description)
@@ -154,12 +178,6 @@ insert or ignore into Buildings_XP2
 	(BuildingType,                  					RequiredPower)
 values
 	('BUILDING_HD_DATA_CENTER',								10);
-
--- 新圣地建筑
-insert or ignore into Types
-	(Type,																		Kind)
-values
-	('BUILDING_HD_ALCHEMY_ROOM',	        		'KIND_BUILDING');
 
 insert or ignore into Buildings
 	(BuildingType,								PrereqDistrict,				PrereqTech,				  	Cost,	Maintenance,	CitizenSlots,	PurchaseYield,		AdvisorType,					Name,																	Description)
@@ -212,13 +230,6 @@ insert or replace into Building_GreatWorks
 values
 	('BUILDING_HD_ALCHEMY_ROOM',			'GREATWORKSLOT_WRITING',			1);
 
--- 西班牙LB
-insert or ignore into Types
-	(Type,																					Kind)
-values
-	('BUILDING_EL_ESCORIAL_PALACE',									'KIND_BUILDING'),
-	('TRAIT_LEADER_BUILDING_EL_ESCORIAL_PALACE',		'KIND_TRAIT');
-
 insert or ignore into Traits
 	(TraitType,																		Name)
 values
@@ -263,13 +274,6 @@ delete from BuildingReplaces where CivUniqueBuildingType = 'BUILDING_ELECTRONICS
 delete from Building_YieldChangesBonusWithPower where BuildingType = 'BUILDING_ELECTRONICS_FACTORY';
 delete from BuildingModifiers where BuildingType = 'BUILDING_ELECTRONICS_FACTORY';
 delete from MomentIllustrations where GameDataType = 'BUILDING_ELECTRONICS_FACTORY';
-
-	-- 定义新建筑
-insert or ignore into Types
-	(Type,																					Kind)
-values
-	('BUILDING_HD_ELECTRONICS_FACTORY',							'KIND_BUILDING'),
-	('BUILDING_HD_INTERNET_COMPANY',								'KIND_BUILDING');
 
 insert or replace into Buildings
 	(BuildingType,                      PrereqDistrict,             PrereqTech,         Cost, Maintenance, CitizenSlots, PurchaseYield, AdvisorType,       Name,                                       Description)
@@ -366,17 +370,6 @@ where exists (select LeaderType from Leaders where LeaderType = 'LEADER_SEJONG')
 
 insert or replace into HD_DUMMY_BUILDINGS (BuildingType) select BuildingType
 	from Buildings where BuildingType in ('BUILDING_SEOWON');
-
--- 新政府区/外交区建筑
-insert or ignore into Types
-	(Type,								                        			Kind)
-values
-	('BUILDING_HD_REGIONAL_COUNCIL_CENTER',		          'KIND_BUILDING'),
-	('BUILDING_HD_WORLD_PARLIAMENT_HEADQUARTERS',	      'KIND_BUILDING'),
-	('BUILDING_HD_HUMAN_RIGHTS_COUNCIL',		            'KIND_BUILDING'),
-	('BUILDING_HD_MINISTRY_OF_NATIONAL_DEFENSE',	      'KIND_BUILDING'),
-	-- 特质
-	('TRAIT_CIVILIZATION_BUILDING_HD_WORLD_PARLIAMENT_HEADQUARTERS',	'KIND_TRAIT');
 
 insert or ignore into Traits
 	(TraitType, 																										Name,																																			Description)

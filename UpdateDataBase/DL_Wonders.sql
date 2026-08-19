@@ -33,7 +33,7 @@ update Buildings set Cost = 750, Coast = 1 where BuildingType = 'BUILDING_KOTOKU
 update Buildings set Cost = 750 where BuildingType = 'BUILDING_MACHU_PICCHU';
 update Buildings set Cost = 750 where BuildingType = 'BUILDING_MEENAKSHI_TEMPLE';
 update Buildings set Cost = 750 where BuildingType = 'BUILDING_UNIVERSITY_SANKORE';
-update Buildings set Cost = 750, PrereqTech = 'TECH_APPRENTICESHIP' where BuildingType = 'BUILDING_VENETIAN_ARSENAL';
+update Buildings set Cost = 750, PrereqTech = 'TECH_SQUARE_SAIL_HD' where BuildingType = 'BUILDING_VENETIAN_ARSENAL';
 update Buildings set Cost = 1000 where BuildingType = 'BUILDING_FORBIDDEN_CITY';
 update Buildings set Cost = 1000, RequiresReligion = 1 where BuildingType = 'BUILDING_ST_BASILS_CATHEDRAL';
 update Buildings set Cost = 1000 where BuildingType = 'BUILDING_TAJ_MAHAL';
