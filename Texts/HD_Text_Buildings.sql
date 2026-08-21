@@ -130,7 +130,7 @@ values
     ("LOC_BUILDING_ZOO_EXPANSION1_DESCRIPTION",                   "+1 [ICON_Culture] Culture and +6 [ICON_Gold] Gold from every Leather, Transit or Beast Resource you controlled."),
     ("LOC_BUILDING_HD_SALON_NAME",                                "Salon"),
     ("LOC_BUILDING_HD_SALON_DESCRIPTION",                         "Provide corresponding regional yield from each type of adjacent districts. If you have at least 2 Beverage Resources, +1 [ICON_Culture] Culture for regional yield."),
-    ("LOC_BUILDING_THERMAL_BATH_DESCRIPTION",                     "Building unique to Hungary. If you have at least 2 Medicine Resources, +2 [ICON_Science] Science for regional yield. If you have at least 2 Flue Resources, +1 regional range tile."),
+    ("LOC_BUILDING_THERMAL_BATH_DESCRIPTION",                     "Building unique to Hungary. If you have at least 2 Medicine Resources, +2 [ICON_Science] Science for regional yield. If you have at least 2 Fuel Resources, +1 regional range tile."),
     -- Water Entertainment Complex
     ("LOC_BUILDING_FERRIS_WHEEL_DESCRIPTION_HD",                  "+3 [ICON_Tourism] Tourism."),
     ("LOC_BUILDING_AQUATICS_CENTER_DL_DESCRIPTION",               "+2 [ICON_Tourism] Tourism for each Wonder built in this city on or adjacent to a Shallow Sea tile."),
