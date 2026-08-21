@@ -198,15 +198,6 @@ delete from Adjacency_YieldChanges where ID in (
 insert or replace into Improvement_Adjacencies
 	(ImprovementType,				YieldChangeId)
 values
-	('IMPROVEMENT_LUMBER_MILL',		'Lumber_Mill_Industrial_Production'),
-	('IMPROVEMENT_MINE',			'Mine_Industrial_Production'),
-	('IMPROVEMENT_QUARRY',			'Quarry_Industrial_Production'),
-	('IMPROVEMENT_PLANTATION',		'Plantation_Commercial_Gold'),
-	('IMPROVEMENT_PLANTATION',		'Plantation_Suguba_Gold'),
-	('IMPROVEMENT_PASTURE',			'Pasture_Commercial_Gold'),
-	('IMPROVEMENT_PASTURE',			'Pasture_Suguba_Gold'),
-	('IMPROVEMENT_CAMP',			'Camp_Commercial_Gold'),
-	('IMPROVEMENT_CAMP',			'Camp_Suguba_Gold'),
 	('IMPROVEMENT_FISHERY',			'Fishery_Production_from_Fishing_Boat'),
 	('IMPROVEMENT_FISHERY',			'Fishery_Food_from_Fishery'),
 
@@ -240,28 +231,6 @@ insert or replace into Adjacency_YieldChanges (ID, Description, YieldType, Yield
 	('HD_Golf_District_Production',	'Placeholder', 'YIELD_PRODUCTION',	1, 1, 0),
 	('HD_Golf_District_Gold',				'Placeholder', 'YIELD_GOLD',				3, 1, 0),
 	('HD_Golf_Wonder_Culture',			'Placeholder', 'YIELD_CULTURE',			2, 0, 1);
-
-insert or replace into Adjacency_YieldChanges
-	(ID,										Description,	YieldType,			YieldChange,	AdjacentDistrict)
-values
-	('Lumber_Mill_Industrial_Production',		'Placeholder',	'YIELD_PRODUCTION',	1,				'DISTRICT_INDUSTRIAL_ZONE'),
-	('Mine_Industrial_Production',				'Placeholder',	'YIELD_PRODUCTION',	1,				'DISTRICT_INDUSTRIAL_ZONE'),
-	('Quarry_Industrial_Production',			'Placeholder',	'YIELD_PRODUCTION',	1,				'DISTRICT_INDUSTRIAL_ZONE'),
-	('Plantation_Commercial_Gold', 				'Placeholder',	'YIELD_GOLD',		3,				'DISTRICT_COMMERCIAL_HUB'),
-	('Plantation_Suguba_Gold', 					'Placeholder',	'YIELD_GOLD',		3,				'DISTRICT_SUGUBA'),
-	('Pasture_Commercial_Gold', 				'Placeholder',	'YIELD_GOLD',		3,				'DISTRICT_COMMERCIAL_HUB'),
-	('Pasture_Suguba_Gold', 					'Placeholder',	'YIELD_GOLD',		3,				'DISTRICT_SUGUBA'),
-	('Camp_Commercial_Gold', 					'Placeholder',	'YIELD_GOLD',		3,				'DISTRICT_COMMERCIAL_HUB'),
-	('Camp_Suguba_Gold', 						'Placeholder',	'YIELD_GOLD',		3,				'DISTRICT_SUGUBA');
-
-update Adjacency_YieldChanges set PrereqTech = 'TECH_CURRENCY' where ID in (
-	'Plantation_Commercial_Gold',
-	'Plantation_Suguba_Gold',
-	'Pasture_Commercial_Gold',
-	'Pasture_Suguba_Gold',
-	'Camp_Commercial_Gold',
-	'Camp_Suguba_Gold'
-);
 
 insert or replace into Adjacency_YieldChanges
 	(ID,																	Description,		YieldType,						YieldChange,	AdjacentDistrict,				PrereqTech,		        PrereqCivic)
@@ -1537,23 +1506,11 @@ insert or replace into Adjacency_YieldChanges (ID, Description, YieldType, Yield
 
 insert or replace into Improvement_Adjacencies (ImprovementType, YieldChangeId) select
 	'IMPROVEMENT_CITY_PARK', 'HD_CITY_PARK_' || DistrictType || '_GOLD'
-from Districts where DistrictType in ('DISTRICT_CITY_CENTER', 'DISTRICT_NEIGHBORHOOD')
-	or DistrictType in (select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType in ('DISTRICT_CITY_CENTER', 'DISTRICT_NEIGHBORHOOD'));
+from Districts where DistrictType in ('DISTRICT_CITY_CENTER');
 
 insert or replace into Adjacency_YieldChanges (ID, Description, YieldType, YieldChange, TilesRequired, AdjacentDistrict) select
 	'HD_CITY_PARK_' || DistrictType || '_GOLD', 'Placeholder', 'YIELD_GOLD', 3, 1, DistrictType
-from Districts where DistrictType in ('DISTRICT_CITY_CENTER', 'DISTRICT_NEIGHBORHOOD')
-	or DistrictType in (select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType in ('DISTRICT_CITY_CENTER', 'DISTRICT_NEIGHBORHOOD'));
-
-insert or replace into Improvement_Adjacencies (ImprovementType, YieldChangeId) select
-	'IMPROVEMENT_CITY_PARK', 'HD_CITY_PARK_' || DistrictType || '_CULTURE'
-from Districts where DistrictType in ('DISTRICT_ENTERTAINMENT_COMPLEX')
-	or DistrictType in (select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType in ('DISTRICT_ENTERTAINMENT_COMPLEX'));
-
-insert or replace into Adjacency_YieldChanges (ID, Description, YieldType, YieldChange, TilesRequired, AdjacentDistrict) select
-	'HD_CITY_PARK_' || DistrictType || '_CULTURE', 'Placeholder', 'YIELD_CULTURE', 1, 1, DistrictType
-from Districts where DistrictType in ('DISTRICT_ENTERTAINMENT_COMPLEX')
-	or DistrictType in (select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType in ('DISTRICT_ENTERTAINMENT_COMPLEX'));
+from Districts where DistrictType in ('DISTRICT_CITY_CENTER');
 
 insert or replace into Improvement_Adjacencies (ImprovementType, YieldChangeId) select
 	'IMPROVEMENT_CITY_PARK', 'HD_CITY_PARK_' || DistrictType || '_FOOD'

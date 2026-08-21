@@ -338,13 +338,13 @@ insert or replace into Adjacency_YieldChanges (ID, Description, YieldType, Yield
 
 insert or replace into Improvement_Adjacencies (ImprovementType, YieldChangeId) select
 	'IMPROVEMENT_TRADING_DOME', 'HD_TRADING_DOME_GOLD_' || DistrictType
-from Districts where DistrictType in ('DISTRICT_HARBOR', 'DISTRICT_COMMERCIAL_HUB', 'DISTRICT_AERODROME', 'DISTRICT_CANAL') or
-	DistrictType in (select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType in ('DISTRICT_HARBOR', 'DISTRICT_COMMERCIAL_HUB', 'DISTRICT_AERODROME', 'DISTRICT_CANAL'));
+from Districts where DistrictType in ('DISTRICT_AERODROME', 'DISTRICT_CANAL') or
+	DistrictType in (select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType in ('DISTRICT_AERODROME', 'DISTRICT_CANAL'));
 
 insert or replace into Adjacency_YieldChanges (ID, Description, YieldType, YieldChange, AdjacentDistrict) select
 	'HD_TRADING_DOME_GOLD_' || DistrictType, 'Placeholder', 'YIELD_GOLD', 2, DistrictType
-from Districts where DistrictType in ('DISTRICT_HARBOR', 'DISTRICT_COMMERCIAL_HUB', 'DISTRICT_AERODROME', 'DISTRICT_CANAL') or
-	DistrictType in (select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType in ('DISTRICT_HARBOR', 'DISTRICT_COMMERCIAL_HUB', 'DISTRICT_AERODROME', 'DISTRICT_CANAL'));
+from Districts where DistrictType in ('DISTRICT_AERODROME', 'DISTRICT_CANAL') or
+	DistrictType in (select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType in ('DISTRICT_AERODROME', 'DISTRICT_CANAL'));
 
 insert or ignore into ImprovementModifiers (ImprovementType, ModifierId) values
 	('IMPROVEMENT_TRADING_DOME', 'HD_TRADING_DOME_BONUS_TRADE_ROUTE_DOMESTIC_ORIGIN'),

@@ -24,7 +24,7 @@ values
 	('IMPROVEMENT_PASTURE',				'HD_Pasture_Outback_Gold'),
 	('IMPROVEMENT_PASTURE',				'HD_Pasture_Outback_Production'),
 	('IMPROVEMENT_PASTURE',				'HD_Outback_Adjacent_Gold'),
-	('IMPROVEMENT_PASTURE',				'HD_Outback_Adjacent_Science'),
+	('IMPROVEMENT_PASTURE',				'HD_Outback_Adjacent_Production'),
 	-- 内陆牧场
 	('IMPROVEMENT_OUTBACK_STATION',		'HD_Outback_Pasture_Food_1'),
 	('IMPROVEMENT_OUTBACK_STATION',		'HD_Outback_Pasture_Food_2'),
@@ -32,7 +32,7 @@ values
 	('IMPROVEMENT_OUTBACK_STATION',		'HD_Outback_Outback_Production_1'),
 	('IMPROVEMENT_OUTBACK_STATION',		'HD_Outback_Outback_Production_2'),
 	('IMPROVEMENT_OUTBACK_STATION',		'HD_Outback_Outback_Production_3'),
-	('IMPROVEMENT_OUTBACK_STATION',		'HD_Outback_Adjacent_Science'),
+	('IMPROVEMENT_OUTBACK_STATION',		'HD_Outback_Adjacent_Production'),
 	('IMPROVEMENT_OUTBACK_STATION',		'HD_Outback_Adjacent_Gold');
 
 insert or replace into Adjacency_YieldChanges
@@ -49,7 +49,7 @@ values
 	('HD_Outback_Outback_Production_2',		'Placeholder',	'YIELD_PRODUCTION',	1,						1,							'IMPROVEMENT_OUTBACK_STATION',	null,												'TECH_STEAM_POWER',							null,							null),
 	('HD_Outback_Outback_Production_3',		'Placeholder',	'YIELD_PRODUCTION',	1,						1,							'IMPROVEMENT_OUTBACK_STATION',	'CIVIC_URBAN_DESIGN_HD',		null,														null,							null),
 	('HD_Outback_Adjacent_Gold',					'Placeholder',	'YIELD_GOLD',				3,						1,							'IMPROVEMENT_OUTBACK_STATION',	'CIVIC_NEOCOLONIALISM_HD',	null,														null,							null),
-	('HD_Outback_Adjacent_Science',				'Placeholder',	'YIELD_SCIENCE',		1,						1,							'IMPROVEMENT_OUTBACK_STATION',	null,												'TECH_GENETIC_ENGINEERING_HD',	null,							null);
+	('HD_Outback_Adjacent_Production',		'Placeholder',	'YIELD_PRODUCTION',	1,						1,							'IMPROVEMENT_OUTBACK_STATION',	null,												'TECH_GENETIC_ENGINEERING_HD',	null,							null);
 
 insert or replace into GlobalParameters (Name, Value) values
   ('HD_OUTBACK_STATION_COPY_RESOURCE', 1);

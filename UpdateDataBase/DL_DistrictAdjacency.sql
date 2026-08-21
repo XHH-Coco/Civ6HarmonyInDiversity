@@ -30,8 +30,6 @@ as (values
 	('DISTRICT_ENCAMPMENT',				'HD_Strategic_Production'),
 	('DISTRICT_ENCAMPMENT',				'Government_Production'),
 	('DISTRICT_ENCAMPMENT',				'Hansa_Production'),
-	('DISTRICT_HOLY_SITE',				'Neighborhood_Faith'),
-	('DISTRICT_HOLY_SITE',				'Mbanza_Faith'),
 	('DISTRICT_CAMPUS',					'City_Center_Science'),
 	('DISTRICT_CAMPUS',					'Marsh_Science'),
 	('DISTRICT_CAMPUS',					'Jungle_Science_Late'),
@@ -48,8 +46,6 @@ as (values
 	('DISTRICT_MBANZA',					'Bonus_Production'),
 	('DISTRICT_MBANZA',					'Luxury_Gold'),
 	('DISTRICT_MBANZA',					'Strategic_Science'),
---	('DISTRICT_HIPPODROME',				'Holy_Site_Culture'),
---	('DISTRICT_HIPPODROME',				'Lavra_Culture'),
 	('DISTRICT_THANH',					'District_Production_HD'),
 	('DISTRICT_OBSERVATORY',			'Luxury_Science'),
 	('DISTRICT_OBSERVATORY',			'Luxury_Science_Late'),
@@ -118,11 +114,7 @@ values
 	('Canal_Gold',							'LOC_DISTRICT_CANAL_GOLD',						'YIELD_GOLD',		3,				'DISTRICT_CANAL'),
 	('City_Center_Culture',					'LOC_DISTRICT_CITY_CENTER_CULTURE',				'YIELD_CULTURE',	2,				'DISTRICT_CITY_CENTER'),
 	('City_Center_Science',					'LOC_DISTRICT_CITY_CENTER_SCIENCE',				'YIELD_SCIENCE',	1,				'DISTRICT_CITY_CENTER'),
-	('City_center_Production',				'LOC_DISTRICT_CITY_CENTER_PRODUCTION',			'YIELD_PRODUCTION', 1,				'DISTRICT_CITY_CENTER'),
-	('Neighborhood_Faith',					'LOC_DISTRICT_NEIGHBORHOOD_FAITH',				'YIELD_FAITH',		2,				'DISTRICT_NEIGHBORHOOD'),
-	('Mbanza_Faith',						'LOC_DISTRICT_MBANZA_FAITH',					'YIELD_FAITH',		2,				'DISTRICT_MBANZA'),
-	('Holy_Site_Culture',					'LOC_DISTRICT_HOLY_SITE_CULTURE',				'YIELD_CULTURE',	2,				'DISTRICT_HOLY_SITE'),
-	('Lavra_Culture',						'LOC_DISTRICT_LAVRA_CULTURE',					'YIELD_CULTURE',	2,				'DISTRICT_LAVRA');
+	('City_center_Production',				'LOC_DISTRICT_CITY_CENTER_PRODUCTION',			'YIELD_PRODUCTION', 1,				'DISTRICT_CITY_CENTER');
 insert or replace into Adjacency_YieldChanges
 	(ID,									Description,									YieldType,			YieldChange,	TilesRequired,	OtherDistrictAdjacent)
 values

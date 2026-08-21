@@ -1166,7 +1166,7 @@ function PrintBinaryCompressKeyData()
 		end
 	end
 end
-PrintBinaryCompressKeyData();
+-- PrintBinaryCompressKeyData();
 
 -- 缓存城邦资源
 local CityStateResourceMap = {};
