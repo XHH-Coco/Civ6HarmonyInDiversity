@@ -189,7 +189,7 @@ insert or replace into HD_Building_Base_On_ResourceClassification (BuildingType,
 
 insert or replace into HD_Binary_Compress_Keys (Key, MaxExp) values
 	('HD_PLOT_BINARY_COMPRESS_RESOURCE_EPO', 	6),
-	('HD_PLOT_BINARY_COMPRESS_SPECIES_EPO', 	6);
+	('HD_PLOT_BINARY_COMPRESS_SPECIES_EPO', 	7);
 
 -- 资源
 insert or replace into BuildingModifiers (BuildingType, ModifierId)
@@ -235,43 +235,43 @@ insert or replace into ModifierArguments (ModifierId, Name, Value)
 -- 物种
 insert or replace into BuildingModifiers (BuildingType, ModifierId)
 	select 'BUILDING_HD_SPECIES_EPO', 'HD_SPECIES_EPO_CULTURE_' || Exp
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 8;
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId)
 	select 'HD_SPECIES_EPO_CULTURE_' || Exp, 'MODIFIER_BUILDING_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_SPECIES_EPO_' || Exp || '_REQUIREMENTS'
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 8;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_SPECIES_EPO_CULTURE_' || Exp, 'BuildingType', 'BUILDING_HD_SPECIES_EPO'
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 8;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_SPECIES_EPO_CULTURE_' || Exp, 'YieldType', 'YIELD_CULTURE'
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 8;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_SPECIES_EPO_CULTURE_' || Exp, 'Amount', Amount * 4
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 8;
 
 insert or replace into BuildingModifiers (BuildingType, ModifierId)
 	select 'BUILDING_HD_SPECIES_EPO', 'HD_SPECIES_EPO_FOOD_' || Exp
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 8;
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId)
 	select 'HD_SPECIES_EPO_FOOD_' || Exp, 'MODIFIER_BUILDING_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_SPECIES_EPO_' || Exp || '_REQUIREMENTS'
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 8;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_SPECIES_EPO_FOOD_' || Exp, 'BuildingType', 'BUILDING_HD_SPECIES_EPO'
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 8;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_SPECIES_EPO_FOOD_' || Exp, 'YieldType', 'YIELD_FOOD'
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 8;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_SPECIES_EPO_FOOD_' || Exp, 'Amount', Amount * 4
-	from HD_Binary_Compress where Exp < 7;
+	from HD_Binary_Compress where Exp < 8;
 
 -- 名胜
 insert or replace into BuildingModifiers (BuildingType, ModifierId)

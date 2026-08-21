@@ -1158,11 +1158,15 @@ function PrintBinaryCompressKeyData()
 			print('资源用途：' .. data.ClassificationName);
 			print('资源数量：' .. data.ResourceNum);
 			print('原本指数：' .. data.PreMaxExp);
-			print('原本上限：' .. (math.pow(2, data.PreMaxExp + 1) - 1));
+			local preMax = math.pow(2, data.PreMaxExp + 1) - 1;
+			print('原本上限：' .. preMax);
+			if data.ResourceNum > preMax then
+				print('WARNING 已超过上限');
+			end
 		end
 	end
 end
--- PrintBinaryCompressKeyData();
+PrintBinaryCompressKeyData();
 
 -- 缓存城邦资源
 local CityStateResourceMap = {};
