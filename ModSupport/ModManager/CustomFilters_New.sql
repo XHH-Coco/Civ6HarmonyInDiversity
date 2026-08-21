@@ -138,7 +138,7 @@ insert or replace into EnglishText (Tag, Text) values
 		37fdca0b-9275-4235-9c18-c7ec348f930e,
 		78aa4d0b-742a-4d7a-be7d-a8317d69fb30,
 		664d17a5-f3be-493a-9332-8e20da1166fa,
-		7d2d70b8-f2ec-4248-a06b-7004018b321d
+		9018a348-589d-44ac-afb9-e7a400e2e90f
 	"),
 	-- 内容拓展
 	("LOC_CONTENT_EXTENSION_LIST", "

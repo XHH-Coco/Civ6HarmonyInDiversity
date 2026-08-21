@@ -44,7 +44,7 @@
             Description="LOC_UNIT_SAPPER_DESCRIPTION" 
             PurchaseYield="YIELD_GOLD" 
             BuildCharges="3" 
-            PrereqTech="TECH_IRON_WORKING"/>
+            PrereqTech="TECH_BRONZE_WORKING"/>
         <Row 
             UnitType="UNIT_ENGINEER_CORP" 
             Cost="220" 

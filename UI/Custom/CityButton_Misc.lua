@@ -11,6 +11,7 @@ local GOVERNOR_MERCHANT_RIGHT_3_TRADE_YIELD_PERCENTAGE_PER_TRADINGPOST = GlobalP
 local MAGNANIMOUS_COMPLETE_DISTRICT_BUILDING_TAG = 'HD_MAGNANIMOUS_COMPLETE_DISTRICT_BUILDING';
 local GOVERNOR_MERCHANT_RIGHT_3_TRADINGPOST_NUM_TAG = 'HD_GOVERNOR_MERCHANT_RIGHT_3_TRADINGPOST_NUM';
 local GOVERNOR_MERCHANT_RIGHT_3_TRADE_ROUTE_YIELD_LIST_TAG = 'HD_GOVERNOR_MERCHANT_RIGHT_3_TRADE_ROUTE_YIELD_LIST';
+local BATCH_PRODUCTS_PROJECT_PRODUCTION_TAG = 'HD_BATCH_PRODUCTS_PROJECT_PRODUCTION';
 -- ===========================================================================
 -- Base Functions
 -- ===========================================================================
@@ -44,6 +45,13 @@ function MiscButtonReset()
           text = text .. '[NEWLINE][ICON_BULLET]+' .. math.floor(yieldList[row.Index] or 0) .. ' ' .. row.IconString .. ' ' .. Locale.Lookup(row.Name);
         end
 
+        table.insert(textList, text);
+      end
+
+      -- 大产品项目
+      local batchProductsProjectProduction = Utils.GetCityProperty(playerId, city:GetID(), BATCH_PRODUCTS_PROJECT_PRODUCTION_TAG) or 0;
+      if batchProductsProjectProduction > 0 then
+        local text = Locale.Lookup('LOC_HD_BATCH_PRODUCTS_PROJECT_TEXT', batchProductsProjectProduction);
         table.insert(textList, text);
       end
       

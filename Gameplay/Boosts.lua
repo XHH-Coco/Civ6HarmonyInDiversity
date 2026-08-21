@@ -148,6 +148,9 @@ local STEEL_BOOST_TAG_COAL = 'HD_SteelBoost_Coal'
 local TEXTILE_HD_INDEX = GameInfo.Technologies['TECH_TEXTILE_HD'].Index;
 local RECORDED_HISTORY_INDEX = GameInfo.Civics['CIVIC_RECORDED_HISTORY'].Index;
 local ASTRONOMY_INDEX = GameInfo.Technologies['TECH_ASTRONOMY'].Index;
+local SOCIAL_SECURITY_SYSTEM_INDEX = GameInfo.Civics['CIVIC_SOCIAL_SECURITY_SYSTEM_HD'].Index;
+local BUILDING_SEWER = GameInfo.Buildings['BUILDING_SEWER'];
+local BUILDING_JNR_HOSPITIUM = GameInfo.Buildings['BUILDING_JNR_HOSPITIUM'];
 function BuildingConstructedBoost(playerId, cityId, buildingId, plotId, bOriginalConstruction)
 	local player = Players[playerId];
 	local building = GameInfo.Buildings[buildingId];
@@ -246,6 +249,23 @@ function BuildingConstructedBoost(playerId, cityId, buildingId, plotId, bOrigina
       if (building.BuildingType == 'BUILDING_JNR_GRAND_HOTEL') then
         if Utils.HasBuildingWithinCountry(playerId, BUILDING_SHOPPING_MALL.Index) then
           player:GetCulture():TriggerBoost(FINANCE_INDEX);
+        end
+      end
+    end
+  end
+
+  -- 社会保障制度
+  if BUILDING_JNR_HOSPITIUM ~= nil then
+    if not player:GetCulture():HasBoostBeenTriggered(SOCIAL_SECURITY_SYSTEM_INDEX) then
+      if (building.BuildingType == 'BUILDING_SEWER') then
+        if Utils.HasBuildingWithinCountry(playerId, BUILDING_JNR_HOSPITIUM.Index) then
+          player:GetCulture():TriggerBoost(SOCIAL_SECURITY_SYSTEM_INDEX);
+        end
+      end
+  
+      if (building.BuildingType == 'BUILDING_JNR_HOSPITIUM') then
+        if Utils.HasBuildingWithinCountry(playerId, BUILDING_SEWER.Index) then
+          player:GetCulture():TriggerBoost(SOCIAL_SECURITY_SYSTEM_INDEX);
         end
       end
     end

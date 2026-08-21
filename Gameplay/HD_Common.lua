@@ -1132,6 +1132,42 @@ Utils.ConsumeUnitBuildCharges = ConsumeUnitBuildCharges;
 -- end
 -- PrintImprovementData()
 
+function PrintBinaryCompressKeyData()
+	local compressKeyData = {};
+
+	for row in GameInfo.HD_Binary_Compress_Keys() do
+		compressKeyData[row.Key] = {
+			ResourceNum = 0,
+			ClassificationName = '';
+			PreMaxExp = row.MaxExp
+		};
+	end
+
+	for row in GameInfo.HD_Building_Base_On_ResourceClassification() do
+		local data = compressKeyData[row.PropertyKey];
+		if data then
+			data.ResourceNum = data.ResourceNum + #(Classification_Resource_Map[row.ResourceClassificationType]);
+			data.ClassificationName = data.ClassificationName .. Locale.Lookup('LOC_' .. row.ResourceClassificationType .. '_NAME') .. ' ';
+		end
+	end
+
+	for key, data in pairs(compressKeyData) do
+		if data.ResourceNum > 0 then
+			print('===================================================================')
+			print(key);
+			print('资源用途：' .. data.ClassificationName);
+			print('资源数量：' .. data.ResourceNum);
+			print('原本指数：' .. data.PreMaxExp);
+			local preMax = math.pow(2, data.PreMaxExp + 1) - 1;
+			print('原本上限：' .. preMax);
+			if data.ResourceNum > preMax then
+				print('WARNING 已超过上限');
+			end
+		end
+	end
+end
+-- PrintBinaryCompressKeyData();
+
 -- 缓存城邦资源
 local CityStateResourceMap = {};
 function InitCityStateResourceMap()

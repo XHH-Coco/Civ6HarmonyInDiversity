@@ -1593,6 +1593,9 @@
         <Context>InGame</Context>
       </Properties>
       <File>UI/Additions/ModLens_Seadog.lua</File>
+      <File>UI/Additions/ModLens_Builder.lua</File>
+      <File>UI/Additions/BuilderLens_Support.lua</File>
+      <File>UI/Additions/BuilderLens_Config_Default.lua</File>
     </ImportFiles>
     <ImportFiles id="TechCivicProgress_Override" criteria="TechCivicProgress_Override">
       <Properties><LoadOrder>200</LoadOrder></Properties>
@@ -2415,6 +2418,9 @@
     <File>UI/Additions/RockBandPopup.lua</File>
     <File>UI/Additions/UnitPanel_Expansion2.lua</File>
     <File>UI/Additions/ModLens_Seadog.lua</File>
+    <File>UI/Additions/ModLens_Builder.lua</File>
+    <File>UI/Additions/BuilderLens_Support.lua</File>
+    <File>UI/Additions/BuilderLens_Config_Default.lua</File>
     <File>UI/Additions/HD_China_UnitCommandDefs.lua</File>
 
     <!-- Custom UI -->

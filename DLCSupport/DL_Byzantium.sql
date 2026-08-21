@@ -45,12 +45,12 @@ insert or replace into ModifierArguments
 values
     ('STATUE_OF_ZEUS_INFLUENCE_POINTS',             'Amount',       1);
 
-insert or replace into Improvement_Adjacencies
-    (ImprovementType,               YieldChangeId)
-values
-    ('IMPROVEMENT_MINE',            'Mine_Oppidum_Production'),
-    ('IMPROVEMENT_QUARRY',          'Quarry_Oppidum_Production'),
-    ('IMPROVEMENT_LUMBER_MILL',     'Lumber_Mill_Oppidum_Production');
+-- insert or replace into Improvement_Adjacencies
+--     (ImprovementType,               YieldChangeId)
+-- values
+--     ('IMPROVEMENT_MINE',            'Mine_Oppidum_Production'),
+--     ('IMPROVEMENT_QUARRY',          'Quarry_Oppidum_Production'),
+--     ('IMPROVEMENT_LUMBER_MILL',     'Lumber_Mill_Oppidum_Production');
     -- ('IMPROVEMENT_CAMP',            'Camp_Hippodrome_Gold');
 
 insert or replace into Improvement_Adjacencies
@@ -68,14 +68,14 @@ insert or replace into Adjacency_YieldChanges
     (ID,                                Description,    YieldType,          YieldChange,    TilesRequired,  AdjacentRiver,
     AdjacentDistrict,               PrereqCivic,    PrereqTech, ObsoleteCivic,  ObsoleteTech,   AdjacentResourceClass)
 values
-    ('Mine_Oppidum_Production',         'Placeholder', 'YIELD_PRODUCTION',  1,              1,              0,
-    'DISTRICT_OPPIDUM',             NULL,           NULL,       NULL,           NULL,           'NO_RESOURCECLASS'),
-    ('Quarry_Oppidum_Production',       'Placeholder', 'YIELD_PRODUCTION',  1,              1,              0,
-    'DISTRICT_OPPIDUM',             NULL,           NULL,       NULL,           NULL,           'NO_RESOURCECLASS'),
-    ('Lumber_Mill_Oppidum_Production',  'Placeholder', 'YIELD_PRODUCTION',  1,              1,              0,
-    'DISTRICT_OPPIDUM',             NULL,           NULL,       NULL,           NULL,           'NO_RESOURCECLASS'),
-    ('Camp_Hippodrome_Gold',            'Placeholder', 'YIELD_GOLD',        2,              1,              0,
-    'DISTRICT_HIPPODROME',          NULL,           NULL,       NULL,           NULL,           'NO_RESOURCECLASS'),
+    -- ('Mine_Oppidum_Production',         'Placeholder', 'YIELD_PRODUCTION',  1,              1,              0,
+    -- 'DISTRICT_OPPIDUM',             NULL,           NULL,       NULL,           NULL,           'NO_RESOURCECLASS'),
+    -- ('Quarry_Oppidum_Production',       'Placeholder', 'YIELD_PRODUCTION',  1,              1,              0,
+    -- 'DISTRICT_OPPIDUM',             NULL,           NULL,       NULL,           NULL,           'NO_RESOURCECLASS'),
+    -- ('Lumber_Mill_Oppidum_Production',  'Placeholder', 'YIELD_PRODUCTION',  1,              1,              0,
+    -- 'DISTRICT_OPPIDUM',             NULL,           NULL,       NULL,           NULL,           'NO_RESOURCECLASS'),
+    -- ('Camp_Hippodrome_Gold',            'Placeholder', 'YIELD_GOLD',        2,              1,              0,
+    -- 'DISTRICT_HIPPODROME',          NULL,           NULL,       NULL,           NULL,           'NO_RESOURCECLASS'),
     ('BATEY_Hippodrome_Culture', 	    'Placeholder', 'YIELD_CULTURE',		1,				1,				0,
 	'DISTRICT_HIPPODROME',		    NULL,			NULL,		'CIVIC_HUMANISM',	NULL,		'NO_RESOURCECLASS'),
 	('BATEY_Late_Hippodrome_Culture', 	'Placeholder', 'YIELD_CULTURE',		2,				1,				0,

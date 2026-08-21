@@ -20,13 +20,13 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_EDUCATOR_RIGHT_2_NAME",                     "贵族书院"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_EDUCATOR_RIGHT_2_DESCRIPTION",              "本城的学院和剧院广场建筑的 [ICON_SCIENCE] 科技值和 [ICON_CULTURE] 文化值本体产出+100%，辐射产出+50%，+1辐射范围。"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_EDUCATOR_RIGHT_3_NAME",                     "国家科学院"),
-  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_EDUCATOR_RIGHT_3_DESCRIPTION",              "每招募一名 [ICON_GREATSCIENTIST] 大科学家，本城+5% [ICON_Science] 科技值和 [ICON_Culture] 文化值。本城太空竞赛项目+30%建造速度。"),
+  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_EDUCATOR_RIGHT_3_DESCRIPTION",              "本城+25% [ICON_Science] 科技值；每招募一名 [ICON_GREATSCIENTIST] 大科学家，额外+5%。本城太空竞赛项目+30%建造速度。"),
   -- ==============================================================================
   -- 维克多
   -- ==============================================================================
   -- 基础升级
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_DEFENDER_BASE_NAME",                        "部落兵制"),
-  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_DEFENDER_BASE_DESCRIPTION",                 "本城的每位 [ICON_Citizen] 公民+0.8 [ICON_PRODUCTION] 生产力，建造单位时+30% [ICON_PRODUCTION] 生产力。提供+4 [ICON_GREATGENERAL] 大将军点数。"),
+  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_DEFENDER_BASE_DESCRIPTION",                 "本城的每位 [ICON_Citizen] 公民+0.8 [ICON_PRODUCTION] 生产力，建造单位时+30% [ICON_PRODUCTION] 生产力。提供+4 [ICON_GREATGENERAL] 大将军和 [ICON_GREATADMIRAL] 海军统帅点数。"),
   -- 左线升级
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_DEFENDER_LEFT_1_NAME",                      "后勤保障部"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_DEFENDER_LEFT_1_DESCRIPTION",               "本城无法被围攻。军事单位相邻或位于本城市中心驻扎一回合可完全恢复。本城生产的军事单位+3 [ICON_STRENGTH] 战斗力，且生产所需的战略资源减少80%。"),
@@ -69,11 +69,11 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MANAGER_BASE_DESCRIPTION",                  "本城生产的开拓者不消耗 [ICON_CITIZEN] 人口，购买单元格-25%花费，工业生产改良+1 [ICON_FOOD] 食物。"),
   -- 左线升级
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MANAGER_LEFT_1_NAME",                       "盈余物流"),
-  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MANAGER_LEFT_1_DESCRIPTION",                "通往本城的国内 [ICON_TRADEROUTE] 贸易路线+2 [ICON_FOOD] 食物、[ICON_PRODUCTION] 生产力和+1 [ICON_Amenities] 宜居度。"),
+  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MANAGER_LEFT_1_DESCRIPTION",                "+1 [ICON_TRADEROUTE] 贸易路线容量。通往本城的国内 [ICON_TRADEROUTE] 贸易路线+2 [ICON_FOOD] 食物、[ICON_PRODUCTION] 生产力和+1 [ICON_Amenities] 宜居度。"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MANAGER_LEFT_2_NAME",                       "实体产业"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MANAGER_LEFT_2_DESCRIPTION",                "本城每种改良的资源为城市+2 [ICON_FOOD] 食物和 [ICON_PRODUCTION] 生产力。"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MANAGER_LEFT_3_NAME",                       "横向一体化"),
-  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MANAGER_LEFT_3_DESCRIPTION",                "9环内的城市+5 [ICON_FOOD] 食物和 [ICON_PRODUCTION] 生产力，解锁“行政部门”后翻倍。"),
+  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MANAGER_LEFT_3_DESCRIPTION",                "9环内的城市+4 [ICON_FOOD] 食物和 [ICON_PRODUCTION] 生产力，解锁“行政部门”后翻倍。"),
   -- 右线升级
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MANAGER_RIGHT_1_NAME",                      "基础建设"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MANAGER_RIGHT_1_DESCRIPTION",               "本城+1区域位，建造区域和建筑时+30%建造速度。"),

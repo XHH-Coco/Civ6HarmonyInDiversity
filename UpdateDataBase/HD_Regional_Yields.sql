@@ -61,9 +61,14 @@ update Buildings_XP2 set EntertainmentBonusWithPower = 0 where BuildingType in (
 -- 科技/市政前置 暂无
 
 -- 补充 YieldChange = 0 的部分建筑，用于适配伟人加产等
-  -- 如桑弘羊给铸币厂+1辐射文化 需要文化的 YieldChange = 0
-  -- 如服装公司
+  -- 温泉浴场
+  -- 桑弘羊给铸币厂+1辐射文化 需要文化的 YieldChange = 0
+  -- 服装公司
   -- 爱达·勒芙蕾丝 工业区建筑+3辐射科技
+  -- 沙龙
+insert or ignore into HD_BuildingRegionalYields (BuildingType, YieldType, YieldChange) values
+  ('BUILDING_THERMAL_BATH', 'YIELD_SCIENCE', 0);
+
 insert or ignore into HD_BuildingRegionalYields (BuildingType, YieldType, YieldChange) select
   BuildingType, 'YIELD_CULTURE', 0
 from Buildings where BuildingType in ('BUILDING_JNR_ACADEMY');
@@ -92,32 +97,36 @@ insert or ignore into HD_BuildingRegionalYields (BuildingType, YieldType, YieldC
   BuildingType, 'YIELD_SCIENCE', 0
 from HD_BuildingRegionalRange where BuildingType in (select BuildingType from Buildings where PrereqDistrict = 'DISTRICT_INDUSTRIAL_ZONE');
 
+insert or ignore into HD_BuildingRegionalYields (BuildingType, YieldType, YieldChange) select
+  'BUILDING_HD_SALON', YieldType, 0
+from Yields;
+
 -- 二进制折叠 Modifiers
 insert or replace into HD_Binary_Compress_Keys (Key, MaxExp) values
-	('HD_PLOT_BINARY_COMPRESS_RECEIVE_REGIONAL_YIELD_FOOD', 	    7),
-	('HD_PLOT_BINARY_COMPRESS_RECEIVE_REGIONAL_YIELD_PRODUCTION', 7),
-	('HD_PLOT_BINARY_COMPRESS_RECEIVE_REGIONAL_YIELD_SCIENCE',    7),
-	('HD_PLOT_BINARY_COMPRESS_RECEIVE_REGIONAL_YIELD_CULTURE',    7),
-	('HD_PLOT_BINARY_COMPRESS_RECEIVE_REGIONAL_YIELD_GOLD',       7),
-	('HD_PLOT_BINARY_COMPRESS_RECEIVE_REGIONAL_YIELD_FAITH',      7),
+	('HD_PLOT_BINARY_COMPRESS_RECEIVE_REGIONAL_YIELD_FOOD', 	    9),
+	('HD_PLOT_BINARY_COMPRESS_RECEIVE_REGIONAL_YIELD_PRODUCTION', 9),
+	('HD_PLOT_BINARY_COMPRESS_RECEIVE_REGIONAL_YIELD_SCIENCE',    9),
+	('HD_PLOT_BINARY_COMPRESS_RECEIVE_REGIONAL_YIELD_CULTURE',    9),
+	('HD_PLOT_BINARY_COMPRESS_RECEIVE_REGIONAL_YIELD_GOLD',       9),
+	('HD_PLOT_BINARY_COMPRESS_RECEIVE_REGIONAL_YIELD_FAITH',      9),
 	('HD_PLOT_BINARY_COMPRESS_RECEIVE_REGIONAL_AMENITY',          5);
 
   -- 产出
 insert or ignore into TraitModifiers (TraitType, ModifierId)
 	select 'TRAIT_LEADER_MAJOR_CIV', 'HD_CITY_RECEIVE_REGIONAL_' || YieldType || '_' || Exp
-	from HD_Binary_Compress, Yields where Exp < 8;
+	from HD_Binary_Compress, Yields where Exp < 10;
 
 insert or ignore into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId)
 	select 'HD_CITY_RECEIVE_REGIONAL_' || YieldType || '_' || Exp, 'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_RECEIVE_REGIONAL_' || YieldType || '_' || Exp || '_REQUIREMENTS'
-	from HD_Binary_Compress, Yields where Exp < 8;
+	from HD_Binary_Compress, Yields where Exp < 10;
 
 insert or ignore into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_CITY_RECEIVE_REGIONAL_' || YieldType || '_' || Exp, 'Amount', Amount
-	from HD_Binary_Compress, Yields where Exp < 8;
+	from HD_Binary_Compress, Yields where Exp < 10;
 
 insert or ignore into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_CITY_RECEIVE_REGIONAL_' || YieldType || '_' || Exp, 'YieldType', YieldType
-	from HD_Binary_Compress, Yields where Exp < 8;
+	from HD_Binary_Compress, Yields where Exp < 10;
 
   -- 宜居度
 insert or ignore into TraitModifiers (TraitType, ModifierId)

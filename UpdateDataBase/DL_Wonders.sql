@@ -33,7 +33,7 @@ update Buildings set Cost = 750, Coast = 1 where BuildingType = 'BUILDING_KOTOKU
 update Buildings set Cost = 750 where BuildingType = 'BUILDING_MACHU_PICCHU';
 update Buildings set Cost = 750 where BuildingType = 'BUILDING_MEENAKSHI_TEMPLE';
 update Buildings set Cost = 750 where BuildingType = 'BUILDING_UNIVERSITY_SANKORE';
-update Buildings set Cost = 750, PrereqTech = 'TECH_APPRENTICESHIP' where BuildingType = 'BUILDING_VENETIAN_ARSENAL';
+update Buildings set Cost = 750, PrereqTech = 'TECH_SQUARE_SAIL_HD' where BuildingType = 'BUILDING_VENETIAN_ARSENAL';
 update Buildings set Cost = 1000 where BuildingType = 'BUILDING_FORBIDDEN_CITY';
 update Buildings set Cost = 1000, RequiresReligion = 1 where BuildingType = 'BUILDING_ST_BASILS_CATHEDRAL';
 update Buildings set Cost = 1000 where BuildingType = 'BUILDING_TAJ_MAHAL';
@@ -1778,3 +1778,14 @@ insert or replace into ModifierArguments (ModifierId, Name, Value) values
 	('HD_COLOSSEUM_REGIONAL_CULTURE',	'Amount',	1),
 	('HD_COLOSSEUM_REGIONAL_AMENITY',	'Key',		'HD_SINGLE_BUILDING_PROVIDE_REGIONAL_YIELD_BONUS_BUILDING_COLOSSEUM_AMENITY'),
 	('HD_COLOSSEUM_REGIONAL_AMENITY',	'Amount',	1);
+
+-- 大金字塔
+insert or replace into BuildingModifiers (BuildingType, ModifierId) values
+	('BUILDING_PYRAMIDS',	'HD_PYRAMIDS_PLOT_YIELDS');
+
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) values
+	('HD_PYRAMIDS_PLOT_YIELDS',	'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',	'PLOT_HAS_IMPROVEMENT_CLASSIFICATION_RELIGIOUS_REQUIREMENTS');
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
+	('HD_PYRAMIDS_PLOT_YIELDS',	'YieldType',	'YIELD_CULTURE,YIELD_FAITH'),
+	('HD_PYRAMIDS_PLOT_YIELDS',	'Amount',			'1,1');

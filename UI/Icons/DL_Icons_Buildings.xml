@@ -37,8 +37,8 @@
 		<Row Name="ICON_BUILDING_NILOMETER_HD_FOW" 															Atlas="ATLAS_HD_Buildings" Index="0"/>
 		<Row Name="ICON_BUILDING_HD_POLICE_STATION" 														Atlas="ATLAS_HD_Buildings" Index="1"/>
 		<Row Name="ICON_BUILDING_HD_POLICE_STATION_FOW"													Atlas="ATLAS_HD_Buildings" Index="1"/>
-		<Row Name="ICON_BUILDING_HD_ROYAL_COURT" 																Atlas="ATLAS_HD_Buildings" Index="43"/>
-		<Row Name="ICON_BUILDING_HD_ROYAL_COURT_FOW"														Atlas="ATLAS_HD_Buildings" Index="43"/>
+		<Row Name="ICON_BUILDING_HD_TABLES_OF_LAW" 															Atlas="ATLAS_HD_Buildings" Index="43"/>
+		<Row Name="ICON_BUILDING_HD_TABLES_OF_LAW_FOW"													Atlas="ATLAS_HD_Buildings" Index="43"/>
 
 		<Row Name="ICON_BUILDING_HD_ALCHEMY_ROOM" 															Atlas="ATLAS_HD_Buildings" Index="2"/>
 		<Row Name="ICON_BUILDING_HD_ALCHEMY_ROOM_FOW" 													Atlas="ATLAS_HD_Buildings" Index="2"/>
@@ -133,6 +133,9 @@
 		<Row Name="ICON_BUILDING_HD_SPECIES_EPO_FOW" 														Atlas="ATLAS_HD_Buildings" Index="41"/>
 		<Row Name="ICON_BUILDING_HD_SCENIC_EPO" 																Atlas="ATLAS_HD_Buildings" Index="42"/>
 		<Row Name="ICON_BUILDING_HD_SCENIC_EPO_FOW" 														Atlas="ATLAS_HD_Buildings" Index="42"/>
+
+		<Row Name="ICON_BUILDING_HD_SALON" 																			Atlas="ATLAS_HD_Buildings" Index="44"/>
+		<Row Name="ICON_BUILDING_HD_SALON_FOW"																	Atlas="ATLAS_HD_Buildings" Index="44"/>
 
 		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_HOLY_SITE"             Atlas="ICON_ATLAS_DISTRICTS" Index="1"/>
 		<Row Name="ICON_BUILDING_MARACANA_DUMMY_DISTRICT_CAMPUS"                Atlas="ICON_ATLAS_DISTRICTS" Index="2"/>
