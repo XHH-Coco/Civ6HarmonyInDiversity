@@ -5,8 +5,7 @@ update Improvements set PrereqCivic = null, PrereqTech = 'TECH_THE_WHEEL' where 
 
 insert or replace into Improvement_YieldChanges (ImprovementType, YieldType, YieldChange) values
 	('IMPROVEMENT_OUTBACK_STATION',		'YIELD_FOOD',			0),
-	('IMPROVEMENT_OUTBACK_STATION',		'YIELD_GOLD',			0),
-	('IMPROVEMENT_OUTBACK_STATION',		'YIELD_SCIENCE',	0);
+	('IMPROVEMENT_OUTBACK_STATION',		'YIELD_GOLD',			0);
 
 insert or replace into Improvement_ValidTerrains
 	(ImprovementType,					TerrainType,				PrereqTech)
