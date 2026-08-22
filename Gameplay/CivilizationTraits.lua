@@ -3751,7 +3751,7 @@ function BannockburnTriggerEvents(playerId, eventId, x, y)
 		if row.CustomEventType == eventId then
 			-- 查询子分类和权重
 			local info = GameInfo.HD_Scotland_Selections[row.SelectionType];
-			if info then
+			if info and Game.GetCurrentGameTurn() >= info.MinTurn then
 				-- 追加额外判断
 				if (row.SelectionType == 'HD_SELECTION_GOODY_HUT_RECON' or row.SelectionType == 'HD_SELECTION_BARBARIAN_RECON') then
 					-- 侦察兵：有地貌
@@ -3839,6 +3839,7 @@ function BannockburnTriggerEvents(playerId, eventId, x, y)
 	-- for _, data in ipairs(recruitList) do
 	-- 	print(data.SelectionType);
 	-- end
+	-- print("==========================================================================")
 	-- for _, data in ipairs(supplyList) do
 	-- 	print(data.SelectionType);
 	-- end

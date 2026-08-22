@@ -458,7 +458,12 @@ from Resources where ResourceType in (
   'RESOURCE_OXEN',
   'RESOURCE_MACKEREL',
   'RESOURCE_ALGAE',
-  'RESOURCE_POTATO'
+  'RESOURCE_POTATO',
+
+  -- 城邦专属资源
+  'RESOURCE_HD_CS_RARE_BIRD',
+  'RESOURCE_HD_CS_EXOTIC_BEAST',
+  'RESOURCE_HD_CS_DESTRIER'
 );
 
 -- =====================================================================================================================================
