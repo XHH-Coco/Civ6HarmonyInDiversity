@@ -469,9 +469,10 @@ function ViewResourcesPage()
 			local kMapResources:table = pGameEconomic:GetMapResources();
 			local iTotal:number = kMapResources[eResourceType];
 			local iMonopolyID:number = pGameEconomic:GetResourceMonopolyPlayer(eResourceType);
-			local sText:string = string.format("%d/%d  %d%%  %s", iControlled, iTotal, 100*iControlled/iTotal, (iMonopolyID == localPlayerID and LL("LOC_RESREPORT_MONOPOLY_NAME") or LL("LOC_RESREPORT_CONTROL")));
-			if 100*(iControlled+1)/iTotal > 60 then sText = sText.." [ICON_New]"; end
-			if iMonopolyID == localPlayerID then sText = "[COLOR_Green]"..sText.."[ENDCOLOR]"; end
+			local percentage = math.min(100, 100*iControlled/(iTotal > 0 and iTotal or 1));
+			local sText:string = string.format("%d/%d  %d%%  %s", iControlled, iTotal, percentage, LL("LOC_RESREPORT_CONTROL"));
+			-- if 100*(iControlled+1)/iTotal > 60 then sText = sText.." [ICON_New]"; end
+			-- if iMonopolyID == localPlayerID then sText = "[COLOR_Green]"..sText.."[ENDCOLOR]"; end
 			instance.Monopoly:SetText(sText);
 			instance.MonopolyContainer:SetHide(false);
 		else

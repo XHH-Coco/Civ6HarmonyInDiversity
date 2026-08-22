@@ -36,7 +36,7 @@ values
 	-- 游戏进度相关调整
 	("LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_CONTENT_TITLE",                      "Game Progress Related"),
 	("LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_HD_FEATURE_RESOURCE_YIELDS_TITLE",   "Yields of Removing Features and Harvesting Resources"),
-	("LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_HD_FEATURE_RESOURCE_YIELDS_PARA_1",  "The instantaneous benefits of removing features and harvesting resources (commonly known as chopping) no longer increase, with the base 24 point benefit for removing features (distributed by feature type) and the base 32 point benefit for harvesting resources (distributed by resource type). See the ""Terrains and Features"" and ""Resources"" Page for details."),
+	("LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_HD_FEATURE_RESOURCE_YIELDS_PARA_1",  "The instantaneous benefits of removing features and harvesting resources (commonly known as chopping) no longer increase, with the base 24 point benefit for removing features (distributed by feature type) and harvesting resources (distributed by resource type). See the ""Terrains and Features"" and ""Resources"" Page for details."),
 	("LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_HD_FEATURE_RESOURCE_YIELDS_PARA_2",  "Luxury and strategy can be harvested or covered by wonders or Districts, after mastering the corresponding prerequisite technologies."),
 	("LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_HD_PILLAGE_YIELDS_TITLE",            "Pillage Yields"),
 	("LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_HD_PILLAGE_YIELDS_PARA_1",           "Remove the setting that pillage gains increase with the ""game progress"", and replace it with a fixed base of 25 points per time (yield type is determined by the pillage target)."),
@@ -258,7 +258,7 @@ values
 	-- 游戏进度相关调整
 	("zh_Hans_CN",  "LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_CONTENT_TITLE",                      "游戏进度相关调整"),
 	("zh_Hans_CN",  "LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_HD_FEATURE_RESOURCE_YIELDS_TITLE",   "移除地貌和收获资源产出"),
-	("zh_Hans_CN",  "LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_HD_FEATURE_RESOURCE_YIELDS_PARA_1",  "移除地貌和收获资源（俗称砍树与收获）的瞬时收益不再增长，移除地貌收益为基础24点（按地貌类型分配）。收获资源收益为基础32点（按资源类型分配）。"),
+	("zh_Hans_CN",  "LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_HD_FEATURE_RESOURCE_YIELDS_PARA_1",  "移除地貌和收获资源（俗称砍树与收获）的瞬时收益不再增长，移除地貌和收获资源的基础收益为24产。"),
 	("zh_Hans_CN",  "LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_HD_FEATURE_RESOURCE_YIELDS_PARA_2",  "在解锁对应科技后，奢侈和战略可以被收获或被奇观或区域覆盖。"),
 	("zh_Hans_CN",  "LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_HD_PILLAGE_YIELDS_TITLE",            "劫掠收益"),
 	("zh_Hans_CN",  "LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_HD_PILLAGE_YIELDS_PARA_1",           "取消劫掠收益随自身科技人文进度而增加的设定，改为固定每次基础25点（产出类型根据劫掠对象决定）。"),

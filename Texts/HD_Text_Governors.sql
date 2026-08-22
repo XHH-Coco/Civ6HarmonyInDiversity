@@ -1,4 +1,206 @@
--- insert or replace into EnglishText (Tag, Text) values
+insert or replace into EnglishText (Tag, Text) values
+  -- ==============================================================================
+  -- 平伽拉
+  -- ==============================================================================
+  -- 基础升级
+  ('LOC_GOVERNOR_PROMOTION_HD_EDUCATOR_BASE_NAME',                        'Basic Education'),
+  ('LOC_GOVERNOR_PROMOTION_HD_EDUCATOR_BASE_DESCRIPTION',                 'Each [ICON_Citizen] Citizen in this city provides +0.8 [ICON_SCIENCE] Science and [ICON_CULTURE] Culture.'),
+  -- 左线升级
+  ('LOC_GOVERNOR_PROMOTION_HD_EDUCATOR_LEFT_1_NAME',                      'Recruiting Talents'),
+  ('LOC_GOVERNOR_PROMOTION_HD_EDUCATOR_LEFT_1_DESCRIPTION',               '+100% [ICON_GREATPERSON] Great Person points in this city.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_EDUCATOR_LEFT_2_NAME',                      'Scripture Study Group'),
+  ('LOC_GOVERNOR_PROMOTION_HD_EDUCATOR_LEFT_2_DESCRIPTION',               'For each different type and era of Cultural Great Works displayed in this city, provide standard Adjacency Bonuses to the Campus and Theater Square in this city.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_EDUCATOR_LEFT_3_NAME',                      'Royal Museum'),
+  ('LOC_GOVERNOR_PROMOTION_HD_EDUCATOR_LEFT_3_DESCRIPTION',               '+200% [ICON_Tourism] Tourism from Cultural Great Works in this city.'),
+  -- 右线升级
+  ('LOC_GOVERNOR_PROMOTION_HD_EDUCATOR_RIGHT_1_NAME',                     'Promote Education'),
+  ('LOC_GOVERNOR_PROMOTION_HD_EDUCATOR_RIGHT_1_DESCRIPTION',              'Campus and Theater Square in this city receive +100% Adjacency Bonuses.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_EDUCATOR_RIGHT_2_NAME',                     'Noble Academy'),
+  ('LOC_GOVERNOR_PROMOTION_HD_EDUCATOR_RIGHT_2_DESCRIPTION',              'Building yields (base) of [ICON_SCIENCE] Science and [ICON_CULTURE] Culture from Campus and Theater Square buildings in this city +100%, their regional yields +50%, and +1 regional range.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_EDUCATOR_RIGHT_3_NAME',                     'National Academy of Sciences'),
+  ('LOC_GOVERNOR_PROMOTION_HD_EDUCATOR_RIGHT_3_DESCRIPTION',              '+25% [ICON_Science] Science in this city; additionally +5% for each [ICON_GREATSCIENTIST] Great Scientist recruited. Space Race projects in this city +30% construction speed.'),
+  -- ==============================================================================
+  -- 维克多
+  -- ==============================================================================
+  -- 基础升级
+  ('LOC_GOVERNOR_PROMOTION_HD_DEFENDER_BASE_NAME',                        'Tribal Military System'),
+  ('LOC_GOVERNOR_PROMOTION_HD_DEFENDER_BASE_DESCRIPTION',                 'Each [ICON_Citizen] Citizen in this city provides +0.8 [ICON_PRODUCTION] Production, and +30% [ICON_PRODUCTION] Production when training units. Provides +4 [ICON_GREATGENERAL] Great General and [ICON_GREATADMIRAL] Great Admiral points.'),
+  -- 左线升级
+  ('LOC_GOVERNOR_PROMOTION_HD_DEFENDER_LEFT_1_NAME',                      'Logistics Support Department'),
+  ('LOC_GOVERNOR_PROMOTION_HD_DEFENDER_LEFT_1_DESCRIPTION',               'This city cannot be besieged. Military units adjacent to or in the city center fully heal when fortified for one turn. Military units trained in this city +3 [ICON_STRENGTH] Combat Strength, and Strategic resource requirements for training them are reduced by 80%.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_DEFENDER_LEFT_2_NAME',                      'Frontline Command Post'),
+  ('LOC_GOVERNOR_PROMOTION_HD_DEFENDER_LEFT_2_DESCRIPTION',               'Military units within 9 tiles +5 [ICON_STRENGTH] Combat Strength and +1 [ICON_MOVEMENT] Movement.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_DEFENDER_LEFT_3_NAME',                      'National Defense Mobilization Department'),
+  ('LOC_GOVERNOR_PROMOTION_HD_DEFENDER_LEFT_3_DESCRIPTION',               'Military units trained in this city start with a free promotion, and gain one additional identical unit.'),
+  -- 右线升级
+  ('LOC_GOVERNOR_PROMOTION_HD_DEFENDER_RIGHT_1_NAME',                     'Equipment Development Department'),
+  ('LOC_GOVERNOR_PROMOTION_HD_DEFENDER_RIGHT_1_DESCRIPTION',              'Encampment in this city +100% Adjacency Bonus. Improved Strategic resources in this city +1 [ICON_PRODUCTION] Production. Accumulation of correctly improved Strategic resources in this city +4 per turn.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_DEFENDER_RIGHT_2_NAME',                     'Military Engineering Department'),
+  ('LOC_GOVERNOR_PROMOTION_HD_DEFENDER_RIGHT_2_DESCRIPTION',              'Support units trained in this city +2 [ICON_MOVEMENT] Movement. Military Engineer units trained in this city +2 [ICON_CHARGES] Build charges, and provide +3 [ICON_STRENGTH] Combat Strength to adjacent military units.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_DEFENDER_RIGHT_3_NAME',                     'Armament Research Department'),
+  ('LOC_GOVERNOR_PROMOTION_HD_DEFENDER_RIGHT_3_DESCRIPTION',              'For each type of Strategic resource the player owns, this city gains +7% [ICON_PRODUCTION] Production and [ICON_Science] Science.'),
+  -- ==============================================================================
+  -- 梁
+  -- ==============================================================================
+  -- 基础升级
+  ('LOC_GOVERNOR_PROMOTION_HD_BUILDER_BASE_NAME',                         'Guild Leader'),
+  ('LOC_GOVERNOR_PROMOTION_HD_BUILDER_BASE_DESCRIPTION',                  'Builders trained in this city +1 [ICON_CHARGES] Build charges and +2 [ICON_MOVEMENT] Movement.'),
+  -- 左线升级
+  ('LOC_GOVERNOR_PROMOTION_HD_BUILDER_LEFT_1_NAME',                       'Rural Planning'),
+  ('LOC_GOVERNOR_PROMOTION_HD_BUILDER_LEFT_1_DESCRIPTION',                'Improvements in this city +1 [ICON_PRODUCTION] Production; agricultural improvements additionally +1 [ICON_PRODUCTION] Production.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_BUILDER_LEFT_2_NAME',                       'Satellite Urban Area'),
+  ('LOC_GOVERNOR_PROMOTION_HD_BUILDER_LEFT_2_DESCRIPTION',                'Districts within 6 tiles +100% Adjacency Bonuses.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_BUILDER_LEFT_3_NAME',                       'Parks and Recreation'),
+  ('LOC_GOVERNOR_PROMOTION_HD_BUILDER_LEFT_3_DESCRIPTION',                'This city can build one additional City Park. City Parks within 6 tiles provide +50% Adjacency Bonuses to districts within 2 tiles of them.'),
+  -- 右线升级
+  ('LOC_GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_1_NAME',                      'Master Builder'),
+  ('LOC_GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_1_DESCRIPTION' ,              '+20% construction speed when building Wonders in this city. Gain [ICON_GREATENGINEER] Great Engineer points equal to 25% of the [ICON_PRODUCTION] Production of Wonders completed in this city after appointment.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_2_NAME',                      'Grand Projects'),
+  ('LOC_GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_2_DESCRIPTION' ,              'Districts and Wonders in this city +1 [ICON_PRODUCTION] Production; Wonders additionally +1 [ICON_CULTURE] Culture.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_3_NAME',                      'National Academy of Engineering'),
+  ('LOC_GOVERNOR_PROMOTION_HD_BUILDER_RIGHT_3_DESCRIPTION' ,              'Wonder base yields and regional yields in this city +100%, +1 regional range. For each [ICON_GREATENGINEER] Great Engineer recruited, districts in this city gain +25% Adjacency Bonuses.'),
+  -- ==============================================================================
+  -- 马格努斯
+  -- ==============================================================================
+  -- 基础升级
+  ('LOC_GOVERNOR_PROMOTION_HD_MANAGER_BASE_NAME',                         'Provision Support'),
+  ('LOC_GOVERNOR_PROMOTION_HD_MANAGER_BASE_DESCRIPTION',                  'Settlers trained in this city do not consume [ICON_Citizen] Population, purchasing tiles costs 25% less, Industrial improvements +1 [ICON_FOOD] Food.'),
+  -- 左线升级
+  ('LOC_GOVERNOR_PROMOTION_HD_MANAGER_LEFT_1_NAME',                       'Surplus Logistics'),
+  ('LOC_GOVERNOR_PROMOTION_HD_MANAGER_LEFT_1_DESCRIPTION',                '+1 [ICON_TRADEROUTE] Trade Route capacity. Domestic [ICON_TRADEROUTE] Trade Routes to this city +2 [ICON_FOOD] Food, [ICON_PRODUCTION] Production, and +1 [ICON_Amenities] Amenities.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_MANAGER_LEFT_2_NAME',                       'Physical Industry'),
+  ('LOC_GOVERNOR_PROMOTION_HD_MANAGER_LEFT_2_DESCRIPTION',                'Each improved resource in this city provides +2 [ICON_FOOD] Food and [ICON_PRODUCTION] Production to the city.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_MANAGER_LEFT_3_NAME',                       'Horizontal Integration'),
+  ('LOC_GOVERNOR_PROMOTION_HD_MANAGER_LEFT_3_DESCRIPTION',                'Cities within 9 tiles +4 [ICON_FOOD] Food and [ICON_PRODUCTION] Production; doubled after unlocking ''Civil Service''.'),
+  -- 右线升级
+  ('LOC_GOVERNOR_PROMOTION_HD_MANAGER_RIGHT_1_NAME',                      'Infrastructure'),
+  ('LOC_GOVERNOR_PROMOTION_HD_MANAGER_RIGHT_1_DESCRIPTION',               'This city +1 District slot, and +30% construction speed when building Districts and Buildings.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_MANAGER_RIGHT_2_NAME',                      'Urban-Rural Integration'),
+  ('LOC_GOVERNOR_PROMOTION_HD_MANAGER_RIGHT_2_DESCRIPTION',               '+20% [ICON_FOOD] Food and [ICON_PRODUCTION] Production in this city.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_MANAGER_RIGHT_3_NAME',                      'Vertical Integration'),
+  ('LOC_GOVERNOR_PROMOTION_HD_MANAGER_RIGHT_3_DESCRIPTION',               '+50% regional yields from Buildings and Wonders in this city.'),
+  -- ==============================================================================
+  -- 瑞娜
+  -- ==============================================================================
+  -- 基础升级
+  ('LOC_GOVERNOR_PROMOTION_HD_MERCHANT_BASE_NAME',                        'Commerce Director'),
+  ('LOC_GOVERNOR_PROMOTION_HD_MERCHANT_BASE_DESCRIPTION',                 '+30% construction speed when building Commercial Hub, Harbor, and their buildings in this city. +1 District slot if this city has a Commercial Hub or Harbor.'),
+  -- 左线升级
+  ('LOC_GOVERNOR_PROMOTION_HD_MERCHANT_LEFT_1_NAME',                      'Tax Farming System'),
+  ('LOC_GOVERNOR_PROMOTION_HD_MERCHANT_LEFT_1_DESCRIPTION',               'Purchasing units in this city costs 15% less; purchasing Merchants costs an additional 15% less.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_MERCHANT_LEFT_2_NAME',                      'Equity Investment'),
+  ('LOC_GOVERNOR_PROMOTION_HD_MERCHANT_LEFT_2_DESCRIPTION',               'Building yields (base) of [ICON_GOLD] Gold from Commercial Hub and Harbor buildings in this city +100%, their regional yields +100%, and +1 regional range.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_MERCHANT_LEFT_3_NAME',                      'Multinational Corporation'),
+  ('LOC_GOVERNOR_PROMOTION_HD_MERCHANT_LEFT_3_DESCRIPTION',               'For each Commercial Hub building in this city, the player''s [ICON_GREATMERCHANT] Great Merchant point accumulation rate +25%; for each Harbor building, the player''s [ICON_GREATADMIRAL] Great Admiral point accumulation rate +25%.'),
+  -- 右线升级
+  ('LOC_GOVERNOR_PROMOTION_HD_MERCHANT_RIGHT_1_NAME',                     'Currency Reform'),
+  ('LOC_GOVERNOR_PROMOTION_HD_MERCHANT_RIGHT_1_DESCRIPTION',              '+2 [ICON_TRADEROUTE] Trade Route capacity. Commercial Hub and Harbor in this city +100% Adjacency Bonuses.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_MERCHANT_RIGHT_2_NAME',                     'Maritime Trade Administration'),
+  ('LOC_GOVERNOR_PROMOTION_HD_MERCHANT_RIGHT_2_DESCRIPTION',              'For each Commercial Hub building in this city, international [ICON_TRADEROUTE] Trade Routes from this city +3 [ICON_GOLD] Gold. For each Harbor building, international Trade Routes from this city +4 [ICON_GOLD] Gold.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_MERCHANT_RIGHT_3_NAME',                     'International Trade'),
+  ('LOC_GOVERNOR_PROMOTION_HD_MERCHANT_RIGHT_3_DESCRIPTION',              'Yields from international [ICON_TRADEROUTE] Trade Routes in this city +25%; additionally +3% after building the first [ICON_TRADINGPOST] Trading Post in each other major civilization''s city.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_MERCHANT_RIGHT_3_BUTTON_TEXT',              'International Trade: {1_Amount}%'),
+  -- ==============================================================================
+  -- 莫克夏
+  -- ==============================================================================
+  -- 基础升级
+  ('LOC_GOVERNOR_PROMOTION_HD_CARDINAL_BASE_NAME',                        'Prophet Disciple'),
+  ('LOC_GOVERNOR_PROMOTION_HD_CARDINAL_BASE_DESCRIPTION',                 'Religious pressure from this city is doubled. Each [ICON_Citizen] Citizen in this city provides +1.5 [ICON_FAITH] Faith. Provides +4 [ICON_GREATPROPHET] Great Prophet points.'),
+  -- 左线升级
+  ('LOC_GOVERNOR_PROMOTION_HD_CARDINAL_LEFT_1_NAME',                      'Justification by Faith'),
+  ('LOC_GOVERNOR_PROMOTION_HD_CARDINAL_LEFT_1_DESCRIPTION',               'Holy Sites within 6 tiles +100% Adjacency Bonuses.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_CARDINAL_LEFT_2_NAME',                      'Prophetic Heritage'),
+  ('LOC_GOVERNOR_PROMOTION_HD_CARDINAL_LEFT_2_DESCRIPTION',               '+20% [ICON_FAITH] Faith in this city; +10% additional if this city has any [ICON_GREATWORK_RELIC] Relic on display.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_CARDINAL_LEFT_3_NAME',                      'Ecumenical Patriarch'),
+  ('LOC_GOVERNOR_PROMOTION_HD_CARDINAL_LEFT_3_DESCRIPTION',               'Districts within 6 tiles provide [ICON_FAITH] Faith equal to their Adjacency Bonuses.'),
+  -- 右线升级
+  ('LOC_GOVERNOR_PROMOTION_HD_CARDINAL_RIGHT_1_NAME',                     'Patron Saint'),
+  ('LOC_GOVERNOR_PROMOTION_HD_CARDINAL_RIGHT_1_DESCRIPTION',              'Purchasing religious units in this city costs 20% less. Missionaries, Apostles, and Inquisitors trained in this city +1 Spread charges. Apostles and Warrior Monks trained in this city gain one additional promotion.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_CARDINAL_RIGHT_2_NAME',                     'Virtuous Guru'),
+  ('LOC_GOVERNOR_PROMOTION_HD_CARDINAL_RIGHT_2_DESCRIPTION',              'Gurus trained in this city +1 Heal charges, and their bonuses to religious units within 1 tile are doubled; can actively consume a Heal charge to exert 150 religious pressure on cities within 6 tiles.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_CARDINAL_RIGHT_3_NAME',                     'Sacred Construction'),
+  ('LOC_GOVERNOR_PROMOTION_HD_CARDINAL_RIGHT_3_DESCRIPTION',              'Can purchase Sacred Architects with [ICON_FAITH] Faith. {LOC_UNIT_CITADEL_OF_GOD_DESCRIPTION}'),
+  -- ==============================================================================
+  -- 阿玛妮
+  -- ==============================================================================
+  -- 基础升级
+  ('LOC_GOVERNOR_PROMOTION_HD_AMBASSADOR_BASE_NAME',                      'Guest Officer'),
+  ('LOC_GOVERNOR_PROMOTION_HD_AMBASSADOR_BASE_DESCRIPTION',               'Counts as 2 [ICON_ENVOY] Envoys when assigned to a City-State.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_AMBASSADOR_BASE_DESCRIPTION_DIPLO',         '{LOC_GOVERNOR_PROMOTION_HD_AMBASSADOR_BASE_DESCRIPTION} When assigned to one of our cities, Diplomatic Quarter buildings in this city +50% base yields.'),
+  -- 左线升级
+  ('LOC_GOVERNOR_PROMOTION_HD_AMBASSADOR_LEFT_1_NAME',                    'Eagle''s Nest'),
+  ('LOC_GOVERNOR_PROMOTION_HD_AMBASSADOR_LEFT_1_DESCRIPTION',             '+2 Spy capacity. When assigned to one of our cities, purchasing Spies in this city costs 25% less and can be bought with [ICON_FAITH] Faith. Spies trained in this city start as Agents.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_AMBASSADOR_LEFT_2_NAME',                    'Disguise'),
+  ('LOC_GOVERNOR_PROMOTION_HD_AMBASSADOR_LEFT_2_DESCRIPTION',             'Our Spies operate at +2 levels of success when performing missions, and mission duration -25%.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_AMBASSADOR_LEFT_3_NAME',                    'Mastermind'),
+  ('LOC_GOVERNOR_PROMOTION_HD_AMBASSADOR_LEFT_3_DESCRIPTION',             'Our Spies operate at +2 levels of success, and enemy Spies in our territory operate at -2 levels.'),
+  -- 右线升级
+  ('LOC_GOVERNOR_PROMOTION_HD_AMBASSADOR_RIGHT_1_NAME',                   'Mutual Market'),
+  ('LOC_GOVERNOR_PROMOTION_HD_AMBASSADOR_RIGHT_1_DESCRIPTION',            'Levying costs 20% less, all levied units and units from Suzerain City-States +4 [ICON_STRENGTH] Combat Strength. Counts as 3 [ICON_ENVOY] Envoys when assigned to a City-State, and also grants one copy of that City-State''s Luxury and Strategic resources.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_AMBASSADOR_RIGHT_2_NAME',                   'Tribute'),
+  ('LOC_GOVERNOR_PROMOTION_HD_AMBASSADOR_RIGHT_2_DESCRIPTION',            'Instantly send 1 [ICON_ENVOY] Envoy to each City-State you have met. Each City-State of which you are Suzerain provides +1 [ICON_SCIENCE] Science, [ICON_CULTURE] Culture, [ICON_GOLD] Gold, and [ICON_FAITH] Faith.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_AMBASSADOR_RIGHT_3_NAME',                   'Reciprocal Alliance'),
+  ('LOC_GOVERNOR_PROMOTION_HD_AMBASSADOR_RIGHT_3_DESCRIPTION',            'Alliances gain +0.5 additional Alliance Points per turn. When assigned to a City-State, all international [ICON_TRADEROUTE] Trade Routes gain two copies of that City-State''s yields, and the number of [ICON_ENVOY] Envoys assigned to that City-State is doubled.'),
+  -- ==============================================================================
+  -- 旅游总督
+  -- ==============================================================================
+  -- 基础升级
+  ('LOC_GOVERNOR_PROMOTION_HD__BASE_NAME',                        ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__BASE_DESCRIPTION',                 ''),
+  -- 左线升级
+  ('LOC_GOVERNOR_PROMOTION_HD__LEFT_1_NAME',                      ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__LEFT_1_DESCRIPTION',               ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__LEFT_2_NAME',                      ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__LEFT_2_DESCRIPTION',               ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__LEFT_3_NAME',                      ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__LEFT_3_DESCRIPTION',               ''),
+  -- 右线升级
+  ('LOC_GOVERNOR_PROMOTION_HD__RIGHT_1_NAME',                     ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__RIGHT_1_DESCRIPTION',              ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__RIGHT_2_NAME',                     ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__RIGHT_2_DESCRIPTION',              ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__RIGHT_3_NAME',                     ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__RIGHT_3_DESCRIPTION',              ''),
+  -- ==============================================================================
+  -- 易卜拉欣
+  -- ==============================================================================
+  -- 基础升级
+  ('LOC_GOVERNOR_PROMOTION_HD__BASE_NAME',                        ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__BASE_DESCRIPTION',                 ''),
+  -- 左线升级
+  ('LOC_GOVERNOR_PROMOTION_HD__LEFT_1_NAME',                      ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__LEFT_1_DESCRIPTION',               ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__LEFT_2_NAME',                      ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__LEFT_2_DESCRIPTION',               ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__LEFT_3_NAME',                      ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__LEFT_3_DESCRIPTION',               ''),
+  -- 右线升级
+  ('LOC_GOVERNOR_PROMOTION_HD__RIGHT_1_NAME',                     ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__RIGHT_1_DESCRIPTION',              ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__RIGHT_2_NAME',                     ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__RIGHT_2_DESCRIPTION',              ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__RIGHT_3_NAME',                     ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__RIGHT_3_DESCRIPTION',              ''),
+  -- ==============================================================================
+  -- 丹隆
+  -- ==============================================================================
+  -- 基础升级
+  ('LOC_GOVERNOR_PROMOTION_HD__BASE_NAME',                        ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__BASE_DESCRIPTION',                 ''),
+  -- 左线升级
+  ('LOC_GOVERNOR_PROMOTION_HD__LEFT_1_NAME',                      ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__LEFT_1_DESCRIPTION',               ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__LEFT_2_NAME',                      ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__LEFT_2_DESCRIPTION',               ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__LEFT_3_NAME',                      ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__LEFT_3_DESCRIPTION',               ''),
+  -- 右线升级
+  ('LOC_GOVERNOR_PROMOTION_HD__RIGHT_1_NAME',                     ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__RIGHT_1_DESCRIPTION',              ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__RIGHT_2_NAME',                     ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__RIGHT_2_DESCRIPTION',              ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__RIGHT_3_NAME',                     ''),
+  ('LOC_GOVERNOR_PROMOTION_HD__RIGHT_3_DESCRIPTION',              '');
 
 insert or replace into LocalizedText (Language, Tag, Text) values
   -- ==============================================================================
@@ -100,7 +302,7 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MERCHANT_RIGHT_2_NAME",                     "市舶榷务"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MERCHANT_RIGHT_2_DESCRIPTION",              "本城每有一座商业中心建筑，本城出发的国际 [ICON_TRADEROUTE] 贸易路线+3 [ICON_GOLD] 金币。本城每有一座港口建筑，本城出发的国际 [ICON_TRADEROUTE] 贸易路线+4 [ICON_GOLD] 金币。"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MERCHANT_RIGHT_3_NAME",                     "国际贸易"),
-  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MERCHANT_RIGHT_3_DESCRIPTION",              "本城从国际 [ICON_TRADEROUTE] 贸易路线获得的产出+25%；每次在其他主要文明的城市中建成首个 [ICON_TRADINGPOST] 贸易站后，额外+5%。"),
+  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MERCHANT_RIGHT_3_DESCRIPTION",              "本城从国际 [ICON_TRADEROUTE] 贸易路线获得的产出+25%；每次在其他主要文明的城市中建成首个 [ICON_TRADINGPOST] 贸易站后，额外+3%。"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MERCHANT_RIGHT_3_BUTTON_TEXT",              "{LOC_GOVERNOR_PROMOTION_HD_MERCHANT_RIGHT_3_NAME}：{1_Amount}%"),
   -- ==============================================================================
   -- 莫克夏
