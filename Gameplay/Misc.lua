@@ -142,7 +142,7 @@ function ArcherForCityState ()
 		if (min ~= nil) and (max ~= nil) and (min <= max) then
 			for _, player in pairs(Players) do
 				if (player ~= nil) and (player:GetInfluence() ~= nil) and player:GetInfluence():CanReceiveInfluence() then
-					player:SetProperty(CITY_STATE_ARCHER_TURN_KEY, math.random(min, max));
+					player:SetProperty(CITY_STATE_ARCHER_TURN_KEY, min + TerrainBuilder.GetRandomNumber(max - min + 1, "City State Archer Turn"));
 				end
 			end
 		end
