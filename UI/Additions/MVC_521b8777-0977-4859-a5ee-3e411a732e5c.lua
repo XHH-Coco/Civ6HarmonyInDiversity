@@ -27,7 +27,7 @@ if not ExposedMembers.MOD_VERSION_CHECKER.ModVersionData then ExposedMembers.MOD
 -- Change the value of VERSION to match your mod's actual version (or leave it at 1 if it's a new mod).
 -- The version number you use here doesn't necessarily have to match the version number you use in Project > Properties > Mod Info > Version, but it's probably easier that way.
 
-local VERSION = 2000
+local VERSION = 2200
 ExposedMembers.MOD_VERSION_CHECKER.ModVersionData["521b8777-0977-4859-a5ee-3e411a732e5c"] = VERSION
 
 -- 5. Keep It Updated

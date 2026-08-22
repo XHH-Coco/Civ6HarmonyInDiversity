@@ -1941,8 +1941,10 @@ values
 	('TRAIT_TECH_ANIMAL_HUSBANDRY',	'TechType',		'TECH_ANIMAL_HUSBANDRY'	),
 	('TRAIT_PASTURE_PRODUCTION',	'YieldType',	'YIELD_PRODUCTION'),
 	('TRAIT_PASTURE_PRODUCTION',	'Amount',		1);
----------------------------------------------------------------------------------------------------------------------------
--- Spainish
+
+-- =====================================================================================================================================
+-- 西班牙
+-- =====================================================================================================================================
 -- 删除原版 UA
 delete from TraitModifiers where TraitType = 'TRAIT_CIVILIZATION_TREASURE_FLEET';
 delete from TraitModifiers where TraitType = 'TRAIT_LEADER_EL_ESCORIAL'
