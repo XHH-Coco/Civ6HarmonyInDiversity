@@ -29,22 +29,10 @@ insert or ignore into ImprovementModifiers (ImprovementType, ModifierId) values
 	('IMPROVEMENT_MONASTERY', 'HD_MONASTERY_BUILDER_PURCHASE');
 
 insert or ignore into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) values
-	('HD_MONASTERY_BUILDER_PURCHASE', 		'MODIFIER_CITY_ENABLE_UNIT_FAITH_PURCHASE', NULL),
-	('HD_CITY_ALLOW_EXTRA_MONASTERY_1', 	'MODIFIER_SINGLE_CITY_ADJUST_PROPERTY', 		'CITY_HAS_DISTRICT_HOLY_SITE_TIER_1_BUILDING_REQUIREMENTS'),
-	('HD_CITY_ALLOW_EXTRA_MONASTERY_2', 	'MODIFIER_SINGLE_CITY_ADJUST_PROPERTY', 		'CITY_HAS_DISTRICT_HOLY_SITE_TIER_2_BUILDING_REQUIREMENTS'),
-	('HD_CITY_ALLOW_EXTRA_MONASTERY_3', 	'MODIFIER_SINGLE_CITY_ADJUST_PROPERTY', 		'CITY_HAS_DISTRICT_HOLY_SITE_TIER_3_BUILDING_REQUIREMENTS'),
-	('HD_CITY_ALLOW_EXTRA_MONASTERY_4', 	'MODIFIER_SINGLE_CITY_ADJUST_PROPERTY', 		'CITY_HAS_DISTRICT_HOLY_SITE_TIER_4_BUILDING_REQUIREMENTS');
+	('HD_MONASTERY_BUILDER_PURCHASE', 		'MODIFIER_CITY_ENABLE_UNIT_FAITH_PURCHASE', NULL);
 
 insert or ignore into ModifierArguments (ModifierId, Name, Value) values
-	('HD_MONASTERY_BUILDER_PURCHASE', 	'Tag', 		'CLASS_BUILDER'),
-	('HD_CITY_ALLOW_EXTRA_MONASTERY_1', 'Key',		'HD_CITY_ALLOW_EXTRA_IMPROVEMENT_MONASTERY'),
-	('HD_CITY_ALLOW_EXTRA_MONASTERY_1', 'Amount',	1),
-	('HD_CITY_ALLOW_EXTRA_MONASTERY_2', 'Key',		'HD_CITY_ALLOW_EXTRA_IMPROVEMENT_MONASTERY'),
-	('HD_CITY_ALLOW_EXTRA_MONASTERY_2', 'Amount',	1),
-	('HD_CITY_ALLOW_EXTRA_MONASTERY_3', 'Key',		'HD_CITY_ALLOW_EXTRA_IMPROVEMENT_MONASTERY'),
-	('HD_CITY_ALLOW_EXTRA_MONASTERY_3', 'Amount',	1),
-	('HD_CITY_ALLOW_EXTRA_MONASTERY_4', 'Key',		'HD_CITY_ALLOW_EXTRA_IMPROVEMENT_MONASTERY'),
-	('HD_CITY_ALLOW_EXTRA_MONASTERY_4', 'Amount',	1);
+	('HD_MONASTERY_BUILDER_PURCHASE', 	'Tag', 		'CLASS_BUILDER');
 
 -- 本体产出
 insert or ignore into ImprovementModifiers (ImprovementType, ModifierId) select
@@ -80,18 +68,22 @@ insert or ignore into ModifierArguments (ModifierId, Name, Value) select
 from HD_Resource_Classification where ResourceClassificationType = 'RESOURCE_CLASSIFICATION_HD_STATIONERY';
 
 -- 建造数量限制
-insert or ignore into DistrictModifiers (DistrictType, ModifierId) select
-	DistrictType, 'HD_CITY_ALLOW_EXTRA_MONASTERY_1'
-from Districts where DistrictType = 'DISTRICT_HOLY_SITE' or DistrictType in (select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType = 'DISTRICT_HOLY_SITE');
-insert or ignore into DistrictModifiers (DistrictType, ModifierId) select
-	DistrictType, 'HD_CITY_ALLOW_EXTRA_MONASTERY_2'
-from Districts where DistrictType = 'DISTRICT_HOLY_SITE' or DistrictType in (select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType = 'DISTRICT_HOLY_SITE');
-insert or ignore into DistrictModifiers (DistrictType, ModifierId) select
-	DistrictType, 'HD_CITY_ALLOW_EXTRA_MONASTERY_3'
-from Districts where DistrictType = 'DISTRICT_HOLY_SITE' or DistrictType in (select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType = 'DISTRICT_HOLY_SITE');
-insert or ignore into DistrictModifiers (DistrictType, ModifierId) select
-	DistrictType, 'HD_CITY_ALLOW_EXTRA_MONASTERY_4'
-from Districts where DistrictType = 'DISTRICT_HOLY_SITE' or DistrictType in (select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType = 'DISTRICT_HOLY_SITE');
+insert or ignore into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) select distinct
+	'HD_CITY_ALLOW_EXTRA_MONASTERY_' || Tier, 	'MODIFIER_SINGLE_CITY_ADJUST_PROPERTY', 		'CITY_HAS_DISTRICT_HOLY_SITE_TIER_' || Tier || '_BUILDING_REQUIREMENTS'
+from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_HOLY_SITE';
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select distinct
+	'HD_CITY_ALLOW_EXTRA_MONASTERY_' || Tier, 'Key', 'HD_CITY_ALLOW_EXTRA_IMPROVEMENT_MONASTERY'
+from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_HOLY_SITE';
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select distinct
+	'HD_CITY_ALLOW_EXTRA_MONASTERY_' || Tier, 'Amount', 1
+from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_HOLY_SITE';
+
+insert or ignore into DistrictModifiers (DistrictType, ModifierId) select distinct
+	DistrictType, 'HD_CITY_ALLOW_EXTRA_MONASTERY_' || Tier
+from Districts, HD_BuildingTiers where PrereqDistrict = 'DISTRICT_HOLY_SITE' and
+	(DistrictType = 'DISTRICT_HOLY_SITE' or DistrictType in (select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType = 'DISTRICT_HOLY_SITE'));
 
 -- =====================================================================================================================================
 -- 城邦

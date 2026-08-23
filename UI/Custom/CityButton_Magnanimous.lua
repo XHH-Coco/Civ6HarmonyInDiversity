@@ -84,12 +84,12 @@ function MagnanimousButtonReset()
 
               -- 第一次引进一定能获得大亨
               if Utils.GetPlayerProperty(playerId, MAGNANIMOUS_FIRST_INTRODUCE_TYCOON_TAG) ~= 1 then
-                print("巴西首次尝试引进大亨");
+                print("巴西首次引进移民 必定不送大亨");
                 Utils.SetPlayerProperty(playerId, MAGNANIMOUS_FIRST_INTRODUCE_TYCOON_TAG, 1);
-                tycoonRandomIndex = 1;
+                tycoonRandomIndex = tycoonPercentage + 1;
               end
 
-              -- print("大亨概率", tycoonRandomIndex, tycoonPercentage);
+              print("大亨概率", tycoonRandomIndex, tycoonPercentage);
               if tycoonRandomIndex <= tycoonPercentage then
                 param.GrantTycoon = true;
               end
