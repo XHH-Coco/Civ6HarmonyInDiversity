@@ -44,7 +44,7 @@ as (values
 	('DISTRICT_MBANZA',					'Mbanza_Self_Food'),
 	('DISTRICT_MBANZA',					'Mbanza_Self_Gold'),
 	('DISTRICT_MBANZA',					'Bonus_Production'),
-	('DISTRICT_MBANZA',					'Luxury_Gold'),
+	('DISTRICT_MBANZA',					'Mbanza_Luxury_Gold'),
 	('DISTRICT_MBANZA',					'Strategic_Science'),
 	('DISTRICT_THANH',					'District_Production_HD'),
 	('DISTRICT_OBSERVATORY',			'Luxury_Science'),
@@ -125,6 +125,7 @@ insert or replace into Adjacency_YieldChanges
 	(ID,								Description,								YieldType,				YieldChange,	AdjacentResourceClass)
 values
 	('Luxury_Gold',						'LOC_DISTRICT_LUXURY_GOLD',					'YIELD_GOLD',			2,				'RESOURCECLASS_LUXURY'),
+	('Mbanza_Luxury_Gold',						'LOC_DISTRICT_LUXURY_GOLD',					'YIELD_GOLD',			3,				'RESOURCECLASS_LUXURY'),
 	('Bonus_Gold',						'LOC_DISTRICT_BONUS_GOLD',					'YIELD_GOLD',			1,				'RESOURCECLASS_BONUS'),
 	('HD_Strategic_Production',			'LOC_DISTRICT_HD_STRATEGIC_PRODUCTION',		'YIELD_PRODUCTION',		2,				'RESOURCECLASS_STRATEGIC'),
 	('Bonus_Production',				'LOC_DISTRICT_BONUS_PRODUCTION',			'YIELD_PRODUCTION',		1,				'RESOURCECLASS_BONUS'),
