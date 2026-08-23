@@ -1995,11 +1995,26 @@ function MagnanimousCompleteDistrictBuilding(playerId, cityId, productionId, obj
 							print("佩德罗二世 建造" .. Locale.Lookup(districtInfo.Name));
 							Game.AddWorldViewText(playerId, Locale.Lookup('LOC_TRAIT_LEADER_MAGNANIMOUS_BUILD_VIEWTEXT', districtInfo.Name), city:GetX(), city:GetY());
 						elseif MAGNANIMOUS_DISTRICT_PUSH_PERCENTAGE > 0 then
-							Utils.CityAddProgressPercentage(playerId, cityId, MAGNANIMOUS_DISTRICT_PUSH_PERCENTAGE, {AddViewText = true});
+							local buildEntry = Utils.GetCityBuildQueueAt(playerId, cityId, 0);
+							if buildEntry and buildEntry.DistrictType then
+								local x = buildEntry.Location.x
+								local y = buildEntry.Location.y
+								-- print(x, y, buildEntry.DistrictType);
+
+								local tag = MAGNANIMOUS_COMPLETE_DISTRICT_BUILDING_TAG .. '_' .. x .. '_' .. y .. '_DISTRICT_' .. buildEntry.DistrictType;
+								if city:GetProperty(tag) ~= 1 then
+									city:SetProperty(tag, 1);
+									Utils.CityAddProgressPercentage(playerId, cityId, MAGNANIMOUS_DISTRICT_PUSH_PERCENTAGE, {AddViewText = true});
+									player:SetProperty(MAGNANIMOUS_COMPLETE_DISTRICT_BUILDING_TAG, amount - 1);
+									print("佩德罗二世 可免费建造次数：" .. amount - 1);
+								end
+							end
+
+							-- Utils.CityAddProgressPercentage(playerId, cityId, MAGNANIMOUS_DISTRICT_PUSH_PERCENTAGE, {AddViewText = true});
 						end
 						
-						player:SetProperty(MAGNANIMOUS_COMPLETE_DISTRICT_BUILDING_TAG, amount - 1);
-						print("佩德罗二世 可免费建造次数：" .. amount - 1);
+						-- player:SetProperty(MAGNANIMOUS_COMPLETE_DISTRICT_BUILDING_TAG, amount - 1);
+						-- print("佩德罗二世 可免费建造次数：" .. amount - 1);
 					end
 				end
 			end
