@@ -4,6 +4,114 @@ bingyang1132 的长期分支。本文件按时间倒序记录本分支的改动�
 
 ---
 
+## 2026-08-26（三）
+
+### 城邦人口溢出：两处改人口的缺陷
+
+leader 反馈城邦人口偶尔异常增长、溢出成负数。先按"全盘搜 `ChangePopulation`"排查了本地 Mods
+和创意工坊 148 个订阅模组，两边共 25 处调用，逐条看下来没有一处能造成无界的正向增长——
+这个搜法方向对但不够，改人口至少还有 Modifier、食物产出、`AttachModifierByID` 三条路，都得单独查。
+最后定位到两处，第一条基本可以解释这个现象。
+
+**`Gameplay/UnitAbilities.lua:551` 间谍「幕后织网」缺人口下限保护。**
+全项目 6 处减人口，只有它没写 `GetPopulation() > 1`。间谍所在城市经常就是城邦，
+被打过的城邦 1 人口很常见，减到 0 或负数就会出数值错误。已补上判断，送间谍照旧无条件触发。
+
+**`DLCSupport/HD_SEJONG.sql:203` 狄奥多拉圣地建筑送人口的修正没声明 `RunOnce`。**
+`THEODORA_DISTRICT_HOLY_SITE_BUILDING_GRANT_CITIZEN` 是 `MODIFIER_SINGLE_CITY_ADD_POPULATION`，
+但 `RunOnce` / `Permanent` / `SubjectStackLimit` 三个字段全走默认值，是全仓库唯一一个三重防护
+都没有的加人口修正（对比 `HD_MEDITERRANEAN_COLONIES_CITY_ADD_POP` 写了 `1,1`，
+`HD_LIBERATION_LINCOLN_POPULATION` 写了 `SubjectStackLimit=1`）。它由
+`CivilizationTraits.lua` 的 `city:AttachModifierByID` 在运行时挂载，Lua 侧那个 property 闸门
+只挡得住重复挂载，挡不住已挂载的非 RunOnce 效果在修正栈重建时重新生效。
+已拆成单独的 insert 补上 `RunOnce=1, Permanent=1`；没加 `SubjectStackLimit`，
+因为设计上每座圣地建筑各触发一次。
+
+这条只影响拜占庭自己的城市，解释不了城邦，属于顺手修，不是主因。
+
+### 巨大地图开大陆必崩：奢侈资源种类数越界
+
+`Maps/Utility/ResourceGenerator.lua:__PrepareContinentsData` 算出的 `totalLuxuries`
+从来没有和资源池的实际大小校验过：
+
+```lua
+local totalLuxuries = #continentsInUse * self.iLuxuriesPerRegion
+                    + math.floor(self.iTargetPercentage/(12 - #continentsInUse)) - 2
+...
+local lux = self.aLuxuryIds[cur_index + j];   -- 越界时 = nil
+ResourceBuilder.CanHaveResource(pPlot, lux)   -- nil 进 C++，直接崩
+```
+
+只开本体时，`RESOURCECLASS_LUXURY` 且 `Frequency > 0` 的陆地奢侈只有 **26** 种。
+25 个地图脚本没有一个传 `LuxuriesPerRegion`，所以 `iLuxuriesPerRegion` 恒为 4。
+`Maps.xml` 里 `MAPSIZE_HUGE` 的 `Continents` 是 6，于是：
+
+| 大陆数 | 资源稀少 | 资源标准 | 资源丰富 |
+|---|---|---|---|
+| 4（标准） | 15 | 17 | 21 |
+| 5（大型） | 20 | 22 | 26（刚好压线） |
+| 6（巨大） | 24 | **27 越界** | **32 越界** |
+| 7+（巨大多岛） | **29 越界** | **32 越界** | **38 越界** |
+
+崩溃是巨大图独有的，跟反馈完全吻合；巨大 + 稀少资源算出来 24，擦边不崩，
+所以"我巨大图没事"的说法多半是选了稀少。
+`ModSupport/Resourceful2` 那三十多种奢侈由 `criteria="Resouceful2_Expansion2"` 门控，
+开了丰富资源 2 池子就够大——这正是"只开本体才崩"的原因。
+
+改法：先建好并洗牌 `aLuxuryIds`，再把池子大小传给 `__PrepareContinentsData` 给
+`totalLuxuries` 封顶；除数用 `math.max(12 - C, 1)` 兜底（大陆数到 12 会除零）；
+逐大陆再夹一次 `num` 并同步回 `cont.numLuxuries`（`__PlaceLuxuryResources` 拿它当除数）；
+封顶时打一行 print 便于以后从 Lua.log 看到。
+
+`__PrepareContinentsData` 不抽随机数，两次 `GetShuffledCopyOfTable` 的相对顺序也没变，
+**随机流没动**，封顶只在原先必崩的配置下才生效，老种子不受影响。
+
+实机验证（巨大 + 大陆 + 丰富资源）：
+`HD: totalLuxuries 32 超过可用奢侈种类 26，已封顶`，六块大陆分到 2+5+8+4+3+4 = 26，
+正好用满池子，出生点全部落位，Lua.log 647 行零报错。
+
+### 沿海低地：把一直在跑的实现转正（行为零变化）
+
+从上面那局的日志里发现 `Map Script:   nil10077710270f eligible coastal tiles`。
+`GlobalParameters.CACAPULCOTE_CHANGE_PERCENT_COASTAL_LOWLANDS` **从未写入过数据库**，
+`Maps/` 下 14 处引用全靠原版代码里那个 `or 35` 兜住。也就是说：原版参数
+`CLIMATE_CHANGE_PERCENT_COASTAL_LOWLANDS` 是 45，而 HD 一直在跑 35，
+走的是原版那个从没生效过的兜底值。
+
+顺着查还发现 `Rivers.lua` 和 `Rivers_And_Lakes.lua` 各把 `MarkCoastalLowlands`
+定义了两次（471/688、526/743）。Lua 后定义覆盖先定义，写着 66% 的那份从未执行，
+后一份和 `Utility/CoastalLowlands.lua` 的共用实现逐字节相同。
+
+经 leader 判断：35 已经跑了很久、玩家反馈正常，没人测过 45 好不好，**按现状转正，一个数值不动**，
+只把实现写规范：
+
+- `Utility/CoastalLowlands.lua`：不再读那个不存在的参数，`35` 写死，来龙去脉写进注释
+- `Rivers.lua` / `Rivers_And_Lakes.lua`：删掉两份本地定义，落到共用实现上（仍是 35%），
+  留注释说明 66% 那份为何被删、想改回去要重新定义并实测
+- 森林高地 77 / 大草原 66 / 新高地 66 / 北方山脉 60 / 湿地湖泊 75 / 湿地湖泊2 75：
+  去掉 `= 77 or 40;` 这类死分支（Lua 里 `77 or 40` 恒为 77，那个 `or` 只会误导人）
+- 8 处 print 改用真正生效的变量。远古图以前打印 45、实跑 68，也一并修了。
+  `"% of"` 换成 `" percent of"`：Civ6 的 `print` 是 printf 风格，`%o` 被当八进制格式符，
+  日志里那串乱码就是这么来的
+
+各图实跑值改动前后完全一致，`iElevation` 的 1.2 / 1.6 / 1 也原样保留，所以老种子不受影响。
+
+顺带记一笔：`iElevation` 对应引擎的 1M/2M/3M 三个整数档位，多数图写的 1.2、湿地湖泊系写的 1.6，
+大概率都被截回 1，也就是白改。没动，留待以后实测。
+
+### 清掉空的 Dark 事件面板
+
+`CustomEvents/UI/HD_CustomEventPanel_Dark.lua` 是 0 字节，配套的 `.xml` 只是个
+`<Context></Context>` 空壳，但两个都注册在 `DL.modinfo` 里，每局都往日志里丢一条
+`Attempt to load empty file. Lua files must not be empty.`。
+
+全仓库没有任何地方触发 `HD_TriggerCustomEventPanel_Dark`，也没有任何事件用
+`UIStyle = 'Dark'`，是个没做完的占位。已删掉两个文件和 `DL.modinfo` 里的 4 处注册。
+`CustomEvents/Database/TableDefinations.sql:10` 那行 style 声明保留——留着不生效，
+以后真要做深色面板时直接补实现即可。
+
+---
+
 ## 2026-08-11（五）
 
 ### 修掉 Suk's Oceans 的崩溃（leader 交办，只修崩溃不碰玩法）
