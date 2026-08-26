@@ -625,7 +625,7 @@ function MarkCoastalLowlands()
 
 	print("Map Generation - Marking Coastal Lowlands");
 
-	local numDesiredCoastalLowlandsPercentage = 75 or 45;
+	local numDesiredCoastalLowlandsPercentage = 75;
 
 	scoredTiles = ScoreCoastalLowlandTiles();
 	tilesToMark = math.floor((#scoredTiles * numDesiredCoastalLowlandsPercentage) / 100);
@@ -642,7 +642,7 @@ function MarkCoastalLowlands()
 			TerrainBuilder.AddCoastalLowland(scoredTiles[tileIdx].MapIndex, iElevation);
 		end
 		print(tostring(tilesToMark).." Coastal Lowland tiles added");
-		print("  " .. tostring(GlobalParameters.CACAPULCOTE_CHANGE_PERCENT_COASTAL_LOWLANDS) .. "% of eligible coastal tiles");
+		print("  " .. tostring(numDesiredCoastalLowlandsPercentage) .. " percent of eligible coastal tiles");
 	end
 end
 ----------------------------------------------------------------------------------------------------

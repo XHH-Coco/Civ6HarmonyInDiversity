@@ -2242,11 +2242,9 @@
     </AddGameplayScripts>
     <AddUserInterfaces id="HD_CustomEvents_UI" criteria="Expansion2">
       <Properties><Context>InGame</Context></Properties>
-      <File>CustomEvents/UI/HD_CustomEventPanel_Dark.xml</File>
       <File>CustomEvents/UI/HD_CustomEventPanel_Light.xml</File>
     </AddUserInterfaces>
     <ImportFiles id="HD_CustomEvents_Import" criteria="Expansion2">
-      <File>CustomEvents/UI/HD_CustomEventPanel_Dark.lua</File>
       <File>CustomEvents/UI/HD_CustomEventPanel_Light.lua</File>
     </ImportFiles>
 
@@ -2862,8 +2860,6 @@
     <File>CustomEvents/Texts/Texts.sql</File>
     <File>CustomEvents/Icons/Icons.sql</File>
     <File>CustomEvents/Gameplay/HD_CustomEvent_GP.lua</File>
-    <File>CustomEvents/UI/HD_CustomEventPanel_Dark.lua</File>
-    <File>CustomEvents/UI/HD_CustomEventPanel_Dark.xml</File>
     <File>CustomEvents/UI/HD_CustomEventPanel_Light.lua</File>
     <File>CustomEvents/UI/HD_CustomEventPanel_Light.xml</File>
 

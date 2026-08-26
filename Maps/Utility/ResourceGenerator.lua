@@ -180,13 +180,27 @@ end
 
 ------------------------------------------------------------------------------
 -- HD rewrite begin
-function ResourceGenerator:__PrepareContinentsData()
+-- iAvailableLuxuries: 资源库里实际可用的陆地奢侈种类数，用来给 totalLuxuries 封顶
+function ResourceGenerator:__PrepareContinentsData(iAvailableLuxuries)
 	local continentsInUse = Map.GetContinentsInUse()
 	self.continentInfo = {}
 	local totalPlots = 0
 	------------------------------------------
-	local totalLuxuries = #continentsInUse * self.iLuxuriesPerRegion + math.floor(self.iTargetPercentage/(12 - #continentsInUse)) - 2	--提高奢侈种类，会导致部分地图反而变差
+	-- 大陆数达到 12 时除数为 0，先夹住避免 inf / 负数
+	local iDivisor = math.max(12 - #continentsInUse, 1)
+	local totalLuxuries = #continentsInUse * self.iLuxuriesPerRegion + math.floor(self.iTargetPercentage/iDivisor) - 2	--提高奢侈种类，会导致部分地图反而变差
 	--local totalLuxuries = #continentsInUse * self.iLuxuriesPerRegion + 1  --v1.4少量增加奢侈种类
+
+	-- 奢侈种类不能超过资源库里实际有的数量，否则后面 aLuxuryIds[cur_index + j] 会取到 nil，
+	-- 把 nil 传给 ResourceBuilder.CanHaveResource 会直接崩游戏。
+	-- 只开本体（25 种陆地奢侈）时，巨大地图 6 块大陆 + 标准资源就会算出 27，必然越界。
+	if iAvailableLuxuries ~= nil and totalLuxuries > iAvailableLuxuries then
+		print('HD: totalLuxuries ' .. totalLuxuries .. ' 超过可用奢侈种类 ' .. iAvailableLuxuries .. '，已封顶')
+		totalLuxuries = iAvailableLuxuries
+	end
+	if totalLuxuries < 1 then
+		totalLuxuries = 1
+	end
 	------------------------------------------
 	-- print('total luxuries', totalLuxuries)
 	for _, eContinent in ipairs(continentsInUse) do 
@@ -225,7 +239,6 @@ end
 
 ------------------------------------------------------------------------------
 function ResourceGenerator:__GetLuxuryResources()
-	self:__PrepareContinentsData();
 	self.aLuxuryIds = {}
 	-- Find the Luxury Resources
 	-- 寻找奢侈并创建一个奢侈资源id表格
@@ -241,12 +254,21 @@ function ResourceGenerator:__GetLuxuryResources()
 	self.aLuxuryIds = GetShuffledCopyOfTable(self.aLuxuryIds)
 	self.iExtraLuxuries = GetShuffledCopyOfTable(self.iExtraLuxuries)
 
+	-- 必须先建好奢侈资源池，再按池子大小决定每块大陆分几种
+	self:__PrepareContinentsData(#self.aLuxuryIds);
+
 	-- 初始化和遍历大陆
 	local cur_index = 0;
 	for i, cont in ipairs(self.continentInfo) do
 	
 	-- 确定奢侈资源数量
 		local num = cont.numLuxuries
+		-- 兜底：不管上面怎么分配，都不能取超过资源池剩余的种类数
+		if num > #self.aLuxuryIds - cur_index then
+			num = #self.aLuxuryIds - cur_index
+		end
+		if num < 0 then num = 0 end
+		cont.numLuxuries = num	-- __PlaceLuxuryResources 用它当除数，必须同步
 
 	-- 准备奢侈资源列表
 		local luxuries = {};

@@ -102,7 +102,11 @@ function MarkCoastalLowlands()
 
 	print("Map Generation - Marking Coastal Lowlands");
 
-	local numDesiredCoastalLowlandsPercentage = GlobalParameters.CACAPULCOTE_CHANGE_PERCENT_COASTAL_LOWLANDS or 35;
+	-- 沿海低地占候选地块的比例，决定风云变幻里会被海平面上升淹没的格子数量。
+	-- 原版读 GlobalParameters.CLIMATE_CHANGE_PERCENT_COASTAL_LOWLANDS（=45）；HD 曾把它换成
+	-- CACAPULCOTE_CHANGE_PERCENT_COASTAL_LOWLANDS，但该参数从未写入数据库，于是一直走的是
+	-- 原版代码里那个兜底值 35。35 是长期实跑且玩家反馈正常的值，这里写死转正。要调改这里。
+	local numDesiredCoastalLowlandsPercentage = 35;
 
 	scoredTiles = ScoreCoastalLowlandTiles();
 	tilesToMark = math.floor((#scoredTiles * numDesiredCoastalLowlandsPercentage) / 100);
@@ -119,6 +123,6 @@ function MarkCoastalLowlands()
 			TerrainBuilder.AddCoastalLowland(scoredTiles[tileIdx].MapIndex, iElevation);
 		end
 		print(tostring(tilesToMark).." Coastal Lowland tiles added");
-		print("  " .. tostring(GlobalParameters.CACAPULCOTE_CHANGE_PERCENT_COASTAL_LOWLANDS) .. "% of eligible coastal tiles");
+		print("  " .. tostring(numDesiredCoastalLowlandsPercentage) .. " percent of eligible coastal tiles");
 	end
 end
