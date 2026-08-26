@@ -467,6 +467,10 @@
       <ModInUse>4873eb62-8ccc-4574-b784-dda455e74e68</ModInUse>
       <ModInUse>eaffc7c2-21d2-47e5-a060-ae55780d1337</ModInUse>
     </Criteria>
+    <!-- 标题汉化 -->
+    <Criteria id="ModsTitleLocalization">
+      <ModInUse>107a9043-4c73-4d5b-8007-79b55f19ba4a</ModInUse>
+    </Criteria>
   </ActionCriteria>
 
   <!-- 前端内容加载 -->
@@ -597,6 +601,11 @@
       <File>UI/Additions/MVC_521b8777-0977-4859-a5ee-3e411a732e5c.lua</File>
       <File>UI/Replacement/StagingRoom.lua</File>
       <File>UI/Replacement/PlayerSetupLogic.lua</File>
+    </ImportFiles>
+    <!-- 标题汉化 -->
+    <ImportFiles id="HD_Mod_Version_Checker" criteria="ModsTitleLocalization">
+      <Properties><LoadOrder>10001</LoadOrder></Properties>
+      <File>UI/Replacement/mods.lua</File>
     </ImportFiles>
     <ImportFiles id="HD_Assets">
       <Properties><LoadOrder>1</LoadOrder></Properties>
@@ -2502,6 +2511,7 @@
     <File>UI/Replacement/TechAndCivicSupport.lua</File>
     <File>UI/Replacement/TechAndCivicUnlockables_HD.lua</File>
     <File>UI/Replacement/InGameTopOptionsMenu.lua</File>
+    <File>UI/Replacement/mods.lua</File>
 
     <!-- Icons -->
     <File>UI/Icons/DL_Icons_Beliefs.xml</File>

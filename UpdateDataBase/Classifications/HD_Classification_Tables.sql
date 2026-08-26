@@ -29,6 +29,8 @@ PRIMARY KEY('ImprovementClassificationType'));
 create table if not exists HD_Improvement_Classification(
   ImprovementType                TEXT    not NULL,
   ImprovementClassificationType  TEXT    not NULL,
+  FOREIGN KEY('ImprovementType') REFERENCES Improvements('ImprovementType') ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY('ImprovementClassificationType') REFERENCES HD_ImprovementClassificationTypes('ImprovementClassificationType') ON DELETE CASCADE ON UPDATE CASCADE
 PRIMARY KEY('ImprovementType', 'ImprovementClassificationType'));
 
 ------------------- 区域分类 -------------------
