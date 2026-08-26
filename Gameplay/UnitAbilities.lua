@@ -551,8 +551,11 @@ function PromotionSpyPromoted (playerId, unitId)
 	if pUnit:GetExperience():HasPromotion(PromotionSpyWebberIndex) and pPlayer:GetProperty(SpyName .. "Webber") == nil then
 		UnitManager.InitUnit(playerId, "UNIT_SPY", city:GetX(), city:GetY());
 		-- UnitManager.InitUnit(playerId, GameInfo.Units[pUnit:GetType()].UnitType, city:GetX(), city:GetY());
-		city:ChangePopulation(-1);
-		Game.AddWorldViewText(0, "-1 [ICON_CITIZEN]", city:GetX(), city:GetY());
+		--人口为1时不再减少，否则城市人口会被打到0或负数
+		if city:GetPopulation() > 1 then
+			city:ChangePopulation(-1);
+			Game.AddWorldViewText(0, "-1 [ICON_CITIZEN]", city:GetX(), city:GetY());
+		end
 		--触发幕后织网后，存储玩家拥有的间谍名对应幕后织网的数据为true，避免重复触发
 		pPlayer:SetProperty(SpyName .. "Webber", true);
 	end

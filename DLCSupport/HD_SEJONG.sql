@@ -200,8 +200,14 @@ insert or replace into Modifiers
 values
 	('THEODORA_ADD_BELIEF',								'MODIFIER_PLAYER_ADD_BELIEF',					'PLAYER_HAS_FOUNDED_A_RELIGION'),
 	('THEODORA_DISTRICT_HOLY_SITE_CULTURE_BOMB',		'MODIFIER_PLAYER_ADD_CULTURE_BOMB_TRIGGER',		NULL),
-	('THEODORA_DISTRICT_HIPPODROME_CULTURE_BOMB',		'MODIFIER_PLAYER_ADD_CULTURE_BOMB_TRIGGER',		NULL),
-	('THEODORA_DISTRICT_HOLY_SITE_BUILDING_GRANT_CITIZEN',		'MODIFIER_SINGLE_CITY_ADD_POPULATION',		NULL);
+	('THEODORA_DISTRICT_HIPPODROME_CULTURE_BOMB',		'MODIFIER_PLAYER_ADD_CULTURE_BOMB_TRIGGER',		NULL);
+
+-- 一次性加人口的修正由 Lua 运行时挂载，必须显式声明 RunOnce/Permanent，
+-- 否则每次修正栈重建（读档等）都会重新生效，导致城市人口无上限累加
+insert or replace into Modifiers
+	(ModifierId,										ModifierType,									SubjectRequirementSetId,	RunOnce,	Permanent)
+values
+	('THEODORA_DISTRICT_HOLY_SITE_BUILDING_GRANT_CITIZEN',		'MODIFIER_SINGLE_CITY_ADD_POPULATION',		NULL,						1,			1);
 
 insert or replace into ModifierArguments
 	(ModifierId,										Name,						Value)
