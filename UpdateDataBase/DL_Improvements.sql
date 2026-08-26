@@ -406,7 +406,8 @@ insert or ignore into HD_Improvement_Yield_To_Tourism (ImprovementType, TourismS
 	('IMPROVEMENT_MONASTERY', 						'TOURISMSOURCE_FAITH', 		'CIVIC_DIVINE_RIGHT', 	NULL, 100),
 	('IMPROVEMENT_PYRAMID', 							'TOURISMSOURCE_FAITH', 		'CIVIC_DIVINE_RIGHT', 	NULL, 100),
 	('IMPROVEMENT_NAZCA_LINE', 						'TOURISMSOURCE_FAITH', 		'CIVIC_DIVINE_RIGHT', 	NULL, 100),
-	('IMPROVEMENT_ROCK_HEWN_CHURCH', 			'TOURISMSOURCE_FAITH', 		'CIVIC_DIVINE_RIGHT', 	NULL, 100);
+	('IMPROVEMENT_ROCK_HEWN_CHURCH', 			'TOURISMSOURCE_FAITH', 		'CIVIC_DIVINE_RIGHT', 	NULL, 100),
+	('IMPROVEMENT_BOOM_LAMASSU', 					'TOURISMSOURCE_FAITH', 		'CIVIC_DIVINE_RIGHT', 	NULL, 100);
 
 delete from Improvement_Tourism;
 insert or replace into Improvement_Tourism (ImprovementType, TourismSource, PrereqCivic, PrereqTech, ScalingFactor) select
