@@ -523,30 +523,9 @@ function GenerateFractalLayerWithoutHills (args, plotTypes)
 end
 
 -------------------------------------------------------------------------------
-function MarkCoastalLowlands()
-
-	print("Map Generation - Marking Coastal Lowlands");
-
-	local numDesiredCoastalLowlandsPercentage = 66 or 40;
-
-	scoredTiles = ScoreCoastalLowlandTiles();
-	tilesToMark = math.floor((#scoredTiles * numDesiredCoastalLowlandsPercentage) / 100);
-	
-	if tilesToMark > 0 then
-        table.sort (scoredTiles, function(a, b) return a.Score > b.Score; end);
-		for tileIdx = 1, tilesToMark, 1 do
-			local iElevation = 2;
-			if (tileIdx <= tilesToMark / 3) then
-				iElevation = 0;
-			elseif (tileIdx <= (tilesToMark * 2) / 3) then
-				iElevation = 1.2;
-			end
-			TerrainBuilder.AddCoastalLowland(scoredTiles[tileIdx].MapIndex, iElevation);
-		end
-		print(tostring(tilesToMark).." Coastal Lowland tiles added");
-		print("  " .. tostring(GlobalParameters.CACAPULCOTE_CHANGE_PERCENT_COASTAL_LOWLANDS) .. "% of eligible coastal tiles");
-	end
-end
+-- 本图不再自带 MarkCoastalLowlands，直接使用 Utility/CoastalLowlands.lua 的共用实现。
+-- 这里原本有两份重复定义，Lua 后定义覆盖先定义，写着 66% 的那份从未执行过；
+-- 实际一直按共用实现的 35% 在跑，现按实跑结果转正。若要改回 66% 需重新定义并实测。
 -------------------------------------------------------------------------------
 function AddTerrainFromContinents(plotTypes, terrainTypes, world_age, iW, iH, iContinentBoundaryPlots, bNoCoastalMountains)
 
@@ -739,31 +718,6 @@ function GetNumberNearbyVolcanoes(iX, iY, range, aPlacedVolcanoes)
 	return iVolcanoCount;
 end
 
--------------------------------------------------------------------------------
-function MarkCoastalLowlands()
-
-	print("Map Generation - Marking Coastal Lowlands");
-
-	local numDesiredCoastalLowlandsPercentage = GlobalParameters.CACAPULCOTE_CHANGE_PERCENT_COASTAL_LOWLANDS or 35;
-
-	scoredTiles = ScoreCoastalLowlandTiles();
-	tilesToMark = math.floor((#scoredTiles * numDesiredCoastalLowlandsPercentage) / 100);
-	
-	if tilesToMark > 0 then
-        table.sort (scoredTiles, function(a, b) return a.Score > b.Score; end);
-		for tileIdx = 1, tilesToMark, 1 do
-			local iElevation = 2;
-			if (tileIdx <= tilesToMark / 3) then
-				iElevation = 0;
-			elseif (tileIdx <= (tilesToMark * 2) / 3) then
-				iElevation = 1.2;
-			end
-			TerrainBuilder.AddCoastalLowland(scoredTiles[tileIdx].MapIndex, iElevation);
-		end
-		print(tostring(tilesToMark).." Coastal Lowland tiles added");
-		print("  " .. tostring(GlobalParameters.CACAPULCOTE_CHANGE_PERCENT_COASTAL_LOWLANDS) .. "% of eligible coastal tiles");
-	end
-end
 ----------------------------------------------------------------------------------------------------
 
 -------------------------------------------------------------------------------------------
