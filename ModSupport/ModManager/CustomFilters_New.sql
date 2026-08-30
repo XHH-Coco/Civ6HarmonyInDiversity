@@ -102,13 +102,13 @@ insert or replace into EnglishText (Tag, Text) values
 	-- 世界奇观
 	("LOC_WONDERS_MODS_LIST", "
 		b8a7c566-c2ab-44d4-a52d-a97416faf690,
-		f6556753-3531-4d36-b448-5a4053064524,
+		37d1b105-f698-47df-85d5-7b39bc610a36,
 		aab33283-4b8f-46a4-83c0-784a8bfa177e,
 		fd3f13ba-3d51-442f-9435-3aeca0116b46,
 		6366039a-6cd8-48d5-99ce-d7832a617629,
 		9f162187-9342-47ca-9085-78fc3f80f25d,
 		ce086704-334c-43cd-b26a-478365503137,
-		3db98aba-d7ca-4b4d-9596-e2344e593ed0,
+		2217fddf-b466-45e1-950c-fc3747f076b6,
 		cfba692b-a7f8-4d6e-aa4b-a25aa704867c,
 		f87fe104-c6c5-4e11-9251-db958c80c589,
 		d1c3ef16-00ed-4d72-a468-1e584fdb85ad,
@@ -119,7 +119,7 @@ insert or replace into EnglishText (Tag, Text) values
 		e3052708-b650-4f3a-8e5c-da8f2a287524,
 		1cfe2a52-233b-4d4c-8bdf-209ec10352c1,
 		e12c350d-df6a-4d21-9302-4466cab4353c,
-		943808b8-5913-4cfc-93a8-0d5d4a0bc4af,
+		32b57a0b-9e64-4409-ad83-d40235860b9b,
 		5a5601c5-090c-4172-89fe-8f1da9e2b96d,
 		ffa02d2f-e5d4-43fd-bb97-0a4868c7b3a7,
 		ecc4e31d-8c79-4e4b-98e7-d96226cb95d9,
@@ -137,7 +137,8 @@ insert or replace into EnglishText (Tag, Text) values
 		4922ba47-61e1-4b15-9281-db996b14522d,
 		37fdca0b-9275-4235-9c18-c7ec348f930e,
 		78aa4d0b-742a-4d7a-be7d-a8317d69fb30,
-		664d17a5-f3be-493a-9332-8e20da1166fa
+		664d17a5-f3be-493a-9332-8e20da1166fa,
+		9018a348-589d-44ac-afb9-e7a400e2e90f
 	"),
 	-- 内容拓展
 	("LOC_CONTENT_EXTENSION_LIST", "
@@ -150,7 +151,8 @@ insert or replace into EnglishText (Tag, Text) values
 	("LOC_MECHANISM_FIX_LIST", "
 		967e466f-28e0-42a0-8f21-0e7bed5d7552,
 		850b838e-bb79-49ee-b61e-e71ee75296f9,
-		05003a81-c381-411c-8aec-4759bd0c0ec4
+		05003a81-c381-411c-8aec-4759bd0c0ec4,
+		2789f86d-acae-4972-94c5-e365f117eacb
 	"),
 	-- 文明拓展
 	("LOC_CIV_EXTENSION_LIST", "

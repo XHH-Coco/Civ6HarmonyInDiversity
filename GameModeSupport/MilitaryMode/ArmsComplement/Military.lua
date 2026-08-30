@@ -24,31 +24,3 @@ function EarnMoneyOnConquerCity( capturerID, ownerID, cityID, cityX, cityY )
 end
 
 GameEvents.CityConquered.Add(EarnMoneyOnConquerCity);
-
-function EngineerAutoRoad(iPlayerID,iUnitID,iX,iY,locallyVisible,stateChange)
-    local pPlayer = Players[iPlayerID];
-    local pUnit = UnitManager.GetUnit(iPlayerID, iUnitID);
-    local plot = Map.GetPlot(iX, iY);
-
-    if(plot:IsWater())then
-        return
-    end
-
-    if(pUnit == nil)then
-        return
-    end
-
-    if(GameInfo.Units[pUnit:GetType()].UnitType ~= "UNIT_SAPPER") and
-    (GameInfo.Units[pUnit:GetType()].UnitType ~= "UNIT_MILITARY_ENGINEER") and
-    (GameInfo.Units[pUnit:GetType()].UnitType ~= "UNIT_ENGINEER_CORP")then
-        return
-    end
-
-    local currentRouteType = plot:GetRouteType(plot);
-    local playerRouteType = Utils.GetRouteTypeForPlayer(pPlayer);
-    if currentRouteType == RouteTypes.NONE or Utils.CompareRoutes(playerRouteType,currentRouteType) then
-        RouteBuilder.SetRouteType(plot, playerRouteType);
-    end
-end
-
-Events.UnitMoved.Add(EngineerAutoRoad);

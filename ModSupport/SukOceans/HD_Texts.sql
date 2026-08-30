@@ -157,41 +157,18 @@ VALUES
             "海带是大型褐藻，生活在靠近海岸的较冷的、相对较浅的水域种。它们生长在密集的群落中，很像陆地上的森林。这些森林中的植物和动物的种类和密度几乎比任何其他海洋群落都要大；这些层层叠叠的森林为多种多样的物种创造了有吸引力的栖息地，既是食物的来源，又是成千上万的鱼类、无脊椎动物和海洋哺乳动物的天堂。"
         );
 --========================================================================================================================
--- Water Park Changes
---========================================================================================================================
-        -- (
-        --     "LOC_DISTRICT_WATER_ENTERTAINMENT_COMPLEX_HD_DESCRIPTION",
-        --     "zh_Hans_CN",
-        --     "建在海岸单元格上的区域，可增加 [ICON_Amenities] 宜居度，让人民生活幸福。若相邻海藻森林+1 [ICON_Amenities] 宜居度。无法建在拥有娱乐区的城市中。"
-        -- );
---========================================================================================================================
---========================================================================================================================
-
--- English
--- INSERT OR REPLACE INTO LocalizedText
---         (Tag,                               Language,       Text)
--- VALUES
--- --========================================================================================================================
--- -- Water Park Changes
--- --========================================================================================================================
---         (
---             "LOC_DISTRICT_WATER_ENTERTAINMENT_COMPLEX_HD_DESCRIPTION",
---             "en_US",
---             "A district placed out on a coastal tile dedicated to keeping your people happy by increasing [ICON_Amenities] Amenities. +1 [ICON_Amenities] Amenity when adjacent to Kelp Forest. Cannot be built in a city with an Entertainment Complex."
---         );
---========================================================================================================================
 --========================================================================================================================
 
 insert or replace into EnglishText
     (Tag,                                                                                   Text)
 values
-    ("LOC_TECH_SAILING_HD_DESCRIPTION",                                                     "Allows harvesting of Kelp Forest and resources improved by Fishing Boats. Allows Builders and Traders to embark."),
-    -- ("LOC_TECH_CELESTIAL_NAVIGATION_HD_DESCRIPTION",                                        "Allows harvesting of Kelp Forest and resources improved by Fishing Boats. If Ship Building is not researched, also allows all land units to embark."),
+    ("LOC_RESOURCE_SUK_CORAL_NAME",                                                         "Stony Coral"),
+    ("LOC_TECH_SAILING_HD_DESCRIPTION",                                                     "Allows harvesting of Kelp Forest and resources improved by Fishing Boats. [NEWLINE]Allows Builders, Settlers and Traders to embark."),
     ("LOC_BELIEF_HD_SONG_OF_SIREN_DL_DESCRIPTION",                                          "+2 [ICON_Production] Production, +1 [ICON_GOLD] Gold from Reefs and Kelps.");
 
 insert or replace into LocalizedText
     (Language,      Tag,                                                                    Text)
 values
-    ("zh_Hans_CN",  "LOC_TECH_SAILING_HD_DESCRIPTION",                                      "允许收获海藻森林和由渔船改良的资源。允许建造者和商人上船。"),
-    -- ("zh_Hans_CN",  "LOC_TECH_CELESTIAL_NAVIGATION_HD_DESCRIPTION",                         "允许收获海藻森林和由渔船改良的资源。若未掌握造船术，也允许所有陆地单位上船。"),
+    ("zh_Hans_CN",  "LOC_RESOURCE_SUK_CORAL_NAME",                                          "石珊瑚"),
+    ("zh_Hans_CN",  "LOC_TECH_SAILING_HD_DESCRIPTION",                                      "允许收获海藻森林和由渔船改良的资源。[NEWLINE]允许建造者、开拓者和商人上船。"),
     ("zh_Hans_CN",  "LOC_BELIEF_HD_SONG_OF_SIREN_DL_DESCRIPTION",                           "礁石和海藻森林单元格+2 [ICON_Production] 生产力和+1 [ICON_GOLD] 金币。");

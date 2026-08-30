@@ -476,8 +476,6 @@ as (values
     ("BUILDING_JNR_FOOD_COURT",                     450),
     ("BUILDING_AQUATICS_CENTER",                    450),
     --社区，地铁站没给
-    ("BUILDING_HD_TAVERN",                          200),
-    ("BUILDING_HD_INN",                             200),
     ("BUILDING_FOOD_MARKET",                        250),
     ("BUILDING_SHOPPING_MALL",                      250),
     ("BUILDING_JNR_RECYCLING_PLANT",                300),
@@ -500,9 +498,10 @@ as (values
     ("BUILDING_RESEARCH_LAB",                       450),
     ("BUILDING_JNR_EDUCATION",                      450),
     --商业中心
+    ("BUILDING_FAIR",                               150),
+    ("BUILDING_JNR_WAYSTATION",                     150),
     ("BUILDING_MARKET",                             200),
     ("BUILDING_JNR_MINT",                           200),
-    ("BUILDING_JNR_WAYSTATION",                     200),
     ("BUILDING_SUKIENNICE",                         200),
     ("BUILDING_JNR_GUILDHALL",                      250),
     ("BUILDING_JNR_MERCHANT_QUARTER",               250),
@@ -512,7 +511,6 @@ as (values
     ("BUILDING_JNR_COMMODITY_EXCHANGE",             450),
     ("BUILDING_STOCK_EXCHANGE",                     450),
     --工业区
-    ("BUILDING_JNR_TOOLING_SHOP",                   200),
     ("BUILDING_IZ_WATER_MILL",                      200),
     ("BUILDING_JNR_WIND_MILL",                      200),
     ("BUILDING_JNR_MANUFACTURY",                    250),

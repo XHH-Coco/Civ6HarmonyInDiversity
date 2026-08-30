@@ -12,7 +12,7 @@ g_PropertyKeys_HD = {
         HaveGrantWalls = "HD_HaveGrantWalls",
     },
     CityFlags = {
-        HasAssignedGovernor = "HD_HasAssignedGovernor",
+        -- HasAssignedGovernor = "HD_HasAssignedGovernor",
         HasDipFavor = 'HD_HasDipFavor',
     },
     UnitFlags = {

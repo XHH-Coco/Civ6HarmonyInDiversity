@@ -103,6 +103,7 @@ values
 	('CIVILIZATION_BRAZIL',				'RESOURCE_COCOA',								2),
 	('CIVILIZATION_BRAZIL',				'RESOURCE_COFFEE',							2),
 	('CIVILIZATION_BRAZIL',				'RESOURCE_LEU_P0K_CAPYBARAS',		2),
+	('CIVILIZATION_BRAZIL',				'RESOURCE_GOLD',								2),
 
 	('CIVILIZATION_CHINA',				'RESOURCE_STONE',								1),
 	('CIVILIZATION_CHINA',				'RESOURCE_SILK',								3),
@@ -119,11 +120,9 @@ values
 	('CIVILIZATION_EGYPT',				'RESOURCE_NITER',								3),
 
 	('CIVILIZATION_FRANCE',				'RESOURCE_WINE',								2),
-	('CIVILIZATION_FRANCE',				'RESOURCE_OLIVES',							2),
 	('CIVILIZATION_FRANCE',				'RESOURCE_POPPIES',							2),
 	('CIVILIZATION_FRANCE',				'RESOURCE_SAFFRON',							2),
 	('CIVILIZATION_FRANCE',				'RESOURCE_STRAWBERRY',					2),
-	('CIVILIZATION_FRANCE',				'RESOURCE_OAK',									2),
 
 	('CIVILIZATION_GERMANY',			'RESOURCE_COAL',								3),
 	('CIVILIZATION_GERMANY',			'RESOURCE_SALT',								3),
@@ -172,6 +171,7 @@ values
 	('CIVILIZATION_POLAND',				'RESOURCE_WHEAT',								2),
 	('CIVILIZATION_POLAND',				'RESOURCE_CATTLE',							2),
 	('CIVILIZATION_POLAND',				'RESOURCE_FURS',								2),
+	('CIVILIZATION_POLAND',				'RESOURCE_SALT',								2),
 
 	('CIVILIZATION_NUBIA',				'RESOURCE_RUBY',								2),
 	('CIVILIZATION_NUBIA',				'RESOURCE_DIAMONDS',						2),
@@ -303,3 +303,41 @@ insert or replace into StartBiasTerrains (CivilizationType, TerrainType, Tier) s
 insert or replace into StartBiasFeatures (CivilizationType, FeatureType, Tier) select CivilizationType, FeatureType, Tier from HD_StartBiasFeatures;
 insert or replace into StartBiasResources (CivilizationType, ResourceType, Tier) select CivilizationType, ResourceType, Tier from HD_StartBiasResources;
 insert or replace into StartBiasRivers (CivilizationType, Tier) select CivilizationType, Tier from HD_StartBiasRivers;
+
+-- =======================================================================================================================
+-- 负面关联
+-- =======================================================================================================================
+
+CREATE TABLE 'HD_Negative_StartBiasTerrains'(
+	'CivilizationType' TEXT NOT NULL,
+	'TerrainType' TEXT NOT NULL
+);
+
+CREATE TABLE 'HD_Negative_StartBiasFeatures'(
+	'CivilizationType' TEXT NOT NULL,
+	'FeatureType' TEXT NOT NULL
+);
+
+CREATE TABLE 'HD_Negative_StartBiasResources'(
+	'CivilizationType' TEXT NOT NULL,
+	'ResourceType' TEXT NOT NULL
+);
+
+CREATE TABLE 'HD_Negative_StartBiasRivers'(
+	'CivilizationType' TEXT NOT NULL
+);
+
+insert or replace into HD_Negative_StartBiasFeatures (CivilizationType, FeatureType) values
+	('CIVILIZATION_AMERICA', 		'FEATURE_FLOODPLAINS'),
+	('CIVILIZATION_AMERICA', 		'FEATURE_FLOODPLAINS_GRASSLAND'),
+	('CIVILIZATION_AMERICA', 		'FEATURE_FLOODPLAINS_PLAINS'),
+	('CIVILIZATION_AUSTRALIA', 	'FEATURE_FLOODPLAINS'),
+	('CIVILIZATION_AUSTRALIA', 	'FEATURE_FLOODPLAINS_GRASSLAND'),
+	('CIVILIZATION_AUSTRALIA', 	'FEATURE_FLOODPLAINS_PLAINS');
+
+delete from HD_Negative_StartBiasTerrains where CivilizationType not in (select CivilizationType from Civilizations);
+delete from HD_Negative_StartBiasFeatures where CivilizationType not in (select CivilizationType from Civilizations);
+delete from HD_Negative_StartBiasFeatures where FeatureType not in (select FeatureType from Features);
+delete from HD_Negative_StartBiasResources where CivilizationType not in (select CivilizationType from Civilizations);
+delete from HD_Negative_StartBiasResources where ResourceType not in (select ResourceType from Resources);
+delete from HD_Negative_StartBiasRivers where CivilizationType not in (select CivilizationType from Civilizations);

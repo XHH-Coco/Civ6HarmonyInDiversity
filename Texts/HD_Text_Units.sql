@@ -3,11 +3,13 @@
 insert or replace into EnglishText
     (Tag,                                                 Text)
 values
-    ("LOC_UNIT_BUILDER_DL_DESCRIPTION",                   "May create tile improvements, remove features like Woods or Rainforest, or Harvest some resources. Builders can be used 4 times. This can be increased through policies or wonders like the Pyramids. After Sailing is researched, Builders are allowed to embark."),
+    ("LOC_UNIT_BUILDER_DL_DESCRIPTION",                   "Builders have 4 build charges. May consume 1 build charges to create tile improvements, remove features or harvest resources: [NEWLINE][ICON_BULLET]After Pottery is researched, allows harvesting of resources improved by Farms.[NEWLINE][ICON_BULLET]After Animal Husbandry is researched, allows harvesting of resources improved by Pastures and Camps.[NEWLINE][ICON_BULLET]After Mining is researched, allows chopping of {LOC_SAVANNAH_AND}Woods and Rainforest, and harvesting of resources improved by Mines.[NEWLINE][ICON_BULLET]After Sailing is researched, Allows harvesting of resources improved by Fishing Boats.[NEWLINE][ICON_BULLET]After Irrigation is researched, allows clearing of Marsh and Swamp, and harvesting of resources improved by Plantations.[NEWLINE][ICON_BULLET]After Bronze Working is researched, allows harvesting of resources improved by Lumber Mills.[NEWLINE][ICON_BULLET]After Masonry is researched, allows harvesting of resources improved by Quarries.[NEWLINE]After Sailing is researched, Builders are allowed to embark."),
+    ("LOC_UNIT_SETTLER_DL_DESCRIPTION",                   "May create new cities. Reduces city's [ICON_Citizen] Population by 1 when completed. [NEWLINE]After Sailing is researched, Settlers are allowed to embark."),
+    ("LOC_UNIT_TRADER_DL_DESCRIPTION",                    "May make and maintain a single [ICON_TradeRoute] Trade Route. Automatically creates Roads as it travels. [NEWLINE]After Sailing is researched, Traders are allowed to embark."),
+
     ("LOC_UNIT_GURU_DESCRIPTION",                         "May use a charge to heal itself and all adjacent friendly religious units. May not initiate theological combat with units of other Religions (but can defend). Religious units adjacent to Gurus receive +5 [ICON_Religion] Religious Strength in Theological Combat and +1 [ICON_Movement] Movement."),
     ("LOC_UNIT_SIEGE_TOWER_EXPANSION2_DESCRIPTION",       "Medieval era support unit. When adjacent to a city, attacking melee, anti-cavalry units and Warrior Monks ignore Walls and immediately assault the city. Does not affect cities with Renaissance Walls. Ineffective against Urban Defenses."),
     ("LOC_UNIT_BATTERING_RAM_EXPANSION2_DESCRIPTION",     "Ancient era support unit. When adjacent to a city, attacking melee, anti-cavalry units and Monk Warriors do full damage to the city’s Walls. Does not affect cities with Medieval or Renaissance Walls. Ineffective against Urban Defenses."),
-    ("LOC_UNIT_MILITARY_ENGINEER_ALT_DESCRIPTION",        "Medieval era support unit. Requires an Armory to produce. Can construct Roads, Railroads, Forts, Airstrips, Missile Silos, and Mountain Tunnel improvements. One of their build charges can also be used to complete 30% of a Canal, Dam or Aqueduct district or a Seawall building. Ignore [ICON_MOVEMENT] movement penalty from all Terrians, Features and Rivers."), -- Can move with ability that ignore all the terrain and river.
     ("LOC_UNIT_WARRIOR_MONK_DESCRIPTION",                 "Fast-moving land combat unit with a unique promotion tree. Can only be purchased with [ICON_FAITH] Faith in city with Temple."),
     ("LOC_UNIT_OBSERVATION_BALLOON_DESCRIPTION",          "Industrial era support unit. Grants +1 [ICON_Range] Range to Siege class units within 1 hex."),
     ("LOC_UNIT_ANCIENT_SEADOG_DESCRIPTION",               "Ancient era ranged Naval Raider."),
@@ -18,7 +20,7 @@ values
     ("LOC_UNIT_BARBARIAN_HORSEMAN_NAME",			      "Nomadic Raider"),
     ("LOC_UNIT_BARBARIAN_HORSE_ARCHER_NAME",			  "Nomadic Bowrider"),
     -- Unique Units
-    ("LOC_UNIT_NORWEGIAN_LONGSHIP_DESCRIPTION",           "Norwegian unique Ancient era naval unit that replaces the Galley. Can pillage enemy coastal lands and capture civilians if adjacent using its coastal raiding ability. Gains 1 bonus [ICON_MOVEMENT] Movement if it begins a turn on a Coast and Lake tile."),
+    ("LOC_UNIT_NORWEGIAN_LONGSHIP_DESCRIPTION",           "Norwegian unique Classical era naval unit that replaces the Galley. Can pillage enemy coastal lands and capture civilians if adjacent using its coastal raiding ability. Gains 1 bonus [ICON_MOVEMENT] Movement if it begins a turn on a Water Area tile."),
     --("LOC_UNIT_ENGLISH_SEADOG_DESCRIPTION",               "Elizabeth I's unique Renaissance era naval unit that replaces the Privateer. Has a chance to capture defeated enemy ships."), -- Can only be seen by other Naval Raiders unless adjacent to it. Reveals Naval Raiders within sight range.
     ("LOC_UNIT_ENGLISH_SEADOG_DESCRIPTION",               "English unique Renaissance era naval unit that replaces the Privateer. Has a chance to capture defeated enemy ships. "), -- Can only be seen by other Naval Raiders unless adjacent to it. Reveals Naval Raiders within sight range.
     ("LOC_UNIT_OTTOMAN_BARBARY_CORSAIR_DESCRIPTION",      "Ottoman unique Medieval era naval unit that replaces the Pirate Ship. It costs no [ICON_Movement] Movement to coastal raid."), -- Can only be seen by other Naval Raiders unless adjacent to it. Reveals Naval Raiders within sight range.
@@ -40,18 +42,22 @@ values
     ("LOC_UNIT_POLISH_HUSSAR_EXPANSION2_DESCRIPTION",     "Polish unique Renaissance era unit. Pushes defending enemy units back from their hex in any battle where they score more damage. Defenders that cannot retreat suffer additional damage. 50% less [ICON_Strength] Combat Strength reduction from being injured."),
 	("LOC_UNIT_BRAZILIAN_MINAS_GERAES_DESCRIPTION",		  "Brazilian unique Industrial era unit that replaces the Battleship. Stronger than the Battleship."),
     ("LOC_UNIT_NORWEGIAN_BERSERKER_DESCRIPTION",          "Harald Hardrada (Heimskringla)'s unique Medieval era melee unit that replaces the Man-At-Arms. 4 [ICON_MOVEMENT] Movement if this unit starts in enemy territory. +10 [ICON_STRENGTH] Combat Strength when attacking and -5 [ICON_STRENGTH] Combat Strength when defending against melee attacks."),
-    ("LOC_UNIT_INCA_WARAKAQ_DESCRIPTION",                 "Incan unique Classical Era unit. +1 additional attack per turn.");
+    ("LOC_UNIT_INCA_WARAKAQ_DESCRIPTION",                 "Incan unique Classical Era unit. +1 additional attack per turn."),
+    ("LOC_UNIT_HD_BANDEIRANTES_NAME",                     "Bandeirante"),
+    ("LOC_UNIT_HD_BANDEIRANTES_DESCRIPTION",              "Brazilian unique Recon unit, but cannot be trained, purchased or upgraded to a more advanced unit. Its [ICON_STRENGTH] Combat Strength increases according to your era. Automatically creates Roads as it moves. It can collect resources on unowned rainforest tiles twice. For every two of the same resource collected, the improved Resources on rainforest tiles in your cities gain the yields of that resource. Each Carnival Street or Carnival Beach district within the territory will increase the collection count by +1.");
 
 --------------------------------------------------------------------------------
 -- Language: zh_Hans_CN
 insert or replace into LocalizedText
     (Language,      Tag,                                                 Text)
 values
-    ("zh_Hans_CN",  "LOC_UNIT_BUILDER_DL_DESCRIPTION",                   "可建造单元格改良设施、移除地貌（如森林或雨林），或收获资源。建造者可使用4次。可通过政策或奇观（如金字塔）增加使用次数。研究“航海术”科技后可进入湖泊或浅海单元格。"),
+    ("zh_Hans_CN",  "LOC_UNIT_BUILDER_DL_DESCRIPTION",                   "建造者拥有4点劳动力，可消耗1点劳动力建造单元格改良设施、移除地貌或收获资源：[NEWLINE][ICON_BULLET]研究“制陶术”科技后，允许收获由农场改良的资源。[NEWLINE][ICON_BULLET]研究“畜牧业”科技后，允许收获由牧场或营地改良的资源。[NEWLINE][ICON_BULLET]研究“采矿业”科技后，允许砍伐{LOC_SAVANNAH_AND}树林、雨林和收获由矿山改良的资源。[NEWLINE][ICON_BULLET]研究“航行”科技后，允许收获由渔船改良的资源。[NEWLINE][ICON_BULLET]研究“灌溉”科技后，允许清理沼泽和收获由种植园改良的资源。[NEWLINE][ICON_BULLET]研究“铸铜术”科技后，允许收获由伐木场改良的资源。[NEWLINE][ICON_BULLET]研究“砌砖”科技后，允许收获由采石场改良的资源。[NEWLINE]研究“航行”科技后允许上船，可进入水域单元格。"),
+    ("zh_Hans_CN",  "LOC_UNIT_SETTLER_DL_DESCRIPTION",                   "开拓者可创建新城市。完成时，该城市减少1 [ICON_Citizen] 人口。[NEWLINE]研究“航行”科技后允许上船，可进入水域单元格。"),
+    ("zh_Hans_CN",  "LOC_UNIT_TRADER_DL_DESCRIPTION",                    "商人能创建和维护一条 [ICON_TradeRoute] 贸易路线。随着旅途进行，自动创建道路。[NEWLINE]研究“航行”科技后允许上船，可进入水域单元格。"),
+    
     ("zh_Hans_CN",  "LOC_UNIT_GURU_DESCRIPTION",                         "消耗次数可治疗其自身以及相邻的全部友方宗教单位。无法发起和其他宗教单位的神学战争（但可进行防御）。与上师相邻的宗教单位在神学战争中+5 [ICON_Religion] 宗教战斗力、+1 [ICON_Movement] 移动力。"),
     ("zh_Hans_CN",  "LOC_UNIT_SIEGE_TOWER_EXPANSION2_DESCRIPTION",       "中世纪支援单位。与城市相邻时，近战、抗骑兵单位和武僧可无视城墙直接对城市发起进攻。对拥有文艺复兴城墙的城市无效。对现代城市防御无效。"),
     ("zh_Hans_CN",  "LOC_UNIT_BATTERING_RAM_EXPANSION2_DESCRIPTION",     "远古时代支援单位。与城市相邻时，近战，抗骑兵单位和武僧发起进攻可对城墙输出全额伤害。对拥有中世纪或文艺复兴城墙的城市无效。对现代城市防御无效。"),
-    ("zh_Hans_CN",  "LOC_UNIT_MILITARY_ENGINEER_ALT_DESCRIPTION",        "中世纪支援单位。需要“兵工厂”才能生产。能建造道路、堡垒、飞机跑道、导弹发射井和穿山隧道改良设施。其建造次数可用于加快运河、堤坝、水渠区域或拦海堤30%的建造进度。无视地形、地貌和河流的移动力消耗。"),
     ("zh_Hans_CN",  "LOC_UNIT_WARRIOR_MONK_DESCRIPTION",                 "高移动力的陆地战斗单位，拥有独特的升级树。只能在有寺庙的城市通过 [ICON_FAITH] 信仰值购买。"),
     ("zh_Hans_CN",  "LOC_UNIT_OBSERVATION_BALLOON_DESCRIPTION",          "工业时代支援单位。为1单元格内的攻城类单位+1 [ICON_Range] 射程。"),
     ("zh_Hans_CN",  "LOC_UNIT_ANCIENT_SEADOG_DESCRIPTION",               "远古时代的海军袭击者。"),
@@ -62,7 +68,7 @@ values
     ("zh_Hans_CN",  "LOC_UNIT_BARBARIAN_HORSEMAN_NAME",			         "游牧袭击者"),
     ("zh_Hans_CN",  "LOC_UNIT_BARBARIAN_HORSE_ARCHER_NAME",			     "游牧弓骑手"),
     -- 特色单位
-    ("zh_Hans_CN",  "LOC_UNIT_NORWEGIAN_LONGSHIP_DESCRIPTION",           "取代桨帆船的挪威远古时代特色海军单位。能在中立领土上恢复。通过海岸扫荡能力，可掠夺敌方海岸土地，并俘获附近的平民。如果在海岸和湖泊单元格上开始一个回合，会获得1 [ICON_MOVEMENT] 移动力加成。"),
+    ("zh_Hans_CN",  "LOC_UNIT_NORWEGIAN_LONGSHIP_DESCRIPTION",           "取代桨帆船的挪威古典时代特色海军单位。能在中立领土上恢复。通过海岸扫荡能力，可掠夺敌方海岸土地，并俘获附近的平民。如果在水域单元格上开始一个回合，会获得1 [ICON_MOVEMENT] 移动力加成。"),
     --("zh_Hans_CN",  "LOC_UNIT_ENGLISH_SEADOG_DESCRIPTION",               "伊丽莎白一世的文艺复兴时代特色海军单位，取代私掠船。击败敌方船只后有几率将其俘获。"),
     ("zh_Hans_CN",  "LOC_UNIT_ENGLISH_SEADOG_DESCRIPTION",               "文艺复兴时代英国特色海军单位，取代私掠船。击败敌方船只后有几率将其俘获。"),
     ("zh_Hans_CN",  "LOC_UNIT_OTTOMAN_BARBARY_CORSAIR_DESCRIPTION",      "中世纪奥斯曼特色海军单位，取代海盗船。进行海岸扫荡时无需花费 [ICON_Movement] 移动力。"),
@@ -90,7 +96,9 @@ values
     ("zh_Hans_CN",  "LOC_UNIT_KOREAN_HWACHA_NAME",                       "火厢车"),
     ("zh_Hans_CN",  "LOC_UNIT_MONGOLIAN_KESHIG_NAME",                    "怯薛军"),
     ("zh_Hans_CN",  "LOC_UNIT_INCA_WARAKAQ_NAME",                        "精锐投石者"),
-    ("zh_Hans_CN",  "LOC_UNIT_INCA_WARAKAQ_DESCRIPTION",                 "印加古典时代特色单位，取代斥候。每回合+1额外攻击。");
+    ("zh_Hans_CN",  "LOC_UNIT_INCA_WARAKAQ_DESCRIPTION",                 "印加古典时代特色单位，取代斥候。每回合+1额外攻击。"),
+    ("zh_Hans_CN",  "LOC_UNIT_HD_BANDEIRANTES_NAME",                     "旗手"),
+    ("zh_Hans_CN",  "LOC_UNIT_HD_BANDEIRANTES_DESCRIPTION",              "巴西特色侦察单位，无法升级成高级单位，无法在城市中建造或购买该单位。[ICON_STRENGTH] 战斗力随你所处的时代提升。移动时自动创建道路。可以收集2次无主雨林单元格上的资源，每收集两个同种资源，境内改良的雨林资源获得该资源的产出。境内的每座狂欢街区或狂欢海滨提供+1收集次数。");
 
 -- Units information updates
 --------------------------------------------------------------------------------
@@ -98,15 +106,33 @@ values
 insert or replace into EnglishText
     (Tag,                                                                       Text)
 values
+    -- 军事工程单位
+    ("LOC_UNIT_MILITARY_ENGINEER_ALT_DESCRIPTION",                              "Medieval era Military Engineering unit. [NEWLINE]Automatically creates Roads as it moves. Can spend a build charges to complete 30% of a Canal, Dam or Aqueduct district or a Seawall building. Can spend a build charges on the Volcanic Soil tiles for “exploration”, having a probability of obtaining [ICON_Gold] Gold or [ICON_Science] Science; there is also the possibility of discovering new resources or [ICON_GREATWORK_RELIC] Relics. Units within 1 tile recover +10 additional HP per turn when healing. [NEWLINE]Ignore [ICON_MOVEMENT] movement penalty from all Terrians, Features and Rivers."),
+    ("LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_NAME",                         "Explore Volcanic Soil"),
+    ("LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_DESCRIPTION",                  "Having a probability of obtaining [ICON_Gold] Gold or [ICON_Science] Science. There is also the possibility of discovering new resources or [ICON_GREATWORK_RELIC] Relics."),
+    ("LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_DISABLED",                     "[COLOR:Red]Must on a Volcanic Soil tile without Districts.[ENDCOLOR]"),
+    ("LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_MAX_TIMES",                    "[COLOR:Red]Each Volcanic Soil tile can be explored up to 3 times.[ENDCOLOR]"),
+    ("LOC_MILITARY_ENGINEER_EXCAVATE_RESOURCE",                                 "[COLOR_LIGHTBLUE]New resource discovered: [ENDCOLOR]"),
+    ("LOC_MILITARY_ENGINEER_EXCAVATE_NOTHING",                                  "[COLOR:Red]Discover nothing...[ENDCOLOR]"),
 
-    ("LOC_UNIT_HD_BARBARIAN_GALLEY_NAME",                                       "Primitive Galley"),
+    ("LOC_UNIT_CITADEL_OF_GOD_NAME",                                            "Holy Architect"),
+    ("LOC_UNIT_CITADEL_OF_GOD_DESCRIPTION",                                     "Allowed to complete the construction of district by consuming [ICON_Faith] Faith equivalent to twice the [ICON_Production] Production."),
+    ("LOC_CITADEL_OF_GOD_DETAIL",                                               "Consume {1_Num} [ICON_Faith] Faith to complete the construction of {2_DistrictName}."),
+    ("LOC_CITADEL_OF_GOD_NO_DISTRICTS",                                         "[COLOR:Red]Needs to be located on District that is currently under construction.[ENDCOLOR]"),
+    ("LOC_CITADEL_OF_GOD_NO_FAITH",                                             "[COLOR:Red]Insufficient [ICON_Faith] Faith.[ENDCOLOR]"),
+    
+    ("LOC_UNIT_HD_BARBARIAN_GALLEY_NAME",                                       "Barbarian Dinghy"),
     ("LOC_UNIT_HD_BARBARIAN_GALLEY_DESCRIPTION",                                "Ancient era naval raider unit, unique to Barbarians."),
     ("LOC_ESPIONAGE_LEVEL_5_NAME",                                              "Legendary Spy"), 
-    ("LOC_UNIT_HD_BARBARIAN_QUADRIREME_NAME",                                   "Primitive Quadrireme"),
+    ("LOC_UNIT_HD_BARBARIAN_QUADRIREME_NAME",                                   "Barbarian Sailboat"),
     ("LOC_UNIT_HD_BARBARIAN_QUADRIREME_DESCRIPTION",                            "Ancient era naval ranged unit, unique to Barbarians."),
     ("LOC_UNIT_DL_MEDIEVAL_PIRATE_DESCRIPTION",                                 "Medieval era Naval Raider unit."), -- have the ability to coastal raid. Can only be seen by other Naval Raiders unless adjacent to it. Reveals Naval Raiders within sight range."),
     ("LOC_UNIT_PRIVATEER_DESCRIPTION",                                          "Renaissance era Naval Raider unit."), -- ranged naval unit with the ability to coastal raid. Can only be seen by other Naval Raiders unless adjacent to it. Reveals Naval Raiders within sight range."),
     ("LOC_UNIT_SUBMARINE_DESCRIPTION",                                          "Modern era Naval Raider unit."), -- ranged naval unit with the ability to coastal raid. Can only be seen by other Naval Raiders unless adjacent to it. Reveals Naval Raiders within sight range."),
+    ("LOC_UNIT_HD_CANOE_NAME",                                                  "Canoe"),
+    ("LOC_UNIT_HD_CANOE_DESCRIPTION",                                           "Ancient era melee naval combat unit."),
+    ("LOC_UNIT_GALLEY_DESCRIPTION",                                             "Classical era melee naval combat unit."),
+    ("LOC_UNIT_PHOENICIA_BIREME_DESCRIPTION",                                   "Phoenician unique Classical Era unit that replaces the Galley. Increased [ICON_STRENGTH] Combat Strength and [ICON_MOVEMENT] Movement. Trader units are immune to being plundered if they are within 4 tiles of a Bireme and on a water tile."),
     ("LOC_UNIT_NUCLEAR_SUBMARINE_DESCRIPTION",                                  "Highly advanced Information era Naval Raider unit that can be armed with nuclear weapons."),
     ("LOC_UNIT_CATAPULT_DESCRIPTION",                                           "Classical era siege unit, ideal for attacking cities. Gains 1 bonus [ICON_MOVEMENT] Movement if it begins a turn near a light cavalry unit. Cannot move and attack on the same turn unless player has Military Training Civic."),
     ("LOC_UNIT_BOMBARD_DESCRIPTION",                                            "Renaissance era siege unit, ideal for attacking cities. Gains 1 bonus [ICON_MOVEMENT] Movement if it begins a turn near a light cavalry unit. Cannot move and attack on the same turn unless player has Military Training Civic."),
@@ -123,16 +149,34 @@ values
 insert or replace into LocalizedText
     (Language,      Tag,                                                                    Text)
 values
-    ("zh_Hans_CN",  "LOC_UNIT_HD_BARBARIAN_GALLEY_NAME",                                    "原始桨帆船"),
+    -- 军事工程单位
+    ("zh_Hans_CN",  "LOC_UNIT_MILITARY_ENGINEER_ALT_DESCRIPTION",                           "中世纪军事工程单位。[NEWLINE]移动时自动创建道路。可消耗1次劳动力加快运河、堤坝、水渠区域或拦海堤30%的建造进度。可以在火山土上消耗1次劳动力进行“勘探”，有概率获得 [ICON_Gold] 金币或 [ICON_Science] 科技值，也有概率发现新资源或发掘出 [ICON_GREATWORK_RELIC] 遗物。一个单元格内单位回复生命值时+10每回合回复量。[NEWLINE]无视地形、地貌和河流的移动力消耗。"),
+    ("zh_Hans_CN",  "LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_NAME",                      "勘探火山土"),
+    ("zh_Hans_CN",  "LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_DESCRIPTION",               "有概率获得 [ICON_Gold] 金币或 [ICON_Science] 科技值，也有概率发现新资源或发掘出 [ICON_GREATWORK_RELIC] 遗物。"),
+    ("zh_Hans_CN",  "LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_DISABLED",                  "[COLOR:Red]必须位于未建有区域的火山土单元格。[ENDCOLOR]"),
+    ("zh_Hans_CN",  "LOC_UNITCOMMAND_MILITARY_ENGINEER_EXCAVATE_MAX_TIMES",                 "[COLOR:Red]每个火山土单元格最多勘探3次。[ENDCOLOR]"),
+    ("zh_Hans_CN",  "LOC_MILITARY_ENGINEER_EXCAVATE_RESOURCE",                              "[COLOR_LIGHTBLUE]发现新资源：[ENDCOLOR]"),
+    ("zh_Hans_CN",  "LOC_MILITARY_ENGINEER_EXCAVATE_NOTHING",                               "[COLOR:Red]什么都没发现……[ENDCOLOR]"),
+
+    ("zh_Hans_CN",  "LOC_UNIT_HD_BARBARIAN_GALLEY_NAME",                                    "蛮族小艇"),
     ("zh_Hans_CN",  "LOC_UNIT_HD_BARBARIAN_GALLEY_DESCRIPTION",                             "远古时代蛮族部落的海上侦察单位。"),
     ("zh_Hans_CN",  "LOC_ESPIONAGE_LEVEL_5_NAME",                                           "传奇间谍"),
 
-    ("zh_Hans_CN",  "LOC_UNIT_HD_BARBARIAN_QUADRIREME_NAME",                                "原始四段帆船"),
+    ("zh_Hans_CN",  "LOC_UNIT_CITADEL_OF_GOD_NAME",                                         "神圣建筑师"),
+    ("zh_Hans_CN",  "LOC_UNIT_CITADEL_OF_GOD_DESCRIPTION",                                  "允许消耗等同于 [ICON_Production] 生产力两倍的 [ICON_Faith] 信仰值完成区域的建造。"),
+    ("zh_Hans_CN",  "LOC_CITADEL_OF_GOD_DETAIL",                                            "消耗{1_Num} [ICON_Faith] 信仰值，完成{2_DistrictName}的建造。"),
+    ("zh_Hans_CN",  "LOC_CITADEL_OF_GOD_NO_DISTRICTS",                                      "[COLOR:Red]需要位于境内正在建造的区域上。[ENDCOLOR]"),
+    ("zh_Hans_CN",  "LOC_CITADEL_OF_GOD_NO_FAITH",                                          "[COLOR:Red][ICON_Faith] 信仰值不足。[ENDCOLOR]"),
+
+    ("zh_Hans_CN",  "LOC_UNIT_HD_BARBARIAN_QUADRIREME_NAME",                                "蛮族帆船"),
     ("zh_Hans_CN",  "LOC_UNIT_HD_BARBARIAN_QUADRIREME_DESCRIPTION",                         "远古时代蛮族部落的海上远程单位。"),
     ("zh_Hans_CN",  "LOC_UNIT_DL_MEDIEVAL_PIRATE_DESCRIPTION",                              "中世纪时代海军袭击者。"),
     ("zh_Hans_CN",  "LOC_UNIT_PRIVATEER_DESCRIPTION",                                       "文艺复兴时代的海军袭击者。"),
     ("zh_Hans_CN",  "LOC_UNIT_SUBMARINE_DESCRIPTION",                                       "现代海军袭击者。"),
-    ("zh_Hans_CN",  "LOC_UNIT_PHOENICIA_BIREME_DESCRIPTION",                                "腓尼基远古时代特色单位，取代桨帆船，拥有更高战斗力及移动力。位于水域且与双层桨座战船相距4个单元格内的商人可免遭掠夺。"),
+    ("zh_Hans_CN",  "LOC_UNIT_HD_CANOE_NAME",                                               "独木舟"),
+    ("zh_Hans_CN",  "LOC_UNIT_HD_CANOE_DESCRIPTION",                                        "远古时代近战海军战斗单位。"),
+    ("zh_Hans_CN",  "LOC_UNIT_GALLEY_DESCRIPTION",                                          "古典时代近战海军战斗单位。"),
+    ("zh_Hans_CN",  "LOC_UNIT_PHOENICIA_BIREME_DESCRIPTION",                                "腓尼基古典时代特色单位，取代桨帆船，拥有更高战斗力及移动力。位于水域且与双层桨座战船相距4个单元格内的商人可免遭掠夺。"),
     ("zh_Hans_CN",  "LOC_UNIT_NUCLEAR_SUBMARINE_DESCRIPTION",                               "高度发达的信息时代海军袭击者，能配备核武器。"),
     ("zh_Hans_CN",  "LOC_UNIT_CATAPULT_DESCRIPTION",                                        "古典时代攻城单位，适合对城市发起攻击。如果相邻轻骑兵单位开始一个回合，会获得1 [ICON_MOVEMENT] 移动力加成。无法在一回合内移动并攻击（除非玩家已拥有军事训练市政）。"),
     ("zh_Hans_CN",  "LOC_UNIT_BOMBARD_DESCRIPTION",                                         "文艺复兴时代攻城单位，适合对城市发起攻击。如果相邻轻骑兵单位开始一个回合，会获得1 [ICON_MOVEMENT] 移动力加成。无法在一回合内移动并攻击（除非玩家已拥有军事训练市政）。"),

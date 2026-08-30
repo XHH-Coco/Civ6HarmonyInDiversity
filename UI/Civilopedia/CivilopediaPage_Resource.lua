@@ -1,6 +1,13 @@
 -- ===========================================================================
 --	Civilopedia - Resource Page Layout
 -- ===========================================================================
+local cityStateTypes = {}
+for row in GameInfo.CSE_ClassTypes() do
+	cityStateTypes[row.Type] = {
+		row.TypeIcon,
+		Locale.Lookup(row.TypeName)
+	}
+end
 
 PageLayouts["Resource" ] = function(page)
 	local sectionId = page.SectionId;
@@ -133,9 +140,6 @@ PageLayouts["Resource" ] = function(page)
 		end
 	end
 
-
-
-
 	-- Now to the right!
 	AddPortrait("ICON_" .. resourceType);
 
@@ -158,17 +162,27 @@ PageLayouts["Resource" ] = function(page)
 
 		s:AddSeparator();
 
-    -- 行业类型
-    if GameInfo.HDMonopolyResourceEffects then
-      local effectInfo = GameInfo.HDMonopolyResourceEffects[resourceType];
-      if effectInfo then
-        s:AddLabel(Locale.Lookup("LOC_UI_PEDIA_RESOURCES_MONOPOLY_CATEGORY_TEXT", "LOC_HD_PEDIA_CATEGORY_" .. effectInfo.Category .. "_NAME"));
-        -- s:AddLabel(Locale.Lookup("LOC_" .. effectInfo.CorporationEffect .. "_DESCRIPTION"));
-        -- s:AddLabel(Locale.Lookup("LOC_UI_PEDIA_RESOURCES_PRODUCT_EFFECT_TEXT", "LOC_PRODUCT_HD_" .. effectInfo.Category .. "_BONUS_DESCRIPTION"));
-        s:AddSeparator();
-      end
-    end
 	end);
+
+	-- 资源分类
+	local classificationList = ExposedMembers.DLHD.Utils.Resource_Classification_Map[resourceType] or {};
+	local textList = {};
+	for _, classificationType in ipairs(classificationList) do
+		local classificationInfo = GameInfo.HD_ResourceClassificationTypes[classificationType];
+		if classificationInfo and classificationInfo.Display then
+			table.insert(textList, '[ICON_BULLET]' .. Locale.Lookup(classificationInfo.Name))
+		end
+	end
+
+	if #textList > 0 then
+		AddRightColumnStatBox("LOC_PEDIA_HD_RESOURCE_CLASSIFICATIONS_TEXT", function(s)
+			s:AddSeparator();
+			for _, text in ipairs(textList) do
+				s:AddLabel(text);
+			end
+			s:AddSeparator();
+		end)
+	end
 	
 	AddRightColumnStatBox("LOC_UI_PEDIA_REQUIREMENTS", function(s)
 		s:AddSeparator();
@@ -213,6 +227,14 @@ PageLayouts["Resource" ] = function(page)
 				s:AddSeparator();
 			end
 		end
+
+		if(#creators > 0) then
+			s:AddHeader("LOC_UI_PEDIA_CREATED_BY");
+			for i,v in ipairs(creators) do
+				s:AddIconLabel(v[1], v[2]);
+			end
+			s:AddSeparator();
+		end
 		
 		if(#placement_requirements > 0) then
 			s:AddHeader("LOC_UI_PEDIA_PLACEMENT");
@@ -233,16 +255,25 @@ PageLayouts["Resource" ] = function(page)
 		end
 	end);
 
-	AddRightColumnStatBox("LOC_UI_PEDIA_USAGE", function(s)
-		s:AddSeparator();
+	local isCivilizationResource = ExposedMembers.DLHD.Utils.IsResourceHasClassification(resourceType, 'RESOURCE_CLASSIFICATION_CIVILIZATION');
+	local isCityStateResource = ExposedMembers.DLHD.Utils.IsResourceHasClassification(resourceType, 'RESOURCE_CLASSIFICATION_CITYSTATE');
 
-		if(#creators > 0) then
-			s:AddHeader("LOC_UI_PEDIA_CREATED_BY");
-			for i,v in ipairs(creators) do
-				s:AddIconLabel(v[1], v[2]);
-			end
+	if isCityStateResource then
+		AddRightColumnStatBox("LOC_UI_PEDIA_CITY_STATE_TYPE", function(s)
 			s:AddSeparator();
-		end
+
+			local cityStateResourceInfo = GameInfo.HD_CityState_Resources[resourceType];
+			if cityStateResourceInfo then
+				local cityStateTypeInfo = cityStateTypes[cityStateResourceInfo.CityStateType];
+				if cityStateTypeInfo then
+					s:AddIconLabel({cityStateTypeInfo[1], cityStateTypeInfo[2]}, cityStateTypeInfo[2]);
+				end
+			end
+		end);
+	end
+
+	AddRightColumnStatBox("LOC_PEDIA_HD_RESOURCE_IMPROVE_HARVEST_TEXT", function(s)
+		s:AddSeparator();
 
 		if(#improvements > 0) then
 			s:AddHeader("LOC_UI_PEDIA_IMPROVED_BY");
@@ -272,12 +303,83 @@ PageLayouts["Resource" ] = function(page)
 	end);
 
 	-- Left Column!
-  if GameInfo.HDMonopolyResourceEffects then
-    local effectInfo = GameInfo.HDMonopolyResourceEffects[resourceType];
-    if effectInfo then
-      AddChapter("LOC_UI_PEDIA_RESOURCES_MONOPOLY_EFFECT_TEXT", "LOC_" .. effectInfo.CorporationEffect .. "_DESCRIPTION");
-      AddChapter("LOC_UI_PEDIA_RESOURCES_PRODUCT_EFFECT_TEXT", "LOC_PRODUCT_HD_" .. effectInfo.Category .. "_BONUS_DESCRIPTION");
-    end
+  if GameInfo.HD_Monopoly_Resource_Categories then
+		local industryStr = {};
+		local corporationStr = {};
+
+		for row in GameInfo.HD_Monopoly_Resource_Categories() do
+			if row.ResourceType == resourceType then
+				local categoryInfo = GameInfo.HD_Monopoly_Categories[row.Category];
+				if categoryInfo then
+					if categoryInfo.IndustryEffect then
+						table.insert(industryStr, Locale.Lookup('LOC_RESOURCE_CLASSIFICATION_HD_' .. row.Category .. '_NAME') .. Locale.Lookup('LOC_TOOLTIP_HD_COLON_TEXT') .. "[NEWLINE]" .. Locale.Lookup("LOC_" .. categoryInfo.IndustryEffect .. "_DESCRIPTION"));
+					end
+					if categoryInfo.CorporationEffect then
+						table.insert(corporationStr, Locale.Lookup('LOC_RESOURCE_CLASSIFICATION_HD_' .. row.Category .. '_NAME') .. Locale.Lookup('LOC_TOOLTIP_HD_COLON_TEXT') .. "[NEWLINE]" .. Locale.Lookup("LOC_" .. categoryInfo.CorporationEffect .. "_DESCRIPTION"));
+					end
+				end
+			end
+		end
+
+		if #industryStr > 0 then
+			local effectStr = '';
+			for i, str in ipairs(industryStr) do
+				if i > 1 then effectStr = effectStr .. "[NEWLINE][NEWLINE]"; end
+				effectStr = effectStr .. str;
+			end
+			AddChapter("LOC_UI_PEDIA_RESOURCES_INDUSTRY_EFFECT_TEXT", effectStr);
+		end
+
+		if #corporationStr > 0 then
+			local effectStr = '';
+			for i, str in ipairs(corporationStr) do
+				if i > 1 then effectStr = effectStr .. "[NEWLINE][NEWLINE]"; end
+				effectStr = effectStr .. str;
+			end
+			AddChapter("LOC_UI_PEDIA_RESOURCES_CORPORATION_EFFECT_TEXT", effectStr);
+		end
+
+    -- 对应产品的名字、产出、特效
+		local productList = {};
+		local hasAnyProduct = false;
+		for row in GameInfo.GreatWorks() do
+			if row.GreatWorkObjectType == 'GREATWORKOBJECT_PRODUCT' and resourceType == 'RESOURCE_' .. string.sub(row.GreatWorkType, 19, string.len(row.GreatWorkType) - 2) then
+				hasAnyProduct = true;
+				productList[row.GreatWorkType] = {
+					ProductStr = '[ICON_GREATWORK_PRODUCT] ' .. Locale.Lookup(row.Name) .. Locale.Lookup('LOC_TOOLTIP_HD_COLON_TEXT') .. '[NEWLINE]',
+					TourismStr = '[ICON_BULLET]+' .. row.Tourism .. ' [ICON_TOURISM] ' .. Locale.Lookup('LOC_GREAT_WORKS_TOURISM')
+				}
+			end
+		end
+
+		for row in GameInfo.GreatWork_YieldChanges() do
+			if productList[row.GreatWorkType] ~= nil then
+				local yieldInfo = GameInfo.Yields[row.YieldType];
+				productList[row.GreatWorkType].ProductStr = productList[row.GreatWorkType].ProductStr .. '[ICON_BULLET]+' .. row.YieldChange .. ' ' .. yieldInfo.IconString .. ' ' .. Locale.Lookup(yieldInfo.Name) .. '[NEWLINE]';
+			end
+		end
+
+		for _, productInfo in pairs(productList) do
+			productInfo.ProductStr = productInfo.ProductStr .. productInfo.TourismStr;
+		end
+
+		for row in GameInfo.HD_GreatWork_Text() do
+			if productList[row.GreatWorkType] ~= nil then
+				productList[row.GreatWorkType].ProductStr = productList[row.GreatWorkType].ProductStr .. '[NEWLINE][ICON_BULLET]' .. Locale.Lookup(row.Description);
+			end
+		end
+
+		-- TEMPORARY CODE：
+		-- 文明资源 城邦资源 暂时不显示产品
+		-- 等待2.3版本后再显示
+		if hasAnyProduct and not (isCivilizationResource or isCityStateResource) then
+			local productStr = '';
+			for _, productInfo in pairs(productList) do
+				if productStr ~= '' then productStr = productStr .. "[NEWLINE][NEWLINE]"; end
+				productStr = productStr .. productInfo.ProductStr;
+			end
+			AddChapter("LOC_UI_PEDIA_RESOURCES_PRODUCT_EFFECT_TEXT", productStr);
+		end
   end
 
 

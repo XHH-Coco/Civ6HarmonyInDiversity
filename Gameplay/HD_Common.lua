@@ -101,13 +101,6 @@ Utils.SetImprovementType = function(plotID, ImprovementID, OwnerID)
 	ImprovementBuilder.SetImprovementType(plot, ImprovementID, OwnerID)
 end
 
-Utils.AddGreatPeoplePoints = function(playerID, gppID, amount)
-	local player = Players[playerID]
-	if player ~= nil then
-		player:GetGreatPeoplePoints():ChangePointsTotal(gppID, amount)
-	end
-end
-
 Utils.SetUnitExperience = function(playerID, unitID, amount)
 	local unit = UnitManager.GetUnit(playerID, unitID)
 	if unit ~= nil then
@@ -298,7 +291,7 @@ end
 Utils.GetBuildingEra = GetBuildingEra
 
 -- 获取城市正在建造
-function GetCityCurrentlyBuilding(plyerId, cityId)
+function GetCityCurrentlyBuilding(playerId, cityId)
 	local city = CityManager.GetCity(playerId, cityId);
 	return city:GetBuildQueue():CurrentlyBuilding();
 end
@@ -420,18 +413,18 @@ function InitRouteTypeList()
 			table.insert(routeTypeLevelList, routeIndex)
 		end
 
-		print(
-			Locale.Lookup(GameInfo.Eras[eraIndex].Name),
-			Locale.Lookup(GameInfo.Routes[routeIndex].Name)
-		)
+		-- print(
+		-- 	Locale.Lookup(GameInfo.Eras[eraIndex].Name),
+		-- 	Locale.Lookup(GameInfo.Routes[routeIndex].Name)
+		-- )
 	end
 
-	for level, routeIndex in ipairs(routeTypeLevelList) do
-		print(
-			level,
-			Locale.Lookup(GameInfo.Routes[routeIndex].Name)
-		)
-	end
+	-- for level, routeIndex in ipairs(routeTypeLevelList) do
+	-- 	print(
+	-- 		level,
+	-- 		Locale.Lookup(GameInfo.Routes[routeIndex].Name)
+	-- 	)
+	-- end
 end
 InitRouteTypeList()
 
@@ -511,8 +504,8 @@ Utils.IsRowValid = IsRowValid;
 -- 苏美尔 获得特殊任务描述
 local Sumeria_Special_Quest_Tag = 'HD_Sumeria_Special_Quest';
 local m_Sumeria_SpecialQuestList = {};
-function GetSumeriaSpecialQuestDescription(plyerId, citystateId)
-	local player = Players[plyerId]
+function GetSumeriaSpecialQuestDescription(playerId, citystateId)
+	local player = Players[playerId]
 	m_Sumeria_SpecialQuestList = player:GetProperty(Sumeria_Special_Quest_Tag) or {}
 	local specialQuest = m_Sumeria_SpecialQuestList[citystateId]
 	if specialQuest then
@@ -649,18 +642,18 @@ function InitHasAdjacencyDistrictList()
     return;
   end
 
-  print("开始统计有相邻加成的区域")
+  -- print("开始统计有相邻加成的区域")
 
   for row in GameInfo.DistrictCorrespondingYieldType_HD() do
     if row.HasAdjacency == true then
       HasAdjacencyDistrictList[GameInfo.Districts[row.DistrictType].Index] = true;
-      print(Locale.Lookup(GameInfo.Districts[row.DistrictType].Name))
+      -- print(Locale.Lookup(GameInfo.Districts[row.DistrictType].Name))
 
       -- 检测UD
       for rrow in GameInfo.DistrictReplaces() do
         if row.DistrictType == rrow.ReplacesDistrictType then
           HasAdjacencyDistrictList[GameInfo.Districts[rrow.CivUniqueDistrictType].Index] = true;
-          print(Locale.Lookup(GameInfo.Districts[rrow.CivUniqueDistrictType].Name))
+          -- print(Locale.Lookup(GameInfo.Districts[rrow.CivUniqueDistrictType].Name))
         end
       end
     end
@@ -668,36 +661,6 @@ function InitHasAdjacencyDistrictList()
 end
 InitHasAdjacencyDistrictList()
 Utils.HasAdjacencyDistrictList = HasAdjacencyDistrictList;
-
--- 获取城市单元格资源列表
-local function GetCityPlotsResources(playerId, cityId, needImproved)
-	local city = CityManager.GetCity(playerId, cityId);
-	if not city then return {}; end
-
-	local resourceList = {};
-	local cityPlots = city:GetOwnedPlots();
-	for _, plot in pairs(cityPlots) do
-		if plot then
-			local resourceHash = plot:GetResourceTypeHash();
-			if Utils.IsResourceVisible(playerId, resourceHash) then
-				if not needImproved then
-					resourceList[GameInfo.Resources[resourceHash].ResourceType] = true;
-					-- print(Locale.Lookup(city:GetName()) .. ' 拥有 ' .. Locale.Lookup(GameInfo.Resources[resourceHash].Name))
-				else
-					local districtId = plot:GetDistrictType();
-					local improvementId = plot:GetImprovementType();
-					if (districtId ~= nil and districtId > -1) or (improvementId ~= nil and improvementId > -1) then
-						resourceList[GameInfo.Resources[resourceHash].ResourceType] = true;
-						-- print(Locale.Lookup(city:GetName()) .. ' 拥有改良的 ' .. Locale.Lookup(GameInfo.Resources[resourceHash].Name))
-					end
-				end
-			end
-		end
-	end
-
-	return resourceList;
-end
-Utils.GetCityPlotsResources = GetCityPlotsResources;
 
 -- 记录虚拟建筑
 local DummyBuildingList = {};
@@ -709,3 +672,510 @@ function InitDummyBuildings()
 end
 InitDummyBuildings();
 Utils.DummyBuildingList = DummyBuildingList;
+
+-- 资源类型排序 奢侈 > 战略 > 加成 > 其他
+Utils.ResourceClassSortList = {
+	RESOURCECLASS_LUXURY = 0,
+	RESOURCECLASS_STRATEGIC = 1,
+	RESOURCECLASS_BONUS = 2,
+	RESOURCECLASS_ARTIFACT = 3
+};
+
+-- 缓存每种类型对应的资源
+local Classification_Resource_Map = {};
+-- 缓存每种资源对应的类型
+local Resource_Classification_Map = {};
+function InitResourceClassificationList()
+	for row in GameInfo.HD_Resource_Classification() do
+		-- 缓存每种类型对应的资源
+		if Classification_Resource_Map[row.ResourceClassificationType] == nil then
+			Classification_Resource_Map[row.ResourceClassificationType] = {};
+		end
+		table.insert(Classification_Resource_Map[row.ResourceClassificationType], row.ResourceType);
+
+		-- 缓存每种资源对应的类型
+		if Resource_Classification_Map[row.ResourceType] == nil then
+			Resource_Classification_Map[row.ResourceType] = {};
+		end
+		table.insert(Resource_Classification_Map[row.ResourceType], row.ResourceClassificationType);
+	end
+
+	-- 排序
+	for _, list in pairs(Classification_Resource_Map) do
+		table.sort(list, function(a, b)
+			local a_score = Utils.ResourceClassSortList[GameInfo.Resources[a].ResourceClassType] or 100;
+			local b_score = Utils.ResourceClassSortList[GameInfo.Resources[b].ResourceClassType] or 100;
+			return a_score < b_score;
+		end);
+	end
+	
+	for _, list in pairs(Resource_Classification_Map) do
+		table.sort(list, function(a, b)
+			return GameInfo.HD_ResourceClassificationTypes[a].SortIndex < GameInfo.HD_ResourceClassificationTypes[b].SortIndex;
+		end);
+	end
+end
+InitResourceClassificationList();
+Utils.Classification_Resource_Map = Classification_Resource_Map;
+Utils.Resource_Classification_Map = Resource_Classification_Map;
+
+-- 判断某种资源是否是某个分类
+function IsResourceHasClassification(resourceId, classificationType)
+	local resourceInfo = GameInfo.Resources[resourceId];
+	if resourceInfo and Utils.Resource_Classification_Map[resourceInfo.ResourceType] then
+		for _, v in ipairs(Utils.Resource_Classification_Map[resourceInfo.ResourceType]) do
+			if v == classificationType then
+				return true;
+			end
+		end
+	end
+	return false;
+end
+Utils.IsResourceHasClassification = IsResourceHasClassification;
+
+-- 缓存每种改良对应的类型
+local Improvement_Classification_Map = {};
+function InitImprovementClassificationList()
+	for row in GameInfo.HD_Improvement_Classification() do
+		if Improvement_Classification_Map[row.ImprovementType] == nil then
+			Improvement_Classification_Map[row.ImprovementType] = {};
+		end
+		table.insert(Improvement_Classification_Map[row.ImprovementType], row.ImprovementClassificationType);
+	end
+end
+InitImprovementClassificationList()
+Utils.Improvement_Classification_Map = Improvement_Classification_Map;
+
+-- 判断某种改良是否是某个分类
+function IsImprovementHasClassification(improvementId, classificationType)
+	local improvementInfo = GameInfo.Improvements[improvementId];
+	if improvementInfo and Utils.Improvement_Classification_Map[improvementInfo.ImprovementType] then
+		for _, v in ipairs(Utils.Improvement_Classification_Map[improvementInfo.ImprovementType]) do
+			if v == classificationType then
+				return true;
+			end
+		end
+	end
+	return false;
+end
+Utils.IsImprovementHasClassification = IsImprovementHasClassification;
+
+-- 获取城市单元格资源列表
+-- filterParam
+	-- ClassTypeList 加成/奢侈/战略
+	-- ClassificationList 资源分类列表
+	-- NeedImproved 是否需要改良
+local function GetCityPlotsResources(playerId, cityId, filterParam)
+	local city = CityManager.GetCity(playerId, cityId);
+	if not city then return {}; end
+
+	-- 筛选条件参数
+	local classTypeList = {};
+	local classificationList = {};
+	local needImproved = false;
+	if filterParam then
+		classTypeList = filterParam.ClassTypeList or {};
+		classificationList = filterParam.ClassificationList or {};
+		needImproved = filterParam.NeedImproved or false;
+	end
+
+	local resourceList = {};
+	local cityPlots = Utils.GetCityPlots(playerId, cityId);
+	for _, plotId in pairs(cityPlots) do
+		local plot = Map.GetPlotByIndex(plotId);
+		if plot then
+			local resourceId = plot:GetResourceType();
+			if resourceId ~= nil and resourceId ~= -1 and Utils.IsResourceVisible(playerId, resourceId) then
+				local resourceInfo = GameInfo.Resources[resourceId];
+				if resourceInfo then
+					print("=======================================================")
+					print("开始检测：" .. Locale.Lookup(resourceInfo.Name));
+					-- 检查资源类型
+					local meetClassTypeFilter = #classTypeList == 0;
+					for _, classType in ipairs(classTypeList) do
+						meetClassTypeFilter = meetClassTypeFilter or (classType == resourceInfo.ResourceClassType);
+						if meetClassTypeFilter then
+							print('满足资源类型检测：' .. classType);
+							break;
+						end
+					end
+
+					-- 检查资源用途
+					local meetClassificationFilter = #classificationList == 0;
+					for _, classification in ipairs(classificationList) do
+						meetClassificationFilter = meetClassificationFilter or IsResourceHasClassification(resourceId, classification);
+						if meetClassificationFilter then
+							print('满足资源用途检测：' .. classification);
+							break;
+						end
+					end
+
+					-- 检查是否改良
+					local meetImprovedFilter = not needImproved;
+					if needImproved then
+						local districtId = plot:GetDistrictType();
+						local improvementId = plot:GetImprovementType();
+						meetImprovedFilter = (districtId ~= nil and districtId > -1) or (improvementId ~= nil and improvementId > -1);
+						if meetImprovedFilter then
+							print('满足资源改良检测');
+						end
+					end
+
+					-- 满足所有筛选条件
+					if meetClassTypeFilter and meetClassificationFilter and meetImprovedFilter then
+						resourceList[resourceInfo.ResourceType] = true;
+						print(Locale.Lookup(city:GetName()) .. ' 拥有 ' .. Locale.Lookup(resourceInfo.Name))
+					end
+				end
+
+			end
+		end
+	end
+
+	return resourceList;
+end
+Utils.GetCityPlotsResources = GetCityPlotsResources;
+
+-- 获取城市参数
+local function GetCityProperty(playerId, cityId, tag)
+	local city = CityManager.GetCity(playerId, cityId);
+	if not city then return nil; end
+
+	return city:GetProperty(tag);
+end
+Utils.GetCityProperty = GetCityProperty;
+
+-- 获取单位参数
+local function GetUnitProperty(playerId, unitId, tag)
+	local unit = UnitManager.GetUnit(playerId, unitId);
+	if not unit then return nil; end
+
+	return unit:GetProperty(tag);
+end
+Utils.GetUnitProperty = GetUnitProperty;
+
+-- 获得玩家参数
+local function GetPlayerProperty(playerId, tag)
+	local player = Players[playerId];
+	if not player then return nil; end
+
+	return player:GetProperty(tag);
+end
+Utils.GetPlayerProperty = GetPlayerProperty;
+
+-- 获得游戏参数
+local function GetGameProperty(tag)
+	return Game:GetProperty(tag);
+end
+Utils.GetGameProperty = GetGameProperty;
+
+-- 设置玩家property
+local function SetPlayerProperty(playerId, tag, value)
+	local player = Players[playerId];
+	if not player then return; end
+
+	return player:SetProperty(tag, value);
+end
+Utils.SetPlayerProperty = SetPlayerProperty;
+
+-- 宣战
+local function DeclareWarBetweenPlayers(player1Id, player2Id, warId)
+	local player1 = Players[player1Id];
+	if player1 and player1:GetDiplomacy():CanDeclareWarOn(player2Id, warId, true) then
+		player1:GetDiplomacy():DeclareWarOn(player2Id, warId, true);
+		return true;
+	end
+
+	return false;
+end
+Utils.DeclareWarBetweenPlayers = DeclareWarBetweenPlayers;
+
+-- 按权重展开的列表
+local function GetListByWeight(dataList, resultList, dataName)
+	local list = resultList or {};
+	dataName = dataName or 'Data';
+	for _, data in ipairs(dataList) do
+		for i = 1, data.Weight do
+			table.insert(list, data[dataName]);
+		end
+	end
+
+	return list;
+end
+Utils.GetListByWeight = GetListByWeight;
+
+-- 获取已解锁的某个兵种的列表
+local function GetUnlockedUnitListByPromotionClass(playerId, promotionClass, Domain, resultList)
+	local list = resultList or {};
+	local player = Players[playerId];
+	if player then
+		for row in GameInfo.Units() do
+			if row.PromotionClass == promotionClass and
+			(not row.PrereqTech or player:GetTechs():HasTech(GameInfo.Technologies[row.PrereqTech].Index)) and
+			(not row.PrereqCivic or player:GetCulture():HasCivic(GameInfo.Civics[row.PrereqCivic].Index)) and
+			(not Domain or row.Domain == Domain) then
+				table.insert(list, row.Index);
+			end
+		end
+	end
+
+	return list;
+end
+Utils.GetUnlockedUnitListByPromotionClass = GetUnlockedUnitListByPromotionClass;
+
+-- 根据当前世界时代获取某个兵种的列表
+local function GetUnitListByPromotionClassByWorldEra(promotionClass, Domain, resultList)
+	local list = resultList or {};
+
+	for row in GameInfo.Units() do
+		if row.PromotionClass == promotionClass and (not Domain or row.Domain == Domain) then
+			local unitEraIndex = 1;
+			local gameEraIndex = GameInfo.Eras[Game.GetEras():GetCurrentEra()].ChronologyIndex;
+
+			if row.PrereqTech then
+				unitEraIndex = GameInfo.Eras[GameInfo.Technologies[row.PrereqTech].EraType].ChronologyIndex;
+			end
+
+			if row.PrereqCivic then
+				unitEraIndex = GameInfo.Eras[GameInfo.Civics[row.PrereqCivic].EraType].ChronologyIndex;
+			end
+
+			if unitEraIndex <= gameEraIndex then
+				table.insert(list, row.Index);
+				-- print(Locale.Lookup(row.Name))
+			end
+		end
+	end
+
+	return list;
+end
+Utils.GetUnitListByPromotionClassByWorldEra = GetUnitListByPromotionClassByWorldEra;
+
+-- 获取已解锁的某个类型的资源
+local function GetUnlockedResourceListByClass(playerId, resourceClassType)
+	local list = {};
+	local player = Players[playerId];
+
+	if player then
+		for row in GameInfo.Resources() do
+			if row.ResourceClassType == resourceClassType and (row.Frequency ~= 0 or row.SeaFrequency ~= 0) and
+			(not row.PrereqTech or player:GetTechs():HasTech(GameInfo.Technologies[row.PrereqTech].Index)) and
+			(not row.PrereqCivic or player:GetCulture():HasCivic(GameInfo.Civics[row.PrereqCivic].Index)) then
+				table.insert(list, row.Index);
+				-- print(Locale.Lookup(row.Name))
+			end
+		end
+	end
+
+	return list;
+end
+Utils.GetUnlockedResourceListByClass = GetUnlockedResourceListByClass;
+
+-- 获取最近的城市
+local function GetNearestCity(playerId, x, y)
+	local player = Players[playerId];
+
+	local distance;
+	local resultCity;
+
+	if player then
+		for _, city in player:GetCities():Members() do
+			local cityLocation = city:GetLocation();
+			local d = Map.GetPlotDistance(x, y, cityLocation.x, cityLocation.y);
+			if not resultCity then
+				distance = d;
+				resultCity = city:GetID();
+			elseif d < distance then
+				distance = d;
+				resultCity = city:GetID();
+			end
+		end
+	end
+
+	return resultCity;
+end
+Utils.GetNearestCity = GetNearestCity;
+
+-- 记录创作巨作的伟人
+local GreatWorkGreatPersonList = {}
+local function InitGreatWorkGreatPersonList()
+	for row in GameInfo.GreatWorks() do
+		if row.GreatPersonIndividualType ~= nil then
+			GreatWorkGreatPersonList[GameInfo.GreatPersonIndividuals[row.GreatPersonIndividualType].Index] = true;
+		end
+	end
+end
+InitGreatWorkGreatPersonList()
+Utils.GreatWorkGreatPersonList = GreatWorkGreatPersonList;
+
+-- 区域对应伟人点Map 包括特色区域
+local DistrictCorrespondingGPPMap = {};
+local function InitDistrictCorrespondingGPPMap()
+	for row in GameInfo.DistrictCorrespondingGPP_HD() do
+		local data = DistrictCorrespondingGPPMap[row.DistrictType] or {};
+		table.insert(data, row.GreatPersonClassType);
+		DistrictCorrespondingGPPMap[row.DistrictType] = data;
+
+		-- 处理UD
+		for rr in GameInfo.DistrictReplaces() do
+			if rr.ReplacesDistrictType == row.DistrictType then
+				local udData = DistrictCorrespondingGPPMap[rr.CivUniqueDistrictType] or {};
+				table.insert(udData, row.GreatPersonClassType);
+				DistrictCorrespondingGPPMap[rr.CivUniqueDistrictType] = udData;
+			end
+		end
+	end
+end
+InitDistrictCorrespondingGPPMap();
+Utils.DistrictCorrespondingGPPMap = DistrictCorrespondingGPPMap;
+
+-- 历史时刻分类
+local MomentClassificationMap = {};
+function InitMomentClassificationMap()
+	for row in GameInfo.HD_Moment_Classification() do
+		local map = MomentClassificationMap[row.MomentClassificationType] or {};
+		map[row.MomentType] = true;
+		MomentClassificationMap[row.MomentClassificationType] = map;
+	end
+
+	-- Debug
+	-- print('=======================================================================')
+	-- print('文明首次发展类历史记录：')
+	-- for momentType, _ in pairs(MomentClassificationMap['MOMENT_CLASSIFICATION_CIVILIZATION_FIRST']) do
+	-- 	if MomentClassificationMap['MOMENT_CLASSIFICATION_DEVELOPMENT'][momentType] == true then
+	-- 		print(Locale.Lookup(GameInfo.Moments[momentType].Name));
+	-- 	end
+	-- end
+	-- print('=======================================================================')
+	-- print('文明首次发展类历史记录：')
+	-- for momentType, _ in pairs(MomentClassificationMap['MOMENT_CLASSIFICATION_WORLD_FIRST']) do
+	-- 	if MomentClassificationMap['MOMENT_CLASSIFICATION_DEVELOPMENT'][momentType] == true then
+	-- 		print(Locale.Lookup(GameInfo.Moments[momentType].Name));
+	-- 	end
+	-- end
+	-- print('=======================================================================')
+	-- print('文明首次军事类历史记录：')
+	-- for momentType, _ in pairs(MomentClassificationMap['MOMENT_CLASSIFICATION_CIVILIZATION_FIRST']) do
+	-- 	if MomentClassificationMap['MOMENT_CLASSIFICATION_MILITARY'][momentType] == true then
+	-- 		print(Locale.Lookup(GameInfo.Moments[momentType].Name));
+	-- 	end
+	-- end
+	-- print('=======================================================================')
+	-- print('文明首次军事类历史记录：')
+	-- for momentType, _ in pairs(MomentClassificationMap['MOMENT_CLASSIFICATION_WORLD_FIRST']) do
+	-- 	if MomentClassificationMap['MOMENT_CLASSIFICATION_MILITARY'][momentType] == true then
+	-- 		print(Locale.Lookup(GameInfo.Moments[momentType].Name));
+	-- 	end
+	-- end
+	-- print('=======================================================================')
+end
+InitMomentClassificationMap();
+Utils.MomentClassificationMap = MomentClassificationMap;
+
+function ConsumeUnitBuildCharges(playerId, unitId, num)
+	local unit = UnitManager.GetUnit(playerId, unitId);
+	if not unit then return; end
+
+	local unitAbility = unit:GetAbility();
+
+	for j=1, num, 1 do
+		for i=1, 15, 1 do
+			if unitAbility:GetAbilityCount('ABILITY_HD_NEGA_BUILD_CHARGE_' .. i) == 0 then
+				unitAbility:ChangeAbilityCount('ABILITY_HD_NEGA_BUILD_CHARGE_' .. i, 1);
+				break;
+			end
+		end
+	end
+end
+Utils.ConsumeUnitBuildCharges = ConsumeUnitBuildCharges;
+
+-- function PrintResourceData()
+-- 	for row in GameInfo.HD_CityState_Resources() do
+-- 		-- 资源图标
+-- 		-- print("('ICON_" .. row.ResourceType .. "',      'ICON_ATLAS_CITYSTATE_RESOURCES_HD',      " .. row.Index .. "),");
+-- 		-- print("('ICON_" .. row.ResourceType .. "_FOW',  'ICON_ATLAS_CITYSTATE_RESOURCES_HD_FOW',  " .. row.Index .. "),");
+-- 		-- print("('" .. row.ResourceType .. "',           'ICON_ATLAS_CITYSTATE_RESOURCES_HD',      " .. row.Index .. "),");
+-- 		-- print("");
+
+-- 		-- 资源名字
+-- 		-- print('("zh_Hans_CN", "LOC_' .. row.ResourceType .. '_NAME", ""),');
+
+-- 		-- 产品 图标
+-- 		-- print('<Row Name="ICON_MONOPOLIES_AND_CORPS_' .. row.ResourceType .. '"        Atlas="ICON_ATLAS_CITYSTATE_RESOURCES_MONOPOLY_HD" Index="' .. row.Index .. '"/>');
+-- 		-- print('<Row Name="MONOPOLIES_AND_CORPS_' .. row.ResourceType .. '"             Atlas="ICON_ATLAS_CITYSTATE_RESOURCES_MONOPOLY_HD" Index="' .. row.Index .. '"/>');
+-- 		-- print('<Row Name="ICON_PROJECT_CREATE_CORPORATION_PRODUCT_' .. string.gsub(row.ResourceType, "RESOURCE_", "") .. '"   Atlas="ICON_ATLAS_CITYSTATE_RESOURCES_MONOPOLY_HD" Index="' .. row.Index .. '"/>');
+-- 		-- print('<Row Name="ICON_MONOPOLIES_AND_CORPS_' .. row.ResourceType .. '_FOW"    Atlas="ICON_ATLAS_CITYSTATE_RESOURCES_MONOPOLY_HD_FOW" Index="' .. row.Index .. '"/>');
+-- 		-- print('');
+
+-- 		-- 产品项目 名字 描述
+-- 		-- print('("' .. row.ResourceType .. '"),');
+
+-- 		-- 产品 名字
+-- 		-- local num = 6;
+-- 		-- for i=1, num, 1 do
+-- 		-- 	print('("zh_Hans_CN",  "LOC_GREATWORK_PRODUCT_' .. string.gsub(row.ResourceType, "RESOURCE_", "") .. '_' .. i .. '_NAME",                         ""),');
+-- 		-- end
+-- 		-- print('');
+-- 	end
+-- end
+-- PrintResourceData()
+
+-- function PrintImprovementData()
+-- 	for row in GameInfo.Improvements() do
+-- 		local msg = row.ImprovementType .. ' ' .. Locale.Lookup(row.Name);
+-- 		local tourismInfo = GameInfo.Improvement_Tourism[row.ImprovementType];
+-- 		if tourismInfo then
+-- 			msg = msg .. ' ' .. tourismInfo.TourismSource;
+-- 		end
+-- 		print(msg);
+-- 	end
+-- end
+-- PrintImprovementData()
+
+function PrintBinaryCompressKeyData()
+	local compressKeyData = {};
+
+	for row in GameInfo.HD_Binary_Compress_Keys() do
+		compressKeyData[row.Key] = {
+			ResourceNum = 0,
+			ClassificationName = '';
+			PreMaxExp = row.MaxExp
+		};
+	end
+
+	for row in GameInfo.HD_Building_Base_On_ResourceClassification() do
+		local data = compressKeyData[row.PropertyKey];
+		if data then
+			data.ResourceNum = data.ResourceNum + #(Classification_Resource_Map[row.ResourceClassificationType]);
+			data.ClassificationName = data.ClassificationName .. Locale.Lookup('LOC_' .. row.ResourceClassificationType .. '_NAME') .. ' ';
+		end
+	end
+
+	for key, data in pairs(compressKeyData) do
+		if data.ResourceNum > 0 then
+			print('===================================================================')
+			print(key);
+			print('资源用途：' .. data.ClassificationName);
+			print('资源数量：' .. data.ResourceNum);
+			print('原本指数：' .. data.PreMaxExp);
+			local preMax = math.pow(2, data.PreMaxExp + 1) - 1;
+			print('原本上限：' .. preMax);
+			if data.ResourceNum > preMax then
+				print('WARNING 已超过上限');
+			end
+		end
+	end
+end
+-- PrintBinaryCompressKeyData();
+
+-- 缓存城邦资源
+local CityStateResourceMap = {};
+function InitCityStateResourceMap()
+	for row in GameInfo.HD_CityState_Resources() do
+		local map = CityStateResourceMap[row.CityStateType] or {};
+		table.insert(map, row.ResourceType);
+		CityStateResourceMap[row.CityStateType] = map;
+	end
+end
+InitCityStateResourceMap();
+Utils.CityStateResourceMap = CityStateResourceMap;

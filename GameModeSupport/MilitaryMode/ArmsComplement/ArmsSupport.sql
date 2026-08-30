@@ -11,7 +11,7 @@ values
 insert or replace into TypeTags
     (Type,                                              Tag)
 values
-    ("ABILITY_ENGINEER_HEAL_HD",                        "CLASS_MILITARY_ENGINEER");
+    ("ABILITY_ENGINEER_HEAL_HD",                        "CLASS_MILITARY_ENGINEERING_UNITS");
 
 insert or replace into UnitAbilityModifiers
     (UnitAbilityType,                                   ModifierId)
@@ -33,9 +33,6 @@ values
 With Unit_BuildingPrereqs_Pre
     (Unit,PrereqBuilding)
 as (values
-      ("UNIT_SAPPER","BUILDING_JNR_TARGET_RANGE"),
-      ("UNIT_SAPPER","BUILDING_BASILIKOI_PAIDES"),
-      ("UNIT_SAPPER","BUILDING_ORDU"),
       ("UNIT_ENGINEER_CORP","BUILDING_JNR_ARSENAL"),
       ("UNIT_ENGINEER_CORP","BUILDING_JNR_PRISON"),
       ("UNIT_ENGINEER_CORP","BUILDING_JNR_NAVAL_BASE"))

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Mod id="521b8777-0977-4859-a5ee-3e411a732e5c" version="2.0">
+<Mod id="521b8777-0977-4859-a5ee-3e411a732e5c" version="2.2">
   <Properties>
     <Name>LOC_HARMONY_IN_DIVERSITY_NAME</Name>
     <Description>LOC_HARMONY_IN_DIVERSITY_DESCRIPTION</Description>
@@ -16,16 +16,16 @@
   <!-- 模组文本 -->
   <LocalizedText>
     <Text id="LOC_HARMONY_IN_DIVERSITY_NAME">
-      <en_US>[COLOR_Civ6LightBlue]Harmony in Diversity v2.0: Civ6 Plus[ENDCOLOR]</en_US>
-      <zh_Hans_CN>[COLOR_Civ6LightBlue]【和而不同 v2.0】文明6 Plus[ENDCOLOR]</zh_Hans_CN>
+      <en_US>[COLOR_Civ6LightBlue]Harmony in Diversity v2.2: Civ6 Plus[ENDCOLOR]</en_US>
+      <zh_Hans_CN>[COLOR_Civ6LightBlue]【和而不同 v2.2】文明6 Plus[ENDCOLOR]</zh_Hans_CN>
     </Text>
     <Text id="LOC_HARMONY_IN_DIVERSITY_TEASER">
-      <en_US>Create a brand new Civ6. Current Version v2.0.</en_US>
-      <zh_Hans_CN>创造一个全新的文明6。当前版本为v2.0。</zh_Hans_CN>
+      <en_US>Create a brand new Civ6. Current Version v2.2.</en_US>
+      <zh_Hans_CN>创造一个全新的文明6。当前版本为v2.2。</zh_Hans_CN>
     </Text>
     <Text id="LOC_HARMONY_IN_DIVERSITY_DESCRIPTION">
-      <en_US>Civ6 Plus: Harmony in Diversity. Building on the spirit of diversity from Harmony in Diversity I, this expansion introduces a wealth of new mechanics, technologies, cultures, and Great People—crafted to deliver distinct playstyles and civilizations, offering passionate Civilization VI players a thoroughly refreshed experience. [NEWLINE]Current version is v2.0.</en_US>
-      <zh_Hans_CN>文明6 Plus: 和而不同2.0。继承了和而不同1代百花齐放的精神，新增了大量新机制、科技、文化和伟人，意图打造丰富而各具特色的玩法和文明，为热爱文明6的友好玩家们带来全新的游戏体验。当前版本为v2.0。 [NEWLINE][NEWLINE]特别鸣谢1代制作组：DeepLogic, 小灰灰, 小小雨10101, 六亿神州尽舜尧, 傲娇的红莉栖, 利牙菠萝, 陈又, YT, wltk, 黑毛毛小魔仙, 柚子, Winged Hussar, o(╯□╰)o, 咸鱼喵, 笑笑, 时代的先驱, 五年, wlhxzwa, 阿伟, 榖音, 奥伊米亚, 凯欧利, 音痴痴c, 戴胜, Blood_Moon, Kekeya, 话心, 亚瑟, Yogomove, 美菲拉斯, xubwa, 镜花水月, 小河, 法拉墨, Vearmus, lp, Siv, 流浪de蒲公英</zh_Hans_CN>
+      <en_US>Civ6 Plus: Harmony in Diversity 2.2. Building on the spirit of diversity from Harmony in Diversity I, this expansion introduces a wealth of new mechanics, technologies, cultures, and Great People—crafted to deliver distinct playstyles and civilizations, offering passionate Civilization VI players a thoroughly refreshed experience. [NEWLINE]Current version is v2.2.</en_US>
+      <zh_Hans_CN>文明6 Plus: 和而不同2.2。继承了和而不同1代百花齐放的精神，新增了大量新机制、科技、文化和伟人，意图打造丰富而各具特色的玩法和文明，为热爱文明6的友好玩家们带来全新的游戏体验。当前版本为v2.2。 [NEWLINE][NEWLINE]特别鸣谢1代制作组：DeepLogic, 小灰灰, 小小雨10101, 六亿神州尽舜尧, 傲娇的红莉栖, 利牙菠萝, 陈又, YT, wltk, 黑毛毛小魔仙, 柚子, Winged Hussar, o(╯□╰)o, 咸鱼喵, 笑笑, 时代的先驱, 五年, wlhxzwa, 阿伟, 榖音, 奥伊米亚, 凯欧利, 音痴痴c, 戴胜, Blood_Moon, Kekeya, 话心, 亚瑟, Yogomove, 美菲拉斯, xubwa, 镜花水月, 小河, 法拉墨, Vearmus, lp, Siv, 流浪de蒲公英</zh_Hans_CN>
     </Text>
     <Text id="LOC_HARMONY_IN_DIVERSITY_AUTHORS">
       <en_US>Xhh, C, Wei, Apry, Siv, Fox</en_US>
@@ -156,17 +156,17 @@
       <RuleSetInUse>RULESET_EXPANSION_2</RuleSetInUse>
       <ModInUse>9f162187-9342-47ca-9085-78fc3f80f25d</ModInUse>
     </Criteria>
-    <Criteria id="CityPolicies_With_Suk">
+    <Criteria id="Suk_NotreDame_Expansion2">
+      <RuleSetInUse>RULESET_EXPANSION_2</RuleSetInUse>
+      <ModInUse>2217fddf-b466-45e1-950c-fc3747f076b6</ModInUse>
+    </Criteria>
+    <Criteria id="Suk_Simple_UI_Adjustments">
       <RuleSetInUse>RULESET_EXPANSION_2</RuleSetInUse>
       <ModInUse>805cc499-c534-4e0a-bdce-32fb3c53ba38</ModInUse>
     </Criteria>
     <Criteria id="BetterTradeScreen_Expansion2">
       <RuleSetInUse>RULESET_EXPANSION_2</RuleSetInUse>
       <ModInUse>8d4fa23a-ef43-440c-8422-2bec11f8f5d7</ModInUse>
-    </Criteria>
-    <Criteria id="BetterBuilderChargesTracking_Conflict_Expansion2">
-      <RuleSetInUse>RULESET_EXPANSION_2</RuleSetInUse>
-      <ModInUse inverse="1">c6477d9f-6bad-4d24-9e76-49cda4f0a966</ModInUse>
     </Criteria>
     <Criteria id="Civitas_CityStates_Conflict_Expansion2">
       <RuleSetInUse>RULESET_EXPANSION_2</RuleSetInUse>
@@ -235,7 +235,7 @@
     </Criteria>
     <Criteria id="TempleOfHeaven_Expansion2">
       <RuleSetInUse>RULESET_EXPANSION_2</RuleSetInUse>
-      <ModInUse>943808b8-5913-4cfc-93a8-0d5d4a0bc4af</ModInUse>
+      <ModInUse>32b57a0b-9e64-4409-ad83-d40235860b9b</ModInUse>
     </Criteria>
     <Criteria id="WatArun_Expansion2">
       <RuleSetInUse>RULESET_EXPANSION_2</RuleSetInUse>
@@ -467,6 +467,10 @@
       <ModInUse>4873eb62-8ccc-4574-b784-dda455e74e68</ModInUse>
       <ModInUse>eaffc7c2-21d2-47e5-a060-ae55780d1337</ModInUse>
     </Criteria>
+    <!-- 标题汉化 -->
+    <Criteria id="ModsTitleLocalization">
+      <ModInUse>107a9043-4c73-4d5b-8007-79b55f19ba4a</ModInUse>
+    </Criteria>
   </ActionCriteria>
 
   <!-- 前端内容加载 -->
@@ -565,10 +569,13 @@
       <Properties><LoadOrder>16019</LoadOrder></Properties>
       <File>UI/Icons/HD_Icons.xml</File>
       <File>UI/Icons/DL_Icons_Frontend.xml</File>
+      <File>UI/Icons/DL_Icons_Districts.xml</File>
     </UpdateIcons>
     <UpdateText id="SukOceans_mod_support_text">
       <Properties><LoadOrder>17000</LoadOrder></Properties>
       <File>ModSupport/SukOceans/HD_Texts.sql</File>
+    <File>ModSupport/SukOceans/Suk_MapConvolution.lua</File>
+    <File>ModSupport/SukOceans/Suk_ResourceGenerator.lua</File>
     </UpdateText>
     <UpdateText id="Savannah_mod_support_text">
       <Properties><LoadOrder>30000</LoadOrder></Properties>
@@ -595,8 +602,27 @@
       <File>UI/Replacement/StagingRoom.lua</File>
       <File>UI/Replacement/PlayerSetupLogic.lua</File>
     </ImportFiles>
+    <!-- 标题汉化 -->
+    <ImportFiles id="HD_Mod_Version_Checker" criteria="ModsTitleLocalization">
+      <Properties><LoadOrder>10001</LoadOrder></Properties>
+      <File>UI/Replacement/mods.lua</File>
+    </ImportFiles>
     <ImportFiles id="HD_Assets">
       <Properties><LoadOrder>1</LoadOrder></Properties>
+      <File>Assets/Maps/HD_ContinentsAndIslands.dds</File>
+      <File>Assets/Maps/HD_Forest_Highlands.dds</File>
+      <File>Assets/Maps/HD_Frozen_Continents.dds</File>
+      <File>Assets/Maps/HD_Great_Sand_Sea.dds</File>
+      <File>Assets/Maps/HD_Great_Steppe.dds</File>
+      <File>Assets/Maps/HD_New_Highlands.dds</File>
+      <File>Assets/Maps/HD_Northern_Mountains.dds</File>
+      <File>Assets/Maps/HD_Regular_Pangaea.dds</File>
+      <File>Assets/Maps/HD_Rivers.dds</File>
+      <File>Assets/Maps/HD_Rivers_And_Lakes.dds</File>
+      <File>Assets/Maps/HD_Tiny_Islands.dds</File>
+      <File>Assets/Maps/HD_Tiny_Lakes.dds</File>
+      <File>Assets/Maps/HD_Wet_Lakes.dds</File>
+      <File>Assets/Maps/HD_Wet_Lakes2.dds</File>
       <File>Assets/CityStates/CivBaikonur_22.dds</File>
       <File>Assets/CityStates/CivBaikonur_30.dds</File>
       <File>Assets/CityStates/CivBaikonur_32.dds</File>
@@ -610,24 +636,26 @@
       <File>Assets/CityStates/CivBaikonur_128.dds</File>
       <File>Assets/CityStates/CivBaikonur_200.dds</File>
       <File>Assets/CityStates/CivBaikonur_256.dds</File>
-      <File>Assets/Buildings/New_Buildings_32.dds</File>
-      <File>Assets/Buildings/New_Buildings_38.dds</File>
-      <File>Assets/Buildings/New_Buildings_50.dds</File>
-      <File>Assets/Buildings/New_Buildings_80.dds</File>
-      <File>Assets/Buildings/New_Buildings_128.dds</File>
-      <File>Assets/Buildings/New_Buildings_256.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_32.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_38.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_50.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_80.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_128.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_256.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_22.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_32.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_38.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_50.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_80.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_256.dds</File>
+      <File>Assets/Buildings/HD_Buildings_32.dds</File>
+      <File>Assets/Buildings/HD_Buildings_38.dds</File>
+      <File>Assets/Buildings/HD_Buildings_50.dds</File>
+      <File>Assets/Buildings/HD_Buildings_80.dds</File>
+      <File>Assets/Buildings/HD_Buildings_128.dds</File>
+      <File>Assets/Buildings/HD_Buildings_256.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_22.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_32.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_38.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_50.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_80.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_128.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_256.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_FOW_256.dds</File>
     </ImportFiles>
     <!-- Suk wonders -->
     <UpdateText id="Suk_wonders_text">
@@ -649,6 +677,20 @@
     </UpdateAudio>
     <ImportFiles id="HD_Assets" criteria="Expansion2">
       <Properties><LoadOrder>1</LoadOrder></Properties>
+      <File>Assets/Maps/HD_ContinentsAndIslands.dds</File>
+      <File>Assets/Maps/HD_Forest_Highlands.dds</File>
+      <File>Assets/Maps/HD_Frozen_Continents.dds</File>
+      <File>Assets/Maps/HD_Great_Sand_Sea.dds</File>
+      <File>Assets/Maps/HD_Great_Steppe.dds</File>
+      <File>Assets/Maps/HD_New_Highlands.dds</File>
+      <File>Assets/Maps/HD_Northern_Mountains.dds</File>
+      <File>Assets/Maps/HD_Regular_Pangaea.dds</File>
+      <File>Assets/Maps/HD_Rivers.dds</File>
+      <File>Assets/Maps/HD_Rivers_And_Lakes.dds</File>
+      <File>Assets/Maps/HD_Tiny_Islands.dds</File>
+      <File>Assets/Maps/HD_Tiny_Lakes.dds</File>
+      <File>Assets/Maps/HD_Wet_Lakes.dds</File>
+      <File>Assets/Maps/HD_Wet_Lakes2.dds</File>
       <File>Assets/TechCivics/HDCivicIcons_38.dds</File>
       <File>Assets/TechCivics/HDCivicIcons_42.dds</File>
       <File>Assets/TechCivics/HDCivicIcons_128.dds</File>
@@ -671,30 +713,26 @@
       <File>Assets/TechCivics/New_Tech_Civic_128.dds</File>
       <File>Assets/TechCivics/New_Tech_Civic_160.dds</File>
       <File>Assets/TechCivics/New_Tech_Civic_FOW_42.dds</File>
-      <File>Assets/Buildings/New_Buildings_32.dds</File>
-      <File>Assets/Buildings/New_Buildings_38.dds</File>
-      <File>Assets/Buildings/New_Buildings_50.dds</File>
-      <File>Assets/Buildings/New_Buildings_80.dds</File>
-      <File>Assets/Buildings/New_Buildings_128.dds</File>
-      <File>Assets/Buildings/New_Buildings_256.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_32.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_38.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_50.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_80.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_128.dds</File>
-      <File>Assets/Buildings/New_Buildings_2_256.dds</File>
-      <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_32.dds</File>
-      <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_38.dds</File>
-      <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_50.dds</File>
-      <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_80.dds</File>
-      <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_128.dds</File>
-      <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_256.dds</File>
       <File>Assets/Buildings/Mod_Icon_Fix_32.dds</File>
       <File>Assets/Buildings/Mod_Icon_Fix_38.dds</File>
       <File>Assets/Buildings/Mod_Icon_Fix_50.dds</File>
       <File>Assets/Buildings/Mod_Icon_Fix_80.dds</File>
       <File>Assets/Buildings/Mod_Icon_Fix_128.dds</File>
       <File>Assets/Buildings/Mod_Icon_Fix_256.dds</File>
+      <File>Assets/Buildings/HD_Buildings_32.dds</File>
+      <File>Assets/Buildings/HD_Buildings_38.dds</File>
+      <File>Assets/Buildings/HD_Buildings_50.dds</File>
+      <File>Assets/Buildings/HD_Buildings_80.dds</File>
+      <File>Assets/Buildings/HD_Buildings_128.dds</File>
+      <File>Assets/Buildings/HD_Buildings_256.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_22.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_32.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_38.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_50.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_80.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_128.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_256.dds</File>
+      <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_FOW_256.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_22.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_32.dds</File>
       <File>Assets/Units/HD_NEW_UNITS_38.dds</File>
@@ -771,21 +809,13 @@
       <File>Assets/CityStates/CivBaikonur_256.dds</File>
       <File>Assets/GreatPeople/GreatPeople_ZhuangZhou_160.dds</File>
       <File>Assets/GreatPeople/GreatPeople_SiNaQian_160.dds</File>
-      <File>Assets/Wetlands/HD_Peat_22.dds</File>
-      <File>Assets/Wetlands/HD_Peat_32.dds</File>
-      <File>Assets/Wetlands/HD_Peat_38.dds</File>
-      <File>Assets/Wetlands/HD_Peat_50.dds</File>
-      <File>Assets/Wetlands/HD_Peat_64.dds</File>
-      <File>Assets/Wetlands/HD_Peat_80.dds</File>
-      <File>Assets/Wetlands/HD_Peat_128.dds</File>
-      <File>Assets/Wetlands/HD_Peat_256.dds</File>
-      <File>Assets/Wetlands/HD_Peat_FOW_256.dds</File>
       <File>Assets/Moments/UNIT_KEQING_MONMENT.dds</File>
       <File>Assets/Moments/UNIT_ENKIDU_HD_MONMENT.dds</File>
       <File>Assets/Moments/UNIT_QIN_ELITE_SOLDIER_HD_MONMENT.dds</File>
       <File>Assets/Moments/UNIT_PLUM_INTERNAL_SECURITY_HD_MONMENT.dds</File>
-      <File>Assets/Moments/BUILDING_HD_PIT_DWELLING_MONMENT.dds</File>
+      <File>Assets/Moments/UNIT_HD_BANDEIRANTES_MONMENT.dds</File>
       <File>Assets/Moments/BUILDING_EL_ESCORIAL_PALACE_MOMENT.dds</File>
+      <File>Assets/Moments/BUILDING_HD_WORLD_PARLIAMENT_HEADQUARTERS_MONMENT.dds</File>
       <File>Assets/GreatPeople/GREAT_PERSON_INDIVIDUAL_ABDUS_SALAM.dds</File>
       <File>Assets/GreatPeople/GREAT_PERSON_INDIVIDUAL_CWON_CARAVAGGIO.dds</File>
       <File>Assets/GreatPeople/GREAT_PERSON_INDIVIDUAL_CWON_DANTE.dds</File>
@@ -814,36 +844,33 @@
       <File>Assets/GreatWorks/New_Greatworks_256.dds</File>
       <File>Assets/Notifications/HD_Notifications_40.dds</File>
       <File>Assets/Notifications/HD_Notifications_100.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_22.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_38.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_50.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_64.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_256.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_FOW_256.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_22.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_32.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_38.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_50.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_64.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_256.dds</File>
-      <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_FOW_256.dds</File>
+      <File>Assets/Resources/HD_Resources_22.dds</File>
+      <File>Assets/Resources/HD_Resources_32.dds</File>
+      <File>Assets/Resources/HD_Resources_38.dds</File>
+      <File>Assets/Resources/HD_Resources_50.dds</File>
+      <File>Assets/Resources/HD_Resources_64.dds</File>
+      <File>Assets/Resources/HD_Resources_256.dds</File>
+      <File>Assets/Resources/HD_Resources_FOW_256.dds</File>
+      <File>Assets/Resources/HD_Resources_Monopoly_22.dds</File>
+      <File>Assets/Resources/HD_Resources_Monopoly_32.dds</File>
+      <File>Assets/Resources/HD_Resources_Monopoly_38.dds</File>
+      <File>Assets/Resources/HD_Resources_Monopoly_50.dds</File>
+      <File>Assets/Resources/HD_Resources_Monopoly_64.dds</File>
+      <File>Assets/Resources/HD_Resources_Monopoly_256.dds</File>
+      <File>Assets/Resources/HD_Resources_Monopoly_FOW_256.dds</File>
+      <File>Assets/Resources/HD_CityState_Resources_22.dds</File>
+      <File>Assets/Resources/HD_CityState_Resources_32.dds</File>
+      <File>Assets/Resources/HD_CityState_Resources_38.dds</File>
+      <File>Assets/Resources/HD_CityState_Resources_50.dds</File>
+      <File>Assets/Resources/HD_CityState_Resources_64.dds</File>
+      <File>Assets/Resources/HD_CityState_Resources_256.dds</File>
+      <File>Assets/Resources/HD_CityState_Resources_FOW_256.dds</File>
+      <File>Assets/CityButtons/CityButtons_32.dds</File>
+      <File>Assets/Commemorations/HD_Commemorations_86.dds</File>
+      <File>Assets/Commemorations/HD_Commemorations_256.dds</File>
+      <File>Assets/CustomEvents/HD_SCOTLAND_SELECTIONS_256.dds</File>
+      <File>Assets/HD_BLANK_38.dds</File>
     </ImportFiles>
-    <ImportFiles id="Resouceful2_Adapt_Import" criteria="Resouceful2_Expansion2">
-      <Properties><LoadOrder>1</LoadOrder></Properties>
-      <File>Assets/Resourceful2/Resourceful2_New_22.dds</File>
-      <File>Assets/Resourceful2/Resourceful2_New_32.dds</File>
-      <File>Assets/Resourceful2/Resourceful2_New_38.dds</File>
-      <File>Assets/Resourceful2/Resourceful2_New_50.dds</File>
-      <File>Assets/Resourceful2/Resourceful2_New_64.dds</File>
-      <File>Assets/Resourceful2/Resourceful2_New_128.dds</File>
-      <File>Assets/Resourceful2/Resourceful2_New_256.dds</File>
-      <File>Assets/Resourceful2/Resourceful2_New_FOW_256.dds</File>
-    </ImportFiles>
-    <!-- Fix Icon -->
-    <UpdateIcons id="FixIcons" criteria="Expansion2">
-      <Properties><LoadOrder>2</LoadOrder></Properties>
-      <File>UI/Icons/DL_Icons_Fixing.sql</File>
-    </UpdateIcons>
     <!-- UI -->
     <ImportFiles id="DL_Overwrite_Files_Import" criteria="Expansion2">
       <Properties><LoadOrder>1</LoadOrder></Properties>
@@ -862,6 +889,9 @@
 	    <File>UI/Civilopedia/CivilopediaPage_CityState.lua</File>
 	    <File>UI/Civilopedia/CivilopediaPage_Commemoration.lua</File>
       <File>UI/Civilopedia/CivilopediaPage_Resource.lua</File>
+      <File>UI/Civilopedia/CivilopediaPage_Improvement.lua</File>
+      <File>UI/Civilopedia/CivilopediaPage_Route.lua</File>
+      <File>UI/Civilopedia/CivilopediaPage_ResourceUsage.lua</File>
     </ImportFiles>
     <ImportFiles id="CityStatesDiversity_BST_Import" criteria="Expansion2">
       <Properties><LoadOrder>5000</LoadOrder></Properties>
@@ -895,10 +925,14 @@
       <File>UI/Replacement/DL_WorldViewIconsManager.lua</File>
       <File>UI/Replacement/DL_UnitPanel.lua</File>
       <File>UI/Replacement/HD_WorldInput.lua</File>
-      <File>UI/Replacement/DL_TechCivicCompletedPopup.lua</File>
+      <File>UI/Replacement/TechCivicCompletedPopup.lua</File>
       <File>UI/Replacement/TechTreeNode.xml</File>
       <File>UI/Replacement/DL_TechTree.lua</File>
       <File>UI/Replacement/CivicsTree.xml</File>
+      <File>UI/Replacement/TechTree.xml</File>
+      <File>UI/Replacement/ResearchChooser.xml</File>
+      <File>UI/Replacement/WorldTrackerResearch.xml</File>
+      <File>UI/Replacement/CivicUnlockIcon.xml</File>
       <File>UI/Replacement/DL_CivicsTree.lua</File>
       <File>UI/Additions/HD_UnitCommandDefs.lua</File>
       <File>UI/Additions/HD_Utils.lua</File>
@@ -916,7 +950,24 @@
       <File>UI/Custom/NotificationPanel_Misc.lua</File>
       <File>UI/Replacement/HD_ActionPanel.lua</File>
       <File>UI/Replacement/PlayerSetupLogic.lua</File>
+      <File>UI/Replacement/ProductionPanel.xml</File>
+      <File>UI/Replacement/UnitFlagManager_UpdateReligionIcon.lua</File>
+      <File>UI/Replacement/GreatWorksSupport.lua</File>
+      <File>UI/Replacement/GovernorPanel.xml</File>
+      <File>UI/Replacement/GovernorPanel.lua</File>
+      <File>UI/Replacement/GovernorDetailsPanel.xml</File>
+      <File>UI/Replacement/GovernorDetailsPanel.lua</File>
+      <File>UI/Replacement/TechAndCivicSupport.lua</File>
+      <File>UI/Replacement/TechAndCivicUnlockables_HD.lua</File>
+      <File>UI/Replacement/InGameTopOptionsMenu.lua</File>
     </ImportFiles>
+    <ReplaceUIScript id="UpdateReligionIcon_UnitFlagManager">
+      <Properties>
+        <LoadOrder>150000</LoadOrder>
+        <LuaContext>UnitFlagManager</LuaContext>
+        <LuaReplace>UI/Replacement/UnitFlagManager_UpdateReligionIcon.lua</LuaReplace>
+      </Properties>
+    </ReplaceUIScript>
     <ReplaceUIScript id="HD_ActionPanel" criteria="Expansion2">
 			<Properties>
         <LoadOrder>150000</LoadOrder>
@@ -931,6 +982,10 @@
     <ImportFiles id="HD_BetterReportScreen_Override_Import" criteria="BetterReportScreen_Override_Expansion2">
       <Properties><LoadOrder>150000</LoadOrder></Properties>
       <File>UI/Replacement/RealModifierAnalysis.lua</File>
+      <File>UI/Replacement/BRSPage_Resources.lua</File>
+      <File>UI/Replacement/BRSPage_ResourceClassifications.lua</File>
+      <File>UI/Replacement/reportscreen.lua</File>
+      <File>UI/Replacement/reportscreen.xml</File>
     </ImportFiles>
     <AddUserInterfaces id="DL_Custom_Interface" criteria="Expansion2">
       <Properties>
@@ -941,6 +996,10 @@
       <File>UI/Custom/Potala_Panel.xml</File>
       <File>UI/Custom/China_NotificationManager.xml</File>
       <File>UI/Custom/China_Panel.xml</File>
+      <File>UI/Custom/CityButton_ResourceClassification.xml</File>
+      <File>UI/Custom/CityButton_RegionalYields.xml</File>
+      <File>UI/Custom/CityButton_Magnanimous.xml</File>
+      <File>UI/Custom/CityButton_Misc.xml</File>
     </AddUserInterfaces>
     <ReplaceUIScript id="DL_CityPanelOverview" criteria="Expansion2">
       <Properties>
@@ -1022,7 +1081,7 @@
       <Properties>
         <LoadOrder>150000</LoadOrder>
         <LuaContext>TechCivicCompletedPopup</LuaContext>
-        <LuaReplace>UI/Replacement/DL_TechCivicCompletedPopup.lua</LuaReplace>
+        <LuaReplace>UI/Replacement/TechCivicCompletedPopup.lua</LuaReplace>
       </Properties>
     </ReplaceUIScript>
     <ReplaceUIScript id="DL_TechTree" criteria="Expansion2">
@@ -1054,6 +1113,10 @@
       </Properties>
     </ReplaceUIScript>
     <!-- Mod Support -->
+    <UpdateDatabase id="HD_BetterReportScreen_Database" criteria="BetterReportScreen_Override_Expansion2">
+      <Properties><LoadOrder>15001</LoadOrder></Properties>
+      <File>ModSupport/BetterReportScreen/ReportsListLoader.sql</File>
+    </UpdateDatabase>
     <UpdateDatabase id="Worships_mod_support_removes" criteria="Worships_Expansion2">
       <Properties><LoadOrder>15001</LoadOrder></Properties>
       <File>ModSupport/Worships/DL_Removes.sql</File>
@@ -1077,7 +1140,7 @@
     </AddGameplayScripts>
     <!-- Wetlands -->
     <UpdateDatabase id="WetLands_mod_support_removes" criteria="WetLands_Expansion2">
-      <Properties><LoadOrder>15003</LoadOrder></Properties>
+      <Properties><LoadOrder>12000</LoadOrder></Properties>
       <File>ModSupport/WetLands/DL_Removes.sql</File>
     </UpdateDatabase>
     <UpdateDatabase id="WetLands_mod_support" criteria="WetLands_Expansion2">
@@ -1110,14 +1173,18 @@
       <Properties><LoadOrder>17000</LoadOrder></Properties>
       <File>ModSupport/SukOceans/HD_Texts.sql</File>
     </UpdateText>
+    <!-- 顶掉上游两个会崩的 Lua。include 按文件名解析，同名文件后加载的赢，
+         所以 LoadOrder 要压过创意工坊那份。生成方式见 tools/vendor_suk_oceans.py，
+         等价性由 tools/maptest/suk.lua 逐格证明。 -->
+    <ImportFiles id="SukOceans_lua_override" criteria="Suk_Oceans_Rework_Expansion2">
+      <Properties><LoadOrder>10000000</LoadOrder></Properties>
+      <File>ModSupport/SukOceans/Suk_MapConvolution.lua</File>
+      <File>ModSupport/SukOceans/Suk_ResourceGenerator.lua</File>
+    </ImportFiles>
     <!-- JNR Savannah -->
     <UpdateDatabase id="Savannah_mod_support" criteria="JNR_Savannah_Expansion2">
       <Properties><LoadOrder>17000</LoadOrder></Properties>
       <File>ModSupport/Savannah/DL_Adaptation.sql</File>
-    </UpdateDatabase>
-    <UpdateDatabase id="Savannah_mod_support" criteria="JNR_Savannah_Expansion2">
-      <Properties><LoadOrder>16011</LoadOrder></Properties>
-      <File>ModSupport/Savannah/Belief.sql</File>
     </UpdateDatabase>
     <UpdateDatabase id="Savannah_Vietnam_mod_support" criteria="Savannah_And_Vietnam_Expansion2">
       <Properties><LoadOrder>17000</LoadOrder></Properties>
@@ -1162,6 +1229,10 @@
       <Properties><LoadOrder>17000</LoadOrder></Properties>
       <File>ModSupport/Wonders/Wonder_Temple_of_Heaven.sql</File>
     </UpdateDatabase>
+    <UpdateDatabase id="Wonder_temple_of_heaven_support_late" criteria="TempleOfHeaven_Expansion2">
+      <Properties><LoadOrder>100001</LoadOrder></Properties>
+      <File>ModSupport/Wonders/Wonder_Temple_of_Heaven_Late.sql</File>
+    </UpdateDatabase>
     <UpdateDatabase id="Wonder_wat_arun_support" criteria="WatArun_Expansion2">
       <!-- After the main part -->
       <Properties><LoadOrder>17000</LoadOrder></Properties>
@@ -1189,7 +1260,7 @@
       <Properties><LoadOrder>17000</LoadOrder></Properties>
       <File>ModSupport/Wonders/HD_National_Wonders.sql</File>
     </UpdateDatabase>
-    <AddGameplayScripts id="National_Wonders_support" criteria="National_Wonders_Expansion2">
+    <AddGameplayScripts id="National_Wonders_support_lua" criteria="National_Wonders_Expansion2">
       <Properties><LoadOrder>17000</LoadOrder></Properties>
       <File>ModSupport/Wonders/HD_National_Wonders.lua</File>
     </AddGameplayScripts>
@@ -1200,9 +1271,14 @@
     </UpdateDatabase>
     <!-- 国家奇观 End -->
     <!-- 黄鹤楼Lua覆盖 -->
-    <ImportFiles id="National_Wonders_support" criteria="Yellow_Crane_Expansion2">
+    <ImportFiles id="Yellow_Crane_Override" criteria="Yellow_Crane_Expansion2">
       <Properties><LoadOrder>17000</LoadOrder></Properties>
       <File>ModSupport/Wonders/YellowCraneGreatPeople.lua</File>
+    </ImportFiles>
+    <!-- 圣母院Lua覆盖 -->
+    <ImportFiles id="Notre_Dame_Override" criteria="Suk_NotreDame_Expansion2">
+      <Properties><LoadOrder>17000</LoadOrder></Properties>
+      <File>ModSupport/Wonders/Suk_AdjacencyHandlerItem_Suk_NotreDame.lua</File>
     </ImportFiles>
     <!-- 丰富资源2 Start -->
     <UpdateDatabase id="Resouceful2_support" criteria="Resouceful2_Expansion2">
@@ -1221,10 +1297,6 @@
       <Properties><LoadOrder>17001</LoadOrder></Properties>
       <File>ModSupport/Resourceful2/HD_Resourceful2_Text.sql</File>
     </UpdateText>
-    <UpdateIcons id="Resouceful2_support_icon" criteria="Resouceful2_Expansion2">
-      <Properties><LoadOrder>17001</LoadOrder></Properties>
-      <File>ModSupport/Resourceful2/HD_Resourceful2_Icons.sql</File>
-    </UpdateIcons>
     <!-- 丰富资源2 End -->
     <!-- Better Trade Scrren -->
     <ImportFiles id="DL_BetterTradeScreen_Imports" criteria="BetterTradeScreen_Expansion2">
@@ -1328,14 +1400,6 @@
       <Properties><LoadOrder>6</LoadOrder></Properties>
       <File>SubMods/BetterChinese/Text/BetterChineseAddon_Text.sql</File>
     </UpdateText>
-    <!-- Better builder charges tracking -->
-    <ReplaceUIScript id="BuilderChargesUnitFlagManager" criteria="BetterBuilderChargesTracking_Conflict_Expansion2">
-      <Properties>
-        <LoadOrder>666</LoadOrder>
-        <LuaContext>UnitFlagManager</LuaContext>
-        <LuaReplace>SubMods/BuilderCharges/UnitFlagManager_BuilderCharges.lua</LuaReplace>
-      </Properties>
-    </ReplaceUIScript>
     <!-- Farm on fresh hills -->
     <UpdateDatabase id="DL_FarmsOnFreshHills_Database" criteria="Expansion2">
       <Properties><LoadOrder>15500</LoadOrder></Properties>
@@ -1365,33 +1429,22 @@
       <Properties><LoadOrder>15605</LoadOrder></Properties>
       <File>SubMods/CityPolicies/UI/CityPanelOverview_CityPolicies.lua</File>
     </ImportFiles>
-    <ImportFiles id="CityPolicy_CityPanelOverview_Suk_Import" criteria="CityPolicies_With_Suk">
+    <ImportFiles id="Suk_Simple_UI_Adjustments_Import" criteria="Suk_Simple_UI_Adjustments">
       <Properties><LoadOrder>15605</LoadOrder></Properties>
       <File>SubMods/CityPolicies/UI/CityPanelOverview_CityPolicies_Suk.lua</File>
+      <File>UI/Replacement/Suk_CityPanelOverview_Instances.lua</File>
+      <File>UI/Replacement/Suk_CityPanelOverview_Instances.xml</File>
+      <File>UI/Replacement/CityPanel.xml</File>
+      <File>UI/Replacement/Suk_YieldTT.lua</File>
     </ImportFiles>
     <ImportFiles id="ToolTipLoader_CityPolicies_Import" criteria="Expansion2">
       <Properties><LoadOrder>15605</LoadOrder></Properties>
       <File>SubMods/CityPolicies/UI/ToolTipLoader_CityPolicies.lua</File>
     </ImportFiles>
     <!-- Governors Diversity -->
-    <AddUserInterfaces id="GovernorsDiversity_lua" criteria="Expansion2">
-      <Properties>
-        <Context>InGame</Context>
-        <LoadOrder>15606</LoadOrder>
-      </Properties>
-      <File>SubMods/GovernorsDiversity/Governors_Interface.xml</File>
-    </AddUserInterfaces>
-    <ImportFiles id="GovernorsDiversity_import" criteria="Expansion2">
-      <Properties><LoadOrder>15606</LoadOrder></Properties>
-      <File>SubMods/GovernorsDiversity/Governors_Interface.lua</File>
-    </ImportFiles>
     <UpdateDatabase id="HD_Governors" criteria="Expansion2">
       <Properties><LoadOrder>15606</LoadOrder></Properties>
       <File>SubMods/GovernorsDiversity/HD_Governors.sql</File>
-    </UpdateDatabase>
-    <UpdateDatabase id="HD_Governors" criteria="Expansion2">
-      <Properties><LoadOrder>20000</LoadOrder></Properties>
-      <File>SubMods/GovernorsDiversity/HD_Governors_Late.sql</File>
     </UpdateDatabase>
     <UpdateText id="HD_Governors_text" criteria="Expansion2">
       <Properties><LoadOrder>15606</LoadOrder></Properties>
@@ -1410,44 +1463,6 @@
       <Properties><LoadOrder>15610</LoadOrder></Properties>
       <File>SubMods/MedievalPirate/DL_Texts.sql</File>
     </UpdateText>
-    <!-- HDRESOURCE -->
-    <ImportFiles>
-      <File>SubMods/HDRESOURCE/ArtDefs/Improvements.artdef</File>
-      <File>SubMods/HDRESOURCE/ArtDefs/Landmarks.artdef</File>
-      <File>SubMods/HDRESOURCE/ArtDefs/Resources.artdef</File>
-      <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE.sql</File>
-      <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Icon.xml</File>
-      <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Localisation.xml</File>
-      <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly.sql</File>
-      <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly_Icon.xml</File>
-      <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly_Localisation.xml</File>
-      <File>SubMods/HDRESOURCE/HDRESOURCE.dep</File>
-      <File>SubMods/HDRESOURCE/Platforms/MacOS/BLPs/HDResources.blp</File>
-      <File>SubMods/HDRESOURCE/Platforms/MacOS/BLPs/Improvements.blp</File>
-      <File>SubMods/HDRESOURCE/Platforms/Windows/BLPs/HDResources.blp</File>
-      <File>SubMods/HDRESOURCE/Platforms/Windows/BLPs/Improvements.blp</File>
-    </ImportFiles>
-    <UpdateArt id="HDRESOURCEArt"  criteria="Expansion2">
-      <File>SubMods/HDRESOURCE/HDRESOURCE.dep</File>
-    </UpdateArt>
-    <UpdateDatabase id="HDRESOURCEDatabase"  criteria="Expansion2">
-      <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE.sql</File>
-    </UpdateDatabase>
-    <UpdateText id="HDRESOURCEText"  criteria="Expansion2">
-      <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Localisation.xml</File>
-    </UpdateText>
-    <UpdateText id="HDRESOURCEText"  criteria="Expansion2">
-      <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly_Localisation.xml</File>
-    </UpdateText>
-    <UpdateIcons id="HDRESOURCEIcon"  criteria="Expansion2">
-      <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Icon.xml</File>
-    </UpdateIcons>
-    <UpdateDatabase id="HDRESOURCEMonopoly" criteria="Monopolies_Mode_Expansion2">
-      <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly.sql</File>
-    </UpdateDatabase>
-    <UpdateIcons id="HDRESOURCEMonopoly_Icon" criteria="Monopolies_Mode_Expansion2">
-      <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly_Icon.xml</File>
-    </UpdateIcons>
     <!-- Third Party -->
     <UpdateText id="CNforMods_Texts" criteria="MonopoliesMode">
       <Properties><LoadOrder>10000</LoadOrder></Properties>
@@ -1487,15 +1502,39 @@
       <File>ThirdParty/GoldResource/Gold_Text.xml</File>
     </UpdateText>
     
-    <UpdateDatabase id="BuildingDefinations" criteria="Expansion2">
+    <UpdateDatabase id="HD_TableDefinations" criteria="Expansion2">
+      <Properties><LoadOrder>11000</LoadOrder></Properties>
+      <File>UpdateDataBase/HD_TableDefinations.sql</File>
+      <File>UpdateDataBase/Classifications/HD_Classification_Tables.sql</File>
+    </UpdateDatabase>
+
+    <UpdateDatabase id="HD_Definations" criteria="Expansion2">
       <Properties><LoadOrder>12000</LoadOrder></Properties>
       <File>UpdateDataBase/HD_CulturalUnits.xml</File>
       <File>UpdateDataBase/DL_BuildingDefinations.sql</File>
-      <File>UpdateDataBase/HD_Definations.sql</File>
+      <File>UpdateDataBase/HD_NotificationDefinations.sql</File>
       <File>UpdateDataBase/DL_UnitDefinations.sql</File>
+      <File>UpdateDataBase/HD_ResourceDefinations.sql</File>
       <File>UpdateDataBase/DL_ImprovementDefinations.sql</File>
       <File>UpdateDataBase/DL_ProjectDefinations.sql</File>
-      <File>UpdateDataBase/HD_Resource_Classification.sql</File>
+      <File>UpdateDataBase/HD_GovernorDefinations.sql</File>
+      <File>UpdateDataBase/HD_Binary_Compress.sql</File>
+    </UpdateDatabase>
+
+    <UpdateDatabase id="HD_Classifications" criteria="Expansion2">
+      <Properties><LoadOrder>15000</LoadOrder></Properties>
+      <File>UpdateDataBase/Classifications/HD_Building_Classification.sql</File>
+      <File>UpdateDataBase/Classifications/HD_District_Classification.sql</File>
+      <File>UpdateDataBase/Classifications/HD_Improvement_Classification.sql</File>
+      <File>UpdateDataBase/Classifications/HD_Moment_Classification.sql</File>
+    </UpdateDatabase>
+    <UpdateDatabase id="HD_Resource_Classification" criteria="Expansion2">
+      <Properties><LoadOrder>15001</LoadOrder></Properties>
+      <File>UpdateDataBase/Classifications/HD_Resource_Classification.sql</File>
+    </UpdateDatabase>
+    <UpdateDatabase id="HD_Classification_Adjacency" criteria="Expansion2">
+      <Properties><LoadOrder>16011</LoadOrder></Properties>
+      <File>UpdateDataBase/Classifications/HD_Classification_Adjacency.sql</File>
     </UpdateDatabase>
 
     <UpdateDatabase id="FasterStartingSettlers" criteria="Expansion2">
@@ -1505,10 +1544,6 @@
     <AddGameplayScripts id="Modified_ExpandedInitialVision" criteria="Expansion2">
       <Properties><LoadOrder>15855</LoadOrder></Properties>
       <File>ThirdParty/ExpandedInitialVision/ExpandedInitialVision_Modified.lua</File>
-    </AddGameplayScripts>
-    <AddGameplayScripts id="Modified_CityRoads" criteria="Expansion2">
-      <Properties><LoadOrder>15905</LoadOrder></Properties>
-      <File>ThirdParty/CityRoads/Modified_CityRoads.lua</File>
     </AddGameplayScripts>
 
     <!-- Artdef -->
@@ -1567,10 +1602,13 @@
         <Context>InGame</Context>
       </Properties>
       <File>UI/Additions/ModLens_Seadog.lua</File>
+      <File>UI/Additions/ModLens_Builder.lua</File>
+      <File>UI/Additions/BuilderLens_Support.lua</File>
+      <File>UI/Additions/BuilderLens_Config_Default.lua</File>
     </ImportFiles>
     <ImportFiles id="TechCivicProgress_Override" criteria="TechCivicProgress_Override">
       <Properties><LoadOrder>200</LoadOrder></Properties>
-      <File>UI/Additions/ToolTipLoader_TCP.lua</File>
+      <File>UI/Loaders/ToolTipLoader_TCP.lua</File>
     </ImportFiles>
     <UpdateDatabase id="HD_Ingame_setup" criteria="Civitas_CityStates_Conflict_Expansion2">
       <Properties><LoadOrder>16000</LoadOrder></Properties>
@@ -1579,8 +1617,8 @@
     <UpdateDatabase id="DL_EarlySetup" criteria="Expansion2">
       <Properties><LoadOrder>16001</LoadOrder></Properties>
       <File>UpdateDataBase/HD_BuildingTiers.sql</File>
-      <File>UpdateDataBase/DL_EarlySetup.sql</File>
       <File>UpdateDataBase/HD_ResourceLimit.sql</File>
+      <File>UpdateDataBase/HD_CorrespondingYields.sql</File>
     </UpdateDatabase>
     <UpdateDatabase id="DL_CityStateBuffs" criteria="Expansion2">
       <Properties><LoadOrder>16003</LoadOrder></Properties>
@@ -1681,7 +1719,7 @@
       <File>DLCSupport/HD_RulersOfTheSahara.sql</File>
     </UpdateDatabase>
     <UpdateDatabase id="DL_SULEIMAN_ALT" criteria="DLC_Suleiman_Alt">
-      <Properties><LoadOrder>20000</LoadOrder></Properties>
+      <Properties><LoadOrder>25001</LoadOrder></Properties>
       <File>DLCSupport/DL_SULEIMAN_ALT.sql</File>
     </UpdateDatabase>
     <UpdateDatabase id="HD_SEJONG" criteria="DLC_Sejong">
@@ -1731,6 +1769,7 @@
       <File>UpdateDataBase/HD_AdjustYields.sql</File>
       <File>UpdateDataBase/HD_AI.sql</File>
       <File>UpdateDataBase/DL_Beliefs.sql</File>
+      <File>UpdateDataBase/HD_Pantheons.sql</File>
       <File>UpdateDataBase/HD_Belief_Worships.sql</File>
       <File>UpdateDataBase/DL_Boosts.sql</File>
       <File>UpdateDataBase/DL_Buildings.sql</File>
@@ -1771,6 +1810,7 @@
       <File>UpdateDataBase/DL_Wonders.sql</File>
       <File>UpdateDataBase/DL_WonderTheming.sql</File>
       <File>UpdateDataBase/DL_ModifierString.sql</File>
+      <File>UpdateDataBase/HD_Governors.sql</File>
     </UpdateDatabase>
     <UpdateDatabase id="DL_Late_Temp" criteria="Expansion2">
       <Properties><LoadOrder>16012</LoadOrder></Properties>
@@ -1782,19 +1822,19 @@
 		<!-- Requirements need to update in the end -->
 		<File>UpdateDataBase/DL_Requirements.sql</File>
     </UpdateDatabase>
-    <UpdateDatabase id="DL_Babylon_Late" criteria="DLC_Babylon">
-      <Properties><LoadOrder>17010</LoadOrder></Properties>
-      <File>DLCSupport/DL_Babylon_Late.sql</File>
-    </UpdateDatabase>
     <UpdateDatabase id="DL_Main_Late" criteria="Expansion2">
-      <Properties><LoadOrder>20000</LoadOrder></Properties>
-      <File>UpdateDataBase/DL_Buildings_Late.sql</File>
+      <Properties><LoadOrder>20001</LoadOrder></Properties>
       <File>UpdateDataBase/DL_PostProcess.sql</File>
       <File>UpdateDataBase/DL_GreatPeople_Late.sql</File>
     </UpdateDatabase>
-    <UpdateDatabase id="DL_Main_GreatWorks_YieldChanges" criteria="Expansion2">
+    <UpdateDatabase id="DL_Main_Late2" criteria="Expansion2">
       <Properties><LoadOrder>25000</LoadOrder></Properties>
       <File>UpdateDataBase/DL_GreatWorks_YieldChanges.sql</File>
+      <File>UpdateDataBase/HD_Regional_Yields.sql</File>
+    </UpdateDatabase>
+    <UpdateDatabase id="DL_Main_Late3" criteria="Expansion2">
+      <Properties><LoadOrder>25001</LoadOrder></Properties>
+      <File>UpdateDataBase/HD_Governors_Late.sql</File>
     </UpdateDatabase>
     <UpdateDatabase id="DL_Main_Last" criteria="Expansion2">
       <Properties><LoadOrder>30000</LoadOrder></Properties>
@@ -1804,10 +1844,12 @@
       <Properties><LoadOrder>16016</LoadOrder></Properties>
       <File>UI/Icons/DL_Icons_Beliefs.xml</File>
       <File>UI/Icons/DL_Icons_Buildings.xml</File>
+      <File>UI/Icons/DL_Icons_Districts.xml</File>
       <File>UI/Icons/DL_Icons_Policies.xml</File>
       <File>UI/Icons/DL_Icons_Projects.xml</File>
       <File>UI/Icons/HD_Icons_UnitCommands.xml</File>
       <File>UI/Icons/HD_Icons.xml</File>
+      <File>UI/Icons/HD_Icons_Notifications.xml</File>
       <File>UI/Icons/HD_Icons_Commemorations.xml</File>
       <File>UI/Icons/HD_Icons_GreatPeople.sql</File>
       <File>UI/Icons/DL_Icons_Cultural_Policies.sql</File>
@@ -1816,14 +1858,15 @@
       <File>UI/Icons/HD_Icons_Techs_Civics.sql</File>
       <File>UI/Icons/HD_Icons_Units.xml</File>
       <File>UI/Icons/HD_Icons_STUUexpansion.xml</File>
-    </UpdateIcons>
-    <UpdateIcons id="DL_Icons_Vietnam" criteria="DLC_Vietnam">
-      <Properties><LoadOrder>16016</LoadOrder></Properties>
-      <File>UI/Icons/DL_Icons_Buildings_Vietnam.xml</File>
+      <File>UI/Icons/HD_Icons_Resources.sql</File>
+      <File>UI/Icons/HD_Icons_CityState_Resources.sql</File>
+      <File>UI/Icons/HD_Icons_CityButtons.xml</File>
+      <File>UI/Icons/HD_Icons_CustomEvents.sql</File>
     </UpdateIcons>
     <!-- Gameplay-->
     <AddGameplayScripts id="DL_Scripts_Gameplay" criteria="Expansion2">
       <Properties><LoadOrder>16017</LoadOrder></Properties>
+      <File>Gameplay/HD_CityStates.lua</File>
       <File>Gameplay/CityYield.lua</File>
       <File>Gameplay/CivilizationTraits.lua</File>
       <File>Gameplay/HD_Common.lua</File>
@@ -1833,6 +1876,7 @@
       <File>Gameplay/Boosts.lua</File>
       <File>Gameplay/Commemorations.lua</File>
       <File>Gameplay/Policies.lua</File>
+      <File>Gameplay/Projects.lua</File>
       <File>Gameplay/Religions.lua</File>
       <File>Gameplay/ResourceCost.lua</File>
       <File>Gameplay/Temp_Gameplay.lua</File>
@@ -1840,6 +1884,12 @@
       <File>Gameplay/Buildings.lua</File>
       <File>Gameplay/BinaryCompress.lua</File>
       <File>Gameplay/UnitAbilities.lua</File>
+      <File>Gameplay/ResourceClassification.lua</File>
+      <File>Gameplay/Governors.lua</File>
+    </AddGameplayScripts>
+    <AddGameplayScripts id="DL_Scripts_Gameplay_Late" criteria="Expansion2">
+      <Properties><LoadOrder>16018</LoadOrder></Properties>
+      <File>Gameplay/RegionalYields.lua</File>
     </AddGameplayScripts>
     <!-- UI scripts for gameplay -->
     <AddUserInterfaces id="DL_Scripts_Interface" criteria="Expansion2">
@@ -1848,13 +1898,11 @@
         <LoadOrder>16018</LoadOrder>
       </Properties>
       <File>Gameplay/Temp_Interface.xml</File>
-      <File>Gameplay/RegionalYield.xml</File>
     </AddUserInterfaces>
     <ImportFiles id="DL_lua_Scripts" criteria="Expansion2">
       <Properties><LoadOrder>16017</LoadOrder></Properties>
       <File>Gameplay/Temp_Interface.lua</File>
       <File>Gameplay/HD_StateUtils.lua</File>
-      <File>Gameplay/RegionalYield.lua</File>
     </ImportFiles>
     <!-- Texts and Tags -->
     <UpdateDatabase id="DL_Text_Tag" criteria="Expansion2">
@@ -1892,7 +1940,7 @@
       <File>Texts/HD_Text_Greatworks_Types.sql</File>
       <File>Texts/HD_Text_Improvements.sql</File>
       <File>Texts/HD_Text_NaturalWonders.sql</File>
-      <File>Texts/HD_Text_Pantheon.sql</File>
+      <File>Texts/HD_Text_Pantheons.sql</File>
       <File>Texts/HD_Text_Policies.sql</File>
       <File>Texts/HD_Text_Commemorations.sql</File>
       <File>Texts/HD_Text_Governments.sql</File>
@@ -1903,6 +1951,13 @@
       <File>Texts/HD_Text_Projects.sql</File>
       <File>Texts/HD_Text_GreatPerson.sql</File>
       <File>Texts/HD_Text_GreatPerson_New.sql</File>
+      <File>Texts/HD_Text_Classifications.sql</File>
+      <File>Texts/HD_Text_ToolTip.sql</File>
+      <File>Texts/HD_Text_Report_Screen.sql</File>
+      <File>Texts/HD_Text_CustomEvents.sql</File>
+      <File>Texts/HD_Text_Governors.sql</File>
+      <File>Texts/HD_Text_Resources.sql</File>
+      <File>Texts/HD_Text_Mod_Titles.sql</File>
     </UpdateText>
     <UpdateText id="DL_Text_Late" criteria="Expansion2">
       <Properties><LoadOrder>20000</LoadOrder></Properties>
@@ -1914,6 +1969,10 @@
     </UpdateText>
     <!-- GameMode Support (at end) -->
     <!-- Monopolies -->
+    <UpdateIcons id="Monopolies_Icon" criteria="Monopolies_Mode_Expansion2">
+      <Properties><LoadOrder>16050</LoadOrder></Properties>
+      <File>UI/Icons/HD_Icons_Monopoply.sql</File>
+    </UpdateIcons>
     <UpdateDatabase id="Monopolies_Adapt" criteria="Monopolies_Mode_Expansion2">
       <Properties><LoadOrder>16050</LoadOrder></Properties>
       <File>GameModeSupport/MonopoliesMode/HD_Monopoly_Adapt.sql</File>
@@ -2056,11 +2115,14 @@
       <Properties><LoadOrder>28101</LoadOrder></Properties>
       <File>GameModeSupport/MilitaryMode/ArmsComplement/ArmsComplement.dep</File>
     </UpdateArt>
+    <UpdateDatabase id="BSK_gameplay_Defination" criteria="Military_Mode_Expansion2">
+      <Properties><LoadOrder>12000</LoadOrder></Properties>
+      <File>GameModeSupport/MilitaryMode/ArmsComplement/ArmsSupport.xml</File>
+    </UpdateDatabase>
     <UpdateDatabase id="BSK_gameplay" criteria="Military_Mode_Expansion2">
       <Properties><LoadOrder>28102</LoadOrder></Properties>
       <File>GameModeSupport/MilitaryMode/ArmsComplement/ArmsComplement_Gameplay.xml</File>
       <File>GameModeSupport/MilitaryMode/ArmsComplement/ArmsSupport.sql</File>
-      <File>GameModeSupport/MilitaryMode/ArmsComplement/ArmsSupport.xml</File>
       <File>GameModeSupport/MilitaryMode/ArmsComplement/UlkChange.sql</File>
     </UpdateDatabase>
     <UpdateIcons id="BSK_Icons" criteria="Military_Mode_Expansion2">
@@ -2164,20 +2226,28 @@
       <File>UI/Replacement/America_UI.lua</File>
       <File>UI/Replacement/America_UI.xml</File>
     </ImportFiles>
-    <AddUserInterfaces id="CITADEL_OF_GOD_UI">
-      <Properties>
-        <Context>InGame</Context>
-        <LoadOrder>1</LoadOrder>
-      </Properties>
-      <File>SubMods/GovernorsDiversity/bishop2-2/Temp_Interface2.xml</File>
-    </AddUserInterfaces>
-    <AddGameplayScripts id="NewAction">
-      <File>SubMods/GovernorsDiversity/bishop2-2/HD_Common2.lua</File>
+
+    <!-- 自定义事件框架 -->
+    <UpdateDatabase id="HD_CustomEvents_Database" criteria="Expansion2">
+      <File>CustomEvents/Database/TableDefinations.sql</File>
+    </UpdateDatabase>
+    <UpdateText id="HD_CustomEvents_Texts" criteria="Expansion2">
+      <File>CustomEvents/Texts/Texts.sql</File>
+    </UpdateText>
+    <UpdateIcons id="HD_CustomEvents_Icons" criteria="Expansion2">
+      <File>CustomEvents/Icons/Icons.sql</File>
+    </UpdateIcons>
+    <AddGameplayScripts id="HD_CustomEvents_Gameplay" criteria="Expansion2">
+      <File>CustomEvents/Gameplay/HD_CustomEvent_GP.lua</File>
     </AddGameplayScripts>
-    <ImportFiles id="CITADEL_OF_GOD_UI_import">
-      <Properties><LoadOrder>1</LoadOrder></Properties>
-      <File>SubMods/GovernorsDiversity/bishop2-2/Temp_Interface2.lua</File>
+    <AddUserInterfaces id="HD_CustomEvents_UI" criteria="Expansion2">
+      <Properties><Context>InGame</Context></Properties>
+      <File>CustomEvents/UI/HD_CustomEventPanel_Light.xml</File>
+    </AddUserInterfaces>
+    <ImportFiles id="HD_CustomEvents_Import" criteria="Expansion2">
+      <File>CustomEvents/UI/HD_CustomEventPanel_Light.lua</File>
     </ImportFiles>
+
   </InGameActions>
 
   <!-- 文件导入 -->
@@ -2211,8 +2281,6 @@
     <File>GameModeSupport/MonopoliesMode/HD_Monopoly_Resource_Gold.xml</File>
     <File>GameModeSupport/MonopoliesMode/HD_Monopoly_Icons.xml</File>
     <File>GameModeSupport/MonopoliesMode/HD_Monopoly_Text.sql</File>
-    <File>GameModeSupport/MonopoliesMode/DiplomacyDealView_KublaiKhanVietnam_MODE.lua</File>
-    <File>GameModeSupport/MonopoliesMode/GreatWorksOverview_KublaiKhanVietnam_Monopolies.lua</File>
     <File>GameModeSupport/BarbarianClansMode/HD_BarbarianClans.sql</File>
     <File>GameModeSupport/BarbarianClansMode/HD_BarbarianClans_Text.sql</File>
     <File>GameModeSupport/SecretSocietiesMode/HD_SecretSocieties.sql</File>
@@ -2305,6 +2373,7 @@
     <File>GameModeSupport/MultiPlayerMode/DL_GameCapabilities.sql</File>
 
     <!-- Gameplay -->
+    <File>Gameplay/HD_CityStates.lua</File>
     <File>Gameplay/CityYield.lua</File>
     <File>Gameplay/CivilizationTraits.lua</File>
     <File>Gameplay/HD_Common.lua</File>
@@ -2314,6 +2383,7 @@
     <File>Gameplay/Boosts.lua</File>
     <File>Gameplay/Commemorations.lua</File>
     <File>Gameplay/Policies.lua</File>
+    <File>Gameplay/Projects.lua</File>
     <File>Gameplay/Religions.lua</File>
 	  <File>Gameplay/ResourceCost.lua</File>
     <File>Gameplay/Temp_Gameplay.lua</File>
@@ -2323,8 +2393,9 @@
 	  <File>Gameplay/Buildings.lua</File>
     <File>Gameplay/Temp_Interface.lua</File>
     <File>Gameplay/Temp_Interface.xml</File>
-    <File>Gameplay/RegionalYield.lua</File>
-    <File>Gameplay/RegionalYield.xml</File>
+    <File>Gameplay/RegionalYields.lua</File>
+    <File>Gameplay/ResourceClassification.lua</File>
+    <File>Gameplay/Governors.lua</File>
 
     <!-- UI Overwrites -->
     <File>UI/Civilopedia/CivilopediaPage_Building.lua</File>
@@ -2335,13 +2406,13 @@
     <File>UI/Civilopedia/CivilopediaPage_CityState.lua</File>
     <File>UI/Civilopedia/CivilopediaPage_Commemoration.lua</File>
     <File>UI/Civilopedia/CivilopediaPage_Resource.lua</File>
-    <File>UI/Replacement/CitySupport.lua</File>
-    <File>UI/Replacement/NotificationPanel_HD.lua</File>
-    <File>UI/Replacement/GreatWorkShowcase_HD.lua</File>
-    <File>UI/Replacement/SettlerInfluenceIconManager.lua</File>
+    <File>UI/Civilopedia/CivilopediaPage_Improvement.lua</File>
+    <File>UI/Civilopedia/CivilopediaPage_Route.lua</File>
+    <File>UI/Civilopedia/CivilopediaPage_ResourceUsage.lua</File>
 
     <!-- UI Loaders -->
     <File>UI/Loaders/ToolTipLoader_DL.lua</File>
+    <File>UI/Loaders/ToolTipLoader_TCP.lua</File>
 
     <!-- UI Additions -->
     <File>UI/Additions/MVC_521b8777-0977-4859-a5ee-3e411a732e5c.lua</File> <!-- Mod Version Checker for multiplayer -->
@@ -2354,7 +2425,9 @@
     <File>UI/Additions/RockBandPopup.lua</File>
     <File>UI/Additions/UnitPanel_Expansion2.lua</File>
     <File>UI/Additions/ModLens_Seadog.lua</File>
-    <File>UI/Additions/ToolTipLoader_TCP.lua</File>
+    <File>UI/Additions/ModLens_Builder.lua</File>
+    <File>UI/Additions/BuilderLens_Support.lua</File>
+    <File>UI/Additions/BuilderLens_Config_Default.lua</File>
     <File>UI/Additions/HD_China_UnitCommandDefs.lua</File>
 
     <!-- Custom UI -->
@@ -2369,8 +2442,20 @@
     <File>UI/Custom/NotificationPanel_China.lua</File>
     <File>UI/Custom/China_Panel.lua</File>
     <File>UI/Custom/China_Panel.xml</File>
+    <File>UI/Custom/CityButton_ResourceClassification.lua</File>
+    <File>UI/Custom/CityButton_ResourceClassification.xml</File>
+    <File>UI/Custom/CityButton_RegionalYields.lua</File>
+    <File>UI/Custom/CityButton_RegionalYields.xml</File>
+    <File>UI/Custom/CityButton_Magnanimous.lua</File>
+    <File>UI/Custom/CityButton_Magnanimous.xml</File>
+    <File>UI/Custom/CityButton_Misc.lua</File>
+    <File>UI/Custom/CityButton_Misc.xml</File>
 
     <!-- UI replacements -->
+    <File>UI/Replacement/CitySupport.lua</File>
+    <File>UI/Replacement/NotificationPanel_HD.lua</File>
+    <File>UI/Replacement/GreatWorkShowcase_HD.lua</File>
+    <File>UI/Replacement/SettlerInfluenceIconManager.lua</File>
     <File>UI/Replacement/StagingRoom.lua</File>
     <File>UI/Replacement/citystates.xml</File>
     <File>UI/Replacement/citystates.lua</File>
@@ -2386,10 +2471,14 @@
     <File>UI/Replacement/DL_PlotToolTip.lua</File>
     <File>UI/Replacement/DL_ProductionPanel.lua</File>
     <File>UI/Replacement/DL_SelectedUnit.lua</File>
-    <File>UI/Replacement/DL_TechCivicCompletedPopup.lua</File>
+    <File>UI/Replacement/TechCivicCompletedPopup.lua</File>
 	  <File>UI/Replacement/TechTreeNode.xml</File>
     <File>UI/Replacement/DL_TechTree.lua</File>
 	  <File>UI/Replacement/CivicsTree.xml</File>
+    <File>UI/Replacement/TechTree.xml</File>
+    <File>UI/Replacement/ResearchChooser.xml</File>
+    <File>UI/Replacement/WorldTrackerResearch.xml</File>
+    <File>UI/Replacement/CivicUnlockIcon.xml</File>
     <File>UI/Replacement/DL_CivicsTree.lua</File>
     <File>UI/Replacement/TestingOption_WithoutPopup.lua</File>
     <File>UI/Replacement/HD_PKSpyUnitPromotionPopup.lua</File>
@@ -2402,17 +2491,36 @@
     <File>UI/Replacement/HD_ActionPanel.lua</File>
     <File>UI/Replacement/RealModifierAnalysis.lua</File>
     <File>UI/Replacement/PlayerSetupLogic.lua</File>
+    <File>UI/Replacement/BRSPage_Resources.lua</File>
+    <File>UI/Replacement/BRSPage_ResourceClassifications.lua</File>
+    <File>UI/Replacement/reportscreen.lua</File>
+    <File>UI/Replacement/reportscreen.xml</File>
+    <File>UI/Replacement/Suk_YieldTT.lua</File>
+    <File>UI/Replacement/ProductionPanel.xml</File>
+    <File>UI/Replacement/Suk_CityPanelOverview_Instances.lua</File>
+    <File>UI/Replacement/Suk_CityPanelOverview_Instances.xml</File>
+    <File>UI/Replacement/CityPanel.xml</File>
+    <File>UI/Replacement/UnitFlagManager_UpdateReligionIcon.lua</File>
+    <File>UI/Replacement/GreatWorksSupport.lua</File>
+    <File>UI/Replacement/GovernorPanel.xml</File>
+    <File>UI/Replacement/GovernorPanel.lua</File>
+    <File>UI/Replacement/GovernorDetailsPanel.xml</File>
+    <File>UI/Replacement/GovernorDetailsPanel.lua</File>
+    <File>UI/Replacement/TechAndCivicSupport.lua</File>
+    <File>UI/Replacement/TechAndCivicUnlockables_HD.lua</File>
+    <File>UI/Replacement/InGameTopOptionsMenu.lua</File>
+    <File>UI/Replacement/mods.lua</File>
 
     <!-- Icons -->
-    <File>UI/Icons/DL_Icons_Fixing.sql</File>
     <File>UI/Icons/DL_Icons_Beliefs.xml</File>
     <File>UI/Icons/DL_Icons_Buildings.xml</File>
-    <File>UI/Icons/DL_Icons_Buildings_Vietnam.xml</File>
+    <File>UI/Icons/DL_Icons_Districts.xml</File>
 	  <File>UI/Icons/DL_Icons_Frontend.xml</File>
     <File>UI/Icons/DL_Icons_Policies.xml</File>
     <File>UI/Icons/DL_Icons_Projects.xml</File>
     <File>UI/Icons/HD_Icons_UnitCommands.xml</File>
     <File>UI/Icons/HD_Icons.xml</File>
+    <File>UI/Icons/HD_Icons_Notifications.xml</File>
     <File>UI/Icons/HD_Icons_Commemorations.xml</File>
     <File>UI/Icons/HD_Icons_GreatPeople.sql</File>
     <File>UI/Icons/DL_Icons_Cultural_Policies.sql</File>
@@ -2422,6 +2530,11 @@
     <File>UI/Icons/HD_Icons_Units.xml</File>
     <File>UI/Icons/HD_Icons_STUUexpansion.xml</File>
     <File>UI/Icons/HD_Icons_Wonder_Resources.sql</File>
+    <File>UI/Icons/HD_Icons_Resources.sql</File>
+    <File>UI/Icons/HD_Icons_CityState_Resources.sql</File>
+    <File>UI/Icons/HD_Icons_Monopoply.sql</File>
+    <File>UI/Icons/HD_Icons_CityButtons.xml</File>
+    <File>UI/Icons/HD_Icons_CustomEvents.sql</File>
 
     <!-- Mod Support -->
     <File>ModSupport/HistoricalReligions/Switch.sql</File>
@@ -2442,7 +2555,6 @@
     <File>ModSupport/SukOceans/HD_Monopoly_Texts.sql</File>
     <File>ModSupport/SukOceans/HD_Texts.sql</File>
     <File>ModSupport/Savannah/DL_Adaptation.sql</File>
-    <File>ModSupport/Savannah/Belief.sql</File>
     <File>ModSupport/Savannah/vietnam.sql</File>
     <File>ModSupport/Savannah/HD_Texts.sql</File>
     <File>ModSupport/MonopolyPlus/DL_Adaptation.sql</File>
@@ -2453,6 +2565,7 @@
     <File>ModSupport/Watchtower/HD_Texts.sql</File>
     <File>ModSupport/Watchtower/HD_Balance.sql</File>
     <File>ModSupport/Wonders/Wonder_Temple_of_Heaven.sql</File>
+    <File>ModSupport/Wonders/Wonder_Temple_of_Heaven_Late.sql</File>
     <File>ModSupport/Wonders/Wonder_WatArun.sql</File>
     <File>ModSupport/Wonders/Wonders_Community.sql</File>
     <File>ModSupport/Wonders/Wonders_Community_Late.sql</File>
@@ -2461,6 +2574,7 @@
     <File>ModSupport/Wonders/HD_National_Wonders.lua</File>
     <File>ModSupport/Wonders/HD_National_Wonders_PackOne.sql</File>
     <File>ModSupport/Wonders/YellowCraneGreatPeople.lua</File>
+    <File>ModSupport/Wonders/Suk_AdjacencyHandlerItem_Suk_NotreDame.lua</File>
     <File>ModSupport/GeneralChineseSupport/Texts.sql</File>
     <File>ModSupport/BetterTradeScreen/TradeSupport.lua</File>
     <File>ModSupport/BetterTradeScreen/TradeRouteChooser.lua</File>
@@ -2481,7 +2595,6 @@
     <File>ModSupport/Resourceful2/HD_Resourceful2_Pre.sql</File>
 	  <File>ModSupport/Resourceful2/HD_Resourceful2_Late.sql</File>
     <File>ModSupport/Resourceful2/HD_Resourceful2_Text.sql</File>
-    <File>ModSupport/Resourceful2/HD_Resourceful2_Icons.sql</File>
     <File>ModSupport/RemovableDistricts/DL_Adaptation.sql</File>
     <File>ModSupport/RemovableDistricts/DL_Texts.sql</File>
     <File>ModSupport/SukWonders/HD_Suk_Wonders.sql</File>
@@ -2489,6 +2602,7 @@
     <File>ModSupport/ModularAdjacencyBonus/Database.sql</File>
     <File>ModSupport/ModularAdjacencyBonus/Config.sql</File>
     <File>ModSupport/ModularAdjacencyBonus/Text.sql</File>
+    <File>ModSupport/BetterReportScreen/ReportsListLoader.sql</File>
 
     <!-- SubMods -->
     <File>SubMods/BetterChinese/Text/Australia_Translations_ConfigText.xml</File>
@@ -2509,7 +2623,6 @@
     <File>SubMods/BetterChinese/Text/Vanilla_zh_Hans_CN.xml</File>
     <File>SubMods/BetterChinese/Text/VikingsLandmarks_Translations_Text.xml</File>
     <File>SubMods/BetterChinese/Text/BetterChineseAddon_Text.sql</File>
-    <File>SubMods/BuilderCharges/UnitFlagManager_BuilderCharges.lua</File>
     <File>SubMods/CityPolicies/CityPolicies.sql</File>
     <File>SubMods/CityPolicies/HD_CityPolicies_Texts.sql</File>
     <File>SubMods/CityPolicies/CityPolicies_Icons.xml</File>
@@ -2519,31 +2632,11 @@
     <File>SubMods/CityPolicies/UI/CityPanelOverview_CityPolicies_Instances.xml</File>
     <File>SubMods/CityPolicies/UI/ToolTipLoader_CityPolicies.lua</File>
     <File>SubMods/FarmsOnFreshHills/FarmsOnFreshHills.sql</File>
-    <File>SubMods/GovernorsDiversity/Governors_Interface.xml</File>
-    <File>SubMods/GovernorsDiversity/Governors_Interface.lua</File>
     <File>SubMods/GovernorsDiversity/HD_Governors.sql</File>
-    <File>SubMods/GovernorsDiversity/HD_Governors_Late.sql</File>
     <File>SubMods/GovernorsDiversity/HD_Text_Governors.sql</File>
-    <File>SubMods/GovernorsDiversity/bishop2-2/Temp_Interface2.xml</File>
-    <File>SubMods/GovernorsDiversity/bishop2-2/HD_Common2.lua</File>
-    <File>SubMods/GovernorsDiversity/bishop2-2/Temp_Interface2.lua</File>
     <File>SubMods/MedievalPirate/DL_Database.sql</File>
     <File>SubMods/MedievalPirate/DL_Icons.xml</File>
     <File>SubMods/MedievalPirate/DL_Texts.sql</File>
-    <File>SubMods/HDRESOURCE/ArtDefs/Improvements.artdef</File>
-    <File>SubMods/HDRESOURCE/ArtDefs/Landmarks.artdef</File>
-    <File>SubMods/HDRESOURCE/ArtDefs/Resources.artdef</File>
-    <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE.sql</File>
-    <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Icon.xml</File>
-    <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Localisation.xml</File>
-    <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly.sql</File>
-    <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly_Icon.xml</File>
-    <File>SubMods/HDRESOURCE/Gameplay/HDRESOURCE_Monopoly_Localisation.xml</File>
-    <File>SubMods/HDRESOURCE/HDRESOURCE.dep</File>
-    <File>SubMods/HDRESOURCE/Platforms/MacOS/BLPs/HDResources.blp</File>
-    <File>SubMods/HDRESOURCE/Platforms/MacOS/BLPs/Improvements.blp</File>
-    <File>SubMods/HDRESOURCE/Platforms/Windows/BLPs/HDResources.blp</File>
-    <File>SubMods/HDRESOURCE/Platforms/Windows/BLPs/Improvements.blp</File>
 
     <!-- Map Utility -->
     <File>Maps/Utility/AssignStartingPlots.lua</File>
@@ -2587,7 +2680,6 @@
     <File>Maps/Rivers_And_Lakes.lua</File><!--太湖，众川赴海--> 
 
     <!-- Third Party -->
-    <File>ThirdParty/CityRoads/Modified_CityRoads.lua</File>
     <File>ThirdParty/CNforMods/Resources.sql</File>
     <File>ThirdParty/CNforMods/VNL'CIVITAS Resources'CN_Add_IG2.sql</File>
     <File>ThirdParty/CNforMods/VNL'Latin American Resources'CN_Add_IG2.sql</File>
@@ -2617,7 +2709,6 @@
     <File>DLCSupport/DL_Poland.sql</File>
     <File>DLCSupport/DL_Vikings.sql</File>
     <File>DLCSupport/DL_Babylon.sql</File>
-	  <File>DLCSupport/DL_Babylon_Late.sql</File>
     <File>DLCSupport/DL_Byzantium.sql</File>
     <File>DLCSupport/DL_Ethiopia.sql</File>
     <File>DLCSupport/DL_GranColombia.sql</File>
@@ -2643,20 +2734,24 @@
     <!-- Update database -->
     <File>UpdateDataBase/HD_BuildingTiers.sql</File>
     <File>UpdateDataBase/HD_CityStateBuffs.sql</File>
-    <File>UpdateDataBase/DL_EarlySetup.sql</File>
     <File>UpdateDataBase/HD_CulturalUnits.xml</File>
     <File>UpdateDataBase/HD_CulturalUnits.sql</File>
     <File>UpdateDataBase/HD_AdjustYields.sql</File>
     <File>UpdateDataBase/HD_AI.sql</File>
     <File>UpdateDataBase/DL_Beliefs.sql</File>
+    <File>UpdateDataBase/HD_Pantheons.sql</File>
     <File>UpdateDataBase/HD_Belief_Worships.sql</File>
     <File>UpdateDataBase/DL_Boosts.sql</File>
     <File>UpdateDataBase/DL_Buildings.sql</File>
     <File>UpdateDataBase/DL_BuildingDefinations.sql</File>
-    <File>UpdateDataBase/HD_Definations.sql</File>
+    <File>UpdateDataBase/HD_TableDefinations.sql</File>
+    <File>UpdateDataBase/HD_CorrespondingYields.sql</File>
+    <File>UpdateDataBase/HD_Binary_Compress.sql</File>
+    <File>UpdateDataBase/HD_NotificationDefinations.sql</File>
     <File>UpdateDataBase/DL_ImprovementDefinations.sql</File>
     <File>UpdateDataBase/DL_ProjectDefinations.sql</File>
     <File>UpdateDataBase/DL_UnitDefinations.sql</File>
+    <File>UpdateDataBase/HD_ResourceDefinations.sql</File>
     <File>UpdateDataBase/DL_City_Yield.sql</File>
 	  <File>UpdateDataBase/DL_CityPolicies.sql</File>
     <File>UpdateDataBase/DL_CityStates.sql</File>
@@ -2681,7 +2776,6 @@
     <File>UpdateDataBase/DL_Policies.sql</File>
     <File>UpdateDataBase/DL_Governments.sql</File>
     <File>UpdateDataBase/DL_Commemorations.sql</File>
-    <File>UpdateDataBase/DL_Buildings_Late.sql</File>
     <File>UpdateDataBase/DL_PostProcess.sql</File>
     <File>UpdateDataBase/HD_Last.sql</File>
     <File>UpdateDataBase/DL_Projects.sql</File>
@@ -2703,7 +2797,17 @@
     <File>UpdateDataBase/DL_Wonders.sql</File>
     <File>UpdateDataBase/DL_WonderTheming.sql</File>
     <File>UpdateDataBase/DL_ModifierString.sql</File>
-    <File>UpdateDataBase/HD_Resource_Classification.sql</File>
+    <File>UpdateDataBase/HD_Regional_Yields.sql</File>
+    <File>UpdateDataBase/HD_Governors.sql</File>
+    <File>UpdateDataBase/HD_GovernorDefinations.sql</File>
+    <File>UpdateDataBase/HD_Governors_Late.sql</File>
+    <File>UpdateDataBase/Classifications/HD_Classification_Tables.sql</File>
+    <File>UpdateDataBase/Classifications/HD_Building_Classification.sql</File>
+    <File>UpdateDataBase/Classifications/HD_District_Classification.sql</File>
+    <File>UpdateDataBase/Classifications/HD_Improvement_Classification.sql</File>
+    <File>UpdateDataBase/Classifications/HD_Moment_Classification.sql</File>
+    <File>UpdateDataBase/Classifications/HD_Resource_Classification.sql</File>
+    <File>UpdateDataBase/Classifications/HD_Classification_Adjacency.sql</File>
 
     <!-- Texts -->
     <File>Texts/HD_Tags_Players_Texts_Early.sql</File>
@@ -2730,7 +2834,7 @@
     <File>Texts/HD_Text_Greatworks_Types.sql</File>
     <File>Texts/HD_Text_Improvements.sql</File>
     <File>Texts/HD_Text_NaturalWonders.sql</File>
-    <File>Texts/HD_Text_Pantheon.sql</File>
+    <File>Texts/HD_Text_Pantheons.sql</File>
     <File>Texts/HD_Text_Policies.sql</File>
     <File>Texts/HD_Text_Commemorations.sql</File>
     <File>Texts/HD_Text_Governments.sql</File>
@@ -2744,8 +2848,36 @@
     <File>Texts/HD_Text_GreatPerson_New.sql</File>
     <File>Texts/HD_Text_Catherine_De_Medici.sql</File>
     <File>Texts/HD_Text_Mod_Titles.sql</File>
+    <File>Texts/HD_Text_Classifications.sql</File>
+    <File>Texts/HD_Text_ToolTip.sql</File>
+    <File>Texts/HD_Text_Report_Screen.sql</File>
+    <File>Texts/HD_Text_CustomEvents.sql</File>
+    <File>Texts/HD_Text_Governors.sql</File>
+    <File>Texts/HD_Text_Resources.sql</File>
     
+    <!-- CustomEvents -->
+    <File>CustomEvents/Database/TableDefinations.sql</File>
+    <File>CustomEvents/Texts/Texts.sql</File>
+    <File>CustomEvents/Icons/Icons.sql</File>
+    <File>CustomEvents/Gameplay/HD_CustomEvent_GP.lua</File>
+    <File>CustomEvents/UI/HD_CustomEventPanel_Light.lua</File>
+    <File>CustomEvents/UI/HD_CustomEventPanel_Light.xml</File>
+
     <!-- Assets -->
+    <File>Assets/Maps/HD_ContinentsAndIslands.dds</File>
+    <File>Assets/Maps/HD_Forest_Highlands.dds</File>
+    <File>Assets/Maps/HD_Frozen_Continents.dds</File>
+    <File>Assets/Maps/HD_Great_Sand_Sea.dds</File>
+    <File>Assets/Maps/HD_Great_Steppe.dds</File>
+    <File>Assets/Maps/HD_New_Highlands.dds</File>
+    <File>Assets/Maps/HD_Northern_Mountains.dds</File>
+    <File>Assets/Maps/HD_Regular_Pangaea.dds</File>
+    <File>Assets/Maps/HD_Rivers.dds</File>
+    <File>Assets/Maps/HD_Rivers_And_Lakes.dds</File>
+    <File>Assets/Maps/HD_Tiny_Islands.dds</File>
+    <File>Assets/Maps/HD_Tiny_Lakes.dds</File>
+    <File>Assets/Maps/HD_Wet_Lakes.dds</File>
+    <File>Assets/Maps/HD_Wet_Lakes2.dds</File>
     <File>Assets/TechCivics/HDCivicIcons_38.dds</File>
     <File>Assets/TechCivics/HDCivicIcons_42.dds</File>
     <File>Assets/TechCivics/HDCivicIcons_128.dds</File>
@@ -2768,30 +2900,26 @@
     <File>Assets/TechCivics/New_Tech_Civic_128.dds</File>
     <File>Assets/TechCivics/New_Tech_Civic_160.dds</File>
     <File>Assets/TechCivics/New_Tech_Civic_FOW_42.dds</File>
-    <File>Assets/Buildings/New_Buildings_32.dds</File>
-    <File>Assets/Buildings/New_Buildings_38.dds</File>
-    <File>Assets/Buildings/New_Buildings_50.dds</File>
-    <File>Assets/Buildings/New_Buildings_80.dds</File>
-    <File>Assets/Buildings/New_Buildings_128.dds</File>
-    <File>Assets/Buildings/New_Buildings_256.dds</File>
-    <File>Assets/Buildings/New_Buildings_2_32.dds</File>
-    <File>Assets/Buildings/New_Buildings_2_38.dds</File>
-    <File>Assets/Buildings/New_Buildings_2_50.dds</File>
-    <File>Assets/Buildings/New_Buildings_2_80.dds</File>
-    <File>Assets/Buildings/New_Buildings_2_128.dds</File>
-    <File>Assets/Buildings/New_Buildings_2_256.dds</File>
-    <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_32.dds</File>
-    <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_38.dds</File>
-    <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_50.dds</File>
-    <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_80.dds</File>
-    <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_128.dds</File>
-    <File>Assets/Buildings/HD_NEW_CITY_CENTER_BUILDING_256.dds</File>
     <File>Assets/Buildings/Mod_Icon_Fix_32.dds</File>
     <File>Assets/Buildings/Mod_Icon_Fix_38.dds</File>
     <File>Assets/Buildings/Mod_Icon_Fix_50.dds</File>
     <File>Assets/Buildings/Mod_Icon_Fix_80.dds</File>
     <File>Assets/Buildings/Mod_Icon_Fix_128.dds</File>
     <File>Assets/Buildings/Mod_Icon_Fix_256.dds</File>
+    <File>Assets/Buildings/HD_Buildings_32.dds</File>
+    <File>Assets/Buildings/HD_Buildings_38.dds</File>
+    <File>Assets/Buildings/HD_Buildings_50.dds</File>
+    <File>Assets/Buildings/HD_Buildings_80.dds</File>
+    <File>Assets/Buildings/HD_Buildings_128.dds</File>
+    <File>Assets/Buildings/HD_Buildings_256.dds</File>
+    <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_22.dds</File>
+    <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_32.dds</File>
+    <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_38.dds</File>
+    <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_50.dds</File>
+    <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_80.dds</File>
+    <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_128.dds</File>
+    <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_256.dds</File>
+    <File>Assets/Districts/HD_DISTRICT_DIPLOMATIC_QUARTER_FOW_256.dds</File>
     <File>Assets/Units/HD_NEW_UNITS_22.dds</File>
     <File>Assets/Units/HD_NEW_UNITS_32.dds</File>
     <File>Assets/Units/HD_NEW_UNITS_38.dds</File>
@@ -2868,48 +2996,19 @@
     <File>Assets/CityStates/CivBaikonur_256.dds</File>
     <File>Assets/GreatPeople/GreatPeople_ZhuangZhou_160.dds</File>
     <File>Assets/GreatPeople/GreatPeople_SiNaQian_160.dds</File>
-    <File>Assets/Resourceful2/Resourceful2_New_22.dds</File>
-    <File>Assets/Resourceful2/Resourceful2_New_32.dds</File>
-    <File>Assets/Resourceful2/Resourceful2_New_38.dds</File>
-    <File>Assets/Resourceful2/Resourceful2_New_50.dds</File>
-    <File>Assets/Resourceful2/Resourceful2_New_64.dds</File>
-    <File>Assets/Resourceful2/Resourceful2_New_128.dds</File>
-    <File>Assets/Resourceful2/Resourceful2_New_256.dds</File>
-    <File>Assets/Resourceful2/Resourceful2_New_FOW_256.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_22.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_38.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_50.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_64.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_256.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_FOW_256.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_22.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_32.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_38.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_50.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_64.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_256.dds</File>
-    <File>Assets/HDRESOURCE/RESOURCE_C_MONOPOLIES_FOW_256.dds</File>
     <File>Assets/WonderResources/Wonder_Resources_22.dds</File>
     <File>Assets/WonderResources/Wonder_Resources_32.dds</File>
     <File>Assets/WonderResources/Wonder_Resources_38.dds</File>
     <File>Assets/WonderResources/Wonder_Resources_50.dds</File>
     <File>Assets/WonderResources/Wonder_Resources_64.dds</File>
     <File>Assets/WonderResources/Wonder_Resources_256.dds</File>
-    <File>Assets/Wetlands/HD_Peat_22.dds</File>
-    <File>Assets/Wetlands/HD_Peat_32.dds</File>
-    <File>Assets/Wetlands/HD_Peat_38.dds</File>
-    <File>Assets/Wetlands/HD_Peat_50.dds</File>
-    <File>Assets/Wetlands/HD_Peat_64.dds</File>
-    <File>Assets/Wetlands/HD_Peat_80.dds</File>
-    <File>Assets/Wetlands/HD_Peat_128.dds</File>
-    <File>Assets/Wetlands/HD_Peat_256.dds</File>
-    <File>Assets/Wetlands/HD_Peat_FOW_256.dds</File>
     <File>Assets/Moments/UNIT_KEQING_MONMENT.dds</File>
     <File>Assets/Moments/UNIT_ENKIDU_HD_MONMENT.dds</File>
     <File>Assets/Moments/UNIT_QIN_ELITE_SOLDIER_HD_MONMENT.dds</File>
     <File>Assets/Moments/UNIT_PLUM_INTERNAL_SECURITY_HD_MONMENT.dds</File>
-    <File>Assets/Moments/BUILDING_HD_PIT_DWELLING_MONMENT.dds</File>
+    <File>Assets/Moments/UNIT_HD_BANDEIRANTES_MONMENT.dds</File>
     <File>Assets/Moments/BUILDING_EL_ESCORIAL_PALACE_MOMENT.dds</File>
+    <File>Assets/Moments/BUILDING_HD_WORLD_PARLIAMENT_HEADQUARTERS_MONMENT.dds</File>
     <File>Assets/GreatPeople/GREAT_PERSON_INDIVIDUAL_ABDUS_SALAM.dds</File>
     <File>Assets/GreatPeople/GREAT_PERSON_INDIVIDUAL_CWON_CARAVAGGIO.dds</File>
     <File>Assets/GreatPeople/GREAT_PERSON_INDIVIDUAL_CWON_DANTE.dds</File>
@@ -2938,6 +3037,32 @@
     <File>Assets/GreatWorks/New_Greatworks_256.dds</File>
     <File>Assets/Notifications/HD_Notifications_40.dds</File>
     <File>Assets/Notifications/HD_Notifications_100.dds</File>
+    <File>Assets/Resources/HD_Resources_22.dds</File>
+    <File>Assets/Resources/HD_Resources_32.dds</File>
+    <File>Assets/Resources/HD_Resources_38.dds</File>
+    <File>Assets/Resources/HD_Resources_50.dds</File>
+    <File>Assets/Resources/HD_Resources_64.dds</File>
+    <File>Assets/Resources/HD_Resources_256.dds</File>
+    <File>Assets/Resources/HD_Resources_FOW_256.dds</File>
+    <File>Assets/Resources/HD_Resources_Monopoly_22.dds</File>
+    <File>Assets/Resources/HD_Resources_Monopoly_32.dds</File>
+    <File>Assets/Resources/HD_Resources_Monopoly_38.dds</File>
+    <File>Assets/Resources/HD_Resources_Monopoly_50.dds</File>
+    <File>Assets/Resources/HD_Resources_Monopoly_64.dds</File>
+    <File>Assets/Resources/HD_Resources_Monopoly_256.dds</File>
+    <File>Assets/Resources/HD_Resources_Monopoly_FOW_256.dds</File>
+    <File>Assets/Resources/HD_CityState_Resources_22.dds</File>
+    <File>Assets/Resources/HD_CityState_Resources_32.dds</File>
+    <File>Assets/Resources/HD_CityState_Resources_38.dds</File>
+    <File>Assets/Resources/HD_CityState_Resources_50.dds</File>
+    <File>Assets/Resources/HD_CityState_Resources_64.dds</File>
+    <File>Assets/Resources/HD_CityState_Resources_256.dds</File>
+    <File>Assets/Resources/HD_CityState_Resources_FOW_256.dds</File>
+    <File>Assets/CityButtons/CityButtons_32.dds</File>
+    <File>Assets/Commemorations/HD_Commemorations_86.dds</File>
+    <File>Assets/Commemorations/HD_Commemorations_256.dds</File>
+    <File>Assets/CustomEvents/HD_SCOTLAND_SELECTIONS_256.dds</File>
+    <File>Assets/HD_BLANK_38.dds</File>
 
     <!-- Platforms -->
     <File>Platforms/Windows/audio/HD_CHINA.ini</File>

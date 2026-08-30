@@ -2,81 +2,8 @@
 insert or ignore into CivilopediaPageExcludes (SectionId, PageId)
   select 'BUILDINGS', BuildingType from HD_DUMMY_BUILDINGS;
 
--- 奇观添加业绩文本
-UPDATE Buildings SET Description = "{" || Description || "}{LOC_EPSTWEAK_WONDER_WORDING_TOURISM}" WHERE IsWonder = 1;
-
 --------------------------------------------------------------------------------------------------------------------
--- 改良分类
-  -- 基础改良
-insert into HD_Basic_Improvements (ImprovementType) select ImprovementType from Improvements where ImprovementType in (
-  'IMPROVEMENT_FARM',
-  'IMPROVEMENT_MINE',
-  'IMPROVEMENT_QUARRY',
-  'IMPROVEMENT_FISHING_BOATS',
-  'IMPROVEMENT_PASTURE',
-  'IMPROVEMENT_PLANTATION',
-  'IMPROVEMENT_CAMP',
-  'IMPROVEMENT_LUMBER_MILL',
-  'IMPROVEMENT_FISHERY',
-  'IMPROVEMENT_OIL_WELL',
-  'IMPROVEMENT_OFFSHORE_OIL_RIG'
-);
-
-  -- 特色改良
-insert into HD_Unique_Improvements (ImprovementType) select ImprovementType from Improvements where TraitType is not Null and TraitType not like 'MINOR_%' and BarbarianCamp = 0 and Goody = 0;
-
-  -- 城邦特色改良
-insert into HD_CityState_Improvements (ImprovementType) select ImprovementType from Improvements where TraitType is not Null and TraitType like 'MINOR_%' and BarbarianCamp = 0 and Goody = 0;
-
-  -- 城市设施改良
-insert into HD_Urban_Facilities_Improvements (ImprovementType) select ImprovementType from Improvements where ImprovementType in (
-  'IMPROVEMENT_GEOTHERMAL_PLANT',
-  'IMPROVEMENT_SOLAR_FARM',
-  'IMPROVEMENT_WIND_FARM',
-  'IMPROVEMENT_OFFSHORE_WIND_FARM',
-  'IMPROVEMENT_MOUNTAIN_TUNNEL',
-  'IMPROVEMENT_INDUSTRY',
-  'IMPROVEMENT_CORPORATION',
-  'IMPROVEMENT_LEU_WAREHOUSE',
-  'IMPROVEMENT_LEU_CONTAINER_PORT',
-  'IMPROVEMENT_LEU_STATION',
-  'IMPROVEMENT_LEU_TRANSNATIONAL',
-  'IMPROVEMENT_LEU_TRANSNATIONAL_SEA',
-  'IMPROVEMENT_MOUNTAIN_ROAD'
-);
-
-  -- 旅游设施改良
-insert into HD_Tourism_Facilities_Improvements (ImprovementType) select ImprovementType from Improvements where ImprovementType in (
-  'IMPROVEMENT_BEACH_RESORT',
-  'IMPROVEMENT_CITY_PARK',
-  'IMPROVEMENT_SKI_RESORT',
-  'IMPROVEMENT_SEASTEAD',
-  'IMPROVEMENT_JNR_OASIS_FARM',
-  'IMPROVEMENT_JNR_REED_HOME'
-);
-
-  -- 军事设施改良
-insert into HD_Military_Facilities_Improvements (ImprovementType) select ImprovementType from Improvements where ImprovementType in (
-  'IMPROVEMENT_FORT',
-  'IMPROVEMENT_AIRSTRIP',
-  'IMPROVEMENT_MISSILE_SILO',
-  'IMPROVEMENT_ROMAN_FORT',
-  'IMPROVEMENT_MAORI_PA',
-  'IMPROVEMENT_SAILOR_WATCHTOWER'
-);
-
-  -- 其他通用改良
-insert into HD_Common_Improvements (ImprovementType) select ImprovementType from Improvements where
-  ImprovementType not in (select ImprovementType from HD_Basic_Improvements) and
-  ImprovementType not in (select ImprovementType from HD_Unique_Improvements) and
-  ImprovementType not in (select ImprovementType from HD_CityState_Improvements) and
-  ImprovementType not in (select ImprovementType from HD_Urban_Facilities_Improvements) and
-  ImprovementType not in (select ImprovementType from HD_Tourism_Facilities_Improvements) and
-  ImprovementType not in (select ImprovementType from HD_Military_Facilities_Improvements) and
-  BarbarianCamp = 0 and Goody = 0;
-
---------------------------------------------------------------------------------------------------------------------
--- 资源分类
+-- 百科资源分类
   -- 战略 文物资源
 insert into HD_Civilopedia_Resource_Groups (ResourceType, PageGroupId)
   select ResourceType, ResourceClassType from Resources where ResourceClassType not in ("RESOURCECLASS_BONUS", "RESOURCECLASS_LUXURY");
@@ -86,12 +13,11 @@ insert into HD_Civilopedia_Resource_Groups (ResourceType, PageGroupId)
   select a.ResourceType, b.ImprovementType || "_" || a.ResourceClassType
   from Resources a inner join Improvement_ValidResources b on a.ResourceType = b.ResourceType
   where ResourceClassType in ("RESOURCECLASS_BONUS", "RESOURCECLASS_LUXURY")
-  and b.ImprovementType in (select ImprovementType from HD_Basic_Improvements);
+  and b.ImprovementType in (select ImprovementType from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_BASIC');
 
-  -- 奇观 奢侈资源
-insert into HD_Civilopedia_Resource_Groups (ResourceType, PageGroupId)
-  select a.ResourceType, 'WONDER_LUXURY' from Resources a inner join Wonder_Resources_HD b on a.ResourceType = b.ResourceType
-  where ResourceClassType = 'RESOURCECLASS_LUXURY';
+  -- 文明 城邦 奢侈资源
+insert into HD_Civilopedia_Resource_Groups (ResourceType, PageGroupId) select ResourceType, 'CIVILIZATION_LUXURY' from Wonder_Resources_HD;
+insert into HD_Civilopedia_Resource_Groups (ResourceType, PageGroupId) select ResourceType, 'CITYSTATE_LUXURY' from HD_CityState_Resources;
 
   -- 特殊 资源
 insert into HD_Civilopedia_Resource_Groups (ResourceType, PageGroupId)
@@ -101,6 +27,156 @@ insert into HD_Civilopedia_Resource_Groups (ResourceType, PageGroupId)
   and ResourceType not like "RESOURCE_C_ALCOHOL_%" 
   and ResourceType != "RESOURCE_C_ALCOHOL_GENERAL";
 
+-- 按改良类型给资源分类
+-- insert or ignore into HD_Resource_Classification (ResourceType, ResourceClassificationType) select
+--   ResourceType, 'RESOURCE_CLASSIFICATION_' || ImprovementType
+-- from Improvement_ValidResources where ImprovementType in (
+--   select ImprovementType from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_BASIC'
+--     and ImprovementType not in ('IMPROVEMENT_OFFSHORE_OIL_RIG')
+-- );
+
+-- 删除没有任何对应资源的分类
+delete from HD_ResourceClassificationTypes where ResourceClassificationType not in (select distinct ResourceClassificationType from HD_Resource_Classification);
+
+--------------------------------------------------------------------------------------------------------------------
+-- 艺术巨作 文物 重复创作者产出和业绩减益
+update Building_GreatWorks set NonUniquePersonYield = 1, NonUniquePersonTourism = 1 where
+  GreatWorkSlotType in ('GREATWORKSLOT_PALACE', 'GREATWORKSLOT_ART', 'GREATWORKSLOT_ARTIFACT');
+update Building_GreatWorks set NonUniquePersonYield = 0, NonUniquePersonTourism = 0 where
+  GreatWorkSlotType not in ('GREATWORKSLOT_PALACE', 'GREATWORKSLOT_ART', 'GREATWORKSLOT_ARTIFACT');
+
+--------------------------------------------------------------------------------------------------------------------
+-- 二进制
+insert or ignore into Requirements (RequirementId, RequirementType)
+	select 'REQUIRES_' || Key || '_' || Exp, 'REQUIREMENT_PLOT_PROPERTY_MATCHES'
+	from HD_Binary_Compress, HD_Binary_Compress_Keys where Exp <= MaxExp;
+
+insert or ignore into RequirementArguments (RequirementId, Name, Value)
+	select 'REQUIRES_' || Key || '_' || Exp, 'PropertyName', Key || '_' || Exp
+	from HD_Binary_Compress, HD_Binary_Compress_Keys where Exp <= MaxExp;
+
+insert or ignore into RequirementArguments (RequirementId, Name, Value)
+	select 'REQUIRES_' || Key || '_' || Exp, 'PropertyMinimum', 1
+	from HD_Binary_Compress, HD_Binary_Compress_Keys where Exp <= MaxExp;
+
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
+	select Key || '_' || Exp || '_REQUIREMENTS', 'REQUIREMENTSET_TEST_ANY'
+	from HD_Binary_Compress, HD_Binary_Compress_Keys where Exp <= MaxExp;
+
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select Key || '_' || Exp || '_REQUIREMENTS', 'REQUIRES_' || Key || '_' || Exp
+	from HD_Binary_Compress, HD_Binary_Compress_Keys where Exp <= MaxExp;
+
+  -- 至少有XX个
+insert or ignore into Requirements (RequirementId, RequirementType)
+	select 'REQUIRES_' || Key || '_AT_LEAST_' || AtLeast, 'REQUIREMENT_PLOT_PROPERTY_MATCHES'
+	from HD_Binary_Compress_AtLeast;
+
+insert or ignore into RequirementArguments (RequirementId, Name, Value)
+	select 'REQUIRES_' || Key || '_AT_LEAST_' || AtLeast, 'PropertyName', 'TOTAL_' || Key
+	from HD_Binary_Compress_AtLeast;
+
+insert or ignore into RequirementArguments (RequirementId, Name, Value)
+	select 'REQUIRES_' || Key || '_AT_LEAST_' || AtLeast, 'PropertyMinimum', AtLeast
+	from HD_Binary_Compress_AtLeast;
+
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
+	select Key || '_AT_LEAST_' || AtLeast || '_REQUIREMENTS', 'REQUIREMENTSET_TEST_ANY'
+	from HD_Binary_Compress_AtLeast;
+
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select Key || '_AT_LEAST_' || AtLeast || '_REQUIREMENTS', 'REQUIRES_' || Key || '_AT_LEAST_' || AtLeast
+	from HD_Binary_Compress_AtLeast;
+
+--------------------------------------------------------------------------------------------------------------------
+-- 依赖Plot Property的政策
+insert or ignore into Requirements (RequirementId, RequirementType)
+	select 'REQUIRES_HD_PLAYER_HAS_' || PolicyType, 'REQUIREMENT_PLOT_PROPERTY_MATCHES'
+	from HD_PolicyNeedDetect;
+
+insert or ignore into RequirementArguments (RequirementId, Name, Value)
+	select 'REQUIRES_HD_PLAYER_HAS_' || PolicyType, 'PropertyName', 'HD_PLAYER_HAS_' || PolicyType
+	from HD_PolicyNeedDetect;
+
+insert or ignore into RequirementArguments (RequirementId, Name, Value)
+	select 'REQUIRES_HD_PLAYER_HAS_' || PolicyType, 'PropertyMinimum', 1
+	from HD_PolicyNeedDetect;
+
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
+  select 'HD_PLAYER_HAS_' || PolicyType || '_REQUIREMENTS', 'REQUIREMENTSET_TEST_ANY'
+	from HD_PolicyNeedDetect;
+
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+  select 'HD_PLAYER_HAS_' || PolicyType || '_REQUIREMENTS', 'REQUIRES_HD_PLAYER_HAS_' || PolicyType
+	from HD_PolicyNeedDetect;
+
+--------------------------------------------------------------------------------------------------------------------
+-- 西班牙自然奇观能力
+	-- LB 自然奇观产出
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId, Permanent, SubjectStackLimit)
+select 'TRAIT_' || b.FeatureType || '_ON_' || a.YieldType, 'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE', null, 1,	1
+	from Feature_YieldChanges a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+select 'TRAIT_' || b.FeatureType || '_ON_' || a.YieldType, 'BuildingType', 'BUILDING_EL_ESCORIAL_PALACE'
+	from Feature_YieldChanges a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+select 'TRAIT_' || b.FeatureType || '_ON_' || a.YieldType, 'Amount', a.YieldChange
+	from Feature_YieldChanges a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+select 'TRAIT_' || b.FeatureType || '_ON_' || a.YieldType, 'YieldType', a.YieldType
+	from Feature_YieldChanges a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
+
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId, Permanent, SubjectStackLimit)
+select 'TRAIT_' || b.FeatureType || '_ADJACENT_' || a.YieldType, 'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE', null, 1,	1
+	from Feature_AdjacentYields a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+select 'TRAIT_' || b.FeatureType || '_ADJACENT_' || a.YieldType, 'BuildingType', 'BUILDING_EL_ESCORIAL_PALACE'
+	from Feature_AdjacentYields a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+select 'TRAIT_' || b.FeatureType || '_ADJACENT_' || a.YieldType, 'Amount', a.YieldChange
+	from Feature_AdjacentYields a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+select 'TRAIT_' || b.FeatureType || '_ADJACENT_' || a.YieldType, 'YieldType', a.YieldType
+	from Feature_AdjacentYields a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
+
+	-- 宫殿
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId, Permanent, SubjectStackLimit)
+select 'TRAIT_PALACE_' || b.FeatureType || '_ON_' || a.YieldType, 'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE', 'PLAYER_HAS_BUILDING_EL_ESCORIAL_PALACE_REQUIREMENTS', 1,	1
+	from Feature_YieldChanges a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+select 'TRAIT_PALACE_' || b.FeatureType || '_ON_' || a.YieldType, 'BuildingType', 'BUILDING_PALACE'
+	from Feature_YieldChanges a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+select 'TRAIT_PALACE_' || b.FeatureType || '_ON_' || a.YieldType, 'Amount', a.YieldChange
+	from Feature_YieldChanges a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+select 'TRAIT_PALACE_' || b.FeatureType || '_ON_' || a.YieldType, 'YieldType', a.YieldType
+	from Feature_YieldChanges a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
+
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId, Permanent, SubjectStackLimit)
+select 'TRAIT_PALACE_' || b.FeatureType || '_ADJACENT_' || a.YieldType, 'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE', 'PLAYER_HAS_BUILDING_EL_ESCORIAL_PALACE_REQUIREMENTS', 1,	1
+	from Feature_AdjacentYields a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+select 'TRAIT_PALACE_' || b.FeatureType || '_ADJACENT_' || a.YieldType, 'BuildingType', 'BUILDING_PALACE'
+	from Feature_AdjacentYields a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+select 'TRAIT_PALACE_' || b.FeatureType || '_ADJACENT_' || a.YieldType, 'Amount', a.YieldChange
+	from Feature_AdjacentYields a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+select 'TRAIT_PALACE_' || b.FeatureType || '_ADJACENT_' || a.YieldType, 'YieldType', a.YieldType
+	from Feature_AdjacentYields a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
 --------------------------------------------------------------------------------------------------------------------
 -- 宙斯像万神殿收益翻倍
 -- MODIFIER_ALL_PLAYERS_ATTACH_MODIFIER -> MODIFIER_PLAYER_CAPITAL_CITY_ATTACH_MODIFIER
@@ -447,7 +523,7 @@ from DistrictCorrespondingYieldType_HD a inner join District_TradeRouteYields b 
 -- 	from Resources where ResourceClassType = 'RESOURCECLASS_LUXURY' and (Frequency != 0 or SeaFrequency != 0);
 
 -- insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId, SubjectStackLimit) select
--- 	'HD_RECORD_CITY_HAS_' || ResourceType, 'MODIFIER_ALL_CITIES_ADJUST_PROPERTY', 'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIRMENTS', 1
+-- 	'HD_RECORD_CITY_HAS_' || ResourceType, 'MODIFIER_ALL_CITIES_ADJUST_PROPERTY', 'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIREMENTS', 1
 -- 	from Resources where ResourceClassType = 'RESOURCECLASS_LUXURY' and (Frequency != 0 or SeaFrequency != 0);
 
 -- insert or replace into ModifierArguments (ModifierId, Name, Value) select
@@ -661,16 +737,24 @@ insert or ignore into Sumeria_CityState_Special_SubQuests_HD (SpecialQuestType, 
   PrereqTech,
   PrereqCivic
 from Improvements where ImprovementType in (
-  'IMPROVEMENT_INDUSTRY', 'IMPROVEMENT_CORPORATION',
+  'IMPROVEMENT_INDUSTRY', 'IMPROVEMENT_CORPORATION', 'IMPROVEMENT_INDUSTRY_BONUS', 'IMPROVEMENT_INDUSTRY_STRATEGIC', 'IMPROVEMENT_CORPORATION_BONUS', 'IMPROVEMENT_CORPORATION_STRATEGIC',
   'IMPROVEMENT_LEU_STATION', 'IMPROVEMENT_LEU_WAREHOUSE','IMPROVEMENT_LEU_CONTAINER_PORT',
   'IMPROVEMENT_MOUNTAIN_TUNNEL', 'IMPROVEMENT_BEACH_RESORT', 'IMPROVEMENT_SKI_RESORT', 'IMPROVEMENT_SEASTEAD',
   'IMPROVEMENT_SAILOR_WATCHTOWER', 'IMPROVEMENT_FORT', 'IMPROVEMENT_AIRSTRIP', 'IMPROVEMENT_MISSILE_SILO',
   'IMPROVEMENT_SOLAR_FARM', 'IMPROVEMENT_WIND_FARM', 'IMPROVEMENT_GEOTHERMAL_PLANT', 'IMPROVEMENT_OFFSHORE_WIND_FARM'
 );
-update Sumeria_CityState_Special_SubQuests_HD set PrereqTech = 'TECH_APPRENTICESHIP' where SpecialSubQuestType = 'HD_SPECIAL_SUBQUEST_BUILD_IMPROVEMENT_INDUSTRY';
-update Sumeria_CityState_Special_SubQuests_HD set PrereqTech = 'TECH_ECONOMICS' where SpecialSubQuestType = 'HD_SPECIAL_SUBQUEST_BUILD_IMPROVEMENT_CORPORATION';
+update Sumeria_CityState_Special_SubQuests_HD set PrereqTech = 'TECH_CURRENCY' where SpecialSubQuestType in (
+  'HD_SPECIAL_SUBQUEST_BUILD_IMPROVEMENT_INDUSTRY',
+  'HD_SPECIAL_SUBQUEST_BUILD_IMPROVEMENT_INDUSTRY_BONUS',
+  'HD_SPECIAL_SUBQUEST_BUILD_IMPROVEMENT_INDUSTRY_STRATEGIC'
+);
+update Sumeria_CityState_Special_SubQuests_HD set PrereqTech = 'TECH_ECONOMICS' where SpecialSubQuestType in (
+  'HD_SPECIAL_SUBQUEST_BUILD_IMPROVEMENT_CORPORATION',
+  'HD_SPECIAL_SUBQUEST_BUILD_IMPROVEMENT_CORPORATION_BONUS',
+  'HD_SPECIAL_SUBQUEST_BUILD_IMPROVEMENT_CORPORATION_STRATEGIC'
+);
 update Sumeria_CityState_Special_Quests_HD set PrereqTech = 'TECH_MILITARY_ENGINEERING' where SpecialQuestType = 'HD_SPECIAL_QUEST_BUILD_SPECIAL_IMPROVEMENT';
-update Sumeria_CityState_Special_Quests_HD set PrereqTech = 'TECH_MILITARY_ENGINEERING' where SpecialQuestType = 'HD_SPECIAL_QUEST_BUILD_SPECIAL_IMPROVEMENT'
+update Sumeria_CityState_Special_Quests_HD set PrereqTech = 'TECH_CURRENCY' where SpecialQuestType = 'HD_SPECIAL_QUEST_BUILD_SPECIAL_IMPROVEMENT'
   and exists (select ImprovementType from Improvements where ImprovementType = 'IMPROVEMENT_INDUSTRY');
 update Sumeria_CityState_Special_Quests_HD set PrereqTech = Null where SpecialQuestType = 'HD_SPECIAL_QUEST_BUILD_SPECIAL_IMPROVEMENT'
   and exists (select ImprovementType from Improvements where ImprovementType = 'IMPROVEMENT_SAILOR_WATCHTOWER');
@@ -884,3 +968,9 @@ from ImprovementsNeedCount_HD;
 insert or replace into ModifierArguments (ModifierId, Name, Value)
   select 'HD_CITY_' || ImprovementType || '_COUNT_RECORD', 'Amount', 1
 from ImprovementsNeedCount_HD;
+
+-------------------------------------------------------------------
+-- 科技提供总督点
+insert or replace into TechnologyModifiers (TechnologyType, ModifierId) select
+  TechnologyType, 'CIVIC_GRANT_PLAYER_GOVERNOR_POINTS'
+from HD_TechnologyGovernorPoints;

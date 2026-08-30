@@ -2,7 +2,6 @@
 <GameData>
     <Tags>
 		<Row Tag="CLASS_SAPPER_HD" Vocabulary="ABILITY_CLASS"/>
-		<Row Tag="CLASS_MILITARY_ENGINEER_HD" Vocabulary="ABILITY_CLASS"/>
 		<Row Tag="CLASS_ENGINEER_CORP_HD" Vocabulary="ABILITY_CLASS"/>
 	</Tags>
     <!-- 工兵 工程部队
@@ -21,15 +20,12 @@
     </UnitAiInfos>
     <TypeTags>
 		<Row Type="UNIT_SAPPER" Tag="CLASS_SUPPORT"/>
-		<Row Type="UNIT_SAPPER" Tag="CLASS_MILITARY_SP"/>
 		<Row Type="UNIT_SAPPER" Tag="CLASS_LAND_UNITS"/>
-		<Row Type="UNIT_SAPPER" Tag="CLASS_MILITARY_ENGINEER"/>
+		<Row Type="UNIT_SAPPER" Tag="CLASS_MILITARY_ENGINEERING_UNITS"/>
 		<Row Type="UNIT_SAPPER" Tag="CLASS_SAPPER_HD"/>
-		<Row Type="UNIT_MILITARY_ENGINEER" Tag="CLASS_MILITARY_ENGINEER_HD"/>
 		<Row Type="UNIT_ENGINEER_CORP" Tag="CLASS_SUPPORT"/>
-		<Row Type="UNIT_ENGINEER_CORP" Tag="CLASS_MILITARY_SP"/>
 		<Row Type="UNIT_ENGINEER_CORP" Tag="CLASS_LAND_UNITS"/>
-		<Row Type="UNIT_ENGINEER_CORP" Tag="CLASS_MILITARY_ENGINEER"/>
+		<Row Type="UNIT_ENGINEER_CORP" Tag="CLASS_MILITARY_ENGINEERING_UNITS"/>
 		<Row Type="UNIT_ENGINEER_CORP" Tag="CLASS_ENGINEER_CORP_HD"/>
 
     </TypeTags>
@@ -48,7 +44,7 @@
             Description="LOC_UNIT_SAPPER_DESCRIPTION" 
             PurchaseYield="YIELD_GOLD" 
             BuildCharges="3" 
-            PrereqTech="TECH_IRON_WORKING"/>
+            PrereqTech="TECH_BRONZE_WORKING"/>
         <Row 
             UnitType="UNIT_ENGINEER_CORP" 
             Cost="220" 
@@ -70,9 +66,6 @@
         </Update>
     </Units>
     <Unit_BuildingPrereqs>
-		<Row Unit="UNIT_SAPPER" PrereqBuilding="BUILDING_BOOTCAMP"/>
-		<Row Unit="UNIT_SAPPER" PrereqBuilding="BUILDING_BARRACKS"/>
-		<Row Unit="UNIT_SAPPER" PrereqBuilding="BUILDING_STABLE"/>
 		<Row Unit="UNIT_ENGINEER_CORP" PrereqBuilding="BUILDING_MILITARY_ACADEMY"/>
 	</Unit_BuildingPrereqs>
     <Route_ValidBuildUnits>
@@ -84,5 +77,21 @@
 		<Row ImprovementType="IMPROVEMENT_AIRSTRIP" UnitType="UNIT_ENGINEER_CORP"/>
 		<Row ImprovementType="IMPROVEMENT_MISSILE_SILO" UnitType="UNIT_ENGINEER_CORP"/>
 		<Row ImprovementType="IMPROVEMENT_MOUNTAIN_TUNNEL" UnitType="UNIT_ENGINEER_CORP"/>
+		<Delete ImprovementType="IMPROVEMENT_AIRSTRIP" UnitType="UNIT_MILITARY_ENGINEER"/>
+		<Delete ImprovementType="IMPROVEMENT_MISSILE_SILO" UnitType="UNIT_MILITARY_ENGINEER"/>
 	</Improvement_ValidBuildUnits>
+    <District_BuildChargeProductions>
+		<Row DistrictType="DISTRICT_CANAL" UnitType="UNIT_SAPPER" PercentProductionPerCharge="20"/>
+		<Row DistrictType="DISTRICT_DAM" UnitType="UNIT_SAPPER" PercentProductionPerCharge="20"/>
+		<Row DistrictType="DISTRICT_AQUEDUCT" UnitType="UNIT_SAPPER" PercentProductionPerCharge="20"/>
+		<Row DistrictType="DISTRICT_BATH" UnitType="UNIT_SAPPER" PercentProductionPerCharge="20"/>
+        
+		<Row DistrictType="DISTRICT_CANAL" UnitType="UNIT_ENGINEER_CORP" PercentProductionPerCharge="40"/>
+		<Row DistrictType="DISTRICT_DAM" UnitType="UNIT_ENGINEER_CORP" PercentProductionPerCharge="40"/>
+		<Row DistrictType="DISTRICT_AQUEDUCT" UnitType="UNIT_ENGINEER_CORP" PercentProductionPerCharge="40"/>
+		<Row DistrictType="DISTRICT_BATH" UnitType="UNIT_ENGINEER_CORP" PercentProductionPerCharge="40"/>
+	</District_BuildChargeProductions>
+    <Building_BuildChargeProductions>
+        <Row BuildingType="BUILDING_FLOOD_BARRIER" UnitType="UNIT_ENGINEER_CORP" PercentProductionPerCharge="40"/>
+	</Building_BuildChargeProductions>
 <GameData>

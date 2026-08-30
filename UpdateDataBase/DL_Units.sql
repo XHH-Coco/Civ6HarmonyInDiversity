@@ -25,7 +25,8 @@ update Units set BuildCharges = 3, BaseMoves = 3 where UnitType = 'UNIT_MILITARY
 
 -- UNIT_MILITARY_ENGINEER
 update Routes_XP2 set BuildWithUnitChargeCost = 0;
-update District_BuildChargeProductions set PercentProductionPerCharge = 30;
+update District_BuildChargeProductions set PercentProductionPerCharge = 30 where UnitType = 'UNIT_MILITARY_ENGINEER';
+update Building_BuildChargeProductions set PercentProductionPerCharge = 30 where UnitType = 'UNIT_MILITARY_ENGINEER';
 insert or replace into Route_ResourceCosts
     (RouteType,                 ResourceType,       BuildWithUnitCost)
 values
@@ -39,22 +40,23 @@ insert or replace into Route_ValidBuildUnits
 values
     ('ROUTE_ANCIENT_ROAD',      'UNIT_ROMAN_LEGION'),
     ('ROUTE_MEDIEVAL_ROAD',     'UNIT_ROMAN_LEGION');
-/*
-insert or replace into BuildingModifiers
-	(BuildingType,					ModifierId)
-values
-    ('BUILDING_ARMORY',				'ARMORY_MILITARY_ENGINEER_PURCHASE_DISCOUNT');
 
-insert or replace into Modifiers
-	(ModifierId,											ModifierType)
-values
-	('ARMORY_MILITARY_ENGINEER_PURCHASE_GOLD_DISCOUNT',		'MODIFIER_SINGLE_CITY_ADJUST_UNIT_PURCHASE_COST');
+-- 军工单位勘探火山土
+insert or replace into GlobalParameters (Name, Value) values
+	('HD_MILITARY_ENGINEER_EXCAVATE_MAX_TIMES',						3),
+	('HD_MILITARY_ENGINEER_EXCAVATE_GOLD',								75),
+	('HD_MILITARY_ENGINEER_EXCAVATE_SCIENCE',							25),
+	('HD_MILITARY_ENGINEER_EXCAVATE_GOLD_PERCENTAGE',			50),
+	('HD_MILITARY_ENGINEER_EXCAVATE_SCIENCE_PERCENTAGE',	50),
+	('HD_MILITARY_ENGINEER_EXCAVATE_RESOURCE_PERCENTAGE',	50),
+	('HD_MILITARY_ENGINEER_EXCAVATE_RELIC_PERCENTAGE',		5);
 
-insert or replace into ModifierArguments
-	(ModifierId,									    Name,			Value)
-values
-	('ARMORY_MILITARY_ENGINEER_PURCHASE_GOLD_DISCOUNT',	'UnitType',	    'UNIT_MILITARY_ENGINEER'),
-    ('ARMORY_MILITARY_ENGINEER_PURCHASE_GOLD_DISCOUNT',	'Amount',	    20);*/
+insert or replace into Modifiers (ModifierId, ModifierType, RunOnce, Permanent) values
+	('HD_MILITARY_ENGINEER_EXCAVATE_GRANT_RELIC', 'MODIFIER_PLAYER_GRANT_RELIC', 1, 1);
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
+	('HD_MILITARY_ENGINEER_EXCAVATE_GRANT_RELIC', 'Amount', 1);
+
 --SPY间谍价格和涨价方式-暂时参考了HD使徒和传教士-但它显得不那么耐用
 -----------------------------------------------------------------------
 update Units set
@@ -306,7 +308,7 @@ update Units set Cost = 300, Maintenance = 4, BaseMoves = 4, Range = 0, Combat =
 update Units_XP2 set ResourceCost = 0, ResourceMaintenanceType = NULL, ResourceMaintenanceAmount = 0 where UnitType = 'UNIT_DRONE';
 
 -- Naval Melee
-update Units set Cost = 55, Maintenance = 1, BaseMoves = 3, Range = 0, Combat = 30, RangedCombat = 0, StrategicResource = NULL where UnitType = 'UNIT_GALLEY';
+update Units set Cost = 55, Maintenance = 1, BaseMoves = 3, Range = 0, Combat = 30, RangedCombat = 0, StrategicResource = NULL, PrereqTech = 'TECH_SHIPBUILDING' where UnitType = 'UNIT_GALLEY';
 update Units_XP2 set ResourceCost = 0, ResourceMaintenanceType = NULL, ResourceMaintenanceAmount = 0 where UnitType = 'UNIT_GALLEY';
 update Units set Cost = 110, Maintenance = 3, BaseMoves = 3, Range = 0, Combat = 45, RangedCombat = 0, StrategicResource = NULL where UnitType = 'UNIT_DLV_COG';
 update Units_XP2 set ResourceCost = 0, ResourceMaintenanceType = NULL, ResourceMaintenanceAmount = 0 where UnitType = 'UNIT_DLV_COG';
@@ -349,7 +351,7 @@ values  ('UNIT_AIRCRAFT_CARRIER',  5, 'RESOURCE_OIL', 1);
 update Units set Cost = 1500 where UnitType = 'UNIT_GIANT_DEATH_ROBOT';
 
 -- Promotions
-update Units set BaseMoves = BaseMoves - 1 where PromotionClass = 'PROMOTION_CLASS_RECON';
+update Units set BaseMoves = BaseMoves - 1 where PromotionClass = 'PROMOTION_CLASS_RECON' and TraitType is NULL;
 
 --------------------------------------------------------------------------------------------------------------
 -- 蛮族远古海军

@@ -180,10 +180,17 @@ values
 	('CIVIC_CAPITALISM',   			 							'LOC_CIVIC_MACRO_ECONOMICS_HD_QUOTE_2',     				'PLAY_CIVIC_MACRO_ECONOMICS_HD_QUOTE_2');
 
 -- 设定市政的总督头衔、使者等效果
-delete from CivicModifiers where ModifierId = 'CIVIC_AWARD_ONE_INFLUENCE_TOKEN';
-delete from CivicModifiers where ModifierId = 'CIVIC_AWARD_TWO_INFLUENCE_TOKENS';
-delete from CivicModifiers where ModifierId = 'CIVIC_AWARD_THREE_INFLUENCE_TOKENS';
-delete from CivicModifiers where ModifierId = 'CIVIC_GRANT_PLAYER_GOVERNOR_POINTS';
+delete from CivicModifiers where ModifierId in (
+	'CIVIC_AWARD_ONE_INFLUENCE_TOKEN',
+	'CIVIC_AWARD_TWO_INFLUENCE_TOKENS',
+	'CIVIC_AWARD_THREE_INFLUENCE_TOKENS',
+	'CIVIC_GRANT_PLAYER_GOVERNOR_POINTS',
+	'CONSERVATION_ANCIENT_WALL_TOURISM',
+	'CONSERVATION_MEDIEVAL_WALL_TOURISM',
+	'CONSERVATION_RENAISSANCE_WALL_TOURISM',
+	'CONSERVATION_TSIKHE_TOURISM_GOLDEN_AGE',
+	'CONSERVATION_TSIKHE_TOURISM'
+);
 
 insert or replace into CivicModifiers
 	(CivicType,										ModifierId) 
@@ -234,8 +241,6 @@ values
 	('CIVIC_NUCLEAR_PROGRAM',						'NUCLEAR_PROGRAM_NUCLEAR_POWER_STATION_PRODUCTION'),
 	('CIVIC_CULTURAL_HEGEMONY',						'FUTURE_VICTORY_CULTURE_ROCK_BAND_PROMOTIONS'),
 	-- ('CIVIC_CONSERVATION',							'CITY_CENTER_ADJACENT_TO_FOREST'),
-	('CIVIC_HERALDRY_HD',								'CIVIC_HERALDRY_TRIUMPHAL_ARCH_CULTURE'),
-	('CIVIC_FEUDALISM',									'CIVIC_FEUDALISM_PIT_DWELLING_FOOD'),
 	-- 军团 军队
 	('CIVIC_COLONIALISM',							'COLONIALISM_NAVAL_CORPS'),
 	('CIVIC_NATIONALISM',							'NATIONALISM_LAND_CORPS');
@@ -244,9 +249,7 @@ insert or replace into Modifiers
 	(ModifierId,						ModifierType)
 values
 	('COLONIALISM_NAVAL_CORPS',			'MODIFIER_PLAYER_CORPS_ARMY_PREREQ'),
-	('NATIONALISM_LAND_CORPS',			'MODIFIER_PLAYER_CORPS_ARMY_PREREQ'),
-	('CIVIC_HERALDRY_TRIUMPHAL_ARCH_CULTURE',			'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE'),
-	('CIVIC_FEUDALISM_PIT_DWELLING_FOOD',					'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE');
+	('NATIONALISM_LAND_CORPS',			'MODIFIER_PLAYER_CORPS_ARMY_PREREQ');
 
 insert or replace into ModifierArguments
 	(ModifierId,						Name,					Value)
@@ -256,13 +259,7 @@ values
 	('COLONIALISM_NAVAL_CORPS',			'CivicType',			'CIVIC_COLONIALISM'),
 	('NATIONALISM_LAND_CORPS',			'Corps',				1),
 	('NATIONALISM_LAND_CORPS',			'Domain',				'DOMAIN_LAND'),
-	('NATIONALISM_LAND_CORPS',			'CivicType',			'CIVIC_NATIONALISM'),
-	('CIVIC_HERALDRY_TRIUMPHAL_ARCH_CULTURE',   'BuildingType',             'BUILDING_TRIUMPHAL_ARCH'),
-	('CIVIC_HERALDRY_TRIUMPHAL_ARCH_CULTURE',   'YieldType',                'YIELD_CULTURE'),
-	('CIVIC_HERALDRY_TRIUMPHAL_ARCH_CULTURE',   'Amount',                   1),
-	('CIVIC_FEUDALISM_PIT_DWELLING_FOOD',   'BuildingType',             'BUILDING_HD_PIT_DWELLING'),
-	('CIVIC_FEUDALISM_PIT_DWELLING_FOOD',   'YieldType',                'YIELD_FOOD'),
-	('CIVIC_FEUDALISM_PIT_DWELLING_FOOD',   'Amount',                   1);
+	('NATIONALISM_LAND_CORPS',			'CivicType',			'CIVIC_NATIONALISM');
 
 update UnitCommands set PrereqCivic = 'CIVIC_MOBILIZATION' where CommandType = 'UNITCOMMAND_FORM_CORPS';
 
@@ -520,13 +517,13 @@ update Civics set UITreeRow = -3 where CivicType = 'CIVIC_CULTURAL_HEGEMONY';
 update Civics set Cost = 30 where CivicType = 'CIVIC_CODE_OF_LAWS';
 update Civics set Cost = 30 where CivicType = 'CIVIC_CRAFTSMANSHIP';
 update Civics set Cost = 30 where CivicType = 'CIVIC_FOREIGN_TRADE';
-update Civics set Cost = 50 where CivicType = 'CIVIC_MILITARY_TRADITION';
-update Civics set Cost = 70 where CivicType = 'CIVIC_STATE_WORKFORCE';
-update Civics set Cost = 70 where CivicType = 'CIVIC_EARLY_EMPIRE';
-update Civics set Cost = 50 where CivicType = 'CIVIC_MYSTICISM';
+update Civics set Cost = 60 where CivicType = 'CIVIC_MILITARY_TRADITION';
+update Civics set Cost = 90 where CivicType = 'CIVIC_STATE_WORKFORCE';
+update Civics set Cost = 90 where CivicType = 'CIVIC_EARLY_EMPIRE';
+update Civics set Cost = 60 where CivicType = 'CIVIC_MYSTICISM';
 
 update Civics set Cost = 150 where CivicType = 'CIVIC_GAMES_RECREATION';
-update Civics set Cost = 150 where CivicType = 'CIVIC_POLITICAL_PHILOSOPHY';
+update Civics set Cost = 180 where CivicType = 'CIVIC_POLITICAL_PHILOSOPHY';
 update Civics set Cost = 150 where CivicType = 'CIVIC_DRAMA_POETRY';
 update Civics set Cost = 240 where CivicType = 'CIVIC_MILITARY_TRAINING';
 update Civics set Cost = 240 where CivicType = 'CIVIC_DEFENSIVE_TACTICS';
@@ -623,7 +620,7 @@ from Projects where ProjectType like 'PROJECT_ENHANCE_DISTRICT_%';
 insert or replace into Modifiers
 	(ModifierId,							ModifierType)
 select
-	ProjectType || '_MODIFIER',				'MODIFIER_PLAYER_ALLOW_PROJECT_CATHERINE'
+	ProjectType || '_MODIFIER',				'MODIFIER_PLAYER_ALLOW_PROJECT'
 from Projects where ProjectType like 'PROJECT_ENHANCE_DISTRICT_%';
 insert or replace into ModifierArguments
 	(ModifierId,							Name,					Value)

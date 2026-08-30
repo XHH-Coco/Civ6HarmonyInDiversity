@@ -104,7 +104,7 @@ VALUES
 		("zh_Hans_CN",	"LOC_GREATWORK_PRODUCT_GOLD_5_NAME",					"西柚公司©电子元件"),
 
 		("zh_Hans_CN",	"LOC_GREATWORK_PRODUCT_SUK_SHARK_1_NAME",				"宾威™鲨翅"),
-		("zh_Hans_CN",	"LOC_GREATWORK_PRODUCT_SUK_SHARK_3_NAME",				"鲛川滨田®鲨鲜"),
+		("zh_Hans_CN",	"LOC_GREATWORK_PRODUCT_SUK_SHARK_2_NAME",				"鲛川滨田®鲨鲜"),
 		("zh_Hans_CN",	"LOC_GREATWORK_PRODUCT_SUK_SHARK_3_NAME",				"维京海盗™鲨鱼肉"),
 		("zh_Hans_CN",	"LOC_GREATWORK_PRODUCT_SUK_SHARK_4_NAME",				"克里基™鲨鱼探险之旅"),
 		("zh_Hans_CN",	"LOC_GREATWORK_PRODUCT_SUK_SHARK_5_NAME",				"卡拉莫阿里®与鲨邂逅");

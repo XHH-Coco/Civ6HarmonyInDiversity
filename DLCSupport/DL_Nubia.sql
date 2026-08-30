@@ -88,7 +88,7 @@ from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.R
 insert or replace into Modifiers
 	(ModifierId,																				ModifierType,																					SubjectRequirementSetId)
 select
-	'HD_TA_SETI_' || i.ResourceType || '_PRODUCTION',		'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER',	'HD_CITY_HAS_IMPROVED_' || i.ResourceType || '_REQUIRMENTS'
+	'HD_TA_SETI_' || i.ResourceType || '_PRODUCTION',		'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER',	'HD_CITY_HAS_IMPROVED_' || i.ResourceType || '_REQUIREMENTS'
 from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_MINE';
 
 insert or replace into ModifierArguments
@@ -113,7 +113,7 @@ from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.R
 insert or replace into Modifiers
 	(ModifierId,																				ModifierType,																					SubjectRequirementSetId)
 select
-	'HD_TA_SETI_' || i.ResourceType || '_GOLD',					'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER',	'HD_CITY_HAS_IMPROVED_' || i.ResourceType || '_REQUIRMENTS'
+	'HD_TA_SETI_' || i.ResourceType || '_GOLD',					'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER',	'HD_CITY_HAS_IMPROVED_' || i.ResourceType || '_REQUIREMENTS'
 from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_MINE';
 
 insert or replace into ModifierArguments
@@ -159,7 +159,7 @@ from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.R
 -- insert or replace into Modifiers
 -- 	(ModifierId,													ModifierType,										SubjectRequirementSetId)
 -- select
--- 	'TRAIT_' || ResourceType || '_MINE_GOLD_PERCENTAGE',	'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER',	'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIRMENTS'
+-- 	'TRAIT_' || ResourceType || '_MINE_GOLD_PERCENTAGE',	'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER',	'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIREMENTS'
 -- from Nubia_Resource;
 
 -- insert or replace into ModifierArguments
@@ -179,7 +179,7 @@ from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.R
 -- from Nubia_Resource1;
 
 -- insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) select
--- 	'TRAIT_'||ResourceType||'_MINE_PRODUCTION_RATIO', 'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER',  'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIRMENTS'
+-- 	'TRAIT_'||ResourceType||'_MINE_PRODUCTION_RATIO', 'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER',  'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIREMENTS'
 -- from Nubia_Resource1;
 
 -- insert or replace into ModifierArguments (ModifierId, Name, Value) select

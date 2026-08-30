@@ -19,7 +19,6 @@ include "AssignStartingPlots"
 local g_iW, g_iH;
 local g_iFlags = {};
 local g_continentsFrac = nil;
-local islands = {};
 ------------------------
 ------------------------------------------------------
 -- The application side will call GetMapScriptInfo directly to request
@@ -174,7 +173,7 @@ function GeneratePlotTypes(world_age)
 		water_percent = sea_level_high
 		water_percent_modifier = 4;
 	else
-		water_percent = TerrainBuilder.GetRandomNumber(sea_level_high - sea_level_low, "Random Sea Level - Lua") + sea_level_low  + 1;
+		water_percent = TerrainBuilder.GetRandomNumber(sea_level_high - sea_level_low + 1, "Random Sea Level - Lua") + sea_level_low;
 	end
 
 	-- Set values for hills and mountains according to World Age chosen by user.
@@ -292,7 +291,7 @@ function GeneratePlotTypes(world_age)
 	end
 
 	-- Generate West Large Islands	
-	islands = plotTypes;
+	SetIslandLayer(plotTypes);
 	local args = {};
 	args.iWaterPercent = 77 + water_percent_modifier;
     args.iRegionWidth = math.ceil(g_iW);
@@ -306,11 +305,11 @@ function GeneratePlotTypes(world_age)
 	args.iRegionFracYExp = 5;
 	args.adjustment = adjustment;
 	plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
-	islands = plotTypes;
+	SetIslandLayer(plotTypes);
 
 	-- Generate West Medium Islands
 	local args = {};	
-	islands = plotTypes;
+	SetIslandLayer(plotTypes);
 	args.iWaterPercent = 80 + water_percent_modifier;
 	args.iRegionWidth = math.ceil(g_iW / 2 - iMediumIslandValue * 2);
 	args.iRegionHeight = math.ceil(g_iH);
@@ -325,7 +324,7 @@ function GeneratePlotTypes(world_age)
     plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
 
 	-- Generate West Tiny Islands
-	islands = plotTypes;
+	SetIslandLayer(plotTypes);
 	local args = {};	
 	args.iWaterPercent = 88 + water_percent_modifier;
 	args.iRegionWidth = math.ceil(g_iW / 2 - iTinyIslandValue * 2);
@@ -340,7 +339,7 @@ function GeneratePlotTypes(world_age)
     plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
 	
 	-- Generate East Large Islands	
-	islands = plotTypes;
+	SetIslandLayer(plotTypes);
 	local args = {};
 	args.iWaterPercent = 79 + water_percent_modifier;
 	args.iRegionWidth = math.ceil(g_iW / 2 - iLargeIslandValue * 2);
@@ -354,11 +353,11 @@ function GeneratePlotTypes(world_age)
 	args.iRegionFracYExp = 5;
 	args.adjustment = adjustment;
 	plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
-	islands = plotTypes;
+	SetIslandLayer(plotTypes);
 
 	-- Generate East Medium Islands
 	local args = {};	
-	islands = plotTypes;
+	SetIslandLayer(plotTypes);
 	args.iWaterPercent = 83 + water_percent_modifier;
 	args.iRegionWidth = math.ceil(g_iW);
 	args.iRegionHeight = math.ceil(g_iH);
@@ -371,10 +370,10 @@ function GeneratePlotTypes(world_age)
 	args.iRegionFracYExp = 4;
 	args.adjustment = world;
     plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
-	islands = plotTypes;
+	SetIslandLayer(plotTypes);
 
 	-- Generate East Tiny Islands
-	islands = plotTypes;
+	SetIslandLayer(plotTypes);
 	local args = {};	
 	args.iWaterPercent = 88 + water_percent_modifier;
 	args.iRegionWidth = math.ceil(g_iW / 2 - iTinyIslandValue * 2);
@@ -871,35 +870,6 @@ function GenerateFractalLayerWithoutHills (args, plotTypes)
 end
 
 -------------------------------------------------------------------------------------------
-function Adjacent(index)
-	aIslands = islands;
-	index = index -1;
-
-	if(aIslands == nil) then
-		return false;
-	end
-	
-	if(index < 0) then
-		return false
-	end
-
-	local plot = Map.GetPlotByIndex(index);
-	if(aIslands[index] ~= nil and aIslands[index] == g_PLOT_TYPE_LAND) then
-		return true;
-	end
-
-	for direction = 0, DirectionTypes.NUM_DIRECTION_TYPES - 1, 1 do
-		local adjacentPlot = Map.GetAdjacentPlot(plot:GetX(), plot:GetY(), direction);
-		if(adjacentPlot ~= nil) then
-			local newIndex = adjacentPlot:GetIndex();
-			if(aIslands  ~= nil and aIslands[newIndex] == g_PLOT_TYPE_LAND) then
-				return true;
-			end
-		end
-	end
-
-	return false;
-end
 -------------------------------------------------------------------------------
 
 function AddFeatures()
@@ -1057,66 +1027,6 @@ function FeatureGenerator:AddIceToMap()
     end
 end
 
---------------------------------------------------------------------------------------
--------------------------------------------------------------------------------
-function AddVolcanicSoil()
-    local mWidth,mHeight = Map.GetGridSize();
-    for CoordinateX = 0,mWidth,1 do
-        for CoordinateY = 0,mHeight-1,1 do
-            local plots = Map.GetPlot(CoordinateX,CoordinateY);
-            if (plots:GetFeatureType() ~= -1) then
-                if (GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_VOLCANO") then
-                    local tNeighborPlots = Map.GetAdjacentPlots(CoordinateX,CoordinateY);
-                    for _, pNeighborPlot in ipairs(tNeighborPlots) do
-                        if (not pNeighborPlot:IsWater() and not pNeighborPlot:IsMountain()) then
-                            TerrainBuilder.SetFeatureType(pNeighborPlot,35);
-                        end
-                    end
-                end
-                if (GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_EYJAFJALLAJOKULL"
-                or GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_KILIMANJARO"
-                or GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_VESUVIUS"
-                or GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_SUK_FUJI"
-                or GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_SUK_NGORONGORO_CRATER") then
-                    local tNeighborPlots = Map.GetAdjacentPlots(CoordinateX,CoordinateY);
-                    for _, pNeighborPlot in ipairs(tNeighborPlots) do
-                        if (not pNeighborPlot:IsWater() and not pNeighborPlot:IsMountain()) then
-                            if (pNeighborPlot:GetFeatureType() ~= -1) then
-                                if (GameInfo.Features[pNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_EYJAFJALLAJOKULL"
-                                and GameInfo.Features[pNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_SUK_NGORONGORO_CRATER") then
-                                    TerrainBuilder.SetFeatureType(pNeighborPlot,35);
-                                end
-                            else
-                                TerrainBuilder.SetFeatureType(pNeighborPlot,35);
-                            end
-                        end
-                        --二环随机生成
-                        local sNeighborPlots = Map.GetAdjacentPlots(pNeighborPlot:GetX(), pNeighborPlot:GetY());
-                        for _, rNeighborPlot in ipairs(sNeighborPlots) do
-                            if (not rNeighborPlot:IsWater() and not rNeighborPlot:IsMountain()) then
-                                if (rNeighborPlot:GetFeatureType() ~= -1) then
-                                    if (GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_EYJAFJALLAJOKULL"
-                                    and GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_KILIMANJARO"
-                                    and GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_VESUVIUS"
-                                    and GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_SUK_FUJI"
-                                    and GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_SUK_NGORONGORO_CRATER") then
-                                        if (math.random(3) == 1) then
-                                            TerrainBuilder.SetFeatureType(rNeighborPlot,35);
-                                        end
-                                    end
-                                else
-                                    if (math.random(3) == 1) then
-                                        TerrainBuilder.SetFeatureType(rNeighborPlot,35);
-                                    end
-                                end
-                            end
-                        end
-                    end
-                end
-            end
-        end
-    end
-end
 
 -------------------------------------------------------------------------------------------
 function AddLakes(largeLakes)

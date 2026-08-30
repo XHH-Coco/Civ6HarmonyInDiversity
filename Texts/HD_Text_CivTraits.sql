@@ -21,7 +21,7 @@ values
 	("LOC_HD_CHINA_ANCIENT_COMMEMORATION_SAME_MEASURE_NAME",                 "Unify Metrics"),
 	("LOC_HD_CHINA_ANCIENT_COMMEMORATION_SAME_MEASURE_DESCRIPTION",          "+1 [ICON_TRADEROUTE] Trade Route capacity. +2 [ICON_Production] Production and +6 [ICON_GOLD] Gold to [ICON_TRADEROUTE] Trade Routes."),
 	("LOC_HD_CHINA_ANCIENT_COMMEMORATION_WATER_CONSERVATION_NAME",           "Hydraulic Engineering"),
-	("LOC_HD_CHINA_ANCIENT_COMMEMORATION_WATER_CONSERVATION_DESCRIPTION",    "Unlocks all water infrastructure districts with Mining. +200% Production towards water infrastructure districts. Each water infrastructure district provides +10% Growth to host city."),
+	("LOC_HD_CHINA_ANCIENT_COMMEMORATION_WATER_CONSERVATION_DESCRIPTION",    "Unlocks all Hydraulic districts with Mining. +200% Production towards Hydraulic districts. Each Hydraulic district provides +10% Growth to host city."),
 	("LOC_HD_CHINA_ANCIENT_COMMEMORATION_IMPERIAL_EXAM_NAME",                "Develope Imperial Examination"),
 	("LOC_HD_CHINA_ANCIENT_COMMEMORATION_IMPERIAL_EXAM_DESCRIPTION",         "[ICON_Capital] Capital gains +100% [ICON_GREATPERSON] Great Person points."),
 	("LOC_HD_CHINA_ANCIENT_COMMEMORATION_ACCEPT_ADVICE_NAME",                "Open to Criticism"),
@@ -38,8 +38,7 @@ values
 	("LOC_GREATWORK_YUE_SHU_YAO_LU_QUOTE",                                   "Volume V: sound differentiation, source analysis, and the seven-tone system...[NEWLINE]Volume VI: temperament calculation and astronomical correlations...[NEWLINE]Volume VII: musical rotation methods..."),
 	("LOC_BUILDING_HD_YUNSHAO_MANSION_INTERNAL_ONLY_NAME",                   "Choose 'Yue Shu Yao Lu' Commemoration"),
 	("LOC_BUILDING_HD_YUNSHAO_MANSION_NAME",                                 "Yunshao Mansion"),
-	("LOC_BUILDING_HD_YUNSHAO_MANSION_DESCRIPTION",                          "Provides +2 [ICON_GREATMUSICIAN] Great Musician Points and 6 [ICON_GREATWORK_MUSIC] Music Greatwork slots. {LOC_BUILDING_THEMINGBONUS_HD_YUNSHAO_MANSION} +200% [ICON_TOURISM] Tourism from [ICON_GREATWORK_MUSIC] Music Greatwork in this city."),
-	("LOC_BUILDING_THEMINGBONUS_HD_YUNSHAO_MANSION",                         "+100% Theming bonus when all slots filled."),
+	("LOC_BUILDING_HD_YUNSHAO_MANSION_DESCRIPTION",                          "Provides +2 [ICON_GREATMUSICIAN] Great Musician Points and 6 [ICON_GREATWORK_MUSIC] Music Greatwork slots. +200% [ICON_TOURISM] Tourism from [ICON_GREATWORK_MUSIC] Music Greatwork in this city."),
 	("LOC_HD_CHINA_ANCIENT_COMMEMORATION_PROVINCIAL_NAME",                   "Provincial System"),
 	("LOC_HD_CHINA_ANCIENT_COMMEMORATION_PROVINCIAL_DESCRIPTION",            "+10 Loyalty, +5% [ICON_Production] Production and [ICON_GOLD] Gold in cities without [ICON_GOVERNOR] Governors."),
 	("LOC_HD_CHINA_ANCIENT_COMMEMORATION_AGRICULTURAL_BOOK_NAME",            "Agricultural Compendium"),
@@ -66,7 +65,7 @@ values
 	("LOC_CITY_NAME_XIANYANG",                           			 							 "Xianyang"),
 	("LOC_LEADER_QIN_ORIGINAL_NAME",                  			      					 "Ying Zheng (Mandate of Heaven)"),
 	("LOC_TRAIT_LEADER_FIRST_EMPEROR_NAME",                           			 "The Greatest Emperor Ever"),
-	("LOC_TRAIT_LEADER_FIRST_EMPEROR_EXPANSION2_DESCRIPTION",         			 "Builders receive an additional charge. Builder may spend a charge to: complete 15% cost of Ancient and Classical Wonders, or complete 10% cost of Medieval and later Wonders with additionally consuming 5 [ICON_GLORY_NORMAL_AGE] Era Scores."),
+	("LOC_TRAIT_LEADER_FIRST_EMPEROR_EXPANSION2_DESCRIPTION",         			 "Builders receive an additional charge. Builder may spend a charge to: complete 20% cost of Ancient and Classical Wonders, or complete 10% cost of Medieval and later Wonders with additionally consuming 5 [ICON_GLORY_NORMAL_AGE] Era Scores."),
 	("LOC_UNITCOMMAND_WONDER_PRODUCTION_DESCRIPTION",                        "Complete 15% of the original wonder cost per charge."),
 	("LOC_UNITCOMMAND_QIN_BULDER_WONDER_DESCRIPTION",                        "Complete 10% of the original wonder cost per charge, additionally consuming 5 [ICON_GLORY_NORMAL_AGE] Era Scores for Medieval and later Wonders."),
 	("LOC_UNIT_QIN_ELITE_SOLDIER_HD_NAME",                                   "Qin Elite Soldier"),
@@ -108,40 +107,40 @@ values
 	("LOC_ABILITY_HD_PROTECT_OFFICIALS_DESCRIPTION", 												 "{LOC_PROMOTION_PROTECT_OFFICIALS_HD_NAME}: +1 [ICON_MOVEMENT] Movement. Can use movement to escort civilians and support units."),
 	("LOC_PROMOTION_ASSASSINATION_HD_NAME", 																 "Assassination"),
 	("LOC_PROMOTION_ASSASSINATION_HD_DESCRIPTION", 													 "Activate when adjacent to enemy military unit. Instantly kills target. Usable 3 times."),
-	("LOC_PROMOTION_ASSASSINATION_HD_DISABLED", 														 "[COLOR:Red]Must be adjacent to enemy military unit.[ENDCOLOR]"),
+	("LOC_PROMOTION_ASSASSINATION_HD_DISABLED", 														 "[COLOR:Red]Must be adjacent to enemy military unit, and have [ICON_MOVEMENT] Movement left.[ENDCOLOR]"),
 	("LOC_PROMOTION_HIJACKING_HD_NAME", 																		 "Hijack"),
 	("LOC_PROMOTION_HIJACKING_HD_DESCRIPTION", 															 "Activate when adjacent to enemy civilian unit. Captures the unit."),
-	("LOC_PROMOTION_HIJACKING_HD_DISABLED", 																 "[COLOR:Red]Must be adjacent to a capturable enemy civilian unit.[ENDCOLOR]"),
+	("LOC_PROMOTION_HIJACKING_HD_DISABLED", 																 "[COLOR:Red]Must be adjacent to a capturable enemy civilian unit, and have [ICON_MOVEMENT] Movement left.[ENDCOLOR]"),
 	("LOC_PROMOTION_INCITE_DEFECTION_HD_NAME", 															 "Incite Defection"),
 	("LOC_PROMOTION_INCITE_DEFECTION_HD_DESCRIPTION", 											 "Activate when adjacent to enemy [ICON_GREATPERSON] Great Person (except [ICON_GreatPROPHET] Great Prophets). Converts the unit. If adjacent to enemy city, reduces Loyalty by 10."),
-	("LOC_PROMOTION_INCITE_DEFECTION_HD_DISABLED", 													 "[COLOR:Red]Must be adjacent to an enemy [ICON_GREATPERSON] Great Person (excluding [ICON_GreatPROPHET] Great Prophets).[ENDCOLOR]"),
+	("LOC_PROMOTION_INCITE_DEFECTION_HD_DISABLED", 													 "[COLOR:Red]Must be adjacent to an enemy [ICON_GREATPERSON] Great Person (excluding [ICON_GreatPROPHET] Great Prophets), and have [ICON_MOVEMENT] Movement left.[ENDCOLOR]"),
 	("LOC_PROMOTION_RECRUIT_BULIANG_HD_NAME", 															 "Recruit Underworld Agent"),
 	("LOC_PROMOTION_RECRUIT_BULIANG_HD_DESCRIPTION", 												 "Activate on enemy (Non-ally) district. Gain +1 spy capacity and 1 spy."),
-	("LOC_PROMOTION_RECRUIT_BULIANG_HD_DISABLED", 													 "[COLOR:Red]Must be on an enemy (Non-ally) district.[ENDCOLOR]"),
+	("LOC_PROMOTION_RECRUIT_BULIANG_HD_DISABLED", 													 "[COLOR:Red]Must be on an enemy (Non-ally) district, and have [ICON_MOVEMENT] Movement left.[ENDCOLOR]"),
 	("LOC_PROMOTION_DEVELOP_DOWNLINES_HD_NAME", 														 "Develop Network"),
 	("LOC_PROMOTION_DEVELOP_DOWNLINES_HD_DESCRIPTION", 											 "Activate on enemy district. Gain 1 Plum Internal Security unit."),
-	("LOC_PROMOTION_DEVELOP_DOWNLINES_HD_DISABLED", 												 "[COLOR:Red]Must be on an enemy district.[ENDCOLOR]"),
+	("LOC_PROMOTION_DEVELOP_DOWNLINES_HD_DISABLED", 												 "[COLOR:Red]Must be on an enemy district, and have [ICON_MOVEMENT] Movement left.[ENDCOLOR]"),
 	("LOC_PROMOTION_DESTRUCTION_EXPERT_HD_NAME", 														 "Sabotage Expert"),
 	("LOC_PROMOTION_DESTRUCTION_EXPERT_HD_DESCRIPTION", 										 "Activate on enemy district. Destroys the district and all its buildings. Then gain plunder yields."),
-	("LOC_PROMOTION_DESTRUCTION_EXPERT_HD_DISABLED", 												 "[COLOR:Red]Must be on an enemy district.[ENDCOLOR]"),
+	("LOC_PROMOTION_DESTRUCTION_EXPERT_HD_DISABLED", 												 "[COLOR:Red]Must be on an enemy district, and have [ICON_MOVEMENT] Movement left.[ENDCOLOR]"),
 	("LOC_PROMOTION_SECRET_ORDER_HD_NAME", 																	 "Imperial Edict"),
 	("LOC_PROMOTION_SECRET_ORDER_HD_DESCRIPTION", 													 "[COLOR:240,204,62,255]Imperial Warrant:[ENDCOLOR] Retire in your City Center to gain 1 [ICON_GOVERNOR] Governor Title."),
-	("LOC_PROMOTION_SECRET_ORDER_HD_DISABLED", 															 "[COLOR:Red]Must be in your City Center.[ENDCOLOR]"),
+	("LOC_PROMOTION_SECRET_ORDER_HD_DISABLED", 															 "[COLOR:Red]Must be in your City Center, and have [ICON_MOVEMENT] Movement left.[ENDCOLOR]"),
 	("LOC_PROMOTION_KUNG_FU_MASTER_HD_NAME", 																 "Kung Fu Master"),
 	("LOC_PROMOTION_KUNG_FU_MASTER_HD_DESCRIPTION", 												 "Activate on your military unit. Grants 1 promotion. Usable 3 times."),
-	("LOC_PROMOTION_KUNG_FU_MASTER_HD_DISABLED", 														 "[COLOR:Red]Must be on your promotable military unit.[ENDCOLOR]"),
+	("LOC_PROMOTION_KUNG_FU_MASTER_HD_DISABLED", 														 "[COLOR:Red]Must be on your promotable military unit, and have [ICON_MOVEMENT] Movement left.[ENDCOLOR]"),
 	("LOC_PROMOTION_ROYAL_GUARD_HD_NAME", 																	 "Imperial Guard"),
 	("LOC_PROMOTION_ROYAL_GUARD_HD_DESCRIPTION", 														 "Activate on your land military unit. Converts it into a Corps. Usable 2 times."),
-	("LOC_PROMOTION_ROYAL_GUARD_HD_DISABLED", 															 "[COLOR:Red]Must be on your land military unit eligible for Corps upgrade.[ENDCOLOR]"),
+	("LOC_PROMOTION_ROYAL_GUARD_HD_DISABLED", 															 "[COLOR:Red]Must be on your land military unit eligible for Corps upgrade, and have [ICON_MOVEMENT] Movement left.[ENDCOLOR]"),
 	("LOC_PROMOTION_ROYAL_ENVOY_HD_NAME", 																	 "Royal Envoy"),
 	("LOC_PROMOTION_ROYAL_ENVOY_HD_DESCRIPTION", 														 "Activate within a City-State to send 2 [ICON_Envoy] Envoys to it."),
-	("LOC_PROMOTION_ROYAL_ENVOY_HD_DISABLED", 															 "[COLOR:Red]Must be inside a City-State.[ENDCOLOR]"),
+	("LOC_PROMOTION_ROYAL_ENVOY_HD_DISABLED", 															 "[COLOR:Red]Must be inside a City-State, and have [ICON_MOVEMENT] Movement left.[ENDCOLOR]"),
 	("LOC_PROMOTION_ROYAL_TRIBUTE_HD_NAME", 																 "Royal Tribute"),
 	("LOC_PROMOTION_ROYAL_TRIBUTE_HD_DESCRIPTION", 													 "Activate on a tile with a luxury resource (neutral or enemy-controlled). Gain 1 copy of the resource and 200 [ICON_GOLD] Gold."),
-	("LOC_PROMOTION_ROYAL_TRIBUTE_HD_DISABLED", 														 "[COLOR:Red]Must be on a luxury resource tile owned by no one or an enemy.[ENDCOLOR]"),
+	("LOC_PROMOTION_ROYAL_TRIBUTE_HD_DISABLED", 														 "[COLOR:Red]Must be on a luxury resource tile owned by no one or an enemy, and have [ICON_MOVEMENT] Movement left.[ENDCOLOR]"),
 	("LOC_PROMOTION_SECRETS_OF_NATURE_HD_NAME", 														 "Secrets of Nature"),
 	("LOC_PROMOTION_SECRETS_OF_NATURE_HD_DESCRIPTION", 											 "Activate on or adjacent to a Natural Wonder. Gain a large amount of random [ICON_GREATPERSON] Great Person points for each Natural Wonder tile."),
-	("LOC_PROMOTION_SECRETS_OF_NATURE_HD_DISABLED", 												 "[COLOR:Red]Must be on or adjacent to a Natural Wonder tile.[ENDCOLOR]"),
+	("LOC_PROMOTION_SECRETS_OF_NATURE_HD_DISABLED", 												 "[COLOR:Red]Must be on or adjacent to a Natural Wonder tile, and have [ICON_MOVEMENT] Movement left.[ENDCOLOR]"),
 	("LOC_PROMOTION_REMAIN_TIMES_TEXT", 																		 "[NEWLINE][NEWLINE]{1_Num} uses remaining."),
 	-- 忽必烈
 	("LOC_LEADER_KUBLAI_KHAN_C_NAME",                  			      					 "Borjigin Kublai (Yuanshizu)"),
@@ -252,7 +251,7 @@ values
 	("LOC_PROMOTION_BATTLE_CHEER_HD_NAME", 																	 "Battle Chant"),
 	("LOC_PROMOTION_BATTLE_CHEER_HD_DESCRIPTION", 													 "All military units within 3 tiles gain +5 [ICON_STRENGTH] Strength."),
 	("LOC_PROMOTION_FIR_EXPEDITION_HD_NAME", 																 "Fir Forest March"),
-	("LOC_PROMOTION_FIR_EXPEDITION_HD_DESCRIPTION", 												 "All military units within 3 tiles in or adjacent to Forest, Jungle{LOC_OR_SWAMP_NAME} gain +1 [ICON_MOVEMENT] Movement and +20 HP/turn."),
+	("LOC_PROMOTION_FIR_EXPEDITION_HD_DESCRIPTION", 												 "All military units within 3 tiles in or adjacent to Forest, Jungle, Marsh{LOC_OR_SWAMP_NAME} gain +1 [ICON_MOVEMENT] Movement and +20 HP/turn."),
 	("LOC_PROMOTION_LONGOX_TRIAL_HD_NAME", 																	 "Longox trial"),
 	("LOC_PROMOTION_LONGOX_TRIAL_HD_DESCRIPTION", 													 "Double Flanking and Support bonus. All military units within 3 tiles ignore [ICON_STRENGTH] Strength penalties after injury."),
 	("LOC_PROMOTION_EPIC_EPILOGUE_HD_NAME", 																 "Epic Epilogue"),
@@ -271,7 +270,7 @@ values
 -- =====================================================================================================================================
 -- 法国
 -- =====================================================================================================================================
-	("LOC_TRAIT_CIVILIZATION_WONDER_TOURISM_DESCRIPTION",             			 "+20% [ICON_Production] Production toward Medieval, Renaissance, and Industrial era wonders. [ICON_Tourism] Tourism from wonders of any era is +200%. Each time you complete a Wonder, gain [ICON_GREATWRITER] Great Writer, [ICON_GREATARTIST] Great Artist and [ICON_GREATMUSICIAN] Great Musician Points each equals to 20% of its production cost. Each time you active a [ICON_GREATWORK_WRITING] Writing, [ICON_GREATWORK_LANDSCAPE] Art or [ICON_GREATWORK_MUSIC] Music Great Work in a city, complete 10% of the original Wonder cost towards the Wonder that is currently building."),
+	("LOC_TRAIT_CIVILIZATION_WONDER_TOURISM_DESCRIPTION",             			 "+20% [ICON_Production] Production toward Medieval, Renaissance, and Industrial era wonders. [ICON_Tourism] Tourism from wonders of any era is +200%. Each time you complete a Wonder, gain Cultural [ICON_GREATPERSON] Great Person points each equals to 20% of its production cost. Each time you active a Cultural Great Work in a city, complete 10% of the original Wonder cost towards the Wonder that is currently building."),
 	-- 黑法国
 	("LOC_TRAIT_LEADER_FLYING_SQUADRON_NAME",                         			 "Château de Chenonceau"),
 	("LOC_TRAIT_LEADER_FLYING_SQUADRON_DESCRIPTION",                  			 "Receives a free Spy (and extra spy capacity) upon unlocking the Castles technology, Political Philosophy civic, or Supply civic. +1 sight range for Trader, Settler, Builder units and Recon units, +3 sight range for spies. All spies start with a free promotion. Gain 1 level of [ICON_VISLIMITED] Diplomatic Visibility greater than normal with every civilization that they've met."),
@@ -280,6 +279,7 @@ values
 -- =====================================================================================================================================
 -- 希腊
 -- =====================================================================================================================================
+	("LOC_TRAIT_CIVILIZATION_PLATOS_REPUBLIC_DESCRIPTION",            			 "+1 [ICON_Culture] Culture from each of your [ICON_ENVOY] Envoys at city-states. After Political Philosophy is researched, receive one extra Wildcard policy slot in any government."),
 	-- 男希腊
 	("LOC_TRAIT_LEADER_SURROUNDED_BY_GLORY_DESCRIPTION",     			           "+5% [ICON_Culture] Culture per city-state you are the Suzerain of. After building an Acropolis District, the first [ICON_Envoy] Envoy you send to each city-state counts as two [ICON_Envoy] Envoys."),
 	-- 女希腊
@@ -290,7 +290,7 @@ values
 	("LOC_TRAIT_CIVILIZATION_EARLY_OCEAN_NAVIGATION_DESCRIPTION", 			     "Fishing Boats provide +1 [ICON_Production] Production. Naval melee units heal in neutral territory. Units ignore additional [ICON_Movement] Movement costs from embarking and disembarking."),
 	-- 劫掠挪威
 	("LOC_LEADER_HARDRADA_ORIGINAL_NAME",                         			     "Harald Hardrada (Heimskringla)"),
-	("LOC_TRAIT_LEADER_THUNDERBOLT_EXPANSION2_DESCRIPTION",      			       "Allows coastal raiding for all naval units. Pillaging costs only 1 [ICON_MOVEMENT] Movement point, and coastal raiding does not cost [ICON_MOVEMENT] Movement point. In addition to normal pillage gains, receive [ICON_SCIENCE] Science from pillaging Fishing Boats, receive [ICON_CULTURE] Culture from pillaging Fishery. Units gain the ability to enter Ocean tiles after researching the Shipbuilding technology. Ancient and Classical era naval units gain +1 [ICON_MOVEMENT] Movement. Gain the Berserker unique unit with Metal Casting."),
+	("LOC_TRAIT_LEADER_THUNDERBOLT_EXPANSION2_DESCRIPTION",      			       "Allows coastal raiding for all naval units. Pillaging costs only 1 [ICON_MOVEMENT] Movement point, and coastal raiding does not cost [ICON_MOVEMENT] Movement point. In addition to normal pillage gains, receive [ICON_SCIENCE] Science from pillaging Fishing Boats, receive [ICON_CULTURE] Culture from pillaging Fishery. Units gain the ability to enter Deep Ocean tiles after researching the Shipbuilding technology. Ancient and Classical era naval units gain +1 [ICON_MOVEMENT] Movement. Gain the Berserker unique unit with Metal Casting."),
 	-- 瓦良格
 	("LOC_LEADER_HARALD_ALT_NAME",                              			       "Harald Hardrada (Varangian)"),
 	("LOC_TRAIT_LEADER_HARALD_ALT_NAME",                       			         "Varangian Adventure"),
@@ -307,7 +307,7 @@ values
 	-- 武老美
 	("LOC_TRAIT_LEADER_ROOSEVELT_COROLLARY_ROUGH_RIDER_DESCRIPTION",         "Units receive +5 [ICON_Strength] Combat Strength on their home continent. When you start a [ICON_TRADEROUTE] Trade Route to a City-State, send an [ICON_ENVOY] Envoy to this City-State. Every specialty district in the origin city provide +1 [ICON_SCIENCE] Science and +2 [ICON_GOLD] Gold for your [ICON_TRADEROUTE] Trade Routes to any city-state. Upon conquering another Civilization's Original [ICON_CAPITAL] Capital city, if this Civilization is still in the game, take over immediately all the City-States it is the Suzerain of. Gain the Rough Rider unique unit with Rifling."),
 	-- 文老美
-	("LOC_TRAIT_LEADER_ANTIQUES_AND_PARKS_DESCRIPTION",                      "Breathtaking tiles receive +1 [ICON_SCIENCE] Science and +1 [ICON_CULTURE] Culture. All tiles in a city with a National Park are +1 Appeal."),
+	("LOC_TRAIT_LEADER_ANTIQUES_AND_PARKS_DESCRIPTION",                      "Breathtaking tiles receive +1 [ICON_SCIENCE] Science and [ICON_CULTURE] Culture. All tiles in a city with a National Park are +1 Appeal."),
 	-- 林肯
 	("LOC_TRAIT_LEADER_LINCOLN_EXPANSION_DESCRIPTION",                       "Industrial Zones give +2 [ICON_Amenities] Amenities. Receive a free Builder every time you finish a Industrial Zone. Enable Liberating the builders, which removes the unit and gives +1 [ICON_PRODUCTION] Production adjacency bonus to this Industrial Zone for each builder charge the unit has, and gains 1 [ICON_CITIZEN] Citizen if you first do it in a city."),
 	("LOC_UNITCOMMAND_LIBERATION_LINCOLN_NAME",                              "Liberate"),
@@ -324,7 +324,7 @@ values
 	("LOC_TRAIT_CIVILIZATION_THREE_KINGDOMS_DESCRIPTION",                    "Receive +1 [Icon_Governor] Governor Title each time a Seowon district or buildings inside a Seowon District is constructed in your [ICON_Capital] Capital."),
 	-- 女朝鲜
 	("LOC_LEADER_SEONDEOK_NAME",                                             "Kim Deokman"),
-	("LOC_TRAIT_LEADER_HWARANG_DESCRIPTION",                                 "+5 [Icon_Housing] Housing and +20 Loyalty per turn for your Capital and cities with an assigned Governor. -20 Loyalty per turn and -50% to all yields for cities that are not your Capital and do not have an assigned Governors. [NEWLINE]+25% [ICON_PRODUCTION] Production towards Districts and Buildings for cities that have a Seowon district. [NEWLINE]+15% [ICON_Production] Production and +15% [ICON_FOOD] Food for Cities with a Tier 1 building of Campus district. [NEWLINE]+100% districts ddjacency bonuses to all Districts for Cities with a Tier 2 building of Campus district. [NEWLINE]Each [ICON_CITIZEN] citizen provieds +1 all yields for Cities with a Tier 3 building of Campus district. [NEWLINE]+10% to all yields for Cities with a Tier 4 building of Campus district."),
+	("LOC_TRAIT_LEADER_HWARANG_DESCRIPTION",                                 "+25% [ICON_PRODUCTION] Production towards Districts and Buildings for cities that have a Seowon district. [NEWLINE]+15% [ICON_Production] Production and +15% [ICON_FOOD] Food for Cities with a Tier 1 building of Campus district. [NEWLINE]+100% districts adjacency bonuses to all Districts for Cities with a Tier 2 building of Campus district. [NEWLINE]Each [ICON_CITIZEN] citizen provieds +1 all yields for Cities with a Tier 3 building of Campus district. [NEWLINE]+10% to all yields for Cities with a Tier 4 building of Campus district."),
 	-- 男朝鲜
 	("LOC_LEADER_SEJONG_NAME",                                               "Yi Do"),
 	("LOC_TRAIT_LEADER_SEJONG_NAME",                                         "Hunminjeongeum"),
@@ -348,8 +348,10 @@ values
 -- =====================================================================================================================================
 -- 加拿大
 -- =====================================================================================================================================
-	("LOC_TRAIT_CIVILIZATION_FACES_OF_PEACE_DESCRIPTION",                    "Cannot declare war on City-States or surprise wars. Surprise wars cannot be declared on Canada. Your cities earn +15% [ICON_Culture] Culture and +25% [ICON_Tourism] Tourism across your empire whenever you are not at war with any major civilization. When you dispersed a Barbarian Outpost, receive a builder reward in addition."),
-	("LOC_TRAIT_LEADER_LAST_BEST_WEST_DESCRIPTION",                          "Allows Farms to be built on Tundra terrain. After Civil Engineering is unlocked Farms can be built on Tundra Hills. In Snow, Tundra, Snow Hills, and Tundra Hills all Mines, Lumber Mills, Pastures and Quarries provide +2 [ICON_PRODUCTION] Production, Farms, Camps and Plantations provide +2 [ICON_FOOD] Food, and strategic resource accumulation rate is +100%. Reduces the purchase cost of tiles in these terrain types by 50%."),
+	("LOC_TRAIT_CIVILIZATION_FACES_OF_PEACE_NAME",             			 				 "The Last Best West"),
+	("LOC_TRAIT_CIVILIZATION_FACES_OF_PEACE_DESCRIPTION",                    "Allows Farms to be built on Tundra terrain. After Civil Engineering is unlocked Farms can be built on Tundra Hills. Improvements on Tundra, Snow and these Hills provide +1 [ICON_FOOD] Food and [ICON_PRODUCTION] Production. Reduces the purchase cost of tiles in these terrain types by 50%."),
+	("LOC_TRAIT_LEADER_LAST_BEST_WEST_NAME",             			 			 				 "Four Faces of Peace"),
+	("LOC_TRAIT_LEADER_LAST_BEST_WEST_DESCRIPTION",                          "Cannot declare war on City-States or surprise wars. Surprise wars cannot be declared on you. Your cities earn +15% [ICON_Culture] Culture and +25% [ICON_Tourism] Tourism across your empire whenever you are not at war with any major civilization. When you dispersed a [ICON_Barbarian] Barbarian Outpost, receive a builder reward in addition."),
 -- =====================================================================================================================================
 -- 俄罗斯
 -- =====================================================================================================================================
@@ -368,12 +370,12 @@ values
 -- =====================================================================================================================================
 -- 德国
 -- =====================================================================================================================================
-	("LOC_TRAIT_CIVILIZATION_IMPERIAL_FREE_CITIES_DESCRIPTION",              "Each city can build one more district than usual. +1 [ICON_Science] Science and [ICON_Culture] Culture for cities that have Specialty Districts."),
-	("LOC_TRAIT_LEADER_HOLY_ROMAN_EMPEROR_DESCRIPTION",                      "After Early Warfare civic is researched, receive an additional Military policy slot. After Encampment district is first built, receive an additional Military policy slot. Encampment district receives an additional standard adjacency bonus for being adjacent to another district, and [ICON_FAITH] Faith equal to its adjacency bonus. Encampment district provides +1 [ICON_PRODUCTION] Production, +1 [ICON_FAITH] Faith to resource plots in the city. Districts and land units can be purchased with [ICON_FAITH] Faith in cities with a [ICON_GOVERNOR] Governor."),
+	("LOC_TRAIT_CIVILIZATION_IMPERIAL_FREE_CITIES_DESCRIPTION",              "Each city +1 Specialty district capacity, +1 [ICON_Science] Science and [ICON_Culture] Culture."),
+	("LOC_TRAIT_LEADER_HOLY_ROMAN_EMPEROR_DESCRIPTION",                      "Receive a Military policy slot for each appointed [ICON_GOVERNOR] Governor. Encampment district receives an additional standard adjacency bonus for being adjacent to another district, and [ICON_FAITH] Faith equal to its adjacency bonus. Encampment district provides +1 [ICON_PRODUCTION] Production, +1 [ICON_FAITH] Faith to resource plots in the city. Land units can be purchased with [ICON_FAITH] Faith in cities with a [ICON_GOVERNOR] Governor."),
 -- =====================================================================================================================================
 -- 印度尼西亚
 -- =====================================================================================================================================
-	("LOC_TRAIT_CIVILIZATION_INDONESIA_NUSANTARA_DESCRIPTION",               "Coast and Lake tiles provide a standard adjacency bonus for Holy Site, Campus, Industrial Zone, and Theater Square districts. Cities adjacent to a Kampung +2 [ICON_AMENITIES] Amenity and +30% [ICON_Production] Production towards Harbor and Water Park districts."),
+	("LOC_TRAIT_CIVILIZATION_INDONESIA_NUSANTARA_DESCRIPTION",               "Shallow Sea and Lake tiles provide a standard adjacency bonus for Holy Site, Campus, Industrial Zone, and Theater Square districts. Cities adjacent to a Kampung +2 [ICON_AMENITIES] Amenity and +30% [ICON_Production] Production towards Harbor and Water Park districts."),
 -- =====================================================================================================================================
 -- 波兰
 -- =====================================================================================================================================
@@ -401,9 +403,9 @@ values
 -- =====================================================================================================================================
 	("LOC_TRAIT_CIVILIZATION_NKISI_DESCRIPTION",                             "All land units ignore [ICON_MOVEMENT] movement penalty from Forest and Jungle. +4 [ICON_Food] Food, +4 [ICON_Production] Production from each Great Work. Palace has slots for 6 Great Works."),
 	-- 男刚果
-	("LOC_TRAIT_LEADER_RELIGIOUS_CONVERT_DESCRIPTION",                       "May not gain Great Prophets, or found Religions. Receive Theology [ICON_CivicBoosted] Inspiration, Divine Right [ICON_CivicBoosted] Inspiration and Reformed Church [ICON_CivicBoosted] Inspiration when Mbanza is first built. Receive 50% more [ICON_GREATWRITER] Great Writer, [ICON_GREATARTIST] Great Artist, [ICON_GREATMUSICIAN] Great Musician, and [ICON_GREATMERCHANT] Great Merchant points. Palace has slots for 5 Great Works."),
+	("LOC_TRAIT_LEADER_RELIGIOUS_CONVERT_DESCRIPTION",                       "Receive 50% more Cultural [ICON_GREATPERSON] Great Person and [ICON_GREATMERCHANT] Great Merchant points."),
 	-- 女刚果
-	("LOC_TRAIT_LEADER_NZINGA_MBANDE_DESCRIPTION",                           "Cities receive +10% Yields if on the same continent as your [ICON_CAPITAL] Capital, -15% if on another continent."),
+	("LOC_TRAIT_LEADER_NZINGA_MBANDE_DESCRIPTION",                           "Cities receive +10% Yields if on the same continent as your [ICON_CAPITAL] Capital, -2 [ICON_AMENITIES] Amenities if on another continent."),
 -- =====================================================================================================================================
 -- 巴比伦
 -- =====================================================================================================================================
@@ -414,7 +416,7 @@ values
 -- =====================================================================================================================================
 -- 玛雅
 -- =====================================================================================================================================
-	("LOC_TRAIT_CIVILIZATION_MAYAB_DESCRIPTION",                             "Settling adjacent to Fresh Water and Coast does not provide extra [ICON_HOUSING] Housing. Instead each Farm provides an additional +1 [ICON_HOUSING] Housing, +1 [ICON_Production] Production for every adjacent Observatory, and +1 [ICON_GOLD] Gold. +1 [ICON_AMENITIES] Amenity for every Luxury resource adjacent to the City Center."),
+	("LOC_TRAIT_CIVILIZATION_MAYAB_DESCRIPTION",                             "Settling adjacent to Fresh Water and Shallow Sea does not provide extra [ICON_HOUSING] Housing. Instead each Farm provides an additional +1 [ICON_HOUSING] Housing, +1 [ICON_Production] Production for every adjacent Observatory, and +1 [ICON_GOLD] Gold. +1 [ICON_AMENITIES] Amenity for every Luxury resource adjacent to the City Center."),
 	("LOC_TRAIT_LEADER_MUTAL_DESCRIPTION",                                   "Reveal plots within 6 tiles of the starting plot. Cities within 6 tiles of the [ICON_Capital] Capital gain +10% to all yields, and when founded receive a builder. Non capital cities within 9 tiles and outside 6 tiles of the [ICON_Capital] Capital yields remain usual. Other non capital cities receive -15% to all yields. +5 [ICON_Strength] Combat Strength to units within 6 tiles of the [ICON_Capital] Capital."),
 -- =====================================================================================================================================
 -- 罗马
@@ -424,17 +426,17 @@ values
 	("LOC_TRAIT_LEADER_TRAJANS_COLUMN_NAME",                                 "Trajan's Forum"),
 	("LOC_TRAIT_LEADER_TRAJANS_COLUMN_DESCRIPTION",                          "All cities start with a Monument building. +100% construction speed towads builings in City Center. The construction of the Government Plaza district and buildings in it can be done immediately."),
 	-- 凯撒
-	("LOC_TRAIT_LEADER_CAESAR_DESCRIPTION",      			         			         "+300 [ICON_GOLD] Gold when you build or conquer a city. +300 [ICON_GOLD] Gold when you clear a Barbarian Outpost. When you conquer a city, all units within 3 tiles permanetly gets +1 [ICON_STRENGTH] Combat Strength."),
+	("LOC_TRAIT_LEADER_CAESAR_DESCRIPTION",      			         			         "+300 [ICON_GOLD] Gold when you build or conquer a city. +300 [ICON_GOLD] Gold when you clear a [ICON_Barbarian] Barbarian Outpost. When you conquer a city, all units within 3 tiles permanetly gets +1 [ICON_STRENGTH] Combat Strength."),
 	("LOC_CAESAR_STRENGTH_MODIFIER",                                         "+{1_Amount} [ICON_STRENGTH] Strength from conquered city."),
 -- =====================================================================================================================================
 -- 毛利
 -- =====================================================================================================================================
-	("LOC_TRAIT_CIVILIZATION_MAORI_MANA_DESCRIPTION",                        "Begin the game with the Sailing and Shipbuilding technologies unlocked and with the ability to enter Ocean tiles. Embarked units gain +2 [ICON_Movement] Movement. Rainforest and Marsh gain +1 [ICON_PRODUCTION] Production, and Woods and Swamp gain +1 [ICON_FOOD] Food after progressing 'Astrology' Technology. Fishing Boats provide +1 [ICON_FOOD] Food and a Culture Bomb to adjacent tiles."),
+	("LOC_TRAIT_CIVILIZATION_MAORI_MANA_DESCRIPTION",                        "Begin the game with the Sailing and Shipbuilding technologies unlocked and with the ability to enter Deep Ocean tiles. Embarked units gain +2 [ICON_Movement] Movement. Rainforest and Marsh gain +1 [ICON_PRODUCTION] Production, and Woods and Swamp gain +1 [ICON_FOOD] Food after progressing 'Astrology' Technology. Fishing Boats provide +1 [ICON_FOOD] Food and a Culture Bomb to adjacent tiles."),
 	("LOC_TRAIT_LEADER_KUPES_VOYAGE_DESCRIPTION",                            "Begin the game in an Ocean tile. Gain +1 [ICON_CITIZEN] Population when settling your first city. The Palace receives +3 [ICON_HOUSING] Housing and +1 [ICON_AMENITIES] Amenity. +2 [ICON_SCIENCE] Science and +2 [ICON_CULTURE] Culture per turn before you settle your first city."),
 -- =====================================================================================================================================
 -- 埃及
 -- =====================================================================================================================================
-	("LOC_TRAIT_CIVILIZATION_ITERU_EXPANSION2_DESCRIPTION",                  "Does not receive damage from Floods. +1 [ICON_FOOD] to Resources on Floodplains tiles. +20% construction speed towards Districts and Wonders if placed next to a River. Receive a free Builder every time you finish a Wonder. Campus and Theater Square districts recieve major adjacency bonus from being adjacent to River."),
+	("LOC_TRAIT_CIVILIZATION_ITERU_EXPANSION2_DESCRIPTION",                  "Does not receive damage from Floods. +1 [ICON_FOOD] to Resources adjacent to rivers. +20% construction speed towards Districts and Wonders if placed next to a River. Receive a free Builder every time you finish a Wonder. Campus and Theater Square districts receive major adjacency bonus from being adjacent to River."),
 	-- 拉二
 	("LOC_TRAIT_LEADER_RAMSES_NAME",                                         "Usermaatre Setepenre"),    
 	("LOC_TRAIT_LEADER_RAMSES_DESCRIPTION",                                  "Gain [ICON_CULTURE] Culture equal to 15% of the construction cost when finishing Buildings and 30% when completing Wonders. All land units ignores [ICON_MOVEMENT] Movement and [ICON_STRENGTH] Combat Strength penalties across rivers."),
@@ -444,7 +446,7 @@ values
 	("LOC_TRAIT_LEADER_MEDITERRANEAN_EXPANSION2_DESCRIPTION",                "When you send a Delegation or Embassy, you receive a Tribal Village reward. After forming an Alliance for the first and second time, gain that ally's Leader Trait."),
 	-- 托勒密
 	("LOC_LEADER_CLEOPATRA_ALT_NAME",                                        "Cleopatra (Ptolemaic Pharaoh)"), 
-	("LOC_TRAIT_LEADER_CLEOPATRA_ALT_DESCRIPTION",                           "+10% Growth Rate from every Cistern and Dam in tiles with Breathtaking Appeal. Improvements on Floodplains tiles provide +1 [ICON_CULTURE] Culture. Owned Floodplains tiles grant +1 Appeal to adjacent tiles instead of usual -1."),
+	("LOC_TRAIT_LEADER_CLEOPATRA_ALT_DESCRIPTION",                           "+10% Growth Rate from every Cistern and Dam in tiles with Breathtaking Appeal. Improvements adjacent to rivers provide +1 [ICON_CULTURE] Culture. Owned Floodplains tiles grant +1 Appeal to adjacent tiles instead of usual -1."),
 -- =====================================================================================================================================
 -- 阿拉伯
 -- =====================================================================================================================================
@@ -487,8 +489,8 @@ values
 -- =====================================================================================================================================
 -- 苏格兰
 -- =====================================================================================================================================
-	("LOC_TRAIT_CIVILIZATION_SCOTTISH_ENLIGHTENMENT_DESCRIPTION",            "Happy cities receive an additional +8% [ICON_SCIENCE] Science and +8% [ICON_PRODUCTION] Production. Happy cities generate +2 [ICON_GreatScientist] Great Scientist point per Campus, +2 [ICON_GreatEngineer] Great Engineer point per Industrial Zone. Joyful cities double all these values, Ecstatic cities triple all these values. Campus and Industrial Zone receive +1 [ICON_Amenities] Amenity and extra standard adjacency (instead of minor adjacency) from other Districts."),
-	("LOC_TRAIT_LEADER_BANNOCKBURN_DESCRIPTION",                             "Military units receive +4 [ICON_Strength] Combat Strength when defending in your territory. Military units trained in the cities with 5 or less [ICON_CITIZEN] Citizens start with a free promotion. Can declare a War of Liberation after gaining the Supply Civic. +100% [ICON_Production] Production and +2 [ICON_Movement] Movement for the first 10 turns after declaring a War of Liberation."),
+	("LOC_TRAIT_CIVILIZATION_SCOTTISH_ENLIGHTENMENT_DESCRIPTION",            "Happy cities receive an additional +8% [ICON_SCIENCE] Science and [ICON_PRODUCTION] Production. Happy cities generate +2 [ICON_GreatScientist] Great Scientist point per Campus, +2 [ICON_GreatEngineer] Great Engineer point per Industrial Zone. Joyful cities double all these values, Ecstatic cities triple all these values. Campus and Industrial Zone receive +1 [ICON_Amenities] Amenity and extra standard adjacency (instead of minor adjacency) from other Districts."),
+	("LOC_TRAIT_LEADER_BANNOCKBURN_DESCRIPTION",                             "Military units receive +4 [ICON_Strength] Combat Strength in your territory. The first civilization you meet will declare war on you. When you are at war with any Civilization: your cities receive +15% [ICON_PRODUCTION] Production; every time your units visit a Goody Hut or clear a [ICON_Barbarian] Barbarian Outpost, you can choose to recruit troops or get supplies."),
 -- =====================================================================================================================================
 -- 格鲁吉亚
 -- =====================================================================================================================================
@@ -504,13 +506,27 @@ values
 -- =====================================================================================================================================
 -- 巴西
 -- =====================================================================================================================================
-	("LOC_TRAIT_CIVILIZATION_AMAZON_DESCRIPTION",                            "Rainforest tiles provide a standard adjacency bonus for specialty districts, and grant +1 Appeal to adjacent tiles, instead of the usual -1. Improvements on Rainforest +1 [ICON_CULTURE] Culture. Luxury Resource on Rainforest +1 [ICON_FOOD] Food. All districts (except city centers) will not remove Rainforest. Unlock the Carnival project in city with Street Carnival or Copacabana district."),
-	("LOC_TRAIT_LEADER_MAGNANIMOUS_DESCRIPTION",                             "After recruiting or patronizing a [ICON_GreatPerson] Great Person, 20% of its [ICON_GreatPerson] Great Person point cost is refunded. +1 [Icon_Faith] Faith in all Rainforest Tiles across your country for every two [ICON_GreatPerson] Great Person you have recruited."),
+	("LOC_TRAIT_CIVILIZATION_AMAZON_DESCRIPTION",                            "Grant a Bandeirante after establishing [ICON_CAPITAL] Capital city. All districts (except city centers) will not remove Rainforest. Rainforest tiles provide a standard adjacency bonus for specialty districts, and grant +1 Appeal to adjacent tiles."),
+	("LOC_TRAIT_LEADER_MAGNANIMOUS_NAME",                      			 				 "O Magnânimo"),
+	("LOC_TRAIT_LEADER_MAGNANIMOUS_DESCRIPTION",                             "After recruiting or patronizing a [ICON_GreatPerson] Great Person, 20% of its [ICON_GreatPerson] Great Person point cost is refunded. After completing a civilization's first Development or Military Historic Moment, you can instantly complete 50% of the cost for the next district. If it is a world's first Historic Moment, you may additionally choose a city to introduce immigrants or talents from other civilizations."),
+	("LOC_TRAIT_LEADER_MAGNANIMOUS_BUILD_VIEWTEXT",          		 		 				 "Built {1_Name} for free"),
+	("LOC_TRAIT_LEADER_MAGNANIMOUS_BUILD_TIMES_TEXT",        		 		 				 "Remaining times of advancing district construction: {1_Num} {1_Num : plural 1?time; other?times;}."),
+	("LOC_TRAIT_LEADER_MAGNANIMOUS_POPULATION_VIEWTEXT",          			 		 "Introduce one [ICON_CITIZEN] immigrant from {1_Name}"),
+	("LOC_TRAIT_LEADER_MAGNANIMOUS_TALENTS_VIEWTEXT",          			 				 "Introduce {2_Name} from {1_Name}"),
+	("LOC_TRAIT_LEADER_MAGNANIMOUS_INTRODUCE_TEXT",        					 				 "Introduce [ICON_CITIZEN] immigrants from other civilizations"),
+	("LOC_TRAIT_LEADER_MAGNANIMOUS_INTRODUCE_PERCENTAGE_TEXT",        			 "[ICON_BULLET]Additionally introduce a {1_Name}."),
+	("LOC_TRAIT_LEADER_MAGNANIMOUS_INTRODUCE_TIMES_TEXT",        		 				 "Remaining times of introductions: {1_Num} {1_Num : plural 1?time; other?times;}."),
+	("LOC_BANDEIRANTES_COLLECT_RESOURCE_TEXT",        		 						 			 "Collect Rainforest Resources"),
+	("LOC_BANDEIRANTES_COLLECT_RESOURCE_TIMES_TEXT",        		 			 			 "Remaining times of collection: {1_Num} {1_Num : plural 1?time; other?times;}."),
+	("LOC_BANDEIRANTES_COLLECT_RESOURCE_DISABLED_TEXT",        		 	 				 "[COLOR:Red]The resources in this tile have already been collected.[ENDCOLOR]"),
+	("LOC_BANDEIRANTES_COLLECT_RESOURCE_DISABLED_TEXT2",        		 	 			 "[COLOR:Red]Must on the unowned Rainforest Resources.[ENDCOLOR]"),
+	("LOC_BANDEIRANTES_COLLECT_RESOURCE_DISABLED_TEXT3",        		 	 			 "[COLOR:Red]Collection limit reached.[ENDCOLOR]"),
+	("LOC_BANDEIRANTES_COLLECT_RESOURCE_COLLECTED_TEXT",        		 	 			 "Collected:[NEWLINE]{1_Detail}"),
 -- =====================================================================================================================================
 -- 西班牙
 -- =====================================================================================================================================
 	("LOC_TRAIT_CIVILIZATION_TREASURE_FLEET_NAME",                           "El Dorado"),
-	("LOC_TRAIT_CIVILIZATION_TREASURE_FLEET_EXPANSION2_DESCRIPTION",         "Awards +1 [ICON_GOVERNOR] Governor Title from each new natural wonder discovered by your units. Every city with a [ICON_GOVERNOR] Governor provide +1 [ICON_PRODUCTION] Production and +2 [ICON_GOLD] Gold to all your [ICON_TRADEROUTE] Trade Routes; these bonuses are doubled for [ICON_TRADEROUTE] Trade Routes across multiple continents. +1 [ICON_TRADEROUTE] Trade Route capacity for the first city on each continent which is not your original [ICON_CAPITAL] Capital’s continent."),
+	("LOC_TRAIT_CIVILIZATION_TREASURE_FLEET_EXPANSION2_DESCRIPTION",         "Each time you discover a Natural Wonde, gain +1 [ICON_GOVERNOR] Governor Title. Every city with a [ICON_GOVERNOR] Governor provide +1 [ICON_PRODUCTION] Production and +2 [ICON_GOLD] Gold to all your [ICON_TRADEROUTE] Trade Routes; these bonuses are doubled for [ICON_TRADEROUTE] Trade Routes across multiple continents. +1 [ICON_TRADEROUTE] Trade Route capacity for the first city on each continent which is not your original [ICON_CAPITAL] Capital’s continent."),
 	("LOC_TRAIT_LEADER_EL_ESCORIAL_NAME",                                    "Treasure Fleet"),
 	("LOC_TRAIT_LEADER_EL_ESCORIAL_EXPANSION2_DESCRIPTION",                  "May construct the El Escorial Palace in the Government Plaza. May form Fleets with Naval Tradition. May form Armadas with Exploration. Conquering a city with a naval unit will upgrade it into a Fleets or Armadas, if the proper Civics are unlocked. +50% accumulation rate for [ICON_GREATADMIRAL] Great Admiral Points."),
 -- =====================================================================================================================================
@@ -529,7 +545,7 @@ values
 -- 印度
 -- =====================================================================================================================================
 	("LOC_TRAIT_CIVILIZATION_DHARMA_NAME",                                   "The Faith of Mother Ganga"),
-	("LOC_TRAIT_CIVILIZATION_DHARMA_EXPANSION2_DESCRIPTION",                 "Improvements which adjacent to River and at most 0 Appeal receive +1 [icon_culture] Culture and +1 [icon_faith] Faith. Cities which adjacent to River and at most 0 Appeal receive +100% [ICON_PRODUCTION] Production towards Holy Site districts. Each 4 [Icon_citizen] Citizens consume 1 [ICON_Amenities] Amenity in a city with less than 30 [ICON_CITIZEN] Citizens (not each 2 [ICON_CITIZEN] Citizens). Can purchase buildings in Holy Site with [ICON_FAITH] Faith. Receives Follower Belief bonuses in a city from each Religion that has at least 1 Follower."),
+	("LOC_TRAIT_CIVILIZATION_DHARMA_EXPANSION2_DESCRIPTION",                 "Improvements adjacent to River and at most 0 Appeal receive +1 [icon_culture] Culture and +1 [icon_faith] Faith. Cities adjacent to River and at most 0 Appeal receive +100% [ICON_PRODUCTION] Production towards Holy Site districts. Each 4 [Icon_citizen] Citizens consume 1 [ICON_Amenities] Amenity in a city with less than 30 [ICON_CITIZEN] Citizens (not each 2 [ICON_CITIZEN] Citizens). Can purchase buildings in Holy Site with [ICON_FAITH] Faith. Receives Follower Belief bonuses in a city from each Religion that has at least 1 Follower."),
 	-- 文印度
 	("LOC_TRAIT_LEADER_SATYAGRAHA_DESCRIPTION",                              "ALL cities have +15% [icon_food] Food, 15% [ICON_Faith] Faith when you are at peace with all other major civilizations. +5 [ICON_Faith] Faith for each civilization (including India) they have met that has founded a Religion and is not currently at war. Opposing civilizations receive double the war weariness for fighting against Gandhi."),
 	-- 武印度
@@ -542,7 +558,7 @@ values
 	("LOC_TRAIT_CIVILIZATION_ADJACENT_DISTRICTS_DESCRIPTION",                "All districts receive an additional standard adjacency bonus for being adjacent to another district."),
 	-- 北条
 	("LOC_TRAIT_LEADER_DIVINE_WIND_NAME",                                    "Kamakura Bakufu"),
-	("LOC_TRAIT_LEADER_DIVINE_WIND_EXPANSION2_DESCRIPTION",                  "Land units receive +5 [ICON_Strength] Combat Strength in land tiles adjacent to Coast; naval units receive +5 [ICON_Strength] Combat Strength in shallow water tiles. +50% [ICON_PRODUCTION] Production towards Harbor, Holy Site and Theater Square districts."),
+	("LOC_TRAIT_LEADER_DIVINE_WIND_EXPANSION2_DESCRIPTION",                  "Land units receive +5 [ICON_Strength] Combat Strength in land tiles adjacent to Coast; naval units receive +5 [ICON_Strength] Combat Strength in Shallow Sea and Lake tiles. +50% [ICON_PRODUCTION] Production towards Harbor, Holy Site and Theater Square districts."),
 	-- 德川
 	("LOC_TRAIT_LEADER_TOKUGAWA_XP_DESCRIPTION",                             "Grant boost [ICON_CIVICBOOSTED] to 'Feudalism' each time a Encampment district is built (complete 'Feudalism' if already boosted). Gain a [ICON_GOVERNOR] Governor Title with the 'Feudalism' Civic. Each non-capital city without a [ICON_GOVERNOR] Governor -20% [ICON_GOLD] Gold and provide +5% [ICON_GOLD] Gold to [icon_capital] Capital or city with a [ICON_GOVERNOR] Governor."),
 -- =====================================================================================================================================
@@ -606,7 +622,7 @@ values
 	("LOC_ABILITY_BASIL_PRESSURE_KILLS_DESCRIPTION",                         "Byzantium's Religion is spread to nearby cities when a major civilization's unit is defeated. (Porphyrogénnētos)"),
 	-- 女拜占庭
 	("LOC_TRAIT_LEADER_THEODORA_NAME",                                       "The Favourite of Byzantium"),
-	("LOC_TRAIT_LEADER_THEODORA_DESCRIPTION",                                "Holy Sites and Hippodromes provide a Culture Bomb of unowned territory. Whenever you complete a Holy Site, grant a free builder in the city.Whenever you complete a Holy Site Building,  grant a [ICON_CITIZEN] Citizen in the city. Immediately evangelize a belief after you found your religion.");
+	("LOC_TRAIT_LEADER_THEODORA_DESCRIPTION",                                "Holy Sites and Hippodromes provide a Culture Bomb of unowned territory. Whenever you complete a Holy Site, grant a free builder in the city. Whenever you complete a Holy Site Building, grant a [ICON_CITIZEN] Citizen in the city. Immediately evangelize a belief after you found your religion.");
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Language: zh_Hans_CN
@@ -631,7 +647,7 @@ values
 	("zh_Hans_CN",  "LOC_HD_CHINA_ANCIENT_COMMEMORATION_SAME_MEASURE_NAME",                 "统一度量衡"),
 	("zh_Hans_CN",  "LOC_HD_CHINA_ANCIENT_COMMEMORATION_SAME_MEASURE_DESCRIPTION",          "+1 [ICON_TRADEROUTE] 贸易路线容量。所有 [ICON_TRADEROUTE] 贸易路线+2 [ICON_Production] 生产力和+6 [ICON_GOLD] 金币。"),
 	("zh_Hans_CN",  "LOC_HD_CHINA_ANCIENT_COMMEMORATION_WATER_CONSERVATION_NAME",           "修筑水利"),
-	("zh_Hans_CN",  "LOC_HD_CHINA_ANCIENT_COMMEMORATION_WATER_CONSERVATION_DESCRIPTION",    "解锁“采矿业”科技后解锁所有水利区域。建造水利区域+200%建造速度。每座水利区域为所在城市+10%余粮。"),
+	("zh_Hans_CN",  "LOC_HD_CHINA_ANCIENT_COMMEMORATION_WATER_CONSERVATION_DESCRIPTION",    "解锁“采矿业”科技后解锁所有水利工程区域。建造水利工程区域+200%建造速度。每座水利工程区域为所在城市+10%余粮。"),
 	("zh_Hans_CN",  "LOC_HD_CHINA_ANCIENT_COMMEMORATION_IMPERIAL_EXAM_NAME",                "发展科举"),
 	("zh_Hans_CN",  "LOC_HD_CHINA_ANCIENT_COMMEMORATION_IMPERIAL_EXAM_DESCRIPTION",         "[ICON_Capital] 首都每回合产出的 [ICON_GREATPERSON] 伟人点数+100%。"),
 	("zh_Hans_CN",  "LOC_HD_CHINA_ANCIENT_COMMEMORATION_ACCEPT_ADVICE_NAME",                "广开言路"),
@@ -648,8 +664,7 @@ values
 	("zh_Hans_CN",  "LOC_GREATWORK_YUE_SHU_YAO_LU_QUOTE",                                   "第五卷载“辨音声”、“审声源”、“论七声相生法”、“论三分损益通诸管弦”等九目；[NEWLINE]第六卷载“纪律吕”、“乾坤唱和义”、“谨权量”、“审飞候”等四目；[NEWLINE]第七卷载“律吕旋宫法”、“识声律法”、“论一律有七声义”等三目……"),
 	("zh_Hans_CN",  "LOC_BUILDING_HD_YUNSHAO_MANSION_INTERNAL_ONLY_NAME",                   "选择“天命”着力点“乐书要录”"),
 	("zh_Hans_CN",  "LOC_BUILDING_HD_YUNSHAO_MANSION_NAME",                                 "云韶府"),
-	("zh_Hans_CN",  "LOC_BUILDING_HD_YUNSHAO_MANSION_DESCRIPTION",                          "提供+2 [ICON_GREATMUSICIAN] 大音乐家点数、+6 [ICON_GREATWORK_MUSIC] 音乐槽位。{LOC_BUILDING_THEMINGBONUS_HD_YUNSHAO_MANSION}本城来自 [ICON_GREATWORK_MUSIC] 音乐巨作的 [ICON_TOURISM] 旅游业绩+200%。"),
-	("zh_Hans_CN",  "LOC_BUILDING_THEMINGBONUS_HD_YUNSHAO_MANSION",                         "当槽位被全部填满时，+100%主题化加成。"),
+	("zh_Hans_CN",  "LOC_BUILDING_HD_YUNSHAO_MANSION_DESCRIPTION",                          "提供+2 [ICON_GREATMUSICIAN] 大音乐家点数、+6 [ICON_GREATWORK_MUSIC] 音乐槽位。本城来自 [ICON_GREATWORK_MUSIC] 音乐巨作的 [ICON_TOURISM] 旅游业绩+200%。"),
 	("zh_Hans_CN",  "LOC_HD_CHINA_ANCIENT_COMMEMORATION_PROVINCIAL_NAME",                   "行省制度"),
 	("zh_Hans_CN",  "LOC_HD_CHINA_ANCIENT_COMMEMORATION_PROVINCIAL_DESCRIPTION",            "没有 [ICON_GOVERNOR] 总督就职的城市+10忠诚度、+5% [ICON_Production] 生产力和 [ICON_GOLD] 金币。"),
 	("zh_Hans_CN",  "LOC_HD_CHINA_ANCIENT_COMMEMORATION_AGRICULTURAL_BOOK_NAME",            "农桑辑要"),
@@ -676,7 +691,7 @@ values
 	("zh_Hans_CN",  "LOC_CITY_NAME_XIANYANG",                           			 							"咸阳"),
 	("zh_Hans_CN",  "LOC_LEADER_QIN_ORIGINAL_NAME",                                         "嬴政（受命于天）"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_FIRST_EMPEROR_NAME",                                  "千古一帝"),
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_FIRST_EMPEROR_EXPANSION2_DESCRIPTION",                "建造者获得额外一次劳动力。建造者可消耗劳动力，为正在建造的远古或古典奇观推进15%的建造进程；或额外消耗5点 [ICON_GLORY_NORMAL_AGE] 时代得分为中世纪或以后的奇观推进10%的建造进程。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_FIRST_EMPEROR_EXPANSION2_DESCRIPTION",                "建造者获得额外一次劳动力。建造者可消耗劳动力，为正在建造的远古或古典奇观推进20%的建造进程；或额外消耗5点 [ICON_GLORY_NORMAL_AGE] 时代得分为中世纪或以后的奇观推进10%的建造进程。"),
 	("zh_Hans_CN",  "LOC_UNITCOMMAND_WONDER_PRODUCTION_DESCRIPTION",                        "消耗劳动力为正在建造的奇观推进15%的建造进程。"),
 	("zh_Hans_CN",  "LOC_UNITCOMMAND_QIN_BULDER_WONDER_DESCRIPTION",                        "消耗劳动力为正在建造的奇观推进10%的建造进程。[NEWLINE]需要消耗5点 [ICON_GLORY_NORMAL_AGE] 时代得分。"),
 	("zh_Hans_CN",  "LOC_UNIT_QIN_ELITE_SOLDIER_HD_NAME",                                  	"秦锐士"),
@@ -693,7 +708,7 @@ values
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_WU_ZETIAN_NAME",                                      "凤集上阳宫"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_WU_ZETIAN_DESCRIPTION",                               "你每招募一个 [ICON_GREATPERSON] 伟人，则全国所有对应类型区域获得2份对应产出。每获得20点 [ICON_GLORY_NORMAL_AGE] 时代得分，获得1个梅花内卫。"),
 	("zh_Hans_CN",  "LOC_UNIT_PLUM_INTERNAL_SECURITY_HD_NAME",                              "梅花内卫"),
-	("zh_Hans_CN",  "LOC_UNIT_PLUM_INTERNAL_SECURITY_HD_DESCRIPTION",                       "武则天特色支援单位。拥有独特的升级树。{LOC_ABILITY_PLUM_INTERNAL_SECURITY_HD_DESCRIPTION}解锁“航海术”科技后允许上船。每回合从所在区域和相邻区域获得5点对应 [ICON_GREATPERSON] 伟人点数和1点经验值；若为其他文明的区域，则改为偷取10点 [ICON_GREATPERSON] 伟人点数，并获得2点经验值。"),
+	("zh_Hans_CN",  "LOC_UNIT_PLUM_INTERNAL_SECURITY_HD_DESCRIPTION",                       "武则天特色支援单位。拥有独特的升级树。{LOC_ABILITY_PLUM_INTERNAL_SECURITY_HD_DESCRIPTION}解锁“航行”科技后允许上船。每回合从所在区域和相邻区域获得5点对应 [ICON_GREATPERSON] 伟人点数和1点经验值；若为其他文明的区域，则改为偷取10点 [ICON_GREATPERSON] 伟人点数，并获得2点经验值。"),
 	("zh_Hans_CN",  "LOC_ABILITY_PLUM_INTERNAL_SECURITY_HD_DESCRIPTION",                    "能够在没有开放边界的情况下进入外国。只有相邻敌军单位才能发现该单位。"),
 	("zh_Hans_CN",  "LOC_PROMOTION_CLASS_PLUM_INTERNAL_SECURITY_HD_NAME",                   "梅花内卫"),
 	("zh_Hans_CN",  "LOC_PROMOTION_SWIFT_LEGS_HD_NAME",                              				"神行太保"),
@@ -718,40 +733,40 @@ values
 	("zh_Hans_CN",  "LOC_ABILITY_HD_PROTECT_OFFICIALS_DESCRIPTION",                         "{LOC_PROMOTION_PROTECT_OFFICIALS_HD_NAME}：+1 [ICON_MOVEMENT] 移动力，且可利用自身的 [ICON_MOVEMENT] 移动力护送平民和支援单位。"),
 	("zh_Hans_CN",  "LOC_PROMOTION_ASSASSINATION_HD_NAME",                              		"刺杀行动"),
 	("zh_Hans_CN",  "LOC_PROMOTION_ASSASSINATION_HD_DESCRIPTION",                       		"相邻敌方军事单位时激活，击杀该单位，可使用3次。"),
-	("zh_Hans_CN",  "LOC_PROMOTION_ASSASSINATION_HD_DISABLED",                       				"[COLOR:Red]必须相邻敌方军事单位。[ENDCOLOR]"),
+	("zh_Hans_CN",  "LOC_PROMOTION_ASSASSINATION_HD_DISABLED",                       				"[COLOR:Red]必须相邻敌方军事单位，且有剩余 [ICON_Movement] 移动力。[ENDCOLOR]"),
 	("zh_Hans_CN",  "LOC_PROMOTION_HIJACKING_HD_NAME",                              				"劫持行动"),
 	("zh_Hans_CN",  "LOC_PROMOTION_HIJACKING_HD_DESCRIPTION",                       				"相邻敌方平民单位时激活，俘虏该单位。"),
-	("zh_Hans_CN",  "LOC_PROMOTION_HIJACKING_HD_DISABLED",                       						"[COLOR:Red]必须相邻可被俘虏的敌方平民单位。[ENDCOLOR]"),
+	("zh_Hans_CN",  "LOC_PROMOTION_HIJACKING_HD_DISABLED",                       						"[COLOR:Red]必须相邻可被俘虏的敌方平民单位，且有剩余 [ICON_Movement] 移动力。[ENDCOLOR]"),
 	("zh_Hans_CN",  "LOC_PROMOTION_INCITE_DEFECTION_HD_NAME",                              	"策反行动"),
 	("zh_Hans_CN",  "LOC_PROMOTION_INCITE_DEFECTION_HD_DESCRIPTION",                       	"相邻敌方 [ICON_GREATPERSON] 伟人单位时激活，策反该 [ICON_GREATPERSON] 伟人，无法策反 [ICON_GreatPROPHET] 大预言家。[NEWLINE]若相邻敌方城市，则该城市-10忠诚度。"),
-	("zh_Hans_CN",  "LOC_PROMOTION_INCITE_DEFECTION_HD_DISABLED",                       		"[COLOR:Red]必须相邻除 [ICON_GreatPROPHET] 大预言家以外的敌方 [ICON_GREATPERSON] 伟人单位。[ENDCOLOR]"),
+	("zh_Hans_CN",  "LOC_PROMOTION_INCITE_DEFECTION_HD_DISABLED",                       		"[COLOR:Red]必须相邻除 [ICON_GreatPROPHET] 大预言家以外的敌方 [ICON_GREATPERSON] 伟人单位，且有剩余 [ICON_Movement] 移动力。[ENDCOLOR]"),
 	("zh_Hans_CN",  "LOC_PROMOTION_RECRUIT_BULIANG_HD_NAME",                              	"招募不良人"),
 	("zh_Hans_CN",  "LOC_PROMOTION_RECRUIT_BULIANG_HD_DESCRIPTION",                       	"在非盟友的敌方区域上激活，获得1个间谍容量和1个间谍。"),
-	("zh_Hans_CN",  "LOC_PROMOTION_RECRUIT_BULIANG_HD_DISABLED",                       			"[COLOR:Red]必须位于非盟友的敌方区域。[ENDCOLOR]"),
+	("zh_Hans_CN",  "LOC_PROMOTION_RECRUIT_BULIANG_HD_DISABLED",                       			"[COLOR:Red]必须位于非盟友的敌方区域，且有剩余 [ICON_Movement] 移动力。[ENDCOLOR]"),
 	("zh_Hans_CN",  "LOC_PROMOTION_DEVELOP_DOWNLINES_HD_NAME",                              "发展下线"),
 	("zh_Hans_CN",  "LOC_PROMOTION_DEVELOP_DOWNLINES_HD_DESCRIPTION",                       "在敌方区域上激活，获得1个梅花内卫。"),
-	("zh_Hans_CN",  "LOC_PROMOTION_DEVELOP_DOWNLINES_HD_DISABLED",                       		"[COLOR:Red]必须位于敌方区域。[ENDCOLOR]"),
+	("zh_Hans_CN",  "LOC_PROMOTION_DEVELOP_DOWNLINES_HD_DISABLED",                       		"[COLOR:Red]必须位于敌方区域，且有剩余 [ICON_Movement] 移动力。[ENDCOLOR]"),
 	("zh_Hans_CN",  "LOC_PROMOTION_DESTRUCTION_EXPERT_HD_NAME",                             "破坏专家"),
 	("zh_Hans_CN",  "LOC_PROMOTION_DESTRUCTION_EXPERT_HD_DESCRIPTION",                      "在敌方区域上激活，破坏该区域和其中的所有建筑，并获得对应的劫掠产出。"),
-	("zh_Hans_CN",  "LOC_PROMOTION_DESTRUCTION_EXPERT_HD_DISABLED",                       	"[COLOR:Red]必须位于敌方区域。[ENDCOLOR]"),
+	("zh_Hans_CN",  "LOC_PROMOTION_DESTRUCTION_EXPERT_HD_DISABLED",                       	"[COLOR:Red]必须位于敌方区域，且有剩余 [ICON_Movement] 移动力。[ENDCOLOR]"),
 	("zh_Hans_CN",  "LOC_PROMOTION_SECRET_ORDER_HD_NAME",                              			"梅花密令"),
 	("zh_Hans_CN",  "LOC_PROMOTION_SECRET_ORDER_HD_DESCRIPTION",                       			"[COLOR:240,204,62,255]皇权特许：[ENDCOLOR]在己方市中心隐退，获得一个 [ICON_GOVERNOR] 总督头衔。"),
-	("zh_Hans_CN",  "LOC_PROMOTION_SECRET_ORDER_HD_DISABLED",                       				"[COLOR:Red]必须位于己方市中心。[ENDCOLOR]"),
+	("zh_Hans_CN",  "LOC_PROMOTION_SECRET_ORDER_HD_DISABLED",                       				"[COLOR:Red]必须位于己方市中心，且有剩余 [ICON_Movement] 移动力。[ENDCOLOR]"),
 	("zh_Hans_CN",  "LOC_PROMOTION_KUNG_FU_MASTER_HD_NAME",                              		"大内高手"),
 	("zh_Hans_CN",  "LOC_PROMOTION_KUNG_FU_MASTER_HD_DESCRIPTION",                       		"在己方军事单位上激活，赠予该单位1次晋升，可使用3次。"),
-	("zh_Hans_CN",  "LOC_PROMOTION_KUNG_FU_MASTER_HD_DISABLED",                       			"[COLOR:Red]必须位于可获得晋升的己方军事单位上。[ENDCOLOR]"),
+	("zh_Hans_CN",  "LOC_PROMOTION_KUNG_FU_MASTER_HD_DISABLED",                       			"[COLOR:Red]必须位于可获得晋升的己方军事单位上，且有剩余 [ICON_Movement] 移动力。[ENDCOLOR]"),
 	("zh_Hans_CN",  "LOC_PROMOTION_ROYAL_GUARD_HD_NAME",	                              		"皇家禁军"),
 	("zh_Hans_CN",  "LOC_PROMOTION_ROYAL_GUARD_HD_DESCRIPTION",	                       			"在己方陆地军事单位上激活，将该单位变为军团，可使用2次。"),
-	("zh_Hans_CN",  "LOC_PROMOTION_ROYAL_GUARD_HD_DISABLED",                       					"[COLOR:Red]必须位于可升级为军团的己方陆地军事单位上。[ENDCOLOR]"),
+	("zh_Hans_CN",  "LOC_PROMOTION_ROYAL_GUARD_HD_DISABLED",                       					"[COLOR:Red]必须位于可升级为军团的己方陆地军事单位上，且有剩余 [ICON_Movement] 移动力。[ENDCOLOR]"),
 	("zh_Hans_CN",  "LOC_PROMOTION_ROYAL_ENVOY_HD_NAME",                              			"皇家特使"),
 	("zh_Hans_CN",  "LOC_PROMOTION_ROYAL_ENVOY_HD_DESCRIPTION",                       			"在城邦境内激活，向该城邦派遣2个 [ICON_Envoy] 使者。"),
-	("zh_Hans_CN",  "LOC_PROMOTION_ROYAL_ENVOY_HD_DISABLED",                       					"[COLOR:Red]必须位于城邦境内。[ENDCOLOR]"),
+	("zh_Hans_CN",  "LOC_PROMOTION_ROYAL_ENVOY_HD_DISABLED",                       					"[COLOR:Red]必须位于城邦境内，且有剩余 [ICON_Movement] 移动力。[ENDCOLOR]"),
 	("zh_Hans_CN",  "LOC_PROMOTION_ROYAL_TRIBUTE_HD_NAME",                              		"皇家贡品"),
 	("zh_Hans_CN",  "LOC_PROMOTION_ROYAL_TRIBUTE_HD_DESCRIPTION",                       		"在有奢侈资源的无主或敌方单元格上激活，获得一份该资源，并获得200 [ICON_GOLD] 金币。"),
-	("zh_Hans_CN",  "LOC_PROMOTION_ROYAL_TRIBUTE_HD_DISABLED",                       				"[COLOR:Red]必须位于有奢侈资源的无主或敌方单元格上。[ENDCOLOR]"),
+	("zh_Hans_CN",  "LOC_PROMOTION_ROYAL_TRIBUTE_HD_DISABLED",                       				"[COLOR:Red]必须位于有奢侈资源的无主或敌方单元格上，且有剩余 [ICON_Movement] 移动力。[ENDCOLOR]"),
 	("zh_Hans_CN",  "LOC_PROMOTION_SECRETS_OF_NATURE_HD_NAME",                              "山水秘闻"),
 	("zh_Hans_CN",  "LOC_PROMOTION_SECRETS_OF_NATURE_HD_DESCRIPTION",                       "在自然奇观单元格或相邻的单元格上激活，从此处或相邻的每个自然奇观单元格，获得大量随机 [ICON_GREATPERSON] 伟人点数。"),
-	("zh_Hans_CN",  "LOC_PROMOTION_SECRETS_OF_NATURE_HD_DISABLED",                       		"[COLOR:Red]必须位于或相邻自然奇观单元格。[ENDCOLOR]"),
+	("zh_Hans_CN",  "LOC_PROMOTION_SECRETS_OF_NATURE_HD_DISABLED",                       		"[COLOR:Red]必须位于或相邻自然奇观单元格，且有剩余 [ICON_Movement] 移动力。[ENDCOLOR]"),
 	("zh_Hans_CN",  "LOC_PROMOTION_REMAIN_TIMES_TEXT",                  			            	"[NEWLINE][NEWLINE]还可以使用{1_Num}次。"),
 	-- 忽必烈
 	("zh_Hans_CN",  "LOC_LEADER_KUBLAI_KHAN_C_NAME",                  			            		"孛儿只斤·忽必烈（元世祖）"),
@@ -862,7 +877,7 @@ values
 	("zh_Hans_CN",  "LOC_PROMOTION_BATTLE_CHEER_HD_NAME", 																	"战斗鼓舞"),
 	("zh_Hans_CN",  "LOC_PROMOTION_BATTLE_CHEER_HD_DESCRIPTION", 														"在三个单元格以内，所有军事单位+5 [ICON_STRENGTH] 战斗力。"),
 	("zh_Hans_CN",  "LOC_PROMOTION_FIR_EXPEDITION_HD_NAME", 																"杉林远征"),
-	("zh_Hans_CN",  "LOC_PROMOTION_FIR_EXPEDITION_HD_DESCRIPTION", 													"在三个单元格以内，所有相邻或位于森林、雨林{LOC_OR_SWAMP_NAME}的军事单位+1 [ICON_MOVEMENT] 移动力，每回合额外回复20 [ICON_Damaged] 生命值。"),
+	("zh_Hans_CN",  "LOC_PROMOTION_FIR_EXPEDITION_HD_DESCRIPTION", 													"在三个单元格以内，所有相邻或位于森林、雨林或沼泽的军事单位+1 [ICON_MOVEMENT] 移动力，每回合额外回复20 [ICON_Damaged] 生命值。"),
 	("zh_Hans_CN",  "LOC_PROMOTION_LONGOX_TRIAL_HD_NAME", 																	"天牛试炼"),
 	("zh_Hans_CN",  "LOC_PROMOTION_LONGOX_TRIAL_HD_DESCRIPTION", 														"获得两倍夹击加成和支援加成。在三个单元格以内，所有军事单位无视受到伤害后的 [ICON_STRENGTH] 战斗力减益。"),
 	("zh_Hans_CN",  "LOC_PROMOTION_EPIC_EPILOGUE_HD_NAME", 																	"史诗终章"),
@@ -881,7 +896,7 @@ values
 -- =====================================================================================================================================
 -- 法国
 -- =====================================================================================================================================
-	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_WONDER_TOURISM_DESCRIPTION",             "为中世纪、文艺复兴时期和工业时代的奇观+20%建造速度。所有奇观的 [ICON_Tourism] 旅游业绩+200%。完成奇观时，获得各等同于其 [ICON_PRODUCTION] 生产力花费20%的 [ICON_GREATWRITER] 大作家、[ICON_GREATARTIST] 大艺术家和 [ICON_GREATMUSICIAN] 大音乐家点数。在城市中创作 [ICON_GREATWORK_WRITING] 著作、[ICON_GREATWORK_LANDSCAPE] 艺术或 [ICON_GREATWORK_MUSIC] 音乐巨作时，可为该城市正在建造的奇观推进10%的建造进程。"),
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_WONDER_TOURISM_DESCRIPTION",             "为中世纪、文艺复兴时期和工业时代的奇观+20%建造速度。所有奇观的 [ICON_Tourism] 旅游业绩+200%。完成奇观时，获得各等同于其 [ICON_PRODUCTION] 生产力花费20%的文化类 [ICON_GREATPERSON] 伟人点。在城市中创作文化类巨作时，可为该城市正在建造的奇观推进10%的建造进程。"),
 	-- 黑法国
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_FLYING_SQUADRON_NAME",                         "舍农索城堡"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_FLYING_SQUADRON_DESCRIPTION",                  "解锁“城堡”科技、“政治哲学”和“后勤补给”市政各获得1个免费间谍容量和1个免费间谍。所有间谍初始便拥有1次免费升级。平民单位和侦察单位+1视野范围，间谍+3视野范围。[ICON_VISLIMITED] 外交能见度比遇到的其他文明高1级。"),
@@ -890,6 +905,7 @@ values
 -- =====================================================================================================================================
 -- 希腊
 -- =====================================================================================================================================
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_PLATOS_REPUBLIC_DESCRIPTION",            "您的每位城邦 [ICON_ENVOY] 使者提供+1 [ICON_Culture] 文化值。解锁“政治哲学”市政后，+1通配符槽位。"),
 	-- 男希腊
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_SURROUNDED_BY_GLORY_DESCRIPTION",              "作为宗主国时，每个下辖的城邦使您的 [ICON_Culture] 文化值+5%。建造卫城后，您向每个城邦派遣的第一个 [ICON_Envoy] 使者会被视为2个 [ICON_Envoy] 使者。"),
 	-- 女希腊
@@ -900,7 +916,7 @@ values
 	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_EARLY_OCEAN_NAVIGATION_DESCRIPTION",     "渔船提供+1 [ICON_Production] 生产力。海军近战单位可在中立领土上回复。单位忽略来自上船和下船的额外 [ICON_Movement] 移动力消耗。"),
 	-- 劫掠挪威
 	("zh_Hans_CN",  "LOC_LEADER_HARDRADA_ORIGINAL_NAME",                             "无情者哈拉尔（挪威诸王萨迦）"),
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_THUNDERBOLT_EXPANSION2_DESCRIPTION",           "所有海军单位均能发动海岸扫荡。掠夺只消耗1个 [ICON_MOVEMENT] 移动力，海岸扫荡不消耗 [ICON_MOVEMENT] 移动力。除常规劫掠收益外，对渔船发动掠夺时还将获得 [ICON_SCIENCE] 科技值，对渔场发动掠夺时还将获得 [ICON_CULTURE] 文化值。在研究造船术后，单位获得进入海洋单元格的能力。所有远古和古典时期的海军单位+1 [ICON_MOVEMENT] 移动力。解锁“金属铸造”后即可获得特色单位“狂暴武士”。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_THUNDERBOLT_EXPANSION2_DESCRIPTION",           "所有海军单位均能发动海岸扫荡。掠夺只消耗1个 [ICON_MOVEMENT] 移动力，海岸扫荡不消耗 [ICON_MOVEMENT] 移动力。除常规劫掠收益外，对渔船发动掠夺时还将获得 [ICON_SCIENCE] 科技值，对渔场发动掠夺时还将获得 [ICON_CULTURE] 文化值。在研究造船术后，单位获得进入深海单元格的能力。所有远古和古典时期的海军单位+1 [ICON_MOVEMENT] 移动力。解锁“金属铸造”后即可获得特色单位“狂暴武士”。"),
 	-- 瓦良格
 	("zh_Hans_CN",  "LOC_LEADER_HARALD_ALT_NAME",                                    "无情者哈拉尔（瓦良格）"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_HARALD_ALT_NAME",                              "瓦良格冒险"),
@@ -917,7 +933,7 @@ values
 	-- 武老美
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_ROOSEVELT_COROLLARY_ROUGH_RIDER_DESCRIPTION",  "在首都所在大陆上时单位+5 [ICON_Strength] 战斗力。通往城邦的 [ICON_TRADEROUTE] 贸易路线将向该城邦派遣1位 [ICON_ENVOY] 使者。起源城市的每个专业化区域为通往城邦的 [ICON_TRADEROUTE] 贸易路线+1 [ICON_SCIENCE] 科技值和+2 [ICON_GOLD] 金币。攻占一个主要文明的原始首都后，如果该文明仍然存在，对其宗主的城邦派遣足够数量的 [ICON_ENVOY] 使者，直至成为这些城邦的宗主国。解锁“膛线”科技后获得特色单位“莽骑兵”。"),
 	-- 文老美
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_ANTIQUES_AND_PARKS_DESCRIPTION",               "魅力值为“惊艳”的单元格+1 [ICON_SCIENCE] 科技值和+1 [ICON_CULTURE] 文化值。在拥有国家公园的城市中，所有单元格+1魅力。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_ANTIQUES_AND_PARKS_DESCRIPTION",               "惊艳单元格+1 [ICON_SCIENCE] 科技值和 [ICON_CULTURE] 文化值。在拥有国家公园的城市中，所有单元格+1魅力。"),
 	-- 林肯
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_LINCOLN_EXPANSION_DESCRIPTION",                "工业区+2 [ICON_Amenities] 宜居度。建造工业区后获得一个免费的建造者。允许在工业区解放建造者，其每有一次剩余劳动力该工业区+1 [ICON_PRODUCTION] 生产力相邻加成，如果在本城第一次进行解放，+1 [ICON_CITIZEN] 人口。"),
 	("zh_Hans_CN",  "LOC_UNITCOMMAND_LIBERATION_LINCOLN_NAME",                       "解放"),
@@ -934,7 +950,7 @@ values
 	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_THREE_KINGDOMS_DESCRIPTION",             "[ICON_CAPITAL] 首都每次建成书院区域和书院区域建筑时获得一个 [ICON_GOVERNOR] 总督头衔。"),
 	-- 女朝鲜
 	("zh_Hans_CN",  "LOC_LEADER_SEONDEOK_NAME",                                      "金德曼"),
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_HWARANG_DESCRIPTION",                          "[ICON_CAPITAL] 首都或派遣了总督的城市获得+5 [Icon_Housing] 住房和+20忠诚度。非首都且未派遣总督的城市-8忠诚度和-50%全部产出。[NEWLINE]有书院的城市建造区域和建筑时+25%建造速度。[NEWLINE]有学院一级建筑的城市+15% [ICON_Food] 食物和 [Icon_production] 生产力。[NEWLINE]有学院二级建筑的城市，所有区域的相邻加成+100%。[NEWLINE]有学院三级建筑的城市每位 [ICON_CITIZEN] 公民额外+1点全部产出。[NEWLINE]有学院四级建筑的城市+10%全部产出。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_HWARANG_DESCRIPTION",                          "有书院的城市建造区域和建筑时+25%建造速度。[NEWLINE]有学院一级建筑的城市+15% [ICON_Food] 食物和 [Icon_production] 生产力。[NEWLINE]有学院二级建筑的城市，所有区域的相邻加成+100%。[NEWLINE]有学院三级建筑的城市每位 [ICON_CITIZEN] 公民额外+1全部产出。[NEWLINE]有学院四级建筑的城市+10%全部产出。"),
 	-- 男朝鲜
 	("zh_Hans_CN",  "LOC_LEADER_SEJONG_NAME",                                        "李裪"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_SEJONG_NAME",                                  "训民正音"),
@@ -958,8 +974,10 @@ values
 -- =====================================================================================================================================
 -- 加拿大
 -- =====================================================================================================================================
-	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_FACES_OF_PEACE_DESCRIPTION",             "无法对城邦宣战或发动突袭战争。无法对加拿大发动突袭战争。与主要文明处于和平时所有城市+15% [ICON_Culture] 文化值，且全境内+25% [ICON_Tourism] 旅游业绩。当您摧毁 [ICON_Barbarian] 蛮族哨站时，奖励一个建造者。"),
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_LAST_BEST_WEST_DESCRIPTION",                   "允许在冻土地貌上建造农场。解锁“土木工程”后，即可在冻土丘陵上建造农场。在雪地、冻土、雪地丘陵和冻土丘陵上的所有矿山、伐木场、牧场和采石场提供的 [ICON_PRODUCTION] 生产力+2，农场、营地、种植园提供的 [ICON_FOOD] 食物+2，战略资源积累速度+100%。这些地形上的单元格购买费用降低50%。"),
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_FACES_OF_PEACE_NAME",             			 "西部净土"),
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_FACES_OF_PEACE_DESCRIPTION",             "允许在冻土上建造农场。解锁“土木工程”后，即可在冻土丘陵上建造农场。在冻土、雪地和对应丘陵上的改良+1 [ICON_FOOD] 食物和 [ICON_PRODUCTION] 生产力。这些地形上的单元格购买费用降低50%。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_LAST_BEST_WEST_NAME",             			 			 "和平四颜"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_LAST_BEST_WEST_DESCRIPTION",                   "无法对城邦宣战，发动突袭战争或被突袭。与主要文明处于和平时所有城市+15% [ICON_Culture] 文化值，且全境内+25% [ICON_Tourism] 旅游业绩。每次摧毁 [ICON_Barbarian] 蛮族哨站时，获得一个建造者。"),
 -- =====================================================================================================================================
 -- 俄罗斯
 -- =====================================================================================================================================
@@ -978,12 +996,12 @@ values
 -- =====================================================================================================================================
 -- 德国
 -- =====================================================================================================================================
-	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_IMPERIAL_FREE_CITIES_DESCRIPTION",       "每座城市都能建造比平常多一个区域。拥有专业化区域的城市+1 [ICON_Science] 科技值和 [ICON_Culture] 文化值。"),
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_HOLY_ROMAN_EMPEROR_DESCRIPTION",               "解锁“原始军事”市政后，和首次建成军营后，分别获得一个军事政策槽位。军营与区域相邻时额外获得标准相邻加成，相邻加成也提供 [ICON_Faith] 信仰值。有军营的城市所有资源+1 [ICON_Production] 生产力和 [ICON_Faith] 信仰值。有 [ICON_GOVERNOR] 总督就职的城市可用 [ICON_FAITH] 信仰值购买区域和陆军单位。"),
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_IMPERIAL_FREE_CITIES_DESCRIPTION",       "每座城市+1区域位、 [ICON_Science] 科技值和 [ICON_Culture] 文化值。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_HOLY_ROMAN_EMPEROR_DESCRIPTION",               "每任命一位 [ICON_GOVERNOR] 总督，获得一个军事政策槽位。军营与区域相邻时额外获得标准相邻加成，相邻加成也提供 [ICON_Faith] 信仰值。有军营的城市所有资源+1 [ICON_Production] 生产力和 [ICON_Faith] 信仰值。有 [ICON_GOVERNOR] 总督就职的城市可用 [ICON_FAITH] 信仰值购买陆军单位。"),
 -- =====================================================================================================================================
 -- 印度尼西亚
 -- =====================================================================================================================================
-	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_INDONESIA_NUSANTARA_DESCRIPTION",        "海岸和湖泊单元格可为圣地、学院、工业区和剧院广场提供标准相邻加成。市中心相邻甘榜屋的城市+2 [ICON_AMENITIES] 宜居度，且建造港口和水上乐园+30%建造速度。"),
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_INDONESIA_NUSANTARA_DESCRIPTION",        "浅海与湖泊单元格可为圣地、学院、工业区和剧院广场提供标准相邻加成。市中心相邻甘榜屋的城市+2 [ICON_AMENITIES] 宜居度，且建造港口和水上乐园+30%建造速度。"),
 -- =====================================================================================================================================
 -- 波兰
 -- =====================================================================================================================================
@@ -1002,7 +1020,7 @@ values
 	-- 蒸英
 	("zh_Hans_CN",  "LOC_LEADER_VICTORIA_ALT_NAME",                                  "维多利亚（滚滚蒸汽）"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_VICTORIA_ALT_NAME",                            "工业革命"),
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_VICTORIA_ALT_DESCRIPTION",                     "每次完成工作坊后，触发工业化 [ICON_TECHBOOSTED] 尤里卡，若工业化 [ICON_TECHBOOSTED] 尤里卡已触发，则直接完成工业化科技。拥有工业区的城市可无视 [ICON_CITIZEN] 人口数量限制再建造一个区域。如城市拥有皇家海军船坞，则每回合+2  [ICON_GREATENGINEER] 大工程师点数。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_VICTORIA_ALT_DESCRIPTION",                     "每次完成建造工坊后，触发工业化 [ICON_TECHBOOSTED] 尤里卡，若工业化 [ICON_TECHBOOSTED] 尤里卡已触发，则直接完成工业化科技。拥有工业区的城市可无视 [ICON_CITIZEN] 人口数量限制再建造一个区域。如城市拥有皇家海军船坞，则每回合+2  [ICON_GREATENGINEER] 大工程师点数。"),
 	-- 海袭英
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_ELIZABETH_NAME",                               "荣光女王"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_ELIZABETH_DESCRIPTION",                        "海军袭击者单位+1 [ICON_RANGE] 射程。[ICON_GREATADMIRAL] 海军统帅拥有额外1点使用次数。"),
@@ -1011,9 +1029,9 @@ values
 -- =====================================================================================================================================
 	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_NKISI_DESCRIPTION",                      "所有陆地单位无视森林和雨林对 [ICON_MOVEMENT] 移动力的减益。每个巨作+4 [ICON_Food] 食物和 [ICON_Production] 生产力。宫殿有6个巨作槽位。"),
 	-- 男刚果
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_RELIGIOUS_CONVERT_DESCRIPTION",                "无法获得 [ICON_GreatPROPHET] 大预言家，或创建宗教。首次建成姆班赞后，激活“神学”、“王权神授”和“归正会”市政 [ICON_CivicBoosted] 鼓舞。获得额外50% [ICON_GREATWRITER] 大作家、[ICON_GREATARTIST] 大艺术家、[ICON_GREATMUSICIAN] 大音乐家和 [ICON_GREATMERCHANT] 大商人点数。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_RELIGIOUS_CONVERT_DESCRIPTION",                "获得+50%文化类 [ICON_GREATPERSON] 伟人和 [ICON_GREATMERCHANT] 大商人点。"),
 	-- 女刚果
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_NZINGA_MBANDE_DESCRIPTION",                    "除了 [ICON_Capital] 首都以外的同大陆的城市+10%产出；异大陆的城市-15%产出。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_NZINGA_MBANDE_DESCRIPTION",                    "同大陆的城市+10%所有产出；异大陆的城市-2 [ICON_AMENITIES] 宜居度。"),
 -- =====================================================================================================================================
 -- 巴比伦
 -- =====================================================================================================================================
@@ -1024,7 +1042,7 @@ values
 -- =====================================================================================================================================
 -- 玛雅
 -- =====================================================================================================================================
-	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_MAYAB_DESCRIPTION",                      "在淡水和海岸旁定居时不提供额外 [ICON_HOUSING] 住房。但农场提供额外+1 [ICON_HOUSING] 住房和+1 [ICON_GOLD] 金币，且每与一座天文台相邻则+1 [ICON_Production] 生产力。每有一个奢侈品与市中心相邻，则+1 [ICON_AMENITIES] 宜居度。"),
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_MAYAB_DESCRIPTION",                      "在淡水和浅海旁定居时不提供额外 [ICON_HOUSING] 住房。但农场提供额外+1 [ICON_HOUSING] 住房和+1 [ICON_GOLD] 金币，且每与一座天文台相邻则+1 [ICON_Production] 生产力。每有一个奢侈品与市中心相邻，则+1 [ICON_AMENITIES] 宜居度。"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MUTAL_DESCRIPTION",                            "揭示出生点6个单元格内的单元格。[ICON_Capital] 首都6个单元格范围内城市所有产出+10%，且建成时将获得1名建造者。[ICON_Capital] 首都9个单元格范围内6个单元格外的非首都城市所有产出不变。其他非首都城市所有产出-15%。[ICON_Capital] 首都6个单元格范围内的单位+5 [ICON_Strength] 战斗力。"),
 -- =====================================================================================================================================
 -- 罗马
@@ -1039,12 +1057,12 @@ values
 -- =====================================================================================================================================
 -- 毛利
 -- =====================================================================================================================================
-	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_MAORI_MANA_DESCRIPTION",                 "游戏初始便解锁“航海术”与“造船术”科技，同时拥有进入海洋单元格的能力。水运单位+2 [ICON_Movement] 移动力。解锁“占星术”后，雨林和草本沼泽提供+1 [ICON_PRODUCTION] 生产力，森林和木本沼泽提供+1 [ICON_FOOD] 食物。渔船提供+1 [ICON_FOOD] 食物，并向相邻单元格投放文化炸弹。"),
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_MAORI_MANA_DESCRIPTION",                 "游戏初始便解锁“航行”与“造船术”科技，同时拥有进入深海单元格的能力。水运单位+2 [ICON_Movement] 移动力。解锁“占星术”后，雨林和草本沼泽提供+1 [ICON_PRODUCTION] 生产力，森林和木本沼泽提供+1 [ICON_FOOD] 食物。渔船提供+1 [ICON_FOOD] 食物，并向相邻单元格投放文化炸弹。"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_KUPES_VOYAGE_DESCRIPTION",                     "游戏开始时位于海洋单元格中。建立首座城市时+1 [ICON_CITIZEN] 人口。宫殿额外+3 [ICON_HOUSING] 住房与+1 [ICON_AMENITIES] 宜居度。建立首座城市前每回合获得+2 [ICON_SCIENCE] 科技值与+2 [ICON_CULTURE] 文化值。"),
 -- =====================================================================================================================================
 -- 埃及
 -- =====================================================================================================================================
-	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_ITERU_EXPANSION2_DESCRIPTION",           "境内不受洪水损害。泛滥平原上的资源+1 [ICON_FOOD] 食物。在相邻河流单元格建造区域与奇观时+20%建造速度。每次完成奇观可获得一个建造者。学院和剧院广场与河流相邻获得大量相邻加成。"),
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_ITERU_EXPANSION2_DESCRIPTION",           "境内不受洪水损害。沿河资源+1 [ICON_FOOD] 食物。在沿河单元格建造区域与奇观时+20%建造速度。每次完成奇观可获得一个建造者。沿河的学院和剧院广场获得大量相邻加成。"),
 	-- 拉二
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_RAMSES_NAME",                                  "拉的神选"),    
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_RAMSES_DESCRIPTION",                           "建筑建成时，获得等同于建筑花费15%的 [ICON_CULTURE] 文化值；奇观建成时则获得30%。无视河流带来的 [ICON_MOVEMENT] 移动力惩罚和 [ICON_STRENGTH] 战斗力惩罚。"),
@@ -1054,7 +1072,7 @@ values
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MEDITERRANEAN_EXPANSION2_DESCRIPTION",         "当您派遣代表团或大使馆时，您会额外获得一次部落村庄奖励。首次和第二次建立同盟后，获得该盟友的领袖特色能力。"),
 	-- 托勒密
 	("zh_Hans_CN",  "LOC_LEADER_CLEOPATRA_ALT_NAME",                                 "克利欧佩特拉（托勒密法老）"), 
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_CLEOPATRA_ALT_DESCRIPTION",                    "城市拥有的每个位于惊艳单元格的蓄水池和堤坝+10%余粮。位于泛滥平原的改良设施+1 [ICON_CULTURE] 文化值。国境内的泛滥平原单元格为相邻的单元格提供+1魅力（而非通常的-1）。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_CLEOPATRA_ALT_DESCRIPTION",                    "城市拥有的每个位于惊艳单元格的蓄水池和堤坝+10%余粮。沿河改良设施+1 [ICON_CULTURE] 文化值。国境内的泛滥平原单元格为相邻的单元格提供+1魅力。"),
 -- =====================================================================================================================================
 -- 阿拉伯
 -- =====================================================================================================================================
@@ -1072,7 +1090,7 @@ values
 -- =====================================================================================================================================
 -- 越南
 -- =====================================================================================================================================
-	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_VIETNAM_DESCRIPTION",                    "所有区域（除市中心外）不移除树林、雨林、沼泽地貌。建在这些区域中的建筑以及区域本体和奇观将获得以下收益：建在树林上提供+2 [ICON_Production] 生产力、建在雨林上提供+2 [ICON_Food] 食物、建在沼泽上提供+2 [ICON_Science] 科技值。拥有“神秘主义”后即可栽种树林。"),
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_VIETNAM_DESCRIPTION",                    "除市中心外的区域不移除树林、雨林、沼泽地貌。建在这些区域中的建筑以及区域本体和奇观将获得以下收益：建在树林上提供+2 [ICON_Production] 生产力、建在雨林上提供+2 [ICON_Food] 食物、建在沼泽上提供+2 [ICON_Science] 科技值。拥有“神秘主义”后即可栽种树林。"),
 -- =====================================================================================================================================
 -- 高卢
 -- =====================================================================================================================================
@@ -1097,8 +1115,8 @@ values
 -- =====================================================================================================================================
 -- 苏格兰
 -- =====================================================================================================================================
-	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_SCOTTISH_ENLIGHTENMENT_DESCRIPTION",     "幸福度为快乐的城市额外+8% [ICON_SCIENCE] 科技值、+8% [ICON_PRODUCTION] 生产力。快乐的城市中每个学院+2 [ICON_GreatScientist] 大科学家点数、每个工业区+2 [ICON_GreatEngineer] 大工程师点数。喜悦的城市获得的上述加成将加倍，欣喜若狂的城市获得的上述加成将变为三倍。学院和工业区+1 [ICON_AMENITIES] 宜居度，且从其他区域获得额外标准相邻加成。"),
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_BANNOCKBURN_DESCRIPTION",                      "国境内的单位防御时+4 [ICON_Strength] 战斗力。低于5 [ICON_Citizen] 人口的城市生产的所有军事单位获得1次免费晋升。解锁“后勤补给”后即可宣布解放战争。宣布解放战争后的10回合内+100% [ICON_Production] 生产力、+2 [ICON_Movement] 移动力。"),
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_SCOTTISH_ENLIGHTENMENT_DESCRIPTION",     "幸福度为高兴的城市额外+8% [ICON_SCIENCE] 科技值和 [ICON_PRODUCTION] 生产力；其中的学院+2 [ICON_GreatScientist] 大科学家点数，工业区+2 [ICON_GreatEngineer] 大工程师点数。喜悦的城市获得的上述加成将加倍，欣喜若狂的城市获得的上述加成将变为三倍。学院和工业区+1 [ICON_AMENITIES] 宜居度，且从其他区域获得额外标准相邻加成。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_BANNOCKBURN_DESCRIPTION",                      "国境内的单位+4 [ICON_Strength] 战斗力。遇见的第一个文明会向你宣战。当您与任何文明发生战争时：你的城市+15% [ICON_PRODUCTION] 生产力；且你的单位造访部落村庄或摧毁 [ICON_Barbarian] 蛮族哨站时，可以选择招募部队或获得补给。"),
 -- =====================================================================================================================================
 -- 格鲁吉亚
 -- =====================================================================================================================================
@@ -1114,13 +1132,27 @@ values
 -- =====================================================================================================================================
 -- 巴西
 -- =====================================================================================================================================
-	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_AMAZON_DESCRIPTION",                     "雨林单元格为专业化区域提供标准相邻加成，并为相邻的单元格提供+1魅力（而非通常的-1。）位于雨林的改良设施+1 [ICON_CULTURE] 文化值，位于雨林的奢侈资源+1 [ICON_FOOD] 食物。所有区域（除市中心外）不移除雨林。建有街头狂欢节或科帕卡瓦纳的城市可解锁“狂欢节”项目。"),
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_DESCRIPTION",                      "招募或赞助一位 [ICON_GreatPerson] 伟人后，将返还所消耗 [ICON_GreatPerson] 伟人点数的20%。每招募2名伟人，您国境内的所有雨林单元格+1 [Icon_Faith] 信仰值。"),
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_AMAZON_DESCRIPTION",                     "建立 [ICON_CAPITAL] 首都后获得一位旗手。除市中心外的区域不移除雨林。雨林单元格为专业化区域提供标准相邻加成，并为相邻的单元格提供+1魅力。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_NAME",                      			 "高尚者"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_DESCRIPTION",                      "招募或赞助一位 [ICON_GreatPerson] 伟人后返还20%消耗的点数。每次完成“文明首次”军事类或发展类历史时刻后，下一个建造的区域立刻推进50%的建造进程；若为“世界首次”则还可以选择一座城市引进其他文明的移民或人才。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_BUILD_VIEWTEXT",          		 		 "免费建造了{1_Name}"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_BUILD_TIMES_TEXT",        		 		 "剩余区域建造进程推进次数：{1_Num}次。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_POPULATION_VIEWTEXT",          		 "从{1_Name}引进了一个 [ICON_CITIZEN] 移民"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_TALENTS_VIEWTEXT",          			 "从{1_Civ}引进了：{2_Name}"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_INTRODUCE_TEXT",        					 "从其他文明引进 [ICON_CITIZEN] 移民"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_INTRODUCE_PERCENTAGE_TEXT",        "[ICON_BULLET]额外引进一位{1_Name}。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNANIMOUS_INTRODUCE_TIMES_TEXT",        		 "剩余引进次数：{1_Num}次。"),
+	("zh_Hans_CN",  "LOC_BANDEIRANTES_COLLECT_RESOURCE_TEXT",        		 						 "收集雨林资源"),
+	("zh_Hans_CN",  "LOC_BANDEIRANTES_COLLECT_RESOURCE_TIMES_TEXT",        		 			 "剩余收集次数：{1_Num}次。"),
+	("zh_Hans_CN",  "LOC_BANDEIRANTES_COLLECT_RESOURCE_DISABLED_TEXT",        		 	 "[COLOR:Red]该单元格的资源已经被收集过了。[ENDCOLOR]"),
+	("zh_Hans_CN",  "LOC_BANDEIRANTES_COLLECT_RESOURCE_DISABLED_TEXT2",        		 	 "[COLOR:Red]必须位于境外的雨林资源上。[ENDCOLOR]"),
+	("zh_Hans_CN",  "LOC_BANDEIRANTES_COLLECT_RESOURCE_DISABLED_TEXT3",        		 	 "[COLOR:Red]收集次数耗尽。[ENDCOLOR]"),
+	("zh_Hans_CN",  "LOC_BANDEIRANTES_COLLECT_RESOURCE_COLLECTED_TEXT",        		 	 "已收集：[NEWLINE]{1_Detail}"),
 -- =====================================================================================================================================
 -- 西班牙
 -- =====================================================================================================================================
 	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_TREASURE_FLEET_NAME",                    "黄金七城"),
-	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_TREASURE_FLEET_EXPANSION2_DESCRIPTION",  "你的单位每发现一个自然奇观（开局发现的除外），便奖励1个 [ICON_GOVERNOR] 总督头衔。每个有 [ICON_GOVERNOR] 总督就职的城市为所有 [ICON_TRADEROUTE] 贸易路线+1 [ICON_PRODUCTION] 生产力、+2 [ICON_GOLD] 金币；如 [ICON_TRADEROUTE] 贸易路线横跨多个大陆，则这些数值将翻倍。在每个异大陆上建立首座城市时+1 [ICON_TRADEROUTE] 贸易路线容量。"),
+	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_TREASURE_FLEET_EXPANSION2_DESCRIPTION",  "每次发现自然奇观时奖励1个 [ICON_GOVERNOR] 总督头衔。每个有 [ICON_GOVERNOR] 总督就职的城市为所有 [ICON_TRADEROUTE] 贸易路线+1 [ICON_PRODUCTION] 生产力、+2 [ICON_GOLD] 金币；如 [ICON_TRADEROUTE] 贸易路线横跨多个大陆则该收益翻倍。在每个异大陆上建立首座城市时+1 [ICON_TRADEROUTE] 贸易路线容量。"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_EL_ESCORIAL_NAME",                             "宝藏舰队"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_EL_ESCORIAL_EXPANSION2_DESCRIPTION",           "解锁“海军传统”市政后即可组建舰队，解锁“探索”市政后即可组建无敌舰队；如已解锁相关市政，用海军单位占领城市则可将其升级为舰队或无敌舰队。[ICON_GREATADMIRAL] 海军统帅点数积累速度+50%。可在市政广场中建造埃斯科里亚尔王宫。"),
 -- =====================================================================================================================================
@@ -1152,7 +1184,7 @@ values
 	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_ADJACENT_DISTRICTS_DESCRIPTION",         "区域与区域相邻时额外获得标准相邻加成。"),
 	-- 北条
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_DIVINE_WIND_NAME",                             "镰仓幕府"),
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_DIVINE_WIND_EXPANSION2_DESCRIPTION",           "陆地单位处于相邻海岸的陆地单元格时+5 [ICON_Strength] 战斗力；浅水单元格上的海军单位+5 [ICON_Strength] 战斗力。建造港口、圣地和剧院广场+50% [ICON_Production] 生产力。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_DIVINE_WIND_EXPANSION2_DESCRIPTION",           "陆地单位处于相邻海岸的陆地单元格时+5 [ICON_Strength] 战斗力；浅海与湖泊单元格上的海军单位+5 [ICON_Strength] 战斗力。建造港口、圣地和剧院广场+50% [ICON_Production] 生产力。"),
 	-- 德川
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_TOKUGAWA_XP_DESCRIPTION",                      "每次建造军营后，触发“封建主义” [ICON_CIVICBOOSTED] 鼓舞，若“封建主义” [ICON_CIVICBOOSTED] 鼓舞已触发，则直接完成“封建主义”市政。完成“封建主义”市政后获得1个 [ICON_GOVERNOR] 总督头衔。每座没有 [ICON_GOVERNOR] 总督就职的非 [icon_capital] 首都城市-20% [icon_gold] 金币，并为 [icon_capital] 首都和每座有 [ICON_GOVERNOR] 总督就职的城市+5% [icon_gold] 金币。"),
 -- =====================================================================================================================================
@@ -1232,11 +1264,11 @@ where exists (select Tag from LocalizedText where Tag = 'LOC_CIVILIZATION_ETHIOP
 -- 美国文本更改
 -- =====================================================================================================================================
 insert or replace into EnglishText (Tag, Text) select
-	"LOC_TRAIT_LEADER_ANTIQUES_AND_PARKS_DESCRIPTION", "Breathtaking tiles receive +1 [ICON_SCIENCE] Science and +1 [ICON_CULTURE] Culture, and receive extra +1 [ICON_SCIENCE] Science and +1 [ICON_CULTURE] Culture from Preserve or Preserve Buildings in the city. All tiles in a city with a National Park are +1 Appeal."
+	"LOC_TRAIT_LEADER_ANTIQUES_AND_PARKS_DESCRIPTION", "Breathtaking tiles receive +1 [ICON_SCIENCE] Science and [ICON_CULTURE] Culture. Preserve and each Tier of Preserve Buildings provide +1 Appeal to all city tiles and extra +1 [ICON_SCIENCE] Science and [ICON_CULTURE] Culture to Breathtaking tiles in the city."
 where exists (select Tag from LocalizedText where Tag = 'LOC_DISTRICT_PRESERVE_NAME');
 
 insert or replace into LocalizedText (Language, Tag, Text) select
-	"zh_Hans_CN", "LOC_TRAIT_LEADER_ANTIQUES_AND_PARKS_DESCRIPTION", "魅力值为“惊艳”的单元格+1 [ICON_SCIENCE] 科技值和+1 [ICON_CULTURE] 文化值，城市中每拥有一个保护区或保护区建筑，则额外+1 [ICON_SCIENCE] 科技值和+1 [ICON_CULTURE] 文化值。在拥有国家公园的城市中，所有单元格+1魅力。"
+	"zh_Hans_CN", "LOC_TRAIT_LEADER_ANTIQUES_AND_PARKS_DESCRIPTION", "惊艳单元格+1 [ICON_SCIENCE] 科技值和 [ICON_CULTURE] 文化值。保护区和其中的每级建筑为所在城市的单元格+1魅力，为惊艳单元格额外+1 [ICON_SCIENCE] 科技值和 [ICON_CULTURE] 文化值。"
 where exists (select Tag from LocalizedText where Tag = 'LOC_DISTRICT_PRESERVE_NAME');
 
 -- 文本修正

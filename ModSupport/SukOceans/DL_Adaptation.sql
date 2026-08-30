@@ -3,14 +3,17 @@
 -------------------------------------
 
 update Resources set LakeEligible = 1 where ResourceType = 'RESOURCE_SUK_LOBSTER';
+update Resources set LakeEligible = 1 where ResourceType = 'RESOURCE_SUK_SEALS';
 
 delete from Resource_YieldChanges where ResourceType = 'RESOURCE_SUK_SQUID' and YieldType = 'YIELD_GOLD';
 delete from Resource_YieldChanges where ResourceType = 'RESOURCE_SUK_ABALONE' and YieldType = 'YIELD_FOOD';
+delete from Resource_YieldChanges where ResourceType = 'RESOURCE_SUK_CORAL';
 update Resource_YieldChanges set YieldChange = 4 where ResourceType = 'RESOURCE_SUK_CAVIAR' and YieldType = 'YIELD_GOLD';
 update Resource_YieldChanges set YieldChange = 4 where ResourceType = 'RESOURCE_SUK_ABALONE' and YieldType = 'YIELD_GOLD';
 insert or replace into Resource_YieldChanges
     (ResourceType,              YieldType,              YieldChange)
 values
+    ('RESOURCE_SUK_CORAL',      'YIELD_PRODUCTION',     1),
     ('RESOURCE_SUK_CORAL',      'YIELD_GOLD',           1),
     ('RESOURCE_SUK_LOBSTER',    'YIELD_GOLD',           1);
 
@@ -41,8 +44,7 @@ insert or replace into RequirementSets
 values  ('SUK_OCEANS_AQUARIUM_KELP_REQUIREMENTS',                   'REQUIREMENTSET_TEST_ANY');
 insert or replace into RequirementSetRequirements
         (RequirementSetId,                                          RequirementId)
-values  ('SUK_OCEANS_AQUARIUM_KELP_REQUIREMENTS',                   'REQUIRES_PLOT_HAS_SUK_KELP'),
-        ('TOTEMS_ADJACENT_REQUIREMENT',                             'HD_REQUIRES_PLOT_ADJACENT_TO_FEATURE_SUK_KELP');
+values  ('SUK_OCEANS_AQUARIUM_KELP_REQUIREMENTS',                   'REQUIRES_PLOT_HAS_SUK_KELP');
 
 insert or ignore into Resource_ValidFeatures
         (ResourceType,				FeatureType)

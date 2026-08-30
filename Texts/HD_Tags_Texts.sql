@@ -3,10 +3,11 @@
 -------------------------------------------------------------------------------- 
 -- Techs and Civics
 
-update Technologies set Description = 'LOC_TECH_ANIMAL_HUSBANDRY_HD_DESCRIPTION' where TechnologyType ='TECH_ANIMAL_HUSBANDRY';
-update Technologies set Description = 'LOC_TECH_MINING_HD_DESCRIPTION' where TechnologyType ='TECH_MINING';
+update Technologies set Description = NULL where TechnologyType ='TECH_ANIMAL_HUSBANDRY';
+update Technologies set Description = NULL where TechnologyType ='TECH_MINING';
 update Technologies set Description = 'LOC_TECH_MASONRY_HD_DESCRIPTION' where TechnologyType ='TECH_MASONRY';
-update Technologies set Description = 'LOC_TECH_SAILING_HD_DESCRIPTION' where TechnologyType ='TECH_SAILING';
+update Technologies set Description = NULL where TechnologyType ='TECH_SAILING';
+update Technologies set Description = NULL where TechnologyType ='TECH_POTTERY';
 -- 
 update Technologies set Description = 'LOC_TECH_ARCHERY_HD_DESCRIPTION' where TechnologyType ='TECH_ARCHERY';
 update Technologies set Description = 'LOC_TECH_IRRIGATION_DESCRIPTION' where TechnologyType ='TECH_IRRIGATION';
@@ -17,6 +18,7 @@ update Technologies set Description = 'LOC_TECH_ENGINEERING_HD_DESCRIPTION' wher
 -- update Technologies set Description = 'LOC_TECH_CURRENCY_HD_DESCRIPTION' where TechnologyType ='TECH_CURRENCY';
 update Technologies set Description = 'LOC_TECH_APPRENTICESHIP_HD_DESCRIPTION' where TechnologyType ='TECH_APPRENTICESHIP';
 update Technologies set Description = 'LOC_TECH_MACHINERY_HD_DESCRIPTION' where TechnologyType ='TECH_MACHINERY';
+update Technologies set Description = 'LOC_TECH_METAL_CASTING_HD_DESCRIPTION' where TechnologyType ='TECH_METAL_CASTING';
 update Technologies set Description = 'LOC_TECH_PRINTING_HD_DESCRIPTION' where TechnologyType ='TECH_PRINTING';
 update Technologies set Description = NULL where TechnologyType = 'TECH_STIRRUPS';
 -- update Technologies set Description = 'LOC_TECH_CASTLES_HD_DESCRIPTION' where TechnologyType = 'TECH_CASTLES';
@@ -41,6 +43,7 @@ update Technologies set Description = 'LOC_TECH_COMPOSITES_HD_DESCRIPTION' where
 update Technologies set Description = 'LOC_TECH_PREDICTIVE_SYSTEMS_HD_DESCRIPTION' where TechnologyType ='TECH_PREDICTIVE_SYSTEMS';
 update Technologies set Description = 'LOC_TECH_ADVANCED_FLIGHT_HD_DESCRIPTION' where TechnologyType ='TECH_ADVANCED_FLIGHT';
 update Technologies set Description = 'LOC_TECH_COMBUSTION_HD_DESCRIPTION' where TechnologyType ='TECH_COMBUSTION';
+update Technologies set Description = 'LOC_TECH_NANOTECHNOLOGY_HD_DESCRIPTION' where TechnologyType ='TECH_NANOTECHNOLOGY';
 
 
 update Technologies set Description = NULL where TechnologyType ='TECH_ROCKETRY';
@@ -56,11 +59,11 @@ update Civics set Description = 'LOC_CIVIC_CRAFTSMANSHIP_HD_DESCRIPTION' where C
 -- update Civics set Description = 'LOC_CIVIC_CIVIL_SERVICE_HD_DESCRIPTION' where CivicType ='CIVIC_CIVIL_SERVICE';
 update Civics set Description = 'LOC_CIVIC_GUILDS_HD_DESCRIPTION' where CivicType ='CIVIC_GUILDS';
 update Civics set Description = 'LOC_CIVIC_MEDIEVAL_FAIRES_HD_DESCRIPTION' where CivicType ='CIVIC_MEDIEVAL_FAIRES';
--- update Civics set Description = 'LOC_CIVIC_EXPLORATION_HD_DESCRIPTION' where CivicType ='CIVIC_EXPLORATION';
+update Civics set Description = 'LOC_CIVIC_EXPLORATION_HD_DESCRIPTION' where CivicType ='CIVIC_EXPLORATION';
 update Civics set Description = NULL where CivicType ='CIVIC_COLONIALISM';
 update Civics set Description = 'LOC_CIVIC_FEUDALISM_HD_DESCRIPTION' where CivicType ='CIVIC_FEUDALISM';
 update Civics set Description = 'LOC_CIVIC_MERCANTILISM_HD_DESCRIPTION' where CivicType ='CIVIC_MERCANTILISM';
-update Civics set Description = NULL where CivicType ='CIVIC_NAVAL_TRADITION';
+update Civics set Description = 'LOC_CIVIC_NAVAL_TRADITION_HD_DESCRIPTION' where CivicType ='CIVIC_NAVAL_TRADITION';
 update Civics set Description = 'LOC_CIVIC_COLONIALISM_HD_DESCRIPTION' where CivicType ='CIVIC_COLONIALISM';
 update Civics set Description = 'LOC_CIVIC_NATIONALISM_HD_DESCRIPTION' where CivicType ='CIVIC_NATIONALISM';
 update Civics set Description = 'LOC_CIVIC_CIVIL_ENGINEERING_HD_DESCRIPTION' where CivicType ='CIVIC_CIVIL_ENGINEERING';
@@ -73,6 +76,11 @@ update Civics set Description = 'LOC_POLICY_FUTURE_VICTORY_CULTURE_DESCRIPTION' 
 
 --------------------------------------------------------------------------------
 -- Buildings
+update Buildings set Description = 'LOC_BUILDING_WALLS_HD_DESCRIPTION' where BuildingType = 'BUILDING_WALLS';
+update Buildings set Description = 'LOC_BUILDING_CASTLE_HD_DESCRIPTION' where BuildingType = 'BUILDING_CASTLE';
+update Buildings set Description = 'LOC_BUILDING_STAR_FORT_HD_DESCRIPTION' where BuildingType = 'BUILDING_STAR_FORT';
+update Buildings set Description = 'LOC_BUILDING_ARENA_HD_DESCRIPTION' where BuildingType = 'BUILDING_ARENA';
+update Buildings set Description = 'LOC_BUILDING_TLACHTLI_HD_DESCRIPTION' where BuildingType = 'BUILDING_TLACHTLI';
 update Buildings set Description = 'LOC_BUILDING_GRANARY_DESCRIPTION' where BuildingType = 'BUILDING_GRANARY';
 update Buildings set Description = 'LOC_BUILDING_UNIVERSITY_DESCRIPTION' where BuildingType = 'BUILDING_UNIVERSITY';
 update Buildings set Description = 'LOC_BUILDING_RESEARCH_LAB_DESCRIPTION' where BuildingType = 'BUILDING_RESEARCH_LAB';
@@ -181,7 +189,6 @@ update Building_GreatWorks set ThemingBonusDescription = 'LOC_BUILDING_THEMINGBO
 update Building_GreatWorks set ThemingBonusDescription = 'LOC_BUILDING_THEMINGBONUS_GOV_CULTURE' where BuildingType = 'BUILDING_GOV_CULTURE';
 update Building_GreatWorks set ThemingBonusDescription = 'LOC_BUILDING_THEMINGBONUS_NEUSCHWANSTEIN' where BuildingType = 'BUILDING_NEUSCHWANSTEIN';
 update Building_GreatWorks set ThemingBonusDescription = 'LOC_BUILDING_THEMINGBONUS_UFFIZI' where BuildingType = 'BUILDING_UFFIZI';
--- update Building_GreatWorks set ThemingBonusDescription = 'LOC_BUILDING_THEMINGBONUS_NOTRE_DAME' where BuildingType = 'BUILDING_NOTRE_DAME';
 update Building_GreatWorks set ThemingBonusDescription = 'LOC_BUILDING_THEMINGBONUS_DL_STPETERSBASILICA' where BuildingType = 'BUILDING_AL_STPETERSBASILICA';
 
 --------------------------------------------------------------------------------
@@ -210,6 +217,8 @@ update Policies set Description = 'LOC_POLICY_LIGHTNING_WARFARE_HD_DESCRIPTION' 
 --------------------------------------------------------------------------------
 -- Units
 update Units set Description = 'LOC_UNIT_BUILDER_DL_DESCRIPTION' where UnitType = 'UNIT_BUILDER';
+update Units set Description = 'LOC_UNIT_SETTLER_DL_DESCRIPTION' where UnitType = 'UNIT_SETTLER';
+update Units set Description = 'LOC_UNIT_TRADER_DL_DESCRIPTION' where UnitType = 'UNIT_TRADER';
 /*
 -- City Names
 update CivilizationLeaders set CapitalName = 'LOC_CITY_XIANYANG' where CivilizationType = 'CIVILIZATION_CHINA' and LeaderType = 'LEADER_QIN';

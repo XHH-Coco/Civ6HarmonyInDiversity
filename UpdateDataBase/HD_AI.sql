@@ -218,7 +218,7 @@ from HD_AIGreatPersonPoints union all select
 	ModifierId,		'Amount',					1
 from HD_AIGreatPersonPoints;
 
-update ModifierArguments set Value = 1 where Name = 'Amount' and ModifierId in
+update ModifierArguments set Value = 2 where Name = 'Amount' and ModifierId in
 	(select ModifierId from HD_AIGreatPersonPoints where GreatPersonClassType in ('GREAT_PERSON_CLASS_WRITER', 'GREAT_PERSON_CLASS_ARTIST', 'GREAT_PERSON_CLASS_MUSICIAN'));
 ------------------------------------------------------------------
 -- adjust district priority   调整基础产出倾向，这会让AI的坐地、科技市政、总督选择、建造选择等有所变化。
@@ -282,16 +282,8 @@ insert or replace into AiFavoredItems
 	(ListType,					Item,									Favored,	Value)
 values
 --将【粮仓】设置为比较热衷的建筑,设置额外价值粮仓0→20，-by siv1.35
---将【图腾柱】设置为不偏爱的建筑，但设置额外价值1，让有了宗教胜利欲望的AI去出。-by siv1.35
---为【工官】和【训练营】增加了价值-by siv1.35
---为【集市】和【贸易港市】降低了价值-by siv1.35
 --但是【远古城墙】从偏爱改为不偏爱，设置额外价值5，以避免砌砖后落地固定出城墙不出碑的情况-by siv1.35
 	('DLAdjustBuildings',		'BUILDING_GRANARY',						1,			20),
-	('DLAdjustBuildings',		'BUILDING_TOTEMS',						0,			1),	
-	('DLAdjustBuildings',		'BUILDING_OFFICIAL_RUN_HANDCRAFT',		1,			1),	
-	('DLAdjustBuildings',		'BUILDING_BOOTCAMP',					1,			0),	
-	('DLAdjustBuildings',		'BUILDING_FAIR',						0,			0),	
-	('DLAdjustBuildings',		'BUILDING_JNR_WHARF_TRADE',				0,			-3),	
 	('DLAdjustBuildings',		'BUILDING_WALLS',						0,			5),
 --增加【神社】的偏爱，以解锁传教士（应用于已经出了圣地的AI）-by siv1.35
 	('DLAdjustBuildings',		'BUILDING_SHRINE',						1,			60),
@@ -306,7 +298,7 @@ values
 	('DLAdjustDistricts',		'DISTRICT_INDUSTRIAL_ZONE',				1,			1),
 --1.37版本，加入商业和港口调整
 --	('DLAdjustDistricts',		'DISTRICT_HARBOR',						1,			0),	
---	('DLAdjustDistricts',		'DISTRICT_COMMERCIAL_HUB',				1,			0),		
+	-- ('DLAdjustDistricts',		'DISTRICT_COMMERCIAL_HUB',				0,			-1),		
 --传教单位（修复不出传教单位的BUG，让能传教的文明更激情传教）-by siv1.35
 	('DLAdjustUnits',			'UNIT_MISSIONARY',						1,			10),
 	('DLAdjustUnits',			'UNIT_APOSTLE',							1,			10),
@@ -344,9 +336,9 @@ values
 	('DLAdjustCivics',			'CIVIC_CRAFTSMANSHIP',					1,			0),
 	('DLAdjustCivics',			'CIVIC_STATE_WORKFORCE',				1,			0),
 	('DLAdjustCivics',			'CIVIC_EARLY_EMPIRE',					1,			0),
-	('DLAdjustCivics',			'CIVIC_POLITICAL_PHILOSOPHY',			1,			0),
+	('DLAdjustCivics',			'CIVIC_POLITICAL_PHILOSOPHY',			1,			20),
 --戏剧诗歌/行政部门/历史哲学（解锁文艺学院，关键）
-	('DLAdjustCivics',			'CIVIC_DRAMA_POETRY',					1,			0),
+	('DLAdjustCivics',			'CIVIC_DRAMA_POETRY',					1,			20),
 	('DLAdjustCivics',			'CIVIC_CIVIL_SERVICE',					1,			0),
 	('DLAdjustCivics',			'CIVIC_HISTORICAL_PHILOSOPHY_HD',		1,			80),--上调，by siv1.35
 --为避免AI不换政体的情况，增加2级政体市政偏爱（归正会和探索） by siv1.35（但测试中AI还是基本不切政体）
@@ -454,11 +446,10 @@ values
 --保护区、水渠和外交区的偏好，避免AI错过有用的建筑资源
 	('DLAdjustDistricts',		'DISTRICT_PRESERVE',					1,			70),
 --神谕碑、古树林、观海石偏好（使AI大后期可以正常解锁并建造到后面的保护区高级建筑）
-	('DLAdjustBuildings',		'BUILDING_HD_MONASTERY.',				1,			500),
-	('DLAdjustBuildings',		'BUILDING_HD_HOLYWATERS',				1,			400),
 	('DLAdjustBuildings',		'BUILDING_GROVE',						1,			400),
 	('DLAdjustDistricts',		'DISTRICT_DIPLOMATIC_QUARTER',			1,			110),	
-	('DLAdjustDistricts',		'DISTRICT_AQUEDUCT',					1,			40);
+	('DLAdjustDistricts',		'DISTRICT_AQUEDUCT',					1,			40),	
+	('DLAdjustDistricts',		'DISTRICT_THEATER',					1,			40);
 
 
 
@@ -579,9 +570,9 @@ update PseudoYields set DefaultValue = 1 where PseudoYieldType = 'PSEUDOYIELD_CL
 update PseudoYields set DefaultValue = 5.5 where PseudoYieldType = 'PSEUDOYIELD_IMPROVEMENT'; -- 	0.5 => 3.0 in NFP, 13.5 too much
 --影响力点数热衷
 update PseudoYields set DefaultValue = 0.8 where PseudoYieldType = 'PSEUDOYIELD_INFLUENCE'; -- 	0.5
---常备军（让AI更加容易爆兵）
-update PseudoYields set DefaultValue = 1.25 where PseudoYieldType = 'PSEUDOYIELD_STANDING_ARMY_NUMBER'; -- 	1 -- controls size of the army
-update PseudoYields set DefaultValue = 0.13 where PseudoYieldType = 'PSEUDOYIELD_STANDING_ARMY_VALUE'; -- 	0.1 -- controls size of the army
+--常备军
+update PseudoYields set DefaultValue = 0.9 where PseudoYieldType = 'PSEUDOYIELD_STANDING_ARMY_NUMBER'; -- 	1 -- controls size of the army
+update PseudoYields set DefaultValue = 0.08 where PseudoYieldType = 'PSEUDOYIELD_STANDING_ARMY_VALUE'; -- 	0.1 -- controls size of the army
 --旅游业绩渴求度降低，理论上降低遗物价格
 --update PseudoYields set DefaultValue = 0.1 where PseudoYieldType = 'PSEUDOYIELD_TOURISM'; -- 	1
 --更加热衷出开拓者
@@ -593,100 +584,10 @@ update PseudoYields set DefaultValue = 7.0 where PseudoYieldType = 'PSEUDOYIELD_
 --世界上的不满传播
 update PseudoYields set DefaultValue = -0.25 where PseudoYieldType = 'PSEUDOYIELD_DIPLOMATIC_GRIEVANCE';
 --奇观倾向
-update PseudoYields set DefaultValue = 1.0 where PseudoYieldType = 'PSEUDOYIELD_WONDER'; -- 2, AI+ 0.55
+update PseudoYields set DefaultValue = 1.1 where PseudoYieldType = 'PSEUDOYIELD_WONDER'; -- 2, AI+ 0.55
 --间谍
 update PseudoYields set DefaultValue = 1.0 where PseudoYieldType = 'PSEUDOYIELD_UNIT_SPY'; -- 20
 --大亨、投资人
 update PseudoYields set DefaultValue = 0.4 where PseudoYieldType = 'PSEUDOYIELD_UNIT_LEU_TYCOON'; 
 update PseudoYields set DefaultValue = 0.2 where PseudoYieldType = 'PSEUDOYIELD_UNIT_LEU_INVESTOR';
 --------------------------------------------------------------
---神级AI不爱莫克夏,临时方案
-insert or replace into GovernorPromotionModifiers 
-	(GovernorPromotionType,                  ModifierId) 
-values
-	('GOVERNOR_PROMOTION_CARDINAL_BISHOP',   'BISHOP_AI_LESS_FAITH_POP');
-insert or replace into Modifiers    
-	(ModifierId,                             ModifierType,                                    Permanent,  SubjectRequirementSetId)
-values
-	('BISHOP_AI_LESS_FAITH_POP',              'MODIFIER_SINGLE_CITY_ADJUST_CITY_YIELD_PER_POPULATION', 0,  'PLAYER_IS_AT_LEAST_DEITY_DIFFICULTY_AI');
-insert or replace into ModifierArguments
-	(ModifierId,                              Name,                   Value)
-values
-	('BISHOP_AI_LESS_FAITH_POP',               'YieldType',            'YIELD_FAITH'),
-	('BISHOP_AI_LESS_FAITH_POP',               'Amount',               -1);
-
-insert or replace into GovernorPromotionModifiers 
-	(GovernorPromotionType,                  ModifierId) 
-values
-	('GOVERNOR_PROMOTION_CARDINAL_BISHOP',   'BISHOP_AI_LESS_PROHET');
-insert or replace into Modifiers    
-	(ModifierId,                             ModifierType,                                    Permanent,  SubjectRequirementSetId)
-values
-	('BISHOP_AI_LESS_PROHET',				'MODIFIER_SINGLE_CITY_ADJUST_GREAT_PERSON_POINT', 0,  'PLAYER_IS_AT_LEAST_DEITY_DIFFICULTY_AI');
-insert or replace into ModifierArguments
-	(ModifierId,                              Name,                   			Value)
-values
-	('BISHOP_AI_LESS_PROHET',               'GreatPersonClassType',            'GREAT_PERSON_CLASS_PROPHET'),
-	('BISHOP_AI_LESS_PROHET',               'Amount',               			-3);
-
--- 神级ai过时代送移民
--- insert or replace into TraitModifiers
--- 	(TraitType,										ModifierId)
--- select
--- 	'TRAIT_LEADER_MAJOR_CIV',			'AI_HIGH_DIFFICULTY_' || EraType || '_EXTRA_SETTLER'
--- from Eras where EraType != 'ERA_ANCIENT';
-
--- insert or replace into Modifiers
--- 	(ModifierId,																						ModifierType,															OwnerRequirementSetId)
--- select
--- 	'AI_HIGH_DIFFICULTY_' || EraType || '_EXTRA_SETTLER',		'MODIFIER_PLAYER_GRANT_UNIT_IN_CAPITAL',	'PLAYER_IS_HIGH_DIFFICULTY_AI_AT_LEAST_' || EraType
--- from Eras where EraType != 'ERA_ANCIENT';
-
--- insert or replace into ModifierArguments
--- 	(ModifierId,																						Name,					Value)
--- select
--- 	'AI_HIGH_DIFFICULTY_' || EraType || '_EXTRA_SETTLER',		'UnitType',		'UNIT_SETTLER'
--- from Eras where EraType != 'ERA_ANCIENT';
-
--- insert or replace into ModifierArguments
--- 	(ModifierId,																						Name,					Value)
--- select
--- 	'AI_HIGH_DIFFICULTY_' || EraType || '_EXTRA_SETTLER',		'Amount',			1
--- from Eras where EraType != 'ERA_ANCIENT';
-
--- insert or replace into ModifierArguments
--- 	(ModifierId,																						Name,										Value)
--- select
--- 	'AI_HIGH_DIFFICULTY_' || EraType || '_EXTRA_SETTLER',		'AllowUniqueOverride',	0
--- from Eras where EraType != 'ERA_ANCIENT';
-
--- 神级ai古典送工人
--- insert or replace into TraitModifiers
--- 	(TraitType,										ModifierId)
--- select
--- 	'TRAIT_LEADER_MAJOR_CIV',			'AI_HIGH_DIFFICULTY_' || EraType || '_EXTRA_BUILDER'
--- from Eras where EraType == 'ERA_CLASSICAL';
-
--- insert or replace into Modifiers
--- 	(ModifierId,																						ModifierType,																	OwnerRequirementSetId)
--- select
--- 	'AI_HIGH_DIFFICULTY_' || EraType || '_EXTRA_BUILDER',		'MODIFIER_PLAYER_CITIES_GRANT_UNIT_IN_CITY',	'PLAYER_IS_HIGH_DIFFICULTY_AI_AT_LEAST_' || EraType
--- from Eras where EraType == 'ERA_CLASSICAL';
-
--- insert or replace into ModifierArguments
--- 	(ModifierId,																						Name,					Value)
--- select
--- 	'AI_HIGH_DIFFICULTY_' || EraType || '_EXTRA_BUILDER',		'UnitType',		'UNIT_BUILDER'
--- from Eras where EraType == 'ERA_CLASSICAL';
-
--- insert or replace into ModifierArguments
--- 	(ModifierId,																						Name,					Value)
--- select
--- 	'AI_HIGH_DIFFICULTY_' || EraType || '_EXTRA_BUILDER',		'Amount',			1
--- from Eras where EraType == 'ERA_CLASSICAL';
-
--- insert or replace into ModifierArguments
--- 	(ModifierId,																						Name,										Value)
--- select
--- 	'AI_HIGH_DIFFICULTY_' || EraType || '_EXTRA_BUILDER',		'AllowUniqueOverride',	0
--- from Eras where EraType == 'ERA_CLASSICAL';

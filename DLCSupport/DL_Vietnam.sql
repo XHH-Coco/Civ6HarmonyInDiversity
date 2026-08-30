@@ -36,41 +36,41 @@ delete from TraitModifiers where ModifierId = 'TRAIT_DISTRICTS_FOREST_ONLY';
 delete from TraitModifiers where ModifierId = 'TRAIT_DISTRICTS_MARSH_ONLY';
 delete from TraitModifiers where ModifierId = 'TRAIT_DISTRICTS_JUNGLE_ONLY';
 
-insert or replace into TraitModifiers (TraitType,   ModifierId) 
-    select 'TRAIT_CIVILIZATION_VIETNAM', 'TRAIT_JUNGLE_VALID_' || DistrictType from Districts where DistrictType != 'DISTRICT_CITY_CENTER';
-insert or replace into TraitModifiers (TraitType,   ModifierId) 
-    select 'TRAIT_CIVILIZATION_VIETNAM', 'TRAIT_MARSH_VALID_' || DistrictType from Districts where DistrictType != 'DISTRICT_CITY_CENTER';
-insert or replace into TraitModifiers (TraitType,   ModifierId) 
-    select 'TRAIT_CIVILIZATION_VIETNAM', 'TRAIT_FOREST_VALID_' || DistrictType from Districts where DistrictType != 'DISTRICT_CITY_CENTER';
+insert or ignore into TraitModifiers (TraitType,   ModifierId) 
+    select 'TRAIT_CIVILIZATION_VIETNAM', 'TRAIT_JUNGLE_VALID_' || DistrictType from Districts where DistrictType not in ('DISTRICT_CITY_CENTER', 'DISTRICT_WONDER');
+insert or ignore into TraitModifiers (TraitType,   ModifierId) 
+    select 'TRAIT_CIVILIZATION_VIETNAM', 'TRAIT_MARSH_VALID_' || DistrictType from Districts where DistrictType not in ('DISTRICT_CITY_CENTER', 'DISTRICT_WONDER');
+insert or ignore into TraitModifiers (TraitType,   ModifierId) 
+    select 'TRAIT_CIVILIZATION_VIETNAM', 'TRAIT_FOREST_VALID_' || DistrictType from Districts where DistrictType not in ('DISTRICT_CITY_CENTER', 'DISTRICT_WONDER');
 
 -- insert or replace into Modifiers    (ModifierId, ModifierType)
 --     select 'TRAIT_JUNGLE_VALID_' || DistrictType, 'MODIFIER_PLAYER_CITIES_ADJUST_VALID_FEATURES_DISTRICTS' 
---     from Districts where DistrictType != 'DISTRICT_CITY_CENTER';
-insert or replace into Modifiers    (ModifierId, ModifierType)
+--     from Districts where DistrictType not in ('DISTRICT_CITY_CENTER', 'DISTRICT_WONDER');
+insert or ignore into Modifiers    (ModifierId, ModifierType)
     select 'TRAIT_MARSH_VALID_' || DistrictType, 'MODIFIER_PLAYER_CITIES_ADJUST_VALID_FEATURES_DISTRICTS' 
-    from Districts where DistrictType != 'DISTRICT_CITY_CENTER';
-insert or replace into Modifiers    (ModifierId, ModifierType)
+    from Districts where DistrictType not in ('DISTRICT_CITY_CENTER', 'DISTRICT_WONDER');
+insert or ignore into Modifiers    (ModifierId, ModifierType)
     select 'TRAIT_FOREST_VALID_' || DistrictType, 'MODIFIER_PLAYER_CITIES_ADJUST_VALID_FEATURES_DISTRICTS' 
-    from Districts where DistrictType != 'DISTRICT_CITY_CENTER';    
+    from Districts where DistrictType not in ('DISTRICT_CITY_CENTER', 'DISTRICT_WONDER');    
 
 -- insert or replace into ModifierArguments    (ModifierId,    Name,        Value) 
 --     select 'TRAIT_JUNGLE_VALID_' || DistrictType, 'DistrictType', DistrictType
---     from Districts where DistrictType != 'DISTRICT_CITY_CENTER';
-insert or replace into ModifierArguments    (ModifierId,    Name,        Value) 
+--     from Districts where DistrictType not in ('DISTRICT_CITY_CENTER', 'DISTRICT_WONDER');
+insert or ignore into ModifierArguments    (ModifierId,    Name,        Value) 
     select 'TRAIT_MARSH_VALID_' || DistrictType, 'DistrictType', DistrictType
-    from Districts where DistrictType != 'DISTRICT_CITY_CENTER';
-insert or replace into ModifierArguments    (ModifierId,    Name,        Value) 
+    from Districts where DistrictType not in ('DISTRICT_CITY_CENTER', 'DISTRICT_WONDER');
+insert or ignore into ModifierArguments    (ModifierId,    Name,        Value) 
     select 'TRAIT_FOREST_VALID_' || DistrictType, 'DistrictType', DistrictType
-    from Districts where DistrictType != 'DISTRICT_CITY_CENTER';
+    from Districts where DistrictType not in ('DISTRICT_CITY_CENTER', 'DISTRICT_WONDER');
 -- insert or replace into ModifierArguments    (ModifierId,    Name,        Value) 
 --     select 'TRAIT_JUNGLE_VALID_' || DistrictType, 'FeatureType', 'FEATURE_JUNGLE'
---     from Districts where DistrictType != 'DISTRICT_CITY_CENTER';
-insert or replace into ModifierArguments    (ModifierId,    Name,        Value) 
+--     from Districts where DistrictType not in ('DISTRICT_CITY_CENTER', 'DISTRICT_WONDER');
+insert or ignore into ModifierArguments    (ModifierId,    Name,        Value) 
     select 'TRAIT_MARSH_VALID_' || DistrictType, 'FeatureType', 'FEATURE_MARSH'
-    from Districts where DistrictType != 'DISTRICT_CITY_CENTER';
-insert or replace into ModifierArguments    (ModifierId,    Name,        Value) 
+    from Districts where DistrictType not in ('DISTRICT_CITY_CENTER', 'DISTRICT_WONDER');
+insert or ignore into ModifierArguments    (ModifierId,    Name,        Value) 
     select 'TRAIT_FOREST_VALID_' || DistrictType, 'FeatureType', 'FEATURE_FOREST'
-    from Districts where DistrictType != 'DISTRICT_CITY_CENTER';
+    from Districts where DistrictType not in ('DISTRICT_CITY_CENTER', 'DISTRICT_WONDER');
 
 update ModifierArguments set Value = 'YIELD_PRODUCTION' where ModifierId = 'TRAIT_FOREST_BUILDINGS_CULTURE' and Name = 'YieldType';
 update ModifierArguments set Value = 'YIELD_FOOD' where ModifierId = 'TRAIT_JUNGLE_BUILDINGS_SCIENCE' and Name = 'YieldType';
@@ -147,47 +147,57 @@ values
 	('Preserve_Self_Food',				'LOC_DISTRICT_SELF_FOOD',		'YIELD_FOOD',		1,				1);
 
 --文美保护区版本改动
-insert or replace into TraitModifiers
-	(TraitType,								ModifierId)
-select
-	'TRAIT_LEADER_ANTIQUES_AND_PARKS',		'TRAIT_LEADER_ANTIQUES_AND_PARKS_DISTRICT_PRESERVE'
-where exists (select TraitType from Traits where TraitType = 'TRAIT_LEADER_ANTIQUES_AND_PARKS') union
-select
-	'TRAIT_LEADER_ANTIQUES_AND_PARKS',		'TRAIT_LEADER_ANTIQUES_AND_PARKS_' || BuildingType
-from Buildings where PrereqDistrict = 'DISTRICT_PRESERVE' and exists (select TraitType from Traits where TraitType = 'TRAIT_LEADER_ANTIQUES_AND_PARKS');
+delete from TraitModifiers where TraitType = 'TRAIT_LEADER_ANTIQUES_AND_PARKS' and ModifierId = 'TRAIT_NATIONAL_PARK_APPEAL_BONUS';
 
-insert or replace into Modifiers
-	(ModifierId,														ModifierType,									SubjectRequirementSetId)
-values
-	('TRAIT_LEADER_ANTIQUES_AND_PARKS_DISTRICT_PRESERVE',				'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER',		'CITY_HAS_DISTRICT_PRESERVE_REQUIREMENTS'),
-	('TRAIT_LEADER_ANTIQUES_AND_PARKS_DISTRICT_PRESERVE_MODIFIER',		'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',	'PLOT_BREATHTAKING_APPEAL');
+insert or replace into TraitModifiers (TraitType, ModifierId)
+    select 'TRAIT_LEADER_ANTIQUES_AND_PARKS', 'HD_ANTIQUES_AND_PARKS_PRESERVE_PLOT_APPEAL'
+where exists (select TraitType from Traits where TraitType = 'TRAIT_LEADER_ANTIQUES_AND_PARKS')
+    union select 'TRAIT_LEADER_ANTIQUES_AND_PARKS', 'HD_ANTIQUES_AND_PARKS_PRESERVE_TIER_1_PLOT_APPEAL'
+where exists (select TraitType from Traits where TraitType = 'TRAIT_LEADER_ANTIQUES_AND_PARKS')
+    union select 'TRAIT_LEADER_ANTIQUES_AND_PARKS', 'HD_ANTIQUES_AND_PARKS_PRESERVE_TIER_2_PLOT_APPEAL'
+where exists (select TraitType from Traits where TraitType = 'TRAIT_LEADER_ANTIQUES_AND_PARKS')
+    union select 'TRAIT_LEADER_ANTIQUES_AND_PARKS', 'HD_ANTIQUES_AND_PARKS_PRESERVE_TIER_3_PLOT_APPEAL'
+where exists (select TraitType from Traits where TraitType = 'TRAIT_LEADER_ANTIQUES_AND_PARKS');
 
-insert or replace into ModifierArguments
-	(ModifierId,														Name,						Value)
-values
-	('TRAIT_LEADER_ANTIQUES_AND_PARKS_DISTRICT_PRESERVE',				'ModifierId',				'TRAIT_LEADER_ANTIQUES_AND_PARKS_DISTRICT_PRESERVE_MODIFIER'),
-	('TRAIT_LEADER_ANTIQUES_AND_PARKS_DISTRICT_PRESERVE_MODIFIER',		'YieldType',				'YIELD_CULTURE,YIELD_SCIENCE'),
-	('TRAIT_LEADER_ANTIQUES_AND_PARKS_DISTRICT_PRESERVE_MODIFIER',		'Amount',					'1,1');
+insert or replace into TraitModifiers (TraitType, ModifierId)
+    select 'TRAIT_LEADER_ANTIQUES_AND_PARKS', 'HD_ANTIQUES_AND_PARKS_PRESERVE_PLOT_YIELDS'
+where exists (select TraitType from Traits where TraitType = 'TRAIT_LEADER_ANTIQUES_AND_PARKS')
+    union select 'TRAIT_LEADER_ANTIQUES_AND_PARKS', 'HD_ANTIQUES_AND_PARKS_PRESERVE_TIER_1_PLOT_YIELDS'
+where exists (select TraitType from Traits where TraitType = 'TRAIT_LEADER_ANTIQUES_AND_PARKS')
+    union select 'TRAIT_LEADER_ANTIQUES_AND_PARKS', 'HD_ANTIQUES_AND_PARKS_PRESERVE_TIER_2_PLOT_YIELDS'
+where exists (select TraitType from Traits where TraitType = 'TRAIT_LEADER_ANTIQUES_AND_PARKS')
+    union select 'TRAIT_LEADER_ANTIQUES_AND_PARKS', 'HD_ANTIQUES_AND_PARKS_PRESERVE_TIER_3_PLOT_YIELDS'
+where exists (select TraitType from Traits where TraitType = 'TRAIT_LEADER_ANTIQUES_AND_PARKS');
 
-insert or replace into Modifiers
-	(ModifierId,														ModifierType,									SubjectRequirementSetId)
-select
-	'TRAIT_LEADER_ANTIQUES_AND_PARKS_' || BuildingType,					'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER',		'CITY_HAS_' || BuildingType || '_REQUIREMENTS'
-from Buildings where PrereqDistrict = 'DISTRICT_PRESERVE' union
-select
-	'TRAIT_LEADER_ANTIQUES_AND_PARKS_' || BuildingType || '_MODIFIER',	'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',	'PLOT_BREATHTAKING_APPEAL'
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) values
+	('HD_ANTIQUES_AND_PARKS_PRESERVE_PLOT_APPEAL',          'MODIFIER_PLAYER_CITIES_ADJUST_CITY_APPEAL',	'CITY_HAS_DISTRICT_PRESERVE_REQUIREMENTS'),
+	('HD_ANTIQUES_AND_PARKS_PRESERVE_TIER_1_PLOT_APPEAL',   'MODIFIER_PLAYER_CITIES_ADJUST_CITY_APPEAL',	'CITY_HAS_DISTRICT_PRESERVE_TIER_1_BUILDING_REQUIREMENTS'),
+	('HD_ANTIQUES_AND_PARKS_PRESERVE_TIER_2_PLOT_APPEAL',   'MODIFIER_PLAYER_CITIES_ADJUST_CITY_APPEAL',	'CITY_HAS_DISTRICT_PRESERVE_TIER_2_BUILDING_REQUIREMENTS'),
+	('HD_ANTIQUES_AND_PARKS_PRESERVE_TIER_3_PLOT_APPEAL',   'MODIFIER_PLAYER_CITIES_ADJUST_CITY_APPEAL',	'CITY_HAS_DISTRICT_PRESERVE_TIER_3_BUILDING_REQUIREMENTS'),
+	('HD_ANTIQUES_AND_PARKS_PRESERVE_PLOT_YIELDS',          'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER',		'CITY_HAS_DISTRICT_PRESERVE_REQUIREMENTS'),
+	('HD_ANTIQUES_AND_PARKS_PRESERVE_TIER_1_PLOT_YIELDS',   'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER',		'CITY_HAS_DISTRICT_PRESERVE_TIER_1_BUILDING_REQUIREMENTS'),
+	('HD_ANTIQUES_AND_PARKS_PRESERVE_TIER_2_PLOT_YIELDS',   'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER',		'CITY_HAS_DISTRICT_PRESERVE_TIER_2_BUILDING_REQUIREMENTS'),
+	('HD_ANTIQUES_AND_PARKS_PRESERVE_TIER_3_PLOT_YIELDS',   'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER',		'CITY_HAS_DISTRICT_PRESERVE_TIER_3_BUILDING_REQUIREMENTS'),
+	('HD_ANTIQUES_AND_PARKS_PLOT_YIELDS',                   'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',	'PLOT_BREATHTAKING_APPEAL');
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
+	('HD_ANTIQUES_AND_PARKS_PRESERVE_PLOT_APPEAL',          'Amount',       1),
+	('HD_ANTIQUES_AND_PARKS_PRESERVE_TIER_1_PLOT_APPEAL',   'Amount',       1),
+	('HD_ANTIQUES_AND_PARKS_PRESERVE_TIER_2_PLOT_APPEAL',   'Amount',       1),
+	('HD_ANTIQUES_AND_PARKS_PRESERVE_TIER_3_PLOT_APPEAL',   'Amount',       1),
+	('HD_ANTIQUES_AND_PARKS_PRESERVE_PLOT_YIELDS',          'ModifierId',   'HD_ANTIQUES_AND_PARKS_PLOT_YIELDS'),
+	('HD_ANTIQUES_AND_PARKS_PRESERVE_TIER_1_PLOT_YIELDS',   'ModifierId',   'HD_ANTIQUES_AND_PARKS_PLOT_YIELDS'),
+	('HD_ANTIQUES_AND_PARKS_PRESERVE_TIER_2_PLOT_YIELDS',   'ModifierId',   'HD_ANTIQUES_AND_PARKS_PLOT_YIELDS'),
+	('HD_ANTIQUES_AND_PARKS_PRESERVE_TIER_3_PLOT_YIELDS',   'ModifierId',   'HD_ANTIQUES_AND_PARKS_PLOT_YIELDS'),
+	('HD_ANTIQUES_AND_PARKS_PLOT_YIELDS',                   'YieldType',    'YIELD_CULTURE,YIELD_SCIENCE'),
+	('HD_ANTIQUES_AND_PARKS_PLOT_YIELDS',                   'Amount',       '1,1');
+
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) select
+	'HD_ANTIQUES_AND_PARKS_PLOT_YIELDS_' || BuildingType, 'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER', 'CITY_HAS_' || BuildingType || '_REQUIREMENTS'
 from Buildings where PrereqDistrict = 'DISTRICT_PRESERVE';
 
-insert or replace into ModifierArguments
-	(ModifierId,														Name,						Value)
-select
-	'TRAIT_LEADER_ANTIQUES_AND_PARKS_' || BuildingType,					'ModifierId',				'TRAIT_LEADER_ANTIQUES_AND_PARKS_' || BuildingType || '_MODIFIER'
-from Buildings where PrereqDistrict = 'DISTRICT_PRESERVE' union
-select
-	'TRAIT_LEADER_ANTIQUES_AND_PARKS_' || BuildingType || '_MODIFIER',	'YieldType',				'YIELD_CULTURE,YIELD_SCIENCE'
-from Buildings where PrereqDistrict = 'DISTRICT_PRESERVE' union
-select
-	'TRAIT_LEADER_ANTIQUES_AND_PARKS_' || BuildingType || '_MODIFIER',	'Amount',					'1,1'
+insert or replace into ModifierArguments (ModifierId, Name, Value) select
+	'HD_ANTIQUES_AND_PARKS_PLOT_YIELDS_' || BuildingType, 'ModifierId', 'HD_ANTIQUES_AND_PARKS_PLOT_YIELDS'
 from Buildings where PrereqDistrict = 'DISTRICT_PRESERVE';
 
 -- 政策

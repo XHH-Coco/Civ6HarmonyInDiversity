@@ -238,24 +238,86 @@ local BASE_GetUnitActionsTable = function ( pUnit )
 
 							bCanStart, tResults = UnitManager.CanStartOperation(pUnit, actionHash, nil, tParameters, false, false);
 							local isDisabled		= not bCanStart;
-							local toolTipString		= Locale.Lookup(operationRow.Description) .. ": " .. Locale.Lookup(improvement.Name);
+							local toolTipString		= Locale.Lookup(operationRow.Description) .. Locale.Lookup('LOC_TOOLTIP_HD_COLON_TEXT') .. Locale.Lookup(improvement.Name);
 
-							-- TODO: 增加行业公司效果说明
-							if GameInfo.HDMonopolyResourceEffects ~= nil
-							and (improvement.ImprovementType == 'IMPROVEMENT_INDUSTRY' or improvement.ImprovementType == 'IMPROVEMENT_CORPORATION') then
+							-- 改良分类
+							local classificationList = {};
+							for row in GameInfo.HD_Improvement_Classification() do
+								if row.ImprovementType == improvement.ImprovementType
+									and row.ImprovementClassificationType ~= 'IMPROVEMENT_CLASSIFICATION_BASIC'
+									and row.ImprovementClassificationType ~= 'IMPROVEMENT_CLASSIFICATION_WATER'
+									and row.ImprovementClassificationType ~= 'IMPROVEMENT_CLASSIFICATION_OTHER'
+								then
+									local classificationInfo = GameInfo.HD_ImprovementClassificationTypes[row.ImprovementClassificationType];
+									if classificationInfo then
+										table.insert(classificationList, classificationInfo.Name);
+									end
+								end
+							end
+							if #classificationList > 0 then
+								toolTipString = toolTipString .. '[NEWLINE][NEWLINE]' .. Locale.Lookup('LOC_TOOLTIP_HD_IMPROVEMENT_CLASSIFICATIONS_TEXT');
+								
+								for _, nameTag in ipairs(classificationList) do
+									toolTipString = toolTipString .. '[NEWLINE][ICON_BULLET]' .. Locale.Lookup(nameTag)
+								end
+							end
+
+							-- 增加行业公司效果说明
+							if GameInfo.HD_Monopoly_Resource_Categories ~= nil
+								and (improvement.ImprovementType == 'IMPROVEMENT_INDUSTRY'
+								or improvement.ImprovementType == 'IMPROVEMENT_INDUSTRY_BONUS'
+								or improvement.ImprovementType == 'IMPROVEMENT_INDUSTRY_STRATEGIC'
+								or improvement.ImprovementType == 'IMPROVEMENT_CORPORATION'
+								or improvement.ImprovementType == 'IMPROVEMENT_CORPORATION_BONUS'
+								or improvement.ImprovementType == 'IMPROVEMENT_CORPORATION_STRATEGIC')
+							then
 								local plot = Map.GetPlotByIndex(pUnit:GetPlotId());
 								if plot ~= nil then
 									local resourceHash = plot:GetResourceTypeHash();
 									local resource = GameInfo.Resources[resourceHash];
 									local player = Players[Game.GetLocalPlayer()];
 									if resource ~= nil and player ~= nil and player:GetResources():IsResourceVisible(resourceHash) then
-										local HDMonopolyinfo = GameInfo.HDMonopolyResourceEffects[resource.ResourceType]
-										if HDMonopolyinfo ~= nil then
-											if improvement.ImprovementType == 'IMPROVEMENT_INDUSTRY' then
-												toolTipString = toolTipString .. "[NEWLINE]" .. Locale.Lookup("LOC_" .. HDMonopolyinfo.IndustryEffect .. "_DESCRIPTION")
-											elseif improvement.ImprovementType == 'IMPROVEMENT_CORPORATION' then
-												toolTipString = toolTipString .. "[NEWLINE]" .. Locale.Lookup("LOC_" .. HDMonopolyinfo.CorporationEffect .. "_DESCRIPTION")
+										local industryStr = {};
+										local corporationStr = {};
+
+										for row in GameInfo.HD_Monopoly_Resource_Categories() do
+											if row.ResourceType == resource.ResourceType then
+												local categoryInfo = GameInfo.HD_Monopoly_Categories[row.Category];
+												if categoryInfo then
+													if (improvement.ImprovementType == 'IMPROVEMENT_INDUSTRY'
+														or improvement.ImprovementType == 'IMPROVEMENT_INDUSTRY_BONUS'
+														or improvement.ImprovementType == 'IMPROVEMENT_INDUSTRY_STRATEGIC')
+														and categoryInfo.IndustryEffect
+													then
+														table.insert(industryStr, '[ICON_BULLET]' .. Locale.Lookup('LOC_RESOURCE_CLASSIFICATION_HD_' .. row.Category .. '_NAME') .. Locale.Lookup('LOC_TOOLTIP_HD_COLON_TEXT') .. Locale.Lookup("LOC_" .. categoryInfo.IndustryEffect .. "_DESCRIPTION"));
+													end
+													if (improvement.ImprovementType == 'IMPROVEMENT_CORPORATION'		
+														or improvement.ImprovementType == 'IMPROVEMENT_CORPORATION_BONUS'
+														or improvement.ImprovementType == 'IMPROVEMENT_CORPORATION_STRATEGIC')
+														and categoryInfo.CorporationEffect
+													then
+														table.insert(corporationStr, '[ICON_BULLET]' .. Locale.Lookup('LOC_RESOURCE_CLASSIFICATION_HD_' .. row.Category .. '_NAME') .. Locale.Lookup('LOC_TOOLTIP_HD_COLON_TEXT') .. Locale.Lookup("LOC_" .. categoryInfo.CorporationEffect .. "_DESCRIPTION"));
+													end
+												end
 											end
+										end
+
+										if #industryStr > 0 then
+											local effectStr = '';
+											for i, str in ipairs(industryStr) do
+												if i > 1 then effectStr = effectStr .. "[NEWLINE]"; end
+												effectStr = effectStr .. str;
+											end
+											toolTipString = toolTipString .. '[NEWLINE][NEWLINE]' .. Locale.Lookup('LOC_HD_INDUSTRY_EFFECT_TEXT', effectStr);
+										end
+								
+										if #corporationStr > 0 then
+											local effectStr = '';
+											for i, str in ipairs(corporationStr) do
+												if i > 1 then effectStr = effectStr .. "[NEWLINE]"; end
+												effectStr = effectStr .. str;
+											end
+											toolTipString = toolTipString .. '[NEWLINE][NEWLINE]' .. Locale.Lookup('LOC_HD_CORPORATION_EFFECT_TEXT', effectStr);
 										end
 									end
 								end
@@ -373,7 +435,7 @@ local BASE_GetUnitActionsTable = function ( pUnit )
 
 							if (tResults[UnitOperationResults.FEATURE_TYPE] ~= nil) then
 								local featureName = GameInfo.Features[tResults[UnitOperationResults.FEATURE_TYPE]].Name;
-								toolTipString = toolTipString .. ": " .. Locale.Lookup(featureName);
+								toolTipString = toolTipString .. Locale.Lookup('LOC_TOOLTIP_HD_COLON_TEXT') .. Locale.Lookup(featureName);
 							end
 
 							if (tResults[UnitOperationResults.ADDITIONAL_DESCRIPTION] ~= nil) then
@@ -498,7 +560,17 @@ function GetUnitActionsTable(pUnit : object)
           sToolTipString = sToolTipString .. "[NEWLINE][NEWLINE]" .. sDisabledToolTipString;
         end
 
-        AddActionToTable(pBaseActionsTable, pCommandTable, bIsDisabled, sToolTipString, UnitCommandTypes.EXECUTE_SCRIPT, pCallback);
+				local sIcon = pCommandTable.Icon or "ICON_UNITOPERATION_ROUTE_TO";
+				if pCommandTable.GetIcon ~= nil then
+					local noErr, ttp = pcall(pCommandTable.GetIcon, pUnit);
+          if noErr then
+            sIcon = ttp;
+          else
+            print(ttp);
+          end
+				end
+
+        AddActionToTable(pBaseActionsTable, pCommandTable, bIsDisabled, sToolTipString, UnitCommandTypes.EXECUTE_SCRIPT, pCallback, nil, nil, sIcon);
       end
     end
   end
@@ -563,8 +635,18 @@ function GetUnitActionsTable(pUnit : object)
 					if (bIsDisabled and sDisabledToolTipString ~= nil) then
 						sToolTipString = sToolTipString .. "[NEWLINE][NEWLINE]" .. sDisabledToolTipString;
 					end
+
+					local sIcon = pCommandTable.Icon or "ICON_UNITOPERATION_ROUTE_TO";
+					if pCommandTable.GetIcon ~= nil then
+						local noErr, ttp = pcall(pCommandTable.GetIcon, pUnit);
+						if noErr then
+							sIcon = ttp;
+						else
+							print(ttp);
+						end
+					end
 	
-					AddActionToTable(pBaseActionsTable, pCommandTable, bIsDisabled, sToolTipString, UnitCommandTypes.EXECUTE_SCRIPT, pCallback);
+					AddActionToTable(pBaseActionsTable, pCommandTable, bIsDisabled, sToolTipString, UnitCommandTypes.EXECUTE_SCRIPT, pCallback, nil, nil, sIcon);
 				end
 			end
 		end
@@ -630,8 +712,18 @@ function GetUnitActionsTable(pUnit : object)
 					if (bIsDisabled and sDisabledToolTipString ~= nil) then
 						sToolTipString = sToolTipString .. "[NEWLINE][NEWLINE]" .. sDisabledToolTipString;
 					end
+
+					local sIcon = pCommandTable.Icon or "ICON_UNITOPERATION_ROUTE_TO";
+					if pCommandTable.GetIcon ~= nil then
+						local noErr, ttp = pcall(pCommandTable.GetIcon, pUnit);
+						if noErr then
+							sIcon = ttp;
+						else
+							print(ttp);
+						end
+					end
 	
-					AddActionToTable(pBaseActionsTable, pCommandTable, bIsDisabled, sToolTipString, UnitCommandTypes.EXECUTE_SCRIPT, pCallback);
+					AddActionToTable(pBaseActionsTable, pCommandTable, bIsDisabled, sToolTipString, UnitCommandTypes.EXECUTE_SCRIPT, pCallback, nil, nil, sIcon);
 				end
 			end
 		end

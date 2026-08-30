@@ -284,7 +284,7 @@
 			<Text>您的城市在进行项目时+20%建造速度。</Text>
 		</Replace>
 		<Replace Tag="LOC_TRAIT_LEADER_THUNDERBOLT_DESCRIPTION" Language="zh_Hans_CN">
-			<Text>允许海军近战单位进行海岸扫荡，生产海军近战单位时+50%建造速度。解锁“航海术”科技后即可获得特色单位维京长船。</Text>
+			<Text>允许海军近战单位进行海岸扫荡，生产海军近战单位时+50%建造速度。解锁“航行”科技后即可获得特色单位维京长船。</Text>
 		</Replace>
 		<Replace Tag="LOC_BELIEF_MONUMENT_TO_THE_GODS_DESCRIPTION" Language="zh_Hans_CN">
 			<Text>建造远古和古典奇观+15%时 [ICON_Production] 生产力。</Text>

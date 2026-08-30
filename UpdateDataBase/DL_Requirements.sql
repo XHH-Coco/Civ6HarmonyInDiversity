@@ -37,6 +37,10 @@ insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) 
 	select 'UNIT_PROMOTION_IS_' || PromotionClassType || '_REQUIREMENTS', 'HD_REQUIRES_UNIT_IS_' || PromotionClassType from UnitPromotionClasses;
 
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) 
+	select distinct 'HD_UNIT_IS_MILITARY_REQUIREMENTS', 'HD_REQUIRES_UNIT_IS_' || PromotionClass
+from Units where FormationClass in ('FORMATION_CLASS_LAND_COMBAT', 'FORMATION_CLASS_NAVAL', 'FORMATION_CLASS_AIR') and PromotionClass is not Null;
+
 -- Resource
 insert or ignore into RequirementArguments (RequirementId, Name, Value)
 	select 'REQUIRES_' || ResourceType || '_IN_PLOT', 'ResourceType', ResourceType from Resources;
@@ -84,9 +88,14 @@ insert or ignore into Requirements (RequirementId, RequirementType)
 	select 'REQUIRES_PLAYER_HAS_ENOUGH_' || ResourceType, 'REQUIREMENT_PLOT_PROPERTY_MATCHES' from Resources where ResourceClassType = 'RESOURCECLASS_STRATEGIC';
 
 insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
-	select 'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIRMENTS', 'REQUIREMENTSET_TEST_ALL' from Resources;
+	select 'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIREMENTS', 'REQUIREMENTSET_TEST_ALL' from Resources;
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
-	select 'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIRMENTS', 'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType from Resources;
+	select 'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIREMENTS', 'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType from Resources;
+
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
+	select 'HD_CITY_HAS_IMPROVED_' || ResourceClassificationType || '_REQUIREMENTS', 'REQUIREMENTSET_TEST_ANY' from HD_ResourceClassificationTypes;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'HD_CITY_HAS_IMPROVED_' || ResourceClassificationType || '_REQUIREMENTS', 'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType from HD_Resource_Classification;
 
 -- Techs
 insert or ignore into RequirementArguments (RequirementId, Name, Value)
@@ -159,7 +168,7 @@ insert or ignore into Requirements (RequirementId, RequirementType)
 	select 'REQUIRES_PLOT_HAS_' || ImprovementType, 'REQUIREMENT_PLOT_IMPROVEMENT_TYPE_MATCHES' from Improvements;
 
 insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
-	select 'PLOT_HAS_' || ImprovementType || '_REQUIREMENTS', 'REQUIREMENTSET_TEST_ALL' from Improvements;
+	select 'PLOT_HAS_' || ImprovementType || '_REQUIREMENTS', 'REQUIREMENTSET_TEST_ANY' from Improvements;
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
 	select 'PLOT_HAS_' || ImprovementType || '_REQUIREMENTS', 'REQUIRES_PLOT_HAS_' || ImprovementType from Improvements;
 
@@ -170,6 +179,44 @@ insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementI
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
 	select 'PLOT_HAS_' || ImprovementType || '_AND_ADJACENT_TO_OWNER_REQUIREMENTS', 'ADJACENT_TO_OWNER' from Improvements;
 
+-- 改良分类
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
+	select 'PLOT_HAS_' || ImprovementClassificationType || '_REQUIREMENTS', 'REQUIREMENTSET_TEST_ANY' from HD_ImprovementClassificationTypes
+	where ImprovementClassificationType != 'IMPROVEMENT_CLASSIFICATION_OTHER';
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'PLOT_HAS_' || ImprovementClassificationType || '_REQUIREMENTS', 'REQUIRES_PLOT_HAS_' || ImprovementType from HD_Improvement_Classification
+	where ImprovementClassificationType != 'IMPROVEMENT_CLASSIFICATION_OTHER';
+
+insert or ignore into Requirements (RequirementId, RequirementType)
+	select 'REQUIRES_PLOT_HAS_' || ImprovementClassificationType, 'REQUIREMENT_REQUIREMENTSET_IS_MET' from HD_ImprovementClassificationTypes
+	where ImprovementClassificationType != 'IMPROVEMENT_CLASSIFICATION_OTHER';
+insert or ignore into RequirementArguments (RequirementId, Name, Value)
+	select 'REQUIRES_PLOT_HAS_' || ImprovementClassificationType, 'RequirementSetId', 'PLOT_HAS_' || ImprovementClassificationType || '_REQUIREMENTS' from HD_ImprovementClassificationTypes
+	where ImprovementClassificationType != 'IMPROVEMENT_CLASSIFICATION_OTHER';
+
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
+	select 'PLOT_HAS_' || ImprovementClassificationType || '_AND_ADJACENT_TO_OWNER_REQUIREMENTS', 'REQUIREMENTSET_TEST_ALL' from HD_ImprovementClassificationTypes
+	where ImprovementClassificationType != 'IMPROVEMENT_CLASSIFICATION_OTHER';
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'PLOT_HAS_' || ImprovementClassificationType || '_AND_ADJACENT_TO_OWNER_REQUIREMENTS', 'REQUIRES_PLOT_HAS_' || ImprovementClassificationType from HD_ImprovementClassificationTypes
+	where ImprovementClassificationType != 'IMPROVEMENT_CLASSIFICATION_OTHER';
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'PLOT_HAS_' || ImprovementClassificationType || '_AND_ADJACENT_TO_OWNER_REQUIREMENTS', 'ADJACENT_TO_OWNER' from HD_ImprovementClassificationTypes
+	where ImprovementClassificationType != 'IMPROVEMENT_CLASSIFICATION_OTHER';
+
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
+	select 'PLOT_ADJACENT_TO_' || ImprovementClassificationType || '_REQUIREMENTS', 'REQUIREMENTSET_TEST_ANY' from HD_ImprovementClassificationTypes
+	where ImprovementClassificationType != 'IMPROVEMENT_CLASSIFICATION_OTHER';
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'PLOT_ADJACENT_TO_' || ImprovementClassificationType || '_REQUIREMENTS', 'REQUIRES_PLOT_ADJACENT_TO_' || ImprovementType from HD_Improvement_Classification
+	where ImprovementClassificationType != 'IMPROVEMENT_CLASSIFICATION_OTHER';
+
+insert or ignore into Requirements (RequirementId, RequirementType)
+	select 'REQUIRES_PLOT_ADJACENT_TO_' || ImprovementClassificationType, 'REQUIREMENT_REQUIREMENTSET_IS_MET' from HD_ImprovementClassificationTypes
+	where ImprovementClassificationType != 'IMPROVEMENT_CLASSIFICATION_OTHER';
+insert or ignore into RequirementArguments (RequirementId, Name, Value)
+	select 'REQUIRES_PLOT_ADJACENT_TO_' || ImprovementClassificationType, 'RequirementSetId', 'PLOT_ADJACENT_TO_' || ImprovementClassificationType || '_REQUIREMENTS' from HD_ImprovementClassificationTypes
+	where ImprovementClassificationType != 'IMPROVEMENT_CLASSIFICATION_OTHER';
 
 -- District 
 insert or ignore into RequirementArguments (RequirementId, Name, Value)
@@ -187,6 +234,48 @@ insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
 	select 'DISTRICT_IS_' || DistrictType || '_REQUIREMENTS', 'REQUIRES_DISTRICT_IS_' || DistrictType from Districts;
 
+-- 区域分类
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
+	select 'DISTRICT_IS_' || DistrictClassificationType || '_REQUIREMENTS', 'REQUIREMENTSET_TEST_ANY' from HD_DistrictClassificationTypes;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'DISTRICT_IS_' || DistrictClassificationType || '_REQUIREMENTS', 'REQUIRES_DISTRICT_IS_' || DistrictType from HD_District_Classification;
+
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
+	select 'PLOT_ADJACENT_TO_' || DistrictClassificationType || '_REQUIREMENTS', 'REQUIREMENTSET_TEST_ANY' from HD_DistrictClassificationTypes;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'PLOT_ADJACENT_TO_' || DistrictClassificationType || '_REQUIREMENTS', 'REQUIRES_PLOT_ADJACENT_TO_' || DistrictType || '_RAW' from HD_District_Classification;
+
+insert or ignore into Requirements (RequirementId, RequirementType)
+	select 'REQUIRES_PLOT_ADJACENT_TO_' || DistrictClassificationType, 'REQUIREMENT_REQUIREMENTSET_IS_MET' from HD_DistrictClassificationTypes;
+insert or ignore into RequirementArguments (RequirementId, Name, Value)
+	select 'REQUIRES_PLOT_ADJACENT_TO_' || DistrictClassificationType, 'RequirementSetId', 'PLOT_ADJACENT_TO_' || DistrictClassificationType || '_REQUIREMENTS' from HD_DistrictClassificationTypes;
+
+-- 相邻某类改良的区域
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
+	select 'DISTRICT_IS_' || DistrictType || '_ADJACENT_TO_' || ImprovementClassificationType || '_REQUIREMENTS', 'REQUIREMENTSET_TEST_ALL'
+from Districts, HD_ImprovementClassificationTypes where ImprovementClassificationType in (
+	'IMPROVEMENT_CLASSIFICATION_LANDSCAPE'
+);
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'DISTRICT_IS_' || DistrictType || '_ADJACENT_TO_' || ImprovementClassificationType || '_REQUIREMENTS', 'REQUIRES_DISTRICT_IS_' || DistrictType
+from Districts, HD_ImprovementClassificationTypes where ImprovementClassificationType in (
+	'IMPROVEMENT_CLASSIFICATION_LANDSCAPE'
+);
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'DISTRICT_IS_' || DistrictType || '_ADJACENT_TO_' || ImprovementClassificationType || '_REQUIREMENTS', 'REQUIRES_PLOT_ADJACENT_TO_' || ImprovementClassificationType
+from Districts, HD_ImprovementClassificationTypes where ImprovementClassificationType in (
+	'IMPROVEMENT_CLASSIFICATION_LANDSCAPE'
+);
+
+-- 3环内区域
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
+	select 'DISTRICT_IS_' || DistrictType || '_WITHIN_3_TILES_REQUIREMENTS', 'REQUIREMENTSET_TEST_ALL' from Districts;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'DISTRICT_IS_' || DistrictType || '_WITHIN_3_TILES_REQUIREMENTS', 'REQUIRES_DISTRICT_IS_' || DistrictType from Districts;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'DISTRICT_IS_' || DistrictType || '_WITHIN_3_TILES_REQUIREMENTS', 'REQUIRES_OBJECT_WITHIN_3_TILES' from Districts;
+
+-- 6环内区域
 insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
 	select 'DISTRICT_IS_' || DistrictType || '_WITHIN_6_TILES_REQUIREMENTS', 'REQUIREMENTSET_TEST_ALL' from Districts;
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
@@ -324,6 +413,12 @@ insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementI
 	select 'HD_PLOT_HAS_' || a.BuildingType || '_REQUIREMENTS', 'PLOT_HAS_' || b.CivUniqueBuildingType
 	from Buildings a inner join BuildingReplaces b on a.BuildingType = b.ReplacesBuildingType where a.IsWonder = 0;
 
+-- 建筑分类
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType) select
+	'HD_PLOT_HAS_' || BuildingClassificationType || '_REQUIREMENTS', 'REQUIREMENTSET_TEST_ANY' from HD_BuildingClassificationTypes;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select
+	'HD_PLOT_HAS_' || BuildingClassificationType || '_REQUIREMENTS', 'PLOT_HAS_' || BuildingType from HD_Building_Classification;
+
 -- 判断单元格是否有XX奇观
 insert or ignore into RequirementSets
 	(RequirementSetId,																				RequirementSetType)
@@ -407,9 +502,9 @@ insert or ignore into RequirementArguments (RequirementId, Name, Value)
 insert or ignore into Requirements (RequirementId, RequirementType)
 	select 'HD_REQUIRES_PLAYER_HAS_IMPROVED_' || ResourceType, 'REQUIREMENT_PLAYER_HAS_RESOURCE_IMPROVED' from Resources;
 insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
-	select 'HD_PLAYER_HAS_IMPROVED_' || ResourceType || '_REQUIRMENTS', 'REQUIREMENTSET_TEST_ALL' from Resources;
+	select 'HD_PLAYER_HAS_IMPROVED_' || ResourceType || '_REQUIREMENTS', 'REQUIREMENTSET_TEST_ALL' from Resources;
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
-	select 'HD_PLAYER_HAS_IMPROVED_' || ResourceType || '_REQUIRMENTS', 'HD_REQUIRES_PLAYER_HAS_IMPROVED_' || ResourceType from Resources;
+	select 'HD_PLAYER_HAS_IMPROVED_' || ResourceType || '_REQUIREMENTS', 'HD_REQUIRES_PLAYER_HAS_IMPROVED_' || ResourceType from Resources;
 
 -- Plot Has Terrains
 insert or ignore into RequirementArguments (RequirementId, Name, Value)
@@ -455,6 +550,9 @@ insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
 	select 'HD_PLOT_HAS_' || FeatureType, 'REQUIREMENTSET_TEST_ALL' from Features;
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
 	select 'HD_PLOT_HAS_' || FeatureType, 'HD_REQUIRES_PLOT_HAS_' || FeatureType from Features;
+
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'HD_PLOT_HAS_NATURAL_WONDER_REQUIREMENTS', 'HD_REQUIRES_PLOT_HAS_' || FeatureType from Features where NaturalWonder = 1;
 
 -- Plot Adjacent to Features & Natural Wonders
 insert or ignore into RequirementArguments (RequirementId, Name, Value)
@@ -553,23 +651,41 @@ insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
 	select 'CITY_HAS_' || Pop || '_POPULATION', 'REQUIRES_CITY_HAS_'  || Pop || '_POPULATION' from PopulationMaintenance;
 
--- 二进制折叠Reqs
+-- 城邦
 insert or ignore into Requirements (RequirementId, RequirementType)
-	select 'HD_REQUIRES_PLOT_BINARY_COMPRESS_' || Exp || '_' || Count, 'REQUIREMENT_PLOT_PROPERTY_MATCHES'
-	from HD_Binary_Compress, HDCounter where Exp < 10 and Count <= 3;
+	select 'REQUIRES_HD_CITY_IS_' || CityStateType, 'REQUIREMENT_PLOT_PROPERTY_MATCHES' from CityStateCorrespondingYieldType_HD;
 insert or ignore into RequirementArguments (RequirementId, Name, Value)
-	select 'HD_REQUIRES_PLOT_BINARY_COMPRESS_' || Exp || '_' || Count, 'PropertyName', 'HD_PLOT_BINARY_COMPRESS_' || Exp || '_' || Count
-	from HD_Binary_Compress, HDCounter where Exp < 10 and Count <= 3;
+	select 'REQUIRES_HD_CITY_IS_' || CityStateType, 'PropertyName', 'HD_CITY_IS_' || CityStateType from CityStateCorrespondingYieldType_HD;
 insert or ignore into RequirementArguments (RequirementId, Name, Value)
-	select 'HD_REQUIRES_PLOT_BINARY_COMPRESS_' || Exp || '_' || Count, 'PropertyMinimum', 1
-	from HD_Binary_Compress, HDCounter where Exp < 10 and Count <= 3;
-
+	select 'REQUIRES_HD_CITY_IS_' || CityStateType, 'PropertyMinimum', 1 from CityStateCorrespondingYieldType_HD;
 insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
-	select 'HD_PLOT_BINARY_COMPRESS_' || Exp || '_' || Count || '_REQUIREMENTS', 'REQUIREMENTSET_TEST_ANY'
-	from HD_Binary_Compress, HDCounter where Exp < 10 and Count <= 3;
+	select 'HD_CITY_IS_' || CityStateType || '_REQUIREMENTS', 'REQUIREMENTSET_TEST_ALL' from CityStateCorrespondingYieldType_HD;
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
-	select 'HD_PLOT_BINARY_COMPRESS_' || Exp || '_' || Count || '_REQUIREMENTS', 'HD_REQUIRES_PLOT_BINARY_COMPRESS_' || Exp || '_' || Count
-	from HD_Binary_Compress, HDCounter where Exp < 10 and Count <= 3;
+	select 'HD_CITY_IS_' || CityStateType || '_REQUIREMENTS', 'REQUIRES_HD_CITY_IS_' || CityStateType from CityStateCorrespondingYieldType_HD;
+
+-- 城市拥有XX类型巨作
+insert or ignore into Requirements (RequirementId, RequirementType)
+	select 'REQUIRES_HD_CITY_HAS_' || GreatWorkObjectType, 'REQUIREMENT_PLOT_PROPERTY_MATCHES' from GreatWorkObjectTypes;
+insert or ignore into RequirementArguments (RequirementId, Name, Value)
+	select 'REQUIRES_HD_CITY_HAS_' || GreatWorkObjectType, 'PropertyName', 'HD_CITY_HAS_' || GreatWorkObjectType from GreatWorkObjectTypes;
+insert or ignore into RequirementArguments (RequirementId, Name, Value)
+	select 'REQUIRES_HD_CITY_HAS_' || GreatWorkObjectType, 'PropertyMinimum', 1 from GreatWorkObjectTypes;
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
+	select 'HD_CITY_HAS_' || GreatWorkObjectType || '_REQUIREMENTS', 'REQUIREMENTSET_TEST_ALL' from GreatWorkObjectTypes;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'HD_CITY_HAS_' || GreatWorkObjectType || '_REQUIREMENTS', 'REQUIRES_HD_CITY_HAS_' || GreatWorkObjectType from GreatWorkObjectTypes;
+
+-- 总督头衔
+insert or ignore into Requirements (RequirementId, RequirementType)
+	select 'REQUIRES_HD_CITY_HAS_' || GovernorPromotionType, 'REQUIREMENT_CITY_HAS_SPECIFIC_GOVERNOR_PROMOTION_TYPE' from GovernorPromotions;
+insert or ignore into RequirementArguments (RequirementId, Name, Value)
+	select 'REQUIRES_HD_CITY_HAS_' || GovernorPromotionType, 'Established', 1 from GovernorPromotions;
+insert or ignore into RequirementArguments (RequirementId, Name, Value)
+	select 'REQUIRES_HD_CITY_HAS_' || GovernorPromotionType, 'GovernorPromotionType', GovernorPromotionType from GovernorPromotions;
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
+	select 'HD_CITY_HAS_' || GovernorPromotionType || '_REQUIREMENTS', 'REQUIREMENTSET_TEST_ALL' from GovernorPromotions;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'HD_CITY_HAS_' || GovernorPromotionType || '_REQUIREMENTS', 'REQUIRES_HD_CITY_HAS_' || GovernorPromotionType from GovernorPromotions;
 
 -- Use insert or ignore to support the missing DLC case.
 insert or ignore into Requirements
@@ -623,30 +739,23 @@ values
 	('TERRAIN_CLASS_HILLS',				'TERRAIN_TUNDRA_HILLS'),
 	('TERRAIN_CLASS_HILLS',				'TERRAIN_SNOW_HILLS');
 
-insert or ignore into Requirements
-	(RequirementId,									RequirementType,							Inverse)
-values
-	-- ('REQUIRES_UNIT_NOT_BARBARIAN_GALLEY', 			'REQUIREMENT_UNIT_TYPE_MATCHES',			1),
-	('REQUIRES_PLAYER_HAS_NO_DIPLOMATIC_QUARTER',	'REQUIREMENT_PLAYER_HAS_DISTRICT',			1),
-	('REQUIRES_PLOT_HAS_NOT_OCEAN',					'REQUIREMENT_PLOT_TERRAIN_TYPE_MATCHES',	1),
-	('REQUIRES_OBJECT_OUTOF_7_TILES',				'REQUIREMENT_PLOT_ADJACENT_TO_OWNER',		1),
-	('REQUIRES_CITY_HAS_NO_FILM_STUDIO',			'REQUIREMENT_CITY_HAS_BUILDING',			1),
-	('REQUIRES_PLAYER_NOT_HAS_CIVIC_URBANIZATION',	'REQUIREMENT_PLAYER_HAS_CIVIC',				1),
-	-- ('REQUIRES_PLAYER_NOT_FOUNDED_RELIGION',			'REQUIREMENT_PLOT_PROPERTY_MATCHES',		1),
-	('REQUIRES_CITY_HAS_NOT_PALACE',		'REQUIREMENT_CITY_HAS_BUILDING',					1),
-	('UNIT_IN_NOT_OWNER_TERRITORY_REQUIREMENT',		'REQUIREMENT_UNIT_IN_OWNER_TERRITORY',					1);
+insert or ignore into Requirements (RequirementId, RequirementType, Inverse) values
+	('REQUIRES_PLAYER_HAS_NO_DIPLOMATIC_QUARTER',			'REQUIREMENT_PLAYER_HAS_DISTRICT',				1),
+	('REQUIRES_PLOT_HAS_NOT_OCEAN',										'REQUIREMENT_PLOT_TERRAIN_TYPE_MATCHES',	1),
+	('REQUIRES_OBJECT_OUTOF_7_TILES',									'REQUIREMENT_PLOT_ADJACENT_TO_OWNER',			1),
+	('REQUIRES_CITY_HAS_NO_FILM_STUDIO',							'REQUIREMENT_CITY_HAS_BUILDING',					1),
+	('REQUIRES_PLAYER_NOT_HAS_CIVIC_URBANIZATION',		'REQUIREMENT_PLAYER_HAS_CIVIC',						1),
+	('REQUIRES_CITY_HAS_NOT_PALACE',									'REQUIREMENT_CITY_HAS_BUILDING',					1),
+	('UNIT_IN_NOT_OWNER_TERRITORY_REQUIREMENT',				'REQUIREMENT_UNIT_IN_OWNER_TERRITORY',		1);
 
 insert or ignore into Requirements
 	(RequirementId,									RequirementType)
 values
-    ('REQUIRES_WITHIN_NINE_TILES_FROM_OWNER',       'REQUIREMENT_PLOT_ADJACENT_TO_OWNER'),
 	('REQUIRES_CITY_HAS_1_DESERT',					'REQUIREMENT_CITY_HAS_X_TERRAIN_TYPE'),
 	('REQUIRES_CITY_HAS_1_TUNDRA',					'REQUIREMENT_CITY_HAS_X_TERRAIN_TYPE'),
 	('REQUIRES_PLOT_IS_TUNDRA_OR_SNOW',				'REQUIREMENT_PLOT_TERRAIN_CLASS_MATCHES'),
 	('REQUIRES_PLOT_IS_FLATTEN',					'REQUIREMENT_PLOT_TERRAIN_CLASS_MATCHES'),
 	('REQUIRES_PLOT_IS_HILLS',						'REQUIREMENT_PLOT_TERRAIN_CLASS_MATCHES'),
-	('REQUIRES_PLOT_HAS_BASIC_PRODUCTION_IMPROVEMENTS',	'REQUIREMENT_REQUIREMENTSET_IS_MET'),
-	('REQUIRES_PLOT_HAS_BASIC_FOOD_IMPROVEMENTS',	'REQUIREMENT_REQUIREMENTSET_IS_MET'),
 	('REQUIRES_THIS_WONDER_IS_AT_LEAST_MIEDIVAL',	'REQUIREMENT_PLOT_WONDER_IS_ERA'),
 	('REQUIRES_THIS_WONDER_IS_AT_LEAST_ANCIENT',	'REQUIREMENT_PLOT_WONDER_IS_ERA'),
 	('REQUIRES_AIRPORT_AND_WITHIN_9TILES',			'REQUIREMENT_PLOT_ADJACENT_BUILDING_TYPE_MATCHES'),
@@ -658,6 +767,7 @@ values
 	('REQUIRES_RESOUCE_ADJACENT_TO_LAKE',			'REQUIREMENT_REQUIREMENTSET_IS_MET'),
 	('REQUIRES_OBJECT_WITHIN_0_TILE',				'REQUIREMENT_PLOT_ADJACENT_TO_OWNER'),
 	('REQUIRES_OBJECT_WITHIN_1_TILE',				'REQUIREMENT_PLOT_ADJACENT_TO_OWNER'),
+	('REQUIRES_OBJECT_WITHIN_2_TILES',				'REQUIREMENT_PLOT_ADJACENT_TO_OWNER'),
 	('REQUIRES_OBJECT_WITHIN_3_TILES',				'REQUIREMENT_PLOT_ADJACENT_TO_OWNER'),
 	('REQUIRES_OBJECT_WITHIN_4_TILES',				'REQUIREMENT_PLOT_ADJACENT_TO_OWNER'),
 	('REQUIRES_OBJECT_WITHIN_5_TILES',				'REQUIREMENT_PLOT_ADJACENT_TO_OWNER'),
@@ -678,10 +788,6 @@ values
 	('HD_REQUIRES_PLAYER_HAS_FAVOR',				'REQUIREMENT_PLOT_PROPERTY_MATCHES'),
 	('REQUIRES_PLAYER_HAS_ENOUGH_HORSES',			'REQUIREMENT_PLOT_PROPERTY_MATCHES'),
 	('REQUIRES_PLAYER_HAS_ENOUGH_IRON',				'REQUIREMENT_PLOT_PROPERTY_MATCHES'),
-	('REQUIRES_CITY_HAS_VERTICAL_INTEGRATION',		'REQUIREMENT_CITY_HAS_SPECIFIC_GOVERNOR_PROMOTION_TYPE'),
-	('REQUIRES_CITY_HAS_CONTRACTOR',				'REQUIREMENT_CITY_HAS_SPECIFIC_GOVERNOR_PROMOTION_TYPE'),
-	('REQUIRES_CITY_HAS_AMBASSADOR_MESSENGER',		'REQUIREMENT_CITY_HAS_SPECIFIC_GOVERNOR_PROMOTION_TYPE'),	
-	('REQUIRES_CITY_HAS_MULTINATIONAL_CORP',		'REQUIREMENT_CITY_HAS_SPECIFIC_GOVERNOR_PROMOTION_TYPE'),	
 	('HD_PLOT_APPEAL_LESS_THAN_0',		'REQUIREMENT_PLOT_IS_APPEAL_BETWEEN'),
 	('HD_PLOT_APPEAL_MORE_THAN_8',		'REQUIREMENT_PLOT_IS_APPEAL_BETWEEN'),	
 	('HD_REQUIRES_PLOT_ADJACENT_TO_ANY_DISTRICT',		'REQUIREMENT_REQUIREMENTSET_IS_MET'),	
@@ -689,11 +795,10 @@ values
 	('REQUIRES_CITY_HAS_6_SPECIALTY_DISTRICTS',		'REQUIREMENT_CITY_HAS_X_SPECIALTY_DISTRICTS'),
 	('HD_REQUIRES_TEMPLE_ARTEMIS_IMPROVEMENTS',		'REQUIREMENT_REQUIREMENTSET_IS_MET'),
 	('REQUIREMENT_UNIT_IS_SCIENTIST',		'REQUIREMENT_GREAT_PERSON_TYPE_MATCHES'),
-	('HD_REQUIRES_PUBLIC_TRANSPORT_AT_RADIUS_ONE',		'REQUIREMENT_REQUIREMENTSET_IS_MET'),
 	('REQUIRES_PLOT_AT_RADIUS_3',		'REQUIREMENT_PLOT_ADJACENT_TO_OWNER'),
-	-- ('REQUIRES_PLAYER_HAS_FOUNDED_RELIGION',		'REQUIREMENT_PLOT_PROPERTY_MATCHES'),
 	('HD_CITY_IS_SAME_CONTINENT_REQUIREMENTS','REQUIREMENT_CITY_IS_OWNER_CAPITAL_CONTINENT'),
 	('HD_REQUIRES_DISTRICT_IS_SPECIALTY_DISTRICT',						'REQUIREMENT_REQUIREMENTSET_IS_MET'),
+	('HD_REQUIRES_DISTRICT_IS_NOT_SPECIALTY_DISTRICT',						'REQUIREMENT_REQUIREMENTSET_IS_MET'),
 	('REQUIRES_DISTRICT_IS_WONDER_THEATER_HOLY_SITE_COMMERCIAL_HUB',	'REQUIREMENT_REQUIREMENTSET_IS_MET'),
 	('REQUIRES_CITY_HAS_SEAPORT',				'REQUIREMENT_CITY_HAS_BUILDING'),
 	('REQUIRES_CITY_HAS_TIER_2_HARBOR_BUILDINGS_MET',				'REQUIREMENT_REQUIREMENTSET_IS_MET'),
@@ -706,7 +811,23 @@ values
 	('REQUIRES_HD_PLOT_HAS_GOVERNMENT_OR_DIPLO_DISTRICTS',				'REQUIREMENT_REQUIREMENTSET_IS_MET'),
 	('REQUIRES_HD_MADRASA_FAITH_PURCHASE_CAMPUS',				'REQUIREMENT_PLOT_PROPERTY_MATCHES'),
 	('REQUIRES_HD_MADRASA_FAITH_PURCHASE_THEATER',				'REQUIREMENT_PLOT_PROPERTY_MATCHES'),
-	('REQUIRES_HD_IS_HOLY_CITY',				'REQUIREMENT_PLOT_PROPERTY_MATCHES');
+	('REQUIRES_HD_IS_HOLY_CITY',				'REQUIREMENT_PLOT_PROPERTY_MATCHES'),
+	('REQUIRES_PLOT_HAS_CIV_OR_CITYSTATE_UNIQUE',				'REQUIREMENT_REQUIREMENTSET_IS_MET'),
+	('HD_REQUIRES_PLOT_ADJACENT_TO_LAND_OR_HARBOR',			'REQUIREMENT_REQUIREMENTSET_IS_MET'),
+	('REQUIRES_PLOT_HAS_ROBOT_PRODUCTION_IMPROVEMENT',			'REQUIREMENT_REQUIREMENTSET_IS_MET'),
+	('HD_REQUIRES_WIND_MILL_PLOT',			'REQUIREMENT_REQUIREMENTSET_IS_MET'),
+	('REQUIRES_HD_PLOT_IS_COAST_OR_OCEAN',		'REQUIREMENT_REQUIREMENTSET_IS_MET'),
+	('UNIT_IN_OWNER_TERRITORY_REQUIREMENT',	'REQUIREMENT_UNIT_IN_OWNER_TERRITORY'),
+	('REQUIRES_CITY_HAS_1_TITLE_GOVERNOR',      'REQUIREMENT_CITY_HAS_GOVERNOR_WITH_X_TITLES'),
+	('REQUIRES_CITY_HAS_3_TITLE_GOVERNOR',      'REQUIREMENT_CITY_HAS_GOVERNOR_WITH_X_TITLES'),
+	('REQUIRES_CITY_HAS_4_TITLE_GOVERNOR',      'REQUIREMENT_CITY_HAS_GOVERNOR_WITH_X_TITLES'),
+	('REQUIRES_CITY_HAS_5_TITLE_GOVERNOR',      'REQUIREMENT_CITY_HAS_GOVERNOR_WITH_X_TITLES'),
+	('REQUIRES_CITY_HAS_6_TITLE_GOVERNOR',      'REQUIREMENT_CITY_HAS_GOVERNOR_WITH_X_TITLES'),
+	('REQUIRES_CITY_HAS_7_TITLE_GOVERNOR',      'REQUIREMENT_CITY_HAS_GOVERNOR_WITH_X_TITLES'),
+	('REQUIRES_HD_DISTRICT_IS_CITY_CENTER_OR_NEIGHBORHOOD',						'REQUIREMENT_REQUIREMENTSET_IS_MET'),
+	('REQUIRES_HD_CITY_IS_CITY_STATE',				'REQUIREMENT_PLOT_PROPERTY_MATCHES'),
+	('REQUIRES_PLOT_ADJACENT_TO_BONUS',				'REQUIREMENT_PLOT_ADJACENT_RESOURCE_CLASS_TYPE_MATCHES'),
+	('REQUIRES_HD_GOVERNOR_MANAGER_LEFT_1_TRADE',				'REQUIREMENT_PLOT_PROPERTY_MATCHES');
 
 insert or ignore into RequirementArguments
 	(RequirementId,									Name,				Value)
@@ -721,8 +842,6 @@ values
 	('REQUIRES_PLOT_IS_TUNDRA_OR_SNOW',				'TerrainClass',		'TERRAIN_CLASS_TUNDRA_OR_SNOW'),
 	('REQUIRES_PLOT_IS_FLATTEN',					'TerrainClass',		'TERRAIN_CLASS_FLATTEN'),
 	('REQUIRES_PLOT_IS_HILLS',						'TerrainClass',		'TERRAIN_CLASS_HILLS'),
-	('REQUIRES_PLOT_HAS_BASIC_PRODUCTION_IMPROVEMENTS',	'RequirementSetId',	'PLOT_HAS_BASIC_PRODUCTION_IMPROVEMENTS_REQUIREMENTS'),
-	('REQUIRES_PLOT_HAS_BASIC_FOOD_IMPROVEMENTS',		'RequirementSetId',	'PLOT_HAS_BASIC_FOOD_IMPROVEMENTS_REQUIREMENTS'),
 	('REQUIRES_THIS_WONDER_IS_AT_LEAST_MIEDIVAL',	'EarliestEra',		'ERA_MEDIEVAL'),
 	('REQUIRES_THIS_WONDER_IS_AT_LEAST_MIEDIVAL',	'LatestEra',		'ERA_FUTURE'),
 	('REQUIRES_THIS_WONDER_IS_AT_LEAST_ANCIENT',	'EarliestEra',		'ERA_ANCIENT'),
@@ -731,8 +850,6 @@ values
 	('REQUIRES_PLOT_HAS_NOT_OCEAN',					'TerrainType',		'TERRAIN_OCEAN'),
 	('REQUIRES_CITY_HAS_NO_FILM_STUDIO',			'BuildingType',		'BUILDING_FILM_STUDIO'),
 	('REQUIRES_CITY_HAS_NO_FILM_STUDIO',			'MustBeFunctioning',	1),	
-	('REQUIRES_WITHIN_NINE_TILES_FROM_OWNER',		'MinDistance',		0),
-	('REQUIRES_WITHIN_NINE_TILES_FROM_OWNER',		'MaxDistance',		9),
 	('REQUIRES_AIRPORT_AND_WITHIN_9TILES',			'BuildingType',		'BUILDING_AIRPORT'),
 	('REQUIRES_AIRPORT_AND_WITHIN_9TILES',			'MinRange',			0),
 	('REQUIRES_AIRPORT_AND_WITHIN_9TILES',			'MaxRange',			9),
@@ -752,6 +869,8 @@ values
 	('REQUIRES_OBJECT_WITHIN_0_TILE',				'MinDistance',		0),
 	('REQUIRES_OBJECT_WITHIN_1_TILE',				'MaxDistance',		1),
 	('REQUIRES_OBJECT_WITHIN_1_TILE',				'MinDistance',		0),
+	('REQUIRES_OBJECT_WITHIN_2_TILES',				'MaxDistance',		2),
+	('REQUIRES_OBJECT_WITHIN_2_TILES',				'MinDistance',		0),
 	('REQUIRES_OBJECT_WITHIN_3_TILES',				'MaxDistance',		3),
 	('REQUIRES_OBJECT_WITHIN_3_TILES',				'MinDistance',		0),
 	('REQUIRES_OBJECT_WITHIN_4_TILES',				'MaxDistance',		4),
@@ -782,26 +901,18 @@ values
 	('REQUIRES_PLOT_HAS_SHALLOW_WATER',				'TerrainType',		'TERRAIN_COAST'),
 	('HD_REQUIRES_PLAYER_HAS_FAVOR', 				'PropertyName',     'HD_HasDipFavor'),
 	('HD_REQUIRES_PLAYER_HAS_FAVOR', 				'PropertyMinimum',  1),
-	('REQUIRES_CITY_HAS_VERTICAL_INTEGRATION', 		'GovernorPromotionType',	'GOVERNOR_PROMOTION_RESOURCE_MANAGER_VERTICAL_INTEGRATION'),
-	('REQUIRES_CITY_HAS_CONTRACTOR',				'GovernorPromotionType',	'GOVERNOR_PROMOTION_MERCHANT_CONTRACTOR'),
-	('REQUIRES_CITY_HAS_AMBASSADOR_MESSENGER',		'GovernorPromotionType',	'GOVERNOR_PROMOTION_AMBASSADOR_MESSENGER'),
-	('REQUIRES_CITY_HAS_MULTINATIONAL_CORP',		'GovernorPromotionType',	'GOVERNOR_PROMOTION_MERCHANT_MULTINATIONAL_CORP'),
 	('HD_PLOT_APPEAL_LESS_THAN_0',		'MaximumAppeal',	0),
 	('HD_PLOT_APPEAL_MORE_THAN_8',		'MinimumAppeal',	8),
-	('HD_REQUIRES_PLOT_ADJACENT_TO_ANY_DISTRICT',		'RequirementSetId',	'HD_PLOT_ADJACENT_TO_ANY_DISTRICT_REQUIRMENTS'),
+	('HD_REQUIRES_PLOT_ADJACENT_TO_ANY_DISTRICT',		'RequirementSetId',	'HD_PLOT_ADJACENT_TO_ANY_DISTRICT_REQUIREMENTS'),
 	('REQUIRES_CITY_HAS_4_SPECIALTY_DISTRICTS',		'Amount',	4),
 	('REQUIRES_CITY_HAS_6_SPECIALTY_DISTRICTS',		'Amount',	6),
 	('HD_REQUIRES_TEMPLE_ARTEMIS_IMPROVEMENTS',		'RequirementSetId',		'HD_TEMPLE_ARTEMIS_IMPROVEMENTS'),
 	('REQUIREMENT_UNIT_IS_SCIENTIST',		'GreatPersonClassType',		'GREAT_PERSON_CLASS_SCIENTIST'),
-	('HD_REQUIRES_PUBLIC_TRANSPORT_AT_RADIUS_ONE',		'RequirementSetId', 'HD_PUBLIC_TRANSPORT_AT_RADIUS_ONE_REQUIREMENTS'),
 	('REQUIRES_PLOT_AT_RADIUS_3',		'MinDistance',		3),
 	('REQUIRES_PLOT_AT_RADIUS_3',		'MaxDistance',		3),
-	-- ('REQUIRES_PLAYER_NOT_FOUNDED_RELIGION',			'PropertyName',		'HDPlayerHasReligion'),
-	-- ('REQUIRES_PLAYER_NOT_FOUNDED_RELIGION',			'PropertyMinimum',	1),
-	-- ('REQUIRES_PLAYER_HAS_FOUNDED_RELIGION',		'PropertyName',		'HDPlayerHasReligion'),
-	-- ('REQUIRES_PLAYER_HAS_FOUNDED_RELIGION',		'PropertyMinimum',	1),
 	('REQUIRES_CITY_HAS_NOT_PALACE',		'BuildingType',		'BUILDING_PALACE'),
 	('HD_REQUIRES_DISTRICT_IS_SPECIALTY_DISTRICT',						'RequirementSetId',	'DISTRICT_IS_SPECIALTY_DISTRICT_REQUIREMENTS'),
+	('HD_REQUIRES_DISTRICT_IS_NOT_SPECIALTY_DISTRICT',						'RequirementSetId',	'DISTRICT_IS_NOT_SPECIALTY_DISTRICT_REQUIREMENTS'),
 	('REQUIRES_DISTRICT_IS_WONDER_THEATER_HOLY_SITE_COMMERCIAL_HUB',	'RequirementSetId',	'MINOR_3DISTRICTS_CULTURE_REQUIREMENTS'),
 	('REQUIRES_CITY_HAS_SEAPORT',				'BuildingType',	'BUILDING_SEAPORT'),
 	('REQUIRES_CITY_HAS_TIER_2_HARBOR_BUILDINGS_MET','RequirementSetId',	'REQUIRES_CITY_HAS_TIER_2_HARBOR_BUILDINGS'),
@@ -818,26 +929,46 @@ values
 	('REQUIRES_HD_MADRASA_FAITH_PURCHASE_THEATER',			'PropertyName',			'HD_MADRASA_FAITH_PURCHASE_THEATER'),
 	('REQUIRES_HD_MADRASA_FAITH_PURCHASE_THEATER',			'PropertyMinimum',	6),
 	('REQUIRES_HD_IS_HOLY_CITY',			'PropertyName',			'HD_IS_HOLY_CITY'),
-	('REQUIRES_HD_IS_HOLY_CITY',			'PropertyMinimum',	1);
+	('REQUIRES_HD_IS_HOLY_CITY',			'PropertyMinimum',	1),
+	('REQUIRES_PLOT_HAS_CIV_OR_CITYSTATE_UNIQUE',			'RequirementSetId',	'PLOT_HAS_CIV_OR_CITYSTATE_UNIQUE_REQUIREMENTS'),
+	('HD_REQUIRES_PLOT_ADJACENT_TO_LAND_OR_HARBOR',		'RequirementSetId',		'HD_PLOT_ADJACENT_TO_LAND_OR_HARBOR_REQUIREMENTS'),
+	('REQUIRES_PLOT_HAS_ROBOT_PRODUCTION_IMPROVEMENT',		'RequirementSetId',		'PLOT_HAS_ROBOT_PRODUCTION_IMPROVEMENT_REQUIREMENTS'),
+	('HD_REQUIRES_WIND_MILL_PLOT',		'RequirementSetId',		'HD_WIND_MILL_PLOT_REQUIREMENTS'),
+	('REQUIRES_HD_PLOT_IS_COAST_OR_OCEAN',		'RequirementSetId',		'HD_PLOT_IS_COAST_OR_OCEAN'),
+	('REQUIRES_CITY_HAS_1_TITLE_GOVERNOR',      'Established',       1),
+	('REQUIRES_CITY_HAS_1_TITLE_GOVERNOR',      'Amount',            1),
+	('REQUIRES_CITY_HAS_3_TITLE_GOVERNOR',      'Established',       1),
+	('REQUIRES_CITY_HAS_3_TITLE_GOVERNOR',      'Amount',            3),
+	('REQUIRES_CITY_HAS_4_TITLE_GOVERNOR',      'Established',       1),
+	('REQUIRES_CITY_HAS_4_TITLE_GOVERNOR',      'Amount',            4),
+	('REQUIRES_CITY_HAS_5_TITLE_GOVERNOR',      'Established',       1),
+	('REQUIRES_CITY_HAS_5_TITLE_GOVERNOR',      'Amount',            5),
+	('REQUIRES_CITY_HAS_6_TITLE_GOVERNOR',      'Established',       1),
+	('REQUIRES_CITY_HAS_6_TITLE_GOVERNOR',      'Amount',            6),
+	('REQUIRES_CITY_HAS_7_TITLE_GOVERNOR',      'Established',       1),
+	('REQUIRES_CITY_HAS_7_TITLE_GOVERNOR',      'Amount',            7),
+	('REQUIRES_HD_DISTRICT_IS_CITY_CENTER_OR_NEIGHBORHOOD',						'RequirementSetId',	'HD_DISTRICT_IS_CITY_CENTER_OR_NEIGHBORHOOD_REQUIREMENTS'),
+	('REQUIRES_HD_CITY_IS_CITY_STATE',			'PropertyName',			'HD_CITY_IS_CITY_STATE'),
+	('REQUIRES_HD_CITY_IS_CITY_STATE',			'PropertyMinimum',	1),
+	('REQUIRES_PLOT_ADJACENT_TO_BONUS',			'ResourceClassType',	'RESOURCECLASS_BONUS'),
+	('REQUIRES_HD_GOVERNOR_MANAGER_LEFT_1_TRADE',			'PropertyName',			'HD_GOVERNOR_MANAGER_LEFT_1_TRADE'),
+	('REQUIRES_HD_GOVERNOR_MANAGER_LEFT_1_TRADE',			'PropertyMinimum',	1);
+
+-- 惊艳的区域
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType) select
+	'HD_DISTRICT_IS_' || DistrictType || '_BREATHTAKING_APPEAL_REQUIREMENTS', 'REQUIREMENTSET_TEST_ALL' from Districts;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select
+	'HD_DISTRICT_IS_' || DistrictType || '_BREATHTAKING_APPEAL_REQUIREMENTS', 'REQUIRES_DISTRICT_IS_' || DistrictType || '_HD' from Districts;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select
+	'HD_DISTRICT_IS_' || DistrictType || '_BREATHTAKING_APPEAL_REQUIREMENTS', 'REQUIRES_PLOT_BREATHTAKING_APPEAL' from Districts;
 
 -- 魅力超过8的区域
-insert or ignore into RequirementSets
-	(RequirementSetId,																										RequirementSetType)
-select
-	'HD_REQUIRES_DISTRICT_IS_' || DistrictType || '_APPEAL_MORE_THAN_8',	'REQUIREMENTSET_TEST_ALL'
-from Districts;
-
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,																										RequirementId)
-select
-	'HD_REQUIRES_DISTRICT_IS_' || DistrictType || '_APPEAL_MORE_THAN_8',	'REQUIRES_DISTRICT_IS_' || DistrictType || '_HD'
-from Districts;
-
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,																										RequirementId)
-select
-	'HD_REQUIRES_DISTRICT_IS_' || DistrictType || '_APPEAL_MORE_THAN_8',	'HD_PLOT_APPEAL_MORE_THAN_8'
-from Districts;
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType) select
+	'HD_DISTRICT_IS_' || DistrictType || '_APPEAL_MORE_THAN_8_REQUIREMENTS', 'REQUIREMENTSET_TEST_ALL' from Districts;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select
+	'HD_DISTRICT_IS_' || DistrictType || '_APPEAL_MORE_THAN_8_REQUIREMENTS', 'REQUIRES_DISTRICT_IS_' || DistrictType || '_HD' from Districts;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select
+	'HD_DISTRICT_IS_' || DistrictType || '_APPEAL_MORE_THAN_8_REQUIREMENTS', 'HD_PLOT_APPEAL_MORE_THAN_8' from Districts;
 
 insert or ignore into RequirementSets
 	(RequirementSetId,												RequirementSetType)
@@ -847,22 +978,17 @@ values
 	('IS_ADJACENT_TO_AQUEDUCT_NO_FEUDALISM',						'REQUIREMENTSET_TEST_ALL'),
 	('HD_HAS_FEATURE_NO_MEDIEVAL_FAIRES',						'REQUIREMENTSET_TEST_ALL'),
 	('HD_HAS_HILL_NO_HERALDRY',						'REQUIREMENTSET_TEST_ALL'),
-	-- ('PLOT_ADJACENT_TO_MOUNTAIN_NO_APPRENTICESHIP',					'REQUIREMENTSET_TEST_ALL'),
-	('PLOT_HAS_BASIC_PRODUCTION_IMPROVEMENTS_REQUIREMENTS',			'REQUIREMENTSET_TEST_ANY'),
-	('PLOT_HAS_BASIC_FOOD_IMPROVEMENTS_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
-	('HD_IS_TUNDRA_SNOW_PRODUCTION_IMPROVEMENTS_REQUIREMENTS',		'REQUIREMENTSET_TEST_ALL'),
 	('PLOT_IS_TUNDRA_OR_SNOW_REQUIREMENTS',							'REQUIREMENTSET_TEST_ALL'),
-	('HD_IS_TUNDRA_SNOW_FOOD_IMPROVEMENTS_REQUIREMENTS',			'REQUIREMENTSET_TEST_ALL'),
 	('IS_CAMPUS_ADJACENT_TO_MOUNTAIN_REQUIREMENTS',					'REQUIREMENTSET_TEST_ALL'),
-	('HD_PLAYER_HAS_NO_CIVIC_COLONIALISM_REQUIRMENTS',				'REQUIREMENTSET_TEST_ALL'),
+	('HD_PLAYER_HAS_NO_CIVIC_COLONIALISM_REQUIREMENTS',				'REQUIREMENTSET_TEST_ALL'),
 	('ADJACENT_TO_FOREST_REQUIREMENTS',								'REQUIREMENTSET_TEST_ALL'),
 	('DL_PLOT_IS_LAKE_REQUIREMENTS',								'REQUIREMENTSET_TEST_ALL'),
 	('DL_CITY_HAS_WONDER_REQUIREMENTS',								'REQUIREMENTSET_TEST_ALL'),
-	('DL_PLOT_IS_WONDER_REQUIRMENTS',								'REQUIREMENTSET_TEST_ALL'),
-	('DL_PLOT_IS_DISTRICT_IS_ENTERTAINMENT_REQUIRMENTS',			'REQUIREMENTSET_TEST_ALL'),
-	('DL_THIS_WONDER_IS_AT_LEAST_MIEDIVAL_REQUIRMENTS',				'REQUIREMENTSET_TEST_ALL'),
-	('DL_THIS_WONDER_IS_AT_LEAST_ANCIENT_REQUIRMENTS',				'REQUIREMENTSET_TEST_ALL'),
-	('CITY_HAS_THEATER_AND_COMMERCIAL_HUB_REQUIRMENTS',				'REQUIREMENTSET_TEST_ALL'),
+	('DL_PLOT_IS_WONDER_REQUIREMENTS',								'REQUIREMENTSET_TEST_ALL'),
+	('DL_PLOT_IS_DISTRICT_IS_ENTERTAINMENT_REQUIREMENTS',			'REQUIREMENTSET_TEST_ALL'),
+	('DL_THIS_WONDER_IS_AT_LEAST_MIEDIVAL_REQUIREMENTS',				'REQUIREMENTSET_TEST_ALL'),
+	('DL_THIS_WONDER_IS_AT_LEAST_ANCIENT_REQUIREMENTS',				'REQUIREMENTSET_TEST_ALL'),
+	('CITY_HAS_THEATER_AND_COMMERCIAL_HUB_REQUIREMENTS',				'REQUIREMENTSET_TEST_ALL'),
 	('HD_UNIT_IN_OWNER_TERRITORY_REQUIREMENTS',						'REQUIREMENTSET_TEST_ALL'),
 	('HD_PLOT_IS_OR_ADJACENT_TO_COAST_NOT_LAKE',					'REQUIREMENTSET_TEST_ANY'),
 	('PLOT_HAS_IMPROVEMENT_ADJACENT_TO_RIVER',						'REQUIREMENTSET_TEST_ALL'),
@@ -884,7 +1010,8 @@ values
 	('HD_OBJECT_WITHIN_10_TILES',									'REQUIREMENTSET_TEST_ALL'),
 	('HD_OBJECT_WITHIN_12_TILES',									'REQUIREMENTSET_TEST_ALL'),
 	('HD_OBJECT_WITHIN_7_TO_12_TILES',								'REQUIREMENTSET_TEST_ALL'),
-	('PLOT_HAS_PASTURE_WITH_4_TILES',								'REQUIREMENTSET_TEST_ALL'),
+	('PLOT_HAS_PASTURE_WITH_6_TILES_REQUIREMENTS',								'REQUIREMENTSET_TEST_ALL'),
+	('PLOT_HAS_IMPROVEMENT_CLASSIFICATION_COMMERCIAL_WITH_6_TILES_REQUIREMENTS',								'REQUIREMENTSET_TEST_ALL'),
 	('PLOT_HAS_RESOURCE_CAMP_WITH_4_TILES',							'REQUIREMENTSET_TEST_ALL'),
 	('PLOT_HAS_FISHING_BOATS_WITH_4_TILES',							'REQUIREMENTSET_TEST_ALL'),
 	('DISTRICT_IS_HARBOR_WITHIN_4_TILES',							'REQUIREMENTSET_TEST_ALL'),
@@ -907,7 +1034,7 @@ values
 	('ENCAMPMENT_ON_OR_ADJACENT_TO_DESERT',							'REQUIREMENTSET_TEST_ALL'),
 	('CITY_WAS_FOUNDED',											'REQUIREMENTSET_TEST_ALL'),
 	('CITY_WAS_NOT_FOUNDED',										'REQUIREMENTSET_TEST_ALL'),
-	('PLOT_HAS_ANY_FEATURE',										'REQUIREMENTSET_TEST_ALL'),
+	('HD_PLOT_HAS_FEATURE_REQUIREMENTS',										'REQUIREMENTSET_TEST_ALL'),
 	('DISTRICT_IS_CHICHEN_ITZA_DISTRICTS',							'REQUIREMENTSET_TEST_ANY'),
 	('CHICHEN_ITZA_REQUIREMENTS',									'REQUIREMENTSET_TEST_ALL'),
 	('CITY_ON_HOME_CONTINENT_HAS_COMMERCIAL_HUB',					'REQUIREMENTSET_TEST_ALL'),
@@ -922,25 +1049,20 @@ values
 	('PLOT_ADJACENT_TO_TOURISM_IMPROVEMENT',					'REQUIREMENTSET_TEST_ANY'),
 	('HD_ADJACENT_PLOT_WATER',					                    'REQUIREMENTSET_TEST_ALL'),
 	('REQUIRE_PLOT_ADJACENT_TO_OWNER_AND_NOT_WONDER',	'REQUIREMENTSET_TEST_ALL'),
-	('HD_PLOT_ADJACENT_TO_ANY_DISTRICT_REQUIRMENTS',	'REQUIREMENTSET_TEST_ANY'),
+	('HD_PLOT_ADJACENT_TO_ANY_DISTRICT_REQUIREMENTS',	'REQUIREMENTSET_TEST_ANY'),
 	('CITY_HAS_4_SPECIALTY_DISTRICTS_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
 	('CITY_HAS_6_SPECIALTY_DISTRICTS_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
 	('CITY_HAS_15_POPULATION_AND_IS_POWERED',   'REQUIREMENTSET_TEST_ALL'),
 	('CITY_HAS_6_SPECIALTY_DISTRICTS_AND_IS_POWERED',	'REQUIREMENTSET_TEST_ALL'),
 	('HD_NOT_WONDER_WITHIN_6_TILES_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
 	('HD_IS_ON_DESERT_OR_DESERT_HILL_REQUIREMENTS',	'REQUIREMENTSET_TEST_ANY'),
-	('PLOT_HAS_IMPROVED_AND_ON_ALL_FLOODPLAINS',					'REQUIREMENTSET_TEST_ALL'),
-	('PLOT_HAS_RESOURCE_AND_ON_ALL_FLOODPLAINS',					'REQUIREMENTSET_TEST_ALL'),
+	('PLOT_HAS_RESOURCE_ADJACENT_TO_RIVER',					'REQUIREMENTSET_TEST_ALL'),
 	('PLOT_IS_FRESH_WATER_REQUIREMENTS',							'REQUIREMENTSET_TEST_ANY'),
 	('PLOT_IS_FRESH_WATER_OR_AQUEDUCT_REQUIREMENTS',							'REQUIREMENTSET_TEST_ANY'),
 	('PLOT_HAS_MARSH_REQUIREMENTS',									'REQUIREMENTSET_TEST_ALL'),
-	('HD_DISTRICT_IS_CITY_CENTER_OR_NEIGHBORHOOD',					'REQUIREMENTSET_TEST_ANY'),
-	('CITY_HAS_VERTICAL_INTEGRATION_REQUIREMENTS',					'REQUIREMENTSET_TEST_ALL'),
-	('CITY_HAS_COMMERCIAL_OR_HARBOR',								'REQUIREMENTSET_TEST_ANY'),
-	('CITY_HAS_CONTRACTOR_REQUIREMENTS',							'REQUIREMENTSET_TEST_ALL'),
-	('CITY_HAS_AMBASSADOR_MESSENGER_REQUIREMENTS',					'REQUIREMENTSET_TEST_ALL'),
-	('CITY_HAS_MULTINATIONAL_CORP_REQUIREMENTS',					'REQUIREMENTSET_TEST_ALL'),
-	('CITY_HAS_REYNA_4',											'REQUIREMENTSET_TEST_ANY'),
+	('HD_DISTRICT_IS_CITY_CENTER_OR_NEIGHBORHOOD_REQUIREMENTS',					'REQUIREMENTSET_TEST_ANY'),
+	('HD_DISTRICT_IS_CITY_CENTER_OR_NEIGHBORHOOD_WITHIN_6_TILES_REQUIREMENTS',					'REQUIREMENTSET_TEST_ALL'),
+	('HD_CITY_HAS_COMMERCIAL_HUB_OR_HARBOR_REQUIREMENTS',								'REQUIREMENTSET_TEST_ANY'),
 	('PLOT_HAS_SHALLOW_WATER_AND_ADJACENT_TO_OWNER_HD',				'REQUIREMENTSET_TEST_ALL'),
 	('HD_CITY_NOT_CAPITAL_NO_GOVERNOR',				'REQUIREMENTSET_TEST_ALL'),
 	('HD_CITY_CAPITAL_OR_GOVERNOR',				'REQUIREMENTSET_TEST_ANY'),
@@ -948,38 +1070,25 @@ values
 	('PLOT_ADJACENT_TO_DISTRICT_CITY_CENTER_ON_FOREIGN_CONTINENT',					'REQUIREMENTSET_TEST_ALL'),
 	('HD_RIVER_IMPROVEMENT_APPEAL_LESS_THAN_0',					'REQUIREMENTSET_TEST_ALL'),
 	('HD_RIVER_PLOT_APPEAL_LESS_THAN_0',								'REQUIREMENTSET_TEST_ALL'),
-	('HD_ARENA_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
 	('HD_NILOMETER_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
 	('UNIT_IS_SCIENTIST',				'REQUIREMENTSET_TEST_ANY'),
-	('HD_TOOLING_SHOP_REQUIREMENT',				'REQUIREMENTSET_TEST_ANY'),
-	('HD_CHARCOAL_KILN_REQUIREMENT',				'REQUIREMENTSET_TEST_ANY'),
-	('HD_ZOO_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
-	('HD_AQUARIUM_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
-	('HD_JEWELRY_SHOP_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
+	('HD_CHARCOAL_KILN_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
 	('HD_PLOT_HAS_SEA_FEATURE',								'REQUIREMENTSET_TEST_ANY'),
-	('HD_BOTANICAL_GARDEN_REQUIREMENTS',								'REQUIREMENTSET_TEST_ANY'),
 	('HD_PLOT_ADJACENT_TO_COAST_REQUIREMENTS',								'REQUIREMENTSET_TEST_ALL'),
 	('PLOT_ON_OR_ADJACENT_TO_GEOTHERMAL_FISSURE',								'REQUIREMENTSET_TEST_ANY'),
-	('HD_PUBLIC_TRANSPORT_AT_RADIUS_ONE_REQUIREMENTS',								'REQUIREMENTSET_TEST_ANY'),
-	('HD_PUBLIC_TRANSPORT_OBJECTS_REQUIREMENTS',								'REQUIREMENTSET_TEST_ANY'),
 	('HD_SPORTS_MEDIA_REQUIREMENTS',								'REQUIREMENTSET_TEST_ANY'),
 	('BUILDING_IS_MUSEUM', 										'REQUIREMENTSET_TEST_ANY'),
 	('HD_IS_MOUNTAIN_SPECIALTY_DISTRICT_REQUIREMENTS', 										'REQUIREMENTSET_TEST_ALL'),
 	('HD_CHANNEL_ADMINISTRATOR_REQUIREMENTS', 										'REQUIREMENTSET_TEST_ANY'),
-	('HD_CITY_HAS_ZOO_OR_BOTANICAL_GARDEN',	'REQUIREMENTSET_TEST_ANY'),
 	('PLOT_IS_WONDER_ADJACENT_TO_RIVER_REQUIREMENTS',		'REQUIREMENTSET_TEST_ALL'),
 	('DISTRICT_IS_HOLY_SITE_AND_ADJACENT_TO_THEATER',		'REQUIREMENTSET_TEST_ALL'),
 	('HD_CLONE_RESEARCH_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
 	('HD_HIGH_TECH_INDUSTRY_REQUIREMENTS',				'REQUIREMENTSET_TEST_ALL'),
 	('HD_URBAN_EXHIBITION_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
-	-- ('PLAYER_NOT_FOUNDED_RELIGION_REQUIREMENTS',		'REQUIREMENTSET_TEST_ALL'),
-	-- ('PLAYER_HAS_FOUNDED_RELIGION_REQUIREMENTS',		'REQUIREMENTSET_TEST_ALL'),
 	('HD_COMMEMORATION_SCIENTIFIC_DISTRICT_REQUIREMENTS',		'REQUIREMENTSET_TEST_ANY'),
 	('HD_CITY_IS_SAME_CONTINENT_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
 	('HD_CITY_IS_SAME_CONTINENT_NOT_CAPITAL_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
-	('DISTRICT_IS_BRAZIL_UD',	'REQUIREMENTSET_TEST_ANY'),
-	('PLOT_HAS_IMPROVED_AND_RAINFOREST_REQUIREMENTS',		'REQUIREMENTSET_TEST_ALL'),
-	('PLOT_HAS_LUXURY_AND_RAINFOREST_REQUIREMENTS',		'REQUIREMENTSET_TEST_ALL'),
+	('PLOT_HAS_IMPROVED_RESOURCE_AND_RAINFOREST_REQUIREMENTS',		'REQUIREMENTSET_TEST_ALL'),
 	('HD_DIONYSIAN_CARNIVAL_REQUIREMENTS',		'REQUIREMENTSET_TEST_ALL'),
 	('HD_NEW_DEAL_REQUIREMENTS',		'REQUIREMENTSET_TEST_ALL'),
 	('MINOR_3DISTRICTS_CULTURE_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
@@ -989,13 +1098,12 @@ values
 	('HOLYSITE_ADJACENT_TO_JUNGLE_REQUIREMENTS',			'REQUIREMENTSET_TEST_ALL'),
 	('PLAYER_IS_AT_WAR_WITH_ANY_MAJOR',						'REQUIREMENTSET_TEST_ALL'),
 	('PLOT_ADJACENT_TO_VOLCANO_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
-	('HD_WRESTING_AND_MANEUVERS_REQUIREMENTS',							'REQUIREMENTSET_TEST_ALL'),
 	('PLOT_ADJACENT_TO_MOUNTAIN_IS_NOT_WONDER_REQUIREMENTS',		'REQUIREMENTSET_TEST_ALL'),
 	('PLOT_IS_SPECIALTY_DISTRICT_ADJACENT_TO_RIVER_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
 	('PLOT_IS_DISTRICT_ADJACENT_TO_RIVER_REQUIREMENTS',				'REQUIREMENTSET_TEST_ALL'),
 	('CITY_HAS_WALLS_EARLY', 									'REQUIREMENTSET_TEST_ALL'),
 	('CITY_HAS_TSIKHE', 										'REQUIREMENTSET_TEST_ALL'),
-	('HD_OVERSEAS_CITY_HAS_TIER_2_COMMERCIAL_HUB_BUILDINGS', 			'REQUIREMENTSET_TEST_ALL'),
+	('HD_OVERSEAS_CITY_HAS_TIER_3_COMMERCIAL_HUB_BUILDINGS', 			'REQUIREMENTSET_TEST_ALL'),
 	('HD_OVERSEAS_CITY_HAS_TIER_2_HARBOR_BUILDINGS', 					'REQUIREMENTSET_TEST_ALL'),
 	('HD_SPORTS_MEET_1_REQUIREMENTS',							'REQUIREMENTSET_TEST_ALL'),
 	('HD_SPORTS_MEET_2_REQUIREMENTS',							'REQUIREMENTSET_TEST_ALL'),
@@ -1023,12 +1131,9 @@ values
 	('CITYCENTER_ADJACENT_TO_COAST_REQUIREMENTS',			'REQUIREMENTSET_TEST_ALL'),
 	('PLOT_HAS_COAST_AND_CITY_HAS_HOLYSITE_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
 	('PLOT_HAS_IMPROVEMENT_OIL_WELL_OR_OFFSHORE_OIL_RIG',	'REQUIREMENTSET_TEST_ANY'),
-	('HD_CITY_HAS_IMPROVED_CAMP_FISHING_BOAT_RESOURCE_REQUIREMENTS',	'REQUIREMENTSET_TEST_ANY'),
 	('HD_AI_CITY_FOLLOWS_RELIGION_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
 	('HD_AI_CAPITAL_FOLLOWS_RELIGION_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
 	('HD_COLOSSUS_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
-	('HD_BOROBUDUR_CITY_REQUIREMENTS',	'REQUIREMENTSET_TEST_ANY'),
-	('HD_BOROBUDUR_DISTRICT_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
 	('HD_IS_WATER_CONSERVATION_DISTRICT',	'REQUIREMENTSET_TEST_ANY'),
 	('HD_PLOT_HAS_FARM_PLANTATION_PASTURE_REQUIREMENTS',	'REQUIREMENTSET_TEST_ANY'),
 	('KEQING_AOE_LAND_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
@@ -1053,7 +1158,79 @@ values
 	('HD_AT_DARK_AGE_AT_WAR',	'REQUIREMENTSET_TEST_ALL'),
 	('HD_HAS_HIGH_COASTAL_CITES_LOW_EXPLORATION',	'REQUIREMENTSET_TEST_ALL'),
 	('HD_PILLAGER_HIGH_EXPLORATION',	'REQUIREMENTSET_TEST_ALL'),
-	('CITY_HAS_WONDER_DISTRICT_IS_HOLY_SITE_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL');
+	('CITY_HAS_WONDER_DISTRICT_IS_HOLY_SITE_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
+	('HD_IMPROVEMENT_CHARMING_APPEAL_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
+	('HD_IMPROVEMENT_BREATHTAKING_APPEAL_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
+	('PLOT_HAS_CIV_OR_CITYSTATE_UNIQUE_REQUIREMENTS',	'REQUIREMENTSET_TEST_ANY'),
+	('HD_PLOT_HAS_FEATURE_AND_RESOURCE_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
+	('HD_CHARMING_PLOT_HAS_FEATURE_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
+	('HD_BREATHTAKING_PLOT_HAS_FEATURE_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
+	('HD_PLOT_HAS_NATURAL_WONDER_REQUIREMENTS',	'REQUIREMENTSET_TEST_ANY'),
+	('HD_ADJACENT_PLOT_CHARMING',					                'REQUIREMENTSET_TEST_ALL'),
+	('HD_ADJACENT_PLOT_BREATHTAKING',					            'REQUIREMENTSET_TEST_ALL'),
+	('HD_PLOT_CHARMING_UNIQUE_IMPROVEMENT',					      'REQUIREMENTSET_TEST_ALL'),
+	('HD_PLOT_BREATHTAKING_UNIQUE_IMPROVEMENT',					  'REQUIREMENTSET_TEST_ALL'),
+	('HD_PLOT_CHARMING_WONDER',					                  'REQUIREMENTSET_TEST_ALL'),
+	('HD_PLOT_BREATHTAKING_WONDER',					              'REQUIREMENTSET_TEST_ALL'),
+	('HD_PLOT_ON_OR_ADJACENT_TO_LUXURY',					              'REQUIREMENTSET_TEST_ANY'),
+	('HD_IMPROVED_PLOT_WITHIN_3_TIELS',					              'REQUIREMENTSET_TEST_ALL'),
+	('HD_CITY_HAS_NEIGHBORHOOD_AND_GOVERNOR_IMPROVEMENT',					              'REQUIREMENTSET_TEST_ALL'),
+	('HD_CITY_HAS_DISTRICT_ENCAMPMENT_AND_INDUSTRIAL_ZONE_REQUIREMENTS',				'REQUIREMENTSET_TEST_ALL'),
+	('HD_UNIT_IS_MILITARY_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
+	('HD_ADJACENT_TO_MOUNTAIN_NO_APPRENTICESHIP',				'REQUIREMENTSET_TEST_ALL'),
+	('HD_HAS_HILL_NO_METAL_CASTING',				'REQUIREMENTSET_TEST_ALL'),
+	('HD_ADJACENT_TO_RIVER_NO_MACHINERY',				'REQUIREMENTSET_TEST_ALL'),
+	('HD_ADJACENT_TO_LAND_OR_HARBOR_NO_COMPASS',				'REQUIREMENTSET_TEST_ALL'),
+	('HD_PLOT_ADJACENT_TO_LAND_OR_HARBOR_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
+	('PLOT_HAS_WATER_IMPROVEMENT_REQUIREMENTS',				'REQUIREMENTSET_TEST_ALL'),
+	('PLOT_HAS_ROBOT_PRODUCTION_IMPROVEMENT_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
+	('PLOT_HAS_ROBOT_PRODUCTION_IMPROVEMENT_AND_ADJACENT_TO_OWNER_REQUIREMENTS',				'REQUIREMENTSET_TEST_ALL'),
+	('HD_CANADA_IMPROVEMENT_REQUIREMENTS',				'REQUIREMENTSET_TEST_ALL'),
+	('HD_WIND_MILL_PLOT_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
+	('HD_WIND_MILL_REQUIREMENTS',				'REQUIREMENTSET_TEST_ALL'),
+	('HD_PLOT_IS_COAST_OR_OCEAN_AND_PLAYER_HAS_CONSTRUCTION',	'REQUIREMENTSET_TEST_ALL'),
+	('HD_PLOT_IS_COAST_OR_OCEAN',								'REQUIREMENTSET_TEST_ANY'),
+	('HD_DIVINATION_REQUIREMENTS',								'REQUIREMENTSET_TEST_ANY'),
+	('HD_ORACLE_REQUIREMENTS',								'REQUIREMENTSET_TEST_ANY'),
+	('HD_WRITING_ON_HIDE_REQUIREMENTS',								'REQUIREMENTSET_TEST_ANY'),
+	('HD_PANEGYRIC_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
+	('HD_PANEGYRIC_WITH_BUILDING_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
+	('HD_VILLA_URBANA_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
+	('HD_VILLA_URBANA_WITH_BUILDING_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
+	('HD_FASHIONABLE_DISTRICT_THEATER_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
+	('HD_FASHIONABLE_DISTRICT_THEATER_1_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
+	('HD_FASHIONABLE_DISTRICT_THEATER_2_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
+	('HD_FASHIONABLE_DISTRICT_THEATER_3_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
+	('HD_FASHIONABLE_DISTRICT_NEIGHBORHOOD_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
+	('HD_FASHIONABLE_DISTRICT_NEIGHBORHOOD_1_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
+	('HD_FASHIONABLE_DISTRICT_NEIGHBORHOOD_2_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
+	('HD_FASHIONABLE_DISTRICT_NEIGHBORHOOD_3_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
+	('CITY_HAS_1_TITLE_GOVERNOR_REQUIREMENTS',  'REQUIREMENTSET_TEST_ALL'),
+	('CITY_HAS_3_TITLE_GOVERNOR_REQUIREMENTS',  'REQUIREMENTSET_TEST_ALL'),
+	('CITY_HAS_4_TITLE_GOVERNOR_REQUIREMENTS',  'REQUIREMENTSET_TEST_ALL'),
+	('CITY_HAS_5_TITLE_GOVERNOR_REQUIREMENTS',  'REQUIREMENTSET_TEST_ALL'),
+	('CITY_HAS_6_TITLE_GOVERNOR_REQUIREMENTS',  'REQUIREMENTSET_TEST_ALL'),
+	('CITY_HAS_7_TITLE_GOVERNOR_REQUIREMENTS',  'REQUIREMENTSET_TEST_ALL'),
+	('HD_IMPROVEMENT_ADJACENT_TO_HYDRAULIC_REQUIREMENTS',  'REQUIREMENTSET_TEST_ALL'),
+	('HD_DISTRICT_ADJACENT_TO_HYDRAULIC_REQUIREMENTS',  'REQUIREMENTSET_TEST_ALL'),
+	('HD_CHARMING_DISTRICT_REQUIREMENTS',  'REQUIREMENTSET_TEST_ALL'),
+	('HD_BREATHTAKING_DISTRICT_REQUIREMENTS',  'REQUIREMENTSET_TEST_ALL'),
+	('HD_ALCHEMY_ROOM_RESOURCES_REQUIREMENTS',  'REQUIREMENTSET_TEST_ANY'),
+	('HD_PLOT_HAS_CITY_OR_WATER_PARK_IMPROVEMENT_WITHIN_6_TILES_REQUIREMENTS',  'REQUIREMENTSET_TEST_ALL'),
+	('UNIT_IS_MILITARY_ENGINEERING_UNITS_REQUIREMENTS',  'REQUIREMENTSET_TEST_ANY'),
+	('PALACE_AND_ROYAL_NAVY_DOCKYARD_REQUIREMENTS',		'REQUIREMENTSET_TEST_ALL'),
+	('PALACE_AND_HARBOR_TIER_1_REQUIREMENTS',			'REQUIREMENTSET_TEST_ALL'),
+	('PALACE_AND_HARBOR_TIER_2_REQUIREMENTS',			'REQUIREMENTSET_TEST_ALL'),
+	('PALACE_AND_HARBOR_TIER_3_REQUIREMENTS',			'REQUIREMENTSET_TEST_ALL'),
+	('CITY_HAS_DISTRICT_SEOWON',                        'REQUIREMENTSET_TEST_ALL'),
+	('HD_ORCHARD_REQUIREMENTS',  'REQUIREMENTSET_TEST_ANY'),
+	('HD_HAMMER_WORKS_REQUIREMENTS',  'REQUIREMENTSET_TEST_ANY'),
+	('HD_HYDRAULIC_SPINNING_WHEEL_REQUIREMENTS',  'REQUIREMENTSET_TEST_ANY'),
+	('HD_BATHHOUSE_REQUIREMENTS',  'REQUIREMENTSET_TEST_ANY'),
+	('PLOT_ADJACENT_TO_BONUS_REQUIREMENTS',  'REQUIREMENTSET_TEST_ANY'),
+	('HD_DISTRICT_IS_CAMPUS_OR_THEATER_REQUIREMENTS',  'REQUIREMENTSET_TEST_ANY'),
+	('HD_GOVERNOR_MANAGER_LEFT_1_TRADE_REQUIREMENTS',  'REQUIREMENTSET_TEST_ANY'),
+	('HD_PLOT_HAS_STATIONERY_INDUSTRY_IMPROVEMENTS_REQUIREMENTS',  'REQUIREMENTSET_TEST_ANY');
 
 insert or ignore into RequirementSetRequirements
 	(RequirementSetId,												RequirementId)
@@ -1071,33 +1248,19 @@ values
 	('HD_HAS_HILL_NO_HERALDRY',						'PLOT_IS_HILLS_REQUIREMENT'),
 	('HD_HAS_HILL_NO_HERALDRY',						'HD_REQUIRES_PLAYER_HAS_NO_CIVIC_HERALDRY_HD'),
 	('HD_HAS_HILL_NO_HERALDRY',						'HD_REQUIRES_PLAYER_HAS_TECH_THE_WHEEL'),
-	-- ('PLOT_ADJACENT_TO_MOUNTAIN_NO_APPRENTICESHIP',					'REQUIRES_PLOT_ADJACENT_TO_MOUNTAIN'),
-	-- ('PLOT_ADJACENT_TO_MOUNTAIN_NO_APPRENTICESHIP',					'HD_REQUIRES_PLAYER_HAS_NO_TECH_APPRENTICESHIP'),
-	-- ('PLOT_ADJACENT_TO_MOUNTAIN_NO_APPRENTICESHIP',					'HD_REQUIRES_PLAYER_HAS_TECH_BRONZE_WORKING'),
-	('PLOT_HAS_BASIC_PRODUCTION_IMPROVEMENTS_REQUIREMENTS',			'REQUIRES_PLOT_HAS_MINE'),
-	('PLOT_HAS_BASIC_PRODUCTION_IMPROVEMENTS_REQUIREMENTS',			'REQUIRES_PLOT_HAS_LUMBER_MILL'),
-	('PLOT_HAS_BASIC_PRODUCTION_IMPROVEMENTS_REQUIREMENTS',			'REQUIRES_PLOT_HAS_QUARRY'),
-	('PLOT_HAS_BASIC_PRODUCTION_IMPROVEMENTS_REQUIREMENTS',			'REQUIRES_PLOT_HAS_PASTURE'),
-	('PLOT_HAS_BASIC_FOOD_IMPROVEMENTS_REQUIREMENTS',				'REQUIRES_PLOT_HAS_CAMP'),
-	('PLOT_HAS_BASIC_FOOD_IMPROVEMENTS_REQUIREMENTS',				'REQUIRES_PLOT_HAS_FARM'),
-	('PLOT_HAS_BASIC_FOOD_IMPROVEMENTS_REQUIREMENTS',				'REQUIRES_PLOT_HAS_PLANTATION'),
 	('PLOT_IS_TUNDRA_OR_SNOW_REQUIREMENTS',		'REQUIRES_PLOT_IS_TUNDRA_OR_SNOW'),
-	('HD_IS_TUNDRA_SNOW_PRODUCTION_IMPROVEMENTS_REQUIREMENTS',		'REQUIRES_PLOT_IS_TUNDRA_OR_SNOW'),
-	('HD_IS_TUNDRA_SNOW_PRODUCTION_IMPROVEMENTS_REQUIREMENTS',		'REQUIRES_PLOT_HAS_BASIC_PRODUCTION_IMPROVEMENTS'),
-	('HD_IS_TUNDRA_SNOW_FOOD_IMPROVEMENTS_REQUIREMENTS',			'REQUIRES_PLOT_IS_TUNDRA_OR_SNOW'),
-	('HD_IS_TUNDRA_SNOW_FOOD_IMPROVEMENTS_REQUIREMENTS',			'REQUIRES_PLOT_HAS_BASIC_FOOD_IMPROVEMENTS'),
 	('IS_CAMPUS_ADJACENT_TO_MOUNTAIN_REQUIREMENTS',					'REQUIRES_PLOT_ADJACENT_TO_MOUNTAIN'),
 	('IS_CAMPUS_ADJACENT_TO_MOUNTAIN_REQUIREMENTS',					'REQUIRES_DISTRICT_IS_CAMPUS'),
-	('HD_PLAYER_HAS_NO_CIVIC_COLONIALISM_REQUIRMENTS',				'HD_REQUIRES_PLAYER_HAS_NO_CIVIC_COLONIALISM'),
+	('HD_PLAYER_HAS_NO_CIVIC_COLONIALISM_REQUIREMENTS',				'HD_REQUIRES_PLAYER_HAS_NO_CIVIC_COLONIALISM'),
 	('ADJACENT_TO_FOREST_REQUIREMENTS',								'HD_REQUIRES_PLOT_ADJACENT_TO_FEATURE_FOREST'),
 	('DL_PLOT_IS_LAKE_REQUIREMENTS',								'REQUIRES_PLOT_IS_LAKE'),
 	('DL_CITY_HAS_WONDER_REQUIREMENTS',								'REQUIRES_CITY_HAS_WONDER'),
-	('DL_PLOT_IS_WONDER_REQUIRMENTS',								'REQUIRES_DISTRICT_IS_DISTRICT_WONDER'),
-	('DL_PLOT_IS_DISTRICT_IS_ENTERTAINMENT_REQUIRMENTS',			'REQUIRES_DISTRICT_IS_ENTERTAINMENT_COMPLEX'),
-	('DL_THIS_WONDER_IS_AT_LEAST_MIEDIVAL_REQUIRMENTS',				'REQUIRES_THIS_WONDER_IS_AT_LEAST_MIEDIVAL'),
-	('DL_THIS_WONDER_IS_AT_LEAST_ANCIENT_REQUIRMENTS',				'REQUIRES_THIS_WONDER_IS_AT_LEAST_ANCIENT'),
-	('CITY_HAS_THEATER_AND_COMMERCIAL_HUB_REQUIRMENTS',				'REQUIRES_CITY_HAS_COMMERCIAL_HUB'),
-	('CITY_HAS_THEATER_AND_COMMERCIAL_HUB_REQUIRMENTS',				'REQUIRES_CITY_HAS_THEATER_DISTRICT'),
+	('DL_PLOT_IS_WONDER_REQUIREMENTS',								'REQUIRES_DISTRICT_IS_DISTRICT_WONDER'),
+	('DL_PLOT_IS_DISTRICT_IS_ENTERTAINMENT_REQUIREMENTS',			'REQUIRES_DISTRICT_IS_ENTERTAINMENT_COMPLEX'),
+	('DL_THIS_WONDER_IS_AT_LEAST_MIEDIVAL_REQUIREMENTS',				'REQUIRES_THIS_WONDER_IS_AT_LEAST_MIEDIVAL'),
+	('DL_THIS_WONDER_IS_AT_LEAST_ANCIENT_REQUIREMENTS',				'REQUIRES_THIS_WONDER_IS_AT_LEAST_ANCIENT'),
+	('CITY_HAS_THEATER_AND_COMMERCIAL_HUB_REQUIREMENTS',				'REQUIRES_CITY_HAS_COMMERCIAL_HUB'),
+	('CITY_HAS_THEATER_AND_COMMERCIAL_HUB_REQUIREMENTS',				'REQUIRES_CITY_HAS_THEATER_DISTRICT'),
 	('HD_UNIT_IN_OWNER_TERRITORY_REQUIREMENTS',						'UNIT_IN_OWNER_TERRITORY_REQUIREMENT'),
 	('PLOT_HAS_IMPROVEMENT_ADJACENT_TO_RIVER',						'REQUIRES_PLOT_IS_IMPROVED'),
 	('PLOT_HAS_IMPROVEMENT_ADJACENT_TO_RIVER',						'REQUIRES_PLOT_ADJACENT_TO_RIVER'),
@@ -1130,8 +1293,10 @@ values
 	('HD_OBJECT_WITHIN_12_TILES',									'REQUIRES_OBJECT_WITHIN_12_TILES'),
 	('HD_OBJECT_WITHIN_7_TO_12_TILES',								'REQUIRES_OBJECT_WITHIN_12_TILES'),
 	('HD_OBJECT_WITHIN_7_TO_12_TILES',								'REQUIRES_OBJECT_OUTOF_7_TILES'),
-	('PLOT_HAS_PASTURE_WITH_4_TILES',								'REQUIRES_OBJECT_WITHIN_4_TILES'),
-	('PLOT_HAS_PASTURE_WITH_4_TILES',								'REQUIRES_PLOT_HAS_IMPROVEMENT_PASTURE'),
+	('PLOT_HAS_PASTURE_WITH_6_TILES_REQUIREMENTS',								'REQUIRES_OBJECT_WITHIN_6_TILES'),
+	('PLOT_HAS_PASTURE_WITH_6_TILES_REQUIREMENTS',								'REQUIRES_PLOT_HAS_IMPROVEMENT_PASTURE'),
+	('PLOT_HAS_IMPROVEMENT_CLASSIFICATION_COMMERCIAL_WITH_6_TILES_REQUIREMENTS',								'REQUIRES_OBJECT_WITHIN_6_TILES'),
+	('PLOT_HAS_IMPROVEMENT_CLASSIFICATION_COMMERCIAL_WITH_6_TILES_REQUIREMENTS',								'REQUIRES_PLOT_HAS_IMPROVEMENT_CLASSIFICATION_COMMERCIAL'),
 	('PLOT_HAS_RESOURCE_CAMP_WITH_4_TILES',							'REQUIRES_OBJECT_WITHIN_4_TILES'),
 	('PLOT_HAS_RESOURCE_CAMP_WITH_4_TILES',							'REQUIRES_PLOT_HAS_IMPROVEMENT_CAMP'),
 	('PLOT_HAS_RESOURCE_CAMP_WITH_4_TILES',							'PLOT_HAS_RESOURCE_REQUIREMENTS'),
@@ -1175,7 +1340,7 @@ values
   ('ENCAMPMENT_ON_OR_ADJACENT_TO_DESERT',                         'REQUIRES_DISTRICT_IS_DISTRICT_ENCAMPMENT'),
 	('CITY_WAS_FOUNDED',											'REQUIRES_CITY_WAS_FOUNDED'),
 	('CITY_WAS_NOT_FOUNDED',										'REQUIRES_CITY_WAS_NOT_FOUNDED'),
-	('PLOT_HAS_ANY_FEATURE',										'PLOT_HAS_ANY_FEATURE_REQUIREMENT'),
+	('HD_PLOT_HAS_FEATURE_REQUIREMENTS',										'PLOT_HAS_ANY_FEATURE_REQUIREMENT'),
 	('DISTRICT_IS_CHICHEN_ITZA_DISTRICTS',							'REQUIRES_DISTRICT_IS_DISTRICT_HOLY_SITE'),
 	('DISTRICT_IS_CHICHEN_ITZA_DISTRICTS',							'REQUIRES_DISTRICT_IS_DISTRICT_CAMPUS'),
 	('DISTRICT_IS_CHICHEN_ITZA_DISTRICTS',							'REQUIRES_DISTRICT_IS_DISTRICT_THEATER'),
@@ -1213,10 +1378,8 @@ values
 	('HD_NOT_WONDER_WITHIN_6_TILES_REQUIREMENTS',	'HD_REQUIRES_DISTRICT_IS_NOT_DISTRICT_WONDER'),
 	('HD_IS_ON_DESERT_OR_DESERT_HILL_REQUIREMENTS',	'HD_REQUIRES_PLOT_HAS_TERRAIN_DESERT'),
 	('HD_IS_ON_DESERT_OR_DESERT_HILL_REQUIREMENTS',	'HD_REQUIRES_PLOT_HAS_TERRAIN_DESERT_HILLS'),
-	('PLOT_HAS_IMPROVED_AND_ON_ALL_FLOODPLAINS',					'REQUIRES_FLOODPLAINS_OR_PLAINSFLOODPLAINS_OR_GRASSFLOODPLAINS_REQUIREMENTS'),
-	('PLOT_HAS_IMPROVED_AND_ON_ALL_FLOODPLAINS',					'REQUIRES_PLOT_IS_IMPROVED'),
-	('PLOT_HAS_RESOURCE_AND_ON_ALL_FLOODPLAINS',					'REQUIRES_FLOODPLAINS_OR_PLAINSFLOODPLAINS_OR_GRASSFLOODPLAINS_REQUIREMENTS'),
-	('PLOT_HAS_RESOURCE_AND_ON_ALL_FLOODPLAINS',					'PLOT_HAS_RESOURCE_REQUIREMENTS'),
+	('PLOT_HAS_RESOURCE_ADJACENT_TO_RIVER',					'REQUIRES_PLOT_ADJACENT_TO_RIVER'),
+	('PLOT_HAS_RESOURCE_ADJACENT_TO_RIVER',					'PLOT_HAS_RESOURCE_REQUIREMENTS'),
 	('PLOT_IS_FRESH_WATER_REQUIREMENTS',							'REQUIRES_PLOT_IS_FRESH_WATER'),
 	('PLOT_IS_FRESH_WATER_REQUIREMENTS',							'REQUIRES_PLOT_ADJACENT_TO_RIVER'),
 	('PLOT_IS_FRESH_WATER_REQUIREMENTS',							'REQUIRES_PLOT_ADJACENT_TO_LAKE'),
@@ -1225,20 +1388,14 @@ values
 	('PLOT_IS_FRESH_WATER_OR_AQUEDUCT_REQUIREMENTS',							'REQUIRES_PLOT_ADJACENT_TO_LAKE'),
 	('PLOT_IS_FRESH_WATER_OR_AQUEDUCT_REQUIREMENTS',							'REQUIRES_PLOT_ADJACENT_TO_DISTRICT_AQUEDUCT'),
 	('PLOT_HAS_MARSH_REQUIREMENTS',									'REQUIRES_PLOT_HAS_MARSH'),
-	('HD_DISTRICT_IS_CITY_CENTER_OR_NEIGHBORHOOD',					'REQUIRES_DISTRICT_IS_DISTRICT_CITY_CENTER'),
-	('HD_DISTRICT_IS_CITY_CENTER_OR_NEIGHBORHOOD',					'REQUIRES_DISTRICT_IS_DISTRICT_NEIGHBORHOOD'),
-	('CITY_HAS_VERTICAL_INTEGRATION_REQUIREMENTS',					'REQUIRES_CITY_HAS_VERTICAL_INTEGRATION'),
-	('CITY_HAS_COMMERCIAL_OR_HARBOR',								'REQUIRES_CITY_HAS_DISTRICT_COMMERCIAL_HUB'),
-	('CITY_HAS_COMMERCIAL_OR_HARBOR',								'REQUIRES_CITY_HAS_DISTRICT_HARBOR'),
-	('CITY_HAS_CONTRACTOR_REQUIREMENTS',							'REQUIRES_CITY_HAS_CONTRACTOR'),
-	('CITY_HAS_AMBASSADOR_MESSENGER_REQUIREMENTS',					'REQUIRES_CITY_HAS_AMBASSADOR_MESSENGER'),	
-	('CITY_HAS_MULTINATIONAL_CORP_REQUIREMENTS',					'REQUIRES_CITY_HAS_MULTINATIONAL_CORP'),
-	('CITY_HAS_REYNA_4',											'REQUIRES_CITY_HAS_CONTRACTOR'),
-	('CITY_HAS_REYNA_4',											'REQUIRES_CITY_HAS_MULTINATIONAL_CORP'),
+	('HD_DISTRICT_IS_CITY_CENTER_OR_NEIGHBORHOOD_REQUIREMENTS',					'REQUIRES_DISTRICT_IS_DISTRICT_CITY_CENTER'),
+	('HD_DISTRICT_IS_CITY_CENTER_OR_NEIGHBORHOOD_REQUIREMENTS',					'REQUIRES_DISTRICT_IS_DISTRICT_NEIGHBORHOOD'),
+	('HD_DISTRICT_IS_CITY_CENTER_OR_NEIGHBORHOOD_WITHIN_6_TILES_REQUIREMENTS',					'REQUIRES_HD_DISTRICT_IS_CITY_CENTER_OR_NEIGHBORHOOD'),
+	('HD_DISTRICT_IS_CITY_CENTER_OR_NEIGHBORHOOD_WITHIN_6_TILES_REQUIREMENTS',					'REQUIRES_OBJECT_WITHIN_6_TILES'),
 	('PLOT_HAS_SHALLOW_WATER_AND_ADJACENT_TO_OWNER_HD',				'REQUIRES_PLOT_HAS_SHALLOW_WATER'),
 	('PLOT_HAS_SHALLOW_WATER_AND_ADJACENT_TO_OWNER_HD',				'ADJACENT_TO_OWNER'),
 	('HD_CITY_NOT_CAPITAL_NO_GOVERNOR',				'REQUIRES_NOT_CITY_HAS_GOV'),
-	('HD_CITY_NOT_CAPITAL_NO_GOVERNOR',				'REQUIRES_CITY_NON_CAPITAL'),
+	('HD_CITY_NOT_CAPITAL_NO_GOVERNOR',				'REQUIRES_CITY_HAS_NOT_PALACE'),
 	('HD_CITY_CAPITAL_OR_GOVERNOR',				'REQUIRES_CITY_HAS_GOVERNOR'),
 	('HD_CITY_CAPITAL_OR_GOVERNOR',				'REQUIRES_CITY_HAS_BUILDING_PALACE'),
 	('HD_PLOT_HAS_CAMP_FISHING_BOAT',				'REQUIRES_PLOT_HAS_IMPROVEMENT_CAMP'),
@@ -1251,15 +1408,6 @@ values
 	('HD_RIVER_PLOT_APPEAL_LESS_THAN_0',								'HD_PLOT_APPEAL_LESS_THAN_0'),
 	('HD_RIVER_PLOT_APPEAL_LESS_THAN_0',								'REQUIRES_PLOT_ADJACENT_TO_RIVER'),
 	('UNIT_IS_SCIENTIST',								'REQUIREMENT_UNIT_IS_SCIENTIST'),
-	('HD_ZOO_REQUIREMENTS',				'REQUIRES_PLOT_HAS_IMPROVEMENT_CAMP'),
-	('HD_ZOO_REQUIREMENTS',				'REQUIRES_PLOT_HAS_IMPROVEMENT_PASTURE'),
-	('HD_AQUARIUM_REQUIREMENTS',				'REQUIRES_PLOT_HAS_IMPROVEMENT_FISHING_BOATS'),
-	('HD_AQUARIUM_REQUIREMENTS',				'REQUIRES_PLOT_HAS_IMPROVEMENT_FISHERY'),
-	('HD_JEWELRY_SHOP_REQUIREMENTS',				'REQUIRES_PLOT_HAS_IMPROVEMENT_MINE'),
-	('HD_JEWELRY_SHOP_REQUIREMENTS',				'REQUIRES_PLOT_HAS_IMPROVEMENT_QUARRY'),
-	('HD_BOTANICAL_GARDEN_REQUIREMENTS',				'REQUIRES_PLOT_HAS_IMPROVEMENT_FARM'),
-	('HD_BOTANICAL_GARDEN_REQUIREMENTS',				'REQUIRES_PLOT_HAS_IMPROVEMENT_PLANTATION'),
-	('HD_BOTANICAL_GARDEN_REQUIREMENTS',				'REQUIRES_PLOT_HAS_IMPROVEMENT_LUMBER_MILL'),
 	('HD_PLOT_ADJACENT_TO_COAST_REQUIREMENTS',				'HD_REQUIRES_PLOT_ADJACENT_TO_COAST'),
 	('PLOT_ON_OR_ADJACENT_TO_GEOTHERMAL_FISSURE',				'HD_REQUIRES_PLOT_HAS_FEATURE_GEOTHERMAL_FISSURE'),
 	('PLOT_ON_OR_ADJACENT_TO_GEOTHERMAL_FISSURE',				'HD_REQUIRES_PLOT_ADJACENT_TO_FEATURE_GEOTHERMAL_FISSURE'),
@@ -1272,7 +1420,6 @@ values
 	('HD_CHANNEL_ADMINISTRATOR_REQUIREMENTS', 										'REQUIRES_DISTRICT_IS_DISTRICT_AQUEDUCT_HD'),
 	('HD_CHANNEL_ADMINISTRATOR_REQUIREMENTS', 										'REQUIRES_DISTRICT_IS_DISTRICT_CANAL_HD'),
 	('HD_CHANNEL_ADMINISTRATOR_REQUIREMENTS', 										'REQUIRES_DISTRICT_IS_DISTRICT_DAM_HD'),
-	('HD_CITY_HAS_ZOO_OR_BOTANICAL_GARDEN',	'REQUIRES_CITY_HAS_BUILDING_ZOO'),
 	('PLOT_IS_WONDER_ADJACENT_TO_RIVER_REQUIREMENTS',		'REQUIRES_PLOT_ADJACENT_TO_RIVER'),
 	('PLOT_IS_WONDER_ADJACENT_TO_RIVER_REQUIREMENTS',		'REQUIRES_PLOT_HAS_COMPLETE_WONDER'),
 	('DISTRICT_IS_HOLY_SITE_AND_ADJACENT_TO_THEATER',		'REQUIRES_DISTRICT_IS_DISTRICT_HOLY_SITE_HD'),
@@ -1282,20 +1429,15 @@ values
 	('HD_HIGH_TECH_INDUSTRY_REQUIREMENTS',		'REQUIRES_CITY_HAS_DISTRICT_INDUSTRIAL_ZONE_TIER_3_BUILDING'),
 	('HD_URBAN_EXHIBITION_REQUIREMENTS',				'REQUIRES_CITY_HAS_DISTRICT_ENTERTAINMENT_COMPLEX_TIER_2_BUILDING'),
 	('HD_URBAN_EXHIBITION_REQUIREMENTS',				'REQUIRES_CITY_HAS_DISTRICT_WATER_ENTERTAINMENT_COMPLEX_TIER_2_BUILDING'),
-	-- ('PLAYER_NOT_FOUNDED_RELIGION_REQUIREMENTS',		'REQUIRES_PLAYER_NOT_FOUNDED_RELIGION'),
-	-- ('PLAYER_HAS_FOUNDED_RELIGION_REQUIREMENTS',		'REQUIRES_PLAYER_HAS_FOUNDED_RELIGION'),
 	('HD_COMMEMORATION_SCIENTIFIC_DISTRICT_REQUIREMENTS',		'REQUIRES_DISTRICT_IS_CAMPUS'),
 	('HD_COMMEMORATION_SCIENTIFIC_DISTRICT_REQUIREMENTS',		'REQUIRES_DISTRICT_IS_HARBOR'),
 	('HD_COMMEMORATION_SCIENTIFIC_DISTRICT_REQUIREMENTS',		'REQUIRES_DISTRICT_IS_AQUEDUCT'),
 	('HD_CITY_IS_SAME_CONTINENT_REQUIREMENTS',	'HD_CITY_IS_SAME_CONTINENT_REQUIREMENTS'),
 	('HD_CITY_IS_SAME_CONTINENT_NOT_CAPITAL_REQUIREMENTS',	'HD_CITY_IS_SAME_CONTINENT_REQUIREMENTS'),
 	('HD_CITY_IS_SAME_CONTINENT_NOT_CAPITAL_REQUIREMENTS',	'REQUIRES_CITY_HAS_NOT_PALACE'),
-	('DISTRICT_IS_BRAZIL_UD',	'REQUIRES_DISTRICT_IS_DISTRICT_STREET_CARNIVAL'),
-	('DISTRICT_IS_BRAZIL_UD',	'REQUIRES_DISTRICT_IS_DISTRICT_WATER_STREET_CARNIVAL'),
-	('PLOT_HAS_IMPROVED_AND_RAINFOREST_REQUIREMENTS',		'REQUIRES_PLOT_IS_IMPROVED'),
-	('PLOT_HAS_IMPROVED_AND_RAINFOREST_REQUIREMENTS',		'REQUIRES_PLOT_HAS_JUNGLE'),
-	('PLOT_HAS_LUXURY_AND_RAINFOREST_REQUIREMENTS',		'REQUIRES_PLOT_HAS_LUXURY'),
-	('PLOT_HAS_LUXURY_AND_RAINFOREST_REQUIREMENTS',		'REQUIRES_PLOT_HAS_JUNGLE'),
+	('PLOT_HAS_IMPROVED_RESOURCE_AND_RAINFOREST_REQUIREMENTS',		'REQUIRES_PLOT_IS_IMPROVED'),
+	('PLOT_HAS_IMPROVED_RESOURCE_AND_RAINFOREST_REQUIREMENTS',		'REQUIRES_PLOT_HAS_JUNGLE'),
+	('PLOT_HAS_IMPROVED_RESOURCE_AND_RAINFOREST_REQUIREMENTS',		'REQUIRES_PLOT_HAS_VISIBLE_RESOURCE'),
 	('HD_DIONYSIAN_CARNIVAL_REQUIREMENTS',		'REQUIRES_CITY_HAS_DISTRICT_THEATER'),
 	('HD_DIONYSIAN_CARNIVAL_REQUIREMENTS',		'REQUIRES_CITY_HAS_4_POPULATION'),
 	('HD_NEW_DEAL_REQUIREMENTS',		'REQUIRES_NOT_CITY_HAS_GOV'),
@@ -1314,8 +1456,6 @@ values
 	('PLOT_ADJACENT_TO_VOLCANO_REQUIREMENTS',				'REQUIRES_PLOT_ADJACENT_EYJAFJALLAJOKULL'),
 	('PLOT_ADJACENT_TO_VOLCANO_REQUIREMENTS',				'REQUIRES_PLOT_ADJACENT_VESUVIUS'),
 	('PLOT_ADJACENT_TO_VOLCANO_REQUIREMENTS',				'REQUIRES_PLOT_ADJACENT_KILIMANJARO'),
-	('HD_WRESTING_AND_MANEUVERS_REQUIREMENTS',							'PLOT_HAS_BUILDING_ARENA'),
-	('HD_WRESTING_AND_MANEUVERS_REQUIREMENTS',							'REQUIRES_DISTRICT_IS_ENTERTAINMENT_COMPLEX'),
 	('PLOT_ADJACENT_TO_MOUNTAIN_IS_NOT_WONDER_REQUIREMENTS',		'HD_REQUIRES_DISTRICT_IS_NOT_DISTRICT_WONDER'),
 	('PLOT_ADJACENT_TO_MOUNTAIN_IS_NOT_WONDER_REQUIREMENTS',		'REQUIRES_PLOT_ADJACENT_TO_MOUNTAIN'),
 	('PLOT_IS_SPECIALTY_DISTRICT_ADJACENT_TO_RIVER_REQUIREMENTS',	'HD_REQUIRES_DISTRICT_IS_SPECIALTY_DISTRICT'),
@@ -1324,9 +1464,9 @@ values
 	('PLOT_IS_DISTRICT_ADJACENT_TO_RIVER_REQUIREMENTS',				'REQUIRES_PLOT_ADJACENT_TO_RIVER'),
 	('CITY_HAS_WALLS_EARLY', 									'REQUIRES_CITY_HAS_BUILDING_WALLS_EARLY'),
 	('CITY_HAS_TSIKHE', 										'REQUIRES_CITY_HAS_BUILDING_TSIKHE'),
-	('HD_OVERSEAS_CITY_HAS_TIER_2_COMMERCIAL_HUB_BUILDINGS', 	'REQUIRES_HD_CITY_HAS_COMMERCIAL_TIER_2_BUILDING'),
-	('HD_OVERSEAS_CITY_HAS_TIER_2_COMMERCIAL_HUB_BUILDINGS', 	'REQUIRES_CITY_IS_NOT_OWNER_CAPITAL_CONTINENT'),
-	('HD_OVERSEAS_CITY_HAS_TIER_2_HARBOR_BUILDINGS', 			'REQUIRES_HD_CITY_HAS_HARBOR_TIER_2_BUILDING'),
+	('HD_OVERSEAS_CITY_HAS_TIER_3_COMMERCIAL_HUB_BUILDINGS', 	'REQUIRES_CITY_HAS_DISTRICT_COMMERCIAL_HUB_TIER_3_BUILDING'),
+	('HD_OVERSEAS_CITY_HAS_TIER_3_COMMERCIAL_HUB_BUILDINGS', 	'REQUIRES_CITY_IS_NOT_OWNER_CAPITAL_CONTINENT'),
+	('HD_OVERSEAS_CITY_HAS_TIER_2_HARBOR_BUILDINGS', 			'REQUIRES_CITY_HAS_DISTRICT_HARBOR_TIER_2_BUILDING'),
 	('HD_OVERSEAS_CITY_HAS_TIER_2_HARBOR_BUILDINGS', 			'REQUIRES_CITY_IS_NOT_OWNER_CAPITAL_CONTINENT'),
 	('HD_SPORTS_MEET_1_REQUIREMENTS',							'PLOT_HAS_BUILDING_STADIUM'),
 	('HD_SPORTS_MEET_1_REQUIREMENTS',							'REQUIRES_DISTRICT_IS_ENTERTAINMENT_COMPLEX'),
@@ -1384,10 +1524,6 @@ values
 	('HD_AI_CITY_FOLLOWS_RELIGION_REQUIREMENTS',	'REQUIRES_PLAYER_IS_AI'),
 	('HD_COLOSSUS_REQUIREMENTS',	'REQUIRES_CITY_HAS_BUILDING_COLOSSUS'),
 	('HD_COLOSSUS_REQUIREMENTS',	'REQUIRES_PLOT_HAS_IMPROVEMENT_FISHING_BOATS'),
-	('HD_BOROBUDUR_CITY_REQUIREMENTS',	'REQUIRES_CITY_HAS_FEATURE_VOLCANIC_SOIL'),
-	('HD_BOROBUDUR_CITY_REQUIREMENTS',	'REQUIRES_CITY_HAS_FEATURE_VOLCANO'),
-	('HD_BOROBUDUR_DISTRICT_REQUIREMENTS',	'HD_REQUIRES_PLOT_ON_OR_ADJACENT_TO_FEATURE_VOLCANIC_SOIL'),
-	('HD_BOROBUDUR_DISTRICT_REQUIREMENTS',	'HD_REQUIRES_DISTRICT_IS_NOT_DISTRICT_WONDER'),
 	('HD_IS_WATER_CONSERVATION_DISTRICT',	'REQUIRES_DISTRICT_IS_DISTRICT_AQUEDUCT'),
 	('HD_IS_WATER_CONSERVATION_DISTRICT',	'REQUIRES_DISTRICT_IS_DISTRICT_CANAL'),
 	('HD_IS_WATER_CONSERVATION_DISTRICT',	'REQUIRES_DISTRICT_IS_DISTRICT_DAM'),
@@ -1449,8 +1585,184 @@ values
 	('HD_PILLAGER_HIGH_EXPLORATION',							'REQUIRES_HAS_HIGH_PILLAGE'),
 	('HD_PILLAGER_HIGH_EXPLORATION',							'REQUIRES_HAS_HIGH_EXPLORATION'),
 	('CITY_HAS_WONDER_DISTRICT_IS_HOLY_SITE_REQUIREMENTS',								'REQUIRES_CITY_HAS_WONDER'),
-	('CITY_HAS_WONDER_DISTRICT_IS_HOLY_SITE_REQUIREMENTS',								'REQUIRES_DISTRICT_IS_HOLY_SITE');
+	('CITY_HAS_WONDER_DISTRICT_IS_HOLY_SITE_REQUIREMENTS',								'REQUIRES_DISTRICT_IS_HOLY_SITE'),
+	('HD_IMPROVEMENT_CHARMING_APPEAL_REQUIREMENTS',								'REQUIRES_PLOT_CHARMING_APPEAL'),
+	('HD_IMPROVEMENT_CHARMING_APPEAL_REQUIREMENTS',								'REQUIRES_PLOT_IS_IMPROVED'),
+	('HD_IMPROVEMENT_BREATHTAKING_APPEAL_REQUIREMENTS',						'REQUIRES_PLOT_BREATHTAKING_APPEAL'),
+	('HD_IMPROVEMENT_BREATHTAKING_APPEAL_REQUIREMENTS',						'REQUIRES_PLOT_IS_IMPROVED'),
+	('HD_PLOT_HAS_FEATURE_AND_RESOURCE_REQUIREMENTS',	'PLOT_HAS_ANY_FEATURE_REQUIREMENT'),
+	('HD_PLOT_HAS_FEATURE_AND_RESOURCE_REQUIREMENTS',	'REQUIRES_PLOT_HAS_VISIBLE_RESOURCE'),
+	('HD_CHARMING_PLOT_HAS_FEATURE_REQUIREMENTS',	'PLOT_HAS_ANY_FEATURE_REQUIREMENT'),
+	('HD_CHARMING_PLOT_HAS_FEATURE_REQUIREMENTS',	'REQUIRES_PLOT_CHARMING_APPEAL'),
+	('HD_BREATHTAKING_PLOT_HAS_FEATURE_REQUIREMENTS',	'PLOT_HAS_ANY_FEATURE_REQUIREMENT'),
+	('HD_BREATHTAKING_PLOT_HAS_FEATURE_REQUIREMENTS',	'REQUIRES_PLOT_BREATHTAKING_APPEAL'),
+	('HD_ADJACENT_PLOT_CHARMING',					                'ADJACENT_TO_OWNER'),
+	('HD_ADJACENT_PLOT_CHARMING',					                'REQUIRES_PLOT_CHARMING_APPEAL'),
+	('HD_ADJACENT_PLOT_BREATHTAKING',					            'ADJACENT_TO_OWNER'),
+	('HD_ADJACENT_PLOT_BREATHTAKING',					            'REQUIRES_PLOT_BREATHTAKING_APPEAL'),
+	('HD_PLOT_CHARMING_UNIQUE_IMPROVEMENT',		            'REQUIRES_PLOT_CHARMING_APPEAL'),
+	('HD_PLOT_CHARMING_UNIQUE_IMPROVEMENT',		            'REQUIRES_PLOT_HAS_CIV_OR_CITYSTATE_UNIQUE'),
+	('HD_PLOT_BREATHTAKING_UNIQUE_IMPROVEMENT',		        'REQUIRES_PLOT_BREATHTAKING_APPEAL'),
+	('HD_PLOT_BREATHTAKING_UNIQUE_IMPROVEMENT',		        'REQUIRES_PLOT_HAS_CIV_OR_CITYSTATE_UNIQUE'),
+	('HD_PLOT_CHARMING_WONDER',					                  'REQUIRES_PLOT_CHARMING_APPEAL'),
+	('HD_PLOT_CHARMING_WONDER',					                  'REQUIRES_DISTRICT_IS_DISTRICT_WONDER'),
+	('HD_PLOT_CHARMING_WONDER',					                  'REQUIRES_PLOT_HAS_COMPLETE_WONDER'),
+	('HD_PLOT_BREATHTAKING_WONDER',					              'REQUIRES_PLOT_BREATHTAKING_APPEAL'),
+	('HD_PLOT_BREATHTAKING_WONDER',					              'REQUIRES_DISTRICT_IS_DISTRICT_WONDER'),
+	('HD_PLOT_BREATHTAKING_WONDER',					              'REQUIRES_PLOT_HAS_COMPLETE_WONDER'),
+	('HD_PLOT_ON_OR_ADJACENT_TO_LUXURY',					              'REQUIRES_PLOT_ADJACENT_TO_LUXURY'),
+	('HD_PLOT_ON_OR_ADJACENT_TO_LUXURY',					              'REQUIRES_PLOT_HAS_LUXURY'),
+	('HD_IMPROVED_PLOT_WITHIN_3_TIELS',					              'REQUIRES_PLOT_IS_IMPROVED'),
+	('HD_IMPROVED_PLOT_WITHIN_3_TIELS',					              'REQUIRES_OBJECT_WITHIN_3_TILES'),
+	('HD_CITY_HAS_NEIGHBORHOOD_AND_GOVERNOR_IMPROVEMENT',					              'REQUIRES_CITY_HAS_GOVERNOR'),
+	('HD_CITY_HAS_NEIGHBORHOOD_AND_GOVERNOR_IMPROVEMENT',					              'REQUIRES_CITY_HAS_DISTRICT_NEIGHBORHOOD'),
+	('HD_CITY_HAS_DISTRICT_ENCAMPMENT_AND_INDUSTRIAL_ZONE_REQUIREMENTS',				'REQUIRES_CITY_HAS_DISTRICT_ENCAMPMENT'),
+	('HD_CITY_HAS_DISTRICT_ENCAMPMENT_AND_INDUSTRIAL_ZONE_REQUIREMENTS',				'REQUIRES_CITY_HAS_DISTRICT_INDUSTRIAL_ZONE'),
+	('HD_ADJACENT_TO_MOUNTAIN_NO_APPRENTICESHIP',				'HD_REQUIRES_PLAYER_HAS_NO_TECH_APPRENTICESHIP'),
+	('HD_ADJACENT_TO_MOUNTAIN_NO_APPRENTICESHIP',				'HD_REQUIRES_PLAYER_HAS_TECH_BRONZE_WORKING'),
+	('HD_ADJACENT_TO_MOUNTAIN_NO_APPRENTICESHIP',				'REQUIRES_PLOT_ADJACENT_TO_MOUNTAIN'),
+	('HD_HAS_HILL_NO_METAL_CASTING',										'HD_REQUIRES_PLAYER_HAS_NO_TECH_METAL_CASTING'),
+	('HD_HAS_HILL_NO_METAL_CASTING',										'HD_REQUIRES_PLAYER_HAS_TECH_MASONRY'),
+	('HD_HAS_HILL_NO_METAL_CASTING',										'PLOT_IS_HILLS_REQUIREMENT'),
+	('HD_ADJACENT_TO_RIVER_NO_MACHINERY',								'HD_REQUIRES_PLAYER_HAS_NO_TECH_MACHINERY'),
+	('HD_ADJACENT_TO_RIVER_NO_MACHINERY',								'HD_REQUIRES_PLAYER_HAS_TECH_THE_WHEEL'),
+	('HD_ADJACENT_TO_RIVER_NO_MACHINERY',								'REQUIRES_PLOT_ADJACENT_TO_RIVER'),
+	('HD_ADJACENT_TO_LAND_OR_HARBOR_NO_COMPASS',								'HD_REQUIRES_PLAYER_HAS_NO_TECH_COMPASS_HD'),
+	('HD_ADJACENT_TO_LAND_OR_HARBOR_NO_COMPASS',								'HD_REQUIRES_PLOT_ADJACENT_TO_LAND_OR_HARBOR'),
+	('HD_PLOT_ADJACENT_TO_LAND_OR_HARBOR_REQUIREMENTS',					'REQUIRES_PLOT_ADJACENT_TO_DISTRICT_HARBOR_RAW'),
+	('PLOT_HAS_WATER_IMPROVEMENT_REQUIREMENTS',					'HD_REQUIRES_PLOT_HAS_TERRAIN_COAST'),
+	('PLOT_HAS_WATER_IMPROVEMENT_REQUIREMENTS',					'REQUIRES_PLOT_IS_IMPROVED'),
+	('PLOT_HAS_ROBOT_PRODUCTION_IMPROVEMENT_AND_ADJACENT_TO_OWNER_REQUIREMENTS',			'ADJACENT_TO_OWNER'),
+	('PLOT_HAS_ROBOT_PRODUCTION_IMPROVEMENT_AND_ADJACENT_TO_OWNER_REQUIREMENTS',			'REQUIRES_PLOT_HAS_ROBOT_PRODUCTION_IMPROVEMENT'),
+	('HD_CANADA_IMPROVEMENT_REQUIREMENTS',			'REQUIRES_PLOT_IS_TUNDRA_OR_SNOW'),
+	('HD_CANADA_IMPROVEMENT_REQUIREMENTS',			'REQUIRES_PLOT_IS_IMPROVED'),
+	('HD_WIND_MILL_REQUIREMENTS',			'HD_REQUIRES_WIND_MILL_PLOT'),
+	('HD_WIND_MILL_REQUIREMENTS',			'HD_REQUIRES_DISTRICT_IS_NOT_DISTRICT_WONDER'),
+	('HD_WIND_MILL_PLOT_REQUIREMENTS',			'REQUIRES_PLOT_IS_ADJACENT_TO_COAST'),
+	('HD_WIND_MILL_PLOT_REQUIREMENTS',			'REQUIRES_TERRAIN_COAST'),
+	('HD_WIND_MILL_PLOT_REQUIREMENTS',			'REQUIRES_TERRAIN_OCEAN'),
+	('HD_WIND_MILL_PLOT_REQUIREMENTS',			'PLOT_IS_HILLS_REQUIREMENT'),
+	('HD_WIND_MILL_PLOT_REQUIREMENTS',			'REQUIRES_PLOT_ADJACENT_TO_MOUNTAIN'),
+	('HD_PLOT_IS_COAST_OR_OCEAN_AND_PLAYER_HAS_CONSTRUCTION',	'REQUIRES_HD_PLOT_IS_COAST_OR_OCEAN'),
+	('HD_PLOT_IS_COAST_OR_OCEAN_AND_PLAYER_HAS_CONSTRUCTION',	'HD_REQUIRES_PLAYER_HAS_TECH_CONSTRUCTION'),
+	('HD_PLOT_IS_COAST_OR_OCEAN',								'REQUIRES_TERRAIN_COAST'),
+	('HD_PLOT_IS_COAST_OR_OCEAN',								'REQUIRES_TERRAIN_OCEAN'),
+	('HD_PANEGYRIC_REQUIREMENTS',								'REQUIRES_CITY_HAS_WONDER'),
+	('HD_PANEGYRIC_REQUIREMENTS',								'REQUIRES_DISTRICT_IS_THEATER'),
+	('HD_PANEGYRIC_WITH_BUILDING_REQUIREMENTS',								'REQUIRES_CITY_HAS_WONDER'),
+	('HD_PANEGYRIC_WITH_BUILDING_REQUIREMENTS',								'REQUIRES_PLOT_HAS_DISTRICT_THEATER_TIER_1_BUILDING'),
+	('HD_VILLA_URBANA_REQUIREMENTS',								'REQUIRES_PLOT_BREATHTAKING_APPEAL'),
+	('HD_VILLA_URBANA_REQUIREMENTS',								'REQUIRES_DISTRICT_IS_DISTRICT_NEIGHBORHOOD'),
+	('HD_VILLA_URBANA_WITH_BUILDING_REQUIREMENTS',								'REQUIRES_PLOT_BREATHTAKING_APPEAL'),
+	('HD_VILLA_URBANA_WITH_BUILDING_REQUIREMENTS',								'REQUIRES_PLOT_HAS_DISTRICT_NEIGHBORHOOD_TIER_1_BUILDING'),
+	('HD_FASHIONABLE_DISTRICT_THEATER_REQUIREMENTS',	'REQUIRES_DISTRICT_IS_THEATER'),
+	('HD_FASHIONABLE_DISTRICT_THEATER_REQUIREMENTS',	'REQUIRES_CITY_HAS_WONDER'),
+	('HD_FASHIONABLE_DISTRICT_THEATER_1_REQUIREMENTS',	'REQUIRES_PLOT_HAS_DISTRICT_THEATER_TIER_1_BUILDING'),
+	('HD_FASHIONABLE_DISTRICT_THEATER_1_REQUIREMENTS',	'REQUIRES_CITY_HAS_WONDER'),
+	('HD_FASHIONABLE_DISTRICT_THEATER_1_REQUIREMENTS',	'REQUIRES_PLOT_BREATHTAKING_APPEAL'),
+	('HD_FASHIONABLE_DISTRICT_THEATER_2_REQUIREMENTS',	'REQUIRES_PLOT_HAS_DISTRICT_THEATER_TIER_2_BUILDING'),
+	('HD_FASHIONABLE_DISTRICT_THEATER_2_REQUIREMENTS',	'REQUIRES_CITY_HAS_WONDER'),
+	('HD_FASHIONABLE_DISTRICT_THEATER_2_REQUIREMENTS',	'REQUIRES_PLOT_BREATHTAKING_APPEAL'),
+	('HD_FASHIONABLE_DISTRICT_THEATER_3_REQUIREMENTS',	'REQUIRES_PLOT_HAS_DISTRICT_THEATER_TIER_3_BUILDING'),
+	('HD_FASHIONABLE_DISTRICT_THEATER_3_REQUIREMENTS',	'REQUIRES_CITY_HAS_WONDER'),
+	('HD_FASHIONABLE_DISTRICT_THEATER_3_REQUIREMENTS',	'REQUIRES_PLOT_BREATHTAKING_APPEAL'),
+	('HD_FASHIONABLE_DISTRICT_NEIGHBORHOOD_REQUIREMENTS',	'REQUIRES_DISTRICT_IS_DISTRICT_NEIGHBORHOOD'),
+	('HD_FASHIONABLE_DISTRICT_NEIGHBORHOOD_REQUIREMENTS',	'REQUIRES_CITY_HAS_WONDER'),
+	('HD_FASHIONABLE_DISTRICT_NEIGHBORHOOD_1_REQUIREMENTS',	'REQUIRES_PLOT_HAS_DISTRICT_NEIGHBORHOOD_TIER_1_BUILDING'),
+	('HD_FASHIONABLE_DISTRICT_NEIGHBORHOOD_1_REQUIREMENTS',	'REQUIRES_CITY_HAS_WONDER'),
+	('HD_FASHIONABLE_DISTRICT_NEIGHBORHOOD_1_REQUIREMENTS',	'REQUIRES_PLOT_BREATHTAKING_APPEAL'),
+	('HD_FASHIONABLE_DISTRICT_NEIGHBORHOOD_2_REQUIREMENTS',	'REQUIRES_PLOT_HAS_DISTRICT_NEIGHBORHOOD_TIER_2_BUILDING'),
+	('HD_FASHIONABLE_DISTRICT_NEIGHBORHOOD_2_REQUIREMENTS',	'REQUIRES_CITY_HAS_WONDER'),
+	('HD_FASHIONABLE_DISTRICT_NEIGHBORHOOD_2_REQUIREMENTS',	'REQUIRES_PLOT_BREATHTAKING_APPEAL'),
+	('HD_FASHIONABLE_DISTRICT_NEIGHBORHOOD_3_REQUIREMENTS',	'REQUIRES_PLOT_HAS_DISTRICT_NEIGHBORHOOD_TIER_3_BUILDING'),
+	('HD_FASHIONABLE_DISTRICT_NEIGHBORHOOD_3_REQUIREMENTS',	'REQUIRES_CITY_HAS_WONDER'),
+	('HD_FASHIONABLE_DISTRICT_NEIGHBORHOOD_3_REQUIREMENTS',	'REQUIRES_PLOT_BREATHTAKING_APPEAL'),
+	('CITY_HAS_1_TITLE_GOVERNOR_REQUIREMENTS',  'REQUIRES_CITY_HAS_1_TITLE_GOVERNOR'),
+	('CITY_HAS_3_TITLE_GOVERNOR_REQUIREMENTS',  'REQUIRES_CITY_HAS_3_TITLE_GOVERNOR'),
+	('CITY_HAS_4_TITLE_GOVERNOR_REQUIREMENTS',  'REQUIRES_CITY_HAS_4_TITLE_GOVERNOR'),
+	('CITY_HAS_5_TITLE_GOVERNOR_REQUIREMENTS',  'REQUIRES_CITY_HAS_5_TITLE_GOVERNOR'),
+	('CITY_HAS_6_TITLE_GOVERNOR_REQUIREMENTS',  'REQUIRES_CITY_HAS_6_TITLE_GOVERNOR'),
+	('CITY_HAS_7_TITLE_GOVERNOR_REQUIREMENTS',  'REQUIRES_CITY_HAS_7_TITLE_GOVERNOR'),
+	('HD_IMPROVEMENT_ADJACENT_TO_HYDRAULIC_REQUIREMENTS',  'REQUIRES_PLOT_ADJACENT_TO_DISTRICT_CLASSIFICATION_HYDRAULIC'),
+	('HD_IMPROVEMENT_ADJACENT_TO_HYDRAULIC_REQUIREMENTS',  'REQUIRES_PLOT_IS_IMPROVED'),
+	('HD_DISTRICT_ADJACENT_TO_HYDRAULIC_REQUIREMENTS',  'REQUIRES_PLOT_ADJACENT_TO_DISTRICT_CLASSIFICATION_HYDRAULIC'),
+	('HD_DISTRICT_ADJACENT_TO_HYDRAULIC_REQUIREMENTS',  'HD_REQUIRES_DISTRICT_IS_NOT_DISTRICT_WONDER'),
+	('HD_CHARMING_DISTRICT_REQUIREMENTS',  'REQUIRES_PLOT_CHARMING_APPEAL'),
+	('HD_CHARMING_DISTRICT_REQUIREMENTS',  'HD_REQUIRES_DISTRICT_IS_NOT_DISTRICT_WONDER'),
+	('HD_BREATHTAKING_DISTRICT_REQUIREMENTS',  'REQUIRES_PLOT_BREATHTAKING_APPEAL'),
+	('HD_BREATHTAKING_DISTRICT_REQUIREMENTS',  'HD_REQUIRES_DISTRICT_IS_NOT_DISTRICT_WONDER'),
+	('HD_PLOT_HAS_CITY_OR_WATER_PARK_IMPROVEMENT_WITHIN_6_TILES_REQUIREMENTS',  'REQUIRES_PLOT_HAS_IMPROVEMENT_CITY_PARK'),
+	('HD_PLOT_HAS_CITY_OR_WATER_PARK_IMPROVEMENT_WITHIN_6_TILES_REQUIREMENTS',  'REQUIRES_OBJECT_WITHIN_6_TILES'),
+	('UNIT_IS_MILITARY_ENGINEERING_UNITS_REQUIREMENTS',  'REQUIRES_UNIT_IS_UNIT_MILITARY_ENGINEER'),
+	('PALACE_AND_ROYAL_NAVY_DOCKYARD_REQUIREMENTS',		'REQUIRES_CITY_HAS_DISTRICT_ROYAL_NAVY_DOCKYARD'),
+	('PALACE_AND_ROYAL_NAVY_DOCKYARD_REQUIREMENTS',		'REQUIRES_CITY_HAS_BUILDING_PALACE'),
+	('PALACE_AND_HARBOR_TIER_1_REQUIREMENTS',			'REQUIRES_CITY_HAS_DISTRICT_HARBOR_TIER_1_BUILDING'),
+	('PALACE_AND_HARBOR_TIER_1_REQUIREMENTS',			'REQUIRES_CITY_HAS_BUILDING_PALACE'),
+	('PALACE_AND_HARBOR_TIER_2_REQUIREMENTS',			'REQUIRES_CITY_HAS_DISTRICT_HARBOR_TIER_2_BUILDING'),
+	('PALACE_AND_HARBOR_TIER_2_REQUIREMENTS',			'REQUIRES_CITY_HAS_BUILDING_PALACE'),
+	('PALACE_AND_HARBOR_TIER_3_REQUIREMENTS',			'REQUIRES_CITY_HAS_DISTRICT_HARBOR_TIER_3_BUILDING'),
+	('PALACE_AND_HARBOR_TIER_3_REQUIREMENTS',			'REQUIRES_CITY_HAS_BUILDING_PALACE'),
+	('CITY_HAS_DISTRICT_SEOWON',                        'REQUIRES_CITY_HAS_DISTRICT_SEOWON'),
+	('PLOT_ADJACENT_TO_BONUS_REQUIREMENTS',  'REQUIRES_PLOT_ADJACENT_TO_BONUS'),
+	('HD_DISTRICT_IS_CAMPUS_OR_THEATER_REQUIREMENTS',  'REQUIRES_DISTRICT_IS_CAMPUS'),
+	('HD_DISTRICT_IS_CAMPUS_OR_THEATER_REQUIREMENTS',  'REQUIRES_DISTRICT_IS_THEATER'),
+	('HD_GOVERNOR_MANAGER_LEFT_1_TRADE_REQUIREMENTS',  'REQUIRES_HD_GOVERNOR_MANAGER_LEFT_1_TRADE');
 
+-- 军事拓展 军事工程单位适配
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select
+	'UNIT_IS_MILITARY_ENGINEERING_UNITS_REQUIREMENTS', 'REQUIRES_UNIT_IS_' || UnitType
+from Units where UnitType in ('UNIT_SAPPER', 'UNIT_ENGINEER_CORP');
+
+-- 蓄水池一级建筑
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'HD_ORCHARD_REQUIREMENTS', 'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType from HD_Resource_Classification
+	where ResourceClassificationType in ('RESOURCE_CLASSIFICATION_HD_FRUIT', 'RESOURCE_CLASSIFICATION_HD_VEGETABLE');
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'HD_HAMMER_WORKS_REQUIREMENTS', 'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType from HD_Resource_Classification
+	where ResourceClassificationType in ('RESOURCE_CLASSIFICATION_HD_CONSTRUCTION', 'RESOURCE_CLASSIFICATION_HD_METALLURGY');
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'HD_HYDRAULIC_SPINNING_WHEEL_REQUIREMENTS', 'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType from HD_Resource_Classification
+	where ResourceClassificationType in ('RESOURCE_CLASSIFICATION_HD_LEATHER', 'RESOURCE_CLASSIFICATION_HD_CLOTH');
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'HD_BATHHOUSE_REQUIREMENTS', 'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType from HD_Resource_Classification
+	where ResourceClassificationType in ('RESOURCE_CLASSIFICATION_HD_MEDICINE', 'RESOURCE_CLASSIFICATION_HD_HOUSEHOLD');
+
+-- 城市有商业或港口 HD_CITY_HAS_COMMERCIAL_HUB_OR_HARBOR_REQUIREMENTS
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select
+	'HD_CITY_HAS_COMMERCIAL_HUB_OR_HARBOR_REQUIREMENTS', 'REQUIRES_CITY_HAS_' || DistrictType || '_RAW'
+from Districts where DistrictType in ('DISTRICT_COMMERCIAL_HUB', 'DISTRICT_HARBOR')
+	or DistrictType in (select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType in ('DISTRICT_COMMERCIAL_HUB', 'DISTRICT_HARBOR'));
+
+-- 丹房
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'HD_ALCHEMY_ROOM_RESOURCES_REQUIREMENTS', 'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType
+from HD_Resource_Classification where ResourceClassificationType in ('RESOURCE_CLASSIFICATION_HD_METALLURGY', 'RESOURCE_CLASSIFICATION_HD_MEDICINE');
+
+-- 机器人生产
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'PLOT_HAS_ROBOT_PRODUCTION_IMPROVEMENT_REQUIREMENTS', 'REQUIRES_PLOT_HAS_' || ImprovementType from HD_Improvement_Classification
+	where ImprovementClassificationType in ('IMPROVEMENT_CLASSIFICATION_AGRARIAN', 'IMPROVEMENT_CLASSIFICATION_EXPLOITATIVE');
+
+-- 相邻陆地或港口
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'HD_PLOT_ADJACENT_TO_LAND_OR_HARBOR_REQUIREMENTS', 'HD_REQUIRES_PLOT_ADJACENT_TO_' || TerrainType
+from Terrains where Water = 0 and Impassable = 0;
+
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'HD_PLOT_ADJACENT_TO_LAND_OR_HARBOR_REQUIREMENTS', 'REQUIRES_PLOT_ADJACENT_TO_' || CivUniqueDistrictType || '_RAW'
+from DistrictReplaces where ReplacesDistrictType = 'DISTRICT_HARBOR';
+
+-- 文明&城邦特色改良
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'PLOT_HAS_CIV_OR_CITYSTATE_UNIQUE_REQUIREMENTS', 'REQUIRES_PLOT_HAS_' || ImprovementType from HD_Improvement_Classification
+	where ImprovementClassificationType in ('IMPROVEMENT_CLASSIFICATION_UNIQUE', 'IMPROVEMENT_CLASSIFICATION_CITYSTATE');
+
+-- 文具行业
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'HD_PLOT_HAS_STATIONERY_INDUSTRY_IMPROVEMENTS_REQUIREMENTS', 'REQUIRES_PLOT_HAS_' || ImprovementType from HD_Improvement_Classification
+	where ImprovementClassificationType in ('IMPROVEMENT_CLASSIFICATION_EDUCATIONAL', 'IMPROVEMENT_CLASSIFICATION_HUMANITIES');
+
+-- 
 insert or ignore into RequirementSetRequirements
 	(RequirementSetId,					RequirementId)
 select
@@ -1497,44 +1809,44 @@ insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementI
 	from TerrainClass_Terrains where TerrainClassType = 'TERRAIN_CLASS_MOUNTAIN';
 
 -- 公共交通
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,																	RequirementId)
-select
-	'HD_PUBLIC_TRANSPORT_AT_RADIUS_ONE_REQUIREMENTS',		'REQUIRES_PLOT_ADJACENT_TO_' || Type
-from Types where Type in (
-	'BUILDING_HD_BUS_STOP', 'BUILDING_JNR_TRANSIT_HUB', 'IMPROVEMENT_LEU_STATION', 'IMPROVEMENT_MOUNTAIN_TUNNEL', 'IMPROVEMENT_MOUNTAIN_ROAD', 'DISTRICT_AERODROME'
-);
+-- insert or ignore into RequirementSetRequirements
+-- 	(RequirementSetId,																	RequirementId)
+-- select
+-- 	'HD_PUBLIC_TRANSPORT_AT_RADIUS_ONE_REQUIREMENTS',		'REQUIRES_PLOT_ADJACENT_TO_' || Type
+-- from Types where Type in (
+-- 	'BUILDING_HD_BUS_STOP', 'BUILDING_JNR_TRANSIT_HUB', 'IMPROVEMENT_LEU_STATION', 'IMPROVEMENT_MOUNTAIN_TUNNEL', 'IMPROVEMENT_MOUNTAIN_ROAD', 'DISTRICT_AERODROME'
+-- );
 
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,														RequirementId)
-select
-	'HD_PUBLIC_TRANSPORT_OBJECTS_REQUIREMENTS',		RequirementId
-from Requirements where RequirementId in (
-	'PLOT_HAS_BUILDING_HD_BUS_STOP',
-	'PLOT_HAS_BUILDING_JNR_TRANSIT_HUB',
-	'REQUIRES_PLOT_HAS_IMPROVEMENT_LEU_STATION',
-	'REQUIRES_PLOT_HAS_IMPROVEMENT_MOUNTAIN_TUNNEL',
-	'REQUIRES_PLOT_HAS_IMPROVEMENT_MOUNTAIN_ROAD',
-	'REQUIRES_DISTRICT_IS_DISTRICT_AERODROME_HD'
-);
+-- insert or ignore into RequirementSetRequirements
+-- 	(RequirementSetId,														RequirementId)
+-- select
+-- 	'HD_PUBLIC_TRANSPORT_OBJECTS_REQUIREMENTS',		RequirementId
+-- from Requirements where RequirementId in (
+-- 	'PLOT_HAS_BUILDING_HD_BUS_STOP',
+-- 	'PLOT_HAS_BUILDING_JNR_TRANSIT_HUB',
+-- 	'REQUIRES_PLOT_HAS_IMPROVEMENT_LEU_STATION',
+-- 	'REQUIRES_PLOT_HAS_IMPROVEMENT_MOUNTAIN_TUNNEL',
+-- 	'REQUIRES_PLOT_HAS_IMPROVEMENT_MOUNTAIN_ROAD',
+-- 	'REQUIRES_DISTRICT_IS_DISTRICT_AERODROME_HD'
+-- );
 
-insert or ignore into RequirementSets
-	(RequirementSetId,																						RequirementSetType)
-select
-	'HD_IS' || DistrictType || '_PUBLIC_TRANSPORT_AT_RADIUS_ONE',	'REQUIREMENTSET_TEST_ALL'
-from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+-- insert or ignore into RequirementSets
+-- 	(RequirementSetId,																						RequirementSetType)
+-- select
+-- 	'HD_IS' || DistrictType || '_PUBLIC_TRANSPORT_AT_RADIUS_ONE',	'REQUIREMENTSET_TEST_ALL'
+-- from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
 
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,																						RequirementId)
-select
-	'HD_IS' || DistrictType || '_PUBLIC_TRANSPORT_AT_RADIUS_ONE',	'HD_REQUIRES_PUBLIC_TRANSPORT_AT_RADIUS_ONE'
-from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+-- insert or ignore into RequirementSetRequirements
+-- 	(RequirementSetId,																						RequirementId)
+-- select
+-- 	'HD_IS' || DistrictType || '_PUBLIC_TRANSPORT_AT_RADIUS_ONE',	'HD_REQUIRES_PUBLIC_TRANSPORT_AT_RADIUS_ONE'
+-- from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
 
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,																						RequirementId)
-select
-	'HD_IS' || DistrictType || '_PUBLIC_TRANSPORT_AT_RADIUS_ONE',	'REQUIRES_DISTRICT_IS_' || DistrictType || '_HD'
-from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+-- insert or ignore into RequirementSetRequirements
+-- 	(RequirementSetId,																						RequirementId)
+-- select
+-- 	'HD_IS' || DistrictType || '_PUBLIC_TRANSPORT_AT_RADIUS_ONE',	'REQUIRES_DISTRICT_IS_' || DistrictType || '_HD'
+-- from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
 
 insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
 	select 'HD_DISTRICT_IS_' || DistrictType || '_AT_RADIUS_THREE', 'REQUIREMENTSET_TEST_ALL' from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
@@ -1547,16 +1859,9 @@ insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementI
 insert or ignore into RequirementSetRequirements
 	(RequirementSetId,						RequirementId)
 select
-	'HD_TOOLING_SHOP_REQUIREMENT',	'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType
+	'HD_CHARCOAL_KILN_REQUIREMENTS',	'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType
 from Improvement_ValidResources
-where ImprovementType in ('IMPROVEMENT_MINE', 'IMPROVEMENT_QUARRY');
-
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,						RequirementId)
-select
-	'HD_CHARCOAL_KILN_REQUIREMENT',	'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType
-from Improvement_ValidResources
-where ImprovementType in ('IMPROVEMENT_FARM', 'IMPROVEMENT_LUMBER_MILL');
+where ImprovementType in ('IMPROVEMENT_FARM', 'IMPROVEMENT_LUMBER_MILL', 'IMPROVEMENT_PLANTATION') or ResourceType = 'RESOURCE_COAL';
 
 -- 城市有改良的战略资源
 insert or ignore into RequirementSetRequirements
@@ -1573,6 +1878,7 @@ select
 from Feature_ValidTerrains i, Features j
 where i.FeatureType = j.FeatureType and (i.TerrainType = 'TERRAIN_COAST' and j.Impassable = 0 and j.NaturalWonder = 0);
 
+-- 测量仪
 insert or ignore into RequirementSetRequirements
 	(RequirementSetId,						RequirementId)
 select
@@ -1580,20 +1886,31 @@ select
 from Features
 where FeatureType in ('FEATURE_FLOODPLAINS', 'FEATURE_OASIS', 'FEATURE_MARSH', 'FEATURE_FLOODPLAINS_GRASSLAND', 'FEATURE_FLOODPLAINS_PLAINS', 'FEATURE_HD_SWAMP');
 
+-- 卜筮
+insert or ignore into RequirementSetRequirements
+	(RequirementSetId,						RequirementId)
+select
+	'HD_DIVINATION_REQUIREMENTS',	'HD_REQUIRES_PLOT_ADJACENT_TO_' || FeatureType
+from Features
+where FeatureType in ('FEATURE_FLOODPLAINS', 'FEATURE_OASIS', 'FEATURE_MARSH', 'FEATURE_FLOODPLAINS_GRASSLAND', 'FEATURE_FLOODPLAINS_PLAINS', 'FEATURE_HD_SWAMP');
+
+-- 甲骨卜辞
 insert or ignore into RequirementSetRequirements
 	(RequirementSetId,								RequirementId)
 select
-	'HD_ARENA_REQUIREMENTS',					'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType
+	'HD_ORACLE_REQUIREMENTS',					'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType
 from Improvement_ValidResources
 where ImprovementType = 'IMPROVEMENT_PASTURE' or ImprovementType = 'IMPROVEMENT_CAMP';
 
+-- 兽皮文书
 insert or ignore into RequirementSetRequirements
-	(RequirementSetId,																											RequirementId)
+	(RequirementSetId,								RequirementId)
 select
-	'HD_CITY_HAS_IMPROVED_CAMP_FISHING_BOAT_RESOURCE_REQUIREMENTS',					'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType
+	'HD_WRITING_ON_HIDE_REQUIREMENTS',	'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType
 from Improvement_ValidResources
-where ImprovementType = 'IMPROVEMENT_FISHING_BOATS' or ImprovementType = 'IMPROVEMENT_CAMP';
+where ImprovementType = 'IMPROVEMENT_PASTURE' or ImprovementType = 'IMPROVEMENT_CAMP';
 
+-- 克隆研究
 insert or ignore into RequirementSetRequirements
 	(RequirementSetId,								RequirementId)
 select
@@ -1604,7 +1921,7 @@ where ImprovementType = 'IMPROVEMENT_PASTURE' or ImprovementType = 'IMPROVEMENT_
 insert or ignore into RequirementSetRequirements
 	(RequirementSetId,															RequirementId)
 select
-	'HD_PLOT_ADJACENT_TO_ANY_DISTRICT_REQUIRMENTS',		'REQUIRES_PLOT_ADJACENT_TO_' || DistrictType || '_RAW'
+	'HD_PLOT_ADJACENT_TO_ANY_DISTRICT_REQUIREMENTS',		'REQUIRES_PLOT_ADJACENT_TO_' || DistrictType || '_RAW'
 from Districts where DistrictType != 'DISTRICT_WONDER';
 
 insert or ignore into RequirementSetRequirements
@@ -1625,15 +1942,19 @@ select
 	'PLOT_IS_FRESH_WATER_OR_AQUEDUCT_REQUIREMENTS',		'HD_REQUIRES_PLOT_ADJACENT_TO_' || FeatureType
 from Features where AddsFreshWater = 1;
 
-insert or ignore into RequirementSets
-	(RequirementSetId,									RequirementSetType)
-values
-	('DISTRICT_IS_SPECIALTY_DISTRICT_REQUIREMENTS',		'REQUIREMENTSET_TEST_ANY');
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,									RequirementId)
-select 
+-- 专业化区域
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType) values
+	('DISTRICT_IS_SPECIALTY_DISTRICT_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
+	('DISTRICT_IS_NOT_SPECIALTY_DISTRICT_REQUIREMENTS',		'REQUIREMENTSET_TEST_ANY');
+
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select 
 	'DISTRICT_IS_SPECIALTY_DISTRICT_REQUIREMENTS',		'REQUIRES_DISTRICT_IS_' || DistrictType
 from Districts where RequiresPopulation = 1;
+
+-- 非专业化区域
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select 
+	'DISTRICT_IS_NOT_SPECIALTY_DISTRICT_REQUIREMENTS',		'REQUIRES_DISTRICT_IS_' || DistrictType
+from Districts where RequiresPopulation = 0 and DistrictType != 'DISTRICT_WONDER';
 
 -- New city center buildings
 insert or ignore into RequirementSets 
@@ -1641,14 +1962,7 @@ insert or ignore into RequirementSets
 values
 	('HD_PLOT_HAS_FARM_RESOURCE_REQUIREMENTS',	'REQUIREMENTSET_TEST_ANY'),
 	('OFFICIAL_RUN_HANDCRAFT_REQUIREMENT',	'REQUIREMENTSET_TEST_ANY'),
-	('BOOTCAMP_REQUIREMENT',				'REQUIREMENTSET_TEST_ANY'),
-	('PLOT_IS_HILLS_OR_ADJACENT_TO_MOUNTAIN','REQUIREMENTSET_TEST_ANY'),
-	('FAIR_REQUIREMENT',					'REQUIREMENTSET_TEST_ANY'),
-	('TOTEMS_ADJACENT_REQUIREMENT',			'REQUIREMENTSET_TEST_ANY'),
-	('HD_PIT_DWELLING_REQUIREMENT',			'REQUIREMENTSET_TEST_ANY'),
-	('WHARF_RIVER_REQUIREMENT',			'REQUIREMENTSET_TEST_ANY'),
-	('HD_WHARF_FISHING_REQUIREMENT',			'REQUIREMENTSET_TEST_ANY'),
-	('HD_WHARF_TRADE_REQUIREMENT',			'REQUIREMENTSET_TEST_ANY');
+	('PLOT_IS_HILLS_OR_ADJACENT_TO_MOUNTAIN','REQUIREMENTSET_TEST_ANY');
 
 insert or ignore into RequirementSetRequirements
 	(RequirementSetId,						RequirementId)
@@ -1664,81 +1978,29 @@ from Resources r, Improvement_ValidResources i
 where r.ResourceType = i.ResourceType and (i.ImprovementType = 'IMPROVEMENT_MINE' or i.ImprovementType = 'IMPROVEMENT_QUARRY')
 	and (r.ResourceClassType = 'RESOURCECLASS_LUXURY' or r.ResourceClassType = 'RESOURCECLASS_BONUS');
 
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,						RequirementId)
-select
-	'HD_PIT_DWELLING_REQUIREMENT',	'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType
-from Improvement_ValidResources
-where ImprovementType in ('IMPROVEMENT_FISHING_BOATS', 'IMPROVEMENT_CAMP');
-
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,						RequirementId)
-select
-	'BOOTCAMP_REQUIREMENT',					'HD_REQUIRES_CITY_HAS_IMPROVED_' || r.ResourceType
-from Resources r, Improvement_ValidResources i
-where r.ResourceType = i.ResourceType and (i.ImprovementType = 'IMPROVEMENT_PASTURE' or i.ImprovementType = 'IMPROVEMENT_CAMP'
-	or r.ResourceClassType = 'RESOURCECLASS_STRATEGIC');
-
 insert or ignore into RequirementSetRequirements 
     (RequirementSetId,						RequirementId) 
 values
 	('PLOT_IS_HILLS_OR_ADJACENT_TO_MOUNTAIN',					'REQUIRES_PLOT_IS_HILLS'),
-	('PLOT_IS_HILLS_OR_ADJACENT_TO_MOUNTAIN',					'REQUIRES_PLOT_ADJACENT_TO_MOUNTAIN'),
-	('FAIR_REQUIREMENT',					'REQUIRES_PLOT_ADJACENT_TO_LUXURY'),
-	('FAIR_REQUIREMENT',					'REQUIRES_PLOT_HAS_LUXURY'),
-	('TOTEMS_ADJACENT_REQUIREMENT',			'HD_REQUIRES_PLOT_ADJACENT_TO_FEATURE_FOREST'),
-	('TOTEMS_ADJACENT_REQUIREMENT',			'REQUIRES_PLOT_ADJACENT_TO_MOUNTAIN'),
-	('TOTEMS_ADJACENT_REQUIREMENT',			'REQUIRES_PLOT_ADJACENT_TO_JUNGLE'),
-	('TOTEMS_ADJACENT_REQUIREMENT',			'HD_REQUIRES_PLOT_ADJACENT_TO_FEATURE_REEF');
-
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,						RequirementId)
-select
-	'WHARF_RIVER_REQUIREMENT',		'HD_REQUIRES_CITY_HAS_IMPROVED_' || r.ResourceType
-from Resources r, Improvement_ValidResources i
-where r.ResourceType = i.ResourceType and i.ImprovementType in (
-	'IMPROVEMENT_FARM',
-	'IMPROVEMENT_MINE',
-	'IMPROVEMENT_QUARRY',
-	'IMPROVEMENT_PASTURE',
-	'IMPROVEMENT_PLANTATION',
-	'IMPROVEMENT_CAMP',
-	'IMPROVEMENT_LUMBER_MILL'
-) and r.ResourceClassType = 'RESOURCECLASS_BONUS';
-
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,								RequirementId)
-select
-	'HD_WHARF_FISHING_REQUIREMENT',		'HD_REQUIRES_CITY_HAS_IMPROVED_' || r.ResourceType
-from Resources r, Improvement_ValidResources i
-where r.ResourceType = i.ResourceType and i.ImprovementType = 'IMPROVEMENT_FISHING_BOATS' and r.ResourceClassType = 'RESOURCECLASS_BONUS';
-
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,								RequirementId)
-select
-	'HD_WHARF_TRADE_REQUIREMENT',			'HD_REQUIRES_CITY_HAS_IMPROVED_' || r.ResourceType
-from Resources r, Improvement_ValidResources i
-where r.ResourceType = i.ResourceType and i.ImprovementType = 'IMPROVEMENT_FISHING_BOATS' and r.ResourceClassType = 'RESOURCECLASS_LUXURY';
+	('PLOT_IS_HILLS_OR_ADJACENT_TO_MOUNTAIN',					'REQUIRES_PLOT_ADJACENT_TO_MOUNTAIN');
 
 insert or ignore into RequirementSets (RequirementSetId, RequirementSetType) select
-	'REQUIRES_DISTRICT_IS_' || DistrictType || '_WITHIN_4_TILES_REQUIREMENTS', 'REQUIREMENTSET_TEST_ALL'
+	'HD_DISTRICT_IS_' || DistrictType || '_WITHIN_4_TILES_REQUIREMENTS', 'REQUIREMENTSET_TEST_ALL'
 from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
 
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select
-	'REQUIRES_DISTRICT_IS_' || DistrictType || '_WITHIN_4_TILES_REQUIREMENTS', 'REQUIRES_DISTRICT_IS_' || DistrictType
+	'HD_DISTRICT_IS_' || DistrictType || '_WITHIN_4_TILES_REQUIREMENTS', 'REQUIRES_DISTRICT_IS_' || DistrictType
 from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
 
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select
-	'REQUIRES_DISTRICT_IS_' || DistrictType || '_WITHIN_4_TILES_REQUIREMENTS', 'REQUIRES_OBJECT_WITHIN_4_TILES'
+	'HD_DISTRICT_IS_' || DistrictType || '_WITHIN_4_TILES_REQUIREMENTS', 'REQUIRES_OBJECT_WITHIN_4_TILES'
 from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
 
 -- RequirementSets
 insert or ignore into RequirementSets
 	(RequirementSetId,																			RequirementSetType)
 values
-	('DISTRICT_IS_HOLY_SITE_WITHIN_SIX_TILES_REQUIREMENTS',										'REQUIREMENTSET_TEST_ALL'),
 	('DISTRICT_IS_THEATER_AND_PLAYER_HAS_CIVIC_SOCIAL_SCIENCE_HD',								'REQUIREMENTSET_TEST_ALL'),
-	('UNIT_WITHIN_NINE_TILES_REQUIREMENTS', 													'REQUIREMENTSET_TEST_ALL'),
 	('PLAYER_HAS_CIVIC_SOCIAL_SCIENCE_HD',														'REQUIREMENTSET_TEST_ALL'),
 	('PLAYER_HAS_CIVIC_URBANIZATION',															'REQUIREMENTSET_TEST_ALL'),
 	('PLAYER_NOT_HAS_CIVIC_URBANIZATION',														'REQUIREMENTSET_TEST_ALL'),
@@ -1749,7 +2011,6 @@ values
 	('PLAYER_HAS_ASTRONOMY_REQUIREMENTS',														'REQUIREMENTSET_TEST_ALL'),
 	('PLAYER_HAS_SCIENTIFIC_THEORY_REQUIREMENTS',												'REQUIREMENTSET_TEST_ALL'),
 	('PLAYER_HAS_CHEMISTRY_REQUIREMENTS',														'REQUIREMENTSET_TEST_ALL'),
-	('PLAYER_HAS_PAPER_MAKING_REQUIREMENTS',													'REQUIREMENTSET_TEST_ALL'),
 	('ATTACKING_DISTRICTS_REQUIREMENTS',														'REQUIREMENTSET_TEST_ALL'),
 	('PLOT_HAS_FOREST_REQUIREMENT',																'REQUIREMENTSET_TEST_ALL'),
 	('PLOT_HAS_JUNGLE_REQUIREMENT',																'REQUIREMENTSET_TEST_ALL'),
@@ -1760,11 +2021,13 @@ values
 	('PLAYER_HAS_ENOUGH_IRON_REQUIREMENTS',														'REQUIREMENTSET_TEST_ALL'),
 	('HD_PLAYER_HAS_HORSES_AND_IRON_REQUIREMENTS',												'REQUIREMENTSET_TEST_ALL'),
 	('CITY_HAS_IMPROVED_LUXURY_RESOURCE',														'REQUIREMENTSET_TEST_ANY'),
+	('HD_CITY_HAS_OR_ON_IMPROVED_LUXURY_RESOURCE_REQUIREMENTS',	'REQUIREMENTSET_TEST_ANY'),
 	('UNIT_IS_CIVILIAN_CLASS',																	'REQUIREMENTSET_TEST_ANY'),
 	('NOT_WONDER_IS_OR_ADJACENT_TO_COAST',														'REQUIREMENTSET_TEST_ALL'),
 	('WONDER_IS_OR_ADJACENT_TO_COAST',															'REQUIREMENTSET_TEST_ALL'),
     ('HD_DISTRICTS_IS_NOT_WONDERS_OR_CITY_CENTER_REQUIREMENTS',									'REQUIREMENTSET_TEST_ALL'),
 	('NON_CITYCENTER_PLOT_IS_OR_ADJACENT_TO_COAST',												'REQUIREMENTSET_TEST_ALL'),
+	('HD_DISTRICT_IS_OR_ADJACENT_TO_COAST_REQUIREMENTS',												'REQUIREMENTSET_TEST_ALL'),
 	('PLOT_HAS_SHALLOW_WATER_AND_STEAM_POWER_REQUIREMENTS',										'REQUIREMENTSET_TEST_ALL'),
 	('PLOT_ADJACENT_TO_MOUNTAIN_IS_IMPROVED_REQUIREMENTS',										'REQUIREMENTSET_TEST_ALL'),
 	('PLOT_ADJACENT_TO_MOUNTAIN_REQUIREMENTS',													'REQUIREMENTSET_TEST_ALL'),
@@ -1775,11 +2038,8 @@ values
 insert or ignore into RequirementSetRequirements
 	(RequirementSetId,																		RequirementId)
 values
-	('DISTRICT_IS_HOLY_SITE_WITHIN_SIX_TILES_REQUIREMENTS', 								'REQUIRES_PLOT_HAS_HOLY_SITE'),
-	('DISTRICT_IS_HOLY_SITE_WITHIN_SIX_TILES_REQUIREMENTS', 								'REQUIRES_OBJECT_WITHIN_6_TILES'),
 	('DISTRICT_IS_THEATER_AND_PLAYER_HAS_CIVIC_SOCIAL_SCIENCE_HD',							'REQUIRES_DISTRICT_IS_THEATER'),
 	('DISTRICT_IS_THEATER_AND_PLAYER_HAS_CIVIC_SOCIAL_SCIENCE_HD',							'REQUIRES_PLAYER_HAS_CIVIC_SOCIAL_SCIENCE_HD'),
-	('UNIT_WITHIN_NINE_TILES_REQUIREMENTS', 												'REQUIRES_WITHIN_NINE_TILES_FROM_OWNER'),
 	('PLAYER_HAS_CIVIC_SOCIAL_SCIENCE_HD',													'REQUIRES_PLAYER_HAS_CIVIC_SOCIAL_SCIENCE_HD'),
 	('PLAYER_HAS_CIVIC_URBANIZATION',														'REQUIRES_PLAYER_HAS_CIVIC_URBANIZATION'),
 	('PLAYER_NOT_HAS_CIVIC_URBANIZATION',													'REQUIRES_PLAYER_NOT_HAS_CIVIC_URBANIZATION'),
@@ -1790,7 +2050,6 @@ values
 	('PLAYER_HAS_ASTRONOMY_REQUIREMENTS',													'HD_REQUIRES_PLAYER_HAS_TECH_ASTRONOMY'),
 	('PLAYER_HAS_SCIENTIFIC_THEORY_REQUIREMENTS',											'HD_REQUIRES_PLAYER_HAS_TECH_SCIENTIFIC_THEORY'),
 	('PLAYER_HAS_CHEMISTRY_REQUIREMENTS',													'HD_REQUIRES_PLAYER_HAS_TECH_CHEMISTRY'),
-	('PLAYER_HAS_PAPER_MAKING_REQUIREMENTS',												'HD_REQUIRES_PLAYER_HAS_TECH_PAPER_MAKING_HD'),
 	('ATTACKING_DISTRICTS_REQUIREMENTS',													'PLAYER_IS_ATTACKER_REQUIREMENTS'),
 	('ATTACKING_DISTRICTS_REQUIREMENTS',													'OPPONENT_IS_DISTRICT'),
 	('PLOT_HAS_FOREST_REQUIREMENT',															'PLOT_IS_FOREST_REQUIREMENT'),
@@ -1807,24 +2066,24 @@ values
 	('WONDER_IS_OR_ADJACENT_TO_COAST',														'PLOT_IS_OR_ADJACENT_TO_COAST_REQUIREMENTS'),
 	('WONDER_IS_OR_ADJACENT_TO_COAST',														'REQUIRES_DISTRICT_IS_DISTRICT_WONDER'),
 	('WONDER_IS_OR_ADJACENT_TO_COAST',														'REQUIRES_PLOT_HAS_COMPLETE_WONDER'),
-    ('HD_DISTRICTS_IS_NOT_WONDERS_OR_CITY_CENTER_REQUIREMENTS',								'HD_REQUIRES_DISTRICT_IS_NOT_DISTRICT_WONDER'),
-    ('HD_DISTRICTS_IS_NOT_WONDERS_OR_CITY_CENTER_REQUIREMENTS',								'HD_REQUIRES_DISTRICT_IS_NOT_DISTRICT_CITY_CENTER'),
+	('HD_DISTRICTS_IS_NOT_WONDERS_OR_CITY_CENTER_REQUIREMENTS',								'HD_REQUIRES_DISTRICT_IS_NOT_DISTRICT_WONDER'),
+	('HD_DISTRICTS_IS_NOT_WONDERS_OR_CITY_CENTER_REQUIREMENTS',								'HD_REQUIRES_DISTRICT_IS_NOT_DISTRICT_CITY_CENTER'),
 	('NON_CITYCENTER_PLOT_IS_OR_ADJACENT_TO_COAST', 										'REQUIRES_DISTRICT_IS_NOT_CITY_CENTER'),
 	('NON_CITYCENTER_PLOT_IS_OR_ADJACENT_TO_COAST',											'PLOT_IS_OR_ADJACENT_TO_COAST_REQUIREMENTS'),
 	('NON_CITYCENTER_PLOT_IS_OR_ADJACENT_TO_COAST',											'REQUIRES_PLOT_DOES_NOT_HAVE_INCOMPLETE_WONDER'),
+	('HD_DISTRICT_IS_OR_ADJACENT_TO_COAST_REQUIREMENTS',											'PLOT_IS_OR_ADJACENT_TO_COAST_REQUIREMENTS'),
+	('HD_DISTRICT_IS_OR_ADJACENT_TO_COAST_REQUIREMENTS',											'REQUIRES_PLOT_DOES_NOT_HAVE_INCOMPLETE_WONDER'),
 	('PLOT_HAS_SHALLOW_WATER_AND_STEAM_POWER_REQUIREMENTS',									'REQUIRES_PLOT_HAS_SHALLOW_WATER'),
 	('PLOT_HAS_SHALLOW_WATER_AND_STEAM_POWER_REQUIREMENTS',									'HD_REQUIRES_PLAYER_HAS_TECH_STEAM_POWER'),
 	('PLOT_ADJACENT_TO_MOUNTAIN_IS_IMPROVED_REQUIREMENTS',									'REQUIRES_PLOT_ADJACENT_TO_MOUNTAIN'),
 	('PLOT_ADJACENT_TO_MOUNTAIN_IS_IMPROVED_REQUIREMENTS',									'REQUIRES_PLOT_IS_IMPROVED'),
 	('PLOT_ADJACENT_TO_MOUNTAIN_REQUIREMENTS',												'REQUIRES_PLOT_ADJACENT_TO_MOUNTAIN'),
-	-- ('HD_PLOT_HAS_RESOURCE_REQUIREMENTS',													'REQUIRES_PLOT_HAS_BONUS'),
-	-- ('HD_PLOT_HAS_RESOURCE_REQUIREMENTS',													'REQUIRES_PLOT_HAS_STRATEGIC'),
-	-- ('HD_PLOT_HAS_RESOURCE_REQUIREMENTS',													'REQUIRES_PLOT_HAS_LUXURY'),
 	('HD_PLOT_HAS_RESOURCE_REQUIREMENTS',													'REQUIRES_PLOT_HAS_VISIBLE_RESOURCE'),
 	('HD_TEMPLE_ARTEMIS_IMPROVEMENTS',													'REQUIRES_PLOT_HAS_IMPROVEMENT_CAMP'),
 	('HD_TEMPLE_ARTEMIS_IMPROVEMENTS',													'REQUIRES_PLOT_HAS_IMPROVEMENT_PASTURE'),
 	('HD_TEMPLE_ARTEMIS_REQUIREMENTS',													'HD_REQUIRES_TEMPLE_ARTEMIS_IMPROVEMENTS'),
-	('HD_TEMPLE_ARTEMIS_REQUIREMENTS',													'REQUIRES_PLOT_HAS_VISIBLE_RESOURCE');
+	('HD_TEMPLE_ARTEMIS_REQUIREMENTS',													'REQUIRES_PLOT_HAS_VISIBLE_RESOURCE'),
+	('HD_CITY_HAS_OR_ON_IMPROVED_LUXURY_RESOURCE_REQUIREMENTS', 'REQUIRES_PLOT_HAS_LUXURY');
 
 -- RequirementSets
 insert or ignore into RequirementSets
@@ -1845,15 +2104,16 @@ values
 	-- ('PLOT_HAS_MANU_RESOURCES_REQUIREMENTS',			'REQUIREMENTSET_TEST_ALL'),
 	-- ('PLOT_HAS_MANU_IMPROVEMENTS_REQUIREMENTS',			'REQUIREMENTSET_TEST_ANY'),
 	-- buildings
+	('HD_PLOT_HAS_FISHING_BOATS_OVER_BONUS_RESOURCES',		'REQUIREMENTSET_TEST_ALL'),
 	('HD_PLOT_HAS_PLANTATION_OVER_BONUS_RESOURCES',		'REQUIREMENTSET_TEST_ALL'),
 	('HD_PLOT_HAS_CAMP_OVER_BONUS_RESOURCES',			'REQUIREMENTSET_TEST_ALL'),
 	('HD_PLOT_HAS_PASTURE_OVER_BONUS_RESOURCES',		'REQUIREMENTSET_TEST_ALL'),
 	('HD_PLOT_HAS_FARM_OVER_BONUS_RESOURCES',			'REQUIREMENTSET_TEST_ALL'),
 	('HD_PLOT_HAS_FARM_OVER_LUXURY_RESOURCES',      	'REQUIREMENTSET_TEST_ALL'),
 	('HD_PLAYER_HAS_FAVOR_REQUIREMENTS',				'REQUIREMENTSET_TEST_ALL'),
-	('HAS_IMPROVED_MINE_BONUS',							'REQUIREMENTSET_TEST_ALL'),
-	('HAS_IMPROVED_QUARRY_BONUS',						'REQUIREMENTSET_TEST_ALL'),
-	('HAS_IMPROVED_LUMBER_MILL_BONUS',					'REQUIREMENTSET_TEST_ALL'),
+	('HD_PLOT_HAS_MINE_OVER_BONUS_RESOURCES',							'REQUIREMENTSET_TEST_ALL'),
+	('HD_PLOT_HAS_QUARRY_OVER_BONUS_RESOURCES',						'REQUIREMENTSET_TEST_ALL'),
+	('HD_PLOT_HAS_LUMBER_MILL_OVER_BONUS_RESOURCES',					'REQUIREMENTSET_TEST_ALL'),
 	('HAS_IMPROVED_HORSES',								'REQUIREMENTSET_TEST_ALL'),
 	('HAS_IMPROVED_IRON',								'REQUIREMENTSET_TEST_ALL'),
 	('HAS_IMPROVED_COAL',								'REQUIREMENTSET_TEST_ALL'),
@@ -1866,7 +2126,7 @@ values
 	('IS_FARM_ADJACENT_TO_AQUEDUCT',					'REQUIREMENTSET_TEST_ALL'),
 	('IS_FARM_ADJACENT_TO_FRESH_WATER_AND_AQUEDUCT',	'REQUIREMENTSET_TEST_ALL'),
 	('UNIVERSITY_ADJACENCY_SCIENCE_JUNGLE_REQUIREMENTS','REQUIREMENTSET_TEST_ALL'),
-	('HANSA_ADJACENT_PRODUCTION_RESOURCE_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
+	('HD_ADJACENT_RESOURCE_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'),
 	-- ('MBANZA_ADJACENCY_FOOD_JUNGLE_REQUIREMENTS',		'REQUIREMENTSET_TEST_ALL'),
 	-- ('MBANZA_ADJACENCY_FOOD_FOREST_REQUIREMENTS',		'REQUIREMENTSET_TEST_ALL'),
 	('PLOT_HAS_MINE_OR_QUARRY',							'REQUIREMENTSET_TEST_ANY'),
@@ -1885,10 +2145,6 @@ values
 insert or ignore into RequirementSetRequirements
 	(RequirementSetId,									RequirementId)
 values
-	-- Copper
-	-- ('HAS_COPPER_RESOURCE_AND_BRONZE_WORKING',			'REQUIRES_RESOURCE_COPPER_IN_PLOT'),
-	-- ('HAS_COPPER_RESOURCE_AND_BRONZE_WORKING',			'HD_REQUIRES_PLAYER_HAS_TECH_BRONZE_WORKING'),
-	-- Mine
 	('PLOT_ADJACENT_TO_MOUNTAIN',						'REQUIRES_PLOT_ADJACENT_TO_MOUNTAIN'),
 	('HAS_APPRENTICESHIP_AND_PLOT_ADJACENT_TO_MOUNTAIN','REQUIRES_PLOT_ADJACENT_TO_MOUNTAIN'),
 	('HAS_APPRENTICESHIP_AND_PLOT_ADJACENT_TO_MOUNTAIN','HD_REQUIRES_PLAYER_HAS_TECH_APPRENTICESHIP'),
@@ -1899,21 +2155,8 @@ values
 	('HD_PLOT_HAS_STRATEGIC_RESOURCE_REQUIREMENTS',		'REQUIRES_PLOT_HAS_STRATEGIC'),
 	('HD_PLOT_HAS_LUXURY_OR_BONUS_RESOURCE_REQUIREMENTS', 'REQUIRES_PLOT_HAS_LUXURY'),
 	('HD_PLOT_HAS_LUXURY_OR_BONUS_RESOURCE_REQUIREMENTS', 'REQUIRES_PLOT_HAS_BONUS'),
-	-- ('PLOT_HAS_WORKSHOP_RESOURCES_REQUIREMENTS',		'PLOT_HAS_RESOURCE_REQUIREMENTS'),
-	-- ('PLOT_HAS_WORKSHOP_RESOURCES_REQUIREMENTS',		'REQUIRES_PLOT_HAS_WORKSHOP_IMPROVEMENTS'),
-	-- ('PLOT_HAS_WORKSHOP_IMPROVEMENTS_REQUIREMENTS',		'REQUIRES_PLOT_HAS_MINE'),
-	-- ('PLOT_HAS_WORKSHOP_IMPROVEMENTS_REQUIREMENTS',		'REQUIRES_PLOT_HAS_QUARRY'),
-	-- ('PLOT_HAS_WORKSHOP_IMPROVEMENTS_REQUIREMENTS',		'REQUIRES_PLOT_HAS_LUMBER_MILL'),
-	-- ('PLOT_HAS_MANU_RESOURCES_REQUIREMENTS',			'PLOT_HAS_RESOURCE_REQUIREMENTS'),
-	-- ('PLOT_HAS_MANU_RESOURCES_REQUIREMENTS',			'REQUIRES_PLOT_HAS_MANU_IMPROVEMENTS'),
-	-- ('PLOT_HAS_MANU_IMPROVEMENTS_REQUIREMENTS',			'REQUIRES_PLOT_HAS_FARM'),
-	-- ('PLOT_HAS_MANU_IMPROVEMENTS_REQUIREMENTS',			'REQUIRES_PLOT_HAS_PLANTATION'),
-	-- ('PLOT_HAS_MANU_IMPROVEMENTS_REQUIREMENTS',			'REQUIRES_PLOT_HAS_PASTURE'),
-	-- ('PLOT_HAS_MANU_IMPROVEMENTS_REQUIREMENTS',			'REQUIRES_PLOT_HAS_CAMP'),
-	-- Lumber mill
-	-- ('HAS_CONSTRUCTION_AND_PLOT_ADJACENT_TO_RIVER_REQUIREMENTS',	'REQUIRES_PLOT_ADJACENT_TO_RIVER'),
-	-- ('HAS_CONSTRUCTION_AND_PLOT_ADJACENT_TO_RIVER_REQUIREMENTS',	'HD_REQUIRES_PLAYER_HAS_TECH_CONSTRUCTION'),
-	-- Granary
+	('HD_PLOT_HAS_FISHING_BOATS_OVER_BONUS_RESOURCES',		'REQUIRES_PLOT_HAS_BONUS'),
+	('HD_PLOT_HAS_FISHING_BOATS_OVER_BONUS_RESOURCES',		'REQUIRES_PLOT_HAS_IMPROVEMENT_FISHING_BOATS'),
 	('HD_PLOT_HAS_PLANTATION_OVER_BONUS_RESOURCES',		'REQUIRES_PLOT_HAS_BONUS'),
 	('HD_PLOT_HAS_PLANTATION_OVER_BONUS_RESOURCES',		'REQUIRES_PLOT_HAS_PLANTATION'),
 	('HD_PLOT_HAS_FARM_OVER_BONUS_RESOURCES',			'REQUIRES_PLOT_HAS_BONUS'),
@@ -1927,8 +2170,8 @@ values
 	('HD_PLOT_HAS_PASTURE_OVER_BONUS_RESOURCES',		'REQUIRES_PLOT_HAS_BONUS'),
 	('HD_PLOT_HAS_PASTURE_OVER_BONUS_RESOURCES',		'REQUIRES_PLOT_HAS_PASTURE'),
 	-- Encampment
-	('HAS_IMPROVED_MINE_BONUS',							'REQUIRES_PLOT_HAS_BONUS'),
-	('HAS_IMPROVED_MINE_BONUS',							'REQUIRES_PLOT_HAS_MINE'),
+	('HD_PLOT_HAS_MINE_OVER_BONUS_RESOURCES',							'REQUIRES_PLOT_HAS_BONUS'),
+	('HD_PLOT_HAS_MINE_OVER_BONUS_RESOURCES',							'REQUIRES_PLOT_HAS_MINE'),
 	-- Stable
 	('HAS_IMPROVED_HORSES',								'REQUIRES_RESOURCE_HORSES_IN_PLOT'),
 	('HAS_IMPROVED_HORSES',								'REQUIRES_PLOT_HAS_PASTURE'),
@@ -1959,13 +2202,13 @@ values
 	('IS_FARM_ADJACENT_TO_FRESH_WATER_AND_AQUEDUCT',	'REQUIRES_PLOT_HAS_FARM'),
 	-- ('IS_FARM_ADJACENT_TO_FRESH_WATER_AND_AQUEDUCT',	'HD_REQUIRES_PLAYER_HAS_TECH_CALENDAR_HD'),
 	-- Industrial Zone
-	('HAS_IMPROVED_QUARRY_BONUS',						'REQUIRES_PLOT_HAS_BONUS'),
-	('HAS_IMPROVED_QUARRY_BONUS',						'REQUIRES_PLOT_HAS_QUARRY'),
-	('HAS_IMPROVED_LUMBER_MILL_BONUS',					'REQUIRES_PLOT_HAS_BONUS'),
-	('HAS_IMPROVED_LUMBER_MILL_BONUS',					'REQUIRES_PLOT_HAS_LUMBER_MILL'),
+	('HD_PLOT_HAS_QUARRY_OVER_BONUS_RESOURCES',						'REQUIRES_PLOT_HAS_BONUS'),
+	('HD_PLOT_HAS_QUARRY_OVER_BONUS_RESOURCES',						'REQUIRES_PLOT_HAS_QUARRY'),
+	('HD_PLOT_HAS_LUMBER_MILL_OVER_BONUS_RESOURCES',					'REQUIRES_PLOT_HAS_BONUS'),
+	('HD_PLOT_HAS_LUMBER_MILL_OVER_BONUS_RESOURCES',					'REQUIRES_PLOT_HAS_LUMBER_MILL'),
 	-- Hansa, add production to adjacent resources.
-	('HANSA_ADJACENT_PRODUCTION_RESOURCE_REQUIREMENTS',	'REQUIRES_PLOT_HAS_VISIBLE_RESOURCE'),
-	('HANSA_ADJACENT_PRODUCTION_RESOURCE_REQUIREMENTS',	'ADJACENT_TO_OWNER'),
+	('HD_ADJACENT_RESOURCE_REQUIREMENTS',	'REQUIRES_PLOT_HAS_VISIBLE_RESOURCE'),
+	('HD_ADJACENT_RESOURCE_REQUIREMENTS',	'ADJACENT_TO_OWNER'),
 	-- Mbanza, add food to adjacent jungle or forest.
 	-- ('MBANZA_ADJACENCY_FOOD_JUNGLE_REQUIREMENTS',		'REQUIRES_PLOT_HAS_JUNGLE'),
 	-- ('MBANZA_ADJACENCY_FOOD_JUNGLE_REQUIREMENTS',		'ADJACENT_TO_OWNER'),
@@ -2078,14 +2321,13 @@ values
 	('GODDESS_OF_FIRE_CITY_HAS_VOLCANO',						'REQUIREMENTSET_TEST_ANY'),
 	('RELIGIOUS_IDOLS_CITY_HAS_MINE',							'REQUIREMENTSET_TEST_ANY'),
 	('STONE_CIRCLES_CITY_HAS_QUARRY',							'REQUIREMENTSET_TEST_ANY'),
-	('ONE_WITH_NATURE_CITY_HAS_NATURAL_WONDER',					'REQUIREMENTSET_TEST_ANY'),
+	('HD_CITY_HAS_NATURAL_WONDER_REQUIREMENTS',					'REQUIREMENTSET_TEST_ANY'),
 	('HOLYSITE_PLANTATION_REQUIREMENTS',						'REQUIREMENTSET_TEST_ALL'),
 	('HOLYSITE_PASTURE_REQUIREMENTS',							'REQUIREMENTSET_TEST_ALL'),
 	('PLOT_EIGHT_INCLUDE_CITY_CENTER',							'REQUIREMENTSET_TEST_ALL'),
 	('CITY_HAS_GRANARY',										'REQUIREMENTSET_TEST_ALL'),
 	('CITY_HAS_MONUMENT',										'REQUIREMENTSET_TEST_ALL'),
 	-- ('PLOT_HAS_FARM_RESOURCE_REQUIREMENTS',						'REQUIREMENTSET_TEST_ANY'),
-	('PLOT_IS_LAND_ADJACENT_TO_COAST',							'REQUIREMENTSET_TEST_ALL'),
 	('PLOT_IS_COAST_NOT_LAKE_REQUIREMENTS',						'REQUIREMENTSET_TEST_ALL'),
 	('PLOT_IS_OCEAN_REQUIREMENTS',								'REQUIREMENTSET_TEST_ALL'),
 	('PLOT_HAS_IMPROVED_FOREST_REQUIREMENTS',					'REQUIREMENTSET_TEST_ALL'),
@@ -2139,11 +2381,16 @@ from Improvement_ValidResources where ImprovementType = 'IMPROVEMENT_FARM';
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
 select 'CITY_HAS_IMPROVED_LUXURY_RESOURCE', 'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType
 from Resources where ResourceClassType = 'RESOURCECLASS_LUXURY';
-
--- 单位是平民单位 不包括伟人、商队、间谍和宗教单位
+-- 城市拥有改良奢侈 或坐在奢侈资源上
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
-select 'UNIT_IS_CIVILIAN_CLASS', 'REQUIRES_UNIT_IS_' || UnitType
-from Units where UnitType in ('UNIT_SETTLER','UNIT_BUILDER','UNIT_ARCHAEOLOGIST','UNIT_NATURALIST','UNIT_ROCK_BAND','UNIT_LEU_INVESTOR','UNIT_LEU_TYCOON');
+select 'HD_CITY_HAS_OR_ON_IMPROVED_LUXURY_RESOURCE_REQUIREMENTS', 'HD_REQUIRES_CITY_HAS_IMPROVED_' || ResourceType
+from Resources where ResourceClassType = 'RESOURCECLASS_LUXURY';
+
+-- 单位是平民单位 不包括商队、间谍和宗教单位
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+	select 'UNIT_IS_CIVILIAN_CLASS', 'REQUIRES_UNIT_IS_' || UnitType
+from Units where FormationClass = 'FORMATION_CLASS_CIVILIAN'
+	and UnitType not in ('UNIT_TRADER','UNIT_SPY','UNIT_MISSIONARY','UNIT_APOSTLE','UNIT_INQUISITOR','UNIT_GURU', 'UNIT_PRODUCT');
 
 insert or ignore into RequirementSetRequirements
 	(RequirementSetId,											RequirementId)
@@ -2190,9 +2437,6 @@ values
 	('CITY_HAS_MONUMENT',										'REQUIRES_CITY_HAS_BUILDING_MONUMENT'),
 	-- ('PLOT_HAS_FARM_RESOURCE_REQUIREMENTS',						'REQUIRES_WHEAT_IN_PLOT'),
 	-- ('PLOT_HAS_FARM_RESOURCE_REQUIREMENTS',						'REQUIRES_RICE_IN_PLOT'),
-	('PLOT_IS_LAND_ADJACENT_TO_COAST',							'REQUIRES_PLOT_HAS_NOT_OCEAN'),
-	('PLOT_IS_LAND_ADJACENT_TO_COAST',							'REQUIRES_PLOT_HAS_NOT_COAST'),
-	('PLOT_IS_LAND_ADJACENT_TO_COAST',							'REQUIRES_PLOT_IS_ADJACENT_TO_COAST'),
 	('PLOT_IS_COAST_NOT_LAKE_REQUIREMENTS',						'PLOT_IS_NOT_LAKE_REQUIREMENTS'),
 	('PLOT_IS_COAST_NOT_LAKE_REQUIREMENTS',						'REQUIRES_PLOT_HAS_COAST'),
 	('PLOT_IS_OCEAN_REQUIREMENTS',								'REQUIRES_TERRAIN_OCEAN'),
@@ -2222,7 +2466,7 @@ values
 	('HD_PLOT_HAS_FARM_AND_LUXURY_RESOURCE_REQUIREMENTS',		'REQUIRES_PLOT_HAS_LUXURY');
 
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
-	select 'ONE_WITH_NATURE_CITY_HAS_NATURAL_WONDER', 'REQUIRES_CITY_HAS_' || FeatureType from Features where NaturalWonder = 1;
+	select 'HD_CITY_HAS_NATURAL_WONDER_REQUIREMENTS', 'REQUIRES_CITY_HAS_' || FeatureType from Features where NaturalWonder = 1;
 
 -- AI 
 insert or ignore into RequirementSets (RequirementSetId, RequirementSetType)
@@ -2314,21 +2558,10 @@ values
 insert or ignore into RequirementSetRequirements 
 	(RequirementSetId,				RequirementId)	
 values
-	('UNIT_IS_LAND_COMBAT',			'REQUIREMENT_UNIT_IS_LAND_COMBAT'),
-	('UNIT_IS_RELIGOUS_ALL',		'REQUIRES_UNIT_IS_UNIT_MISSIONARY'),
-	('UNIT_IS_RELIGOUS_ALL',		'REQUIRES_UNIT_IS_UNIT_APOSTLE'),
-	('UNIT_IS_RELIGOUS_ALL',		'REQUIRES_UNIT_IS_UNIT_INQUISITOR'),
-	('UNIT_IS_RELIGOUS_ALL',		'REQUIRES_UNIT_IS_UNIT_GURU'),
-	('UNIT_IS_RELIGOUS_ALL_AND_MONK','REQUIRES_UNIT_IS_UNIT_MISSIONARY'),
-	('UNIT_IS_RELIGOUS_ALL_AND_MONK','REQUIRES_UNIT_IS_UNIT_APOSTLE'),
-	('UNIT_IS_RELIGOUS_ALL_AND_MONK','REQUIRES_UNIT_IS_UNIT_INQUISITOR'),
-	('UNIT_IS_RELIGOUS_ALL_AND_MONK','REQUIRES_UNIT_IS_UNIT_GURU'),
-	('UNIT_IS_RELIGOUS_ALL_AND_MONK','REQUIRES_UNIT_IS_UNIT_WARRIOR_MONK');
+	('UNIT_IS_LAND_COMBAT',			'REQUIREMENT_UNIT_IS_LAND_COMBAT');
 
 insert or ignore into RequirementSets (RequirementSetId,	RequirementSetType)	values
-	('UNIT_IS_LAND_COMBAT',			'REQUIREMENTSET_TEST_ALL'),
-	('UNIT_IS_RELIGOUS_ALL_AND_MONK','REQUIREMENTSET_TEST_ANY'),
-	('UNIT_IS_RELIGOUS_ALL',		'REQUIREMENTSET_TEST_ANY');
+	('UNIT_IS_LAND_COMBAT',			'REQUIREMENTSET_TEST_ALL');
 
 --Player_Can_See_Strategic resources(Hattusa)
 insert or ignore into RequirementSetRequirements 
@@ -2435,7 +2668,6 @@ values
 insert or ignore into RequirementSets
 	(RequirementSetId,											RequirementSetType)
 values
-	('HD_CITY_DEFENDER_PROMOTION_REQUIREMENTS',					'REQUIREMENTSET_TEST_ALL'),
 	('HD_UNIT_IS_NOT_BARBARIAN_GALLEY_REQUIREMENTS',			'REQUIREMENTSET_TEST_ALL'),
 	('HD_UNIT_IS_NOT_BARBARIAN_REQUIREMENTS',					'REQUIREMENTSET_TEST_ALL'),
 	('HD_OPPONENT_IS_CAVALRY_REQUIREMENTS',						'REQUIREMENTSET_TEST_ANY'),
@@ -2466,8 +2698,6 @@ values
 insert or ignore into RequirementSetRequirements
 	(RequirementSetId,											RequirementId)
 values
-	('HD_CITY_DEFENDER_PROMOTION_REQUIREMENTS',					'HD_REQUIRES_UNIT_IS_NOT_UNIT_SPY'),
-	('HD_CITY_DEFENDER_PROMOTION_REQUIREMENTS',					'HD_REQUIRES_UNIT_IS_NOT_UNIT_APOSTLE'),
 	('HD_UNIT_IS_NOT_BARBARIAN_GALLEY_REQUIREMENTS',			'HD_REQUIRES_UNIT_IS_NOT_UNIT_HD_BARBARIAN_GALLEY'),
 	('HD_UNIT_IS_NOT_BARBARIAN_REQUIREMENTS',					'REQUIRES_UNIT_NOT_BARBARIAN'),
 	('HD_OPPONENT_IS_CAVALRY_REQUIREMENTS',						'ANTI_CAVALRY_OPPONENT_REQUIREMENT_LC'),
@@ -2801,53 +3031,47 @@ insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementI
 	from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
 
 -- 相邻的区域Req
-insert or ignore into RequirementSets
-	(RequirementSetId,                                  RequirementSetType)
-select
-	'HD_DISTRICT_IS_' || DistrictType || '_ADJACENT',   'REQUIREMENTSET_TEST_ALL'
-from Districts;
-
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,                                  RequirementId)
-select
-	'HD_DISTRICT_IS_' || DistrictType || '_ADJACENT',   'ADJACENT_TO_OWNER'
-from Districts;
-
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,                                  RequirementId)
-select
-	'HD_DISTRICT_IS_' || DistrictType || '_ADJACENT',   'REQUIRES_DISTRICT_IS_' || DistrictType || '_HD'
-from Districts;
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType) select
+	'HD_DISTRICT_IS_' || DistrictType || '_ADJACENT', 'REQUIREMENTSET_TEST_ALL' from Districts;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select
+	'HD_DISTRICT_IS_' || DistrictType || '_ADJACENT', 'ADJACENT_TO_OWNER' from Districts;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select
+	'HD_DISTRICT_IS_' || DistrictType || '_ADJACENT', 'REQUIRES_DISTRICT_IS_' || DistrictType || '_HD' from Districts;
 
 -- 一环内的区域Req
-insert or ignore into RequirementSets
-	(RequirementSetId,                                  			RequirementSetType)
-select
-	'HD_DISTRICT_IS_' || DistrictType || '_WITHIN_1_TILE',   	'REQUIREMENTSET_TEST_ALL'
-from Districts;
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType) select
+	'HD_DISTRICT_IS_' || DistrictType || '_WITHIN_1_TILE_REQUIREMENTS', 'REQUIREMENTSET_TEST_ALL' from Districts;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select
+	'HD_DISTRICT_IS_' || DistrictType || '_WITHIN_1_TILE_REQUIREMENTS', 'REQUIRES_OBJECT_WITHIN_1_TILE' from Districts;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select
+	'HD_DISTRICT_IS_' || DistrictType || '_WITHIN_1_TILE_REQUIREMENTS', 'REQUIRES_DISTRICT_IS_' || DistrictType || '_HD' from Districts;
 
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,                                  			RequirementId)
-select
-	'HD_DISTRICT_IS_' || DistrictType || '_WITHIN_1_TILE',   	'REQUIRES_OBJECT_WITHIN_1_TILE'
-from Districts;
-
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,                                  RequirementId)
-select
-	'HD_DISTRICT_IS_' || DistrictType || '_WITHIN_1_TILE',   'REQUIRES_DISTRICT_IS_' || DistrictType || '_HD'
-from Districts;
+-- 二环内的区域Req
+insert or ignore into RequirementSets (RequirementSetId, RequirementSetType) select
+	'HD_DISTRICT_IS_' || DistrictType || '_WITHIN_2_TILES_REQUIREMENTS', 'REQUIREMENTSET_TEST_ALL' from Districts;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select
+	'HD_DISTRICT_IS_' || DistrictType || '_WITHIN_2_TILES_REQUIREMENTS', 'REQUIRES_OBJECT_WITHIN_2_TILES' from Districts;
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId) select
+	'HD_DISTRICT_IS_' || DistrictType || '_WITHIN_2_TILES_REQUIREMENTS', 'REQUIRES_DISTRICT_IS_' || DistrictType || '_HD' from Districts;
 
 -- Ayutthaya & Nan Madol bug fix
 insert or ignore into RequirementSets
 	(RequirementSetId, 							RequirementSetType)
 values
 	('PLOT_HAS_COMPLETE_WONDER',				'REQUIREMENTSET_TEST_ANY'),
+	('HD_STONE_STATUE_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
 	('HD_DRY_STONE_REQUIREMENTS',				'REQUIREMENTSET_TEST_ANY'),
 	('PLOT_DOES_NOT_HAVE_INCOMPLETE_WONDER',	'REQUIREMENTSET_TEST_ANY'),
 	('PLOT_HAS_WONDER',							'REQUIREMENTSET_TEST_ANY');
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
 select 'PLOT_HAS_COMPLETE_WONDER',	'PLOT_HAS_' || BuildingType from Buildings where IsWonder = 1;
+
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+select 'HD_STONE_STATUE_REQUIREMENTS',	'PLOT_HAS_' || BuildingType from Buildings where IsWonder = 1
+and PrereqTech in (select TechnologyType from Technologies where EraType in ('ERA_ANCIENT'));
+insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
+select 'HD_STONE_STATUE_REQUIREMENTS',	'PLOT_HAS_' || BuildingType from Buildings where IsWonder = 1
+and PrereqCivic in (select CivicType from Civics where EraType in ('ERA_ANCIENT'));
 
 insert or ignore into RequirementSetRequirements (RequirementSetId, RequirementId)
 select 'HD_DRY_STONE_REQUIREMENTS',	'PLOT_HAS_' || BuildingType from Buildings where IsWonder = 1
@@ -2890,7 +3114,6 @@ values
 	('WONDER_ADJACENT_TO_LAKE_OR_LAKE_REQUIREMENTS',				'REQUIREMENTSET_TEST_ALL'),
 --圣瓦西里主教座堂
 	('ST_BASILS_CATHEDRAL_YIELD_IMPROVEMENT_REQUIREMENTS',		'REQUIREMENTSET_TEST_ALL'),
-	('ST_BASILS_CATHEDRAL_YIELD_DISTRICT_REQUIREMENTS',		'REQUIREMENTSET_TEST_ALL'),
 --伦敦塔桥
 	('HD_IS_RIVER_OR_ON_OR_ADJACENT_TO_COAST',							'REQUIREMENTSET_TEST_ANY');
 insert or ignore into RequirementSetRequirements
@@ -2906,12 +3129,8 @@ values
 	('WONDER_ADJACENT_TO_LAKE_OR_LAKE_REQUIREMENTS',				'REQUIRES_ADJACENT_TO_LAKE_OR_LAKE'),
 	('WONDER_ADJACENT_TO_LAKE_OR_LAKE_REQUIREMENTS',				'REQUIRES_PLOT_HAS_COMPLETE_WONDER'),
 --圣瓦西里主教座堂
-	('ST_BASILS_CATHEDRAL_YIELD_IMPROVEMENT_REQUIREMENTS',		'REQUIRES_OBJECT_WITHIN_6_TILES'),
 	('ST_BASILS_CATHEDRAL_YIELD_IMPROVEMENT_REQUIREMENTS',		'REQUIRES_PLOT_HAS_ANYTUNDRA'),
 	('ST_BASILS_CATHEDRAL_YIELD_IMPROVEMENT_REQUIREMENTS',		'REQUIRES_PLOT_IS_IMPROVED'),
-	('ST_BASILS_CATHEDRAL_YIELD_DISTRICT_REQUIREMENTS',		'REQUIRES_OBJECT_WITHIN_6_TILES'),
-	('ST_BASILS_CATHEDRAL_YIELD_DISTRICT_REQUIREMENTS',		'REQUIRES_PLOT_HAS_ANYTUNDRA'),
-	('ST_BASILS_CATHEDRAL_YIELD_DISTRICT_REQUIREMENTS',		'HD_REQUIRES_DISTRICT_IS_NOT_DISTRICT_WONDER'),
 --伦敦塔桥
 	('HD_IS_RIVER_OR_ON_OR_ADJACENT_TO_COAST',							'REQUIRES_PLOT_IS_COAST'),
 	('HD_IS_RIVER_OR_ON_OR_ADJACENT_TO_COAST',							'REQUIRES_PLOT_IS_ADJACENT_TO_COAST'),
@@ -3039,55 +3258,6 @@ values
 	('REQUIRES_PLOT_HAS_BONUS_AND_ADJACENT_TO_OWNER',		'ADJACENT_TO_OWNER'),
 	('REQUIRES_PLOT_HAS_LUXURY_AND_ADJACENT_TO_OWNER',		'REQUIRES_PLOT_HAS_LUXURY'),
 	('REQUIRES_PLOT_HAS_LUXURY_AND_ADJACENT_TO_OWNER',		'ADJACENT_TO_OWNER');
-
--- 官邸 Reqs
-	-- 建筑部分
-insert or ignore into RequirementSets
-	(RequirementSetId,																			RequirementSetType)
-values
-	('HD_CITY_IS_POWERED_PLAYER_HAS_BUILDING_HD_MANSION',		'REQUIREMENTSET_TEST_ALL');
-
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,																			RequirementId)
-values
-	('HD_CITY_IS_POWERED_PLAYER_HAS_BUILDING_HD_MANSION',		'REQUIRES_CITY_IS_POWERED'),
-	('HD_CITY_IS_POWERED_PLAYER_HAS_BUILDING_HD_MANSION',		'REQUIRES_PLAYER_HAS_BUILDING_HD_MANSION');
-
-insert or ignore into RequirementSets
-	(RequirementSetId,																													RequirementSetType)
-select
-	'PLAYER_HAS_' || TechnologyType || '_AND_BUILDING_HD_MANSION_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'
-from Technologies;
-
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,																													RequirementId)
-select
-	'PLAYER_HAS_' || TechnologyType || '_AND_BUILDING_HD_MANSION_REQUIREMENTS',	'HD_REQUIRES_PLAYER_HAS_' || TechnologyType
-from Technologies;
-
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,																													RequirementId)
-select
-	'PLAYER_HAS_' || TechnologyType || '_AND_BUILDING_HD_MANSION_REQUIREMENTS',	'REQUIRES_PLAYER_HAS_BUILDING_HD_MANSION'
-from Technologies;
-
-insert or ignore into RequirementSets
-	(RequirementSetId,																											RequirementSetType)
-select
-	'PLAYER_HAS_' || CivicType || '_AND_BUILDING_HD_MANSION_REQUIREMENTS',	'REQUIREMENTSET_TEST_ALL'
-from Civics;
-
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,																											RequirementId)
-select
-	'PLAYER_HAS_' || CivicType || '_AND_BUILDING_HD_MANSION_REQUIREMENTS',	'REQUIRES_PLAYER_HAS_' || CivicType
-from Civics;
-
-insert or ignore into RequirementSetRequirements
-	(RequirementSetId,																											RequirementId)
-select
-	'PLAYER_HAS_' || CivicType || '_AND_BUILDING_HD_MANSION_REQUIREMENTS',	'REQUIRES_PLAYER_HAS_BUILDING_HD_MANSION'
-from Civics;
 
 insert or ignore into RequirementSets
 	(RequirementSetId, 							            RequirementSetType)

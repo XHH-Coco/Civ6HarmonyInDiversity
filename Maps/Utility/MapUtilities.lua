@@ -588,9 +588,9 @@ function GenerateNextToCoastalLandDataTables()
 	return plotDataIsCoastal, plotDataIsNextToCoast
 end
 ------------------------------------------------------------------------------
-function TestMembership(table, value)
+function TestMembership(incoming_table, value)
 	local testResult = false;
-	for index, data in pairs(table) do
+	for index, data in pairs(incoming_table) do
 		if data == value then
 			testResult = true;
 			break
@@ -620,7 +620,7 @@ function GetShuffledCopyOfTable(incoming_table)
 	return shuffledVersion
 end
 --]]
--- DeepLogic version: implementation of Fisher�CYates shuffle
+-- DeepLogic version: implementation of Fisher–Yates shuffle
 function GetShuffledCopyOfTable(incoming_table)
 	-- Designed to operate on tables with no gaps. Does not affect original table.
 	local len = table.maxn(incoming_table);
@@ -629,8 +629,7 @@ function GetShuffledCopyOfTable(incoming_table)
 	for loop = 1, len do
 		copy[loop] = incoming_table[loop];
 	end
-	-- Fisher�CYates shuffle
-	local left_to_do = table.maxn(copy);
+	-- Fisher–Yates shuffle
 	for i = len, 1, -1 do
 		local random_index = 1 + TerrainBuilder.GetRandomNumber(i, "Shuffling table entry - Lua");
 		copy[random_index], copy[i] = copy[i], copy[random_index]
@@ -830,11 +829,11 @@ function AddGoodies(iW, iH)
 				local pPlot = Map.GetPlotByIndex(pos);
 				local bGoody = CanPlaceGoodyAt(improvement, pPlot);
 				if (bGoody) then
-					if (iNeedtoPlace >= 0) then
+					if (iNeedtoPlace > 0) then
 						ImprovementBuilder.SetImprovementType(pPlot, improvementID, NO_PLAYER);
 						iNeedtoPlace = iNeedtoPlace - 1;
 						-- print('goody', iNeedtoPlace, 'x', x, 'y', y);
-						if (iNeedtoPlace < 0) then
+						if (iNeedtoPlace <= 0) then
 							break;
 						end
 					end
@@ -963,3 +962,159 @@ function AddLeyLines()
 		end
 	end
 end
+
+------------------------------------------------------------------------------
+-- 以下为 HD 自有的共享地图代码。合并自各地图脚本里的重复副本。
+------------------------------------------------------------------------------
+
+--火山土开局生成----------------------------------------------------------------
+function AddVolcanicSoil(iSecondRingChance)
+    -- iSecondRingChance：二环铺火山土的概率分母，默认 1/3。Primordial 传 2。
+    iSecondRingChance = iSecondRingChance or 3;
+
+    local mWidth, mHeight = Map.GetGridSize();
+
+    -- 能不能在这一格铺火山土：水域、山地、泛滥平原和任何自然奇观都不铺。
+    -- 原先这里是三份互不一致的硬编码奇观名单，普通火山那一支甚至一份都没有，
+    -- 会把平地上的自然奇观（如恩戈罗恩戈罗火山口、撒哈拉之眼）直接覆盖掉。
+    --
+    -- 泛滥平原也要跳过：覆盖掉地貌并不会让洪水停下（洪水看的是河流，不是地貌），
+    -- 结果是一格"会发洪水但没有泛滥平原"的地，容易触发别处的意外行为。
+    -- 火山旁边有泛滥就让一环少铺几格，这是刻意的。
+    local function CanTakeVolcanicSoil(pPlot)
+        if (pPlot:IsWater() or pPlot:IsMountain()) then
+            return false;
+        end
+        local eFeature = pPlot:GetFeatureType();
+        if (eFeature == -1) then
+            return true;
+        end
+        if (eFeature == g_FEATURE_FLOODPLAINS
+        or eFeature == g_FEATURE_FLOODPLAINS_GRASSLAND
+        or eFeature == g_FEATURE_FLOODPLAINS_PLAINS) then
+            return false;
+        end
+        if (GameInfo.Features[eFeature].NaturalWonder) then
+            return false;
+        end
+        return true;
+    end
+
+    for CoordinateX = 0, mWidth - 1, 1 do
+        for CoordinateY = 0, mHeight - 1, 1 do
+            local plots = Map.GetPlot(CoordinateX, CoordinateY);
+            if (plots:GetFeatureType() ~= -1) then
+                local sFeatureType = GameInfo.Features[plots:GetFeatureType()].FeatureType;
+
+                -- 普通火山：一环铺满，没有二环。
+                if (sFeatureType == "FEATURE_VOLCANO") then
+                    local tNeighborPlots = Map.GetAdjacentPlots(CoordinateX, CoordinateY);
+                    for _, pNeighborPlot in ipairs(tNeighborPlots) do
+                        if (CanTakeVolcanicSoil(pNeighborPlot)) then
+                            TerrainBuilder.SetFeatureType(pNeighborPlot, g_FEATURE_VOLCANIC_SOIL);
+                        end
+                    end
+                end
+
+                -- 火山系自然奇观：一环铺满，二环按概率。
+                if (sFeatureType == "FEATURE_EYJAFJALLAJOKULL"
+                or sFeatureType == "FEATURE_KILIMANJARO"
+                or sFeatureType == "FEATURE_VESUVIUS"
+                or sFeatureType == "FEATURE_SUK_FUJI"
+                or sFeatureType == "FEATURE_SUK_NGORONGORO_CRATER") then
+                    local tNeighborPlots = Map.GetAdjacentPlots(CoordinateX, CoordinateY);
+                    for _, pNeighborPlot in ipairs(tNeighborPlots) do
+                        if (CanTakeVolcanicSoil(pNeighborPlot)) then
+                            TerrainBuilder.SetFeatureType(pNeighborPlot, g_FEATURE_VOLCANIC_SOIL);
+                        end
+                        -- 二环随机生成。这一段刻意留在上面的 if 之外：每个一环邻格都向外摇一圈，
+                        -- 所以一个二环格子邻接几个一环格就被摇几次（角格 1 次、边格 2 次），
+                        -- 实际覆盖率因此高于 1/iSecondRingChance（默认参数下是 33%~56%）。
+                        local sNeighborPlots = Map.GetAdjacentPlots(pNeighborPlot:GetX(), pNeighborPlot:GetY());
+                        for _, rNeighborPlot in ipairs(sNeighborPlots) do
+                            if (CanTakeVolcanicSoil(rNeighborPlot)) then
+                                if (TerrainBuilder.GetRandomNumber(iSecondRingChance, "Volcanic Soil - Lua") == 0) then
+                                    TerrainBuilder.SetFeatureType(rNeighborPlot, g_FEATURE_VOLCANIC_SOIL);
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+
+--分形叠层的"已有陆地"参考层--------------------------------------------------
+-- GenerateFractalLayerWithoutHills 逐层叠加时，靠上一层的结果判断相邻陆地。
+-- 这份状态原本是每个地图脚本各自的 `local islands`，配一对逐字相同的
+-- Adjacent / AdjacentCount（22 份 / 11 份）。合并后状态搬到这里，
+-- 地图脚本改用 SetIslandLayer() 写入。
+-- 初值是空表而不是 nil，与原来的 `local islands = {}` 行为一致。
+local g_IslandLayer = {};
+
+function SetIslandLayer(plotTypes)
+	g_IslandLayer = plotTypes;
+end
+
+function Adjacent(index)
+	local aIslands = g_IslandLayer;
+	index = index -1;
+
+	if(aIslands == nil) then
+		return false;
+	end
+	
+	if(index < 0) then
+		return false
+	end
+
+	local plot = Map.GetPlotByIndex(index);
+	if(aIslands[index] ~= nil and aIslands[index] == g_PLOT_TYPE_LAND) then
+		return true;
+	end
+
+	for direction = 0, DirectionTypes.NUM_DIRECTION_TYPES - 1, 1 do
+		local adjacentPlot = Map.GetAdjacentPlot(plot:GetX(), plot:GetY(), direction);
+		if(adjacentPlot ~= nil) then
+			local newIndex = adjacentPlot:GetIndex();
+			if(aIslands  ~= nil and aIslands[newIndex] == g_PLOT_TYPE_LAND) then
+				return true;
+			end
+		end
+	end
+
+	return false;
+end
+
+function AdjacentCount(index)
+	local aIslands = g_IslandLayer;
+	index = index -1;
+
+	if(aIslands == nil) then
+		return 0;
+	end
+	
+	if(index < 0) then
+		return 0;
+	end
+
+	local plot = Map.GetPlotByIndex(index);
+	if(aIslands[index] ~= nil and aIslands[index] == g_PLOT_TYPE_LAND) then
+		return 7;
+	end
+
+	local adjCount = 0;
+	for direction = 0, DirectionTypes.NUM_DIRECTION_TYPES - 1, 1 do
+		local adjacentPlot = Map.GetAdjacentPlot(plot:GetX(), plot:GetY(), direction);
+		if(adjacentPlot ~= nil) then
+			local newIndex = adjacentPlot:GetIndex();
+			if(aIslands  ~= nil and aIslands[newIndex] == g_PLOT_TYPE_LAND) then
+				adjCount = adjCount+1;
+			end
+		end
+	end
+
+	return adjCount;
+end
+

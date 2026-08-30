@@ -166,14 +166,6 @@ function AssignStartingPlots:__InitStartingData()
             StartPositioner.MarkMajorRegionUsed(i);
             table.insert(self.majorStartPlots, startPlot);
             info = StartPositioner.GetMajorCivStartInfo(i);
---          print ("ContinentType: " .. tostring(info.ContinentType));
---          print ("LandmassID: " .. tostring(info.LandmassID));
---          print ("Fertility: " .. tostring(info.Fertility));
---          print ("TotalPlots: " .. tostring(info.TotalPlots));
---          print ("WestEdge: " .. tostring(info.WestEdge));
---          print ("EastEdge: " .. tostring(info.EastEdge));
---          print ("NorthEdge: " .. tostring(info.NorthEdge));
---          print ("SouthEdge: " .. tostring(info.SouthEdge));
         else
             failed = failed + 1;
             info = StartPositioner.GetMajorCivStartInfo(i);
@@ -262,14 +254,6 @@ function AssignStartingPlots:__InitStartingData()
         info = StartPositioner.GetMinorCivStartInfo(i);
         if(startPlot ~= nil) then
             table.insert(self.minorStartPlots, startPlot);
---          print ("Minor ContinentType: " .. tostring(info.ContinentType));
---          print ("Minor LandmassID: " .. tostring(info.LandmassID));
---          print ("Minor Fertility: " .. tostring(info.Fertility));
---          print ("Minor TotalPlots: " .. tostring(info.TotalPlots));
---          print ("Minor WestEdge: " .. tostring(info.WestEdge));
---          print ("Minor EastEdge: " .. tostring(info.EastEdge));
---          print ("Minor NorthEdge: " .. tostring(info.NorthEdge));
---          print ("Minor SouthEdge: " .. tostring(info.SouthEdge));
             valid = valid + 1;
         else
             print ("-- START FAILED MINOR --");
@@ -356,6 +340,7 @@ end
 ------------------------------------------------------------------------------
 function AssignStartingPlots:__DLPreparePlotFertilities()
     print('start __DLPreparePlotFertilities');
+
     self.plotFertilities = {};
 
     self.resourceList = {};
@@ -372,6 +357,36 @@ function AssignStartingPlots:__DLPreparePlotFertilities()
 
     local gridWidth, gridHeight = Map.GetGridSize();
     local numPlots = gridWidth * gridHeight;
+	local t_count = 0
+	------------------------------------------------------------------------------
+	-- 判断是否是海洋关联文明
+	print('debug -- 判断海洋文明')
+	local coastflag = false;
+	for row in GameInfo.StartBiasTerrains() do
+		local civilizationType = row.CivilizationType;
+		local terrainType = row.TerrainType;
+		if PlayerConfigurations[0]:GetCivilizationTypeName() == civilizationType and terrainType == "TERRAIN_COAST" then
+			coastflag = true;
+		end
+	end
+
+	-- 判断是否存在负关联表，并将对应的负关联地貌记录
+	print('debug -- 载入负关联地貌')
+	local featureList = {};
+	for row in GameInfo.HD_Negative_StartBiasFeatures() do
+		local civilizationType = row.CivilizationType;
+		if PlayerConfigurations[0]:GetCivilizationTypeName() == civilizationType then
+			table.insert(featureList, row.FeatureType);
+			print(row.FeatureType);
+		end
+	end
+
+	-- 载入地貌表
+	local Features = {};
+	for row in GameInfo.Features() do
+        table.insert(Features, row.FeatureType);
+    end
+	------------------------------------------------------------------------------
     for i = 0, numPlots -1 do
         local plot = Map.GetPlotByIndex(i);
         local x = plot:GetX();
@@ -403,9 +418,31 @@ function AssignStartingPlots:__DLPreparePlotFertilities()
                         local yield = anotherPlot:GetYield(row.Index) * row.DefaultValue;
                         plotYields[row.YieldType] = plotYields[row.YieldType] + yield;
                         -- print(x, y, anotherPlot:GetX(), anotherPlot:GetY(), row.YieldType, yield);
-
-
                     end
+					
+					------------------------------------------------------------------------------
+					-- 判断地形是否是海岸地形
+					if coastflag then
+                        if 15 <= anotherPlot:GetTerrainType() and anotherPlot:GetTerrainType() <= 16 then
+                            totalFertility = totalFertility + 2;
+                        end
+					else
+						if 15 <= anotherPlot:GetTerrainType() and anotherPlot:GetTerrainType() <= 16 then
+                            totalFertility = totalFertility - 2;
+                        end
+                    end
+					-- 判断是否是负关联地貌，如果是则扣分降低权重
+					if (anotherPlot) then
+						if (anotherPlot:GetFeatureType() ~= -1) then
+							for i, feature in ipairs(featureList) do
+								if Features[anotherPlot:GetFeatureType()+1] == feature then
+									totalFertility = totalFertility - 2;
+									t_count = t_count + 1;
+								end
+							end
+						end
+					end
+					------------------------------------------------------------------------------
                     if (PlayerConfigurations[0]:GetCivilizationTypeName() == "CIVILIZATION_INCA") then
                         if anotherPlot:GetTerrainType()%3 == 0 then
                             totalFertility = totalFertility + 4;
@@ -414,7 +451,7 @@ function AssignStartingPlots:__DLPreparePlotFertilities()
 
                     if (PlayerConfigurations[0]:GetCivilizationTypeName() == "CIVILIZATION_CANADA") or (PlayerConfigurations[0]:GetCivilizationTypeName() == "CIVILIZATION_RUSSIA")then
                         if 9 <= anotherPlot:GetTerrainType() and anotherPlot:GetTerrainType() <= 14 then
-                            totalFertility = totalFertility + 1;
+                            totalFertility = totalFertility + 5 / 3; -- 原权重为1。
                         end
                     end
 
@@ -433,7 +470,7 @@ function AssignStartingPlots:__DLPreparePlotFertilities()
                         end
                     end
                     -- TODO: include rivers & fresh water.
-                    -- 如果范围内存在自然奇观，则大幅降低肥沃度
+                    -- 如果范围内存在自然奇观，则大幅降低权重
                     -- if anotherPlot:IsNaturalWonder() then
                     --     totalFertility = totalFertility - 30;
                     -- end
@@ -450,12 +487,17 @@ function AssignStartingPlots:__DLPreparePlotFertilities()
 		yieldWeight['YIELD_GOLD'] = 1 / 3;
 		yieldWeight['YIELD_FAITH'] = 2 / 3;
 		-- xiaoxiaocat: end
-        for k, v in pairs(RingOnePlotYields) do
-            totalFertility = totalFertility + yieldWeight[k] * v * innerRingWeight;
+        -- 按数据库行序累加，而不是 pairs 的哈希序。浮点加法不满足结合律，
+        -- 而权重里有 1/3、2/3 这类无限二进制小数，所以遍历顺序会影响末位。
+        -- 这原本是地图生成里唯一一处对字符串键表的 pairs 遍历。
+        for row in GameInfo.Yields() do
+            local k = row.YieldType;
+            totalFertility = totalFertility + yieldWeight[k] * RingOnePlotYields[k] * innerRingWeight;
         end
         -- Sum of fertility for range-2 ring.
-        for k, v in pairs(RingTwoPlotYields) do
-            totalFertility = totalFertility + yieldWeight[k] * v;
+        for row in GameInfo.Yields() do
+            local k = row.YieldType;
+            totalFertility = totalFertility + yieldWeight[k] * RingTwoPlotYields[k];
         end
         -- Shortage of food of inner ring decreases score.
         if RingOnePlotYields['YIELD_FOOD'] <= popConsumFood * 3 then
@@ -471,6 +513,7 @@ function AssignStartingPlots:__DLPreparePlotFertilities()
         -- print(i, plot:GetX(), plot:GetY(), 'Fertility', StartPositioner.GetPlotFertility(i, -1));
         --print(totalFertility);
     end
+	print('debug - 负关联地貌共降低' .. t_count .. '次')
     print('end __DLPreparePlotFertilities');
 end
 ------------------------------------------------------------------------------
@@ -2512,3 +2555,4 @@ function AssignStartingPlots:__RemoveBonus(plot)
         end
     end 
 end
+

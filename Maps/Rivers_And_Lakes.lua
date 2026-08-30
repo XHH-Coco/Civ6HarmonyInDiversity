@@ -1,11 +1,11 @@
 ------------------------------------------------------------------------------
---	FILE:	 Lakes.lua
+--	FILE:	 The River And Lakes.lua(恒河平原)
 --	AUTHOR:  
 --	PURPOSE: Base game script - Produces widely varied islands.
 ------------------------------------------------------------------------------
 --	Copyright (c) 2017 Firaxis Games, Inc. All rights reserved.
 ------------------------------------------------------------------------------
---太湖
+
 include "MapEnums"
 include "MapUtilities"
 include "MountainsCliffs"
@@ -20,15 +20,27 @@ include "AssignStartingPlots"
 local g_iW, g_iH;
 local g_iFlags = {};
 local g_continentsFrac = nil;
-local islands = {};
-local featureGen = nil;
-local world_age_old = 2;
-local world_age_normal = 3;
-local world_age_new = 5;
+local featuregen = nil;
+local world_age_old = 1;
+local world_age_normal = 2;
+local world_age_new = 3;
+
 
 -------------------------------------------------------------------------------
+local function unique(t)
+    local seen = {}
+    local result = {}
+    for _, v in ipairs(t) do
+        if not seen[v] then
+            seen[v] = true
+            table.insert(result, v)
+        end
+    end
+    return result
+end
+-------------------------------------------------------------------------------
 function GenerateMap()
-	print("Generating Rivers And Lakes Map");
+	print("Generating River And Lakes Map");
 	local pPlot;
 
 	-- Set globals
@@ -72,12 +84,12 @@ function GenerateMap()
 
 	-- River generation is affected by plot types, originating from highlands and preferring to traverse lowlands.
 	AddRivers(2);
-	
 	-- Lakes would interfere with rivers, causing them to stop and not reach the ocean, if placed any sooner.
-	local numLargeLakes = math.ceil(GameInfo.Maps[Map.GetMapSize()].Continents * 7 + 12 );
+	local numLargeLakes = math.ceil(GameInfo.Maps[Map.GetMapSize()].Continents * 7 + 0 );
 	AddLakes(numLargeLakes);
 
 	AddFeatures();
+	AddFloodPlain();
 	
 	print("Adding cliffs");
 	AddCliffs(plotTypes, terrainTypes);
@@ -97,22 +109,66 @@ function GenerateMap()
     AddVolcanicSoil();--火山土开局生成必要语句
 	local resourcesConfig = MapConfiguration.GetValue("resources");
 	local startConfig = MapConfiguration.GetValue("start");-- Get the start config
+
+	local Features = {};
+	for row in GameInfo.Features() do
+        table.insert(Features, row.FeatureType);
+    end
+
+	local Map_ExtraLuxuries = {};
+
+	-- 第一步：建立资源类型到资源类的映射索引
+	local resourceClassMap = {};
+	for row in GameInfo.Resources() do
+		resourceClassMap[row.ResourceType] = row.ResourceClassType;
+	end
+
+	local improvementTypeMap = {};
+	for row in GameInfo.Improvement_ValidResources() do
+		if row.ImprovementType == "IMPROVEMENT_FARM" or 
+		row.ImprovementType == "IMPROVEMENT_PLANTATION" then
+			improvementTypeMap[row.ResourceType] = row.ImprovementType;
+		end
+	end
+	-- 第二步：遍历有效资源-特征组合
+	for row in GameInfo.Resource_ValidFeatures() do
+		local resourceType = row.ResourceType;
+		local featureType = row.FeatureType;
+		
+		-- 检查是否为奢侈品或者是否是种植园或者农场
+		if resourceClassMap[resourceType] == "RESOURCECLASS_LUXURY" and 
+		improvementTypeMap[resourceType] ~= nil then
+			-- 检查是否为洪泛平原
+			if featureType == "FEATURE_FLOODPLAINS" or 
+			featureType == "FEATURE_FLOODPLAINS_PLAINS" or 
+			featureType == "FEATURE_FLOODPLAINS_GRASSLAND" then
+				table.insert(Map_ExtraLuxuries, resourceType);
+			end
+		end
+	end
+
+	Map_ExtraLuxuries = unique(Map_ExtraLuxuries);
+
+	print("Extra Luxuries Choosing finish!");
+	for _, row in ipairs(Map_ExtraLuxuries) do
+		print(row);
+	end
+
 	local args = {
 		iWaterLux = 3,
 		iWaterBonus = 1.1, 
 		resources = resourcesConfig,
 		START_CONFIG = startConfig,
 
-		ExtraBonusGroupTwoMultiply = 1.85,							--增加的倍率
+		ExtraBonusGroupTwoMultiply = 1.5,							--增加的倍率
 		ExtraBonusGroupTwo = {
 		"RESOURCE_JNR_PEAT",--泥炭
 		"RESOURCE_RICE",--大米
 		"RESOURCE_WHEAT"--小麦
 		},--增加的陆地加成资源,水资无效，奢侈战略无效
 
-		ExtraBonusGroupOneMultiply = 1.3,							--增加的倍率
+		ExtraBonusGroupOneMultiply = 1.25,							--增加的倍率
 		ExtraBonusGroupOne = {	
-		"RESOURCE_CRABS",			--螃蟹
 		"RESOURCE_CATTLE",			--牛
 		"RESOURCE_LEAD",			--铅锌矿
 		"RESOURCE_DATES",			--椰枣
@@ -126,8 +182,9 @@ function GenerateMap()
 			"RESOURCE_RUBBER"			--橡胶
 		},--减少的陆地加成资源,水资无效，奢侈战略无效
 
-		FewerBonusGroupTwoMultiply = 0.7,							--减少的倍率
+		FewerBonusGroupTwoMultiply = 0.77,							--减少的倍率
 		FewerBonusGroupTwo = {	
+			--"RESOURCE_CRABS",			--螃蟹
 			"RESOURCE_DLV_BISON",		--野牛
 			"RESOURCE_HAM",				--火腿
 			"RESOURCE_MAIZE",			--玉米
@@ -136,14 +193,11 @@ function GenerateMap()
 
 		HorsesMultiply =    1.0,	--调整马资源丰度
         IronMultiply =		1.0,	--调整铁资源丰度
-        NiterMultiply =     1.0,	--调整硝石资源丰度
+        NiterMultiply =     0.8,	--调整硝石资源丰度
         CoalMultiply =      1.0,	--调整煤炭资源丰度
         OilMultiply =       1.0,	--调整石油资源丰度
         AluminumMultiply =  1.0,	--调整铝资源丰度
-		ExtraLuxuries = {	
-			--"RESOURCE_SAFFRON",				--藏红花
-			--"RESOURCE_LEU_P0K_QUINOA"		--藜麦			
-		}--增加陆地奢，奢侈按大陆加无倍率，不用在这里加企鹅，企鹅用别的方法加了
+		ExtraLuxuries = 	Map_ExtraLuxuries
 	};
 	local resGen = ResourceGenerator.Create(args);
 	print("Creating start plot database.");
@@ -159,8 +213,8 @@ function GenerateMap()
         START_MAX_Y = 55,
         START_MIN_X = 15,
         START_MAX_X = 40,
-        WATER = true,
-        LAND = true,
+		WATER = false,
+		LAND = true,
 		START_CONFIG = startConfig,
 	};
 	local start_plot_database = AssignStartingPlots.Create(args)
@@ -173,7 +227,7 @@ function GeneratePlotTypes(world_age)
 	print("Generating Plot Types");
 	local plotTypes = {};
 	local extra_mountains = 0;
-	local grain_amount = 3;
+	local grain_amount = 4;
 	local adjust_plates = 1.0;
 	local shift_plot_types = true;
 	local tectonic_islands = true;
@@ -181,7 +235,8 @@ function GeneratePlotTypes(world_age)
 	local peaks_ridge_flags = g_iFlags;
 	local has_center_rift = false;
 	local sea_level = 1;
-	local world_age = 1;
+
+	world_age = world_age or 2;
 
 	local water_percent_modifier = 0; 
 
@@ -209,13 +264,12 @@ function GeneratePlotTypes(world_age)
 
 	
 	
-	local iWaterShift1 = math.ceil(g_iH * 3);
-	local iWaterHeight1 = g_iH - iWaterShift1 * 1.3;
+
 
 	-- by changing iRegionFracXExp and iRegionFracYExp to control the shape of oceans.
 		-- Generate huge Lakes		
 		local args = {};	
-		args.iWaterPercent = 63 + water_percent_modifier;
+		args.iWaterPercent = 77 + water_percent_modifier;
 		args.iRegionWidth = math.ceil(g_iW);
 		args.iRegionHeight = math.ceil(g_iH);
 		args.iRegionWestX = math.floor(0);
@@ -226,12 +280,12 @@ function GeneratePlotTypes(world_age)
 		args.iRegionFracXExp = 5;
 		args.iRegionFracYExp = 4;
 		plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
-		islands = plotTypes;
+		SetIslandLayer(plotTypes);
 	
 	
 		-- Generate Medium Lakes		
 		local args = {};	
-		args.iWaterPercent = 77 + water_percent_modifier;
+		args.iWaterPercent = 78 + water_percent_modifier;
 		args.iRegionWidth = math.ceil(g_iW);
 		args.iRegionHeight = math.ceil(g_iH);
 		args.iRegionWestX = math.floor(0);
@@ -239,16 +293,16 @@ function GeneratePlotTypes(world_age)
 		args.iRegionGrain = 6;
 		args.iRegionHillsGrain = 4;
 		args.iRegionPlotFlags = g_iFlags;
-		args.iRegionFracXExp = 4;
-		args.iRegionFracYExp = 5;
+		args.iRegionFracXExp = 5;
+		args.iRegionFracYExp = 4;
 		plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
-		islands = plotTypes;
+		SetIslandLayer(plotTypes);
 	
 	
 	
 		-- Generate Medium Lakes	
 		local args = {};	
-		args.iWaterPercent = 82 + water_percent_modifier;
+		args.iWaterPercent = 72 + water_percent_modifier;
 		args.iRegionWidth = math.ceil(g_iW);
 		args.iRegionHeight = math.ceil(g_iH);
 		args.iRegionWestX = math.floor(0);
@@ -259,11 +313,11 @@ function GeneratePlotTypes(world_age)
 		args.iRegionFracXExp = 5;
 		args.iRegionFracYExp = 5;
 		plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
-		islands = plotTypes;
+		SetIslandLayer(plotTypes);
 	
 		-- Generate Tiny Lakes
 		local args = {};	
-		args.iWaterPercent = 95 + water_percent_modifier;
+		args.iWaterPercent = 66 + water_percent_modifier;
 		args.iRegionWidth = math.ceil(g_iW);
 		args.iRegionHeight = math.ceil(g_iH);
 		args.iRegionWestX = math.floor(0);
@@ -272,13 +326,14 @@ function GeneratePlotTypes(world_age)
 		args.iRegionHillsGrain = 4;
 		args.iRegionPlotFlags = g_iFlags;
 		args.iRegionFracXExp = 5;
-		args.iRegionFracYExp = 3;
+		args.iRegionFracYExp = 4;
 		plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
 	
 
 	-- Land and water are set. Apply hills and mountains.
 	local args = {};
 	args.world_age = world_age;
+	args.grain_amount = grain_amount;
 	args.iW = g_iW;
 	args.iH = g_iH
 	args.iFlags = g_iFlags;
@@ -286,27 +341,59 @@ function GeneratePlotTypes(world_age)
 	-- args.blendFract = 5; -- original setting
 	args.blendFract = 1;
 	-- args.extra_mountains = 5; -- original setting
-	args.extra_mountains = 1;
+	args.extra_mountains = -2;
 	-- mountainRatio = 8 + world_age * 3; -- original setting
-	mountainRatio = 16.5 + world_age * 6;
+	mountainRatio = 16 + world_age * 5;
 
 	plotTypes = ApplyTectonics(args, plotTypes);
 	plotTypes = AddLonelyMountains(plotTypes, mountainRatio);
+
+	--防止丘陵聚团生成，强制转换相邻4个及以上丘陵的丘陵单元格变为平原单元格
+	local plot_size = args.iW * args.iH;
+
+	for x = 0, args.iW - 1 do
+		for y = 0, args.iH - 1 do
+			local i = y * args.iW + x + 1;
+			if plotTypes[i] == g_PLOT_TYPE_HILLS then
+				local iAdjHillCount = 0;
+				for dx=-1,1 do
+					for dy=-1,1 do
+						local j = i + dy * args.iW + dx;
+						distance = Map.GetPlotDistance(i, j);
+						if(j > 0 and j < plot_size and distance == 1) then
+							if(plotTypes[j] == g_PLOT_TYPE_HILLS) then
+								iAdjHillCount = iAdjHillCount + 1;
+							end
+						end
+					end
+				end
+				if (iAdjHillCount > 3) then
+					plotTypes[i] = g_PLOT_TYPE_LAND;
+				end
+			end
+		end
+	end
 
 	return  plotTypes;
 end
 -------------------------------------------------------------------------------
 function AddFeatures()
 	print("Adding Features");
-
 	-- Get Rainfall setting input by user.
 	local rainfall = MapConfiguration.GetValue("rainfall");
 	if rainfall == 4 then
 		rainfall = 1 + TerrainBuilder.GetRandomNumber(3, "Random Rainfall - Lua");
 	end
 	--植被
-		local args = {rainfall = rainfall, iMarshPercent = 6, iSwampPercent = 4, iJunglePercent = 32, iForestPercent = 16} 
-	
+		local args = {
+			rainfall = rainfall, 
+			iMarshPercent = 3, 
+			iSwampPercent = 3, 
+			iJunglePercent = 26, 
+			iForestPercent = 20,
+			iMinFloodplainSize = 5,
+			iMaxFloodplainSize = 18,
+		} 
 	featuregen = FeatureGenerator.Create(args);
 	featuregen:AddFeatures(true, false);  --second parameter is whether or not rivers start inland);
 end
@@ -327,7 +414,7 @@ function GenerateFractalLayerWithoutHills (args, plotTypes)
 	local plotTypes2 = {};
 
 	-- Handle args or assign defaults.
-	local iWaterPercent = args.iWaterPercent or 63;
+	local iWaterPercent = args.iWaterPercent or 60;
 	local iRegionWidth = args.iRegionWidth; -- Mandatory Parameter, no default
 	local iRegionHeight = args.iRegionHeight; -- Mandatory Parameter, no default
 	local iRegionWestX = args.iRegionWestX; -- Mandatory Parameter, no default
@@ -403,11 +490,9 @@ function GenerateFractalLayerWithoutHills (args, plotTypes)
 				--do nothing
 			elseif (adjCount == 7) then
 				--do nothing
-			-- by changing oceans adjacent to lots of land into land, might be able to relieve the stripe ocean problem.
-			elseif (adjCount > 12 and adjCount <= 19) then
-				if (math.random(2,4) <= adjCount) then
-					plotTypes2[i] = g_PLOT_TYPE_LAND;
-				end
+			-- 注：AdjacentCount 的值域是 0..6（相邻陆地数），或哨兵 7（自己已是陆地，上一分支已拦截）。
+			-- 原先这里有一个概率填海分支，阈值写成 >8 ~ >16，永不成立、从未执行过，已删除。
+			-- 若要重新启用，请按 0..6 的量级标定，参考 Lakes.lua。
 			elseif (adjCount == 0) then
 				plotTypes2[i] = g_PLOT_TYPE_LAND;
 			end
@@ -438,37 +523,16 @@ function GenerateFractalLayerWithoutHills (args, plotTypes)
 end
 
 -------------------------------------------------------------------------------
-function MarkCoastalLowlands()
-
-	print("Map Generation - Marking Coastal Lowlands");
-
-	local numDesiredCoastalLowlandsPercentage = 71 or 45;
-
-	scoredTiles = ScoreCoastalLowlandTiles();
-	tilesToMark = math.floor((#scoredTiles * numDesiredCoastalLowlandsPercentage) / 100);
-	
-	if tilesToMark > 0 then
-        table.sort (scoredTiles, function(a, b) return a.Score > b.Score; end);
-		for tileIdx = 1, tilesToMark, 1 do
-			local iElevation = 2;
-			if (tileIdx <= tilesToMark / 3) then
-				iElevation = 0;
-			elseif (tileIdx <= (tilesToMark * 2) / 3) then
-				iElevation = 1.4;
-			end
-			TerrainBuilder.AddCoastalLowland(scoredTiles[tileIdx].MapIndex, iElevation);
-		end
-		print(tostring(tilesToMark).." Coastal Lowland tiles added");
-		print("  " .. tostring(GlobalParameters.CACAPULCOTE_CHANGE_PERCENT_COASTAL_LOWLANDS) .. "% of eligible coastal tiles");
-	end
-end
+-- 本图不再自带 MarkCoastalLowlands，直接使用 Utility/CoastalLowlands.lua 的共用实现。
+-- 这里原本有两份重复定义，Lua 后定义覆盖先定义，写着 66% 的那份从未执行过；
+-- 实际一直按共用实现的 35% 在跑，现按实跑结果转正。若要改回 66% 需重新定义并实测。
 -------------------------------------------------------------------------------
 function AddTerrainFromContinents(plotTypes, terrainTypes, world_age, iW, iH, iContinentBoundaryPlots, bNoCoastalMountains)
 
-	local iMountainPercentByDistance:table = {42, 24, 6}; 
+	local iMountainPercentByDistance:table = {10, 5, 2}; --可能表示在不同距离范围内生成山脉的概率。需测试
 	-- bias the probability of generate mountains when adjacent to mountains
-	local iMountainPercentBias:table = {12,6,0};
-	local iHillPercentByDistance:table = {50, 40, 30};
+	local iMountainPercentBias:table = {5, 3, 0}; --可能表示当某个格子相邻有山脉时，生成山脉的概率会增加。需测试
+	local iHillPercentByDistance:table = {10, 5, 2};
 	local aLonelyMountainIndices:table = {};
 	local aPlacedVolcanoes:table = {};
 
@@ -494,7 +558,7 @@ function AddTerrainFromContinents(plotTypes, terrainTypes, world_age, iW, iH, iC
 	if (world_age < 8) then
 		iDivisor = 8 - world_age;  -- iDivisor should be 3 for new, 6 for old
 	end
-	local iDesiredVolcanoes = iTotalLandPlots / (iDivisor * 50)/3;
+	local iDesiredVolcanoes = iTotalLandPlots / (iDivisor * 50) / 3;
 
 	print ("Desired Volcanoes: " .. iDesiredVolcanoes);
 
@@ -519,17 +583,17 @@ function AddTerrainFromContinents(plotTypes, terrainTypes, world_age, iW, iH, iC
 					if (iNumAdjacentMountains ~= 6 and GetNumberNearbyVolcanoes(iX, iY, 3, aPlacedVolcanoes) == 0) then
 						if not(bNoCoastalMountains and IsAdjacentToShallowWater(terrainTypes, iX, iY)) then --get rid of coastal volcano.
 							if (Map.FindSecondContinent(pPlot, 1)) then
-								if (TerrainBuilder.GetRandomNumber(iBoundaryPlotsPerVolcano *.7, "Volcano on boundary") == 0) then
+								if (TerrainBuilder.GetRandomNumber(math.max(1, math.floor(iBoundaryPlotsPerVolcano * 0.7)), "Volcano on boundary") == 0) then
 									bVolcanoHere = true;
 								end
 								iPlotsFromBoundary = 1;
 							elseif(Map.FindSecondContinent(pPlot, 2)) then
-								if (TerrainBuilder.GetRandomNumber(iBoundaryPlotsPerVolcano, "Volcano 1 from boundary") == 0) then
+								if (TerrainBuilder.GetRandomNumber(math.max(1, math.floor(iBoundaryPlotsPerVolcano)), "Volcano 1 from boundary") == 0) then
 									bVolcanoHere = true;
 								end
 								iPlotsFromBoundary = 2;
 							elseif(Map.FindSecondContinent(pPlot, 3)) then
-								if (TerrainBuilder.GetRandomNumber(iBoundaryPlotsPerVolcano * 1.5, "Volcano 2 from boundary") == 0) then
+								if (TerrainBuilder.GetRandomNumber(math.max(1, math.floor(iBoundaryPlotsPerVolcano * 1.5)), "Volcano 2 from boundary") == 0) then
 									bVolcanoHere = true;
 								end
 								iPlotsFromBoundary = 3;
@@ -618,7 +682,6 @@ function AddTerrainFromContinents(plotTypes, terrainTypes, world_age, iW, iH, iC
 
 	print ("Total Volcanoes Placed: " .. #aPlacedVolcanoes);
 end
-
 ------------------------------------------------------------------------------
 function GetNumberAdjacentVolcanoes(iX, iY)
 	
@@ -655,152 +718,8 @@ function GetNumberNearbyVolcanoes(iX, iY, range, aPlacedVolcanoes)
 	return iVolcanoCount;
 end
 
--------------------------------------------------------------------------------
-function MarkCoastalLowlands()
-
-	print("Map Generation - Marking Coastal Lowlands");
-
-	local numDesiredCoastalLowlandsPercentage = 77 or 40;
-
-	scoredTiles = ScoreCoastalLowlandTiles();
-	tilesToMark = math.floor((#scoredTiles * numDesiredCoastalLowlandsPercentage) / 100);
-	
-	if tilesToMark > 0 then
-        table.sort (scoredTiles, function(a, b) return a.Score > b.Score; end);
-		for tileIdx = 1, tilesToMark, 1 do
-			local iElevation = 2;
-			if (tileIdx <= tilesToMark / 3) then
-				iElevation = 0;
-			elseif (tileIdx <= (tilesToMark * 2) / 3) then
-				iElevation = 1.2;
-			end
-			TerrainBuilder.AddCoastalLowland(scoredTiles[tileIdx].MapIndex, iElevation);
-		end
-		print(tostring(tilesToMark).." Coastal Lowland tiles added");
-		print("  " .. tostring(GlobalParameters.CACAPULCOTE_CHANGE_PERCENT_COASTAL_LOWLANDS) .. "% of eligible coastal tiles");
-	end
-end
--------------------------------------------------------------------------------
---火山土开局生成----------------------------------------------------------------
-function AddVolcanicSoil()
-    local mWidth,mHeight = Map.GetGridSize();
-    for CoordinateX = 0,mWidth,1 do
-        for CoordinateY = 0,mHeight-1,1 do
-            local plots = Map.GetPlot(CoordinateX,CoordinateY);
-            if (plots:GetFeatureType() ~= -1) then
-                if (GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_VOLCANO") then
-                    local tNeighborPlots = Map.GetAdjacentPlots(CoordinateX,CoordinateY);
-                    for _, pNeighborPlot in ipairs(tNeighborPlots) do
-                        if (not pNeighborPlot:IsWater() and not pNeighborPlot:IsMountain()) then
-                            TerrainBuilder.SetFeatureType(pNeighborPlot,35);
-                        end
-                    end
-                end
-                if (GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_EYJAFJALLAJOKULL"
-                or GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_KILIMANJARO"
-                or GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_VESUVIUS"
-                or GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_SUK_FUJI"
-                or GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_SUK_NGORONGORO_CRATER") then
-                    local tNeighborPlots = Map.GetAdjacentPlots(CoordinateX,CoordinateY);
-                    for _, pNeighborPlot in ipairs(tNeighborPlots) do
-                        if (not pNeighborPlot:IsWater() and not pNeighborPlot:IsMountain()) then
-                            if (pNeighborPlot:GetFeatureType() ~= -1) then
-                                if (GameInfo.Features[pNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_EYJAFJALLAJOKULL"
-                                and GameInfo.Features[pNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_SUK_NGORONGORO_CRATER") then
-                                    TerrainBuilder.SetFeatureType(pNeighborPlot,35);
-                                end
-                            else
-                                TerrainBuilder.SetFeatureType(pNeighborPlot,35);
-                            end
-                        end
-                        --二环随机生成
-                        local sNeighborPlots = Map.GetAdjacentPlots(pNeighborPlot:GetX(), pNeighborPlot:GetY());
-                        for _, rNeighborPlot in ipairs(sNeighborPlots) do
-                            if (not rNeighborPlot:IsWater() and not rNeighborPlot:IsMountain()) then
-                                if (rNeighborPlot:GetFeatureType() ~= -1) then
-                                    if (GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_EYJAFJALLAJOKULL"
-                                    and GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_KILIMANJARO"
-                                    and GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_VESUVIUS"
-                                    and GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_SUK_FUJI"
-                                    and GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_SUK_NGORONGORO_CRATER") then
-                                        if (math.random(3) == 1) then
-                                            TerrainBuilder.SetFeatureType(rNeighborPlot,35);
-                                        end
-                                    end
-                                else
-                                    if (math.random(3) == 1) then
-                                        TerrainBuilder.SetFeatureType(rNeighborPlot,35);
-                                    end
-                                end
-                            end
-                        end
-                    end
-                end
-            end
-        end
-    end
-end
 ----------------------------------------------------------------------------------------------------
-function Adjacent(index)
-	aIslands = islands;
-	index = index -1;
 
-	if(aIslands == nil) then
-		return false;
-	end
-	
-	if(index < 0) then
-		return false
-	end
-
-	local plot = Map.GetPlotByIndex(index);
-	if(aIslands[index] ~= nil and aIslands[index] == g_PLOT_TYPE_LAND) then
-		return true;
-	end
-
-	for direction = 0, DirectionTypes.NUM_DIRECTION_TYPES - 1, 1 do
-		local adjacentPlot = Map.GetAdjacentPlot(plot:GetX(), plot:GetY(), direction);
-		if(adjacentPlot ~= nil) then
-			local newIndex = adjacentPlot:GetIndex();
-			if(aIslands  ~= nil and aIslands[newIndex] == g_PLOT_TYPE_LAND) then
-				return true;
-			end
-		end
-	end
-
-	return false;
-end
-
-function AdjacentCount(index)
-	aIslands = islands;
-	index = index -1;
-
-	if(aIslands == nil) then
-		return 0;
-	end
-	
-	if(index < 0) then
-		return 0;
-	end
-
-	local plot = Map.GetPlotByIndex(index);
-	if(aIslands[index] ~= nil and aIslands[index] == g_PLOT_TYPE_LAND) then
-		return 7;
-	end
-
-	local adjCount = 0;
-	for direction = 0, DirectionTypes.NUM_DIRECTION_TYPES - 1, 1 do
-		local adjacentPlot = Map.GetAdjacentPlot(plot:GetX(), plot:GetY(), direction);
-		if(adjacentPlot ~= nil) then
-			local newIndex = adjacentPlot:GetIndex();
-			if(aIslands  ~= nil and aIslands[newIndex] == g_PLOT_TYPE_LAND) then
-				adjCount = adjCount+1;
-			end
-		end
-	end
-
-	return adjCount;
-end
 -------------------------------------------------------------------------------------------
 function AddLakes(largeLakes)
 
@@ -850,4 +769,106 @@ function AddLakes(largeLakes)
 		print(tostring(numLakesAdded).." lakes added")
 		AreaBuilder.Recalculate();
 	end
+end
+-------------------------------------------------------------------------------------------
+function AssignStartingPlots:__MajorCivBuffer(plot)
+    -- Checks to see if there are major civs in the given distance for this major civ
+
+    local iMaxStart = 13;
+
+    if (PlayerConfigurations[0]:GetCivilizationTypeName() == "CIVILIZATION_CANADA") or (PlayerConfigurations[0]:GetCivilizationTypeName() == "CIVILIZATION_RUSSIA")then
+        local iMaxStart = 15;
+    end
+
+    iMaxStart = iMaxStart - GlobalParameters.START_DISTANCE_RANGE_MAJOR or 2;
+
+    local iSourceIndex = plot:GetIndex();
+    for i, majorPlot in ipairs(self.majorStartPlots) do
+        if(Map.GetPlotDistance(iSourceIndex, majorPlot:GetIndex()) <= iMaxStart) then
+            return false;
+        end
+    end 
+
+    return true;
+end
+-------------------------------------------------------------------------------------------
+function AssignStartingPlots:__MinorMajorCivBuffer(plot)
+    -- Checks to see if there are najors in the given distance for this minor civ
+
+    local iMaxStart = 9;
+
+    if (PlayerConfigurations[0]:GetCivilizationTypeName() == "CIVILIZATION_CANADA") or (PlayerConfigurations[0]:GetCivilizationTypeName() == "CIVILIZATION_RUSSIA")then
+        local iMaxStart = 11;
+    end
+    local iSourceIndex = plot:GetIndex();
+    
+    for i, majorPlot in ipairs(self.majorCopy) do
+        if(Map.GetPlotDistance(iSourceIndex, majorPlot:GetIndex()) <= iMaxStart) then
+            return false;
+        end
+    end 
+
+    return true;
+end
+-------------------------------------------------------------------------------------------
+function AssignStartingPlots:__MinorMinorCivBuffer(plot)
+    -- Checks to see if there are minors in the given distance for this minor civ
+
+    local iMaxStart = 5;
+
+    if (PlayerConfigurations[0]:GetCivilizationTypeName() == "CIVILIZATION_CANADA") or (PlayerConfigurations[0]:GetCivilizationTypeName() == "CIVILIZATION_RUSSIA")then
+        local iMaxStart = 7;
+    end
+    local iSourceIndex = plot:GetIndex();
+
+    for i, minorPlot in ipairs(self.minorStartPlots) do
+        if(Map.GetPlotDistance(iSourceIndex, minorPlot:GetIndex()) <= iMaxStart) then
+            return false;
+        end
+    end
+
+    return true;
+end
+-------------------------------------------------------------------------------------------
+function AddFloodPlain()
+
+	print("Map Generation - Adding More FloodPlain");
+	local iW, iH = Map.GetGridSize();
+	local plot_size = iW * iH;
+	for iX = 0, iW - 1 do
+		for iY = 0, iH - 1 do
+			local index = (iY * iW) + iX;
+			plot = Map.GetPlotByIndex(index);
+			if(plot) then
+				if (plot:IsRiver() == false) then
+					local iAdjFloodPlainCount = 0;
+					for dx=-1,1 do
+						for dy=-1,1 do
+							local j = index + dy * iW + dx;
+							local distance = Map.GetPlotDistance(index, j);
+							if(j > 0 and j < plot_size and distance == 1) then
+								pPlot = Map.GetPlotByIndex(j);
+								if(pPlot ~= nil and pPlot:IsRiver() == true) then
+									if(pPlot:GetFeatureType() == g_FEATURE_FLOODPLAINS_PLAINS or pPlot:GetFeatureType() == g_FEATURE_FLOODPLAINS_GRASSLAND) then
+										iAdjFloodPlainCount = iAdjFloodPlainCount + 1;
+									end
+								end
+							end
+						end
+					end
+					if iAdjFloodPlainCount > 1 then
+						-- print("id: " .. index .. " iAdjFloodPlainCount: " .. iAdjFloodPlainCount);
+						if (plot:GetTerrainType() == g_TERRAIN_TYPE_GRASS and plot:GetFeatureType() == -1)then
+							TerrainBuilder.SetFeatureType(plot, g_FEATURE_FLOODPLAINS_GRASSLAND)
+							-- print("Set feature to FLOODPLAINS_GRASSLAND for plot: " .. index)
+						elseif (plot:GetTerrainType() == g_TERRAIN_TYPE_PLAINS and plot:GetFeatureType() == -1)then
+							TerrainBuilder.SetFeatureType(plot, g_FEATURE_FLOODPLAINS_PLAINS)
+							-- print("Set feature to FLOODPLAINS_PLAINS for plot: " .. index)
+						end
+					end	
+				end
+			end
+		end
+	end
+	
 end

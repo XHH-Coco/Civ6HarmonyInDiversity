@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Context  ColorSet="BodyTextCool" FontStyle="Shadow">
+	<!--====================================================================-->
+	<!--INSTANCES-->
+	<!--====================================================================-->
+	<Instance Name="Suk_BuildingInstance">
+		<GridButton ID="Top" Offset="15,0" Size="parent-15,auto" Style="CityPanelSubPanelContainer" AutoSizePadding="0,0" MinSize="24,24">
+			<Container Size="24,24" Anchor="L,C" Offset="0,0">
+				<Image ID="Icon" Offset="-2,-4" Texture="Buildings32" Size="32,32"/>
+			</Container>
+			<Label ID="BuildingName" Anchor="L,C" Offset="30,0" Style="CityPanelText" String="$BuildingName$" WrapWidth="120"/>
+			<Label ID="BuildingYield" Anchor="R,C" Offset="2,2" Style="CityPanelText" String="$BuildingYield$"/>
+		</GridButton>
+	</Instance>
+
+	<Instance Name="Suk_DistrictInstance">
+		<GridButton ID="Top" Size="parent,auto" Style="CityPanelSubPanelContainer" AutoSizePadding="0,2" MinSize="24,24">
+			<Stack Offset="0,10" Padding="0">
+				<Container ID="DistrictInfo" Size="parent,auto" AutoSizePadding="0,2">
+
+					<!-- Icon and Name -->
+
+					<Container Size="93,auto" AutoSizePadding="0,2" Anchor="L,C">
+						<Stack Anchor="C,C" Padding="6">
+							<Label ID="DistrictName" Anchor="C,T" Style="CityPanelText" Align="Center" String="$DistrictName$" WrapWidth="89"/>
+							<Image ID="Icon" Anchor="C,T" Texture="Districts32" Size="32,32"/>
+						</Stack>
+					</Container>
+
+					<!-- District Yields -->
+
+					<Container Size="187,auto" AutoSizePadding="0,2" Anchor="R,C">
+						<Stack Anchor="C,C" Padding="6">
+							<Grid Size="175,auto" Style="CityPanelSubPanelContainer" AutoSizePadding="0,8" ID="DistrictYields">
+								<Stack Anchor="C,C" Padding="6">
+									<Label Anchor="C,T" Offset="0,0" Style="CityPanelHeader"  String="{LOC_HUD_REPORTS_ADJACENCY_BONUS:upper}"/>
+									<Label ID="DistrictAdjacencyBonuses" Anchor="C,T" Offset="0,0" Style="CityPanelText" String="$DistrictYield$"/>
+									<Label ID="DistrictOtherBonusesLabel" Anchor="C,T" Offset="0,0" Style="CityPanelHeader"  String="{LOC_HUD_REPORTS_SUK_OTHER_ADJACENCY_BONUS:upper}"/>
+									<Label ID="DistrictOtherBonuses" Anchor="C,T" Offset="0,0" Style="CityPanelText" String="$DistrictYield$"/>
+								</Stack>
+							</Grid>
+						</Stack>
+					</Container>
+
+				</Container>
+
+				<Stack ID="BuildingStack" Offset="0,10" Padding="3"/>
+
+			</Stack>
+		</GridButton>
+	</Instance>
+
+	<Instance Name="Suk_WonderInstance">
+		<GridButton ID="Top" Size="parent,auto"	Style="CityPanelSubPanelContainer" AutoSizePadding="5,5" MinSize="24,24">
+			<Container Size="24,24" Anchor="L,C" Offset="0,0">
+				<Image ID="Icon" Offset="-2,-4" Texture="Buildings32" Size="32,32"/>
+			</Container>
+			<Label ID="WonderName" Anchor="L,C" Offset="36,0" Style="CityPanelText" String="$WonderName$" WrapWidth="120"/>
+			<Label ID="WonderYield" Anchor="R,C" Offset="2,2" Style="CityPanelText" String="$WonderYield$" WrapWidth="parent-130"/>
+		</GridButton>
+	</Instance>
+</Context>

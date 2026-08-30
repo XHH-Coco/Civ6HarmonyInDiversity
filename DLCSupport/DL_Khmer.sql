@@ -149,10 +149,6 @@ select
 	'IMPROVEMENT_KAMPUNG',		'FEATURE_SUK_KELP'
 where exists (select FeatureType from Features where FeatureType = 'FEATURE_SUK_KELP');
 
--- 旅游业绩
--- update Improvement_Tourism set TourismSource = 'TOURISMSOURCE_PRODUCTION' where ImprovementType = 'IMPROVEMENT_KAMPUNG';
-delete from Improvement_Tourism where ImprovementType = 'IMPROVEMENT_KAMPUNG';
-
 -- 相邻加成
 delete from Improvement_Adjacencies where ImprovementType = 'IMPROVEMENT_KAMPUNG';
 -- update Adjacency_YieldChanges set YieldType = 'YIELD_PRODUCTION' where ID = 'Kampung_FoodFishingBoats';

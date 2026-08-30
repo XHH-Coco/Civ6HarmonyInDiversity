@@ -4,7 +4,9 @@ insert or replace into Improvement_YieldChanges
 values
 	('IMPROVEMENT_FISHING_BOATS',		'YIELD_FOOD',			0),
 	('IMPROVEMENT_FISHING_BOATS',		'YIELD_PRODUCTION',		1),
-	('IMPROVEMENT_FISHING_BOATS',		'YIELD_GOLD',			0),
+	
+	('IMPROVEMENT_FISHERY', 'YIELD_FOOD',       1),
+	('IMPROVEMENT_FISHERY', 'YIELD_PRODUCTION', 1),
 
 	('IMPROVEMENT_PLANTATION',			'YIELD_FOOD',			1),
 	('IMPROVEMENT_PLANTATION',			'YIELD_PRODUCTION',		0),
@@ -29,13 +31,21 @@ values
 	('IMPROVEMENT_COLOSSAL_HEAD',		'YIELD_FAITH',			2),
 	('IMPROVEMENT_MOAI',				'YIELD_CULTURE',		2),
 	
+	('IMPROVEMENT_GOLF_COURSE',		'YIELD_CULTURE',		2),
+	('IMPROVEMENT_GOLF_COURSE',		'YIELD_GOLD',				3),
+	('IMPROVEMENT_GOLF_COURSE',		'YIELD_PRODUCTION',	0),
+
+	('IMPROVEMENT_CITY_PARK',		'YIELD_FOOD',				0),
+	('IMPROVEMENT_CITY_PARK',		'YIELD_CULTURE',		2),
+	('IMPROVEMENT_CITY_PARK',		'YIELD_GOLD',				0),
+	
 	('IMPROVEMENT_ZIGGURAT',			'YIELD_SCIENCE',		1),
 	('IMPROVEMENT_ZIGGURAT',			'YIELD_FAITH',		0),
 	('IMPROVEMENT_MEKEWAP',				'YIELD_GOLD',			2),
 	('IMPROVEMENT_MEKEWAP',				'YIELD_PRODUCTION',		0),
 	('IMPROVEMENT_GREAT_WALL',			'YIELD_FOOD',			1),
 	('IMPROVEMENT_CHATEAU',				'YIELD_FOOD',		2),
-	('IMPROVEMENT_CHATEAU',				'YIELD_CULTURE',		1),
+	('IMPROVEMENT_CHATEAU',				'YIELD_CULTURE',		0),
 	('IMPROVEMENT_CHATEAU',				'YIELD_GOLD',		0),
 	('IMPROVEMENT_LAND_POLDER',			'YIELD_FOOD',			1),
 	('IMPROVEMENT_LAND_POLDER',			'YIELD_PRODUCTION',		1),
@@ -43,6 +53,12 @@ values
 	('IMPROVEMENT_MISSION',				'YIELD_FOOD',			0),
 	('IMPROVEMENT_MISSION',				'YIELD_PRODUCTION',		0),
 	('IMPROVEMENT_ICE_HOCKEY_RINK',		'YIELD_FOOD',			2);
+
+update Improvements set Housing = 1, TilesRequired = 2 where ImprovementType in (
+	'IMPROVEMENT_QUARRY',
+	'IMPROVEMENT_MINE',
+	'IMPROVEMENT_LUMBER_MILL'
+);
 
 -- Bonus Yield
 delete from Improvement_BonusYieldChanges where ImprovementType in (
@@ -54,6 +70,7 @@ delete from Improvement_BonusYieldChanges where ImprovementType in (
 	'IMPROVEMENT_MINE',
 	'IMPROVEMENT_LUMBER_MILL',
 	'IMPROVEMENT_FISHING_BOATS');
+
 insert or replace into Improvement_BonusYieldChanges
 	(Id,	ImprovementType,								YieldType,							BonusYieldChange,	PrereqCivic,										PrereqTech)
 values
@@ -97,13 +114,14 @@ values
 	(638,	'IMPROVEMENT_PASTURE',					'YIELD_PRODUCTION',		1,					null,							'TECH_ROBOTICS'),
 
 	(640,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					null,							'TECH_ENGINEERING'),
-	(641,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					null,							'TECH_GUNPOWDER'),
-	(642,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					null,							'TECH_GEOLOGY_HD'),
-	(643,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					null,							'TECH_STEEL'),
-	(644,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					'CIVIC_PALEOBIOLOGY_HD',							null),
-	(645,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					null,							'TECH_INDUSTRIAL_AUTOMATION_HD'),
-	(646,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					null,							'TECH_SYNTHETIC_MATERIALS'),
-	(647,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					null,							'TECH_COMPOSITES'),
+	(641,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					null,							'TECH_METAL_CASTING'),
+	(642,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					null,							'TECH_GUNPOWDER'),
+	(643,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					null,							'TECH_GEOLOGY_HD'),
+	(644,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					null,							'TECH_STEEL'),
+	(645,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					'CIVIC_PALEOBIOLOGY_HD',							null),
+	(646,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					null,							'TECH_INDUSTRIAL_AUTOMATION_HD'),
+	(647,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					null,							'TECH_SYNTHETIC_MATERIALS'),
+	(648,	'IMPROVEMENT_QUARRY',					'YIELD_PRODUCTION',		1,					null,							'TECH_COMPOSITES'),
 
 	(650,	'IMPROVEMENT_MINE',						'YIELD_PRODUCTION',		1,					null,							'TECH_ALCHEMY_HD'),
 	(651,	'IMPROVEMENT_MINE',						'YIELD_PRODUCTION',		1,					null,							'TECH_APPRENTICESHIP'),
@@ -125,43 +143,63 @@ values
 	(667,	'IMPROVEMENT_LUMBER_MILL',				'YIELD_PRODUCTION',		1,					null,							'TECH_GENETIC_ENGINEERING_HD'),
 	(668,	'IMPROVEMENT_LUMBER_MILL',				'YIELD_PRODUCTION',		1,					null,							'TECH_COMPOSITES'),
 
-	(670,	'IMPROVEMENT_FISHING_BOATS',			'YIELD_PRODUCTION',		1,					null,							'TECH_COMPASS_HD'),
-	(671,	'IMPROVEMENT_FISHING_BOATS',			'YIELD_GOLD',			2,					null,							'TECH_OCEANOGRAPHY_HD'),
-	(672,	'IMPROVEMENT_FISHING_BOATS',			'YIELD_FOOD',			1,					null,							'TECH_REFRIGERATION_HD'),
-	(673,	'IMPROVEMENT_FISHING_BOATS',			'YIELD_FOOD',			1,					null,							'TECH_PLASTICS'),
+	(670,	'IMPROVEMENT_FISHING_BOATS',			'YIELD_FOOD',					1,					null,							'TECH_SHIPBUILDING'),
+	(671,	'IMPROVEMENT_FISHING_BOATS',			'YIELD_FOOD',					1,					null,							'TECH_COMPASS_HD'),
+	(672,	'IMPROVEMENT_FISHING_BOATS',			'YIELD_PRODUCTION',		1,					null,							'TECH_MASS_PRODUCTION'),
+	(673,	'IMPROVEMENT_FISHING_BOATS',			'YIELD_FOOD',					1,					null,							'TECH_OCEANOGRAPHY_HD'),
+	(674,	'IMPROVEMENT_FISHING_BOATS',			'YIELD_FOOD',					1,					null,							'TECH_REFRIGERATION_HD'),
+	(675,	'IMPROVEMENT_FISHING_BOATS',			'YIELD_FOOD',					1,					null,							'TECH_BIOLOGY_HD'),
+	(676,	'IMPROVEMENT_FISHING_BOATS',			'YIELD_PRODUCTION',		1,					null,							'TECH_PLASTICS'),
+	(677,	'IMPROVEMENT_FISHING_BOATS',			'YIELD_FOOD',					1,					null,							'TECH_GENETIC_ENGINEERING_HD'),
+	(678,	'IMPROVEMENT_FISHING_BOATS',			'YIELD_FOOD',					1,					null,							'TECH_ROBOTICS'),
 
-	(700,	'IMPROVEMENT_OIL_WELL',					'YIELD_PRODUCTION',		2,					null,							'TECH_REFINING'),
-	(701,	'IMPROVEMENT_OIL_WELL',					'YIELD_SCIENCE',		2,					null,							'TECH_REFINING'),
-	(702,	'IMPROVEMENT_OFFSHORE_OIL_RIG',			'YIELD_PRODUCTION',		2,					null,							'TECH_REFINING'),
-	(703,	'IMPROVEMENT_OFFSHORE_OIL_RIG',			'YIELD_SCIENCE',		2,					null,							'TECH_REFINING');
+	(710,	'IMPROVEMENT_FISHERY',		'YIELD_PRODUCTION',	1,								null,												'TECH_TEXTILE_HD'),
+	(711,	'IMPROVEMENT_FISHERY',		'YIELD_FOOD',				1,								null,												'TECH_SQUARE_SAIL_HD'),
+	(712,	'IMPROVEMENT_FISHERY',		'YIELD_PRODUCTION',	1,								'CIVIC_NAVAL_TRADITION',		null),
+	(713,	'IMPROVEMENT_FISHERY',		'YIELD_FOOD',				1,								null,												'TECH_CARTOGRAPHY'),
+	(714,	'IMPROVEMENT_FISHERY',		'YIELD_PRODUCTION',	1,								'CIVIC_EXPLORATION',				null),
+	(715,	'IMPROVEMENT_FISHERY',		'YIELD_PRODUCTION',	1,								'CIVIC_COLONIALISM',				null),
+	(716,	'IMPROVEMENT_FISHERY',		'YIELD_FOOD',				1,								null,												'TECH_REFRIGERATION_HD'),
+	(717,	'IMPROVEMENT_FISHERY',		'YIELD_PRODUCTION',	1,								null,												'TECH_BIOLOGY_HD'),
+	(718,	'IMPROVEMENT_FISHERY',		'YIELD_FOOD',				1,								null,												'TECH_PLASTICS'),
+	(719,	'IMPROVEMENT_FISHERY',		'YIELD_PRODUCTION',	1,								'CIVIC_NEOCOLONIALISM_HD',	null),
+	(720,	'IMPROVEMENT_FISHERY',		'YIELD_FOOD',				1,								null,												'TECH_NANOTECHNOLOGY'),
+
+	(800,	'IMPROVEMENT_OIL_WELL',							'YIELD_PRODUCTION',		2,					null,							'TECH_REFINING'),
+	(801,	'IMPROVEMENT_OIL_WELL',							'YIELD_SCIENCE',			2,					null,							'TECH_REFINING'),
+	(802,	'IMPROVEMENT_OFFSHORE_OIL_RIG',			'YIELD_PRODUCTION',		2,					null,							'TECH_REFINING'),
+	(803,	'IMPROVEMENT_OFFSHORE_OIL_RIG',			'YIELD_SCIENCE',			2,					null,							'TECH_REFINING'),
+
+	(810,	'IMPROVEMENT_CITY_PARK',						'YIELD_FOOD',					1,					null,																'TECH_CONSTRUCTION'),
+	(811,	'IMPROVEMENT_CITY_PARK',						'YIELD_GOLD',					3,					'CIVIC_GAMES_RECREATION',						null),
+	(812,	'IMPROVEMENT_CITY_PARK',						'YIELD_GOLD',					3,					'CIVIC_COMMERCIAL_CAPITALISM_HD',		null),
+	(813,	'IMPROVEMENT_CITY_PARK',						'YIELD_CULTURE',			1,					'CIVIC_URBANIZATION',								null),
+	(814,	'IMPROVEMENT_CITY_PARK',						'YIELD_CULTURE',			1,					'CIVIC_URBAN_DESIGN_HD',						null),
+	(815,	'IMPROVEMENT_CITY_PARK',						'YIELD_FOOD',					1,					'CIVIC_CONSERVATION',							  null),
+	(816,	'IMPROVEMENT_CITY_PARK',						'YIELD_GOLD',					3,					null,																'TECH_ADVANCED_FLIGHT'),
+	(817,	'IMPROVEMENT_CITY_PARK',						'YIELD_FOOD',					1,					'CIVIC_ENVIRONMENTALISM',						null);
 
 -- Adjacency Yield
-delete from Improvement_Adjacencies where ImprovementType = 'IMPROVEMENT_ICE_HOCKEY_RINK'
+delete from Improvement_Adjacencies where
+	ImprovementType = 'IMPROVEMENT_ICE_HOCKEY_RINK'
+	or ImprovementType = 'IMPROVEMENT_GOLF_COURSE'
 	or (ImprovementType = 'IMPROVEMENT_TERRACE_FARM' and YieldChangeId = 'Terrace_AqueductAdjacency')
 	or (ImprovementType = 'IMPROVEMENT_CHATEAU' and YieldChangeId = 'Chateau_River')
 	or (ImprovementType = 'IMPROVEMENT_CHATEAU' and YieldChangeId = 'Chateau_WonderEarly')
-	or (YieldChangeId in ('Terrace_MedievalAdjacency', 'Terrace_MechanizedAdjacency'));
+	or (YieldChangeId in ('Terrace_MedievalAdjacency', 'Terrace_MechanizedAdjacency'))
+	or ImprovementType = 'IMPROVEMENT_FISHERY';
+
 delete from Adjacency_YieldChanges where ID in (
 	'Mekewap_FirstBonusAdjacency',
 	'Mekewap_SecondBonusAdjacency',
 	'Mekewap_ThirdBonusAdjacency'
 );
+
 insert or replace into Improvement_Adjacencies
 	(ImprovementType,				YieldChangeId)
 values
-	('IMPROVEMENT_LUMBER_MILL',		'Lumber_Mill_River_Production'),
-	('IMPROVEMENT_LUMBER_MILL',		'Lumber_Mill_Industrial_Production'),
-	('IMPROVEMENT_MINE',			'Mine_Industrial_Production'),
-	('IMPROVEMENT_QUARRY',			'Quarry_Industrial_Production'),
-	('IMPROVEMENT_PLANTATION',		'Plantation_Commercial_Gold'),
-	('IMPROVEMENT_PLANTATION',		'Plantation_Suguba_Gold'),
-	('IMPROVEMENT_PASTURE',			'Pasture_Commercial_Gold'),
-	('IMPROVEMENT_PASTURE',			'Pasture_Suguba_Gold'),
-	('IMPROVEMENT_CAMP',			'Camp_Commercial_Gold'),
-	('IMPROVEMENT_CAMP',			'Camp_Suguba_Gold'),
-	('IMPROVEMENT_FISHING_BOATS',	'Fishing_Boats_Harbor_Gold'),
-	('IMPROVEMENT_FISHING_BOATS',	'Fishing_Boats_Royal_Navy_Gold'),
-	('IMPROVEMENT_FISHING_BOATS',	'Fishing_Boats_Cothon_Gold'),
+	('IMPROVEMENT_FISHERY',			'Fishery_Production_from_Fishing_Boat'),
+	('IMPROVEMENT_FISHERY',			'Fishery_Food_from_Fishery'),
 
 	('IMPROVEMENT_MEKEWAP',			'Mekewap_Luxury_Production_Tier1'),
 	('IMPROVEMENT_MEKEWAP',			'Mekewap_Luxury_Production_Tier2'),
@@ -169,12 +207,6 @@ values
 	('IMPROVEMENT_MEKEWAP',		    'Mekewap_Strategic_Production_Tier2'),
 	('IMPROVEMENT_MEKEWAP',		    'Mekewap_Bonus_Food_Tier1'),
 	('IMPROVEMENT_MEKEWAP',		    'Mekewap_Bonus_Food_Tier2'),
-	-- ('IMPROVEMENT_TERRACE_FARM',	'Terrace_GrassMountainAdjacency_Late'),
-	-- ('IMPROVEMENT_TERRACE_FARM',	'Terrace_PlainsMountainAdjacency_Late'),
-	-- ('IMPROVEMENT_TERRACE_FARM',	'Terrace_DesertMountainAdjacency_Late'),
-	-- ('IMPROVEMENT_TERRACE_FARM',	'Terrace_TundraMountainAdjacency_Late'),
-	-- ('IMPROVEMENT_TERRACE_FARM',	'Terrace_SnowMountainAdjacency_Late'),
-	-- ('IMPROVEMENT_TERRACE_FARM',	'Terrace_ConstructionAdjacency'),
 	('IMPROVEMENT_CHATEAU',			'Chateau_Bonus_Food'),
 	('IMPROVEMENT_CHATEAU',			'Chateau_Luxury_Culture'),
 	-- 传教团
@@ -189,31 +221,16 @@ values
 	('IMPROVEMENT_MISSION',			'Mission_Neighborhood_Food2'),
 	('IMPROVEMENT_MISSION',			'Mission_Neighborhood_Production2'),
 	('IMPROVEMENT_MISSION',			'Mission_Neighborhood_Food3'),
-	('IMPROVEMENT_MISSION',			'Mission_Neighborhood_Production3');
-insert or replace into Adjacency_YieldChanges
-	(ID,										Description,	YieldType,			YieldChange,	AdjacentDistrict)
-values
-	('Lumber_Mill_Industrial_Production',		'Placeholder',	'YIELD_PRODUCTION',	1,				'DISTRICT_INDUSTRIAL_ZONE'),
-	('Mine_Industrial_Production',				'Placeholder',	'YIELD_PRODUCTION',	1,				'DISTRICT_INDUSTRIAL_ZONE'),
-	('Quarry_Industrial_Production',			'Placeholder',	'YIELD_PRODUCTION',	1,				'DISTRICT_INDUSTRIAL_ZONE'),
-	('Plantation_Commercial_Gold', 				'Placeholder',	'YIELD_GOLD',		3,				'DISTRICT_COMMERCIAL_HUB'),
-	('Plantation_Suguba_Gold', 					'Placeholder',	'YIELD_GOLD',		3,				'DISTRICT_SUGUBA'),
-	('Pasture_Commercial_Gold', 				'Placeholder',	'YIELD_GOLD',		3,				'DISTRICT_COMMERCIAL_HUB'),
-	('Pasture_Suguba_Gold', 					'Placeholder',	'YIELD_GOLD',		3,				'DISTRICT_SUGUBA'),
-	('Camp_Commercial_Gold', 					'Placeholder',	'YIELD_GOLD',		3,				'DISTRICT_COMMERCIAL_HUB'),
-	('Camp_Suguba_Gold', 						'Placeholder',	'YIELD_GOLD',		3,				'DISTRICT_SUGUBA'),
-	('Fishing_Boats_Harbor_Gold', 				'Placeholder',	'YIELD_GOLD',		2,				'DISTRICT_HARBOR'),
-	('Fishing_Boats_Royal_Navy_Gold', 			'Placeholder',	'YIELD_GOLD',		2,				'DISTRICT_ROYAL_NAVY_DOCKYARD'),
-	('Fishing_Boats_Cothon_Gold', 				'Placeholder',	'YIELD_GOLD',		2,				'DISTRICT_COTHON');
+	('IMPROVEMENT_MISSION',			'Mission_Neighborhood_Production3'),
+	-- 高尔夫球场
+	('IMPROVEMENT_GOLF_COURSE',			'HD_Golf_District_Production'),
+	('IMPROVEMENT_GOLF_COURSE',			'HD_Golf_District_Gold'),
+	('IMPROVEMENT_GOLF_COURSE',			'HD_Golf_Wonder_Culture');
 
-update Adjacency_YieldChanges set PrereqTech = 'TECH_CURRENCY' where ID in (
-	'Plantation_Commercial_Gold',
-	'Plantation_Suguba_Gold',
-	'Pasture_Commercial_Gold',
-	'Pasture_Suguba_Gold',
-	'Camp_Commercial_Gold',
-	'Camp_Suguba_Gold'
-);
+insert or replace into Adjacency_YieldChanges (ID, Description, YieldType, YieldChange, OtherDistrictAdjacent, AdjacentWonder) values
+	('HD_Golf_District_Production',	'Placeholder', 'YIELD_PRODUCTION',	1, 1, 0),
+	('HD_Golf_District_Gold',				'Placeholder', 'YIELD_GOLD',				3, 1, 0),
+	('HD_Golf_Wonder_Culture',			'Placeholder', 'YIELD_CULTURE',			2, 0, 1);
 
 insert or replace into Adjacency_YieldChanges
 	(ID,																	Description,		YieldType,						YieldChange,	AdjacentDistrict,				PrereqTech,		        PrereqCivic)
@@ -233,9 +250,10 @@ values
 	('Mission_Neighborhood_Production3',	'Placeholder',	'YIELD_PRODUCTION',		1,						'DISTRICT_NEIGHBORHOOD','TECH_SANITATION',		null);
 
 insert or replace into Adjacency_YieldChanges
-	(ID,										Description,	YieldType,			YieldChange,	AdjacentRiver,	PrereqTech,				ObsoleteTech)
+	(ID,																			Description,		YieldType,						YieldChange,	AdjacentImprovement,					PrereqTech,		        				PrereqCivic)
 values
-	('Lumber_Mill_River_Production', 			'Placeholder',	'YIELD_PRODUCTION',	1,				1,				'TECH_BRONZE_WORKING',	'TECH_MACHINERY');
+	('Fishery_Production_from_Fishing_Boat',	'Placeholder',	'YIELD_PRODUCTION',		1,						'IMPROVEMENT_FISHING_BOATS',	NULL,													NULL),
+	('Fishery_Food_from_Fishery',							'Placeholder',	'YIELD_FOOD',					1,						'IMPROVEMENT_FISHERY',				'TECH_CELESTIAL_NAVIGATION',	NULL);
 
 insert or replace into Adjacency_YieldChanges
 	(ID,										Description,	YieldType,			YieldChange,	AdjacentResourceClass,		PrereqTech,		        PrereqCivic,            ObsoleteTech,           ObsoleteCivic)
@@ -248,18 +266,6 @@ values
 	('Mekewap_Bonus_Food_Tier2',                'PlaceHolder',  'YIELD_FOOD',       2,              'RESOURCECLASS_BONUS',      null,                   'CIVIC_CIVIL_SERVICE',  null,                   null),
 	('Chateau_Bonus_Food', 					'Placeholder',	'YIELD_FOOD',	1,				'RESOURCECLASS_BONUS',		null,	        null,                   null,                   null),
 	('Chateau_Luxury_Culture', 					'Placeholder',	'YIELD_CULTURE',	2,				'RESOURCECLASS_LUXURY',		null,	        null,                   null,                   null);
--- insert or replace into Adjacency_YieldChanges
--- 	(ID,										Description,	YieldType,			YieldChange,	AdjacentTerrain,			PrereqTech)
--- values
--- 	('Terrace_GrassMountainAdjacency_Late',		'Placeholder',	'YIELD_FOOD',		2,				'TERRAIN_GRASS_MOUNTAIN',	'TECH_ENGINEERING'),
--- 	('Terrace_PlainsMountainAdjacency_Late',	'Placeholder',	'YIELD_FOOD',		2,				'TERRAIN_PLAINS_MOUNTAIN',	'TECH_ENGINEERING'),
--- 	('Terrace_DesertMountainAdjacency_Late',	'Placeholder',	'YIELD_FOOD',		2,				'TERRAIN_DESERT_MOUNTAIN',	'TECH_ENGINEERING'),
--- 	('Terrace_TundraMountainAdjacency_Late',	'Placeholder',	'YIELD_FOOD',		2,				'TERRAIN_TUNDRA_MOUNTAIN',	'TECH_ENGINEERING'),
--- 	('Terrace_SnowMountainAdjacency_Late',		'Placeholder',	'YIELD_FOOD',		2,				'TERRAIN_SNOW_MOUNTAIN',	'TECH_ENGINEERING');
--- insert or replace into Adjacency_YieldChanges
--- 	(ID,										Description,	YieldType,			YieldChange,	TilesRequired,	AdjacentImprovement,		PrereqTech)
--- values
--- 	('Terrace_ConstructionAdjacency',			'Placeholder',	'YIELD_PRODUCTION',	1,				2,				'IMPROVEMENT_TERRACE_FARM',	'TECH_CONSTRUCTION');
 
 -- Prereq Tech / Civic
 update Improvements set PrereqTech = 'TECH_POTTERY'					where ImprovementType = 'IMPROVEMENT_PLANTATION';
@@ -282,7 +288,11 @@ values
 	('IMPROVEMENT_COLOSSAL_HEAD',	'FEATURE_FOREST',				null,				null),
 	('IMPROVEMENT_COLOSSAL_HEAD',	'FEATURE_JUNGLE',				null,				null),
 
-	('IMPROVEMENT_MEKEWAP',			'FEATURE_FOREST',				'TECH_MINING',		null);
+	('IMPROVEMENT_MEKEWAP',			'FEATURE_FOREST',				'TECH_MINING',		null),
+
+	('IMPROVEMENT_CITY_PARK',		'FEATURE_FLOODPLAINS',				null,				null),
+	('IMPROVEMENT_CITY_PARK',		'FEATURE_FLOODPLAINS_GRASSLAND',				null,				null),
+	('IMPROVEMENT_CITY_PARK',		'FEATURE_FLOODPLAINS_PLAINS',				null,				null);
 
 with I(ImprovementType) as (select ImprovementType from Improvements where ImprovementType in (
 	'IMPROVEMENT_GREAT_WALL',
@@ -293,7 +303,8 @@ with I(ImprovementType) as (select ImprovementType from Improvements where Impro
 	'IMPROVEMENT_MEKEWAP',
 	'IMPROVEMENT_MOAI',
 	'IMPROVEMENT_OPEN_AIR_MUSEUM',
-	'IMPROVEMENT_MAHAVIHARA', 
+	'IMPROVEMENT_MAHAVIHARA',
+	'IMPROVEMENT_TRADING_DOME',
 	'IMPROVEMENT_BATEY',
 	'IMPROVEMENT_HACIENDA',
 	'IMPROVEMENT_PAIRIDAEZA',
@@ -319,6 +330,7 @@ update Improvements set Description = '{' || Description || '}{LOC_IMPROVEMENT_B
 	'IMPROVEMENT_MOAI',
 	'IMPROVEMENT_OPEN_AIR_MUSEUM',
 	'IMPROVEMENT_MAHAVIHARA',
+	'IMPROVEMENT_TRADING_DOME',
 	'IMPROVEMENT_BATEY',
 	'IMPROVEMENT_HACIENDA',
 	'IMPROVEMENT_PAIRIDAEZA',
@@ -329,6 +341,7 @@ update Improvements set Description = '{' || Description || '}{LOC_IMPROVEMENT_B
 with I(ImprovementType) as (select ImprovementType from Improvements where ImprovementType in (
 	'IMPROVEMENT_BATEY',
 	'IMPROVEMENT_MAHAVIHARA',
+	'IMPROVEMENT_TRADING_DOME',
 	'IMPROVEMENT_CITY_PARK',
 	'IMPROVEMENT_MEKEWAP',
 	'IMPROVEMENT_ALCAZAR',
@@ -354,286 +367,104 @@ update Improvements set PlunderType = 'PLUNDER_GOLD', PlunderAmount = 50 where I
 update Improvements set PlunderType = 'PLUNDER_GOLD', PlunderAmount = 50 where ImprovementType = 'IMPROVEMENT_QUARRY';
 update Improvements set PlunderType = 'PLUNDER_HEAL' where ImprovementType = 'IMPROVEMENT_PASTURE';
 
--- Improvement Tourism
-delete from Improvement_Tourism where ImprovementType in (
-	'IMPROVEMENT_MINE',
-	'IMPROVEMENT_ZIGGURAT',
-	'IMPROVEMENT_SEASTEAD',
-	'IMPROVEMENT_PASTURE',
-	'IMPROVEMENT_PLANTATION',
-	'IMPROVEMENT_CITY_PARK',
-	'IMPROVEMENT_BEACH_RESORT'
-);
+-- =====================================================================================================================================
+-- 旅游业绩
+-- =====================================================================================================================================
+insert or ignore into HD_Improvement_Yield_To_Tourism (ImprovementType, TourismSource, PrereqCivic, PrereqTech, ScalingFactor) values
+	('IMPROVEMENT_CHATEAU', 							'TOURISMSOURCE_CULTURE', 	'CIVIC_HUMANISM', 			NULL, 100),
+	('IMPROVEMENT_GREAT_WALL', 						'TOURISMSOURCE_CULTURE', 	'CIVIC_HUMANISM', 			NULL, 100),
+	('IMPROVEMENT_SPHINX', 								'TOURISMSOURCE_CULTURE', 	'CIVIC_HUMANISM', 			NULL, 100),
+	('IMPROVEMENT_PAIRIDAEZA', 						'TOURISMSOURCE_CULTURE', 	'CIVIC_HUMANISM', 			NULL, 100),
+	('IMPROVEMENT_CHEMAMULL', 						'TOURISMSOURCE_CULTURE', 	'CIVIC_HUMANISM', 			NULL, 100),
+	('IMPROVEMENT_GOLF_COURSE', 					'TOURISMSOURCE_CULTURE', 	NULL, 						 			NULL, 100),
+	('IMPROVEMENT_MOAI', 									'TOURISMSOURCE_CULTURE', 	'CIVIC_HUMANISM', 			NULL, 100),
+	('IMPROVEMENT_OPEN_AIR_MUSEUM', 			'TOURISMSOURCE_CULTURE', 	'CIVIC_HUMANISM', 			NULL, 100),
+	('IMPROVEMENT_ICE_HOCKEY_RINK', 			'TOURISMSOURCE_CULTURE', 	NULL, 						 			NULL, 100),
+	('IMPROVEMENT_BATEY', 								'TOURISMSOURCE_CULTURE', 	'CIVIC_HUMANISM', 			NULL, 100),
+	('IMPROVEMENT_JNR_OASIS_FARM', 				'TOURISMSOURCE_CULTURE', 	NULL, 						 			NULL, 100),
+	('IMPROVEMENT_GEDEMO_DZIMBABWE', 			'TOURISMSOURCE_CULTURE', 	'CIVIC_HUMANISM', 			NULL, 100),
 
-insert or replace into Improvement_Tourism
-	(ImprovementType,			TourismSource,						PrereqTech)
-select
-	ImprovementType,			'TOURISMSOURCE_CULTURE',	'TECH_FLIGHT'
-from Improvements where ImprovementType in (
-	'IMPROVEMENT_FORT'
-);
+	('IMPROVEMENT_MISSION', 							'TOURISMSOURCE_SCIENCE', 	'CIVIC_DIVINE_RIGHT', 	NULL, 100),
+	('IMPROVEMENT_ZIGGURAT', 							'TOURISMSOURCE_SCIENCE', 	'CIVIC_HUMANISM', 		 	NULL, 100),
+	('IMPROVEMENT_ALCAZAR', 							'TOURISMSOURCE_SCIENCE', 	'CIVIC_HUMANISM', 		 	NULL, 100),
+	('IMPROVEMENT_MAHAVIHARA', 						'TOURISMSOURCE_SCIENCE', 	'CIVIC_DIVINE_RIGHT', 	NULL, 100),
+	('IMPROVEMENT_JNR_REED_HOME', 				'TOURISMSOURCE_SCIENCE', 	NULL, 									NULL, 100),
 
-insert or replace into Improvement_Tourism
-	(ImprovementType,			TourismSource,					PrereqCivic)
-select
-	ImprovementType, 			'TOURISMSOURCE_GOLD',		'CIVIC_CAPITALISM'
-from Improvements where ImprovementType in (
-	'IMPROVEMENT_PLANTATION',
-	'IMPROVEMENT_CAMP',
-	'IMPROVEMENT_PASTURE',
-	'IMPROVEMENT_LUMBER_MILL',
-	'IMPROVEMENT_FISHING_BOATS',
-	'IMPROVEMENT_MEKEWAP',
-	'IMPROVEMENT_POLDER',
-	'IMPROVEMENT_LAND_POLDER',
-	'IMPROVEMENT_TRADING_DOME',
-	'IMPROVEMENT_CITY_PARK',
-	'IMPROVEMENT_BEACH_RESORT',
-	'IMPROVEMENT_MOUNTAIN_ROAD'
-);
+	('IMPROVEMENT_BEACH_RESORT', 					'TOURISMSOURCE_GOLD', 		NULL, 									NULL, 100),
+	('IMPROVEMENT_CITY_PARK', 						'TOURISMSOURCE_GOLD', 		NULL, 									NULL, 100),
+	('IMPROVEMENT_SEASTEAD', 							'TOURISMSOURCE_GOLD', 		NULL, 									NULL, 100),
+	('IMPROVEMENT_SKI_RESORT', 						'TOURISMSOURCE_GOLD', 		NULL, 									NULL, 100),
+	('IMPROVEMENT_CORPORATION', 					'TOURISMSOURCE_GOLD', 		NULL, 									NULL, 100),
+	('IMPROVEMENT_LEU_TRANSNATIONAL', 		'TOURISMSOURCE_GOLD', 		NULL, 									NULL, 100),
+	('IMPROVEMENT_LEU_TRANSNATIONAL_SEA', 'TOURISMSOURCE_GOLD', 		NULL, 									NULL, 100),
+	('IMPROVEMENT_TRADING_DOME', 					'TOURISMSOURCE_GOLD', 		NULL, 									NULL, 100),
+	('IMPROVEMENT_CORPORATION_BONUS', 		'TOURISMSOURCE_GOLD', 		NULL, 									NULL, 100),
+	('IMPROVEMENT_CORPORATION_STRATEGIC', 'TOURISMSOURCE_GOLD', 		NULL, 									NULL, 100),
 
-insert or replace into Improvement_Tourism
-	(ImprovementType,			TourismSource,						PrereqTech)
-select
-	ImprovementType, 			'TOURISMSOURCE_SCIENCE',	'TECH_FLIGHT'
-from Improvements where ImprovementType in (
-	'IMPROVEMENT_MAHAVIHARA',
-	'IMPROVEMENT_ALCAZAR',
-	'IMPROVEMENT_MISSION',
-	'IMPROVEMENT_ZIGGURAT'
-);
+	('IMPROVEMENT_COLOSSAL_HEAD', 				'TOURISMSOURCE_FAITH', 		'CIVIC_DIVINE_RIGHT', 	NULL, 100),
+	('IMPROVEMENT_KURGAN', 								'TOURISMSOURCE_FAITH', 		'CIVIC_DIVINE_RIGHT', 	NULL, 100),
+	('IMPROVEMENT_MONASTERY', 						'TOURISMSOURCE_FAITH', 		'CIVIC_DIVINE_RIGHT', 	NULL, 100),
+	('IMPROVEMENT_PYRAMID', 							'TOURISMSOURCE_FAITH', 		'CIVIC_DIVINE_RIGHT', 	NULL, 100),
+	('IMPROVEMENT_NAZCA_LINE', 						'TOURISMSOURCE_FAITH', 		'CIVIC_DIVINE_RIGHT', 	NULL, 100),
+	('IMPROVEMENT_ROCK_HEWN_CHURCH', 			'TOURISMSOURCE_FAITH', 		'CIVIC_DIVINE_RIGHT', 	NULL, 100),
+	('IMPROVEMENT_BOOM_LAMASSU', 					'TOURISMSOURCE_FAITH', 		'CIVIC_DIVINE_RIGHT', 	NULL, 100);
 
-insert or replace into Improvement_Tourism
-	(ImprovementType,			TourismSource,						PrereqTech)
-select
-	ImprovementType, 			'TOURISMSOURCE_FAITH',		'TECH_FLIGHT'
-from Improvements where ImprovementType in (
-	'IMPROVEMENT_PYRAMID',
-	'IMPROVEMENT_MONASTERY'
-);
+delete from Improvement_Tourism;
+insert or replace into Improvement_Tourism (ImprovementType, TourismSource, PrereqCivic, PrereqTech, ScalingFactor) select
+	ImprovementType, TourismSource, PrereqCivic, PrereqTech, ScalingFactor
+from HD_Improvement_Yield_To_Tourism where ImprovementType in (select ImprovementType from Improvements);
 
-insert or replace into Improvement_Tourism
-	(ImprovementType,			TourismSource,							PrereqTech)
-select
-	ImprovementType, 			'TOURISMSOURCE_PRODUCTION',	'TECH_FLIGHT'
-from Improvements where ImprovementType in (
-	'IMPROVEMENT_OUTBACK_STATION',
-	'IMPROVEMENT_HACIENDA',
-	'IMPROVEMENT_SEASTEAD'
-);
-
--- Common Improvements
+-- =====================================================================================================================================
+-- 改良特效
+-- =====================================================================================================================================
 -- Farm
 update Adjacency_YieldChanges set PrereqTech = 'TECH_MODERN_AGRICULTURE_HD' where ID = 'Farms_MechanizedAdjacency' or ID = 'Terrace_MechanizedAdjacency';
 update Adjacency_YieldChanges set ObsoleteTech = 'TECH_MODERN_AGRICULTURE_HD' where ID = 'Farms_MedievalAdjacency' or ID = 'Terrace_MedievalAdjacency';
 
--- Plantation
-insert or replace into ImprovementModifiers
-	(ImprovementType,			ModifierID)
-values
+insert or replace into ImprovementModifiers (ImprovementType, ModifierID) values
+	-- Plantation
 	('IMPROVEMENT_PLANTATION',	'PLANTATION_FRESH_WATER_NO_AQUEDUCT_FEUDALISM_GOLD'),
-	('IMPROVEMENT_PLANTATION',	'PLANTATION_AQUEDUCT_NO_FEUDALISM_GOLD');
-insert or replace into Modifiers
-	(ModifierId,											ModifierType,								SubjectRequirementSetId)
-values
+	('IMPROVEMENT_PLANTATION',	'PLANTATION_AQUEDUCT_NO_FEUDALISM_GOLD'),
+	-- Camp
+	('IMPROVEMENT_CAMP',				'CAMP_FEATURE_NO_MEDIEVAL_FAIRES_PRODUCTION'),
+	-- Pasture
+	('IMPROVEMENT_PASTURE',			'PASTURE_HILL_NO_HERALDRY_PRODUCTION'),
+	-- Mine
+	('IMPROVEMENT_MINE', 				'MINE_NO_APPRENTICESHIP_PRODUCTION'),
+	-- Quarry
+	('IMPROVEMENT_QUARRY', 			'QUARRY_NO_METAL_CASTING_PRODUCTION'),
+	-- Lumber Mill
+	('IMPROVEMENT_LUMBER_MILL', 'LUMBER_MILL_NO_MACHINERY_PRODUCTION'),
+	-- 渔船
+	('IMPROVEMENT_FISHING_BOATS', 'FISHING_BOATS_NO_COMPASS_FOOD');
+
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) values
 	('PLANTATION_FRESH_WATER_NO_AQUEDUCT_FEUDALISM_GOLD',	'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'PLOT_IS_ADJACENT_TO_FRESH_WATER_NOT_AQUEDUCT_NO_FEUDALISM'),
-	('PLANTATION_AQUEDUCT_NO_FEUDALISM_GOLD',				'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'IS_ADJACENT_TO_AQUEDUCT_NO_FEUDALISM');
-insert or replace into ModifierArguments
-	(ModifierId,											Name,		Value)
-values
+	('PLANTATION_AQUEDUCT_NO_FEUDALISM_GOLD',							'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'IS_ADJACENT_TO_AQUEDUCT_NO_FEUDALISM'),
+	('CAMP_FEATURE_NO_MEDIEVAL_FAIRES_PRODUCTION',				'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'HD_HAS_FEATURE_NO_MEDIEVAL_FAIRES'),
+	('PASTURE_HILL_NO_HERALDRY_PRODUCTION',								'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'HD_HAS_HILL_NO_HERALDRY'),
+	('MINE_NO_APPRENTICESHIP_PRODUCTION',									'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'HD_ADJACENT_TO_MOUNTAIN_NO_APPRENTICESHIP'),
+	('QUARRY_NO_METAL_CASTING_PRODUCTION',								'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'HD_HAS_HILL_NO_METAL_CASTING'),
+	('LUMBER_MILL_NO_MACHINERY_PRODUCTION',								'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'HD_ADJACENT_TO_RIVER_NO_MACHINERY'),
+	('FISHING_BOATS_NO_COMPASS_FOOD',											'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'HD_ADJACENT_TO_LAND_OR_HARBOR_NO_COMPASS');
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
 	('PLANTATION_FRESH_WATER_NO_AQUEDUCT_FEUDALISM_GOLD',	'YieldType',	'YIELD_FOOD'),
 	('PLANTATION_FRESH_WATER_NO_AQUEDUCT_FEUDALISM_GOLD',	'Amount',		1),
-	('PLANTATION_AQUEDUCT_NO_FEUDALISM_GOLD',				'YieldType',	'YIELD_FOOD'),
-	('PLANTATION_AQUEDUCT_NO_FEUDALISM_GOLD',				'Amount',		1);
-
--- Camp
-insert or replace into ImprovementModifiers
-	(ImprovementType,			ModifierID)
-values
-	('IMPROVEMENT_CAMP',	'CAMP_FEATURE_NO_MEDIEVAL_FAIRES_PRODUCTION');
-insert or replace into Modifiers
-	(ModifierId,											ModifierType,								SubjectRequirementSetId)
-values
-	('CAMP_FEATURE_NO_MEDIEVAL_FAIRES_PRODUCTION',				'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'HD_HAS_FEATURE_NO_MEDIEVAL_FAIRES');
-insert or replace into ModifierArguments
-	(ModifierId,											Name,		Value)
-values
+	('PLANTATION_AQUEDUCT_NO_FEUDALISM_GOLD',							'YieldType',	'YIELD_FOOD'),
+	('PLANTATION_AQUEDUCT_NO_FEUDALISM_GOLD',							'Amount',		1),
 	('CAMP_FEATURE_NO_MEDIEVAL_FAIRES_PRODUCTION',				'YieldType',	'YIELD_PRODUCTION'),
-	('CAMP_FEATURE_NO_MEDIEVAL_FAIRES_PRODUCTION',				'Amount',		1);
-
--- Pasture
-insert or replace into ImprovementModifiers
-	(ImprovementType,			ModifierID)
-values
-	('IMPROVEMENT_PASTURE',	'PASTURE_HILL_NO_HERALDRY_PRODUCTION');
-insert or replace into Modifiers
-	(ModifierId,											ModifierType,								SubjectRequirementSetId)
-values
-	('PASTURE_HILL_NO_HERALDRY_PRODUCTION',				'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'HD_HAS_HILL_NO_HERALDRY');
-insert or replace into ModifierArguments
-	(ModifierId,											Name,		Value)
-values
-	('PASTURE_HILL_NO_HERALDRY_PRODUCTION',				'YieldType',	'YIELD_PRODUCTION'),
-	('PASTURE_HILL_NO_HERALDRY_PRODUCTION',				'Amount',		1);
-
--- 采石场 奇观加速
--- 远古古典
-insert or replace into TechnologyModifiers
-	(TechnologyType,			ModifierID)
-select
-	'TECH_MASONRY',				'QUARRY_' || i.ResourceType || '_ADJUST_ANCIENT_AND_CLASSICAL_WONDER_PRODUCTION'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_QUARRY';
-insert or replace into Modifiers
-	(ModifierId, ModifierType, SubjectRequirementSetId)
-select
-	'QUARRY_' || i.ResourceType || '_ADJUST_ANCIENT_AND_CLASSICAL_WONDER_PRODUCTION',
-	'MODIFIER_PLAYER_CITIES_ADJUST_WONDER_ERA_PRODUCTION',
-	'HD_CITY_HAS_IMPROVED_' || i.ResourceType || '_REQUIRMENTS'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_QUARRY';
-insert or replace into ModifierArguments
-	(ModifierId,																																			Name,					Value)
-select
-	'QUARRY_' || i.ResourceType || '_ADJUST_ANCIENT_AND_CLASSICAL_WONDER_PRODUCTION',	'IsWonder',		1
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_QUARRY';
-insert or replace into ModifierArguments
-	(ModifierId,																																			Name,					Value)
-select
-	'QUARRY_' || i.ResourceType || '_ADJUST_ANCIENT_AND_CLASSICAL_WONDER_PRODUCTION',	'Amount',			10
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_QUARRY';
-insert or replace into ModifierArguments
-	(ModifierId,																																			Name,					Value)
-select
-	'QUARRY_' || i.ResourceType || '_ADJUST_ANCIENT_AND_CLASSICAL_WONDER_PRODUCTION',	'StartEra',		'ERA_ANCIENT'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_QUARRY';
-insert or replace into ModifierArguments
-	(ModifierId,																																			Name,					Value)
-select
-	'QUARRY_' || i.ResourceType || '_ADJUST_ANCIENT_AND_CLASSICAL_WONDER_PRODUCTION',	'EndEra',			'ERA_CLASSICAL'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_QUARRY';
-
--- 中世纪文艺复兴 拱券
-insert or replace into TechnologyModifiers
-	(TechnologyType,		ModifierID)
-select
-	'TECH_ARCH_HD',			'QUARRY_' || i.ResourceType || '_ADJUST_MEDIEVAL_AND_RENAISSANCE_WONDER_PRODUCTION'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_QUARRY';
-insert or replace into Modifiers
-	(ModifierId, ModifierType, SubjectRequirementSetId)
-select
-	'QUARRY_' || i.ResourceType || '_ADJUST_MEDIEVAL_AND_RENAISSANCE_WONDER_PRODUCTION',
-	'MODIFIER_PLAYER_CITIES_ADJUST_WONDER_ERA_PRODUCTION',
-	'HD_CITY_HAS_IMPROVED_' || i.ResourceType || '_REQUIRMENTS'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_QUARRY';
-insert or replace into ModifierArguments
-	(ModifierId,																																					Name,					Value)
-select
-	'QUARRY_' || i.ResourceType || '_ADJUST_MEDIEVAL_AND_RENAISSANCE_WONDER_PRODUCTION',	'IsWonder',		1
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_QUARRY';
-insert or replace into ModifierArguments
-	(ModifierId,																																					Name,					Value)
-select
-	'QUARRY_' || i.ResourceType || '_ADJUST_MEDIEVAL_AND_RENAISSANCE_WONDER_PRODUCTION',	'Amount',			10
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_QUARRY';
-insert or replace into ModifierArguments
-	(ModifierId,																																					Name,					Value)
-select
-	'QUARRY_' || i.ResourceType || '_ADJUST_MEDIEVAL_AND_RENAISSANCE_WONDER_PRODUCTION',	'StartEra',		'ERA_MEDIEVAL'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_QUARRY';
-insert or replace into ModifierArguments
-	(ModifierId,																																					Name,					Value)
-select
-	'QUARRY_' || i.ResourceType || '_ADJUST_MEDIEVAL_AND_RENAISSANCE_WONDER_PRODUCTION',	'EndEra',			'ERA_RENAISSANCE'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_QUARRY';
-
--- 矿山 单位加速
-	-- 军事单位
-insert or replace into TraitModifiers (TraitType,	ModifierId)
-	select 'TRAIT_LEADER_MAJOR_CIV',	'MINE_' || i.ResourceType || '_ADJUST_MILITARY_UNIT_PRODUCTION'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_MINE';
-
-insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId)
-select
-	'MINE_' || i.ResourceType || '_ADJUST_MILITARY_UNIT_PRODUCTION',
-	'MODIFIER_PLAYER_CITIES_ADJUST_MILITARY_UNITS_PRODUCTION',
-	'HD_CITY_HAS_IMPROVED_' || i.ResourceType || '_REQUIRMENTS'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_MINE';
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-select
-	'MINE_' || i.ResourceType || '_ADJUST_MILITARY_UNIT_PRODUCTION', 'Amount', 15
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_MINE';
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-select
-	'MINE_' || i.ResourceType || '_ADJUST_MILITARY_UNIT_PRODUCTION', 'StartEra', 'ERA_ANCIENT'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_MINE';
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-select
-	'MINE_' || i.ResourceType || '_ADJUST_MILITARY_UNIT_PRODUCTION', 'EndEra', 'ERA_CLASSICAL'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_MINE';
-
-	-- 开拓者和建造者
-insert or replace into TraitModifiers (TraitType,	ModifierId)
-	select 'TRAIT_LEADER_MAJOR_CIV',	'MINE_' || i.ResourceType || '_ADJUST_' || k.UnitType || '_PRODUCTION'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType, Units k where j.ImprovementType = 'IMPROVEMENT_MINE' and k.UnitType in ('UNIT_SETTLER', 'UNIT_BUILDER');
-
-insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId)
-select
-	'MINE_' || i.ResourceType || '_ADJUST_' || k.UnitType || '_PRODUCTION',
-	'MODIFIER_PLAYER_CITIES_ADJUST_UNIT_PRODUCTION',
-	'HD_CITY_HAS_IMPROVED_' || i.ResourceType || '_REQUIRMENTS'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType, Units k where j.ImprovementType = 'IMPROVEMENT_MINE' and k.UnitType in ('UNIT_SETTLER', 'UNIT_BUILDER');
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-select
-	'MINE_' || i.ResourceType || '_ADJUST_' || k.UnitType || '_PRODUCTION', 'Amount', 15
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType, Units k where j.ImprovementType = 'IMPROVEMENT_MINE' and k.UnitType in ('UNIT_SETTLER', 'UNIT_BUILDER');
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-select
-	'MINE_' || i.ResourceType || '_ADJUST_' || k.UnitType || '_PRODUCTION', 'UnitType', k.UnitType
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType, Units k where j.ImprovementType = 'IMPROVEMENT_MINE' and k.UnitType in ('UNIT_SETTLER', 'UNIT_BUILDER');
-
--- 伐木场 区域建筑加速
-	-- 区域
-insert or replace into TechnologyModifiers (TechnologyType, ModifierID)
-	select 'TECH_BRONZE_WORKING',	'LUMBER_MILL_' || i.ResourceType || '_ADJUST_DISTRICT_PRODUCTION'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_LUMBER_MILL';
-
-insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId)
-select
-	'LUMBER_MILL_' || i.ResourceType || '_ADJUST_DISTRICT_PRODUCTION',
-	'MODIFIER_PLAYER_CITIES_ADJUST_ALL_DISTRICTS_PRODUCTION',
-	'HD_CITY_HAS_IMPROVED_' || i.ResourceType || '_REQUIRMENTS'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_LUMBER_MILL';
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-select
-	'LUMBER_MILL_' || i.ResourceType || '_ADJUST_DISTRICT_PRODUCTION', 'Amount', 10
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_LUMBER_MILL';
-
-	-- 建筑
-insert or replace into TechnologyModifiers (TechnologyType, ModifierID)
-	select 'TECH_BRONZE_WORKING',	'LUMBER_MILL_' || i.ResourceType || '_ADJUST_BUILDING_PRODUCTION'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_LUMBER_MILL';
-
-insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId)
-select
-	'LUMBER_MILL_' || i.ResourceType || '_ADJUST_BUILDING_PRODUCTION',
-	'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_PRODUCTION_MODIFIER',
-	'HD_CITY_HAS_IMPROVED_' || i.ResourceType || '_REQUIRMENTS'
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_LUMBER_MILL';
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-select
-	'LUMBER_MILL_' || i.ResourceType || '_ADJUST_BUILDING_PRODUCTION', 'Amount', 10
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_LUMBER_MILL';
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-select
-	'LUMBER_MILL_' || i.ResourceType || '_ADJUST_BUILDING_PRODUCTION', 'IsWonder', 0
-from Resources i inner join Improvement_ValidResources j on i.ResourceType = j.ResourceType where j.ImprovementType = 'IMPROVEMENT_LUMBER_MILL';
+	('CAMP_FEATURE_NO_MEDIEVAL_FAIRES_PRODUCTION',				'Amount',		1),
+	('PASTURE_HILL_NO_HERALDRY_PRODUCTION',								'YieldType',	'YIELD_PRODUCTION'),
+	('PASTURE_HILL_NO_HERALDRY_PRODUCTION',								'Amount',		1),
+	('MINE_NO_APPRENTICESHIP_PRODUCTION',									'YieldType',	'YIELD_PRODUCTION'),
+	('MINE_NO_APPRENTICESHIP_PRODUCTION',									'Amount',		1),
+	('QUARRY_NO_METAL_CASTING_PRODUCTION',								'YieldType',	'YIELD_PRODUCTION'),
+	('QUARRY_NO_METAL_CASTING_PRODUCTION',								'Amount',		1),
+	('LUMBER_MILL_NO_MACHINERY_PRODUCTION',								'YieldType',	'YIELD_PRODUCTION'),
+	('LUMBER_MILL_NO_MACHINERY_PRODUCTION',								'Amount',		1),
+	('FISHING_BOATS_NO_COMPASS_FOOD',											'YieldType',	'YIELD_FOOD'),
+	('FISHING_BOATS_NO_COMPASS_FOOD',											'Amount',		1);
 
 -- City State UI
 -- Cahokia Mounds
@@ -730,13 +561,6 @@ values
 	('PLOT_ADJACENT_TO_OWNER_AND_PLAYER_HAS_MASS_PRODUCTION',	'ADJACENT_TO_OWNER'),
 	('PLOT_ADJACENT_TO_OWNER_AND_PLAYER_HAS_MASS_PRODUCTION',	'HD_REQUIRES_PLAYER_HAS_TECH_MASS_PRODUCTION');
 
--- Mahavihara
-delete from TraitModifiers where TraitType = 'MINOR_CIV_NALANDA_TRAIT' and ModifierId = 'MINOR_CIV_NALANDA_FREE_TECHNOLOGY';
-update Adjacency_YieldChanges set PrereqTech = null, PrereqCivic = 'CIVIC_DIVINE_RIGHT' where ID = 'Mahavihara_Campus_Science_Late' or ID = 'Mahavihara_Observatory_Science_Late';
-update Adjacency_YieldChanges set ObsoleteTech = null, ObsoleteCivic = 'CIVIC_DIVINE_RIGHT' where ID = 'Mahavihara_Campus_Science_Early' or ID = 'Mahavihara_Observatory_Science_Early';
-update Adjacency_YieldChanges set YieldType = 'YIELD_SCIENCE', ObsoleteCivic = 'CIVIC_DIVINE_RIGHT' where ID = 'Mahavihara_Holy_Site_Faith';
-update Adjacency_YieldChanges set YieldType = 'YIELD_SCIENCE', ObsoleteCivic = 'CIVIC_DIVINE_RIGHT' where ID = 'Mahavihara_Lavra_Faith';
-
 -- Civilization UI
 -- Mekewap (Cree)
 delete from ImprovementModifiers where ImprovementType = 'IMPROVEMENT_MEKEWAP' and ModifierId = 'MEKEWAP_LUXURY_GOLD';
@@ -791,7 +615,7 @@ insert or replace into Adjacency_YieldChanges (ID, Description, YieldType, Yield
 
 -- 建造圣地建筑允许额外建造金字形神塔
 insert or replace into TraitModifiers (TraitType,	ModifierId)
-	select distinct 'TRAIT_LEADER_MAJOR_CIV', 'HD_CITY_ALLOW_EXTRA_ZIGGURAT_FROM_TIER_' || Tier || '_HOLY_SITE_BUILDING'
+	select distinct 'TRAIT_CIVILIZATION_IMPROVEMENT_ZIGGURAT', 'HD_CITY_ALLOW_EXTRA_ZIGGURAT_FROM_TIER_' || Tier || '_HOLY_SITE_BUILDING'
 from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_HOLY_SITE';
 
 insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId)
@@ -842,7 +666,9 @@ insert or replace into Improvement_ValidTerrains
 values
 	('IMPROVEMENT_TERRACE_FARM',	'TERRAIN_GRASS_MOUNTAIN'),
 	('IMPROVEMENT_TERRACE_FARM',	'TERRAIN_PLAINS_MOUNTAIN'),
-	('IMPROVEMENT_TERRACE_FARM',	'TERRAIN_DESERT_MOUNTAIN');
+	('IMPROVEMENT_TERRACE_FARM',	'TERRAIN_DESERT_MOUNTAIN'),
+	('IMPROVEMENT_TERRACE_FARM',	'TERRAIN_TUNDRA_HILLS'),
+	('IMPROVEMENT_TERRACE_FARM',	'TERRAIN_TUNDRA_MOUNTAIN');
 insert or replace into Improvement_ValidFeatures
 	(ImprovementType,				FeatureType)
 values
@@ -918,56 +744,25 @@ values
 insert or replace into Modifiers
 	(ModifierId,											ModifierType,																						SubjectRequirementSetId)
 values
-	('HD_MOUNTAIN_ROAD_GOLD',					'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'PLOT_HAS_IMPROVEMENT_MOUNTAIN_ROAD_REQUIREMENTS'),
-	('HD_MOUNTAIN_ROAD_PRODUCTION',		'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'PLOT_HAS_IMPROVEMENT_MOUNTAIN_ROAD_REQUIREMENTS');
+	('HD_MOUNTAIN_ROAD_YIELD',				'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',					'PLOT_HAS_IMPROVEMENT_MOUNTAIN_ROAD_REQUIREMENTS');
 
 insert or replace into ModifierArguments
 	(ModifierId,											Name,							Value)
 values
-	('HD_MOUNTAIN_ROAD_GOLD',					'YieldType',			'YIELD_GOLD'),
-	('HD_MOUNTAIN_ROAD_GOLD',					'Amount',					3),
-	('HD_MOUNTAIN_ROAD_PRODUCTION',		'YieldType',			'YIELD_PRODUCTION'),
-	('HD_MOUNTAIN_ROAD_PRODUCTION',		'Amount',					2);
+	('HD_MOUNTAIN_ROAD_YIELD',				'YieldType',			'YIELD_GOLD,YIELD_PRODUCTION'),
+	('HD_MOUNTAIN_ROAD_YIELD',				'Amount',					'1,1');
 
 insert or replace into ImprovementModifiers (ImprovementType, ModifierId)
-	select ImprovementType, 'HD_MOUNTAIN_ROAD_GOLD'
-	from Improvements where ImprovementType in (
-		'IMPROVEMENT_LEU_STATION',
-		'IMPROVEMENT_MOUNTAIN_TUNNEL'
-	);
+	select ImprovementType, 'HD_MOUNTAIN_ROAD_YIELD'
+from HD_Improvement_Classification where ImprovementClassificationType = 'IMPROVEMENT_CLASSIFICATION_TRANSPOTATION' and ImprovementType != 'IMPROVEMENT_MOUNTAIN_ROAD';
 
 insert or replace into BuildingModifiers (BuildingType, ModifierId)
-	select BuildingType, 'HD_MOUNTAIN_ROAD_GOLD'
-	from Buildings where BuildingType in (
-		'BUILDING_HD_BUS_STOP',
-		'BUILDING_JNR_TRANSIT_HUB'
-	);
+	select BuildingType, 'HD_MOUNTAIN_ROAD_YIELD'
+from HD_Building_Classification where BuildingClassificationType = 'BUILDING_CLASSIFICATION_TRANSPORTATION';
 
 insert or replace into DistrictModifiers (DistrictType, ModifierId)
-	select DistrictType, 'HD_MOUNTAIN_ROAD_GOLD'
-	from Districts where DistrictType in (
-		'DISTRICT_AERODROME'
-	);
-
-insert or replace into ImprovementModifiers (ImprovementType, ModifierId)
-	select ImprovementType, 'HD_MOUNTAIN_ROAD_PRODUCTION'
-	from Improvements where ImprovementType in (
-		'IMPROVEMENT_LEU_STATION',
-		'IMPROVEMENT_MOUNTAIN_TUNNEL'
-	);
-
-insert or replace into BuildingModifiers (BuildingType, ModifierId)
-	select BuildingType, 'HD_MOUNTAIN_ROAD_PRODUCTION'
-	from Buildings where BuildingType in (
-		'BUILDING_HD_BUS_STOP',
-		'BUILDING_JNR_TRANSIT_HUB'
-	);
-
-insert or replace into DistrictModifiers (DistrictType, ModifierId)
-	select DistrictType, 'HD_MOUNTAIN_ROAD_PRODUCTION'
-	from Districts where DistrictType in (
-		'DISTRICT_AERODROME'
-	);
+	select DistrictType, 'HD_MOUNTAIN_ROAD_YIELD'
+from HD_District_Classification where DistrictClassificationType = 'DISTRICT_CLASSIFICATION_TRANSPORTATION';
 
 -- Sphinx (Egypt)
 -- In order to adapt the wonder yield change made in UpdateDatabse/DL_Wonders.sql at LoadOrder 16010, Modifiers about adjacent wonders are written in UpdateDatabse/DL_PostProcess.sql, which is at LoadOrder 20000
@@ -1135,6 +930,16 @@ where ImprovementType = 'IMPROVEMENT_CHATEAU';
 update Adjacency_YieldChanges set PrereqTech = null where ID = 'Chateau_WonderLate';
 insert or ignore into ImprovementsNeedCount_HD (ImprovementType) values ('IMPROVEMENT_CHATEAU');
 
+insert or replace into ImprovementModifiers (ImprovementType, ModifierId) values
+  ('IMPROVEMENT_CHATEAU', 'HD_CHATEAU_CULTURE');
+
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) values
+  ('HD_CHATEAU_CULTURE', 'MODIFIER_PLAYER_ADJUST_PLOT_YIELD', 'PLOT_HAS_IMPROVEMENT_CHATEAU_REQUIREMENTS');
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) values
+  ('HD_CHATEAU_CULTURE', 'YieldType',	'YIELD_CULTURE'),
+  ('HD_CHATEAU_CULTURE', 'Amount',		1);
+
 -- Coastal Polder (Netherlands)
 update Improvements set MovementChange = 1, ValidAdjacentTerrainAmount = 1, PrereqTech = 'TECH_SAILING', PrereqCivic = null where ImprovementType = 'IMPROVEMENT_POLDER';
 delete from Improvement_BonusYieldChanges where ImprovementType = 'IMPROVEMENT_POLDER';
@@ -1149,11 +954,6 @@ insert or replace into CivilizationTraits
 	(CivilizationType,								TraitType)
 values
 	('CIVILIZATION_NETHERLANDS',					'TRAIT_CIVILIZATION_IMPROVEMENT_LAND_POLDER');
-
-insert or replace into Improvement_Tourism
-	(ImprovementType,			TourismSource,			PrereqCivic,		PrereqTech,	ScalingFactor)
-values
-	('IMPROVEMENT_LAND_POLDER',	'TOURISMSOURCE_GOLD',	'CIVIC_CAPITALISM',	null,		100	);
 
 insert or replace into Improvement_ValidFeatures
 	(ImprovementType,			FeatureType)
@@ -1260,92 +1060,71 @@ values
 	('HD_MISSION_FOREIGN_CITY_CENTER_PRODUCTION',		'YieldType',	'YIELD_PRODUCTION'),
 	('HD_MISSION_FOREIGN_CITY_CENTER_PRODUCTION',		'Amount',			1);
 
--- Golf Course (Scotland)(fox)
-	-- pre
-update Improvements set PrereqCivic = 'CIVIC_GAMES_RECREATION', SameAdjacentValid = 0, Workable = 0 where ImprovementType = 'IMPROVEMENT_GOLF_COURSE';
-
-delete from Improvement_YieldChanges where ImprovementType = 'IMPROVEMENT_GOLF_COURSE';
-
+-- 高尔夫球场
+update Improvements set PrereqCivic = 'CIVIC_GAMES_RECREATION', OnePerCity = 0 where ImprovementType = 'IMPROVEMENT_GOLF_COURSE';
 delete from Improvement_BonusYieldChanges where ImprovementType = 'IMPROVEMENT_GOLF_COURSE';
-
-delete from Improvement_Adjacencies where ImprovementType = 'IMPROVEMENT_GOLF_COURSE';
-
 delete from ImprovementModifiers where ImprovementType = 'IMPROVEMENT_GOLF_COURSE';
-		
-	-- modifier
-insert or replace into ImprovementModifiers
-	(ImprovementType,				ModifierId)
-values
-	('IMPROVEMENT_GOLF_COURSE',		'GOLFCOURSE_AMENITY_TIER1'),
-	('IMPROVEMENT_GOLF_COURSE',		'GOLFCOURSE_AMENITY_TIER2'),
-	('IMPROVEMENT_GOLF_COURSE',		'GOLFCOURSE_DISTRICT_CULTURE');
 
-insert or replace into Modifiers
-	(ModifierId,																ModifierType,																				SubjectRequirementSetId)
-values
-	('GOLFCOURSE_AMENITY_TIER1',								'MODIFIER_SINGLE_CITY_ADJUST_IMPROVEMENT_AMENITY',	NULL),
-	('GOLFCOURSE_AMENITY_TIER2',								'MODIFIER_SINGLE_CITY_ADJUST_IMPROVEMENT_AMENITY',	'PLAYER_HAS_CIVIC_HUMANISM_REQUIREMENTS'),
-	('GOLFCOURSE_DISTRICT_CULTURE',							'MODIFIER_PLAYER_DISTRICTS_ADJUST_YIELD_CHANGE',		'REQUIRE_PLOT_ADJACENT_TO_OWNER_AND_NOT_WONDER');
+insert or replace into ImprovementModifiers (ImprovementType, ModifierId) values
+	('IMPROVEMENT_GOLF_COURSE', 'GOLFCOURSE_AMENITY_TIER');
 
-insert or replace into ModifierArguments
-	(ModifierId,						Name,				Value)
-values
-	('GOLFCOURSE_AMENITY_TIER1',		'Type',				'ARGTYPE_IDENTITY'),
-	('GOLFCOURSE_AMENITY_TIER1',		'Amount',			1),
-	('GOLFCOURSE_AMENITY_TIER2',		'Type',				'ARGTYPE_IDENTITY'),
-	('GOLFCOURSE_AMENITY_TIER2',		'Amount',			1),
-	('GOLFCOURSE_DISTRICT_CULTURE',		'YieldType',				'YIELD_CULTURE'),
-	('GOLFCOURSE_DISTRICT_CULTURE',		'Amount',			1);
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) values
+	('GOLFCOURSE_AMENITY_TIER', 'MODIFIER_SINGLE_CITY_ADJUST_IMPROVEMENT_AMENITY', NULL);
 
--- 区域加速
-insert or replace into ImprovementModifiers
-	(ImprovementType,						ModifierId)
-select
-	'IMPROVEMENT_GOLF_COURSE',	'IMPROVEMENT_GOLF_COURSE_' || DistrictType || '_PRODUCTION'
-from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
+	('GOLFCOURSE_AMENITY_TIER', 'Amount', 1);
 
-insert or replace into Modifiers
-	(ModifierId,																									ModifierType,																					OwnerRequirementSetId,																	SubjectStackLimit)
-select
-	'IMPROVEMENT_GOLF_COURSE_' || DistrictType || '_PRODUCTION',	'MODIFIER_PLAYER_CITIES_ADJUST_DISTRICT_PRODUCTION',	'PLOT_ADJACENT_TO_' || DistrictType || '_REQUIREMENTS',	1
-from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+-- 伟人点
+insert or replace into ImprovementModifiers (ImprovementType, ModifierId) select
+	'IMPROVEMENT_GOLF_COURSE',	'HD_GOLF_COURSE_' || DistrictType || '_' || GreatPersonClassType
+from DistrictCorrespondingGPP_HD;
 
-insert or replace into ModifierArguments
-	(ModifierId,																									Name,						Value)
-select
-	'IMPROVEMENT_GOLF_COURSE_' || DistrictType || '_PRODUCTION',	'DistrictType',	DistrictType
-from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) select
+	'HD_GOLF_COURSE_' || DistrictType || '_' || GreatPersonClassType, 'MODIFIER_PLAYER_DISTRICTS_ADJUST_GREAT_PERSON_POINTS', 'HD_DISTRICT_IS_' || DistrictType || '_WITHIN_1_TILE_REQUIREMENTS'
+from DistrictCorrespondingGPP_HD;
 
-insert or replace into ModifierArguments
-	(ModifierId,																									Name,						Value)
-select
-	'IMPROVEMENT_GOLF_COURSE_' || DistrictType || '_PRODUCTION',	'Amount',				30
-from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+insert or replace into ModifierArguments (ModifierId, Name, Value) select
+	'HD_GOLF_COURSE_' || DistrictType || '_' || GreatPersonClassType, 'GreatPersonClassType', GreatPersonClassType
+from DistrictCorrespondingGPP_HD;
 
--- 相邻加成
-insert or replace into ImprovementModifiers
-	(ImprovementType,						ModifierId)
-select
-	'IMPROVEMENT_GOLF_COURSE',	'IMPROVEMENT_GOLF_COURSE_' || DistrictType || '_ADJACENCY'
-from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+insert or replace into ModifierArguments (ModifierId, Name, Value) select
+	'HD_GOLF_COURSE_' || DistrictType || '_' || GreatPersonClassType, 'Amount', 4
+from DistrictCorrespondingGPP_HD;
 
-insert or replace into Modifiers
-	(ModifierId,																									ModifierType,																					OwnerRequirementSetId,																	SubjectRequirementSetId,															SubjectStackLimit)
-select
-	'IMPROVEMENT_GOLF_COURSE_' || DistrictType || '_ADJACENCY',		'MODIFIER_PLAYER_DISTRICTS_ADJUST_YIELD_MODIFIER',		'PLOT_ADJACENT_TO_' || DistrictType || '_REQUIREMENTS',	'REQUIRES_DISTRICT_IS_' || DistrictType || '_UDMET',	1
-from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+-- 建造个数限制
+insert or ignore into ImprovementsNeedCount_HD (ImprovementType) values ('IMPROVEMENT_GOLF_COURSE');
 
-insert or replace into ModifierArguments
-	(ModifierId,																									Name,						Value)
-select
-	'IMPROVEMENT_GOLF_COURSE_' || DistrictType || '_ADJACENCY',		'YieldType',		YieldType
-from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+insert or replace into TraitModifiers (TraitType,	ModifierId)
+	select distinct 'TRAIT_CIVILIZATION_IMPROVEMENT_GOLF_COURSE', 'HD_CITY_ALLOW_EXTRA_GOLF_COURSE_FROM_TIER_' || Tier || '_ENTERTAINMENT_BUILDING'
+from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_ENTERTAINMENT_COMPLEX';
 
-insert or replace into ModifierArguments
-	(ModifierId,																									Name,						Value)
-select
-	'IMPROVEMENT_GOLF_COURSE_' || DistrictType || '_ADJACENCY',		'Amount',				50
-from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId)
+	select distinct 'HD_CITY_ALLOW_EXTRA_GOLF_COURSE_FROM_TIER_' || Tier || '_ENTERTAINMENT_BUILDING', 'MODIFIER_PLAYER_CITIES_ADJUST_PROPERTY', 'CITY_HAS_DISTRICT_ENTERTAINMENT_COMPLEX_TIER_' || Tier || '_BUILDING_REQUIREMENTS'
+from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_ENTERTAINMENT_COMPLEX';
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select distinct 'HD_CITY_ALLOW_EXTRA_GOLF_COURSE_FROM_TIER_' || Tier || '_ENTERTAINMENT_BUILDING', 'Key', 'HD_CITY_ALLOW_EXTRA_IMPROVEMENT_GOLF_COURSE'
+from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_ENTERTAINMENT_COMPLEX';
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select distinct 'HD_CITY_ALLOW_EXTRA_GOLF_COURSE_FROM_TIER_' || Tier || '_ENTERTAINMENT_BUILDING', 'Amount', 1
+from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_ENTERTAINMENT_COMPLEX';
+
+insert or replace into TraitModifiers (TraitType,	ModifierId)
+	select distinct 'TRAIT_CIVILIZATION_IMPROVEMENT_GOLF_COURSE', 'HD_CITY_ALLOW_EXTRA_GOLF_COURSE_FROM_TIER_' || Tier || '_WATER_ENTERTAINMENT_BUILDING'
+from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_WATER_ENTERTAINMENT_COMPLEX';
+
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId)
+	select distinct 'HD_CITY_ALLOW_EXTRA_GOLF_COURSE_FROM_TIER_' || Tier || '_WATER_ENTERTAINMENT_BUILDING', 'MODIFIER_PLAYER_CITIES_ADJUST_PROPERTY', 'CITY_HAS_DISTRICT_WATER_ENTERTAINMENT_COMPLEX_TIER_' || Tier || '_BUILDING_REQUIREMENTS'
+from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_WATER_ENTERTAINMENT_COMPLEX';
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select distinct 'HD_CITY_ALLOW_EXTRA_GOLF_COURSE_FROM_TIER_' || Tier || '_WATER_ENTERTAINMENT_BUILDING', 'Key', 'HD_CITY_ALLOW_EXTRA_IMPROVEMENT_GOLF_COURSE'
+from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_WATER_ENTERTAINMENT_COMPLEX';
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select distinct 'HD_CITY_ALLOW_EXTRA_GOLF_COURSE_FROM_TIER_' || Tier || '_WATER_ENTERTAINMENT_BUILDING', 'Amount', 1
+from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_WATER_ENTERTAINMENT_COMPLEX';
 
 
 -- Open-Air Museum (Sweden)
@@ -1464,7 +1243,8 @@ update Improvements set PrereqCivic = 'CIVIC_GAMES_RECREATION' where Improvement
 update Improvement_YieldChanges set YieldChange = 0 where ImprovementType = 'IMPROVEMENT_ICE_HOCKEY_RINK' and YieldType = 'YIELD_FOOD';
 delete from Improvement_BonusYieldChanges where ImprovementType = 'IMPROVEMENT_ICE_HOCKEY_RINK';
 delete from ImprovementModifiers where ImprovementType = 'IMPROVEMENT_ICE_HOCKEY_RINK' and ModifierId = 'ICEHOCKEYRINK_CULTURE_STADIUM';
-delete from ImprovementModifiers where ImprovementType = 'IMPROVEMENT_ICE_HOCKEY_RINK' and ModifierId = 'ICEHOCKEYRINK_AMENITY';
+-- delete from ImprovementModifiers where ImprovementType = 'IMPROVEMENT_ICE_HOCKEY_RINK' and ModifierId = 'ICEHOCKEYRINK_AMENITY';
+update ModifierArguments set Value = 2 where ModifierId = 'ICEHOCKEYRINK_AMENITY' and Name = 'Amount';
 insert or replace into ImprovementModifiers
 	(ImprovementType,					ModifierId)
 values
@@ -1587,9 +1367,9 @@ values
 	('IMPROVEMENT_BEACH_RESORT_GOLD_WATER_ENTERTAINMENT_COMPLEX_TIER_1',	'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'CITY_HAS_DISTRICT_WATER_ENTERTAINMENT_COMPLEX_TIER_1_BUILDING_REQUIREMENTS'),
 	('IMPROVEMENT_BEACH_RESORT_GOLD_WATER_ENTERTAINMENT_COMPLEX_TIER_2',	'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'CITY_HAS_DISTRICT_WATER_ENTERTAINMENT_COMPLEX_TIER_2_BUILDING_REQUIREMENTS'),
 	('IMPROVEMENT_BEACH_RESORT_GOLD_WATER_ENTERTAINMENT_COMPLEX_TIER_3',	'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'CITY_HAS_DISTRICT_WATER_ENTERTAINMENT_COMPLEX_TIER_3_BUILDING_REQUIREMENTS'),
-	('IMPROVEMENT_BEACH_RESORT_GOLD_HARBOR_TIER_1',					'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'HD_CITY_HAS_HARBOR_TIER_1_BUILDING_REQUIREMENTS'),
-	('IMPROVEMENT_BEACH_RESORT_GOLD_HARBOR_TIER_2',					'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'HD_CITY_HAS_HARBOR_TIER_2_BUILDING_REQUIREMENTS'),
-	('IMPROVEMENT_BEACH_RESORT_GOLD_HARBOR_TIER_3',					'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'HD_CITY_HAS_HARBOR_TIER_3_BUILDING_REQUIREMENTS');
+	('IMPROVEMENT_BEACH_RESORT_GOLD_HARBOR_TIER_1',					'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'CITY_HAS_DISTRICT_HARBOR_TIER_1_BUILDING_REQUIREMENTS'),
+	('IMPROVEMENT_BEACH_RESORT_GOLD_HARBOR_TIER_2',					'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'CITY_HAS_DISTRICT_HARBOR_TIER_2_BUILDING_REQUIREMENTS'),
+	('IMPROVEMENT_BEACH_RESORT_GOLD_HARBOR_TIER_3',					'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'CITY_HAS_DISTRICT_HARBOR_TIER_3_BUILDING_REQUIREMENTS');
 
 insert or ignore into ModifierArguments
 	(ModifierId,                                            Name,         Value)
@@ -1632,25 +1412,25 @@ insert or replace into ImprovementModifiers
 	(ImprovementType,						ModifierId)
 select
 	'IMPROVEMENT_SKI_RESORT',			'IMPROVEMENT_SKI_RESORT_' || ImprovementType || '_TOURISM'
-from Improvement_Tourism where ImprovementType != 'IMPROVEMENT_SKI_RESORT';
+from Improvement_Tourism;
 
 insert or replace into Modifiers
 	(ModifierId,									                ModifierType,								OwnerRequirementSetId)
 select
   'IMPROVEMENT_SKI_RESORT_' || ImprovementType || '_TOURISM',    'MODIFIER_PLAYER_CITIES_ADJUST_TOURISM',    'PLOT_ADJACENT_TO_TOURISM_IMPROVEMENT'
-from Improvement_Tourism where ImprovementType != 'IMPROVEMENT_SKI_RESORT';
+from Improvement_Tourism;
 
 insert or replace into ModifierArguments
 	(ModifierId,					                                Name,				Value)
 select
 	'IMPROVEMENT_SKI_RESORT_' || ImprovementType || '_TOURISM',	'ImprovementType',	ImprovementType
-from Improvement_Tourism where ImprovementType != 'IMPROVEMENT_SKI_RESORT';
+from Improvement_Tourism;
 
 insert or replace into ModifierArguments
 	(ModifierId,					                                Name,				Value)
 select
 	'IMPROVEMENT_SKI_RESORT_' || ImprovementType || '_TOURISM',	'ScalingFactor',	150
-from Improvement_Tourism where ImprovementType != 'IMPROVEMENT_SKI_RESORT';
+from Improvement_Tourism;
 
 -- 产品业绩1
 insert or replace into ImprovementModifiers
@@ -1705,3 +1485,61 @@ where exists (select GreatWorkSlotType from GreatWorkSlotTypes where GreatWorkSl
 -- 发电厂
 update Improvements set PrereqTech = 'TECH_INTEGRATED_CIRCUIT_HD' where ImprovementType = 'IMPROVEMENT_SOLAR_FARM';
 update Improvements set PrereqTech = 'TECH_INTEGRATED_CIRCUIT_HD' where ImprovementType = 'IMPROVEMENT_WIND_FARM';
+
+-- =====================================================================================================================================
+-- 市立公园
+-- =====================================================================================================================================
+update Improvements set
+	PrereqCivic = null,
+	PrereqTech = 'TECH_IRRIGATION',
+	TraitType = null,
+	YieldFromAppeal = 'YIELD_GOLD',
+	SameAdjacentValid = 0,
+	Appeal = 1
+where ImprovementType = 'IMPROVEMENT_CITY_PARK';
+
+delete from ImprovementModifiers where ImprovementType = 'IMPROVEMENT_CITY_PARK';
+
+insert or replace into Improvement_Adjacencies (ImprovementType, YieldChangeId) values
+	('IMPROVEMENT_CITY_PARK', 'HD_CITY_PARK_WONDER_CULTURE');
+
+insert or replace into Adjacency_YieldChanges (ID, Description, YieldType, YieldChange, TilesRequired, AdjacentWonder) values
+	('HD_CITY_PARK_WONDER_CULTURE', 'Placeholder', 'YIELD_CULTURE', 1, 1, 1);
+
+insert or replace into Improvement_Adjacencies (ImprovementType, YieldChangeId) select
+	'IMPROVEMENT_CITY_PARK', 'HD_CITY_PARK_' || DistrictType || '_GOLD'
+from Districts where DistrictType in ('DISTRICT_CITY_CENTER');
+
+insert or replace into Adjacency_YieldChanges (ID, Description, YieldType, YieldChange, TilesRequired, AdjacentDistrict) select
+	'HD_CITY_PARK_' || DistrictType || '_GOLD', 'Placeholder', 'YIELD_GOLD', 3, 1, DistrictType
+from Districts where DistrictType in ('DISTRICT_CITY_CENTER');
+
+insert or replace into Improvement_Adjacencies (ImprovementType, YieldChangeId) select
+	'IMPROVEMENT_CITY_PARK', 'HD_CITY_PARK_' || DistrictType || '_FOOD'
+from Districts where DistrictType in ('DISTRICT_PRESERVE')
+	or DistrictType in (select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType in ('DISTRICT_PRESERVE'));
+
+insert or replace into Adjacency_YieldChanges (ID, Description, YieldType, YieldChange, TilesRequired, AdjacentDistrict) select
+	'HD_CITY_PARK_' || DistrictType || '_FOOD', 'Placeholder', 'YIELD_FOOD', 1, 1, DistrictType
+from Districts where DistrictType in ('DISTRICT_PRESERVE')
+	or DistrictType in (select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType in ('DISTRICT_PRESERVE'));
+
+	-- 建造数量限制
+insert or ignore into ImprovementsNeedCount_HD (ImprovementType) values ('IMPROVEMENT_CITY_PARK');
+
+insert or ignore into DistrictModifiers (DistrictType, ModifierId) select
+	DistrictType, 'HD_CITY_ALLOW_EXTRA_CITY_PARK'
+from Districts where RequiresPopulation = 1;
+
+insert or ignore into Modifiers (ModifierId, ModifierType) values
+	('HD_CITY_ALLOW_EXTRA_CITY_PARK', 'MODIFIER_SINGLE_CITY_ADJUST_PROPERTY');
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) values
+	('HD_CITY_ALLOW_EXTRA_CITY_PARK', 'Key',		'HD_CITY_ALLOW_EXTRA_IMPROVEMENT_CITY_PARK'),
+	('HD_CITY_ALLOW_EXTRA_CITY_PARK', 'Amount',	1);
+
+-- =====================================================================================================================================
+-- 渔场
+-- =====================================================================================================================================
+update Improvements set PrereqTech = 'TECH_SAILING', Housing = 1, TilesRequired = 2, SameAdjacentValid = 1, AdjacentSeaResource = 1, Workable = 1 where ImprovementType = 'IMPROVEMENT_FISHERY';
+delete from ImprovementModifiers where ImprovementType = 'IMPROVEMENT_FISHERY';

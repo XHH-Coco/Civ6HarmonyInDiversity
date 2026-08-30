@@ -622,6 +622,7 @@
     <Replace Unit="UNIT_SCOUT" UpgradeUnit="UNIT_VELITE"/>
     <Replace Unit="UNIT_SKIRMISHER" UpgradeUnit="UNIT_CHASSEUR"/>
     <Replace Unit="UNIT_ANCIENT_SEADOG" UpgradeUnit="UNIT_PIRATE"/>
+    <Replace Unit="UNIT_HD_BARBARIAN_GALLEY" UpgradeUnit="UNIT_PIRATE"/>
 
     <!-- 
       以下为uu更改    <Replace Unit="UNIT_GEDEMO_GPALADIN" UpgradeUnit="UNIT_ARMOR_CAVALRY"/>
@@ -640,6 +641,10 @@
     <Update>
       <Where Unit="UNIT_POLISH_HUSSAR"/>
       <Set UpgradeUnit="UNIT_CUIRASSIER"/>
+    </Update>
+    <Update>
+      <Where Unit="UNIT_INCA_WARAKAQ"/>
+      <Set UpgradeUnit="UNIT_CHASSEUR"/>
     </Update>
   </UnitUpgrades>
 </GameData>

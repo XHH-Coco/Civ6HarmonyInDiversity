@@ -18,7 +18,7 @@ values
 	("LOC_PEDIA_CONCEPTS_PAGE_HD_CONCEPTS_PAGE_CHAPTER_HD_OVERVIEW_PARA_1",                      "Harmony in Diversity 2.0 have introduced many new concepts and terms to simplify and unify the game text."),
 	("LOC_PEDIA_CONCEPTS_PAGE_HD_CONCEPTS_PAGE_CHAPTER_HD_OVERVIEW_PARA_2",                      "For instance, the ability of the Chinese leader Wu Zetian (Tianshou) is:[NEWLINE][NEWLINE]When you recruit a [ICON_GREATPERSON] Great Person, provide corresponding yield of two copies to all corresponding type districts in your country.[NEWLINE][NEWLINE][NEWLINE]When recruiting a [ICON_GreatScientist] Great Scientist, the corresponding district of [ICON_GreatScientist] Great Scientist is Campus, and the corresponding yield is [ICON_SCIENCE] Science, so the actual effect is:[NEWLINE][NEWLINE]Recruiting a [ICON_GreatScientist] Great Scientist provides +2 [ICON_SCIENCE] Science for all Campus districts in your country.[NEWLINE][NEWLINE]The same applies to other [ICON_GREATPERSON] Great People."),
 	("LOC_PEDIA_CONCEPTS_PAGE_HD_CONCEPTS_PAGE_CHAPTER_HD_DISTRICT_YIELDS_TITLE",                "Corresponding Yield of District"),
-	("LOC_PEDIA_CONCEPTS_PAGE_HD_CONCEPTS_PAGE_CHAPTER_HD_DISTRICT_YIELDS_PARA_1",               "[ICON_BULLET][ICON_DISTRICT_HOLY_SITE]Holy Site: +1 [ICON_FAITH] Faith[NEWLINE][ICON_BULLET][ICON_DISTRICT_CAMPUS]Campus: +1 [ICON_SCIENCE] Science[NEWLINE][ICON_BULLET][ICON_DISTRICT_THEATER]Theater Square: +1 [ICON_CULTURE] Culture[NEWLINE][ICON_BULLET][ICON_DISTRICT_COMMERCIAL_HUB]Commercial Hub: +3 [ICON_GOLD] Gold[NEWLINE][ICON_BULLET][ICON_DISTRICT_HARBOR]Harbor: +3 [ICON_GOLD] Gold[NEWLINE][ICON_BULLET][ICON_DISTRICT_ENCAMPMENT]Encampment: +1 [ICON_PRODUCTION] Production[NEWLINE][ICON_BULLET][ICON_DISTRICT_INDUSTRIAL_ZONE]Industrial Zone: +1 [ICON_PRODUCTION] Production[NEWLINE][ICON_BULLET][ICON_DISTRICT_GOVERNMENT]Government Plaza: +1 [ICON_CULTURE] Culture[NEWLINE][ICON_BULLET][ICON_DISTRICT_DIPLOMATIC_QUARTER]Diplomatic Quarter: +3 [ICON_GOLD] Gold[NEWLINE][ICON_BULLET][ICON_DISTRICT_CITY_CENTER]City Center: +1 [ICON_PRODUCTION] Production[NEWLINE][ICON_BULLET][ICON_DISTRICT_AQUEDUCT]Cistern: +1 [ICON_FOOD] Food[NEWLINE][ICON_BULLET][ICON_DISTRICT_ENTERTAINMENT_COMPLEX]Entertainment Complex: +3 [ICON_GOLD] Gold[NEWLINE][ICON_BULLET][ICON_DISTRICT_WATER_ENTERTAINMENT_COMPLEX]Water Park: +3 [ICON_GOLD] Gold[NEWLINE][ICON_BULLET][ICON_DISTRICT_DAM]Dam: +1 [ICON_FOOD] Food[NEWLINE][ICON_BULLET][ICON_DISTRICT_CANAL]Canal: +3 [ICON_GOLD] Gold[NEWLINE][ICON_BULLET][ICON_DISTRICT_NEIGHBORHOOD]Neighborhood: +1 [ICON_GOLD] Gold[NEWLINE][ICON_BULLET][ICON_DISTRICT_AERODROME]Aerodrome: +3 [ICON_GOLD] Gold[NEWLINE][ICON_BULLET][ICON_DISTRICT_PRESERVE]Preserve: +1 [ICON_FOOD] Food"),
+	("LOC_PEDIA_CONCEPTS_PAGE_HD_CONCEPTS_PAGE_CHAPTER_HD_DISTRICT_YIELDS_PARA_1",               "[ICON_BULLET][ICON_DISTRICT_HOLY_SITE]Holy Site: +1 [ICON_FAITH] Faith[NEWLINE][ICON_BULLET][ICON_DISTRICT_CAMPUS]Campus: +1 [ICON_SCIENCE] Science[NEWLINE][ICON_BULLET][ICON_DISTRICT_THEATER]Theater Square: +1 [ICON_CULTURE] Culture[NEWLINE][ICON_BULLET][ICON_DISTRICT_COMMERCIAL_HUB]Commercial Hub: +3 [ICON_GOLD] Gold[NEWLINE][ICON_BULLET][ICON_DISTRICT_HARBOR]Harbor: +3 [ICON_GOLD] Gold[NEWLINE][ICON_BULLET][ICON_DISTRICT_ENCAMPMENT]Encampment: +1 [ICON_PRODUCTION] Production[NEWLINE][ICON_BULLET][ICON_DISTRICT_INDUSTRIAL_ZONE]Industrial Zone: +1 [ICON_PRODUCTION] Production[NEWLINE][ICON_BULLET][ICON_DISTRICT_GOVERNMENT]Government Plaza: +1 [ICON_CULTURE] Culture[NEWLINE][ICON_BULLET][ICON_DISTRICT_DIPLOMATIC_QUARTER]Diplomatic Quarter: +3 [ICON_GOLD] Gold[NEWLINE][ICON_BULLET][ICON_DISTRICT_CITY_CENTER]City Center: +1 [ICON_PRODUCTION] Production[NEWLINE][ICON_BULLET][ICON_DISTRICT_AQUEDUCT]Cistern: +1 [ICON_FOOD] Food[NEWLINE][ICON_BULLET][ICON_DISTRICT_ENTERTAINMENT_COMPLEX]Entertainment Complex: +3 [ICON_GOLD] Gold[NEWLINE][ICON_BULLET][ICON_DISTRICT_WATER_ENTERTAINMENT_COMPLEX]Water Park: +3 [ICON_GOLD] Gold[NEWLINE][ICON_BULLET][ICON_DISTRICT_DAM]Dam: +1 [ICON_FOOD] Food[NEWLINE][ICON_BULLET][ICON_DISTRICT_CANAL]Canal: +3 [ICON_GOLD] Gold[NEWLINE][ICON_BULLET][ICON_DISTRICT_NEIGHBORHOOD]Neighborhood: +1 [ICON_PRODUCTION] Production[NEWLINE][ICON_BULLET][ICON_DISTRICT_AERODROME]Aerodrome: +3 [ICON_GOLD] Gold[NEWLINE][ICON_BULLET][ICON_DISTRICT_PRESERVE]Preserve: +1 [ICON_FOOD] Food"),
 	("LOC_PEDIA_CONCEPTS_PAGE_HD_CONCEPTS_PAGE_CHAPTER_HD_DISTRICT_GPPS_TITLE",                  "Corresponding Great Person of District"),
 	("LOC_PEDIA_CONCEPTS_PAGE_HD_CONCEPTS_PAGE_CHAPTER_HD_DISTRICT_GPPS_PARA_1",                 "[ICON_BULLET][ICON_DISTRICT_HOLY_SITE]Holy Site: [ICON_GreatProphet] Great Prophet[NEWLINE][ICON_BULLET][ICON_DISTRICT_CAMPUS]Campus: [ICON_GreatScientist] Great Scientist[NEWLINE][ICON_BULLET][ICON_DISTRICT_THEATER]Theater Square: [ICON_GreatWriter] Great Writer [ICON_GreatArtist] Great Artist [ICON_GreatMusician] Great Musician[NEWLINE][ICON_BULLET][ICON_DISTRICT_COMMERCIAL_HUB]Commercial Hub: [ICON_GreatMerchant] Great Merchant[NEWLINE][ICON_BULLET][ICON_DISTRICT_HARBOR]Harbor: [ICON_GreatAdmiral] Great Admiral[NEWLINE][ICON_BULLET][ICON_DISTRICT_ENCAMPMENT]Encampment: [ICON_GreatGeneral] Great General[NEWLINE][ICON_BULLET][ICON_DISTRICT_INDUSTRIAL_ZONE]Industrial Zone: [ICON_GreatEngineer] Great Engineer"),
 	("LOC_PEDIA_CONCEPTS_PAGE_HD_CONCEPTS_PAGE_CHAPTER_HD_GREAT_PERSON_YIELDS_TITLE",            "Corresponding Yield of Great Person"),
@@ -36,7 +36,7 @@ values
 	-- 游戏进度相关调整
 	("LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_CONTENT_TITLE",                      "Game Progress Related"),
 	("LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_HD_FEATURE_RESOURCE_YIELDS_TITLE",   "Yields of Removing Features and Harvesting Resources"),
-	("LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_HD_FEATURE_RESOURCE_YIELDS_PARA_1",  "The instantaneous benefits of removing features and harvesting resources (commonly known as chopping) no longer increase, with the base 24 point benefit for removing features (distributed by feature type) and the base 32 point benefit for harvesting resources (distributed by resource type). See the ""Terrains and Features"" and ""Resources"" Page for details."),
+	("LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_HD_FEATURE_RESOURCE_YIELDS_PARA_1",  "The instantaneous benefits of removing features and harvesting resources (commonly known as chopping) no longer increase, with the base 24 point benefit for removing features (distributed by feature type) and harvesting resources (distributed by resource type). See the ""Terrains and Features"" and ""Resources"" Page for details."),
 	("LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_HD_FEATURE_RESOURCE_YIELDS_PARA_2",  "Luxury and strategy can be harvested or covered by wonders or Districts, after mastering the corresponding prerequisite technologies."),
 	("LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_HD_PILLAGE_YIELDS_TITLE",            "Pillage Yields"),
 	("LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_HD_PILLAGE_YIELDS_PARA_1",           "Remove the setting that pillage gains increase with the ""game progress"", and replace it with a fixed base of 25 points per time (yield type is determined by the pillage target)."),
@@ -67,6 +67,13 @@ values
 	("LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_ERA_PAGE_CHAPTER_HD_ERA_SCORE_TITLE",                      "Gain Gold from Era Score"),
 	("LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_ERA_PAGE_CHAPTER_HD_ERA_SCORE_PARA_1",                     "New mechanism: Gains 5 [ICON_Gold] Gold for every era score earned. If one loses their era points through certain means, the corresponding amount of [ICON_GOLD] gold coins will also be deducted."),
 
+	("LOC_PEDIA_HD_YIELD_CHANGES_NAME",                         									 "Yields Changes"),
+	("LOC_PEDIA_HD_IMPROVEMENT_UNIT_TEXT",                         							 	 "Built By"),
+	("LOC_PEDIA_HD_CLASSIFICATION_TEXT",                         						 			 "Classifications"),
+	("LOC_PEDIA_HD_RESOURCE_CLASSIFICATIONS_TEXT",                         				 "Usages"),
+	("LOC_PEDIA_HD_RESOURCE_IMPROVE_HARVEST_TEXT",                         			 	 "Improve and Harvest"),
+	("LOC_PEDIA_HD_GREATWORKS_TEXT",                         			 							 	 "Great Works"),
+
 	-- 百科分类
 	("LOC_PEDIA_GOVERNMENTS_PAGEGROUP_CITY_POLICIES_NAME",                         "City Policies"),
 	("LOC_PEDIA_MOMENTS_TITLE",      			                 												 "Historic Moments and Commemorations"),
@@ -74,13 +81,6 @@ values
 	("LOC_PEDIA_MOMENTS_PAGEGROUP_CHINA_COMMEMORATIONS_NAME",			                 "China “Mandate of Heaven” Commemorations"),
 	("LOC_PEDIA_DISTRICTS_PAGEGROUP_COMMON_DISTRICTS_NAME",			                 	 "Common Districts"),
 	("LOC_PEDIA_DISTRICTS_PAGEGROUP_UNIQUE_DISTRICTS_NAME",			                 	 "Unique Districts"),
-	("LOC_PEDIA_IMPROVEMENTS_PAGEGROUP_BASIC_IMPROVEMENTS_NAME",	                 "Basic Improvements"),
-	("LOC_PEDIA_IMPROVEMENTS_PAGEGROUP_UNIQUE_IMPROVEMENTS_NAME",	                 "Unique Improvements"),
-	("LOC_PEDIA_IMPROVEMENTS_PAGEGROUP_CITYSTATE_IMPROVEMENTS_NAME",	             "City-state Unique Improvements"),
-	("LOC_PEDIA_IMPROVEMENTS_PAGEGROUP_URBAN_IMPROVEMENTS_NAME",	                 "Urban Facilities Improvements"),
-	("LOC_PEDIA_IMPROVEMENTS_PAGEGROUP_TOURISM_IMPROVEMENTS_NAME",	               "Tourism Facilities Improvements"),
-	("LOC_PEDIA_IMPROVEMENTS_PAGEGROUP_MILITARY_IMPROVEMENTS_NAME",	               "Military Facilities Improvements"),
-	("LOC_PEDIA_IMPROVEMENTS_PAGEGROUP_IMPROVEMENTS_NAME",	                 			 "Common Improvements"),
 
 	("LOC_PEDIA_RESOURCES_PAGEGROUP_STRATEGIC_NAME",	               				 		   "[COLOR:ResScienceLabelCS]Strategic[ENDCOLOR]"),
 	("LOC_PEDIA_RESOURCES_PAGEGROUP_ARTIFACT_NAME",	               				 		   	 "[COLOR:ResCultureLabelCS]Artifact[ENDCOLOR]"),
@@ -103,11 +103,15 @@ values
 	("LOC_PEDIA_RESOURCES_PAGEGROUP_PLANTATION_LUXURY_NAME",	               			 "Plantation [COLOR:ResGoldLabelCS]Luxury[ENDCOLOR]"),
 	("LOC_PEDIA_RESOURCES_PAGEGROUP_CAMP_LUXURY_NAME",	               				 		 "Camp [COLOR:ResGoldLabelCS]Luxury[ENDCOLOR]"),
 	("LOC_PEDIA_RESOURCES_PAGEGROUP_LUMBER_MILL_LUXURY_NAME",	               		   "Lumber Mill [COLOR:ResGoldLabelCS]Luxury[ENDCOLOR]"),
+	("LOC_PEDIA_RESOURCES_PAGEGROUP_CIVILIZATION_LUXURY_NAME",	               		 "Civilization Unique [COLOR:ResGoldLabelCS]Luxury[ENDCOLOR]"),
+	("LOC_PEDIA_RESOURCES_PAGEGROUP_CITYSTATE_LUXURY_NAME",	               			 	 "City-state Exclusive [COLOR:ResGoldLabelCS]Luxury[ENDCOLOR]"),
 	("LOC_PEDIA_RESOURCES_PAGEGROUP_LUXURY_NAME",	               				 				   "Special [COLOR:ResGoldLabelCS]Luxury[ENDCOLOR]"),
-	("LOC_PEDIA_RESOURCES_PAGEGROUP_WONDER_LUXURY_NAME",	               				 	 "Wonder [COLOR:ResGoldLabelCS]Luxury[ENDCOLOR]"),
 
-	("LOC_UI_PEDIA_RESOURCES_MONOPOLY_CATEGORY_TEXT",	               				 	 		 "Monopoly Category: {1_Category}"),
-	("LOC_UI_PEDIA_RESOURCES_MONOPOLY_EFFECT_TEXT",	               				 	 	 	 	 "Industry and Corporation Effects"),
+	("LOC_PEDIA_RESOURCES_PAGEGROUP_RESOURCE_USAGE_NAME",	               				 	 "[ICON_BULLETGLOW][COLOR_DiplomaticLabelCS]Resource Usages[ENDCOLOR][ICON_BULLETGLOW]"),
+
+	("LOC_UI_PEDIA_RESOURCES_TEXT",	               				 	 	 	 								 	 "Resources"),
+	("LOC_UI_PEDIA_RESOURCES_INDUSTRY_EFFECT_TEXT",	               				 	 	 	 	 "Industry Effects"),
+	("LOC_UI_PEDIA_RESOURCES_CORPORATION_EFFECT_TEXT",	               				 	 	 "Corporation Effects"),
 	("LOC_UI_PEDIA_RESOURCES_PRODUCT_EFFECT_TEXT",	               				 	 	 		 "Product Effects"),
 
 	("LOC_PEDIA_WONDERS_PAGEGROUP_WONDERS_NAME",	               				   				 "Wonder Wonders"),
@@ -178,7 +182,7 @@ values
 		[ICON_BULLET][ICON_DISTRICT_WATER_ENTERTAINMENT_COMPLEX]水上乐园：+3 [ICON_GOLD] 金币[NEWLINE]
 		[ICON_BULLET][ICON_DISTRICT_DAM]堤坝：+1 [ICON_FOOD] 食物[NEWLINE]
 		[ICON_BULLET][ICON_DISTRICT_CANAL]运河：+3 [ICON_GOLD] 金币[NEWLINE]
-		[ICON_BULLET][ICON_DISTRICT_NEIGHBORHOOD]社区：+1 [ICON_GOLD] 金币[NEWLINE]
+		[ICON_BULLET][ICON_DISTRICT_NEIGHBORHOOD]社区：+1 [ICON_PRODUCTION] 生产力[NEWLINE]
 		[ICON_BULLET][ICON_DISTRICT_AERODROME]航空港：+3 [ICON_GOLD] 金币[NEWLINE]
 		[ICON_BULLET][ICON_DISTRICT_PRESERVE]保护区：+1 [ICON_FOOD] 食物
 	"),
@@ -254,7 +258,7 @@ values
 	-- 游戏进度相关调整
 	("zh_Hans_CN",  "LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_CONTENT_TITLE",                      "游戏进度相关调整"),
 	("zh_Hans_CN",  "LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_HD_FEATURE_RESOURCE_YIELDS_TITLE",   "移除地貌和收获资源产出"),
-	("zh_Hans_CN",  "LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_HD_FEATURE_RESOURCE_YIELDS_PARA_1",  "移除地貌和收获资源（俗称砍树与收获）的瞬时收益不再增长，移除地貌收益为基础24点（按地貌类型分配）。收获资源收益为基础32点（按资源类型分配）。"),
+	("zh_Hans_CN",  "LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_HD_FEATURE_RESOURCE_YIELDS_PARA_1",  "移除地貌和收获资源（俗称砍树与收获）的瞬时收益不再增长，移除地貌和收获资源的基础收益为24产。"),
 	("zh_Hans_CN",  "LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_HD_FEATURE_RESOURCE_YIELDS_PARA_2",  "在解锁对应科技后，奢侈和战略可以被收获或被奇观或区域覆盖。"),
 	("zh_Hans_CN",  "LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_HD_PILLAGE_YIELDS_TITLE",            "劫掠收益"),
 	("zh_Hans_CN",  "LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_PROGRESS_PAGE_CHAPTER_HD_PILLAGE_YIELDS_PARA_1",           "取消劫掠收益随自身科技人文进度而增加的设定，改为固定每次基础25点（产出类型根据劫掠对象决定）。"),
@@ -290,6 +294,14 @@ values
 	("zh_Hans_CN",  "LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_ERA_PAGE_CHAPTER_HD_ERA_SCORE_TITLE",                      "时代得分获得金币"),
 	("zh_Hans_CN",  "LOC_PEDIA_CONCEPTS_PAGE_HD_GAME_ERA_PAGE_CHAPTER_HD_ERA_SCORE_PARA_1",                     "新增机制：每获得1点时代得分获得5 [ICON_GOLD] 金币，如果通过某些手段失去时代分，则也会扣除对应数量的 [ICON_GOLD] 金币。"),
 	
+	("zh_Hans_CN",  "LOC_PEDIA_HD_YIELD_CHANGES_NAME",                         									 "加产节点"),
+	("zh_Hans_CN",  "LOC_PEDIA_HD_IMPROVEMENT_UNIT_TEXT",                         						 	 "改良单位"),
+	("zh_Hans_CN",  "LOC_PEDIA_HD_CLASSIFICATION_TEXT",                         						     "分类"),
+	("zh_Hans_CN",  "LOC_PEDIA_HD_RESOURCE_CLASSIFICATIONS_TEXT",                         			 "用途"),
+	("zh_Hans_CN",  "LOC_PEDIA_HD_RESOURCE_IMPROVE_HARVEST_TEXT",                         			 "改良与收获"),
+	("zh_Hans_CN",  "LOC_UI_PEDIA_IMPROVED_BY",                         			 									 "改良"),
+	("zh_Hans_CN",  "LOC_PEDIA_HD_GREATWORKS_TEXT",                         			 							 "巨作"),
+
 	-- 百科分类
 	("zh_Hans_CN",  "LOC_PEDIA_GOVERNMENTS_PAGEGROUP_CITY_POLICIES_NAME",                        "城市政策"),
 
@@ -299,14 +311,6 @@ values
 
 	("zh_Hans_CN",  "LOC_PEDIA_DISTRICTS_PAGEGROUP_COMMON_DISTRICTS_NAME",			                 "通用区域"),
 	("zh_Hans_CN",  "LOC_PEDIA_DISTRICTS_PAGEGROUP_UNIQUE_DISTRICTS_NAME",			                 "特色区域"),
-
-	("zh_Hans_CN",  "LOC_PEDIA_IMPROVEMENTS_PAGEGROUP_BASIC_IMPROVEMENTS_NAME",	                 "基础改良"),
-	("zh_Hans_CN",  "LOC_PEDIA_IMPROVEMENTS_PAGEGROUP_UNIQUE_IMPROVEMENTS_NAME",	               "特色改良"),
-	("zh_Hans_CN",  "LOC_PEDIA_IMPROVEMENTS_PAGEGROUP_CITYSTATE_IMPROVEMENTS_NAME",	             "城邦特色改良"),
-	("zh_Hans_CN",  "LOC_PEDIA_IMPROVEMENTS_PAGEGROUP_URBAN_IMPROVEMENTS_NAME",	                 "城市设施改良"),
-	("zh_Hans_CN",  "LOC_PEDIA_IMPROVEMENTS_PAGEGROUP_TOURISM_IMPROVEMENTS_NAME",	               "旅游设施改良"),
-	("zh_Hans_CN",  "LOC_PEDIA_IMPROVEMENTS_PAGEGROUP_MILITARY_IMPROVEMENTS_NAME",	             "军事设施改良"),
-	("zh_Hans_CN",  "LOC_PEDIA_IMPROVEMENTS_PAGEGROUP_IMPROVEMENTS_NAME",	               				 "通用改良"),
 
 	("zh_Hans_CN",  "LOC_PEDIA_RESOURCES_PAGEGROUP_STRATEGIC_NAME",	               				 		 	 "[COLOR:ResScienceLabelCS]战略资源[ENDCOLOR]"),
 	("zh_Hans_CN",  "LOC_PEDIA_RESOURCES_PAGEGROUP_ARTIFACT_NAME",	               				 		 	 "[COLOR:ResCultureLabelCS]文物资源[ENDCOLOR]"),
@@ -329,11 +333,15 @@ values
 	("zh_Hans_CN",  "LOC_PEDIA_RESOURCES_PAGEGROUP_PLANTATION_LUXURY_NAME",	               			 "[COLOR:ResGoldLabelCS]奢侈资源[ENDCOLOR] 种植园"),
 	("zh_Hans_CN",  "LOC_PEDIA_RESOURCES_PAGEGROUP_CAMP_LUXURY_NAME",	               				 		 "[COLOR:ResGoldLabelCS]奢侈资源[ENDCOLOR] 营地"),
 	("zh_Hans_CN",  "LOC_PEDIA_RESOURCES_PAGEGROUP_LUMBER_MILL_LUXURY_NAME",	               		 "[COLOR:ResGoldLabelCS]奢侈资源[ENDCOLOR] 伐木场"),
+	("zh_Hans_CN",  "LOC_PEDIA_RESOURCES_PAGEGROUP_CIVILIZATION_LUXURY_NAME",	               		 "[COLOR:ResGoldLabelCS]奢侈资源[ENDCOLOR] 文明特色"),
+	("zh_Hans_CN",  "LOC_PEDIA_RESOURCES_PAGEGROUP_CITYSTATE_LUXURY_NAME",	               			 "[COLOR:ResGoldLabelCS]奢侈资源[ENDCOLOR] 城邦专属"),
 	("zh_Hans_CN",  "LOC_PEDIA_RESOURCES_PAGEGROUP_LUXURY_NAME",	               				 				 "[COLOR:ResGoldLabelCS]奢侈资源[ENDCOLOR] 特殊"),
-	("zh_Hans_CN",  "LOC_PEDIA_RESOURCES_PAGEGROUP_WONDER_LUXURY_NAME",	               				 	 "[COLOR:ResGoldLabelCS]奢侈资源[ENDCOLOR] 奇观"),
+	
+	("zh_Hans_CN",  "LOC_PEDIA_RESOURCES_PAGEGROUP_RESOURCE_USAGE_NAME",	               				 "[ICON_BULLETGLOW][COLOR_DiplomaticLabelCS]资源用途[ENDCOLOR][ICON_BULLETGLOW]"),
 
-	("zh_Hans_CN",  "LOC_UI_PEDIA_RESOURCES_MONOPOLY_CATEGORY_TEXT",	               				 	 	 "行业类型：{1_Category}"),
-	("zh_Hans_CN",  "LOC_UI_PEDIA_RESOURCES_MONOPOLY_EFFECT_TEXT",	               				 	 	 	 "行业与公司效果"),
+	("zh_Hans_CN",  "LOC_UI_PEDIA_RESOURCES_TEXT",	               				 	 	 	 								 "资源"),
+	("zh_Hans_CN",  "LOC_UI_PEDIA_RESOURCES_INDUSTRY_EFFECT_TEXT",	               				 	 	 	 "行业效果"),
+	("zh_Hans_CN",  "LOC_UI_PEDIA_RESOURCES_CORPORATION_EFFECT_TEXT",	               				 	 	 "公司效果"),
 	("zh_Hans_CN",  "LOC_UI_PEDIA_RESOURCES_PRODUCT_EFFECT_TEXT",	               				 	 	 		 "产品效果"),
 
 	("zh_Hans_CN",  "LOC_PEDIA_WONDERS_PAGEGROUP_WONDERS_NAME",	               				 					 "世界奇观"),
@@ -390,26 +398,17 @@ values
 insert or replace into EnglishText
 	(Tag,                                                                               Text)
 values
-	("LOC_PEDIA_BUILDINGS_PAGE_BUILDING_NILOMETER_HD_CHAPTER_HISTORY_PARA_1",           "The measuring device comes from the Nile gauge in the official scenario ""The Gift of the Nile"". The Nile gauge was a stepped hydraulic device that the Egyptians built along the Nile to regulate agricultural production by observing the water level of the Nile using the steps and the scales on the pillars contained within them. To this day, the remains of such structures can be found on the island of Roda in Cairo and on the island of Elephantine in Aswan. It was not until the opening of the Aswan Dam that the temple of Abu Simbel was saved, but Egyptian water relics like the Nile Instrument officially ended their mission."),
-	("LOC_PEDIA_BUILDINGS_PAGE_BUILDING_TRIUMPHAL_ARCH_CHAPTER_HISTORY_PARA_1",         "At the beginning of Rome, the Romans had a tradition of erecting gate-like structures on the main roads to celebrate their victories. By the time the empire was founded, the Triumph Arch had evolved into a majestic, massive stone structure with spectacular arches and fine reliefs etched in history. With the Roman Empire long gone and lightning not seen to return, the only Roman triumphal arches left are the Triumphal Arch of Constantine, the Triumphal Arch of Titus and the Triumphal Arch of Severus, but buildings in the form of triumphal arches have been erected in various places where Rome has been or has not been, in places that claim to be Rome or are thought to be Rome, and have become epic in stone."),
-	("LOC_PEDIA_BUILDINGS_PAGE_BUILDING_KAREZ_CHAPTER_HISTORY_PARA_1",                  "The karez is a long-established irrigation project, mostly found in the arid and semi-arid regions of Central Asia in West Asia and Northwest China. It is a combination of vertical wells and culverts that cleverly exploits the scarce water resources of the arid mountainous regions. Its origins are highly controversial. One theory is that it was invented by the people of Guanzhong during the Qin and Han dynasties, but it contains open channels, while the other is that the well-drilling technique was inherited from Assyria in Persia. Although the truth of history may have been buried in the sands of Inner Asia, the people that the water feeds still grow and pass it on from generation to generation."),
-	("LOC_PEDIA_BUILDINGS_PAGE_BUILDING_OFFICIAL_RUN_HANDCRAFT_CHAPTER_HISTORY_PARA_1", "The official run handcraft was the official body that managed the handicraft industry during the Qin and Han dynasties, and is found in official documents of the Qin dynasty, including the Qin dynasty, such as the Qin dynasty in the Sleeping Tiger Earth. The precociousness of the Chinese bureaucracy allowed for the extremely rapid development of government-run handicrafts, which for a long time represented the highest standard of Chinese handicrafts. At the same time, a well-developed bureaucracy made organising the people for large-scale projects a state capacity, which may have been the origin of Qin Shi Huang's ability. However, the monarch's great construction and light use of the people's power also often became a turning point for the feudal dynasty."),
-	("LOC_PEDIA_BUILDINGS_PAGE_BUILDING_BOOTCAMP_CHAPTER_HISTORY_PARA_1",               "The term 'bootcamp' is a very broadly defined term. The term refers to the period between the creation of early professional armies and the emergence of large-scale military camps, such as colosseums and different When class divisions began to form and those in a position of entitlement to the free possession of the means of production of others - the nobility and the priests - needed armed groups loyal to them to protect their right to the free possession of material goods, military organisations The military organisations entered the stage of history and have been involved in an extremely long and complex history of events, with the creation and development of institutions, facilities and personnel to serve their purposes. Such groups were primed before the first time in human history that the armies of two different civilisations met at Kadesh, and the Hittites are known for their invention and production of iron weapons and chariot axles."),
-	("LOC_PEDIA_BUILDINGS_PAGE_BUILDING_FAIR_CHAPTER_HISTORY_PARA_1",                   "From the emergence of the division of labour in material production there was an interaction of different substances, and then the exchange of goods followed. Then, because of the division of labour and the geographical nature of the production of goods, people began to form their own bazaars in places that were easily accessible. For a long time, fairs were the main source of access to things that people could not produce themselves, until the emergence of supermarkets."),
-	("LOC_PEDIA_BUILDINGS_PAGE_BUILDING_TOTEMS_CHAPTER_HISTORY_PARA_1",                 "The word 'totem' in all languages is derived from North American Aboriginal languages. It refers to the various traditions of worshipping a particular image. Some of the more common totems include birds, beasts and so on, which started out as concrete images and became more abstract until the classic and widely used figures of the dragon and the two-headed eagle emerged.");
+	("LOC_PEDIA_BUILDINGS_PAGE_BUILDING_NILOMETER_HD_CHAPTER_HISTORY_PARA_1",           "The measuring device comes from the Nile gauge in the official scenario ""The Gift of the Nile"". The Nile gauge was a stepped hydraulic device that the Egyptians built along the Nile to regulate Agrarian by observing the water level of the Nile using the steps and the scales on the pillars contained within them. To this day, the remains of such structures can be found on the island of Roda in Cairo and on the island of Elephantine in Aswan. It was not until the opening of the Aswan Dam that the temple of Abu Simbel was saved, but Egyptian water relics like the Nile Instrument officially ended their mission."),
+	("LOC_PEDIA_BUILDINGS_PAGE_BUILDING_FAIR_CHAPTER_HISTORY_PARA_1",                   "From the emergence of the division of labour in material production there was an interaction of different substances, and then the exchange of goods followed. Then, because of the division of labour and the geographical nature of the production of goods, people began to form their own bazaars in places that were easily accessible. For a long time, fairs were the main source of access to things that people could not produce themselves, until the emergence of supermarkets.");
 
 --------------------------------------------------------------------------------
 -- Language: zh_Hans_CN
 insert or replace into LocalizedText
 	(Language,      Tag,                                                                                Text)
 values
-	("zh_Hans_CN",  "LOC_PEDIA_BUILDINGS_PAGE_BUILDING_NILOMETER_HD_CHAPTER_HISTORY_PARA_1",            "测量仪来自官方情景“尼罗河的赠礼”中的尼罗河仪。尼罗河仪是一种阶梯型的水利设施，埃及人在尼罗河边建立这些设施，用阶梯和其中包含的柱子上的刻度观测尼罗河的水位，调节农业生产。到现在，开罗的罗达岛、阿斯旺的埃勒芬蒂尼岛都有这种建筑的遗迹。直到阿斯旺大坝的启用，阿布辛拜勒神庙虽然被拯救，但是像尼罗河仪这些埃及水利遗迹却正式终结了使命。"),
-	("zh_Hans_CN",  "LOC_PEDIA_BUILDINGS_PAGE_BUILDING_TRIUMPHAL_ARCH_CHAPTER_HISTORY_PARA_1",          "在罗马之初，罗马人就有在主要道路上搭建门型建筑物庆祝胜利的传统。到帝国建立时，凯旋门已经演化为雄伟的巨大石制建筑，壮观的拱门和精美的浮雕铭刻着历史。罗马帝国早已远去，闪电也不见归来，罗马的凯旋门仅剩下君士坦丁凯旋门、提图斯凯旋门和塞维鲁凯旋门，但是，凯旋门这种形式的建筑在各个罗马到过或没有到过的地方，在自称是罗马或者被认为是罗马的地方被建立起来，成为了石头的史诗。"),
-	("zh_Hans_CN",  "LOC_PEDIA_BUILDINGS_PAGE_BUILDING_KAREZ_CHAPTER_HISTORY_PARA_1",                   "坎儿井是一种历史悠久的灌溉取水工程，多见于西亚中亚和中国西北干旱半干旱地区。这是一种竖井和暗渠的结合，巧妙利用了干旱区山地紧缺的水资源。其起源有着很大的争议一说是秦汉时关中人民发明的井渠，然而井渠含有明渠；另一说是波斯传承自亚述的凿井技术。虽然历史的真相可能已经掩埋在了内亚的沙尘之中，但是水源供养的人民仍然一代代的成长和传承。"),
-	("zh_Hans_CN",  "LOC_PEDIA_BUILDINGS_PAGE_BUILDING_OFFICIAL_RUN_HANDCRAFT_CHAPTER_HISTORY_PARA_1",  "工官是秦汉时期管理手工业的官方机构，见于睡虎地秦简等秦代官方文件。中国官僚系统的早熟使得官营手工业的发展极为迅速，很长一段时间内代表中国手工业的最高水准。同时，完善的官僚体系使得组织人民进行大型工程成为一种国家能力，这可能是秦始皇能力的由来。然而，君王大兴土木、轻用民力，也往往成为封建王朝的转折点。"),
-	("zh_Hans_CN",  "LOC_PEDIA_BUILDINGS_PAGE_BUILDING_BOOTCAMP_CHAPTER_HISTORY_PARA_1",                "“训练营”是一个定义非常广泛的词汇。和而不同中的训练营指的是从早期的专业军队产生到有规模的军营出现这段时间的军事机构，比如说斗兽场和各种兵器生产机构与设施。当阶级分化开始形成，处于有资格无偿占有他人生产生活资料的地位的那些阶级——贵族和祭司——就需要对他们忠诚的武装团体来保护他们对物质资料的无偿占有的权利，军事组织就此登上历史舞台，参与了极为漫长的历史和纷繁复杂的历史事件，为他们的目的服务的机构、设施和人员也随之产生并发展。在当人类历史上第一次有两支不同文明的军队会战于卡迭石之前，这样的集团就已经初步完备，赫梯人就以他们发明并生产的铁质兵器和战车车轴而闻名。"),
-	("zh_Hans_CN",  "LOC_PEDIA_BUILDINGS_PAGE_BUILDING_FAIR_CHAPTER_HISTORY_PARA_1",                    "从物质生产出现分工开始就有了不同物质的交互，然后商品交换随之产生。然后，因为商品生产的分工和地域性，人们开始在交通便利的地方自发的形成集市。在很长一段时间内，集市都是人们获得自己无法生产的东西的主要来源，直到超级市场出现。"),
-	("zh_Hans_CN",  "LOC_PEDIA_BUILDINGS_PAGE_BUILDING_TOTEMS_CHAPTER_HISTORY_PARA_1",                  "各种语言中的“图腾”一词都来自北美原住民语言。指的是各种传统的对一种特定形象的崇拜。比较常见的图腾形象有鸟类、猛兽等等，这些形象一开始是具体的，后来逐渐变得抽象，直到出现龙和双头鹰这种经典的广泛使用的图形。");
+	("zh_Hans_CN",  "LOC_PEDIA_BUILDINGS_PAGE_BUILDING_NILOMETER_HD_CHAPTER_HISTORY_PARA_1",            "测量仪来自官方情景“尼罗河的赠礼”中的尼罗河仪。尼罗河仪是一种阶梯型的水利工程，埃及人在尼罗河边建立这些设施，用阶梯和其中包含的柱子上的刻度观测尼罗河的水位，调节农业生产。到现在，开罗的罗达岛、阿斯旺的埃勒芬蒂尼岛都有这种建筑的遗迹。直到阿斯旺大坝的启用，阿布辛拜勒神庙虽然被拯救，但是像尼罗河仪这些埃及水利遗迹却正式终结了使命。"),
+	("zh_Hans_CN",  "LOC_PEDIA_BUILDINGS_PAGE_BUILDING_FAIR_CHAPTER_HISTORY_PARA_1",                    "从物质生产出现分工开始就有了不同物质的交互，然后商品交换随之产生。然后，因为商品生产的分工和地域性，人们开始在交通便利的地方自发的形成集市。在很长一段时间内，集市都是人们获得自己无法生产的东西的主要来源，直到超级市场出现。");
+
 insert or replace into EnglishText
 	(Tag,                                                                               Text)
 values

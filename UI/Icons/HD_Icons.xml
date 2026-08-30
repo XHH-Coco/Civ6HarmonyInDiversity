@@ -1,54 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GameData>
-    <IconTextureAtlases>
-        <Row Name="ATLAS_CivBaikonur" IconSize="22" IconsPerRow="1" IconsPerColumn="1" Filename="CivBaikonur_22.dds"/>
-        <Row Name="ATLAS_CivBaikonur" IconSize="30" IconsPerRow="1" IconsPerColumn="1" Filename="CivBaikonur_30.dds"/>
-        <Row Name="ATLAS_CivBaikonur" IconSize="32" IconsPerRow="1" IconsPerColumn="1" Filename="CivBaikonur_32.dds"/>
-        <Row Name="ATLAS_CivBaikonur" IconSize="36" IconsPerRow="1" IconsPerColumn="1" Filename="CivBaikonur_36.dds"/>
-        <Row Name="ATLAS_CivBaikonur" IconSize="44" IconsPerRow="1" IconsPerColumn="1" Filename="CivBaikonur_44.dds"/>
-        <Row Name="ATLAS_CivBaikonur" IconSize="45" IconsPerRow="1" IconsPerColumn="1" Filename="CivBaikonur_45.dds"/>
-        <Row Name="ATLAS_CivBaikonur" IconSize="48" IconsPerRow="1" IconsPerColumn="1" Filename="CivBaikonur_48.dds"/>
-        <Row Name="ATLAS_CivBaikonur" IconSize="50" IconsPerRow="1" IconsPerColumn="1" Filename="CivBaikonur_50.dds"/>
-        <Row Name="ATLAS_CivBaikonur" IconSize="64" IconsPerRow="1" IconsPerColumn="1" Filename="CivBaikonur_64.dds"/>
-        <Row Name="ATLAS_CivBaikonur" IconSize="80" IconsPerRow="1" IconsPerColumn="1" Filename="CivBaikonur_80.dds"/>
-        <Row Name="ATLAS_CivBaikonur" IconSize="128" IconsPerRow="1" IconsPerColumn="1" Filename="CivBaikonur_128.dds"/>
-        <Row Name="ATLAS_CivBaikonur" IconSize="200" IconsPerRow="1" IconsPerColumn="1" Filename="CivBaikonur_200.dds"/>
-        <Row Name="ATLAS_CivBaikonur" IconSize="256" IconsPerRow="1" IconsPerColumn="1" Filename="CivBaikonur_256.dds"/>
+  <IconTextureAtlases>
+    <Row Name="ATLAS_CivBaikonur" IconSize="22" IconsPerRow="1" IconsPerColumn="1" Filename="CivBaikonur_22.dds"/>
+    <Row Name="ATLAS_CivBaikonur" IconSize="30" IconsPerRow="1" IconsPerColumn="1" Filename="CivBaikonur_30.dds"/>
+    <Row Name="ATLAS_CivBaikonur" IconSize="32" IconsPerRow="1" IconsPerColumn="1" Filename="CivBaikonur_32.dds"/>
+    <Row Name="ATLAS_CivBaikonur" IconSize="36" IconsPerRow="1" IconsPerColumn="1" Filename="CivBaikonur_36.dds"/>
+    <Row Name="ATLAS_CivBaikonur" IconSize="44" IconsPerRow="1" IconsPerColumn="1" Filename="CivBaikonur_44.dds"/>
+    <Row Name="ATLAS_CivBaikonur" IconSize="45" IconsPerRow="1" IconsPerColumn="1" Filename="CivBaikonur_45.dds"/>
+    <Row Name="ATLAS_CivBaikonur" IconSize="48" IconsPerRow="1" IconsPerColumn="1" Filename="CivBaikonur_48.dds"/>
+    <Row Name="ATLAS_CivBaikonur" IconSize="50" IconsPerRow="1" IconsPerColumn="1" Filename="CivBaikonur_50.dds"/>
+    <Row Name="ATLAS_CivBaikonur" IconSize="64" IconsPerRow="1" IconsPerColumn="1" Filename="CivBaikonur_64.dds"/>
+    <Row Name="ATLAS_CivBaikonur" IconSize="80" IconsPerRow="1" IconsPerColumn="1" Filename="CivBaikonur_80.dds"/>
+    <Row Name="ATLAS_CivBaikonur" IconSize="128" IconsPerRow="1" IconsPerColumn="1" Filename="CivBaikonur_128.dds"/>
+    <Row Name="ATLAS_CivBaikonur" IconSize="200" IconsPerRow="1" IconsPerColumn="1" Filename="CivBaikonur_200.dds"/>
+    <Row Name="ATLAS_CivBaikonur" IconSize="256" IconsPerRow="1" IconsPerColumn="1" Filename="CivBaikonur_256.dds"/>
+    
+    <Row Name="ATLAS_HD_BLANK" IconSize="38" IconsPerRow="1" IconsPerColumn="1" Filename="HD_BLANK_38.dds"/>
+  </IconTextureAtlases>
+  <IconDefinitions>
+    <Row Name="ICON_CIVILIZATION_HONG_KONG" Atlas="ATLAS_CivBaikonur" Index="0"/>
+    <Row Name="ICON_IMPROVEMENT_LAND_POLDER" Atlas="ICON_ATLAS_EXPANSION_1_IMPROVEMENTS" Index="2"/>
 
-        <Row Name="ATLAS_HD_Notifications" IconSize="40" IconsPerRow="3" IconsPerColumn="3" Filename="HD_Notifications_40.dds"/>
-        <Row Name="ATLAS_HD_Notifications" IconSize="100" IconsPerRow="3" IconsPerColumn="3" Filename="HD_Notifications_100.dds"/>
-    </IconTextureAtlases>
-    <IconDefinitions>
-        <!-- <Row Name="ICON_0" Atlas="ATLAS_CivBaikonur" Index="0"/> -->
-        <Row Name="ICON_CIVILIZATION_HONG_KONG" Atlas="ATLAS_CivBaikonur" Index="0"/>
-        <Row Name="ICON_GREATWORK_ZHUANG_ZHOU_1"             Atlas="ICON_ATLAS_GREATWORKS"           Index="0"/>
-        <Row Name="ICON_GREATWORK_ZHUANG_ZHOU_2"             Atlas="ICON_ATLAS_GREATWORKS"           Index="0"/>
-        <Row Name="ICON_GREATWORK_SI_MA_QIAN_1"             Atlas="ICON_ATLAS_GREATWORKS"           Index="0"/>
-        <Row Name="ICON_GREATWORK_SI_MA_QIAN_2"             Atlas="ICON_ATLAS_GREATWORKS"           Index="0"/>
-        <Row Name="ICON_GREATWORK_HANFEI"             Atlas="ICON_ATLAS_GREATWORKS"           Index="0"/>
-        <Row Name="ICON_GREATWORK_WEILIAO"             Atlas="ICON_ATLAS_GREATWORKS"           Index="0"/>
-        <Row Name="ICON_IMPROVEMENT_LAND_POLDER" Atlas="ICON_ATLAS_EXPANSION_1_IMPROVEMENTS" Index="2"/>
-        <Row Name="ICON_NOTIFICATION_POLAND_ALLIANCE_COPY_GPP" Atlas="ICON_ATLAS_NOTIFICATIONS" Index="121"/>
-
-        <Row Name="ICON_NOTIFICATION_POTALA_EXTRA_BELIEF" Atlas="ATLAS_HD_Notifications" Index="0"/>
-
-		<Row Name="ICON_NOTIFICATION_CHINA_CHOOSE_FIRST_TURN_COMMEMORATION"  Atlas="ATLAS_HD_Notifications" Index="1"/>
-		<Row Name="ICON_NOTIFICATION_CHINA_CHOOSE_ERA_ANCIENT_COMMEMORATION"  Atlas="ATLAS_HD_Notifications" Index="1"/>
-		<Row Name="ICON_NOTIFICATION_CHINA_CHOOSE_ERA_CLASSICAL_COMMEMORATION"  Atlas="ATLAS_HD_Notifications" Index="1"/>
-		<Row Name="ICON_NOTIFICATION_CHINA_CHOOSE_ERA_MEDIEVAL_COMMEMORATION"  Atlas="ATLAS_HD_Notifications" Index="1"/>
-		<Row Name="ICON_NOTIFICATION_CHINA_CHOOSE_ERA_RENAISSANCE_COMMEMORATION"  Atlas="ATLAS_HD_Notifications" Index="1"/>
-		<Row Name="ICON_NOTIFICATION_CHINA_CHOOSE_ERA_INDUSTRIAL_COMMEMORATION"  Atlas="ATLAS_HD_Notifications" Index="1"/>
-		<Row Name="ICON_NOTIFICATION_CHINA_CHOOSE_ERA_MODERN_COMMEMORATION"  Atlas="ATLAS_HD_Notifications" Index="1"/>
-		<Row Name="ICON_NOTIFICATION_CHINA_CHOOSE_ERA_ATOMIC_COMMEMORATION"  Atlas="ATLAS_HD_Notifications" Index="1"/>
-		<Row Name="ICON_NOTIFICATION_CHINA_CHOOSE_ERA_INFORMATION_COMMEMORATION"  Atlas="ATLAS_HD_Notifications" Index="1"/>
-		<Row Name="ICON_NOTIFICATION_CHINA_CHOOSE_ERA_FUTURE_COMMEMORATION"  Atlas="ATLAS_HD_Notifications" Index="1"/>
-    </IconDefinitions>
-    <IconAliases>
-		<Row Name="ICON_NOTIFICATION_SUMERIA_FREE_TECH" OtherName="ICON_NOTIFICATION_CHOOSE_TECH"/>
-		<Row Name="ICON_NOTIFICATION_SUMERIA_FREE_CIVIC" OtherName="ICON_NOTIFICATION_CHOOSE_CIVIC"/>
-		<Row Name="ICON_NOTIFICATION_SUMERIA_SPECIAL_QUEST" OtherName="ICON_NOTIFICATION_CITYSTATE_QUEST_GIVEN"/>
-		<Row Name="ICON_NOTIFICATION_SUMERIA_SPECIAL_QUEST_REWORD" OtherName="ICON_NOTIFICATION_CITYSTATE_QUEST_COMPLETED"/>
-
-        <Row Name="ICON_NOTIFICATION_PLUM_INTERNAL_SECURITY_GPP" OtherName="ICON_NOTIFICATION_SPY_GROUP"/>
-	</IconAliases>
+    <Row Name="ICON_HD_BLANK" Atlas="ATLAS_HD_BLANK" Index="0"/>
+  </IconDefinitions>
 </GameData>

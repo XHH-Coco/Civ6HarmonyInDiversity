@@ -23,6 +23,7 @@ print("Rise & Fall    :", (bIsRiseFall and "YES" or "no"));
 local bIsGatheringStorm:boolean = Modding.IsModActive("4873eb62-8ccc-4574-b784-dda455e74e68"); -- Gathering Storm
 print("Gathering Storm:", (bIsGatheringStorm and "YES" or "no"));
 
+local CITY_STATE_RESOURCE_TAG = 'HD_CITY_STATE_RESOURCE';
 
 -- ===========================================================================
 -- Helpers
@@ -1147,6 +1148,37 @@ function AddCityStateRow( kCityState:table )
 	if GameCapabilities.HasCapability("CAPABILITY_MILITARY") then
 		kInst.DiplomacyPip:SetToolTipString(tooltip);
 	end
+
+	local exclusiveResource = Utils.GetPlayerProperty(kCityState.iPlayer, CITY_STATE_RESOURCE_TAG);
+	if exclusiveResource then
+		kInst.ExclusiveResource:SetHide(false);
+		kInst.ExclusiveResource:SetText('[ICON_' .. exclusiveResource .. ']');
+
+		local exclusiveResourceStr = Locale.Lookup('LOC_MINOR_CIV_EXCLUSIVE_RESOURCE', '[ICON_' .. exclusiveResource .. ']', Locale.Lookup('LOC_' .. exclusiveResource .. '_NAME'));
+		
+		local classificationList = Utils.Resource_Classification_Map[exclusiveResource] or {};
+		local textList = {};
+		for _, classificationType in ipairs(classificationList) do
+			local classificationInfo = GameInfo.HD_ResourceClassificationTypes[classificationType];
+			if classificationInfo and classificationInfo.Display then
+				table.insert(textList, Locale.Lookup(classificationInfo.Name))
+			end
+		end
+		if #textList > 0 then
+			local classificationText = Locale.Lookup('LOC_TOOLTIP_HD_RESOURCE_CLASSIFICATIONS_TEXT');
+			for i, text in ipairs(textList) do
+				if i > 1 then
+					classificationText = classificationText .. Locale.Lookup('LOC_TOOLTIP_HD_COMMA_TEXT')
+				end
+				classificationText = classificationText .. text;
+			end
+			exclusiveResourceStr = exclusiveResourceStr .. '[NEWLINE]' .. classificationText;
+		end
+		
+		kInst.ExclusiveResource:SetToolTipString(exclusiveResourceStr);
+	else
+		kInst.ExclusiveResource:SetHide(true);
+	end
     
     -- 2021-06-09 Infixo Trade info
 
@@ -2219,14 +2251,15 @@ function GetData()
 			local playerResources:table = pPlayer:GetResources();
 			--print("..resources", kCityState.CivType);
 			for res in GameInfo.Resources() do
-                local bIsStrategic:boolean = ( res.ResourceClassType == "RESOURCECLASS_STRATEGIC" );
-                local bIsLuxury:boolean    = ( res.ResourceClassType == "RESOURCECLASS_LUXURY" );
+				local bIsStrategic:boolean = ( res.ResourceClassType == "RESOURCECLASS_STRATEGIC" );
+				local bIsLuxury:boolean    = ( res.ResourceClassType == "RESOURCECLASS_LUXURY" );
+				local bIsBonus:boolean    = ( res.ResourceClassType == "RESOURCECLASS_BONUS" );
 				local iNum:number = playerResources:GetResourceAmount(res.Index); -- how many the minor has
-                -- for GS and startegics get how many accumulates per turn
-                if bIsGatheringStorm and bIsStrategic then
-                    iNum = playerResources:GetResourceAccumulationPerTurn(res.Index);
-                end
-				if iNum > 0 and (bIsStrategic or bIsLuxury) then
+				-- for GS and startegics get how many accumulates per turn
+				if bIsGatheringStorm and bIsStrategic then
+						iNum = playerResources:GetResourceAccumulationPerTurn(res.Index);
+				end
+				if iNum > 0 and (bIsStrategic or bIsLuxury or bIsBonus) then
 					--print(res.ResourceType, iNum);
 					local sIcon:string = "[ICON_"..res.ResourceType.."]";
 					local sName:string = Locale.Lookup(res.Name);

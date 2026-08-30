@@ -6,6 +6,12 @@ Utils = ExposedMembers.DLHD.Utils;
 function PlayerHasPolicy(playerId, policyId)
   local player = Players[playerId]
   if player and player:IsMajor() then
+    local policyInfo = GameInfo.Policies[policyId];
+    if not policyInfo then return; end
+
+    local propertyHas = player:GetProperty('HD_PLAYER_HAS_' .. policyInfo.PolicyType) or 0;
+    if propertyHas > 0 then return true; end
+
     local playerCulture = player:GetCulture()
     local numSlots = playerCulture:GetNumPolicySlots();
     for i = 0, numSlots-1, 1 do
@@ -17,6 +23,41 @@ function PlayerHasPolicy(playerId, policyId)
   return false;
 end
 Utils.PlayerHasPolicy = PlayerHasPolicy;
+
+-- 依赖Plot Property的政策
+function HDGovernmentPolicyChanged(playerId, policyId, enacted)
+  local player = Players[playerId];
+  if not player then return; end
+
+  local policyInfo = GameInfo.Policies[policyId];
+  if not policyInfo then return; end
+
+  local needDetectInfo = GameInfo.HD_PolicyNeedDetect[policyInfo.PolicyType];
+  if not needDetectInfo then return; end
+
+  if enacted then
+    print("依赖Plot Property的政策 " .. Locale.Lookup(policyInfo.Name) .. ' 激活');
+  else
+    print("依赖Plot Property的政策 " .. Locale.Lookup(policyInfo.Name) .. ' 取消');
+  end
+
+  local property = enacted and 1 or 0;
+  if needDetectInfo.PropertyRange == 'CAPITAL' then
+    local capital = player:GetCities():GetCapitalCity();
+    if not capital then return; end
+    local plot = Map.GetPlot(capital:GetX(), capital:GetY());
+    plot:SetProperty('HD_PLAYER_HAS_' .. policyInfo.PolicyType, property);
+  elseif needDetectInfo.PropertyRange == 'CITIES' then
+    for _, city in player:GetCities():Members() do
+      local plot = Map.GetPlot(city:GetX(), city:GetY());
+      plot:SetProperty('HD_PLAYER_HAS_' .. policyInfo.PolicyType, property);
+    end
+  else
+    print("依赖Plot Property的政策 为实现的PropertyRange" .. needDetectInfo.PropertyRange);
+  end
+end
+-- Events.GovernmentPolicyChanged.Add(HDGovernmentPolicyChanged);
+GameEvents.PolicyChanged.Add(HDGovernmentPolicyChanged);
 
 -- 福音本土化
 local POLICY_HD_GOSPEL_LOCALISATION_INDEX = GameInfo.Policies['POLICY_HD_GOSPEL_LOCALISATION'].Index;
@@ -103,8 +144,7 @@ function PolicyBuildingConstructed(playerId, cityId, buildingId, plotId, bOrigin
   local plot = Map.GetPlotByIndex(plotId)
   if (building.BuildingType == 'BUILDING_BROADCAST_CENTER'
       or building.BuildingType == 'BUILDING_FILM_STUDIO'
-      or building.BuildingType == 'BUILDING_JNR_MEDIA_CENTER'
-      or building.BuildingType == 'BUILDING_HD_CINEMA') then
+      or building.BuildingType == 'BUILDING_JNR_MEDIA_CENTER') then
     -- 宗教电台
     if RELIGIOUS_BROADCASTING_RELIGIOUS_PRESSURE ~= 0 and PlayerHasPolicy(playerId, POLICY_HD_RELIGIOUS_BROADCASTING_INDEX) then
       local religionId = player:GetReligion():GetReligionTypeCreated()
@@ -185,7 +225,20 @@ end
 -- end
 -- GameEvents.OnDistrictConstructed.Add(OnDistrictConstructedPolicy)
 
+-- 开路先锋
+function PathFinderPlayerCompleteMoment(playerId, momentId, classificationMap)
+  local amount = classificationMap['MOMENT_CLASSIFICATION_EXPLORATION'] or 0;
+  if amount > 0 and amount % 2 == 0 then
+    local player = Players[playerId];
+    if player then
+      player:AttachModifierByID('HD_PATHFINDER_FAITH');
+      print("开路先锋 获得+1信仰值");
+    end
+  end
+end
+GameEvents.HDPlayerCompleteMoment.Add(PathFinderPlayerCompleteMoment)
+
 function initialize()
-  Events.UnitDamageChanged.Add(UnitDamageChanged)
+  Events.UnitDamageChanged.Add(UnitDamageChanged);
 end
 Events.LoadGameViewStateDone.Add(initialize);

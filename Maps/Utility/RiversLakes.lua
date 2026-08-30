@@ -276,9 +276,47 @@ function DoRiver(startPlot, thisFlowDirection, originalFlowDirection, riverID)
 		end
 		
 		if(bestFlowDirection == FlowDirectionTypes.NO_FLOWDIRECTION) then
-		
+
+			-- 诊断：河流在这里断在陆地上了，没有入海口。
+			-- 穷举过方向搜索的三个约束：六个流向里只有指向南北的那几个会拿不到
+			-- 打分用的相邻格（东西向环绕），所以走到这里一定是在首行或末行，
+			-- 内陆不可能。打出来是为了统计"补边界"到底能收回多少条河。
+			print(string.format("RIVER DEAD END: (%d,%d) this=%d orig=%d id=%d",
+				riverPlot:GetX(), riverPlot:GetY(),
+				thisFlowDirection, originalFlowDirection, riverID));
+
 			-- Patch river to north edge of map if can't flow off their normally
-			if (originalFlowDirection == FlowDirectionTypes.FLOWDIRECTION_NORTHEAST) then
+			--
+			-- 原版只在 originalFlowDirection == NORTHEAST 时补。但决定"河现在停在这一格的
+			-- 哪个角上"的是 thisFlowDirection，不是 originalFlowDirection —— 补的那两条边
+			-- （NW 边走 NORTHEAST、W 边走 NORTH）只和"以 NORTH 流向到达这里"有关，
+			-- 跟这条河最初往哪流没关系。原版按 original 判，属于判错了变量，
+			-- 只是绝大多数时候两者恰好同时成立。
+			--
+			-- 离线测量（tools/maptest/river.lua）：
+			--   随机采样 4 个场景、144 张图、89742 次起河、232634 条河流边 ——
+			--   走到这里 80 次，全部在北边界 y=H-1，thisFlowDirection 全是 NORTH。
+			--   定向穷举（全陆地图上逐格 × 逐组 this/orig 直接调 DoRiver）——
+			--   真正可达的组合有 11 种，全在北边界。
+			--
+			-- 南边界结构上就不可能：y=0 时 FLOWDIRECTION_SOUTH 那个分支会在
+			-- 铺边之前 early return（它要取 SW 邻格，那格不存在），走不到搜索这一步。
+			--
+			-- 关键区分：只有 thisFlowDirection == NORTH 才是真的断在内陆。
+			-- 各分支铺的边不同 —— NORTH 铺的是某格的 W 边，在 y=H-1 上它外侧还有格子；
+			-- 而 NORTHEAST / SOUTHWEST / SOUTHEAST / NORTHWEST 铺的是 NW 或 NE 边，
+			-- 在 y=H-1 上外侧没有格子，也就是那条边本来就躺在地图上边界上，
+			-- 河已经"流出图外"了，不需要补。实测每一种都是 100%。
+			--
+			-- 所以这里只做加法：保留原来的条件，另外补上按 thisFlowDirection 的判断。
+			-- 测试断言的是一条完整的不变式 —— 每一种可达的断头，要么被补上，
+			-- 要么最后铺下的那条边本来就贴着图外；11 / 11 全部满足。
+			--
+			-- 保留的原版半条件其实从没做过有用功（它只会额外命中
+			-- this=NORTHWEST / orig=NORTHEAST，而那种情况本来就贴边），
+			-- 留着只是为了不平白删掉长期存在的行为。
+			if (thisFlowDirection == FlowDirectionTypes.FLOWDIRECTION_NORTH
+			 or originalFlowDirection == FlowDirectionTypes.FLOWDIRECTION_NORTHEAST) then
 				TerrainBuilder.SetNWOfRiver(riverPlot, true, FlowDirectionTypes.FLOWDIRECTION_NORTHEAST, riverID);
 				TerrainBuilder.SetWOfRiver(riverPlot, true, FlowDirectionTypes.FLOWDIRECTION_NORTH, riverID);
 				print ("*** NORTH EDGE OF MAP RIVER REPAIR ***");

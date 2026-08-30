@@ -89,37 +89,37 @@ function getCityCenterPlotIndex(city)
 	return Map.GetPlotIndex(x, y)
 end
 
-function UpdateCityHasGovernor(playerID)
-	local player = Players[playerID]
-	local pCities = player:GetCities()
+-- function UpdateCityHasGovernor(playerID)
+-- 	local player = Players[playerID]
+-- 	local pCities = player:GetCities()
 
-	for _, city in pCities:Members() do
-		local plotID = getCityCenterPlotIndex(city)
-		local value = 0
-		if city:GetAssignedGovernor() == nil then
-			value = 0
-		else
-			value = 1
-		end
-		local plot = Map.GetPlotByIndex(plotID)
-		-- print(plotID, value)
-		SetObjectState(plot, g_PropertyKeys_HD.CityFlags.HasAssignedGovernor, value)
-	end
-end
+-- 	for _, city in pCities:Members() do
+-- 		local plotID = getCityCenterPlotIndex(city)
+-- 		local value = 0
+-- 		if city:GetAssignedGovernor() == nil then
+-- 			value = 0
+-- 		else
+-- 			value = 1
+-- 		end
+-- 		local plot = Map.GetPlotByIndex(plotID)
+-- 		-- print(plotID, value)
+-- 		SetObjectState(plot, g_PropertyKeys_HD.CityFlags.HasAssignedGovernor, value)
+-- 	end
+-- end
 
-function OnGovernorChanged(playerID, governorID)
-	-- print('OnGovernorChanged', playerID, governorID)
-	UpdateCityHasGovernor(playerID)
-end
+-- function OnGovernorChanged(playerID, governorID)
+-- 	-- print('OnGovernorChanged', playerID, governorID)
+-- 	UpdateCityHasGovernor(playerID)
+-- end
 
-function OnGovernorAssigned(cityOwner, cityID, governorOwner, governorType)
-	-- print('OnGovernorAssigned', cityOwner, cityID, governorOwner, governorType)
-	UpdateCityHasGovernor(governorOwner)
-end
+-- function OnGovernorAssigned(cityOwner, cityID, governorOwner, governorType)
+-- 	-- print('OnGovernorAssigned', cityOwner, cityID, governorOwner, governorType)
+-- 	UpdateCityHasGovernor(governorOwner)
+-- end
 
-Events.GovernorChanged.Add(OnGovernorChanged)
-Events.GovernorAppointed.Add(OnGovernorChanged)
-Events.GovernorAssigned.Add(OnGovernorAssigned)
+-- Events.GovernorChanged.Add(OnGovernorChanged)
+-- Events.GovernorAppointed.Add(OnGovernorChanged)
+-- Events.GovernorAssigned.Add(OnGovernorAssigned)
 
 function cityHasDistrict(city, districtID)
 	local districts = city:GetDistricts();
@@ -418,13 +418,14 @@ Events.TurnBegin.Add(SydneyOperaHouseTurnBegin);
 
 -- 埃及女王
 local Cleopatra_Trait = 'TRAIT_LEADER_MEDITERRANEAN'
+local NOTIFICATION_MEDITERRANEAN_REWARD_HASH = GameInfo.Types['NOTIFICATION_MEDITERRANEAN_REWARD'].Hash;
 function CleopatraDiplomacyStatement(fromPlayer: number, toPlayer: number, kVariants: table)
 	local statementType = DiplomacyManager.GetKeyName(kVariants.StatementType)
 	local statementSubType = DiplomacyManager.GetKeyName(kVariants.StatementSubType)
 	if (statementType == 'DIPLOMATIC_DELEGATION' or statementType == 'RESIDENT_EMBASSY') and statementSubType == 'AI_ACCEPT_DEAL' then
 		print('CleopatraDiplomacyStatement', fromPlayer, toPlayer, statementType, statementSubType)
 		if Utils.LeaderHasTrait(toPlayer, Cleopatra_Trait) then
-			GameEvents.GetRandomGoodyHutReward.Call(toPlayer, "LOC_TRAIT_LEADER_MEDITERRANEAN_NAME")
+			GameEvents.GetRandomGoodyHutReward.Call(toPlayer, "LOC_TRAIT_LEADER_MEDITERRANEAN_NAME", NOTIFICATION_MEDITERRANEAN_REWARD_HASH)
 		end
 	end
 end
@@ -459,9 +460,40 @@ function ChinaSelectCommemoration(playerId, operationId)
 			end
 			SetObjectState(player, CHINA_LAST_ERA_SELECTED_COMMEMORATION_TAG, selectedCommemorationTypes)
 		end
+
+		-- 唤起GP端事件
+		GameEvents.HD_ChooseCommemoration.Call(playerId);
 	end
 end
 Events.PlayerOperationComplete.Add(ChinaSelectCommemoration)
+
+-- ===================================================================================================================================== 
+-- 莫右二 上师
+-- ===================================================================================================================================== 
+local GOVERNOR_CARDINAL_RIGHT_2_RELIGIOUS_DISTANCE = GlobalParameters.HD_GOVERNOR_CARDINAL_RIGHT_2_RELIGIOUS_DISTANCE or 0;
+local GOVERNOR_CARDINAL_RIGHT_2_RELIGIOUS_PRESSURE = GlobalParameters.HD_GOVERNOR_CARDINAL_RIGHT_2_RELIGIOUS_PRESSURE or 0;
+local GOVERNOR_CARDINAL_RIGHT_2_GURU_AOE_PRESSURE_TAG = 'HD_GOVERNOR_CARDINAL_RIGHT_2_GURU_AOE_PRESSURE';
+function GuruSpreadReligiousPressure(playerId, unitId)
+	if GOVERNOR_CARDINAL_RIGHT_2_RELIGIOUS_DISTANCE <= 0 then return; end
+	if GOVERNOR_CARDINAL_RIGHT_2_RELIGIOUS_PRESSURE <= 0 then return; end
+
+	local unit = UnitManager.GetUnit(playerId, unitId);
+	if not unit then return; end
+	local hasAbility = unit:GetProperty(GOVERNOR_CARDINAL_RIGHT_2_GURU_AOE_PRESSURE_TAG) or 0;
+	if hasAbility == 0 then return; end
+
+	print("上师消耗使用次数");
+
+	local param = {};
+  param['OnStart'] = 'HD_SpreadAoeReligiousPressure';
+  param['X'] = unit:GetX();
+  param['Y'] = unit:GetY();
+  param['Amount'] = GOVERNOR_CARDINAL_RIGHT_2_RELIGIOUS_PRESSURE;
+  param['Distance'] = GOVERNOR_CARDINAL_RIGHT_2_RELIGIOUS_DISTANCE;
+  param['ReligionId'] = unit:GetReligionType();
+  UI.RequestPlayerOperation(playerId, PlayerOperations.EXECUTE_SCRIPT, param);
+end
+Events.UnitChargesChanged.Add(GuruSpreadReligiousPressure);
 
 --------------------------------------------------------------
 -- Initialize

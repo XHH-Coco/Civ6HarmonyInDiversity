@@ -1,7 +1,4 @@
-local TOOLING_SHOP = GameInfo.Buildings['BUILDING_JNR_TOOLING_SHOP'];
-local WAYSTATION = GameInfo.Buildings['BUILDING_JNR_WAYSTATION'];
 local TARGET_RANGE = GameInfo.Buildings['BUILDING_JNR_TARGET_RANGE'];
--- local JNR_CHEMICAL = GameInfo.Buildings['BUILDING_JNR_CHEMICAL'];
 function GetResourceCost (playerId)
 	local player = Players[playerId];
 	local costs = {};
@@ -10,26 +7,12 @@ function GetResourceCost (playerId)
 			local sum = 0;
 			for _, city in player:GetCities():Members() do
 				local buildings = city:GetBuildings();
-				if (row.ResourceType == 'RESOURCE_HORSES') and (WAYSTATION ~= nil) and (buildings:HasBuilding(WAYSTATION.Index)) then
-					sum = sum + 2;
-				end
-				-- if (row.ResourceType == 'RESOURCE_IRON') and (TOOLING_SHOP ~= nil) and (buildings:HasBuilding(TOOLING_SHOP.Index)) then
-				-- 	sum = sum + 2;
-				-- end
 				if (row.ResourceType == 'RESOURCE_HORSES') and (TARGET_RANGE ~= nil) and (buildings:HasBuilding(TARGET_RANGE.Index)) then
 					sum = sum + 2;
 				end
 				if (row.ResourceType == 'RESOURCE_IRON') and (TARGET_RANGE ~= nil) and (buildings:HasBuilding(TARGET_RANGE.Index)) then
 					sum = sum + 2;
 				end
-				-- if (row.ResourceType == 'RESOURCE_HORSES' or
-				-- 	row.ResourceType == 'RESOURCE_IRON' or
-				-- 	row.ResourceType == 'RESOURCE_NITER' or
-				-- 	row.ResourceType == 'RESOURCE_COAL' or
-				-- 	row.ResourceType == 'RESOURCE_OIL') 
-				-- 	and (JNR_CHEMICAL ~= nil) and (buildings:HasBuilding(JNR_CHEMICAL.Index)) then
-				-- 	sum = sum + 1;
-				-- end
 			end
 			table.insert(costs, {
 				id = row.Index,

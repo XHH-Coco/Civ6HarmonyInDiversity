@@ -81,8 +81,8 @@
     <Row Name="ICON_UNIT_SAPPER" Atlas="ATLAS_SAPPER" Index="0"/>
     <Row Name="ICON_UNIT_ENGINEER_CORP" Atlas="ATLAS_ENGINEER_CORP" Index="0"/>
 
-    <Row Name="ICON_UNIT_VELITE" Atlas="ATLAS_HD_NEW_UNITS" Index="3"/>
-    <Row Name="ICON_UNIT_CHASSEUR" Atlas="ATLAS_HD_NEW_UNITS" Index="4"/>
+    <Row Name="ICON_UNIT_VELITE" Atlas="ATLAS_HD_NEW_UNITS" Index="4"/>
+    <Row Name="ICON_UNIT_CHASSEUR" Atlas="ATLAS_HD_NEW_UNITS" Index="5"/>
     <Row Name="ICON_UNIT_PIRATE" Atlas="ATLAS_HD_NEW_UNITS" Index="2"/>
 
     <!-- This is the portrait of the unit. -->

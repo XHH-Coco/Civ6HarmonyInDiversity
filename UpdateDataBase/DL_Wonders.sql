@@ -29,15 +29,15 @@ update Buildings set Cost = 750 where BuildingType = 'BUILDING_MONT_ST_MICHEL';
 update Buildings set Cost = 750 where BuildingType = 'BUILDING_GREAT_ZIMBABWE';
 update Buildings set Cost = 750 where BuildingType = 'BUILDING_ANGKOR_WAT';
 update Buildings set Cost = 750 where BuildingType = 'BUILDING_KILWA_KISIWANI';
-update Buildings set Cost = 750 where BuildingType = 'BUILDING_KOTOKU_IN';
+update Buildings set Cost = 750, Coast = 1 where BuildingType = 'BUILDING_KOTOKU_IN';
 update Buildings set Cost = 750 where BuildingType = 'BUILDING_MACHU_PICCHU';
 update Buildings set Cost = 750 where BuildingType = 'BUILDING_MEENAKSHI_TEMPLE';
 update Buildings set Cost = 750 where BuildingType = 'BUILDING_UNIVERSITY_SANKORE';
-update Buildings set Cost = 750, PrereqTech = 'TECH_APPRENTICESHIP' where BuildingType = 'BUILDING_VENETIAN_ARSENAL';
+update Buildings set Cost = 750, PrereqTech = 'TECH_SQUARE_SAIL_HD' where BuildingType = 'BUILDING_VENETIAN_ARSENAL';
 update Buildings set Cost = 1000 where BuildingType = 'BUILDING_FORBIDDEN_CITY';
-update Buildings set Cost = 1000 where BuildingType = 'BUILDING_ST_BASILS_CATHEDRAL';
+update Buildings set Cost = 1000, RequiresReligion = 1 where BuildingType = 'BUILDING_ST_BASILS_CATHEDRAL';
 update Buildings set Cost = 1000 where BuildingType = 'BUILDING_TAJ_MAHAL';
-update Buildings set Cost = 1000 where BuildingType = 'BUILDING_CASA_DE_CONTRATACION';
+update Buildings set Cost = 1000, AdjacentDistrict = 'DISTRICT_HARBOR' where BuildingType = 'BUILDING_CASA_DE_CONTRATACION';
 update Buildings set Cost = 1000 where BuildingType = 'BUILDING_TORRE_DE_BELEM';
 update Buildings set Cost = 750, PrereqCivic = 'CIVIC_FEUDALISM', PrereqTech = null where BuildingType = 'BUILDING_POTALA_PALACE';
 update Buildings set Cost = 1360 where BuildingType = 'BUILDING_PANAMA_CANAL';
@@ -56,7 +56,7 @@ update Buildings set Cost = 2000 where BuildingType = 'BUILDING_ESTADIO_DO_MARAC
 update Buildings set Cost = 2000 where BuildingType = 'BUILDING_BIOSPHERE';
 update Buildings set Cost = 2000 where BuildingType = 'BUILDING_SYDNEY_OPERA_HOUSE';
 update Buildings set Cost = 2000 where BuildingType = 'BUILDING_AMUNDSEN_SCOTT_RESEARCH_STATION';
-
+update Buildings set ObsoleteEra = 'NO_ERA' where IsWonder = 1 and ObsoleteEra != 'NO_ERA';
 update Buildings set DefenseModifier = 4 where DefenseModifier != 0;
 
 -- Adjust basic yield
@@ -106,7 +106,9 @@ as (values
 	('BUILDING_CASA_DE_CONTRATACION',			'YIELD_GOLD',		6),
 	('BUILDING_CASA_DE_CONTRATACION',			'YIELD_PRODUCTION',	2),
 	('BUILDING_FORBIDDEN_CITY',					'YIELD_CULTURE',	4),
-	('BUILDING_ST_BASILS_CATHEDRAL',			'YIELD_FAITH',		4),
+	('BUILDING_ST_BASILS_CATHEDRAL',			'YIELD_PRODUCTION',		1),
+	('BUILDING_ST_BASILS_CATHEDRAL',			'YIELD_CULTURE',		1),
+	('BUILDING_ST_BASILS_CATHEDRAL',			'YIELD_FAITH',		2),
 	('BUILDING_TAJ_MAHAL',						'YIELD_CULTURE',	2),
 	('BUILDING_TAJ_MAHAL',						'YIELD_FAITH',		2),
 	('BUILDING_POTALA_PALACE',					'YIELD_CULTURE',	2),
@@ -134,9 +136,12 @@ as (values
 	('BUILDING_SYDNEY_OPERA_HOUSE',				'YIELD_CULTURE',	6),
 
 	('BUILDING_ITSUKUSHIMA',					'YIELD_CULTURE',	1),
-	('BUILDING_BAMYAN',							'YIELD_FAITH',		1),
-	('BUILDING_BAMYAN',							'YIELD_GOLD',		3),
-	('BUILDING_BOROBUDUR',						'YIELD_CULTURE',	1),
+	('BUILDING_BAMYAN',							'YIELD_CULTURE',		2),
+	('BUILDING_BAMYAN',							'YIELD_FAITH',		3),
+	('BUILDING_PHANTA_TEMPLE_OF_HEAVEN', 'YIELD_CULTURE',		2),
+	('BUILDING_PHANTA_TEMPLE_OF_HEAVEN', 'YIELD_FAITH',		2),
+	('BUILDING_SUK_BOROBUDUR',						'YIELD_CULTURE',	1),
+	('BUILDING_SUK_BOROBUDUR',						'YIELD_FAITH',	1),
 	('BUILDING_PHANTA_BRONZE_BIRD_TERRACE', 'YIELD_CULTURE',	2),
 	('BUILDING_LEANING_TOWER',					'YIELD_SCIENCE',	4),
 	('BUILDING_UFFIZI',							'YIELD_CULTURE',	2),
@@ -238,6 +243,7 @@ values
 
 -- Adjust building effects
 -- Great Bath
+update Buildings set PrereqTech = 'TECH_IRRIGATION' where BuildingType = 'BUILDING_GREAT_BATH';
 insert or replace into BuildingModifiers
 	(BuildingType,					ModifierId)
 values
@@ -649,58 +655,63 @@ update ModifierArguments set Value = 2 		where ModifierId = 'BIOSPHERE_ADJUST_AP
 update ModifierArguments set Value = 2		where ModifierId = 'BIOSPHERE_ADJUST_APPEAL_MARSH'		and Name = 'Amount';
 
 -- Kotoku-in
+insert or replace into Building_GreatWorks (BuildingType, GreatWorkSlotType, NumSlots) values
+	('BUILDING_KOTOKU_IN',	'GREATWORKSLOT_RELIC',	2);
+
 delete from BuildingModifiers where BuildingType = 'BUILDING_KOTOKU_IN';
-insert or replace into BuildingModifiers
-	(BuildingType,						 ModifierId)
-values
-	('BUILDING_KOTOKU_IN',		'KOTOKU_IN_GRANTS_1_EXPMONKS'),
-	('BUILDING_KOTOKU_IN',		'KOTOKU_IN_GRANTS_2_EXPMONKS'),
-	('BUILDING_KOTOKU_IN',		'KOTOKU_IN_GRANTS_3_EXPMONKS'),
-	('BUILDING_KOTOKU_IN',		'KOTOKU_IN_GRANTS_4_EXPMONKS'),
-	('BUILDING_KOTOKU_IN',		'KOTOKU_IN_GRANTS_MONKS_FREE_PROMOTION');
-insert or replace into Modifiers	
-	(ModifierId,								ModifierType,											SubjectRequirementSetId,					RunOnce,	Permanent)
-values
-	('KOTOKU_IN_GRANTS_1_EXPMONKS',				'MODIFIER_PLAYER_GRANT_UNIT_OF_ABILITY_WITH_MODIFIER',	null,										1,			1),
-	('KOTOKU_IN_GRANTS_2_EXPMONKS',				'MODIFIER_PLAYER_GRANT_UNIT_OF_ABILITY_WITH_MODIFIER',	null,										1,			1),
-	('KOTOKU_IN_GRANTS_3_EXPMONKS',				'MODIFIER_PLAYER_GRANT_UNIT_OF_ABILITY_WITH_MODIFIER',	null,										1,			1),
-	('KOTOKU_IN_GRANTS_4_EXPMONKS',				'MODIFIER_PLAYER_GRANT_UNIT_OF_ABILITY_WITH_MODIFIER',	null,										1,			1),
-	('KOTOKU_IN_GRANTS_MONKS_FREE_PROMOTION',	'MODIFIER_SINGLE_CITY_GRANT_ABILITY_FOR_TRAINED_UNITS',	null,										0,			1),
-	('KOTUKU_GRANT_ENLIGHTENED',				'MODIFIER_PLAYER_UNIT_GRANT_ABILITY',					null,										1,			1),
-	('KOTOKU_IN_GRANTS_CIVILIAN_MONK',			'MODIFIER_PLAYER_CITIES_GRANT_UNIT_IN_CITY',			'CITY_HAS_BUILDING_KOTOKU_IN_REQUIREMENTS',	0,			0);
-insert or replace into ModifierArguments 
-	(ModifierId,								Name,						Value) 
-values
-	('KOTOKU_IN_GRANTS_MONKS_FREE_PROMOTION',	'AbilityType',				'ABILITY_KOTOKU_IN_TRAINED_FREE_PROMOTION'),
-	('KOTOKU_IN_GRANTS_1_EXPMONKS',				'UnitPromotionClassType',	'PROMOTION_CLASS_MONK'),
-	('KOTOKU_IN_GRANTS_1_EXPMONKS',				'ModifierId',				'KOTUKU_GRANT_ENLIGHTENED'),			
-	('KOTOKU_IN_GRANTS_2_EXPMONKS',				'UnitPromotionClassType',	'PROMOTION_CLASS_MONK'),
-	('KOTOKU_IN_GRANTS_2_EXPMONKS',				'ModifierId',				'KOTUKU_GRANT_ENLIGHTENED'),
-	('KOTOKU_IN_GRANTS_3_EXPMONKS',				'UnitPromotionClassType',	'PROMOTION_CLASS_MONK'),
-	('KOTOKU_IN_GRANTS_3_EXPMONKS',				'ModifierId',				'KOTUKU_GRANT_ENLIGHTENED'),
-	('KOTOKU_IN_GRANTS_4_EXPMONKS',				'UnitPromotionClassType',	'PROMOTION_CLASS_MONK'),
-	('KOTOKU_IN_GRANTS_4_EXPMONKS',				'ModifierId',				'KOTUKU_GRANT_ENLIGHTENED'),
-	('KOTOKU_IN_GRANTS_CIVILIAN_MONK',			'UnitType',					'UNIT_WARRIOR_MONK'),
-	('KOTOKU_IN_GRANTS_CIVILIAN_MONK',			'Amount',					1),
-	('KOTUKU_GRANT_ENLIGHTENED',				'AbilityType',				'ABILITY_KOTOKU_IN_ENLIGHTENED');
---BUILDING_GREAT_BATH
-update Buildings set PrereqTech = 'TECH_IRRIGATION' where BuildingType = 'BUILDING_GREAT_BATH';
--- Hanging Gardens
+
+insert or replace into BuildingModifiers (BuildingType, ModifierId) values
+	('BUILDING_KOTOKU_IN', 'HD_KOTOKU_IN_GRANT_RELIC'),
+	('BUILDING_KOTOKU_IN', 'HD_KOTOKU_IN_COASTAL_CITY_YIELD_MODIFIER'),
+	('BUILDING_KOTOKU_IN', 'HD_KOTOKU_IN_COASTAL_CITY_AMENITY'),
+	('BUILDING_KOTOKU_IN', 'HD_KOTOKU_IN_RELIGIOUS_TOURISM_ATTACH'),
+	('BUILDING_KOTOKU_IN', 'HD_KOTOKU_IN_WONDER_TOURISM_ATTACH');
+
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId, RunOnce, Permanent) values
+	('HD_KOTOKU_IN_GRANT_RELIC', 									'MODIFIER_PLAYER_GRANT_RELIC', 												null, 																												1, 1),
+	('HD_KOTOKU_IN_COASTAL_CITY_YIELD_MODIFIER', 	'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER', 	'PLOT_IS_COASTAL_LAND_REQUIREMENTS', 													0, 0),
+	('HD_KOTOKU_IN_COASTAL_CITY_AMENITY', 				'MODIFIER_PLAYER_CITIES_ADJUST_TRAIT_AMENITY', 				'PLOT_IS_COASTAL_LAND_REQUIREMENTS', 													0, 0),
+	('HD_KOTOKU_IN_RELIGIOUS_TOURISM_ATTACH', 		'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER', 						'CITY_HAS_DISTRICT_HOLY_SITE_TIER_3_BUILDING_REQUIREMENTS', 	0, 0),
+	('HD_KOTOKU_IN_WONDER_TOURISM_ATTACH', 				'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER', 						'CITY_HAS_DISTRICT_HOLY_SITE_TIER_3_BUILDING_REQUIREMENTS', 	0, 0),
+	('HD_KOTOKU_IN_RELIGIOUS_TOURISM_MODIFIER', 	'MODIFIER_PLAYER_CITIES_ADJUST_TOURISM',	 						'CITY_HAS_BUILDING_KOTOKU_IN_REQUIREMENTS', 									0, 0),
+	('HD_KOTOKU_IN_WONDER_TOURISM_MODIFIER', 			'MODIFIER_PLAYER_CITIES_ADJUST_TOURISM',	 						'CITY_HAS_BUILDING_KOTOKU_IN_REQUIREMENTS', 									0, 0);
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
+	('HD_KOTOKU_IN_GRANT_RELIC', 									'Amount', 				1),
+	('HD_KOTOKU_IN_COASTAL_CITY_YIELD_MODIFIER', 	'YieldType', 			'YIELD_CULTURE,YIELD_FAITH,YIELD_PRODUCTION'),
+	('HD_KOTOKU_IN_COASTAL_CITY_YIELD_MODIFIER', 	'Amount', 				'5,5,5'),
+	('HD_KOTOKU_IN_COASTAL_CITY_AMENITY', 				'Amount', 				2),
+	('HD_KOTOKU_IN_RELIGIOUS_TOURISM_ATTACH', 		'ModifierId',			'HD_KOTOKU_IN_RELIGIOUS_TOURISM_MODIFIER'),
+	('HD_KOTOKU_IN_WONDER_TOURISM_ATTACH', 				'ModifierId',			'HD_KOTOKU_IN_WONDER_TOURISM_MODIFIER'),
+	('HD_KOTOKU_IN_RELIGIOUS_TOURISM_MODIFIER',		'Religious',			1),
+	('HD_KOTOKU_IN_RELIGIOUS_TOURISM_MODIFIER',		'ScalingFactor',	150),
+	('HD_KOTOKU_IN_WONDER_TOURISM_MODIFIER',			'BoostsWonders',	1),
+	('HD_KOTOKU_IN_WONDER_TOURISM_MODIFIER',			'ScalingFactor',	150);
+
+-- 空中花园
 update Buildings set Housing = 1, PrereqTech = 'TECH_CALENDAR_HD' where BuildingType = 'BUILDING_HANGING_GARDENS';
 delete from BuildingModifiers where BuildingType = 'BUILDING_HANGING_GARDENS';
-insert or replace into BuildingModifiers
-	(BuildingType,					ModifierId)
-values
-	('BUILDING_HANGING_GARDENS',	'HANGING_GARDEN_ADDFOOD');
-insert or replace into Modifiers	
-	(ModifierId,					ModifierType)
-values
-	('HANGING_GARDEN_ADDFOOD',		'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER');
-insert or replace into ModifierArguments 
-	(ModifierId,					Name,			Value) 
-values
-	('HANGING_GARDEN_ADDFOOD',		'YieldType',	'YIELD_FOOD'),
-	('HANGING_GARDEN_ADDFOOD',		'Amount',		10);
+
+insert or replace into HD_Building_Base_On_ResourceClassification (BuildingType, ResourceClassificationType, DetectRange, PropertyKey) values
+	('BUILDING_HANGING_GARDENS', 'RESOURCE_CLASSIFICATION_HD_ORNAMENTAL',	'PLAYER', 'HD_PLOT_BINARY_COMPRESS_HANGING_GARDENS');
+
+insert or replace into HD_Binary_Compress_AtLeast (Key, AtLeast) values
+	('HD_PLOT_BINARY_COMPRESS_HANGING_GARDENS', 2);
+
+insert or replace into BuildingModifiers (BuildingType, ModifierId) values
+	('BUILDING_HANGING_GARDENS',	'HANGING_GARDEN_ADDFOOD'),
+	('BUILDING_HANGING_GARDENS',	'HD_HANGING_GARDEN_CULTURE');
+
+insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId) values
+	('HANGING_GARDEN_ADDFOOD',		'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER', 	NULL),
+	('HD_HANGING_GARDEN_CULTURE',	'MODIFIER_BUILDING_YIELD_CHANGE', 										'HD_PLOT_BINARY_COMPRESS_HANGING_GARDENS_AT_LEAST_2_REQUIREMENTS');
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
+	('HANGING_GARDEN_ADDFOOD',			'YieldType',		'YIELD_FOOD'),
+	('HANGING_GARDEN_ADDFOOD',			'Amount',				10),
+	('HD_HANGING_GARDEN_CULTURE',		'BuildingType',	'BUILDING_HANGING_GARDENS'),
+	('HD_HANGING_GARDEN_CULTURE',		'YieldType',		'YIELD_CULTURE'),
+	('HD_HANGING_GARDEN_CULTURE',		'Amount',				2);
 
 -- Cristo Redentor
 insert or replace into BuildingModifiers
@@ -754,36 +765,34 @@ values
 update Buildings set PrereqCivic = 'CIVIC_COLONIALISM', MustBeAdjacentLand = 0 where BuildingType = 'BUILDING_STATUE_LIBERTY';
 delete from BuildingModifiers where BuildingType = 'BUILDING_STATUE_LIBERTY' and ModifierId = 'STATUELIBERTY_CITIES_ALWAYS_LOYAL';
 
-insert or replace into BuildingModifiers
-	(BuildingType, 						ModifierId)
-values
-	('BUILDING_STATUE_LIBERTY',			'STATUE_OF_LIBERTY_COASTAL_CULTURE'),
-	('BUILDING_STATUE_LIBERTY',			'STATUE_OF_LIBERTY_COASTAL_GOLD'),
-	('BUILDING_STATUE_LIBERTY',			'STATUE_OF_LIBERTY_COASTAL_AMENITY'),
-	('BUILDING_STATUE_LIBERTY',			'GUNBOATDIPLOMACY_OPENBORDERS');
+insert or replace into BuildingModifiers (BuildingType, ModifierId) values
+	('BUILDING_STATUE_LIBERTY', 'HD_STATUE_LIBERTY_TRADE_ROUTE_GOLD_COAST_ORIGIN'),
+	('BUILDING_STATUE_LIBERTY', 'HD_STATUE_LIBERTY_TRADE_ROUTE_GOLD_OCEAN_ORIGIN'),
+	('BUILDING_STATUE_LIBERTY', 'GUNBOATDIPLOMACY_OPENBORDERS');
 
-insert or replace into Modifiers
-	(ModifierId,														ModifierType,																						SubjectRequirementSetId)
-values
-	('STATUE_OF_LIBERTY_COASTAL_CULTURE',		'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER',		'PLOT_IS_COASTAL_LAND_REQUIREMENTS'),
-	('STATUE_OF_LIBERTY_COASTAL_GOLD',			'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_MODIFIER',		'PLOT_IS_COASTAL_LAND_REQUIREMENTS'),
-	('STATUE_OF_LIBERTY_COASTAL_AMENITY',		'MODIFIER_PLAYER_CITIES_ADJUST_TRAIT_AMENITY',					'PLOT_IS_COASTAL_LAND_REQUIREMENTS');
+insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId) values
+	('HD_STATUE_LIBERTY_TRADE_ROUTE_GOLD_COAST_ORIGIN',	'MODIFIER_PLAYER_ADJUST_TRADE_ROUTE_YIELD_PER_TERRAIN_INTERNATIONAL',	NULL),
+	('HD_STATUE_LIBERTY_TRADE_ROUTE_GOLD_OCEAN_ORIGIN',	'MODIFIER_PLAYER_ADJUST_TRADE_ROUTE_YIELD_PER_TERRAIN_INTERNATIONAL',	NULL),
+	('HD_STATUE_LIBERTY_TRADE_ROUTE_CAPACITY',					'MODIFIER_PLAYER_ADJUST_TRADE_ROUTE_CAPACITY',												'PLAYER_HAS_BUILDING_STATUE_LIBERTY_REQUIREMENTS');
 
-insert or replace into ModifierArguments
-	(ModifierId,														Name,						Value)
-values
-	('STATUE_OF_LIBERTY_COASTAL_CULTURE',		'YieldType',		'YIELD_CULTURE'),
-	('STATUE_OF_LIBERTY_COASTAL_CULTURE',		'Amount',				5),
-	('STATUE_OF_LIBERTY_COASTAL_GOLD',			'YieldType',		'YIELD_GOLD'),
-	('STATUE_OF_LIBERTY_COASTAL_GOLD',			'Amount',				5),
-	('STATUE_OF_LIBERTY_COASTAL_AMENITY',		'Amount',				2);
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
+	('HD_STATUE_LIBERTY_TRADE_ROUTE_GOLD_COAST_ORIGIN',	'Origin',				1),
+	('HD_STATUE_LIBERTY_TRADE_ROUTE_GOLD_COAST_ORIGIN',	'Amount',				1),
+	('HD_STATUE_LIBERTY_TRADE_ROUTE_GOLD_COAST_ORIGIN',	'TerrainType',	'TERRAIN_COAST'),
+	('HD_STATUE_LIBERTY_TRADE_ROUTE_GOLD_COAST_ORIGIN',	'YieldType',		'YIELD_GOLD'),
+	('HD_STATUE_LIBERTY_TRADE_ROUTE_GOLD_OCEAN_ORIGIN',	'Origin',				1),
+	('HD_STATUE_LIBERTY_TRADE_ROUTE_GOLD_OCEAN_ORIGIN',	'Amount',				1),
+	('HD_STATUE_LIBERTY_TRADE_ROUTE_GOLD_OCEAN_ORIGIN',	'TerrainType',	'TERRAIN_OCEAN'),
+	('HD_STATUE_LIBERTY_TRADE_ROUTE_GOLD_OCEAN_ORIGIN',	'YieldType',		'YIELD_GOLD'),
+	('HD_STATUE_LIBERTY_TRADE_ROUTE_CAPACITY',					'Amount',				1);
 
-insert or replace into GlobalParameters
-	(Name,																						Value)
-values
+insert or replace into GlobalParameters (Name, Value) values
 	('HD_STATUE_LIBERTY_NAVAL_HEAL',									1),
 	('HD_STATUE_LIBERTY_NAVAL_FLEET',									1),
 	('HD_STATUE_LIBERTY_INFLUENCE_POINT_PERCENTAGE',	5);
+
+insert or replace into HD_Binary_Compress_Keys (Key) values
+	('HD_PLOT_BINARY_COMPRESS_STATUE_LIBERTY');
 
 	-- 影响力 二进制压缩
 insert or replace into BuildingModifiers (BuildingType, ModifierId)
@@ -791,7 +800,7 @@ insert or replace into BuildingModifiers (BuildingType, ModifierId)
 	from HD_Binary_Compress where Exp < 10;
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId)
-	select 'HD_STATUE_LIBERTY_INFLUENCE_POINT_' || Exp, 'MODIFIER_PLAYER_ADJUST_INFLUENCE_POINTS_PER_TURN', 'HD_PLOT_BINARY_COMPRESS_' || Exp || '_1_REQUIREMENTS'
+	select 'HD_STATUE_LIBERTY_INFLUENCE_POINT_' || Exp, 'MODIFIER_PLAYER_ADJUST_INFLUENCE_POINTS_PER_TURN', 'HD_PLOT_BINARY_COMPRESS_STATUE_LIBERTY_' || Exp || '_REQUIREMENTS'
 	from HD_Binary_Compress where Exp < 10;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
@@ -1395,9 +1404,21 @@ select
 	'MARACANA_' || DistrictType || '_EXPERT_YIELD', 	'BuildingType',		'BUILDING_MARACANA_DUMMY_' || DistrictType
 from HD_Maracana_DistrictBonus;
 
--- Free tech / civic Wonder
--- Player can choose awarded tech manually
+-- 牛津大学/莫斯科大剧院
 update Modifiers set OwnerRequirementSetId = 'PLAYER_IS_AI' where ModifierId in ('OXFORD_UNIVERSITY_FREE_TECHS', 'BOLSHOI_THEATRE_FREE_CIVICS', 'ARECIBO_FREE_TECHS');
+insert or replace into BuildingModifiers (BuildingType, ModifierId) values
+	('BUILDING_OXFORD_UNIVERSITY',	'HD_OXFORD_UNIVERSITY_FREE_TECH'),
+	('BUILDING_BOLSHOI_THEATRE',		'HD_BOLSHOI_THEATRE_FREE_CIVIC');
+
+insert or replace into Modifiers (ModifierId, ModifierType, RunOnce, Permanent) values
+	('HD_OXFORD_UNIVERSITY_FREE_TECH','MODIFIER_PLAYER_ADJUST_PROPERTY', 1, 1),
+	('HD_BOLSHOI_THEATRE_FREE_CIVIC',	'MODIFIER_PLAYER_ADJUST_PROPERTY', 1, 1);
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
+	('HD_OXFORD_UNIVERSITY_FREE_TECH','Key',		'HD_FREE_TECH'),
+  ('HD_OXFORD_UNIVERSITY_FREE_TECH','Amount',	2),
+	('HD_BOLSHOI_THEATRE_FREE_CIVIC',	'Key',		'HD_FREE_CIVIC'),
+  ('HD_BOLSHOI_THEATRE_FREE_CIVIC',	'Amount',	2);
 
 --圣瓦西里主教座堂
 update Building_GreatWorks set
@@ -1409,37 +1430,83 @@ update Building_GreatWorks set
 where BuildingType = 'BUILDING_ST_BASILS_CATHEDRAL';
 
 delete from BuildingModifiers where BuildingType = 'BUILDING_ST_BASILS_CATHEDRAL';
-update ModifierArguments set Value = 150 where ModifierId = 'STBASILS_ADDRELIGIOUSTOURISM' and Name = 'ScalingFactor';
-insert or replace into BuildingModifiers
-	(BuildingType,										ModifierId)
-values
+update ModifierArguments set Value = 200 where ModifierId = 'STBASILS_ADDRELIGIOUSTOURISM' and Name = 'ScalingFactor';
+
+insert or replace into BuildingModifiers (BuildingType, ModifierId) values
+	('BUILDING_ST_BASILS_CATHEDRAL',	'ST_BASILS_CATHEDRAL_POP'),
+	('BUILDING_ST_BASILS_CATHEDRAL',	'ST_BASILS_CATHEDRAL_BUILDER'),
+	('BUILDING_ST_BASILS_CATHEDRAL',	'TUNDRA_FARMS'),
+	('BUILDING_ST_BASILS_CATHEDRAL',	'TUNDRA_HILLS_FARMS'),
+	('BUILDING_ST_BASILS_CATHEDRAL',	'FRESH_WATER_TUNDRA_HILL_FARMS'),
 	('BUILDING_ST_BASILS_CATHEDRAL',	'ST_BASILS_CATHEDRAL_YIELD_IMPROVEMENT'),
-	('BUILDING_ST_BASILS_CATHEDRAL',	'ST_BASILS_CATHEDRAL_YIELD_DISTRICT_1'),
-	('BUILDING_ST_BASILS_CATHEDRAL',	'ST_BASILS_CATHEDRAL_YIELD_DISTRICT_2'),
-	('BUILDING_ST_BASILS_CATHEDRAL',	'ST_BASILS_CATHEDRAL_YIELD_DISTRICT_3'),
 	('BUILDING_ST_BASILS_CATHEDRAL',	'ST_BASILS_CATHEDRAL_TOURISM_ATTACH');
 
-insert or replace into Modifiers
-	(ModifierId,														ModifierType,													SubjectRequirementSetId)
-values
-	('ST_BASILS_CATHEDRAL_YIELD_IMPROVEMENT',	'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',	'ST_BASILS_CATHEDRAL_YIELD_IMPROVEMENT_REQUIREMENTS'),
-	('ST_BASILS_CATHEDRAL_YIELD_DISTRICT_1',	'MODIFIER_PLAYER_DISTRICTS_ADJUST_YIELD_CHANGE',	'ST_BASILS_CATHEDRAL_YIELD_DISTRICT_REQUIREMENTS'),
-	('ST_BASILS_CATHEDRAL_YIELD_DISTRICT_2',	'MODIFIER_PLAYER_DISTRICTS_ADJUST_YIELD_CHANGE',	'ST_BASILS_CATHEDRAL_YIELD_DISTRICT_REQUIREMENTS'),
-	('ST_BASILS_CATHEDRAL_YIELD_DISTRICT_3',	'MODIFIER_PLAYER_DISTRICTS_ADJUST_YIELD_CHANGE',	'ST_BASILS_CATHEDRAL_YIELD_DISTRICT_REQUIREMENTS'),
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId, NewOnly, Permanent) values
+	('ST_BASILS_CATHEDRAL_POP',								'MODIFIER_PLAYER_CITIES_ADD_POPULATION',			'PLOT_HAS_ANYTUNDRA_REQUIREMENTS', 1, 1),
+	('ST_BASILS_CATHEDRAL_BUILDER',						'MODIFIER_PLAYER_CITIES_GRANT_UNIT_IN_CITY',	'PLOT_HAS_ANYTUNDRA_REQUIREMENTS', 1, 1);
+
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) values
+	('ST_BASILS_CATHEDRAL_YIELD_IMPROVEMENT',	'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',				'ST_BASILS_CATHEDRAL_YIELD_IMPROVEMENT_REQUIREMENTS'),
 	('ST_BASILS_CATHEDRAL_TOURISM_ATTACH',		'MODIFIER_CITY_DISTRICTS_ATTACH_MODIFIER',	'PLOT_HAS_COMPLETE_WONDER');
 
-insert or replace into ModifierArguments
-	(ModifierId,														Name,					value)
-values
-	('ST_BASILS_CATHEDRAL_YIELD_IMPROVEMENT',	'YieldType',	'YIELD_FOOD,YIELD_CULTURE,YIELD_FAITH'),
-	('ST_BASILS_CATHEDRAL_YIELD_IMPROVEMENT',	'Amount',			'1,1,2'),
-	('ST_BASILS_CATHEDRAL_YIELD_DISTRICT_1',	'YieldType',	'YIELD_FOOD'),
-	('ST_BASILS_CATHEDRAL_YIELD_DISTRICT_1',	'Amount',			1),
-	('ST_BASILS_CATHEDRAL_YIELD_DISTRICT_2',	'YieldType',	'YIELD_CULTURE'),
-	('ST_BASILS_CATHEDRAL_YIELD_DISTRICT_2',	'Amount',			1),
-	('ST_BASILS_CATHEDRAL_YIELD_DISTRICT_3',	'YieldType',	'YIELD_FAITH'),
-	('ST_BASILS_CATHEDRAL_YIELD_DISTRICT_3',	'Amount',			2),
+insert or replace into ModifierArguments (ModifierId, Name, value) values
+	('ST_BASILS_CATHEDRAL_POP',								'Amount',			1),
+	('ST_BASILS_CATHEDRAL_BUILDER',						'UnitType',		'UNIT_BUILDER'),
+	('ST_BASILS_CATHEDRAL_BUILDER',						'Amount',			1),
+	('ST_BASILS_CATHEDRAL_YIELD_IMPROVEMENT',	'YieldType',	'YIELD_FOOD,YIELD_PRODUCTION,YIELD_CULTURE,YIELD_FAITH'),
+	('ST_BASILS_CATHEDRAL_YIELD_IMPROVEMENT',	'Amount',			'1,2,1,1'),
 	('ST_BASILS_CATHEDRAL_TOURISM_ATTACH',		'ModifierId',	'STBASILS_ADDRELIGIOUSTOURISM');
+
+insert or replace into HD_Binary_Compress_Keys (Key) values
+	('HD_PLOT_BINARY_COMPRESS_ST_BASILS_CATHEDRAL_1'),
+	('HD_PLOT_BINARY_COMPRESS_ST_BASILS_CATHEDRAL_2');
+
+	-- 信徒提供产出
+insert or replace into BuildingModifiers (BuildingType, ModifierId)
+	select 'BUILDING_ST_BASILS_CATHEDRAL', 'HD_ST_BASILS_CATHEDRAL_CULTURE_' || Exp
+	from HD_Binary_Compress where Exp < 10;
+
+insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId)
+	select 'HD_ST_BASILS_CATHEDRAL_CULTURE_' || Exp, 'MODIFIER_BUILDING_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_ST_BASILS_CATHEDRAL_1_' || Exp || '_REQUIREMENTS'
+	from HD_Binary_Compress where Exp < 10;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select 'HD_ST_BASILS_CATHEDRAL_CULTURE_' || Exp, 'Amount', Amount
+	from HD_Binary_Compress where Exp < 10;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select 'HD_ST_BASILS_CATHEDRAL_CULTURE_' || Exp, 'YieldType', 'YIELD_CULTURE'
+	from HD_Binary_Compress where Exp < 10;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select 'HD_ST_BASILS_CATHEDRAL_CULTURE_' || Exp, 'BuildingType', 'BUILDING_ST_BASILS_CATHEDRAL'
+	from HD_Binary_Compress where Exp < 10;
+
+insert or replace into BuildingModifiers (BuildingType, ModifierId)
+	select 'BUILDING_ST_BASILS_CATHEDRAL', 'HD_ST_BASILS_CATHEDRAL_FAITH_' || Exp
+	from HD_Binary_Compress where Exp < 10;
+
+insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId)
+	select 'HD_ST_BASILS_CATHEDRAL_FAITH_' || Exp, 'MODIFIER_BUILDING_YIELD_CHANGE', 'HD_PLOT_BINARY_COMPRESS_ST_BASILS_CATHEDRAL_2_' || Exp || '_REQUIREMENTS'
+	from HD_Binary_Compress where Exp < 10;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select 'HD_ST_BASILS_CATHEDRAL_FAITH_' || Exp, 'Amount', Amount
+	from HD_Binary_Compress where Exp < 10;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select 'HD_ST_BASILS_CATHEDRAL_FAITH_' || Exp, 'YieldType', 'YIELD_FAITH'
+	from HD_Binary_Compress where Exp < 10;
+
+insert or replace into ModifierArguments (ModifierId, Name, Value)
+	select 'HD_ST_BASILS_CATHEDRAL_FAITH_' || Exp, 'BuildingType', 'BUILDING_ST_BASILS_CATHEDRAL'
+	from HD_Binary_Compress where Exp < 10;
+
+insert or replace into GlobalParameters (Name, Value) values
+	('HD_ST_BASILS_CATHEDRAL_CULTURE_FOLLOWER', 3),
+	('HD_ST_BASILS_CATHEDRAL_CULTURE_AMOUNT', 	1),
+	('HD_ST_BASILS_CATHEDRAL_FAITH_FOLLOWER', 	3),
+	('HD_ST_BASILS_CATHEDRAL_FAITH_AMOUNT', 		1);
 
 --休伊神庙
 delete from BuildingModifiers where ModifierId = 'HUEY_LAKE_FOOD' or ModifierId = 'HUEY_LAKE_PRODUCTION';
@@ -1492,15 +1559,15 @@ values
 	('HUEY_FOOD_HD',						'YieldType',			'YIELD_FOOD'),
 	('HUEY_FOOD_HD',						'Amount',				2),
 	('HUEY_PRODUCTION_HD',					'YieldType',			'YIELD_PRODUCTION'),
-	('HUEY_PRODUCTION_HD',					'Amount',				2),
+	('HUEY_PRODUCTION_HD',					'Amount',				1),
 	('HUEY_FOOD_HD_DISTRICT',						'YieldType',			'YIELD_FOOD'),
 	('HUEY_FOOD_HD_DISTRICT',						'Amount',				2),
 	('HUEY_PRODUCTION_HD_DISTRICT',					'YieldType',			'YIELD_PRODUCTION'),
-	('HUEY_PRODUCTION_HD_DISTRICT',					'Amount',				2),
+	('HUEY_PRODUCTION_HD_DISTRICT',					'Amount',				1),
 	('HUEY_FOOD_HD_WONDER',						'YieldType',			'YIELD_FOOD'),
 	('HUEY_FOOD_HD_WONDER',						'Amount',				2),
 	('HUEY_PRODUCTION_HD_WONDER',					'YieldType',			'YIELD_PRODUCTION'),
-	('HUEY_PRODUCTION_HD_WONDER',					'Amount',				2);
+	('HUEY_PRODUCTION_HD_WONDER',					'Amount',				1);
 
 -- 埃菲尔铁塔
 	-- 相邻加成
@@ -1513,7 +1580,7 @@ from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
 insert or replace into Modifiers
 	(ModifierId,																					ModifierType,																				SubjectRequirementSetId)
 select
-	'HD_EIFFEL_' || DistrictType || '_ADJACENCY_BONUS',		'MODIFIER_PLAYER_DISTRICTS_ADJUST_YIELD_MODIFIER',	'HD_REQUIRES_DISTRICT_IS_' || DistrictType || '_APPEAL_MORE_THAN_8'
+	'HD_EIFFEL_' || DistrictType || '_ADJACENCY_BONUS',		'MODIFIER_PLAYER_DISTRICTS_ADJUST_YIELD_MODIFIER',	'HD_DISTRICT_IS_' || DistrictType || '_APPEAL_MORE_THAN_8_REQUIREMENTS'
 from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
 
 insert or replace into ModifierArguments
@@ -1538,7 +1605,7 @@ from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
 insert or replace into Modifiers
 	(ModifierId,																					ModifierType,																													SubjectRequirementSetId)
 select
-	'HD_EIFFEL_' || DistrictType || '_ADJACENCY_TOURISM',	'MODIFIER_PLAYER_DISTRICTS_ADJUST_TOURISM_ADJACENCY_YIELD_MOFIFIER',	'HD_REQUIRES_DISTRICT_IS_' || DistrictType || '_APPEAL_MORE_THAN_8'
+	'HD_EIFFEL_' || DistrictType || '_ADJACENCY_TOURISM',	'MODIFIER_PLAYER_DISTRICTS_ADJUST_TOURISM_ADJACENCY_YIELD_MOFIFIER',	'HD_DISTRICT_IS_' || DistrictType || '_APPEAL_MORE_THAN_8_REQUIREMENTS'
 from DistrictCorrespondingYieldType_HD where HasAdjacency = 1;
 
 insert or replace into ModifierArguments
@@ -1563,7 +1630,7 @@ from DistrictCorrespondingGPP_HD;
 insert or replace into Modifiers
 	(ModifierId,																															ModifierType,																	SubjectRequirementSetId)
 select
-	'HD_EIFFEL_' || DistrictType || '_' || GreatPersonClassType || '_GPP',		'MODIFIER_PLAYER_DISTRICTS_ATTACH_MODIFIER',	'HD_REQUIRES_DISTRICT_IS_' || DistrictType || '_APPEAL_MORE_THAN_8'
+	'HD_EIFFEL_' || DistrictType || '_' || GreatPersonClassType || '_GPP',		'MODIFIER_PLAYER_DISTRICTS_ATTACH_MODIFIER',	'HD_DISTRICT_IS_' || DistrictType || '_APPEAL_MORE_THAN_8_REQUIREMENTS'
 from DistrictCorrespondingGPP_HD;
 
 insert or replace into Modifiers
@@ -1687,3 +1754,38 @@ from DistrictCorrespondingGPP_HD;
 insert or replace into ModifierArguments (ModifierId, name, value)
 	select 'HD_ORACLE_' || GreatPersonClassType || '_POINTS', 'Amount', 6
 from DistrictCorrespondingGPP_HD;
+
+-- 罗马斗兽场
+delete from BuildingModifiers where ModifierId = 'COLOSSEUM_IDENTITY';
+
+insert or replace into HD_Building_Base_On_ResourceClassification (BuildingType, ResourceClassificationType, DetectRange, PropertyKey) values
+	('BUILDING_COLOSSEUM', 'RESOURCE_CLASSIFICATION_HD_LEATHER',	'PLAYER', 'HD_PLOT_BINARY_COMPRESS_COLOSSEUM'),
+	('BUILDING_COLOSSEUM', 'RESOURCE_CLASSIFICATION_HD_BEAST',		'PLAYER', 'HD_PLOT_BINARY_COMPRESS_COLOSSEUM');
+
+insert or replace into HD_Binary_Compress_AtLeast (Key, AtLeast) values
+	('HD_PLOT_BINARY_COMPRESS_COLOSSEUM', 5);
+
+insert or replace into BuildingModifiers (BuildingType, ModifierId) values
+	('BUILDING_COLOSSEUM',	'HD_COLOSSEUM_REGIONAL_CULTURE'),
+	('BUILDING_COLOSSEUM',	'HD_COLOSSEUM_REGIONAL_AMENITY');
+
+insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId) values
+	('HD_COLOSSEUM_REGIONAL_CULTURE',	'MODIFIER_SINGLE_CITY_ADJUST_PROPERTY',	'HD_PLOT_BINARY_COMPRESS_COLOSSEUM_AT_LEAST_5_REQUIREMENTS'),
+	('HD_COLOSSEUM_REGIONAL_AMENITY',	'MODIFIER_SINGLE_CITY_ADJUST_PROPERTY',	'HD_PLOT_BINARY_COMPRESS_COLOSSEUM_AT_LEAST_5_REQUIREMENTS');
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
+	('HD_COLOSSEUM_REGIONAL_CULTURE',	'Key',		'HD_SINGLE_BUILDING_PROVIDE_REGIONAL_YIELD_BONUS_BUILDING_COLOSSEUM_YIELD_CULTURE'),
+	('HD_COLOSSEUM_REGIONAL_CULTURE',	'Amount',	1),
+	('HD_COLOSSEUM_REGIONAL_AMENITY',	'Key',		'HD_SINGLE_BUILDING_PROVIDE_REGIONAL_YIELD_BONUS_BUILDING_COLOSSEUM_AMENITY'),
+	('HD_COLOSSEUM_REGIONAL_AMENITY',	'Amount',	1);
+
+-- 大金字塔
+insert or replace into BuildingModifiers (BuildingType, ModifierId) values
+	('BUILDING_PYRAMIDS',	'HD_PYRAMIDS_PLOT_YIELDS');
+
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) values
+	('HD_PYRAMIDS_PLOT_YIELDS',	'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',	'PLOT_HAS_IMPROVEMENT_CLASSIFICATION_RELIGIOUS_REQUIREMENTS');
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
+	('HD_PYRAMIDS_PLOT_YIELDS',	'YieldType',	'YIELD_CULTURE,YIELD_FAITH'),
+	('HD_PYRAMIDS_PLOT_YIELDS',	'Amount',			'1,1');

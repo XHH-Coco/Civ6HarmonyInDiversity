@@ -45,12 +45,12 @@ insert or replace into ModifierArguments
 values
     ('STATUE_OF_ZEUS_INFLUENCE_POINTS',             'Amount',       1);
 
-insert or replace into Improvement_Adjacencies
-    (ImprovementType,               YieldChangeId)
-values
-    ('IMPROVEMENT_MINE',            'Mine_Oppidum_Production'),
-    ('IMPROVEMENT_QUARRY',          'Quarry_Oppidum_Production'),
-    ('IMPROVEMENT_LUMBER_MILL',     'Lumber_Mill_Oppidum_Production');
+-- insert or replace into Improvement_Adjacencies
+--     (ImprovementType,               YieldChangeId)
+-- values
+--     ('IMPROVEMENT_MINE',            'Mine_Oppidum_Production'),
+--     ('IMPROVEMENT_QUARRY',          'Quarry_Oppidum_Production'),
+--     ('IMPROVEMENT_LUMBER_MILL',     'Lumber_Mill_Oppidum_Production');
     -- ('IMPROVEMENT_CAMP',            'Camp_Hippodrome_Gold');
 
 insert or replace into Improvement_Adjacencies
@@ -68,14 +68,14 @@ insert or replace into Adjacency_YieldChanges
     (ID,                                Description,    YieldType,          YieldChange,    TilesRequired,  AdjacentRiver,
     AdjacentDistrict,               PrereqCivic,    PrereqTech, ObsoleteCivic,  ObsoleteTech,   AdjacentResourceClass)
 values
-    ('Mine_Oppidum_Production',         'Placeholder', 'YIELD_PRODUCTION',  1,              1,              0,
-    'DISTRICT_OPPIDUM',             NULL,           NULL,       NULL,           NULL,           'NO_RESOURCECLASS'),
-    ('Quarry_Oppidum_Production',       'Placeholder', 'YIELD_PRODUCTION',  1,              1,              0,
-    'DISTRICT_OPPIDUM',             NULL,           NULL,       NULL,           NULL,           'NO_RESOURCECLASS'),
-    ('Lumber_Mill_Oppidum_Production',  'Placeholder', 'YIELD_PRODUCTION',  1,              1,              0,
-    'DISTRICT_OPPIDUM',             NULL,           NULL,       NULL,           NULL,           'NO_RESOURCECLASS'),
-    ('Camp_Hippodrome_Gold',            'Placeholder', 'YIELD_GOLD',        2,              1,              0,
-    'DISTRICT_HIPPODROME',          NULL,           NULL,       NULL,           NULL,           'NO_RESOURCECLASS'),
+    -- ('Mine_Oppidum_Production',         'Placeholder', 'YIELD_PRODUCTION',  1,              1,              0,
+    -- 'DISTRICT_OPPIDUM',             NULL,           NULL,       NULL,           NULL,           'NO_RESOURCECLASS'),
+    -- ('Quarry_Oppidum_Production',       'Placeholder', 'YIELD_PRODUCTION',  1,              1,              0,
+    -- 'DISTRICT_OPPIDUM',             NULL,           NULL,       NULL,           NULL,           'NO_RESOURCECLASS'),
+    -- ('Lumber_Mill_Oppidum_Production',  'Placeholder', 'YIELD_PRODUCTION',  1,              1,              0,
+    -- 'DISTRICT_OPPIDUM',             NULL,           NULL,       NULL,           NULL,           'NO_RESOURCECLASS'),
+    -- ('Camp_Hippodrome_Gold',            'Placeholder', 'YIELD_GOLD',        2,              1,              0,
+    -- 'DISTRICT_HIPPODROME',          NULL,           NULL,       NULL,           NULL,           'NO_RESOURCECLASS'),
     ('BATEY_Hippodrome_Culture', 	    'Placeholder', 'YIELD_CULTURE',		1,				1,				0,
 	'DISTRICT_HIPPODROME',		    NULL,			NULL,		'CIVIC_HUMANISM',	NULL,		'NO_RESOURCECLASS'),
 	('BATEY_Late_Hippodrome_Culture', 	'Placeholder', 'YIELD_CULTURE',		2,				1,				0,
@@ -218,26 +218,23 @@ values
     ('AmbiorixYields',          'YIELD_FOOD',               1,          10),
     ('AmbiorixYields',          'YIELD_PRODUCTION',         1,          10);
 
-update Districts set PrereqCivic = NULL, PrereqTech = 'TECH_ANIMAL_HUSBANDRY' where DistrictType = 'DISTRICT_HIPPODROME';
+update Districts set PrereqCivic = NULL, PrereqTech = 'TECH_HORSEBACK_RIDING' where DistrictType = 'DISTRICT_HIPPODROME';
 insert or replace into DistrictModifiers
 	(DistrictType,					ModifierId)
 values
 	('DISTRICT_HIPPODROME',	'HD_DISTRICT_HIPPODROME_EXTRA_AMENITY'),
-	('DISTRICT_HIPPODROME',	'HD_DISTRICT_HIPPODROME_TECH_HORSEBACK_RIDING'),
 	('DISTRICT_HIPPODROME',	'HD_DISTRICT_HIPPODROME_TECH_SADDLE_HD');
 
 insert or replace into Modifiers
 	(ModifierId,																			ModifierType,																	OwnerRequirementSetId)
 values
 	('HD_DISTRICT_HIPPODROME_EXTRA_AMENITY',					'MODIFIER_ADJUST_AMENITIES_IN_DISTRICT',			'HD_PLOT_ADJACENT_TO_IMPROVEMENT_CAMP_OR_PASTURE'),
-	('HD_DISTRICT_HIPPODROME_TECH_HORSEBACK_RIDING',	'MODIFIER_PLAYER_GRANT_SPECIFIC_TECHNOLOGY',	Null),
 	('HD_DISTRICT_HIPPODROME_TECH_SADDLE_HD',					'MODIFIER_PLAYER_GRANT_SPECIFIC_TECHNOLOGY',	Null);
 
 insert or replace into ModifierArguments
 	(ModifierId,																			Name,				Value)
 values
 	('HD_DISTRICT_HIPPODROME_EXTRA_AMENITY',					'Amount',		1),
-	('HD_DISTRICT_HIPPODROME_TECH_HORSEBACK_RIDING',	'TechType',	'TECH_HORSEBACK_RIDING'),
 	('HD_DISTRICT_HIPPODROME_TECH_SADDLE_HD',					'TechType',	'TECH_SADDLE_HD');
 
 

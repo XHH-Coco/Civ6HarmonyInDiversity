@@ -10,6 +10,8 @@ local EVOLUTION_THEORY_INDEX = GameInfo.Civics['CIVIC_EVOLUTION_THEORY_HD'].Inde
 local REFRIGERATION_INDEX = GameInfo.Technologies['TECH_REFRIGERATION_HD'].Index;
 local URBAN_DESIGN_INDEX = GameInfo.Civics['CIVIC_URBAN_DESIGN_HD'].Index;
 local URBAN_DESIGN_TAG = "HD_URBAN_DESIGN"
+local PROFESSIONAL_SPORTS_INDEX = GameInfo.Civics['CIVIC_PROFESSIONAL_SPORTS'].Index;
+local PROFESSIONAL_SPORTS_TAG = "HD_PROFESSIONAL_SPORTS"
 function OnDistrictConstructedBoost(playerId, districtId, x, y)
   local player = Players[playerId]
   if player ~= nil then
@@ -70,6 +72,20 @@ function OnDistrictConstructedBoost(playerId, districtId, x, y)
         end
       end
     end
+
+    -- 职业体育
+    if not player:GetCulture():HasBoostBeenTriggered(PROFESSIONAL_SPORTS_INDEX) then
+      if Utils.IsDistrictType(districtType, 'DISTRICT_ENTERTAINMENT_COMPLEX')
+      or Utils.IsDistrictType(districtType, 'DISTRICT_WATER_ENTERTAINMENT_COMPLEX') then
+        local amount = player:GetProperty(PROFESSIONAL_SPORTS_TAG) or 0;
+        amount = amount + 1;
+        if amount == 4 then
+          player:GetCulture():TriggerBoost(PROFESSIONAL_SPORTS_INDEX);
+        else
+          player:SetProperty(PROFESSIONAL_SPORTS_TAG, amount)
+        end
+      end
+    end
     
   end
 end
@@ -125,35 +141,57 @@ local ENVIRONMENTALISM_INDEX = GameInfo.Civics['CIVIC_ENVIRONMENTALISM'].Index;
 local DISTRICT_PRESERVE = GameInfo.Districts['DISTRICT_PRESERVE'];
 local CLASS_STRUGGLE_INDEX = GameInfo.Civics['CIVIC_CLASS_STRUGGLE'].Index;
 local CLASS_STRUGGLE_BOOST_TAG = 'HD_ClassStruggleBoost'
-local PROFESSIONAL_SPORTS_INDEX = GameInfo.Civics['CIVIC_PROFESSIONAL_SPORTS'].Index;
-local BUILDING_HD_CIRCUS_INDEX = GameInfo.Buildings['BUILDING_HD_CIRCUS'].Index;
-local BUILDING_HD_JEWELRY_SHOP_INDEX = GameInfo.Buildings['BUILDING_HD_JEWELRY_SHOP'].Index;
 local BIOLOGY_INDEX = GameInfo.Technologies['TECH_BIOLOGY_HD'].Index;
 local STEEL_INDEX = GameInfo.Technologies['TECH_STEEL'].Index;
 local STEEL_BOOST_TAG_FACTORY = 'HD_SteelBoost_Factory'
 local STEEL_BOOST_TAG_COAL = 'HD_SteelBoost_Coal'
 local TEXTILE_HD_INDEX = GameInfo.Technologies['TECH_TEXTILE_HD'].Index;
-local TEXTILE_HD_TAG = 'HD_Textile_Boost_Num_'
+local RECORDED_HISTORY_INDEX = GameInfo.Civics['CIVIC_RECORDED_HISTORY'].Index;
+local ASTRONOMY_INDEX = GameInfo.Technologies['TECH_ASTRONOMY'].Index;
+local SOCIAL_SECURITY_SYSTEM_INDEX = GameInfo.Civics['CIVIC_SOCIAL_SECURITY_SYSTEM_HD'].Index;
+local BUILDING_SEWER = GameInfo.Buildings['BUILDING_SEWER'];
+local BUILDING_JNR_HOSPITIUM = GameInfo.Buildings['BUILDING_JNR_HOSPITIUM'];
 function BuildingConstructedBoost(playerId, cityId, buildingId, plotId, bOriginalConstruction)
 	local player = Players[playerId];
 	local building = GameInfo.Buildings[buildingId];
   
-  -- 纺织
-  if (building.BuildingType == 'BUILDING_FAIR' or building.BuildingType == 'BUILDING_HD_WHARF_RIVER') then
-    if player:GetProperty(TEXTILE_HD_TAG) ~= 1 then
-      player:SetProperty(TEXTILE_HD_TAG, 1)
-    else
-      if not player:GetTechs():HasBoostBeenTriggered(TEXTILE_HD_INDEX) then
-        player:GetTechs():TriggerBoost(TEXTILE_HD_INDEX);
+  -- 历史记录
+  if (building.BuildingType == 'BUILDING_JNR_ACADEMY') then
+    if not player:GetCulture():HasBoostBeenTriggered(RECORDED_HISTORY_INDEX) then
+      player:GetCulture():TriggerBoost(RECORDED_HISTORY_INDEX);
+    end
+  end
+
+  -- 天文学
+  if (building.BuildingType == 'BUILDING_JNR_SCHOOL' or building.BuildingType == 'BUILDING_NAVIGATION_SCHOOL') then
+    local isAdjacentToMountain = false;
+    local plot = Map.GetPlotByIndex(plotId);
+    if plot then
+      local plots = Map.GetNeighborPlots(plot:GetX(), plot:GetY(), 1);
+      -- 遍历一环内的区域
+      for _, adjacentPlot in ipairs(plots) do
+        if adjacentPlot and adjacentPlot:IsMountain() then
+          isAdjacentToMountain = true;
+          break;
+        end
       end
+    end
+    if isAdjacentToMountain and not player:GetTechs():HasBoostBeenTriggered(ASTRONOMY_INDEX) then
+      player:GetTechs():TriggerBoost(ASTRONOMY_INDEX);
+    end
+  end
+
+  -- 纺织
+  if (building.BuildingType == 'BUILDING_JNR_WAYSTATION') then
+    if not player:GetTechs():HasBoostBeenTriggered(TEXTILE_HD_INDEX) then
+      player:GetTechs():TriggerBoost(TEXTILE_HD_INDEX);
     end
   end
 
   -- 现代通讯设备
 	if (building.BuildingType == 'BUILDING_BROADCAST_CENTER'
       or building.BuildingType == 'BUILDING_FILM_STUDIO'
-      or building.BuildingType == 'BUILDING_JNR_MEDIA_CENTER'
-      or building.BuildingType == 'BUILDING_HD_CINEMA') then
+      or building.BuildingType == 'BUILDING_JNR_MEDIA_CENTER') then
     if player:GetProperty(TELECOMMUNICATIONS_BOOST_TAG) ~= 1 then
       player:SetProperty(TELECOMMUNICATIONS_BOOST_TAG, 1)
     else
@@ -186,19 +224,18 @@ function BuildingConstructedBoost(playerId, cityId, buildingId, plotId, bOrigina
   end
 
   -- 警察制度
-	if (building.BuildingType == 'BUILDING_HD_ANCESTRAL_TEMPLE'
-      or building.BuildingType == 'BUILDING_HD_TAVERN'
-      or building.BuildingType == 'BUILDING_HD_INN'
-      or building.BuildingType == 'BUILDING_HD_DRAMA_STAGE'
-      or building.BuildingType == 'BUILDING_HD_LOCAL_POLICE_STATION') then
-    if player:GetProperty(POLICE_SYSTEM_BOOST_TAG) ~= 1 then
-      player:SetProperty(POLICE_SYSTEM_BOOST_TAG, 1)
-    else
-      if not player:GetCulture():HasBoostBeenTriggered(POLICE_SYSTEM_INDEX) then
+  if not player:GetCulture():HasBoostBeenTriggered(POLICE_SYSTEM_INDEX) then
+    if (building.BuildingType == 'BUILDING_HD_VILLA'
+      or building.BuildingType == 'BUILDING_HD_MANSION') then
+      local num = player:GetProperty(POLICE_SYSTEM_BOOST_TAG) or 0;
+      num = num + 1;
+      if num == 3 then
         player:GetCulture():TriggerBoost(POLICE_SYSTEM_INDEX);
+      else
+        player:SetProperty(POLICE_SYSTEM_BOOST_TAG, num)
       end
     end
-	end
+  end
 
   -- 金融学
   if BUILDING_JNR_GRAND_HOTEL ~= nil then
@@ -212,6 +249,23 @@ function BuildingConstructedBoost(playerId, cityId, buildingId, plotId, bOrigina
       if (building.BuildingType == 'BUILDING_JNR_GRAND_HOTEL') then
         if Utils.HasBuildingWithinCountry(playerId, BUILDING_SHOPPING_MALL.Index) then
           player:GetCulture():TriggerBoost(FINANCE_INDEX);
+        end
+      end
+    end
+  end
+
+  -- 社会保障制度
+  if BUILDING_JNR_HOSPITIUM ~= nil then
+    if not player:GetCulture():HasBoostBeenTriggered(SOCIAL_SECURITY_SYSTEM_INDEX) then
+      if (building.BuildingType == 'BUILDING_SEWER') then
+        if Utils.HasBuildingWithinCountry(playerId, BUILDING_JNR_HOSPITIUM.Index) then
+          player:GetCulture():TriggerBoost(SOCIAL_SECURITY_SYSTEM_INDEX);
+        end
+      end
+  
+      if (building.BuildingType == 'BUILDING_JNR_HOSPITIUM') then
+        if Utils.HasBuildingWithinCountry(playerId, BUILDING_SEWER.Index) then
+          player:GetCulture():TriggerBoost(SOCIAL_SECURITY_SYSTEM_INDEX);
         end
       end
     end
@@ -250,21 +304,6 @@ function BuildingConstructedBoost(playerId, cityId, buildingId, plotId, bOrigina
     end
 	end
 
-  -- 职业体育
-  if not player:GetCulture():HasBoostBeenTriggered(PROFESSIONAL_SPORTS_INDEX) then
-    if (building.BuildingType == 'BUILDING_HD_JEWELRY_SHOP') then
-      if Utils.HasBuildingWithinCountry(playerId, BUILDING_HD_CIRCUS_INDEX) then
-        player:GetCulture():TriggerBoost(PROFESSIONAL_SPORTS_INDEX);
-      end
-    end
-
-    if (building.BuildingType == 'BUILDING_HD_CIRCUS') then
-      if Utils.HasBuildingWithinCountry(playerId, BUILDING_HD_JEWELRY_SHOP_INDEX) then
-        player:GetCulture():TriggerBoost(PROFESSIONAL_SPORTS_INDEX);
-      end
-    end
-  end
-
   -- 生物
   if (building.BuildingType == 'BUILDING_JNR_BOTANICAL_GARDEN') then
     if not player:GetTechs():HasBoostBeenTriggered(BIOLOGY_INDEX) then
@@ -294,13 +333,15 @@ function HumanRightsBoost(playerId, cityId, eVisibility)
   local player = Players[playerId];
   if not player:GetCulture():HasBoostBeenTriggered(HUMAN_RIGHTS_INDEX) then
     local city = CityManager.GetCity(playerId, cityId);
-    local cityReligion = city:GetReligion():GetMajorityReligion();
-    if cityReligion ~= -1 then
-      if (city:GetBuildings():HasBuilding(BANK.Index)
-          or (GRAND_BAZAAR ~= nil and city:GetBuildings():HasBuilding(GRAND_BAZAAR.Index))
-          or (JNR_GUILDHALL ~= nil and city:GetBuildings():HasBuilding(JNR_GUILDHALL.Index))
-          or (JNR_MERCHANT_QUARTER ~= nil and city:GetBuildings():HasBuilding(JNR_MERCHANT_QUARTER.Index))) then
-        player:GetCulture():TriggerBoost(HUMAN_RIGHTS_INDEX);
+    if city then
+      local cityReligion = city:GetReligion():GetMajorityReligion();
+      if cityReligion ~= -1 then
+        if (city:GetBuildings():HasBuilding(BANK.Index)
+            or (GRAND_BAZAAR ~= nil and city:GetBuildings():HasBuilding(GRAND_BAZAAR.Index))
+            or (JNR_GUILDHALL ~= nil and city:GetBuildings():HasBuilding(JNR_GUILDHALL.Index))
+            or (JNR_MERCHANT_QUARTER ~= nil and city:GetBuildings():HasBuilding(JNR_MERCHANT_QUARTER.Index))) then
+          player:GetCulture():TriggerBoost(HUMAN_RIGHTS_INDEX);
+        end
       end
     end
   end
@@ -314,11 +355,37 @@ local MINE_INDEX = GameInfo.Improvements['IMPROVEMENT_MINE'].Index;
 local COAL_INDEX = GameInfo.Resources['RESOURCE_COAL'].Index;
 local HORSEBACK_RIDING_INDEX = GameInfo.Technologies['TECH_HORSEBACK_RIDING'].Index;
 local PASTURE_INDEX = GameInfo.Improvements['IMPROVEMENT_PASTURE'].Index;
-local HEAVENLY_HORSE_INDEX = GameInfo.Resources['RESOURCE_C_HEAVENLY_HORSE'].Index;
+local HEAVENLY_HORSE_INFO = GameInfo.Resources['RESOURCE_C_HEAVENLY_HORSE'];
+local IMPROVEMENT_INDUSTRY_BONUS_INFO = GameInfo.Improvements['IMPROVEMENT_INDUSTRY_BONUS'];
+local IMPROVEMENT_INDUSTRY_STRATEGIC_INFO = GameInfo.Improvements['IMPROVEMENT_INDUSTRY_STRATEGIC'];
+local COMMERCIAL_CAPITALISM_HD_INDEX = GameInfo.Civics['CIVIC_COMMERCIAL_CAPITALISM_HD'].Index;
+local IMPROVEMENT_CORPORATION_BONUS_INFO = GameInfo.Improvements['IMPROVEMENT_CORPORATION_BONUS'];
+local IMPROVEMENT_CORPORATION_STRATEGIC_INFO = GameInfo.Improvements['IMPROVEMENT_CORPORATION_STRATEGIC'];
+local CAPITALISM_INDEX = GameInfo.Civics['CIVIC_CAPITALISM'].Index;
 function ImprovementAddedToMapBoost(x, y, improvementId, playerId, resourceId, isPillaged, isWorked)
+  local player = Players[playerId];
+  if not player then return; end
+
+  -- 商业资本主义
+  if (IMPROVEMENT_INDUSTRY_BONUS_INFO and improvementId == IMPROVEMENT_INDUSTRY_BONUS_INFO.Index)
+    or (IMPROVEMENT_INDUSTRY_STRATEGIC_INFO and improvementId == IMPROVEMENT_INDUSTRY_STRATEGIC_INFO.Index)
+  then
+    if not player:GetCulture():HasBoostBeenTriggered(COMMERCIAL_CAPITALISM_HD_INDEX) then
+      player:GetCulture():TriggerBoost(COMMERCIAL_CAPITALISM_HD_INDEX);
+    end
+  end
+
+  -- 宏观调控
+  if (IMPROVEMENT_CORPORATION_BONUS_INFO and improvementId == IMPROVEMENT_CORPORATION_BONUS_INFO.Index)
+    or (IMPROVEMENT_CORPORATION_STRATEGIC_INFO and improvementId == IMPROVEMENT_CORPORATION_STRATEGIC_INFO.Index)
+  then
+    if not player:GetCulture():HasBoostBeenTriggered(CAPITALISM_INDEX) then
+      player:GetCulture():TriggerBoost(CAPITALISM_INDEX);
+    end
+  end
+
   -- 海洋学
   if improvementId == FISHERY_INDEX then
-    local player = Players[playerId]
     if not player:GetTechs():HasBoostBeenTriggered(OCEANOGRAPHY_INDEX) then
       local plot = Map.GetPlot(x, y)
       local ownerId = plot:GetOwner()
@@ -333,7 +400,6 @@ function ImprovementAddedToMapBoost(x, y, improvementId, playerId, resourceId, i
 
   -- 钢铁
   if improvementId == MINE_INDEX and resourceId == COAL_INDEX then
-    local player = Players[playerId]
     if player:GetProperty(STEEL_BOOST_TAG_FACTORY) == 1 then
       if not player:GetTechs():HasBoostBeenTriggered(STEEL_INDEX) then
         player:GetTechs():TriggerBoost(STEEL_INDEX);
@@ -344,8 +410,7 @@ function ImprovementAddedToMapBoost(x, y, improvementId, playerId, resourceId, i
   end
 
   -- 骑马
-  if improvementId == PASTURE_INDEX and resourceId == HEAVENLY_HORSE_INDEX then
-    local player = Players[playerId]
+  if HEAVENLY_HORSE_INFO and improvementId == PASTURE_INDEX and resourceId == HEAVENLY_HORSE_INFO.Index then
     if not player:GetTechs():HasBoostBeenTriggered(HORSEBACK_RIDING_INDEX) then
       player:GetTechs():TriggerBoost(HORSEBACK_RIDING_INDEX);
     end
@@ -620,6 +685,7 @@ local NATIONALISM_INDEX = GameInfo.Civics['CIVIC_NATIONALISM'].Index;
 local NATIONALISM_BOOST_TAG = 'HD_NationalismBoost'
 local COLONIALISM_INDEX = GameInfo.Civics['CIVIC_COLONIALISM'].Index;
 local COLONIALISM_BOOST_TAG = 'HD_ColonialismBoost'
+local SAILING_INDEX = GameInfo.Technologies['TECH_SAILING'].Index;
 function NationalismBoost(playerId, cityId, x, y)
   local plot = Map.GetPlot(x, y)
   local newCityContinent = plot:GetContinentType()
@@ -658,6 +724,17 @@ function NationalismBoost(playerId, cityId, x, y)
       if (player:GetProperty(COLONIALISM_BOOST_TAG) ~= nil
           and player:GetProperty(COLONIALISM_BOOST_TAG) >= 2) then
         player:GetCulture():TriggerBoost(COLONIALISM_INDEX);
+      end
+    end
+  end
+
+  -- 航行
+  if not player:GetTechs():HasBoostBeenTriggered(SAILING_INDEX) then
+    for direction = 0, 5 do
+      local adjacentPlot = Map.GetAdjacentPlot(plot:GetX(), plot:GetY(), direction);
+      if adjacentPlot and adjacentPlot:IsLake() then
+        player:GetTechs():TriggerBoost(SAILING_INDEX);
+        break;
       end
     end
   end
@@ -735,7 +812,7 @@ Events.InfluenceChanged.Add(LeagueOfNationsBoost)
 
 -- 户籍
 local HOUSEHOLD_REGISTRATION_INDEX = GameInfo.Civics['CIVIC_HOUSEHOLD_REGISTRATION_HD'].Index;
-function HouseholdRegistrationBoost(playerId, cityId, cityPopulation)
+function HouseholdRegistrationBoost(playerId, cityId)
   local player = Players[playerId]
 
   if not player:GetCulture():HasBoostBeenTriggered(HOUSEHOLD_REGISTRATION_INDEX) then
@@ -757,7 +834,20 @@ function HouseholdRegistrationBoost(playerId, cityId, cityPopulation)
     end
   end
 end
-Events.CityPopulationChanged.Add(HouseholdRegistrationBoost)
+GameEvents.OnCityPopulationChanged.Add(HouseholdRegistrationBoost)
+
+-- 探索
+local EXPLORATION_INDEX = GameInfo.Civics['CIVIC_EXPLORATION'].Index;
+function PlayerCompleteMomentBoost(playerId, momentId)
+  local momentInfo = GameInfo.Moments[momentId]
+  if momentInfo and (momentInfo.MomentType == 'MOMENT_WORLD_CIRCUMNAVIGATED' or momentInfo.MomentType == 'MOMENT_WORLD_CIRCUMNAVIGATED_FIRST_IN_WORLD') then
+    local player = Players[playerId];
+    if not player:GetCulture():HasBoostBeenTriggered(EXPLORATION_INDEX) then
+      player:GetCulture():TriggerBoost(EXPLORATION_INDEX);
+    end
+  end
+end
+GameEvents.HDPlayerCompleteMoment.Add(PlayerCompleteMomentBoost);
 --------------------------------------------------------------
 -- Initialize
 function initialize()

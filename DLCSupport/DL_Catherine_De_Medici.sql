@@ -31,7 +31,7 @@ insert or replace into Wonder_Resources_HD (BuildingType) values
   ('BUILDING_MOTHERLAND_CALLS'),
   ('BUILDING_MONT_ST_MICHEL'),
   ('BUILDING_EIFFEL_TOWER'),
-  ('BUILDING_NOTRE_DAME'),
+  ('BUILDING_SUK_NOTRE_DAME_DE_PARIS'),
   ('BUILDING_AL_STPETERSBASILICA'),
   ('BUILDING_ANGKOR_WAT'),
   ('CL_BUILDING_CN_TOWER'),
@@ -67,7 +67,7 @@ insert or replace into Wonder_Resources_HD (BuildingType) values
   ('BUILDING_TAJ_MAHAL'),
   ('BUILDING_GREAT_BATH'),
   ('BUILDING_MEENAKSHI_TEMPLE'),
-  ('BUILDING_BOROBUDUR'),
+  ('BUILDING_SUK_BOROBUDUR'),
   ('BUILDING_MACHU_PICCHU'),
   ('BUILDING_STONEHENGE'),
   ('BUILDING_OXFORD_UNIVERSITY'),
@@ -79,7 +79,7 @@ insert or replace into Wonder_Resources_HD (BuildingType) values
   ('BUILDING_FORBIDDEN_CITY'),
   ('BUILDING_POTALA_PALACE'),
   ('BUILDING_PORCELAIN_TOWER'),
-  ('BUILDING_TEMPLE_OF_HEAVEN'),
+  ('BUILDING_PHANTA_TEMPLE_OF_HEAVEN'),
   ('BUILDING_PHANTA_BRONZE_BIRD_TERRACE'),
   ('BUILDING_THREE_GORDES_DAM'),
   ('BUILDING_YELLOW_CRANE_HD');
@@ -108,10 +108,10 @@ values
   ('TRAIT_LEADER_MAGNIFICENCES',  'HD_MAGNIFICENCES_CITY_HAS_LUXURY_TRAIN_UNIT_MOVEMENT');
 
 insert or replace into Modifiers
-  (ModifierId,                                                      ModifierType,                                           SubjectRequirementSetId,              Permanent)
+  (ModifierId,                                                      ModifierType,                                           Permanent,  SubjectRequirementSetId)
 values
-  ('HD_MAGNIFICENCES_CITY_HAS_LUXURY_TRAIN_UNIT_MOVEMENT',          'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER',               'CITY_HAS_IMPROVED_LUXURY_RESOURCE',  0),
-  ('HD_MAGNIFICENCES_CITY_HAS_LUXURY_TRAIN_UNIT_MOVEMENT_MODIFIER', 'MODIFIER_SINGLE_CITY_GRANT_ABILITY_FOR_TRAINED_UNITS', NULL,                                 1);
+  ('HD_MAGNIFICENCES_CITY_HAS_LUXURY_TRAIN_UNIT_MOVEMENT',          'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER',               0,          'HD_CITY_HAS_OR_ON_IMPROVED_LUXURY_RESOURCE_REQUIREMENTS'),
+  ('HD_MAGNIFICENCES_CITY_HAS_LUXURY_TRAIN_UNIT_MOVEMENT_MODIFIER', 'MODIFIER_SINGLE_CITY_GRANT_ABILITY_FOR_TRAINED_UNITS', 1,          NULL);
 
 insert or ignore into ModifierArguments
   (ModifierId,                                                      Name,             Value)
@@ -123,23 +123,5 @@ update Projects set CostProgressionParam1 = 800, Cost = 50, Description = 'LOC_P
 update ModifierArguments set Value = 10 where ModifierId = 'PROJECT_COMPLETION_GRANT_CULTURE_BASED_ON_EXCESS_LUXURIES' and Name = 'Amount';
 update ModifierArguments set Value = 10 where ModifierId = 'PROJECT_COMPLETION_GRANT_TOURISM_BASED_ON_EXCESS_LUXURIES' and Name = 'Amount';
 
-insert or ignore into UniqueProjects_HD
-	(ProjectType,				            ModifierId,						          LeaderType)
-values
+insert or ignore into UniqueProjects_HD (ProjectType, ModifierId, LeaderType) values
   ('PROJECT_COURT_FESTIVAL',      'MAGNIFICENCES_ALLOW_PROJECT',  'LEADER_CATHERINE_DE_MEDICI_ALT');
-
-insert or replace into ProjectCompletionModifiers
-  (ProjectType,                   ModifierId)
-values
-  ('PROJECT_COURT_FESTIVAL',      'HD_COURT_FESTIVAL_CHATEAU_CULTURE');
-
-insert or replace into Modifiers
-  (ModifierId,                              ModifierType,                             SubjectRequirementSetId)
-values
-  ('HD_COURT_FESTIVAL_CHATEAU_CULTURE',     'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',      'PLOT_HAS_IMPROVEMENT_CHATEAU_REQUIREMENTS');
-
-insert or ignore into ModifierArguments
-  (ModifierId,                              Name,           Value)
-values
-  ('HD_COURT_FESTIVAL_CHATEAU_CULTURE',     'YieldType',    'YIELD_CULTURE'),
-  ('HD_COURT_FESTIVAL_CHATEAU_CULTURE',     'Amount',       1);
