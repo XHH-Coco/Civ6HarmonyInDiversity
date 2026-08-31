@@ -444,7 +444,7 @@ function AssignStartingPlots:__DLPreparePlotFertilities()
 					end
 					------------------------------------------------------------------------------
                     if (PlayerConfigurations[0]:GetCivilizationTypeName() == "CIVILIZATION_INCA") then
-                        if anotherPlot:GetTerrainType()%3 == 0 then
+                        if anotherPlot:GetTerrainType()%3 == 2 then
                             totalFertility = totalFertility + 4;
                         end
                     end
