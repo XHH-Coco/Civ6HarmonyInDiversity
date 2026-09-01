@@ -294,7 +294,7 @@ values
 
 update Civics set Description = 'LOC_CIVIC_NUCLEAR_PROGRAM_DESCRIPTION' where CivicType = 'CIVIC_NUCLEAR_PROGRAM';
 update Civics set Description = 'LOC_CIVIC_MYSTICISM_DESCRIPTION' where CivicType = 'CIVIC_MYSTICISM';
-update Civics set Description = 'LOC_CIVIC_CAPITALISM_DESCRIPTION' where CivicType = 'CIVIC_CAPITALISM';
+-- update Civics set Description = 'LOC_CIVIC_CAPITALISM_DESCRIPTION' where CivicType = 'CIVIC_CAPITALISM';
 insert or replace into Civics_XP2 (CivicType, RandomPrereqs, HiddenUntilPrereqComplete)
 select CivicType, 0, 0 from Civics where EraType = 'ERA_FUTURE';
 

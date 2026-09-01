@@ -51,6 +51,7 @@ update Technologies set Description = NULL where TechnologyType ='TECH_ROCKETRY'
 update Technologies set Description = null where TechnologyType = 'TECH_HORSEBACK_RIDING'; 
 update Technologies set Description = 'LOC_TECH_SANITATION_HD_DESCRIPTION' where TechnologyType = 'TECH_SANITATION';
 update Technologies set Description = null where TechnologyType = 'TECH_BUTTRESS';
+update Technologies set Description = null where TechnologyType = 'TECH_FLIGHT';
 
 update Civics set Name = 'LOC_CIVIC_DEFENSIVE_TACTICS_HD_NAME' where CivicType ='CIVIC_DEFENSIVE_TACTICS';
 update Civics set Name = 'LOC_CIVIC_NATURAL_HISTORY_HD_NAME' where CivicType ='CIVIC_NATURAL_HISTORY';

@@ -47,7 +47,7 @@ insert or replace into EnglishText (Tag, Text) values
   ('LOC_GOVERNOR_PROMOTION_HD_BUILDER_BASE_DESCRIPTION',                  'Builders trained in this city +1 [ICON_CHARGES] Build charges and +2 [ICON_MOVEMENT] Movement.'),
   -- 左线升级
   ('LOC_GOVERNOR_PROMOTION_HD_BUILDER_LEFT_1_NAME',                       'Rural Planning'),
-  ('LOC_GOVERNOR_PROMOTION_HD_BUILDER_LEFT_1_DESCRIPTION',                'Improvements in this city +1 [ICON_PRODUCTION] Production; agricultural improvements additionally +1 [ICON_PRODUCTION] Production.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_BUILDER_LEFT_1_DESCRIPTION',                'Improvements in this city +1 [ICON_PRODUCTION] Production; Agrarian improvements additionally +1 [ICON_PRODUCTION] Production.'),
   ('LOC_GOVERNOR_PROMOTION_HD_BUILDER_LEFT_2_NAME',                       'Satellite Urban Area'),
   ('LOC_GOVERNOR_PROMOTION_HD_BUILDER_LEFT_2_DESCRIPTION',                'Districts within 6 tiles +100% Adjacency Bonuses.'),
   ('LOC_GOVERNOR_PROMOTION_HD_BUILDER_LEFT_3_NAME',                       'Parks and Recreation'),
@@ -64,7 +64,7 @@ insert or replace into EnglishText (Tag, Text) values
   -- ==============================================================================
   -- 基础升级
   ('LOC_GOVERNOR_PROMOTION_HD_MANAGER_BASE_NAME',                         'Provision Support'),
-  ('LOC_GOVERNOR_PROMOTION_HD_MANAGER_BASE_DESCRIPTION',                  'Settlers trained in this city do not consume [ICON_Citizen] Population, purchasing tiles costs 25% less, Industrial improvements +1 [ICON_FOOD] Food.'),
+  ('LOC_GOVERNOR_PROMOTION_HD_MANAGER_BASE_DESCRIPTION',                  'Settlers trained in this city do not consume [ICON_Citizen] Population, purchasing tiles costs 25% less, Exploitative improvements +1 [ICON_FOOD] Food.'),
   -- 左线升级
   ('LOC_GOVERNOR_PROMOTION_HD_MANAGER_LEFT_1_NAME',                       'Surplus Logistics'),
   ('LOC_GOVERNOR_PROMOTION_HD_MANAGER_LEFT_1_DESCRIPTION',                '+1 [ICON_TRADEROUTE] Trade Route capacity. Domestic [ICON_TRADEROUTE] Trade Routes to this city +2 [ICON_FOOD] Food, [ICON_PRODUCTION] Production, and +1 [ICON_Amenities] Amenities.'),
@@ -268,7 +268,7 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   -- ==============================================================================
   -- 基础升级
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MANAGER_BASE_NAME",                         "给养保障"),
-  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MANAGER_BASE_DESCRIPTION",                  "本城生产的开拓者不消耗 [ICON_CITIZEN] 人口，购买单元格-25%花费，工业生产改良+1 [ICON_FOOD] 食物。"),
+  ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MANAGER_BASE_DESCRIPTION",                  "本城生产的开拓者不消耗 [ICON_CITIZEN] 人口，购买单元格-25%花费，工业开发改良+1 [ICON_FOOD] 食物。"),
   -- 左线升级
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MANAGER_LEFT_1_NAME",                       "盈余物流"),
   ("zh_Hans_CN", "LOC_GOVERNOR_PROMOTION_HD_MANAGER_LEFT_1_DESCRIPTION",                "+1 [ICON_TRADEROUTE] 贸易路线容量。通往本城的国内 [ICON_TRADEROUTE] 贸易路线+2 [ICON_FOOD] 食物、[ICON_PRODUCTION] 生产力和+1 [ICON_Amenities] 宜居度。"),

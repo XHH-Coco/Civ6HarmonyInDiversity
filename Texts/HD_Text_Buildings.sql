@@ -304,7 +304,7 @@ values
     ("zh_Hans_CN",  "LOC_BUILDING_STADIUM_DL_DESCRIPTION",                       "如城市 [ICON_CITIZEN] 人口大于等于10，则+2 [ICON_Tourism] 旅游业绩；如城市 [ICON_CITIZEN] 人口大于等于20，则+5 [ICON_Tourism] 旅游业绩。"),
     ("zh_Hans_CN",  "LOC_BUILDING_ZOO_EXPANSION1_DESCRIPTION",                   "你每拥有一种皮革、运载或珍兽资源，+1 [ICON_CULTURE] 文化值和+6 [ICON_GOLD] 金币。"),
     ("zh_Hans_CN",  "LOC_BUILDING_HD_SALON_NAME",                                "沙龙"),
-    ("zh_Hans_CN",  "LOC_BUILDING_HD_SALON_DESCRIPTION",                         "每相邻一种区域，提供一份对应辐射产出。若你拥有至少2种饮品资源，辐射产出+1 [ICON_Culture] 文化值。"),
+    ("zh_Hans_CN",  "LOC_BUILDING_HD_SALON_DESCRIPTION",                         "每相邻一种区域，提供一份对应辐射产出。若你拥有至少2种饮料资源，辐射产出+1 [ICON_Culture] 文化值。"),
     ("zh_Hans_CN",  "LOC_BUILDING_THERMAL_BATH_DESCRIPTION",                     "匈牙利特色建筑。若你拥有至少2种医药资源，辐射产出+2 [ICON_SCIENCE] 科技值。若你拥有至少2种燃料资源，+1辐射范围。"),
     -- 水上娱乐
     ("zh_Hans_CN",  "LOC_BUILDING_FERRIS_WHEEL_DESCRIPTION_HD",                  "+3 [ICON_Tourism] 旅游业绩。"),
