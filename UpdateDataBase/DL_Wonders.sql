@@ -44,7 +44,7 @@ update Buildings set Cost = 1360 where BuildingType = 'BUILDING_PANAMA_CANAL';
 update Buildings set Cost = 1360 where BuildingType = 'BUILDING_ORSZAGHAZ';
 update Buildings set Cost = 1360 where BuildingType = 'BUILDING_RUHR_VALLEY';
 update Buildings set Cost = 1360 where BuildingType = 'BUILDING_BOLSHOI_THEATRE';
-update Buildings set Cost = 1360 where BuildingType = 'BUILDING_OXFORD_UNIVERSITY';
+update Buildings set Cost = 1360, RequiresRiver = 1 where BuildingType = 'BUILDING_OXFORD_UNIVERSITY';
 update Buildings set Cost = 1360 where BuildingType = 'BUILDING_STATUE_LIBERTY';
 update Buildings set Cost = 1360 where BuildingType = 'BUILDING_BIG_BEN';
 update Buildings set Cost = 1800, PrereqCivic = 'CIVIC_MUSEOLOGY_HD' where BuildingType = 'BUILDING_HERMITAGE';
@@ -226,6 +226,8 @@ update Buildings_XP2 set RequiredPower = 6 where BuildingType in (
 	'BUILDING_AMUNDSEN_SCOTT_RESEARCH_STATION',
 	'WON_CL_BUILDING_ARECIBO');
 
+delete from Building_ValidTerrains where BuildingType in ('BUILDING_GREAT_LIBRARY', 'BUILDING_OXFORD_UNIVERSITY', 'NAT_WONDER_CL_COLLEGE', 'NAT_WONDER_CL_COLLEGE_INTERNAL');
+
 -- Enable Wonders on Mountain
 insert or replace into Building_ValidTerrains (BuildingType,	TerrainType)
 select a.BuildingType,	b.TerrainType
@@ -236,10 +238,7 @@ insert or replace into Building_ValidTerrains
 	(BuildingType,		TerrainType)
 values
 	('BUILDING_PETRA',	'TERRAIN_DESERT_HILLS'),
-	('BUILDING_PETRA',	'TERRAIN_DESERT_MOUNTAIN'),
-	('BUILDING_OXFORD_UNIVERSITY',	'TERRAIN_TUNDRA'),
-	('BUILDING_OXFORD_UNIVERSITY',	'TERRAIN_SNOW'),
-	('BUILDING_OXFORD_UNIVERSITY',	'TERRAIN_DESERT');
+	('BUILDING_PETRA',	'TERRAIN_DESERT_MOUNTAIN');
 
 -- Adjust building effects
 -- Great Bath

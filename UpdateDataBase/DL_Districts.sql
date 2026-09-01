@@ -169,6 +169,9 @@ values
 -- 宇航中心
 update Districts set Maintenance = 50 where DistrictType = 'DISTRICT_SPACEPORT';
 
+-- 区域解除地形限制
+delete from District_ValidTerrains where DistrictType in ('DISTRICT_SPACEPORT', 'DISTRICT_ACROPOLIS', 'DISTRICT_SEOWON');
+
 -------------------------------------------------------------------------------
 -- Modifiers
 -------------------------------------------------------------------------------
@@ -390,9 +393,6 @@ insert or replace into District_CitizenGreatPersonPoints (DistrictType, GreatPer
 
 -- 堤坝
 update Districts set Entertainment = 0 where DistrictType = 'DISTRICT_DAM';
-
--- 卫城
-delete from District_ValidTerrains where DistrictType = 'DISTRICT_ACROPOLIS';
 
 -- 外交区
 update Districts set MaxPerPlayer = -1, PrereqTech = NULL, PrereqCivic = 'CIVIC_EARLY_EMPIRE' where DistrictType = 'DISTRICT_DIPLOMATIC_QUARTER';

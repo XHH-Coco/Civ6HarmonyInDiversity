@@ -2511,8 +2511,6 @@ values
 	('HWARANG_TIER_4_ALL_YIELD_BUFF',           'YieldType',    'YIELD_PRODUCTION, YIELD_FOOD, YIELD_SCIENCE, YIELD_CULTURE, YIELD_GOLD, YIELD_FAITH'),
 	('HWARANG_TIER_4_ALL_YIELD_BUFF',           'Amount',       '10,10,10,10,10,10');
 
-delete from District_ValidTerrains where DistrictType = 'DISTRICT_SEOWON';
-
 ----------------------------------------------------------------------------------------------------------------------
 -- Phoenicia
 -- LA

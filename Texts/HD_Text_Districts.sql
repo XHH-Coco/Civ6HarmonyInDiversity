@@ -54,7 +54,9 @@ values
 	("LOC_DISTRICT_NEIGHBORHOOD_HD_DESCRIPTION",								"A district for civil activities and community services in your city. [NEWLINE]Gives Housing according to the tile's appeal.[NEWLINE]Breathtaking: +5 [ICON_HOUSING] Housing.[NEWLINE]Charming: +4 [ICON_HOUSING] Housing.[NEWLINE]Average: +3 [ICON_HOUSING] Housing.[NEWLINE]Unappealing: +2 [ICON_HOUSING] Housing.[NEWLINE]Disgusting: +1 [ICON_HOUSING] Housing."),
 	("LOC_DISTRICT_MBANZA_HD_DESCRIPTION",											"A district unique to the Congo, replacing the Neighborhood district. [NEWLINE]Provides +3 [ICON_HOUSING] Housing, +2 [ICON_FOOD] Food, and +3 [ICON_GOLD] Gold. +1 [ICON_FOOD] Food to all adjacent tiles. Receives +1 [Icon_Production] Production from every Bonus Resource. +3 [Icon_Gold] Gold from every Luxury Resource. +1 [Icon_Science] Science from every Strategic Resource. Experts in it provide +4 Cultural [ICON_GREATPERSON] Great Person points. Allows the purchasing of Settlers and Builders using [ICON_FAITH] Faith. Will not remove features if built on Forest or Rainforest."),
 	-- 航空港
-	("LOC_DISTRICT_AERODROME_HD_DESCRIPTION",						 				"A district for air force activities and civil air services in your city. [NEWLINE]Cannot be built on Hills. Can be built regardless of [ICON_CITIZEN] population. +25% [Icon_Production] Production towards Air Units.");
+	("LOC_DISTRICT_AERODROME_HD_DESCRIPTION",						 				"A district for air force activities and civil air services in your city. [NEWLINE]Cannot be built on Hills. +25% [Icon_Production] Production towards Air Units."),
+	-- 宇航中心
+	("LOC_DISTRICT_SPACEPORT_DESCRIPTION_XP2",						 			"A district that is required to construct the Science Victory projects. This includes Launch Earth Satellite, Launch Moon Landing, Launch Mars Colony, and Launch Exoplanet Expedition.");
 	
 
 --------------------------------------------------------------------------------
@@ -114,7 +116,9 @@ values
 	("zh_Hans_CN",	"LOC_DISTRICT_NEIGHBORHOOD_HD_DESCRIPTION",									"城市中专注于公民活动与社区服务的区域。[NEWLINE]基于单元格的魅力提供住房，情况如下：[NEWLINE]惊艳的：+5 [ICON_HOUSING] 住房。[NEWLINE]迷人的：+4 [ICON_HOUSING] 住房。[NEWLINE]普通的：+3 [ICON_HOUSING] 住房。[NEWLINE]无吸引力的：+2 [ICON_HOUSING] 住房。[NEWLINE]令人厌恶的：+1 [ICON_HOUSING] 住房。"),
 	("zh_Hans_CN",	"LOC_DISTRICT_MBANZA_HD_DESCRIPTION",												"刚果特色区域，取代“社区”。[NEWLINE]+3 [ICON_Housing] 住房、+2 [ICON_Food] 食物和+3 [ICON_Gold] 金币。为相邻的单元格提供 +1 [ICON_FOOD] 食物。从每个相邻的加成资源获得+1 [ICON_PRODUCTION] 生产力；从每个相邻的奢侈品资源获得+3 [ICON_Gold] 金币；从每个相邻的战略资源获得+1 [ICON_Science] 科技值。本区域的专家提供+4文化类 [ICON_GREATPERSON] 伟人点。允许使用 [ICON_Faith] 信仰值购买开拓者和建造者。建造在森林或雨林上时不会移除地貌。"),
  	-- 航空港
-	("zh_Hans_CN",	"LOC_DISTRICT_AERODROME_HD_DESCRIPTION",						 				"城市中专注于空军活动与民航服务的区域。[NEWLINE]不能建在丘陵上。建造空中单位时，+25%建造速度。");
+	("zh_Hans_CN",	"LOC_DISTRICT_AERODROME_HD_DESCRIPTION",						 				"城市中专注于空军活动与民航服务的区域。[NEWLINE]不能建在丘陵上。建造空中单位时，+25%建造速度。"),
+	-- 宇航中心
+	("zh_Hans_CN",	"LOC_DISTRICT_SPACEPORT_DESCRIPTION_XP2",						 				"建造科技胜利项目所需的区域。其中包括：发射地球卫星、启动登月计划、启动火星殖民与启动系外行星探索。");
 
 -- 汉萨同盟
 update  LocalizedText set Text = REPLACE(Text, '商业同业工会', '汉萨同盟')

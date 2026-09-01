@@ -296,6 +296,11 @@ UPDATE Buildings SET ObsoleteEra = 'ERA_MODERN'
 WHERE BuildingType = 'BUILDING_UFFIZI' AND EXISTS (SELECT BuildingType FROM Buildings WHERE BuildingType ='BUILDING_UFFIZI');
 delete from BuildingModifiers where ModifierId = 'UFFIZI_ART_MUSEUM_CULTURE_MODIFIER';
 
+insert or replace into Building_ValidTerrains (BuildingType, TerrainType) select
+	'BUILDING_UFFIZI', TerrainType
+from Terrains where TerrainType in ('TERRAIN_DESERT', 'TERRAIN_TUNDRA', 'TERRAIN_SNOW')
+	and exists (select BuildingType from Buildings where BuildingType = 'BUILDING_UFFIZI');
+
 -- insert or replace into BuildingModifiers (BuildingType, ModifierId)
 -- select	'BUILDING_UFFIZI', 'UFFIZI_CITY_GOLD'
 -- where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_UFFIZI');
@@ -477,6 +482,10 @@ WHERE BuildingType = 'BUILDING_GLOBE_THEATRE' AND EXISTS (SELECT BuildingType FR
 update Building_YieldChanges set YieldChange = 8 where BuildingType = 'BUILDING_GLOBE_THEATRE';
 insert or ignore into Building_ValidTerrains (BuildingType, TerrainType)
 select 'BUILDING_GLOBE_THEATRE', 'TERRAIN_DESERT' where exists (SELECT BuildingType FROM Buildings WHERE BuildingType = 'BUILDING_GLOBE_THEATRE');
+
+insert or replace into Building_ValidTerrains (BuildingType, TerrainType) select
+	'BUILDING_GLOBE_THEATRE', 'TERRAIN_SNOW'
+where exists (select BuildingType from Buildings where BuildingType = 'BUILDING_GLOBE_THEATRE');
 
 insert or replace into BuildingModifiers (BuildingType, ModifierId)
 select	'BUILDING_GLOBE_THEATRE', 'GLOBE_THEATRE_CITY_WRITING_TOURISM'
