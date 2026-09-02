@@ -502,7 +502,7 @@ values
 	("LOC_TRAIT_CIVILIZATION_GREAT_MOUNTAINS_NAME",                          "Qhapaq Ñan"),
 	("LOC_TRAIT_CIVILIZATION_GREAT_MOUNTAINS_DESCRIPTION",                   "Citizens may work Mountain tiles. Mountain tiles provide +2 [ICON_FOOD] Food and +1 [ICON_PRODUCTION] Production. Reduces the purchase cost of mountain tiles by 50%. All land units ignore [ICON_MOVEMENT] movement penalty from Hills. Recon Units can build a Qhapaq Ñan by on charge, without consuming [ICON_Movement] Movement."),
 	("LOC_TRAIT_LEADER_PACHACUTI_QHAPAQ_NAN_NAME",                           "Unity of Tawantinsuyu"),
-	("LOC_TRAIT_LEADER_PACHACUTI_QHAPAQ_NAN_DESCRIPTION",                    "For each [ICON_GOVERNOR] Governor: grant a [ICON_GOVERNOR] Governor title whilst first time established in a city within 2 tiles of a mountain tile. For each governor with at least 4 Promotions: specialty districts with adjacency bonus in the [ICON_CAPITAL] Capital provide Trade Yields of Domestic Destination to Terrace Farms; provide Trade Yields of International Destination to Qhapaq Ñans."),
+	("LOC_TRAIT_LEADER_PACHACUTI_QHAPAQ_NAN_DESCRIPTION",                    "For each [ICON_GOVERNOR] Governor: grant a [ICON_GOVERNOR] Governor title whilst first time established in a city within 2 tiles of a mountain tile. For each governor with at least 4 Promotions: land specialty districts with adjacency bonus in the [ICON_CAPITAL] Capital provide Trade Yields of Domestic Destination to Terrace Farms; provide Trade Yields of International Destination to Qhapaq Ñans."),
 -- =====================================================================================================================================
 -- 巴西
 -- =====================================================================================================================================
@@ -1128,7 +1128,7 @@ values
 	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_GREAT_MOUNTAINS_NAME",                   "印加路网"),
 	("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_GREAT_MOUNTAINS_DESCRIPTION",            "公民可在山脉单元格上工作。山脉单元格提供+2 [ICON_FOOD] 食物和 +1 [ICON_PRODUCTION] 生产力，且购买费用降低50%。所有陆地单位无视丘陵对 [ICON_MOVEMENT] 移动力的减益。侦察单位可以不消耗 [ICON_Movement] 移动力建造一次印加路网。"),
 	("zh_Hans_CN",  "LOC_TRAIT_LEADER_PACHACUTI_QHAPAQ_NAN_NAME",                    "塔万廷苏尤一统"),
-	("zh_Hans_CN",  "LOC_TRAIT_LEADER_PACHACUTI_QHAPAQ_NAN_DESCRIPTION",             "每一位 [ICON_GOVERNOR] 总督首次在2个单元格内有山脉的城市中就职时，返还1个 [ICON_GOVERNOR] 总督头衔。每有一个至少拥有4次升级的 [ICON_GOVERNOR] 总督，[ICON_CAPITAL] 首都拥有相邻加成的专业化区域为全国的梯田提供一份区域国内目的地的贸易产出，为印加路网提供一份区域国外目的地的贸易产出。"),
+	("zh_Hans_CN",  "LOC_TRAIT_LEADER_PACHACUTI_QHAPAQ_NAN_DESCRIPTION",             "每一位 [ICON_GOVERNOR] 总督首次在2个单元格内有山脉的城市中就职时，返还1个 [ICON_GOVERNOR] 总督头衔。每有一个至少拥有4次升级的 [ICON_GOVERNOR] 总督，[ICON_CAPITAL] 首都拥有相邻加成的陆地专业化区域为全国的梯田提供一份区域国内目的地的贸易产出，为印加路网提供一份区域国外目的地的贸易产出。"),
 -- =====================================================================================================================================
 -- 巴西
 -- =====================================================================================================================================
