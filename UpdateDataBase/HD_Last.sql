@@ -460,41 +460,41 @@ PRIMARY KEY('ModifierId'));
 
 insert or replace into Pachacuti_Modifiers_HD (ModifierId)
 	select 'HD_PACHACUTI_' || a.DistrictType || '_DOMESTIC_' || b.YieldType || '_BONUS'
-from DistrictCorrespondingYieldType_HD a inner join District_TradeRouteYields b on a.DistrictType = b.DistrictType where a.HasAdjacency = 1 and b.YieldChangeAsDomesticDestination != 0 and a.DistrictType != 'DISTRICT_HARBOR';
+from DistrictCorrespondingYieldType_HD a inner join District_TradeRouteYields b on a.DistrictType = b.DistrictType where a.RequiresPopulation = 1 and b.YieldChangeAsDomesticDestination != 0 and a.DistrictType != 'DISTRICT_HARBOR';
 
 insert or replace into Pachacuti_Modifiers_HD (ModifierId)
 	select 'HD_PACHACUTI_' || a.DistrictType || '_INTERNATIONAL_' || b.YieldType || '_BONUS'
-from DistrictCorrespondingYieldType_HD a inner join District_TradeRouteYields b on a.DistrictType = b.DistrictType where a.HasAdjacency = 1 and b.YieldChangeAsInternationalDestination != 0 and a.DistrictType != 'DISTRICT_HARBOR';
+from DistrictCorrespondingYieldType_HD a inner join District_TradeRouteYields b on a.DistrictType = b.DistrictType where a.RequiresPopulation = 1 and b.YieldChangeAsInternationalDestination != 0 and a.DistrictType != 'DISTRICT_HARBOR';
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId, SubjectRequirementSetId)
 	select 'HD_PACHACUTI_' || a.DistrictType || '_DOMESTIC_' || b.YieldType || '_BONUS',
 	'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',
 	'REQUIRES_CITY_HAS_' || a.DistrictType || '_UDMET',
 	'PLOT_HAS_IMPROVEMENT_TERRACE_FARM_REQUIREMENTS'
-from DistrictCorrespondingYieldType_HD a inner join District_TradeRouteYields b on a.DistrictType = b.DistrictType where a.HasAdjacency = 1 and b.YieldChangeAsDomesticDestination != 0 and a.DistrictType != 'DISTRICT_HARBOR';
+from DistrictCorrespondingYieldType_HD a inner join District_TradeRouteYields b on a.DistrictType = b.DistrictType where a.RequiresPopulation = 1 and b.YieldChangeAsDomesticDestination != 0 and a.DistrictType != 'DISTRICT_HARBOR';
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId, SubjectRequirementSetId)
 	select 'HD_PACHACUTI_' || a.DistrictType || '_INTERNATIONAL_' || b.YieldType || '_BONUS',
 	'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',
 	'REQUIRES_CITY_HAS_' || a.DistrictType || '_UDMET',
 	'PLOT_HAS_IMPROVEMENT_MOUNTAIN_ROAD_REQUIREMENTS'
-from DistrictCorrespondingYieldType_HD a inner join District_TradeRouteYields b on a.DistrictType = b.DistrictType where a.HasAdjacency = 1 and b.YieldChangeAsInternationalDestination != 0 and a.DistrictType != 'DISTRICT_HARBOR';
+from DistrictCorrespondingYieldType_HD a inner join District_TradeRouteYields b on a.DistrictType = b.DistrictType where a.RequiresPopulation = 1 and b.YieldChangeAsInternationalDestination != 0 and a.DistrictType != 'DISTRICT_HARBOR';
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_PACHACUTI_' || a.DistrictType || '_DOMESTIC_' || b.YieldType || '_BONUS', 'YieldType', b.YieldType
-from DistrictCorrespondingYieldType_HD a inner join District_TradeRouteYields b on a.DistrictType = b.DistrictType where a.HasAdjacency = 1 and b.YieldChangeAsDomesticDestination != 0 and a.DistrictType != 'DISTRICT_HARBOR';
+from DistrictCorrespondingYieldType_HD a inner join District_TradeRouteYields b on a.DistrictType = b.DistrictType where a.RequiresPopulation = 1 and b.YieldChangeAsDomesticDestination != 0 and a.DistrictType != 'DISTRICT_HARBOR';
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_PACHACUTI_' || a.DistrictType || '_DOMESTIC_' || b.YieldType || '_BONUS', 'Amount', b.YieldChangeAsDomesticDestination
-from DistrictCorrespondingYieldType_HD a inner join District_TradeRouteYields b on a.DistrictType = b.DistrictType where a.HasAdjacency = 1 and b.YieldChangeAsDomesticDestination != 0 and a.DistrictType != 'DISTRICT_HARBOR';
+from DistrictCorrespondingYieldType_HD a inner join District_TradeRouteYields b on a.DistrictType = b.DistrictType where a.RequiresPopulation = 1 and b.YieldChangeAsDomesticDestination != 0 and a.DistrictType != 'DISTRICT_HARBOR';
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_PACHACUTI_' || a.DistrictType || '_INTERNATIONAL_' || b.YieldType || '_BONUS', 'YieldType', b.YieldType
-from DistrictCorrespondingYieldType_HD a inner join District_TradeRouteYields b on a.DistrictType = b.DistrictType where a.HasAdjacency = 1 and b.YieldChangeAsInternationalDestination != 0 and a.DistrictType != 'DISTRICT_HARBOR';
+from DistrictCorrespondingYieldType_HD a inner join District_TradeRouteYields b on a.DistrictType = b.DistrictType where a.RequiresPopulation = 1 and b.YieldChangeAsInternationalDestination != 0 and a.DistrictType != 'DISTRICT_HARBOR';
 
 insert or replace into ModifierArguments (ModifierId, Name, Value)
 	select 'HD_PACHACUTI_' || a.DistrictType || '_INTERNATIONAL_' || b.YieldType || '_BONUS', 'Amount', b.YieldChangeAsInternationalDestination
-from DistrictCorrespondingYieldType_HD a inner join District_TradeRouteYields b on a.DistrictType = b.DistrictType where a.HasAdjacency = 1 and b.YieldChangeAsInternationalDestination != 0 and a.DistrictType != 'DISTRICT_HARBOR';
+from DistrictCorrespondingYieldType_HD a inner join District_TradeRouteYields b on a.DistrictType = b.DistrictType where a.RequiresPopulation = 1 and b.YieldChangeAsInternationalDestination != 0 and a.DistrictType != 'DISTRICT_HARBOR';
 
 --------------------------------------------------------------------------------------------------------------------
 -- 记录城市开发的奢侈资源
