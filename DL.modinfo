@@ -1450,19 +1450,6 @@
       <Properties><LoadOrder>15606</LoadOrder></Properties>
       <File>SubMods/GovernorsDiversity/HD_Text_Governors.sql</File>
     </UpdateText>
-    <!-- Medieval Pirate -->
-    <UpdateDatabase id="HD_Medieval_Pirate" criteria="Expansion2">
-      <Properties><LoadOrder>15610</LoadOrder></Properties>
-      <File>SubMods/MedievalPirate/DL_Database.sql</File>
-    </UpdateDatabase>
-    <UpdateIcons id="HD_Medieval_Pirate_Icons" criteria="Expansion2">
-      <Properties><LoadOrder>15610</LoadOrder></Properties>
-      <File>SubMods/MedievalPirate/DL_Icons.xml</File>
-    </UpdateIcons>
-    <UpdateText id="HD_Medieval_Pirate_Text" criteria="Expansion2">
-      <Properties><LoadOrder>15610</LoadOrder></Properties>
-      <File>SubMods/MedievalPirate/DL_Texts.sql</File>
-    </UpdateText>
     <!-- Third Party -->
     <UpdateText id="CNforMods_Texts" criteria="MonopoliesMode">
       <Properties><LoadOrder>10000</LoadOrder></Properties>
@@ -2117,7 +2104,7 @@
     </UpdateArt>
     <UpdateDatabase id="BSK_gameplay_Defination" criteria="Military_Mode_Expansion2">
       <Properties><LoadOrder>12000</LoadOrder></Properties>
-      <File>GameModeSupport/MilitaryMode/ArmsComplement/ArmsSupport.xml</File>
+      <File>GameModeSupport/MilitaryMode/ArmsComplement/ArmsDefination.xml</File>
     </UpdateDatabase>
     <UpdateDatabase id="BSK_gameplay" criteria="Military_Mode_Expansion2">
       <Properties><LoadOrder>28102</LoadOrder></Properties>
@@ -2303,7 +2290,7 @@
     <File>GameModeSupport/MilitaryMode/ArmsComplement/DrugCombat.lua</File>
     <File>GameModeSupport/MilitaryMode/ArmsComplement/Military.lua</File>
     <File>GameModeSupport/MilitaryMode/ArmsComplement/ArmsSupport.sql</File>
-    <File>GameModeSupport/MilitaryMode/ArmsComplement/ArmsSupport.xml</File>
+    <File>GameModeSupport/MilitaryMode/ArmsComplement/ArmsDefination.xml</File>
     <File>GameModeSupport/MilitaryMode/ArmsComplement/ArmsSupportText.sql</File>
     <File>GameModeSupport/MilitaryMode/ArmsComplement/Assets/ARMOR_CAVALRY_22.dds</File>
     <File>GameModeSupport/MilitaryMode/ArmsComplement/Assets/ARMOR_CAVALRY_32.dds</File>
@@ -2634,9 +2621,6 @@
     <File>SubMods/FarmsOnFreshHills/FarmsOnFreshHills.sql</File>
     <File>SubMods/GovernorsDiversity/HD_Governors.sql</File>
     <File>SubMods/GovernorsDiversity/HD_Text_Governors.sql</File>
-    <File>SubMods/MedievalPirate/DL_Database.sql</File>
-    <File>SubMods/MedievalPirate/DL_Icons.xml</File>
-    <File>SubMods/MedievalPirate/DL_Texts.sql</File>
 
     <!-- Map Utility -->
     <File>Maps/Utility/AssignStartingPlots.lua</File>

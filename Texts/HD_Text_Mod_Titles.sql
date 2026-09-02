@@ -57,6 +57,7 @@ insert or replace into EnglishText (Tag, Text) values
   ("LOC_850b838ebb7949eeb61ee71ee75296f9", "[COLOR:ResFaithLabelCS][Mechanism Fix][ENDCOLOR] Science/Culture Overflow Bug Fix"),
   ("LOC_05003a81c381411c8aec4759bd0c0ec4", "[COLOR:ResFaithLabelCS][Mechanism Fix][ENDCOLOR] Great Work Lag Fix"),
   ("LOC_2789f86dacae497294c5e365f117eacb", "[COLOR:ResFaithLabelCS][Mechanism Fix][ENDCOLOR] Policy Obsolescence Tweaks"),
+  ("LOC_00000000FDC7F40AF2D2DA4A5407A33A", "[COLOR:ResFaithLabelCS][Mechanism Fix][ENDCOLOR] No wait for Pantheon"),
   ("LOC_7d155dc34a944923a306d8fd40fb0003", "[COLOR:ResScienceLabelCS][Civs & Leaders][ENDCOLOR][ICON_GREATPERSON] Australian Rework"),
   ("LOC_d3cbeba52100475d8c4774573c80d406", "[COLOR:ResScienceLabelCS][Civs & Leaders][ENDCOLOR][ICON_GREATPERSON] France: Charlemagne"),
   ("LOC_ff430ab554c14dae8f946d4c55cfefa5", "[COLOR:ResScienceLabelCS][Civs & Leaders][ENDCOLOR][ICON_GREATPERSON] Germany: Charlemagne"),
@@ -84,6 +85,7 @@ insert or replace into EnglishText (Tag, Text) values
   ("LOC_9735472b05d144278fc2b44ff2c39088", "[COLOR:204,153,255,255][Art][ENDCOLOR] Hillier Hills"),
   ("LOC_2e6d109366894dd5a47a9539bc3f8a29", "[COLOR:204,153,255,255][Art][ENDCOLOR] Tomatekh's Historical Religions"),
   ("LOC_5aceed0386394a818cbf03f54d543502", "[COLOR:255,102,178,255][UI][ENDCOLOR] Quick Deals"),
+  ("LOC_f11a6a0d2f364cf09f619d8a9d2d2a11", "[COLOR:255,102,178,255][UI][ENDCOLOR] Better Quick Deals"),
   ("LOC_4ecfcc6254714435b295590df213e8d8", "[COLOR:255,102,178,255][UI][ENDCOLOR] Detailed Map Tacks"),
   ("LOC_ebdf2824352e49c390c1743a89180da8", "[COLOR:255,102,178,255][UI][ENDCOLOR] Better Espionage Screen"),
   ("LOC_fbb7b86a9ac94a8e94399ded6aceda0e", "[COLOR:255,102,178,255][UI][ENDCOLOR] Better Deal Window"),
@@ -115,6 +117,7 @@ insert or replace into EnglishText (Tag, Text) values
   ("LOC_577c52849691458ca861db802265a325", "[COLOR:255,102,178,255][UI][ENDCOLOR] Enhanced Camera"),
   ("LOC_6a18ae19df934322a3d533c5a5087b36", "[COLOR:255,102,178,255][UI][ENDCOLOR] Real Great People"),
   ("LOC_8446e6e97703434dba100bd70a291d28", "[COLOR:255,102,178,255][UI][ENDCOLOR] Tech Civic Progress Plus"),
+  ("LOC_ae166b3bfe6b48488a66a48d91bc2966", "[COLOR:255,102,178,255][UI][ENDCOLOR] Notifications Clear Button"),
   ("LOC_b8fb5dd4d2da4a7196c0858913f9c610", "[COLOR:Civ6Red][Cheat][ENDCOLOR] Cheat Map Editor"),
   ("LOC_f1e02dd36a9447c4a2d71d5219d8a40e", "[COLOR:Civ6Red][Cheat][ENDCOLOR] Cheat Menu Panel");
 
@@ -178,6 +181,7 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_850b838ebb7949eeb61ee71ee75296f9", "[COLOR:ResFaithLabelCS]【机制修复】[ENDCOLOR]溢出瓶琴修复"),
   ("zh_Hans_CN", "LOC_05003a81c381411c8aec4759bd0c0ec4", "[COLOR:ResFaithLabelCS]【机制修复】[ENDCOLOR]巨作过回合卡顿修复"),
   ("zh_Hans_CN", "LOC_2789f86dacae497294c5e365f117eacb", "[COLOR:ResFaithLabelCS]【机制修复】[ENDCOLOR]政策卡过期修复"),
+  ("zh_Hans_CN", "LOC_00000000FDC7F40AF2D2DA4A5407A33A", "[COLOR:ResFaithLabelCS]【机制修复】[ENDCOLOR]万神殿不排队"),
   ("zh_Hans_CN", "LOC_7d155dc34a944923a306d8fd40fb0003", "[COLOR:ResScienceLabelCS]【文明领袖】[ENDCOLOR][ICON_GREATPERSON] 澳大利亚重置"),
   ("zh_Hans_CN", "LOC_d3cbeba52100475d8c4774573c80d406", "[COLOR:ResScienceLabelCS]【文明领袖】[ENDCOLOR][ICON_GREATPERSON] 法国：查理曼"),
   ("zh_Hans_CN", "LOC_ff430ab554c14dae8f946d4c55cfefa5", "[COLOR:ResScienceLabelCS]【文明领袖】[ENDCOLOR][ICON_GREATPERSON] 德国：查理曼"),
@@ -205,6 +209,7 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_9735472b05d144278fc2b44ff2c39088", "[COLOR:204,153,255,255]【美术资源】[ENDCOLOR]更起伏的丘陵"),
   ("zh_Hans_CN", "LOC_2e6d109366894dd5a47a9539bc3f8a29", "[COLOR:204,153,255,255]【美术资源】[ENDCOLOR]历史中的真实宗教"),
   ("zh_Hans_CN", "LOC_5aceed0386394a818cbf03f54d543502", "[COLOR:255,102,178,255]【界面优化】[ENDCOLOR]快速交易"),
+  ("zh_Hans_CN", "LOC_f11a6a0d2f364cf09f619d8a9d2d2a11", "[COLOR:255,102,178,255]【界面优化】[ENDCOLOR]一键交易比例"),
   ("zh_Hans_CN", "LOC_4ecfcc6254714435b295590df213e8d8", "[COLOR:255,102,178,255]【界面优化】[ENDCOLOR]更详细的地图钉"),
   ("zh_Hans_CN", "LOC_ebdf2824352e49c390c1743a89180da8", "[COLOR:255,102,178,255]【界面优化】[ENDCOLOR]更好的间谍界面"),
   ("zh_Hans_CN", "LOC_fbb7b86a9ac94a8e94399ded6aceda0e", "[COLOR:255,102,178,255]【界面优化】[ENDCOLOR]更好的交易界面"),
@@ -236,5 +241,6 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_577c52849691458ca861db802265a325", "[COLOR:255,102,178,255]【界面优化】[ENDCOLOR]相机增强"),
   ("zh_Hans_CN", "LOC_6a18ae19df934322a3d533c5a5087b36", "[COLOR:255,102,178,255]【界面优化】[ENDCOLOR]更好的伟人界面"),
   ("zh_Hans_CN", "LOC_8446e6e97703434dba100bd70a291d28", "[COLOR:255,102,178,255]【界面优化】[ENDCOLOR]详细科文进度显示"),
+  ("zh_Hans_CN", "LOC_ae166b3bfe6b48488a66a48d91bc2966", "[COLOR:255,102,178,255]【界面优化】[ENDCOLOR]通知栏消息快速清理"),
   ("zh_Hans_CN", "LOC_b8fb5dd4d2da4a7196c0858913f9c610", "[COLOR:Civ6Red]【作弊工具】[ENDCOLOR]地图修改作弊器"),
   ("zh_Hans_CN", "LOC_f1e02dd36a9447c4a2d71d5219d8a40e", "[COLOR:Civ6Red]【作弊工具】[ENDCOLOR]常用作弊菜单");

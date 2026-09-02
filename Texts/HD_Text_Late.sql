@@ -181,7 +181,7 @@ update LocalizedText set Text = Text || '[NEWLINE][NEWLINE]Naval Melee: Reveals 
 
 -- Naval raider: have the ability to coastal raid. Can only be seen by Naval Melee unless adjacent to it.
 update LocalizedText set Text = Text || '[NEWLINE][NEWLINE]Naval Raider: have the ability to coastal raid. Can only be seen by Naval Melee units unless adjacent to it.' where Language = 'en_US' and (
-    Tag = 'LOC_UNIT_DL_MEDIEVAL_PIRATE_DESCRIPTION' or
+    Tag = 'LOC_UNIT_HD_MEDIEVAL_PIRATE_DESCRIPTION' or
     Tag = 'LOC_UNIT_PRIVATEER_DESCRIPTION' or
     Tag = 'LOC_UNIT_ENGLISH_SEADOG_DESCRIPTION' or
     Tag = 'LOC_UNIT_SUBMARINE_DESCRIPTION' or
@@ -370,7 +370,7 @@ update LocalizedText set Text = Text || '[NEWLINE][NEWLINE]海军近战：能使
 
 -- Naval raider: have the ability to coastal raid. Can only be seen by Naval Melee unless adjacent to it.
 update LocalizedText set Text = Text || '[NEWLINE][NEWLINE]海军袭击者：能够进行海岸扫荡。除非与单位相邻，否则只能被海军近战单位发现。' where Language = 'zh_Hans_CN' and (
-    Tag = 'LOC_UNIT_DL_MEDIEVAL_PIRATE_DESCRIPTION' or
+    Tag = 'LOC_UNIT_HD_MEDIEVAL_PIRATE_DESCRIPTION' or
     Tag = 'LOC_UNIT_PRIVATEER_DESCRIPTION' or
     Tag = 'LOC_UNIT_ENGLISH_SEADOG_DESCRIPTION' or
     Tag = 'LOC_UNIT_SUBMARINE_DESCRIPTION' or

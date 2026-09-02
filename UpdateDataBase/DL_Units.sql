@@ -332,8 +332,8 @@ update Units set Cost = 1080, Maintenance = 8, BaseMoves = 5, Range = 4, Combat 
 update Units_XP2 set ResourceCost = 5, ResourceMaintenanceType = 'RESOURCE_OIL', ResourceMaintenanceAmount = 1 where UnitType = 'UNIT_MISSILE_CRUISER';
 
 -- Naval Raider
-update Units set Cost = 110, Maintenance = 3, BaseMoves = 4, Range = 1, Combat = 30, RangedCombat = 40, StrategicResource = NULL where UnitType = 'UNIT_DL_MEDIEVAL_PIRATE';
-update Units_XP2 set ResourceCost = 0, ResourceMaintenanceType = NULL, ResourceMaintenanceAmount = 0 where UnitType = 'UNIT_DL_MEDIEVAL_PIRATE';
+update Units set Cost = 110, Maintenance = 3, BaseMoves = 4, Range = 1, Combat = 30, RangedCombat = 40, StrategicResource = NULL where UnitType = 'UNIT_HD_MEDIEVAL_PIRATE';
+update Units_XP2 set ResourceCost = 0, ResourceMaintenanceType = NULL, ResourceMaintenanceAmount = 0 where UnitType = 'UNIT_HD_MEDIEVAL_PIRATE';
 update Units set Cost = 180, Maintenance = 4, BaseMoves = 4, Range = 2, Combat = 40, RangedCombat = 50, StrategicResource = NULL where UnitType = 'UNIT_PRIVATEER';
 update Units_XP2 set ResourceCost = 0, ResourceMaintenanceType = NULL, ResourceMaintenanceAmount = 0 where UnitType = 'UNIT_PRIVATEER';
 update Units set Cost = 450, Maintenance = 6, BaseMoves = 5, Range = 2, Combat = 65, RangedCombat = 75, StrategicResource = 'RESOURCE_COAL' where UnitType = 'UNIT_SUBMARINE';

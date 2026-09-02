@@ -152,7 +152,8 @@ insert or replace into EnglishText (Tag, Text) values
 		967e466f-28e0-42a0-8f21-0e7bed5d7552,
 		850b838e-bb79-49ee-b61e-e71ee75296f9,
 		05003a81-c381-411c-8aec-4759bd0c0ec4,
-		2789f86d-acae-4972-94c5-e365f117eacb
+		2789f86d-acae-4972-94c5-e365f117eacb,
+		00000000-FDC7-F40A-F2D2-DA4A5407A33A
 	"),
 	-- 文明拓展
 	("LOC_CIV_EXTENSION_LIST", "
@@ -189,6 +190,7 @@ insert or replace into EnglishText (Tag, Text) values
 	-- 界面优化
 	("LOC_HD_UI_MODS_LIST", "
 		5aceed03-8639-4a81-8cbf-03f54d543502,
+		f11a6a0d-2f36-4cf0-9f61-9d8a9d2d2a11,
 		4ecfcc62-5471-4435-b295-590df213e8d8,
 		ebdf2824-352e-49c3-90c1-743a89180da8,
 		fbb7b86a-9ac9-4a8e-9439-9ded6aceda0e,
@@ -219,7 +221,8 @@ insert or replace into EnglishText (Tag, Text) values
 		013654fc-425d-4df6-aeda-825bb27df885,
 		577c5284-9691-458c-a861-db802265a325,
 		6a18ae19-df93-4322-a3d5-33c5a5087b36,
-		8446e6e9-7703-434d-ba10-0bd70a291d28
+		8446e6e9-7703-434d-ba10-0bd70a291d28,
+		ae166b3b-fe6b-4848-8a66-a48d91bc2966
 	"),
 	-- 可选集
 	("LOC_HD_OPTIONAL_MODS_LIST", "

@@ -14,6 +14,9 @@ values
     ("LOC_UNIT_OBSERVATION_BALLOON_DESCRIPTION",          "Industrial era support unit. Grants +1 [ICON_Range] Range to Siege class units within 1 hex."),
     ("LOC_UNIT_ANCIENT_SEADOG_DESCRIPTION",               "Ancient era ranged Naval Raider."),
     ("LOC_UNIT_ANCIENT_SEADOG_NAME",                      "Oarlocked Rowboats"), -- Outrigger Boats
+    ("LOC_UNIT_HD_MEDIEVAL_PIRATE_NAME",                  "Corsair Ship"),
+    ("LOC_UNIT_HD_MEDIEVAL_PIRATE_DESCRIPTION",           "Medieval era Naval Raiders."),
+    ("LOC_UNIT_OTTOMAN_BARBARY_CORSAIR_DESCRIPTION",      "Ottoman unique Medieval era naval unit that replaces the Corsair Ship. It costs no [ICON_Movement] Movement to coastal raid. Can only be seen by other Naval Raiders unless adjacent to them. Reveals Naval Raiders within sight range."),
     ("LOC_UNIT_ANCIENT_SIEGE_DESCRIPTION",                "Ancient era siege unit, ideal for attacking cities. Gains 1 bonus [ICON_MOVEMENT] Movement if it begins a turn near a light cavalry unit. Cannot move and attack on the same turn unless player has Military Training Civic."),
     ("LOC_UNIT_ANCIENT_SIEGE_NAME",                       "Trebucket"),
     ("LOC_SEADOG_LESS_STRENGTH_DESCRIPTION",			  "-17 [ICON_STRENGTH] Strength when attacking districts."), -- Outrigger Boats
@@ -23,7 +26,7 @@ values
     ("LOC_UNIT_NORWEGIAN_LONGSHIP_DESCRIPTION",           "Norwegian unique Classical era naval unit that replaces the Galley. Can pillage enemy coastal lands and capture civilians if adjacent using its coastal raiding ability. Gains 1 bonus [ICON_MOVEMENT] Movement if it begins a turn on a Water Area tile."),
     --("LOC_UNIT_ENGLISH_SEADOG_DESCRIPTION",               "Elizabeth I's unique Renaissance era naval unit that replaces the Privateer. Has a chance to capture defeated enemy ships."), -- Can only be seen by other Naval Raiders unless adjacent to it. Reveals Naval Raiders within sight range.
     ("LOC_UNIT_ENGLISH_SEADOG_DESCRIPTION",               "English unique Renaissance era naval unit that replaces the Privateer. Has a chance to capture defeated enemy ships. "), -- Can only be seen by other Naval Raiders unless adjacent to it. Reveals Naval Raiders within sight range.
-    ("LOC_UNIT_OTTOMAN_BARBARY_CORSAIR_DESCRIPTION",      "Ottoman unique Medieval era naval unit that replaces the Pirate Ship. It costs no [ICON_Movement] Movement to coastal raid."), -- Can only be seen by other Naval Raiders unless adjacent to it. Reveals Naval Raiders within sight range.
+    -- ("LOC_UNIT_OTTOMAN_BARBARY_CORSAIR_DESCRIPTION",      "Ottoman unique Medieval era naval unit that replaces the Pirate Ship. It costs no [ICON_Movement] Movement to coastal raid."), -- Can only be seen by other Naval Raiders unless adjacent to it. Reveals Naval Raiders within sight range.
     ("LOC_UNIT_GERMAN_UBOAT_DESCRIPTION",                 "German unique Modern era naval unit that replaces the Submarine. Cheaper to produce, +1 Sight, and +10 [ICON_Strength] Combat Strength when fighting on Ocean tiles."), -- Able to reveal other stealthed units.
     ("LOC_UNIT_ZULU_IMPI_DESCRIPTION",                    "Zulu unique Medieval Era unit that replaces the Pikeman. +100% Flanking bonus, lower maintenance. Earns XP 50% faster."),
     ("LOC_UNIT_KONGO_SHIELD_BEARER_DESCRIPTION",          "Kongo unique Classical era unit that replaces the Swordsman. +10 [ICON_Strength] Combat Strength when defending against ranged attacks. Can see through Woods and Rainforest. +3 [ICON_Strength] Combat Strength when fighting in Rainforest or Woods tiles."),
@@ -62,6 +65,9 @@ values
     ("zh_Hans_CN",  "LOC_UNIT_OBSERVATION_BALLOON_DESCRIPTION",          "工业时代支援单位。为1单元格内的攻城类单位+1 [ICON_Range] 射程。"),
     ("zh_Hans_CN",  "LOC_UNIT_ANCIENT_SEADOG_DESCRIPTION",               "远古时代的海军袭击者。"),
     ("zh_Hans_CN",  "LOC_UNIT_ANCIENT_SEADOG_NAME",                      "双边架船"),
+    ("zh_Hans_CN",  "LOC_UNIT_HD_MEDIEVAL_PIRATE_NAME",                  "海盗船"),
+    ("zh_Hans_CN",  "LOC_UNIT_HD_MEDIEVAL_PIRATE_DESCRIPTION",           "中世纪海军袭击者。"),
+    ("zh_Hans_CN",  "LOC_UNIT_OTTOMAN_BARBARY_CORSAIR_DESCRIPTION",      "中世纪奥斯曼特色海军单位，取代海盗船。进行海岸扫荡时无需花费 [ICON_Movement] 移动力。除非与单位相邻，否则只能被其他海军袭击者发现。能使视线范围中的海军袭击者暴露位置。"),
     ("zh_Hans_CN",  "LOC_UNIT_ANCIENT_SIEGE_DESCRIPTION",                "远古时代攻城单位，适合对城市发起攻击。如果相邻轻骑兵单位开始一个回合，会获得1 [ICON_MOVEMENT] 移动力加成。无法在一回合内移动并攻击（除非玩家已拥有军事训练市政）。"),
     ("zh_Hans_CN",  "LOC_UNIT_ANCIENT_SIEGE_NAME",                       "投石机"),
     ("zh_Hans_CN",  "LOC_SEADOG_LESS_STRENGTH_DESCRIPTION",			     "攻击区域防御时-17 [ICON_STRENGTH] 攻击力。"),
@@ -71,7 +77,7 @@ values
     ("zh_Hans_CN",  "LOC_UNIT_NORWEGIAN_LONGSHIP_DESCRIPTION",           "取代桨帆船的挪威古典时代特色海军单位。能在中立领土上恢复。通过海岸扫荡能力，可掠夺敌方海岸土地，并俘获附近的平民。如果在水域单元格上开始一个回合，会获得1 [ICON_MOVEMENT] 移动力加成。"),
     --("zh_Hans_CN",  "LOC_UNIT_ENGLISH_SEADOG_DESCRIPTION",               "伊丽莎白一世的文艺复兴时代特色海军单位，取代私掠船。击败敌方船只后有几率将其俘获。"),
     ("zh_Hans_CN",  "LOC_UNIT_ENGLISH_SEADOG_DESCRIPTION",               "文艺复兴时代英国特色海军单位，取代私掠船。击败敌方船只后有几率将其俘获。"),
-    ("zh_Hans_CN",  "LOC_UNIT_OTTOMAN_BARBARY_CORSAIR_DESCRIPTION",      "中世纪奥斯曼特色海军单位，取代海盗船。进行海岸扫荡时无需花费 [ICON_Movement] 移动力。"),
+    -- ("zh_Hans_CN",  "LOC_UNIT_OTTOMAN_BARBARY_CORSAIR_DESCRIPTION",      "中世纪奥斯曼特色海军单位，取代海盗船。进行海岸扫荡时无需花费 [ICON_Movement] 移动力。"),
     ("zh_Hans_CN",  "LOC_UNIT_GERMAN_UBOAT_DESCRIPTION",                 "取代潜艇的德国特色现代海军单位。生产成本更低，+1视野，在海洋单元格作战时，+10 [ICON_Strength] 战斗力。"),
     ("zh_Hans_CN",  "LOC_UNIT_ZULU_IMPI_DESCRIPTION",                    "中世纪时代的祖鲁特色单位，取代长矛兵。双倍夹击加成，维护费较低。从战斗中获得的经验值多50%。"),
     ("zh_Hans_CN",  "LOC_UNIT_KONGO_SHIELD_BEARER_DESCRIPTION",          "取代剑客的刚果古典时代特色单位。防御远程攻击时+10 [ICON_Strength] 战斗力。视野能穿过树林和雨林。在森林或雨林中战斗时+3 [ICON_Strength] 战斗力。"),
@@ -126,7 +132,6 @@ values
     ("LOC_ESPIONAGE_LEVEL_5_NAME",                                              "Legendary Spy"), 
     ("LOC_UNIT_HD_BARBARIAN_QUADRIREME_NAME",                                   "Barbarian Sailboat"),
     ("LOC_UNIT_HD_BARBARIAN_QUADRIREME_DESCRIPTION",                            "Ancient era naval ranged unit, unique to Barbarians."),
-    ("LOC_UNIT_DL_MEDIEVAL_PIRATE_DESCRIPTION",                                 "Medieval era Naval Raider unit."), -- have the ability to coastal raid. Can only be seen by other Naval Raiders unless adjacent to it. Reveals Naval Raiders within sight range."),
     ("LOC_UNIT_PRIVATEER_DESCRIPTION",                                          "Renaissance era Naval Raider unit."), -- ranged naval unit with the ability to coastal raid. Can only be seen by other Naval Raiders unless adjacent to it. Reveals Naval Raiders within sight range."),
     ("LOC_UNIT_SUBMARINE_DESCRIPTION",                                          "Modern era Naval Raider unit."), -- ranged naval unit with the ability to coastal raid. Can only be seen by other Naval Raiders unless adjacent to it. Reveals Naval Raiders within sight range."),
     ("LOC_UNIT_HD_CANOE_NAME",                                                  "Canoe"),
@@ -170,7 +175,6 @@ values
 
     ("zh_Hans_CN",  "LOC_UNIT_HD_BARBARIAN_QUADRIREME_NAME",                                "蛮族帆船"),
     ("zh_Hans_CN",  "LOC_UNIT_HD_BARBARIAN_QUADRIREME_DESCRIPTION",                         "远古时代蛮族部落的海上远程单位。"),
-    ("zh_Hans_CN",  "LOC_UNIT_DL_MEDIEVAL_PIRATE_DESCRIPTION",                              "中世纪时代海军袭击者。"),
     ("zh_Hans_CN",  "LOC_UNIT_PRIVATEER_DESCRIPTION",                                       "文艺复兴时代的海军袭击者。"),
     ("zh_Hans_CN",  "LOC_UNIT_SUBMARINE_DESCRIPTION",                                       "现代海军袭击者。"),
     ("zh_Hans_CN",  "LOC_UNIT_HD_CANOE_NAME",                                               "独木舟"),
