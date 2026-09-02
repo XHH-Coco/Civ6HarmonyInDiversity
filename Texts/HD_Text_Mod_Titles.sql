@@ -118,6 +118,7 @@ insert or replace into EnglishText (Tag, Text) values
   ("LOC_6a18ae19df934322a3d533c5a5087b36", "[COLOR:255,102,178,255][UI][ENDCOLOR] Real Great People"),
   ("LOC_8446e6e97703434dba100bd70a291d28", "[COLOR:255,102,178,255][UI][ENDCOLOR] Tech Civic Progress Plus"),
   ("LOC_ae166b3bfe6b48488a66a48d91bc2966", "[COLOR:255,102,178,255][UI][ENDCOLOR] Notifications Clear Button"),
+  ("LOC_60092bddce394319aef6baea505c7c45", "[COLOR:255,102,178,255][UI][ENDCOLOR] Better Civ Selection Screen"),
   ("LOC_b8fb5dd4d2da4a7196c0858913f9c610", "[COLOR:Civ6Red][Cheat][ENDCOLOR] Cheat Map Editor"),
   ("LOC_f1e02dd36a9447c4a2d71d5219d8a40e", "[COLOR:Civ6Red][Cheat][ENDCOLOR] Cheat Menu Panel");
 
@@ -242,5 +243,6 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_6a18ae19df934322a3d533c5a5087b36", "[COLOR:255,102,178,255]【界面优化】[ENDCOLOR]更好的伟人界面"),
   ("zh_Hans_CN", "LOC_8446e6e97703434dba100bd70a291d28", "[COLOR:255,102,178,255]【界面优化】[ENDCOLOR]详细科文进度显示"),
   ("zh_Hans_CN", "LOC_ae166b3bfe6b48488a66a48d91bc2966", "[COLOR:255,102,178,255]【界面优化】[ENDCOLOR]通知栏消息快速清理"),
+  ("zh_Hans_CN", "LOC_60092bddce394319aef6baea505c7c45", "[COLOR:255,102,178,255]【界面优化】[ENDCOLOR]更好的文明选择界面"),
   ("zh_Hans_CN", "LOC_b8fb5dd4d2da4a7196c0858913f9c610", "[COLOR:Civ6Red]【作弊工具】[ENDCOLOR]地图修改作弊器"),
   ("zh_Hans_CN", "LOC_f1e02dd36a9447c4a2d71d5219d8a40e", "[COLOR:Civ6Red]【作弊工具】[ENDCOLOR]常用作弊菜单");

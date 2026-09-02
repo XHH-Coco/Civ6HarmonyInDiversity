@@ -222,10 +222,13 @@ insert or replace into EnglishText (Tag, Text) values
 		577c5284-9691-458c-a861-db802265a325,
 		6a18ae19-df93-4322-a3d5-33c5a5087b36,
 		8446e6e9-7703-434d-ba10-0bd70a291d28,
-		ae166b3b-fe6b-4848-8a66-a48d91bc2966
+		ae166b3b-fe6b-4848-8a66-a48d91bc2966,
+		60092bdd-ce39-4319-aef6-baea505c7c45
 	"),
 	-- 可选集
 	("LOC_HD_OPTIONAL_MODS_LIST", "
+		f11a6a0d-2f36-4cf0-9f61-9d8a9d2d2a11,
+		60092bdd-ce39-4319-aef6-baea505c7c45,
 		43e4ac68-4ce4-4e6a-8eca-fbe81fdbd1df,
 		7d155dc3-4a94-4923-a306-d8fd40fb0003,
 		d3cbeba5-2100-475d-8c47-74573c80d406,
