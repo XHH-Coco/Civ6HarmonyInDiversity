@@ -1724,7 +1724,7 @@ insert or replace into GlobalParameters (Name, Value) values
 	-- 旗手收集资源加产需要的个数
 	('HD_BANDEIRANTES_RESOURCES_TIMES', 								 2),
 	-- 区域推进进度
-	('HD_MAGNANIMOUS_DISTRICT_PUSH_PERCENTAGE', 				 50),
+	('HD_MAGNANIMOUS_DISTRICT_PUSH_PERCENTAGE', 				 33),
 	-- 吸引人才概率
   ('HD_MAGNANIMOUS_INTRODUCE_GREAT_PERSON_PERCENTAGE', 40),
   ('HD_MAGNANIMOUS_INTRODUCE_TYCOON_PERCENTAGE', 			 30),

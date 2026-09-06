@@ -246,12 +246,13 @@ end
 function Initialize ()
 	InitRegionalBuildingList();
 
-	Events.CitySelectionChanged.Add(function (playerId)
-		RefreshRegionalYieldIfPending(playerId);
-	end);
+	-- Events.CitySelectionChanged.Add(function (playerId)
+	-- 	RefreshRegionalYieldIfPending(playerId);
+	-- end);
 	
 	GameEvents.PlayerTurnStarted.Add(RefreshRegionalYieldIfPending);
   GameEvents.OnPlayerTurnEnded.Add(RefreshRegionalYieldIfPending);
+	GameEvents.HD_RefreshRegionalYieldIfPending.Add(RefreshRegionalYieldIfPending);
 
 	Events.BuildingAddedToMap.Add(function (x, y, buildingId, playerId, misc2, misc3)
 		pendingRefresh[playerId] = 1;
@@ -301,6 +302,10 @@ function Initialize ()
 		pendingRefresh[playerId] = 1;
 	end);
 	Events.CivicCompleted.Add(function (playerId, civicId)
+		pendingRefresh[playerId] = 1;
+	end);
+
+	GameEvents.HD_RefreshPlayerResourceDetectIfPending.Add(function (playerId)
 		pendingRefresh[playerId] = 1;
 	end);
 end

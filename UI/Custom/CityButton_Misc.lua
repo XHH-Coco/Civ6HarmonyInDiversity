@@ -44,6 +44,7 @@ function MiscButtonReset()
         for row in GameInfo.Yields() do
           text = text .. '[NEWLINE][ICON_BULLET]+' .. math.floor(yieldList[row.Index] or 0) .. ' ' .. row.IconString .. ' ' .. Locale.Lookup(row.Name);
         end
+        text = text .. '[NEWLINE]' .. Locale.Lookup('LOC_TOOLTIP_REFRESH_DATA_TEXT');
 
         table.insert(textList, text);
       end
@@ -81,6 +82,12 @@ function AddMiscButton()
   local context = ContextPtr:LookUpControl("/InGame/CityPanel/ActionStack")
   if context then
       Controls.Misc_Button_Stack:ChangeParent(context)
+      Controls.Misc_Button:RegisterCallback(Mouse.eLClick, function()
+        MerchantRefreshTradeYieldProperty();
+      end)
+      Controls.Misc_Button:RegisterCallback(Mouse.eMouseEnter, function()
+        UI.PlaySound("Main_Menu_Mouse_Over")
+      end)
       -- 刷新按钮
       MiscButtonReset()
   end
@@ -97,6 +104,25 @@ function MiscCitySelectChange(ownerId, cityId, i, j, k, isSelected)
       MiscButtonReset()
   end
   -- 这个函数似乎有点多余
+end
+
+-- 按钮点击事件
+function MerchantRefreshTradeYieldProperty()
+  -- 获取玩家当前UI选中的城市对象
+  local city = UI.GetHeadSelectedCity()
+  if city then
+    local playerId = city:GetOwner();
+    if playerId == Game.GetLocalPlayer() then
+      UI.RequestPlayerOperation(
+        Game.GetLocalPlayer(),
+        PlayerOperations.EXECUTE_SCRIPT,
+        {
+          CityId = city:GetID(),
+          OnStart = 'HD_MerchantRefreshTradeYieldProperty'
+        }
+      );
+    end
+  end
 end
 
 -- ===========================================================================

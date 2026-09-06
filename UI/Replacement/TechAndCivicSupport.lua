@@ -395,9 +395,9 @@ function PopulateUnlockablesForTech(playerID:number, techID:number, instanceMana
 					LuaEvents.OpenCivilopedia(civilopediaKey);
 				end);
 			end
-		end
 
-		numIcons = numIcons + 1;
+			numIcons = numIcons + 1;
+		end
 	end
 
 	if kTechData.Description then

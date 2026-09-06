@@ -70,11 +70,12 @@ function RegionalYieldsButtonReset()
     end
 
     if toolTipStr ~= '' then
+      toolTipStr = toolTipStr .. '[NEWLINE][NEWLINE]' .. Locale.Lookup('LOC_TOOLTIP_REFRESH_DATA_TEXT');
       Controls.RegionalYields_Button_Stack:SetHide(false)
       Controls.RegionalYields_Button:SetToolTipString(toolTipStr)
     else
       Controls.RegionalYields_Button_Stack:SetHide(false)
-      Controls.RegionalYields_Button:SetToolTipString(Locale.Lookup('LOC_CITY_REGIONAL_YIELD_NON_TEXT'))
+      Controls.RegionalYields_Button:SetToolTipString(Locale.Lookup('LOC_CITY_REGIONAL_YIELD_NON_TEXT') .. '[NEWLINE][NEWLINE]' .. Locale.Lookup('LOC_TOOLTIP_REFRESH_DATA_TEXT'))
     end
   else
     Controls.RegionalYields_Button_Stack:SetHide(true)
@@ -89,6 +90,10 @@ function AddRegionalYieldsButton()
   local context = ContextPtr:LookUpControl("/InGame/CityPanel/ActionStack")
   if context then
       Controls.RegionalYields_Button_Stack:ChangeParent(context)
+      Controls.RegionalYields_Button:RegisterCallback(Mouse.eLClick, RefreshRegionalYieldsProperty)
+      Controls.RegionalYields_Button:RegisterCallback(Mouse.eMouseEnter, function()
+        UI.PlaySound("Main_Menu_Mouse_Over")
+      end)
       -- 刷新按钮
       RegionalYieldsButtonReset()
   end
@@ -105,6 +110,24 @@ function RegionalYieldsCitySelectChange(ownerId, cityId, i, j, k, isSelected)
       RegionalYieldsButtonReset()
   end
   -- 这个函数似乎有点多余
+end
+
+-- 按钮点击事件
+function RefreshRegionalYieldsProperty()
+  -- 获取玩家当前UI选中的城市对象
+  local city = UI.GetHeadSelectedCity()
+  if city then
+    local playerId = city:GetOwner();
+    if playerId == Game.GetLocalPlayer() then
+      UI.RequestPlayerOperation(
+        Game.GetLocalPlayer(),
+        PlayerOperations.EXECUTE_SCRIPT,
+        {
+          OnStart = 'HD_RefreshRegionalYieldIfPending'
+        }
+      );
+    end
+  end
 end
 
 -- ===========================================================================

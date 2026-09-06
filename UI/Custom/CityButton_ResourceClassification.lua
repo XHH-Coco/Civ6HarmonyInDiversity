@@ -48,6 +48,7 @@ function ResourceClassificationButtonReset()
 
     -- 若有相关建筑，显示ToolTip
     if hasAnyBuilding == true then
+      toolTipStr = toolTipStr .. '[NEWLINE][NEWLINE]' .. Locale.Lookup('LOC_TOOLTIP_REFRESH_DATA_TEXT');
       Controls.ResourceClassification_Button_Stack:SetHide(false)
       Controls.ResourceClassification_Button:SetToolTipString(toolTipStr)
     else
@@ -67,6 +68,10 @@ function AddResourceClassificationButton()
   local context = ContextPtr:LookUpControl("/InGame/CityPanel/ActionStack")
   if context then
       Controls.ResourceClassification_Button_Stack:ChangeParent(context)
+      Controls.ResourceClassification_Button:RegisterCallback(Mouse.eLClick, RefreshResourceClassificationProperty)
+      Controls.ResourceClassification_Button:RegisterCallback(Mouse.eMouseEnter, function()
+        UI.PlaySound("Main_Menu_Mouse_Over")
+      end)
       -- 刷新按钮
       ResourceClassificationButtonReset()
   end
@@ -83,6 +88,24 @@ function ResourceClassificationCitySelectChange(ownerId, cityId, i, j, k, isSele
       ResourceClassificationButtonReset()
   end
   -- 这个函数似乎有点多余
+end
+
+-- 按钮点击事件
+function RefreshResourceClassificationProperty()
+  -- 获取玩家当前UI选中的城市对象
+  local city = UI.GetHeadSelectedCity()
+  if city then
+    local playerId = city:GetOwner();
+    if playerId == Game.GetLocalPlayer() then
+      UI.RequestPlayerOperation(
+        Game.GetLocalPlayer(),
+        PlayerOperations.EXECUTE_SCRIPT,
+        {
+          OnStart = 'HD_RefreshPlayerResourceDetectIfPending'
+        }
+      );
+    end
+  end
 end
 
 -- ===========================================================================

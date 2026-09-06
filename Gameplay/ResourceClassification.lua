@@ -120,9 +120,10 @@ function RefreshPlayerResourceDetectIfPending(playerId)
 end
 
 local function Initialize()
-  Events.CitySelectionChanged.Add(RefreshPlayerResourceDetectIfPending);
+  -- Events.CitySelectionChanged.Add(RefreshPlayerResourceDetectIfPending);
   GameEvents.PlayerTurnStarted.Add(RefreshPlayerResourceDetectIfPending);
   GameEvents.OnPlayerTurnEnded.Add(RefreshPlayerResourceDetectIfPending);
+  GameEvents.HD_RefreshPlayerResourceDetectIfPending.Add(RefreshPlayerResourceDetectIfPending);
 
   -- 资源变化时记录允许刷新状态
   Events.PlayerResourceChanged.Add(function (playerId, resourceId)

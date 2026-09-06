@@ -73,7 +73,9 @@ insert or replace into EnglishText (Tag, Text) values
 	("LOC_TOOLTIP_THEMING_ALL_FILLED_REQ",						    "All slots are filled"),
 	("LOC_TOOLTIP_THEMING_BONUS_TITLE",							      "Theming Bonus: "),
 	("LOC_TOOLTIP_THEMING_YIELD_BONUS_TEXT",					    "+{1_Amount}% Yields"),
-	("LOC_TOOLTIP_THEMING_TOURISM_BONUS_TEXT",				    "+{1_Amount}% [ICON_TOURISM] Tourism");
+	("LOC_TOOLTIP_THEMING_TOURISM_BONUS_TEXT",				    "+{1_Amount}% [ICON_TOURISM] Tourism"),
+
+	("LOC_TOOLTIP_REFRESH_DATA_TEXT",				              "[COLOR:Red]Refresh the ACTUAL DATA after clicking the button.[ENDCOLOR]");
 
 insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_TOOLTIP_HD_COMMA_TEXT",                         "、"),
@@ -150,4 +152,6 @@ insert or replace into LocalizedText (Language, Tag, Text) values
 	("zh_Hans_CN", "LOC_TOOLTIP_THEMING_ALL_FILLED_REQ",						    "填满所有槽位"),
 	("zh_Hans_CN", "LOC_TOOLTIP_THEMING_BONUS_TITLE",							      "主题化收益："),
 	("zh_Hans_CN", "LOC_TOOLTIP_THEMING_YIELD_BONUS_TEXT",					    "+{1_Amount}%产出"),
-	("zh_Hans_CN", "LOC_TOOLTIP_THEMING_TOURISM_BONUS_TEXT",				    "+{1_Amount}% [ICON_TOURISM] 旅游业绩");
+	("zh_Hans_CN", "LOC_TOOLTIP_THEMING_TOURISM_BONUS_TEXT",				    "+{1_Amount}% [ICON_TOURISM] 旅游业绩"),
+
+	("zh_Hans_CN", "LOC_TOOLTIP_REFRESH_DATA_TEXT",				              "[COLOR:Red]点击按钮后刷新实际数据。[ENDCOLOR]");

@@ -326,7 +326,7 @@ function GovernorRefreshCitySelectionChanged(playerId, cityId)
   -- 马左一
   ManagerRefreshTradeProperty(playerId, cityId);
   -- 瑞右三
-  MerchantRefreshTradeYieldProperty(playerId, cityId);
+  -- MerchantRefreshTradeYieldProperty(playerId, cityId);
 end
 Events.CitySelectionChanged.Add(GovernorRefreshCitySelectionChanged);
 
@@ -351,3 +351,13 @@ function GovernorRefreshOnGameTurnEnded()
 	end
 end
 GameEvents.OnGameTurnEnded.Add(GovernorRefreshOnGameTurnEnded);
+
+-- 城市界面按钮点击
+function RefreshTradeYieldProperty(playerId, param)
+  local cityId = param.CityId;
+  if cityId then
+    -- 瑞右三
+    MerchantRefreshTradeYieldProperty(playerId, cityId);
+  end
+end
+GameEvents.HD_MerchantRefreshTradeYieldProperty.Add(RefreshTradeYieldProperty);
