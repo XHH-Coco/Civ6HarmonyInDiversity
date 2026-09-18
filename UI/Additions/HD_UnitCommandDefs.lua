@@ -1502,6 +1502,7 @@ end
 -- 津巴布韦LA 单位消耗资源
 -- ======================================================================================================================================================
 local LTRAIT_UNITS_TAG = 'HD_LTRAIT_UNITS';
+local LTRAIT_UNITS_TURN_TAG = 'HD_LTRAIT_UNITS_TURN';
 
 m_HDUnitCommands.MUTOTA_LTRAIT_CONSUME_RESOURCE = {};
 m_HDUnitCommands.MUTOTA_LTRAIT_CONSUME_RESOURCE.Properties = {};
@@ -1599,6 +1600,11 @@ function m_HDUnitCommands.MUTOTA_LTRAIT_CONSUME_RESOURCE.IsVisible(unit)
 
 	local districtType = plot:GetDistrictType();
 	if districtType ~= -1 then return false; end
+
+	-- 判断是否是本回合第一次
+	local turn = Game.GetCurrentGameTurn();
+	local lastTurn = Utils.GetUnitProperty(unit:GetOwner(), unit:GetID(), LTRAIT_UNITS_TURN_TAG) or 0;
+	if turn == lastTurn then return false; end
 
 	local resourceId = plot:GetResourceType();
 	if resourceId == -1 then return false; end
