@@ -19,6 +19,17 @@ create table if not exists HD_Resource_Classification(
   ResourceClassificationType  TEXT    not NULL,
 PRIMARY KEY('ResourceType', 'ResourceClassificationType'));
 
+create table if not exists HD_Resource_ExtraEffects(
+  ResourceClassificationType  TEXT    Default NULL,
+  ResourceClassType           TEXT    Default NULL,
+  ResourceType                TEXT    Default NULL,
+  ExtraEffectType             TEXT    not NULL,
+  MinAmount                   Integer Default NULL,
+  MaxAmount                   Integer Default NULL,
+  ModifierId                  TEXT    Default NULL,
+  Description                 TEXT    Default NULL,
+PRIMARY KEY('ResourceClassificationType', 'ResourceClassType', 'ResourceType', 'ExtraEffectType'));
+
 ------------------- 改良分类 -------------------
 create table if not exists HD_ImprovementClassificationTypes(
   ImprovementClassificationType  TEXT    not NULL,

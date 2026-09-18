@@ -75,7 +75,9 @@ insert or replace into EnglishText (Tag, Text) values
 	("LOC_TOOLTIP_THEMING_YIELD_BONUS_TEXT",					    "+{1_Amount}% Yields"),
 	("LOC_TOOLTIP_THEMING_TOURISM_BONUS_TEXT",				    "+{1_Amount}% [ICON_TOURISM] Tourism"),
 
-	("LOC_TOOLTIP_REFRESH_DATA_TEXT",				              "[COLOR:Red]Refresh the ACTUAL DATA after clicking the button.[ENDCOLOR]");
+	("LOC_TOOLTIP_REFRESH_DATA_TEXT",				              "[COLOR:Red]Refresh the ACTUAL DATA after clicking the button.[ENDCOLOR]"),
+	("LOC_TOOLTIP_SELECT_RESOURCE_AMOUNT", 						    "You have {1_Amount} {2_Icon} {3_ResouceName}."),
+	("LOC_TOOLTIP_SELECT_RESOURCE_REQUIRED", 					    "Need Consume {1_Amount} {2_Icon} {3_ResouceName}.");
 
 insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_TOOLTIP_HD_COMMA_TEXT",                         "、"),
@@ -154,4 +156,6 @@ insert or replace into LocalizedText (Language, Tag, Text) values
 	("zh_Hans_CN", "LOC_TOOLTIP_THEMING_YIELD_BONUS_TEXT",					    "+{1_Amount}%产出"),
 	("zh_Hans_CN", "LOC_TOOLTIP_THEMING_TOURISM_BONUS_TEXT",				    "+{1_Amount}% [ICON_TOURISM] 旅游业绩"),
 
-	("zh_Hans_CN", "LOC_TOOLTIP_REFRESH_DATA_TEXT",				              "[COLOR:Red]点击按钮后刷新实际数据。[ENDCOLOR]");
+	("zh_Hans_CN", "LOC_TOOLTIP_REFRESH_DATA_TEXT",				              "[COLOR:Red]点击按钮后刷新实际数据。[ENDCOLOR]"),
+	("zh_Hans_CN", "LOC_TOOLTIP_SELECT_RESOURCE_AMOUNT", 						    "现在拥有{1_Amount}份 {2_Icon} {3_ResouceName}。"),
+	("zh_Hans_CN", "LOC_TOOLTIP_SELECT_RESOURCE_REQUIRED", 					    "需要消耗{1_Amount}份 {2_Icon} {3_ResouceName}。");

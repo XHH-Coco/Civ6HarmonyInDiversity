@@ -83,3 +83,12 @@ create table if not exists HD_Improvement_Yield_To_Tourism(
 	FOREIGN KEY(PrereqCivic) REFERENCES Civics(CivicType) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY(PrereqTech) REFERENCES Technologies(TechnologyType) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+------------------- 文明领袖虚拟建筑 -------------------
+create table if not exists HD_Trait_Unique_Dummy_Buildings(
+	TraitType			TEXT not NULL,
+	BuildingType	TEXT not NULL,
+	PRIMARY KEY(TraitType, BuildingType),
+	FOREIGN KEY(TraitType) REFERENCES Traits(TraitType) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(BuildingType) REFERENCES Buildings(BuildingType) ON DELETE CASCADE ON UPDATE CASCADE
+);

@@ -174,7 +174,8 @@ insert or replace into Technologies_XP2 (TechnologyType, RandomPrereqs, HiddenUn
 select TechnologyType, 0, 0 from Technologies where EraType = 'ERA_FUTURE';
 
 update Technologies set AdvisorType = 'ADVISOR_TECHNOLOGY' where TechnologyType = 'TECH_COMPUTERS';
-update Technologies set EraType = 'ERA_ANCIENT', Cost = 80 where TechnologyType = 'TECH_HORSEBACK_RIDING';
+update Technologies set EraType = 'ERA_ANCIENT', Cost = 80, BarbarianFree = 1 where TechnologyType = 'TECH_HORSEBACK_RIDING';
+update Technologies set BarbarianFree = 1 where TechnologyType = 'TECH_THE_WHEEL';
 
 --------------------------------------------------------------------------------
 -- from tech testing

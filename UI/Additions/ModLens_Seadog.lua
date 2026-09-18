@@ -20,6 +20,14 @@ local function plotHasGoodyHut(plot)
     return false
 end
 
+local function plotHasBarbarianOutpost(plot)
+    local improvementInfo = GameInfo.Improvements[plot:GetImprovementType()]
+    if improvementInfo ~= nil and improvementInfo.ImprovementType == "IMPROVEMENT_BARBARIAN_CAMP" then
+        return true
+    end
+    return false
+end
+
 -- ===========================================================================
 -- Exported functions
 -- ===========================================================================
@@ -31,14 +39,18 @@ local function OnGetColorPlotTable()
     local localPlayerVis:table = PlayersVisibility[localPlayer]
 
     local GoodyHutColor   :number = UI.GetColorValue("COLOR_GHUT_SCOUT_LENS")
+    local BarbarianOutpostColor   :number = UI.GetColorValue("COLOR_BUILDER_LENS_PD")
     local colorPlot = {}
     colorPlot[GoodyHutColor] = {}
+    colorPlot[BarbarianOutpostColor] = {}
 
     for i = 0, (mapWidth * mapHeight) - 1, 1 do
         local pPlot:table = Map.GetPlotByIndex(i)
         if localPlayerVis:IsRevealed(pPlot:GetX(), pPlot:GetY()) then
             if plotHasGoodyHut(pPlot) then
                 table.insert(colorPlot[GoodyHutColor], i)
+            elseif plotHasBarbarianOutpost(pPlot) then
+                table.insert(colorPlot[BarbarianOutpostColor], i)
             end
         end
     end
@@ -83,17 +95,20 @@ local function OnUnitSelectionChanged( playerID:number, unitID:number, hexI:numb
     end
 
     local unitType = pUnit:GetUnitType()
-    if unitType == -1 or GameInfo.Units[unitType] == nil then
+    local unitInfo = GameInfo.Units[unitType];
+    if unitType == -1 or unitInfo == nil then
         return
     end
 
-    local promotionClass = GameInfo.Units[unitType].PromotionClass
-    local unitDomain = GameInfo.Units[unitType].Domain
+    local promotionClass = unitInfo.PromotionClass
+    local unitDomain = unitInfo.Domain
     local militaryUnit = (pUnit:GetCombat() > 0 or pUnit:GetRangedCombat() > 0) and (unitDomain == "DOMAIN_SEA")
     if bSelected then
         if militaryUnit and AUTO_APPLY_SCOUT_LENS_EXTRA then
             ShowScoutLens()
         elseif promotionClass == "PROMOTION_CLASS_NAVAL_RAIDER" then
+            ShowScoutLens()
+        elseif unitInfo.UnitType == "UNIT_GEDEMO_ROZWI" then
             ShowScoutLens()
         end
     -- Deselection
@@ -101,6 +116,8 @@ local function OnUnitSelectionChanged( playerID:number, unitID:number, hexI:numb
         if militaryUnit and AUTO_APPLY_SCOUT_LENS_EXTRA then
             ClearScoutLens()
         elseif promotionClass == "PROMOTION_CLASS_NAVAL_RAIDER" then
+            ClearScoutLens()
+        elseif unitInfo.UnitType == "UNIT_GEDEMO_ROZWI" then
             ClearScoutLens()
         end
     end
@@ -145,16 +162,19 @@ local function OnUnitMoveComplete( playerID:number, unitID:number )
     end
 
     local unitType = pUnit:GetUnitType()
-    if unitType == -1 or GameInfo.Units[unitType] == nil then
+    local unitInfo = GameInfo.Units[unitType];
+    if unitType == -1 or unitInfo == nil then
         return
     end
     
-    local promotionClass = GameInfo.Units[unitType].PromotionClass
-    local unitDomain = GameInfo.Units[unitType].Domain
+    local promotionClass = unitInfo.PromotionClass
+    local unitDomain = unitInfo.Domain
     local militaryUnit = (pUnit:GetCombat() > 0 or pUnit:GetRangedCombat() > 0) and (unitDomain == "DOMAIN_SEA")
     if militaryUnit and AUTO_APPLY_SCOUT_LENS_EXTRA then
         RefreshScoutLens()
     elseif promotionClass == "PROMOTION_CLASS_NAVAL_RAIDER" then
+        RefreshScoutLens()
+    elseif unitInfo.UnitType == "UNIT_GEDEMO_ROZWI" then
         RefreshScoutLens()
     end
 end
@@ -205,6 +225,7 @@ if g_ModLensModalPanel ~= nil then
     g_ModLensModalPanel[LENS_NAME] = {}
     g_ModLensModalPanel[LENS_NAME].LensTextKey = "LOC_HUD_SEADOG_LENS"
     g_ModLensModalPanel[LENS_NAME].Legend = {
-        {"LOC_TOOLTIP_SCOUT_LENS_GHUT", UI.GetColorValue("COLOR_GHUT_SCOUT_LENS")}
+        {"LOC_TOOLTIP_SCOUT_LENS_GHUT", UI.GetColorValue("COLOR_GHUT_SCOUT_LENS")},
+        {"LOC_TOOLTIP_SCOUT_LENS_BARBARIAN_CAMP", UI.GetColorValue("COLOR_BUILDER_LENS_PD")}
     }
 end

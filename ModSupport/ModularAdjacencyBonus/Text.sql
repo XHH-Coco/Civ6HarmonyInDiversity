@@ -4,6 +4,6 @@ insert or replace into EnglishText (Tag, Text) values
   ("LOC_TRAIT_LEADER_HOLY_ROMAN_EMPEROR_DESCRIPTION_MAB",             "Receive a Military policy slot for each appointed [ICON_GOVERNOR] Governor. Encampment district receives a standard adjacency bonus from adjacent resource and each military policy. Encampment district provides [ICON_FAITH] Faith equal to its adjacency bonus. Land units can be purchased with [ICON_FAITH] Faith in cities with a [ICON_GOVERNOR] Governor.");
 
 insert or replace into LocalizedText (Language, Tag, Text) values
-  ("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNIFICENCES_DESCRIPTION_MAB",                 "如果城市拥有改良的奢侈资源或建造在奢侈资源上，则生产的单位+1 [ICON_MOVEMENT] 移动力。每建造一座奇观，获得2份该奇观对应的特色奢侈资源。区域从城市的每3点溢出的 [ICON_AMENITIES] 宜居度获得+1相邻加成。可在拥有剧院广场区域的任意城市中开展“宫廷盛会”项目。"),
+  ("zh_Hans_CN",  "LOC_TRAIT_LEADER_MAGNIFICENCES_DESCRIPTION_MAB",                 "如果城市拥有改良的奢侈资源或建造在奢侈资源上，则生产的单位+1 [ICON_MOVEMENT] 移动力。每建造一座奇观，获得2份该奇观对应的特色奢侈资源。区域从城市的每3点溢出的 [ICON_AMENITIES] 宜居度获得+1相邻加成。可在拥有剧院广场的城市中开展“宫廷盛会”项目。"),
   ("zh_Hans_CN",  "LOC_TRAIT_CIVILIZATION_SCOTTISH_ENLIGHTENMENT_DESCRIPTION_MAB",  "建造学院和工业区时+100%建造速度。每位在岗 [ICON_CITIZEN] 公民为相邻的专业化区域+1相邻加成和+2对应 [ICON_GREATPERSON] 伟人点数。"),
   ("zh_Hans_CN",  "LOC_TRAIT_LEADER_HOLY_ROMAN_EMPEROR_DESCRIPTION_MAB",            "每任命一位 [ICON_GOVERNOR] 总督，获得一个军事政策槽位。军营从每个相邻资源和军事政策获得标准相邻加成。军营提供等同于其相邻加成的 [ICON_Faith] 信仰值。有 [ICON_GOVERNOR] 总督就职的城市可用 [ICON_FAITH] 信仰值购买陆军单位。");

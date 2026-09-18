@@ -504,3 +504,81 @@ from Resources where ResourceType in (
   'RESOURCE_URANIUM',
   'RESOURCE_GOLD2'
 );
+
+-- =====================================================================================================================================
+-- 资源用途对应额外收益
+-- =====================================================================================================================================
+insert or ignore into HD_Resource_ExtraEffects (ResourceClassificationType, ExtraEffectType, MinAmount) select
+  ResourceClassificationType, 'HEAL', 20
+from HD_ResourceClassificationTypes where ResourceClassificationType in (
+  'RESOURCE_CLASSIFICATION_HD_CROPS',
+  'RESOURCE_CLASSIFICATION_HD_AGRICULTURE',
+  'RESOURCE_CLASSIFICATION_HD_CUISINE',
+  'RESOURCE_CLASSIFICATION_HD_FRUIT',
+  'RESOURCE_CLASSIFICATION_HD_VEGETABLE',
+  'RESOURCE_CLASSIFICATION_HD_SEAFOOD',
+  'RESOURCE_CLASSIFICATION_HD_MEDICINE'
+);
+
+insert or ignore into HD_Resource_ExtraEffects (ResourceClassificationType, ExtraEffectType, MinAmount) select
+  ResourceClassificationType, 'EXP', 10
+from HD_ResourceClassificationTypes where ResourceClassificationType in (
+  'RESOURCE_CLASSIFICATION_HD_CROPS',
+  'RESOURCE_CLASSIFICATION_HD_AGRICULTURE',
+  'RESOURCE_CLASSIFICATION_HD_CUISINE',
+  'RESOURCE_CLASSIFICATION_HD_FRUIT',
+  'RESOURCE_CLASSIFICATION_HD_VEGETABLE',
+  'RESOURCE_CLASSIFICATION_HD_SEAFOOD',
+  'RESOURCE_CLASSIFICATION_HD_MEDICINE'
+);
+
+insert or ignore into HD_Resource_ExtraEffects (ResourceClassificationType, ExtraEffectType, MinAmount) select
+  ResourceClassificationType, 'MOVEMENT', 2
+from HD_ResourceClassificationTypes where ResourceClassificationType in (
+  'RESOURCE_CLASSIFICATION_HD_TRANSIT'
+);
+
+insert or ignore into HD_Resource_ExtraEffects (ResourceClassificationType, ExtraEffectType, MinAmount, MaxAmount) select
+  ResourceClassificationType, 'GOLD', 20, 50
+from HD_ResourceClassificationTypes where ResourceClassificationType in (
+  'RESOURCE_CLASSIFICATION_HD_BREWING',
+  'RESOURCE_CLASSIFICATION_HD_BEVERAGE',
+  'RESOURCE_CLASSIFICATION_HD_OIL',
+  'RESOURCE_CLASSIFICATION_HD_LEATHER',
+  'RESOURCE_CLASSIFICATION_HD_MINTING',
+  'RESOURCE_CLASSIFICATION_HD_SEASONING',
+  'RESOURCE_CLASSIFICATION_HD_MARINE_PRODUCTS'
+);
+
+insert or ignore into HD_Resource_ExtraEffects (ResourceClassificationType, ExtraEffectType, MinAmount, MaxAmount) select
+  ResourceClassificationType, 'SCIENCE', 5, 10
+from HD_ResourceClassificationTypes where ResourceClassificationType in (
+  'RESOURCE_CLASSIFICATION_HD_CONSTRUCTION',
+  'RESOURCE_CLASSIFICATION_HD_FUEL',
+  'RESOURCE_CLASSIFICATION_HD_CHEMISTRY',
+  'RESOURCE_CLASSIFICATION_HD_METALLURGY',
+  'RESOURCE_CLASSIFICATION_HD_STATIONERY'
+);
+
+insert or ignore into HD_Resource_ExtraEffects (ResourceClassificationType, ExtraEffectType, MinAmount, MaxAmount) select
+  ResourceClassificationType, 'CULTURE', 5, 10
+from HD_ResourceClassificationTypes where ResourceClassificationType in (
+  'RESOURCE_CLASSIFICATION_HD_CLOTH',
+  'RESOURCE_CLASSIFICATION_HD_ART',
+  'RESOURCE_CLASSIFICATION_HD_DECORATION',
+  'RESOURCE_CLASSIFICATION_HD_ORNAMENTAL',
+  'RESOURCE_CLASSIFICATION_HD_HOUSEHOLD'
+);
+
+insert or ignore into HD_Resource_ExtraEffects (ResourceClassificationType, ExtraEffectType, MinAmount, MaxAmount) select
+  ResourceClassificationType, 'FAITH', 5, 20
+from HD_ResourceClassificationTypes where ResourceClassificationType in (
+  'RESOURCE_CLASSIFICATION_HD_SEA_BEAST',
+  'RESOURCE_CLASSIFICATION_HD_CELEBRATION',
+  'RESOURCE_CLASSIFICATION_HD_BEAST'
+);
+
+insert or ignore into HD_Resource_ExtraEffects (ResourceClassType, ExtraEffectType, ModifierId, Description) values
+  ('RESOURCECLASS_ARTIFACT', 'MODIFIER', 'GOODY_CULTURE_GRANT_ONE_CIVIC_BOOST', 'LOC_HD_RESOURCE_EXTRAEFFECT_ONE_CIVIC_BOOST_DESCRIPTION');
+
+update HD_Resource_ExtraEffects set Description = 'LOC_HD_RESOURCE_EXTRAEFFECT_' || ExtraEffectType || '_DESCRIPTION' where Description is NULL;

@@ -303,34 +303,6 @@ function HDChiChenItzaSacrifice (playerId, unitId)
 end
 GameEvents.HDChiChenItzaSacrifice.Add(HDChiChenItzaSacrifice);
 
--- 津巴布韦探路者，by xiaoxiao
-local PATHFINDER_RESOURCE_KEY = "PATHFINDER_RESOURCE";
-local PATHFINDER_TIME_KEY = "PATHFINDER_TIME";
-function HDPathfinderRecord (playerId, unitId)
-	local unit = UnitManager.GetUnit(playerId, unitId);
-	local location = unit:GetLocation();
-	local plot = Map.GetPlot(location.x, location.y);
-	local resourceId = plot:GetResourceType();
-	if resourceId ~= -1 then
-		local resourceInfo = GameInfo.Resources[resourceId];
-		if resourceInfo.ResourceClassType == 'RESOURCECLASS_LUXURY' then
-			unit:SetProperty(PATHFINDER_RESOURCE_KEY, resourceInfo.Index);
-		end
-	end
-end
-GameEvents.HDPathfinderRecord.Add(HDPathfinderRecord);
-function HDPathfinderPlant (playerId, unitId)
-	local unit = UnitManager.GetUnit(playerId, unitId);
-	local location = unit:GetLocation();
-	local plot = Map.GetPlot(location.x, location.y);
-	local resourceId = unit:GetProperty(PATHFINDER_RESOURCE_KEY);
-	if resourceId ~= nil then
-		ResourceBuilder.SetResourceType(plot, resourceId, 1);
-		unit:SetProperty(PATHFINDER_TIME_KEY, (unit:GetProperty(PATHFINDER_TIME_KEY) or 0) + 1);
-	end
-end
-GameEvents.HDPathfinderPlant.Add(HDPathfinderPlant);
-
 --获取单位级别
 function UnitGetLevelNum (playerId, unitId)
 	local pUnit = UnitManager.GetUnit(playerId, unitId);

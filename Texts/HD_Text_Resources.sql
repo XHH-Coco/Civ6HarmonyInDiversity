@@ -4,6 +4,11 @@ insert or replace into EnglishText (Tag, Text) values
 	("LOC_RESOURCE_SPICES_NAME",                                  "Cardamom"),
 	("LOC_RESOURCE_WINE_NAME",                                    "Grape"),
   ("LOC_RESOURCE_GOLD_NAME",                                    "Gold"),
+  ("LOC_RESOURCE_FURS_NAME",                                    "Fox"),
+  ("LOC_RESOURCE_SUK_CHEESE_NAME",                              "Goat"),
+  ("LOC_RESOURCE_HAM_NAME",                                     "Pig"),
+  ("LOC_RESOURCE_CASHMERE_NAME",                                "Cashmere Goat"),
+  ("LOC_RESOURCE_IVORY_NAME",                                   "Elephant"),
 
   ("LOC_RESOURCE_HD_CS_MANUSCRIPT_NAME",                        "Manuscript"),
   ("LOC_RESOURCE_HD_CS_MEDICINAL_HERBS_NAME",                   "Medicinal Herbs"),
@@ -53,6 +58,11 @@ insert or replace into LocalizedText (Language, Tag, Text) values
 	("zh_Hans_CN", "LOC_RESOURCE_SPICES_NAME",                                  "豆蔻"),
 	("zh_Hans_CN", "LOC_RESOURCE_WINE_NAME",                                    "葡萄"),
   ("zh_Hans_CN", "LOC_RESOURCE_GOLD_NAME",                                    "黄金"),
+  ("zh_Hans_CN", "LOC_RESOURCE_FURS_NAME",                                    "狐狸"),
+  ("zh_Hans_CN", "LOC_RESOURCE_SUK_CHEESE_NAME",                              "山羊"),
+  ("zh_Hans_CN", "LOC_RESOURCE_HAM_NAME",                                     "猪"),
+  ("zh_Hans_CN", "LOC_RESOURCE_CASHMERE_NAME",                                "绒山羊"),
+  ("zh_Hans_CN", "LOC_RESOURCE_IVORY_NAME",                                   "大象"),
 
   ("zh_Hans_CN", "LOC_RESOURCE_HD_CS_MANUSCRIPT_NAME",                        "抄本"),
   ("zh_Hans_CN", "LOC_RESOURCE_HD_CS_MEDICINAL_HERBS_NAME",                   "草药"),
@@ -136,4 +146,49 @@ where Tag in (
   'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_WINE_DESCRIPTION',
   'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_WINE_SHORT_NAME',
   'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_WINE_NAME'
+);
+
+-- 皮草改名狐狸
+update  LocalizedText set Text = REPLACE(Text, '皮草', '狐狸')
+where Language = 'zh_Hans_CN' and (Tag in (
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_FURS_DESCRIPTION',
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_FURS_SHORT_NAME',
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_FURS_NAME'
+));
+
+update  LocalizedText set Text = REPLACE(Text, 'Furs', 'Fox')
+where Tag in (
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_FURS_DESCRIPTION',
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_FURS_SHORT_NAME',
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_FURS_NAME'
+);
+
+-- 奶酪改名山羊
+update  LocalizedText set Text = REPLACE(Text, '奶酪', '山羊')
+where Language = 'zh_Hans_CN' and (Tag in (
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUK_CHEESE_DESCRIPTION',
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUK_CHEESE_SHORT_NAME',
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUK_CHEESE_NAME'
+));
+
+update  LocalizedText set Text = REPLACE(Text, 'Cheese', 'Goat')
+where Tag in (
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUK_CHEESE_DESCRIPTION',
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUK_CHEESE_SHORT_NAME',
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUK_CHEESE_NAME'
+);
+
+-- 象牙改名大象
+update  LocalizedText set Text = REPLACE(Text, '象牙', '大象')
+where Language = 'zh_Hans_CN' and (Tag in (
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUK_CHEESE_DESCRIPTION',
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUK_CHEESE_SHORT_NAME',
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUK_CHEESE_NAME'
+));
+
+update  LocalizedText set Text = REPLACE(Text, 'Ivory', 'Elephant')
+where Tag in (
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUK_CHEESE_DESCRIPTION',
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUK_CHEESE_SHORT_NAME',
+  'LOC_PROJECT_CREATE_CORPORATION_PRODUCT_SUK_CHEESE_NAME'
 );

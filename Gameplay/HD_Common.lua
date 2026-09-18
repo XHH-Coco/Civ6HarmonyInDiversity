@@ -50,12 +50,12 @@ end
 
 Utils.CityHasDistrict = function(city, DistrictType)
 	local district_index = Utils.GetDistrictIndex(DistrictType)
-	if city:GetDistricts():HasDistrict(district_index) then return true end
+	if city:GetDistricts():HasDistrict(district_index) and Utils.IsDistrictComplete(city:GetOwner(), city:GetID(), district_index) then return true end
 	
 	for row in GameInfo.DistrictReplaces() do
 		if row.ReplacesDistrictType == DistrictType then
 			district_index = Utils.GetDistrictIndex(row.CivUniqueDistrictType)
-			if city:GetDistricts():HasDistrict(district_index) then
+			if city:GetDistricts():HasDistrict(district_index) and Utils.IsDistrictComplete(city:GetOwner(), city:GetID(), district_index) then
 				return true
 			end
 		end
@@ -1179,3 +1179,12 @@ function InitCityStateResourceMap()
 end
 InitCityStateResourceMap();
 Utils.CityStateResourceMap = CityStateResourceMap;
+
+-- 判断是否可以建造城市
+function IsValidFoundCity(playerId, x, y)
+	local player = Players[playerId];
+	if not player then return false; end
+
+	return player:GetCities():IsValidFoundLocation(x, y);
+end
+Utils.IsValidFoundCity = IsValidFoundCity;

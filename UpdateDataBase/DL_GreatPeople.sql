@@ -40,8 +40,8 @@ values
 insert or replace into GreatPersonClasses
 	(GreatPersonClassType,              		Name,                         									UnitType,           			DistrictType,           PseudoYieldType,             IconString,             ActionIcon,                          AvailableInTimeline,	GenerateDuplicateIndividuals)
 values
-	('GREAT_PERSON_CLASS_HD_YUAN_WAN_QING', 'LOC_GREAT_PERSON_CLASS_HD_YUAN_WAN_QING_NAME', 'UNIT_HD_YUAN_WAN_QING', 'DISTRICT_THEATER',     'PSEUDOYIELD_GPP_WRITER',    '[ICON_GreatWriter]', 	'ICON_UNITOPERATION_WRITER_ACTION',   0,										1),
-	('GREAT_PERSON_CLASS_HD_SI_NONG_SI', 		'LOC_GREAT_PERSON_CLASS_HD_SI_NONG_SI_NAME',  	'UNIT_HD_SI_NONG_SI', 	 'DISTRICT_THEATER',     'PSEUDOYIELD_GPP_MUSICIAN',  '[ICON_GreatMusician]', 'ICON_UNITOPERATION_MUSICIAN_ACTION', 0,										1);
+	('GREAT_PERSON_CLASS_HD_YUAN_WAN_QING', 'LOC_GREAT_PERSON_CLASS_HD_YUAN_WAN_QING_NAME', 'UNIT_HD_YUAN_WAN_QING', 'DISTRICT_THEATER',     'PSEUDOYIELD_GPP_MUSICIAN',  '[ICON_GreatMusician]', 'ICON_UNITOPERATION_MUSICIAN_ACTION', 0,										1),
+	('GREAT_PERSON_CLASS_HD_SI_NONG_SI', 		'LOC_GREAT_PERSON_CLASS_HD_SI_NONG_SI_NAME',  	'UNIT_HD_SI_NONG_SI', 	 'DISTRICT_THEATER',     'PSEUDOYIELD_GPP_WRITER',  	'[ICON_GreatWriter]', 	'ICON_UNITOPERATION_WRITER_ACTION', 	0,										1);
 
 -- GreatPersonIndividuals
 --------------------------------------------------------------

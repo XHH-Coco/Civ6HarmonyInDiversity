@@ -309,7 +309,8 @@ with I(ImprovementType) as (select ImprovementType from Improvements where Impro
 	'IMPROVEMENT_HACIENDA',
 	'IMPROVEMENT_PAIRIDAEZA',
 	'IMPROVEMENT_MONASTERY',
-	'IMPROVEMENT_ALCAZAR'
+	'IMPROVEMENT_ALCAZAR',
+	'IMPROVEMENT_GEDEMO_DZIMBABWE'
 	)),
 F(FeatureType) as (select FeatureType from Features where FeatureType in (
 	'FEATURE_FLOODPLAINS',
@@ -335,7 +336,8 @@ update Improvements set Description = '{' || Description || '}{LOC_IMPROVEMENT_B
 	'IMPROVEMENT_HACIENDA',
 	'IMPROVEMENT_PAIRIDAEZA',
 	'IMPROVEMENT_MONASTERY',
-	'IMPROVEMENT_ALCAZAR'
+	'IMPROVEMENT_ALCAZAR',
+	'IMPROVEMENT_GEDEMO_DZIMBABWE'
 );
 
 with I(ImprovementType) as (select ImprovementType from Improvements where ImprovementType in (
@@ -355,7 +357,9 @@ with I(ImprovementType) as (select ImprovementType from Improvements where Impro
 	'IMPROVEMENT_ROMAN_FORT',
 	'IMPROVEMENT_FORT',
 	'IMPROVEMENT_OPEN_AIR_MUSEUM',
-	'IMPROVEMENT_ZIGGURAT'))
+	'IMPROVEMENT_ZIGGURAT',
+	'IMPROVEMENT_GEDEMO_DZIMBABWE'
+	))
 insert or replace into Improvement_ValidFeatures
 	(ImprovementType,			FeatureType)
 select

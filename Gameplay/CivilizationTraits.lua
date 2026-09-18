@@ -83,6 +83,61 @@ local DISTRICT_HARBOR_INDEX = GameInfo.Districts['DISTRICT_HARBOR'].Index
 local DISTRICT_COTHON_INDEX = GameInfo.Districts['DISTRICT_COTHON'].Index;
 local DISTRICT_SEOWON_INDEX = GameInfo.Districts['DISTRICT_SEOWON'].Index;
 
+-- 建筑
+local BUILDING_PALACE_INDEX = GameInfo.Buildings['BUILDING_PALACE'].Index;
+
+-- =====================================================================================================================================
+-- 文明领袖虚拟建筑处理
+-- =====================================================================================================================================
+-- 建立首都（宫殿）后建造虚拟建筑
+function BuildTraitUniqueDummyBuilding(playerId, cityId, buildingId, plotId)
+	if buildingId == BUILDING_PALACE_INDEX then
+		local city = CityManager.GetCity(playerId, cityId);
+		if not city then return; end
+
+		for row in GameInfo.HD_Trait_Unique_Dummy_Buildings() do
+			if CivilizationHasTrait(playerId, row.TraitType) or LeaderHasTrait(playerId, row.TraitType) then
+				local buildingInfo = GameInfo.Buildings[row.BuildingType];
+        if buildingInfo and not city:GetBuildings():HasBuilding(buildingInfo.Index) then
+          city:GetBuildQueue():CreateBuilding(buildingInfo.Index);
+          print("建造文明领袖虚拟建筑：" .. Locale.Lookup(buildingInfo.Name));
+        end
+			end
+		end
+	end
+end
+GameEvents.BuildingConstructed.Add(BuildTraitUniqueDummyBuilding);
+
+-- 夺取能力后建造虚拟建筑
+function GetTraitBuildTraitUniqueDummyBuilding(capital, traitType)
+	if not capital then return; end
+
+	for row in GameInfo.HD_Trait_Unique_Dummy_Buildings() do
+		if traitType == row.TraitType then
+			local buildingInfo = GameInfo.Buildings[row.BuildingType];
+			if buildingInfo and not capital:GetBuildings():HasBuilding(buildingInfo.Index) then
+				capital:GetBuildQueue():CreateBuilding(buildingInfo.Index);
+				print("建造文明领袖虚拟建筑：" .. Locale.Lookup(buildingInfo.Name));
+			end
+		end
+	end
+end
+
+-- 占领城市后移除虚拟建筑
+function CityConqueredRemoveTraitUniqueDummyBuilding(newPlayerId, oldPlayerId, newCityId, x, y)
+	local city = CityManager.GetCity(newPlayerId, newCityId);
+	if not city then return; end
+
+	for row in GameInfo.HD_Trait_Unique_Dummy_Buildings() do
+		local buildingInfo = GameInfo.Buildings[row.BuildingType];
+		if buildingInfo and city:GetBuildings():HasBuilding(buildingInfo.Index) then
+			city:GetBuildings():RemoveBuilding(buildingInfo.Index);
+			print("摧毁文明领袖虚拟建筑：" .. Locale.Lookup(buildingInfo.Name));
+		end
+	end
+end
+GameEvents.CityConquered.Add(CityConqueredRemoveTraitUniqueDummyBuilding);
+
 -- =====================================================================================================================================
 -- 中国
 -- =====================================================================================================================================
@@ -2330,6 +2385,9 @@ function KublaiGrantCivTrait( playerID, iX, iY )
 						end
 					end
 				end
+
+				-- 获得文明领袖虚拟建筑
+				GetTraitBuildTraitUniqueDummyBuilding(capital, traitType);
 			end
 
 			for _, modifier in ipairs(captureModifier) do
@@ -3221,6 +3279,9 @@ function CleopatraAlliance(id1, id2)
 						end
 					end
 				end
+
+				-- 获得文明领袖虚拟建筑
+				GetTraitBuildTraitUniqueDummyBuilding(capital, traitType);
 			end
 
 			for _, modifier in ipairs(captureModifier) do

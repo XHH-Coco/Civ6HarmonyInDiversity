@@ -80,7 +80,16 @@ insert or replace into EnglishText (Tag, Text) values
   ("LOC_RESOURCE_CLASSIFICATION_MINERAL_NAME",                      "Mineral"),
 
   ("LOC_RESOURCE_CLASSIFICATION_CIVILIZATION_NAME",                 "Civilization Unique"),
-  ("LOC_RESOURCE_CLASSIFICATION_CITYSTATE_NAME",                    "City-state Exclusive");
+  ("LOC_RESOURCE_CLASSIFICATION_CITYSTATE_NAME",                    "City-state Exclusive"),
+
+  ("LOC_HD_RESOURCE_EXTRAEFFECT_HEAL_DESCRIPTION",                  "Recover {1_Num} [ICON_DAMAGED] HP."),
+  ("LOC_HD_RESOURCE_EXTRAEFFECT_EXP_DESCRIPTION",                   "Gain {1_Num} [ICON_PROMOTION] EXP."),
+  ("LOC_HD_RESOURCE_EXTRAEFFECT_MOVEMENT_DESCRIPTION",              "Recover {1_Num} [ICON_MOVEMENT] Movement."),
+  ("LOC_HD_RESOURCE_EXTRAEFFECT_GOLD_DESCRIPTION",                  "Gain {1_Num} [ICON_GOLD] Gold."),
+  ("LOC_HD_RESOURCE_EXTRAEFFECT_SCIENCE_DESCRIPTION",               "Gain {1_Num} [ICON_SCIENCE] Science."),
+  ("LOC_HD_RESOURCE_EXTRAEFFECT_CULTURE_DESCRIPTION",               "Gain {1_Num} [ICON_CULTURE] Culture."),
+  ("LOC_HD_RESOURCE_EXTRAEFFECT_FAITH_DESCRIPTION",                 "Gain {1_Num} [ICON_FAITH] Faith."),
+  ("LOC_HD_RESOURCE_EXTRAEFFECT_ONE_CIVIC_BOOST_DESCRIPTION",       "Receive a random [ICON_CivicBoosted] Inspiration.");
 
 insert or replace into LocalizedText (Language, Tag, Text) values
   -- ToolTip
@@ -164,4 +173,13 @@ insert or replace into LocalizedText (Language, Tag, Text) values
   ("zh_Hans_CN", "LOC_RESOURCE_CLASSIFICATION_MINERAL_NAME",                      "矿产类"),
 
   ("zh_Hans_CN", "LOC_RESOURCE_CLASSIFICATION_CIVILIZATION_NAME",                 "文明特色"),
-  ("zh_Hans_CN", "LOC_RESOURCE_CLASSIFICATION_CITYSTATE_NAME",                    "城邦专属");
+  ("zh_Hans_CN", "LOC_RESOURCE_CLASSIFICATION_CITYSTATE_NAME",                    "城邦专属"),
+
+  ("zh_Hans_CN", "LOC_HD_RESOURCE_EXTRAEFFECT_HEAL_DESCRIPTION",                  "回复 [ICON_DAMAGED] 生命值。"),
+  ("zh_Hans_CN", "LOC_HD_RESOURCE_EXTRAEFFECT_EXP_DESCRIPTION",                   "获得 [ICON_PROMOTION] 经验值。"),
+  ("zh_Hans_CN", "LOC_HD_RESOURCE_EXTRAEFFECT_MOVEMENT_DESCRIPTION",              "回复 [ICON_MOVEMENT] 移动力。"),
+  ("zh_Hans_CN", "LOC_HD_RESOURCE_EXTRAEFFECT_GOLD_DESCRIPTION",                  "获得 [ICON_GOLD] 金币。"),
+  ("zh_Hans_CN", "LOC_HD_RESOURCE_EXTRAEFFECT_SCIENCE_DESCRIPTION",               "获得 [ICON_SCIENCE] 科技值。"),
+  ("zh_Hans_CN", "LOC_HD_RESOURCE_EXTRAEFFECT_CULTURE_DESCRIPTION",               "获得 [ICON_CULTURE] 文化值。"),
+  ("zh_Hans_CN", "LOC_HD_RESOURCE_EXTRAEFFECT_FAITH_DESCRIPTION",                 "获得 [ICON_FAITH] 信仰值。"),
+  ("zh_Hans_CN", "LOC_HD_RESOURCE_EXTRAEFFECT_ONE_CIVIC_BOOST_DESCRIPTION",       "获得1个随机 [ICON_CivicBoosted] 鼓舞。");

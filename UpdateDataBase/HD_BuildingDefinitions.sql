@@ -44,10 +44,10 @@ insert or ignore into Types (Type, Kind) values
 	('TRAIT_CIVILIZATION_BUILDING_HD_WORLD_PARLIAMENT_HEADQUARTERS',	'KIND_TRAIT');
 
 insert or ignore into Buildings (BuildingType, Name, Description, TraitType, PrereqTech, PrereqCivic, PrereqDistrict,
-	Cost, Housing, Entertainment, Maintenance, OuterDefenseHitPoints, CitizenSlots, RegionalRange, InternalOnly, PurchaseYield, AdvisorType, GovernmentTierRequirement)
+	Cost, Housing, Entertainment, Maintenance, CitizenSlots, RegionalRange, InternalOnly, OuterDefenseHitPoints, PurchaseYield, AdvisorType, GovernmentTierRequirement)
 values
 	('BUILDING_HD_SALON', 'LOC_BUILDING_HD_SALON_NAME', 'LOC_BUILDING_HD_SALON_DESCRIPTION', NULL, NULL, 'CIVIC_HUMANISM', 'DISTRICT_ENTERTAINMENT_COMPLEX',
-		300, 0, 2, 4, 0, 0, 6, 0, 'YIELD_GOLD', 'ADVISOR_GENERIC', NULL);
+		300, 0, 2, 4, 0, 6, 0, NULL, 'YIELD_GOLD', 'ADVISOR_GENERIC', NULL);
 
 insert or ignore into BuildingPrereqs (Building, PrereqBuilding) values
 	('BUILDING_HD_SALON', 'BUILDING_ARENA'),

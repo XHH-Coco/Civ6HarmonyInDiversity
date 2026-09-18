@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Context Hidden="1">
+	<Container Style="FullScreenVignetteConsumer" />
+
+	<Grid ID="PopupDrowShadowGrid" Anchor="C,C" Offset="0,0" Size="auto,auto" AutoSizePadding="50,50"	Style="DropShadow" >
+		<Image ID="PopupBackgroundImage" Anchor="C,C" Size="auto,auto" AutoSizePadding="-10,-10" Texture="Parchment_Pattern"	StretchMode="Tile" ConsumeMouse="1">
+			<Grid ID="PopupFrameGrid" Anchor="C,C" Size="900,680" Offset="0,0" Texture="CompletedPopup_Frame" SliceCorner="112,120" SliceSize="2,1">
+				<!-- 关闭按钮 -->
+				<Button	ID="CloseButton" Texture="Controls_CloseLarge" Size="44,44" Anchor="R,T" Offset="11,11"	/>
+
+        <!-- 标题 -->
+				<Container Size="353,80" Anchor="C,T" Offset="0,0">
+					<Label ID="HeaderTitle" Anchor="C,C" Align="C,C" Color="92,86,85,255" Offset="0,10" Style="FontFlair20" SmallCaps="26" SmallCapsType="EveryWord" WrapWidth="350" String="LOC_HD_CITYSTATE_SELECTION_MAIN_TITLE" />
+				</Container>
+
+        <!-- 主要图标 -->
+        <Grid ID="SubheaderIconGrid" Anchor="L,T" Style="DecoGrid" Size="110,110" Offset="58,80" Color="40,40,40,170">
+					<Image ID="SubheaderIcon" Anchor="C,C" Size="80,80" Offset="0,0" Icon="ICON_IMPROVEMENT_FARM" IconSize="80"/>
+				</Grid>
+
+        <!-- 主要描述 -->
+				<Grid ID="SubheaderGrid" Anchor="R,T" Style="DecoGrid" Size="670,110" Offset="58,80" Color="40,40,40,170">
+					<ScrollPanel ID="SubheaderScrollPanel" Anchor="C,C" Size="640,90" Vertical="1" AutoScrollBar="1">
+						<Label ID="SubheaderLabel" Anchor="C,C" Color="92,86,85,255" Offset="0,0" Style="FontFlair16" SmallCaps="20" SmallCapsType="EveryWord" WrapWidth="640" />
+						<ScrollBar Style="Slider_Light" Anchor="R,C" AnchorSide="O,I"/>
+					</ScrollPanel>
+				</Grid>
+
+				<!-- 资源选择标题 -->
+				<Container Size="353,80" Anchor="C,T" Offset="0,194">
+					<Label ID="CityStateListTitle" Anchor="C,C" Align="C,C" Color="92,86,85,255" Offset="0,10" Style="FontFlair20" SmallCaps="26" SmallCapsType="EveryWord" WrapWidth="350" String="LOC_HD_CITYSTATE_SELECTION_LIST_SUBTITLE" />
+				</Container>
+
+        <!-- 资源选择滑动框 -->
+        <Grid ID="CityStateScrollGrid" Anchor="C,T" Style="DecoGrid" Size="784,110" Offset="0,278" Color="40,40,40,170">
+					<ScrollPanel ID="CityStateScrollPanel" Anchor="C,C" Size="774,110" AutoScrollBar="1">
+						<Stack ID="CityStateSelectionStack" Anchor="L,C" Offset="0,0" StackGrowth="Right" StackPadding="0" />
+						<ScrollBar Anchor="C,B"	Offset="0,2" AnchorSide="I,O"	Vertical="0" Texture="Controls_ScrollbarV" Size="14,11" SliceCorner="4,6" SliceTextureSize="11,14" Color="255,255,255,50" >
+							<Thumb Texture="Controls_ScrollHandle" Size="12,5" StateOffsetIncrement="0,0" SliceCorner="3,6" SliceTextureSize="5,12" Color="255,255,255,50" />
+						</ScrollBar>
+					</ScrollPanel>
+
+					<!-- 无可选资源提示文本 -->
+					<Label ID="NoAvailableCityStateLabel" Anchor="C,C" Align="C,C" Offset="0,0" Color="92,86,85,255" Style="FontFlair28" SmallCaps="26" SmallCapsType="EveryWord" WrapWidth="350" String="LOC_HD_CITYSTATE_SELECTION_NO_AVAILABLE_CITYSTATE" />
+        </Grid>
+
+				<!-- 资源详情标题 -->
+				<Container Size="353,80" Anchor="C,T" Offset="0,392">
+					<Label ID="CityStateDetailTitle" Anchor="C,C" Align="C,C" Color="92,86,85,255" Offset="0,10" Style="FontFlair20" SmallCaps="26" SmallCapsType="EveryWord" WrapWidth="350" String="LOC_HD_CITYSTATE_SELECTION_DETAIL_SUBTITLE" />
+				</Container>
+        
+        <!-- 被选中的资源图标 -->
+        <Grid ID="SelectedCityStateIconGrid" Anchor="L,T" Style="DecoGrid" Size="110,110" Offset="58,476" Color="40,40,40,170">
+					<Image ID="SelectedCityStateIcon" Anchor="C,C" Size="80,80" Offset="0,0" Icon="ICON_MONOPOLIES_AND_CORPS_RESOURCE_BANANAS" IconSize="80"/>
+				</Grid>
+
+        <!-- 被选中的资源详情 -->
+        <Grid ID="SelectedCityStateDetailGrid" Anchor="R,T" Style="DecoGrid" Size="670,110" Offset="58,476" Color="40,40,40,170">
+					<ScrollPanel ID="SelectedCityStateDetailScrollPanel" Anchor="C,C" Size="640,90" Vertical="1" AutoScrollBar="1">
+						<Label ID="SelectedCityStateDetailLabel" Anchor="L,C" Color="92,86,85,255" Offset="0,0" Style="FontFlair16" SmallCaps="20" SmallCapsType="EveryWord" WrapWidth="640" />
+						<ScrollBar Style="Slider_Light" Anchor="R,C" AnchorSide="O,I"/>
+					</ScrollPanel>
+        </Grid>
+
+        <!-- 确认按钮 -->
+        <GridButton ID="Confirm" Style="MainButton" Size="200,41" Anchor="C,B" Offset="0,35" String="LOC_CONFIRM" Disabled="1"/>
+			</Grid>
+		</Image>
+	</Grid>
+
+  <!-- 资源图标 Instances -->
+	<Instance Name="CityStateSelectionInstance">
+		<Container ID="CityStateSelection" Anchor="C,C" Size="110,110">
+			<GridButton ID="SelectButton" Style="ButtonDraggableGrid" Size="100,100" Offset="0,0" Anchor="C,C">
+				<Image ID="CityStateIcon" Anchor="C,C" Size="80,80" Icon="ICON_CIVILIZATION_BRUSSELS" IconSize="80"/>
+			</GridButton>
+		</Container>
+	</Instance>
+</Context>
