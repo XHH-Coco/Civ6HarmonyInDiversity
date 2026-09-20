@@ -509,7 +509,7 @@ from Resources where ResourceType in (
 -- 资源用途对应额外收益
 -- =====================================================================================================================================
 insert or ignore into HD_Resource_ExtraEffects (ResourceClassificationType, ExtraEffectType, MinAmount) select
-  ResourceClassificationType, 'HEAL', 20
+  ResourceClassificationType, 'HEAL', 15
 from HD_ResourceClassificationTypes where ResourceClassificationType in (
   'RESOURCE_CLASSIFICATION_HD_CROPS',
   'RESOURCE_CLASSIFICATION_HD_AGRICULTURE',
@@ -533,13 +533,13 @@ from HD_ResourceClassificationTypes where ResourceClassificationType in (
 );
 
 insert or ignore into HD_Resource_ExtraEffects (ResourceClassificationType, ExtraEffectType, MinAmount) select
-  ResourceClassificationType, 'MOVEMENT', 2
+  ResourceClassificationType, 'MOVEMENT', 1
 from HD_ResourceClassificationTypes where ResourceClassificationType in (
   'RESOURCE_CLASSIFICATION_HD_TRANSIT'
 );
 
 insert or ignore into HD_Resource_ExtraEffects (ResourceClassificationType, ExtraEffectType, MinAmount, MaxAmount) select
-  ResourceClassificationType, 'GOLD', 20, 50
+  ResourceClassificationType, 'GOLD', 10, 30
 from HD_ResourceClassificationTypes where ResourceClassificationType in (
   'RESOURCE_CLASSIFICATION_HD_BREWING',
   'RESOURCE_CLASSIFICATION_HD_BEVERAGE',
@@ -551,7 +551,7 @@ from HD_ResourceClassificationTypes where ResourceClassificationType in (
 );
 
 insert or ignore into HD_Resource_ExtraEffects (ResourceClassificationType, ExtraEffectType, MinAmount, MaxAmount) select
-  ResourceClassificationType, 'SCIENCE', 5, 10
+  ResourceClassificationType, 'SCIENCE', 2, 5
 from HD_ResourceClassificationTypes where ResourceClassificationType in (
   'RESOURCE_CLASSIFICATION_HD_CONSTRUCTION',
   'RESOURCE_CLASSIFICATION_HD_FUEL',
@@ -561,7 +561,7 @@ from HD_ResourceClassificationTypes where ResourceClassificationType in (
 );
 
 insert or ignore into HD_Resource_ExtraEffects (ResourceClassificationType, ExtraEffectType, MinAmount, MaxAmount) select
-  ResourceClassificationType, 'CULTURE', 5, 10
+  ResourceClassificationType, 'CULTURE', 2, 5
 from HD_ResourceClassificationTypes where ResourceClassificationType in (
   'RESOURCE_CLASSIFICATION_HD_CLOTH',
   'RESOURCE_CLASSIFICATION_HD_ART',
@@ -571,7 +571,7 @@ from HD_ResourceClassificationTypes where ResourceClassificationType in (
 );
 
 insert or ignore into HD_Resource_ExtraEffects (ResourceClassificationType, ExtraEffectType, MinAmount, MaxAmount) select
-  ResourceClassificationType, 'FAITH', 5, 20
+  ResourceClassificationType, 'FAITH', 5, 10
 from HD_ResourceClassificationTypes where ResourceClassificationType in (
   'RESOURCE_CLASSIFICATION_HD_SEA_BEAST',
   'RESOURCE_CLASSIFICATION_HD_CELEBRATION',
