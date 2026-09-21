@@ -30,6 +30,12 @@ create table if not exists HD_Resource_ExtraEffects(
   Description                 TEXT    Default NULL,
 PRIMARY KEY('ResourceClassificationType', 'ResourceClassType', 'ResourceType', 'ExtraEffectType'));
 
+create table if not exists HD_ZimbabwePathfinderResources(
+  ResourceType                TEXT    not NULL,
+  PRIMARY KEY('ResourceType'),
+  FOREIGN KEY('ResourceType') REFERENCES Resources('ResourceType') ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 ------------------- 改良分类 -------------------
 create table if not exists HD_ImprovementClassificationTypes(
   ImprovementClassificationType  TEXT    not NULL,

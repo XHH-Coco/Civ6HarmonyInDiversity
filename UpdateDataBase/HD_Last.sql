@@ -527,6 +527,19 @@ insert or ignore into ModifierArguments (ModifierId, Name, Value)
   select 'HD_GRANT_' || ResourceType, 'Amount', 1
 from Resources where ResourceClassType = 'RESOURCECLASS_LUXURY' and (Frequency != 0 or SeaFrequency != 0);
 
+-- 消耗加成/奢侈资源
+insert or ignore into Modifiers (ModifierId, ModifierType)
+  select 'HD_LOSE_' || ResourceType, 'MODIFIER_PLAYER_ADJUST_FREE_RESOURCE_IMPORT'
+from Resources where ResourceClassType in ('RESOURCECLASS_BONUS', 'RESOURCECLASS_LUXURY');
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value)
+  select 'HD_LOSE_' || ResourceType, 'ResourceType', ResourceType
+from Resources where ResourceClassType in ('RESOURCECLASS_BONUS', 'RESOURCECLASS_LUXURY');
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value)
+  select 'HD_LOSE_' || ResourceType, 'Amount', -1
+from Resources where ResourceClassType in ('RESOURCECLASS_BONUS', 'RESOURCECLASS_LUXURY');
+
 -- 城堡庄园
 insert or replace into ImprovementModifiers (ImprovementType, ModifierId)
   select 'IMPROVEMENT_CHATEAU', 'HD_CHATEAU_GRANT_' || a.ResourceType || '_ATTACH'

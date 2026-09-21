@@ -521,7 +521,7 @@ from HD_ResourceClassificationTypes where ResourceClassificationType in (
 );
 
 insert or ignore into HD_Resource_ExtraEffects (ResourceClassificationType, ExtraEffectType, MinAmount) select
-  ResourceClassificationType, 'EXP', 10
+  ResourceClassificationType, 'EXP', 5
 from HD_ResourceClassificationTypes where ResourceClassificationType in (
   'RESOURCE_CLASSIFICATION_HD_CROPS',
   'RESOURCE_CLASSIFICATION_HD_AGRICULTURE',
@@ -539,7 +539,7 @@ from HD_ResourceClassificationTypes where ResourceClassificationType in (
 );
 
 insert or ignore into HD_Resource_ExtraEffects (ResourceClassificationType, ExtraEffectType, MinAmount, MaxAmount) select
-  ResourceClassificationType, 'GOLD', 10, 30
+  ResourceClassificationType, 'GOLD', 5, 25
 from HD_ResourceClassificationTypes where ResourceClassificationType in (
   'RESOURCE_CLASSIFICATION_HD_BREWING',
   'RESOURCE_CLASSIFICATION_HD_BEVERAGE',
@@ -571,7 +571,7 @@ from HD_ResourceClassificationTypes where ResourceClassificationType in (
 );
 
 insert or ignore into HD_Resource_ExtraEffects (ResourceClassificationType, ExtraEffectType, MinAmount, MaxAmount) select
-  ResourceClassificationType, 'FAITH', 5, 10
+  ResourceClassificationType, 'FAITH', 2, 5
 from HD_ResourceClassificationTypes where ResourceClassificationType in (
   'RESOURCE_CLASSIFICATION_HD_SEA_BEAST',
   'RESOURCE_CLASSIFICATION_HD_CELEBRATION',

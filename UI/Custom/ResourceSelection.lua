@@ -278,22 +278,22 @@ function CallZimbabwePathfinderSelectResourceEvent(param)
     ScriptParam = {UnitId = param.UnitId}
   };
 
-	local resourceList = Utils.Classification_Resource_Map['RESOURCE_CLASSIFICATION_HD_TRANSIT'] or {};
+	-- 查询玩家拥有的运载资源
 	local dataList = {}
-	for _, resourceType in ipairs(resourceList) do
-		local resourceInfo = GameInfo.Resources[resourceType];
+	for row in GameInfo.HD_ZimbabwePathfinderResources() do
+		local resourceInfo = GameInfo.Resources[row.ResourceType];
 		if resourceInfo then
 			local requiredAmount = 1;
-			local amount = player:GetResources():GetResourceAmount(resourceType) or 0;
+			local amount = player:GetResources():GetResourceAmount(row.ResourceType) or 0;
 
 			-- 战略资源需求 10 + 10n
 			if resourceInfo.ResourceClassType == 'RESOURCECLASS_STRATEGIC' then
-				local times = Utils.GetPlayerProperty(playerId, UNIT_ZIMBABWE_PATHFINDER_STRATEGIC_RESOURCE_PLAYER_TAG .. resourceType) or 0;
+				local times = Utils.GetPlayerProperty(playerId, UNIT_ZIMBABWE_PATHFINDER_STRATEGIC_RESOURCE_PLAYER_TAG .. row.ResourceType) or 0;
 				requiredAmount = UNIT_ZIMBABWE_PATHFINDER_STRATEGIC_RESOURCE_BASE + UNIT_ZIMBABWE_PATHFINDER_STRATEGIC_RESOURCE_ADD_PER_TIME * times;
 			end
 
 			local data = {
-				ResourceType = resourceType,
+				ResourceType = row.ResourceType,
 				DetailParam = {
 					Amount = amount,
 					RequiredAmount = requiredAmount
@@ -301,7 +301,7 @@ function CallZimbabwePathfinderSelectResourceEvent(param)
 				Disabled = amount < requiredAmount
 			};
 			if data.Disabled then
-				data.DisabledReason = Locale.Lookup('LOC_ABILITY_HD_ZIMBABWE_PATHFINDER_SELECT_RESOURCE_DISABLED', requiredAmount, '[ICON_' .. resourceType .. ']', resourceInfo.Name);
+				data.DisabledReason = Locale.Lookup('LOC_ABILITY_HD_ZIMBABWE_PATHFINDER_SELECT_RESOURCE_DISABLED', requiredAmount, '[ICON_' .. row.ResourceType .. ']', resourceInfo.Name);
 			end
 
 			table.insert(dataList, data)
