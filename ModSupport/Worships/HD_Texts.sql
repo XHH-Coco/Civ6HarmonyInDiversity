@@ -3,8 +3,8 @@
 insert or replace into EnglishText
     (Tag,                                             Text)
 values
-    ("LOC_BELIEF_JNR_CANDI_DL_DESCRIPTION",           "Allows construction of Candi(+1 [ICON_CULTURE] Culture and +1 [ICON_FAITH] Faith for every coastal or lake tile in this city.)"),
-    ("LOC_BUILDING_JNR_CANDI_DL_DESCRIPTION",         "+1 [ICON_CULTURE] Culture and +1 [ICON_FAITH] Faith for every coastal or lake tile in this city."),
+    ("LOC_BELIEF_JNR_CANDI_DL_DESCRIPTION",           "Allows construction of Candi(+1 [ICON_CULTURE] Culture and +1 [ICON_FAITH] Faith for every Shallow Sea and Lake tile in this city.)"),
+    ("LOC_BUILDING_JNR_CANDI_DL_DESCRIPTION",         "+1 [ICON_CULTURE] Culture and +1 [ICON_FAITH] Faith for every Shallow Sea and Lake tile in this city."),
     ("LOC_BELIEF_JNR_KHALWAT_DL_DESCRIPTION",         "Allows construction of Khalwat (Gain a Naturalist unit after finishing construction.)"),
     ("LOC_BUILDING_JNR_KHALWAT_DL_DESCRIPTION",       "Gain a Naturalist unit after finishing construction."),
     ("LOC_BELIEF_JNR_MANDIR_DL_DESCRIPTION",          "Allows construction of Mandir (Speciality Districts in this city provide +3 [ICON_FOOD] Food.)"),
@@ -29,8 +29,8 @@ insert or replace into LocalizedText
 values
     ("zh_Hans_CN",  "LOC_BELIEF_JNR_CANDI_NAME",                     "禅邸"),
     ("zh_Hans_CN",  "LOC_BUILDING_JNR_CANDI_NAME",                   "禅邸"),
-    ("zh_Hans_CN",  "LOC_BELIEF_JNR_CANDI_DL_DESCRIPTION",           "允许建造禅邸（此城中每拥有1个海岸或湖泊单元格，则+1 [ICON_CULTURE] 文化值和+1 [ICON_FAITH] 信仰值。）。"),
-    ("zh_Hans_CN",  "LOC_BUILDING_JNR_CANDI_DL_DESCRIPTION",         "此城中每拥有1个海岸或湖泊单元格，则+1 [ICON_CULTURE] 文化值和+1 [ICON_FAITH] 信仰值。"),
+    ("zh_Hans_CN",  "LOC_BELIEF_JNR_CANDI_DL_DESCRIPTION",           "允许建造禅邸（此城中每拥有1个浅海与湖泊单元格，则+1 [ICON_CULTURE] 文化值和+1 [ICON_FAITH] 信仰值。）。"),
+    ("zh_Hans_CN",  "LOC_BUILDING_JNR_CANDI_DL_DESCRIPTION",         "此城中每拥有1个浅海与湖泊单元格，则+1 [ICON_CULTURE] 文化值和+1 [ICON_FAITH] 信仰值。"),
     ("zh_Hans_CN",  "LOC_BELIEF_JNR_KHALWAT_NAME",                   "隐修会"),
     ("zh_Hans_CN",  "LOC_BUILDING_JNR_KHALWAT_NAME",                 "隐修会"),
     ("zh_Hans_CN",  "LOC_BELIEF_JNR_KHALWAT_DL_DESCRIPTION",         "允许建造隐修会（获得一位自然学家）。"),

@@ -1,99 +1,313 @@
 -- Units with Ability ABILITY_BLOCK_FIRST_NON_LETHAL_ATTACK_EACH_TURN ignores the first non-lethal combat (as defender) damage each turn. by xiaoxiao
--- ExposedMembers.DLHD = ExposedMembers.DLHD or {};
--- ExposedMembers.DLHD.Utils = ExposedMembers.DLHD.Utils or {};
--- Utils = ExposedMembers.DLHD.Utils;
+ExposedMembers.DLHD = ExposedMembers.DLHD or {};
+ExposedMembers.DLHD.Utils = ExposedMembers.DLHD.Utils or {};
+Utils = ExposedMembers.DLHD.Utils;
 
 function OnCombat (combatResult)
-    local name = "ABILITY_BLOCK_FIRST_NON_LETHAL_ATTACK_EACH_TURN"
-    local turn = Game.GetCurrentGameTurn()
-    local defender = combatResult[CombatResultParameters.DEFENDER]
-    local info = defender[CombatResultParameters.ID]
-    local unit = UnitManager.GetUnit(info.player, info.id)
-    if unit then
-        local used = unit:GetProperty(name .. "_USED_ON_TURN" .. turn)
-        if unit:GetAbility():HasAbility(name) and not used then
-            local location = unit:GetLocation()
-            Game.AddWorldViewText(0, Locale.Lookup("LOC_" .. name .. "_POP"), location.x, location.y)
-            unit:ChangeDamage(-defender[CombatResultParameters.DAMAGE_TO])
-            unit:SetProperty(name .. "_USED_ON_TURN" .. turn, true)
-        end
-    end
+	local name = "ABILITY_BLOCK_FIRST_NON_LETHAL_ATTACK_EACH_TURN"
+	local turn = Game.GetCurrentGameTurn()
+	local defender = combatResult[CombatResultParameters.DEFENDER]
+	local info = defender[CombatResultParameters.ID]
+	local unit = UnitManager.GetUnit(info.player, info.id)
+	if unit then
+		local used = unit:GetProperty(name .. "_USED_ON_TURN" .. turn)
+		if unit:GetAbility():HasAbility(name) and not used then
+			local location = unit:GetLocation()
+			Game.AddWorldViewText(0, Locale.Lookup("LOC_" .. name .. "_POP"), location.x, location.y)
+			unit:ChangeDamage(-defender[CombatResultParameters.DAMAGE_TO])
+			unit:SetProperty(name .. "_USED_ON_TURN" .. turn, true)
+		end
+	end
 end
 
 Events.Combat.Add(OnCombat)
 
+-- 神圣建筑师
+local GOVERNOR_CARDINAL_RIGHT_3_FAITH_PERCENTAGE = GlobalParameters.HD_GOVERNOR_CARDINAL_RIGHT_3_FAITH_PERCENTAGE or 0;
+function CitadelOfGodCompleteDistrict(playerId, unitId)
+	local player = Players[playerId];
+	if not player then return; end
+	local unit = UnitManager.GetUnit(playerId, unitId);
+	if not unit then return; end
+	local plot = Map.GetPlot(unit:GetX(), unit:GetY());
+	if not plot then return; end
+	local city = Cities.GetPlotPurchaseCity(plot);
+	if not city then return; end
+	
+	if plot:GetOwner() == playerId then
+		local detail = Utils.GetPlotDistrictDetails(unit:GetX(), unit:GetY());
+		if detail and not detail.IsCompleted and detail.IsUnderConstruction and GOVERNOR_CARDINAL_RIGHT_3_FAITH_PERCENTAGE > 0 then
+			local amount = math.ceil(detail.RemainingProduction * GOVERNOR_CARDINAL_RIGHT_3_FAITH_PERCENTAGE / 100);
+			player:GetReligion():ChangeFaithBalance(-amount);
+			city:GetBuildQueue():FinishProgress();
+			local msg = "-" .. amount .. " [ICON_Faith]";
+    	Game.AddWorldViewText(playerId, msg, unit:GetX(), unit:GetY());
+			print("神圣建筑师建造区域：" .. Locale.Lookup(city:GetName()) .. ' ' .. Locale.Lookup(detail.DistrictName) .. ' ' .. amount .. '信仰值');
+		end
+	end
+end
+GameEvents.HD_CitadelOfGodCompleteDistrict.Add(CitadelOfGodCompleteDistrict);
+
+-- ===================================================================================================================================== 
+-- 莫右二 具德上师
+-- ===================================================================================================================================== 
+function GuruSpreadAoeReligiousPressureConsumeCharges(playerId, unitId)
+	local unit = UnitManager.GetUnit(playerId, unitId);
+	if not unit then return; end
+
+	if unit:GetReligion():GetReligiousHealCharges() <= 1 then
+		Players[playerId]:GetUnits():Destroy(unit);
+	else
+		unit:GetReligion():ChangeReligiousHealCharges(-1);
+		local movesRemaining = Utils.GetUnitMovesRemaining(playerId, unitId);
+		unit:ChangeMovesRemaining(-movesRemaining);
+	end
+end
+GameEvents.HD_GuruSpreadAoeReligiousPressureConsumeCharges.Add(GuruSpreadAoeReligiousPressureConsumeCharges);
+
+-- 工程单位勘探火山土
+local MILITARY_ENGINEER_EXCAVATE_TIMES_TAG = 'HD_MILITARY_ENGINEER_EXCAVATE_TIMES';
+local MILITARY_ENGINEER_EXCAVATE_RELIC_TAG = 'HD_MILITARY_ENGINEER_EXCAVATE_RELIC';
+
+local MILITARY_ENGINEER_EXCAVATE_GOLD = GlobalParameters.HD_MILITARY_ENGINEER_EXCAVATE_GOLD or 0;
+local MILITARY_ENGINEER_EXCAVATE_SCIENCE = GlobalParameters.HD_MILITARY_ENGINEER_EXCAVATE_SCIENCE or 0;
+
+local MILITARY_ENGINEER_EXCAVATE_GOLD_PERCENTAGE = GlobalParameters.HD_MILITARY_ENGINEER_EXCAVATE_GOLD_PERCENTAGE or 0;
+local MILITARY_ENGINEER_EXCAVATE_SCIENCE_PERCENTAGE = GlobalParameters.HD_MILITARY_ENGINEER_EXCAVATE_SCIENCE_PERCENTAGE or 0;
+local MILITARY_ENGINEER_EXCAVATE_RESOURCE_PERCENTAGE = GlobalParameters.HD_MILITARY_ENGINEER_EXCAVATE_RESOURCE_PERCENTAGE or 0;
+local MILITARY_ENGINEER_EXCAVATE_RELIC_PERCENTAGE = GlobalParameters.HD_MILITARY_ENGINEER_EXCAVATE_RELIC_PERCENTAGE or 0;
+
+-- 初始化获取火山土上可生成的资源
+local MilitaryEngineerExcavateResources = {}
+function MilitaryEngineerExcavateInit()
+  for row in GameInfo.Resource_ValidFeatures() do
+		if row.FeatureType == 'FEATURE_VOLCANIC_SOIL' then
+			table.insert(MilitaryEngineerExcavateResources, row.ResourceType)
+		end
+	end
+end
+MilitaryEngineerExcavateInit();
+
+function MilitaryEngineerExcavate(playerId, unitId)
+  local player = Players[playerId];
+	if not player then return; end
+	local unit = UnitManager.GetUnit(playerId, unitId);
+	if not unit then return; end
+
+  -- 记录勘探次数
+  local x = unit:GetX()
+  local y = unit:GetY()
+	local plot = Map.GetPlot(x, y);
+  local times = plot:GetProperty(MILITARY_ENGINEER_EXCAVATE_TIMES_TAG) or 0
+  plot:SetProperty(MILITARY_ENGINEER_EXCAVATE_TIMES_TAG, times + 1)
+  print("工程单位勘探次数", times + 1)
+
+  local hasAnyBonus = false
+
+
+	-- 金币奖励
+	local goldRandomNum = Game.GetRandNum(100, "Random MilitaryEngineerExcavate Gold Bonus " .. playerId) + 1;
+	if goldRandomNum <= MILITARY_ENGINEER_EXCAVATE_GOLD_PERCENTAGE then
+		local randomFactor = Game.GetRandNum(101, "Random MilitaryEngineerExcavate Yield Factor " .. playerId) + 50;
+		local amount = math.ceil(MILITARY_ENGINEER_EXCAVATE_GOLD * randomFactor / 100);
+		player:GetTreasury():ChangeGoldBalance(amount);
+
+    local msg = "+" .. amount .. " [ICON_Gold]";
+    Game.AddWorldViewText(playerId, msg, x, y);
+    hasAnyBonus = true;
+	end
+
+	-- 科技奖励
+	local scienceRandomNum = Game.GetRandNum(100, "Random MilitaryEngineerExcavate Science Bonus " .. playerId) + 1;
+	if scienceRandomNum <= MILITARY_ENGINEER_EXCAVATE_SCIENCE_PERCENTAGE then
+		local randomFactor = Game.GetRandNum(101, "Random MilitaryEngineerExcavate Yield Factor " .. playerId) + 50;
+		local amount = math.ceil(MILITARY_ENGINEER_EXCAVATE_SCIENCE * randomFactor / 100);
+		player:GetTechs():ChangeCurrentResearchProgress(amount);
+
+		local msg = "+" .. amount .. " [ICON_Science]";
+    Game.AddWorldViewText(playerId, msg, x, y);
+    hasAnyBonus = true;
+	end
+
+	-- 勘探资源
+  if plot:GetResourceType() == -1 and plot:GetImprovementType() == -1 then
+    local resourceRandomNum = Game.GetRandNum(100, "Random MilitaryEngineerExcavate Resource " .. playerId) + 1;
+    if resourceRandomNum <= MILITARY_ENGINEER_EXCAVATE_RESOURCE_PERCENTAGE then
+      local resourceRandomIndex = Game.GetRandNum(#MilitaryEngineerExcavateResources, "Random MilitaryEngineerExcavate ResourceType " .. playerId) + 1;
+      local resourceType = MilitaryEngineerExcavateResources[resourceRandomIndex];
+      local resourceInfo = GameInfo.Resources[resourceType];
+      local resourceId = resourceInfo.Index;
+      local resourceName = resourceInfo.Name;
+      Utils.GenerateResource(plot, resourceId);
+
+      local msg = Locale.Lookup('LOC_MILITARY_ENGINEER_EXCAVATE_RESOURCE') .. '[ICON_' .. resourceType .. '] ' .. Locale.Lookup(resourceName);
+      Game.AddWorldViewText(playerId, msg, x, y);
+      hasAnyBonus = true;
+    end
+  end
+
+  -- 遗物奖励
+  if plot:GetProperty(MILITARY_ENGINEER_EXCAVATE_RELIC_TAG) ~= 1 then
+    local relicRandomNum = Game.GetRandNum(100, "Random MilitaryEngineerExcavate Relic " .. playerId) + 1
+    if relicRandomNum <= MILITARY_ENGINEER_EXCAVATE_RELIC_PERCENTAGE then
+      plot:SetProperty(MILITARY_ENGINEER_EXCAVATE_RELIC_TAG, 1);
+      player:AttachModifierByID('HD_MILITARY_ENGINEER_EXCAVATE_GRANT_RELIC');
+
+      local msg = Locale.Lookup('LOC_GOODYHUT_CULTURE_RELIC_DESCRIPTION');
+      Game.AddWorldViewText(playerId, msg, x, y);
+      hasAnyBonus = true;
+    end
+  end
+
+  -- 没有获得任何奖励
+  if not hasAnyBonus then
+    local msg = Locale.Lookup('LOC_MILITARY_ENGINEER_EXCAVATE_NOTHING');
+    Game.AddWorldViewText(playerId, msg, x, y);
+  end
+
+  -- 扣除劳动次数/删除单位
+  local movesRemaining = Utils.GetUnitMovesRemaining(playerId, unitId);
+  unit:ChangeMovesRemaining(-movesRemaining);
+  Utils.ConsumeUnitBuildCharges(playerId, unitId, 1);
+end
+GameEvents.HD_Military_Engineer_Excavate.Add(MilitaryEngineerExcavate)
+
+-- 自动修路
+local UNIT_AUTOMATICALLY_CREATE_ROADS_TAG = 'HD_UNIT_AUTOMATICALLY_CREATE_ROADS';
+function BandeirantesAutoRoad(playerId, unitId, x, y, locallyVisible, stateChange)
+	local player = Players[playerId];
+	local unit = UnitManager.GetUnit(playerId, unitId);
+	local plot = Map.GetPlot(x, y);
+	if not player or not unit or not plot then return; end
+	if plot:IsWater() then return; end
+
+	local canCreateRoad = unit:GetProperty(UNIT_AUTOMATICALLY_CREATE_ROADS_TAG) or 0;
+	if canCreateRoad > 0 then
+		local currentRouteType = plot:GetRouteType();
+		local playerRouteType = Utils.GetRouteTypeForPlayer(player);
+		if currentRouteType == RouteTypes.NONE or Utils.CompareRoutes(playerRouteType,currentRouteType) then
+			RouteBuilder.SetRouteType(plot, playerRouteType);
+		end
+	end
+end
+Events.UnitMoved.Add(BandeirantesAutoRoad);
+
+-- 巴西UU 旗手
+local BANDEIRANTES_PLOT_TAG = 'HD_BANDEIRANTES_PLOT';
+local BANDEIRANTES_RESOURCE_TAG = 'HD_BANDEIRANTES_RESOURCE';
+-- local BANDEIRANTES_FIRST_COLLECT_TAG = 'HD_BANDEIRANTES_FIRST_COLLECT';
+local BANDEIRANTES_TIMES_TAG = 'HD_BANDEIRANTES_TIMES';
+local BANDEIRANTES_RESOURCES_TIMES = GlobalParameters.HD_BANDEIRANTES_RESOURCES_TIMES or 0;
+function Bandeirantes_Collect_Resource(playerId, unitId)
+	if BANDEIRANTES_RESOURCES_TIMES <= 0 then return; end
+
+	local player = Players[playerId];
+	local unit = UnitManager.GetUnit(playerId, unitId);
+	if not player or not unit then return; end
+
+	local x = unit:GetX()
+  local y = unit:GetY()
+	local plot = Map.GetPlot(x, y);
+	local resourceId = plot:GetResourceType();
+	local resourceInfo = GameInfo.Resources[resourceId];
+
+	if resourceInfo then
+		-- 单元格已经收集
+		plot:SetProperty(BANDEIRANTES_PLOT_TAG, 1);
+
+		-- 记录次数
+		local resourceMap = player:GetProperty(BANDEIRANTES_RESOURCE_TAG) or {};
+		local times = resourceMap[resourceInfo.ResourceType] or 0;
+		resourceMap[resourceInfo.ResourceType] = times + 1;
+		player:SetProperty(BANDEIRANTES_RESOURCE_TAG, resourceMap);
+		print("旗手收集资源：" .. Locale.Lookup(resourceInfo.Name) .. " 次数：" .. (times + 1));
+
+		-- 判断是否满足加产的收集次数
+		if times > 0 and (times + 1) % BANDEIRANTES_RESOURCES_TIMES == 0 then
+			-- 获得资源本体的产出
+			for row in GameInfo.Resource_YieldChanges() do
+				if row.ResourceType == resourceInfo.ResourceType then
+					-- 负产出
+					if row.YieldChange < 0 then
+						for i=1, (-1 * row.YieldChange), 1 do
+							player:AttachModifierByID('HD_BANDEIRANTES_JUNGLE_NEGATIVE_' .. row.YieldType);
+						end
+					end
+
+					-- 正产出
+					if row.YieldChange > 0 then
+						for i=1, row.YieldChange, 1 do
+							player:AttachModifierByID('HD_BANDEIRANTES_JUNGLE_' .. row.YieldType);
+						end
+					end
+				end
+			end
+		end
+		
+		local timesRemaining = unit:GetProperty(BANDEIRANTES_TIMES_TAG) or 0;
+		unit:SetProperty(BANDEIRANTES_TIMES_TAG, timesRemaining - 1);
+
+		local movesRemaining = Utils.GetUnitMovesRemaining(playerId, unitId);
+		unit:ChangeMovesRemaining(-movesRemaining);
+	end
+end
+GameEvents.HD_Bandeirantes_Collect_Resource.Add(Bandeirantes_Collect_Resource);
+
 -- 垃圾回收中心, by xiaoxiao
+local RECYCLING_PLANT_PRODUCTION_PERCENT = GlobalParameters.RECYCLING_PLANT_PRODUCTION_PERCENT or 0;
 function HDRecyclingPlantRecycle (playerId, unitId)
-    local unit = UnitManager.GetUnit(playerId, unitId);
-    local unitInfo = GameInfo.Units[unit:GetType()];
-    local cost = unitInfo.Cost;
-    local costRate = GlobalParameters.RECYCLING_PLANT_PRODUCTION_PERCENT or 0;
-    local resourceType = unitInfo.StrategicResource;
-    local resourceCost = 0;
-    for row in GameInfo.Units_XP2() do
-        if row.UnitType == unitInfo.UnitType then
-            resourceCost = row.ResourceCost;
-        end
-    end
-    local resourceCostMultiplier = 0;
-    if resourceType ~= nil then
-        for row in GameInfo.GlobalParameters() do
-            if row.Name == 'RECYCLING_PLANT_' .. resourceType .. '_MULTIPLIER' then
-                resourceCostMultiplier = row.Value;
-            end
-        end
-    end
-    local gold = costRate * cost / 100 + resourceCostMultiplier * resourceCost;
-    local player = Players[playerId];
-    player:GetTreasury():ChangeGoldBalance(gold);
+	local unit = UnitManager.GetUnit(playerId, unitId);
+	local unitInfo = GameInfo.Units[unit:GetType()];
+	local cost = unitInfo.Cost;
+	local resourceType = unitInfo.StrategicResource;
+	local resourceCost = 0;
+	local unitXP2Info = GameInfo.Units_XP2[unitInfo.UnitType];
+	if unitXP2Info ~= nil then
+		resourceCost = unitXP2Info.ResourceCost;
+	end
+	local resourceCostMultiplier = 0;
+	if resourceType ~= nil then
+		resourceCostMultiplier = GlobalParameters['RECYCLING_PLANT_' .. resourceType .. '_MULTIPLIER'] or 0;
+	end
+	local gold = RECYCLING_PLANT_PRODUCTION_PERCENT * cost / 100 + resourceCostMultiplier * resourceCost;
+	local player = Players[playerId];
+	player:GetTreasury():ChangeGoldBalance(gold);
     
 	local location = unit:GetLocation();
 	local x = location.x;
 	local y = location.y;
-    Game.AddWorldViewText(playerId, '+' .. gold ..' [ICON_GOLD]', x, y);
+	Game.AddWorldViewText(playerId, '+' .. gold ..' [ICON_GOLD]', x, y);
 
-    -- original version: provides production
-    -- local production = costRate * cost / 100 + resourceCostMultiplier * resourceCost;
-	-- local district = CityManager.GetDistrictAt(x, y);
-	-- local city = district:GetCity();
-    -- city:GetBuildQueue():AddProgress(production);
 end
 GameEvents.HDRecyclingPlantRecycle.Add(HDRecyclingPlantRecycle);
 
 -- 奇琴伊察献祭，by xiaoxiao
 local SACRIFICED_CHICHEN_ITZA_KEY = 'SACRIFICED_CHICHEN_ITZA';
 function HDChiChenItzaSacrifice (playerId, unitId)
-    local player = Players[playerId];
-    local unit = UnitManager.GetUnit(playerId, unitId);
-    local unitInfo = GameInfo.Units[unit:GetType()];
-    local unitType = unitInfo.UnitType;
+	local player = Players[playerId];
+	local unit = UnitManager.GetUnit(playerId, unitId);
+	local unitInfo = GameInfo.Units[unit:GetType()];
+	local unitType = unitInfo.UnitType;
 	local sacrificed = player:GetProperty(SACRIFICED_CHICHEN_ITZA_KEY) or {};
-    sacrificed[unitType] = 1;
-    player:SetProperty(SACRIFICED_CHICHEN_ITZA_KEY, sacrificed);
-    local cost = unitInfo.Combat;
-    local award = math.floor(cost * GlobalParameters.CHICHEN_ITZA_PERCENTAGE / 100);
-    if award < 1 then
-        award = 1;
-    end
-    for i = 1, award do
-        player:AttachModifierByID('CHICHEN_ITZA_SACRIFICE_FAITH');
-        player:AttachModifierByID('CHICHEN_ITZA_SACRIFICE_CULTURE');
-    end
+	sacrificed[unitType] = 1;
+	player:SetProperty(SACRIFICED_CHICHEN_ITZA_KEY, sacrificed);
+	local cost = unitInfo.Combat;
+	local award = math.floor(cost * GlobalParameters.CHICHEN_ITZA_PERCENTAGE / 100);
+	if award < 1 then
+		award = 1;
+	end
+	for i = 1, award do
+		player:AttachModifierByID('CHICHEN_ITZA_SACRIFICE_FAITH');
+		player:AttachModifierByID('CHICHEN_ITZA_SACRIFICE_CULTURE');
+	end
 end
 GameEvents.HDChiChenItzaSacrifice.Add(HDChiChenItzaSacrifice);
-
--- 高德院剃度出家，by xiaoxiao
-function HDKotokuInPravrajya (playerId, unitId)
-    local player = Players[playerId];
-    player:AttachModifierByID('KOTOKU_IN_GRANTS_CIVILIAN_MONK');
-end
-GameEvents.HDKotokuInPravrajya.Add(HDKotokuInPravrajya);
 
 -- 津巴布韦探路者，by xiaoxiao
 local PATHFINDER_RESOURCE_KEY = "PATHFINDER_RESOURCE";
 local PATHFINDER_TIME_KEY = "PATHFINDER_TIME";
 function HDPathfinderRecord (playerId, unitId)
-    local unit = UnitManager.GetUnit(playerId, unitId);
+	local unit = UnitManager.GetUnit(playerId, unitId);
 	local location = unit:GetLocation();
 	local plot = Map.GetPlot(location.x, location.y);
 	local resourceId = plot:GetResourceType();
@@ -106,7 +320,7 @@ function HDPathfinderRecord (playerId, unitId)
 end
 GameEvents.HDPathfinderRecord.Add(HDPathfinderRecord);
 function HDPathfinderPlant (playerId, unitId)
-    local unit = UnitManager.GetUnit(playerId, unitId);
+	local unit = UnitManager.GetUnit(playerId, unitId);
 	local location = unit:GetLocation();
 	local plot = Map.GetPlot(location.x, location.y);
 	local resourceId = unit:GetProperty(PATHFINDER_RESOURCE_KEY);
@@ -119,370 +333,372 @@ GameEvents.HDPathfinderPlant.Add(HDPathfinderPlant);
 
 --获取单位级别
 function UnitGetLevelNum (playerId, unitId)
-    local pUnit = UnitManager.GetUnit(playerId, unitId);
-    local level = 0;
-    for row in GameInfo.UnitPromotions() do
-        if (row ~= nil) and (pUnit:GetExperience() ~= nil) and (pUnit:GetExperience():HasPromotion(row.Index)) then
-            level = level + 1;
-        end
-    end
-    return level;
+	local pUnit = UnitManager.GetUnit(playerId, unitId);
+	local level = 0;
+	for row in GameInfo.UnitPromotions() do
+		if (row ~= nil) and (pUnit:GetExperience() ~= nil) and (pUnit:GetExperience():HasPromotion(row.Index)) then
+			level = level + 1;
+		end
+	end
+	return level;
 end
 
 --间谍
 function PromotionSpyOffensiveMission (playerId, pPlotIndex, SpyName, SpyOperationId)
-    local PromotionSpyChaosIndex = GameInfo.UnitPromotions['PROMOTION_SPY_CHAOS'].Index;
-    local PromotionSpySeniorCheaterIndex = GameInfo.UnitPromotions['PROMOTION_SPY_SENIOR_CHEATER'].Index;
-    local PromotionSpyScholarIndex = GameInfo.UnitPromotions['PROMOTION_SPY_SCHOLAR'].Index;
-    local PromotionSpyHeroesIndex = GameInfo.UnitPromotions['PROMOTION_SPY_HEROES'].Index;
+	local PromotionSpyChaosIndex = GameInfo.UnitPromotions['PROMOTION_SPY_CHAOS'].Index;
+	local PromotionSpySeniorCheaterIndex = GameInfo.UnitPromotions['PROMOTION_SPY_SENIOR_CHEATER'].Index;
+	local PromotionSpyScholarIndex = GameInfo.UnitPromotions['PROMOTION_SPY_SCHOLAR'].Index;
+	local PromotionSpyHeroesIndex = GameInfo.UnitPromotions['PROMOTION_SPY_HEROES'].Index;
 
-    local PolicyWallBreakerIndex = GameInfo.Policies['POLICY_WALLBREAKER'].Index;
-    local BuildingWallsEarlyIndex = GameInfo.Buildings['BUILDING_WALLS_EARLY'].Index;
-    local BuildingWallsIndex = GameInfo.Buildings['BUILDING_WALLS'].Index;
-    local BuildingCastleIndex = GameInfo.Buildings['BUILDING_CASTLE'].Index;
-    local BuildingStarFortIndex = GameInfo.Buildings['BUILDING_STAR_FORT'].Index;
-    local BuildingTsikneIndex = GameInfo.Buildings['BUILDING_TSIKHE'].Index;
+	local PolicyWallBreakerIndex = GameInfo.Policies['POLICY_WALLBREAKER'].Index;
+	local BuildingWallsEarlyIndex = GameInfo.Buildings['BUILDING_WALLS_EARLY'].Index;
+	local BuildingWallsIndex = GameInfo.Buildings['BUILDING_WALLS'].Index;
+	local BuildingCastleIndex = GameInfo.Buildings['BUILDING_CASTLE'].Index;
+	local BuildingStarFortIndex = GameInfo.Buildings['BUILDING_STAR_FORT'].Index;
+	local BuildingTsikneIndex = GameInfo.Buildings['BUILDING_TSIKHE'].Index;
 
-    local PolicyScholarSpiritIndex = GameInfo.Policies['POLICY_SCHOLAR_SPIRIT'].Index;
-    local PolicySpyHeroesIndex = GameInfo.Policies['POLICY_SPY_HEROES'].Index;
+	local PolicyScholarSpiritIndex = GameInfo.Policies['POLICY_SCHOLAR_SPIRIT'].Index;
+	local PolicySpyHeroesIndex = GameInfo.Policies['POLICY_SPY_HEROES'].Index;
 
-    local pPlayer = Players[playerId];
-    local pPlot = Map.GetPlotByIndex(pPlotIndex);
-    local city = Cities.GetPlotPurchaseCity(pPlot);
-    local SpyOperationType = GameInfo.UnitOperations[SpyOperationId].OperationType;
-    local pUnit = nil;
+	local pPlayer = Players[playerId];
+	local pPlot = Map.GetPlotByIndex(pPlotIndex);
+	local city = Cities.GetPlotPurchaseCity(pPlot);
+	local SpyOperationType = GameInfo.UnitOperations[SpyOperationId].OperationType;
+	local pUnit = nil;
 
-    for i, tUnit in pPlayer:GetUnits():Members() do
-        if tUnit:GetName() == SpyName then
-            pUnit = tUnit;
-        end
-    end
-    local pUnitX = pUnit:GetX();
-    local pUnitY = pUnit:GetY();
-    local unitId = pUnit:GetID();
-    local level = UnitGetLevelNum (playerId, unitId);
+	for i, tUnit in pPlayer:GetUnits():Members() do
+		if tUnit:GetName() == SpyName then
+			pUnit = tUnit;
+		end
+	end
+	local pUnitX = pUnit:GetX();
+	local pUnitY = pUnit:GetY();
+	local unitId = pUnit:GetID();
+	local level = UnitGetLevelNum (playerId, unitId);
 
-    local Amount = 0;
-    --间谍晋升
-    if (SpyOperationType ~= 'UNITOPERATION_SPY_LISTENING_POST') and (SpyOperationType ~= 'UNITOPERATION_SPY_COUNTERSPY') then
-        --煽动减人口
-        if (pUnit:GetExperience():HasPromotion(PromotionSpyChaosIndex)) and (city:GetOwner() ~= playerId) then
-            if city:GetPopulation() > 1 then
-                city:ChangePopulation(-1);
-                Game.AddWorldViewText(0, "-1 [ICON_CITIZEN]", city:GetX(), city:GetY());
-            end
-        end
+	local Amount = 0;
+	--间谍晋升
+	if (SpyOperationType ~= 'UNITOPERATION_SPY_LISTENING_POST') and (SpyOperationType ~= 'UNITOPERATION_SPY_COUNTERSPY') then
+		--煽动减人口
+		if (pUnit:GetExperience():HasPromotion(PromotionSpyChaosIndex)) and (city:GetOwner() ~= playerId) then
+			if city:GetPopulation() > 1 then
+				city:ChangePopulation(-1);
+				Game.AddWorldViewText(0, "-1 [ICON_CITIZEN]", city:GetX(), city:GetY());
+			end
+		end
 
-        --盗窃团伙给钱
-        if (pUnit:GetExperience():HasPromotion(PromotionSpySeniorCheaterIndex)) and (city:GetOwner() ~= playerId) then
-            Amount = level * 40;
-            pPlayer:GetTreasury():ChangeGoldBalance(Amount);
-            Game.AddWorldViewText(0, "+" .. Amount .. " [ICON_GOLD]", pUnitX, pUnitY);
-        end
+		--盗窃团伙给钱
+		if (pUnit:GetExperience():HasPromotion(PromotionSpySeniorCheaterIndex)) and (city:GetOwner() ~= playerId) then
+			Amount = level * 40;
+			pPlayer:GetTreasury():ChangeGoldBalance(Amount);
+			Game.AddWorldViewText(0, "+" .. Amount .. " [ICON_GOLD]", pUnitX, pUnitY);
+		end
 
-        --犯罪天才给瓶琴
-        if (pUnit:GetExperience():HasPromotion(PromotionSpyScholarIndex)) and (city:GetOwner() ~= playerId) then
-            pPlayer:GetTechs():ChangeCurrentResearchProgress(50);
-            pPlayer:GetCulture():ChangeCurrentCulturalProgress(50);
-            Game.AddWorldViewText(0, "+ 50 [ICON_SCIENCE]", pUnitX, pUnitY);
-            Game.AddWorldViewText(0, "+ 50 [ICON_CULTURE]", pUnitX, pUnitY);
-        end
+		--犯罪天才给瓶琴
+		if (pUnit:GetExperience():HasPromotion(PromotionSpyScholarIndex)) and (city:GetOwner() ~= playerId) then
+			pPlayer:GetTechs():ChangeCurrentResearchProgress(50);
+			pPlayer:GetCulture():ChangeCurrentCulturalProgress(50);
+			Game.AddWorldViewText(0, "+ 50 [ICON_SCIENCE]", pUnitX, pUnitY);
+			Game.AddWorldViewText(0, "+ 50 [ICON_CULTURE]", pUnitX, pUnitY);
+		end
 
-        --英豪升级
-        if (pUnit:GetExperience():HasPromotion(PromotionSpyHeroesIndex)) and (city:GetOwner() ~= playerId) then
-            for i, unit in pPlayer:GetUnits():Members() do
-                local unitInfo = GameInfo.Units[unit:GetType()];
-                local unitTypeName = unitInfo.UnitType;
-                local unitX = unit:GetX();
-                local unitY = unit:GetY();
-                local unitLevel = UnitGetLevelNum (playerId, unit:GetID());
-    
-                if unitTypeName == "UNIT_SPY" then
-                -- if Utils.IsUnitPromotionPromotion(pUnit:GetType(), "PROMOTION_CLASS_SPY") then
-                    local plots = Map.GetNeighborPlots(pUnitX, pUnitY, 9);
-                    for j, adjPlot in ipairs(plots) do
-	                    if (unitX == adjPlot:GetX()) and (unitY == adjPlot:GetY()) and (unitLevel <= 2) then
-                            local exps = unit:GetExperience():GetExperienceForNextLevel();
-                            unit:GetExperience():ChangeExperience(exps);
-                        end
-                    end
-                end
-            end
-        end
-        --间谍政策
-        --判断有没有挂卡
-        --城墙破坏者
-        if pPlayer:GetCulture():IsPolicyActive(PolicyWallBreakerIndex) then
-            --2级间谍破坏简易远古城墙
-            if level >= 2 then
-                if city:GetBuildings():HasBuilding(BuildingWallsEarlyIndex) and not city:GetBuildings():IsPillaged(BuildingWallsEarlyIndex) then
-                    city:GetBuildings():RemoveBuilding(BuildingWallsEarlyIndex);
-                    -- city:GetBuildings():SetPillaged(BuildingWallsIndex, true)
-                end
-            end
-            --2级间谍破坏远古城墙
-            if level >= 2 then
-                if city:GetBuildings():HasBuilding(BuildingWallsIndex) and not city:GetBuildings():IsPillaged(BuildingWallsIndex) then
-                    city:GetBuildings():RemoveBuilding(BuildingWallsIndex);
-                    -- city:GetBuildings():SetPillaged(BuildingWallsIndex, true)
-                end
-            end
-            --3级间谍破坏中世纪城墙
-            if level >= 3 then
-                if city:GetBuildings():HasBuilding(BuildingCastleIndex) and not city:GetBuildings():IsPillaged(BuildingCastleIndex) then
-                    city:GetBuildings():RemoveBuilding(BuildingCastleIndex);
-                    -- city:GetBuildings():SetPillaged(BuildingCastleIndex, true)
-                end
-                if city:GetBuildings():HasBuilding(BuildingTsikneIndex) and not city:GetBuildings():IsPillaged(BuildingTsikneIndex) then
-                    city:GetBuildings():RemoveBuilding(BuildingTsikneIndex);
-                    -- city:GetBuildings():SetPillaged(BuildingTsikneIndex, true)
-                end
-            end
-            --4级间谍破坏文艺复兴城墙或城堡
-            if level ==4 then
-                if city:GetBuildings():HasBuilding(BuildingStarFortIndex) and not city:GetBuildings():IsPillaged(BuildingStarFortIndex) then
-                    city:GetBuildings():RemoveBuilding(BuildingStarFortIndex);
-                    -- city:GetBuildings():SetPillaged(BuildingStarFortIndex, true)
-                end
-            end
-        end
-        --学者精神
-        if pPlayer:GetCulture():IsPolicyActive(PolicyScholarSpiritIndex) then
-            --遍历所有单位，如果存在犯罪天才则使获取瓶琴的数量翻倍
-            local ScholarHad = false;
-            for i, Sunit in pPlayer:GetUnits():Members() do
-                if Sunit:GetExperience():HasPromotion(PromotionSpyScholarIndex) then
-                    ScholarHad = true;
-                end
-            end
-            if ScholarHad == false then
-                Amount = level * 5;
-            else
-                Amount = level * 10;
-            end
-            pPlayer:GetTechs():ChangeCurrentResearchProgress(Amount);
-            pPlayer:GetCulture():ChangeCurrentCulturalProgress(Amount);
-            Game.AddWorldViewText(0, "+" .. Amount .. " [ICON_SCIENCE]", pUnitX, pUnitY);
-            Game.AddWorldViewText(0, "+" .. Amount .. " [ICON_CULTURE]", pUnitX, pUnitY);
-        end
-        --游击精英
-        if pPlayer:GetCulture():IsPolicyActive(PolicySpyHeroesIndex) then
-            if (pUnit:GetExperience():HasPromotion(PromotionSpyHeroesIndex)) and (city:GetOwner() ~= playerId) then
-                for i, unit in pPlayer:GetUnits():Members() do
-                    local unitInfo = GameInfo.Units[unit:GetType()];
-                    local unitTypeName = unitInfo.UnitType;
-                    local unitFormationClass = unitInfo.FormationClass;
-                    local unitX = unit:GetX();
-                    local unitY = unit:GetY();
-                    local unitLevel = UnitGetLevelNum (playerId, unit:GetID());
-        
-                    if (unitFormationClass ~= "FORMATION_CLASS_CIVILIAN") and (unitFormationClass ~= "FORMATION_CLASS_SUPPORT") then
-                        local plots = Map.GetNeighborPlots(pUnitX, pUnitY, 6);
-                        for j, adjPlot in ipairs(plots) do
-                            if (unitX == adjPlot:GetX()) and (unitY == adjPlot:GetY()) and (unitLevel <= 2) then
-                                local exps = unit:GetExperience():GetExperienceForNextLevel();
-                                unit:GetExperience():ChangeExperience(exps);
-                            end
-                            if (unitX == adjPlot:GetX()) and (unitY == adjPlot:GetY()) and (unitLevel > 2) then
-                                unit:ChangeDamage(-30)
-                            end
-                        end
-                    end
-                end
-            end
-        end
-        --如果间谍是3级则获得1次晋升
-        if level == 3 and pPlayer:IsHuman() then 
-            local Spyexps = pUnit:GetExperience():GetExperienceForNextLevel()
-            pUnit:GetExperience():ChangeExperience(Spyexps);
-        end
-        --间谍完成进攻性任务时获得+1时代得分
-        Game.GetEras():ChangePlayerEraScore(playerId, 1);
-        NotificationManager.SendNotification(playerId, "NOTIFICATION_PRIDE_MOMENT_RECORDED", "LOC_NOTIFIER_OFFENSIVE_MISSION_ERASCORE");
-    end
+		--英豪升级
+		if (pUnit:GetExperience():HasPromotion(PromotionSpyHeroesIndex)) and (city:GetOwner() ~= playerId) then
+			for i, unit in pPlayer:GetUnits():Members() do
+				local unitInfo = GameInfo.Units[unit:GetType()];
+				local unitTypeName = unitInfo.UnitType;
+				local unitX = unit:GetX();
+				local unitY = unit:GetY();
+				local unitLevel = UnitGetLevelNum (playerId, unit:GetID());
+
+				if unitTypeName == "UNIT_SPY" then
+					local plots = Map.GetNeighborPlots(pUnitX, pUnitY, 9);
+					for j, adjPlot in ipairs(plots) do
+						if (unitX == adjPlot:GetX()) and (unitY == adjPlot:GetY()) and (unitLevel <= 2) then
+							local exps = unit:GetExperience():GetExperienceForNextLevel();
+							unit:GetExperience():ChangeExperience(exps);
+						end
+					end
+				end
+			end
+		end
+		--间谍政策
+		--判断有没有挂卡
+		--城墙破坏者
+		if pPlayer:GetCulture():IsPolicyActive(PolicyWallBreakerIndex) then
+			--2级间谍破坏简易远古城墙
+			if level >= 2 then
+				if city:GetBuildings():HasBuilding(BuildingWallsEarlyIndex) and not city:GetBuildings():IsPillaged(BuildingWallsEarlyIndex) then
+					city:GetBuildings():RemoveBuilding(BuildingWallsEarlyIndex);
+					-- city:GetBuildings():SetPillaged(BuildingWallsIndex, true)
+				end
+			end
+			--2级间谍破坏远古城墙
+			if level >= 2 then
+				if city:GetBuildings():HasBuilding(BuildingWallsIndex) and not city:GetBuildings():IsPillaged(BuildingWallsIndex) then
+					city:GetBuildings():RemoveBuilding(BuildingWallsIndex);
+					-- city:GetBuildings():SetPillaged(BuildingWallsIndex, true)
+				end
+			end
+			--3级间谍破坏中世纪城墙
+			if level >= 3 then
+				if city:GetBuildings():HasBuilding(BuildingCastleIndex) and not city:GetBuildings():IsPillaged(BuildingCastleIndex) then
+					city:GetBuildings():RemoveBuilding(BuildingCastleIndex);
+					-- city:GetBuildings():SetPillaged(BuildingCastleIndex, true)
+				end
+				if city:GetBuildings():HasBuilding(BuildingTsikneIndex) and not city:GetBuildings():IsPillaged(BuildingTsikneIndex) then
+					city:GetBuildings():RemoveBuilding(BuildingTsikneIndex);
+					-- city:GetBuildings():SetPillaged(BuildingTsikneIndex, true)
+				end
+			end
+			--4级间谍破坏文艺复兴城墙或城堡
+			if level ==4 then
+				if city:GetBuildings():HasBuilding(BuildingStarFortIndex) and not city:GetBuildings():IsPillaged(BuildingStarFortIndex) then
+					city:GetBuildings():RemoveBuilding(BuildingStarFortIndex);
+					-- city:GetBuildings():SetPillaged(BuildingStarFortIndex, true)
+				end
+			end
+		end
+		--学者精神
+		if pPlayer:GetCulture():IsPolicyActive(PolicyScholarSpiritIndex) then
+			--遍历所有单位，如果存在犯罪天才则使获取瓶琴的数量翻倍
+			local ScholarHad = false;
+			for i, Sunit in pPlayer:GetUnits():Members() do
+				if Sunit:GetExperience():HasPromotion(PromotionSpyScholarIndex) then
+					ScholarHad = true;
+				end
+			end
+			if ScholarHad == false then
+				Amount = level * 5;
+			else
+				Amount = level * 10;
+			end
+			pPlayer:GetTechs():ChangeCurrentResearchProgress(Amount);
+			pPlayer:GetCulture():ChangeCurrentCulturalProgress(Amount);
+			Game.AddWorldViewText(0, "+" .. Amount .. " [ICON_SCIENCE]", pUnitX, pUnitY);
+			Game.AddWorldViewText(0, "+" .. Amount .. " [ICON_CULTURE]", pUnitX, pUnitY);
+		end
+		--游击精英
+		if pPlayer:GetCulture():IsPolicyActive(PolicySpyHeroesIndex) then
+			if (pUnit:GetExperience():HasPromotion(PromotionSpyHeroesIndex)) and (city:GetOwner() ~= playerId) then
+				for i, unit in pPlayer:GetUnits():Members() do
+					local unitInfo = GameInfo.Units[unit:GetType()];
+					local unitTypeName = unitInfo.UnitType;
+					local unitFormationClass = unitInfo.FormationClass;
+					local unitX = unit:GetX();
+					local unitY = unit:GetY();
+					local unitLevel = UnitGetLevelNum (playerId, unit:GetID());
+
+					if (unitFormationClass ~= "FORMATION_CLASS_CIVILIAN") and (unitFormationClass ~= "FORMATION_CLASS_SUPPORT") then
+						local plots = Map.GetNeighborPlots(pUnitX, pUnitY, 6);
+						for j, adjPlot in ipairs(plots) do
+							if (unitX == adjPlot:GetX()) and (unitY == adjPlot:GetY()) and (unitLevel <= 2) then
+								local exps = unit:GetExperience():GetExperienceForNextLevel();
+								unit:GetExperience():ChangeExperience(exps);
+							end
+							if (unitX == adjPlot:GetX()) and (unitY == adjPlot:GetY()) and (unitLevel > 2) then
+								unit:ChangeDamage(-30)
+							end
+						end
+					end
+				end
+			end
+		end
+		--如果间谍是3级则获得1次晋升
+		if level == 3 and pPlayer:IsHuman() then 
+			local Spyexps = pUnit:GetExperience():GetExperienceForNextLevel()
+			pUnit:GetExperience():ChangeExperience(Spyexps);
+		end
+		--间谍完成进攻性任务时获得+1时代得分
+		Game.GetEras():ChangePlayerEraScore(playerId, 1);
+		NotificationManager.SendNotification(playerId, "NOTIFICATION_PRIDE_MOMENT_RECORDED", "LOC_NOTIFIER_OFFENSIVE_MISSION_ERASCORE");
+	end
 end
 
 GameEvents.PromotionSpyOffensiveMissionSwitch.Add(PromotionSpyOffensiveMission);
 
 
 function PromotionSpyPromoted (playerId, unitId)
-    local PromotionSpyLocalInformantIndex = GameInfo.UnitPromotions['PROMOTION_SPY_LOCAL_INFORMANT'].Index;
-    local PromotionSpyWebberIndex = GameInfo.UnitPromotions['PROMOTION_SPY_WEBBER'].Index;
-    local pPlayer = Players[playerId];
-    local pUnit = UnitManager.GetUnit(playerId, unitId);
-    local level = UnitGetLevelNum (playerId, unitId);
-    local pUnitX = pUnit:GetX();
-    local pUnitY = pUnit:GetY();
+	local PromotionSpyLocalInformantIndex = GameInfo.UnitPromotions['PROMOTION_SPY_LOCAL_INFORMANT'].Index;
+	local PromotionSpyWebberIndex = GameInfo.UnitPromotions['PROMOTION_SPY_WEBBER'].Index;
+	local pPlayer = Players[playerId];
+	local pUnit = UnitManager.GetUnit(playerId, unitId);
+	local level = UnitGetLevelNum (playerId, unitId);
+	local pUnitX = pUnit:GetX();
+	local pUnitY = pUnit:GetY();
 
-    if GameInfo.Units[pUnit:GetType()].UnitType ~= 'UNIT_SPY' then
-    -- if not Utils.IsUnitPromotion(pUnit:GetType(), "PROMOTION_CLASS_SPY") then
-        return;
-    end
+	if GameInfo.Units[pUnit:GetType()].UnitType ~= 'UNIT_SPY' then
+	-- if not Utils.IsUnitPromotion(pUnit:GetType(), "PROMOTION_CLASS_SPY") then
+		return;
+	end
 
-    local SpyName = pUnit:GetName();
-    local pPlot = Map.GetPlot(pUnitX, pUnitY);
-    local city = Cities.GetPlotPurchaseCity(pPlot);
+	local SpyName = pUnit:GetName();
+	local pPlot = Map.GetPlot(pUnitX, pUnitY);
+	local city = Cities.GetPlotPurchaseCity(pPlot);
 
-    --因为每个间谍都有自己固定的名字，移动到其他城市后虽然单位id变了，但间谍名字没有变化，通过间谍的名字存储数据可以避免重复触发。
-    --本地线人送新手间谍
-    --当玩家拥有的间谍名对应本地线人的数据不存在时，触发本地线人
-    if pUnit:GetExperience():HasPromotion(PromotionSpyLocalInformantIndex) and pPlayer:GetProperty(SpyName .. "LocalInformant") == nil then
-        UnitManager.InitUnit(playerId, "UNIT_SPY", city:GetX(), city:GetY());
-        -- UnitManager.InitUnit(playerId, GameInfo.Units[pUnit:GetType()].UnitType, city:GetX(), city:GetY());
-        --触发本地线人后，存储玩家拥有的间谍名对应本地线人的数据为true，避免重复触发
-        pPlayer:SetProperty(SpyName .. "LocalInformant", true);
-    end
+	--因为每个间谍都有自己固定的名字，移动到其他城市后虽然单位id变了，但间谍名字没有变化，通过间谍的名字存储数据可以避免重复触发。
+	--本地线人送新手间谍
+	--当玩家拥有的间谍名对应本地线人的数据不存在时，触发本地线人
+	if pUnit:GetExperience():HasPromotion(PromotionSpyLocalInformantIndex) and pPlayer:GetProperty(SpyName .. "LocalInformant") == nil then
+		UnitManager.InitUnit(playerId, "UNIT_SPY", city:GetX(), city:GetY());
+		-- UnitManager.InitUnit(playerId, GameInfo.Units[pUnit:GetType()].UnitType, city:GetX(), city:GetY());
+		--触发本地线人后，存储玩家拥有的间谍名对应本地线人的数据为true，避免重复触发
+		pPlayer:SetProperty(SpyName .. "LocalInformant", true);
+	end
 
-    --幕后织网送间谍并减人口
-    --当玩家拥有的间谍名对应幕后织网的数据不存在时，触发幕后织网
-    if pUnit:GetExperience():HasPromotion(PromotionSpyWebberIndex) and pPlayer:GetProperty(SpyName .. "Webber") == nil then
-        UnitManager.InitUnit(playerId, "UNIT_SPY", city:GetX(), city:GetY());
-        -- UnitManager.InitUnit(playerId, GameInfo.Units[pUnit:GetType()].UnitType, city:GetX(), city:GetY());
-        city:ChangePopulation(-1);
-        Game.AddWorldViewText(0, "-1 [ICON_CITIZEN]", city:GetX(), city:GetY());
-        --触发幕后织网后，存储玩家拥有的间谍名对应幕后织网的数据为true，避免重复触发
-        pPlayer:SetProperty(SpyName .. "Webber", true);
-    end
-    --4级间谍获得逃跑成功率提升的能力
-    if level == 4 and pUnit:GetAbility():GetAbilityCount("ABILITY_LEVEL4_SPY_ESCAPE_INCREASE") == 0 then
-        pUnit:GetAbility():ChangeAbilityCount("ABILITY_LEVEL4_SPY_ESCAPE_INCREASE", 1)
-    end
+	--幕后织网送间谍并减人口
+	--当玩家拥有的间谍名对应幕后织网的数据不存在时，触发幕后织网
+	if pUnit:GetExperience():HasPromotion(PromotionSpyWebberIndex) and pPlayer:GetProperty(SpyName .. "Webber") == nil then
+		UnitManager.InitUnit(playerId, "UNIT_SPY", city:GetX(), city:GetY());
+		-- UnitManager.InitUnit(playerId, GameInfo.Units[pUnit:GetType()].UnitType, city:GetX(), city:GetY());
+		--人口为1时不再减少，否则城市人口会被打到0或负数
+		if city:GetPopulation() > 1 then
+			city:ChangePopulation(-1);
+			Game.AddWorldViewText(0, "-1 [ICON_CITIZEN]", city:GetX(), city:GetY());
+		end
+		--触发幕后织网后，存储玩家拥有的间谍名对应幕后织网的数据为true，避免重复触发
+		pPlayer:SetProperty(SpyName .. "Webber", true);
+	end
+	--4级间谍获得逃跑成功率提升的能力
+	if level == 4 and pUnit:GetAbility():GetAbilityCount("ABILITY_LEVEL4_SPY_ESCAPE_INCREASE") == 0 then
+		pUnit:GetAbility():ChangeAbilityCount("ABILITY_LEVEL4_SPY_ESCAPE_INCREASE", 1)
+	end
 
-    --传奇间谍+3时代得分
-    if level == 4 and pPlayer:GetProperty(SpyName .. "EraScore") == nil then
-        Game.GetEras():ChangePlayerEraScore(playerId, 3);
-        NotificationManager.SendNotification(playerId, "NOTIFICATION_PRIDE_MOMENT_RECORDED", "LOC_NOTIFIER_LEGENDARY_SPY_ERASCORE");
-        pPlayer:SetProperty(SpyName .. "EraScore", true);
-    end
+	--传奇间谍+3时代得分
+	if level == 4 and pPlayer:GetProperty(SpyName .. "EraScore") == nil then
+		Game.GetEras():ChangePlayerEraScore(playerId, 3);
+		NotificationManager.SendNotification(playerId, "NOTIFICATION_PRIDE_MOMENT_RECORDED", "LOC_NOTIFIER_LEGENDARY_SPY_ERASCORE");
+		pPlayer:SetProperty(SpyName .. "EraScore", true);
+	end
 end
 
 Events.UnitPromoted.Add(PromotionSpyPromoted);
 
 --外交密探
 function DiplomaticSpyTurnEnd ()
-    local PromotionSpyDiplomatIndex = GameInfo.UnitPromotions['PROMOTION_SPY_DIPLOMAT'].Index;
-    local PolicyDiplomaticSpyIndex = GameInfo.Policies['POLICY_DIPLOMATIC_SPY'].Index;
+	local PromotionSpyDiplomatIndex = GameInfo.UnitPromotions['PROMOTION_SPY_DIPLOMAT'].Index;
+	local PolicyDiplomaticSpyIndex = GameInfo.Policies['POLICY_DIPLOMATIC_SPY'].Index;
 
-    local SpyInfuluenceAbilityCount = 0;
-    local SpyInfuluenceDoubleAbilityCount = 0;
-    local SpyInfuluenceAbilityChange = 0
-    local SpyInfuluenceDoubleAbilityChange = 0
+	local SpyInfuluenceAbilityCount = 0;
+	local SpyInfuluenceDoubleAbilityCount = 0;
+	local SpyInfuluenceAbilityChange = 0
+	local SpyInfuluenceDoubleAbilityChange = 0
 
-    for _, playerId in pairs(PlayerManager.GetWasEverAliveIDs()) do
-        local pPlayer = Players[playerId];
-        --获取玩家的单位中是否有长袖善舞技能
-        local DiplomatHad = false;
-        for i, pUnit in pPlayer:GetUnits():Members() do
-            if pUnit:GetExperience():HasPromotion(PromotionSpyDiplomatIndex) then
-                DiplomatHad = true;
-            end
-        end
-        --判断是否有外交密探政策卡，有则根据长袖善舞给予影响力点数，没有则移除
-        if pPlayer:GetCulture():IsPolicyActive(PolicyDiplomaticSpyIndex) then
-            if DiplomatHad == false then
-                for j, dUnit in pPlayer:GetUnits():Members() do
-                    if GameInfo.Units[dUnit:GetType()].UnitType == 'UNIT_SPY' then
-                    -- if Utils.IsUnitPromotion(dUnit:GetType(), "PROMOTION_CLASS_SPY") then
-                        --初始化能力
-                        SpyInfuluenceAbilityCount = dUnit:GetAbility():GetAbilityCount("ABILITY_DIPLOMATIC_SPY_INFLUENCE")
-                        SpyInfuluenceDoubleAbilityCount = dUnit:GetAbility():GetAbilityCount("ABILITY_DIPLOMATIC_SPY_INFLUENCE_DOUBLE")
-                        SpyInfuluenceAbilityChange = (SpyInfuluenceAbilityCount ~= 0) and -SpyInfuluenceAbilityCount or 0
-                        SpyInfuluenceDoubleAbilityChange = (SpyInfuluenceDoubleAbilityCount ~= 0) and -SpyInfuluenceDoubleAbilityCount or 0
-                        dUnit:GetAbility():ChangeAbilityCount("ABILITY_DIPLOMATIC_SPY_INFLUENCE", SpyInfuluenceAbilityChange)
-                        dUnit:GetAbility():ChangeAbilityCount("ABILITY_DIPLOMATIC_SPY_INFLUENCE_DOUBLE", SpyInfuluenceDoubleAbilityChange)
-                        --设置能力
-                        dUnit:GetAbility():ChangeAbilityCount("ABILITY_DIPLOMATIC_SPY_INFLUENCE", 1)
-                    end
-                end
-            end
-            if DiplomatHad == true then
-                for j, dUnit in pPlayer:GetUnits():Members() do
-                    if GameInfo.Units[dUnit:GetType()].UnitType == 'UNIT_SPY' then
-                    -- if Utils.IsUnitPromotion(dUnit:GetType(), "PROMOTION_CLASS_SPY") then
-                        SpyInfuluenceAbilityCount = dUnit:GetAbility():GetAbilityCount("ABILITY_DIPLOMATIC_SPY_INFLUENCE")
-                        SpyInfuluenceDoubleAbilityCount = dUnit:GetAbility():GetAbilityCount("ABILITY_DIPLOMATIC_SPY_INFLUENCE_DOUBLE")
-                        SpyInfuluenceAbilityChange = (SpyInfuluenceAbilityCount ~= 0) and -SpyInfuluenceAbilityCount or 0
-                        SpyInfuluenceDoubleAbilityChange = (SpyInfuluenceDoubleAbilityCount ~= 0) and -SpyInfuluenceDoubleAbilityCount or 0
-                        dUnit:GetAbility():ChangeAbilityCount("ABILITY_DIPLOMATIC_SPY_INFLUENCE", SpyInfuluenceAbilityChange)
-                        dUnit:GetAbility():ChangeAbilityCount("ABILITY_DIPLOMATIC_SPY_INFLUENCE_DOUBLE", SpyInfuluenceDoubleAbilityChange)
-                        dUnit:GetAbility():ChangeAbilityCount("ABILITY_DIPLOMATIC_SPY_INFLUENCE_DOUBLE", 1)
-                    end
-                end
-            end
-        else
-            --没挂卡删除能力
-            for j, dUnit in pPlayer:GetUnits():Members() do
-                if GameInfo.Units[dUnit:GetType()].UnitType == 'UNIT_SPY' then
-                -- if Utils.IsUnitPromotion(dUnit:GetType(), "PROMOTION_CLASS_SPY") then
-                    SpyInfuluenceAbilityCount = dUnit:GetAbility():GetAbilityCount("ABILITY_DIPLOMATIC_SPY_INFLUENCE")
-                    SpyInfuluenceDoubleAbilityCount = dUnit:GetAbility():GetAbilityCount("ABILITY_DIPLOMATIC_SPY_INFLUENCE_DOUBLE")
-                    SpyInfuluenceAbilityChange = (SpyInfuluenceAbilityCount ~= 0) and -SpyInfuluenceAbilityCount or 0
-                    SpyInfuluenceDoubleAbilityChange = (SpyInfuluenceDoubleAbilityCount ~= 0) and -SpyInfuluenceDoubleAbilityCount or 0
-                    dUnit:GetAbility():ChangeAbilityCount("ABILITY_DIPLOMATIC_SPY_INFLUENCE", SpyInfuluenceAbilityChange)
-                    dUnit:GetAbility():ChangeAbilityCount("ABILITY_DIPLOMATIC_SPY_INFLUENCE_DOUBLE", SpyInfuluenceDoubleAbilityChange)
-                end
-            end
-        end
-    end
+	for _, playerId in pairs(PlayerManager.GetWasEverAliveIDs()) do
+		local pPlayer = Players[playerId];
+		--获取玩家的单位中是否有长袖善舞技能
+		local DiplomatHad = false;
+		for i, pUnit in pPlayer:GetUnits():Members() do
+			if pUnit:GetExperience():HasPromotion(PromotionSpyDiplomatIndex) then
+				DiplomatHad = true;
+			end
+		end
+		--判断是否有外交密探政策卡，有则根据长袖善舞给予影响力点数，没有则移除
+		if pPlayer:GetCulture():IsPolicyActive(PolicyDiplomaticSpyIndex) then
+			if DiplomatHad == false then
+				for j, dUnit in pPlayer:GetUnits():Members() do
+					if GameInfo.Units[dUnit:GetType()].UnitType == 'UNIT_SPY' then
+					-- if Utils.IsUnitPromotion(dUnit:GetType(), "PROMOTION_CLASS_SPY") then
+						--初始化能力
+						SpyInfuluenceAbilityCount = dUnit:GetAbility():GetAbilityCount("ABILITY_DIPLOMATIC_SPY_INFLUENCE")
+						SpyInfuluenceDoubleAbilityCount = dUnit:GetAbility():GetAbilityCount("ABILITY_DIPLOMATIC_SPY_INFLUENCE_DOUBLE")
+						SpyInfuluenceAbilityChange = (SpyInfuluenceAbilityCount ~= 0) and -SpyInfuluenceAbilityCount or 0
+						SpyInfuluenceDoubleAbilityChange = (SpyInfuluenceDoubleAbilityCount ~= 0) and -SpyInfuluenceDoubleAbilityCount or 0
+						dUnit:GetAbility():ChangeAbilityCount("ABILITY_DIPLOMATIC_SPY_INFLUENCE", SpyInfuluenceAbilityChange)
+						dUnit:GetAbility():ChangeAbilityCount("ABILITY_DIPLOMATIC_SPY_INFLUENCE_DOUBLE", SpyInfuluenceDoubleAbilityChange)
+						--设置能力
+						dUnit:GetAbility():ChangeAbilityCount("ABILITY_DIPLOMATIC_SPY_INFLUENCE", 1)
+					end
+				end
+			end
+			if DiplomatHad == true then
+				for j, dUnit in pPlayer:GetUnits():Members() do
+					if GameInfo.Units[dUnit:GetType()].UnitType == 'UNIT_SPY' then
+					-- if Utils.IsUnitPromotion(dUnit:GetType(), "PROMOTION_CLASS_SPY") then
+						SpyInfuluenceAbilityCount = dUnit:GetAbility():GetAbilityCount("ABILITY_DIPLOMATIC_SPY_INFLUENCE")
+						SpyInfuluenceDoubleAbilityCount = dUnit:GetAbility():GetAbilityCount("ABILITY_DIPLOMATIC_SPY_INFLUENCE_DOUBLE")
+						SpyInfuluenceAbilityChange = (SpyInfuluenceAbilityCount ~= 0) and -SpyInfuluenceAbilityCount or 0
+						SpyInfuluenceDoubleAbilityChange = (SpyInfuluenceDoubleAbilityCount ~= 0) and -SpyInfuluenceDoubleAbilityCount or 0
+						dUnit:GetAbility():ChangeAbilityCount("ABILITY_DIPLOMATIC_SPY_INFLUENCE", SpyInfuluenceAbilityChange)
+						dUnit:GetAbility():ChangeAbilityCount("ABILITY_DIPLOMATIC_SPY_INFLUENCE_DOUBLE", SpyInfuluenceDoubleAbilityChange)
+						dUnit:GetAbility():ChangeAbilityCount("ABILITY_DIPLOMATIC_SPY_INFLUENCE_DOUBLE", 1)
+					end
+				end
+			end
+		else
+			--没挂卡删除能力
+			for j, dUnit in pPlayer:GetUnits():Members() do
+				if GameInfo.Units[dUnit:GetType()].UnitType == 'UNIT_SPY' then
+				-- if Utils.IsUnitPromotion(dUnit:GetType(), "PROMOTION_CLASS_SPY") then
+					SpyInfuluenceAbilityCount = dUnit:GetAbility():GetAbilityCount("ABILITY_DIPLOMATIC_SPY_INFLUENCE")
+					SpyInfuluenceDoubleAbilityCount = dUnit:GetAbility():GetAbilityCount("ABILITY_DIPLOMATIC_SPY_INFLUENCE_DOUBLE")
+					SpyInfuluenceAbilityChange = (SpyInfuluenceAbilityCount ~= 0) and -SpyInfuluenceAbilityCount or 0
+					SpyInfuluenceDoubleAbilityChange = (SpyInfuluenceDoubleAbilityCount ~= 0) and -SpyInfuluenceDoubleAbilityCount or 0
+					dUnit:GetAbility():ChangeAbilityCount("ABILITY_DIPLOMATIC_SPY_INFLUENCE", SpyInfuluenceAbilityChange)
+					dUnit:GetAbility():ChangeAbilityCount("ABILITY_DIPLOMATIC_SPY_INFLUENCE_DOUBLE", SpyInfuluenceDoubleAbilityChange)
+				end
+			end
+		end
+	end
 end
 
 Events.TurnEnd.Add(DiplomaticSpyTurnEnd);
 
 --酷吏
 function SpyInquisitorTurnEnd ()
-    local PromotionSpyInquisitorIndex = GameInfo.UnitPromotions['PROMOTION_SPY_INQUISITOR'].Index;
-    local PolicySpyInquisitorIndex = GameInfo.Policies['POLICY_SPY_INQUISITOR'].Index;
+	local PromotionSpyInquisitorIndex = GameInfo.UnitPromotions['PROMOTION_SPY_INQUISITOR'].Index;
+	local PolicySpyInquisitorIndex = GameInfo.Policies['POLICY_SPY_INQUISITOR'].Index;
 
-    local SpyFoodProductionAbilityCount = 0;
-    local SpyFoodProductionAbilityChange = 0
+	local SpyFoodProductionAbilityCount = 0;
+	local SpyFoodProductionAbilityChange = 0
 
-    for _, playerId in pairs(PlayerManager.GetWasEverAliveIDs()) do
-        local pPlayer = Players[playerId];
+	for _, playerId in pairs(PlayerManager.GetWasEverAliveIDs()) do
+		local pPlayer = Players[playerId];
 
-        --判断是否有酷吏政策卡，有则給予严刑逼供粮锤能力，没有则移除
-        if pPlayer:GetCulture():IsPolicyActive(PolicySpyInquisitorIndex) then
-            --获取玩家拥有严刑逼供的单位
-            for i, pUnit in pPlayer:GetUnits():Members() do
-                --如果间谍拥有严刑逼供，获取粮锤能力
-                if GameInfo.Units[pUnit:GetType()].UnitType == 'UNIT_SPY' and pUnit:GetExperience():HasPromotion(PromotionSpyInquisitorIndex) then
-                -- if Utils.IsUnitPromotion(pUnit:GetType(), "PROMOTION_CLASS_SPY") and pUnit:GetExperience():HasPromotion(PromotionSpyInquisitorIndex) then
-                    --初始化能力
-                    SpyFoodProductionAbilityCount = pUnit:GetAbility():GetAbilityCount("ABILITY_SPY_FOOD_PRODUCTION")
-                    SpyFoodProductionAbilityChange = (SpyFoodProductionAbilityCount ~= 0) and -SpyFoodProductionAbilityCount or 0
-                    pUnit:GetAbility():ChangeAbilityCount("ABILITY_SPY_FOOD_PRODUCTION", SpyFoodProductionAbilityChange)
-                    --赋予能力
-                    pUnit:GetAbility():ChangeAbilityCount("ABILITY_SPY_FOOD_PRODUCTION", 1);
-                end
-            end
-        else
-            for j, dUnit in pPlayer:GetUnits():Members() do
-                if GameInfo.Units[dUnit:GetType()].UnitType == 'UNIT_SPY' then
-                -- if Utils.IsUnitPromotion(dUnit:GetType(), "PROMOTION_CLASS_SPY") then
-                    --初始化能力
-                    SpyFoodProductionAbilityCount = dUnit:GetAbility():GetAbilityCount("ABILITY_SPY_FOOD_PRODUCTION")
-                    SpyFoodProductionAbilityChange = (SpyFoodProductionAbilityCount ~= 0) and -SpyFoodProductionAbilityCount or 0
-                    dUnit:GetAbility():ChangeAbilityCount("ABILITY_SPY_FOOD_PRODUCTION", SpyFoodProductionAbilityChange)
-                end
-            end
-        end
-    end
+		--判断是否有酷吏政策卡，有则給予严刑逼供粮锤能力，没有则移除
+		if pPlayer:GetCulture():IsPolicyActive(PolicySpyInquisitorIndex) then
+			--获取玩家拥有严刑逼供的单位
+			for i, pUnit in pPlayer:GetUnits():Members() do
+				--如果间谍拥有严刑逼供，获取粮锤能力
+				if GameInfo.Units[pUnit:GetType()].UnitType == 'UNIT_SPY' and pUnit:GetExperience():HasPromotion(PromotionSpyInquisitorIndex) then
+				-- if Utils.IsUnitPromotion(pUnit:GetType(), "PROMOTION_CLASS_SPY") and pUnit:GetExperience():HasPromotion(PromotionSpyInquisitorIndex) then
+					--初始化能力
+					SpyFoodProductionAbilityCount = pUnit:GetAbility():GetAbilityCount("ABILITY_SPY_FOOD_PRODUCTION")
+					SpyFoodProductionAbilityChange = (SpyFoodProductionAbilityCount ~= 0) and -SpyFoodProductionAbilityCount or 0
+					pUnit:GetAbility():ChangeAbilityCount("ABILITY_SPY_FOOD_PRODUCTION", SpyFoodProductionAbilityChange)
+					--赋予能力
+					pUnit:GetAbility():ChangeAbilityCount("ABILITY_SPY_FOOD_PRODUCTION", 1);
+				end
+			end
+		else
+			for j, dUnit in pPlayer:GetUnits():Members() do
+				if GameInfo.Units[dUnit:GetType()].UnitType == 'UNIT_SPY' then
+				-- if Utils.IsUnitPromotion(dUnit:GetType(), "PROMOTION_CLASS_SPY") then
+					--初始化能力
+					SpyFoodProductionAbilityCount = dUnit:GetAbility():GetAbilityCount("ABILITY_SPY_FOOD_PRODUCTION")
+					SpyFoodProductionAbilityChange = (SpyFoodProductionAbilityCount ~= 0) and -SpyFoodProductionAbilityCount or 0
+					dUnit:GetAbility():ChangeAbilityCount("ABILITY_SPY_FOOD_PRODUCTION", SpyFoodProductionAbilityChange)
+				end
+			end
+		end
+	end
 end
 
 Events.TurnEnd.Add(SpyInquisitorTurnEnd);
 
 function SetSpySkillTreeUnlock (iPlayerID, I,J, spyname)
-    local pPlayer = Players[iPlayerID];
-    pPlayer:SetProperty("SPY_SKILL_TREE" .. I .. J .. spyname .. "Unlock", true) -- 技能树存表
+	local pPlayer = Players[iPlayerID];
+	pPlayer:SetProperty("SPY_SKILL_TREE" .. I .. J .. spyname .. "Unlock", true) -- 技能树存表
 end
 
 function SetSpySkillTreelock (iPlayerID, I,J, spyname)
-    local pPlayer = Players[iPlayerID];
-    pPlayer:SetProperty("SPY_SKILL_TREE" .. I .. J .. spyname .. "Unlock", false) -- 技能树存表
+	local pPlayer = Players[iPlayerID];
+	pPlayer:SetProperty("SPY_SKILL_TREE" .. I .. J .. spyname .. "Unlock", false) -- 技能树存表
 end
 
 function GetSpySkillTreeUnlock (iPlayerID, I, J, spyname)
-    local pPlayer = Players[iPlayerID];
-    return pPlayer:GetProperty("SPY_SKILL_TREE" .. I .. J .. spyname .. "Unlock") -- 读取技能树
+	local pPlayer = Players[iPlayerID];
+	return pPlayer:GetProperty("SPY_SKILL_TREE" .. I .. J .. spyname .. "Unlock") -- 读取技能树
 end
 
 ExposedMembers.SPYPROMOTION = ExposedMembers.SPYPROMOTION or {}

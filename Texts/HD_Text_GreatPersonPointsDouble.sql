@@ -37,7 +37,7 @@ values
     ("zh_Hans_CN",  "LOC_EMERGENCY_REWARD_WORLD_FAIR_FIRST_PLACE_GREAT_PERSON_POINTS_DESCRIPTION",   "200点 [ICON_GREATPERSON] 伟人点数"),
     -- ("zh_Hans_CN",  "LOC_POLICY_FRESCOES_DESCRIPTION_XP2",                                           "+4 [ICON_GreatArtist] 大艺术家点数。每有一座艺术博物馆，每回合的 [ICON_GreatArtist] 大艺术家点数便+4。"),
     ("zh_Hans_CN",  "LOC_POLICY_INSPIRATION_DESCRIPTION",                                            "+4 [ICON_GreatScientist] 大科学家点数。"),
-    -- ("zh_Hans_CN",  "LOC_POLICY_INVENTION_DESCRIPTION_XP2",                                          "每回合的 [ICON_GreatEngineer] 大工程师点数+8。每有一座工作坊，每回合的 [ICON_GreatEngineer] 大工程师点数便+4。"),
+    -- ("zh_Hans_CN",  "LOC_POLICY_INVENTION_DESCRIPTION_XP2",                                          "每回合的 [ICON_GreatEngineer] 大工程师点数+8。每有一座建造工坊，每回合的 [ICON_GreatEngineer] 大工程师点数便+4。"),
     -- ("zh_Hans_CN",  "LOC_POLICY_LAISSEZ_FAIRE_DESCRIPTION_XP2",                                      "每有一座银行，每回合的 [ICON_GreatMerchant] 大商人点数便+4；每有一座证券交易所，每回合的 [ICON_GreatMerchant] 大商人点数便+8。每有一座造船厂，每回合的 [ICON_GreatAdmiral] 海军统帅点数便+4；每有一座码头，每回合的 [ICON_GreatAdmiral] 海军统帅点数便+8。"),
     ("zh_Hans_CN",  "LOC_POLICY_LITERARY_TRADITION_DESCRIPTION",                                     "+4 [ICON_GreatWriter] 大作家点数。"),
     -- ("zh_Hans_CN",  "LOC_POLICY_MILITARY_ORGANIZATION_DESCRIPTION_XP2",                              "每有一座兵工厂，每回合的 [ICON_GreatGeneral] 大将军点数便+4；每有一所军事学院，每回合的 [ICON_GreatGeneral] 大将军点数便+8。大将军的移动力+2。"),

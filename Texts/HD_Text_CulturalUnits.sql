@@ -49,7 +49,31 @@ values
     ("LOC_RESULT_CREATIVE_DIFFERENCES_DESCRIPTION",                             "Cast a cold eye, On life, on death. Horseman, pass by!"),
     ("LOC_RESULT_AGING_ROCKERS_DESCRIPTION",                                    "Though the great song return no more There's keen delight in what we have: The rattle of pebbles on the shore Under the receding wave. (Your unit has dissolved)"),
     ("LOC_RESULT_LEGENDS_NEVER_DIE_DESCRIPTION",                                "Hearts are not had as a gift but hearts are earned. (Your unit has dissolved)"),
-    ("LOC_NOTIFICATION_ROCK_BANDS_PROHIBITED_SUMMARY",                          "{LOC_GRAMMAR_LEADER_UPPER &lt;&lt; {1_leader}} {1_leader: plural 1?is; other?are;} now prohibiting foreign culture. Your Cultural Communicators inside their empire have been displaced to a tile just outside their lands.");
+    ("LOC_NOTIFICATION_ROCK_BANDS_PROHIBITED_SUMMARY",                          "{LOC_GRAMMAR_LEADER_UPPER &lt;&lt; {1_leader}} {1_leader: plural 1?is; other?are;} now prohibiting foreign culture. Your Cultural Communicators inside their empire have been displaced to a tile just outside their lands."),
+
+    ("LOC_RESULT_LEGENDS_NEVER_DIE_NAME",                                       "Fallen From Grace"),
+    ("LOC_RESULT_LEGENDS_NEVER_DIE_TIER",                                       "Lowest Tier Performance"),
+
+    ("LOC_UNIT_MALI_GRIOTS_NAME",                                               "Jeli"),
+    ("LOC_UNIT_MALI_GRIOTS_DESCRIPTION",                                        "Malian unique Classical era unit that replaces the Oral Scholar. Performances have 25 additional base performance points and gain 3% [ICON_GOLD] "),
+    ("LOC_ABILITY_MALI_GRIOTS_BASIC_YIELD_HD_DESCRIPTION",                      "Performances have 25 additional base performance points and gain 3% [ICON_GOLD] "),
+    ("LOC_ABILITY_ROCK_BASIC_YIELD_HD_DESCRIPTION",                             "Cultural Communicator performances gain 1% [ICON_GOLD] and 1% [ICON_CULTURE]"),
+
+    ("LOC_ABILITY_ORAL_SCHOLAR_BOMB_ALL_HD_DESCRIPTION",                        "+4% [ICON_Tourism] Tourism output for adjacent Cultural Communicators in civilizations you are at peace with"),
+    ("LOC_ABILITY_TRAVEL_THEATRE_BOMB_ALL_HD_DESCRIPTION",                      "+8% [ICON_Tourism] Tourism output for adjacent Cultural Communicators in civilizations you are at peace with"),
+    ("LOC_ABILITY_ROCK_BAND_BOMB_ALL_HD_DESCRIPTION",                           "+20% [ICON_Tourism] Tourism output for adjacent Cultural Communicators in civilizations you are at peace with"),
+
+    ("LOC_ABILITY_ALL_LAND_UNITS_GREAT_PEOPLE_POINTS_HD_DESCRIPTION",           "Land units gain [ICON_GREATGENERAL] Great General points equal to 25% of the Combat Strength of the major and minor civilization units they kill"),
+    ("LOC_ABILITY_ALL_NAVAL_UNITS_GREAT_PEOPLE_POINTS_HD_DESCRIPTION",          "Naval units gain [ICON_GREATADMIRAL] Great Admiral points equal to 25% of the Combat Strength of the major and minor civilization units they kill"),
+
+    ("LOC_PROMOTION_ACADEMISM_PRE_HD_DESCRIPTION",                              "Allows performances in Campuses without buildings"),
+    ("LOC_PROMOTION_CLASSICISM_PRE_HD_DESCRIPTION",                             "Allows performances in Theater Squares without buildings"),
+    ("LOC_PROMOTION_FISHER_SONG_PRE_HD_DESCRIPTION",                            "Allows performances in Harbors without buildings"),
+    ("LOC_PROMOTION_MYSTICISM_PRE_HD_DESCRIPTION",                              "Allows performances at Natural Wonders and National Parks, and in Holy Sites without buildings"),
+    ("LOC_PROMOTION_PLURALISM_PRE_HD_DESCRIPTION",                              "Allows performances in Industrial Zones without buildings"),
+    ("LOC_PROMOTION_POPULARISM_PRE_HD_DESCRIPTION",                             "Allows performances in Commercial Hubs without buildings"),
+    ("LOC_PROMOTION_REALISM_PRE_HD_DESCRIPTION",                                "Allows performances on Farms and Camps, and in Neighborhoods without buildings"),
+    ("LOC_PROMOTION_ROMANTICISM_PRE_HD_DESCRIPTION",                            "Allows performances in Entertainment Complexes and Water Parks without buildings, and at Seaside Resorts");
 
 -- Language: zh_Hans_CN
 insert or replace into LocalizedText

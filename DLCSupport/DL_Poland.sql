@@ -114,13 +114,18 @@ insert or replace into ModifierArguments (ModifierId, Name, Value) values
 	('HD_SUKIENNICE_SET_CITY_PROPERTY',   					'Key',    					'HD_CITY_HAS_SUKIENNICE'),
 	('HD_SUKIENNICE_SET_CITY_PROPERTY',   					'Amount',    				1);
 
+insert or replace into HD_Binary_Compress_Keys (Key) values
+	('HD_PLOT_BINARY_COMPRESS_SUKIENNICE_1'),
+	('HD_PLOT_BINARY_COMPRESS_SUKIENNICE_2'),
+	('HD_PLOT_BINARY_COMPRESS_SUKIENNICE_3');
+
 -- 商路
 insert or replace into BuildingModifiers (BuildingType, ModifierId) select
 	'BUILDING_SUKIENNICE',	'HD_SUKIENNICE_TRADE_ROUTE_' || Exp
 	from HD_Binary_Compress where Exp < 10;
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId) select
-	'HD_SUKIENNICE_TRADE_ROUTE_' || Exp, 'MODIFIER_PLAYER_ADJUST_TRADE_ROUTE_CAPACITY', 'HD_PLOT_BINARY_COMPRESS_' || Exp || '_1_REQUIREMENTS'
+	'HD_SUKIENNICE_TRADE_ROUTE_' || Exp, 'MODIFIER_PLAYER_ADJUST_TRADE_ROUTE_CAPACITY', 'HD_PLOT_BINARY_COMPRESS_SUKIENNICE_1_' || Exp || '_REQUIREMENTS'
 	from HD_Binary_Compress where Exp < 10;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value) select
@@ -133,7 +138,7 @@ insert or replace into BuildingModifiers (BuildingType, ModifierId) select
 	from HD_Binary_Compress where Exp < 10;
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId) select
-	'HD_SUKIENNICE_DOMESTIC_TRADE_PRODUCTION_' || Exp, 'MODIFIER_SINGLE_CITY_ADJUST_TRADE_ROUTE_YIELD_TO_OTHERS', 'HD_PLOT_BINARY_COMPRESS_' || Exp || '_2_REQUIREMENTS'
+	'HD_SUKIENNICE_DOMESTIC_TRADE_PRODUCTION_' || Exp, 'MODIFIER_SINGLE_CITY_ADJUST_TRADE_ROUTE_YIELD_TO_OTHERS', 'HD_PLOT_BINARY_COMPRESS_SUKIENNICE_2_' || Exp || '_REQUIREMENTS'
 	from HD_Binary_Compress where Exp < 10;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value) select
@@ -154,7 +159,7 @@ insert or replace into BuildingModifiers (BuildingType, ModifierId) select
 	from HD_Binary_Compress where Exp < 10;
 
 insert or replace into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId) select
-	'HD_SUKIENNICE_INTERNATIONAL_TRADE_GOLD_' || Exp, 'MODIFIER_SINGLE_CITY_ADJUST_TRADE_ROUTE_YIELD_FOR_INTERNATIONAL', 'HD_PLOT_BINARY_COMPRESS_' || Exp || '_3_REQUIREMENTS'
+	'HD_SUKIENNICE_INTERNATIONAL_TRADE_GOLD_' || Exp, 'MODIFIER_SINGLE_CITY_ADJUST_TRADE_ROUTE_YIELD_FOR_INTERNATIONAL', 'HD_PLOT_BINARY_COMPRESS_SUKIENNICE_3_' || Exp || '_REQUIREMENTS'
 	from HD_Binary_Compress where Exp < 10;
 
 insert or replace into ModifierArguments (ModifierId, Name, Value) select

@@ -150,21 +150,6 @@ from HD_NEW_CODIFIER;
 -- LA 获得槽位
 insert or replace into TraitModifiers
 	(TraitType,							ModifierId)
-values
-	('TRAIT_LEADER_SEJONG',	'HD_SEJONG_DISTRICT_SEOWON_WRITING_SLOT');
-
-insert or replace into Modifiers
-	(ModifierId,																ModifierType,																							SubjectRequirementSetId)
-values
-	('HD_SEJONG_DISTRICT_SEOWON_WRITING_SLOT',	'MODIFIER_PLAYER_CITIES_GRANT_BUILDING_IN_CITY_IGNORE',		'CITY_HAS_DISTRICT_SEOWON_REQUIREMENTS');
-
-insert or replace into ModifierArguments
-	(ModifierId,																Name,						Value)
-values
-	('HD_SEJONG_DISTRICT_SEOWON_WRITING_SLOT',	'BuildingType',	'BUILDING_SEOWON');
-
-insert or replace into TraitModifiers
-	(TraitType,							ModifierId)
 select
 	'TRAIT_LEADER_SEJONG',	'HD_SEJONG_' || BuildingType || '_WRITING_SLOT'
 from Buildings where PrereqDistrict = 'DISTRICT_CAMPUS' and TraitType is null and BuildingType not in (select BuildingType from HD_DUMMY_BUILDINGS);
@@ -196,15 +181,14 @@ from Buildings where PrereqDistrict = 'DISTRICT_CAMPUS' and TraitType is null an
 insert or replace into MomentIllustrations
 	(MomentIllustrationType, 								MomentDataType,					GameDataType,				Texture)
 values
-	('MOMENT_ILLUSTRATION_UNIQUE_UNIT', 		'MOMENT_DATA_UNIT',			'UNIT_HD_CODIFIER',	'Moment_Infrastructure_Korea.dds'),
-	('MOMENT_ILLUSTRATION_UNIQUE_BUILDING', 'MOMENT_DATA_BUILDING',	'BUILDING_SEOWON',	'Moment_Infrastructure_Korea.dds');
+	('MOMENT_ILLUSTRATION_UNIQUE_UNIT', 		'MOMENT_DATA_UNIT',			'UNIT_HD_CODIFIER',	'Moment_Infrastructure_Korea.dds');
 
 --狄奥多拉la拜占庭的宠儿：圣地和跑马场建成时对相邻单元格释放文化炸弹。建成圣地时获得一个建造者，建成圣地建筑时获得一个人口。创力宗教时可以额外选取一个信条。
 delete from TraitModifiers where TraitType = 'TRAIT_LEADER_THEODORA';
 insert or replace into TraitModifiers
 	(TraitType,					ModifierId)
 values
-	('TRAIT_LEADER_THEODORA',	'THEODORA_ADD_BELIEF'),
+	-- ('TRAIT_LEADER_THEODORA',	'THEODORA_ADD_BELIEF'),
 	('TRAIT_LEADER_THEODORA',	'THEODORA_DISTRICT_HOLY_SITE_CULTURE_BOMB'),
 	('TRAIT_LEADER_THEODORA',	'THEODORA_DISTRICT_HIPPODROME_CULTURE_BOMB');
 
@@ -216,8 +200,14 @@ insert or replace into Modifiers
 values
 	('THEODORA_ADD_BELIEF',								'MODIFIER_PLAYER_ADD_BELIEF',					'PLAYER_HAS_FOUNDED_A_RELIGION'),
 	('THEODORA_DISTRICT_HOLY_SITE_CULTURE_BOMB',		'MODIFIER_PLAYER_ADD_CULTURE_BOMB_TRIGGER',		NULL),
-	('THEODORA_DISTRICT_HIPPODROME_CULTURE_BOMB',		'MODIFIER_PLAYER_ADD_CULTURE_BOMB_TRIGGER',		NULL),
-	('THEODORA_DISTRICT_HOLY_SITE_BUILDING_GRANT_CITIZEN',		'MODIFIER_SINGLE_CITY_ADD_POPULATION',		NULL);
+	('THEODORA_DISTRICT_HIPPODROME_CULTURE_BOMB',		'MODIFIER_PLAYER_ADD_CULTURE_BOMB_TRIGGER',		NULL);
+
+-- 一次性加人口的修正由 Lua 运行时挂载，必须显式声明 RunOnce/Permanent，
+-- 否则每次修正栈重建（读档等）都会重新生效，导致城市人口无上限累加
+insert or replace into Modifiers
+	(ModifierId,										ModifierType,									SubjectRequirementSetId,	RunOnce,	Permanent)
+values
+	('THEODORA_DISTRICT_HOLY_SITE_BUILDING_GRANT_CITIZEN',		'MODIFIER_SINGLE_CITY_ADD_POPULATION',		NULL,						1,			1);
 
 insert or replace into ModifierArguments
 	(ModifierId,										Name,						Value)

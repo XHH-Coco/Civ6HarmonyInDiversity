@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GameInfo>
 	<Maps>
-		<Row Domain="Maps:Expansion2Maps" File="Regular_Pangaea.lua" Name="LOC_MAP_REGULAR_PANGAEA_NAME" Description="LOC_MAP_REGULAR_PANGAEA_DESCRIPTION" Image="Map_Pangaea" SortIndex="1"/>
-		<Row Domain="Maps:Expansion2Maps" File="Tiny_Islands.lua" Name="LOC_MAP_TINY_ISLANDS_NAME" Description="LOC_MAP_TINY_ISLANDS_DESCRIPTION" Image="Map_Achipelago" SortIndex="1"/>
-		<Row Domain="Maps:Expansion2Maps" File="Tiny_Lakes.lua" Name="LOC_MAP_TINY_LAKES_NAME" Description="LOC_MAP_TINY_LAKES_DESCRIPTION" Image="Map_Lakes" SortIndex="1"/>
-		<Row Domain="Maps:Expansion2Maps" File="Wet_Lakes.lua" Name="LOC_MAP_WET_LAKES_NAME" Description="LOC_MAP_WET_LAKES_DESCRIPTION" Image="Map_Wetlands" SortIndex="1"/>
-		<Row Domain="Maps:Expansion2Maps" File="Rivers.lua" Name="LOC_MAP_RIVERS_NAME" Description="LOC_MAP_RIVERS_DESCRIPTION" Image="Map_Lakes" SortIndex="1"/>
+		<Row Domain="Maps:Expansion2Maps" File="Regular_Pangaea.lua" Name="LOC_MAP_REGULAR_PANGAEA_NAME" Description="LOC_MAP_REGULAR_PANGAEA_DESCRIPTION" Image="HD_Regular_Pangaea.dds" SortIndex="1"/>
+		<Row Domain="Maps:Expansion2Maps" File="Tiny_Islands.lua" Name="LOC_MAP_TINY_ISLANDS_NAME" Description="LOC_MAP_TINY_ISLANDS_DESCRIPTION" Image="HD_Tiny_Islands.dds" SortIndex="1"/>
+		<Row Domain="Maps:Expansion2Maps" File="Tiny_Lakes.lua" Name="LOC_MAP_TINY_LAKES_NAME" Description="LOC_MAP_TINY_LAKES_DESCRIPTION" Image="HD_Tiny_Lakes.dds" SortIndex="1"/>
+		<Row Domain="Maps:Expansion2Maps" File="Wet_Lakes.lua" Name="LOC_MAP_WET_LAKES_NAME" Description="LOC_MAP_WET_LAKES_DESCRIPTION" Image="HD_Wet_Lakes.dds" SortIndex="1"/>
+		<Row Domain="Maps:Expansion2Maps" File="Rivers.lua" Name="LOC_MAP_RIVERS_NAME" Description="LOC_MAP_RIVERS_DESCRIPTION" Image="HD_Rivers.dds" SortIndex="1"/>
 		 <!-- 1.3.9新地图 -->
-		<Row Domain="Maps:Expansion2Maps" File="New_Highlands.lua" Name="LOC_MAP_NEW_HIGHLANDS_NAME" Description="LOC_MAP_NEW_HIGHLANDS_DESCRIPTION" Image="Map_Highlands" SortIndex="1"/>
-		<Row Domain="Maps:Expansion2Maps" File="Forest_Highlands.lua" Name="LOC_MAP_FOREST_HIGHLANDS_NAME" Description="LOC_MAP_FOREST_HIGHLANDS_DESCRIPTION" Image="Map_Lakes" SortIndex="1"/>
-		<Row Domain="Maps:Expansion2Maps" File="Wet_Lakes2.lua" Name="LOC_MAP_WET_LAKES2_NAME" Description="LOC_MAP_WET_LAKES2_DESCRIPTION" Image="Map_Wetlands" SortIndex="1"/>
+		<Row Domain="Maps:Expansion2Maps" File="New_Highlands.lua" Name="LOC_MAP_NEW_HIGHLANDS_NAME" Description="LOC_MAP_NEW_HIGHLANDS_DESCRIPTION" Image="HD_New_Highlands.dds" SortIndex="1"/>
+		<Row Domain="Maps:Expansion2Maps" File="Forest_Highlands.lua" Name="LOC_MAP_FOREST_HIGHLANDS_NAME" Description="LOC_MAP_FOREST_HIGHLANDS_DESCRIPTION" Image="HD_Forest_Highlands.dds" SortIndex="1"/>
+		<Row Domain="Maps:Expansion2Maps" File="Wet_Lakes2.lua" Name="LOC_MAP_WET_LAKES2_NAME" Description="LOC_MAP_WET_LAKES2_DESCRIPTION" Image="HD_Wet_Lakes2.dds" SortIndex="1"/>
 		<!-- 1.4新地图 -->
-		<Row Domain="Maps:Expansion2Maps" File="Frozen_Continents.lua" Name="LOC_MAP_FROZEN_CONTINENTS_NAME" Description="LOC_MAP_FROZEN_CONTINENTS_DESCRIPTION" Image="Map_Wetlands" SortIndex="1"/>
-		<Row Domain="Maps:Expansion2Maps" File="Northern_Mountains.lua" Name="LOC_MAP_NORTHERN_MOUNTAINS_NAME" Description="LOC_MAP_NORTHERN_MOUNTAINS_DESCRIPTION" Image="Map_Wetlands" SortIndex="1"/>
-		<Row Domain="Maps:Expansion2Maps" File="Great_Sand_Sea.lua" Name="LOC_MAP_GREAT_SAND_SEA_NAME" Description="LOC_MAP_GREAT_SAND_SEA_DESCRIPTION" Image="Map_Wetlands" SortIndex="1"/>
-		<Row Domain="Maps:Expansion2Maps" File="Great_Steppe.lua" Name="LOC_MAP_GREAT_STEPPE_NAME" Description="LOC_MAP_GREAT_STEPPE_DESCRIPTION" Image="Map_Pangaea" SortIndex="1"/>
-		<Row Domain="Maps:Expansion2Maps" File="Rivers_And_Lakes.lua" Name="LOC_MAP_RIVERS_AND_LAKES_NAME" Description="LOC_MAP_RIVERS_AND_LAKES_DESCRIPTION" Image="Map_Pangaea" SortIndex="1"/>
+		<Row Domain="Maps:Expansion2Maps" File="Frozen_Continents.lua" Name="LOC_MAP_FROZEN_CONTINENTS_NAME" Description="LOC_MAP_FROZEN_CONTINENTS_DESCRIPTION" Image="HD_Frozen_Continents.dds" SortIndex="1"/>
+		<Row Domain="Maps:Expansion2Maps" File="Northern_Mountains.lua" Name="LOC_MAP_NORTHERN_MOUNTAINS_NAME" Description="LOC_MAP_NORTHERN_MOUNTAINS_DESCRIPTION" Image="HD_Northern_Mountains.dds" SortIndex="1"/>
+		<Row Domain="Maps:Expansion2Maps" File="Great_Sand_Sea.lua" Name="LOC_MAP_GREAT_SAND_SEA_NAME" Description="LOC_MAP_GREAT_SAND_SEA_DESCRIPTION" Image="HD_Great_Sand_Sea.dds" SortIndex="1"/>
+		<Row Domain="Maps:Expansion2Maps" File="Great_Steppe.lua" Name="LOC_MAP_GREAT_STEPPE_NAME" Description="LOC_MAP_GREAT_STEPPE_DESCRIPTION" Image="HD_Great_Steppe.dds" SortIndex="1"/>
+		<Row Domain="Maps:Expansion2Maps" File="Rivers_And_Lakes.lua" Name="LOC_MAP_RIVERS_AND_LAKES_NAME" Description="LOC_MAP_RIVERS_AND_LAKES_DESCRIPTION" Image="HD_Rivers_And_Lakes.dds" SortIndex="1"/>
+	
+		<Update>
+			<Where File="Continents_Islands.lua" />
+			<Set Image="HD_ContinentsAndIslands.dds" />
+		</Update>
 	</Maps>
 
 	<Parameters>

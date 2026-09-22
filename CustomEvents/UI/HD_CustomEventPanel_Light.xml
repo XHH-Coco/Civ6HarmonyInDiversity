@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Context Hidden="1">
+	<Container Style="FullScreenVignetteConsumer" />
+
+	<Grid ID="PopupDrowShadowGrid" Anchor="C,C" Offset="0,0" Size="auto,auto" AutoSizePadding="50,50"	Style="DropShadow" >
+		<Image ID="PopupBackgroundImage" Anchor="C,C" Size="auto,auto" AutoSizePadding="-10,-10" Texture="Parchment_Pattern"	StretchMode="Tile" ConsumeMouse="1">
+			<Grid ID="PopupFrameGrid" Anchor="C,C" Size="900,720" Offset="0,0" Texture="CompletedPopup_Frame" SliceCorner="112,120" SliceSize="2,1">
+				<!-- Corner Icons -->
+				<Button	ID="CloseButton" Texture="Controls_CloseLarge" Size="44,44" Anchor="R,T" Offset="11,11"	/>
+
+				<Container Size="353,80" Anchor="C,T" Offset="0,0">
+					<Label ID="HeaderLabel" Anchor="C,C" Align="C,C" Color="92,86,85,255" Offset="0,10" Style="FontFlair20" SmallCaps="26" SmallCapsType="EveryWord" WrapWidth="350" />
+				</Container>
+
+				<Grid ID="SubheaderGrid" Anchor="C,T" Style="DecoGrid" Size="784,auto" Offset="0,80" Color="40,40,40,170" AutoSizePadding="0,15">
+					<ScrollPanel ID="SubheaderScrollPanel" Anchor="C,C" Size="759,60" Vertical="1" AutoScrollBar="1">
+						<Label ID="SubheaderLabel" Anchor="C,C" Color="92,86,85,255" Offset="0,0" Style="FontFlair16" SmallCaps="20" SmallCapsType="EveryWord" WrapWidth="759" />
+						<ScrollBar Style="Slider_Light"	Anchor="R,C" AnchorSide="O,I"/>
+					</ScrollPanel>
+				</Grid>
+				
+				<Stack ID="EventSelectionStack" Anchor="C,T" Offset="0,157" StackGrowth="Right" StackPadding="2" />
+			</Grid>
+		</Image>
+	</Grid>
+
+	<!-- Instances -->
+	<Instance Name="EventSelectionInstance">
+		<Container ID="EventSelection" Anchor="C,C" Size="auto, 525">
+			<Image ID="EventSelectionIcon" Anchor="C,T" Size="256,256" Offset="-1,24" Icon="ICON_LEADER_DEFAULT" IconSize="256"/>
+			<Grid ID="EventSelectionGrid" Anchor="C,T" Style="DecoGrid" Size="260,auto" Offset="0,282" Color="40,40,40,170" AutoSizePadding="0,15">
+				<ScrollPanel Anchor="C,C" Size="235,156" Vertical="1" AutoScrollBar="1">
+					<Label ID="EventSelectionInfo" Anchor="C,C" Color="52,45,48,230" WrapWidth="235" Style="FontNormal14"/>
+					<ScrollBar Style="Slider_Light"	Anchor="R,C" AnchorSide="O,I"/>
+				</ScrollPanel>
+			</Grid>
+			<GridButton ID="EventSelectionButton" Size="210,41" Anchor="C,B" Style="MainButton" Disabled="0"/>
+		</Container>
+	</Instance>
+</Context>

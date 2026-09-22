@@ -15,7 +15,7 @@ values
 insert or replace into Modifiers
 	(ModifierId,								ModifierType,										SubjectRequirementSetId)
 values
-	('THE_PTOLEMAIC_IMPROVEMENT_CULTRUE',		'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',				'PLOT_HAS_IMPROVED_AND_ON_ALL_FLOODPLAINS');
+	('THE_PTOLEMAIC_IMPROVEMENT_CULTRUE',		'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',				'PLOT_HAS_IMPROVEMENT_ADJACENT_TO_RIVER');
 
 insert or replace into ModifierArguments
 	(ModifierId,									Name,						Value)

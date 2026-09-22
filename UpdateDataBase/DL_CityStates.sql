@@ -428,6 +428,17 @@ select
 	'MINOR_CIV_HONG_KONG_' || BuildingType || '_PRODUCTION',	'Amount',			1
 from HD_BuildingTiers where PrereqDistrict = 'DISTRICT_CAMPUS' and ReplacesOther = 0;
 
+-- 墨西哥城
+delete from TraitModifiers where TraitType = 'MINOR_CIV_MEXICO_CITY_TRAIT';
+insert or ignore into TraitAttachedModifiers (TraitType, ModifierId) values
+	('MINOR_CIV_MEXICO_CITY_TRAIT', 'HD_MEXICO_CITY_BUILDER_CHARGE');
+
+insert or replace into Modifiers (ModifierId, ModifierType, Permanent, SubjectRequirementSetId) values
+	('HD_MEXICO_CITY_BUILDER_CHARGE', 'MODIFIER_PLAYER_TRAINED_UNITS_ADJUST_BUILDER_CHARGES',	1, 'UNIT_IS_BUILDER');
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
+	('HD_MEXICO_CITY_BUILDER_CHARGE', 'Amount', 1);
+
 -- Attach modifiers in TraitAttachedModifiers to suzerain
 insert or ignore into TraitModifiers
     (TraitType, ModifierId)

@@ -21,7 +21,7 @@ local g_iW, g_iH;
 local g_iFlags = {};
 local g_continentsFrac = nil;
 local g_iNumTotalLandTiles = 0; 
-local featureGen = nil;
+local featuregen = nil;
 local world_age_new = 5;
 local world_age_normal = 3;
 local world_age_old = 2;
@@ -178,7 +178,7 @@ function GeneratePlotTypes(world_age)
 		hd_water_limit = 12
 		hd_water_threshold = 8
 	else
-		water_percent = TerrainBuilder.GetRandomNumber(sea_level_high - sea_level_low, "Random Sea Level - Lua") + sea_level_low + 1; 
+		water_percent = TerrainBuilder.GetRandomNumber(sea_level_high - sea_level_low + 1, "Random Sea Level - Lua") + sea_level_low; 
 		hd_water_threshold = TerrainBuilder.GetRandomNumber(5, "HD: Random Sea Level - Lua") + 8;
 		hd_water_limit = math.floor(hd_water_threshold * 1.5);
 	end
@@ -476,64 +476,4 @@ function AddFeaturesFromContinents()
 	featuregen:AddFeaturesFromContinents();
 end
 
--------------------------------------------------------------------------------
---火山土开局生成----------------------------------------------------------------
-function AddVolcanicSoil()
-    local mWidth,mHeight = Map.GetGridSize();
-    for CoordinateX = 0,mWidth,1 do
-        for CoordinateY = 0,mHeight-1,1 do
-            local plots = Map.GetPlot(CoordinateX,CoordinateY);
-            if (plots:GetFeatureType() ~= -1) then
-                if (GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_VOLCANO") then
-                    local tNeighborPlots = Map.GetAdjacentPlots(CoordinateX,CoordinateY);
-                    for _, pNeighborPlot in ipairs(tNeighborPlots) do
-                        if (not pNeighborPlot:IsWater() and not pNeighborPlot:IsMountain()) then
-                            TerrainBuilder.SetFeatureType(pNeighborPlot,35);
-                        end
-                    end
-                end
-                if (GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_EYJAFJALLAJOKULL"
-                or GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_KILIMANJARO"
-                or GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_VESUVIUS"
-                or GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_SUK_FUJI"
-                or GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_SUK_NGORONGORO_CRATER") then
-                    local tNeighborPlots = Map.GetAdjacentPlots(CoordinateX,CoordinateY);
-                    for _, pNeighborPlot in ipairs(tNeighborPlots) do
-                        if (not pNeighborPlot:IsWater() and not pNeighborPlot:IsMountain()) then
-                            if (pNeighborPlot:GetFeatureType() ~= -1) then
-                                if (GameInfo.Features[pNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_EYJAFJALLAJOKULL"
-                                and GameInfo.Features[pNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_SUK_NGORONGORO_CRATER") then
-                                    TerrainBuilder.SetFeatureType(pNeighborPlot,35);
-                                end
-                            else
-                                TerrainBuilder.SetFeatureType(pNeighborPlot,35);
-                            end
-                        end
-                        --二环随机生成
-                        local sNeighborPlots = Map.GetAdjacentPlots(pNeighborPlot:GetX(), pNeighborPlot:GetY());
-                        for _, rNeighborPlot in ipairs(sNeighborPlots) do
-                            if (not rNeighborPlot:IsWater() and not rNeighborPlot:IsMountain()) then
-                                if (rNeighborPlot:GetFeatureType() ~= -1) then
-                                    if (GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_EYJAFJALLAJOKULL"
-                                    and GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_KILIMANJARO"
-                                    and GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_VESUVIUS"
-                                    and GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_SUK_FUJI"
-                                    and GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_SUK_NGORONGORO_CRATER") then
-                                        if (math.random(3) == 1) then
-                                            TerrainBuilder.SetFeatureType(rNeighborPlot,35);
-                                        end
-                                    end
-                                else
-                                    if (math.random(3) == 1) then
-                                        TerrainBuilder.SetFeatureType(rNeighborPlot,35);
-                                    end
-                                end
-                            end
-                        end
-                    end
-                end
-            end
-        end
-    end
-end
 ----------------------------------------------------------------------------------------------------

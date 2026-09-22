@@ -235,6 +235,9 @@ function CreateCommemoration(commemorationInfo:table)
 
 	-- Commemoration Icon
 	local iconName:string = "ICON_" .. commemorationInfo.CommemorationType;
+  if GameInfo.CommemorationIcons ~= nil and GameInfo.CommemorationIcons[commemorationInfo.CommemorationType] ~= nil then
+    iconName = GameInfo.CommemorationIcons[commemorationInfo.CommemorationType].Icon;
+  end
 	instance.CommemorationIcon:SetIcon(iconName);
 
   -- Commemoration Name

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<GameData>
-	<IconDefinitions>
-		<Row Name="ICON_BUILDING_HD_DUMMY_PREREQ_PRESERVE" 			Atlas="ICON_ATLAS_KUBLAIKHAN_VIETNAM_DISTRICTS" Index="1"/>
-		<Row Name="ICON_BUILDING_HD_DUMMY_PREREQ_PRESERVE_FOW" 		Atlas="ICON_ATLAS_KUBLAIKHAN_VIETNAM_DISTRICTS" Index="1"/>
-	</IconDefinitions>
-</GameData>

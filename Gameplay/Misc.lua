@@ -3,14 +3,6 @@ Utils = ExposedMembers.DLHD.Utils;
 
 ExposedMembers.GameEvents = GameEvents
 
-function SetPlotProperty(x, y, key, value)
-	local plot = Map.GetPlot(x, y);
-	if plot ~= nil then
-		plot:SetProperty(key, value);
-	end
-end
-GameEvents.SetPlotPropertySwitch.Add(SetPlotProperty);
-
 function AttachModifier(playerId, cityId, modifierId)
 	local city = CityManager.GetCity(playerId, cityId);
 	city:AttachModifierByID(modifierId);
@@ -83,21 +75,6 @@ Events.PlayerEraScoreChanged.Add(OnPlayerEraScoreChanged)
 --     end
 -- end);
 
--- strategic projects
-function ProjectStrategicResourcesChange(playerID, cityID, projectID)
-    local player = Players[playerID]
-    -- print(GameInfo.Projects['PROJECT_GRANT_RESOURCE_HORSES'].Index, projectID)
-    local project_name = GameInfo.Projects[projectID].ProjectType
-    local resource_name = string.sub(project_name, 15)
-    if string.sub(project_name, 1, 14) == 'PROJECT_GRANT_' then
-        local playerResources = Players[playerID]:GetResources()
-        local resource_id = GameInfo.Resources[resource_name].Index
-        playerResources:ChangeResourceAmount(resource_id, 20)
-    end
-end
-
-Events.CityProjectCompleted.Add(ProjectStrategicResourcesChange)
-
 -- great admiral free strategic resource for heal
 function GreatAdmiralFreeStrategicResource(unitOwner, unitID, greatPersonClassID, greatPersonIndividualID)
 	local owner = Players[unitOwner]
@@ -156,22 +133,6 @@ GameEvents.ChangeUnitExperience.Add(function(playerID, unitID, amount)
     end
 end)
 
-GameEvents.SendEnvoytoCityState.Add(function(playerID, citystateID)
-    -- Need to make sure the second is citystate
-    local player = Players[playerID]
-    if player ~= nil then
-        player:GetInfluence():GiveFreeTokenToPlayer(citystateID)
-    end
-end)
-
-GameEvents.AddGreatPeoplePoints.Add(function(playerID, gppID, amount)
-    local player = Players[playerID]
-    if player ~= nil then
-        print('HD DEBUG add great people point', playerID, gppID, amount)
-        player:GetGreatPeoplePoints():ChangePointsTotal(gppID, amount)
-    end
-end)
-
 -- Archer for City State
 local CITY_STATE_ARCHER_TURN_KEY = 'CITY_STATE_ARCHER_TURN';
 function ArcherForCityState ()
@@ -181,7 +142,7 @@ function ArcherForCityState ()
 		if (min ~= nil) and (max ~= nil) and (min <= max) then
 			for _, player in pairs(Players) do
 				if (player ~= nil) and (player:GetInfluence() ~= nil) and player:GetInfluence():CanReceiveInfluence() then
-					player:SetProperty(CITY_STATE_ARCHER_TURN_KEY, math.random(min, max));
+					player:SetProperty(CITY_STATE_ARCHER_TURN_KEY, min + TerrainBuilder.GetRandomNumber(max - min + 1, "City State Archer Turn"));
 				end
 			end
 		end
@@ -197,99 +158,6 @@ function ArcherForCityState ()
 end
 Events.TurnBegin.Add(ArcherForCityState);
 
--- Record Resources on Map
--- local PRESERVE_MAP_HAS_KEY = 'HD_PRESERVE_MAP_HAS';
--- local iProperty = "HD_MAP_HAS_"
--- function HDvIn(tbl, value)
---     if tbl == nil then
---         return false
---     end
---     for k, v in ipairs(tbl) do
---         if v == value then
---             return true
---         end
---     end
---     return false
--- end
-
--- function calculateResourceOnMap ()
--- 	HD_MapResourcesArray = {};
--- 	local iW, iH;
--- 	iW, iH = Map.GetGridSize();
--- 	for x = 0, iW - 1 do
--- 		for y = 0, iH - 1 do
--- 			local i = y * iW + x;
--- 			local pPlot = Map.GetPlotByIndex(i);
--- 			if (pPlot ~= nil) then
--- 				local iResourceType = pPlot:GetResourceType();
--- 				if (iResourceType ~= nil and iResourceType ~= -1) then
--- 					local iResource = GameInfo.Resources[iResourceType];
--- 					if (iResource ~= nil and iResource.ResourceClassType ~= 'RESOURCECLASS_ARTIFACT') then
--- 						HD_MapResourcesArray[iResource.ResourceType] = 1;
--- 					end
--- 				end
--- 			end
--- 		end
--- 	end
--- 	Game.SetProperty(PRESERVE_MAP_HAS_KEY, HD_MapResourcesArray);
--- 	for resourceType, _ in pairs(HD_MapResourcesArray) do
--- 		local iPropertyKey = "" .. iProperty .. resourceType .. ""
--- 		Game.SetProperty(iPropertyKey, 1);
--- 	end
--- end
-
--- -- Preserve Tier 3
--- local PRESERVE_INDEX;
--- if GameInfo.Districts['DISTRICT_PRESERVE'] ~= nil then
--- 	PRESERVE_INDEX = GameInfo.Districts['DISTRICT_PRESERVE'].Index;
--- end
--- function PreserveEpoSetProperty(playerID, districtID, cityID, iX, iY, districtType, percentComplete)
--- 	local HD_MapResourcesArray = Game.GetProperty(PRESERVE_MAP_HAS_KEY);
--- 	if HD_MapResourcesArray == nil then
--- 		calculateResourceOnMap();
--- 		HD_MapResourcesArray = Game.GetProperty(PRESERVE_MAP_HAS_KEY);
--- 	end
--- 	if (playerID >= 0) and (PRESERVE_INDEX ~= nil) and (districtType == PRESERVE_INDEX) then
--- 		local iPlot = Map.GetPlot(iX, iY);
--- 		for resourceType, _ in pairs(HD_MapResourcesArray) do
--- 			local iPropertyKey = "" .. iProperty .. resourceType;
--- 			iPlot:SetProperty(iPropertyKey, 1);
--- 		end
--- 	end
--- end
--- Events.DistrictAddedToMap.Add(PreserveEpoSetProperty)
-
--- James Watt
-local JAMES_WATT_INDEX = GameInfo.GreatPersonIndividuals['GREAT_PERSON_INDIVIDUAL_ADA_LOVELACE'].Index;
-local SANG_HONGYANG = GameInfo.GreatPersonIndividuals['GREAT_PERSON_INDIVIDUAL_HD_SANG_HONGYANG'];
-local JAMES_WATT_ACTIVATION_TIME_KEY = 'JAMES_WATT_ACTIVATION_TIME';
-local SANG_HONGYANG_ACTIVATION_TIME_KEY = 'SANG_HONGYANG_ACTIVATION_TIME';
-function JamesWattCounter (playerId, unitId, greatPersonClassId, greatPersonIndividualId)
-	if greatPersonIndividualId == JAMES_WATT_INDEX then
-		local player = Players[playerId];
-		local watt = player:GetProperty(JAMES_WATT_ACTIVATION_TIME_KEY) or 0;
-		player:SetProperty(JAMES_WATT_ACTIVATION_TIME_KEY, watt + 1);
-	end
-	if (SANG_HONGYANG ~= nil) and (greatPersonIndividualId == SANG_HONGYANG.Index) then
-		local player = Players[playerId];
-		local hongyang = player:GetProperty(SANG_HONGYANG_ACTIVATION_TIME_KEY) or 0;
-		player:SetProperty(SANG_HONGYANG_ACTIVATION_TIME_KEY, hongyang + 1);
-	end
-end
-Events.UnitGreatPersonActivated.Add(JamesWattCounter);
-
--- Reyna
-local REYNA_CULTURE_KEY = 'REYNA_CULTURE_';
-GameEvents.ReynaChangeCurrentCulturalProgress.Add(function (playerId, amount)
-	local player = Players[playerId];
-	local turn = Game.GetCurrentGameTurn();
-	local key = REYNA_CULTURE_KEY .. turn;
-	if player:GetProperty(key) == nil then
-		player:SetProperty(key, 1);
-		player:GetCulture():ChangeCurrentCulturalProgress(amount);
-	end
-end);
-
 -- Religious Settlements
 local RELIGIOUS_SETTLEMENTS_INDEX = GameInfo.Beliefs['BELIEF_RELIGIOUS_SETTLEMENTS'].Index;
 local GREAT_PROPHET_INDEX = GameInfo.GreatPersonClasses['GREAT_PERSON_CLASS_PROPHET'].Index;
@@ -300,27 +168,6 @@ GameEvents.CityBuilt.Add(function (playerId, cityId, x, y)
 		player:GetGreatPeoplePoints():ChangePointsTotal(GREAT_PROPHET_INDEX, 30);
 	end
 end);
--- local SETTLER_INDEX = GameInfo.Units['UNIT_SETTLER'].Index;
--- Events.CityProductionCompleted.Add(function (playerId, cityId, type, unitId, cancelled)
--- 	if unitId == nil then
--- 		return;
--- 	end
--- 	local player = Players[playerId];
--- 	local unit = UnitManager.GetUnit(playerId, unitId);
--- 	local pantheon = player:GetReligion():GetPantheon();
--- 	if (pantheon == RELIGIOUS_SETTLEMENTS_INDEX) and (unit:GetType() == SETTLER_INDEX) then
--- 		player:GetGreatPeoplePoints():ChangePointsTotal(GREAT_PROPHET_INDEX, 30);
--- 	end
--- end);
--- Events.CityMadePurchase.Add(function (playerId, cityId, x, y, purchaseType, objectType)
--- 	if (purchaseType == EventSubTypes.UNIT) and (objectType == SETTLER_INDEX) then
--- 		local player = Players[playerId];
--- 		local pantheon = player:GetReligion():GetPantheon();
--- 		if pantheon == RELIGIOUS_SETTLEMENTS_INDEX then
--- 			player:GetGreatPeoplePoints():ChangePointsTotal(GREAT_PROPHET_INDEX, 30);
--- 		end
--- 	end
--- end);
 
 -- Free Tech
 local FREE_TECH_KEY = 'HD_FREE_TECH';
@@ -332,16 +179,6 @@ GameEvents.HD_FreeTechSwitch.Add(function (playerId, techId)
 	player:SetProperty(FREE_TECH_KEY, remains - 1);
 	playerTech:SetResearchProgress(techId, playerTech:GetResearchCost(techId));
 end);
-Events.WonderCompleted.Add(function (x, y, buildingId, playerId, cityId, percentComplete, unknown)
-	local player = Players[playerId];
-	local buildingInfo = GameInfo.Buildings[buildingId];
-	local remains = player:GetProperty(FREE_TECH_KEY) or 0;
-	if buildingInfo.BuildingType == 'BUILDING_OXFORD_UNIVERSITY' then
-		player:SetProperty(FREE_TECH_KEY, remains + 2);
-	elseif buildingInfo.BuildingType == 'WON_CL_BUILDING_ARECIBO' then
-		player:SetProperty(FREE_TECH_KEY, remains + 1);
-	end
-end);
 
 -- Free Civic
 local FREE_CIVIC_KEY = 'HD_FREE_CIVIC';
@@ -352,14 +189,6 @@ GameEvents.HD_FreeCivicSwitch.Add(function (playerId, civicId)
 
 	player:SetProperty(FREE_CIVIC_KEY, remains - 1);
 	playerCulture:SetCulturalProgress(civicId, playerCulture:GetCultureCost(civicId));
-end);
-Events.WonderCompleted.Add(function (x, y, buildingId, playerId, cityId, percentComplete, unknown)
-	local player = Players[playerId];
-	local buildingInfo = GameInfo.Buildings[buildingId];
-	local remains = player:GetProperty(FREE_CIVIC_KEY) or 0;
-	if buildingInfo.BuildingType == 'BUILDING_BOLSHOI_THEATRE' then
-		player:SetProperty(FREE_CIVIC_KEY, remains + 2);
-	end
 end);
 
 -- Horses and Iron within 6 tiles
@@ -400,94 +229,6 @@ function StrategicCityAddedToMap (playerId, cityId, x, y)
 	end
 end
 
--- Free Tech张衡
--- local FREE_TECH_KEY_ZH = 'HD_FREE_TECH_ZH';
--- GameEvents.HD_FreeTechSwitchZH.Add(function (playerId, techId)
--- 	local player = Players[playerId];
--- 	local remains = player:GetProperty(FREE_TECH_KEY_ZH) or 0;
--- 	local playerTech = player:GetTechs();
--- 	
--- 	player:SetProperty(FREE_TECH_KEY_ZH, remains - 1);
--- 	playerTech:SetResearchProgress(techId, playerTech:GetResearchCost(techId));
--- end);
-
--- GameEvents.GreatPersonHandleActivation.Add(function (unitOwner, unitId, greatPersonIndividualId)
--- 	local player = Players[unitOwner];
--- 	local ZHANGHENG_INDEX = GameInfo.GreatPersonIndividuals['GREAT_PERSON_INDIVIDUAL_ZHANG_HENG'].Index;
--- 	local remains = player:GetProperty(FREE_TECH_KEY_ZH) or 0;
--- 	if greatPersonIndividualId == ZHANGHENG_INDEX then
--- 		player:SetProperty(FREE_TECH_KEY_ZH, remains + 1);
--- 	end
--- end);
-
--- Free Tech霍普
-local FREE_TECH_KEY_HP = 'HD_FREE_TECH_HP';
-GameEvents.HD_FreeTechSwitchHP.Add(function (playerId, techId)
-	local player = Players[playerId];
-	local remains = player:GetProperty(FREE_TECH_KEY_HP) or 0;
-	local playerTech = player:GetTechs();
-	
-	player:SetProperty(FREE_TECH_KEY_HP, remains - 1);
-	playerTech:SetResearchProgress(techId, playerTech:GetResearchCost(techId));
-end);
-
-GameEvents.GreatPersonHandleActivation.Add(function (unitOwner, unitId, greatPersonIndividualId)
-	local player = Players[unitOwner];
-	local HOPPER_INDEX = GameInfo.GreatPersonIndividuals['GREAT_PERSON_INDIVIDUAL_GRACE_HOPPER'].Index;
-	local remains = player:GetProperty(FREE_TECH_KEY_HP) or 0;
-	if greatPersonIndividualId == HOPPER_INDEX then
-		player:SetProperty(FREE_TECH_KEY_HP, remains + 2);
-	end
-end);
-
--- Free Civic李斯
-GameEvents.GreatPersonHandleActivation.Add(function (unitOwner, unitId, greatPersonIndividualId)
-	local player = Players[unitOwner];
-	local LISI_INDEX = GameInfo.GreatPersonIndividuals['GREAT_PERSON_INDIVIDUAL_LISI'].Index;
-	local remains = player:GetProperty(FREE_CIVIC_KEY) or 0;
-	if greatPersonIndividualId == LISI_INDEX then
-		player:SetProperty(FREE_CIVIC_KEY, remains + 1);
-	end
-end);
-
--- 切换政策事件
--- local BUILDING_HD_BUS_STOP_POLICY_TAG = 'BUILDING_HD_BUS_STOP_'
--- local BUILDING_HD_NEWSPAPER_OFFICE_POLICY_TAG = 'BUILDING_HD_NEWSPAPER_OFFICE_'
--- local BUILDING_HD_LAW_OFFICE_POLICY_TAG = 'BUILDING_HD_LAW_OFFICE_'
--- function OnPolicyChangedBuildingYieldChange(playerId, policyId)
--- 	local player = Players[playerId];
--- 	local playerCulture = player:GetCulture()
--- 	local numSlots = playerCulture:GetNumPolicySlots();
--- 	for i = 0, numSlots-1, 1 do
--- 		local	policyId = playerCulture:GetSlotPolicy(i);
--- 		if policyId ~= nil and policyId ~= -1 then
--- 			local policy = GameInfo.Policies[policyId]
--- 			if policy.GovernmentSlotType == 'SLOT_MILITARY' then
--- 				if player:GetProperty(BUILDING_HD_LAW_OFFICE_POLICY_TAG .. policy.PolicyType) ~= 1 then
--- 					player:AttachModifierByID('HD_BUILDING_HD_LAW_OFFICE_PRODUCTION')
--- 					player:SetProperty(BUILDING_HD_LAW_OFFICE_POLICY_TAG .. policy.PolicyType, 1)
--- 					-- print('OnPolicyChangedBuildingYieldChange', Locale.Lookup(policy.Name), policy.GovernmentSlotType)
--- 				end
--- 			elseif policy.GovernmentSlotType == 'SLOT_ECONOMIC' then
--- 				if player:GetProperty(BUILDING_HD_BUS_STOP_POLICY_TAG .. policy.PolicyType) ~= 1 then
--- 					player:AttachModifierByID('HD_BUILDING_HD_BUS_STOP_GOLD')
--- 					player:SetProperty(BUILDING_HD_BUS_STOP_POLICY_TAG .. policy.PolicyType, 1)
--- 					-- print('OnPolicyChangedBuildingYieldChange', Locale.Lookup(policy.Name), policy.GovernmentSlotType)
--- 				end
--- 			elseif policy.GovernmentSlotType == 'SLOT_DIPLOMATIC' then
-
--- 			elseif policy.GovernmentSlotType == 'SLOT_GREAT_PERSON' or policy.GovernmentSlotType == 'SLOT_WILDCARD' then
--- 				if player:GetProperty(BUILDING_HD_NEWSPAPER_OFFICE_POLICY_TAG .. policy.PolicyType) ~= 1 then
--- 					player:AttachModifierByID('HD_BUILDING_HD_NEWSPAPER_OFFICE_CULTURE')
--- 					player:SetProperty(BUILDING_HD_NEWSPAPER_OFFICE_POLICY_TAG .. policy.PolicyType, 1)
--- 					-- print('OnPolicyChangedBuildingYieldChange', Locale.Lookup(policy.Name), policy.GovernmentSlotType)
--- 				end
--- 			end
--- 		end
--- 	end
--- end
--- Events.GovernmentPolicyChanged.Add(OnPolicyChangedBuildingYieldChange);
-
 -- 随机部落村庄奖励
 local goodyHutRewards = {};
 function initGoodyHutReward()
@@ -504,13 +245,13 @@ function initGoodyHutReward()
 			ModifierId = row.ModifierId,
 			Turn = row.Turn
     })
-		print(
-			"initGoodyHutReward",
-			row.GoodyHut,
-			row.SubTypeGoodyHut,
-			row.ModifierId,
-			row.Turn
-		)
+		-- print(
+		-- 	"initGoodyHutReward",
+		-- 	row.GoodyHut,
+		-- 	row.SubTypeGoodyHut,
+		-- 	row.ModifierId,
+		-- 	row.Turn
+		-- )
 	end
 end
 initGoodyHutReward();
@@ -520,7 +261,7 @@ local firstCivicBoosted = nil;
 local firstTechBoosted = nil;
 local NOTIFICATION_DISCOVER_GOODY_HUT_HASH = GameInfo.Types['NOTIFICATION_DISCOVER_GOODY_HUT'].Hash;
 
-function GetRandomGoodyHutReward(playerId, title, extra)
+function GetRandomGoodyHutReward(playerId, title, notificationHash, extra)
 	local player = Players[playerId]
 	if player:IsMajor() then
 		print('GetRandomGoodyHutReward', playerId)
@@ -530,6 +271,7 @@ function GetRandomGoodyHutReward(playerId, title, extra)
 		if checkResult ~= 0 then
 			m_PendingGoodyHut = {
 				Title = title,
+				NotificationHash = notificationHash or NOTIFICATION_DISCOVER_GOODY_HUT_HASH,
 				ModifierId = reward.ModifierId
 			};
 
@@ -548,14 +290,14 @@ function GetRandomGoodyHutReward(playerId, title, extra)
 				and reward.SubTypeGoodyHut ~= 'GOODYHUT_TWO_TECH_BOOSTS'
 				and reward.SubTypeGoodyHut ~= 'GOODYHUT_RESOURCES' then
 					local msg = GetGoodyHutRewardDescription(reward.ModifierId)
-					SendRewardNotification(playerId, NOTIFICATION_DISCOVER_GOODY_HUT_HASH, Locale.Lookup(title), msg);
+					SendRewardNotification(playerId, notificationHash, Locale.Lookup(title), msg);
 			end
 			
 			print("GetRandomGoodyHutReward", "应用奖励", reward.ModifierId)
 		else
 			-- 重新随机
 			print("GetRandomGoodyHutReward", "重新随机")
-			GetRandomGoodyHutReward(playerId, title, extra)
+			GetRandomGoodyHutReward(playerId, title, notificationHash, extra)
 		end
 	end
 end
@@ -719,11 +461,12 @@ function OnCivicBoostTriggered(playerId, boostedCivic)
 	if pendingHut ~= nil then
 		local modifierId = pendingHut.ModifierId;
 		local title = pendingHut.Title;
+		local notificationHash = pendingHut.NotificationHash;
 		local msg;
 		if modifierId == "GOODY_CULTURE_GRANT_ONE_CIVIC_BOOST" then
 			local civicName = GameInfo.Civics[boostedCivic].Name;
 			msg = "[ICON_CivicBoosted]" .. Locale.Lookup(civicName);
-			SendRewardNotification(playerId, NOTIFICATION_DISCOVER_GOODY_HUT_HASH, Locale.Lookup(title), msg);
+			SendRewardNotification(playerId, notificationHash, Locale.Lookup(title), msg);
 			m_PendingGoodyHut = nil;
 		elseif modifierId == "GOODY_CULTURE_GRANT_TWO_CIVIC_BOOSTS" then
 			if firstCivicBoosted == nil then
@@ -734,7 +477,7 @@ function OnCivicBoostTriggered(playerId, boostedCivic)
 				msg = "[ICON_CivicBoosted]" .. firstCivicName .. "&" .. civicName;
 				firstCivicBoosted = nil;
 				m_PendingGoodyHut = nil;
-				SendRewardNotification(playerId, NOTIFICATION_DISCOVER_GOODY_HUT_HASH, Locale.Lookup(title), msg);
+				SendRewardNotification(playerId, notificationHash, Locale.Lookup(title), msg);
 			end
 		end
 	end
@@ -748,11 +491,12 @@ function OnTechBoostTriggered(playerId, boostedTech)
 	if pendingHut ~= nil then
 		local modifierId = pendingHut.ModifierId;
 		local title = pendingHut.Title;
+		local notificationHash = pendingHut.NotificationHash;
 		local msg;
 		if modifierId == "GOODY_SCIENCE_GRANT_ONE_TECH_BOOST" then
 			local techName = GameInfo.Technologies[boostedTech].Name;
 			msg = "[ICON_TechBoosted]" .. Locale.Lookup(techName);
-			SendRewardNotification(playerId, NOTIFICATION_DISCOVER_GOODY_HUT_HASH, Locale.Lookup(title), msg);
+			SendRewardNotification(playerId, notificationHash, Locale.Lookup(title), msg);
 			m_PendingGoodyHut = nil;
 		elseif modifierId == "GOODY_SCIENCE_GRANT_TWO_TECH_BOOSTS" then
 			if firstTechBoosted == nil then
@@ -763,7 +507,7 @@ function OnTechBoostTriggered(playerId, boostedTech)
 				msg = "[ICON_TechBoosted]" .. firstTechName .. "&" .. techName;
 				firstTechBoosted = nil;
 				m_PendingGoodyHut = nil;
-				SendRewardNotification(playerId, NOTIFICATION_DISCOVER_GOODY_HUT_HASH, Locale.Lookup(title), msg);
+				SendRewardNotification(playerId, notificationHash, Locale.Lookup(title), msg);
 			end
 		end
 	end
@@ -777,12 +521,13 @@ function OnPlayerResourceChanged(playerId, resourceId)
 	if pendingHut ~= nil then
 		local modifierId = pendingHut.ModifierId;
 		local title = pendingHut.Title;
+		local notificationHash = pendingHut.NotificationHash;
 		local msg;
 		if modifierId == "GOODY_MILITARY_ADJUST_STRATEGIC_RESOURCES" then
 			local resourceName = GameInfo.Resources[resourceId].Name;
 			local amount = Utils.GetModifierAmount(modifierId);
 			msg = amount .. Locale.Lookup(resourceName);
-			SendRewardNotification(playerId, NOTIFICATION_DISCOVER_GOODY_HUT_HASH, Locale.Lookup(title), msg);
+			SendRewardNotification(playerId, notificationHash, Locale.Lookup(title), msg);
 			m_PendingGoodyHut = nil;
 		end
 	end
@@ -935,12 +680,233 @@ function HDDestroyUnit(playerId, unitId)
 end
 GameEvents.HDDestroyUnit.Add(HDDestroyUnit)
 
+-- 向X环内城市施加宗教压力
+function SpreadAoeReligiousPressure(playerId, param)
+	print("向X环内城市施加宗教压力");
+
+	local x = param.X;
+	local y = param.Y;
+	local amount = param.Amount;
+	if amount == 0 then return; end
+	local distance = param.Distance;
+	local religionId = param.ReligionId;
+	if not religionId or religionId == -1 then return; end
+
+	local religionInfo = GameInfo.Religions[religionId];
+	if not religionInfo then return; end
+	local message = '[COLOR:White]+' .. tostring(amount) .. ' ' .. Locale.Lookup(religionInfo.Name) .. '[ENDCOLOR]'
+
+	for _, cityOwner in ipairs(Players) do
+		if cityOwner:GetCities() ~= nil then
+			for _, city in cityOwner:GetCities():Members() do
+				if Map.GetPlotDistance(x, y, city:GetX(), city:GetY()) <= distance then
+					city:GetReligion():AddReligiousPressure(playerId, religionId, amount, playerId);
+					Game.AddWorldViewText(playerId, message, city:GetX(), city:GetY());
+				end
+			end
+		end
+	end
+end
+GameEvents.HD_SpreadAoeReligiousPressure.Add(SpreadAoeReligiousPressure);
+
+-- 记录城邦类型 专属资源
+local CITY_IS_CITY_STATE_TAG = 'HD_CITY_IS_CITY_STATE';
+local CITY_IS_CITY_STATE_TYPE_TAG = 'HD_CITY_IS_';
+local CITY_STATE_TYPE_TAG = 'HD_CITY_STATE_TYPE';
+local CITY_STATE_RESOURCE_TAG = 'HD_CITY_STATE_RESOURCE';
+function CityStateSetProperty(playerId, cityId, x, y)
+	local plot = Map.GetPlot(x, y);
+	if not plot then return; end
+
+	local player = Players[playerId];
+	if not player then return; end
+
+	if Utils.PlayerIsMinor(playerId) then
+		local citystateConfig = PlayerConfigurations[playerId];
+		local citystateLeader = citystateConfig:GetLeaderTypeName();
+		local citystateType = GameInfo.Leaders[citystateLeader].InheritFrom;
+		if citystateType and #citystateType > 18 then
+			local typeStr = string.sub(citystateType, 18);
+
+			-- 记录城邦类型
+			plot:SetProperty(CITY_IS_CITY_STATE_TAG, 1);
+			plot:SetProperty(CITY_IS_CITY_STATE_TYPE_TAG .. typeStr, 1);
+			player:SetProperty(CITY_STATE_TYPE_TAG, typeStr);
+
+			-- 记录专属资源
+			if player:GetProperty(CITY_STATE_RESOURCE_TAG) == nil then
+				local list = Utils.CityStateResourceMap[typeStr] or {};
+				if #list > 0 then
+					local randomIndex = Game.GetRandNum(#list, "Random CityStateResource for Player " .. playerId) + 1;
+					local resourceType = list[randomIndex];
+					if resourceType then
+						player:SetProperty(CITY_STATE_RESOURCE_TAG, resourceType);
+						print(
+							"城邦城市设置参数：",
+							Locale.Lookup(citystateConfig:GetCivilizationShortDescription()),
+							typeStr,
+							Locale.Lookup(GameInfo.Resources[resourceType].Name)
+						);
+					end
+				end
+			end
+		end
+	elseif plot:GetProperty(CITY_IS_CITY_STATE_TAG) == 1 then
+		-- 被占领 重置参数
+		print("城市重置城邦参数")
+		plot:SetProperty(CITY_IS_CITY_STATE_TAG, 0);
+		for row in GameInfo.CityStateCorrespondingYieldType_HD() do
+			if plot:GetProperty(CITY_IS_CITY_STATE_TYPE_TAG .. row.CityStateType) == 1 then
+				plot:SetProperty(CITY_IS_CITY_STATE_TYPE_TAG .. row.CityStateType, 0);
+			end
+		end
+	end
+end
+GameEvents.CityBuilt.Add(CityStateSetProperty);
+
+function ConqueredCityStateSetProperty(newPlayerId, oldPlayerId, newCityId, x, y)
+	CityStateSetProperty(newPlayerId, newCityId, x, y);
+end
+GameEvents.CityConquered.Add(ConqueredCityStateSetProperty);
+
+-- 城市判断是否拥有XX类型的巨作
+local HD_CITY_NEED_DETECT_GREATWORK_TAG = 'HD_CITY_NEED_DETECT_';
+local HD_CITY_HAS_GREATWORK_TAG = 'HD_CITY_HAS_';
+function DetectCityHasGreatWork(playerId, cityId)
+	local city = CityManager.GetCity(playerId, cityId);
+	if not city then return; end
+
+	for row in GameInfo.GreatWorkObjectTypes() do
+		local needDetect = city:GetProperty(HD_CITY_NEED_DETECT_GREATWORK_TAG .. row.GreatWorkObjectType) or 0;
+		if needDetect > 0 then
+			local greatWorkTypeFilter = {};
+			greatWorkTypeFilter[row.GreatWorkObjectType] = true;
+			local greatWorkList = Utils.GetCityGreatWorks(playerId, cityId, greatWorkTypeFilter);
+
+			if #greatWorkList > 0 then
+				print(Locale.Lookup(city:GetName()) .. " 拥有 " .. Locale.Lookup(row.Name));
+			else
+				print(Locale.Lookup(city:GetName()) .. " 未拥有 " .. Locale.Lookup(row.Name));
+			end
+			
+			local plot = Map.GetPlot(city:GetX(), city:GetY());
+			if plot then
+				plot:SetProperty(HD_CITY_HAS_GREATWORK_TAG .. row.GreatWorkObjectType, #greatWorkList);
+			end
+		end
+	end
+end
+
+local m_Tech_Wheel = GameInfo.Technologies['TECH_THE_WHEEL'].Index;
+local city_roads_require_wheel = GlobalParameters.HD_CITY_ROADS_REQUIRE_WHEEL;
+function OnImprovementAddedToMap(locationX, locationY, improvementType, eImprovementOwner, resource, isPillaged, isWorked)
+	local plot = Map.GetPlot(locationX,locationY);
+	local owner = plot:GetOwner();
+	if owner >= 0 and owner == eImprovementOwner and not plot:IsWater() then 
+		local player = Players[owner];
+		local playerTechs = player:GetTechs();
+		-- enable the improvements roads after researching TECH_THE_WHEEL
+		if playerTechs:HasTech(m_Tech_Wheel) or (city_roads_require_wheel == 0) then
+			local era = GameInfo.Eras[player:GetEra()];
+			local currentRouteType = plot:GetRouteType();
+			local playerRouteType = Utils.GetRouteTypeForPlayer(player);
+			if currentRouteType == RouteTypes.NONE or Utils.CompareRoutes(playerRouteType,currentRouteType) then
+				RouteBuilder.SetRouteType(plot, playerRouteType);
+			end
+		end
+	end
+end
+
+function OnResearchCompleted(ePlayer, eTech)
+	if ePlayer >= 0 and (eTech == m_Tech_Wheel) and (city_roads_require_wheel ~= 0) then
+		-- place roads on the improvements roads after researching TECH_THE_WHEEL
+		local player = Players[ePlayer];
+		if not player:IsBarbarian() then
+			local pCities = player:GetCities();
+			local pCity;
+			for i, pCity in pCities:Members() do
+				local playerRouteType = Utils.GetRouteTypeForPlayer(player);
+				local cityPlots = Utils.GetCityPlots(ePlayer, pCity:GetID());
+				for _, plotId in pairs(cityPlots) do
+					local plot = Map.GetPlotByIndex(plotId);
+					if plot and not plot:IsWater() and plot:GetImprovementType() >= 0 then
+						local currentRouteType = plot:GetRouteType(plot);
+						if currentRouteType == RouteTypes.NONE or Utils.CompareRoutes(playerRouteType,currentRouteType) then
+							RouteBuilder.SetRouteType(plot, playerRouteType);
+						end
+					end
+				end
+			end
+		end
+	end
+end
+
+-- 记录历史时刻分类
+local NOTIFICATION_PRIDE_MOMENT_RECORDED_HASH = GameInfo.Notifications['NOTIFICATION_PRIDE_MOMENT_RECORDED'].Hash;
+local PLAYER_MOMENT_TAG = 'HD_PLAYER_MOMENT_';
+local PLAYER_MOMENT_NUM_TAG = 'HD_PLAYER_MOMENT_NUM_';
+function RecordMoment(playerId, notificationId)
+	local player = Players[playerId];
+  if not player then return; end
+
+	local notificationEntry = NotificationManager.Find(playerId, notificationId)
+  if notificationEntry and notificationEntry:GetType() == NOTIFICATION_PRIDE_MOMENT_RECORDED_HASH then
+    local momentId = notificationEntry:GetValue("MomentID");
+    if momentId then
+      local momentData = Utils.GetHistoricalMomentData(momentId);
+      local momentInfo = momentData and GameInfo.Moments[momentData.Type] or nil;
+      if momentInfo and player:GetProperty(PLAYER_MOMENT_TAG .. momentId) ~= 1 then
+				player:SetProperty(PLAYER_MOMENT_TAG .. momentId, 1);
+				local classificationMap = {};
+
+				for row in GameInfo.HD_MomentClassificationTypes() do
+					local map = Utils.MomentClassificationMap[row.MomentClassificationType] or {};
+					if map[momentInfo.MomentType] == true then
+						local num = player:GetProperty(PLAYER_MOMENT_NUM_TAG .. row.MomentClassificationType) or 0;
+						classificationMap[row.MomentClassificationType] = num + 1;
+						player:SetProperty(PLAYER_MOMENT_NUM_TAG .. row.MomentClassificationType, num + 1);
+						print(Locale.Lookup(momentInfo.Name) , Locale.Lookup(row.Name) , num + 1);
+					end
+				end
+
+				GameEvents.HDPlayerCompleteMoment.Call(
+					playerId,
+					momentInfo.Index,
+					classificationMap
+				);
+			end
+		end
+	end
+end
+Events.NotificationAdded.Add(RecordMoment);
+
 --------------------------------------------------------------
+function DetectCityOnCitySelectionChanged(playerId, cityId)
+	-- 城市判断是否拥有XX类型的巨作
+	DetectCityHasGreatWork(playerId, cityId)
+end
+Events.CitySelectionChanged.Add(DetectCityOnCitySelectionChanged);
+
+function DetectCityOnGameTurnEnded()
+  for _, playerId in ipairs(PlayerManager.GetAliveMajorIDs()) do
+    local player = Players[playerId];
+    if player then
+      for _, city in player:GetCities():Members() do
+				-- 城市判断是否拥有XX类型的巨作
+        DetectCityHasGreatWork(playerId, city:GetID());
+      end
+    end
+	end
+end
+GameEvents.OnGameTurnEnded.Add(DetectCityOnGameTurnEnded);
+
 -- Initialize
 function initialize()
 	Events.CityAddedToMap.Add(StrategicCityAddedToMap);
 	-- Events.ImprovementAddedToMap.Add(CityImprovementAddedToMap);
 	-- Events.ImprovementRemovedFromMap.Add(CityImprovementRemovedFromMap);
 	Events.ImprovementRemovedFromMap.Add(ClearBarbarianCamp);
+	Events.ImprovementAddedToMap.Add(OnImprovementAddedToMap);
+	Events.ResearchCompleted.Add(OnResearchCompleted);
 end
 Events.LoadGameViewStateDone.Add(initialize);

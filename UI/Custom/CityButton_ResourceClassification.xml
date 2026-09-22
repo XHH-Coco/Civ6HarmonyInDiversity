@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Context Name="ResourceClassification_CityPanelAddon">
+	<Stack ID="ResourceClassification_Button_Stack" Anchor="C,B" StackGrowth="Right" StackPadding="4">
+		<Button ID="ResourceClassification_Button" Anchor="L,B" Size="44,53" Texture="UnitPanel_ActionButton">
+			<Image ID="ResourceClassification_Button_Icon" Anchor="C,C" Offset="0,-3" Size="32,32" Icon="ICON_HD_CITYBUTTONS_RESOURCE_CLASSIFICATION"/>
+		</Button>
+	</Stack>
+</Context>

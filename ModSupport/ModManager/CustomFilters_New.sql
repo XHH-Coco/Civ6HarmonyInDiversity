@@ -102,13 +102,13 @@ insert or replace into EnglishText (Tag, Text) values
 	-- 世界奇观
 	("LOC_WONDERS_MODS_LIST", "
 		b8a7c566-c2ab-44d4-a52d-a97416faf690,
-		f6556753-3531-4d36-b448-5a4053064524,
+		37d1b105-f698-47df-85d5-7b39bc610a36,
 		aab33283-4b8f-46a4-83c0-784a8bfa177e,
 		fd3f13ba-3d51-442f-9435-3aeca0116b46,
 		6366039a-6cd8-48d5-99ce-d7832a617629,
 		9f162187-9342-47ca-9085-78fc3f80f25d,
 		ce086704-334c-43cd-b26a-478365503137,
-		3db98aba-d7ca-4b4d-9596-e2344e593ed0,
+		2217fddf-b466-45e1-950c-fc3747f076b6,
 		cfba692b-a7f8-4d6e-aa4b-a25aa704867c,
 		f87fe104-c6c5-4e11-9251-db958c80c589,
 		d1c3ef16-00ed-4d72-a468-1e584fdb85ad,
@@ -119,7 +119,7 @@ insert or replace into EnglishText (Tag, Text) values
 		e3052708-b650-4f3a-8e5c-da8f2a287524,
 		1cfe2a52-233b-4d4c-8bdf-209ec10352c1,
 		e12c350d-df6a-4d21-9302-4466cab4353c,
-		943808b8-5913-4cfc-93a8-0d5d4a0bc4af,
+		32b57a0b-9e64-4409-ad83-d40235860b9b,
 		5a5601c5-090c-4172-89fe-8f1da9e2b96d,
 		ffa02d2f-e5d4-43fd-bb97-0a4868c7b3a7,
 		ecc4e31d-8c79-4e4b-98e7-d96226cb95d9,
@@ -137,7 +137,8 @@ insert or replace into EnglishText (Tag, Text) values
 		4922ba47-61e1-4b15-9281-db996b14522d,
 		37fdca0b-9275-4235-9c18-c7ec348f930e,
 		78aa4d0b-742a-4d7a-be7d-a8317d69fb30,
-		664d17a5-f3be-493a-9332-8e20da1166fa
+		664d17a5-f3be-493a-9332-8e20da1166fa,
+		9018a348-589d-44ac-afb9-e7a400e2e90f
 	"),
 	-- 内容拓展
 	("LOC_CONTENT_EXTENSION_LIST", "
@@ -150,7 +151,9 @@ insert or replace into EnglishText (Tag, Text) values
 	("LOC_MECHANISM_FIX_LIST", "
 		967e466f-28e0-42a0-8f21-0e7bed5d7552,
 		850b838e-bb79-49ee-b61e-e71ee75296f9,
-		05003a81-c381-411c-8aec-4759bd0c0ec4
+		05003a81-c381-411c-8aec-4759bd0c0ec4,
+		2789f86d-acae-4972-94c5-e365f117eacb,
+		00000000-FDC7-F40A-F2D2-DA4A5407A33A
 	"),
 	-- 文明拓展
 	("LOC_CIV_EXTENSION_LIST", "
@@ -187,6 +190,7 @@ insert or replace into EnglishText (Tag, Text) values
 	-- 界面优化
 	("LOC_HD_UI_MODS_LIST", "
 		5aceed03-8639-4a81-8cbf-03f54d543502,
+		f11a6a0d-2f36-4cf0-9f61-9d8a9d2d2a11,
 		4ecfcc62-5471-4435-b295-590df213e8d8,
 		ebdf2824-352e-49c3-90c1-743a89180da8,
 		fbb7b86a-9ac9-4a8e-9439-9ded6aceda0e,
@@ -217,10 +221,14 @@ insert or replace into EnglishText (Tag, Text) values
 		013654fc-425d-4df6-aeda-825bb27df885,
 		577c5284-9691-458c-a861-db802265a325,
 		6a18ae19-df93-4322-a3d5-33c5a5087b36,
-		8446e6e9-7703-434d-ba10-0bd70a291d28
+		8446e6e9-7703-434d-ba10-0bd70a291d28,
+		ae166b3b-fe6b-4848-8a66-a48d91bc2966,
+		60092bdd-ce39-4319-aef6-baea505c7c45
 	"),
 	-- 可选集
 	("LOC_HD_OPTIONAL_MODS_LIST", "
+		f11a6a0d-2f36-4cf0-9f61-9d8a9d2d2a11,
+		60092bdd-ce39-4319-aef6-baea505c7c45,
 		43e4ac68-4ce4-4e6a-8eca-fbe81fdbd1df,
 		7d155dc3-4a94-4923-a306-d8fd40fb0003,
 		d3cbeba5-2100-475d-8c47-74573c80d406,

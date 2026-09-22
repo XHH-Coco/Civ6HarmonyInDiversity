@@ -27,7 +27,7 @@ values
   ("zh_Hans_CN",  "LOC_GOVT_INHERENT_BONUS_MONARCHY_XP1",                      "拥有驻军单位的城市+10%余粮，建造区域+25%建造速度。"),
   ("zh_Hans_CN",  "LOC_GOVT_ACCUMULATED_BONUS_BRIEF_MONARCHY_XP1",             "+50%影响力点数。拥有驻军单位的城市生产单位时+20% [ICON_Production] 生产力。"),
   ("zh_Hans_CN",  "LOC_GOVT_INHERENT_BONUS_MERCHREP_XP1",                      "城市中每位 [ICON_CITIZEN] 公民+4 [ICON_GOLD] 金币。有 [ICON_Governor] 总督就职的城市+10% [ICON_GOLD] 金币。"),
-  ("zh_Hans_CN",  "LOC_GOVT_ACCUMULATED_BONUS_BRIEF_MERCHREP_XP1",             "购买一个单元格的费用降低20%。"),
+  ("zh_Hans_CN",  "LOC_GOVT_ACCUMULATED_BONUS_BRIEF_MERCHREP_XP1",             "购买单元格-20%花费。"),
   ("zh_Hans_CN",  "LOC_GOVT_INHERENT_BONUS_THEOCRACY_XP1",                     "神学战争中+5 [ICON_Religion] 宗教战斗力。每一级圣地建筑为城市中每位 [ICON_CITIZEN] 公民+0.5 [ICON_Faith] 信仰值。"),
   ("zh_Hans_CN",  "LOC_GOVT_ACCUMULATED_BONUS_BRIEF_THEOCRACY_XP1",            "使用 [ICON_Faith] 信仰值购买可享受15%折扣。可使用信仰在拥有圣地的城市购买陆地军事单位。"),
   -- Tier 3

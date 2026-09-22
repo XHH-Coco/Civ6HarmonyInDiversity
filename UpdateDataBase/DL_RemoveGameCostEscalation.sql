@@ -5,9 +5,6 @@
 update GlobalParameters set Value = 100 where Name = 'GAME_COST_ESCALATION';
 
 -- Harvest & chopping
-update Resource_Harvests set Amount = 40 where YieldType = 'YIELD_FOOD';
-update Resource_Harvests set Amount = 40 where YieldType = 'YIELD_PRODUCTION';
-update Resource_Harvests set Amount = 80 where YieldType = 'YIELD_GOLD';
 update Feature_Removes set Yield = 30 where FeatureType = 'FEATURE_FOREST';
 update Feature_Removes set Yield = 30 where FeatureType = 'FEATURE_MARSH';
 update Feature_Removes set Yield = 15 where FeatureType = 'FEATURE_JUNGLE' and YieldType = 'YIELD_FOOD';
@@ -65,7 +62,7 @@ update Districts set CostProgressionModel = 'NO_COST_PROGRESSION', CostProgressi
 
 update Districts set Cost = 60 where DistrictType = 'DISTRICT_GOVERNMENT';
 -- update Districts set Cost = 60 where DistrictType = 'DISTRICT_DIPLOMATIC_QUARTER';
-update Districts set Cost = 90 where DistrictType = 'DISTRICT_HARBOR';
+update Districts set Cost = 75 where DistrictType = 'DISTRICT_HARBOR';
 update Districts set Cost = 90 where DistrictType = 'DISTRICT_AQUEDUCT';
 update Districts set CostProgressionModel = 'NO_COST_PROGRESSION', CostProgressionParam1 = 0, Cost = 60 where DistrictType in 
 (select CivUniqueDistrictType from DistrictReplaces where

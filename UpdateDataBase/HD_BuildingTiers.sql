@@ -35,9 +35,10 @@ select
 from HD_BuildingTiers group by PrereqDistrict;
 
 create table if not exists HD_HighestTierBuildings (
-	BuildingType text not null primary key
+	BuildingType text not null primary key,
+	PrereqDistrict text not null
 );
-insert or ignore into HD_HighestTierBuildings (BuildingType) select b.BuildingType
+insert or ignore into HD_HighestTierBuildings (BuildingType, PrereqDistrict) select b.BuildingType, b.PrereqDistrict
 	from HD_DistrictBuildingHighestTier a inner join HD_BuildingTiers b on a.DistrictType = b.PrereqDistrict and a.Tier = b.Tier where b.PrereqDistrict != 'DISTRICT_CITY_CENTER'
 	and b.BuildingType not in (select BuildingType from HD_DUMMY_BUILDINGS);
 
@@ -140,7 +141,6 @@ update HD_CityStateBuffedObjects set TraitType = 'MINOR_CIV_TRADE_TRAIT',			Yiel
 update HD_CityStateBuffedObjects set TraitType = 'MINOR_CIV_MILITARISTIC_TRAIT',	YieldType = 'YIELD_PRODUCTION'		where PrereqDistrict = 'DISTRICT_ENCAMPMENT';
 update HD_CityStateBuffedObjects set TraitType = 'MINOR_CIV_INDUSTRIAL_TRAIT',		YieldType = 'YIELD_PRODUCTION'   	where PrereqDistrict = 'DISTRICT_INDUSTRIAL_ZONE';
 update HD_CityStateBuffedObjects set TraitType = 'MINOR_CIV_CSE_MARITIME_TRAIT',	YieldType = 'YIELD_GOLD'			where PrereqDistrict = 'DISTRICT_HARBOR';
-update HD_CityStateBuffedObjects set TraitType = 'MINOR_CIV_INDUSTRIAL_TRAIT',  YieldType = 'YIELD_PRODUCTION', Amount = Amount + 1 where PrereqDistrict = 'DISTRICT_INDUSTRIAL_ZONE' and Amount < 3;
 update HD_CityStateBuffedObjects set TraitType = 'MINOR_CIV_CSE_AGRICULTURAL_TRAIT',  YieldType = 'YIELD_FOOD', Amount = Amount + 1 where PrereqDistrict = 'DISTRICT_AQUEDUCT';
 update HD_CityStateBuffedObjects set TraitType = 'MINOR_CIV_CSE_AGRICULTURAL_TRAIT',  YieldType = 'YIELD_FOOD', Amount = Amount + 1 where PrereqDistrict = 'DISTRICT_NEIGHBORHOOD';
 -- 农业区适配
@@ -211,8 +211,6 @@ update HD_CityStateBuffedObjects set Amount = Amount - 1 where Amount > 1 and Yi
 	and not exists (select DistrictType from Districts where DistrictType = 'DISTRICT_C_AGRICULTURE');
 update HD_CityStateBuffedObjects set Amount = Amount - 1 where Amount > 1 and YieldType = 'YIELD_FOOD'
 	and not exists (select DistrictType from Districts where DistrictType = 'DISTRICT_C_AGRICULTURE');
--- Industrial City States adjusts
-update HD_CityStateBuffedObjects set Amount = Amount - 1 where Amount > 1 and YieldType = 'YIELD_PRODUCTION' and PrereqDistrict = 'DISTRICT_INDUSTRIAL_ZONE';
 -- triple gold yield
 update HD_CityStateBuffedObjects set Amount = Amount * 3 where YieldType = 'YIELD_GOLD';
 

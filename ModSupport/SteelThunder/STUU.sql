@@ -87,7 +87,6 @@ insert or replace into UnitAbilityModifiers (UnitAbilityType, ModifierId) values
 -- 阿拉伯
 delete from CivilizationTraits where CivilizationType = 'CIVILIZATION_ARABIA' and TraitType = 'TRAIT_CIVILIZATION_UNIT_ARABIAN_MAMLUK';
 insert or replace into LeaderTraits (LeaderType, TraitType) values ('LEADER_SALADIN', 'TRAIT_CIVILIZATION_UNIT_ARABIAN_MAMLUK');
-update Traits set Description = 'LOC_TRAIT_LEADER_RIGHTEOUSNESS_OF_FAITH_STUU_DESCRIPTION' where TraitType = 'TRAIT_LEADER_RIGHTEOUSNESS_OF_FAITH';
 -- 
 insert or replace into UnitReplaces (CivUniqueUnitType, ReplacesUnitType) values ('UNIT_ARABIAN_CAMEL_ARCHER', 'UNIT_CROSSBOWMAN');
 -- update Units set PrereqTech = 'TECH_STIRRUPS', PurchaseYield = 'YIELD_FAITH' where UnitType = 'UNIT_ARABIAN_CAMEL_ARCHER';

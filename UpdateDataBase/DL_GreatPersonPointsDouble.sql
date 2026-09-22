@@ -66,8 +66,8 @@ update ModifierArguments set Value = Value * 2 where Name = 'Amount' and
 	or ModifierId = 'TRAIT_ENGINEER_HAPPY'
 	or ModifierId = 'TRAIT_SCIENTIST_ECSTATIC'
 	or ModifierId = 'TRAIT_SCIENTIST_HAPPY'
-	or ModifierId = 'TRAIT_GREAT_ENGINEER_FACTORY_MODIFIER' -- 瑞典
-	or ModifierId = 'TRAIT_GREAT_SCIENTIST_UNIVERSITY_MODIFIER'
+	-- or ModifierId = 'TRAIT_GREAT_ENGINEER_FACTORY_MODIFIER' -- 瑞典
+	-- or ModifierId = 'TRAIT_GREAT_SCIENTIST_UNIVERSITY_MODIFIER'
 	or ModifierId = 'TRAVELINGMERCHANTS_GREATMERCHANTPOINTS' -- 政策卡
 	or ModifierId = 'WOLIN_GREAT_ADMIRAL_POINTS' -- 沃林
 	or ModifierId = 'WOLIN_GREAT_GENERAL_POINTS'

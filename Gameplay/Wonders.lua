@@ -16,6 +16,9 @@ function PlayerHasWonder(player, wonderId)
 end
 Utils.PlayerHasWonder = PlayerHasWonder;
 
+-- 通知
+local NOTIFICATION_PRIDE_MOMENT_RECORDED_HASH = GameInfo.Notifications['NOTIFICATION_PRIDE_MOMENT_RECORDED'].Hash;
+
 -- 伟人
 local WRITER_INDEX = GameInfo.GreatPersonClasses['GREAT_PERSON_CLASS_WRITER'].Index;
 local ARTIST_INDEX = GameInfo.GreatPersonClasses['GREAT_PERSON_CLASS_ARTIST'].Index;
@@ -176,11 +179,14 @@ local STATUE_LIBERTY_NAVAL_FLEET = GlobalParameters.HD_STATUE_LIBERTY_NAVAL_FLEE
 local STATUE_LIBERTY_INFLUENCE_POINT_PERCENTAGE = GlobalParameters.HD_STATUE_LIBERTY_INFLUENCE_POINT_PERCENTAGE or 0;
 local STATUE_LIBERTY_POS_X_TAG = 'HD_STATUE_LIBERTY_POS_X';
 local STATUE_LIBERTY_POS_Y_TAG = 'HD_STATUE_LIBERTY_POS_Y';
+local STATUE_LIBERTY_HARBOR_TAG = 'HD_STATUE_LIBERTY_HARBOR_';
 function StatueLibertyWonderCompleted(x, y, buildingId, playerId, cityId, percentComplete, unknown)
 	if buildingId == STATUE_LIBERTY_INDEX then
     Game.SetProperty(STATUE_LIBERTY_POS_X_TAG, x)
     Game.SetProperty(STATUE_LIBERTY_POS_Y_TAG, y)
     local player = Players[playerId]
+
+    -- 海军回血 组建舰队
     for _, unit in player:GetUnits():Members() do
       local unitInfo = GameInfo.Units[unit:GetType()]
       local domian = unitInfo.Domain
@@ -226,11 +232,26 @@ function StatueLibertyOnGameTurnEnded()
       end
       amount = math.floor(amount * STATUE_LIBERTY_INFLUENCE_POINT_PERCENTAGE / 100);
       local plot = Map.GetPlot(Game.GetProperty(STATUE_LIBERTY_POS_X_TAG), Game.GetProperty(STATUE_LIBERTY_POS_Y_TAG))
-      Utils.BinaryCompress(amount, plot)
+      Utils.BinaryCompress(amount, plot, 'HD_PLOT_BINARY_COMPRESS_STATUE_LIBERTY')
     end
   end
 end
 GameEvents.OnGameTurnEnded.Add(StatueLibertyOnGameTurnEnded)
+
+function StatueLibertyDistrictConstructed(playerId, districtType, x, y)
+  local player = Players[playerId];
+  local plot = Map.GetPlot(x, y);
+	if player ~= nil and plot ~= nil and not plot:IsLake() and Utils.IsDistrictType(districtType, 'DISTRICT_HARBOR') then
+		-- 获取本格海洋名字
+		local seaName = Utils.GetPlotSeaName(x, y);
+		if seaName ~= nil and player:GetProperty(STATUE_LIBERTY_HARBOR_TAG .. seaName) ~= 1 then
+      player:SetProperty(STATUE_LIBERTY_HARBOR_TAG .. seaName, 1)
+      print('自由女神像', seaName)
+      player:AttachModifierByID('HD_STATUE_LIBERTY_TRADE_ROUTE_CAPACITY');
+    end
+	end
+end
+GameEvents.OnDistrictConstructed.Add(StatueLibertyDistrictConstructed);
 
 -- 宙斯像
 local STATUE_OF_ZEUS_DOUBLE_PANTHEON_TAG = 'HD_StatueOfZeusDoublePantheon';
@@ -272,6 +293,7 @@ function HagiaSophiaGetWorship(playerId, cityId, eVisibility)
   if isHolyCity then
     -- 获取城市当前宗教
     local city = CityManager.GetCity(playerId, cityId);
+    if not city then return; end
     local cityReligion = city:GetReligion():GetMajorityReligion();
     -- 获取该圣城原本的宗教
     local player = Players[playerId];
@@ -319,7 +341,7 @@ function HagiaSophiaGetWorship(playerId, cityId, eVisibility)
         end
       end
 
-      -- 如果两种建筑都存在，则 AttachModifer
+      -- 如果两种建筑都存在
       if buildings.copyBuilding ~= nil and buildings.targetBuilding ~= nil and buildings.copyBuilding ~= buildings.targetBuilding then
         -- print('HagiaSophiaGetWorship 被复制的祭祀建筑', buildings.copyBuilding)
         -- print('HagiaSophiaGetWorship 目标祭祀建筑', buildings.targetBuilding)
@@ -360,7 +382,7 @@ end
 GameEvents.SydneyOperaHouseTurnBeginSwitch.Add(SydneyOperaHouseTurnBeginGold);
 
 --圣母院
-local NOTRE_DAME = GameInfo.Buildings['BUILDING_NOTRE_DAME']
+local NOTRE_DAME = GameInfo.Buildings['BUILDING_SUK_NOTRE_DAME_DE_PARIS']
 function NotreDameCivicBoostTriggered(playerId, iBoostedCivic)
   if not NOTRE_DAME then
     return;
@@ -371,10 +393,11 @@ function NotreDameCivicBoostTriggered(playerId, iBoostedCivic)
     return;
   end
 
-  local cost = GameInfo.Civics[iBoostedCivic].Cost;
+  local cost = player:GetCulture():GetCultureCost(iBoostedCivic);
+  print("圣母院 市政需求", cost)
   local percentage = GlobalParameters.HD_NOTRE_DAME_CIVIC_BOOST_PERCENTAGE or 0;
   local amount = cost * percentage / 100;
-  player:GetGreatPeoplePoints():ChangePointsTotal(GameInfo.GreatPersonClasses['GREAT_PERSON_CLASS_ARTIST'].Index, amount);
+  -- player:GetGreatPeoplePoints():ChangePointsTotal(GameInfo.GreatPersonClasses['GREAT_PERSON_CLASS_ARTIST'].Index, amount);
   player:GetGreatPeoplePoints():ChangePointsTotal(GameInfo.GreatPersonClasses['GREAT_PERSON_CLASS_MUSICIAN'].Index, amount);
 end
 
@@ -462,53 +485,63 @@ end
 
 Events.UnitGreatPersonCreated.Add(OnhemitageArtistCreated);
 
---巴米扬大佛:建立贸易路线时获得宗教压力
-local BamyanInfo = GameInfo.Buildings["BUILDING_BAMYAN"];
-local Bamyan_TAG = 'HD_BamyanTradeRouteAddedToMap';
-local BAMYAN_RELIGIOUS_PRESSURE = GlobalParameters.HD_BAMYAN_RELIGIOUS_PRESSURE or 0;
-function BamyanTradeRouteAddedToMap(playerId, x, y)
-  if BamyanInfo == nil then
-    return;
-  end
+-- 巴米扬大佛
+local BAMYAN_INFO = GameInfo.Buildings['BUILDING_BAMYAN']
+local NOTIFICATION_TRADING_POST_CREATED_HASH = GameInfo.Notifications['NOTIFICATION_TRADING_POST_CREATED'].Hash;
+local BAMYAN_RELIC_TAG = 'HD_BAMYAN_RELIC_';
+local BAMYAN_RELIC_NUM_TAG = 'HD_BAMYAN_RELIC_NUM';
+function BamyanNotificationAdded(playerId, notificationId)
+  if not BAMYAN_INFO then return; end
+
   local player = Players[playerId];
-  if PlayerHasWonder(player, BamyanInfo.Index) then
-    local city = Cities.GetCityInPlot(x, y)
-    city:SetProperty(Bamyan_TAG, 1)
-  end
-end
+  if not player then return; end
 
-function BamyanTradeRouteActivityChanged(playerId, originPlayerId, originCityId, targetPlayerId, targetCityId)
-  local originCity = CityManager.GetCity(originPlayerId, originCityId)
-  if originCity and originCity:GetProperty(Bamyan_TAG) == 1 then
-    -- 判断是否是创建贸易路线
-    originCity:SetProperty(Bamyan_TAG, 0)
+  local notificationEntry = NotificationManager.Find(playerId, notificationId)
+  if notificationEntry then
+    if notificationEntry:GetType() == NOTIFICATION_TRADING_POST_CREATED_HASH then
+      local x, y = notificationEntry:GetLocation();
+      local city = CityManager.GetCityAt(x, y);
+      if not city then return; end
 
-    -- 判断目的地是否是圣城
-    local isHolyCity = Utils.IsHolyCity(targetPlayerId, targetCityId);
-    if isHolyCity then
-      -- 获取城市当前宗教
-      local targetCity = CityManager.GetCity(targetPlayerId, targetCityId);
-      local cityReligion = targetCity:GetReligion():GetMajorityReligion();
-      -- 获取该圣城原本的宗教
-      local targetPlayer = Players[targetPlayerId];
-      local playerReligion = targetPlayer:GetReligion():GetReligionTypeCreated();
-      -- 如果圣城的宗教未改变
-      if cityReligion == playerReligion then
-        originCity:GetReligion():AddReligiousPressure(playerId, playerReligion, BAMYAN_RELIGIOUS_PRESSURE, playerId);
-        for row in GameInfo.Religions() do
-          if row.Index == playerReligion then
-            local religionName = Locale.Lookup(row.Name)
-            local message = '[COLOR:White]+' .. tostring(BAMYAN_RELIGIOUS_PRESSURE) .. ' ' .. religionName .. '[ENDCOLOR]'
-            local cityLocation = originCity:GetLocation();
-            Game.AddWorldViewText(playerId, message, cityLocation.x, cityLocation.y)
-          end
+      local ownerId = city:GetOwner();
+      local owner = Players[ownerId];
+      if ownerId == playerId or not owner or not owner:IsMajor() then return; end
+
+      local religionId = owner:GetReligion():GetReligionTypeCreated();
+      if religionId and religionId ~= -1 and player:GetProperty(BAMYAN_RELIC_TAG .. ownerId) ~= 1 then
+        player:SetProperty(BAMYAN_RELIC_TAG .. ownerId, 1);
+
+        -- 判断是否有巴米扬大佛
+        if PlayerHasWonder(player, BAMYAN_INFO.Index) then
+          -- 直接获得遗物
+          player:AttachModifierByID('BAMYAN_GRANT_RELIC');
+          print("巴米扬大佛送遗物 建立贸易站：" .. Locale.Lookup(city:GetName()));
+        else
+          -- 计数 等建成后追溯
+          local amount = player:GetProperty(BAMYAN_RELIC_NUM_TAG) or 0;
+          player:SetProperty(BAMYAN_RELIC_NUM_TAG, amount + 1);
+          print("巴米扬大佛未建成 遗物计数：" .. amount + 1 .. " 建立贸易站：" .. Locale.Lookup(city:GetName()));
         end
       end
     end
   end
-  
 end
-Events.TradeRouteActivityChanged.Add(BamyanTradeRouteActivityChanged)
+Events.NotificationAdded.Add(BamyanNotificationAdded);
+
+-- 建成巴米扬大佛后追溯遗物
+function BamyanWonderCompleted(x, y, buildingId, playerId, cityId, percentComplete, unknown)
+  if BAMYAN_INFO and buildingId == BAMYAN_INFO.Index then
+    local player = Players[playerId];
+    if not player then return; end
+
+    local amount = player:GetProperty(BAMYAN_RELIC_NUM_TAG) or 0;
+    for i=1, amount, 1 do
+      player:AttachModifierByID('BAMYAN_GRANT_RELIC');
+      print("建成巴米扬大佛后追溯遗物", i);
+    end
+  end
+end
+Events.WonderCompleted.Add(BamyanWonderCompleted);
 
 -- 铜雀台
 local BronzeBirdInfo = GameInfo.Buildings["BUILDING_PHANTA_BRONZE_BIRD_TERRACE"];
@@ -544,174 +577,6 @@ function BronzeBirdPlayerTurnActivated(playerId, isFirstTime)
 end
 Events.PlayerTurnActivated.Add(BronzeBirdPlayerTurnActivated);
 
--- 鲁尔山谷
-local RUHR_VALLEY_INDEX = GameInfo.Buildings["BUILDING_RUHR_VALLEY"].Index;
-local RUHR_VALLEY_SHARE_INDUSTRY = GlobalParameters.HD_RUHR_VALLEY_SHARE_INDUSTRY or 0;
-local RUHR_VALLEY_TAG = "HD_CITY_HAS_RUHR_VALLEY"
-function RuhrValleyWonderCompleted(x, y, buildingId, playerId, cityId, percentComplete, unknown)
-  if RUHR_VALLEY_SHARE_INDUSTRY ~= 0 and buildingId == RUHR_VALLEY_INDEX then
-    local city = CityManager.GetCity(playerId, cityId)
-    city:SetProperty(RUHR_VALLEY_TAG, 1)
-    local player = Players[playerId];
-    player:SetProperty(RUHR_VALLEY_TAG, 1)
-    RefreshRuhrValleyTradeRoute(playerId, cityId)
-
-    -- 记录已经存在的改良单元格 property
-    local cityPlots = Utils.GetCityPlots(playerId, cityId)
-    if cityPlots then
-      for _, plotId in ipairs(cityPlots) do
-        local plot = Map.GetPlotByIndex(plotId)
-        RuhrValleyCheckPlot(plot:GetX(), plot:GetY(), plot:GetImprovementType(), playerId, plot:GetResourceType(), false)
-      end
-    end
-  end
-end
-Events.WonderCompleted.Add(RuhrValleyWonderCompleted);
-
-function RuhrValleyTradeRouteActivityChanged(playerId, originPlayerId, originCityId, targetPlayerId, targetCityId)
-  if RUHR_VALLEY_SHARE_INDUSTRY ~= 0 and originPlayerId == targetPlayerId then
-    local targetCity = CityManager.GetCity(targetPlayerId, targetCityId)
-    if targetCity and targetCity:GetProperty(RUHR_VALLEY_TAG) == 1 then
-      RefreshRuhrValleyTradeRoute(playerId, targetCityId)
-    end
-  end
-end
-Events.TradeRouteActivityChanged.Add(RuhrValleyTradeRouteActivityChanged)
-
-local FARM_INDEX = GameInfo.Improvements['IMPROVEMENT_FARM'].Index
-local PLANTATION_INDEX = GameInfo.Improvements['IMPROVEMENT_PLANTATION'].Index
-local LUMBER_MILL_INDEX = GameInfo.Improvements['IMPROVEMENT_LUMBER_MILL'].Index
-local CHATEAU_INDEX = GameInfo.Improvements['IMPROVEMENT_CHATEAU'].Index
-local INDUSTRY_INFO = GameInfo.Improvements['IMPROVEMENT_INDUSTRY']
-local CORPORATION_INFO = GameInfo.Improvements['IMPROVEMENT_CORPORATION']
-local RUHR_VALLEY_IMPROVEMENT_TAG = "HD_RUHR_VALLEY_NEED_REFRESH"
-function RuhrValleyImprovementAddedToMap(x, y, improvementId, playerId, resourceId, isPillaged, isWorked)
-  RuhrValleyCheckPlot(x, y, improvementId, playerId, resourceId, true)
-end
-
-function RuhrValleyCheckPlot(x, y, improvementId, playerId, resourceId, needRefresh)
-  if RUHR_VALLEY_SHARE_INDUSTRY ~= 0 then
-    local player = Players[playerId];
-    if player and player:GetProperty(RUHR_VALLEY_TAG) == 1 then
-      -- 后手建造行业或公司
-      if improvementId == INDUSTRY_INFO.Index or improvementId == CORPORATION_INFO.Index then
-        local plot = Map.GetPlot(x, y)
-        local city = Cities.GetPlotPurchaseCity(plot);
-        if city and city:GetProperty(RUHR_VALLEY_TAG) == 1 then
-          if needRefresh then RefreshRuhrValleyTradeRoute(playerId, city:GetID()); end
-          plot:SetProperty(RUHR_VALLEY_IMPROVEMENT_TAG, 1)
-        else
-          -- 在其他城市相邻法国酒庄开行业
-          for direction = 0, 5 do
-            local adjacentPlot = Map.GetAdjacentPlot(x, y, direction);  
-            if adjacentPlot and adjacentPlot:GetImprovementType() == CHATEAU_INDEX then
-              local adjacentCity = Cities.GetPlotPurchaseCity(adjacentPlot);
-              if adjacentCity and adjacentCity:GetProperty(RUHR_VALLEY_TAG) == 1 then
-                if needRefresh then RefreshRuhrValleyTradeRoute(playerId, adjacentCity:GetID()); end
-                plot:SetProperty(RUHR_VALLEY_IMPROVEMENT_TAG, 2)
-                break;
-              end
-            end
-          end
-        end
-      end
-      -- 法国酒庄行业效果适配
-      if improvementId == CHATEAU_INDEX then
-        local plot = Map.GetPlot(x, y)
-        local city = Cities.GetPlotPurchaseCity(plot);
-        if city and city:GetProperty(RUHR_VALLEY_TAG) == 1 then
-          if needRefresh then RefreshRuhrValleyTradeRoute(playerId, city:GetID()); end
-          plot:SetProperty(RUHR_VALLEY_IMPROVEMENT_TAG, 1)
-
-          for direction = 0, 5 do
-            local adjacentPlot = Map.GetAdjacentPlot(x, y, direction);
-            if adjacentPlot then
-              local adjacentImprovementId = adjacentPlot:GetImprovementType()
-              local adjacentResourceId = adjacentPlot:GetResourceType()
-              if (adjacentImprovementId == FARM_INDEX or adjacentImprovementId == PLANTATION_INDEX or adjacentImprovementId == LUMBER_MILL_INDEX) and adjacentResourceId ~= -1 then
-                adjacentPlot:SetProperty(RUHR_VALLEY_IMPROVEMENT_TAG, 2)
-              end
-            end
-          end
-        end
-      end
-
-      -- 法国酒庄相邻建造对应改良
-      if (improvementId == FARM_INDEX or improvementId == PLANTATION_INDEX or improvementId == LUMBER_MILL_INDEX) and resourceId ~= -1 then
-        for direction = 0, 5 do
-          local adjacentPlot = Map.GetAdjacentPlot(x, y, direction);  
-          if adjacentPlot and adjacentPlot:GetImprovementType() == CHATEAU_INDEX then
-            local adjacentCity = Cities.GetPlotPurchaseCity(adjacentPlot);
-            if adjacentCity and adjacentCity:GetProperty(RUHR_VALLEY_TAG) == 1 then
-              if needRefresh then RefreshRuhrValleyTradeRoute(playerId, adjacentCity:GetID()); end
-              local plot = Map.GetPlot(x, y)
-              plot:SetProperty(RUHR_VALLEY_IMPROVEMENT_TAG, 2)
-              break;
-            end
-          end
-        end
-      end
-    end
-  end
-end
-
-function RuhrValleyImprovementRemovedFromMap(x, y, playerId)
-  local plot = Map.GetPlot(x, y)
-  local needRefresh = plot:GetProperty(RUHR_VALLEY_IMPROVEMENT_TAG) or 0
-  if needRefresh == 1 then
-    local city = Cities.GetPlotPurchaseCity(plot);
-    RefreshRuhrValleyTradeRoute(playerId, city:GetID())
-    plot:SetProperty(RUHR_VALLEY_IMPROVEMENT_TAG, 0)
-  elseif needRefresh == 2 then
-    for direction = 0, 5 do
-      local adjacentPlot = Map.GetAdjacentPlot(x, y, direction); 
-      if adjacentPlot and adjacentPlot:GetImprovementType() == CHATEAU_INDEX then
-        local city = Cities.GetPlotPurchaseCity(adjacentPlot);
-        if city and city:GetProperty(RUHR_VALLEY_TAG) == 1 then
-          RefreshRuhrValleyTradeRoute(playerId, city:GetID())
-          plot:SetProperty(RUHR_VALLEY_IMPROVEMENT_TAG, 0)
-          break;
-        end
-      end
-    end
-  end
-end
-
-function RefreshRuhrValleyTradeRoute(playerId, targetCityId)
-  local targetCity = CityManager.GetCity(playerId, targetCityId)
-  print("RuhrValley start refresh in", Locale.Lookup(targetCity:GetName()))
-  local player = Players[playerId];
-  local playerCities = player:GetCities();
-  if not playerCities then return; end
-  -- 重置所有城市的 property
-  for _, city in playerCities:Members() do
-    local plot = city:GetPlot()
-    for row in GameInfo.HDMonopolyResourceClasses() do
-      plot:SetProperty('HD_RUHR_VALLEY_SHARE_' .. row.Category .. '_INDUSTRY', 0)
-    end
-  end
-
-  -- 检测以该城市为目的地的内商
-  local routes = Utils.GetCityIncomingRoutes(playerId, targetCityId);
-  if not routes then return; end
-  for _, route in ipairs(routes) do
-    if route.OriginCityPlayer == route.DestinationCityPlayer then
-      local originCity = playerCities:FindID(route.OriginCityID);
-      for row in GameInfo.HDMonopolyResourceClasses() do
-        local industryProperty = targetCity:GetProperty('HD_CITY_HAS_' .. row.Category .. '_INDUSTRY') or 0;
-        if industryProperty > 0 then
-          local plot = originCity:GetPlot();
-          plot:SetProperty('HD_RUHR_VALLEY_SHARE_' .. row.Category .. '_INDUSTRY', 1)
-          
-          local msg = Locale.Lookup("LOC_HD_PEDIA_CATEGORY_" .. row.Category .. "_NAME")
-          print("RuhrValley share", Locale.Lookup("LOC_HD_PEDIA_CATEGORY_" .. row.Category .. "_NAME"), "to", Locale.Lookup(originCity:GetName()))
-          Game.AddWorldViewText(playerId, msg, plot:GetX(), plot:GetY())
-        end
-      end
-    end
-  end
-end
-
 -- 圣米歇尔山
 local MICHEL_INDEX = GameInfo.Buildings['BUILDING_MONT_ST_MICHEL'].Index;
 local MICHEL_TAG = 'HD_MICHEL';
@@ -728,18 +593,6 @@ function MichelWonderCompleted(x, y, buildingId, playerId, cityId, percentComple
     print('MichelWonderCompleted', playerId, playerReligion)
     Game:SetProperty(MICHEL_TAG, playerReligion)
     Game:SetProperty(MICHEL_PLAYER_TAG, playerId)
-
-    -- -- 记录可获得点数的伟人类型
-    -- local MichelGreatPeopleList = {}
-    -- for row in GameInfo.GreatPersonClasses() do
-    --   if row.AvailableInTimeline == true and row.GreatPersonClassType ~= 'GREAT_PERSON_CLASS_PROPHET' then
-    --     table.insert(MichelGreatPeopleList, {
-    --       Index = row.Index,
-    --       Icon = row.IconString
-    --     })
-    --   end
-    -- end
-    -- Game:SetProperty(MICHEL_LIST_TAG, MichelGreatPeopleList)
 
     -- 标记已经信仰该宗教的城市
     local alives = PlayerManager.GetAlive()
@@ -763,6 +616,8 @@ Events.WonderCompleted.Add(MichelWonderCompleted);
 
 function MichelCityReligionFollowersChanged(playerId, cityId, eVisibility)
   local city = CityManager.GetCity(playerId, cityId);
+  if not city then return; end
+
   local cityReligion = city:GetReligion():GetMajorityReligion();
   local michelReligion = Game:GetProperty(MICHEL_TAG) or -1;
   if MICHEL_GPP_AMOUNT ~= 0 and city:GetProperty(MICHEL_TAG) ~= 1 and cityReligion ~= -1 and michelReligion ~= -1 and cityReligion == michelReligion then
@@ -877,126 +732,305 @@ function KhalifaGreatWorkCreated(playerId, unitId, x, y, buildingId, greatWorkIn
 end
 Events.GreatWorkCreated.Add(KhalifaGreatWorkCreated);
 
--- 婆罗浮屠
-local BOROBUDUR_INFO = GameInfo.Buildings['BUILDING_BOROBUDUR'];
-local BOROBUDUR_EXCAVATE_TIMES_TAG = 'HD_BOROBUDUR_EXCAVATE_TIMES';
-local BOROBUDUR_EXCAVATE_GOLD = GlobalParameters.HD_BOROBUDUR_EXCAVATE_GOLD or 0;
-local BOROBUDUR_EXCAVATE_FAITH = GlobalParameters.HD_BOROBUDUR_EXCAVATE_FAITH or 0;
-local BOROBUDUR_EXCAVATE_CULTURE = GlobalParameters.HD_BOROBUDUR_EXCAVATE_CULTURE or 0;
-local BOROBUDUR_EXCAVATE_RELIC_TAG = 'HD_BOROBUDUR_EXCAVATE_RELIC';
-local BOROBUDUR_EXCAVATE_RELIC_PROB = GlobalParameters.HD_BOROBUDUR_EXCAVATE_RELIC_PROB or 0;
-local BOROBUDUR_EXCAVATE_RESOURCE_PROB = GlobalParameters.HD_BOROBUDUR_EXCAVATE_RESOURCE_PROB or 0;
-local BorobudurResources = {}
-function BorobudurInit()
-  for row in GameInfo.Resource_ValidFeatures() do
-		if row.FeatureType == 'FEATURE_VOLCANIC_SOIL' then
-			table.insert(BorobudurResources, row.ResourceType)
-		end
+-- 圣彼得大教堂
+local BUILDING_AL_STPETERSBASILICA_INFO = GameInfo.Buildings['BUILDING_AL_STPETERSBASILICA'];
+local AL_STPETERSBASILICA_PLAYER_TAG = 'HD_AL_STPETERSBASILICA_PLAYER';
+local AL_STPETERSBASILICA_RELIGION_TAG = 'HD_AL_STPETERSBASILICA_RELIGION';
+local AL_STPETERSBASILICA_HAS_GRANTED_APOSTLE_TAG = 'HD_AL_STPETERSBASILICA_HAS_GRANTED_APOSTLE';
+local NEED_REFRESH_RELIGION_FLAG_TAG = 'HD_NEED_REFRESH_RELIGION_FLAG';
+local AL_STPETERSBASILICA_HAS_GRANTED_YIELD_TAG = 'HD_AL_STPETERSBASILICA_HAS_GRANTED_YIELD';
+function AlStpetersbasilicaWonderCompleted(x, y, buildingId, playerId, cityId, percentComplete, unknown)
+  if BUILDING_AL_STPETERSBASILICA_INFO == nil then
+    return;
+  end
+
+  local player = Players[playerId];
+  if not player then return; end
+
+  if buildingId == BUILDING_AL_STPETERSBASILICA_INFO.Index then
+    -- 记录玩家创建的宗教
+    local playerReligion = player:GetReligion():GetReligionTypeCreated();
+    Game:SetProperty(AL_STPETERSBASILICA_PLAYER_TAG, playerId);
+    Game:SetProperty(AL_STPETERSBASILICA_RELIGION_TAG, playerReligion);
+
+    local alivePlayers = PlayerManager.GetAliveIDs()
+    for _, alivePlayerId in ipairs(alivePlayers) do
+      local alivePlayer = Players[alivePlayerId];
+      local capitalCity = alivePlayer:GetCities():GetCapitalCity();
+      if alivePlayer:IsMajor() and capitalCity and capitalCity:GetProperty(AL_STPETERSBASILICA_HAS_GRANTED_APOSTLE_TAG) ~= 1 then
+        -- 判断是否信奉玩家的宗教
+        local cityReligion = capitalCity:GetReligion():GetMajorityReligion();
+        if cityReligion ~= -1 and cityReligion == playerReligion then
+          capitalCity:SetProperty(AL_STPETERSBASILICA_HAS_GRANTED_APOSTLE_TAG, 1);
+          AlStpetersbasilicaInitUnit(playerId, capitalCity, playerReligion);
+        end
+      end
+
+      -- 标记已经信仰该宗教的城市
+      local aliveCities = alivePlayer:GetCities()
+      for _, city in aliveCities:Members() do
+        local cityReligion = city:GetReligion():GetMajorityReligion();
+        if cityReligion == playerReligion then
+          city:SetProperty(AL_STPETERSBASILICA_HAS_GRANTED_YIELD_TAG, 1);
+        end
+      end
+    end
+
+  end
+end
+Events.WonderCompleted.Add(AlStpetersbasilicaWonderCompleted);
+
+local AL_STPETERSBASILICA_YIELD_SCIENCE_PER_POP = GlobalParameters.HD_AL_STPETERSBASILICA_YIELD_SCIENCE_PER_POP or 0;
+local AL_STPETERSBASILICA_YIELD_CULTURE_PER_POP = GlobalParameters.HD_AL_STPETERSBASILICA_YIELD_CULTURE_PER_POP or 0;
+local AL_STPETERSBASILICA_YIELD_FAITH_PER_POP = GlobalParameters.HD_AL_STPETERSBASILICA_YIELD_FAITH_PER_POP or 0;
+local AL_STPETERSBASILICA_YIELD_GOLD_PER_POP = GlobalParameters.HD_AL_STPETERSBASILICA_YIELD_GOLD_PER_POP or 0;
+function AlStpetersbasilicaCityReligionFollowersChanged(playerId, cityId, eVisibility)
+  local player = Players[playerId];
+
+  local city = CityManager.GetCity(playerId, cityId);
+  local cityReligion = city:GetReligion():GetMajorityReligion();
+  local alStpetersbasilicaReligion = Game:GetProperty(AL_STPETERSBASILICA_RELIGION_TAG) or -1;
+
+  if cityReligion ~= -1 and alStpetersbasilicaReligion ~= -1 and cityReligion == alStpetersbasilicaReligion then
+    local alStpetersbasilicaPlayerId = Game.GetProperty(AL_STPETERSBASILICA_PLAYER_TAG)
+    local alStpetersbasilicaPlayer = Players[alStpetersbasilicaPlayerId];
+    if alStpetersbasilicaPlayer and alStpetersbasilicaPlayer:IsAlive() then
+      -- 若为首都 获得使徒
+      if player:IsMajor() and Utils.IsPlayerCapital(playerId, cityId) and city:GetProperty(AL_STPETERSBASILICA_HAS_GRANTED_APOSTLE_TAG) ~= 1 then
+        city:SetProperty(AL_STPETERSBASILICA_HAS_GRANTED_APOSTLE_TAG, 1);
+        AlStpetersbasilicaInitUnit(alStpetersbasilicaPlayerId, city, alStpetersbasilicaReligion);
+      end
+      
+      -- 根据人口和区域获得产出
+      if city:GetProperty(AL_STPETERSBASILICA_HAS_GRANTED_YIELD_TAG) ~= 1 then
+        city:SetProperty(AL_STPETERSBASILICA_HAS_GRANTED_YIELD_TAG, 1);
+
+        local districtsNum = city:GetDistricts():GetNumDistricts();
+        for index = 0, districtsNum - 1 do
+          local district = city:GetDistricts():GetDistrictByIndex(index);
+          if district and not district:IsPillaged() and district:IsComplete() then
+            local districtInfo = GameInfo.Districts[district:GetType()];
+            if districtInfo and districtInfo.DistrictType ~= 'DISTRICT_WONDER' then
+              local districtType = districtInfo.DistrictType;
+
+              -- 检测 UD
+              local districtReplaceInfo = GameInfo.DistrictReplaces[districtType];
+              if districtReplaceInfo then
+                districtType = districtReplaceInfo.ReplacesDistrictType;
+              end
+
+              -- 查询区域对应产出
+              local correspondingYieldInfo = GameInfo.DistrictCorrespondingYieldType_HD[districtType];
+              if correspondingYieldInfo and correspondingYieldInfo.RequiresPopulation == true then
+                local popNum = city:GetPopulation();
+                local yieldType = correspondingYieldInfo.YieldType;
+                if yieldType == 'YIELD_FOOD' or yieldType == 'YIELD_FAITH' then
+                  local amount = popNum * AL_STPETERSBASILICA_YIELD_FAITH_PER_POP
+                  alStpetersbasilicaPlayer:GetReligion():ChangeFaithBalance(amount);
+                  local msg = "+" .. amount .. " [ICON_Faith]"
+                  Game.AddWorldViewText(alStpetersbasilicaPlayerId, msg, district:GetX(), district:GetY())
+                elseif yieldType == 'YIELD_PRODUCTION' or yieldType == 'YIELD_GOLD' then
+                  local amount = popNum * AL_STPETERSBASILICA_YIELD_GOLD_PER_POP
+                  alStpetersbasilicaPlayer:GetTreasury():ChangeGoldBalance(amount);
+                  local msg = "+" .. amount .. " [ICON_Gold]"
+                  Game.AddWorldViewText(alStpetersbasilicaPlayerId, msg, district:GetX(), district:GetY())
+                elseif yieldType == 'YIELD_SCIENCE' then
+                  local amount = popNum * AL_STPETERSBASILICA_YIELD_SCIENCE_PER_POP
+                  alStpetersbasilicaPlayer:GetTechs():ChangeCurrentResearchProgress(amount);
+                  local msg = "+" .. amount .. " [ICON_Science]"
+                  Game.AddWorldViewText(alStpetersbasilicaPlayerId, msg, district:GetX(), district:GetY())
+                elseif yieldType == 'YIELD_CULTURE' then
+                  local amount = popNum * AL_STPETERSBASILICA_YIELD_CULTURE_PER_POP
+                  alStpetersbasilicaPlayer:GetCulture():ChangeCurrentCulturalProgress(amount);
+                  local msg = "+" .. amount .. " [ICON_Culture]"
+                  Game.AddWorldViewText(alStpetersbasilicaPlayerId, msg, district:GetX(), district:GetY())
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end
+Events.CityReligionFollowersChanged.Add(AlStpetersbasilicaCityReligionFollowersChanged);
+
+local TECH_CELESTIAL_NAVIGATION_INDEX = GameInfo.Technologies['TECH_CELESTIAL_NAVIGATION'].Index;
+local TECH_SHIPBUILDING_INDEX = GameInfo.Technologies['TECH_SHIPBUILDING'].Index;
+function AlStpetersbasilicaInitUnit(playerId, city, religionId)
+  local player = Players[playerId];
+  if not player or not player:IsAlive() then return; end
+
+  local targetPlot;
+
+  -- 选取目标首都周围的可用单元格
+  for direction = 0, 5 do
+    local plot = Map.GetAdjacentPlot(city:GetX(), city:GetY(), direction);
+    if plot and not plot:IsImpassable() then
+      if not plot:IsWater() or (player:GetTechs():HasTech(TECH_CELESTIAL_NAVIGATION_INDEX) or player:GetTechs():HasTech(TECH_SHIPBUILDING_INDEX)) then
+        -- 获取单元格内的单位
+        local units = Units.GetUnitsInPlot(plot:GetX(), plot:GetY());
+        if units ~= nil then
+          -- 无单位
+          if #units == 0 then
+            targetPlot = plot;
+            break;
+          end
+
+          -- 有友方单位
+          for _, pUnit in ipairs(units) do
+            if pUnit:GetOwner() == playerId then
+              targetPlot = plot;
+              break;
+            end
+          end
+
+          if targetPlot then
+            break;
+          end
+        end
+      end
+    end
+  end
+
+  -- 如果没有合法单位 则生成在首都
+  if not targetPlot then
+    local playerCapitalCity = player:GetCities():GetCapitalCity();
+    if playerCapitalCity then
+      targetPlot = Map.GetPlot(playerCapitalCity:GetX(), playerCapitalCity:GetY());
+    end
+  end
+
+  -- 生成单位
+  if targetPlot then
+    print("圣彼得大教堂 " .. Locale.Lookup(city:GetName()) .. "信教 获得使徒");
+    local newUnit = UnitManager.InitUnit(playerId, 'UNIT_APOSTLE', targetPlot:GetX(), targetPlot:GetY());
+    if newUnit and newUnit:GetReligion() then
+      newUnit:GetReligion():SetReligionType(religionId);
+      newUnit:SetProperty(NEED_REFRESH_RELIGION_FLAG_TAG, 1);
+      ReportingEvents.SendLuaEvent('HD_UpdateUnitReligionIcon', {
+        playerId = newUnit:GetOwner(),
+        unitId = newUnit:GetID()
+      });
+    end
+  end
+end
+
+-- 瓦西里升天教堂
+local BUILDING_ST_BASILS_CATHEDRAL_INDEX = GameInfo.Buildings['BUILDING_ST_BASILS_CATHEDRAL'].Index;
+local ST_BASILS_CATHEDRAL_CULTURE_FOLLOWER = GlobalParameters.HD_ST_BASILS_CATHEDRAL_CULTURE_FOLLOWER or 0;
+local ST_BASILS_CATHEDRAL_CULTURE_AMOUNT = GlobalParameters.HD_ST_BASILS_CATHEDRAL_CULTURE_AMOUNT or 0;
+local ST_BASILS_CATHEDRAL_FAITH_FOLLOWER = GlobalParameters.HD_ST_BASILS_CATHEDRAL_FAITH_FOLLOWER or 0;
+local ST_BASILS_CATHEDRAL_FAITH_AMOUNT = GlobalParameters.HD_ST_BASILS_CATHEDRAL_FAITH_AMOUNT or 0;
+local ST_BASILS_CATHEDRAL_POS_X_TAG = 'HD_ST_BASILS_CATHEDRAL_POS_X';
+local ST_BASILS_CATHEDRAL_POS_Y_TAG = 'HD_ST_BASILS_CATHEDRAL_POS_Y';
+
+function StBasilsWonderCompleted(x, y, buildingId, playerId, cityId, percentComplete, unknown)
+	if buildingId == BUILDING_ST_BASILS_CATHEDRAL_INDEX then
+    Game.SetProperty(ST_BASILS_CATHEDRAL_POS_X_TAG, x)
+    Game.SetProperty(ST_BASILS_CATHEDRAL_POS_Y_TAG, y)
+    
+    RefreshStBasils()
 	end
 end
-BorobudurInit()
+Events.WonderCompleted.Add(StBasilsWonderCompleted);
 
-function BorobudurUnitExcavate(playerId, unitId)
-  local player = Players[playerId];
-	local unit = UnitManager.GetUnit(playerId, unitId);
+function RefreshStBasils()
+  if Game.GetProperty(ST_BASILS_CATHEDRAL_POS_X_TAG) == nil then return; end
 
-  -- 记录勘探次数
-  local x = unit:GetX()
-  local y = unit:GetY()
-	local plot = Map.GetPlot(x, y);
-  local times = plot:GetProperty(BOROBUDUR_EXCAVATE_TIMES_TAG) or 0
-  plot:SetProperty(BOROBUDUR_EXCAVATE_TIMES_TAG, times + 1)
-  print("BorobudurUnitExcavate", times + 1)
+  local alives = PlayerManager.GetAlive()
+  for _, player in ipairs(alives) do
+    if PlayerHasWonder(player, BUILDING_ST_BASILS_CATHEDRAL_INDEX) then
+      local followerAmount = Utils.GetReligionFollowerNum(player:GetReligion():GetReligionTypeCreated());
+      print("瓦西里升天教堂 信徒数量 " .. followerAmount)
 
-  local hasAnyBonus = false
+      -- 文化值
+      if ST_BASILS_CATHEDRAL_CULTURE_FOLLOWER > 0 and ST_BASILS_CATHEDRAL_CULTURE_AMOUNT > 0 then
+        local amount = math.floor(followerAmount / ST_BASILS_CATHEDRAL_CULTURE_FOLLOWER) * ST_BASILS_CATHEDRAL_CULTURE_AMOUNT;
+        local plot = Map.GetPlot(Game.GetProperty(ST_BASILS_CATHEDRAL_POS_X_TAG), Game.GetProperty(ST_BASILS_CATHEDRAL_POS_Y_TAG))
+        Utils.BinaryCompress(amount, plot, 'HD_PLOT_BINARY_COMPRESS_ST_BASILS_CATHEDRAL_1')
+      end
 
-  local randomIndex = Game.GetRandNum(4, "Random Borobudur Yield Bonus " .. playerId)
-  print("婆罗浮屠 产出", randomIndex)
-  local randomFactor = Game.GetRandNum(101, "Random Borobudur Yield Factor " .. playerId) + 50
-  if randomIndex == 0 then
-    -- 金币奖励
-    local amount = BOROBUDUR_EXCAVATE_GOLD * randomFactor / 100
-    player:GetTreasury():ChangeGoldBalance(amount)
-
-    local msg = "+" .. amount .. " [ICON_Gold]"
-    Game.AddWorldViewText(playerId, msg, x, y)
-    hasAnyBonus = true
-  elseif randomIndex == 1 then
-    -- 信仰奖励
-    local amount = BOROBUDUR_EXCAVATE_FAITH * randomFactor / 100
-    player:GetReligion():ChangeFaithBalance(amount)
-
-    local msg = "+" .. amount .. " [ICON_Faith]"
-    Game.AddWorldViewText(playerId, msg, x, y)
-    hasAnyBonus = true
-  elseif randomIndex == 2 then
-    -- 文化奖励
-    local amount = BOROBUDUR_EXCAVATE_CULTURE * randomFactor / 100
-    player:GetCulture():ChangeCurrentCulturalProgress(amount)
-
-    local msg = "+" .. amount .. " [ICON_Culture]"
-    Game.AddWorldViewText(playerId, msg, x, y)
-    hasAnyBonus = true
-  end
-
-  -- 遗物奖励
-  if plot:GetProperty(BOROBUDUR_EXCAVATE_RELIC_TAG) ~= 1 then
-    randomIndex = Game.GetRandNum(100, "Random Borobudur Relic " .. playerId) + 1
-    print("婆罗浮屠 遗物", randomIndex)
-    if randomIndex / 100 <= BOROBUDUR_EXCAVATE_RELIC_PROB then
-      plot:SetProperty(BOROBUDUR_EXCAVATE_RELIC_TAG, 1)
-      player:AttachModifierByID('HD_BOROBUDUR_GRANT_RELIC')
-      player:AttachModifierByID('HD_BOROBUDUR_RELIC_TOURISM')
-
-      local msg = Locale.Lookup('LOC_GOODYHUT_CULTURE_RELIC_DESCRIPTION')
-      Game.AddWorldViewText(playerId, msg, x, y)
-      hasAnyBonus = true
-    end
-  end
-
-  -- 勘探资源
-  if plot:GetResourceType() == -1 and plot:GetImprovementType() == -1 then
-    randomIndex = Game.GetRandNum(100, "Random Borobudur Resource " .. playerId) + 1
-    print("婆罗浮屠 资源", randomIndex)
-    if randomIndex / 100 <= BOROBUDUR_EXCAVATE_RESOURCE_PROB then
-      randomIndex = Game.GetRandNum(#BorobudurResources, "Random Borobudur ResourceType " .. playerId) + 1
-      local resourceType = BorobudurResources[randomIndex]
-      local resourceInfo = GameInfo.Resources[resourceType]
-      local resourceId = resourceInfo.Index
-      local resourceName = resourceInfo.Name
-      Utils.GenerateResource(plot, resourceId)
-
-      player:AttachModifierByID('HD_BOROBUDUR_VOLCANIC_SOIL_YIELD')
-
-      local msg = Locale.Lookup('LOC_BOROBUDUR_EXCAVATE_RESOURCE') .. '[ICON_' .. resourceType .. '] ' .. Locale.Lookup(resourceName)
-      Game.AddWorldViewText(playerId, msg, x, y)
-      hasAnyBonus = true
-    end
-  end
-
-  -- 没有获得任何奖励
-  if not hasAnyBonus then
-    local msg = Locale.Lookup('LOC_BOROBUDUR_EXCAVATE_NOTHING')
-    Game.AddWorldViewText(playerId, msg, x, y)
-  end
-
-  -- 扣除劳动次数/删除单位
-  local movesRemaining = Utils.GetUnitMovesRemaining(playerId, unitId)
-  unit:ChangeMovesRemaining(-movesRemaining)
-  local unitAbility = unit:GetAbility()
-  for i=1, 10, 1 do
-    if unitAbility:GetAbilityCount('ABILITY_HD_BOROBUDUR_MILITARY_ENGINEER_NEGA_CHARGE_' .. i) == 0 then
-      unitAbility:ChangeAbilityCount('ABILITY_HD_BOROBUDUR_MILITARY_ENGINEER_NEGA_CHARGE_' .. i, 1);
-      break;
+      -- 信仰值
+      if ST_BASILS_CATHEDRAL_FAITH_FOLLOWER > 0 and ST_BASILS_CATHEDRAL_FAITH_AMOUNT > 0 then
+        local amount = math.floor(followerAmount / ST_BASILS_CATHEDRAL_FAITH_FOLLOWER) * ST_BASILS_CATHEDRAL_FAITH_AMOUNT;
+        local plot = Map.GetPlot(Game.GetProperty(ST_BASILS_CATHEDRAL_POS_X_TAG), Game.GetProperty(ST_BASILS_CATHEDRAL_POS_Y_TAG))
+        Utils.BinaryCompress(amount, plot, 'HD_PLOT_BINARY_COMPRESS_ST_BASILS_CATHEDRAL_2')
+      end
+      
     end
   end
 end
-GameEvents.HD_Borobudur_Excavate.Add(BorobudurUnitExcavate)
+
+local pendingRefreshStBasils = false;
+function RefreshStBasilsIfPending(playerId)
+	if pendingRefreshStBasils == true then
+		RefreshStBasils();
+		pendingRefreshStBasils = false;
+	end
+end
+Events.CityReligionFollowersChanged.Add(function()
+  pendingRefreshStBasils = true;
+end)
+GameEvents.OnGameTurnEnded.Add(RefreshStBasilsIfPending)
+Events.CitySelectionChanged.Add(RefreshStBasilsIfPending)
+
+-- 婆罗浮屠
+local BOROBUDUR_UNIT_TAG = 'HD_BOROBUDUR_UNIT_';
+function BorobudurTrainOrPurchaseUnit(playerId, objectId)
+  local player = Players[playerId];
+  if not player then return; end
+
+  local unit = GameInfo.Units[objectId];
+  if not unit then return; end
+
+  if unit.FormationClass == 'FORMATION_CLASS_NAVAL' and player:GetProperty(BOROBUDUR_UNIT_TAG .. unit.UnitType) ~= 1 then
+    player:SetProperty(BOROBUDUR_UNIT_TAG .. unit.UnitType, 1);
+    player:AttachModifierByID('HD_BOROBUDUR_GRANT_ENVOY_' .. unit.UnitType);
+    print('婆罗浮屠建造或购买海军获得使者：' .. Locale.Lookup(unit.Name));
+  end
+end
+
+function BorobudurTrainUnit(playerId, cityId, type, objectId, cancelled)
+  if type == 0 then
+    BorobudurTrainOrPurchaseUnit(playerId, objectId);
+  end
+end
+Events.CityProductionCompleted.Add(BorobudurTrainUnit);
+
+function BorobudurPurchaseUnit(playerId, cityId, x, y, type, objectId)
+  if type == EventSubTypes.UNIT then
+    BorobudurTrainOrPurchaseUnit(playerId, objectId);
+  end
+end
+Events.CityMadePurchase.Add(BorobudurPurchaseUnit);
+
+-- 勃兰登堡门
+local BRANDENBURG_GATE_INFO = GameInfo.Buildings['BUILDING_BRANDENBURG_GATE'];
+local BRANDENBURG_GATE_MILITARY_MOMENT_COUNT = GlobalParameters.HD_BRANDENBURG_GATE_MILITARY_MOMENT_COUNT or 0;
+function BrandenburgGatePlayerCompleteMoment(playerId, momentId, classificationMap)
+  if not BRANDENBURG_GATE_INFO then return; end
+
+  local player = Players[playerId];
+  if not player then return; end
+
+  local amount = classificationMap['MOMENT_CLASSIFICATION_MILITARY'] or 0;
+  if amount > 0 then
+    print("勃兰登堡门 军事类历史时刻：" .. amount);
+    player:AttachModifierByID('HD_BRANDENBURG_GATE_SCIENCE');
+    player:AttachModifierByID('HD_BRANDENBURG_GATE_PRODUCTION');
+
+    if amount == BRANDENBURG_GATE_MILITARY_MOMENT_COUNT then
+      player:AttachModifierByID('HD_BRANDENBURG_GATE_YIELD_BOOST');
+      print("勃兰登堡门 获得全国百分比");
+    end
+  end
+end
+GameEvents.HDPlayerCompleteMoment.Add(BrandenburgGatePlayerCompleteMoment);
+
 --------------------------------------------------------------
 -- Initialize
-function initialize()
-  Events.TradeRouteAddedToMap.Add(BamyanTradeRouteAddedToMap)
-	Events.ImprovementAddedToMap.Add(RuhrValleyImprovementAddedToMap);
-	Events.ImprovementRemovedFromMap.Add(RuhrValleyImprovementRemovedFromMap);
-end
-Events.LoadGameViewStateDone.Add(initialize);
+-- function initialize()
+  
+-- end
+-- Events.LoadGameViewStateDone.Add(initialize);

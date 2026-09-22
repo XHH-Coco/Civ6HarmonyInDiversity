@@ -35,6 +35,7 @@ select
     'DISTRICT_PRESERVE',       'YIELD_FOOD',       1,                                  0
 where exists (select DistrictType from Districts where DistrictType = 'DISTRICT_PRESERVE');
 
+delete from District_TradeRouteYields where DistrictType = 'DISTRICT_GOVERNMENT' and YieldType = 'YIELD_FOOD';
 delete from District_TradeRouteYields where DistrictType = 'DISTRICT_DIPLOMATIC_QUARTER' and YieldType = 'YIELD_FOOD';
 update District_TradeRouteYields set YieldType = 'YIELD_FOOD', YieldChangeAsDomesticDestination = 1 where DistrictType = 'DISTRICT_DIPLOMATIC_QUARTER' and YieldType = 'YIELD_PRODUCTION';
 

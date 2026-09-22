@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Context Name="RegionalYields_CityPanelAddon">
+	<Stack ID="RegionalYields_Button_Stack" Anchor="C,B" StackGrowth="Right" StackPadding="4">
+		<Button ID="RegionalYields_Button" Anchor="L,B" Size="44,53" Texture="UnitPanel_ActionButton">
+			<Image ID="RegionalYields_Button_Icon" Anchor="C,C" Offset="0,-3" Size="32,32" Icon="ICON_HD_CITYBUTTONS_REGIONAL_YIELDS"/>
+		</Button>
+	</Stack>
+</Context>

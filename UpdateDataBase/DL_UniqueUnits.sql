@@ -55,7 +55,7 @@ update Units set Cost = 210, Maintenance = 5, BaseMoves = 5, Range = 0, Combat =
 update Units_XP2 set ResourceCost = 5, ResourceMaintenanceType = 'RESOURCE_HORSES', ResourceMaintenanceAmount = 1 where UnitType = 'UNIT_RUSSIAN_COSSACK';
 ------ UNIT_RUSSIAN_DRUZHINA
 -- 挪威
-update Units set Cost = 55, Maintenance = 1, BaseMoves = 3, Range = 0, Combat = 35, RangedCombat = 0, StrategicResource = NULL where UnitType = 'UNIT_NORWEGIAN_LONGSHIP';
+update Units set Cost = 55, Maintenance = 1, BaseMoves = 3, Range = 0, Combat = 35, RangedCombat = 0, StrategicResource = NULL, PrereqTech = 'TECH_SHIPBUILDING' where UnitType = 'UNIT_NORWEGIAN_LONGSHIP';
 update Units_XP2 set ResourceCost = 0, ResourceMaintenanceType = NULL, ResourceMaintenanceAmount = 0 where UnitType = 'UNIT_NORWEGIAN_LONGSHIP';
 insert or replace into TypeTags (Type, Tag) values ('ABILITY_LONGSHIP_COASTAL_RAID', 'CLASS_LONGSHIP');
 update Units set Cost = 90, Maintenance = 3, BaseMoves = 2, Range = 0, Combat = 48, RangedCombat = 0, StrategicResource = 'RESOURCE_IRON' where UnitType = 'UNIT_NORWEGIAN_BERSERKER';
@@ -266,7 +266,7 @@ update Units set Cost = 220, Maintenance = 4, BaseMoves = 4, Range = 2, Combat =
 update Units_XP2 set ResourceCost = 0, ResourceMaintenanceType = 'RESOURCE_NITER', ResourceMaintenanceAmount = 1 where UnitType = 'UNIT_DE_ZEVEN_PROVINCIEN';
 ------ UNIT_DUTCH_SCHUTTERIJ
 -- 克里
-update Units set Cost = 30, Combat = 17, BaseMoves = BaseMoves + 1 where UnitType = 'UNIT_CREE_OKIHTCITAW';
+update Units set Cost = 30, Combat = 17 where UnitType = 'UNIT_CREE_OKIHTCITAW';
 delete from TypeTags where Type = 'ABILITY_CREE_OKIHTCITAW' and Tag = 'CLASS_CREE_OKIHTCITAW';
 ------ UNIT_CREE_OTEHTAPIW
 -- 印尼
@@ -283,11 +283,11 @@ update Units set Cost = 205, Maintenance = 5, BaseMoves = 5, Range = 0, Combat =
 update Units_XP2 set ResourceCost = 5, ResourceMaintenanceType = 'RESOURCE_HORSES', ResourceMaintenanceAmount = 1 where UnitType = 'UNIT_HUNGARY_HUSZAR';
 ------ UNIT_HUNGARY_KALANDOZO
 -- 印加
-update Units set Cost = 60, Maintenance = 2, BaseMoves = BaseMoves + 1, Range = 1, Combat = 32, RangedCombat = 28, StrategicResource = NULL,
+update Units set Cost = 60, Maintenance = 2, Range = 1, Combat = 36, RangedCombat = 26, StrategicResource = NULL,
     PrereqTech = null, PrereqCivic = 'CIVIC_MILITARY_TRAINING'
     where UnitType = 'UNIT_INCA_WARAKAQ';
 update Units_XP2 set ResourceCost = 0, ResourceMaintenanceType = NULL, ResourceMaintenanceAmount = 0 where UnitType = 'UNIT_INCA_WARAKAQ';
-update UnitUpgrades set UpgradeUnit = 'UNIT_SKIRMISHER' where Unit = 'UNIT_INCA_WARAKAQ';
+update UnitUpgrades set UpgradeUnit = 'UNIT_RANGER' where Unit = 'UNIT_INCA_WARAKAQ';
 -- maybe not add melee to encourage the ranged attack.
 ------ UNIT_INCA_CHASQUI
 -- 马里
@@ -304,7 +304,7 @@ update Units set Cost = 105, Maintenance = 4, BaseMoves = 2, Range = 0, Combat =
 update Units_XP2 set ResourceCost = 5, ResourceMaintenanceType = 'RESOURCE_NITER', ResourceMaintenanceAmount = 1 where UnitType = 'UNIT_SULEIMAN_JANISSARY';
 ------ UNIT_OTTOMAN_SIPAHI
 -- 腓尼基
-update Units set Cost = 55, Maintenance = 1, BaseMoves = 4, Range = 0, Combat = 35, RangedCombat = 0, StrategicResource = NULL where UnitType = 'UNIT_PHOENICIA_BIREME';
+update Units set Cost = 55, Maintenance = 1, BaseMoves = 4, Range = 0, Combat = 35, RangedCombat = 0, StrategicResource = NULL, PrereqTech = 'TECH_SHIPBUILDING' where UnitType = 'UNIT_PHOENICIA_BIREME';
 update Units_XP2 set ResourceCost = 0, ResourceMaintenanceType = NULL, ResourceMaintenanceAmount = 0 where UnitType = 'UNIT_PHOENICIA_BIREME';
 ------ UNIT_PHOENICIA_NUMIDIAN_CAVALRY
 -- 瑞典

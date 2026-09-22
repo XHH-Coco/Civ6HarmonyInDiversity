@@ -18,24 +18,24 @@ values
 	('TERRAIN_DESERT_HILLS',	'YIELD_PRODUCTION',	1),
 	('TERRAIN_SNOW_HILLS',		'YIELD_PRODUCTION',	1),
 	('TERRAIN_COAST',			'YIELD_FOOD',		2),
-	('TERRAIN_COAST',			'YIELD_GOLD',		3),
-	('TERRAIN_OCEAN',			'YIELD_FOOD',		1);
+	('TERRAIN_COAST',			'YIELD_PRODUCTION',		1),
+	('TERRAIN_OCEAN',			'YIELD_FOOD',		1),
+	('TERRAIN_OCEAN',			'YIELD_PRODUCTION',		1);
 -- Feature yield
 insert or replace into Feature_YieldChanges
 	(FeatureType,			YieldType,			YieldChange)
 values
 	('FEATURE_FOREST',		'YIELD_FOOD',		-1),
 	('FEATURE_JUNGLE',		'YIELD_PRODUCTION',	-1),
-	('FEATURE_REEF',		'YIELD_GOLD',		-3),
+	('FEATURE_REEF',		'YIELD_FOOD',		-1),
 	('FEATURE_FLOODPLAINS',	'YIELD_FOOD',		3),
 	('FEATURE_OASIS',		'YIELD_FOOD',		4);
 insert or replace into Feature_YieldChanges
 	(FeatureType,			YieldType,			YieldChange)
 select
-	'FEATURE_SUK_KELP',		'YIELD_GOLD',		-3
+	'FEATURE_SUK_KELP',		'YIELD_PRODUCTION',		-1
 where exists (select FeatureType from Features where FeatureType = 'FEATURE_SUK_KELP');
 delete from Feature_YieldChanges where FeatureType = 'FEATURE_MARSH' and YieldType = 'YIELD_FOOD';
-delete from Feature_YieldChanges where FeatureType = 'FEATURE_REEF' and YieldType = 'YIELD_FOOD';
 -- Resource yield
 with Resource_YieldChanges_Pre
 	(ResourceType,						YieldType,			YieldChange)
@@ -57,6 +57,7 @@ as (values
 	('RESOURCE_AMBER',					'YIELD_GOLD',		1),
 	('RESOURCE_TURTLES',				'YIELD_GOLD',		1),
 	('RESOURCE_SILVER',					'YIELD_PRODUCTION',	1),
+	('RESOURCE_SILVER',					'YIELD_GOLD',	1),
 	('RESOURCE_ALUMINUM',				'YIELD_PRODUCTION',	2),
 	('RESOURCE_URANIUM',				'YIELD_SCIENCE',	3),
 	('RESOURCE_CITRUS',					'YIELD_FOOD',		1),
@@ -153,70 +154,3 @@ from Feature_AdjacentYields_Pre where FeatureType in (select FeatureType from Fe
 
 update Features set NoResource = 0 where FeatureType = 'FEATURE_TORRES_DEL_PAINE';
 delete from Feature_AdjacentTerrains where FeatureType = 'FEATURE_EYJAFJALLAJOKULL' and (TerrainType = 'TERRAIN_SNOW_HILLS' or TerrainType = 'TERRAIN_SNOW');
-
--- 西班牙自然奇观能力
-	-- LB 自然奇观产出
-insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId, RunOnce, Permanent, SubjectStackLimit)
-select 'TRAIT_' || b.FeatureType || '_ON_' || a.YieldType, 'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE', null, 1, 1,	1
-	from Feature_YieldChanges a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-select 'TRAIT_' || b.FeatureType || '_ON_' || a.YieldType, 'BuildingType', 'BUILDING_EL_ESCORIAL_PALACE'
-	from Feature_YieldChanges a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-select 'TRAIT_' || b.FeatureType || '_ON_' || a.YieldType, 'Amount', a.YieldChange
-	from Feature_YieldChanges a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-select 'TRAIT_' || b.FeatureType || '_ON_' || a.YieldType, 'YieldType', a.YieldType
-	from Feature_YieldChanges a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
-
-insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId, RunOnce, Permanent, SubjectStackLimit)
-select 'TRAIT_' || b.FeatureType || '_ADJACENT_' || a.YieldType, 'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE', null, 1, 1,	1
-	from Feature_AdjacentYields a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-select 'TRAIT_' || b.FeatureType || '_ADJACENT_' || a.YieldType, 'BuildingType', 'BUILDING_EL_ESCORIAL_PALACE'
-	from Feature_AdjacentYields a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-select 'TRAIT_' || b.FeatureType || '_ADJACENT_' || a.YieldType, 'Amount', a.YieldChange
-	from Feature_AdjacentYields a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-select 'TRAIT_' || b.FeatureType || '_ADJACENT_' || a.YieldType, 'YieldType', a.YieldType
-	from Feature_AdjacentYields a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
-
-	-- 宫殿
-insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId, RunOnce, Permanent, SubjectStackLimit)
-select 'TRAIT_PALACE_' || b.FeatureType || '_ON_' || a.YieldType, 'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE', 'PLAYER_HAS_BUILDING_EL_ESCORIAL_PALACE_REQUIREMENTS', 1, 1,	1
-	from Feature_YieldChanges a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-select 'TRAIT_PALACE_' || b.FeatureType || '_ON_' || a.YieldType, 'BuildingType', 'BUILDING_PALACE'
-	from Feature_YieldChanges a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-select 'TRAIT_PALACE_' || b.FeatureType || '_ON_' || a.YieldType, 'Amount', a.YieldChange
-	from Feature_YieldChanges a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-select 'TRAIT_PALACE_' || b.FeatureType || '_ON_' || a.YieldType, 'YieldType', a.YieldType
-	from Feature_YieldChanges a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
-
-insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId, RunOnce, Permanent, SubjectStackLimit)
-select 'TRAIT_PALACE_' || b.FeatureType || '_ADJACENT_' || a.YieldType, 'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE', 'PLAYER_HAS_BUILDING_EL_ESCORIAL_PALACE_REQUIREMENTS', 1, 1,	1
-	from Feature_AdjacentYields a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-select 'TRAIT_PALACE_' || b.FeatureType || '_ADJACENT_' || a.YieldType, 'BuildingType', 'BUILDING_PALACE'
-	from Feature_AdjacentYields a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-select 'TRAIT_PALACE_' || b.FeatureType || '_ADJACENT_' || a.YieldType, 'Amount', a.YieldChange
-	from Feature_AdjacentYields a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;
-
-insert or replace into ModifierArguments (ModifierId, Name, Value)
-select 'TRAIT_PALACE_' || b.FeatureType || '_ADJACENT_' || a.YieldType, 'YieldType', a.YieldType
-	from Feature_AdjacentYields a inner join Features b on a.FeatureType = b.FeatureType where b.NaturalWonder = 1;

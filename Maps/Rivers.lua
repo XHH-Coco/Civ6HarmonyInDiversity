@@ -20,8 +20,7 @@ include "AssignStartingPlots"
 local g_iW, g_iH;
 local g_iFlags = {};
 local g_continentsFrac = nil;
-local islands = {};
-local featureGen = nil;
+local featuregen = nil;
 local world_age_old = 1;
 local world_age_normal = 2;
 local world_age_new = 3;
@@ -231,7 +230,7 @@ function GeneratePlotTypes(world_age)
 		args.iRegionFracXExp = 5;
 		args.iRegionFracYExp = 4;
 		plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
-		islands = plotTypes;
+		SetIslandLayer(plotTypes);
 	
 	
 		-- Generate Medium Lakes		
@@ -247,7 +246,7 @@ function GeneratePlotTypes(world_age)
 		args.iRegionFracXExp = 5;
 		args.iRegionFracYExp = 4;
 		plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
-		islands = plotTypes;
+		SetIslandLayer(plotTypes);
 	
 	
 	
@@ -264,7 +263,7 @@ function GeneratePlotTypes(world_age)
 		args.iRegionFracXExp = 5;
 		args.iRegionFracYExp = 5;
 		plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
-		islands = plotTypes;
+		SetIslandLayer(plotTypes);
 	
 		-- Generate Tiny Lakes
 		local args = {};	
@@ -436,11 +435,9 @@ function GenerateFractalLayerWithoutHills (args, plotTypes)
 				--do nothing
 			elseif (adjCount == 7) then
 				--do nothing
-			-- by changing oceans adjacent to lots of land into land, might be able to relieve the stripe ocean problem.
-			elseif (adjCount > 12 and adjCount <= 18) then
-				if (math.random(3,4) <= adjCount) then
-					plotTypes2[i] = g_PLOT_TYPE_LAND;
-				end
+			-- 注：AdjacentCount 的值域是 0..6（相邻陆地数），或哨兵 7（自己已是陆地，上一分支已拦截）。
+			-- 原先这里有一个概率填海分支，阈值写成 >8 ~ >16，永不成立、从未执行过，已删除。
+			-- 若要重新启用，请按 0..6 的量级标定，参考 Lakes.lua。
 			elseif (adjCount == 0) then
 				plotTypes2[i] = g_PLOT_TYPE_LAND;
 			end
@@ -471,30 +468,9 @@ function GenerateFractalLayerWithoutHills (args, plotTypes)
 end
 
 -------------------------------------------------------------------------------
-function MarkCoastalLowlands()
-
-	print("Map Generation - Marking Coastal Lowlands");
-
-	local numDesiredCoastalLowlandsPercentage = 66 or 40;
-
-	scoredTiles = ScoreCoastalLowlandTiles();
-	tilesToMark = math.floor((#scoredTiles * numDesiredCoastalLowlandsPercentage) / 100);
-	
-	if tilesToMark > 0 then
-        table.sort (scoredTiles, function(a, b) return a.Score > b.Score; end);
-		for tileIdx = 1, tilesToMark, 1 do
-			local iElevation = 2;
-			if (tileIdx <= tilesToMark / 3) then
-				iElevation = 0;
-			elseif (tileIdx <= (tilesToMark * 2) / 3) then
-				iElevation = 1.2;
-			end
-			TerrainBuilder.AddCoastalLowland(scoredTiles[tileIdx].MapIndex, iElevation);
-		end
-		print(tostring(tilesToMark).." Coastal Lowland tiles added");
-		print("  " .. tostring(GlobalParameters.CACAPULCOTE_CHANGE_PERCENT_COASTAL_LOWLANDS) .. "% of eligible coastal tiles");
-	end
-end
+-- 本图不再自带 MarkCoastalLowlands，直接使用 Utility/CoastalLowlands.lua 的共用实现。
+-- 这里原本有两份重复定义，Lua 后定义覆盖先定义，写着 66% 的那份从未执行过；
+-- 实际一直按共用实现的 35% 在跑，现按实跑结果转正。若要改回 66% 需重新定义并实测。
 -------------------------------------------------------------------------------
 function AddTerrainFromContinents(plotTypes, terrainTypes, world_age, iW, iH, iContinentBoundaryPlots, bNoCoastalMountains)
 
@@ -552,17 +528,17 @@ function AddTerrainFromContinents(plotTypes, terrainTypes, world_age, iW, iH, iC
 					if (iNumAdjacentMountains ~= 6 and GetNumberNearbyVolcanoes(iX, iY, 3, aPlacedVolcanoes) == 0) then
 						if not(bNoCoastalMountains and IsAdjacentToShallowWater(terrainTypes, iX, iY)) then --get rid of coastal volcano.
 							if (Map.FindSecondContinent(pPlot, 1)) then
-								if (TerrainBuilder.GetRandomNumber(iBoundaryPlotsPerVolcano *.7, "Volcano on boundary") == 0) then
+								if (TerrainBuilder.GetRandomNumber(math.max(1, math.floor(iBoundaryPlotsPerVolcano * 0.7)), "Volcano on boundary") == 0) then
 									bVolcanoHere = true;
 								end
 								iPlotsFromBoundary = 1;
 							elseif(Map.FindSecondContinent(pPlot, 2)) then
-								if (TerrainBuilder.GetRandomNumber(iBoundaryPlotsPerVolcano, "Volcano 1 from boundary") == 0) then
+								if (TerrainBuilder.GetRandomNumber(math.max(1, math.floor(iBoundaryPlotsPerVolcano)), "Volcano 1 from boundary") == 0) then
 									bVolcanoHere = true;
 								end
 								iPlotsFromBoundary = 2;
 							elseif(Map.FindSecondContinent(pPlot, 3)) then
-								if (TerrainBuilder.GetRandomNumber(iBoundaryPlotsPerVolcano * 1.5, "Volcano 2 from boundary") == 0) then
+								if (TerrainBuilder.GetRandomNumber(math.max(1, math.floor(iBoundaryPlotsPerVolcano * 1.5)), "Volcano 2 from boundary") == 0) then
 									bVolcanoHere = true;
 								end
 								iPlotsFromBoundary = 3;
@@ -687,152 +663,8 @@ function GetNumberNearbyVolcanoes(iX, iY, range, aPlacedVolcanoes)
 	return iVolcanoCount;
 end
 
--------------------------------------------------------------------------------
-function MarkCoastalLowlands()
-
-	print("Map Generation - Marking Coastal Lowlands");
-
-	local numDesiredCoastalLowlandsPercentage = GlobalParameters.CACAPULCOTE_CHANGE_PERCENT_COASTAL_LOWLANDS or 35;
-
-	scoredTiles = ScoreCoastalLowlandTiles();
-	tilesToMark = math.floor((#scoredTiles * numDesiredCoastalLowlandsPercentage) / 100);
-	
-	if tilesToMark > 0 then
-        table.sort (scoredTiles, function(a, b) return a.Score > b.Score; end);
-		for tileIdx = 1, tilesToMark, 1 do
-			local iElevation = 2;
-			if (tileIdx <= tilesToMark / 3) then
-				iElevation = 0;
-			elseif (tileIdx <= (tilesToMark * 2) / 3) then
-				iElevation = 1.2;
-			end
-			TerrainBuilder.AddCoastalLowland(scoredTiles[tileIdx].MapIndex, iElevation);
-		end
-		print(tostring(tilesToMark).." Coastal Lowland tiles added");
-		print("  " .. tostring(GlobalParameters.CACAPULCOTE_CHANGE_PERCENT_COASTAL_LOWLANDS) .. "% of eligible coastal tiles");
-	end
-end
--------------------------------------------------------------------------------
---火山土开局生成----------------------------------------------------------------
-function AddVolcanicSoil()
-    local mWidth,mHeight = Map.GetGridSize();
-    for CoordinateX = 0,mWidth,1 do
-        for CoordinateY = 0,mHeight-1,1 do
-            local plots = Map.GetPlot(CoordinateX,CoordinateY);
-            if (plots:GetFeatureType() ~= -1) then
-                if (GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_VOLCANO") then
-                    local tNeighborPlots = Map.GetAdjacentPlots(CoordinateX,CoordinateY);
-                    for _, pNeighborPlot in ipairs(tNeighborPlots) do
-                        if (not pNeighborPlot:IsWater() and not pNeighborPlot:IsMountain()) then
-                            TerrainBuilder.SetFeatureType(pNeighborPlot,35);
-                        end
-                    end
-                end
-                if (GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_EYJAFJALLAJOKULL"
-                or GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_KILIMANJARO"
-                or GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_VESUVIUS"
-                or GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_SUK_FUJI"
-                or GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_SUK_NGORONGORO_CRATER") then
-                    local tNeighborPlots = Map.GetAdjacentPlots(CoordinateX,CoordinateY);
-                    for _, pNeighborPlot in ipairs(tNeighborPlots) do
-                        if (not pNeighborPlot:IsWater() and not pNeighborPlot:IsMountain()) then
-                            if (pNeighborPlot:GetFeatureType() ~= -1) then
-                                if (GameInfo.Features[pNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_EYJAFJALLAJOKULL"
-                                and GameInfo.Features[pNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_SUK_NGORONGORO_CRATER") then
-                                    TerrainBuilder.SetFeatureType(pNeighborPlot,35);
-                                end
-                            else
-                                TerrainBuilder.SetFeatureType(pNeighborPlot,35);
-                            end
-                        end
-                        --二环随机生成
-                        local sNeighborPlots = Map.GetAdjacentPlots(pNeighborPlot:GetX(), pNeighborPlot:GetY());
-                        for _, rNeighborPlot in ipairs(sNeighborPlots) do
-                            if (not rNeighborPlot:IsWater() and not rNeighborPlot:IsMountain()) then
-                                if (rNeighborPlot:GetFeatureType() ~= -1) then
-                                    if (GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_EYJAFJALLAJOKULL"
-                                    and GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_KILIMANJARO"
-                                    and GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_VESUVIUS"
-                                    and GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_SUK_FUJI"
-                                    and GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_SUK_NGORONGORO_CRATER") then
-                                        if (math.random(3) == 1) then
-                                            TerrainBuilder.SetFeatureType(rNeighborPlot,35);
-                                        end
-                                    end
-                                else
-                                    if (math.random(3) == 1) then
-                                        TerrainBuilder.SetFeatureType(rNeighborPlot,35);
-                                    end
-                                end
-                            end
-                        end
-                    end
-                end
-            end
-        end
-    end
-end
 ----------------------------------------------------------------------------------------------------
-function Adjacent(index)
-	aIslands = islands;
-	index = index -1;
 
-	if(aIslands == nil) then
-		return false;
-	end
-	
-	if(index < 0) then
-		return false
-	end
-
-	local plot = Map.GetPlotByIndex(index);
-	if(aIslands[index] ~= nil and aIslands[index] == g_PLOT_TYPE_LAND) then
-		return true;
-	end
-
-	for direction = 0, DirectionTypes.NUM_DIRECTION_TYPES - 1, 1 do
-		local adjacentPlot = Map.GetAdjacentPlot(plot:GetX(), plot:GetY(), direction);
-		if(adjacentPlot ~= nil) then
-			local newIndex = adjacentPlot:GetIndex();
-			if(aIslands  ~= nil and aIslands[newIndex] == g_PLOT_TYPE_LAND) then
-				return true;
-			end
-		end
-	end
-
-	return false;
-end
-
-function AdjacentCount(index)
-	aIslands = islands;
-	index = index -1;
-
-	if(aIslands == nil) then
-		return 0;
-	end
-	
-	if(index < 0) then
-		return 0;
-	end
-
-	local plot = Map.GetPlotByIndex(index);
-	if(aIslands[index] ~= nil and aIslands[index] == g_PLOT_TYPE_LAND) then
-		return 7;
-	end
-
-	local adjCount = 0;
-	for direction = 0, DirectionTypes.NUM_DIRECTION_TYPES - 1, 1 do
-		local adjacentPlot = Map.GetAdjacentPlot(plot:GetX(), plot:GetY(), direction);
-		if(adjacentPlot ~= nil) then
-			local newIndex = adjacentPlot:GetIndex();
-			if(aIslands  ~= nil and aIslands[newIndex] == g_PLOT_TYPE_LAND) then
-				adjCount = adjCount+1;
-			end
-		end
-	end
-
-	return adjCount;
-end
 -------------------------------------------------------------------------------------------
 function AddLakes(largeLakes)
 

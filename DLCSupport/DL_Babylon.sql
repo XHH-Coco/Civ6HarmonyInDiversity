@@ -1,30 +1,6 @@
--- Trading Dome (Samarkand)
--- In order to adapt the resource change made in UpdateDatabse/DL_Resources.sql at LoadOrder 16010 and resource in Resourceful2 in ModSupport/Resourceful2/HD_Resourceful2.sql at LoadOrder 17000, Modifiers about collecting Luxuries are written in DLCSupport/DL_Babylon_Late.sql, which is at LoadOrder 17010
-update Improvements set OnePerCity = 1, SameAdjacentValid = 1 where ImprovementType = 'IMPROVEMENT_TRADING_DOME';
-delete from Improvement_YieldChanges where ImprovementType = 'IMPROVEMENT_TRADING_DOME';
-delete from TraitModifiers where TraitType = 'MINOR_CIV_SAMARKAND_TRAIT' and ModifierId = 'MINOR_CIV_SAMARKAND_TRADE_GOLD';
-delete from Improvement_Adjacencies where ImprovementType = 'IMPROVEMENT_TRADING_DOME' and YieldChangeId = 'TradingDome_LuxuryAdjacency';
-delete from Improvement_ValidFeatures where ImprovementType = 'IMPROVEMENT_TRADING_DOME';
-delete from Improvement_ValidTerrains where ImprovementType = 'IMPROVEMENT_TRADING_DOME';
-insert or replace into ImprovementModifiers
-	(ImprovementType,				ModifierId)
-values
-	('IMPROVEMENT_TRADING_DOME',	'TRADING_DOME_DESERT_FOOD'),
-	('IMPROVEMENT_TRADING_DOME',	'TRADING_DOME_DESERT_PRODUCTION');
-insert or replace into Modifiers
-	(ModifierId,							ModifierType,								SubjectRequirementSetId)
-values
-	('TRADING_DOME_DESERT_FOOD',			'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'PETRA_YIELD_MODIFIER_REQUIREMENTS'),
-	('TRADING_DOME_DESERT_PRODUCTION',		'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS',	'PETRA_YIELD_MODIFIER_REQUIREMENTS');
-insert or replace into ModifierArguments
-	(ModifierId,								Name,			Value)
-values
-	('TRADING_DOME_DESERT_FOOD',				'YieldType',	'YIELD_FOOD'),
-	('TRADING_DOME_DESERT_FOOD',				'Amount',		2),
-	('TRADING_DOME_DESERT_PRODUCTION',			'YieldType',	'YIELD_PRODUCTION'),
-	('TRADING_DOME_DESERT_PRODUCTION',			'Amount',		1);
-	
+-- =====================================================================================================================================
 -- 古典提督航海家汉诺: 赠送一艘+2速的海军近战单位, 且所有与该单位编队的单位将继承该桨帆单位的移速
+-- =====================================================================================================================================
 insert or replace into Types (Type, Kind) values ('ABILITY_HANNO', 'KIND_ABILITY');
 insert or replace into TypeTags (Type, Tag) values ('ABILITY_HANNO', 'CLASS_NAVAL_MELEE');
 insert or replace into UnitAbilities
@@ -181,6 +157,23 @@ select
 	ModifierId,				'Amount',		Amount
 from HD_BabylonDistrictBonuses;
 
+-- 沟渠 BUILDING_PALGUM
+insert or replace into BuildingModifiers
+	(BuildingType,					ModifierId)
+values
+	('BUILDING_PALGUM',			'HD_PALGUM_ADD_PRODUCTION');
+
+insert or replace into Modifiers
+	(ModifierId,									ModifierType,																		OwnerRequirementSetId,											SubjectRequirementSetId)
+values
+	('HD_PALGUM_ADD_PRODUCTION',	'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD',	'PLAYER_HAS_TECH_ENGINEERING_REQUIREMENTS',	'PLOT_IS_FRESH');
+
+insert or replace into ModifierArguments
+	(ModifierId,									Name,						Value)
+values
+	('HD_PALGUM_ADD_PRODUCTION',	'YieldType',		'YIELD_PRODUCTION'),
+	('HD_PALGUM_ADD_PRODUCTION',	'Amount',				1);
+
 -- Kenzo Tange
 delete from GreatPersonIndividualActionModifiers where GreatPersonIndividualType = 'GREAT_PERSON_INDIVIDUAL_KENZO_TANGE';
 
@@ -324,26 +317,134 @@ values
 	('GREAT_PERSON_INDIVIDUAL_IBN_KHALDUN_EMPIRE_JOYFUL_FAITH',			 'YieldType',		'YIELD_FAITH'),
 	('GREAT_PERSON_INDIVIDUAL_IBN_KHALDUN_EMPIRE_JOYFUL_FAITH',			 'Amount',			6);
 
--- Mahavihara
-insert or replace into Improvement_Adjacencies
-	(ImprovementType,				YieldChangeId)
-values
-	('IMPROVEMENT_MAHAVIHARA',		'Mahavihara_Seowon_Science_Early'),
-	('IMPROVEMENT_MAHAVIHARA',		'Mahavihara_Seowon_Science_Late'),
-	('IMPROVEMENT_MAHAVIHARA',		'Mahavihara_Holy_Site_Science_Late'),
-	('IMPROVEMENT_MAHAVIHARA',		'Mahavihara_Lavra_Science_Late'),
-	('IMPROVEMENT_MAHAVIHARA',		'Mahavihara_Neighborhood_Science'),
-	('IMPROVEMENT_MAHAVIHARA',		'Mahavihara_Mbanza_Science');
-insert or replace into Adjacency_YieldChanges
-	(ID,										Description,	YieldType,			YieldChange,	AdjacentDistrict,			PrereqCivic,			ObsoleteCivic)
-values
-	('Mahavihara_Seowon_Science_Early',		'Placeholder',	'YIELD_SCIENCE',	1,				'DISTRICT_SEOWON',			null,					'CIVIC_DIVINE_RIGHT'),
-	('Mahavihara_Seowon_Science_Late',			'Placeholder',	'YIELD_SCIENCE',	2,				'DISTRICT_SEOWON',			'CIVIC_DIVINE_RIGHT',	null),
-	('Mahavihara_Holy_Site_Science_Late',		'Placeholder',	'YIELD_SCIENCE',	2,				'DISTRICT_HOLY_SITE',		'CIVIC_DIVINE_RIGHT',	null),
-	('Mahavihara_Lavra_Science_Late',			'Placeholder',	'YIELD_SCIENCE',	2,				'DISTRICT_LAVRA',			'CIVIC_DIVINE_RIGHT',	null),
-	('Mahavihara_Neighborhood_Science',		'Placeholder',	'YIELD_SCIENCE',	1,				'DISTRICT_NEIGHBORHOOD',	null,					null),
-	('Mahavihara_Mbanza_Science',				'Placeholder',	'YIELD_SCIENCE',	1,				'DISTRICT_MBANZA',			null,					null);
+-- =====================================================================================================================================
+-- 圆顶市集 下放通用
+-- =====================================================================================================================================
+update Improvements set TraitType = NULL, Housing = 1, TilesRequired = 1, PrereqTech = 'TECH_THE_WHEEL', SameAdjacentValid = 1, OnePerCity = 1,
+	NAME = 'LOC_IMPROVEMENT_TRADING_DOME_HD_NAME', Description = 'LOC_IMPROVEMENT_TRADING_DOME_HD_DESCRIPTION' where ImprovementType = 'IMPROVEMENT_TRADING_DOME';
+delete from Improvement_Adjacencies where ImprovementType = 'IMPROVEMENT_TRADING_DOME';
+delete from ImprovementModifiers where ImprovementType = 'IMPROVEMENT_TRADING_DOME';
 
+insert or replace into Improvement_YieldChanges (ImprovementType, YieldType, YieldChange) values
+	('IMPROVEMENT_TRADING_DOME', 'YIELD_FOOD',				1),
+	('IMPROVEMENT_TRADING_DOME', 'YIELD_PRODUCTION',	1),
+	('IMPROVEMENT_TRADING_DOME', 'YIELD_GOLD',				0);
+
+insert or replace into Improvement_Adjacencies (ImprovementType, YieldChangeId) values
+	('IMPROVEMENT_TRADING_DOME', 'HD_TRADING_DOME_RESOURCE_GOLD');
+
+insert or replace into Adjacency_YieldChanges (ID, Description, YieldType, YieldChange, AdjacentResource) values
+	('HD_TRADING_DOME_RESOURCE_GOLD', 'Placeholder', 'YIELD_GOLD', 2, 1);
+
+insert or replace into Improvement_Adjacencies (ImprovementType, YieldChangeId) select
+	'IMPROVEMENT_TRADING_DOME', 'HD_TRADING_DOME_GOLD_' || DistrictType
+from Districts where DistrictType in ('DISTRICT_AERODROME', 'DISTRICT_CANAL') or
+	DistrictType in (select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType in ('DISTRICT_AERODROME', 'DISTRICT_CANAL'));
+
+insert or replace into Adjacency_YieldChanges (ID, Description, YieldType, YieldChange, AdjacentDistrict) select
+	'HD_TRADING_DOME_GOLD_' || DistrictType, 'Placeholder', 'YIELD_GOLD', 2, DistrictType
+from Districts where DistrictType in ('DISTRICT_AERODROME', 'DISTRICT_CANAL') or
+	DistrictType in (select CivUniqueDistrictType from DistrictReplaces where ReplacesDistrictType in ('DISTRICT_AERODROME', 'DISTRICT_CANAL'));
+
+insert or ignore into ImprovementModifiers (ImprovementType, ModifierId) values
+	('IMPROVEMENT_TRADING_DOME', 'HD_TRADING_DOME_BONUS_TRADE_ROUTE_DOMESTIC_ORIGIN'),
+	('IMPROVEMENT_TRADING_DOME', 'HD_TRADING_DOME_BONUS_TRADE_ROUTE_DOMESTIC_DESTINATION'),
+	('IMPROVEMENT_TRADING_DOME', 'HD_TRADING_DOME_BONUS_TRADE_ROUTE_INTERNATIONAL_ORIGIN'),
+	('IMPROVEMENT_TRADING_DOME', 'HD_TRADING_DOME_BONUS_TRADE_ROUTE_INTERNATIONAL_DESTINATION'),
+	('IMPROVEMENT_TRADING_DOME', 'HD_TRADING_DOME_LUXURY_TRADE_ROUTE_DOMESTIC_ORIGIN'),
+	('IMPROVEMENT_TRADING_DOME', 'HD_TRADING_DOME_LUXURY_TRADE_ROUTE_DOMESTIC_DESTINATION'),
+	('IMPROVEMENT_TRADING_DOME', 'HD_TRADING_DOME_LUXURY_TRADE_ROUTE_INTERNATIONAL_ORIGIN'),
+	('IMPROVEMENT_TRADING_DOME', 'HD_TRADING_DOME_LUXURY_TRADE_ROUTE_INTERNATIONAL_DESTINATION');
+
+insert or ignore into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId) values
+	('HD_TRADING_DOME_BONUS_TRADE_ROUTE_DOMESTIC_ORIGIN',								'MODIFIER_SINGLE_CITY_ADJUST_TRADE_ROUTE_YIELD_FOR_DOMESTIC',				'PLOT_ADJACENT_TO_BONUS_REQUIREMENTS'),
+	('HD_TRADING_DOME_BONUS_TRADE_ROUTE_DOMESTIC_DESTINATION',					'MODIFIER_SINGLE_CITY_ADJUST_TRADE_ROUTE_YIELD_TO_OTHERS',					'PLOT_ADJACENT_TO_BONUS_REQUIREMENTS'),
+	('HD_TRADING_DOME_BONUS_TRADE_ROUTE_INTERNATIONAL_ORIGIN',					'MODIFIER_SINGLE_CITY_ADJUST_TRADE_ROUTE_YIELD_FOR_INTERNATIONAL',	'PLOT_ADJACENT_TO_BONUS_REQUIREMENTS'),
+	('HD_TRADING_DOME_BONUS_TRADE_ROUTE_INTERNATIONAL_DESTINATION',			'MODIFIER_SINGLE_CITY_ADJUST_TRADE_ROUTE_YIELD_TO_OTHERS',					'PLOT_ADJACENT_TO_BONUS_REQUIREMENTS'),
+	('HD_TRADING_DOME_LUXURY_TRADE_ROUTE_DOMESTIC_ORIGIN',							'MODIFIER_SINGLE_CITY_ADJUST_TRADE_ROUTE_YIELD_FOR_DOMESTIC',				'PLOT_ADJACENT_TO_LUXURY_REQUIREMENTS'),
+	('HD_TRADING_DOME_LUXURY_TRADE_ROUTE_DOMESTIC_DESTINATION',					'MODIFIER_SINGLE_CITY_ADJUST_TRADE_ROUTE_YIELD_TO_OTHERS',					'PLOT_ADJACENT_TO_LUXURY_REQUIREMENTS'),
+	('HD_TRADING_DOME_LUXURY_TRADE_ROUTE_INTERNATIONAL_ORIGIN',					'MODIFIER_SINGLE_CITY_ADJUST_TRADE_ROUTE_YIELD_FOR_INTERNATIONAL',	'PLOT_ADJACENT_TO_LUXURY_REQUIREMENTS'),
+	('HD_TRADING_DOME_LUXURY_TRADE_ROUTE_INTERNATIONAL_DESTINATION',		'MODIFIER_SINGLE_CITY_ADJUST_TRADE_ROUTE_YIELD_TO_OTHERS',					'PLOT_ADJACENT_TO_LUXURY_REQUIREMENTS');
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) values
+	('HD_TRADING_DOME_BONUS_TRADE_ROUTE_DOMESTIC_ORIGIN',								'YieldType',	'YIELD_FOOD'),
+	('HD_TRADING_DOME_BONUS_TRADE_ROUTE_DOMESTIC_ORIGIN',								'Amount',			1),
+	('HD_TRADING_DOME_BONUS_TRADE_ROUTE_DOMESTIC_DESTINATION',					'YieldType',	'YIELD_FOOD'),
+	('HD_TRADING_DOME_BONUS_TRADE_ROUTE_DOMESTIC_DESTINATION',					'Amount',			1),
+	('HD_TRADING_DOME_BONUS_TRADE_ROUTE_DOMESTIC_DESTINATION',					'Domestic',		1),
+	('HD_TRADING_DOME_BONUS_TRADE_ROUTE_INTERNATIONAL_ORIGIN',					'YieldType',	'YIELD_FOOD'),
+	('HD_TRADING_DOME_BONUS_TRADE_ROUTE_INTERNATIONAL_ORIGIN',					'Amount',			1),
+	('HD_TRADING_DOME_BONUS_TRADE_ROUTE_INTERNATIONAL_DESTINATION',			'YieldType',	'YIELD_FOOD'),
+	('HD_TRADING_DOME_BONUS_TRADE_ROUTE_INTERNATIONAL_DESTINATION',			'Amount',			1),
+	('HD_TRADING_DOME_LUXURY_TRADE_ROUTE_DOMESTIC_ORIGIN',							'YieldType',	'YIELD_GOLD'),
+	('HD_TRADING_DOME_LUXURY_TRADE_ROUTE_DOMESTIC_ORIGIN',							'Amount',			3),
+	('HD_TRADING_DOME_LUXURY_TRADE_ROUTE_DOMESTIC_DESTINATION',					'YieldType',	'YIELD_GOLD'),
+	('HD_TRADING_DOME_LUXURY_TRADE_ROUTE_DOMESTIC_DESTINATION',					'Amount',			3),
+	('HD_TRADING_DOME_LUXURY_TRADE_ROUTE_DOMESTIC_DESTINATION',					'Domestic',		1),
+	('HD_TRADING_DOME_LUXURY_TRADE_ROUTE_INTERNATIONAL_ORIGIN',					'YieldType',	'YIELD_GOLD'),
+	('HD_TRADING_DOME_LUXURY_TRADE_ROUTE_INTERNATIONAL_ORIGIN',					'Amount',			3),
+	('HD_TRADING_DOME_LUXURY_TRADE_ROUTE_INTERNATIONAL_DESTINATION',		'YieldType',	'YIELD_GOLD'),
+	('HD_TRADING_DOME_LUXURY_TRADE_ROUTE_INTERNATIONAL_DESTINATION',		'Amount',			3);
+
+-- =====================================================================================================================================
+-- 大寺 下放通用
+-- =====================================================================================================================================
+update Improvements set TraitType = NULL, Housing = 1, TilesRequired = 1, PrereqTech = 'TECH_PAPER_MAKING_HD', SameAdjacentValid = 1, OnePerCity = 1,
+	Description = 'LOC_IMPROVEMENT_MAHAVIHARA_HD_DESCRIPTION' where ImprovementType = 'IMPROVEMENT_MAHAVIHARA';
+delete from Improvement_Adjacencies where ImprovementType = 'IMPROVEMENT_MAHAVIHARA';
+delete from ImprovementModifiers where ImprovementType = 'IMPROVEMENT_MAHAVIHARA';
+
+insert or replace into Improvement_YieldChanges (ImprovementType, YieldType, YieldChange) values
+	('IMPROVEMENT_MAHAVIHARA', 'YIELD_FAITH', 		2),
+	('IMPROVEMENT_MAHAVIHARA', 'YIELD_SCIENCE', 	2);
+
+insert or ignore into ImprovementModifiers (ImprovementType, ModifierId) values
+	('IMPROVEMENT_MAHAVIHARA', 'HD_MAHAVIHARA_GPP');
+
+insert or ignore into Modifiers (ModifierId, ModifierType, OwnerRequirementSetId, SubjectRequirementSetId) values
+	('HD_MAHAVIHARA_GPP',	'MODIFIER_SINGLE_CITY_DISTRICTS_ADJUST_GREAT_PERSON_POINTS', 'PLAYER_IS_HUMAN', 'DISTRICT_IS_SPECIALTY_DISTRICT_REQUIREMENTS');
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) values
+	('HD_MAHAVIHARA_GPP', 'GreatPersonClassType',	'GREAT_PERSON_CLASS_SCIENTIST'),
+	('HD_MAHAVIHARA_GPP', 'Amount',								1);
+
+-- 信仰值产出
+insert or ignore into ImprovementModifiers (ImprovementType, ModifierId) select
+	'IMPROVEMENT_MAHAVIHARA', 'HD_MAHAVIHARA_FAITH_' || Count
+from HDCounter where Count <= (select Tier from HD_DistrictBuildingHighestTier where DistrictType = 'DISTRICT_CAMPUS');
+
+insert or ignore into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) select
+	'HD_MAHAVIHARA_FAITH_' || Count, 'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS', 'CITY_HAS_DISTRICT_CAMPUS_TIER_' || Count || '_BUILDING_REQUIREMENTS'
+from HDCounter where Count <= (select Tier from HD_DistrictBuildingHighestTier where DistrictType = 'DISTRICT_CAMPUS');
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select
+	'HD_MAHAVIHARA_FAITH_' || Count, 'YieldType', 'YIELD_FAITH'
+from HDCounter where Count <= (select Tier from HD_DistrictBuildingHighestTier where DistrictType = 'DISTRICT_CAMPUS');
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select
+	'HD_MAHAVIHARA_FAITH_' || Count, 'Amount', 1
+from HDCounter where Count <= (select Tier from HD_DistrictBuildingHighestTier where DistrictType = 'DISTRICT_CAMPUS');
+
+-- 科技值产出
+insert or ignore into ImprovementModifiers (ImprovementType, ModifierId) select
+	'IMPROVEMENT_MAHAVIHARA', 'HD_MAHAVIHARA_SCIENCE_' || Count
+from HDCounter where Count <= (select Tier from HD_DistrictBuildingHighestTier where DistrictType = 'DISTRICT_HOLY_SITE');
+
+insert or ignore into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) select
+	'HD_MAHAVIHARA_SCIENCE_' || Count, 'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS', 'CITY_HAS_DISTRICT_HOLY_SITE_TIER_' || Count || '_BUILDING_REQUIREMENTS'
+from HDCounter where Count <= (select Tier from HD_DistrictBuildingHighestTier where DistrictType = 'DISTRICT_HOLY_SITE');
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select
+	'HD_MAHAVIHARA_SCIENCE_' || Count, 'YieldType', 'YIELD_SCIENCE'
+from HDCounter where Count <= (select Tier from HD_DistrictBuildingHighestTier where DistrictType = 'DISTRICT_HOLY_SITE');
+
+insert or ignore into ModifierArguments (ModifierId, Name, Value) select
+	'HD_MAHAVIHARA_SCIENCE_' || Count, 'Amount', 1
+from HDCounter where Count <= (select Tier from HD_DistrictBuildingHighestTier where DistrictType = 'DISTRICT_HOLY_SITE');
+
+-- =====================================================================================================================================
+-- 城邦
+-- =====================================================================================================================================
 -- Modifiers in this table are attached to suzerain
 create temporary table if not exists TraitAttachedModifiers (
 	TraitType text not null,
@@ -351,7 +452,43 @@ create temporary table if not exists TraitAttachedModifiers (
 	primary key (TraitType, ModifierId)
 );
 
--- Johannesburg
+-- =====================================================================================================================================
+-- 那烂陀
+-- =====================================================================================================================================
+delete from TraitModifiers where TraitType = 'MINOR_CIV_NALANDA_TRAIT';
+
+insert or replace into TraitAttachedModifiers (TraitType, ModifierId) values
+	('MINOR_CIV_NALANDA_TRAIT', 'HD_NALANDA_IMPROVEMENT_SCIENCE'),
+	('MINOR_CIV_NALANDA_TRAIT', 'HD_NALANDA_WONDER_FAITH');
+
+insert or replace into Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) values
+	('HD_NALANDA_IMPROVEMENT_SCIENCE',	'MODIFIER_PLAYER_ADJUST_PLOT_YIELD',									'PLOT_HAS_IMPROVEMENT_CLASSIFICATION_RELIGIOUS_REQUIREMENTS'),
+	('HD_NALANDA_WONDER_FAITH',					'MODIFIER_PLAYER_CITIES_ADJUST_WONDER_YIELD_CHANGE',	NULL);
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
+	('HD_NALANDA_IMPROVEMENT_SCIENCE',	'YieldType',	'YIELD_SCIENCE'),
+	('HD_NALANDA_IMPROVEMENT_SCIENCE',	'Amount',			2),
+	('HD_NALANDA_WONDER_FAITH', 				'YieldType',	'YIELD_FAITH'),
+	('HD_NALANDA_WONDER_FAITH', 				'Amount',			3);
+
+-- =====================================================================================================================================
+-- 撒马尔罕
+-- =====================================================================================================================================
+delete from TraitModifiers where TraitType = 'MINOR_CIV_SAMARKAND_TRAIT';
+
+insert or replace into TraitAttachedModifiers (TraitType, ModifierId) values
+	('MINOR_CIV_SAMARKAND_TRAIT', 'HD_SAMARKAND_TRADE_GOLD');
+
+insert or replace into Modifiers (ModifierId, ModifierType) values
+	('HD_SAMARKAND_TRADE_GOLD',	'MODIFIER_PLAYER_CITIES_ADJUST_TRADE_ROUTE_YIELD_PER_DESTINATION_LUXURY_FOR_INTERNATIONAL');
+
+insert or replace into ModifierArguments (ModifierId, Name, Value) values
+	('HD_SAMARKAND_TRADE_GOLD',	'YieldType',	'YIELD_GOLD'),
+	('HD_SAMARKAND_TRADE_GOLD',	'Amount',			4);
+
+-- =====================================================================================================================================
+-- 约翰内斯堡
+-- =====================================================================================================================================
 delete from TraitModifiers where TraitType = 'MINOR_CIV_JOHANNESBURG_TRAIT';
 create temporary table JohannesburgResources (ResourceType text not null primary key);
 insert or replace into JohannesburgResources (ResourceType) select ResourceType from Improvement_ValidResources where ImprovementType = 'IMPROVEMENT_MINE' or ImprovementType = 'IMPROVEMENT_QUARRY';
@@ -364,7 +501,7 @@ from JohannesburgResources;
 insert or replace into Modifiers
 	(ModifierId,														ModifierType,										 SubjectRequirementSetId)
 select
-	'MINOR_CIV_JOHANNESBURG_' || ResourceType || '_PRODUCTION_TIRE1',	'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',	 'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIRMENTS'
+	'MINOR_CIV_JOHANNESBURG_' || ResourceType || '_PRODUCTION_TIRE1',	'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',	 'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIREMENTS'
 from JohannesburgResources;
 insert or replace into ModifierArguments
 	(ModifierId,														Name,			Value)
@@ -384,7 +521,7 @@ from JohannesburgResources;
 insert or replace into Modifiers
 	(ModifierId,														ModifierType,											OwnerRequirementSetId,							SubjectRequirementSetId)
 select
-	'MINOR_CIV_JOHANNESBURG_' || ResourceType || '_PRODUCTION_TIRE2',	'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',		'PLAYER_HAS_TECH_APPRENTICESHIP_REQUIREMENTS',	'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIRMENTS'
+	'MINOR_CIV_JOHANNESBURG_' || ResourceType || '_PRODUCTION_TIRE2',	'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',		'PLAYER_HAS_TECH_APPRENTICESHIP_REQUIREMENTS',	'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIREMENTS'
 from JohannesburgResources;
 insert or replace into ModifierArguments
 	(ModifierId,														Name,			Value)
@@ -405,7 +542,7 @@ from JohannesburgResources;
 insert or replace into Modifiers
 	(ModifierId,														ModifierType,											SubjectRequirementSetId)
 select
-	'MINOR_CIV_JOHANNESBURG_' || ResourceType || '_GOLD',	'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',	'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIRMENTS'
+	'MINOR_CIV_JOHANNESBURG_' || ResourceType || '_GOLD',	'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE',	'HD_CITY_HAS_IMPROVED_' || ResourceType || '_REQUIREMENTS'
 from JohannesburgResources;
 insert or replace into ModifierArguments
 	(ModifierId,														Name,			Value)

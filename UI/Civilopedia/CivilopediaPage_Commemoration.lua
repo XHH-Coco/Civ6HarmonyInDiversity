@@ -11,7 +11,12 @@ PageLayouts["Commemoration"] = function(page)
   end
   
   local commemorationType = commemoration.CommemorationType;
-  AddPortrait("ICON_" .. commemorationType);
+
+  local iconName = "ICON_" .. commemorationType;
+  if GameInfo.CommemorationIcons ~= nil and GameInfo.CommemorationIcons[commemorationType] ~= nil then
+    iconName = GameInfo.CommemorationIcons[commemorationType].Icon;
+  end
+  AddPortrait(iconName);
   
   local minEra;
   local minEraRow = GameInfo.Eras[commemoration.MinimumGameEra];
@@ -54,7 +59,12 @@ PageLayouts["China_Commemoration"] = function(page)
   end
   
   local commemorationType = commemoration.AncientCommemorationType;
-  AddPortrait("ICON_" .. commemorationType);
+
+  local iconName = "ICON_" .. commemorationType;
+  if GameInfo.CommemorationIcons ~= nil and GameInfo.CommemorationIcons[commemorationType] ~= nil then
+    iconName = GameInfo.CommemorationIcons[commemorationType].Icon;
+  end
+  AddPortrait(iconName);
   
   local unique_to = {};
   for row in GameInfo.ChinaLeaders_AncientCommemorationTypes_HD() do

@@ -59,4 +59,4 @@ where BuildingType = 'BUILDING_SYDNEY_OPERA_HOUSE';
 insert or replace into Building_GreatWorks
 	(BuildingType, 						GreatWorkSlotType, 			NumSlots,	ThemingUniquePerson,	ThemingYieldMultiplier,	ThemingTourismMultiplier,	NonUniquePersonYield,	NonUniquePersonTourism, ThemingBonusDescription)
 values
-	('BUILDING_HAGIA_SOPHIA',	'GREATWORKSLOT_ART',		3,				1,										100,										100,											1,										1,											'LOC_BUILDING_HAGIA_SOPHIA_THEMINGBONUS');
+	('BUILDING_HAGIA_SOPHIA',	'GREATWORKSLOT_ART',		3,				1,										100,										100,											1,										1,											'LOC_BUILDING_THEMINGBONUS_HAGIA_SOPHIA');

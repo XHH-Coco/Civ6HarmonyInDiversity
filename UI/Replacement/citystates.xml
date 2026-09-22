@@ -210,6 +210,7 @@
             <BoxButton ID="Button" Anchor="L,T" Offset="8,0" Size="40,40" Color="0,0,0,0">
                 <Image ID="Icon" Anchor="L,C" Size="36,36" Offset="0,2" Texture="CivSymbols36" />
                 <Image ID="DiplomacyPip" Anchor="L,B" Offset="-9,-6" Size="23,23" Texture="Diplomacy_RelationshipPips" />
+                <Label ID="ExclusiveResource" Hidden="1" Anchor="R,B" Offset="0,-2" Size="28,28" />
                 <!--<Label ID="QuestIcon" Hidden="1" Anchor="L,T" Offset="-9,0" String="[ICON_CityStateQuest]" Size="28,28"/>-->
             </BoxButton>
 

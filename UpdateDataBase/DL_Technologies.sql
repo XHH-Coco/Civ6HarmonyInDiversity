@@ -75,7 +75,7 @@ values
     -- 测绘学
     ('TECH_GEOMATICS_HD',               'LOC_TECH_GEOMATICS_HD_NAME',               NULL,                                               300,    'ERA_MEDIEVAL',     -2,         'ADVISOR_TECHNOLOGY'),
     -- 拱券
-    ('TECH_ARCH_HD',                    'LOC_TECH_ARCH_HD_NAME',                    'LOC_TECH_ARCH_HD_DESCRIPTION',                     300,    'ERA_MEDIEVAL',     2,          'ADVISOR_GENERIC'),
+    ('TECH_ARCH_HD',                    'LOC_TECH_ARCH_HD_NAME',                    NULL,                                               300,    'ERA_MEDIEVAL',     2,          'ADVISOR_GENERIC'),
     -- 海洋学
     ('TECH_OCEANOGRAPHY_HD',            'LOC_TECH_OCEANOGRAPHY_HD_NAME',            'LOC_TECH_OCEANOGRAPHY_HD_DESCRIPTION',             930,    'ERA_INDUSTRIAL',   -3,         'ADVISOR_GENERIC'),
     -- 地质学
@@ -486,6 +486,16 @@ update Technologies set Cost = 160 where Cost = 120;
 update Technologies set Cost = 80 where Cost = 80;
 update Technologies set Cost = 50 where Cost = 50;
 
+-- 总督点
+insert or replace into HD_TechnologyGovernorPoints (TechnologyType) values
+    ('TECH_EDUCATION'),
+    ('TECH_CASTLES'),
+    ('TECH_BANKING'),
+    ('TECH_MILITARY_SCIENCE'),
+    ('TECH_FLIGHT'),
+    ('TECH_COMPUTERS'),
+    ('TECH_TELECOMMUNICATIONS');
+
 -- 删除电脑全境业绩
 delete from TechnologyModifiers where TechnologyType = 'TECH_COMPUTERS' and ModifierId = 'COMPUTERS_BOOST_ALL_TOURISM';
 
@@ -494,32 +504,18 @@ insert or replace into TechnologyModifiers
 values
 	('TECH_STEAM_POWER',						'TRAIT_WATER_TRADE_ROUTE_RANGE'),
 	('TECH_CALENDAR_HD',						'TECH_CALENDAR_HD_MONUMENT_CULTURE'),
-	('TECH_ENGINEERING',						'TECH_ENGINEERING_WATER_MILL_PRODUCTION'),
-	('TECH_CONSTRUCTION',						'TECH_CONSTRUCTION_HD_CELLAR_FOOD'),
 	('TECH_SAILING',							'TECH_SAILING_TRADER_EMBARK'),
-	('TECH_ALCHEMY_HD',							'TECH_ALCHEMY_TOTEMS_SCIENCE'),
-	('TECH_TEXTILE_HD',							'TECH_TEXTILE_FAIR_PRODUCTION'),
-	('TECH_SHIPBUILDING',						'TECH_SHIPBUILDING_WHARF_RIVER_FOOD'),
-	('TECH_GEOMATICS_HD',						'TECH_GEOMATICS_NILOMETER_SCIENCE'),
-	('TECH_GEOMATICS_HD',						'TECH_GEOMATICS_KAREZ_PRODUCTION'),
-	('TECH_IRON_WORKING',						'TECH_IRON_WORKING_HANDCRAFT_PRODUCTION'),
-	('TECH_FUEL_HD',						    'TECH_FUEL_CAMPFIRE_PRODUCTION');
+	('TECH_SAILING',							'TECH_SAILING_SETTLER_EMBARK'),
+	('TECH_GEOMATICS_HD',						'TECH_GEOMATICS_NILOMETER_SCIENCE');
 
 insert or replace into Modifiers
 	(ModifierId,													ModifierType)
 values
     ('ASTRONOMY_ADJACENT_MOUNTAIN_CAMPUS_SCIENCE',                  'MODIFIER_PLAYER_DISTRICTS_ADJUST_YIELD_CHANGE'),
     ('TECH_CALENDAR_HD_MONUMENT_CULTURE',                           'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE'),
-    ('TECH_ENGINEERING_WATER_MILL_PRODUCTION',                      'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE'),
-    ('TECH_CONSTRUCTION_HD_CELLAR_FOOD',                            'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE'),
-    ('TECH_ALCHEMY_TOTEMS_SCIENCE',                                 'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE'),
-    ('TECH_TEXTILE_FAIR_PRODUCTION',                                'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE'),
-    ('TECH_SHIPBUILDING_WHARF_RIVER_FOOD',                          'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE'),
     ('TECH_GEOMATICS_NILOMETER_SCIENCE',                            'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE'),
-    ('TECH_GEOMATICS_KAREZ_PRODUCTION',                             'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE'),
-    ('TECH_IRON_WORKING_HANDCRAFT_PRODUCTION',                      'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE'),
-    ('TECH_FUEL_CAMPFIRE_PRODUCTION',                               'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE'),
-	('TECH_SAILING_TRADER_EMBARK',									'MODIFIER_PLAYER_ADJUST_EMBARK_UNIT_PASS');
+	('TECH_SAILING_TRADER_EMBARK',									'MODIFIER_PLAYER_ADJUST_EMBARK_UNIT_PASS'),
+	('TECH_SAILING_SETTLER_EMBARK',					                'MODIFIER_PLAYER_ADJUST_EMBARK_UNIT_PASS');
 
 update Modifiers set SubjectRequirementSetId = 'IS_CAMPUS_ADJACENT_TO_MOUNTAIN_REQUIREMENTS'
     where ModifierId = 'ASTRONOMY_ADJACENT_MOUNTAIN_CAMPUS_SCIENCE';
@@ -532,34 +528,11 @@ values
     ('TECH_CALENDAR_HD_MONUMENT_CULTURE',                       'BuildingType',             'BUILDING_MONUMENT'),
     ('TECH_CALENDAR_HD_MONUMENT_CULTURE',                       'YieldType',                'YIELD_CULTURE'),
     ('TECH_CALENDAR_HD_MONUMENT_CULTURE',                       'Amount',                   1),
-    ('TECH_ENGINEERING_WATER_MILL_PRODUCTION',                  'BuildingType',             'BUILDING_WATER_MILL'),
-    ('TECH_ENGINEERING_WATER_MILL_PRODUCTION',                  'YieldType',                'YIELD_PRODUCTION'),
-    ('TECH_ENGINEERING_WATER_MILL_PRODUCTION',                  'Amount',                   1),
-    ('TECH_CONSTRUCTION_HD_CELLAR_FOOD',                        'BuildingType',             'BUILDING_HD_CELLAR'),
-    ('TECH_CONSTRUCTION_HD_CELLAR_FOOD',                        'YieldType',                'YIELD_FOOD'),
-    ('TECH_CONSTRUCTION_HD_CELLAR_FOOD',                        'Amount',                   1),
-    ('TECH_ALCHEMY_TOTEMS_SCIENCE',                             'BuildingType',             'BUILDING_TOTEMS'),
-    ('TECH_ALCHEMY_TOTEMS_SCIENCE',                             'YieldType',                'YIELD_SCIENCE'),
-    ('TECH_ALCHEMY_TOTEMS_SCIENCE',                             'Amount',                   1),
-    ('TECH_TEXTILE_FAIR_PRODUCTION',                            'BuildingType',             'BUILDING_FAIR'),
-    ('TECH_TEXTILE_FAIR_PRODUCTION',                            'YieldType',                'YIELD_PRODUCTION'),
-    ('TECH_TEXTILE_FAIR_PRODUCTION',                            'Amount',                   1),
-    ('TECH_SHIPBUILDING_WHARF_RIVER_FOOD',                      'BuildingType',             'BUILDING_HD_WHARF_RIVER'),
-    ('TECH_SHIPBUILDING_WHARF_RIVER_FOOD',                      'YieldType',                'YIELD_FOOD'),
-    ('TECH_SHIPBUILDING_WHARF_RIVER_FOOD',                      'Amount',                   1),
     ('TECH_GEOMATICS_NILOMETER_SCIENCE',                        'BuildingType',             'BUILDING_NILOMETER_HD'),
     ('TECH_GEOMATICS_NILOMETER_SCIENCE',                        'YieldType',                'YIELD_SCIENCE'),
     ('TECH_GEOMATICS_NILOMETER_SCIENCE',                        'Amount',                   1),
-    ('TECH_GEOMATICS_KAREZ_PRODUCTION',                         'BuildingType',             'BUILDING_KAREZ'),
-    ('TECH_GEOMATICS_KAREZ_PRODUCTION',                         'YieldType',                'YIELD_PRODUCTION'),
-    ('TECH_GEOMATICS_KAREZ_PRODUCTION',                         'Amount',                   1),
-    ('TECH_IRON_WORKING_HANDCRAFT_PRODUCTION',                  'BuildingType',             'BUILDING_OFFICIAL_RUN_HANDCRAFT'),
-    ('TECH_IRON_WORKING_HANDCRAFT_PRODUCTION',                  'YieldType',                'YIELD_PRODUCTION'),
-    ('TECH_IRON_WORKING_HANDCRAFT_PRODUCTION',                  'Amount',                   1),
-    ('TECH_FUEL_CAMPFIRE_PRODUCTION',                           'BuildingType',             'BUILDING_HD_CAMPFIRE'),
-    ('TECH_FUEL_CAMPFIRE_PRODUCTION',                           'YieldType',                'YIELD_PRODUCTION'),
-    ('TECH_FUEL_CAMPFIRE_PRODUCTION',                           'Amount',                   1),
-	('TECH_SAILING_TRADER_EMBARK',								'UnitType',					'UNIT_TRADER');
+	('TECH_SAILING_TRADER_EMBARK',								'UnitType',					'UNIT_TRADER'),
+	('TECH_SAILING_SETTLER_EMBARK',						        'UnitType',		'UNIT_SETTLER');
 
 
 --移除雨林前移到采矿

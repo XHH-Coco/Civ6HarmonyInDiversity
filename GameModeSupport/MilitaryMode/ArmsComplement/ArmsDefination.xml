@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameData>
+	<Tags>
+		<Row Tag="CLASS_SAPPER_HD" Vocabulary="ABILITY_CLASS"/>
+		<Row Tag="CLASS_ENGINEER_CORP_HD" Vocabulary="ABILITY_CLASS"/>
+	</Tags>
+
+	<Types>
+		<Row Type="UNIT_SAPPER" Kind="KIND_UNIT"/>
+		<Row Type="UNIT_ENGINEER_CORP" Kind="KIND_UNIT"/>
+		<Row Type="UNIT_HALBERDMAN" Kind="KIND_UNIT" />
+	  <Row Type="UNIT_COMPOSITE_BOWMAN" Kind="KIND_UNIT" />
+	  <Row Type="UNIT_ARMOR_CAVALRY" Kind="KIND_UNIT" />
+    <Row Type="UNIT_CANNON" Kind="KIND_UNIT" />
+    <Row Type="UNIT_LANCER" Kind="KIND_UNIT" />
+    <Row Type="UNIT_REITER" Kind="KIND_UNIT" />
+    <Row Type="UNIT_ARRAY_INFANTRY" Kind="KIND_UNIT" />
+    <Row Type="UNIT_MORTER_NEW" Kind="KIND_UNIT" />
+		<Row Type="UNIT_VELITE" Kind="KIND_UNIT" />
+    <Row Type="UNIT_CHASSEUR" Kind="KIND_UNIT" />
+    <Row Type="UNIT_PIRATE" Kind="KIND_UNIT" />
+	</Types>
+
+	<UnitAiInfos>
+		<Row UnitType="UNIT_SAPPER" AiType="UNITTYPE_SIEGE_SUPPORT"/>
+		<Row UnitType="UNIT_SAPPER" AiType="UNITAI_BUILD"/>
+		<Row UnitType="UNIT_SAPPER" AiType="UNITTYPE_CIVILIAN"/>
+		<Row UnitType="UNIT_ENGINEER_CORP" AiType="UNITTYPE_SIEGE_SUPPORT"/>
+		<Row UnitType="UNIT_ENGINEER_CORP" AiType="UNITAI_BUILD"/>
+		<Row UnitType="UNIT_ENGINEER_CORP" AiType="UNITTYPE_CIVILIAN"/>
+		<Row UnitType="UNIT_HALBERDMAN" AiType="UNITAI_COMBAT"/>
+		<Row UnitType="UNIT_HALBERDMAN" AiType="UNITAI_EXPLORE"/>
+		<Row UnitType="UNIT_HALBERDMAN" AiType="UNITTYPE_MELEE"/>
+		<Row UnitType="UNIT_HALBERDMAN" AiType="UNITTYPE_ANTI_CAVALRY"/>
+		<Row UnitType="UNIT_HALBERDMAN" AiType="UNITTYPE_LAND_COMBAT"/>
+    
+    <Row UnitType="UNIT_COMPOSITE_BOWMAN" AiType="UNITAI_COMBAT"/>
+		<Row UnitType="UNIT_COMPOSITE_BOWMAN" AiType="UNITTYPE_RANGED"/>
+		<Row UnitType="UNIT_COMPOSITE_BOWMAN" AiType="UNITTYPE_LAND_COMBAT"/>
+    
+    <Row UnitType="UNIT_ARMOR_CAVALRY" AiType="UNITAI_COMBAT"/>
+		<Row UnitType="UNIT_ARMOR_CAVALRY" AiType="UNITAI_EXPLORE"/>
+		<Row UnitType="UNIT_ARMOR_CAVALRY" AiType="UNITTYPE_CAVALRY"/>
+		<Row UnitType="UNIT_ARMOR_CAVALRY" AiType="UNITTYPE_MELEE"/>
+		<Row UnitType="UNIT_ARMOR_CAVALRY" AiType="UNITTYPE_LAND_COMBAT"/>
+  
+    <Row UnitType="UNIT_CANNON" AiType="UNITTYPE_LAND_COMBAT"/>
+		<Row UnitType="UNIT_CANNON" AiType="UNITTYPE_RANGED"/>
+		<Row UnitType="UNIT_CANNON" AiType="UNITAI_COMBAT"/>
+  
+    <Row UnitType="UNIT_LANCER" AiType="UNITAI_COMBAT"/>
+		<Row UnitType="UNIT_LANCER" AiType="UNITAI_EXPLORE"/>
+		<Row UnitType="UNIT_LANCER" AiType="UNITTYPE_MELEE"/>
+		<Row UnitType="UNIT_LANCER" AiType="UNITTYPE_CAVALRY"/>
+		<Row UnitType="UNIT_LANCER" AiType="UNITTYPE_LAND_COMBAT"/>
+
+    <Row UnitType="UNIT_REITER" AiType="UNITAI_COMBAT"/>
+		<Row UnitType="UNIT_REITER" AiType="UNITAI_EXPLORE"/>
+		<Row UnitType="UNIT_REITER" AiType="UNITTYPE_MELEE"/>
+		<Row UnitType="UNIT_REITER" AiType="UNITTYPE_CAVALRY"/>
+		<Row UnitType="UNIT_REITER" AiType="UNITTYPE_LAND_COMBAT"/>
+  
+    <Row UnitType="UNIT_ARRAY_INFANTRY" AiType="UNITAI_COMBAT"/>
+		<Row UnitType="UNIT_ARRAY_INFANTRY" AiType="UNITAI_EXPLORE"/>
+		<Row UnitType="UNIT_ARRAY_INFANTRY" AiType="UNITTYPE_MELEE"/>
+		<Row UnitType="UNIT_ARRAY_INFANTRY" AiType="UNITTYPE_LAND_COMBAT"/>
+  
+    <Row UnitType="UNIT_MORTER_NEW" AiType="UNITAI_COMBAT"/>
+		<Row UnitType="UNIT_MORTER_NEW" AiType="UNITTYPE_RANGED"/>
+		<Row UnitType="UNIT_MORTER_NEW" AiType="UNITTYPE_SIEGE"/>
+		<Row UnitType="UNIT_MORTER_NEW" AiType="UNITTYPE_SIEGE_ALL"/>
+		<Row UnitType="UNIT_MORTER_NEW" AiType="UNITTYPE_LAND_COMBAT"/>
+
+    <Replace UnitType="UNIT_EGYPTIAN_CHARIOT_ARCHER" AiType="UNITAI_COMBAT"/>
+		<Replace UnitType="UNIT_EGYPTIAN_CHARIOT_ARCHER" AiType="UNITAI_EXPLORE"/>
+		<Replace UnitType="UNIT_EGYPTIAN_CHARIOT_ARCHER" AiType="UNITTYPE_CAVALRY"/>
+		<Replace UnitType="UNIT_EGYPTIAN_CHARIOT_ARCHER" AiType="UNITTYPE_MELEE"/>
+		<Replace UnitType="UNIT_EGYPTIAN_CHARIOT_ARCHER" AiType="UNITTYPE_LAND_COMBAT"/>
+
+    <Row UnitType="UNIT_VELITE" AiType="UNITAI_EXPLORE"/>
+		<Row UnitType="UNIT_VELITE" AiType="UNITTYPE_RANGED"/>
+		<Row UnitType="UNIT_VELITE" AiType="UNITAI_BUILD"/>
+		<Row UnitType="UNIT_VELITE" AiType="UNITTYPE_LAND_COMBAT"/>
+
+		<Row UnitType="UNIT_CHASSEUR" AiType="UNITAI_EXPLORE"/>
+		<Row UnitType="UNIT_CHASSEUR" AiType="UNITTYPE_RANGED"/>
+		<Row UnitType="UNIT_CHASSEUR" AiType="UNITAI_BUILD"/>
+		<Row UnitType="UNIT_CHASSEUR" AiType="UNITTYPE_LAND_COMBAT"/>
+
+		<Row UnitType="UNIT_PIRATE" AiType="UNITAI_COMBAT"/>
+		<Row UnitType="UNIT_PIRATE" AiType="UNITTYPE_RANGED"/>
+		<Row UnitType="UNIT_PIRATE" AiType="UNITTYPE_NAVAL"/>
+	</UnitAiInfos>
+
+	<TypeTags>
+		<Row Type="UNIT_SAPPER" Tag="CLASS_SUPPORT"/>
+		<Row Type="UNIT_SAPPER" Tag="CLASS_LAND_UNITS"/>
+		<Row Type="UNIT_SAPPER" Tag="CLASS_MILITARY_ENGINEERING_UNITS"/>
+		<Row Type="UNIT_SAPPER" Tag="CLASS_SAPPER_HD"/>
+		<Row Type="UNIT_ENGINEER_CORP" Tag="CLASS_SUPPORT"/>
+		<Row Type="UNIT_ENGINEER_CORP" Tag="CLASS_LAND_UNITS"/>
+		<Row Type="UNIT_ENGINEER_CORP" Tag="CLASS_MILITARY_ENGINEERING_UNITS"/>
+		<Row Type="UNIT_ENGINEER_CORP" Tag="CLASS_ENGINEER_CORP_HD"/>
+
+		<Row Type="UNIT_HALBERDMAN" Tag="CLASS_ANTI_CAVALRY"/>
+    <Row Type="UNIT_HALBERDMAN" Tag="CLASS_LAND_COMBAT"/>
+    <Row Type="UNIT_HALBERDMAN" Tag="CLASS_LAND_UNITS"/>
+    <Row Type="UNIT_HALBERDMAN" Tag="CLASS_MILITARY"/>
+    <Row Type="UNIT_HALBERDMAN" Tag="CLASS_LAND_MILITARY"/>
+
+    <Row Type="UNIT_COMPOSITE_BOWMAN" Tag="CLASS_RANGED"/>
+    <Row Type="UNIT_COMPOSITE_BOWMAN" Tag="CLASS_LAND_COMBAT"/>
+    <Row Type="UNIT_COMPOSITE_BOWMAN" Tag="CLASS_LAND_UNITS"/>
+    <Row Type="UNIT_COMPOSITE_BOWMAN" Tag="CLASS_MILITARY"/>
+    <Row Type="UNIT_COMPOSITE_BOWMAN" Tag="CLASS_LAND_MILITARY"/>
+
+    <Row Type="UNIT_ARMOR_CAVALRY" Tag="CLASS_HEAVY_CAVALRY"/>
+    <Row Type="UNIT_ARMOR_CAVALRY" Tag="CLASS_DACAOGU"/>
+    <Row Type="UNIT_ARMOR_CAVALRY" Tag="CLASS_LAND_COMBAT"/>
+    <Row Type="UNIT_ARMOR_CAVALRY" Tag="CLASS_LAND_UNITS"/>
+    <Row Type="UNIT_ARMOR_CAVALRY" Tag="CLASS_MILITARY"/>
+    <Row Type="UNIT_ARMOR_CAVALRY" Tag="CLASS_LAND_MILITARY"/>
+
+    <Row Type="UNIT_CANNON" Tag="CLASS_RANGED"/>
+    <Row Type="UNIT_CANNON" Tag="CLASS_LAND_COMBAT"/>
+    <Row Type="UNIT_CANNON" Tag="CLASS_LAND_UNITS"/>
+    <Row Type="UNIT_CANNON" Tag="CLASS_MILITARY"/>
+    <Row Type="UNIT_CANNON" Tag="CLASS_LAND_MILITARY"/>
+
+    <Row Type="UNIT_LANCER" Tag="CLASS_LIGHT_CAVALRY"/>
+    <Row Type="UNIT_LANCER" Tag="CLASS_DACAOGU"/>
+    <Row Type="UNIT_LANCER" Tag="CLASS_LAND_COMBAT"/>
+    <Row Type="UNIT_LANCER" Tag="CLASS_LAND_UNITS"/>
+    <Row Type="UNIT_LANCER" Tag="CLASS_MILITARY"/>
+    <Row Type="UNIT_LANCER" Tag="CLASS_LAND_MILITARY"/>
+
+    <Row Type="UNIT_REITER" Tag="CLASS_HEAVY_CAVALRY"/>
+    <Row Type="UNIT_REITER" Tag="CLASS_LAND_COMBAT"/>
+    <Row Type="UNIT_REITER" Tag="CLASS_LAND_UNITS"/>
+    <Row Type="UNIT_REITER" Tag="CLASS_MILITARY"/>
+    <Row Type="UNIT_REITER" Tag="CLASS_LAND_MILITARY"/>
+
+    <Row Type="UNIT_ARRAY_INFANTRY" Tag="CLASS_ANTI_CAVALRY"/>
+    <Row Type="UNIT_ARRAY_INFANTRY" Tag="CLASS_LAND_COMBAT"/>
+    <Row Type="UNIT_ARRAY_INFANTRY" Tag="CLASS_LAND_UNITS"/>
+    <Row Type="UNIT_ARRAY_INFANTRY" Tag="CLASS_MILITARY"/>
+    <Row Type="UNIT_ARRAY_INFANTRY" Tag="CLASS_LAND_MILITARY"/>
+
+    <Row Type="UNIT_MORTER_NEW" Tag="CLASS_SIEGE"/>
+    <Row Type="UNIT_MORTER_NEW" Tag="CLASS_SIEGE_SETUP"/>
+    <Row Type="UNIT_MORTER_NEW" Tag="CLASS_FORWARD_OBSERVER"/>
+    <Row Type="UNIT_MORTER_NEW" Tag="CLASS_TARGETTING_ASSIST"/>
+    <Row Type="UNIT_MORTER_NEW" Tag="CLASS_CAPOU_EXTRA"/>
+    <Row Type="UNIT_MORTER_NEW" Tag="CLASS_LAND_COMBAT"/>
+    <Row Type="UNIT_MORTER_NEW" Tag="CLASS_LAND_UNITS"/>
+    <Row Type="UNIT_MORTER_NEW" Tag="CLASS_MILITARY"/>
+    <Row Type="UNIT_MORTER_NEW" Tag="CLASS_LAND_MILITARY"/>
+
+		<Row Type="UNIT_VELITE" Tag="CLASS_RECON"/>
+    <Row Type="UNIT_VELITE" Tag="CLASS_LAND_COMBAT"/>
+    <Row Type="UNIT_VELITE" Tag="CLASS_LAND_UNITS"/>
+    <Row Type="UNIT_VELITE" Tag="CLASS_MILITARY"/>
+    <Row Type="UNIT_VELITE" Tag="CLASS_LAND_MILITARY"/>
+
+		<Row Type="UNIT_CHASSEUR" Tag="CLASS_RECON"/>
+    <Row Type="UNIT_CHASSEUR" Tag="CLASS_LAND_COMBAT"/>
+    <Row Type="UNIT_CHASSEUR" Tag="CLASS_LAND_UNITS"/>
+    <Row Type="UNIT_CHASSEUR" Tag="CLASS_MILITARY"/>
+    <Row Type="UNIT_CHASSEUR" Tag="CLASS_LAND_MILITARY"/>
+
+		<Row Type="UNIT_PIRATE" Tag="CLASS_NAVAL_RAIDER"/>
+    <Row Type="UNIT_PIRATE" Tag="CLASS_NAVAL_RANGED"/>
+    <Row Type="UNIT_PIRATE" Tag="CLASS_STEALTH"/>
+    <Row Type="UNIT_PIRATE" Tag="CLASS_NAVAL"/>
+    <Row Type="UNIT_PIRATE" Tag="CLASS_MILITARY"/>
+
+    <Replace Type="UNIT_AMERICAN_ROUGH_RIDER" Tag="CLASS_HEAVY_CAVALRY"/>
+    <Replace Type="UNIT_EGYPTIAN_CHARIOT_ARCHER" Tag="CLASS_HEAVY_CAVALRY"/>
+	</TypeTags>
+
+	<Units>
+		<Row 
+			UnitType="UNIT_SAPPER" 
+			Cost="60" 
+			Maintenance="1" BaseMoves="2" 
+			BaseSightRange="2" 
+			ZoneOfControl="false" 
+			Domain="DOMAIN_LAND" 
+			FormationClass="FORMATION_CLASS_SUPPORT" 
+			PromotionClass="PROMOTION_CLASS_SUPPORT" 
+			AdvisorType="ADVISOR_CONQUEST" 
+			Name="LOC_UNIT_SAPPER_NAME" 
+			Description="LOC_UNIT_SAPPER_DESCRIPTION" 
+			PurchaseYield="YIELD_GOLD" 
+			BuildCharges="3" 
+			PrereqTech="TECH_BRONZE_WORKING"/>
+		<Row 
+			UnitType="UNIT_ENGINEER_CORP" 
+			Cost="220" 
+			Maintenance="3" BaseMoves="4" 
+			BaseSightRange="2" 
+			ZoneOfControl="false" 
+			Domain="DOMAIN_LAND" 
+			FormationClass="FORMATION_CLASS_SUPPORT" 
+			PromotionClass="PROMOTION_CLASS_SUPPORT" 
+			AdvisorType="ADVISOR_CONQUEST" 
+			Name="LOC_UNIT_ENGINEER_CORP_NAME" 
+			Description="LOC_UNIT_ENGINEER_CORP_DESCRIPTION" 
+			PurchaseYield="YIELD_GOLD" 
+			BuildCharges="4" 
+			PrereqTech="TECH_CIVIL_ENGINEERING_HD"/>
+
+		<Row 
+      UnitType="UNIT_HALBERDMAN" 
+      Cost="60" 
+      Maintenance="2" BaseMoves="2" 
+      BaseSightRange="2" 
+      ZoneOfControl="true" 
+      Domain="DOMAIN_LAND" 
+      Combat="32" 
+      FormationClass="FORMATION_CLASS_LAND_COMBAT" 
+      PromotionClass="PROMOTION_CLASS_ANTI_CAVALRY" 
+      AdvisorType="ADVISOR_CONQUEST" 
+      Name="LOC_UNIT_HALBERDMAN_NAME" 
+      Description="LOC_UNIT_HALBERDMAN_DESCRIPTION" 
+      PurchaseYield="YIELD_GOLD" 
+      MandatoryObsoleteTech="TECH_METAL_CASTING" 
+      PrereqTech="TECH_IRON_WORKING"/>
+    
+    <Row 
+      UnitType="UNIT_COMPOSITE_BOWMAN" 
+      Cost="60" 
+      Maintenance="2" BaseMoves="2" 
+      BaseSightRange="2" 
+      ZoneOfControl="false" 
+      Domain="DOMAIN_LAND" 
+      Combat="25" RangedCombat="35" Range="2" 
+      FormationClass="FORMATION_CLASS_LAND_COMBAT" 
+      PromotionClass="PROMOTION_CLASS_RANGED" 
+      AdvisorType="ADVISOR_CONQUEST" 
+      Name="LOC_UNIT_COMPOSITE_BOWMAN_NAME" 
+      Description="LOC_UNIT_COMPOSITE_BOWMAN_DESCRIPTION" 
+      PurchaseYield="YIELD_GOLD" 
+      MandatoryObsoleteTech="TECH_MACHINERY" 
+      PrereqTech="TECH_ENGINEERING"/>
+
+    <Row 
+      UnitType="UNIT_ARMOR_CAVALRY" 
+      Cost="80" 
+      Maintenance="2" BaseMoves="4" 
+      BaseSightRange="2"
+      ZoneOfControl="true" 
+      Domain="DOMAIN_LAND" 
+      Combat="40" 
+      StrategicResource="RESOURCE_HORSES"
+      FormationClass="FORMATION_CLASS_LAND_COMBAT" 
+      PromotionClass="PROMOTION_CLASS_HEAVY_CAVALRY" 
+      AdvisorType="ADVISOR_CONQUEST" 
+      Name="LOC_UNIT_ARMOR_CAVALRY_NAME" 
+      Description="LOC_UNIT_ARMOR_CAVALRY_DESCRIPTION" 
+      PurchaseYield="YIELD_GOLD" 
+      MandatoryObsoleteTech="TECH_STIRRUPS" 
+      PrereqTech="TECH_SADDLE_HD"/>
+
+    <Row 
+      UnitType="UNIT_CANNON" 
+      Cost="140" 
+      Maintenance="4" BaseMoves="2" 
+      BaseSightRange="2" 
+      ZoneOfControl="false" 
+      Domain="DOMAIN_LAND" 
+      Combat="46" RangedCombat="56" Range="2" 
+      FormationClass="FORMATION_CLASS_LAND_COMBAT" 
+      PromotionClass="PROMOTION_CLASS_RANGED" 
+      AdvisorType="ADVISOR_CONQUEST" 
+      Name="LOC_UNIT_CANNON_NAME" 
+      Description="LOC_UNIT_CANNON_DESCRIPTION" 
+      PurchaseYield="YIELD_GOLD" 
+      MandatoryObsoleteTech="TECH_ADVANCED_BALLISTICS" 
+      PrereqTech="TECH_GUNPOWDER"/>
+
+    <Row 
+      UnitType="UNIT_LANCER" 
+      Cost="150" 
+      Maintenance="4" BaseMoves="5" 
+      BaseSightRange="2"
+      ZoneOfControl="true" 
+      Domain="DOMAIN_LAND" 
+      Combat="51" 
+      StrategicResource="RESOURCE_HORSES"
+      FormationClass="FORMATION_CLASS_LAND_COMBAT" 
+      PromotionClass="PROMOTION_CLASS_LIGHT_CAVALRY" 
+      AdvisorType="ADVISOR_CONQUEST" 
+      Name="LOC_UNIT_LANCER_NAME" 
+      Description="LOC_UNIT_LANCER_DESCRIPTION" 
+      PurchaseYield="YIELD_GOLD" 
+      MandatoryObsoleteTech="TECH_MILITARY_SCIENCE" 
+      PrereqTech="TECH_MILITARY_TACTICS"/>
+
+    <Row 
+      UnitType="UNIT_REITER" 
+      Cost="220" 
+      Maintenance="4" BaseMoves="4" 
+      BaseSightRange="2"
+      ZoneOfControl="true" 
+      Domain="DOMAIN_LAND" 
+      Combat="55" 
+      StrategicResource="RESOURCE_IRON"
+      FormationClass="FORMATION_CLASS_LAND_COMBAT" 
+      PromotionClass="PROMOTION_CLASS_HEAVY_CAVALRY" 
+      AdvisorType="ADVISOR_CONQUEST" 
+      Name="LOC_UNIT_REITER_NAME" 
+      Description="LOC_UNIT_REITER_DESCRIPTION" 
+      PurchaseYield="YIELD_GOLD" 
+      MandatoryObsoleteTech="TECH_RIFLING" 
+      PrereqTech="TECH_GUNPOWDER"/>
+
+    <Row 
+      UnitType="UNIT_ARRAY_INFANTRY" 
+      Cost="210" 
+      Maintenance="5" BaseMoves="2" 
+      BaseSightRange="2" 
+      ZoneOfControl="true" 
+      Domain="DOMAIN_LAND" 
+      Combat="62" 
+      FormationClass="FORMATION_CLASS_LAND_COMBAT" 
+      PromotionClass="PROMOTION_CLASS_ANTI_CAVALRY" 
+      AdvisorType="ADVISOR_CONQUEST" 
+      Name="LOC_UNIT_ARRAY_INFANTRY_NAME" 
+      Description="LOC_UNIT_ARRAY_INFANTRY_DESCRIPTION" 
+      PurchaseYield="YIELD_GOLD" 
+      MandatoryObsoleteTech="TECH_CHEMISTRY" 
+      PrereqTech="TECH_BALLISTICS"/>
+
+    <Row 
+      UnitType="UNIT_MORTER_NEW" 
+      Cost="300" 
+      Maintenance="7" BaseMoves="3" 
+      BaseSightRange="2" 
+      ZoneOfControl="false" 
+      Domain="DOMAIN_LAND" 
+      Combat="60" Bombard="70" Range="2" 
+      StrategicResource="RESOURCE_NITER" 
+      FormationClass="FORMATION_CLASS_LAND_COMBAT" 
+      PromotionClass="PROMOTION_CLASS_SIEGE" 
+      AdvisorType="ADVISOR_CONQUEST" 
+      Name="LOC_UNIT_MORTER_NEW_NAME" 
+      Description="LOC_UNIT_MORTER_NEW_DESCRIPTION" 
+      PurchaseYield="YIELD_GOLD" 
+      MandatoryObsoleteTech="TECH_STEEL" 
+      PrereqTech="TECH_RIFLING"/>
+
+    <Row 
+      UnitType="UNIT_VELITE" 
+      Cost="50" 
+      Maintenance="1" BaseMoves="2" 
+      BaseSightRange="2" 
+      ZoneOfControl="false" 
+      Domain="DOMAIN_LAND" 
+      Combat="30" RangedCombat="20" Range="1" 
+      FormationClass="FORMATION_CLASS_LAND_COMBAT" 
+      PromotionClass="PROMOTION_CLASS_RECON" 
+      AdvisorType="ADVISOR_GENERIC" 
+      Name="LOC_UNIT_VELITE_NAME" 
+      Description="LOC_UNIT_VELITE_DESCRIPTION" 
+      PurchaseYield="YIELD_GOLD" 
+      MandatoryObsoleteTech="TECH_MACHINERY" 
+      PrereqCivic="CIVIC_MILITARY_TRAINING"/>
+
+    <Row 
+      UnitType="UNIT_CHASSEUR" 
+      Cost="140" 
+      Maintenance="4" BaseMoves="2" 
+      BaseSightRange="2" 
+      ZoneOfControl="false" 
+      Domain="DOMAIN_LAND" 
+      Combat="50" RangedCombat="40" Range="1" 
+      FormationClass="FORMATION_CLASS_LAND_COMBAT" 
+      PromotionClass="PROMOTION_CLASS_RECON" 
+      AdvisorType="ADVISOR_GENERIC" 
+      Name="LOC_UNIT_CHASSEUR_NAME" 
+      Description="LOC_UNIT_CHASSEUR_DESCRIPTION" 
+      PurchaseYield="YIELD_GOLD" 
+      MandatoryObsoleteTech="TECH_RIFLING" 
+      PrereqTech="TECH_MILITARY_TACTICS"/>
+
+    <Row 
+      UnitType="UNIT_PIRATE" 
+      Cost="50" 
+      Maintenance="2" BaseMoves="3" 
+      BaseSightRange="2" 
+      ZoneOfControl="false" 
+      Domain="DOMAIN_SEA" 
+      Combat="20" RangedCombat="30" Range="1" 
+      FormationClass="FORMATION_CLASS_NAVAL" 
+      PromotionClass="PROMOTION_CLASS_NAVAL_RAIDER" 
+      AdvisorType="ADVISOR_CONQUEST" 
+      Name="LOC_UNIT_PIRATE_NAME" 
+      Description="LOC_UNIT_PIRATE_DESCRIPTION" 
+      PurchaseYield="YIELD_GOLD" 
+      MandatoryObsoleteTech="TECH_COMPASS_HD" 
+      PrereqTech="TECH_CELESTIAL_NAVIGATION"/>
+
+		<Update>
+			<Where UnitType="UNIT_MILITARY_ENGINEER"/>
+			<Set Cost="100" BaseMoves="3"/>
+		</Update>
+	</Units>
+
+	<Unit_BuildingPrereqs>
+		<Row Unit="UNIT_ENGINEER_CORP" PrereqBuilding="BUILDING_MILITARY_ACADEMY"/>
+	</Unit_BuildingPrereqs>
+
+	<Route_ValidBuildUnits>
+		<Row RouteType="ROUTE_RAILROAD" UnitType="UNIT_ENGINEER_CORP"/>
+	</Route_ValidBuildUnits>
+
+	<UnitReplaces>
+    <Replace CivUniqueUnitType="UNIT_AMERICAN_ROUGH_RIDER" ReplacesUnitType="UNIT_CAVALRY"/>
+    <Replace CivUniqueUnitType="UNIT_GREEK_HOPLITE" ReplacesUnitType="UNIT_HALBERDMAN"/>
+    <Replace CivUniqueUnitType="UNIT_SUMERIAN_WAR_CART" ReplacesUnitType="UNIT_HEAVY_CHARIOT"/>
+    <Replace CivUniqueUnitType="UNIT_EGYPTIAN_CHARIOT_ARCHER" ReplacesUnitType="UNIT_HEAVY_CHARIOT"/>
+    <Replace CivUniqueUnitType="UNIT_CHINESE_CROUCHING_TIGER" ReplacesUnitType="UNIT_CANNON"/>
+    <Replace CivUniqueUnitType="UNIT_INDIAN_VARU" ReplacesUnitType="UNIT_ARMOR_CAVALRY"/>
+    <Replace CivUniqueUnitType="UNIT_SCYTHIAN_HORSE_ARCHER" ReplacesUnitType="UNIT_COMPOSITE_BOWMAN"/>
+    <Replace CivUniqueUnitType="UNIT_ZULU_IMPI" ReplacesUnitType="UNIT_HALBERDMAN"/>
+    <Replace CivUniqueUnitType="UNIT_MAPUCHE_MALON_RAIDER" ReplacesUnitType="UNIT_LANCER"/>
+    <Replace CivUniqueUnitType="UNIT_KOREAN_HWACHA" ReplacesUnitType="UNIT_CANNON"/>
+    <Replace CivUniqueUnitType="UNIT_CANADA_MOUNTIE" ReplacesUnitType="UNIT_CAVALRY"/>
+
+    <Update>
+      <Where CivUniqueUnitType="UNIT_POLISH_HUSSAR"/>
+      <Set ReplacesUnitType="UNIT_REITER"/>
+    </Update>
+  </UnitReplaces>
+
+	<Improvement_ValidBuildUnits>
+		<Row ImprovementType="IMPROVEMENT_FORT" UnitType="UNIT_SAPPER"/>
+		<Row ImprovementType="IMPROVEMENT_FORT" UnitType="UNIT_ENGINEER_CORP"/>
+		<Row ImprovementType="IMPROVEMENT_AIRSTRIP" UnitType="UNIT_ENGINEER_CORP"/>
+		<Row ImprovementType="IMPROVEMENT_MISSILE_SILO" UnitType="UNIT_ENGINEER_CORP"/>
+		<Row ImprovementType="IMPROVEMENT_MOUNTAIN_TUNNEL" UnitType="UNIT_ENGINEER_CORP"/>
+		<Delete ImprovementType="IMPROVEMENT_AIRSTRIP" UnitType="UNIT_MILITARY_ENGINEER"/>
+		<Delete ImprovementType="IMPROVEMENT_MISSILE_SILO" UnitType="UNIT_MILITARY_ENGINEER"/>
+	</Improvement_ValidBuildUnits>
+
+	<District_BuildChargeProductions>
+		<Row DistrictType="DISTRICT_CANAL" UnitType="UNIT_SAPPER" PercentProductionPerCharge="20"/>
+		<Row DistrictType="DISTRICT_DAM" UnitType="UNIT_SAPPER" PercentProductionPerCharge="20"/>
+		<Row DistrictType="DISTRICT_AQUEDUCT" UnitType="UNIT_SAPPER" PercentProductionPerCharge="20"/>
+		<Row DistrictType="DISTRICT_BATH" UnitType="UNIT_SAPPER" PercentProductionPerCharge="20"/>
+        
+		<Row DistrictType="DISTRICT_CANAL" UnitType="UNIT_ENGINEER_CORP" PercentProductionPerCharge="40"/>
+		<Row DistrictType="DISTRICT_DAM" UnitType="UNIT_ENGINEER_CORP" PercentProductionPerCharge="40"/>
+		<Row DistrictType="DISTRICT_AQUEDUCT" UnitType="UNIT_ENGINEER_CORP" PercentProductionPerCharge="40"/>
+		<Row DistrictType="DISTRICT_BATH" UnitType="UNIT_ENGINEER_CORP" PercentProductionPerCharge="40"/>
+	</District_BuildChargeProductions>
+
+	<Building_BuildChargeProductions>
+		<Row BuildingType="BUILDING_FLOOD_BARRIER" UnitType="UNIT_ENGINEER_CORP" PercentProductionPerCharge="40"/>
+	</Building_BuildChargeProductions>
+<GameData>

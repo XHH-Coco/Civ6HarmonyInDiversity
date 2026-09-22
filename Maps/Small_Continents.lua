@@ -20,11 +20,10 @@ include "AssignStartingPlots"
 local g_iW, g_iH;
 local g_iFlags = {};
 local g_continentsFrac = nil;
-local featureGen = nil;
+local featuregen = nil;
 local world_age_new = 5;
 local world_age_normal = 3;
 local world_age_old = 2;
-local islands = {};
 
 -------------------------------------------------------------------------------
 function GenerateMap()
@@ -146,12 +145,11 @@ function GeneratePlotTypes(world_age)
 		water_percent = sea_level_high
 		water_percent_modifier = 4;
 	else
-		water_percent = TerrainBuilder.GetRandomNumber(sea_level_high - sea_level_low, "Random Sea Level - Lua") + sea_level_low  + 1;
+		water_percent = TerrainBuilder.GetRandomNumber(sea_level_high - sea_level_low + 1, "Random Sea Level - Lua") + sea_level_low;
 		water_percent_modifier = TerrainBuilder.GetRandomNumber(4, "Random Sea Level - Lua") - 4;
 	end
 
 	-- Set values for hills and mountains according to World Age chosen by user.
-	local adjustment = world_age;
 	if world_age <= world_age_old  then -- 5 Billion Years
 		adjust_plates = adjust_plates * 0.75;
 	elseif world_age >= world_age_new then -- 3 Billion Years
@@ -203,7 +201,7 @@ function GeneratePlotTypes(world_age)
 --------------------------------------------------------------------------------------		
 	
 	-- Generate Medium Islands  小小型大陆/大型半岛，偏竖偏方
-    islands = plotTypes;
+    SetIslandLayer(plotTypes);
     local args = {};    
     args.iWaterPercent = 72 + water_percent_modifier;
     args.iRegionWidth = math.ceil(g_iW);
@@ -216,10 +214,10 @@ function GeneratePlotTypes(world_age)
     args.iRegionFracXExp = 5;
     args.iRegionFracYExp = 5;
     plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
-    islands = plotTypes;
+    SetIslandLayer(plotTypes);
 	
     -- Generate Small Islands   --联结物
-    islands = plotTypes;
+    SetIslandLayer(plotTypes);
     local args = {};    
     args.iWaterPercent = 79 + water_percent_modifier;
     args.iRegionWidth = math.ceil(g_iW);
@@ -232,7 +230,7 @@ function GeneratePlotTypes(world_age)
     args.iRegionFracXExp = 3;
     args.iRegionFracYExp = 5;
     plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
-    islands = plotTypes;
+    SetIslandLayer(plotTypes);
 
 
 
@@ -306,7 +304,7 @@ function GeneratePlotTypes(world_age)
 	args.iRegionFracXExp = 5;
 	args.iRegionFracYExp = 3;
     plotTypes = GenerateFractalLayerWithoutHills(args, plotTypes);
-	islands = plotTypes;
+	SetIslandLayer(plotTypes);
 
 	-- Generate Tiny Lakes
 	local args = {};	
@@ -600,67 +598,6 @@ function GenerateWaterLayer (args, plotTypes)
     -- This region is done.
     return plotTypes;
 end
---------------------------------------------------------------------------------------
--------------------------------------------------------------------------------
---火山土开局生成----------------------------------------------------------------
-function AddVolcanicSoil()
-    local mWidth,mHeight = Map.GetGridSize();
-    for CoordinateX = 0,mWidth,1 do
-        for CoordinateY = 0,mHeight-1,1 do
-            local plots = Map.GetPlot(CoordinateX,CoordinateY);
-            if (plots:GetFeatureType() ~= -1) then
-                if (GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_VOLCANO") then
-                    local tNeighborPlots = Map.GetAdjacentPlots(CoordinateX,CoordinateY);
-                    for _, pNeighborPlot in ipairs(tNeighborPlots) do
-                        if (not pNeighborPlot:IsWater() and not pNeighborPlot:IsMountain()) then
-                            TerrainBuilder.SetFeatureType(pNeighborPlot,35);
-                        end
-                    end
-                end
-                if (GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_EYJAFJALLAJOKULL"
-                or GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_KILIMANJARO"
-                or GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_VESUVIUS"
-                or GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_SUK_FUJI"
-                or GameInfo.Features[plots:GetFeatureType()].FeatureType == "FEATURE_SUK_NGORONGORO_CRATER") then
-                    local tNeighborPlots = Map.GetAdjacentPlots(CoordinateX,CoordinateY);
-                    for _, pNeighborPlot in ipairs(tNeighborPlots) do
-                        if (not pNeighborPlot:IsWater() and not pNeighborPlot:IsMountain()) then
-                            if (pNeighborPlot:GetFeatureType() ~= -1) then
-                                if (GameInfo.Features[pNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_EYJAFJALLAJOKULL"
-                                and GameInfo.Features[pNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_SUK_NGORONGORO_CRATER") then
-                                    TerrainBuilder.SetFeatureType(pNeighborPlot,35);
-                                end
-                            else
-                                TerrainBuilder.SetFeatureType(pNeighborPlot,35);
-                            end
-                        end
-                        --二环随机生成
-                        local sNeighborPlots = Map.GetAdjacentPlots(pNeighborPlot:GetX(), pNeighborPlot:GetY());
-                        for _, rNeighborPlot in ipairs(sNeighborPlots) do
-                            if (not rNeighborPlot:IsWater() and not rNeighborPlot:IsMountain()) then
-                                if (rNeighborPlot:GetFeatureType() ~= -1) then
-                                    if (GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_EYJAFJALLAJOKULL"
-                                    and GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_KILIMANJARO"
-                                    and GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_VESUVIUS"
-                                    and GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_SUK_FUJI"
-                                    and GameInfo.Features[rNeighborPlot:GetFeatureType()].FeatureType ~= "FEATURE_SUK_NGORONGORO_CRATER") then
-                                        if (math.random(3) == 1) then
-                                            TerrainBuilder.SetFeatureType(rNeighborPlot,35);
-                                        end
-                                    end
-                                else
-                                    if (math.random(3) == 1) then
-                                        TerrainBuilder.SetFeatureType(rNeighborPlot,35);
-                                    end
-                                end
-                            end
-                        end
-                    end
-                end
-            end
-        end
-    end
-end
 ----------------------------------------------------------------------------------------------------
 function FeatureGenerator:AddIceToMap()
 	local iTargetIceTiles = (self.iGridH * self.iGridW *  (GlobalParameters.ICE_TILES_PERCENT + self.iIceModifiedPercent)) / 100;
@@ -803,33 +740,4 @@ end
 
 --------------------------------------------------------------------------------------
 
-function Adjacent(index)
-	aIslands = islands;
-	index = index -1;
-
-	if(aIslands == nil) then
-		return false;
-	end
-	
-	if(index < 0) then
-		return false
-	end
-
-	local plot = Map.GetPlotByIndex(index);
-	if(aIslands[index] ~= nil and aIslands[index] == g_PLOT_TYPE_LAND) then
-		return true;
-	end
-
-	for direction = 0, DirectionTypes.NUM_DIRECTION_TYPES - 1, 1 do
-		local adjacentPlot = Map.GetAdjacentPlot(plot:GetX(), plot:GetY(), direction);
-		if(adjacentPlot ~= nil) then
-			local newIndex = adjacentPlot:GetIndex();
-			if(aIslands  ~= nil and aIslands[newIndex] == g_PLOT_TYPE_LAND) then
-				return true;
-			end
-		end
-	end
-
-	return false;
-end
 

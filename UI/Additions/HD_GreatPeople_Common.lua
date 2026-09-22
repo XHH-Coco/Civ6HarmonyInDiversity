@@ -64,8 +64,8 @@ function HDGreatPersonGetActivationPlots(playerID, greatPersonIndividualID)
     end
 
     -- 公司模式大商开公司, by xiaoxiao
-    if GameInfo.XXCAT_GreatPersonUniqueResources ~= nil then
-        for row in GameInfo.XXCAT_GreatPersonUniqueResources() do
+    if GameInfo.HD_GreatPerson_CreateResources ~= nil then
+        for row in GameInfo.HD_GreatPerson_CreateResources() do
             local greatPersonIndex = GameInfo.GreatPersonIndividuals[row.GreatPersonIndividualType].Index;
             if greatPersonIndividualID == greatPersonIndex then
                 activationPlots = {};
@@ -78,6 +78,7 @@ function HDGreatPersonGetActivationPlots(playerID, greatPersonIndividualID)
                         and plot:GetResourceType() == -1 --没有资源
                         and not plot:IsNaturalWonder() -- 没有自然奇观
                         and not plot:IsWater() -- 是陆地单元格
+                        and not plot:IsNationalPark() -- 不是国家公园
                         and plot:GetFeatureType() ~= FEATURE_BURNING_FOREST_INDEX -- 没有燃烧的树林
                         and plot:GetFeatureType() ~= FEATURE_BURNT_FOREST_INDEX -- 没有烧毁的的树林
                         and plot:GetFeatureType() ~= FEATURE_BURNING_JUNGLE_INDEX -- 没有燃烧的雨林

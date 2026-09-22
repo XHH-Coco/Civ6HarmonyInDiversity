@@ -40,7 +40,7 @@ insert or replace into Tags
 values
 	('CLASS_HD_GAIN_SCIENCE_WHEN_KILLS',	'ABILITY_CLASS'),
 	('CLASS_HD_CAN_MOVE_AFTER_ATTACK',		'ABILITY_CLASS'),
-	('CLASS_MILITARY_ENGINEER',				'ABILITY_CLASS'),
+	('CLASS_MILITARY_ENGINEERING_UNITS',				'ABILITY_CLASS'),
 	('CLASS_MILITARY',						'ABILITY_CLASS'),
 	('CLASS_LAND_UNITS',					'ABILITY_CLASS'),
 	('CLASS_AIR',							'ABILITY_CLASS'),
@@ -53,7 +53,7 @@ values
 insert or replace into TypeTags
 	(Type,									Tag)
 values
-	('UNIT_MILITARY_ENGINEER', 'CLASS_MILITARY_ENGINEER');
+	('UNIT_MILITARY_ENGINEER', 'CLASS_MILITARY_ENGINEERING_UNITS');
 ------------------------------------------------------------------------
 --typetags warrior monks------
 insert or replace into TypeTags

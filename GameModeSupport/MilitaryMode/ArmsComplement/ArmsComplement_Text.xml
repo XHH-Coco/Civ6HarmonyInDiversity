@@ -86,44 +86,88 @@
       <Text>拥有2名复合弓手</Text>
     </Replace>
 
+    <Row Tag="LOC_UNIT_HALBERDMAN_DESCRIPTION" Language="en_US">
+		  <Text>A Classical era anti-cavalry unit.</Text>
+	  </Row>
+
     <Row Tag="LOC_UNIT_HALBERDMAN_DESCRIPTION" Language="zh_Hans_CN">
 		  <Text>古典时期抗骑兵单位</Text>
+	  </Row>
+
+	  <Row Tag="LOC_UNIT_COMPOSITE_BOWMAN_DESCRIPTION" Language="en_US">
+		  <Text>A Classical era ranged unit.</Text>
 	  </Row>
 
 	  <Row Tag="LOC_UNIT_COMPOSITE_BOWMAN_DESCRIPTION" Language="zh_Hans_CN">
 		  <Text>古典时期远程单位</Text>
 	  </Row>
 
+	  <Row Tag="LOC_UNIT_ARMOR_CAVALRY_DESCRIPTION" Language="en_US">
+		  <Text>A Classical era heavy cavalry unit.</Text>
+	  </Row>
+
 	  <Row Tag="LOC_UNIT_ARMOR_CAVALRY_DESCRIPTION" Language="zh_Hans_CN">
 		  <Text>古典时代重骑兵单位</Text>
+	  </Row>
+
+	  <Row Tag="LOC_UNIT_CANNON_DESCRIPTION" Language="en_US">
+		  <Text>A Renaissance era ranged unit.</Text>
 	  </Row>
 
 	  <Row Tag="LOC_UNIT_CANNON_DESCRIPTION" Language="zh_Hans_CN">
 		  <Text>文艺复兴时期远程单位</Text>
 	  </Row>
 
+	  <Row Tag="LOC_UNIT_LANCER_DESCRIPTION" Language="en_US">
+		  <Text>A Renaissance era light cavalry unit.</Text>
+	  </Row>
+
 	  <Row Tag="LOC_UNIT_LANCER_DESCRIPTION" Language="zh_Hans_CN">
 		  <Text>文艺复兴时期轻骑兵单位</Text>
+	  </Row>
+
+	  <Row Tag="LOC_UNIT_REITER_DESCRIPTION" Language="en_US">
+		  <Text>A Renaissance era heavy cavalry unit.</Text>
 	  </Row>
 
 	  <Row Tag="LOC_UNIT_REITER_DESCRIPTION" Language="zh_Hans_CN">
 		  <Text>文艺复兴时期重骑兵单位</Text>
 	  </Row>
 
+	  <Row Tag="LOC_UNIT_ARRAY_INFANTRY_DESCRIPTION" Language="en_US">
+		  <Text>An Industrial era anti-cavalry unit.</Text>
+	  </Row>
+
 	  <Row Tag="LOC_UNIT_ARRAY_INFANTRY_DESCRIPTION" Language="zh_Hans_CN">
 		  <Text>工业时代抗骑兵单位</Text>
+	  </Row>
+
+	  <Row Tag="LOC_UNIT_MORTER_NEW_DESCRIPTION" Language="en_US">
+		  <Text>An Industrial era siege unit, well suited to attacking cities. Gains +1 [ICON_MOVEMENT] Movement if it begins a turn adjacent to a light cavalry unit. Cannot move and attack in the same turn (unless the player has the Military Training civic).</Text>
 	  </Row>
 
 	  <Row Tag="LOC_UNIT_MORTER_NEW_DESCRIPTION" Language="zh_Hans_CN">
 		  <Text>工业时代攻城单位，适合对城市发起攻击。如果相邻轻骑兵单位开始一个回合，会获得1 [ICON_MOVEMENT] 移动力加成。无法在一回合内移动并攻击（除非玩家已拥有军事训练市政）。</Text>
 	  </Row>
 
+    <Row Tag="LOC_ABILITY_CHINESE_CROUCHING_TIGER_HD_DESCRIPTION" Language="en_US">
+		  <Text>An additional +5 [ICON_STRENGTH] Combat Strength when attacking damaged units</Text>
+	  </Row>
+
     <Row Tag="LOC_ABILITY_CHINESE_CROUCHING_TIGER_HD_DESCRIPTION" Language="zh_Hans_CN">
 		  <Text>攻击受伤单位时额外+5 [ICON_STRENGTH] 战斗力</Text>
 	  </Row>
 
+	  <Row Tag="LOC_ABILITY_ENGLISH_LONGBOWMAN_HD_DESCRIPTION" Language="en_US">
+		  <Text>+10 [ICON_STRENGTH] Combat Strength when attacking once the Machinery technology is unlocked</Text>
+	  </Row>
+
 	  <Row Tag="LOC_ABILITY_ENGLISH_LONGBOWMAN_HD_DESCRIPTION" Language="zh_Hans_CN">
 		  <Text>解锁机械科技后进攻时+10 [ICON_STRENGTH] 战斗力</Text>
+	  </Row>
+
+	  <Row Tag="LOC_ABILITY_PERC_50_POST_COMBAT_CULTURAL_HD_DESCRIPTION" Language="en_US">
+		  <Text>Gain [ICON_GOLD] Gold equal to 50% of an enemy unit's [ICON_STRENGTH] Combat Strength when you defeat it.</Text>
 	  </Row>
 
 	  <Row Tag="LOC_ABILITY_PERC_50_POST_COMBAT_CULTURAL_HD_DESCRIPTION" Language="zh_Hans_CN">
@@ -138,6 +182,10 @@
       <Text>斥候</Text>
     </Replace>
 
+    <Replace Tag="LOC_UNIT_VELITE_DESCRIPTION" Language="en_US">
+      <Text>A fast-moving Classical era reconnaissance unit.</Text>
+    </Replace>
+
     <Replace Tag="LOC_UNIT_VELITE_DESCRIPTION" Language="zh_Hans_CN">
       <Text>能够快速移动的古典时代侦察单位。</Text>
     </Replace>
@@ -150,6 +198,10 @@
       <Text>猎兵</Text>
     </Replace>
 
+    <Replace Tag="LOC_UNIT_CHASSEUR_DESCRIPTION" Language="en_US">
+      <Text>A fast-moving Renaissance era reconnaissance unit.</Text>
+    </Replace>
+
     <Replace Tag="LOC_UNIT_CHASSEUR_DESCRIPTION" Language="zh_Hans_CN">
       <Text>能够快速移动的文艺复兴时期侦察单位。</Text>
     </Replace>
@@ -160,6 +212,10 @@
 
     <Replace Tag="LOC_UNIT_PIRATE_NAME" Language="zh_Hans_CN">
       <Text>艨艟</Text>
+    </Replace>
+
+    <Replace Tag="LOC_UNIT_PIRATE_DESCRIPTION" Language="en_US">
+      <Text>A Classical era naval raider.</Text>
     </Replace>
 
     <Replace Tag="LOC_UNIT_PIRATE_DESCRIPTION" Language="zh_Hans_CN">

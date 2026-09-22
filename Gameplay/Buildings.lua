@@ -98,19 +98,19 @@ function SukienniceAdjacencyChange(playerId)
 				if SUKIENNICE_TRADE_ROUTE_NUM > 0 then
 					local amount = math.floor(adjacency/SUKIENNICE_TRADE_ROUTE_NUM);
 					print("纺织会馆 商队容量", amount)
-					Utils.BinaryCompress(amount, plot, 1);
+					Utils.BinaryCompress(amount, plot, 'HD_PLOT_BINARY_COMPRESS_SUKIENNICE_1');
 				end
 				-- 内商产出
 				if SUKIENNICE_DOMESTIC_TRADE_PRODUCTION_PERCENTAGE > 0 then
 					local amount = math.floor(adjacency*SUKIENNICE_DOMESTIC_TRADE_PRODUCTION_PERCENTAGE/100)
 					print("纺织会馆 内商产出", amount)
-					Utils.BinaryCompress(amount, plot, 2);
+					Utils.BinaryCompress(amount, plot, 'HD_PLOT_BINARY_COMPRESS_SUKIENNICE_2');
 				end
 				-- 外商产出
 				if SUKIENNICE_INTERNATIONAL_TRADE_GOLD_PERCENTAGE > 0 then
 					local amount = math.floor(adjacency*SUKIENNICE_INTERNATIONAL_TRADE_GOLD_PERCENTAGE/100)
 					print("纺织会馆 外商产出", amount)
-					Utils.BinaryCompress(amount, plot, 3);
+					Utils.BinaryCompress(amount, plot, 'HD_PLOT_BINARY_COMPRESS_SUKIENNICE_3');
 				end
 			end
 		end
@@ -252,7 +252,7 @@ function MadrasaCityReligionFollowersChanged(cityOwnerId, cityId, eVisibility)
 			local plot = Map.GetPlot(x, y);
 			local amount = math.floor(cityAmount*MADRASA_CAMPUS_ADJACENCY_NUM);
 			print("伊斯兰学校 学院相邻", amount)
-			Utils.BinaryCompress(amount, plot, 1);
+			Utils.BinaryCompress(amount, plot, 'HD_PLOT_BINARY_COMPRESS_MADRASA_1');
 
 			plot:SetProperty('HD_MADRASA_FAITH_PURCHASE_CAMPUS', cityAmount);
 		end
@@ -280,9 +280,129 @@ function MadrasaGovernmentPolicyChanged(playerId, policyId)
 		local plot = Map.GetPlot(x, y);
 		local amount = math.floor(culturePolicySlotNum*MADRASA_THEATER_ADJACENCY_NUM);
 		print("伊斯兰学校 剧院相邻", amount)
-		Utils.BinaryCompress(amount, plot, 2);
+		Utils.BinaryCompress(amount, plot, 'HD_PLOT_BINARY_COMPRESS_MADRASA_2');
 
 		plot:SetProperty('HD_MADRASA_FAITH_PURCHASE_THEATER', culturePolicySlotNum);
 	end
 end
 Events.GovernmentPolicyChanged.Add(MadrasaGovernmentPolicyChanged);
+
+-- =====================================================================================================================================
+-- 自然环境保护部
+-- =====================================================================================================================================
+local BUILDING_SANCTUARY = GameInfo.Buildings['BUILDING_SANCTUARY'];
+
+function SanctuaryConstructed(playerId, cityId, buildingId, plotId, bOriginalConstruction)
+	if BUILDING_SANCTUARY and buildingId == BUILDING_SANCTUARY.Index then
+		local validResourceList = {};
+		local cityPlots = Utils.GetCityPlots(playerId, cityId);
+		for _, plotId in pairs(cityPlots) do
+			local plot = Map.GetPlotByIndex(plotId);
+			if plot then
+				local resourceId = plot:GetResourceType();
+				-- 判断是否为生物类资源
+				if resourceId ~= nil and resourceId ~= -1 and Utils.IsResourceVisible(playerId, resourceId)
+				and Utils.IsResourceHasClassification(resourceId, 'RESOURCE_CLASSIFICATION_BIOLOGICAL') == true then
+					print("保护部 本城生物资源" .. Locale.Lookup(GameInfo.Resources[resourceId].Name))
+					-- 判断一环内是否有合法单元格
+					local vaildPlots = {};
+
+					for direction = 0, 5 do
+						local adjacentPlot = Map.GetAdjacentPlot(plot:GetX(), plot:GetY(), direction);
+						if adjacentPlot then
+							local districtId = adjacentPlot:GetDistrictType();
+							local improvementId = adjacentPlot:GetImprovementType();
+
+							if (districtId == nil or districtId == -1)
+							and (improvementId == nil or improvementId == -1)
+							and ResourceBuilder.CanHaveResource(adjacentPlot, resourceId) then
+								table.insert(vaildPlots, adjacentPlot);
+							end
+						end
+					end
+
+					print("一环内有" .. #vaildPlots .. "个可用单元格")
+					if #vaildPlots > 0 then
+						table.insert(validResourceList, {
+							resourceId = resourceId,
+							vaildPlots = vaildPlots
+						})
+					end
+					
+				end
+			end
+		end
+
+		if #validResourceList > 0 then
+			local randomResourceIndex = Game.GetRandNum(#validResourceList, "Sanctuary Get Random Resource For Player " .. playerId) + 1
+			local resourceId = validResourceList[randomResourceIndex].resourceId;
+			local vaildPlots = validResourceList[randomResourceIndex].vaildPlots;
+			local randomPlotIndex = Game.GetRandNum(#vaildPlots, "Sanctuary Get Random Plot For Player " .. playerId) + 1
+			local targetPlot = vaildPlots[randomPlotIndex];
+			
+			local resourceInfo = GameInfo.Resources[resourceId];
+			if resourceInfo then
+				Utils.GenerateResource(targetPlot, resourceId);
+				local msg = '[ICON_' .. resourceInfo.ResourceType .. '] ' .. Locale.Lookup(resourceInfo.Name);
+				Game.AddWorldViewText(playerId, Locale.Lookup('LOC_BUILDING_SANCTUARY_TEXT', msg), targetPlot:GetX(), targetPlot:GetY());
+			end
+		end
+
+	end
+end
+GameEvents.BuildingConstructed.Add(SanctuaryConstructed)
+
+-- =====================================================================================================================================
+-- 中心医院
+-- =====================================================================================================================================
+local PLAYER_HAS_JNR_HOSPITAL_TAG = 'HD_PLAYER_HAS_JNR_HOSPITAL';
+local JNR_HOSPITAL_PREVENT_POP_LOST_TAG = 'HD_JNR_HOSPITAL_PREVENT_POP_LOST';
+local JNR_HOSPITAL_EXTRA_POP_BOOST_TAG = 'HD_JNR_HOSPITAL_EXTRA_POP_BOOST';
+local NOTIFICATION_JNR_HOSPITAL_PREVENT_POP_LOST_HASH = GameInfo.Types['NOTIFICATION_JNR_HOSPITAL_PREVENT_POP_LOST'].Hash;
+local NOTIFICATION_JNR_HOSPITAL_EXTRA_POP_BOOST_HASH = GameInfo.Types['NOTIFICATION_JNR_HOSPITAL_EXTRA_POP_BOOST'].Hash;
+local JNR_HOSPITAL_PREVENT_POP_LOST_CHANCE = GlobalParameters.HD_JNR_HOSPITAL_PREVENT_POP_LOST_CHANCE or 0;
+local JNR_HOSPITAL_EXTRA_POP_BOOST_CHANCE = GlobalParameters.HD_JNR_HOSPITAL_EXTRA_POP_BOOST_CHANCE or 0;
+
+function HospitalCityPopulationChanged(playerId, cityId, changeAmount)
+  local player = Players[playerId]
+	if not player then return; end
+	local hasHospital = player:GetProperty(PLAYER_HAS_JNR_HOSPITAL_TAG) or 0;
+
+	local city = CityManager.GetCity(playerId, cityId);
+	if not city then return; end
+
+	if hasHospital > 0 then
+		print(Locale.Lookup(city:GetName()) .. " 人口变化 " .. changeAmount);
+
+		if changeAmount < 0 and JNR_HOSPITAL_PREVENT_POP_LOST_CHANCE > 0 then
+			-- 防止人口损失
+			local randomIndex = Game.GetRandNum(100, "Hospital Prevent Population Lost for Player " .. playerId) + 1;
+			print("中心医院 " .. Locale.Lookup(city:GetName()) .. " 防止人口损失 随机数 " .. randomIndex);
+			if randomIndex / 100 <= JNR_HOSPITAL_PREVENT_POP_LOST_CHANCE then
+				print("中心医院 " .. Locale.Lookup(city:GetName()) .. " 城市损失" .. (-changeAmount) .. "人口")
+				city:SetProperty(JNR_HOSPITAL_PREVENT_POP_LOST_TAG, 1)
+				city:ChangePopulation(-changeAmount)
+				Utils.SendMergableNotification(playerId, NOTIFICATION_JNR_HOSPITAL_PREVENT_POP_LOST_HASH, Locale.Lookup('LOC_BUILDING_JNR_HOSPITAL_PREVENT_POP_LOST_VIEWTEXT'), Locale.Lookup(city:GetName()), ', ')
+			end
+		elseif changeAmount > 0 and JNR_HOSPITAL_EXTRA_POP_BOOST_CHANCE > 0 then
+			if city:GetProperty(JNR_HOSPITAL_PREVENT_POP_LOST_TAG) == 1 then
+				city:SetProperty(JNR_HOSPITAL_PREVENT_POP_LOST_TAG, 0);
+				print("中心医院 " .. Locale.Lookup(city:GetName()) .. " 城市补偿" .. changeAmount .. "人口")
+			elseif city:GetProperty(JNR_HOSPITAL_EXTRA_POP_BOOST_TAG) == 1 then
+				city:SetProperty(JNR_HOSPITAL_EXTRA_POP_BOOST_TAG, 0);
+				print("中心医院 " .. Locale.Lookup(city:GetName()) .. " 已额外增长人口")
+			else
+				-- 增长人口有概率额外增长一个
+				local randomIndex = Game.GetRandNum(100, "Hospital Extra Population Boost for Player " .. playerId) + 1;
+				print("中心医院 " .. Locale.Lookup(city:GetName()) .. " 额外人口增长 随机数 " .. randomIndex);
+				if randomIndex / 100 <= JNR_HOSPITAL_EXTRA_POP_BOOST_CHANCE then
+					city:SetProperty(JNR_HOSPITAL_EXTRA_POP_BOOST_TAG, 1)
+					city:ChangePopulation(1);
+					print("中心医院 " .. Locale.Lookup(city:GetName()) .. " 城市额外增长1人口")
+					Utils.SendMergableNotification(playerId, NOTIFICATION_JNR_HOSPITAL_EXTRA_POP_BOOST_HASH, Locale.Lookup('LOC_BUILDING_JNR_HOSPITAL_EXTRA_POP_BOOST_VIEWTEXT'), Locale.Lookup(city:GetName()), ', ')
+				end
+			end
+		end
+	end
+end
+GameEvents.OnCityPopulationChanged.Add(HospitalCityPopulationChanged)

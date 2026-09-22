@@ -25,14 +25,33 @@
     <Row Name="ATLAS_CITADEL_OF_GOD" IconSize="50" Filename="CITADEL_OF_GOD_50.dds"/>
     <Row Name="ATLAS_CITADEL_OF_GOD" IconSize="80" Filename="CITADEL_OF_GOD_80.dds"/>
     <Row Name="ATLAS_CITADEL_OF_GOD" IconSize="256" Filename="CITADEL_OF_GOD_256.dds"/>
-    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="22" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_UNITS_22.dds"/>
-    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="32" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_UNITS_32.dds"/>
-    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="38" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_UNITS_38.dds"/>
-    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="50" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_UNITS_50.dds"/>
-    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="80" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_UNITS_80.dds"/>
-    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="256" IconsPerRow="3" IconsPerColumn="3" Filename="HD_NEW_UNITS_256.dds"/>
+    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="22" IconsPerRow="4" IconsPerColumn="4" Filename="HD_NEW_UNITS_22.dds"/>
+    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="32" IconsPerRow="4" IconsPerColumn="4" Filename="HD_NEW_UNITS_32.dds"/>
+    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="38" IconsPerRow="4" IconsPerColumn="4" Filename="HD_NEW_UNITS_38.dds"/>
+    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="50" IconsPerRow="4" IconsPerColumn="4" Filename="HD_NEW_UNITS_50.dds"/>
+    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="80" IconsPerRow="4" IconsPerColumn="4" Filename="HD_NEW_UNITS_80.dds"/>
+    <Row Name="ATLAS_HD_NEW_UNITS" IconSize="256" IconsPerRow="4" IconsPerColumn="4" Filename="HD_NEW_UNITS_256.dds"/>
+    <Row Name="ICON_ATLAS_UNIT_HD_MEDIEVAL_PIRATE_PORTRAITS" IconSize="38" IconsPerRow="1" IconsPerColumn="1"  Filename="MedivalPirate_38.dds"/>
+    <Row Name="ICON_ATLAS_UNIT_HD_MEDIEVAL_PIRATE_PORTRAITS" IconSize="50" IconsPerRow="1" IconsPerColumn="1"  Filename="MedivalPirate_50.dds"/>
+    <Row Name="ICON_ATLAS_UNIT_HD_MEDIEVAL_PIRATE_PORTRAITS" IconSize="70" IconsPerRow="1" IconsPerColumn="1"  Filename="MedivalPirate_70.dds"/>
+    <Row Name="ICON_ATLAS_UNIT_HD_MEDIEVAL_PIRATE_PORTRAITS" IconSize="95" IconsPerRow="1" IconsPerColumn="1"  Filename="MedivalPirate_95.dds"/>
+    <Row Name="ICON_ATLAS_UNIT_HD_MEDIEVAL_PIRATE_PORTRAITS" IconSize="200" IconsPerRow="1" IconsPerColumn="1" Filename="MedivalPirate_200.dds"/>
+    <Row Name="ICON_ATLAS_UNIT_HD_MEDIEVAL_PIRATE_PORTRAITS" IconSize="256" IconsPerRow="1" IconsPerColumn="1" Filename="MedivalPirate_256.dds"/>
+    <Row Name="ICON_ATLAS_UNIT_HD_MEDIEVAL_PIRATE_UNITS" IconSize="22" IconsPerRow="1" IconsPerColumn="1"  Filename="DL_Pirates_22.dds"/>
+    <Row Name="ICON_ATLAS_UNIT_HD_MEDIEVAL_PIRATE_UNITS" IconSize="32" IconsPerRow="1" IconsPerColumn="1"  Filename="DL_Pirates_32.dds"/>
+    <Row Name="ICON_ATLAS_UNIT_HD_MEDIEVAL_PIRATE_UNITS" IconSize="38" IconsPerRow="1" IconsPerColumn="1"  Filename="DL_Pirates_38.dds"/>
+    <Row Name="ICON_ATLAS_UNIT_HD_MEDIEVAL_PIRATE_UNITS" IconSize="50" IconsPerRow="1" IconsPerColumn="1"  Filename="DL_Pirates_50.dds"/>
+    <Row Name="ICON_ATLAS_UNIT_HD_MEDIEVAL_PIRATE_UNITS" IconSize="80" IconsPerRow="1" IconsPerColumn="1"  Filename="DL_Pirates_80.dds"/>
+    <Row Name="ICON_ATLAS_UNIT_HD_MEDIEVAL_PIRATE_UNITS" IconSize="256" IconsPerRow="1" IconsPerColumn="1" Filename="DL_Pirates_256.dds"/>
   </IconTextureAtlases>
   <IconDefinitions>
+    <Row Name="ICON_UNIT_HD_MEDIEVAL_PIRATE" Atlas="ICON_ATLAS_UNIT_HD_MEDIEVAL_PIRATE_UNITS" Index="0"/>
+    <Row Name="ICON_UNIT_HD_MEDIEVAL_PIRATE_PORTRAIT" Atlas="ICON_ATLAS_UNIT_HD_MEDIEVAL_PIRATE_PORTRAITS" Index="0"/>
+    <Row Name="ICON_ETHNICITY_ASIAN_UNIT_HD_MEDIEVAL_PIRATE_PORTRAIT" Atlas="ICON_ATLAS_UNIT_HD_MEDIEVAL_PIRATE_PORTRAITS" Index="0"/>
+    <Row Name="ICON_ETHNICITY_MEDIT_UNIT_HD_MEDIEVAL_PIRATE_PORTRAIT" Atlas="ICON_ATLAS_UNIT_HD_MEDIEVAL_PIRATE_PORTRAITS" Index="0"/>
+    <Row Name="ICON_ETHNICITY_SOUTHAM_UNIT_HD_MEDIEVAL_PIRATE_PORTRAIT" Atlas="ICON_ATLAS_UNIT_HD_MEDIEVAL_PIRATE_PORTRAITS" Index="0"/>
+    <Row Name="ICON_ETHNICITY_AFRICAN_UNIT_HD_MEDIEVAL_PIRATE_PORTRAIT" Atlas="ICON_ATLAS_UNIT_HD_MEDIEVAL_PIRATE_PORTRAITS" Index="0"/>
+    
     <!-- <Row Name="ICON_UNIT_BARBARIAN_RAIDER_WHITE" Index="26" Atlas="ICON_ATLAS_UNIT_FLAG_SYMBOLS_WHITE"/>
     <Row Name="ICON_UNIT_BARBARIAN_RAIDER_BLACK" Index="26" Atlas="ICON_ATLAS_UNIT_FLAG_SYMBOLS_BLACK"/>
 
@@ -81,6 +100,8 @@
     
     <Row Name="ICON_UNIT_ANCIENT_SEADOG"         Atlas="ATLAS_HD_NEW_UNITS" Index="1"/>
     <Row Name="ICON_UNIT_ANCIENT_SEADOG_FOW"         Atlas="ATLAS_HD_NEW_UNITS" Index="1"/> 
+    <Row Name="ICON_UNIT_HD_CANOE"         Atlas="ATLAS_HD_NEW_UNITS" Index="3"/>
+    <Row Name="ICON_UNIT_HD_CANOE_FOW"         Atlas="ATLAS_HD_NEW_UNITS" Index="3"/> 
     <!-- create ancient_siege unit. -->
     <Row Name="ICON_UNIT_ANCIENT_SIEGE"                 Atlas="ICON_ATLAS_UNITS" Index="39"/>
     <Row Name="ICON_UNIT_ANCIENT_SIEGE_FOW"             Atlas="ICON_ATLAS_UNITS_FOW" Index="39"/>
@@ -96,19 +117,21 @@
     <Row Name="ICON_UNIT_HD_CODIFIER_FOW"                 Atlas="ATLAS_HD_NEW_UNITS" Index="0"/>
     <Row Name="ICON_BUILDING_SEOWON" Atlas="ATLAS_HD_NEW_UNITS" Index="0"/>
 		<Row Name="ICON_BUILDING_SEOWON_FOW" Atlas="ATLAS_HD_NEW_UNITS" Index="0"/>
-    <Row Name="ICON_BUILDING_SEOWON_INTERNAL_ONLY" Atlas="ATLAS_HD_NEW_UNITS" Index="0"/>
-		<Row Name="ICON_BUILDING_SEOWON_INTERNAL_ONLY_FOW" Atlas="ATLAS_HD_NEW_UNITS" Index="0"/>
-		<Row Name="ICON_UNIT_ENKIDU_HD"                 Atlas="ATLAS_HD_NEW_UNITS" Index="5"/>
-    <Row Name="ICON_UNIT_ENKIDU_HD_FOW"                 Atlas="ATLAS_HD_NEW_UNITS" Index="5"/>
-		<Row Name="ICON_UNIT_QIN_ELITE_SOLDIER_HD"                 Atlas="ATLAS_HD_NEW_UNITS" Index="6"/>
-    <Row Name="ICON_UNIT_QIN_ELITE_SOLDIER_HD_FOW"                 Atlas="ATLAS_HD_NEW_UNITS" Index="6"/>
-    <Row Name="ICON_UNIT_KEQING"                    Atlas="ATLAS_HD_NEW_UNITS" Index="7"/>
-		<Row Name="ICON_UNIT_KEQING_FOW"                Atlas="ATLAS_HD_NEW_UNITS"   Index="7"/>
-    <Row Name="ICON_UNIT_PLUM_INTERNAL_SECURITY_HD"                    Atlas="ATLAS_HD_NEW_UNITS" Index="8"/>
-		<Row Name="ICON_UNIT_PLUM_INTERNAL_SECURITY_HD_FOW"                Atlas="ATLAS_HD_NEW_UNITS"   Index="8"/>
+		<Row Name="ICON_UNIT_ENKIDU_HD"                 Atlas="ATLAS_HD_NEW_UNITS" Index="6"/>
+    <Row Name="ICON_UNIT_ENKIDU_HD_FOW"                 Atlas="ATLAS_HD_NEW_UNITS" Index="6"/>
+    <Row Name="ICON_UNIT_PLUM_INTERNAL_SECURITY_HD"                    Atlas="ATLAS_HD_NEW_UNITS" Index="7"/>
+		<Row Name="ICON_UNIT_PLUM_INTERNAL_SECURITY_HD_FOW"                Atlas="ATLAS_HD_NEW_UNITS"   Index="7"/>
+		<Row Name="ICON_UNIT_QIN_ELITE_SOLDIER_HD"                 Atlas="ATLAS_HD_NEW_UNITS" Index="8"/>
+    <Row Name="ICON_UNIT_QIN_ELITE_SOLDIER_HD_FOW"                 Atlas="ATLAS_HD_NEW_UNITS" Index="8"/>
+    <Row Name="ICON_UNIT_KEQING"                    Atlas="ATLAS_HD_NEW_UNITS" Index="9"/>
+		<Row Name="ICON_UNIT_KEQING_FOW"                Atlas="ATLAS_HD_NEW_UNITS"   Index="9"/>
+    <Row Name="ICON_UNIT_HD_BANDEIRANTES"                    Atlas="ATLAS_HD_NEW_UNITS" Index="10"/>
+		<Row Name="ICON_UNIT_HD_BANDEIRANTES_FOW"                Atlas="ATLAS_HD_NEW_UNITS" Index="10"/>
   </IconDefinitions>
 
   <IconAliases>
+    <Row Name="ICON_UNIT_HD_CANOE_PORTRAIT" OtherName="ICON_UNIT_GALLEY_PORTRAIT"/>
+    
     <Row Name="ICON_UNIT_ORAL_SCHOLAR_PORTRAIT" OtherName="ICON_UNIT_GREAT_WRITER_PORTRAIT"/>
     <Row Name="ICON_UNIT_TRAVEL_THEATRE_PORTRAIT" OtherName="ICON_UNIT_GREAT_WRITER_PORTRAIT"/>
     <Row Name="ICON_UNIT_MALI_GRIOTS_PORTRAIT" OtherName="ICON_UNIT_GREAT_WRITER_PORTRAIT"/>
@@ -119,6 +142,7 @@
     
 		<Row Name="ICON_UNIT_HD_CODIFIER_PORTRAIT"       OtherName="ICON_UNIT_GREAT_WRITER_PORTRAIT"/>
 		<Row Name="ICON_UNIT_ENKIDU_HD_PORTRAIT"         OtherName="ICON_UNIT_WARRIOR_PORTRAIT"/>
+    <Row Name="ICON_UNIT_HD_BANDEIRANTES_PORTRAIT"   OtherName="ICON_UNIT_RANGER_PORTRAIT"/>
 
 		<Row Name="ICON_UNIT_HD_YUAN_WAN_QING"           OtherName="ICON_UNIT_GREAT_MUSICIAN"/>
 		<Row Name="ICON_UNIT_HD_YUAN_WAN_QING_FOW"       OtherName="ICON_UNIT_GREAT_MUSICIAN_FOW"/>

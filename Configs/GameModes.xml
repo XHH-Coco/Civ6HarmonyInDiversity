@@ -85,7 +85,7 @@
 		<Row QueryId="DevTestModePlayerItemOverrides" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_DEVTEST" Operator="Equals" ConfigurationValue="1"/>
 	</QueryCriteria> -->
 	<!-- MultiPlayer test -->
-	<Parameters>
+	<!-- <Parameters>
 		<Row Key1="Ruleset" Key2="RULESET_EXPANSION_2" ParameterId="GameMode_MPtest" Name="LOC_GAMEMODE_MPTEST_NAME" Description="LOC_GAMEMODE_MPTEST_DESCRIPTION" Domain="bool" DefaultValue="0" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_MPTEST" NameArrayConfigurationId="GAMEMODES_ENABLED_NAMES" GroupId="GameModes" SortIndex="100"/>
 	</Parameters>
 	<ParameterCriteria>
@@ -96,9 +96,9 @@
 	</ParameterDependencies>
 	<GameModeItems>
 		<Row GameModeType="GAMEMODE_MPTEST" Name="LOC_GAMEMODE_MPTEST_NAME" Description="LOC_GAMEMODE_MPTEST_DESCRIPTION" Portrait="GAMEMODE_TREE_RANDOMIZER_NEUTRAL" Background="GAMEMODE_TREE_RANDOMIZER_BACKGROUND" Icon="ICON_GAMEMODE_MPTEST" SortIndex="10"/>
-	</GameModeItems>
+	</GameModeItems> -->
 	<!-- Mode-based Player Overrides -->
-	<PlayerInfoOverrideQueries>
+	<!-- <PlayerInfoOverrideQueries>
 		<Row QueryId="MPtestModePlayerInfoOverrides"/>
 	</PlayerInfoOverrideQueries>
 	<PlayerItemOverrideQueries>
@@ -111,7 +111,7 @@
 	<QueryCriteria>
 		<Row QueryId="MPtestModePlayerInfoOverrides" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_MPTEST" Operator="Equals" ConfigurationValue="1"/>
 		<Row QueryId="MPtestModePlayerItemOverrides" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_MPTEST" Operator="Equals" ConfigurationValue="1"/>
-	</QueryCriteria>
+	</QueryCriteria> -->
 	<!-- Wild Mode -->
 	<!-- <Parameters>
 		<Row Key1="Ruleset" Key2="RULESET_EXPANSION_2" ParameterId="GameMode_Wild" Name="LOC_GAMEMODE_WILD_NAME" Description="LOC_GAMEMODE_WILD_DESCRIPTION" Domain="bool" DefaultValue="0" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_WILD" NameArrayConfigurationId="GAMEMODES_ENABLED_NAMES" GroupId="GameModes" SortIndex="100"/>
